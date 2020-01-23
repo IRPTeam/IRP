@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Predefined Symbols (Marker)</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+     <div id="map"></div>
+        <script>
+     	var map;
+		
+		var mapMaxZoom = 17;
+				
+		var start_latlng = START_LATLNG; //{lat: 46.476436, lng: 30.740110};
+		var end_latlng = END_LATLNG;//{lat: 46.480773, lng: 30.720503};
+		var waypoints = WAYPOINTS;
+
+//		var start_latlng = {lat: 46.476436, lng: 30.740110};
+//		var end_latlng = {lat: 46.480773, lng: 30.720503};		
+//		var waypoints = 
+//		[
+//			{
+//				location:{lat: 46.484112, lng: 30.736897},
+//				stopover: true
+//			},
+//			{
+//				location:{lat: 46.472468, lng: 30.740416},
+//				stopover: true
+//			}					
+//		];
+		
+		function initMap() {
+		 
+		    //The center location of our map.    		    
+		    var centerOfMap = New google.maps.LatLng(start_latlng);
+		    		 
+		    //Map options.
+		    var options = {
+		      center: centerOfMap, //Set center.
+		      zoom: mapMaxZoom //The zoom value.
+		    };
+		        
+		    //Create the map object.
+		    map = New google.maps.Map(document.getElementById('map'), options);
+		    		    
+			//Create route
+			var directionsService = New google.maps.DirectionsService();
+			var directionsDisplay = New google.maps.DirectionsRenderer();
+			
+			directionsDisplay.setMap(map);
+						
+			var route = {
+				origin: start_latlng,
+				destination: end_latlng,
+				waypoints: waypoints,
+				optimizeWaypoints: true,
+				travelMode:'DRIVING',
+				unitSystem: google.maps.UnitSystem.METRIC 
+			};
+			directionsService.route(route, function(result, status){
+				directionsDisplay.setDirections(result);
+			});
+		}
+    </script>
+ 	<script async defer	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2WCO2tJglRWL0u1uqlD5xJAf8BIjS9sw&callback=initMap">
+    </script>
+
+  </body>
+</html>

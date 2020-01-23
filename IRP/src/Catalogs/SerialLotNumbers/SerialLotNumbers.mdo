@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e7f6fd71-4e01-4dca-aab2-67e2d20575d6">
+  <producedTypes>
+    <objectType typeId="87cd82b2-1f05-4222-8087-b0c090b0aa12" valueTypeId="16c35377-4303-4060-92ab-c26bda017e07"/>
+    <refType typeId="a96d472a-f8df-4b43-9456-0099957cf341" valueTypeId="579260e5-a6cd-4871-82b0-1133bb47422e"/>
+    <selectionType typeId="6443498e-8b38-47be-990c-c21e9482160a" valueTypeId="69d7f807-41bb-453e-acde-b1cde62fb437"/>
+    <listType typeId="5f55e337-617d-4b32-986e-faaf4124ac0e" valueTypeId="2dc39293-5047-4a6c-8045-356b3291c7ce"/>
+    <managerType typeId="384e9d3a-42b5-4e44-a195-43d09eb6caa6" valueTypeId="6004189e-d541-4808-90f1-6743cffd9df8"/>
+  </producedTypes>
+  <name>SerialLotNumbers</name>
+  <synonym>
+    <key>en</key>
+    <value>Serial lot numbers</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Serial lot number</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <attributes uuid="b1910d24-9155-47dd-82b1-92d92ca46f00">
+    <name>Item</name>
+    <synonym>
+      <key>en</key>
+      <value>Item</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+      <types>CatalogRef.ItemTypes</types>
+      <types>CatalogRef.Items</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+</mdclass:Catalog>

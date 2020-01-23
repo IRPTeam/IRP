@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9fd6bb7e-7a68-48b4-bcef-f2e7b4de7502">
+  <producedTypes>
+    <selectionType typeId="c9c2e6e0-e3f5-4453-975b-03ee7c083591" valueTypeId="51f6ba12-b50f-456b-bdb6-3686f3be64e8"/>
+    <listType typeId="b9c6966a-bf73-40be-b3f8-c5d66f623ba7" valueTypeId="f42b784a-47d4-4384-b431-00da128b4a76"/>
+    <managerType typeId="f10d43cf-7f64-460e-ba76-febad72ae90d" valueTypeId="548c537b-3c0b-484a-b476-ce5b263a65cf"/>
+    <recordSetType typeId="0971fe2c-1574-4321-a634-94ad296102a7" valueTypeId="488bb9f6-6301-48a6-8eec-bb62b0a1f8bb"/>
+    <recordKeyType typeId="cc02e2ca-c3c6-49b0-8b60-01e54d9b3549" valueTypeId="d959b987-26a9-41a8-9bb6-254ef8e35b41"/>
+    <recordType typeId="6fc909b7-3761-4a49-972a-3f90306b7811" valueTypeId="2309b326-d461-4207-897b-d86ff9a50d07"/>
+  </producedTypes>
+  <name>StockReservation</name>
+  <synonym>
+    <key>en</key>
+    <value>Stock reservation</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="f4731e01-ddee-4f2f-b785-3d7393140142">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <dimensions uuid="115f0535-bdbe-47c5-8ef2-efb3360bfde4">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
+  <dimensions uuid="c1c431c3-f349-4a2b-aa27-f51cae6dc908">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
+</mdclass:AccumulationRegister>

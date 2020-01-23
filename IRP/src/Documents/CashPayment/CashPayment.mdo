@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f5078e26-7faf-4ba0-9aba-167ab704e665">
+  <producedTypes>
+    <objectType typeId="5ea4f6cd-ad50-4248-a41e-972492231298" valueTypeId="e1903646-484e-4908-821d-0329402ae005"/>
+    <refType typeId="1c6fe0e0-7b74-41e4-8c58-ea77048d4859" valueTypeId="2385b946-1b67-454e-b1b7-504a579abc55"/>
+    <selectionType typeId="d399f515-1989-46e7-8057-b22c77ede791" valueTypeId="9e82ec7e-ba5a-48b6-9506-ab6ae12e7568"/>
+    <listType typeId="5b31b192-1d4c-4ada-93ac-bb96b304c9d1" valueTypeId="12d48726-73cb-49a9-9a84-7e0671d47955"/>
+    <managerType typeId="8b7c5f52-c0ab-455c-bbee-29b5bb880512" valueTypeId="e8f8fd85-3405-479a-bc0b-a52ee2bda945"/>
+  </producedTypes>
+  <name>CashPayment</name>
+  <synonym>
+    <key>en</key>
+    <value>Cash payment</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.CashPayment.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
+    <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
+    <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.CurrencyMovementSets.Document_CashPayment</value>
+    </typesFilterValue>
+    <characteristicValues>Document.CashPayment.TabularSection.Currencies</characteristicValues>
+    <objectField>Document.CashPayment.TabularSection.Currencies.StandardAttribute.Ref</objectField>
+    <typeField>Document.CashPayment.TabularSection.Currencies.Attribute.MovementType</typeField>
+    <valueField>Document.CashPayment.TabularSection.Currencies.Attribute.Amount</valueField>
+  </characteristics>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value></value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Cash payments</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.CashPayment.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.CashPayment.Form.ListForm</defaultListForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.AccountBalance</registerRecords>
+  <registerRecords>AccumulationRegister.PlaningCashTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
+  <registerRecords>AccumulationRegister.AdvanceToSuppliers</registerRecords>
+  <registerRecords>AccumulationRegister.ReconciliationStatement</registerRecords>
+  <registerRecords>AccumulationRegister.CashAdvance</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="ca779102-3d94-4838-92eb-59a8da24fe3f">
+    <name>CashAccount</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash account</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.CashAccounts</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c1680107-24b2-4e59-b1be-5a4cf5812588">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="72e4c427-1fe6-4bf2-9a7b-0889c45c442c">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="0071b809-fe19-42ee-863e-2ec263baa1b9">
+    <name>TransactionType</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.OutgoingPaymentTransactionTypes</types>
+    </type>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.OutgoingPaymentTransactionTypes.EnumValue.PaymentToVendor</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="f181064a-4a05-4415-9dcf-aaf9f5f7c346">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="0f3f280f-b462-4225-8b95-573629f94132">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <help>
+      <pages>
+        <lang>en</lang>
+      </pages>
+    </help>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="5fc3828e-82f0-4c15-bc7d-bdcbf4ad0080">
+    <producedTypes>
+      <objectType typeId="e0cb2489-5c15-4de6-9723-a878cd849850" valueTypeId="8a5cdee6-0c55-4f03-8e3d-ceffddda3e58"/>
+      <rowType typeId="e4deea23-46f4-4eff-bec1-8f24d2907c88" valueTypeId="69794b05-b64a-46ee-b00a-ac41ad34823d"/>
+    </producedTypes>
+    <name>PaymentList</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment list</value>
+    </synonym>
+    <attributes uuid="93dbf123-3937-4639-aac9-fb4528917732">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="73284da2-4b48-4d32-925d-7791edfab6ba">
+      <name>BasisDocument</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis document</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeApTransactionBasises</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d1f9ce82-959c-45b1-8ab8-c24f557a5554">
+      <name>Agreement</name>
+      <synonym>
+        <key>en</key>
+        <value>Agreement</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Agreements</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="56bc6889-499c-47b0-a1e3-fb0a75ed0356">
+      <name>Partner</name>
+      <synonym>
+        <key>en</key>
+        <value>Partner</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9d785d80-f468-4995-a248-a465ca996e6b">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="ad225c1c-df40-462e-837f-8b62aa9db10c">
+      <name>Payee</name>
+      <synonym>
+        <key>en</key>
+        <value>Payee</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="10d1d3e6-3e82-4df2-b379-e81d1d6beab9">
+      <name>PlaningTransactionBasis</name>
+      <synonym>
+        <key>en</key>
+        <value>Planing transaction basis</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePlaningTransactionBasises</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="eaf31d05-7f0d-4841-9fa3-9ab9aa12e70d">
+    <producedTypes>
+      <objectType typeId="4e7db992-e2ff-45ed-8247-ea1180dea08b" valueTypeId="7dadce86-6606-4ab3-a996-700018215e66"/>
+      <rowType typeId="0aa7026b-fdb2-4e62-8336-def68831b786" valueTypeId="327581af-e39d-4d44-b57b-270bc064ddf9"/>
+    </producedTypes>
+    <name>Currencies</name>
+    <synonym>
+      <key>en</key>
+      <value>Currencies</value>
+    </synonym>
+    <attributes uuid="70145ab5-8f45-47fb-a2c0-3fe0dddddbaf">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d4e5d6dd-292d-4bc6-bade-d48f1261d39b">
+      <name>CurrencyFrom</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency from</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Currencies</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="371dccb8-3ff3-4017-a6ca-037139315d20">
+      <name>Rate</name>
+      <synonym>
+        <key>en</key>
+        <value>Rate</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeCurrencyRate</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1abb1367-6afa-46dc-b528-3a9e8a5df79d">
+      <name>ReverseRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Reverse rate</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeCurrencyRate</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="10e72c56-33c1-42e7-a07c-1d17c21fbfba">
+      <name>ShowReverseRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Show reverse rate</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="db64cae0-9533-4835-8bdd-59eaeeaa8c83">
+      <name>Multiplicity</name>
+      <synonym>
+        <key>en</key>
+        <value>Multiplicity</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ff4caf4f-606b-4b3c-8c1c-77c16aa4e5c9">
+      <name>MovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Movement type</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="dcae0609-f47e-43ab-bb4b-a832060bd5de">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <commands uuid="49dff27a-55a1-4d85-9f44-c177caab4874">
+    <name>GenerateCashPayment</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash payment</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.CashTransferOrder</types>
+      <types>DocumentRef.OutgoingPaymentOrder</types>
+      <types>DocumentRef.PurchaseInvoice</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+</mdclass:Document>

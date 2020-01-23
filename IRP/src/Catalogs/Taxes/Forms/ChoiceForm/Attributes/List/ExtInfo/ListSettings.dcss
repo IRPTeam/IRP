@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core">
+	<filter>
+		<viewMode>Normal</viewMode>
+		<userSettingID>f887916e-1c10-4082-bd96-296859859082</userSettingID>
+	</filter>
+	<order>
+		<viewMode>Normal</viewMode>
+		<userSettingID>bffe56bf-a81d-4a6d-b352-58a5512bcc4c</userSettingID>
+	</order>
+	<conditionalAppearance>
+		<item>
+			<selection>
+				<item>
+					<field>Ref</field>
+				</item>
+			</selection>
+			<filter/>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>Visible</dcscor:parameter>
+					<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</item>
+		<viewMode>Normal</viewMode>
+		<userSettingID>8899ab8a-1a9f-4f1d-8966-a34df865712e</userSettingID>
+	</conditionalAppearance>
+	<itemsViewMode>Normal</itemsViewMode>
+	<itemsUserSettingID>5cf5d902-ae5c-4ec8-89ea-496bf1b0d9ad</itemsUserSettingID>
+</Settings>

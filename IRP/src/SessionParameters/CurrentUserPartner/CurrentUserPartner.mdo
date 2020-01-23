@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="acf1baf9-445b-422c-930c-b6d8450c4476">
+  <name>CurrentUserPartner</name>
+  <synonym>
+    <key>en</key>
+    <value>Current user partner</value>
+  </synonym>
+  <comment></comment>
+  <type>
+    <types>CatalogRef.Partners</types>
+  </type>
+</mdclass:SessionParameter>

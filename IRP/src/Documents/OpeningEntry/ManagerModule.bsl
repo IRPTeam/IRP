@@ -1,0 +1,435 @@
+#Region Posting
+
+Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	Tables = New Structure();
+	AccReg = Metadata.AccumulationRegisters;
+	Tables.Insert("AccountBalance", PostingServer.CreateTable(AccReg.AccountBalance));
+	Tables.Insert("InventoryBalance", PostingServer.CreateTable(AccReg.InventoryBalance));
+	Tables.Insert("StockBalance", PostingServer.CreateTable(AccReg.StockBalance));
+	Tables.Insert("StockReservation", PostingServer.CreateTable(AccReg.StockReservation));
+	Tables.Insert("AdvanceFromCustomers", PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
+	Tables.Insert("AdvanceToSuppliers", PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
+	Tables.Insert("PartnerArTransactions", PostingServer.CreateTable(AccReg.PartnerArTransactions));
+	Tables.Insert("PartnerApTransactions", PostingServer.CreateTable(AccReg.PartnerApTransactions));
+	Tables.Insert("ReconciliationStatement_Expense", PostingServer.CreateTable(AccReg.ReconciliationStatement));
+	Tables.Insert("ReconciliationStatement_Receipt", PostingServer.CreateTable(AccReg.ReconciliationStatement));
+	
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	OpeningEntryInventory.Ref.Company AS Company,
+		|	OpeningEntryInventory.ItemKey AS ItemKey,
+		|	OpeningEntryInventory.Store AS Store,
+		|	OpeningEntryInventory.Quantity AS Quantity,
+		|	OpeningEntryInventory.Ref.Date AS Period
+		|FROM
+		|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
+		|WHERE
+		|	OpeningEntryInventory.Ref = &Ref
+		|;
+		|
+		|//[1]//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	OpeningEntryAccountBalance.Ref.Company,
+		|	OpeningEntryAccountBalance.Account,
+		|	OpeningEntryAccountBalance.Currency,
+		|	OpeningEntryAccountBalance.Amount AS Amount,
+		|	OpeningEntryAccountBalance.Ref.Date AS Period,
+		|	OpeningEntryAccountBalance.Key
+		|FROM
+		|	Document.OpeningEntry.AccountBalance AS OpeningEntryAccountBalance
+		|WHERE
+		|	OpeningEntryAccountBalance.Ref = &Ref
+		|;
+		|
+		|//[2]//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	OpeningEntryAdvanceFromCustomers.Ref.Company,
+		|	OpeningEntryAdvanceFromCustomers.Partner,
+		|	OpeningEntryAdvanceFromCustomers.LegalName,
+		|	OpeningEntryAdvanceFromCustomers.Currency,
+		|	OpeningEntryAdvanceFromCustomers.Amount AS Amount,
+		|	OpeningEntryAdvanceFromCustomers.Ref AS ReceiptDocument,
+		|	OpeningEntryAdvanceFromCustomers.Ref.Date AS Period,
+		|	OpeningEntryAdvanceFromCustomers.Key
+		|FROM
+		|	Document.OpeningEntry.AdvanceFromCustomers AS OpeningEntryAdvanceFromCustomers
+		|WHERE
+		|	OpeningEntryAdvanceFromCustomers.Ref = &Ref
+		|;
+		|
+		|//[3]//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	OpeningEntryAdvanceToSuppliers.Ref.Company,
+		|	OpeningEntryAdvanceToSuppliers.Partner,
+		|	OpeningEntryAdvanceToSuppliers.LegalName,
+		|	OpeningEntryAdvanceToSuppliers.Currency,
+		|	OpeningEntryAdvanceToSuppliers.Amount AS Amount,
+		|	OpeningEntryAdvanceToSuppliers.Ref AS PaymentDocument,
+		|	OpeningEntryAdvanceToSuppliers.Ref.Date AS Period,
+		|	OpeningEntryAdvanceToSuppliers.Key
+		|FROM
+		|	Document.OpeningEntry.AdvanceToSuppliers AS OpeningEntryAdvanceToSuppliers
+		|WHERE
+		|	OpeningEntryAdvanceToSuppliers.Ref = &Ref
+		|;
+		|
+		|//[4]//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	OpeningEntryAccountReceivableByDocuments.Key,
+		|	OpeningEntryAccountReceivableByDocuments.Ref.Date AS Period,
+		|	OpeningEntryAccountReceivableByDocuments.Ref.Company,
+		|	OpeningEntryAccountReceivableByDocuments.BasisDocument,
+		|	OpeningEntryAccountReceivableByDocuments.Partner,
+		|	OpeningEntryAccountReceivableByDocuments.LegalName,
+		|	CASE
+		|		WHEN OpeningEntryAccountReceivableByDocuments.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND
+		|			OpeningEntryAccountReceivableByDocuments.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN OpeningEntryAccountReceivableByDocuments.Agreement.StandardAgreement
+		|		ELSE OpeningEntryAccountReceivableByDocuments.Agreement
+		|	END AS Agreement,
+		|	OpeningEntryAccountReceivableByDocuments.Currency,
+		|	OpeningEntryAccountReceivableByDocuments.Amount AS Amount
+		|FROM
+		|	Document.OpeningEntry.AccountReceivableByDocuments AS OpeningEntryAccountReceivableByDocuments
+		|WHERE
+		|	OpeningEntryAccountReceivableByDocuments.Ref = &Ref
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	OpeningEntryAccountReceivableByAgreements.Key,
+		|	OpeningEntryAccountReceivableByAgreements.Ref.Date,
+		|	OpeningEntryAccountReceivableByAgreements.Ref.Company,
+		|	UNDEFINED,
+		|	OpeningEntryAccountReceivableByAgreements.Partner,
+		|	OpeningEntryAccountReceivableByAgreements.LegalName,
+		|	CASE
+		|		WHEN OpeningEntryAccountReceivableByAgreements.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND
+		|			OpeningEntryAccountReceivableByAgreements.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN OpeningEntryAccountReceivableByAgreements.Agreement.StandardAgreement
+		|		ELSE OpeningEntryAccountReceivableByAgreements.Agreement
+		|	END AS Agreement,
+		|	OpeningEntryAccountReceivableByAgreements.Currency,
+		|	OpeningEntryAccountReceivableByAgreements.Amount AS Amount
+		|FROM
+		|	Document.OpeningEntry.AccountReceivableByAgreements AS OpeningEntryAccountReceivableByAgreements
+		|WHERE
+		|	OpeningEntryAccountReceivableByAgreements.Ref = &Ref
+		|;
+		|
+		|//[5]//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	OpeningEntryAccountPayableByDocuments.Ref.Date AS Period,
+		|	OpeningEntryAccountPayableByDocuments.Key,
+		|	OpeningEntryAccountPayableByDocuments.Ref.Company,
+		|	OpeningEntryAccountPayableByDocuments.BasisDocument,
+		|	OpeningEntryAccountPayableByDocuments.Partner,
+		|	OpeningEntryAccountPayableByDocuments.LegalName,
+		|	CASE
+		|		WHEN OpeningEntryAccountPayableByDocuments.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND
+		|			OpeningEntryAccountPayableByDocuments.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN OpeningEntryAccountPayableByDocuments.Agreement.StandardAgreement
+		|		ELSE OpeningEntryAccountPayableByDocuments.Agreement
+		|	END AS Agreement,
+		|	OpeningEntryAccountPayableByDocuments.Currency,
+		|	OpeningEntryAccountPayableByDocuments.Amount AS Amount
+		|FROM
+		|	Document.OpeningEntry.AccountPayableByDocuments AS OpeningEntryAccountPayableByDocuments
+		|WHERE
+		|	OpeningEntryAccountPayableByDocuments.Ref = &Ref
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	OpeningEntryAccountPayableByAgreements.Ref.Date,
+		|	OpeningEntryAccountPayableByAgreements.Key,
+		|	OpeningEntryAccountPayableByAgreements.Ref.Company,
+		|	UNDEFINED,
+		|	OpeningEntryAccountPayableByAgreements.Partner,
+		|	OpeningEntryAccountPayableByAgreements.LegalName,
+		|	CASE
+		|		WHEN OpeningEntryAccountPayableByAgreements.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND
+		|			OpeningEntryAccountPayableByAgreements.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN OpeningEntryAccountPayableByAgreements.Agreement.StandardAgreement
+		|		ELSE OpeningEntryAccountPayableByAgreements.Agreement
+		|	END AS Agreement,
+		|	OpeningEntryAccountPayableByAgreements.Currency,
+		|	OpeningEntryAccountPayableByAgreements.Amount AS Amount
+		|FROM
+		|	Document.OpeningEntry.AccountPayableByAgreements AS OpeningEntryAccountPayableByAgreements
+		|WHERE
+		|	OpeningEntryAccountPayableByAgreements.Ref = &Ref
+		|;
+		|
+		|//[6]//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	OpeningEntryAdvanceFromCustomers.Ref.Date AS Period,
+		|	OpeningEntryAdvanceFromCustomers.Ref.Company,
+		|	OpeningEntryAdvanceFromCustomers.LegalName,
+		|	OpeningEntryAdvanceFromCustomers.Currency,
+		|	SUM(OpeningEntryAdvanceFromCustomers.Amount) AS Amount
+		|FROM
+		|	Document.OpeningEntry.AdvanceFromCustomers AS OpeningEntryAdvanceFromCustomers
+		|WHERE
+		|	OpeningEntryAdvanceFromCustomers.Ref = &Ref
+		|GROUP BY
+		|	OpeningEntryAdvanceFromCustomers.Ref.Date,
+		|	OpeningEntryAdvanceFromCustomers.Ref.Company,
+		|	OpeningEntryAdvanceFromCustomers.LegalName,
+		|	OpeningEntryAdvanceFromCustomers.Currency
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	OpeningEntryAccountPayableByAgreements.Ref.Date,
+		|	OpeningEntryAccountPayableByAgreements.Ref.Company,
+		|	OpeningEntryAccountPayableByAgreements.LegalName,
+		|	OpeningEntryAccountPayableByAgreements.Currency,
+		|	SUM(OpeningEntryAccountPayableByAgreements.Amount) AS Amount
+		|FROM
+		|	Document.OpeningEntry.AccountPayableByAgreements AS OpeningEntryAccountPayableByAgreements
+		|WHERE
+		|	OpeningEntryAccountPayableByAgreements.Ref = &Ref
+		|GROUP BY
+		|	OpeningEntryAccountPayableByAgreements.Ref.Date,
+		|	OpeningEntryAccountPayableByAgreements.Ref.Company,
+		|	OpeningEntryAccountPayableByAgreements.LegalName,
+		|	OpeningEntryAccountPayableByAgreements.Currency
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	OpeningEntryAccountPayableByDocuments.Ref.Date,
+		|	OpeningEntryAccountPayableByDocuments.Ref.Company,
+		|	OpeningEntryAccountPayableByDocuments.LegalName,
+		|	OpeningEntryAccountPayableByDocuments.Currency,
+		|	SUM(OpeningEntryAccountPayableByDocuments.Amount) AS Amount
+		|FROM
+		|	Document.OpeningEntry.AccountPayableByDocuments AS OpeningEntryAccountPayableByDocuments
+		|WHERE
+		|	OpeningEntryAccountPayableByDocuments.Ref = &Ref
+		|GROUP BY
+		|	OpeningEntryAccountPayableByDocuments.Ref.Date,
+		|	OpeningEntryAccountPayableByDocuments.Ref.Company,
+		|	OpeningEntryAccountPayableByDocuments.LegalName,
+		|	OpeningEntryAccountPayableByDocuments.Currency
+		|;
+		|
+		|//[7]//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	OpeningEntryAdvanceToSuppliers.Ref.Date AS Period,
+		|	OpeningEntryAdvanceToSuppliers.Ref.Company,
+		|	OpeningEntryAdvanceToSuppliers.LegalName,
+		|	OpeningEntryAdvanceToSuppliers.Currency,
+		|	SUM(OpeningEntryAdvanceToSuppliers.Amount) AS Amount
+		|FROM
+		|	Document.OpeningEntry.AdvanceToSuppliers AS OpeningEntryAdvanceToSuppliers
+		|WHERE
+		|	OpeningEntryAdvanceToSuppliers.Ref = &Ref
+		|GROUP BY
+		|	OpeningEntryAdvanceToSuppliers.Ref.Date,
+		|	OpeningEntryAdvanceToSuppliers.Ref.Company,
+		|	OpeningEntryAdvanceToSuppliers.LegalName,
+		|	OpeningEntryAdvanceToSuppliers.Currency
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	OpeningEntryAccountReceivableByAgreements.Ref.Date,
+		|	OpeningEntryAccountReceivableByAgreements.Ref.Company,
+		|	OpeningEntryAccountReceivableByAgreements.LegalName,
+		|	OpeningEntryAccountReceivableByAgreements.Currency,
+		|	SUM(OpeningEntryAccountReceivableByAgreements.Amount) AS Amount
+		|FROM
+		|	Document.OpeningEntry.AccountReceivableByAgreements AS OpeningEntryAccountReceivableByAgreements
+		|WHERE
+		|	OpeningEntryAccountReceivableByAgreements.Ref = &Ref
+		|GROUP BY
+		|	OpeningEntryAccountReceivableByAgreements.Ref.Date,
+		|	OpeningEntryAccountReceivableByAgreements.Ref.Company,
+		|	OpeningEntryAccountReceivableByAgreements.LegalName,
+		|	OpeningEntryAccountReceivableByAgreements.Currency
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	OpeningEntryAccountReceivableByDocuments.Ref.Date,
+		|	OpeningEntryAccountReceivableByDocuments.Ref.Company,
+		|	OpeningEntryAccountReceivableByDocuments.LegalName,
+		|	OpeningEntryAccountReceivableByDocuments.Currency,
+		|	SUM(OpeningEntryAccountReceivableByDocuments.Amount) AS Amount
+		|FROM
+		|	Document.OpeningEntry.AccountReceivableByDocuments AS OpeningEntryAccountReceivableByDocuments
+		|WHERE
+		|	OpeningEntryAccountReceivableByDocuments.Ref = &Ref
+		|GROUP BY
+		|	OpeningEntryAccountReceivableByDocuments.Ref.Date,
+		|	OpeningEntryAccountReceivableByDocuments.Ref.Company,
+		|	OpeningEntryAccountReceivableByDocuments.LegalName,
+		|	OpeningEntryAccountReceivableByDocuments.Currency";
+	
+	Query.SetParameter("Ref", Ref);
+	QueryResults = Query.ExecuteBatch();
+
+	Tables.InventoryBalance = QueryResults[0].Unload();
+	Tables.StockBalance = QueryResults[0].Unload();
+	Tables.StockReservation = QueryResults[0].Unload();
+	Tables.AccountBalance = QueryResults[1].Unload();	
+	Tables.AdvanceFromCustomers = QueryResults[2].Unload();
+	Tables.AdvanceToSuppliers = QueryResults[3].Unload();
+	Tables.PartnerArTransactions = QueryResults[4].Unload();
+	Tables.PartnerApTransactions = QueryResults[5].Unload();
+	Tables.ReconciliationStatement_Receipt = QueryResults[7].Unload();
+	Tables.ReconciliationStatement_Expense = QueryResults[6].Unload();
+	
+	Return Tables;
+EndFunction
+
+Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	DocumentDataTables = Parameters.DocumentDataTables;
+	DataMapWithLockFields = New Map();
+	
+	// AdvanceFromCustomers
+	AdvanceFromCustomers = AccumulationRegisters.AdvanceFromCustomers.GetLockFields(DocumentDataTables.AdvanceFromCustomers);
+	DataMapWithLockFields.Insert(AdvanceFromCustomers.RegisterName, AdvanceFromCustomers.LockInfo);
+	
+	// AdvanceToSuppliers
+	AdvanceToSuppliers = AccumulationRegisters.AdvanceToSuppliers.GetLockFields(DocumentDataTables.AdvanceToSuppliers);
+	DataMapWithLockFields.Insert(AdvanceToSuppliers.RegisterName, AdvanceToSuppliers.LockInfo);
+	
+	
+	// AccountBalance
+	AccountBalance = AccumulationRegisters.AccountBalance.GetLockFields(DocumentDataTables.AccountBalance);
+	DataMapWithLockFields.Insert(AccountBalance.RegisterName, AccountBalance.LockInfo);
+	
+	// InventoryBalance
+	InventoryBalance = AccumulationRegisters.InventoryBalance.GetLockFields(DocumentDataTables.InventoryBalance);
+	DataMapWithLockFields.Insert(InventoryBalance.RegisterName, InventoryBalance.LockInfo);
+	
+	// StockBalance
+	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance);
+	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
+	
+	// StockReservation
+	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation);
+	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
+	
+	// PartnerArTransactions
+	PartnerArTransactions = AccumulationRegisters.PartnerArTransactions.GetLockFields(DocumentDataTables.PartnerArTransactions);
+	DataMapWithLockFields.Insert(PartnerArTransactions.RegisterName, PartnerArTransactions.LockInfo);
+	
+	// PartnerApTransactions
+	PartnerApTransactions = AccumulationRegisters.PartnerApTransactions.GetLockFields(DocumentDataTables.PartnerApTransactions);
+	DataMapWithLockFields.Insert(PartnerApTransactions.RegisterName, PartnerApTransactions.LockInfo);
+	
+	Return DataMapWithLockFields;
+EndFunction
+
+Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	Return;
+EndProcedure
+
+Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	PostingDataTables = New Map();
+	
+	// AdvanceFromCustomers
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceFromCustomers,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.AdvanceFromCustomers));
+	
+	// AdvanceToSuppliers
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceToSuppliers,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.AdvanceToSuppliers));
+	
+	// AccountBalance
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountBalance,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.AccountBalance));
+	
+	// InventoryBalance
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.InventoryBalance,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.InventoryBalance));
+	
+	// StockBalance
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.StockBalance));
+	
+	// StockReservation
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.StockReservation));
+	
+	// PartnerArTransactions		
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerArTransactions,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.PartnerArTransactions));
+	
+	// PartnerApTransactions		
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerApTransactions,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.PartnerApTransactions));
+
+	// ReconciliationStatement
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.ReconciliationStatement_Expense.Copy();
+	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table1);
+	
+	Table2 = Parameters.DocumentDataTables.ReconciliationStatement_Receipt.Copy();
+	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
+	ArrayOfTables.Add(Table2);
+	
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReconciliationStatement,
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+				"RecordType, Period, Company, LegalName, Currency, Amount"),
+			Parameters.IsReposting));
+
+
+	Return PostingDataTables;
+EndFunction
+
+Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	Return;
+EndProcedure
+
+#EndRegion
+
+#Region Undoposting
+
+Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	Return Undefined;	
+EndFunction
+
+Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	Return;
+EndProcedure
+
+Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	Return;
+EndProcedure
+
+#EndRegion
+

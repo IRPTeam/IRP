@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:ExchangePlan xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="57aa0125-4a18-4308-875f-56fcc775ad95" thisNode="57aa0125-4a18-4308-875f-56fcc775ad95">
+  <producedTypes>
+    <objectType typeId="d33cc1e1-beaf-4025-a8ce-aba90c9a4b56" valueTypeId="851018c2-9de8-4b0c-ac4a-1234271488d8"/>
+    <refType typeId="c594851a-039a-4d6e-9393-7fb802eb30f2" valueTypeId="c78358c5-2bb1-48dd-885b-40e5fcbbeca7"/>
+    <selectionType typeId="de6a2d8b-ff22-4e55-84a4-1e4570e6d915" valueTypeId="6d9efc18-d0db-4cdf-9405-94d3b96800dd"/>
+    <listType typeId="47216b93-92da-49e5-a947-45f9455c724f" valueTypeId="7d474768-489b-4eb0-bdba-f481085f45a2"/>
+    <managerType typeId="57cd73de-591c-4006-983a-8758ceec61a3" valueTypeId="6f2be28c-71eb-47fa-a1cc-d20d8d784b8f"/>
+  </producedTypes>
+  <name>FullDataExchange</name>
+  <synonym>
+    <key>en</key>
+    <value>Full data exchange</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>ExchangePlan.FullDataExchange.StandardAttribute.Code</inputByString>
+  <inputByString>ExchangePlan.FullDataExchange.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <codeLength>9</codeLength>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <descriptionLength>25</descriptionLength>
+  <content>
+    <mdObject>Catalog.Items</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.ItemKeys</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.PricesByItemKeys</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.PriceList</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.ItemTypes</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.Barcodes</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <choiceMode>BothWays</choiceMode>
+</mdclass:ExchangePlan>

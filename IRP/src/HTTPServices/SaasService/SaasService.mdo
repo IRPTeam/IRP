@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:HTTPService xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fdcf3371-ff97-48a3-a0a0-eae697a18805">
+  <name>SaasService</name>
+  <synonym>
+    <key>en</key>
+    <value>Saas service</value>
+  </synonym>
+  <rootURL>saas</rootURL>
+  <reuseSessions>AutoUse</reuseSessions>
+  <sessionMaxAge>20</sessionMaxAge>
+  <urlTemplates uuid="62cb5187-dc99-4787-80b4-caa317b3a728">
+    <name>Saas</name>
+    <synonym>
+      <key>en</key>
+      <value>Saas</value>
+    </synonym>
+    <template>/*</template>
+    <methods uuid="721b0d2a-beb4-4b28-bc2c-59b8c6ae51ce">
+      <name>CreateArea</name>
+      <synonym>
+        <key>en</key>
+        <value>Create area</value>
+      </synonym>
+      <httpMethod>POST</httpMethod>
+      <handler>SaasCreateArea</handler>
+    </methods>
+    <methods uuid="e08087a6-e544-4da3-999d-d26646b6d71d">
+      <name>CompanyLocalizations</name>
+      <synonym>
+        <key>en</key>
+        <value>Company localizations</value>
+      </synonym>
+      <handler>SaasCompanyLocalizations</handler>
+    </methods>
+  </urlTemplates>
+</mdclass:HTTPService>

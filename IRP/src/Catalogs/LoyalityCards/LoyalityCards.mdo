@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="15ef2786-43ce-4a3f-b5fa-922d1bbfdf3c">
+  <producedTypes>
+    <objectType typeId="066330a1-44db-44c1-b29f-b66cc081252b" valueTypeId="63bfbe3f-9b67-4c61-8b9d-636cded9a3ad"/>
+    <refType typeId="a594e102-abb2-4fa4-9084-e491d4998417" valueTypeId="54226323-8bd2-4556-8d32-49123b633546"/>
+    <selectionType typeId="48fef869-4764-4b10-82be-bbab36ea56cb" valueTypeId="5b5a4ad6-6674-4fe6-a9ad-f8c4497d2dca"/>
+    <listType typeId="a0a7e1cc-ec29-4ea0-8a2f-b6c252e910d3" valueTypeId="93c3eb2e-3562-4335-9d51-885c2d318fad"/>
+    <managerType typeId="bae5f8ef-7d17-46e5-a50e-e963f7f59f28" valueTypeId="146964d7-3bbe-4636-8bf4-f5596997aeea"/>
+  </producedTypes>
+  <name>LoyalityCards</name>
+  <synonym>
+    <key>en</key>
+    <value>Loyality cards</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <objectPresentation>
+    <key>en</key>
+    <value>Loyality card</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.LoyalityCards.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.LoyalityCards.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.LoyalityCards.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <forms uuid="f3812c4b-b039-4651-a74c-977356ed92f9">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="7b9b4c8d-8a2b-4bfb-a5cf-3004478db053">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="e3196716-c03f-4330-bd20-c4dd6b47f32e">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

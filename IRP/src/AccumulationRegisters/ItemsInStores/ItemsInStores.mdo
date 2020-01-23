@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3f191e54-212b-4b5e-9988-a830324e5424">
+  <producedTypes>
+    <selectionType typeId="9f3bdb11-208a-480b-a665-4d0458357d3a" valueTypeId="d55168f6-3e73-4d10-92da-1f073701316d"/>
+    <listType typeId="4f211ae0-bd57-4ed4-8aaf-fa7492fd6bc1" valueTypeId="4a9d9d2e-1b03-484b-9789-546187d8936c"/>
+    <managerType typeId="42316fa4-eafa-47b7-9e8a-2fd0d3d57160" valueTypeId="ea58f937-54cc-4a00-8674-9d24ea2d86a3"/>
+    <recordSetType typeId="847b4339-1625-4699-a216-cbf7d64b0cba" valueTypeId="8e741798-7502-41f3-b829-b4f21477a22f"/>
+    <recordKeyType typeId="dee0327b-e9c0-48a4-b51f-e475e4f87548" valueTypeId="ea9ce523-e1f0-4561-bae4-41154a4ed77f"/>
+    <recordType typeId="61a1a1e7-440c-4dd9-b101-1c03b049a491" valueTypeId="8ee133cb-4b58-4bce-8a32-02b7e7bccd06"/>
+  </producedTypes>
+  <name>ItemsInStores</name>
+  <synonym>
+    <key>en</key>
+    <value>Items in stores</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="6ec53e2d-76dc-4e22-a0b1-b0a3f63003c2">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <dimensions uuid="f3b9e9dd-8d9d-42fe-a5cc-de491ea3767b">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="aad7e5df-c525-42a7-ac04-5147840f8bc2">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

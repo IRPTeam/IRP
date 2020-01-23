@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsVisibility>
+    <visibilityFragments>
+      <command>Catalog.Agreements.StandardCommand.OpenList</command>
+      <visible/>
+    </visibilityFragments>
+  </commandsVisibility>
+  <commandsPlacement>
+    <placementFragments>
+      <group>NavigationPanelImportant</group>
+      <commands>CommonCommand.OpenPartnersCustomer</commands>
+      <commands>Catalog.Agreements.StandardCommand.OpenList</commands>
+      <commands>Catalog.Items.StandardCommand.OpenList</commands>
+      <commands>CommonCommand.OpenCustomerAgreements</commands>
+    </placementFragments>
+  </commandsPlacement>
+  <commandsOrder>
+    <orderFragments>
+      <group>NavigationPanelImportant</group>
+      <commands>CommonCommand.OpenPartnersCustomer</commands>
+      <commands>Catalog.Agreements.StandardCommand.OpenList</commands>
+      <commands>CommonCommand.OpenCustomerAgreements</commands>
+      <commands>Catalog.Items.StandardCommand.OpenList</commands>
+    </orderFragments>
+  </commandsOrder>
+  <subsystemsOrder>
+    <subsystems>Subsystem.SalesAR.Subsystem.Sales</subsystems>
+    <subsystems>Subsystem.SalesAR.Subsystem.SalesReturn</subsystems>
+    <subsystems>Subsystem.SalesAR.Subsystem.Pricing</subsystems>
+  </subsystemsOrder>
+</cmi:CommandInterface>

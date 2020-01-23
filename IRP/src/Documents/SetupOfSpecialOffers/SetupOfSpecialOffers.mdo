@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5ae34919-f612-4ad3-8dd5-50ffc6c181c9">
+  <producedTypes>
+    <objectType typeId="138b59fa-c409-410d-ae85-03d3fc7323a8" valueTypeId="efabd044-9dc9-4802-8863-2b8da478fd5b"/>
+    <refType typeId="7b006d8c-6249-4de2-9d15-4bb6fb9876e3" valueTypeId="5482fa9b-a727-477a-93e3-b5ba0c63e468"/>
+    <selectionType typeId="ccf38785-d43b-4614-8d6c-a623bfa2e206" valueTypeId="354b3903-6308-40df-a394-97e8eb39d95a"/>
+    <listType typeId="801b03bf-5b34-4041-9542-87d73e729feb" valueTypeId="f4dce204-869e-4e0f-ae14-b2b440b7d2eb"/>
+    <managerType typeId="24caac15-e386-4741-a34a-66e9bca03d3d" valueTypeId="4e182c96-4926-45b9-a966-20690e9304ba"/>
+  </producedTypes>
+  <name>SetupOfSpecialOffers</name>
+  <synonym>
+    <key>en</key>
+    <value>Setup of special offers</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.SetupOfSpecialOffers.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>SSO</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Setup of special offers</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+</mdclass:Document>

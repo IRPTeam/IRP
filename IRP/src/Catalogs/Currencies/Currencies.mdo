@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9611ac5e-e674-4d95-b6c8-d12261810cd9">
+  <producedTypes>
+    <objectType typeId="9503cda0-fdb6-47be-99bb-95b78e7e28d4" valueTypeId="6c1b571d-b6ad-49c9-9e42-dbd9b26641a3"/>
+    <refType typeId="6b87960e-317a-45fd-ac2c-f2b5889ce6ce" valueTypeId="985af63d-4a8c-4231-94cd-7046bf70397c"/>
+    <selectionType typeId="2f1e0ad6-81a4-4204-bc28-a80e612ceb7a" valueTypeId="960b0124-2f37-4948-8b73-508ab7da149d"/>
+    <listType typeId="a4ea0606-aa08-489c-8643-398ffbf99786" valueTypeId="55b468d7-2657-4c43-90ac-bb72d2b58482"/>
+    <managerType typeId="f77fa8be-c0a1-42aa-bb1c-b4e8de8cab0b" valueTypeId="3d94e63e-e08d-4f24-9fbc-40f8b7ce1ecc"/>
+  </producedTypes>
+  <name>Currencies</name>
+  <synonym>
+    <key>en</key>
+    <value>Currencies</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.Currencies.StandardAttribute.Code</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <objectPresentation>
+    <key>en</key>
+    <value>Currency</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>3</codeLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.Currencies.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.Currencies.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.Currencies.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="e3dbb019-b9eb-4392-8faf-8ebae3fc898e">
+    <name>Symbol</name>
+    <synonym>
+      <key>en</key>
+      <value>Symbol</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>3</length>
+      </stringQualifiers>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="1477549c-e8a4-4fab-a6a4-3dd8dca6b8d0">
+    <name>NumericCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Numeric code</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>3</length>
+      </stringQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="81b4c231-1b4b-4178-99c2-a6e580eca048">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="5d50a584-ae6b-40f6-a633-88795cb903f6">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="f8aa0177-f31c-4524-878a-bba836bab82d">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="e3fc7388-8c22-455d-9f70-24df8b272d48">
+    <name>SelectIntegration</name>
+    <synonym>
+      <key>en</key>
+      <value>Select integration</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

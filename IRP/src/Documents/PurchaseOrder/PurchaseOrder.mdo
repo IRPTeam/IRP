@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e43f6b36-ca75-4121-ae12-3cc9ff3e3905">
+  <producedTypes>
+    <objectType typeId="d0bcd25c-148f-44bd-91cd-07726c041f3c" valueTypeId="4eb5abc7-6b16-4511-acb9-319df42651a4"/>
+    <refType typeId="59bb418b-3f52-42e2-818d-abc8c7d5f62a" valueTypeId="891ea5e7-20ed-4062-af23-4d955b1ddc79"/>
+    <selectionType typeId="4d75a683-ffe6-4aa8-9e63-1c43d87b0fb8" valueTypeId="ec6e7a43-8f6b-48f8-b120-9b1d9f7a69df"/>
+    <listType typeId="bc6429e3-a01d-4e0f-9ac3-4d8ed9600a73" valueTypeId="2cb17bb8-9e76-4189-943b-51a43353f1af"/>
+    <managerType typeId="44026402-8374-4731-a69f-2dc75e493f23" valueTypeId="13f2e37b-fdbe-4808-bee4-2e037caa4060"/>
+  </producedTypes>
+  <name>PurchaseOrder</name>
+  <synonym>
+    <key>en</key>
+    <value>Purchase order</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.PurchaseOrder.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
+    <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
+    <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.CurrencyMovementSets.Document_PurchaseOrder</value>
+    </typesFilterValue>
+    <characteristicValues>Document.PurchaseOrder.TabularSection.Currencies</characteristicValues>
+    <objectField>Document.PurchaseOrder.TabularSection.Currencies.StandardAttribute.Ref</objectField>
+    <typeField>Document.PurchaseOrder.TabularSection.Currencies.Attribute.MovementType</typeField>
+    <valueField>Document.PurchaseOrder.TabularSection.Currencies.Attribute.Amount</valueField>
+  </characteristics>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Purchase orders</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.PurchaseOrder.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.PurchaseOrder.Form.ListForm</defaultListForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
+  <registerRecords>AccumulationRegister.ReceiptOrders</registerRecords>
+  <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsReceiptSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.OrderProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="b17a092c-0822-4e3d-bbaa-29596267b2a4">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="f23d2f35-992c-4fcb-8f5f-e7359345c488">
+    <name>Status</name>
+    <synonym>
+      <key>en</key>
+      <value>Status</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ObjectStatuses</types>
+    </type>
+    <choiceParameters>
+      <name>Filter.Parent</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Catalog.ObjectStatuses.PurchaseOrder</value>
+      </value>
+    </choiceParameters>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="37be6940-7759-4dbb-a0c9-fd69c111f42f">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="f2e07c15-cda5-42ab-8b35-346ba764bd52">
+    <name>LegalName</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b74b63b7-b14a-45c4-b28e-62536eefb98e">
+    <name>PriceIncludeTax</name>
+    <synonym>
+      <key>en</key>
+      <value>Price include tax</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="53b2da61-833b-47f6-9980-48cd715fdb0f">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="386b4704-74e9-4b28-8cde-e21046034309">
+    <name>Agreement</name>
+    <synonym>
+      <key>en</key>
+      <value>Agreement</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4dbe14b3-f7d1-4396-86d1-3cb538912103">
+    <name>GoodsReceiptBeforePurchaseInvoice</name>
+    <synonym>
+      <key>en</key>
+      <value>Goods receipt before purchase invoice</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="e6bf39f0-4401-47e6-a79c-2b4366675c4e">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="8f595946-9ad8-46e0-bc8c-85fe1da258a5">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="1102a58b-c8c2-438b-9bae-05fd419df297">
+    <producedTypes>
+      <objectType typeId="514d49de-949d-4271-80da-4b1005a1d064" valueTypeId="7a3ea28c-99ba-48eb-a0c9-fe0a3b956fa2"/>
+      <rowType typeId="41a062a6-b25b-48f4-bb84-7a4889382334" valueTypeId="39e71d4c-b7f3-4032-9ba0-f465a6bc8df2"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="379ed2b6-fee7-4b66-9082-1306d0cd0aa3">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="891ceaf7-dc04-4e48-9edd-e036706b4c48">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="1ce31090-7b0a-4b6f-8c95-d66dfaf227ba">
+      <name>Store</name>
+      <synonym>
+        <key>en</key>
+        <value>Store</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Stores</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9f7608ed-61d3-4e71-96db-ca909698ae79">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="0341b8b8-f56b-43a7-8020-adac32bfc7b7">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="3eb674d1-a312-4edd-bac9-8996a6e73c45">
+      <name>PurchaseBasis</name>
+      <synonym>
+        <key>en</key>
+        <value>Purchase basis</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePurchaseBasis</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6bc42c79-0398-4969-be80-a17db232ad99">
+      <name>Price</name>
+      <synonym>
+        <key>en</key>
+        <value>Price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePrice</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="72199130-310b-494e-8934-05c9c88d3541">
+      <name>TaxAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Tax amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ed34f035-0dff-4f92-b9bb-05f4075569d0">
+      <name>TotalAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Total amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2c73a0dc-eab4-4ea4-8dc1-3dbec39867bc">
+      <name>NetAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Net amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a653e2f0-1d6c-4ae7-acfa-63850e623cea">
+      <name>OffersAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Offers amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="224f07ac-cf8a-4142-bf31-1d79af567ca1">
+      <name>PriceType</name>
+      <synonym>
+        <key>en</key>
+        <value>Price type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PriceTypes</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="855f6b59-6740-45de-8bf6-b9f485a4bcb5">
+      <name>BusinessUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Business unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5ae4a4e3-a41d-4f98-ab06-c60c2eb26a6b">
+      <name>ExpenseType</name>
+      <synonym>
+        <key>en</key>
+        <value>Expense type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3c093d08-9e81-4c87-b8ff-efd56a6af747">
+      <name>DeliveryDate</name>
+      <synonym>
+        <key>en</key>
+        <value>Delivery date</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="95206074-2441-4517-9961-a48572f6b76f">
+      <name>Detail</name>
+      <synonym>
+        <key>en</key>
+        <value>Detail</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeDescription</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="20d2c667-e4e9-41b5-95bb-4f0b6b2770da">
+    <producedTypes>
+      <objectType typeId="c327cca5-ac33-48c3-ad55-315bf36e2570" valueTypeId="7adc82a4-66e5-4427-b640-37031f05faeb"/>
+      <rowType typeId="9309dfe1-3598-463c-b99b-755b0c4cd443" valueTypeId="819ed81c-a304-4059-a952-a0ed6240ccc7"/>
+    </producedTypes>
+    <name>SpecialOffers</name>
+    <synonym>
+      <key>en</key>
+      <value>Special offers</value>
+    </synonym>
+    <attributes uuid="4a8e237c-c81b-4b08-8024-5244eee8a7b3">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="dc7326c7-02c8-45af-84dd-cee6b08aaf14">
+      <name>Offer</name>
+      <synonym>
+        <key>en</key>
+        <value>Offer</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SpecialOffers</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a6a06376-a401-477e-9a26-0fea9f066159">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f57b9f73-fd19-45d3-8c63-51bf7b738929">
+      <name>Percent</name>
+      <synonym>
+        <key>en</key>
+        <value>Percent</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePercent</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="6b6424f7-8f6e-4e38-9f9e-f1af4a1efc8f">
+    <producedTypes>
+      <objectType typeId="24db540e-ad80-49a1-896a-2690aaa05524" valueTypeId="722e5176-f370-40da-86b9-2be5379b22f9"/>
+      <rowType typeId="6cf9474a-b493-416a-9226-e442490365db" valueTypeId="bf5f3e79-8cd9-4e40-97eb-019c5ab2b546"/>
+    </producedTypes>
+    <name>TaxList</name>
+    <synonym>
+      <key>en</key>
+      <value>Tax list</value>
+    </synonym>
+    <attributes uuid="686da772-706d-4966-80e6-0ea26cdebbbc">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d65df58f-2ef5-416d-95d1-d7d2ccb1ccf8">
+      <name>Tax</name>
+      <synonym>
+        <key>en</key>
+        <value>Tax</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Taxes</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ce5c7d38-97e2-48c4-a75f-ef7136d70dc5">
+      <name>Analytics</name>
+      <synonym>
+        <key>en</key>
+        <value>Analytics</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.TaxAnalytics</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="688872e1-1771-40ef-a479-32272d3e9a1a">
+      <name>TaxRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Tax rate</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.TaxRates</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f0f7b544-d342-4599-8130-e6c8adaba276">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b2f46852-aaa8-4643-b272-03506a3e438f">
+      <name>IncludeToTotalAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Include to total amount</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="72722cb3-a0e6-423f-8b64-ecd47aec72a9">
+      <name>ManualAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Manual amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="5ecdd16e-d79e-401c-9d6f-6b169a9bbf41">
+    <producedTypes>
+      <objectType typeId="16cecfc2-1424-4ef7-bd66-590fe49c9018" valueTypeId="9498491c-3a27-4121-8067-5f3289f5ed11"/>
+      <rowType typeId="1177802e-46b9-484c-bb0c-fb1c317ab315" valueTypeId="e353f4a8-0cf1-4b34-ad05-9a6a12a7ab32"/>
+    </producedTypes>
+    <name>Currencies</name>
+    <synonym>
+      <key>en</key>
+      <value>Currencies</value>
+    </synonym>
+    <attributes uuid="b7bb1443-cba3-4c0b-a31a-19ac3c5bbb6b">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5d375ae2-bbcc-4eb2-b6a9-0acb02a90cb9">
+      <name>CurrencyFrom</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency from</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Currencies</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="72b5c2bf-037b-4375-83af-4bb77e3e2598">
+      <name>Rate</name>
+      <synonym>
+        <key>en</key>
+        <value>Rate</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeCurrencyRate</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="311bd4a4-ccbd-4d2e-b969-b4d29b3ba991">
+      <name>ReverseRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Reverse rate</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeCurrencyRate</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d0b0cc85-3d46-4163-9000-cb28725881fa">
+      <name>ShowReverseRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Show reverse rate</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7847ca89-e7be-4dd5-a862-b0cb309a8dc3">
+      <name>Multiplicity</name>
+      <synonym>
+        <key>en</key>
+        <value>Multiplicity</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3a8267d0-f7e6-42d0-b34b-f6b071d3095f">
+      <name>MovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Movement type</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="bb0db29f-4498-4596-ab70-0d3c85a63b1c">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="6ac8f75b-4043-417f-8164-8d541077ddb1">
+    <producedTypes>
+      <objectType typeId="9a39e3a9-9a2a-41c3-ad5a-ec247ddda07c" valueTypeId="e0f49ed2-aecc-4d53-b42d-78a6d5b86e60"/>
+      <rowType typeId="b6a31897-67af-48d0-a1ef-7e336e7a51b1" valueTypeId="bb1004fd-0850-4a0f-a8ff-da64e294a5c5"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="25dfd169-621a-4562-82d3-f6dd5bb5f1b1">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="7bbaa421-9fb9-43f2-b895-fd097caaeb32">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <commands uuid="496559c7-f7cd-402c-8890-4d84580ebb15">
+    <name>GeneratePurchaseOrder</name>
+    <synonym>
+      <key>en</key>
+      <value>Purchase order</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.InternalSupplyRequest</types>
+      <types>DocumentRef.SalesOrder</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+</mdclass:Document>

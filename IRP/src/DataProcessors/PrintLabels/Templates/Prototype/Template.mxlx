@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://v8.1c.ru/8.2/data/spreadsheet" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<languageSettings>
+		<currentLanguage>en</currentLanguage>
+		<defaultLanguage>en</defaultLanguage>
+		<languageInfo>
+			<id>en</id>
+			<code>English</code>
+			<description>English</description>
+		</languageInfo>
+	</languageSettings>
+	<columns>
+		<size>2</size>
+	</columns>
+	<drawing>
+		<drawingType>Picture</drawingType>
+		<id>1</id>
+		<formatIndex>0</formatIndex>
+		<beginRow>0</beginRow>
+		<beginRowOffset>0</beginRowOffset>
+		<endRow>6</endRow>
+		<endRowOffset>30</endRowOffset>
+		<beginColumn>0</beginColumn>
+		<beginColumnOffset>0</beginColumnOffset>
+		<endColumn>1</endColumn>
+		<endColumnOffset>111</endColumnOffset>
+		<pictureSize>Stretch</pictureSize>
+		<pictureIndex>1</pictureIndex>
+	</drawing>
+	<templateMode>true</templateMode>
+	<height>7</height>
+	<namedItem xsi:type="NamedItemDrawing">
+		<name>Square100Pixels</name>
+		<drawingID>1</drawingID>
+	</namedItem>
+	<picture>
+		<picture>iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA0SURBVHhe7cEBDQAAAMKg909tDjcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbNXWUAAEE/b5iAAAAAElFTkSuQmCC</picture>
+	</picture>
+</document>

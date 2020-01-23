@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="167a38ce-a50e-4c07-bc08-058076f87110">
+  <producedTypes>
+    <objectType typeId="969f1eb3-9b20-451e-8bd0-8928d770f69c" valueTypeId="5a02bdec-7296-4fdc-bb7c-a78b07a5051e"/>
+    <refType typeId="0b6423f3-c0ab-49aa-bf4b-ef65b7cbe70e" valueTypeId="d93b7a9a-c5be-4d8a-bbe5-7fae2db10d8e"/>
+    <selectionType typeId="0b88f98e-274c-474b-bd21-3c23389f5063" valueTypeId="7a3754a0-e0f8-47c3-919d-926532df70b1"/>
+    <listType typeId="3c04365e-4f7f-410d-95bb-2a89b9d22f8e" valueTypeId="b871869e-f6e9-4e5b-8a8d-4c71a9e0c893"/>
+    <managerType typeId="d819688b-1f74-4c6a-81af-b70cfc0fc7c9" valueTypeId="448b6a71-f625-4785-901e-19bbde7f8e37"/>
+  </producedTypes>
+  <name>Units</name>
+  <synonym>
+    <key>en</key>
+    <value>Units</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <objectPresentation>
+    <key>en</key>
+    <value>Unit</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.Units.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.Units.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.Units.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="82b9dc61-781d-4617-a240-2e712aafa7b8">
+    <name>Item</name>
+    <synonym>
+      <key>en</key>
+      <value>Item</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>CatalogRef.Items</types>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <createOnInput>Use</createOnInput>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="840178c5-4b1d-441a-a05b-cec5fc49ad11">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>5</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:NumberValue">
+      <value>1</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5eef9619-e141-4c45-9e22-dacc1f54d169">
+    <name>BasisUnit</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis unit</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>CatalogRef.Units</types>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="59b5c950-0af8-47d0-af1b-4bcb5f8f5592">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="e9294be7-3296-429b-b5f2-7bb03f50c5c8">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="d2932cf8-4322-468c-86b3-09f75af80703">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

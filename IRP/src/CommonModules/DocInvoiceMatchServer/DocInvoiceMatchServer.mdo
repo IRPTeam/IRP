@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2eb9be77-0b3b-44f3-a72b-983300efbf60">
+  <name>DocInvoiceMatchServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc Invoice Match server</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
+</mdclass:CommonModule>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cb23c8d8-d683-4ef7-a8cf-d15791dfae9a">
+  <name>Delivery</name>
+  <synonym>
+    <key>en</key>
+    <value>Delivery</value>
+  </synonym>
+  <comment></comment>
+  <includeHelpInContents>true</includeHelpInContents>
+  <includeInCommandInterface>true</includeInCommandInterface>
+  <picture xsi:type="core:PictureRef">
+    <picture>CommonPicture.Delivery</picture>
+  </picture>
+  <content>Catalog.Vehicles</content>
+  <content>Catalog.DeliveryAreas</content>
+  <content>Document.DeliveryList</content>
+  <content>DefinedType.typeBasisDelivery</content>
+  <content>Enum.DeliveryConditions</content>
+  <content>Constant.DefaulDeliveryAddress</content>
+  <content>Constant.DefaultDeliveryGPS</content>
+  <content>Document.TrackList</content>
+  <content>FunctionalOption.BetaTesting</content>
+</mdclass:Subsystem>

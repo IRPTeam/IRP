@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="26afc779-ab6e-46a1-8341-ec3c9f2e0193">
+  <name>UseEventLog</name>
+  <synonym>
+    <key>en</key>
+    <value>Use event log</value>
+  </synonym>
+  <comment></comment>
+</mdclass:Role>

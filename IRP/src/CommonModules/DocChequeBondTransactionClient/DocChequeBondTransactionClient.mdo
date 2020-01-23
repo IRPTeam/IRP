@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a3efad11-19fa-4264-bbb0-bfc1ac9966f6">
+  <name>DocChequeBondTransactionClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc cheque bond transaction client</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+</mdclass:CommonModule>

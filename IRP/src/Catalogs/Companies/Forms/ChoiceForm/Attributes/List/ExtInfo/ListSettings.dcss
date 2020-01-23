@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core">
+	<filter>
+		<viewMode>Normal</viewMode>
+		<userSettingID>f2b09b63-4739-4c58-84fa-91c913ec9ba3</userSettingID>
+		<userSettingPresentation xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content/>
+			</v8:item>
+		</userSettingPresentation>
+	</filter>
+	<order>
+		<viewMode>Normal</viewMode>
+		<userSettingID>32969375-446c-49aa-8e2f-e156303f3c04</userSettingID>
+		<userSettingPresentation xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content/>
+			</v8:item>
+		</userSettingPresentation>
+	</order>
+	<conditionalAppearance>
+		<item>
+			<selection>
+				<item>
+					<field>Ref</field>
+				</item>
+			</selection>
+			<filter/>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>Visible</dcscor:parameter>
+					<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+				</dcscor:item>
+			</appearance>
+			<presentation xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content/>
+				</v8:item>
+			</presentation>
+		</item>
+		<viewMode>Normal</viewMode>
+		<userSettingID>db2c5746-fd9c-4209-9a3a-263854e9dbcf</userSettingID>
+		<userSettingPresentation xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content/>
+			</v8:item>
+		</userSettingPresentation>
+	</conditionalAppearance>
+	<itemsViewMode>Normal</itemsViewMode>
+	<itemsUserSettingID>589ba4af-9aa6-44a4-bb85-ee82f794cb65</itemsUserSettingID>
+	<itemsUserSettingPresentation xsi:type="v8:LocalStringType">
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content/>
+		</v8:item>
+	</itemsUserSettingPresentation>
+</Settings>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="888d8fb4-0ece-4d53-97ae-2cfd04699440">
+  <producedTypes>
+    <objectType typeId="a5b7c40f-2600-4cf1-94da-6a5f6a31badf" valueTypeId="0662b382-a687-4bff-8bb7-7231803428d0"/>
+    <refType typeId="c8a8f8bf-d64b-41fb-9a12-48d874c8cd8c" valueTypeId="84588c06-8acf-4a91-98d4-ad022c040000"/>
+    <selectionType typeId="b836e913-9359-4369-85f0-185868708bc9" valueTypeId="8ab737d9-fb19-40ab-a700-de1dd3d4faa1"/>
+    <listType typeId="bfd0eddc-d0c5-4d11-85c2-564bd8bc98e7" valueTypeId="a5c10059-fa89-4f16-a874-5111c34df411"/>
+    <managerType typeId="c3250fa8-268a-48b8-965e-8e779638d3ab" valueTypeId="1a3a1478-d8b6-406b-a2d7-81682ec51ae1"/>
+  </producedTypes>
+  <name>Specifications</name>
+  <synonym>
+    <key>en</key>
+    <value>Specifications</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_Specifications</value>
+    </typesFilterValue>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <objectPresentation>
+    <key>en</key>
+    <value>Specification</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.Specifications.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.Specifications.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.Specifications.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="3ab2e28d-23cc-4663-9278-95a988030745">
+    <name>Type</name>
+    <synonym>
+      <key>en</key>
+      <value>Type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.SpecificationType</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="758c3868-18e1-4102-b684-62676c7d7c57">
+    <name>ItemBundle</name>
+    <synonym>
+      <key>en</key>
+      <value>Item bundle</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Items</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="f206459e-07da-4bbf-8def-0b1e6dca4c79">
+    <name>UniqueMD5</name>
+    <synonym>
+      <key>en</key>
+      <value>Unique MD5</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="a5d987ad-3b5e-454b-b53e-0398676c1a67">
+    <producedTypes>
+      <objectType typeId="72146f7d-6acd-4b5f-a7f3-dc6e355189e3" valueTypeId="72588d1b-631d-461d-8171-80964da92a9b"/>
+      <rowType typeId="43955f75-9ea9-4f54-80a9-9cf42eee1bc5" valueTypeId="b0389a0f-d8c3-4fb1-96e6-ce430e9b1f34"/>
+    </producedTypes>
+    <name>DataSet</name>
+    <synonym>
+      <key>en</key>
+      <value>Data set</value>
+    </synonym>
+    <attributes uuid="225c783b-ef06-4624-90db-f33aad0e7a36">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6161d092-06e2-4f8f-9937-12e385b3ff93">
+      <name>Item</name>
+      <synonym>
+        <key>en</key>
+        <value>Item</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Items</types>
+        <types>CatalogRef.ItemTypes</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="87fd3728-7fca-4c94-a01e-c57381784548">
+      <name>Attribute</name>
+      <synonym>
+        <key>en</key>
+        <value>Attribute</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="df014a9f-205a-4934-8a6f-781297c12559">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="e0ced2c3-8138-4b34-ad99-1efa0f12109f">
+    <producedTypes>
+      <objectType typeId="cb175017-90c3-4882-8d2f-bb46d7fe4e23" valueTypeId="39f6bd66-a5e0-4ffc-8094-ae8c68b5a320"/>
+      <rowType typeId="b0c1f1f5-d598-4543-bd9f-19a465ea1808" valueTypeId="5121b946-bf23-48d7-9f09-4d6be31e0f7f"/>
+    </producedTypes>
+    <name>DataQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Data quantity</value>
+    </synonym>
+    <attributes uuid="693f22f2-b706-4976-82f5-931e8be96e07">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4fd4218b-614f-4c70-94e0-590d4bd8a855">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="b558f2fc-e742-4c45-a34a-1bb4d50b665f">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="30dfd148-e5bf-4808-a453-e1e922d08cc4">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="d2bf8307-d4f9-4ae0-869c-24a56ff68c4a">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

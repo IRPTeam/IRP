@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core">
+	<filter>
+		<viewMode>Normal</viewMode>
+		<userSettingID>7f6cb38f-96ec-4f20-80aa-995cdbe79204</userSettingID>
+		<userSettingPresentation xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content/>
+			</v8:item>
+		</userSettingPresentation>
+	</filter>
+	<order>
+		<viewMode>Normal</viewMode>
+		<userSettingID>c809d583-6617-42f6-89b7-0d01e23479a0</userSettingID>
+		<userSettingPresentation xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content/>
+			</v8:item>
+		</userSettingPresentation>
+	</order>
+	<conditionalAppearance>
+		<item>
+			<selection>
+				<item>
+					<field>Ref</field>
+				</item>
+			</selection>
+			<filter/>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>Visible</dcscor:parameter>
+					<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</item>
+		<viewMode>Normal</viewMode>
+		<userSettingID>423157fd-dc4b-4ed3-b289-1db735f8d69f</userSettingID>
+		<userSettingPresentation xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content/>
+			</v8:item>
+		</userSettingPresentation>
+	</conditionalAppearance>
+	<itemsViewMode>Normal</itemsViewMode>
+	<itemsUserSettingID>e144d594-b615-42a1-94ad-b4722ce17204</itemsUserSettingID>
+	<itemsUserSettingPresentation xsi:type="v8:LocalStringType">
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content/>
+		</v8:item>
+	</itemsUserSettingPresentation>
+</Settings>

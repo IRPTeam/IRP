@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c6da0a73-4834-4ae9-a394-b28fec4f9ad6">
+  <producedTypes>
+    <objectType typeId="de65152b-c8ce-4a4b-bbe4-2aec9d2047aa" valueTypeId="6203e17e-94be-4eb6-977b-bb8a5d500728"/>
+    <refType typeId="0632ec6c-caf6-4688-ae8a-185215e15689" valueTypeId="ccf72dcf-1629-4714-b8cb-5e2ef4e13c23"/>
+    <selectionType typeId="4595a458-91c1-4358-8f8a-b44ed4387932" valueTypeId="ee12047d-5d62-4c98-96f9-bf48799f7460"/>
+    <listType typeId="f919a5d5-4412-4d71-bffa-62dba990dac7" valueTypeId="953944aa-d27e-40bc-a2ca-497304b9958c"/>
+    <managerType typeId="b43e3b1e-812e-44fb-a6a3-36caf9aab8f8" valueTypeId="0df4aaa6-4dae-4154-bd46-1b0d47379c61"/>
+  </producedTypes>
+  <name>IncomingPaymentOrder</name>
+  <synonym>
+    <key>en</key>
+    <value>Incoming payment order</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.IncomingPaymentOrder.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
+    <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
+    <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.CurrencyMovementSets.Document_IncomingPaymentOrder</value>
+    </typesFilterValue>
+    <characteristicValues>Document.IncomingPaymentOrder.TabularSection.Currencies</characteristicValues>
+    <objectField>Document.IncomingPaymentOrder.TabularSection.Currencies.StandardAttribute.Ref</objectField>
+    <typeField>Document.IncomingPaymentOrder.TabularSection.Currencies.Attribute.MovementType</typeField>
+    <valueField>Document.IncomingPaymentOrder.TabularSection.Currencies.Attribute.Amount</valueField>
+  </characteristics>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Incoming payment orders</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.IncomingPaymentOrder.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.IncomingPaymentOrder.Form.ListForm</defaultListForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.PlaningCashTransactions</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="e311a647-ddfc-4d94-b092-3366c47de2a1">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="ff56fee6-9ed4-4dba-aa36-23b60e371527">
+    <name>Account</name>
+    <synonym>
+      <key>en</key>
+      <value>Account</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.CashAccounts</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a5ffbf9b-b63e-416f-adfc-1ffe8338233d">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5fa5d43e-c985-4f09-9109-2feb9af12bdc">
+    <name>PlaningDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Planing date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="c84d8328-9e1b-416a-bcde-b09dfd972845">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="a8b20e28-6b04-4d8b-8e74-3cf0bf03a592">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="e7ce1887-c783-4352-a684-89cb637141c0">
+    <producedTypes>
+      <objectType typeId="dedae23d-66ac-428c-a840-bce5412a0579" valueTypeId="87b4e66d-732e-4791-8537-9efb9f5f47bb"/>
+      <rowType typeId="cc3bf045-7aee-4777-8976-039ea319b3ff" valueTypeId="44b5488e-f199-498e-8c01-648fcb6d6b65"/>
+    </producedTypes>
+    <name>PaymentList</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment list</value>
+    </synonym>
+    <attributes uuid="0f240352-03f2-4e0d-9981-2ca4c4b5bedc">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ecebb079-81e1-4c2f-be04-291b67c11855">
+      <name>Partner</name>
+      <synonym>
+        <key>en</key>
+        <value>Partner</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="eaeb01d8-364c-4d2a-8565-601f41aa29d8">
+      <name>Payer</name>
+      <synonym>
+        <key>en</key>
+        <value>Payer</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8e863974-7dc3-4b4b-8714-47b377fbdf12">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="ed59f46d-585b-4f10-86b3-00ca16baf2d7">
+    <producedTypes>
+      <objectType typeId="a768ac6d-5139-4387-b9aa-bbadc72d7c85" valueTypeId="b4040c80-049b-4bcf-9c04-8ac420851673"/>
+      <rowType typeId="efb43d82-6461-4b1d-bfd8-fce2ad718904" valueTypeId="fd197fb8-f189-475a-95fe-57df19856f9a"/>
+    </producedTypes>
+    <name>Currencies</name>
+    <synonym>
+      <key>en</key>
+      <value>Currencies</value>
+    </synonym>
+    <attributes uuid="73dbd584-7b2c-44cb-8039-52605135f2a3">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="744c8982-6040-4971-8003-abadf1bc9575">
+      <name>CurrencyFrom</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency from</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Currencies</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="876a147a-ed2d-4ad8-a765-70b8b49b061a">
+      <name>Rate</name>
+      <synonym>
+        <key>en</key>
+        <value>Rate</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeCurrencyRate</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="bc125c34-26ab-4534-98dc-63494a4c9e1c">
+      <name>ReverseRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Reverse rate</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeCurrencyRate</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d53f593d-f7e1-413d-89bd-c35658806b73">
+      <name>ShowReverseRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Show reverse rate</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d13434e5-564e-4285-b29c-557eeed3214e">
+      <name>Multiplicity</name>
+      <synonym>
+        <key>en</key>
+        <value>Multiplicity</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d488a921-b982-4b2a-bede-2ec2e2816d2d">
+      <name>MovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Movement type</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2fc4c86f-9801-4b46-9b50-781782bcba3c">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

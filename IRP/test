@@ -1,0 +1,30 @@
+pipeline {
+  agent {
+    node {
+      label "Depot1C"
+    }
+  }
+
+  stages {
+    stage("SonarQube analysis") {
+       steps {
+          script {
+              
+              bat "C:/sonar-scanner/bin/sonar-scanner -e \
+			  -Dsonar.host.url=xxx \
+			  -Dsonar.host.url=https://sq.irp.one:4443 \
+			  -Dsonar.projectKey=irppre \
+			  -Dsonar.projectName=irppre \
+			  -Dsonar.sources=. \
+			  -Dsonar.login=d776bfcdfb490fafbc4f583faa2b84e2295738c7 \
+			  -Dsonar.sourceEncoding=UTF-8 \
+			  -Dsonar.branch.name=$GIT_BRANCH \
+			  -Dsonar.branch.target= \
+			  -Dsonar.pullrequest.branch=$GIT_BRANCH \
+			  -Dsonar.pullrequest.base=origin/develop \
+			  
+            }
+         }
+      }
+    }
+  }

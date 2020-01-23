@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4470d229-1d5a-4247-a266-058caed43185">
+  <name>CommonFormActions</name>
+  <synonym>
+    <key>en</key>
+    <value>Common form actions</value>
+  </synonym>
+  <comment></comment>
+  <clientManagedApplication>true</clientManagedApplication>
+</mdclass:CommonModule>

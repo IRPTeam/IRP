@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3c3ee96d-f804-41bc-9e61-46922136697a">
+  <producedTypes>
+    <objectType typeId="e3778691-f0e7-42eb-8a09-0d1d36f98887" valueTypeId="10f4ec49-cba4-47d9-9126-ffabc1a8aabc"/>
+    <refType typeId="b8030ab7-2352-4a5a-aa2a-5d8269f64239" valueTypeId="7f5324fa-e3d6-42c9-9281-8cc436e02e0f"/>
+    <selectionType typeId="3d244ba3-f74b-4921-96ee-e2c39665df42" valueTypeId="f7422c5b-b2f1-4ca3-b183-cdbb097337dd"/>
+    <listType typeId="5514de3d-773a-4b58-ac2c-abcb6cb690d2" valueTypeId="ccaab740-fd97-475f-a43a-8ee25e937b93"/>
+    <managerType typeId="b56139a9-d64d-423d-899f-f3bf2b1e5f85" valueTypeId="6ccc5d9f-7d01-40aa-82cf-f55b12ab9b86"/>
+  </producedTypes>
+  <name>Countries</name>
+  <synonym>
+    <key>en</key>
+    <value>Countries</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <objectPresentation>
+    <key>en</key>
+    <value>Country</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.Countries.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.Countries.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.Countries.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="c81a36e4-4c50-47a8-811c-a787f2d4ce4d">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="613d1695-2a56-4778-a6cb-1a5d86f5ee2f">
+    <name>LocalizationCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Localization code</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>2</length>
+      </stringQualifiers>
+    </type>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="a2057f05-5025-48f5-b472-fecac5f3df5d">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="67dc10dc-52d7-45af-bd7b-4881e0945185">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="7a17eae2-7bff-4756-b2ff-d34b3734ded3">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

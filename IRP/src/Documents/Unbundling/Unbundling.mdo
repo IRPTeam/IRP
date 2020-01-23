@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a2b50c1f-6168-40f0-80d6-9a5e433cd1b7">
+  <producedTypes>
+    <objectType typeId="e2e1b0ab-e86d-4648-be6b-ac9566954203" valueTypeId="66a64016-2f72-4591-984e-bd82d8d9887b"/>
+    <refType typeId="545bc3b0-9b58-433d-8648-912e3d06f780" valueTypeId="d63c286d-dae2-4b69-8db1-02c4212809bd"/>
+    <selectionType typeId="ffbd7664-06a2-497b-a76f-dac60aeeb141" valueTypeId="c96ce49f-708a-4b26-9dd2-2622954c5b00"/>
+    <listType typeId="142f2e04-9d90-4adf-bcc7-cd826f355752" valueTypeId="b8c43bd8-35ab-46c7-be7e-196e817afd9f"/>
+    <managerType typeId="55fcfca5-87c4-4c0b-bd18-b611264b8c45" valueTypeId="13998be1-e1ee-44c0-b58b-4f39562e0f56"/>
+  </producedTypes>
+  <name>Unbundling</name>
+  <synonym>
+    <key>en</key>
+    <value>Unbundling</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.Unbundling.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Unbundling list</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.Unbundling.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.Unbundling.Form.ListForm</defaultListForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="52f32705-a380-4e87-8e35-1ac5b31f6963">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d694041e-1d49-4fe9-a028-e87f681f7939">
+    <name>ItemKeyBundle</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key bundle</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="29d1cf3a-4d32-49c7-8907-4cf0be70d5a0">
+    <name>Unit</name>
+    <synonym>
+      <key>en</key>
+      <value>Unit</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Units</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a0234e03-0328-4a06-a0b2-db9c856e31fb">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2bf43524-0188-40d5-a4cf-af4d98f42021">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="c5e88bdf-668f-4122-84a2-0b5bc2d68122">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="91259c78-536b-47a5-bce9-d1487e9a53a8">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="da56be85-a3e7-4dc9-b2c6-3d59a6d8561a">
+    <producedTypes>
+      <objectType typeId="3a0e8dee-3d26-4619-8289-43c9645793f9" valueTypeId="95fc3117-20e9-436c-86f6-95afc6d6d3ce"/>
+      <rowType typeId="72acacd7-4600-4b16-afa5-7b2c1166bb2b" valueTypeId="9e2425c2-4c4a-422d-b7e2-638a5bc092f7"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="0a86d53c-11a0-4ed3-b2be-06402445a05d">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="33532bf0-7e77-43ef-9361-de7c48d57210">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a670f10d-988d-4b4a-9677-c8326cf93181">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c2fbcb8a-c8bc-4088-a993-2eb4b4ddf37f">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

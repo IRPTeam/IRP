@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsOrder>
+    <orderFragments>
+      <group>NavigationPanelOrdinary</group>
+      <commands>Catalog.BusinessUnits.StandardCommand.OpenList</commands>
+      <commands>Catalog.CashAccounts.StandardCommand.OpenList</commands>
+      <commands>Catalog.Currencies.StandardCommand.OpenList</commands>
+      <commands>Catalog.ExpenseAndRevenueTypes.StandardCommand.OpenList</commands>
+      <commands>Catalog.TaxRates.StandardCommand.OpenList</commands>
+      <commands>InformationRegister.Taxes.StandardCommand.OpenList</commands>
+    </orderFragments>
+  </commandsOrder>
+</cmi:CommandInterface>

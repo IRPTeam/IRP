@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f94766d4-5c9b-4b92-8717-eed0cca4f319">
+  <name>CalculationStringsClientServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Calculation strings client server</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+  <server>true</server>
+</mdclass:CommonModule>

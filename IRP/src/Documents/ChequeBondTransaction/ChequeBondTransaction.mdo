@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="797b2c73-2528-48a8-8174-a161a14a4436">
+  <producedTypes>
+    <objectType typeId="accbe55e-0011-4074-b2df-236ce332b2df" valueTypeId="75c6a69a-313b-4fec-a2d2-4e0f810ea2a9"/>
+    <refType typeId="37e41b22-709b-408c-a622-6a617f87886d" valueTypeId="271f9dca-056d-424e-86f9-21e90f629d36"/>
+    <selectionType typeId="5908c637-32c4-44cb-b894-091512be74f4" valueTypeId="f67c9111-7852-4de6-a10d-f183823e3425"/>
+    <listType typeId="bcfb422e-bb00-4e7a-893f-ab1329cbba5b" valueTypeId="d1cf012f-8d46-4765-86e3-390de6f67737"/>
+    <managerType typeId="3998696d-5954-4dd7-867e-50eb670063ec" valueTypeId="70d8131c-6072-4ea5-b93d-d4f6f5851cff"/>
+  </producedTypes>
+  <name>ChequeBondTransaction</name>
+  <synonym>
+    <key>en</key>
+    <value>Cheque bond transaction</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.ChequeBondTransaction.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Cheque bond transactions</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.ChequeBondTransaction.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.ChequeBondTransaction.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.ChequeBondTransaction.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>InformationRegister.ChequeBondStatuses</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="84e23cc8-86e2-40ca-913c-948a457ad518">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d543149c-59d6-49b4-b428-a85b075ec57f">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="ea103288-74a0-46ef-a0c7-51e2e1274ff9">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="39632e9a-db92-4531-bc9b-af6ee98a940b">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="2860bdb8-a410-4a71-9c6d-70a596a7abd3">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="f4f92a4d-3057-423d-aaeb-862509c01425">
+    <producedTypes>
+      <objectType typeId="8f3997f6-abdd-464f-8b8b-675a11892f17" valueTypeId="a917f8de-16f7-4fe4-8be6-1207d6685a83"/>
+      <rowType typeId="6cb9ebbf-8d8f-4cc1-a011-1ef8c582e9d6" valueTypeId="54156fde-d840-4968-a5b0-b792dde352a8"/>
+    </producedTypes>
+    <name>ChequeBonds</name>
+    <synonym>
+      <key>en</key>
+      <value>Cheque bonds</value>
+    </synonym>
+    <attributes uuid="fa818099-85b2-4bae-8e25-c2fb05eb1319">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="76db2fb1-a1f2-41a7-91ea-409c69904e1d">
+      <name>Cheque</name>
+      <synonym>
+        <key>en</key>
+        <value>Cheque</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ChequeBonds</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <indexing>Index</indexing>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="cc2809e1-7617-4f2c-a291-e2608ea95edd">
+      <name>Status</name>
+      <synonym>
+        <key>en</key>
+        <value>Status</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ObjectStatuses</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="58c3050e-b2ca-4d0e-997b-32bcaf16aa39">
+      <name>Partner</name>
+      <synonym>
+        <key>en</key>
+        <value>Partner</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9c558d05-3dbf-48ba-9dbd-d821b57bcac4">
+      <name>Agreement</name>
+      <synonym>
+        <key>en</key>
+        <value>Agreement</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Agreements</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="93d195d1-6fbd-45e4-ba63-e5d17de551d6">
+      <name>LegalName</name>
+      <synonym>
+        <key>en</key>
+        <value>Legal name</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d47f4d4e-aff7-46c5-84ce-be68c47a9cfd">
+      <name>CashAccount</name>
+      <synonym>
+        <key>en</key>
+        <value>Cash account</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CashAccounts</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="33150a75-24e6-4348-ac96-1eb0d1dee36b">
+      <name>Bank</name>
+      <synonym>
+        <key>en</key>
+        <value>Bank</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="92af76fd-30e4-4d52-9f57-8a03d21ad337">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a9631d69-2875-4f29-a692-3b6c1f227cb6">
+      <name>NewStatus</name>
+      <synonym>
+        <key>en</key>
+        <value>New status</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ObjectStatuses</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a8869bff-3ce5-4e32-9b17-56a26bca6b94">
+      <name>Currency</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Currencies</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="6b44552d-7f8f-42b7-aaa7-4037d874d7ae">
+    <producedTypes>
+      <objectType typeId="6cbd620a-fa25-4991-933c-87bddf575090" valueTypeId="17a10b00-7824-4d16-8589-2214ddd13b39"/>
+      <rowType typeId="2f1404a1-cb85-4e73-a2a4-50ad235aa11f" valueTypeId="1e550d87-4dc0-45e3-b90b-49157f2c9759"/>
+    </producedTypes>
+    <name>PaymentList</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment list</value>
+    </synonym>
+    <attributes uuid="8a98dce8-7a76-41f2-8f5e-3895a1c0af6a">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="49b9a323-7c86-49ab-ab9d-ad00359e4304">
+      <name>PartnerArBasisDocument</name>
+      <synonym>
+        <key>en</key>
+        <value>Partner ar basis document</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeArTransactionBasises</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d45acdfa-9f5f-4026-a783-9bd52cc486c0">
+      <name>PartnerApBasisDocument</name>
+      <synonym>
+        <key>en</key>
+        <value>Partner ap basis document</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeApTransactionBasises</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0928416b-d457-4701-be92-8fec32cac725">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="652888c9-533d-41ce-8529-c9e5e6522c58">
+    <producedTypes>
+      <objectType typeId="44f7aa13-63dd-4752-8ebb-cdfe8c64eacf" valueTypeId="7a0fad21-9d5b-4adf-b8e7-bd9c6e295acd"/>
+      <rowType typeId="040b13d7-76f6-41db-a7b0-dc248b597f0c" valueTypeId="5552558d-0fdb-4183-a647-b9ce10fcd43b"/>
+    </producedTypes>
+    <name>Currencies</name>
+    <synonym>
+      <key>en</key>
+      <value>Currencies</value>
+    </synonym>
+    <attributes uuid="bf49de00-05e2-4cee-b489-6510d567d46e">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c2de1cd2-595e-4cd0-a91c-c5c503306502">
+      <name>CurrencyFrom</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency from</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Currencies</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9f3a1564-ccb0-409e-b26b-6b34ed80bbfd">
+      <name>Rate</name>
+      <synonym>
+        <key>en</key>
+        <value>Rate</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeCurrencyRate</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="93eaf5ae-ddc0-47e6-aecf-273b766c29f8">
+      <name>ReverseRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Reverse rate</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeCurrencyRate</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="65cde306-dc8b-4252-9656-2c8e616ad3ee">
+      <name>ShowReverseRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Show reverse rate</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="fdfea3bb-6512-4e42-8fb4-b75d5664705e">
+      <name>Multiplicity</name>
+      <synonym>
+        <key>en</key>
+        <value>Multiplicity</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8a2c2c32-30b0-466d-b4a4-32ea079a8668">
+      <name>MovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Movement type</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="211def9f-2e89-4e94-9137-d8712c91462c">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a20dd55a-e887-4529-b496-8854dfe323a4">
+  <name>MultiThreadingClientServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Multi threading client server</value>
+  </synonym>
+  <comment></comment>
+  <server>true</server>
+</mdclass:CommonModule>

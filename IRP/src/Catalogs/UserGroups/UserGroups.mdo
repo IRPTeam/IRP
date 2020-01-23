@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e8b567fd-16da-47f5-a242-5cc3cb112a29">
+  <producedTypes>
+    <objectType typeId="fe6b7a4b-c9e3-4de1-aef0-f12aeebc02d7" valueTypeId="4d7885cf-0d70-4f68-8303-bd2c65e82bb4"/>
+    <refType typeId="34be68cd-3cbe-45b2-8cba-4b1d14e09f73" valueTypeId="350973ba-cbdc-4667-b557-283659106d4a"/>
+    <selectionType typeId="da6b5712-63c4-4c71-93c6-8a2b153cd1ea" valueTypeId="64b9f327-8b8a-4b5e-85de-2f08b31ed555"/>
+    <listType typeId="c993a6f9-af6a-4d12-997e-a708ca667a06" valueTypeId="db5b7b43-25d4-4ec4-bbf8-c18f3ca1806a"/>
+    <managerType typeId="87fe2c39-a8d8-44ac-b14e-6b15e984fd14" valueTypeId="338f53f0-3586-41b6-bc42-ea09eb53a219"/>
+  </producedTypes>
+  <name>UserGroups</name>
+  <synonym>
+    <key>en</key>
+    <value>User groups</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>User group</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.UserGroups.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.UserGroups.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.UserGroups.Form.ChoiceForm</defaultChoiceForm>
+  <forms uuid="447fd96c-4019-4f7f-a415-3e7bdcd4e68f">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="e0221954-0b20-4408-a8dd-44b6bb3f9f7c">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="4163c831-f054-40b9-ab47-32b8983efca6">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

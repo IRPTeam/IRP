@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e5b12a72-a0bc-490b-bd40-8d623c453245">
+  <producedTypes>
+    <objectType typeId="ae1544e0-205a-4a84-9428-e6606e07e3c9" valueTypeId="6d2bc587-6224-4128-b896-fa1f5ec78456"/>
+    <refType typeId="0fad6657-4159-4b59-b341-31b01839c634" valueTypeId="e18f7d73-908c-4e92-94d9-1fe7b78f4dae"/>
+    <selectionType typeId="65e67537-615b-4ca1-8263-8c007e3fbd21" valueTypeId="72607c4d-551d-41bb-884d-7ad3143c185b"/>
+    <listType typeId="8e3618e2-b254-4b1e-a665-ffe56c4a6962" valueTypeId="5c5e9e45-14ec-41d7-b118-4fd91b7b26c2"/>
+    <managerType typeId="59a42a76-5c21-4cac-9e45-a219ddc16781" valueTypeId="c7507bf1-a3c2-4646-bb74-6c75eb33c3d1"/>
+  </producedTypes>
+  <name>PaymentTypes</name>
+  <synonym>
+    <key>en</key>
+    <value>Payment types</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <objectPresentation>
+    <key>en</key>
+    <value>Payment type</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.PaymentTypes.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.PaymentTypes.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.PaymentTypes.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <forms uuid="22902463-20cf-4b29-b85a-4d889c8828df">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="7b9b7854-d459-4fed-bf38-2699fe17d012">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="939d68ea-338f-4fc8-a067-9cbf0d09e10f">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

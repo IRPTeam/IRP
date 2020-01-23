@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8505770f-00c4-4d08-8b6d-43a63db079f5">
+  <producedTypes>
+    <selectionType typeId="0af028fe-9395-4916-b3e1-e72d49d566e6" valueTypeId="0cdea671-7ad2-414f-8167-5c1ccbc4ca2c"/>
+    <listType typeId="73a28a13-99b2-4d6f-be23-ccbe163c773e" valueTypeId="8629f4e3-b306-4fba-9f30-2b5b5e9f8e75"/>
+    <managerType typeId="f565359e-37e4-4986-8c1b-e468d0960334" valueTypeId="33f9484e-138c-42e4-bfdf-4f6a471a5442"/>
+    <recordSetType typeId="3f8cf4f8-00d1-4cf6-b2cf-d3e2c891c5ab" valueTypeId="d82ac454-aa58-4fd3-8205-3c97163bd128"/>
+    <recordKeyType typeId="0d9e5ca2-dcd0-4f03-8ab3-4cb057d33610" valueTypeId="f93013b2-c9ba-4e3d-9142-521291aec7d7"/>
+    <recordType typeId="fdf5f9d9-0cbb-4b7f-a755-df7348465637" valueTypeId="4225efcc-3272-42f3-96d3-e8ede1616be1"/>
+    <recordManagerType typeId="6c45db09-15cf-45e3-87d0-58f0c8d6947f" valueTypeId="b12877bc-eb30-4f99-ac66-330186aed212"/>
+  </producedTypes>
+  <name>BoxContents</name>
+  <synonym>
+    <key>en</key>
+    <value>Box contents</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+  <writeMode>RecorderSubordinate</writeMode>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="0d26376e-aa6a-4132-9504-034afe97c2c2">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </resources>
+  <dimensions uuid="935cd93a-03b2-4b0b-8d8a-c2ffad5438dc">
+    <name>ItemKeyBox</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key box</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="557185cb-a5e5-4d51-bc4f-35117d4817bc">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+</mdclass:InformationRegister>

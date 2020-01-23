@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="15802646-1457-4759-b1e7-b7df55ab910f">
+  <producedTypes>
+    <objectType typeId="d84e22ce-3fad-42c6-a1c0-fe4f5b2a1b15" valueTypeId="40f099c7-eeb6-4877-ba19-4c8b1f8f9aa4"/>
+    <refType typeId="4dd4563f-ceb7-4b48-80c9-230d0b4b9c6c" valueTypeId="8f4f62c8-25e2-4701-a46c-baeb6aee0259"/>
+    <selectionType typeId="a5547500-f66a-4aae-94ea-7a5716f27286" valueTypeId="c8012bd1-fcf2-453e-b7c2-2c598d467242"/>
+    <listType typeId="4ffac1ac-8b4d-4e00-bca2-e14d7493be29" valueTypeId="b91d8d2c-b478-462b-8e2d-e9a9249b401d"/>
+    <managerType typeId="5c661dbb-ef53-4030-9f06-b5a13be68254" valueTypeId="919337bd-3fbd-4382-8cfe-3e1b4ae2fc05"/>
+  </producedTypes>
+  <name>Labeling</name>
+  <synonym>
+    <key>en</key>
+    <value>Labeling</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.Labeling.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Labeling list</value>
+  </listPresentation>
+  <numberType>String</numberType>
+  <numberLength>9</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.Labeling.Form.DocumentForm</defaultObjectForm>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <forms uuid="11702bf6-a43f-4d69-8fb3-039bfee037bf">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="be3bb248-605e-4626-a4dc-a1061fa15aa8">
+    <producedTypes>
+      <objectType typeId="bbdb2c40-4b94-47f4-82cd-ee5be36ac0f6" valueTypeId="460b8447-9e1e-4997-910a-e98d3c065534"/>
+      <rowType typeId="caf607d0-1732-4b9d-a3be-665bebaa6ada" valueTypeId="8e9af20d-0440-4c35-9537-b44dd049c066"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="b79f3a6a-b0d9-4e6c-841c-b55221f8d776">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+        <types>CatalogRef.ItemTypes</types>
+        <types>CatalogRef.Items</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c52a8178-e9b4-4948-bb32-0f7618cd4fe2">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2f43d1ff-ca82-4f7e-8e28-140d1d1ac8c3">
+      <name>Barcode</name>
+      <synonym>
+        <key>en</key>
+        <value>Barcode</value>
+      </synonym>
+      <comment></comment>
+      <type>
+        <types>DefinedType.typeBarcode</types>
+      </type>
+      <mask></mask>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <indexing>Index</indexing>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5b525886-6f77-4eea-b705-7d7ebf9661f0">
+      <name>PurchaseOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Purchase order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseOrder</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="830c948f-9c23-4d44-ac75-0a2280a6bd73">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <commands uuid="7244e3b7-050d-47eb-b6ef-1b6153ee8801">
+    <name>GenerateLabeling</name>
+    <synonym>
+      <key>en</key>
+      <value>Labeling</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.PurchaseOrder</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+</mdclass:Document>

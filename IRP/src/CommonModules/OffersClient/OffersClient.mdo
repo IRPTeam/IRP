@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="88bac9e3-4e7b-4626-876c-806ccb526a5f">
+  <name>OffersClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Offers client</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+</mdclass:CommonModule>

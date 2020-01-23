@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="df29be46-1fe2-45c0-b250-0eae4b0f5ba6">
+  <producedTypes>
+    <selectionType typeId="eb0b7e1b-97c5-4b65-b823-09106897e6e4" valueTypeId="6fd04f5e-17ba-4c4c-abf1-3dfd9532061a"/>
+    <listType typeId="b44c94a6-52a2-42da-98b3-4851886ff9e6" valueTypeId="21e5e227-f8ad-4d11-96fd-59c01d7a04ee"/>
+    <managerType typeId="21b59ab9-4659-4e04-9ab5-0330bccb95a3" valueTypeId="f9ccb992-bedd-4ac2-aa68-29589ffeb7af"/>
+    <recordSetType typeId="f9bf0374-f147-4654-b8f8-9060fbd7aef3" valueTypeId="8e2d5f3b-491f-4f79-b29e-221bc0087d94"/>
+    <recordKeyType typeId="b9d2d8bc-14ed-4167-8966-d7c6c7276d19" valueTypeId="ce21ba6e-3bc0-407d-80c5-fa9108ef48a7"/>
+    <recordType typeId="e4c68a4a-6c15-42a2-8847-c87741bf6dec" valueTypeId="ac0fef71-c277-472b-b68e-ffcc4e2ad363"/>
+  </producedTypes>
+  <name>AdvanceToSuppliers</name>
+  <synonym>
+    <key>en</key>
+    <value>Advance to suppliers</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="fcb8bd34-fa35-4710-a9f6-cc97ac12f4b5">
+    <name>Amount</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <attributes uuid="b2b56184-e410-429e-ba63-af1dce594ae3">
+    <name>DeferredCalculation</name>
+    <synonym>
+      <key>en</key>
+      <value>Deferred calculation</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <dimensions uuid="422c403d-5990-416c-a735-c9ecb8b409f7">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="b123bd33-0103-4958-8981-1399eb9e0bc4">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="fe41566a-b2d5-4e67-bfb9-30e284bf8703">
+    <name>LegalName</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="dee5bdbf-05d3-43b7-be68-d94c9e382a1b">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="ee2b6d06-3de6-44ac-812b-50d320a033bf">
+    <name>PaymentDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.CashPayment</types>
+      <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.ChequeBondTransactionItem</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="ed256828-41f8-4106-b4e4-bac52f0f0de5">
+    <name>CurrencyMovementType</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency movement type</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

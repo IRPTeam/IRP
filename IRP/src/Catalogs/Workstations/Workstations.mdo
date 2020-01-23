@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="52016cc9-453f-44d2-9a07-dae0b9c94e10">
+  <producedTypes>
+    <objectType typeId="a35075e9-1020-4581-99fb-bf1753b9c585" valueTypeId="23b87741-810e-4403-ae32-a1c90d9b982e"/>
+    <refType typeId="50f7560f-144f-4fe9-b87c-a72530c3569e" valueTypeId="acb84d64-b0a1-4a22-a456-e9a221fb367d"/>
+    <selectionType typeId="cddc0bae-89de-45ff-8536-32c1ab801362" valueTypeId="eafbb7e6-4a78-4b0e-85d2-b7cd03a4f2a3"/>
+    <listType typeId="0d360455-587e-4eae-a3c5-f8f8b716b670" valueTypeId="e9232678-c836-49ea-b385-71f4d4156021"/>
+    <managerType typeId="12ae1994-109c-415f-85f6-6678eaf826a5" valueTypeId="3c4e3ac7-947c-4cdf-8b58-2a094d95a6c6"/>
+  </producedTypes>
+  <name>Workstations</name>
+  <synonym>
+    <key>en</key>
+    <value>Workstations</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.Workstations.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.Workstations.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Workstation</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>9</codeLength>
+  <descriptionLength>25</descriptionLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+</mdclass:Catalog>

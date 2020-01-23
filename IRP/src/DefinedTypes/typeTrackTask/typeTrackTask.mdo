@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="78dc5165-9ec8-4a97-87ea-2677baf7292c">
+  <producedTypes>
+    <containerType typeId="1a888fd8-36f2-492b-9e00-c74279586a39" valueTypeId="c49f23fd-748d-4c17-b0ae-49824ee4098e"/>
+  </producedTypes>
+  <name>typeTrackTask</name>
+  <synonym>
+    <key>en</key>
+    <value>Type track task</value>
+  </synonym>
+  <comment></comment>
+  <type>
+    <types>DocumentRef.DeliveryList</types>
+  </type>
+</mdclass:DefinedType>

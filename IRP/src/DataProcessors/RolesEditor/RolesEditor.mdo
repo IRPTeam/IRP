@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="526929c2-fb24-4daa-b148-1351d356f6ad">
+  <producedTypes>
+    <objectType typeId="223c30d6-e209-4041-895e-2b07d45e109a" valueTypeId="59c1e813-7c8c-42a7-b6b3-87061f213fbd"/>
+    <managerType typeId="76f6e589-60e0-4062-a457-db3185a87b29" valueTypeId="ada4311a-1082-4b88-bed9-ef8ce80abcda"/>
+  </producedTypes>
+  <name>RolesEditor</name>
+  <synonym>
+    <key>en</key>
+    <value>Roles editor</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.RolesEditor.Form.Form</defaultForm>
+  <forms uuid="e62ea192-7e62-4f17-8490-a5fba5947bc3">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="2a8b7447-d773-4a74-b310-462d7157c08a">
+    <name>EditRole</name>
+    <synonym>
+      <key>en</key>
+      <value>Edit role</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <templates uuid="5ffffd26-8ab6-42b4-8da3-7abeaf7cea43">
+    <name>TemplateDB</name>
+    <synonym>
+      <key>en</key>
+      <value>Template DB</value>
+    </synonym>
+    <templateType>BinaryData</templateType>
+  </templates>
+</mdclass:DataProcessor>

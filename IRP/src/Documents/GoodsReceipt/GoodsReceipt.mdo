@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e21fc0a4-9f3b-43c1-873d-952dbbb8ae63">
+  <producedTypes>
+    <objectType typeId="7e81414b-7b79-4d60-956c-c44703019269" valueTypeId="8fc9572e-dde1-4257-a2fe-3c33981365fb"/>
+    <refType typeId="dd72e931-9eea-40fc-b419-9ff578908f82" valueTypeId="abbba13c-1786-4b57-90cd-5a8f5d906cc4"/>
+    <selectionType typeId="3de1dbde-6158-4058-9e4b-18e6cb9bdb4f" valueTypeId="cdd205b0-55c9-4603-8893-95d3e6c6cb2a"/>
+    <listType typeId="1651bd9a-6fc8-4662-bbcb-104338f51818" valueTypeId="01609107-935f-41c4-a83f-9c20461f62db"/>
+    <managerType typeId="79e7f4a0-a4c2-4c50-aad4-872fa4f49ab9" valueTypeId="b46e8d45-d37f-4f6a-9066-e73e74137e95"/>
+  </producedTypes>
+  <name>GoodsReceipt</name>
+  <synonym>
+    <key>en</key>
+    <value>Goods receipt</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.GoodsReceipt.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Goods receipts</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.GoodsReceipt.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.GoodsReceipt.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.GoodsReceipt.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.ReceiptOrders</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsReceiptSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="be35385a-b405-438b-817f-207b0b6ac187">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="994057c5-754a-44b8-a196-65fdf9a65415">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="12089e5a-0f18-4580-9ec3-60f070988802">
+    <name>LegalName</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="b01866f0-3352-4171-b089-2dc69110e3cd">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="0e3b12ea-d926-4049-81d4-8bcccb6e0acc">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="b7f17a17-5e47-4f13-8489-8a6dbe675354">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="b9a62d99-0c9a-4433-a369-2ec8caf2aa14">
+    <name>DocumentFormMobile</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form mobile</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="3caaaa06-4032-438b-a050-115c24d3cb3a">
+    <name>SelectReceiptBasisesForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Select Receipt basises</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="506c7b4d-f0ff-4625-914d-590053e7544f">
+    <producedTypes>
+      <objectType typeId="8509535a-15a6-40e7-84c1-e439f9b2d951" valueTypeId="9886a59c-aa6d-4e99-b83e-6192fe1ec6a1"/>
+      <rowType typeId="904a598e-d34e-42ac-8b7e-e4ed513f4767" valueTypeId="08d26a84-40b3-4339-b928-61941c24ff27"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="d30b1035-eb74-426c-9b1e-c0785a852966">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="e97a6495-364b-4d0f-b505-788e06d5dd8a">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="44ffdc3e-3410-4181-8296-41dad299a764">
+      <name>Store</name>
+      <synonym>
+        <key>en</key>
+        <value>Store</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Stores</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="932c54c3-e82f-47e3-a7e5-6439007ebffc">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="9c24bf98-a745-49f3-b688-09680a73ffa4">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="0001510c-5cbc-409b-9a7a-5ed05f5660c9">
+      <name>ReceiptBasis</name>
+      <synonym>
+        <key>en</key>
+        <value>Receipt basis</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeReceiptBasis</types>
+      </type>
+      <quickChoice>DontUse</quickChoice>
+      <createOnInput>DontUse</createOnInput>
+      <dataHistory>Use</dataHistory>
+      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+    </attributes>
+    <attributes uuid="d2fcaccb-954c-4e83-bde1-505c49704ebf">
+      <name>SalesOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Sales order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesOrder</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="ac98fe34-35b6-4d53-9ba6-bd686556a6c7">
+    <producedTypes>
+      <objectType typeId="c039c36d-2a09-467c-8e7e-d423e56b2aa3" valueTypeId="9b9dc8f5-6849-4152-afba-68ec7576f516"/>
+      <rowType typeId="d3b36ee4-d61b-4e5e-aadc-4fa48c489368" valueTypeId="2e3e1fc5-e14a-4f34-9637-8a10201683d8"/>
+    </producedTypes>
+    <name>SerialLotNumberList</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot number list</value>
+    </synonym>
+    <attributes uuid="67f6c7ff-5ade-464e-8187-04b079ce6413">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1ee2f8a6-7ea3-40a8-8be7-9a96bdfddb86">
+      <name>KeyRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Key ref</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="317b398f-58fa-4a44-affe-9d68487f1b68">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <commands uuid="8c19c753-9d70-4b53-95eb-a4ef841a951d">
+    <name>GenerateGoodsReceipt</name>
+    <synonym>
+      <key>en</key>
+      <value>Goods receipt</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.InventoryTransfer</types>
+      <types>DocumentRef.Bundling</types>
+      <types>DocumentRef.Boxing</types>
+      <types>DocumentRef.Unboxing</types>
+      <types>DocumentRef.Unbundling</types>
+      <types>DocumentRef.PurchaseOrder</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+</mdclass:Document>

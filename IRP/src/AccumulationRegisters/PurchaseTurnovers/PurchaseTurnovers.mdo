@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7a767ced-bff5-4ef1-a214-9354b0bd93b8">
+  <producedTypes>
+    <selectionType typeId="37e69ec2-d733-4c5d-ad0d-bb636bc30578" valueTypeId="c014740d-f8fe-46fd-87b6-5b33e443813b"/>
+    <listType typeId="056423b5-d3f0-4683-bb41-461c8dc59c1b" valueTypeId="7fb67890-f6b9-466b-b8ca-422036a8426a"/>
+    <managerType typeId="d00e27fb-1e5f-4761-9140-d4f9c5a48417" valueTypeId="13abb143-9dd3-47c6-929d-1aee418bb710"/>
+    <recordSetType typeId="53c310e1-0ae9-4877-a8a9-86c1522bf50c" valueTypeId="2ec587dd-0be0-4572-bcff-0edeb8a2a340"/>
+    <recordKeyType typeId="701a11a2-6a3e-4d22-a473-d4261b1c8a96" valueTypeId="09d365a4-5cae-4397-a62a-952f6d192e03"/>
+    <recordType typeId="32090f93-b51b-4fea-951c-78099660c8cd" valueTypeId="a63f6657-e1cd-46bf-b047-d1c6cab0eff3"/>
+  </producedTypes>
+  <name>PurchaseTurnovers</name>
+  <synonym>
+    <key>en</key>
+    <value>Purchase turnovers</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="4bbd016f-8def-4661-8a91-a0d80401b19b">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="d49da3ae-6573-40a5-b841-96fdc03ad9a4">
+    <name>Amount</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="f68e2970-5216-4ec0-b494-0c81c7477cdb">
+    <name>NetAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Net amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <attributes uuid="fe63c48d-3756-4f66-8fcc-2b3df19c94e9">
+    <name>DeferredCalculation</name>
+    <synonym>
+      <key>en</key>
+      <value>Deferred calculation</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <dimensions uuid="b6587310-59b9-457c-b0e6-e58caac26bc7">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="b94fd34c-d9c7-408b-886f-0c84aac581a4">
+    <name>PurchaseInvoice</name>
+    <synonym>
+      <key>en</key>
+      <value>Purchase invoice</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseInvoice</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="ddd6fb26-a5c1-4121-b9c6-aa58368a519b">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="f8f2e28b-55b9-428a-8e28-2d158bbb3b0f">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="2588b5e7-7702-4324-ab99-7179d42c272a">
+    <name>RowKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Row key</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="9f1fe5e9-0882-4da1-82b6-e1cb32bbcd71">
+    <name>CurrencyMovementType</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency movement type</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

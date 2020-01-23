@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1b9eaf7a-d644-4ccd-a1ca-6262361b7abe">
+  <name>MultiThreading</name>
+  <synonym>
+    <key>en</key>
+    <value>Multi threading</value>
+  </synonym>
+  <comment></comment>
+  <includeHelpInContents>true</includeHelpInContents>
+  <content>InformationRegister.ThreadsInfo</content>
+  <content>CommonModule.MultiThreadingClientServer</content>
+  <content>InformationRegister.JobSettings</content>
+  <content>Enum.ThreadState</content>
+  <content>ScheduledJob.ThreadLauncher</content>
+</mdclass:Subsystem>

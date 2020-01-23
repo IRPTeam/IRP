@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dfcafed1-cccc-4b34-842d-3507cd12808c">
+  <producedTypes>
+    <objectType typeId="b240a3a4-810e-4674-9057-36414304f6de" valueTypeId="b26710c5-3a9b-4379-bcef-d26c8c698dcc"/>
+    <refType typeId="bba2110a-f217-4248-ae0e-cee207799748" valueTypeId="cb93c599-efe3-417b-942c-7f6714b2edff"/>
+    <selectionType typeId="9037ce0f-913e-4251-bdc0-cc9f2390d69a" valueTypeId="a5b86cdc-ba11-4acd-9201-dba08086f0ef"/>
+    <listType typeId="8b845d4a-6770-4583-95b2-5b1cb3a9cd7f" valueTypeId="2088840f-e623-4b84-b4cf-a1a86f4ae940"/>
+    <managerType typeId="7d9dff4e-dc10-482f-a599-fc9b81bebb65" valueTypeId="d2443d17-bb66-4d5f-8798-186fc23c72b4"/>
+  </producedTypes>
+  <name>InventoryTransferOrder</name>
+  <synonym>
+    <key>en</key>
+    <value>Inventory transfer order</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.InventoryTransferOrder.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Inventory transfer orders</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.InventoryTransferOrder.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.InventoryTransferOrder.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.InventoryTransferOrder.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.TransferOrderBalance</registerRecords>
+  <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="d83df841-35e2-4107-90c0-9163d052ff0b">
+    <name>StoreSender</name>
+    <synonym>
+      <key>en</key>
+      <value>Store sender</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="074f005f-7f5b-48fa-98b5-540940a7a70c">
+    <name>StoreReceiver</name>
+    <synonym>
+      <key>en</key>
+      <value>Store receiver</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="29ee3f07-c06b-4b55-93e6-05bc75f2f0a4">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="3b29c339-4ba1-4e0b-bb50-5842ed0fff30">
+    <name>Status</name>
+    <synonym>
+      <key>en</key>
+      <value>Status</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ObjectStatuses</types>
+    </type>
+    <choiceParameters>
+      <name>Filter.Parent</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Catalog.ObjectStatuses.InventoryTransferOrder</value>
+      </value>
+    </choiceParameters>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="0838a40b-9efe-48ee-8cb4-ca06cd01940d">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="c88dc45e-adda-414a-8699-de3e4b37450f">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="25893ebc-6263-4899-81ad-0da97b150f83">
+    <name>SelectStoreForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Select store</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="64609791-db74-48d0-8068-b5a444480022">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="499ea0b9-621c-4f65-8709-ad3f5d210d56">
+    <producedTypes>
+      <objectType typeId="b72d6482-d24b-4e30-a918-d56057bcbff4" valueTypeId="c9cc7386-fd07-4b61-9ce3-7c182cd499bb"/>
+      <rowType typeId="686ef8f0-0e20-4388-8a80-51feeb85bc66" valueTypeId="37223707-edad-4d78-ad38-4f784d29a83f"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="17f2fed6-87d6-43aa-a550-3fe46eb5e528">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="b3f74d1d-87ef-4172-9992-be387de6eb3f">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="27361e8f-b795-426f-8446-b1b112999f40">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="3ba485f9-fb5b-444d-9712-af015653f75e">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="60b639e9-a28e-4abf-b79f-618bd6dec3fb">
+      <name>InternalSupplyRequest</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal supply request</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.InternalSupplyRequest</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <commands uuid="a1b5f914-0d10-4e9c-a0f5-5420027552ed">
+    <name>GenerateInventoryTransferOrder</name>
+    <synonym>
+      <key>en</key>
+      <value>Inventory transfer order</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.InternalSupplyRequest</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+</mdclass:Document>

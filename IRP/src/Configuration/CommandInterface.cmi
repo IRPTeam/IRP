@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <subsystemsVisibility>
+    <visibilityFragments>
+      <subsystem>Subsystem.Mobile</subsystem>
+      <visible/>
+    </visibilityFragments>
+    <visibilityFragments>
+      <subsystem>Subsystem.Temp</subsystem>
+      <visible/>
+    </visibilityFragments>
+  </subsystemsVisibility>
+  <subsystemsOrder>
+    <subsystems>Subsystem.Temp</subsystems>
+    <subsystems>Subsystem.Mobile</subsystems>
+    <subsystems>Subsystem.PurchaseAP</subsystems>
+    <subsystems>Subsystem.SalesAR</subsystems>
+    <subsystems>Subsystem.Marketing</subsystems>
+    <subsystems>Subsystem.Inventory</subsystems>
+    <subsystems>Subsystem.Delivery</subsystems>
+    <subsystems>Subsystem.Treasury</subsystems>
+    <subsystems>Subsystem.MasterData</subsystems>
+    <subsystems>Subsystem.Settings</subsystems>
+    <subsystems>Subsystem.AutoTest</subsystems>
+  </subsystemsOrder>
+</cmi:CommandInterface>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="507291c1-5af4-45a7-86b6-7e3e177d945f">
+  <producedTypes>
+    <objectType typeId="54ce4287-dd3d-4496-bf23-92837ee3a799" valueTypeId="aec5e623-8c94-4adb-ab6b-29b0c37e12d7"/>
+    <refType typeId="0a534cc9-d61b-4c71-b246-5748241d0991" valueTypeId="8ed27b93-f60b-466f-8be3-c466d0fa3f06"/>
+    <selectionType typeId="2d32f957-701d-4c65-9357-031e271e0464" valueTypeId="837e59b4-b06c-42e5-bbda-0abe239f2d11"/>
+    <listType typeId="adea26a0-3fd6-4cf6-a906-0ab93a766ad9" valueTypeId="207838d5-7b0a-4c1d-83aa-40118a53e052"/>
+    <managerType typeId="87a595d6-df1c-41d7-93ac-93f1cbc96b0c" valueTypeId="4d4bd305-af27-49f9-b5eb-d27a03d255c7"/>
+  </producedTypes>
+  <name>SpecialOffers</name>
+  <synonym>
+    <key>en</key>
+    <value>Special offers</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <objectPresentation>
+    <key>en</key>
+    <value>Special offer</value>
+  </objectPresentation>
+  <hierarchical>true</hierarchical>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <predefined/>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.SpecialOffers.Form.ItemForm</defaultObjectForm>
+  <defaultFolderForm>Catalog.SpecialOffers.Form.GroupForm</defaultFolderForm>
+  <defaultListForm>Catalog.SpecialOffers.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.SpecialOffers.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="fab4eaec-2a2f-40c0-ba87-06946e527260">
+    <name>Settings</name>
+    <synonym>
+      <key>en</key>
+      <value>Settings</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e49008d4-cc2d-49ee-ad19-a9d5688e57db">
+    <name>SpecialOfferType</name>
+    <synonym>
+      <key>en</key>
+      <value>Special offer type</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>CatalogRef.SpecialOfferTypes</types>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <createOnInput>Use</createOnInput>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <use>ForFolderAndItem</use>
+  </attributes>
+  <attributes uuid="38476fa2-c496-458b-a723-0f0b845fedf0">
+    <name>Priority</name>
+    <synonym>
+      <key>en</key>
+      <value>Priority</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>3</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>IndexWithAdditionalOrder</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <use>ForFolderAndItem</use>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9b34285b-59b0-4197-8663-b7fbe83cb4b2">
+    <name>Manually</name>
+    <synonym>
+      <key>en</key>
+      <value>Manually</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="434f75b6-d091-4e19-ad9e-8ca99d2ea281">
+    <name>StartOf</name>
+    <synonym>
+      <key>en</key>
+      <value>Start of</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>IndexWithAdditionalOrder</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c875e906-b9f4-40f9-acaf-be4553286880">
+    <name>EndOf</name>
+    <synonym>
+      <key>en</key>
+      <value>End of</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>IndexWithAdditionalOrder</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="82b22115-a469-4b57-9ad2-95d4db243b7e">
+    <name>Launch</name>
+    <synonym>
+      <key>en</key>
+      <value>Launch</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="db183eec-aa74-4a1a-b58e-cb057aa535c3">
+    <name>ManualInputValue</name>
+    <synonym>
+      <key>en</key>
+      <value>Manual input value</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9efa1600-cea0-4e6c-a280-446db770215d">
+    <name>Type</name>
+    <synonym>
+      <key>en</key>
+      <value>Type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.SpecialOfferTypes</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b09a7cf3-e6db-4fb2-b968-2dc9deaf697a">
+    <name>DocumentType</name>
+    <synonym>
+      <key>en</key>
+      <value>Document type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.OffersDocumentTypes</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="0f4c534b-e7a5-4315-af0f-02d495968dc0">
+    <producedTypes>
+      <objectType typeId="fe81f38e-668c-430c-9f3e-aa282e964d44" valueTypeId="e36eb4d8-089b-45d7-a9a6-cb7ee8a67952"/>
+      <rowType typeId="1a23021f-c698-4eda-bdf9-39cf141076f0" valueTypeId="538b3f36-6667-4c9a-b6c1-9b917506b78c"/>
+    </producedTypes>
+    <name>Rules</name>
+    <synonym>
+      <key>en</key>
+      <value>Rules</value>
+    </synonym>
+    <comment></comment>
+    <attributes uuid="45a0606f-4972-4dca-b61f-5fd1515a7b42">
+      <name>Rule</name>
+      <synonym>
+        <key>en</key>
+        <value>Rule</value>
+      </synonym>
+      <comment></comment>
+      <type>
+        <types>CatalogRef.SpecialOfferRules</types>
+      </type>
+      <mask></mask>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="308c8297-9e1b-490e-94ef-83b2234a6303">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="7e929be8-086d-46cc-9d96-ce729bb3795f">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="610e407f-0df2-495a-9905-4f689ddcb0d6">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="594ff96e-be44-4fff-9a94-e6c6f39b6199">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

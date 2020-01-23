@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="31da0319-6f81-430c-baed-a4c625a367ce">
+  <name>LocalizationClientServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Localization client server</value>
+  </synonym>
+  <comment></comment>
+  <global>true</global>
+  <clientManagedApplication>true</clientManagedApplication>
+  <server>true</server>
+</mdclass:CommonModule>

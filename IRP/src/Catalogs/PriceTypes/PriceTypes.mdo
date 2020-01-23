@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e019a08b-22aa-41dc-8df3-530bb83a6d59">
+  <producedTypes>
+    <objectType typeId="fcfd97c2-6501-40b4-ac48-1fb226111f18" valueTypeId="c1d98d13-bffe-47f1-b869-20b12744337a"/>
+    <refType typeId="4aade15d-dab4-4a08-b20b-e993cc86a34f" valueTypeId="b7f6f842-8b1e-4fe6-b9db-fe870a97940b"/>
+    <selectionType typeId="1e77fdad-d9d4-4ffd-ab38-4ad997204a26" valueTypeId="0366fc4a-3383-48b7-8604-b704cf7fb332"/>
+    <listType typeId="a8eadd57-f13e-438c-ad0f-d2c0926ac517" valueTypeId="f4b3f09c-e2a8-4117-aa69-45bfabfc1332"/>
+    <managerType typeId="0f2e9793-2619-4164-bf80-9be7df287775" valueTypeId="2f4f78fb-955c-4741-b7ba-7d9f016dfb5e"/>
+  </producedTypes>
+  <name>PriceTypes</name>
+  <synonym>
+    <key>en</key>
+    <value>Price types</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <objectPresentation>
+    <key>en</key>
+    <value>Price type</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <predefined>
+    <items id="bd902239-daa4-480f-bf8e-731e384fa593">
+      <name>ManualPriceType</name>
+      <description>Manual price type</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+  </predefined>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.PriceTypes.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.PriceTypes.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.PriceTypes.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="2ce9af94-de63-49a1-b3c8-ec2cac9b4200">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a25418b7-6e26-44c9-b3f9-b3e02d1653d7">
+    <name>ExternalDataProc</name>
+    <synonym>
+      <key>en</key>
+      <value>External data proc</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExternalDataProc</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="7e518ed3-1629-45e5-95ea-d231fc6672cd">
+    <name>ExternalDataProcSettings</name>
+    <synonym>
+      <key>en</key>
+      <value>External data proc settings</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="1229ea32-678b-41d7-b6cd-d65cb1c538f2">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="66ec94ec-bb26-4cb5-9f8f-6852f4dccf75">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="405f0a1e-ad81-45a5-b2c5-e4567ab075b1">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

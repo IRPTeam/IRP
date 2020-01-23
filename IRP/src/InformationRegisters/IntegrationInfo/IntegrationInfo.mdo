@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="29b89a56-fcfc-4c19-8cb1-529c1b6b9392">
+  <producedTypes>
+    <selectionType typeId="35db3245-983a-4967-bc6f-b6c7895fc9f1" valueTypeId="0b862ce8-d745-4716-b156-a9aa09303d8a"/>
+    <listType typeId="adb1880d-8033-4d80-8d73-a6294d7f5b73" valueTypeId="8cec83f8-a458-4ad5-9eb8-8734cc57f282"/>
+    <managerType typeId="e3f3e13c-0ebd-4432-828d-9269eef1d777" valueTypeId="f210940f-84a0-4951-bedd-e2d628abeb02"/>
+    <recordSetType typeId="bf7cccdb-615e-41d2-baa0-3108bc7a8cf4" valueTypeId="e02387e8-6af0-4465-b786-6cbdd66b391e"/>
+    <recordKeyType typeId="5f190671-fcfe-4ba2-8f48-7593a26888a7" valueTypeId="57723951-3805-4495-9112-8ae3b0ebf777"/>
+    <recordType typeId="f20cbcd8-7b91-423d-8b8f-e5d3dcf6bd28" valueTypeId="671f464c-c99e-4c0a-b8e8-4dc962685498"/>
+    <recordManagerType typeId="8857f0fb-b0a9-4ecb-b31c-19c19995d916" valueTypeId="29313c13-bcb4-4d53-a19b-34b568118178"/>
+  </producedTypes>
+  <name>IntegrationInfo</name>
+  <synonym>
+    <key>en</key>
+    <value>Integration info</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="d2a5b90d-55df-4a3e-82cb-c3e52fa5f31f">
+    <name>Value</name>
+    <synonym>
+      <key>en</key>
+      <value>Value</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </resources>
+  <resources uuid="937b8196-d8f5-44c0-8828-6e42e7c64f7a">
+    <name>SecondValue</name>
+    <synonym>
+      <key>en</key>
+      <value>Second value</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <types>Number</types>
+      <types>Date</types>
+      <types>Boolean</types>
+      <types>AnyRef</types>
+      <numberQualifiers>
+        <precision>15</precision>
+        <scale>5</scale>
+      </numberQualifiers>
+      <stringQualifiers>
+        <length>1024</length>
+      </stringQualifiers>
+      <dateQualifiers/>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </resources>
+  <dimensions uuid="0fc7edc6-8ac0-4c81-95cc-3e616e62304f">
+    <name>IntegrationSettings</name>
+    <synonym>
+      <key>en</key>
+      <value>Integration settings</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.IntegrationSettings</types>
+    </type>
+    <denyIncompleteValues>true</denyIncompleteValues>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <master>true</master>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="ec938a94-f118-419f-bb75-e70992854f56">
+    <name>Key</name>
+    <synonym>
+      <key>en</key>
+      <value>Key</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <denyIncompleteValues>true</denyIncompleteValues>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+</mdclass:InformationRegister>

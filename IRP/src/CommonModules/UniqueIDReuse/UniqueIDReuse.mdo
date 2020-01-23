@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6d47f216-3b12-4ab8-84ca-37e4b3ba11f6">
+  <name>UniqueIDReuse</name>
+  <synonym>
+    <key>en</key>
+    <value>Unique IDReuse</value>
+  </synonym>
+  <comment></comment>
+  <server>true</server>
+  <serverCall>true</serverCall>
+  <returnValuesReuse>DuringSession</returnValuesReuse>
+</mdclass:CommonModule>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="76f0e9ed-6561-4d24-96cc-9c61ab8b7c3d">
+  <producedTypes>
+    <managerType typeId="28eeaaf1-0329-49d5-9285-0e2314a2a394" valueTypeId="e7131a89-496e-46a5-9bbe-0a3e1a60a923"/>
+    <valueManagerType typeId="572af736-ee69-424c-a9ec-297e9b87270c" valueTypeId="2d6ab436-214e-4cc8-823b-ce7ba50c0d88"/>
+  </producedTypes>
+  <name>DefaulDeliveryAddress</name>
+  <synonym>
+    <key>en</key>
+    <value>Defaul delivery address</value>
+  </synonym>
+  <comment></comment>
+  <type>
+    <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <mask></mask>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

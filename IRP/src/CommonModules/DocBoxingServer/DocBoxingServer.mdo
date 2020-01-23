@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2013eb24-a8b0-4a5c-a2bd-c7d6def81af0">
+  <name>DocBoxingServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc boxing server</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
+</mdclass:CommonModule>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8414293c-c0e1-45e2-8940-d298db8c1978">
+  <producedTypes>
+    <objectType typeId="94b81e87-2549-46f5-9cf9-b6285a95b75f" valueTypeId="c72aa31d-7a90-48fb-9980-8851cbe5e9d1"/>
+    <refType typeId="53d9a1ce-f586-4d94-a574-d9af14401b35" valueTypeId="a27145b0-3e0c-40fe-953d-abbb5c2ee4ff"/>
+    <selectionType typeId="998f67c5-dcfb-4986-a339-017a756da3f9" valueTypeId="f4042ddc-a62f-4258-9cdf-8747071f6b98"/>
+    <listType typeId="a87d645d-475a-44bb-b4df-ef9dc651cc87" valueTypeId="0d16addf-7b4c-4394-b74c-18f760feec26"/>
+    <managerType typeId="6935355e-b85e-4b41-b7e4-c08f6a2bddf8" valueTypeId="21367c2f-96d1-456c-81b0-843fa1a877d5"/>
+  </producedTypes>
+  <name>ShipmentConfirmation</name>
+  <synonym>
+    <key>en</key>
+    <value>Shipment confirmation</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.ShipmentConfirmation.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Shipment confirmations</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.ShipmentConfirmation.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.ShipmentConfirmation.Form.ListForm</defaultListForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.ShipmentOrders</registerRecords>
+  <registerRecords>AccumulationRegister.ShipmentConfirmationSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
+  <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="0dfea938-94e8-49fe-a32c-d544c26df949">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="061b4dcb-a07e-4f48-8a10-e85875631c16">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="17bfd625-c7fc-4b31-8875-b3800cae2c02">
+    <name>LegalName</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="f6578bfa-a325-46b9-afca-68594934b925">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="b49983fb-cd20-4b4d-96ed-57b410bd8da1">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="6d25ca4c-afc1-481d-bc0e-4569d377f067">
+    <name>SelectShipmentBasisesForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Select Receipt basises</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="42359745-e080-4344-86f6-41e63dc140f6">
+    <producedTypes>
+      <objectType typeId="a8debb24-2cb1-4480-814b-a0d3853d37da" valueTypeId="78ba8146-ff73-44d3-adc9-cf7a40841f6b"/>
+      <rowType typeId="0474db37-0ceb-41b6-a97f-26d7cd858709" valueTypeId="aec2a9a4-9831-4eaf-bb77-48b3947ff2d5"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="66e26842-d4d9-45bf-b74e-4774f49b4d78">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="1a833a4a-f848-4102-9460-5d35471f332d">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="7abee603-a33c-4cd4-8688-04f64f6127b4">
+      <name>Store</name>
+      <synonym>
+        <key>en</key>
+        <value>Store</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Stores</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="32a8ac28-6dce-488d-9e01-906ea4314536">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="34625cf2-83b5-444d-96ea-141cbae7c759">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="42888955-053d-4ba3-8199-5215ae092504">
+      <name>ShipmentBasis</name>
+      <synonym>
+        <key>en</key>
+        <value>Shipment basis</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeShipmentBasis</types>
+      </type>
+      <quickChoice>DontUse</quickChoice>
+      <createOnInput>DontUse</createOnInput>
+      <dataHistory>Use</dataHistory>
+      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+    </attributes>
+    <attributes uuid="a9c0e2b1-5d76-456a-a869-c56488e4707a">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <commands uuid="ee505248-867e-49a2-ab6b-efc12c78befc">
+    <name>GenerateShipmentConfirmation</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment confirmation</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.InventoryTransfer</types>
+      <types>DocumentRef.Bundling</types>
+      <types>DocumentRef.Unboxing</types>
+      <types>DocumentRef.Unbundling</types>
+      <types>DocumentRef.Boxing</types>
+      <types>DocumentRef.SalesOrder</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+</mdclass:Document>

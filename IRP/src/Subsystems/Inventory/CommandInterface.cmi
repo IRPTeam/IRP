@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsPlacement>
+    <placementFragments>
+      <group>NavigationPanelImportant</group>
+      <commands>Catalog.Stores.StandardCommand.OpenList</commands>
+    </placementFragments>
+  </commandsPlacement>
+  <commandsOrder>
+    <orderFragments>
+      <group>NavigationPanelOrdinary</group>
+      <commands>Document.ShipmentConfirmation.StandardCommand.OpenList</commands>
+      <commands>Document.GoodsReceipt.StandardCommand.OpenList</commands>
+    </orderFragments>
+    <orderFragments>
+      <group>NavigationPanelImportant</group>
+      <commands>Catalog.Stores.StandardCommand.OpenList</commands>
+    </orderFragments>
+  </commandsOrder>
+  <subsystemsOrder>
+    <subsystems>Subsystem.Inventory.Subsystem.Items</subsystems>
+    <subsystems>Subsystem.Inventory.Subsystem.Transfers</subsystems>
+    <subsystems>Subsystem.Inventory.Subsystem.ComposedItems</subsystems>
+  </subsystemsOrder>
+</cmi:CommandInterface>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core">
+	<filter>
+		<viewMode>Normal</viewMode>
+		<userSettingID>9af3f852-fa1f-42f3-b613-631c277fb407</userSettingID>
+		<userSettingPresentation xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content/>
+			</v8:item>
+		</userSettingPresentation>
+	</filter>
+	<order>
+		<viewMode>Normal</viewMode>
+		<userSettingID>23588e4f-7385-4170-885f-027c685f5008</userSettingID>
+		<userSettingPresentation xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content/>
+			</v8:item>
+		</userSettingPresentation>
+	</order>
+	<conditionalAppearance>
+		<viewMode>Normal</viewMode>
+		<userSettingID>583ed3a3-366a-4af3-805a-c83e4e4f3f34</userSettingID>
+		<userSettingPresentation xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content/>
+			</v8:item>
+		</userSettingPresentation>
+	</conditionalAppearance>
+	<itemsViewMode>Normal</itemsViewMode>
+	<itemsUserSettingID>44473b25-ea80-4d2c-9620-461f9f4e4e07</itemsUserSettingID>
+	<itemsUserSettingPresentation xsi:type="v8:LocalStringType">
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content/>
+		</v8:item>
+	</itemsUserSettingPresentation>
+</Settings>

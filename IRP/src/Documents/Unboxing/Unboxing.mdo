@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6e23e9ef-6bd9-457f-8cd9-9a910d041a88">
+  <producedTypes>
+    <objectType typeId="8501c562-cd60-40a1-b010-94a38985b7b9" valueTypeId="ed188972-b60a-46eb-a510-0a6ef94f71f3"/>
+    <refType typeId="0f07dfd1-5bd9-4330-85ee-e64dbfa86e23" valueTypeId="aa42a1dc-8f62-4e5f-b358-2c93db014cb7"/>
+    <selectionType typeId="001c3015-d024-4c5f-b1de-ffc3e30a04e6" valueTypeId="31f988cb-ef6b-4aa5-8150-9eb437ed008c"/>
+    <listType typeId="e082a3e6-0b5d-4ef0-8347-086a7fd82a59" valueTypeId="f8c4d7ab-1bdb-498e-b914-c23891ba083e"/>
+    <managerType typeId="ba224ba0-69a6-468e-bdf9-01dbb6ad6cfd" valueTypeId="bb37075d-fe25-4ded-86c0-0d988b044cb5"/>
+  </producedTypes>
+  <name>Unboxing</name>
+  <synonym>
+    <key>en</key>
+    <value>Unboxing</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.Unboxing.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Unboxing list</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.Unboxing.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.Unboxing.Form.ListForm</defaultListForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="27c8932e-3632-42d8-9961-f20d4e6f7817">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="fd0ecb0f-cf36-4cf9-b78d-4a94b30c53e9">
+    <name>ItemKeyBox</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key box</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b61f456c-0340-49e2-9263-660c3854ea1b">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d14a15cd-8a99-494e-a7f3-b71f30b6e617">
+    <name>WriteOff</name>
+    <synonym>
+      <key>en</key>
+      <value>Write off</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="a85206d3-b743-4a63-badb-c6405085832a">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="0909ebcc-2159-420a-8e62-b0e15d1ceced">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="5ab81da3-da1f-420c-afd8-b4231e5768d7">
+    <producedTypes>
+      <objectType typeId="21df33f3-1d5b-4f5f-89d6-95a9ad3054f4" valueTypeId="4fa352df-40c3-44aa-9a7f-1970f73116a6"/>
+      <rowType typeId="a9cf18a8-87a8-4b68-b7fc-69c7b6a7ab9a" valueTypeId="ddc20f52-c2bf-4c77-a18b-21ad51b0d8dd"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <fillChecking>ShowError</fillChecking>
+    <attributes uuid="246cd89c-9c1c-4278-84e8-dcc02ef08eb4">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f3fe7baf-78e8-4d84-88f9-f028c7aacbe7">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1b173115-6210-4f71-a4ec-7f09eb52f1ef">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1208fa85-05c0-49b3-bc21-3b64345e949b">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <commands uuid="ec814dfd-bef7-4234-b30f-884aab7d6e84">
+    <name>GenerateUnboxing</name>
+    <synonym>
+      <key>en</key>
+      <value>Unboxing</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.Boxing</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
+</mdclass:Document>

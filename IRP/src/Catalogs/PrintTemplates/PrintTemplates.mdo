@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d34e4a21-a499-49a1-8f9f-efd8b296f1f4">
+  <producedTypes>
+    <objectType typeId="f8e244f1-4afa-4803-bc86-3e01ab55ba3d" valueTypeId="efdac102-3fdd-43ed-9ef4-ca55b5bafb3e"/>
+    <refType typeId="762d15c8-7fea-47a1-a7f5-035ec94c8442" valueTypeId="f2618283-7a88-41eb-bc74-d6b8cb1be765"/>
+    <selectionType typeId="c2c424e4-d776-42ce-b152-45d1c2c549e9" valueTypeId="8ed55e38-6d89-41e5-b90b-a5c20341376b"/>
+    <listType typeId="185eb831-a615-4f87-a7c1-59d1e9846a42" valueTypeId="d99215d9-5eb4-4b5e-814d-e7542f35bd87"/>
+    <managerType typeId="4828c9f3-eb24-47c9-9282-d7eb5ea3aa05" valueTypeId="2e1b41f8-079b-449f-a61d-82f57309d017"/>
+  </producedTypes>
+  <name>PrintTemplates</name>
+  <synonym>
+    <key>en</key>
+    <value>Print templates</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Description</name>
+    <fullTextSearch>Use</fullTextSearch>
+  </standardAttributes>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.PrintTemplates.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.PrintTemplates.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.PrintTemplates.Form.ChoiceForm</defaultChoiceForm>
+  <attributes uuid="5909f91c-d6a4-4907-895e-6f60178f488e">
+    <name>ValueOfTemplate</name>
+    <synonym>
+      <key>en</key>
+      <value>Value of template</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2062d8af-7f44-47cc-9648-d7814d2d082d">
+    <name>ExternalDataProc</name>
+    <synonym>
+      <key>en</key>
+      <value>External data proc</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExternalDataProc</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="c0e52768-591d-442c-b661-8174b871df74">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="9f618435-a68c-462e-bdca-13dd070d3fb5">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="17f4a9ad-15df-4eb3-a364-6ad902d0be7b">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <templates uuid="d7262a5a-b0f2-44ac-bf26-23408c64ea44">
+    <name>Default</name>
+    <synonym>
+      <key>en</key>
+      <value>Default</value>
+    </synonym>
+  </templates>
+  <templates uuid="72cf4cec-add8-4b70-b8c2-f342288a01f6">
+    <name>DataSource</name>
+    <synonym>
+      <key>en</key>
+      <value>Data source</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
+  <templates uuid="b79ab6b2-6fd2-4abb-88b2-38f3d72bd547">
+    <name>Template</name>
+    <synonym>
+      <key>en</key>
+      <value>Template</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
+</mdclass:Catalog>

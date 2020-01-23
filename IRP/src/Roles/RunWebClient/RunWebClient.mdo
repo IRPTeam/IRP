@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c0e1883f-497b-44c9-b9bf-e47bb1e35caf">
+  <name>RunWebClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Run web client</value>
+  </synonym>
+  <comment></comment>
+</mdclass:Role>

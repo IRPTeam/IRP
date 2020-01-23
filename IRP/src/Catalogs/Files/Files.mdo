@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="76b0b919-bed7-4175-b871-efda28243cc8">
+  <producedTypes>
+    <objectType typeId="201c3a6f-7626-43b0-97ec-4ca1e592c114" valueTypeId="2aa4244f-e9ed-4b9c-8d53-7fe66c15db20"/>
+    <refType typeId="24d1c64d-4c99-4f68-8ab1-c9fa46591d5e" valueTypeId="7a5cc7b7-3c86-4c2d-88cb-3ec281e3f1c4"/>
+    <selectionType typeId="067f41f7-ca02-4526-8cb8-52d97a78d929" valueTypeId="ba2489bd-e607-491f-b517-4412bd79e133"/>
+    <listType typeId="fbd42b6c-c1e2-4554-a9b2-7b854f656c54" valueTypeId="f1a3c85f-826c-4194-8dbb-05497a854894"/>
+    <managerType typeId="a23cc9e8-2f7e-4423-accd-3538f30ffd7d" valueTypeId="10d8f054-3bb5-4c1d-bdb4-6c85176826b8"/>
+  </producedTypes>
+  <name>Files</name>
+  <synonym>
+    <key>en</key>
+    <value>Files</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.Files.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Description</name>
+    <synonym>
+      <key>en</key>
+      <value>File name</value>
+    </synonym>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+  </standardAttributes>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>File</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <descriptionLength>50</descriptionLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.Files.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.Files.Form.ListForm</defaultListForm>
+  <attributes uuid="f84fa69a-be6e-49dc-afd6-34a2bb4a575c">
+    <name>Volume</name>
+    <synonym>
+      <key>en</key>
+      <value>Volume</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.FileStorageVolumes</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="19fb2c1f-49ea-4c03-8845-fe6dfbfb38fa">
+    <name>URI</name>
+    <synonym>
+      <key>en</key>
+      <value>URI</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>512</length>
+      </stringQualifiers>
+    </type>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6b017ef5-8d7b-43f8-91c8-bdbb25d5a199">
+    <name>FileID</name>
+    <synonym>
+      <key>en</key>
+      <value>File ID</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6957f794-f457-40bc-af0e-7cb74f846324">
+    <name>Height</name>
+    <synonym>
+      <key>en</key>
+      <value>Height</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>5</precision>
+      </numberQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="490e46f4-700f-4da5-a969-eeeb484d2743">
+    <name>Width</name>
+    <synonym>
+      <key>en</key>
+      <value>Width</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>5</precision>
+      </numberQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="3888808e-e394-46f4-918a-67302339e6ab">
+    <name>SizeBytes</name>
+    <synonym>
+      <key>en</key>
+      <value>Size</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="03737161-83de-44bd-8356-2b7958ff4d2a">
+    <name>Preview1URI</name>
+    <synonym>
+      <key>en</key>
+      <value>Preview1 URI</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>512</length>
+      </stringQualifiers>
+    </type>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d781f0b4-e76f-423f-96fb-92822515db13">
+    <name>Extension</name>
+    <synonym>
+      <key>en</key>
+      <value>Extension</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>5</length>
+      </stringQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a73b3a9a-bec7-4894-b3e9-2cb9311be883">
+    <name>MD5</name>
+    <synonym>
+      <key>en</key>
+      <value>MD5</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="b27620a5-4be9-4e90-a4bb-21f2ff08b08a">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="0698c185-374c-4e43-b3c4-20fc2fb27cd6">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="696d92ce-a427-44bc-8336-39c11a0e1906">
+    <name>DeleteFiles</name>
+    <synonym>
+      <key>en</key>
+      <value>Delete files</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

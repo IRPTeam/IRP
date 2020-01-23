@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataSource>
+		<name>DataSource1</name>
+		<dataSourceType>Local</dataSourceType>
+	</dataSource>
+	<dataSet xsi:type="DataSetQuery">
+		<name>DataSet1</name>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Barcode</dataPath>
+			<field>Barcode</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Item</dataPath>
+			<field>Item</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ItemKey</dataPath>
+			<field>ItemKey</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item key</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Price</dataPath>
+			<field>Price</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>BarcodePicture</dataPath>
+			<field>BarcodePicture</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Barcode picture</v8:content>
+				</v8:item>
+			</title>
+			<valueType/>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>QRPicture</dataPath>
+			<field>QRPicture</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>QR picture</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Picture</dataPath>
+			<field>Picture</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Picture</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ItemKeyPicture</dataPath>
+			<field>ItemKeyPicture</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item key picture</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ItemPicture</dataPath>
+			<field>ItemPicture</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item picture</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<dataSource>DataSource1</dataSource>
+		<query>SELECT
+	Barcodes.ItemKey AS ItemKey,
+	MAX(Barcodes.Barcode) AS Barcode
+INTO Barcodes_TT
+FROM
+	InformationRegister.Barcodes AS Barcodes
+WHERE
+	Barcodes.ItemKey.Specification &lt;&gt; VALUE(Catalog.Specifications.EmptyRef)
+GROUP BY
+	Barcodes.ItemKey
+;
+////////////////////////////////////////////////////////////////////////////////
+ SELECT TOP 1
+	ItemKeys.Item AS Item,
+	ItemKeys.Ref AS ItemKey,
+	"" AS Barcode,
+	"" AS BarcodePicture,
+	"" AS QRPicture,
+	"" AS Picture,
+	"" AS ItemPicture,
+	"" AS ItemKeyPicture,
+	"" AS Price
+FROM
+	Catalog.ItemKeys AS ItemKeys
+		LEFT JOIN Barcodes_TT AS Barcodes_TT
+		ON (ItemKeys.Ref = Barcodes_TT.ItemKey)
+		LEFT JOIN InformationRegister.PricesByItemKeys.SliceLast AS PricesByItemKeysSliceLast
+		ON (ItemKeys.Ref = PricesByItemKeysSliceLast.ItemKey)</query>
+	</dataSet>
+	<dataSet xsi:type="DataSetObject">
+		<name>DataSet2</name>
+		<dataSource>DataSource1</dataSource>
+	</dataSet>
+	<dataSet xsi:type="DataSetObject">
+		<name>DataSet2</name>
+		<dataSource>DataSource1</dataSource>
+	</dataSet>
+	<dataSet xsi:type="DataSetObject">
+		<name>DataSet2</name>
+		<dataSource>DataSource1</dataSource>
+	</dataSet>
+	<parameter>
+		<name>Period</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<settingsVariant>
+		<dcsset:name>Default</dcsset:name>
+		<dcsset:presentation xsi:type="xs:string">Default</dcsset:presentation>
+		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
+			<dcsset:selection>
+			</dcsset:selection>
+			<dcsset:order>
+			</dcsset:order>
+			<dcsset:item xsi:type="dcsset:StructureItemGroup">
+				<dcsset:order>
+					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+				</dcsset:order>
+				<dcsset:selection>
+					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+				</dcsset:selection>
+			</dcsset:item>
+		</dcsset:settings>
+	</settingsVariant>
+</DataCompositionSchema>

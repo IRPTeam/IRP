@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3eca01f7-3762-4326-8515-0f2a33e71b58">
+  <producedTypes>
+    <selectionType typeId="473a59f8-939c-41cb-91b6-acf2a75417aa" valueTypeId="0c93e561-2193-4b11-8e5f-2ce805736106"/>
+    <listType typeId="02aceca9-76d3-4bea-9896-627bb80e99d1" valueTypeId="5a831da2-c680-4732-a43b-a5dc1953fa35"/>
+    <managerType typeId="fd6f1e3b-696e-4153-b6ef-4da96a44250b" valueTypeId="f1f3d86b-086a-4aba-ab18-99087d077210"/>
+    <recordSetType typeId="d9da38ff-6f78-4c97-82c0-c259d8d91f86" valueTypeId="444f2ec2-4929-4236-9432-9ae6c1ddb0a0"/>
+    <recordKeyType typeId="c551d7c6-739b-43a4-843b-d713a942090e" valueTypeId="646feb17-9a7f-495d-96b1-3d2af489284c"/>
+    <recordType typeId="ad7d48a1-2c3a-4786-8c39-bbe52f0db60f" valueTypeId="733f4b32-3631-4075-b9f9-afbca0c67dca"/>
+  </producedTypes>
+  <name>InventoryBalance</name>
+  <synonym>
+    <key>en</key>
+    <value>Inventory balance</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="2d411f4b-78f9-4b9b-8ab3-34f0ab5750d5">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <dimensions uuid="9f13daf7-bfd4-4927-b201-4b3be7e178e2">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
+  <dimensions uuid="4817e01c-7bd7-4139-baf6-157e3b20df56">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
+</mdclass:AccumulationRegister>

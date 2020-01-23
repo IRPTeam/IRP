@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d4372a7e-37c3-476e-9129-ff410c9069e1">
+  <producedTypes>
+    <containerType typeId="625ef7f4-0dc3-4f17-be54-a229a67361bc" valueTypeId="0960b0b0-3f12-42df-bef8-5640d8067e5d"/>
+  </producedTypes>
+  <name>typeObjectWithTaxes</name>
+  <synonym>
+    <key>en</key>
+    <value>Type object with taxes</value>
+  </synonym>
+  <type>
+    <types>DocumentRef.PurchaseInvoice</types>
+    <types>DocumentRef.SalesInvoice</types>
+    <types>DocumentRef.CashExpense</types>
+    <types>DocumentRef.CashRevenue</types>
+  </type>
+</mdclass:DefinedType>

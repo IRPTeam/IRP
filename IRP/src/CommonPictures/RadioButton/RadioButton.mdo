@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a41c5fc0-9674-4a9d-b426-69c7352649cb">
+  <name>RadioButton</name>
+  <synonym>
+    <key>en</key>
+    <value>Radio button</value>
+  </synonym>
+  <comment></comment>
+</mdclass:CommonPicture>

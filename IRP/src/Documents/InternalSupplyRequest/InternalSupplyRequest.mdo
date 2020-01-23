@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="eef53ebb-b10f-4d69-99d7-6ae89432628b">
+  <producedTypes>
+    <objectType typeId="60beff4b-fabb-4aac-80b1-f64700983b68" valueTypeId="16773b21-de18-428f-b663-2b171f3711a0"/>
+    <refType typeId="54233ca2-01e0-4e1d-bd59-a142cd82507d" valueTypeId="a77561a7-0c74-4267-b25b-94a200c5a9ba"/>
+    <selectionType typeId="7d43946f-f01c-4491-825b-12ed832a800d" valueTypeId="43de0071-fc00-4bd3-8d64-eacc7a911daa"/>
+    <listType typeId="85fb18ed-f7f9-463e-a4a5-9dfe2416b807" valueTypeId="28a9edfd-0bae-4b8f-bdd6-1d982083daa2"/>
+    <managerType typeId="547ebe07-1110-4f8e-bb16-c8a74cae9535" valueTypeId="72bd7702-353c-409c-84f9-d9f2290952ef"/>
+  </producedTypes>
+  <name>InternalSupplyRequest</name>
+  <synonym>
+    <key>en</key>
+    <value>Internal supply request</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.InternalSupplyRequest.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Internal supply requests</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.InternalSupplyRequest.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.InternalSupplyRequest.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.InternalSupplyRequest.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="2792e35b-db13-48c0-8735-9fa6a4926581">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="20b7c216-3503-4fe4-875c-9e92301733d3">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="c327bbec-e519-4860-9b93-b8b8cc31f668">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="b70b2dda-94be-4ece-be8c-5061afe58ee0">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="a0a0a485-5abd-495b-b14e-835579226110">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="7bb29739-384d-4251-bb0a-c64774ecb09e">
+    <producedTypes>
+      <objectType typeId="19402370-57ef-48e9-a038-6777a1a986b7" valueTypeId="3a3010b3-a30f-4512-a3ed-d42db2857ba6"/>
+      <rowType typeId="4c495c7e-8a4a-401d-8361-0e788b4cc5ff" valueTypeId="cae9df8f-1705-4f87-b590-f9a39181d45c"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="4ede788d-972b-4a5f-853a-a07a3ae0a991">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f6cad51c-1f98-40d6-b0b1-f783ee867028">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="37d9c84b-ef87-429c-9215-66e9c075f449">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="774aeb18-b235-45f1-bb36-1d930d68d0c4">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

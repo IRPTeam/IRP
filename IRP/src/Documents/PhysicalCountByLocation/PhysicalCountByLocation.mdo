@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="68776962-9298-4319-98da-22abfc39c643">
+  <producedTypes>
+    <objectType typeId="3c21905f-94db-4a0f-9408-2e3c6837d94f" valueTypeId="6d46a42b-5758-4186-9cd7-25e1e1e4ac95"/>
+    <refType typeId="7e0906a1-5e1f-4885-a670-98c1e26a21ed" valueTypeId="9ab978ce-deaa-4c2b-a109-6752db329f62"/>
+    <selectionType typeId="11610ca9-82f5-4f7d-99d0-3b47f3284bc7" valueTypeId="0de493bf-0104-4bac-8583-e8c67e86aa7b"/>
+    <listType typeId="9834fed3-61fb-428e-82e5-d722338345d0" valueTypeId="6572c484-4896-469a-83f2-1a80eda945f1"/>
+    <managerType typeId="a9777923-ea54-4ecb-9734-f84dfc506547" valueTypeId="ab9c3dab-ece3-424b-9c63-e3dd869af184"/>
+  </producedTypes>
+  <name>PhysicalCountByLocation</name>
+  <synonym>
+    <key>en</key>
+    <value>Physical count by location</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.PhysicalCountByLocation.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Physical count by location list</value>
+  </listPresentation>
+  <numberType>String</numberType>
+  <numberLength>9</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.PhysicalCountByLocation.Form.DocumentFormMobile</defaultObjectForm>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="c6410d44-1a5c-44ad-8a8f-17968de73e3c">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="0a2b235a-cf47-41d9-87f4-a12e7d32c118">
+    <name>Barcode</name>
+    <synonym>
+      <key>en</key>
+      <value>Barcode</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeBarcode</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="a819e458-f047-4ea6-82a0-23698581e312">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="623efd9d-58f3-4926-9ef8-1f65fa64ae43">
+    <name>DocumentFormMobile</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form mobile</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="942e8a25-95aa-4552-83b4-30c03cbe4d9d">
+    <producedTypes>
+      <objectType typeId="47ebebbf-d447-479a-a2f5-150f52feb653" valueTypeId="3e679140-e25f-4022-bdde-089669543de0"/>
+      <rowType typeId="473113f9-1ebe-4ea4-a67c-d491f1f6c4e5" valueTypeId="dc6dab6d-3e86-4848-9d99-8fde15be9624"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="0b4a2426-e0df-4e0b-9723-b57404f2de24">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="542811d0-9ecc-4298-8241-3739211a6f29">
+      <name>ExpectedQuantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Expected quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5584cc79-d126-486f-a6a6-8a39f55a7151">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

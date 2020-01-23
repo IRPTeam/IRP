@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2c755e80-7d8b-4bfd-9abf-de328b6fdd1c">
+  <producedTypes>
+    <objectType typeId="7df5b34f-f616-4375-b506-cf4bf90e39c0" valueTypeId="5b53d0ba-f1b4-424e-9aa9-b05621234c86"/>
+    <refType typeId="5bf67cf9-39ac-4f5b-aa8b-0c2b81aa28c4" valueTypeId="58feab8d-c65f-428d-ac61-3bd62b861906"/>
+    <selectionType typeId="7afe3b83-dfb5-4a9e-880c-e5b4ce99440a" valueTypeId="d1019aeb-07aa-4a21-ba5e-f65aec32ae31"/>
+    <listType typeId="0a8f988d-0eaf-422a-b079-dc3dc4102127" valueTypeId="3727d1c5-f216-4a26-9d86-6e2bc958e75d"/>
+    <managerType typeId="3057dbe5-28fe-4362-9f64-6d7f9ca0af44" valueTypeId="47f9565e-9c3f-4510-a3f0-91bd08c5d4bd"/>
+  </producedTypes>
+  <name>AddAttributeAndPropertySets</name>
+  <synonym>
+    <key>en</key>
+    <value>Add attribute and property sets</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <objectPresentation>
+    <key>en</key>
+    <value>Add attribute and property set</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <predefined>
+    <items id="759d2809-0696-4f6c-befd-bd93aaf90e60">
+      <name>Catalog_ItemKeys</name>
+      <description></description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="18357eb8-bf37-45d4-b02d-349d9b6347dc">
+      <name>Catalog_Items</name>
+      <description></description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="a3975cab-9db4-4c45-9ad2-6682721cbdc5">
+      <name>Catalog_ItemTypes</name>
+      <description></description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="c02f2c5d-9c88-4433-b318-bcc39d844c69">
+      <name>Document_SalesInvoice</name>
+      <description></description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="f06b9b7d-444a-4e73-96c2-21c3ddf63a0d">
+      <name>Catalog_Boxes</name>
+      <description>Catalog boxes</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="8846cea1-3716-4606-bdc5-f47a7aa533ce">
+      <name>Catalog_Partners</name>
+      <description>Catalog partners</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="28287f24-dca3-4f41-ae30-4cb503cc38ca">
+      <name>Catalog_ExpenseAndRevenueTypes</name>
+      <description>Catalog expense and revenue types</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="5a7a7a54-2c7a-46cf-ac83-c55cca798a08">
+      <name>Catalog_BusinessUnits</name>
+      <description>Catalog business units</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="eab4813e-9ad8-48e4-aa2e-e95eb15725c7">
+      <name>Catalog_PriceKeys</name>
+      <description>Catalog price keys</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="69ba322c-2a19-4125-b7e0-a3123897bd99">
+      <name>Document_SalesOrder</name>
+      <description>Document sales order</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="dd8f4747-410a-4bf3-8599-40a05cb32058">
+      <name>Catalog_ChequeBonds</name>
+      <description>Cheque bonds</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="9cd4810f-e450-4719-9620-8a6d3960b834">
+      <name>Catalog_Specifications</name>
+      <description>Catalog specifications</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="41f02ae3-551e-41ee-a0f7-cbb4825a290e">
+      <name>Document_PurchaseInvoice</name>
+      <description>Document purchase invoice</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="888eb86f-c74e-45fa-bee5-bf3e7baa99d1">
+      <name>Document_PurchaseOrder</name>
+      <description>Document purchase order</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+  </predefined>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.AddAttributeAndPropertySets.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.AddAttributeAndPropertySets.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.AddAttributeAndPropertySets.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <tabularSections uuid="099ccca7-3624-470b-8fa0-c61ef9fe8699">
+    <producedTypes>
+      <objectType typeId="29fa0760-f75c-46e1-b9fc-e3b0959cc8f1" valueTypeId="fe3aef49-d912-49bc-a118-1c65ed62a991"/>
+      <rowType typeId="0ee1f4a0-f844-4031-b450-33765fdb3dc9" valueTypeId="4f791557-fd94-4210-9ad2-837fbe4ec108"/>
+    </producedTypes>
+    <name>Attributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Attributes</value>
+    </synonym>
+    <comment></comment>
+    <attributes uuid="80c4cfb8-465c-47b9-956d-60dad6cc77e4">
+      <name>Attribute</name>
+      <synonym>
+        <key>en</key>
+        <value>Attribute</value>
+      </synonym>
+      <comment></comment>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <mask></mask>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="a5ed841f-c7ca-455f-a862-2d1c9175493b">
+      <name>Condition</name>
+      <synonym>
+        <key>en</key>
+        <value>Condition</value>
+      </synonym>
+      <comment></comment>
+      <type>
+        <types>ValueStorage</types>
+      </type>
+      <mask></mask>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="41b0e27f-df2c-49f4-846e-ac8fdc7d8ad4">
+      <name>IsConditionSet</name>
+      <synonym>
+        <key>en</key>
+        <value>Is condition set</value>
+      </synonym>
+      <comment></comment>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </type>
+      <mask></mask>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="e90ab08a-d83c-4d9d-bd32-2a3a48d03587">
+      <name>InterfaceGroup</name>
+      <synonym>
+        <key>en</key>
+        <value>Interface group</value>
+      </synonym>
+      <comment>Name of group for attribute</comment>
+      <type>
+        <types>CatalogRef.InterfaceGroups</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7ad65860-4869-4104-96f2-6f7d4e74e542">
+      <name>Required</name>
+      <synonym>
+        <key>en</key>
+        <value>Required</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="71b4625a-8e0a-41a1-b6e0-1ab83ed78d93">
+      <name>ShowInHTML</name>
+      <synonym>
+        <key>en</key>
+        <value>Show in HTML</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="63d25f08-66d6-4386-bb3e-221989d0bc8e">
+    <producedTypes>
+      <objectType typeId="8d59c13f-477c-44a6-ada6-965fd34b33b6" valueTypeId="398cd1d2-b53c-4680-b793-cb1c50c5b526"/>
+      <rowType typeId="4af89b6f-39bd-4099-b384-ffae14d674d3" valueTypeId="896b12ec-c96d-400b-81ad-c1c7fcc611db"/>
+    </producedTypes>
+    <name>Properties</name>
+    <synonym>
+      <key>en</key>
+      <value>Properties</value>
+    </synonym>
+    <comment></comment>
+    <attributes uuid="b9140641-608f-4582-8a42-2dfd3e257d41">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <comment></comment>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <mask></mask>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="c4664993-2b71-4723-a9db-9ef5a5a2a5c6">
+      <name>Condition</name>
+      <synonym>
+        <key>en</key>
+        <value>Condition</value>
+      </synonym>
+      <comment></comment>
+      <type>
+        <types>ValueStorage</types>
+      </type>
+      <mask></mask>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="678ece06-d283-4b04-b6b1-40a1668fa140">
+      <name>IsConditionSet</name>
+      <synonym>
+        <key>en</key>
+        <value>Is condition set</value>
+      </synonym>
+      <comment></comment>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </type>
+      <mask></mask>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="d57788a9-75b9-4593-836f-d865423c2412">
+      <name>ShowInHTML</name>
+      <synonym>
+        <key>en</key>
+        <value>Show in HTML</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="333dfaea-30f0-4b62-a4f2-ec34b2892f28">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="c2447e7a-2ea5-4e27-9d50-1b2c5cb709ad">
+    <name>EditCondition</name>
+    <synonym>
+      <key>en</key>
+      <value>Edit condition</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="f18418ea-d0b2-487c-9397-d88335f33e2e">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="8d999616-7ec1-4449-84d3-2d2d11fabae0">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <templates uuid="f2f206a0-f85d-44cd-a5f6-d3560c17bce1">
+    <name>DCS_Catalog</name>
+    <synonym>
+      <key>en</key>
+      <value>DCS catalog</value>
+    </synonym>
+    <comment></comment>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
+  <templates uuid="e550ab2e-fb52-4923-86ef-30b0b9ef15bd">
+    <name>DCS_Document</name>
+    <synonym>
+      <key>en</key>
+      <value>DCS document</value>
+    </synonym>
+    <comment></comment>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
+</mdclass:Catalog>

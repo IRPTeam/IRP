@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="088a4787-93a3-4aa9-8191-4aed9fc2050f">
+  <producedTypes>
+    <containerType typeId="d4983f50-270f-41f7-8a10-5c18b4c2415c" valueTypeId="0c202c54-307d-4792-b771-1a3c235944a8"/>
+  </producedTypes>
+  <name>UseUniqueID</name>
+  <synonym>
+    <key>en</key>
+    <value>Use unique ID</value>
+  </synonym>
+  <comment></comment>
+  <type>
+    <types>CatalogObject.IntegrationSettings</types>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+    <types>ChartOfCharacteristicTypesObject.CustomUserSettings</types>
+  </type>
+</mdclass:DefinedType>

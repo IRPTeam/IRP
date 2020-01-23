@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ace76ef5-d095-492a-99b8-3e999209c09a">
+  <producedTypes>
+    <objectType typeId="afd3ed4d-d4e2-4e82-b7cf-8aa8a6e5b885" valueTypeId="e1c3b59c-5301-4b90-abee-56f687bf3fe2"/>
+    <refType typeId="9dcd52b1-0148-4d61-a9c0-a50111ba2c3c" valueTypeId="b6c1f6b4-3f46-4a9c-a399-27feb96c2e3d"/>
+    <selectionType typeId="d3b1922b-e53f-497e-b391-6b2883abb4cd" valueTypeId="78c01f54-2067-4cbc-ad73-0d4cf88ec0c5"/>
+    <listType typeId="f6323fde-3702-4b08-8319-061d0ce9cf32" valueTypeId="c6279ccd-9b26-457b-9d46-10f38ee4f8e7"/>
+    <managerType typeId="b8d1f2a6-bbce-4777-b421-383c9ffddec7" valueTypeId="de20b83d-8f53-4eab-a8ed-850a2f767085"/>
+  </producedTypes>
+  <name>DeliveryAreas</name>
+  <synonym>
+    <key>en</key>
+    <value>Delivery areas</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Delivery area</value>
+  </objectPresentation>
+  <hierarchical>true</hierarchical>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.DeliveryAreas.Form.ItemForm</defaultObjectForm>
+  <defaultFolderForm>Catalog.DeliveryAreas.Form.GroupForm</defaultFolderForm>
+  <defaultListForm>Catalog.DeliveryAreas.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.DeliveryAreas.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <forms uuid="f102221a-ac4c-40bc-aa08-6888b933dba5">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="3c9d28a5-5bba-47ac-9472-9464d00d113e">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="bc160b4f-acb5-4ed5-a918-11b1db6d6730">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="fb917165-fac8-4e6c-b438-ce1d51f2baba">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="359f9151-8b7b-495d-8401-2a2f1fc35c23">
+  <producedTypes>
+    <objectType typeId="01e903b7-ed00-4e2d-bc79-b2bc0f081b25" valueTypeId="e8d8dfac-701b-448c-aff2-0f9c4d0d771e"/>
+    <refType typeId="178eed2c-430c-4ecd-92e3-4fe85bf684e1" valueTypeId="6de5f14a-eb76-40e6-b63d-b8f0f052ca19"/>
+    <selectionType typeId="50630abf-2d8d-40f1-ae60-4f01e4436334" valueTypeId="b548596d-c654-4005-a4a6-c05ca09bbc7c"/>
+    <listType typeId="02d2b81e-2296-439a-8008-3d0aedc838b9" valueTypeId="803ccb78-7991-43ee-af0a-8170998cc8c7"/>
+    <managerType typeId="085a204f-2d08-41af-b9b7-02ff43564122" valueTypeId="b402930e-7a22-4d61-b935-51ad88c2f69f"/>
+  </producedTypes>
+  <name>Vehicles</name>
+  <synonym>
+    <key>en</key>
+    <value>Vehicles</value>
+  </synonym>
+  <comment></comment>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Vehicle</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.Vehicles.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.Vehicles.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.Vehicles.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="c4a46361-009a-408b-9ce9-5a41003a0535">
+    <name>LicensePlate</name>
+    <synonym>
+      <key>en</key>
+      <value>License plate</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>15</length>
+      </stringQualifiers>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="711535b9-e348-4d3d-96d0-815dc33b9c9d">
+    <name>CarryingCapacity</name>
+    <synonym>
+      <key>en</key>
+      <value>Carrying capacity</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+        <scale>3</scale>
+      </numberQualifiers>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="7ec97589-d8bb-4a90-ac73-db19c2f26b55">
+    <name>Capacity</name>
+    <synonym>
+      <key>en</key>
+      <value>Capacity</value>
+    </synonym>
+    <comment></comment>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+        <scale>3</scale>
+      </numberQualifiers>
+    </type>
+    <mask></mask>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="a7d5e20b-6fe6-4502-ae30-2b8eb5255c8f">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="18b90199-3549-4f39-bcbe-f7f20e95eb6a">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="cca43c5a-97f4-4769-a256-5587efba0d80">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <comment></comment>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="563683a1-9aed-46d0-9ae1-f2b6e1ab347d">
+  <producedTypes>
+    <selectionType typeId="af0e7e95-f449-45a4-9078-7b73830b7a7e" valueTypeId="7517adb7-7715-4129-a83b-396b7ac5badf"/>
+    <listType typeId="c38bc59f-2902-467e-9f92-95145aa68950" valueTypeId="02e71d41-3bb1-460a-91b9-2386c488fda4"/>
+    <managerType typeId="f9042c1c-9acf-4708-842d-743b7658e092" valueTypeId="959b4868-df53-4306-9588-0751931678ed"/>
+    <recordSetType typeId="d2136cd5-f286-477b-a7f0-d850f483974e" valueTypeId="ab940fd7-66e2-480c-8bb1-989e39bd6ea9"/>
+    <recordKeyType typeId="3ae36175-7e78-4142-af50-72ff6137cda5" valueTypeId="b7b9eb66-7859-4f95-a781-f0fe5f20815a"/>
+    <recordType typeId="58410bfa-3ed3-4849-b020-3db794d99245" valueTypeId="b86f5b46-13ba-48bc-9498-ce9b0a505ad6"/>
+  </producedTypes>
+  <name>GoodsInTransitOutgoing</name>
+  <synonym>
+    <key>en</key>
+    <value>Goods in transit outgoing</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="1bfb0ba3-b49b-4e42-bbe2-dd0a284dd7ba">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <dimensions uuid="4062285d-b326-4f5b-933c-9e186644d5ed">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
+  <dimensions uuid="5b4d24e1-0dc1-4f5e-b6b4-6d15f458564a">
+    <name>ShipmentBasis</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment basis</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeShipmentBasis</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
+  <dimensions uuid="b3fbfe2e-cd68-4290-a6ab-8edbdc540ea1">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
+  <dimensions uuid="a1e1b368-b7f5-40ab-95a6-201aa82dc04a">
+    <name>RowKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Row key</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

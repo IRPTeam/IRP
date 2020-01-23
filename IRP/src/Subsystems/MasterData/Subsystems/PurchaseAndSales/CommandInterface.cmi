@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsOrder>
+    <orderFragments>
+      <group>NavigationPanelOrdinary</group>
+      <commands>Catalog.Companies.StandardCommand.OpenList</commands>
+      <commands>Catalog.Partners.StandardCommand.OpenList</commands>
+      <commands>Catalog.Stores.StandardCommand.OpenList</commands>
+      <commands>Catalog.Agreements.StandardCommand.OpenList</commands>
+      <commands>Catalog.PriceTypes.StandardCommand.OpenList</commands>
+      <commands>Catalog.SpecialOffers.StandardCommand.OpenList</commands>
+      <commands>Catalog.SpecialOfferRules.StandardCommand.OpenList</commands>
+      <commands>Catalog.SpecialOfferTypes.StandardCommand.OpenList</commands>
+      <commands>Catalog.PartnerSegments.StandardCommand.OpenList</commands>
+      <commands>Catalog.CompanyTypes.StandardCommand.OpenList</commands>
+      <commands>Catalog.Countries.StandardCommand.OpenList</commands>
+    </orderFragments>
+  </commandsOrder>
+</cmi:CommandInterface>

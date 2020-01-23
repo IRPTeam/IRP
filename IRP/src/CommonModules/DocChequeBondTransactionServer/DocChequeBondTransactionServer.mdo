@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e90d27e9-cea0-489d-8d7a-2e1611fcb1b5">
+  <name>DocChequeBondTransactionServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc cheque bond transaction server</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
+</mdclass:CommonModule>

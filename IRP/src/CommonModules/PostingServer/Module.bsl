@@ -53,7 +53,7 @@ Function Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 		
 		RecordInfo = KeyValue.Value;
 		If RecordInfo.RecordSet.Columns.Find("RowKey") = Undefined 
-		Or RegisterMetadata.Dimensions.Find("RowKey") <> Undefined
+		Or RegisterMetadata.Dimensions.Find("RowKey") = Undefined
 		Or Not RecordInfo.RecordSet.Count() Then
 			Continue;
 		EndIf;

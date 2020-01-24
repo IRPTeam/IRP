@@ -39,16 +39,13 @@ Function ProcessBarcodes(Barcodes, Parameters)
 		PricePeriod = CurrentDate();
 	EndIf;	
 	FoundedItems = BarcodeServer.SearchByBarcodes(Barcodes, PriceType, PricePeriod);
-	If FoundedItems.Count() Then
-		
+	If FoundedItems.Count() Then		
 		If Parameters.Property("DocumentClientModule") Then
 			DocumentModule = Parameters.DocumentClientModule;
 			DocumentModule.PickupItemsEnd(FoundedItems, Parameters);
-		EndIf;
-		
+		EndIf;		
 		ReturnResult = True;
-	EndIf;
-	
+	EndIf;	
 	Return ReturnResult;
 EndFunction
 

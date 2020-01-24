@@ -44,14 +44,17 @@ Function Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	EndIf;
 	
 	For Each KeyValue In PostingDataTables Do
-		RegisterName = KeyValue.Key.Metadata().Name;
+		RegisterMetadata = KeyValue.Key.Metadata();
+		RegisterName = RegisterMetadata.Name;
 		
 		If Metadata.AccumulationRegisters.Find(RegisterName) = Undefined Then
 			Continue;
 		EndIf;
 		
 		RecordInfo = KeyValue.Value;
-		If RecordInfo.RecordSet.Columns.Find("RowKey") = Undefined Or Not RecordInfo.RecordSet.Count() Then
+		If RecordInfo.RecordSet.Columns.Find("RowKey") = Undefined 
+		Or RegisterMetadata.Dimensions.Find("RowKey") <> Undefined
+		Or Not RecordInfo.RecordSet.Count() Then
 			Continue;
 		EndIf;
 		
@@ -70,7 +73,7 @@ Function Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 		If Not RecordsForExpense.Count() Then
 			Continue;
 		EndIf;
-		FixRowKey(KeyValue.Key.Metadata(), RecordInfo, RecordsForExpense, DocObject);
+		FixRowKey(RegisterMetadata, RecordInfo, RecordsForExpense, DocObject);
 	EndDo;
 	
 	// Multi currency integration

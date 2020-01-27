@@ -215,8 +215,44 @@ Procedure PaymentListBasisDocumentOnChange(Object, Form, Item) Export
 EndProcedure
 
 &AtClient
-Procedure PaymentListPlaningTransactionBasisOnChange(Object, ThisObject, Item) Export
-	DocumentsClient.PaymentListPlaningTransactionBasisOnChange(Object, ThisObject, Item);
+Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If ValueIsFilled(CurrentData.PlaningTransactionBasis) 
+		And TypeOf(CurrentData.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+		CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingBankReceipt(CurrentData.PlaningTransactionBasis);
+			If Not ValueIsFilled(Object.Account) Then
+				Object.Account = CashTransferOrderInfo.Account;
+			EndIf;
+			
+			If Not ValueIsFilled(Object.Company) Then
+				Object.Company = CashTransferOrderInfo.Company;
+			EndIf;
+			
+			If Not ValueIsFilled(Object.Currency) Then
+				Object.Currency = CashTransferOrderInfo.Currency;
+			EndIf;
+			
+			If Not ValueIsFilled(Object.CurrencyExchange) Then
+				Object.CurrencyExchange = CashTransferOrderInfo.CurrencyExchange;
+			EndIf;
+			
+			ArrayOfPlaningTransactionBasises = New Array();
+			ArrayOfPlaningTransactionBasises.Add(CurrentData.PlaningTransactionBasis);
+			ArrayOfBalance = DocBankReceiptServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises);
+			If ArrayOfBalance.Count() Then
+				RowOfBalance = ArrayOfBalance[0];
+//				CurrentData.Partner = RowOfBalance.Partner;
+//				CurrentData.Amount = RowOfBalance.Amount;
+//				CurrentData.AmountExchange = RowOfBalance.AmountExchange;
+			EndIf;
+	EndIf;
+	
+	DocumentsClient.PaymentListPlaningTransactionBasisOnChange(Object, Form, Item);
 EndProcedure
 
 Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -236,7 +272,13 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 																		Object.Account, 
 																		DataCompositionComparisonType.Equal));
 	EndIf;
-																																			
+	
+	If ValueIsFilled(Object.Company) Then
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Company",
+																		Object.Company,
+																		DataCompositionComparisonType.Equal));
+	EndIf;
+	
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange") Then
 		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", 
 																		True, 
@@ -248,11 +290,19 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 																		DataCompositionComparisonType.Equal));	
 		EndIf;
 		
-		If ValueIsFilled(Object.CurrencyExchange) Then																		
+		If ValueIsFilled(Object.CurrencyExchange) Then
 		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("SendCurrency", 
 																			Object.CurrencyExchange, 
 																		DataCompositionComparisonType.Equal));																																		
 		EndIf;
+		
+		ArrayOfChoisedDocuments = New Array();
+		For Each Row In Object.PaymentList Do
+			ArrayOfChoisedDocuments.Add(Row.PlaningTransactionBasis);
+		EndDo;
+		
+		OpenSettings.FormParameters = New Structure();
+		OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
 		
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 		
@@ -265,10 +315,19 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 		
 		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", 
 																		False, 
-																		DataCompositionComparisonType.Equal));																																			
+																		DataCompositionComparisonType.Equal));
+		
+		ArrayOfChoisedDocuments = New Array();
+		For Each Row In Object.PaymentList Do
+			ArrayOfChoisedDocuments.Add(Row.PlaningTransactionBasis);
+		EndDo;
+		
+		OpenSettings.FormParameters = New Structure();
+		OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
+		
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 	EndIf;
-																																	
+
 EndProcedure
 
 Procedure OnActiveCell(Object, Form, Item, Cancel = Undefined) Export

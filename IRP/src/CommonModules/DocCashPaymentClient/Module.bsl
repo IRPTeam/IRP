@@ -254,8 +254,38 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 EndProcedure
 
 &AtClient
-Procedure PaymentListPlaningTransactionBasisOnChange(Object, ThisObject, Item) Export
-	DocumentsClient.PaymentListPlaningTransactionBasisOnChange(Object, ThisObject, Item);
+Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If ValueIsFilled(CurrentData.PlaningTransactionBasis) 
+		And TypeOf(CurrentData.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+		CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingCashPayment(CurrentData.PlaningTransactionBasis);
+			If Not ValueIsFilled(Object.CashAccount) Then
+				Object.CashAccount = CashTransferOrderInfo.CashAccount;
+			EndIf;
+			
+			If Not ValueIsFilled(Object.Company) Then
+				Object.Company = CashTransferOrderInfo.Company;
+			EndIf;
+			
+			If Not ValueIsFilled(Object.Currency) Then
+				Object.Currency = CashTransferOrderInfo.Currency;
+			EndIf;
+			
+			ArrayOfPlaningTransactionBasises = New Array();
+			ArrayOfPlaningTransactionBasises.Add(CurrentData.PlaningTransactionBasis);
+			ArrayOfBalance = DocCashPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises);
+			If ArrayOfBalance.Count() Then
+				RowOfBalance = ArrayOfBalance[0];
+				CurrentData.Partner = RowOfBalance.Partner;
+				CurrentData.Amount = RowOfBalance.Amount;
+			EndIf;
+	EndIf;
+	DocumentsClient.PaymentListPlaningTransactionBasisOnChange(Object, Form, Item);
 EndProcedure
 
 Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

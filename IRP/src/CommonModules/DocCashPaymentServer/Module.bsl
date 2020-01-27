@@ -97,3 +97,83 @@ Procedure SetGroupItemsList(Object, Form)
 EndProcedure
 
 #EndRegion
+
+Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = Undefined) Export
+	TempTableManager = New TempTablesManager();
+	Query = New Query();
+	Query.TempTablesManager = TempTableManager;
+	Query.Text = GetDocumentTable_CashTransferOrder_QueryText();
+	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
+	Query.SetParameter("UseArrayOfBasisDocuments", True);
+	If EndOfDate = Undefined Then
+		Query.SetParameter("EndOfDate", CurrentDate());
+	Else
+		Query.SetParameter("EndOfDate", EndOfDate);
+	EndIf;
+	
+	Query.Execute();
+	Query.Text = 
+	"SELECT
+	|	tmp.BasedOn AS BasedOn,
+	|	tmp.TransactionType AS TransactionType,
+	|	tmp.Company AS Company,
+	|	tmp.CashAccount AS CashAccount,
+	|	tmp.Currency AS Currency,
+	|	tmp.Amount AS Amount,
+	|	tmp.PlaningTransactionBasis AS PlaningTransactionBasis,
+	|	tmp.Partner AS Partner
+	|FROM
+	|	tmp_CashTransferOrder AS tmp";
+	QueryResult = Query.Execute();
+	Return QueryResult.Unload();
+EndFunction
+
+Function GetDocumentTable_CashTransferOrder_QueryText()
+	Return
+	"SELECT ALLOWED
+	|	""CashTransferOrder"" AS BasedOn,
+	|	CASE
+	|		WHEN Doc.SendCurrency = Doc.ReceiveCurrency
+	|			THEN VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder)
+	|		ELSE VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange)
+	|	END AS TransactionType,
+	|	PlaningCashTransactionsTurnovers.Company AS Company,
+	|	PlaningCashTransactionsTurnovers.Account AS CashAccount,
+	|	PlaningCashTransactionsTurnovers.Currency AS Currency,
+	|	PlaningCashTransactionsTurnovers.AmountTurnover AS Amount,
+	|	PlaningCashTransactionsTurnovers.BasisDocument AS PlaningTransactionBasis,
+	|	Doc.CashAdvanceHolder AS Partner
+	|INTO tmp_CashTransferOrder
+	|FROM
+	|	AccumulationRegister.PlaningCashTransactions.Turnovers(, &EndOfDate,,
+	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND CASE
+	|		WHEN &UseArrayOfBasisDocuments
+	|			THEN BasisDocument IN (&ArrayOfBasisDocuments)
+	|		ELSE TRUE
+	|	END) AS PlaningCashTransactionsTurnovers
+	|		INNER JOIN Document.CashTransferOrder AS Doc
+	|		ON PlaningCashTransactionsTurnovers.BasisDocument = Doc.Ref
+	|WHERE
+	|	PlaningCashTransactionsTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
+	|	AND PlaningCashTransactionsTurnovers.AmountTurnover > 0";
+EndFunction
+
+Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments) Export
+	ArrayOfResults = New Array();
+	ValueTable = GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments);
+	For Each Row In ValueTable Do
+		NewRow = New Structure();
+		NewRow.Insert("BasedOn", Row.BasedOn);
+		NewRow.Insert("TransactionType", Row.TransactionType);
+		NewRow.Insert("Company", Row.Company);
+		NewRow.Insert("CashAccount", Row.CashAccount);
+		NewRow.Insert("Currency", Row.Currency);
+		NewRow.Insert("Amount", Row.Amount);
+		NewRow.Insert("PlaningTransactionBasis", Row.PlaningTransactionBasis);
+		NewRow.Insert("Partner", Row.Partner);
+	EndDo;
+	Return ArrayOfResults;
+EndFunction
+

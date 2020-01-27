@@ -421,49 +421,6 @@
         <autoMaxHeight>true</autoMaxHeight>
       </extInfo>
     </items>
-    <items xsi:type="form:FormField">
-      <name>IsCurrensyExchange</name>
-      <id>37</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.IsCurrensyExchange</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>IsCurrensyExchangeExtendedTooltip</name>
-        <id>39</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>IsCurrensyExchangeContextMenu</name>
-        <id>38</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>CheckBoxField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-    </items>
     <commandBarLocation>None</commandBarLocation>
     <autoCommandBar>
       <name>ListCommandBar</name>
@@ -688,36 +645,21 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
-	CashTransferOrder.Ref AS Ref,
-	CashTransferOrder.DeletionMark AS DeletionMark,
-	CashTransferOrder.Number AS Number,
-	CashTransferOrder.Date AS Date,
-	CashTransferOrder.Posted AS Posted,
-	CashTransferOrder.Company AS Company,
-	CashTransferOrder.Sender AS Sender,
-	CashTransferOrder.Receiver AS Receiver,
-	CashTransferOrder.SendAmount AS SendAmount,
-	CashTransferOrder.ReceiveAmount AS ReceiveAmount,
-	CashTransferOrder.SendCurrency AS SendCurrency,
-	CashTransferOrder.ReceiveCurrency AS ReceiveCurrency,
-	CashTransferOrder.SendDate AS SendDate,
-	CashTransferOrder.ReceiveDate AS ReceiveDate,
-	CashTransferOrder.SendUUID AS SendUUID,
-	CashTransferOrder.ReceiveUUID AS ReceiveUUID,
-	CashTransferOrder.CashAdvanceHolder AS CashAdvanceHolder,
-	CashTransferOrder.Description AS Description,
-	CashTransferOrder.SendCurrency &lt;> CashTransferOrder.ReceiveCurrency AS IsCurrensyExchange,
-	PlaningCashTransactionsTurnovers.BasisDocument,
-	CASE
-		WHEN &amp;UseArrayOfChoisedDocuments
-			THEN CashTransferOrder.Ref IN (&amp;ArrayOfChoisedDocuments)
-		ELSE FALSE
-	END AS Choised
+	CashTransferOrder.Ref,
+	CashTransferOrder.Number,
+	CashTransferOrder.Date,
+	CashTransferOrder.Company,
+	CashTransferOrder.Sender,
+	CashTransferOrder.SendCurrency,
+	CashTransferOrder.Receiver,
+	CashTransferOrder.ReceiveCurrency,
+	tmp.TransactionType AS TransactionType,
+	tmp.Amount AS Amount,
+	tmp.Partner AS Partner
 FROM
-	AccumulationRegister.PlaningCashTransactions.Turnovers(, &amp;EndOfPeriod,,) AS PlaningCashTransactionsTurnovers
+	tmp_CashTransferOrder AS tmp
 		INNER JOIN Document.CashTransferOrder AS CashTransferOrder
-		ON PlaningCashTransactionsTurnovers.AmountTurnover > 0
-		AND CashTransferOrder.Ref = PlaningCashTransactionsTurnovers.BasisDocument</queryText>
+		ON tmp.PlaningTransactionBasis = CashTransferOrder.Ref</queryText>
       <mainTable>Document.CashTransferOrder</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>

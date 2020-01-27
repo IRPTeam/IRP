@@ -331,6 +331,10 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 		OpenSettings.FormParameters = New Structure();
 		OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
 		
+		If ValueIsFilled(Object.Ref) Then
+			OpenSettings.FormParameters.Insert("OwnerRef", Object.Ref);
+		EndIf;
+		
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 		
 	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Then
@@ -342,7 +346,15 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 																		Object.Currency, 
 																		DataCompositionComparisonType.Equal));
 		EndIf;
-
+		
+		ArrayOfChoisedDocuments = New Array();
+		For Each Row In Object.PaymentList Do
+			ArrayOfChoisedDocuments.Add(Row.PlaningTransactionBasis);
+		EndDo;
+		
+		OpenSettings.FormParameters = New Structure();
+		OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
+		
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 	EndIf;
 EndProcedure

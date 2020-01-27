@@ -6,7 +6,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("S_001", NStr("en = 'Unsupported type of request body'", CodeLanguage));
 	
 	// Can Not connect to: localhost:8080 Detail: There is no internet connection
-	Strings.Insert("S_002", NStr("en = 'Can Not connect to: %1:%2 Detail: %3'", CodeLanguage));
+	Strings.Insert("S_002", NStr("en = 'Can''t connect to: %1:%2 Detail: %3'", CodeLanguage));
 	
 	// Received response from: localhost:8080
 	Strings.Insert("S_003", NStr("en = 'Received response from: %1:%2'", CodeLanguage));
@@ -14,29 +14,29 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("S_004", NStr("en = 'Resource address is empty'", CodeLanguage));
 	
 	// Integration setting Not found by name: connection_to_other_system
-	Strings.Insert("S_005", NStr("en = 'Integration setting Not found by name: %1'", CodeLanguage));
+	Strings.Insert("S_005", NStr("en = 'Integration setting not found by name: %1'", CodeLanguage));
 	
 	Strings.Insert("S_006", NStr("en = 'Method unsupported on web client'", CodeLanguage));
 	
 	Strings.Insert("S_007", NStr("en = 'Metadata name is empty'", CodeLanguage));
 	
 	// Metadata name Not defined: Catalog_Items
-	Strings.Insert("S_008", NStr("en = 'Metadata name Not defined: %1'", CodeLanguage));
+	Strings.Insert("S_008", NStr("en = 'Metadata name not defined: %1'", CodeLanguage));
 	
 	Strings.Insert("S_009", NStr("en = 'JSON is empty'", CodeLanguage));
 	
 	Strings.Insert("S_010", NStr("en = 'External system is empty'", CodeLanguage));
 	
 	// External system Not defined: IRP
-	Strings.Insert("S_011", NStr("en = 'External system Not defined: %1'", CodeLanguage));
-	Strings.Insert("S_012", NStr("en = 'Can Not retrive value for: Property[%1] Value[%2] Metadata[%3]'", CodeLanguage));
+	Strings.Insert("S_011", NStr("en = 'External system not defined: %1'", CodeLanguage));
+	Strings.Insert("S_012", NStr("en = 'Can''t retrive value for: Property[%1] Value[%2] Metadata[%3]'", CodeLanguage));
 	
 	// Special offers
 	Strings.Insert("S_013", NStr("en = 'Not supperted type of object: %1'", CodeLanguage));
 	
 	// FileTransfer
 	Strings.Insert("S_014", NStr("en = 'File name is empty'", CodeLanguage));
-	Strings.Insert("S_015", NStr("en = 'Path for save Not set'", CodeLanguage));
+	Strings.Insert("S_015", NStr("en = 'Path for save not set'", CodeLanguage));
 	
 	// Test connection
 	Strings.Insert("S_016", NStr("en = '%1 Status code: %2 %3'", CodeLanguage));
@@ -111,7 +111,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Error_012", NStr("en = 'Not according rules for naming variable'", CodeLanguage));
 	Strings.Insert("Error_013", NStr("en = 'Value is not unique'", CodeLanguage));
 	Strings.Insert("Error_014", NStr("en = 'Password and password confirmation do not match'", CodeLanguage));
-	Strings.Insert("Error_015", NStr("en = 'Webclient does Not support this feature'", CodeLanguage));
+	Strings.Insert("Error_015", NStr("en = 'Webclient does not support this feature'", CodeLanguage));
 	Strings.Insert("Error_016", NStr("en = 'Lines on which you need to order items from suppliers are missed in the Sales Order'", CodeLanguage));
 	Strings.Insert("Error_017", NStr("en = 'Please, at first create Goods receipt or uncheck the box Goods receipt before Purchase invoice on the tab Other'", CodeLanguage));
 	Strings.Insert("Error_018", NStr("en = 'Please, at first create Shipment confirmation or uncheck the box Shipment confirmation before Sales invoice on the tab Other'", CodeLanguage));
@@ -132,7 +132,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Error_036", NStr("en = 'Not found row by index In Files table'", CodeLanguage));
 	Strings.Insert("Error_037", NStr("en = 'Unsupported data composition comparison type'", CodeLanguage));	
 	Strings.Insert("Error_038", NStr("en = 'Thread have status [%1] but In register ThreadInfo set status [%2] Error info : [%3]'", CodeLanguage));
-	Strings.Insert("Error_039", NStr("en = 'Job Not found'", CodeLanguage));
+	Strings.Insert("Error_039", NStr("en = 'Job not found'", CodeLanguage));
 	Strings.Insert("Error_040", NStr("en = 'Support picture files only'", CodeLanguage));
 	Strings.Insert("Error_041", NStr("en = 'Tax table content more 1 row [key: %1] [tax: %2]'", CodeLanguage));
 	Strings.Insert("Error_042", NStr("en = 'Cannot find tax by column name: %1'", CodeLanguage));
@@ -198,8 +198,8 @@ Function Strings(CodeLanguage) Export
 	#EndRegion
 	
 	#Region UsersEvent
-	Strings.Insert("UsersEvent_001", NStr("en = 'User Not found UUID: %1 Name: %2'", CodeLanguage));
-	Strings.Insert("UsersEvent_002", NStr("en = 'User found UUID: %1 Name: %2'", CodeLanguage));
+	Strings.Insert("UsersEvent_001", NStr("en = 'User not found by UUID: %1 Name: %2'", CodeLanguage));
+	Strings.Insert("UsersEvent_002", NStr("en = 'User found by UUID: %1 Name: %2'", CodeLanguage));
 	#EndRegion
 	
 	#Region TrackList

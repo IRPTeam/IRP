@@ -1,3 +1,0 @@
-Procedure GenerateEmptyExtension() Export
-	
-EndProcedure

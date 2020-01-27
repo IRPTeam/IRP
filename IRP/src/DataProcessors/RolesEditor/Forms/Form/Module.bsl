@@ -83,13 +83,29 @@ Procedure UpdateExtentionAtServer()
 	Zip.ExtractAll(Path);
 	Zip.Close();
 	TemplateDB.Close();
-	
-	CommandToUploadExt = """" + BinDir() + "1cv8.exe"" designer /f " + Path + " /DumpConfigToFiles " + Path + "\Ext -Extension Roles /DumpResult " + Path + "\Event.log /DisableStartupMessages /DisableStartupDialogs";
+
+	// unload to xml
+	CommandToUploadExt = """" + BinDir() + "1cv8.exe"" designer /f " + Path + 
+			" /DumpConfigToFiles " + Path + "\Ext -Extension Roles /DumpResult " + Path + 
+			"\Event.log /DisableStartupMessages /DisableStartupDialogs";
 	RunApp(CommandToUploadExt, , True);
 	DeleteFiles(Path + "\Ext\ConfigDumpInfo.xml");
 	
-	//Metadata.CompatibilityMode
+	// load from xml to db
+	CommandToUploadExt = """" + BinDir() + "1cv8.exe"" designer /f " + Path + 
+			" /LoadConfigFromFiles " + Path + "\Ext -Extension Roles /DumpResult " + Path + 
+			"\Event.log /DisableStartupMessages /DisableStartupDialogs";
+	RunApp(CommandToUploadExt, , True);
 	
+	// upload from db to cfe
+	CommandToUploadExt = """" + BinDir() + "1cv8.exe"" designer /f " + Path + 
+			" /DumpCfg " + Path + "\Roles.cfe -Extension Roles /DumpResult " + Path + 
+			"\Event.log /DisableStartupMessages /DisableStartupDialogs";
+	RunApp(CommandToUploadExt, , True);
+	
+	// load cfe to cuurent db
+	BD = New BinaryData(Path + "\Roles.cfe");
+	ExtentionServer.InstallExtention("Roles", BD, True);
 	DeleteFiles(Path);
 	
 EndProcedure

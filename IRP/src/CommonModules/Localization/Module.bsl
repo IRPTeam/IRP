@@ -165,6 +165,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Error_071", NStr("en = 'External data processor ""%1"" was not connected'", CodeLanguage));
 	Strings.Insert("Error_072", NStr("en = 'Store is required on line %1'", CodeLanguage));
 	Strings.Insert("Error_073", NStr("en = 'All items in %1(s) are already received by %2(s).'", CodeLanguage));
+	Strings.Insert("Error_074", NStr("en = 'Currency transfer is possible only when amounts is equal.'", CodeLanguage));
 	#EndRegion
 	
 	#Region InfoMessages

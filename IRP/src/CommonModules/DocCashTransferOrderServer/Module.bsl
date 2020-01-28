@@ -46,40 +46,15 @@ EndProcedure
 
 #Region CommonFunctions
 
-Function CashAdvanceHolderVisibility(Settings) Export
-	
-	If Not Settings.Sender.Type = PredefinedValue("Enum.CashAccountTypes.Cash") Then
-		Return False;
+Function UseCashAdvanceHolder(Val Object) Export
+	If Object.Sender.Type = Enums.CashAccountTypes.Cash 
+		And Object.Receiver.Type = Enums.CashAccountTypes.Cash 
+		And ValueIsFilled(Object.SendCurrency)
+		And ValueIsFilled(Object.ReceiveCurrency) 
+		And Object.SendCurrency <> Object.ReceiveCurrency Then
+		Return True;
 	EndIf;
-	
-	If Not Settings.Receiver.Type = PredefinedValue("Enum.CashAccountTypes.Cash") Then
-		Return False;
-	EndIf;
-	 
-	If Not ValueIsFilled(Settings.SendCurrency) = ValueIsFilled(Settings.ReceiveCurrency) Then
-		Return False;
-	EndIf;
-	
-	If Settings.SendCurrency = Settings.ReceiveCurrency Then
-		Return False;
-	EndIf;
-	
-	Return True;	
-	
-EndFunction
-
-Function CurrencyExchangeChecking(Object) Export
-	
-	If Object.SendCurrency = Object.ReceiveCurrency Then
-		Return False;
-	EndIf;
-	
-	If Object.Sender.Type = Object.Receiver.Type Then
-		Return False;
-	EndIf;
-	
-	Return True;
-	
+	Return False;
 EndFunction
 
 #EndRegion
@@ -107,3 +82,47 @@ Function GetInfoForFillingCashReceipt(Ref) Export
 	Return Result;
 EndFunction
 
+Function GetInfoForFillingCashPayment(Ref) Export
+	Result = New Structure("Ref, CashAccount, Company, Currency");
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	CashTransferOrder.Receiver AS CashAccount,
+	|	CashTransferOrder.Company,
+	|	CashTransferOrder.SendCurrency AS Currency,
+	|	CashTransferOrder.Ref
+	|FROM
+	|	Document.CashTransferOrder AS CashTransferOrder
+	|WHERE
+	|	CashTransferOrder.Ref = &Ref";
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetInfoForFillingBankReceipt(Ref) Export
+	Result = New Structure("Ref, Account, Company, Currency, CurrencyExchange");
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	CashTransferOrder.Receiver AS Account,
+	|	CashTransferOrder.Company,
+	|	CashTransferOrder.ReceiveCurrency AS Currency,
+	|	CashTransferOrder.SendCurrency AS CurrencyExchange,
+	|	CashTransferOrder.Ref
+	|FROM
+	|	Document.CashTransferOrder AS CashTransferOrder
+	|WHERE
+	|	CashTransferOrder.Ref = &Ref";
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+	EndIf;
+	Return Result;
+EndFunction

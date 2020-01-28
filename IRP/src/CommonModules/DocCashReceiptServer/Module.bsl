@@ -101,9 +101,40 @@ EndProcedure
 
 #EndRegion
 
-Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments) Export
+Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = Undefined) Export
+	TempTableManager = New TempTablesManager();
 	Query = New Query();
-	Query.Text =
+	Query.TempTablesManager = TempTableManager;
+	Query.Text = GetDocumentTable_CashTransferOrder_QueryText();
+	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
+	Query.SetParameter("UseArrayOfBasisDocuments", True);
+	If EndOfDate = Undefined Then
+		Query.SetParameter("EndOfDate", CurrentDate());
+	Else
+		Query.SetParameter("EndOfDate", EndOfDate);
+	EndIf;
+	
+	Query.Execute();
+	Query.Text = 
+	"SELECT
+	|	tmp.BasedOn AS BasedOn,
+	|	tmp.TransactionType AS TransactionType,
+	|	tmp.Company AS Company,
+	|	tmp.CashAccount AS CashAccount,
+	|	tmp.Currency AS Currency,
+	|	tmp.CurrencyExchange AS CurrencyExchange,
+	|	tmp.Amount AS Amount,
+	|	tmp.PlaningTransactionBasis AS PlaningTransactionBasis,
+	|	tmp.Partner AS Partner,
+	|	tmp.AmountExchange AS AmountExchange
+	|FROM
+	|	tmp_CashTransferOrder AS tmp";
+	QueryResult = Query.Execute();
+	Return QueryResult.Unload();
+EndFunction
+
+Function GetDocumentTable_CashTransferOrder_QueryText()
+	Return
 	"SELECT ALLOWED
 	|	""CashTransferOrder"" AS BasedOn,
 	|	CASE
@@ -121,15 +152,23 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments) Export
 	|	CashAdvanceBalance.AmountBalance AS AmountExchange
 	|INTO tmp
 	|FROM
-	|	AccumulationRegister.PlaningCashTransactions.Turnovers(,,,
+	|	AccumulationRegister.PlaningCashTransactions.Turnovers(, &EndOfDate,,
 	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND BasisDocument IN (&ArrayOfBasisDocuments)) AS PlaningCashTransactionsTurnovers
+	|	AND CASE
+	|		WHEN &UseArrayOfBasisDocuments
+	|			THEN BasisDocument IN (&ArrayOfBasisDocuments)
+	|		ELSE TRUE
+	|	END) AS PlaningCashTransactionsTurnovers
 	|		INNER JOIN Document.CashTransferOrder AS Doc
 	|		ON PlaningCashTransactionsTurnovers.BasisDocument = Doc.Ref
-	|		INNER JOIN AccumulationRegister.CashAdvance.Balance(,
+	|		INNER JOIN AccumulationRegister.CashAdvance.Balance(&EndOfDate,
 	|			CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|		AND BasisDocument IN (&ArrayOfBasisDocuments)) AS CashAdvanceBalance
+	|		AND CASE
+	|			WHEN &UseArrayOfBasisDocuments
+	|				THEN BasisDocument IN (&ArrayOfBasisDocuments)
+	|			ELSE TRUE
+	|		END) AS CashAdvanceBalance
 	|		ON PlaningCashTransactionsTurnovers.BasisDocument = CashAdvanceBalance.BasisDocument
 	|WHERE
 	|	PlaningCashTransactionsTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
@@ -153,10 +192,14 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments) Export
 	|	NULL,
 	|	0
 	|FROM
-	|	AccumulationRegister.PlaningCashTransactions.Turnovers(,,,
+	|	AccumulationRegister.PlaningCashTransactions.Turnovers(, &EndOfDate,,
 	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND BasisDocument IN (&ArrayOfBasisDocuments)) AS PlaningCashTransactionsTurnovers
+	|	AND CASE
+	|		WHEN &UseArrayOfBasisDocuments
+	|			THEN BasisDocument IN (&ArrayOfBasisDocuments)
+	|		ELSE TRUE
+	|	END) AS PlaningCashTransactionsTurnovers
 	|		INNER JOIN Document.CashTransferOrder AS Doc
 	|		ON PlaningCashTransactionsTurnovers.BasisDocument = Doc.Ref
 	|WHERE
@@ -177,12 +220,9 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments) Export
 	|	tmp.PlaningTransactionBasis AS PlaningTransactionBasis,
 	|	tmp.Partner AS Partner,
 	|	tmp.AmountExchange AS AmountExchange
+	|INTO tmp_CashTransferOrder
 	|FROM
 	|	tmp AS tmp";
-
-	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
-	QueryResult = Query.Execute();
-	Return QueryResult.Unload();
 EndFunction
 
 Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments) Export

@@ -378,6 +378,16 @@ Function CreateTable(RegisterMetadata) Export
 EndFunction
 
 Procedure FixRowKey(RegisterMetadata, RecordInfo, RecordsForExpense, DocObject)
+	
+	// explicit type cast
+	If RecordInfo.RecordSet.Columns.RowKey.ValueType <> RegisterMetadata.Dimensions.RowKey.Type Then
+		RecordInfo.RecordSet.Columns.RowKey.Name = "_RowKey";
+		RecordInfo.RecordSet.Columns.Add("RowKey", RegisterMetadata.Dimensions.RowKey.Type);
+		For Each Row In RecordInfo.RecordSet Do
+			Row.RowKey = Row._RowKey;
+		EndDo;
+	EndIf;
+	
 	ArrayOfDimensions = New Array();
 	For Each Dimension In RegisterMetadata.Dimensions Do
 		If Upper(Dimension.Name) = Upper("RowKey") Then

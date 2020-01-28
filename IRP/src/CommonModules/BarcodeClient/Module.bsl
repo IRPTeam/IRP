@@ -27,8 +27,7 @@ Function ProcessBarcode(Barcode, Parameters)
 EndFunction
 
 Function ProcessBarcodes(Barcodes, Parameters)
-	ReturnResult = False;
-	
+	ReturnResult = False;	
 	If Parameters.Property("PriceType") Then
 		PriceType = Parameters.PriceType;
 	Else
@@ -38,19 +37,15 @@ Function ProcessBarcodes(Barcodes, Parameters)
 		PricePeriod = Parameters.PricePeriod;
 	Else
 		PricePeriod = CurrentDate();
-	EndIf;
-	
+	EndIf;	
 	FoundedItems = BarcodeServer.SearchByBarcodes(Barcodes, PriceType, PricePeriod);
-	If FoundedItems.Count() Then
-		
+	If FoundedItems.Count() Then		
 		If Parameters.Property("DocumentClientModule") Then
 			DocumentModule = Parameters.DocumentClientModule;
 			DocumentModule.PickupItemsEnd(FoundedItems, Parameters);
-		EndIf;
-		
+		EndIf;		
 		ReturnResult = True;
-	EndIf;
-	
+	EndIf;	
 	Return ReturnResult;
 EndFunction
 

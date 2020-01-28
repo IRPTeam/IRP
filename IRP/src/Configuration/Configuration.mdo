@@ -527,7 +527,6 @@
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
   <dataProcessors>DataProcessor.FillingNewAreaAssistant</dataProcessors>
-  <dataProcessors>DataProcessor.RolesEditor</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

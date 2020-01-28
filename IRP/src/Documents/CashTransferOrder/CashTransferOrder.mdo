@@ -70,6 +70,7 @@
       <types>CatalogRef.CashAccounts</types>
     </type>
     <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -122,6 +123,7 @@
     <type>
       <types>CatalogRef.Currencies</types>
     </type>
+    <fillChecking>ShowError</fillChecking>
     <fillFromFillingValue>true</fillFromFillingValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -135,6 +137,7 @@
     <type>
       <types>CatalogRef.Currencies</types>
     </type>
+    <fillChecking>ShowError</fillChecking>
     <fillFromFillingValue>true</fillFromFillingValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

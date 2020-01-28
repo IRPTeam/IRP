@@ -9,19 +9,27 @@ EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	
-	If DocCashTransferOrderServer.CurrencyExchangeChecking(ThisObject) Then
-		CommonFunctionsClientServer.ShowUsersMessage(R().Error_050, "Sender", ThisObject);
-		CommonFunctionsClientServer.ShowUsersMessage(R().Error_050, "Receiver", ThisObject);
-		Cancel = True;
+	If ValueIsFilled(SendCurrency) And ValueIsFilled(ReceiveCurrency)
+		And ValueIsFilled(Sender) And ValueIsFilled(Receiver) Then
+		
+		If SendCurrency = ReceiveCurrency Then
+			
+			If SendAmount <> ReceiveAmount Then
+				CommonFunctionsClientServer.ShowUsersMessage(R().Error_074, "SendAmount", ThisObject);
+				CommonFunctionsClientServer.ShowUsersMessage(R().Error_074, "ReceiveAmount", ThisObject);
+			EndIf;
+		Else
+			// Currency exchange is possible only through accounts with the same type (cash account or bank account)
+			If Sender.Type <> Receiver.Type Then
+				CommonFunctionsClientServer.ShowUsersMessage(R().Error_050, "Sender", ThisObject);
+				CommonFunctionsClientServer.ShowUsersMessage(R().Error_050, "Receiver", ThisObject);
+			EndIf;
+		EndIf;
 	EndIf;
 
-	Settings = New Structure("Sender, Receiver, SendCurrency, ReceiveCurrency");
-	FillPropertyValues(Settings, ThisObject);
-	If DocCashTransferOrderServer.CashAdvanceHolderVisibility(Settings) Then
+	If DocCashTransferOrderServer.UseCashAdvanceHolder(ThisObject) Then
 		CheckedAttributes.Add("CashAdvanceHolder");
 	EndIf;
-	
-
 EndProcedure
 
 

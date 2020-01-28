@@ -291,36 +291,25 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	OpenSettings.ArrayOfFilters = New Array();
 	
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Posted",
-																		True, 
-																		DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Posted", True, DataCompositionComparisonType.Equal));
 	If ValueIsFilled(Object.CashAccount) Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Receiver", 
-																		Object.CashAccount, 
-																		DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Receiver", Object.CashAccount, DataCompositionComparisonType.Equal));
 	EndIf;
 	
 	If ValueIsFilled(Object.Company) Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Company",
-																		Object.Company,
-																		DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Company", Object.Company, DataCompositionComparisonType.Equal));
 	EndIf;
 	
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange") Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", 
-																		True, 
-																		DataCompositionComparisonType.Equal));
+		
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", True, DataCompositionComparisonType.Equal));
 		
 		If ValueIsFilled(Object.Currency) Then
-			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ReceiveCurrency", 
-																		Object.Currency, 
-																		DataCompositionComparisonType.Equal));	
+			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ReceiveCurrency", Object.Currency, DataCompositionComparisonType.Equal));
 		EndIf;
 		
 		If ValueIsFilled(Object.CurrencyExchange) Then
-			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("SendCurrency", 
-																		Object.CurrencyExchange, 
-																		DataCompositionComparisonType.Equal));	
+			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("SendCurrency", Object.CurrencyExchange, DataCompositionComparisonType.Equal));
 		EndIf;
 		
 		ArrayOfChoisedDocuments = New Array();
@@ -331,20 +320,15 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 		OpenSettings.FormParameters = New Structure();
 		OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
 		
-		If ValueIsFilled(Object.Ref) Then
-			OpenSettings.FormParameters.Insert("OwnerRef", Object.Ref);
-		EndIf;
+		OpenSettings.FormParameters.Insert("OwnerRef", Object.Ref);
 		
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-		
 	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", 
-																		False, 
-																		DataCompositionComparisonType.Equal));
+		
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", False, DataCompositionComparisonType.Equal));
+		
 		If ValueIsFilled(Object.Currency) Then
-			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ReceiveCurrency", 
-																		Object.Currency, 
-																		DataCompositionComparisonType.Equal));
+			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ReceiveCurrency", Object.Currency, DataCompositionComparisonType.Equal));
 		EndIf;
 		
 		ArrayOfChoisedDocuments = New Array();
@@ -354,6 +338,8 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 		
 		OpenSettings.FormParameters = New Structure();
 		OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
+		
+		OpenSettings.FormParameters.Insert("OwnerRef", Object.Ref);
 		
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 	EndIf;

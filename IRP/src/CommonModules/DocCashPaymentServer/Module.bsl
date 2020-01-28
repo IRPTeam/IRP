@@ -128,7 +128,7 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 	Return QueryResult.Unload();
 EndFunction
 
-Function GetDocumentTable_CashTransferOrder_QueryText()
+Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	Return
 	"SELECT ALLOWED
 	|	""CashTransferOrder"" AS BasedOn,
@@ -160,7 +160,10 @@ Function GetDocumentTable_CashTransferOrder_QueryText()
 	|	AND PlaningCashTransactionsTurnovers.AmountTurnover > 0";
 EndFunction
 
-Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments) Export
+Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, ObjectRef = Undefined) Export
+	EndOfDate = Undefined;
+	If ValueIsFilled(ObjectRef) Then
+	EndIf;
 	ArrayOfResults = New Array();
 	ValueTable = GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments);
 	For Each Row In ValueTable Do
@@ -173,6 +176,7 @@ Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments) Exp
 		NewRow.Insert("Amount", Row.Amount);
 		NewRow.Insert("PlaningTransactionBasis", Row.PlaningTransactionBasis);
 		NewRow.Insert("Partner", Row.Partner);
+		ArrayOfResults.Add(NewRow);
 	EndDo;
 	Return ArrayOfResults;
 EndFunction

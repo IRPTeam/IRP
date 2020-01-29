@@ -13,10 +13,7 @@ Procedure BeforeWrite(Object, Form, Cancel, WriteParameters) Export
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	
-	Form.InputType = "Item";
-	ChangeInputType(Object, Form);
-	
+		
 	Settings = New Structure;
 	Settings.Insert("UpdateInfoString");
 	If AddInfo <> Undefined And AddInfo.Property("RemovedActions") Then
@@ -98,18 +95,6 @@ Procedure ItemListOnActivateRow(Object, Form, Item) Export
 	
 EndProcedure
 
-Procedure InputTypeOnChange(Object, Form, Item) Export
-	ChangeInputType(Object, Form);
-EndProcedure
-
-Procedure ChangeInputType(Object, Form) Export
-	If Form.InputType = "Item" Then
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Items");
-	Else
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Boxes");
-	EndIf;
-EndProcedure
-
 #EndRegion
 
 #Region ItemListItemsEvents
@@ -123,11 +108,9 @@ Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProces
 EndProcedure
 
 Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	If Form.InputType = "Item" Then
-		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-	EndIf;
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
 Function ItemListItemSettings() Export

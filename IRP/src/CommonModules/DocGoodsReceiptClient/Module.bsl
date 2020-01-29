@@ -501,6 +501,7 @@ Procedure SelectReceiptBasisesContinue(Result, AdditionalParameters) Export
 	DocGoodsReceiptClient.ItemListOnChange(Object, Form, Form.Items.ItemList);
 	DocGoodsReceiptClient.FillItemBasisList(Object, Form);
 	
+	Notify("ChoiceReceiptBasis", New Structure(), Result);
 EndProcedure
 
 Procedure SelectReceiptBasisInRowContinue(Result, AdditionalParameters) Export
@@ -521,6 +522,7 @@ Procedure SelectReceiptBasisInRowContinue(Result, AdditionalParameters) Export
 	DocGoodsReceiptClient.ItemListOnChange(Object, Form, Form.Items.ItemList);
 	DocGoodsReceiptClient.FillItemBasisList(Object, Form);
 	
+	Notify("ChoiceReceiptBasis", New Structure(), Result);
 EndProcedure
 
 Procedure FillReceiptBasises(Object, Form, Command) Export

@@ -22,9 +22,9 @@ Procedure SetAvailability(Object, Form) Export
 				Break;
 			EndIf;
 		EndDo;
-		Form.Items.Account.ReadOnly = BasedOnCashTransferOrder;
-		Form.Items.Company.ReadOnly = BasedOnCashTransferOrder;
-		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder;
+		Form.Items.Account.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Account);
+		Form.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
+		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
 	EndIf;
 EndProcedure
 
@@ -200,8 +200,8 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	//DocBankPaymentClient.FillPayees(Object, Form);
-	//SetAvailability(Object, Form);
+	DocBankPaymentClient.FillPayees(Object, Form);
+	SetAvailability(Object, Form);
 EndProcedure
 
 Procedure PaymentListOnActivateRow(Object, Form, Item) Export
@@ -259,8 +259,38 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 EndProcedure
 
 &AtClient
-Procedure PaymentListPlaningTransactionBasisOnChange(Object, ThisObject, Item) Export
-	DocumentsClient.PaymentListPlaningTransactionBasisOnChange(Object, ThisObject, Item);
+Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If ValueIsFilled(CurrentData.PlaningTransactionBasis) 
+		And TypeOf(CurrentData.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+		CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingBankPayment(CurrentData.PlaningTransactionBasis);
+			If Not ValueIsFilled(Object.Account) Then
+				Object.Account = CashTransferOrderInfo.Account;
+			EndIf;
+			
+			If Not ValueIsFilled(Object.Company) Then
+				Object.Company = CashTransferOrderInfo.Company;
+			EndIf;
+			
+			If Not ValueIsFilled(Object.Currency) Then
+				Object.Currency = CashTransferOrderInfo.Currency;
+			EndIf;
+			
+			ArrayOfPlaningTransactionBasises = New Array();
+			ArrayOfPlaningTransactionBasises.Add(CurrentData.PlaningTransactionBasis);
+			ArrayOfBalance = DocBankPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises, Object.Ref);
+			If ArrayOfBalance.Count() Then
+				RowOfBalance = ArrayOfBalance[0];
+				CurrentData.Amount = RowOfBalance.Amount;
+			EndIf;
+	EndIf;
+	
+	DocumentsClient.PaymentListPlaningTransactionBasisOnChange(Object, Form, Item);
 EndProcedure
 
 Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -269,35 +299,43 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 		Return;
 	EndIf;
 	
-	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Or
-		Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
-		OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-		OpenSettings.ArrayOfFilters = New Array();
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Posted",
-																		True, 
-																		DataCompositionComparisonType.Equal));
-		If ValueIsFilled(Object.Account) Then
-			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Sender", 
-																		Object.Account, 
-																		DataCompositionComparisonType.Equal));
-		EndIf;
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings.FormParameters = New Structure();
+	OpenSettings.FormParameters.Insert("OwnerRef", Object.Ref);
+	
+	ArrayOfChoisedDocuments = New Array();
+	For Each Row In Object.PaymentList Do
+		ArrayOfChoisedDocuments.Add(Row.PlaningTransactionBasis);
+	EndDo;
+	OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
 		
-		If ValueIsFilled(Object.Currency) Then
-			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("SendCurrency", 
-																		Object.Currency, 
-																		DataCompositionComparisonType.Equal));	
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Posted", True, DataCompositionComparisonType.Equal));
+	
+	// Account
+	If ValueIsFilled(Object.Account) Then
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Sender", Object.Account, DataCompositionComparisonType.Equal));
+	EndIf;
 		
-		EndIf;
+	// Company
+	If ValueIsFilled(Object.Company) Then
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Company", Object.Company, DataCompositionComparisonType.Equal));
+	EndIf;
 		
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", 
-									Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange"), 
-									DataCompositionComparisonType.Equal));																						
+	// Currency
+	If ValueIsFilled(Object.Currency) Then
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("SendCurrency", Object.Currency, DataCompositionComparisonType.Equal));
+	EndIf;
+
+	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", True, DataCompositionComparisonType.Equal));
 		
-		OpenSettings.FormParameters = New Structure();
-		OpenSettings.FormParameters.Insert("EndDate",  EndOfDay(Object.Date));
+		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	ElsIf Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", False, DataCompositionComparisonType.Equal));
+		
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 	EndIf;
-																																	
 EndProcedure
 
 Procedure OnActiveCell(Object, Form, Item, Cancel = Undefined) Export

@@ -45,9 +45,9 @@ Procedure SetVisibilityAvailability() Export
 				Break;
 			EndIf;
 		EndDo;
-		ThisObject.Items.CashAccount.ReadOnly = BasedOnCashTransferOrder;
-		ThisObject.Items.Company.ReadOnly 	= BasedOnCashTransferOrder;
-		ThisObject.Items.Currency.ReadOnly 	= BasedOnCashTransferOrder;
+		ThisObject.Items.CashAccount.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.CashAccount);
+		ThisObject.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
+		ThisObject.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
 
 		ArrayTypes = New Array();
 		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));

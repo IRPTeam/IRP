@@ -165,6 +165,7 @@ Procedure CreateMainFormItemDescription(Form, GroupName, AddInfo = Undefined) Ex
 			NewAttribute.Type = FormFieldType.InputField;
 			NewAttribute.DataPath = "Object." + Attribute;
 			NewAttribute.OpenButton = True;
+			NewAttribute.AutoMarkIncomplete = True;
 			NewAttribute.SetAction("Opening", "DescriptionOpening");
 		EndIf;
 	EndDo;

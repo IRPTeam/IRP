@@ -31,22 +31,22 @@ Procedure SetVisibilityAvailability(Object, Form) Export
 	Form.Items.LegalName.Enabled = Not BasedOnBoxingBundling AND ValueIsFilled(Object.Partner);
 	Form.Items.Partner.Visible = Not BasedOnBoxingBundling;
 	Form.Items.LegalName.Visible = Not BasedOnBoxingBundling;
+#If Client Then	
+	For Each Row In Object.ItemList Do
+		If ValueIsFilled(Row.ReceiptBasis) Then
+			Row.ReceiptBasisCurrency = ServiceSystemServer.GetCompositeObjectAttribute(Row.ReceiptBasis, "Currency");
+		Else
+			Row.ReceiptBasisCurrency = Undefined;
+		EndIf;
+	EndDo;
+#EndIf
 EndProcedure
 
 &AtClient
-Procedure BeforeWrite(Cancel, WriteParameters)
-	// canceling multicurrency receipt basises
-	CurrenciesArray = New Array();
-	For Each Row In Object.ItemList Do
-		If ValueIsFilled(Row.ReceiptBasisCurrency) And CurrenciesArray.Find(Row.ReceiptBasisCurrency) = Undefined Then
-			CurrenciesArray.Add(Row.ReceiptBasisCurrency);
-			If CurrenciesArray.Count() > 1 Then
-				CommonFunctionsClientServer.ShowUsersMessage(R().S_022);
-				Cancel = True;
-				Break;
-			EndIf;
-		EndIf;
-	EndDo;
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "ChoiceReceiptBasis" Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -103,8 +103,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListReceiptBasisOnChange(Item)
-	Items.ItemList.CurrentData.ReceiptBasisCurrency = 
-			ServiceSystemServer.GetCompositeObjectAttribute(Items.ItemList.CurrentData.ReceiptBasis, "Currency");
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient

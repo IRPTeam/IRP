@@ -95,8 +95,8 @@ EndProcedure
 Procedure DateOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-	FillSendDate(Object, Form);
-	FillReceiveDate(Object, Form);
+	SetSendDate(Object, Form);
+	SetReceiveDate(Object, Form);
 EndProcedure
 
 #EndRegion
@@ -138,7 +138,7 @@ Procedure SendDateOnChange(Object, Form, Item) Export
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
 EndProcedure
 
-Procedure FillSendDate(Object, Form)
+Procedure SetSendDate(Object, Form)
 	If Not CommonFunctionsClientServer.IsFormItemModifiedByUser(Form, "SendDate") Then
 		Object.SendDate = Object.Date;		
 	EndIf;
@@ -153,9 +153,9 @@ Procedure ReceiveDateOnChange(Object, Form, Item) Export
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
 EndProcedure
 
-Procedure FillReceiveDate(Object, Form)
+Procedure SetReceiveDate(Object, Form)
 	If Not CommonFunctionsClientServer.IsFormItemModifiedByUser(Form, "ReceiveDate") Then
-		Object.ReceiveDate = Object.Date;		
+		Object.ReceiveDate = Object.Date;
 	EndIf;
 EndProcedure
 
@@ -198,7 +198,7 @@ EndProcedure
 
 Procedure SenderOnChange(Object, Form, Item) Export
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-	FillSenderCurrency(Object, Form);
+	SetSenderCurrency(Object, Form);
 	SetVisibilityAvailability(Object, Form);
 EndProcedure
 
@@ -253,22 +253,18 @@ EndProcedure
 
 Procedure ReceiverOnChange(Object, Form, Item) Export
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-	FillReceiverCurrency(Object, Form);
+	SetReceiverCurrency(Object, Form);
 	SetVisibilityAvailability(Object, Form);
 EndProcedure
 
 Procedure SetVisibilityAvailability(Object, Form) Export
-	
-	Settings = New Structure("Sender, Receiver, SendCurrency, ReceiveCurrency");
-	FillPropertyValues(Settings, Object);
-	
-	If DocCashTransferOrderServer.CashAdvanceHolderVisibility(Settings) Then
+	If DocCashTransferOrderServer.UseCashAdvanceHolder(Object) Then
 		Form.Items.CashAdvanceHolder.Visible = True;
 	Else
 		Form.Items.CashAdvanceHolder.Visible = False;
 		Object.CashAdvanceHolder = PredefinedValue("Catalog.Partners.EmptyRef");
 	EndIf;
-EndProcedure	
+EndProcedure
 
 Procedure ReceiverStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	StandardProcessing = False;
@@ -286,7 +282,7 @@ EndProcedure
 
 #Region ItemSenderCurrency
 
-Procedure FillSenderCurrency(Object, Form)
+Procedure SetSenderCurrency(Object, Form)
 	ObjectSenderCurrency = ServiceSystemServer.GetObjectAttribute(Object.Sender, "Currency"); 
 	If ValueIsFilled(ObjectSenderCurrency) Then
 		Object.SendCurrency = ObjectSenderCurrency;
@@ -299,7 +295,7 @@ EndProcedure
 
 #Region ItemReceiverCurrency
 
-Procedure FillReceiverCurrency(Object, Form)
+Procedure SetReceiverCurrency(Object, Form)
 	ObjectReceiverCurrency = ServiceSystemServer.GetObjectAttribute(Object.Receiver, "Currency"); 
 	If ValueIsFilled(ObjectReceiverCurrency) Then
 		Object.ReceiveCurrency = ObjectReceiverCurrency;
@@ -313,10 +309,10 @@ EndProcedure
 #Region CheckFillData
 
 Procedure CheckFillData(Object, Form)
-	FillSendDate(Object, Form);
-	FillReceiveDate(Object, Form);
-	FillSenderCurrency(Object, Form);
-	FillReceiverCurrency(Object, Form);
+	SetSendDate(Object, Form);
+	SetReceiveDate(Object, Form);
+	SetSenderCurrency(Object, Form);
+	SetReceiverCurrency(Object, Form);
 EndProcedure
 
 #EndRegion

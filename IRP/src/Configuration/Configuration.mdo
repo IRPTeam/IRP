@@ -290,9 +290,9 @@
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>
   <commonModules>CommonModule.GoogleDriveServer</commonModules>
   <commonModules>CommonModule.GoogleDriveClient</commonModules>
-  <commonModules>CommonModule.ExtensionsServer</commonModules>
   <commonModules>CommonModule.UniqueIDReuse</commonModules>
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
+  <commonModules>CommonModule.ExtentionServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -527,7 +527,6 @@
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
   <dataProcessors>DataProcessor.FillingNewAreaAssistant</dataProcessors>
-  <dataProcessors>DataProcessor.RolesEditor</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

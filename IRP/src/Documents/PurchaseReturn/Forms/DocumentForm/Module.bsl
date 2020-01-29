@@ -149,6 +149,11 @@ Procedure ItemListBeforeDeleteRow(Item, Cancel)
 EndProcedure
 
 &AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocPurchaseReturnClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	DocPurchaseReturnClient.ItemListOnChange(Object, ThisObject, Item);
 EndProcedure

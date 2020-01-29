@@ -290,7 +290,31 @@ Function GetDocumentTable_PurchaseOrder(ArrayOfBasisDocuments)
 EndFunction
 
 Function GetDocumentTable_SalesReturn(ArrayOfBasisDocuments)
-	Return GetDocumentTable(ArrayOfBasisDocuments, "SalesReturn");
+	Query = New Query();
+	Query.Text =
+		"SELECT ALLOWED
+		|	""SalesReturn"" AS BasedOn,
+		|	GoodsInTransitIncomingBalance.Store AS Store,
+		|	CAST(GoodsInTransitIncomingBalance.ReceiptBasis AS Document.SalesReturn) AS ReceiptBasis,
+		|	CAST(GoodsInTransitIncomingBalance.ReceiptBasis AS Document.SalesReturn).Partner AS Partner,
+		|	CAST(GoodsInTransitIncomingBalance.ReceiptBasis AS Document.SalesReturn).LegalName AS LegalName,
+		|	CAST(GoodsInTransitIncomingBalance.ReceiptBasis AS Document.SalesReturn).Agreement AS Agreement,
+		|	CAST(GoodsInTransitIncomingBalance.ReceiptBasis AS Document.SalesReturn).Company AS Company,
+		|	GoodsInTransitIncomingBalance.ItemKey,
+		|	CASE
+		|		WHEN GoodsInTransitIncomingBalance.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
+		|			THEN GoodsInTransitIncomingBalance.ItemKey.Unit
+		|		ELSE GoodsInTransitIncomingBalance.ItemKey.Item.Unit
+		|	END AS Unit,
+		|	GoodsInTransitIncomingBalance.QuantityBalance AS Quantity,
+		|	GoodsInTransitIncomingBalance.RowKey
+		|FROM
+		|	AccumulationRegister.GoodsInTransitIncoming.Balance(, ReceiptBasis IN (&ArrayOfBasises)) AS
+		|		GoodsInTransitIncomingBalance";
+	Query.SetParameter("ArrayOfBasises", ArrayOfBasisDocuments);
+	
+	QueryResult = Query.Execute();
+	Return QueryResult.Unload();
 EndFunction
 
 Function GetDocumentTable_Unboxing(ArrayOfBasisDocuments)

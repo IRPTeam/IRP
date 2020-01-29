@@ -118,16 +118,8 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 	DocumentsClient.ItemListItemOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
-Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	If Form.InputType = "Item" Then
-		OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-		
-		OpenSettings.ArrayOfFilters = New Array();
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
-																		
-		DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-	EndIf;
+Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export																		
+	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export

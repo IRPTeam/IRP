@@ -21,9 +21,9 @@ Procedure SetAvailability(Object, Form) Export
 				Break;
 			EndIf;
 		EndDo;
-		Form.Items.CashAccount.ReadOnly = BasedOnCashTransferOrder;
-		Form.Items.Company.ReadOnly 	= BasedOnCashTransferOrder;
-		Form.Items.Currency.ReadOnly 	= BasedOnCashTransferOrder;
+		Form.Items.CashAccount.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.CashAccount);
+		Form.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
+		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
 	EndIf;
 EndProcedure
 
@@ -298,17 +298,26 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FormParameters.Insert("OwnerRef", Object.Ref);
 	
+	ArrayOfChoisedDocuments = New Array();
+	For Each Row In Object.PaymentList Do
+		ArrayOfChoisedDocuments.Add(Row.PlaningTransactionBasis);
+	EndDo;
+	OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
+		
 	OpenSettings.ArrayOfFilters = New Array();
-	
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Posted", True, DataCompositionComparisonType.Equal));
+	
+	// CashAccount
 	If ValueIsFilled(Object.CashAccount) Then
 		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Sender", Object.CashAccount, DataCompositionComparisonType.Equal));
 	EndIf;
 	
+	// Company
 	If ValueIsFilled(Object.Company) Then
 		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Company", Object.Company, DataCompositionComparisonType.Equal));
 	EndIf;
-
+	
+	// Currency
 	If ValueIsFilled(Object.Currency) Then
 		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("SendCurrency", Object.Currency, DataCompositionComparisonType.Equal));
 	EndIf;

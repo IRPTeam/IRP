@@ -87,7 +87,7 @@ Function GetInfoForFillingCashPayment(Ref) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	CashTransferOrder.Receiver AS CashAccount,
+	|	CashTransferOrder.Sender AS CashAccount,
 	|	CashTransferOrder.Company,
 	|	CashTransferOrder.SendCurrency AS Currency,
 	|	CashTransferOrder.Ref
@@ -113,6 +113,28 @@ Function GetInfoForFillingBankReceipt(Ref) Export
 	|	CashTransferOrder.Company,
 	|	CashTransferOrder.ReceiveCurrency AS Currency,
 	|	CashTransferOrder.SendCurrency AS CurrencyExchange,
+	|	CashTransferOrder.Ref
+	|FROM
+	|	Document.CashTransferOrder AS CashTransferOrder
+	|WHERE
+	|	CashTransferOrder.Ref = &Ref";
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetInfoForFillingBankPayment(Ref) Export
+	Result = New Structure("Ref, Account, Company, Currency, CurrencyExchange");
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	CashTransferOrder.Sender AS Account,
+	|	CashTransferOrder.Company,
+	|	CashTransferOrder.SendCurrency AS Currency,
 	|	CashTransferOrder.Ref
 	|FROM
 	|	Document.CashTransferOrder AS CashTransferOrder

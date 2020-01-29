@@ -133,7 +133,7 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 	Return QueryResult.Unload();
 EndFunction
 
-Function GetDocumentTable_CashTransferOrder_QueryText()
+Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	Return
 	"SELECT ALLOWED
 	|	""CashTransferOrder"" AS BasedOn,
@@ -187,7 +187,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText()
 	|	PlaningCashTransactionsTurnovers.Account,
 	|	PlaningCashTransactionsTurnovers.Currency,
 	|	Doc.SendCurrency,
-	|	PlaningCashTransactionsTurnovers.AmountTurnover,
+	|	CashInTransitBalance.AmountBalance,
 	|	PlaningCashTransactionsTurnovers.BasisDocument,
 	|	NULL,
 	|	0
@@ -202,6 +202,14 @@ Function GetDocumentTable_CashTransferOrder_QueryText()
 	|	END) AS PlaningCashTransactionsTurnovers
 	|		INNER JOIN Document.CashTransferOrder AS Doc
 	|		ON PlaningCashTransactionsTurnovers.BasisDocument = Doc.Ref
+	|		LEFT JOIN AccumulationRegister.CashInTransit.Balance(&EndOfDate,
+	|			CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|		AND CASE
+	|			WHEN &UseArrayOfBasisDocuments
+	|				THEN BasisDocument IN (&ArrayOfBasisDocuments)
+	|			ELSE TRUE
+	|		END) AS CashInTransitBalance
+	|		ON PlaningCashTransactionsTurnovers.BasisDocument = CashInTransitBalance.BasisDocument
 	|WHERE
 	|	PlaningCashTransactionsTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
 	|	AND PlaningCashTransactionsTurnovers.AmountTurnover > 0

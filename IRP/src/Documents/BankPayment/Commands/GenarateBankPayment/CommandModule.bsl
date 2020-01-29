@@ -138,36 +138,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 EndFunction
 
 Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments)
-//	Query = New Query();
-//	Query.Text =
-//		"SELECT ALLOWED
-//		|	""CashTransferOrder"" AS BasedOn,
-//		|	CASE
-//		|		WHEN Doc.SendCurrency = Doc.ReceiveCurrency
-//		|			THEN VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder)
-//		|		ELSE VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange)
-//		|	END AS TransactionType,
-//		|	PlaningCashTransactionsTurnovers.Company AS Company,
-//		|	PlaningCashTransactionsTurnovers.Account AS Account,
-//		|	PlaningCashTransactionsTurnovers.Account.TransitAccount AS TransitAccount,
-//		|	PlaningCashTransactionsTurnovers.Currency AS Currency,
-//		|	PlaningCashTransactionsTurnovers.AmountTurnover AS Amount,
-//		|	PlaningCashTransactionsTurnovers.BasisDocument AS PlaningTransactionBasis
-//		|FROM
-//		|	AccumulationRegister.PlaningCashTransactions.Turnovers(,,,
-//		|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
-//		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-//		|	AND BasisDocument IN (&ArrayOfBasisDocuments)) AS PlaningCashTransactionsTurnovers
-//		|		INNER JOIN Document.CashTransferOrder AS Doc
-//		|		ON PlaningCashTransactionsTurnovers.BasisDocument = Doc.Ref
-//		|WHERE
-//		|	PlaningCashTransactionsTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Bank)
-//		|	AND PlaningCashTransactionsTurnovers.AmountTurnover > 0";
-//	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
-//	QueryResult = Query.Execute();
-//	
-//	Result = QueryResult.Unload();
-	
+
 	Result = DocBankPaymentServer.GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments);
 	
 	ErrorDocuments = New Array();

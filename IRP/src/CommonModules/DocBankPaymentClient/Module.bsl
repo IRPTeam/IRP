@@ -271,6 +271,9 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 		CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingBankPayment(CurrentData.PlaningTransactionBasis);
 			If Not ValueIsFilled(Object.Account) Then
 				Object.Account = CashTransferOrderInfo.Account;
+				If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
+					Object.TransitAccount = ServiceSystemServer.GetCompositeObjectAttribute(Object.Account, "TransitAccount");
+				EndIf;
 			EndIf;
 			
 			If Not ValueIsFilled(Object.Company) Then

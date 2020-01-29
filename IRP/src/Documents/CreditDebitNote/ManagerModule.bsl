@@ -47,7 +47,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.Ref = &Ref
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -73,7 +73,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Key
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BusinessUnit AS BusinessUnit,
@@ -87,7 +87,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Payable)
+		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Receivable)
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.BusinessUnit,
@@ -99,7 +99,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	VALUE(Catalog.ItemKeys.EmptyRef)
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -125,7 +125,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Key
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[4]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BusinessUnit AS BusinessUnit,
@@ -139,7 +139,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Receivable)
+		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Payable)
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.BusinessUnit,
@@ -151,7 +151,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	VALUE(Catalog.ItemKeys.EmptyRef)
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[5]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.LegalName AS LegalName,
@@ -169,7 +169,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[6]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.LegalName AS LegalName,

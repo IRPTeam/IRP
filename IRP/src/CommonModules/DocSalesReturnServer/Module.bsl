@@ -5,19 +5,28 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
 	If Form.Parameters.Key.IsEmpty() Then
 		Form.CurrentPartner = Object.Partner;
+		Form.CurrentAgreement = Object.Agreement;
+		Form.CurrentDate = Object.Date;
+		Form.StoreBeforeChange 		= Form.Store;
+		
+		DocumentsClientServer.FillDefinedData(Object, Form);
+		
+		SetGroupItemsList(Object, Form);
+		DocumentsServer.FillItemList(Object);
 		
 		ObjectData = DocumentsClientServer.GetStructureFillStores();
 		FillPropertyValues(ObjectData, Object);
 		DocumentsClientServer.FillStores(ObjectData, Form);
 		
-		DocumentsServer.FillItemList(Object);
-		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
+	DocumentsServer.ShowUserMessageOnCreateAtServer(Form);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	Form.CurrentPartner = CurrentObject.Partner;
+	Form.CurrentAgreement = CurrentObject.Agreement;
+	Form.CurrentDate = CurrentObject.Date;
 	DocumentsServer.FillItemList(Object);
 	
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
@@ -29,12 +38,15 @@ EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	Form.CurrentPartner = CurrentObject.Partner;
+	Form.CurrentAgreement = CurrentObject.Agreement;
+	Form.CurrentDate = CurrentObject.Date;
+		
+	DocumentsServer.FillItemList(Object);
 	
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
 	FillPropertyValues(ObjectData, CurrentObject);
 	DocumentsClientServer.FillStores(ObjectData, Form);
 	
-	DocumentsServer.FillItemList(Object);
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;
@@ -65,7 +77,7 @@ Function GetAgreementByPartner(Partner, Agreement) Export
 	If Not Partner.IsEmpty() Then
 		ArrayOfFilters = New Array();
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", Enums.AgreementTypes.Customer, ComparisonType.Equal));
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", Enums.AgreementTypes.Vendor, ComparisonType.Equal));
 		If ValueIsFilled(Agreement) Then
 			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", Agreement, ComparisonType.Equal));
 		EndIf;

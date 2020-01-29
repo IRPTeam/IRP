@@ -1,25 +1,18 @@
 #Region FormEvents
-
-&AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocSalesReturnServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-EndProcedure
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));
 	
 	DocSalesReturnServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
+		CurrentPartner = Object.Partner;
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-EndProcedure
-
-&AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	DocSalesReturnServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetVisibilityAvailability(Object, ThisObject);
+	// {TAXES}
+	Taxes_CreateFormControls();
+	Taxes_CreateTaxTree();
+	// {TAXES}
+	ThisObject.TaxAndOffersCalculated = True;
 EndProcedure
 
 &AtClient
@@ -28,13 +21,28 @@ Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
-Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
-	DocSalesReturnClient.AfterWrite(Object, ThisObject, WriteParameters);
+Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
+	
+	If Not Source = ThisObject Then
+		Return;
+	EndIf;
+	
+	DocSalesReturnClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
+
+	// {TAXES}
+	If EventName = "CalculateTax" Then
+		Taxes_CreateTaxTree();
+		TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
+	EndIf;
+	// {TAXES}
 EndProcedure
 
-&AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form) Export
-	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+&AtClient
+Procedure BeforeWrite(Cancel, WriteParameters)
+	Return;
 EndProcedure
 
 &AtServer
@@ -42,11 +50,102 @@ Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
+&AtClient
+Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
+	Return;
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
+	// {TAXES}
+	Taxes_CreateFormControls();
+	// {TAXES}
+	
+	DocSalesReturnServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocSalesReturnServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	Taxes_CreateFormControls();
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form) Export
+	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+EndProcedure
+
 #EndRegion
+
+#Region AddAttributes
+&AtServer
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+#EndRegion
+
+#Region FormItemsEvents
+
+&AtClient
+Procedure DateOnChange(Item, AddInfo = Undefined) Export
+	DocSalesReturnClient.DateOnChange(Object, ThisObject, Item);
+EndProcedure
 
 &AtClient
 Procedure StoreOnChange(Item)
 	DocSalesReturnClient.StoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PartnerOnChange(Item, AddInfo = Undefined) Export
+	DocSalesReturnClient.PartnerOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure LegalNameOnChange(Item, AddInfo = Undefined) Export
+	DocSalesReturnClient.LegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
+	DocSalesReturnClient.AgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
+	DocSalesReturnClient.CompanyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PriceIncludeTaxOnChange(Item)
+	DocSalesReturnClient.PriceIncludeTaxOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure InputTypeOnChange(Item)
+	DocSalesReturnClient.InputTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region ItemListEvents
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	DocSalesReturnClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -59,12 +158,17 @@ Procedure ItemListOnStartEdit(Item, NewRow, Clone)
 	If Clone Then
 		Item.CurrentData.Key = New UUID();
 	EndIf;
+	DocumentsClient.TableOnStartEdit(Object, ThisObject, "Object.ItemList", Item, NewRow, Clone);
 EndProcedure
 
 &AtClient
 Procedure ItemListOnActivateRow(Item)
 	DocSalesReturnClient.ItemListOnActivateRow(Object, ThisObject, Item);
 EndProcedure
+
+#EndRegion
+
+#Region ItemListItemsEvents
 
 &AtClient
 Procedure ItemListItemOnChange(Item, AddInfo = Undefined) Export
@@ -73,131 +177,32 @@ EndProcedure
 
 &AtClient
 Procedure ItemListItemKeyOnChange(Item, AddInfo = Undefined) Export
-	CurrentRow = Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-	
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object,
-		CurrentRow,
-		CalculationSettings);
+	DocSalesReturnClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure DateOnChange(Item, AddInfo = Undefined) Export
-	DocSalesReturnClient.DateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#Region ItemAgreement
-
-&AtClient
-Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
-	DocSalesReturnClient.AgreementOnChange(Object, ThisObject, Item);
+Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
+	DocSalesReturnClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
-	DocSalesReturnClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
+	DocSalesReturnClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
-	DocSalesReturnClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemLegalName
-
-&AtClient
-Procedure LegalNameOnChange(Item, AddInfo = Undefined) Export
-	DocSalesReturnClient.LegalNameOnChange(Object, ThisObject, Item);
+Procedure ItemListStoreOnChange(Item)
+	DocSalesReturnClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocSalesReturnClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
+	DocSalesReturnClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
-	DocSalesReturnClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemCompany
-
-&AtClient
-Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
-	DocSalesReturnClient.CompanyOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
-	DocSalesReturnClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
-	DocSalesReturnClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-
-#Region ItemPartner
-
-&AtClient
-Procedure PartnerOnChange(Item, AddInfo = Undefined) Export
-	DocSalesReturnClient.PartnerOnChange(Object, ThisObject, Item);
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocSalesReturnClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
-	DocSalesReturnClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region DescriptionEvents
-
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	DocSalesReturnClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-
-#Region GroupTitleDecorations
-
-&AtClient
-Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocSalesReturnClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleCollapsedLalelClick(Item)
-	DocSalesReturnClient.DecorationGroupTitleCollapsedLalelClick(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocSalesReturnClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
-	DocSalesReturnClient.DecorationGroupTitleUncollapsedLalelClick(Object, ThisObject, Item);
+Procedure ItemListPriceOnChange(Item, AddInfo = Undefined) Export
+	DocSalesReturnClient.ItemListPriceOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -212,11 +217,299 @@ EndProcedure
 
 #EndRegion
 
+#Region ItemPartner
+
+&AtClient
+Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocSalesReturnClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
+	DocSalesReturnClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ItemLegalName
+
+&AtClient
+Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocSalesReturnClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocSalesReturnClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ItemAgreement
+
+&AtClient
+Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocSalesReturnClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
+	DocSalesReturnClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ItemCompany
+
+&AtClient
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocSalesReturnClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
+	DocSalesReturnClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region DescriptionEvents
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region SpecialOffers
+
+#Region Offers_for_document
+
+&AtClient
+Procedure SetSpecialOffers(Command)
+	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object,
+		ThisObject,
+		"SpecialOffersEditFinish_ForDocument");
+EndProcedure
+
+&AtClient
+Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Export
+	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
+	
+EndProcedure
+
+#EndRegion
+
+#Region Offers_for_row
+
+&AtClient
+Procedure SetSpecialOffersAtRow(Command)
+	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object,
+		Items.ItemList.CurrentData,
+		ThisObject,
+		"SpecialOffersEditFinish_ForRow");
+EndProcedure
+
+&AtClient
+Procedure SpecialOffersEditFinish_ForRow(Result, AdditionalParameters) Export
+	OffersClient.SpecialOffersEditFinish_ForRow(Result, Object, ThisObject, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region GroupTitleDecorations
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedPictureClick(Item)
+	DocumentsClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedLalelClick(Item)
+	DocumentsClient.DecorationGroupTitleCollapsedLalelClick(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
+	DocumentsClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
+	DocumentsClient.DecorationGroupTitleUncollapsedLalelClick(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region Taxes
+&AtClient
+Procedure TaxValueOnChange(Item) Export
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	PutToTaxTable_(Item.Name, CurrentData.Key, CurrentData[Item.Name]);
+	Settings = New Structure();
+	Settings.Insert("Rows", New Array());
+	Settings.Insert("CalculateSettings");
+	Settings.CalculateSettings = New Structure("CalculateTax");
+	Settings.Rows.Add(CurrentData);
+	DocumentsClient.ItemListCalculateRowsAmounts(Object, ThisObject, Settings);
+EndProcedure
+
+&AtServer
+Procedure PutToTaxTable_(ItemName, Key, Value) Export
+	TaxesServer.PutToTaxTableByColumnName(ThisObject, Key, ItemName, Value);
+EndProcedure
+
+&AtClient
+Procedure TaxTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure TaxTreeOnChange(Item)
+	CurrentData = Items.TaxTree.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	Filter = TaxesClient.ChangeTaxAmount(Object, ThisObject, CurrentData, Object.ItemList);
+	Taxes_CreateTaxTree();
+	TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
+	ThisObject.Items.TaxTree.CurrentRow = TaxesClient.FindRowInTree(Filter, ThisObject.TaxTree);
+EndProcedure
+
+&AtClient
+Procedure TaxTreeBeforeDeleteRow(Item, Cancel)
+	Cancel = True;
+EndProcedure
+
+&AtServer
+Procedure Taxes_CreateFormControls() Export
+	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
+	TaxesParameters.Date = Object.Date;
+	TaxesParameters.Company = Object.Company;
+	TaxesParameters.PathToTable = "Object.ItemList";
+	TaxesParameters.ItemParent = ThisObject.Items.ItemList;
+	TaxesParameters.ColumnOffset = ThisObject.Items.ItemListOffersAmount;
+	TaxesParameters.ItemListName = "ItemList";
+	TaxesParameters.TaxListName = "TaxList";
+	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
+	TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
+EndProcedure
+
+&AtServer
+Procedure Taxes_CreateTaxTree() Export
+	TaxesTreeParameters = TaxesServer.GetCreateTaxTreeParameters();
+	TaxesTreeParameters.MetadataMainList = Metadata.Documents.SalesReturn.TabularSections.ItemList;
+	TaxesTreeParameters.MetadataTaxList = Metadata.Documents.SalesReturn.TabularSections.TaxList;
+	TaxesTreeParameters.ObjectMainList = Object.ItemList;
+	TaxesTreeParameters.ObjectTaxList = Object.TaxList;
+	TaxesTreeParameters.MainListColumns = "Key, Item, ItemKey";
+	TaxesTreeParameters.Level1Columns = "Tax";
+	TaxesTreeParameters.Level2Columns = "Key, Item, ItemKey, TaxRate";
+	TaxesTreeParameters.Level3Columns = "Key, Analytics";
+	TaxesServer.CreateTaxTree(Object, ThisObject, TaxesTreeParameters);
+EndProcedure
+
+#EndRegion
+
 #Region Commands
+
+&AtClient
+Procedure OpenPickupItems(Command)
+	DocSalesReturnClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command)
 	DocSalesReturnClient.SearchByBarcode(Command, Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
+	CurrentData = ThisObject.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	TaxesClient.CalculateReverseTaxOnChangeTotalAmount(Object, ThisObject, CurrentData);
+EndProcedure
+
+&AtClient
+Procedure SelectSalesReturnOrders(Command)
+	FilterValues = New Structure("Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
+	FillPropertyValues(FilterValues, Object);
+	
+	ExistingRows = New Array;
+	For Each Row In Object.ItemList Do
+		RowStructure = New Structure("Key, Unit, Quantity");
+		FillPropertyValues(RowStructure, Row);
+		ExistingRows.Add(RowStructure);
+	EndDo;
+	
+	FormParameters = New Structure("FilterValues, ExistingRows, Ref", FilterValues, ExistingRows, Object.Ref);
+	OpenForm("Document.SalesReturn.Form.SelectSalesReturnOrdersForm"
+		, FormParameters, , , ,
+		, New NotifyDescription("SelectSalesReturnOrdersContinue", ThisObject));
+EndProcedure
+
+&AtClient
+Procedure SelectSalesReturnOrdersContinue(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	SelectSalesReturnOrdersContinueAtServer(Result, AdditionalParameters);
+	
+	DocSalesReturnClient.ItemListOnChange(Object, ThisObject, Items.ItemList);
+EndProcedure
+
+&AtServer
+Procedure SelectSalesReturnOrdersContinueAtServer(Result, AdditionalParameters)
+	
+	Settings = New Structure();
+	Settings.Insert("Rows", New Array());
+	Settings.Insert("CalculateSettings", New Structure());
+	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
+	
+	
+	For Each ResultRow In Result Do
+		RowsByKey = Object.ItemList.FindRows(New Structure("Key", ResultRow.Key));
+		If RowsByKey.Count() Then
+			RowByKey = RowsByKey[0];
+			ItemKeyUnit = CatItemsServer.GetItemKeyUnit(ResultRow.ItemKey);
+			UnitFactorFrom = Catalogs.Units.GetUnitFactor(RowByKey.Unit, ItemKeyUnit);
+			UnitFactorTo = Catalogs.Units.GetUnitFactor(ResultRow.Unit, ItemKeyUnit);
+			FillPropertyValues(RowByKey, ResultRow, , "Quantity");
+			RowByKey.Quantity = ?(UnitFactorTo = 0,
+					0,
+					RowByKey.Quantity * UnitFactorFrom / UnitFactorTo) + ResultRow.Quantity;
+			RowByKey.PriceType = ResultRow.PriceType;
+			RowByKey.Price = ResultRow.Price;
+			Settings.Rows.Add(RowByKey);
+		Else
+			NewRow = Object.ItemList.Add();
+			FillPropertyValues(NewRow, ResultRow);
+			NewRow.PriceType = ResultRow.PriceType;
+			NewRow.Price = ResultRow.Price;
+			Settings.Rows.Add(NewRow);
+		EndIf;
+	EndDo;
+	
+	TaxInfo = Undefined;
+	SavedData = TaxesClientServer.GetSavedData(ThisObject, TaxesServer.GetAttributeNames().CacheName);
+	If SavedData.Property("ArrayOfColumnsInfo") Then
+		TaxInfo = SavedData.ArrayOfColumnsInfo;
+	EndIf;
+	CalculationStringsClientServer.CalculateItemsRows(Object,
+		ThisObject,
+		Settings.Rows,
+		Settings.CalculateSettings,
+		TaxInfo);
 EndProcedure
 
 &AtClient

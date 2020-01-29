@@ -1107,7 +1107,6 @@
           <items xsi:type="form:Button">
             <name>SelectSalesReturnOrders</name>
             <id>305</id>
-            <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
@@ -1853,7 +1852,6 @@
             <common>true</common>
           </userVisible>
           <horizontalAlign>Left</horizontalAlign>
-          <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
           <event>OnChange</event>
@@ -4227,6 +4225,7 @@
         <id>2</id>
         <valueType>
           <types>CatalogRef.Items</types>
+          <types>CatalogRef.Boxes</types>
         </valueType>
         <view>
           <common>true</common>

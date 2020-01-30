@@ -77,7 +77,7 @@ Function GetAgreementByPartner(Partner, Agreement) Export
 	If Not Partner.IsEmpty() Then
 		ArrayOfFilters = New Array();
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", Enums.AgreementTypes.Vendor, ComparisonType.Equal));
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", Enums.AgreementTypes.Customer, ComparisonType.Equal));
 		If ValueIsFilled(Agreement) Then
 			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", Agreement, ComparisonType.Equal));
 		EndIf;

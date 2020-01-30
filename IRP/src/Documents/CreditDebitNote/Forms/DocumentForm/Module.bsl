@@ -28,6 +28,13 @@ Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocCreditDebitNoteClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "SetVisibility" Then
+		SetVisibility(Object, ThisObject);
+	EndIf;
+EndProcedure
+
 &AtServer
 Procedure SetConditionalAppearence() Export
 	Return;

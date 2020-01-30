@@ -142,6 +142,7 @@ Procedure TransactionsBeforeClearing(Answer, AdditionalParameters) Export
 			Form.Object.Company = Form.CurrentCompany;
 			Form.Object.OperationType = Form.CurrentOperationType;
 			Form.Object.LegalName = Form.CurrentLegalName;
+			Notify("SetVisibility", Undefined, Form);
 		EndIf;
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Form.Object, Form);

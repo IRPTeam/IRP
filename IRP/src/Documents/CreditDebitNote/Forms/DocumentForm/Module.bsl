@@ -159,6 +159,15 @@ EndProcedure
 
 #EndRegion
 
+#Region ItemPartner
+
+&AtClient
+Procedure PartnerOnChange(Item)
+	DocCreditDebitNoteClient.PartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #Region ItemLegalName
 
 &AtClient
@@ -416,11 +425,6 @@ EndProcedure
 &AtServer
 Procedure Currencies_CalculateRate(Amount, MovementType, RowKey) Export
 	CurrenciesServer.CalculateRate(Object, Amount, MovementType, RowKey);
-EndProcedure
-
-&AtClient
-Procedure PartnerOnChange(Item)
-	DocCreditDebitNoteClient.PartnerOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

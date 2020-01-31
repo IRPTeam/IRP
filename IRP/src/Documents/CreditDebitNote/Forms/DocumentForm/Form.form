@@ -2613,6 +2613,23 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>CurrentPartner</name>
+    <title>
+      <key>en</key>
+      <value>Current partner</value>
+    </title>
+    <id>12</id>
+    <valueType>
+      <types>CatalogRef.Partners</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>FillTransactions</name>
     <title>

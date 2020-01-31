@@ -13,10 +13,7 @@ Procedure BeforeWrite(Object, Form, Cancel, WriteParameters) Export
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	
-	Form.InputType = "Item";
-	ChangeInputType(Object, Form);
-	
+		
 	Settings = New Structure;
 	Settings.Insert("UpdateInfoString");
 	If AddInfo <> Undefined And AddInfo.Property("RemovedActions") Then
@@ -98,18 +95,6 @@ Procedure ItemListOnActivateRow(Object, Form, Item) Export
 	
 EndProcedure
 
-Procedure InputTypeOnChange(Object, Form, Item) Export
-	ChangeInputType(Object, Form);
-EndProcedure
-
-Procedure ChangeInputType(Object, Form) Export
-	If Form.InputType = "Item" Then
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Items");
-	Else
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Boxes");
-	EndIf;
-EndProcedure
-
 #EndRegion
 
 #Region ItemListItemsEvents
@@ -123,11 +108,9 @@ Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProces
 EndProcedure
 
 Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	If Form.InputType = "Item" Then
-		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-	EndIf;
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
 Function ItemListItemSettings() Export
@@ -214,7 +197,7 @@ Function PartnerSettings() Export
 	Settings.Actions = Actions;	
 	Settings.ObjectAttributes 	= "Company, Currency, PriceIncludeTax, Agreement, LegalName";
 	Settings.FormAttributes		= "CurrentPriceType";
-	Settings.AgreementType = PredefinedValue("Enum.AgreementTypes.Vendor");
+	Settings.AgreementType = PredefinedValue("Enum.AgreementTypes.Customer");
 	Return Settings;
 EndFunction
 
@@ -224,11 +207,11 @@ Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing)
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
 																		True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Vendor"		, 
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Customer"		, 
 																		True, DataCompositionComparisonType.Equal));
 	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("Filter", New Structure("Vendor" , True));
-	OpenSettings.FillingData = New Structure("Vendor", True);
+	OpenSettings.FormParameters.Insert("Filter", New Structure("Customer" , True));
+	OpenSettings.FillingData = New Structure("Customer", True);
 	
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -236,7 +219,7 @@ EndProcedure
 Procedure PartnerTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Vendor"		, True, ComparisonType.Equal));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Customer"		, True, ComparisonType.Equal));
 	AdditionalParameters = New Structure();				
 	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing,
 				ArrayOfFilters, AdditionalParameters);
@@ -273,7 +256,7 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 																	True, 
 																	DataCompositionComparisonType.NotEqual));
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	PredefinedValue("Enum.AgreementTypes.Vendor"), 
+																	PredefinedValue("Enum.AgreementTypes.Customer"), 
 																	DataCompositionComparisonType.Equal));
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", 
 																	PredefinedValue("Enum.AgreementKinds.Standard"), 
@@ -288,7 +271,7 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	OpenSettings.FillingData.Insert("Partner", Object.Partner);
 	OpenSettings.FillingData.Insert("LegalName", Object.LegalName);
 	OpenSettings.FillingData.Insert("Company", Object.Company);
-	OpenSettings.FillingData.Insert("Type", PredefinedValue("Enum.AgreementTypes.Vendor"));
+	OpenSettings.FillingData.Insert("Type", PredefinedValue("Enum.AgreementTypes.Customer"));
 	
 	DocumentsClient.AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -297,7 +280,7 @@ Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Expo
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	PredefinedValue("Enum.AgreementTypes.Vendor"),
+																	PredefinedValue("Enum.AgreementTypes.Customer"),
 																	ComparisonType.Equal));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", 
 																	PredefinedValue("Enum.AgreementKinds.Standard"), 
@@ -457,7 +440,7 @@ Function DateSettings() Export
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, Agreement, LegalName";
 	Settings.FormAttributes = "CurrentPriceType";
-	Settings.AgreementType = PredefinedValue("Enum.AgreementTypes.Vendor");
+	Settings.AgreementType = PredefinedValue("Enum.AgreementTypes.Customer");
 	
 	Return Settings;
 EndFunction

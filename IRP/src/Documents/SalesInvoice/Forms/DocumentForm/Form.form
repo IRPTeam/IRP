@@ -2249,7 +2249,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>ItemList</value>
+        <value>Item list</value>
       </title>
       <extendedTooltip>
         <name>GroupItemListExtendedTooltip</name>

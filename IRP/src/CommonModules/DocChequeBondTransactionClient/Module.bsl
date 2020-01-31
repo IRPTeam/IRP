@@ -102,7 +102,7 @@ Procedure CurrencyOnChange(Object, Form, Item) Export
 	
 	QuestionToUserNotify = New NotifyDescription("CurrencyOnChangeEnd", ThisObject, Parameters);
 	
-	ShowQueryBox(QuestionToUserNotify, StrTemplate(R()["QuestionToUser_003"], Item.Title), QuestionDialogMode.YesNo);
+	ShowQueryBox(QuestionToUserNotify, StrTemplate(R().QuestionToUser_003, Item.Title), QuestionDialogMode.YesNo);
 EndProcedure
 
 Procedure CurrencyOnChangeEnd(Result, Parameters) Export
@@ -138,7 +138,7 @@ Procedure CompanyOnChange(Object, Form, Item) Export
 		Parameters.Insert("Object", Object);
 		
 		QuestionToUserNotify = New NotifyDescription("CompanyOnChangeEnd", ThisObject, Parameters);
-		ShowQueryBox(QuestionToUserNotify,StrTemplate(R()["QuestionToUser_003"], Item.Title), QuestionDialogMode.YesNo);
+		ShowQueryBox(QuestionToUserNotify,StrTemplate(R().QuestionToUser_003, Item.Title), QuestionDialogMode.YesNo);
 		Return;
 	EndIf;
 	Form.CurrentCompany = Object.Company;

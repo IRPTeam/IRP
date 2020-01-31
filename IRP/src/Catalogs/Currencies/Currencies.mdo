@@ -16,6 +16,12 @@
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Catalog.Currencies.StandardAttribute.Code</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Code</name>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+  </standardAttributes>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>

@@ -158,6 +158,7 @@ Procedure AccountOnChange(Object, Form, Item = Undefined) Export
 		Return;
 	EndIf;
 	
+	Form.CurrentAccount = Object.Account;
 	SetTransitAccount(Object, Form);
 
 	AccountCurrency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");

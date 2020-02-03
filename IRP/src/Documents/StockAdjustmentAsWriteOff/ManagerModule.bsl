@@ -34,23 +34,23 @@ EndFunction
 Function GetQueryTextInventoryWriteOffItemList()
 	Return
 		"SELECT
-		|	InventoryWriteOffItemList.Ref.Company AS Company,
-		|	InventoryWriteOffItemList.Ref.Store AS Store,
-		|	InventoryWriteOffItemList.ItemKey AS ItemKey,
-		|	InventoryWriteOffItemList.Quantity AS Quantity,
-		|	InventoryWriteOffItemList.BusinessUnit AS BusinessUnit,
-		|	InventoryWriteOffItemList.ExpenseType AS ExpenseType,
-		|	InventoryWriteOffItemList.Ref.Date AS Period,
+		|	StockAdjustmentAsWriteOffItemList.Ref.Company AS Company,
+		|	StockAdjustmentAsWriteOffItemList.Ref.Store AS Store,
+		|	StockAdjustmentAsWriteOffItemList.ItemKey AS ItemKey,
+		|	StockAdjustmentAsWriteOffItemList.Quantity AS Quantity,
+		|	StockAdjustmentAsWriteOffItemList.BusinessUnit AS BusinessUnit,
+		|	StockAdjustmentAsWriteOffItemList.ExpenseType AS ExpenseType,
+		|	StockAdjustmentAsWriteOffItemList.Ref.Date AS Period,
 		|	0 AS BasisQuantity,
-		|	InventoryWriteOffItemList.Unit,
-		|	InventoryWriteOffItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	InventoryWriteOffItemList.ItemKey.Unit AS ItemKeyUnit,
+		|	StockAdjustmentAsWriteOffItemList.Unit,
+		|	StockAdjustmentAsWriteOffItemList.ItemKey.Item.Unit AS ItemUnit,
+		|	StockAdjustmentAsWriteOffItemList.ItemKey.Unit AS ItemKeyUnit,
 		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	InventoryWriteOffItemList.ItemKey.Item AS Item
+		|	StockAdjustmentAsWriteOffItemList.ItemKey.Item AS Item
 		|FROM
-		|	Document.InventoryWriteOff.ItemList AS InventoryWriteOffItemList
+		|	Document.StockAdjustmentAsWriteOff.ItemList AS StockAdjustmentAsWriteOffItemList
 		|WHERE
-		|	InventoryWriteOffItemList.Ref = &Ref";
+		|	StockAdjustmentAsWriteOffItemList.Ref = &Ref";
 EndFunction
 
 Function GetQueryTextQueryTable()

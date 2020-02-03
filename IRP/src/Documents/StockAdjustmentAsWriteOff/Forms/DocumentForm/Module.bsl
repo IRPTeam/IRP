@@ -2,22 +2,22 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocInventoryWriteOffServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	DocStockAdjustmentAsWriteOffServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
-	DocInventoryWriteOffServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	DocStockAdjustmentAsWriteOffServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	DocInventoryWriteOffClient.OnOpen(Object, ThisObject, Cancel);
+	DocStockAdjustmentAsWriteOffClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	DocInventoryWriteOffServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	DocStockAdjustmentAsWriteOffServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -29,12 +29,12 @@ EndProcedure
 
 &AtClient
 Procedure InputTypeOnChange(Item)
-	DocInventoryWriteOffClient.InputTypeOnChange(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.InputTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocInventoryWriteOffClient.ItemListOnChange(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.ItemListOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -46,7 +46,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListItemOnChange(Item)
-	DocInventoryWriteOffClient.ItemListItemOnChange(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.ItemListItemOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -65,46 +65,46 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocInventoryWriteOffClient.OpenPickupItems(Object, ThisObject, Command);
+	DocStockAdjustmentAsWriteOffClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
 &AtClient
 Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
-	DocInventoryWriteOffClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocStockAdjustmentAsWriteOffClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
-	DocInventoryWriteOffClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocStockAdjustmentAsWriteOffClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #Region ItemCompany
 
 &AtClient
 Procedure CompanyOnChange(Item)
-	DocInventoryWriteOffClient.CompanyOnChange(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
-	DocInventoryWriteOffClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocStockAdjustmentAsWriteOffClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
-	DocInventoryWriteOffClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocStockAdjustmentAsWriteOffClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
 
 &AtClient
 Procedure StoreOnChange(Item)
-	DocInventoryWriteOffClient.StoreOnChange(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.StoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
-	DocInventoryWriteOffClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+	DocStockAdjustmentAsWriteOffClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 
@@ -112,28 +112,28 @@ EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocInventoryWriteOffClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedLalelClick(Item)
-	DocInventoryWriteOffClient.DecorationGroupTitleCollapsedLalelClick(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.DecorationGroupTitleCollapsedLalelClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocInventoryWriteOffClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
-	DocInventoryWriteOffClient.DecorationGroupTitleUncollapsedLalelClick(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.DecorationGroupTitleUncollapsedLalelClick(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
 
 &AtClient
 Procedure SearchByBarcode(Command)
-	DocInventoryWriteOffClient.SearchByBarcode(Command, Object, ThisObject);
+	DocStockAdjustmentAsWriteOffClient.SearchByBarcode(Command, Object, ThisObject);
 EndProcedure
 

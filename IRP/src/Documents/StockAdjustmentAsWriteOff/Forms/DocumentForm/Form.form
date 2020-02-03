@@ -1677,7 +1677,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>DocumentObject.InventoryWriteOff</types>
+      <types>DocumentObject.StockAdjustmentAsWriteOff</types>
     </valueType>
     <view>
       <common>true</common>

@@ -293,8 +293,8 @@
   <commonModules>CommonModule.UniqueIDReuse</commonModules>
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
   <commonModules>CommonModule.ExtentionServer</commonModules>
-  <commonModules>CommonModule.DocInventoryWriteOffServer</commonModules>
-  <commonModules>CommonModule.DocInventoryWriteOffClient</commonModules>
+  <commonModules>CommonModule.DocStockAdjustmentAsWriteOffServer</commonModules>
+  <commonModules>CommonModule.DocStockAdjustmentAsWriteOffClient</commonModules>
   <commonModules>CommonModule.DocStockAdjustmentAsSurplusClient</commonModules>
   <commonModules>CommonModule.DocStockAdjustmentAsSurplusServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
@@ -496,7 +496,7 @@
   <documents>Document.Unboxing</documents>
   <documents>Document.Unbundling</documents>
   <documents>Document.ZReport</documents>
-  <documents>Document.InventoryWriteOff</documents>
+  <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.StockAdjustmentAsSurplus</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>

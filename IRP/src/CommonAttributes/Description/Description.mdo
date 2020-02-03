@@ -173,7 +173,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.InventoryWriteOff</metadata>
+    <metadata>Document.StockAdjustmentAsWriteOff</metadata>
     <use>Use</use>
   </content>
   <content>

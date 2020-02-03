@@ -14,7 +14,7 @@
   <content>Document.ShipmentConfirmation</content>
   <content>Document.GoodsReceipt</content>
   <content>Document.PhysicalCountByLocation</content>
-  <content>Document.InventoryWriteOff</content>
+  <content>Document.StockAdjustmentAsWriteOff</content>
   <content>Document.StockAdjustmentAsSurplus</content>
   <subsystems>ComposedItems</subsystems>
   <subsystems>Items</subsystems>

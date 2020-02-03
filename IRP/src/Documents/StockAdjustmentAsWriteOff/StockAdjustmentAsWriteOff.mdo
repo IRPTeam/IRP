@@ -7,13 +7,13 @@
     <listType typeId="e5f3b4fa-38ce-4d35-a90b-a876a281d59e" valueTypeId="9e5f9772-3f3b-4f80-8bbf-ebaf0db1a54f"/>
     <managerType typeId="d920b560-d67a-4be9-bc09-bfc14a73463a" valueTypeId="45f664cd-d6ee-4c0e-8cf0-c56e11b75c7a"/>
   </producedTypes>
-  <name>InventoryWriteOff</name>
+  <name>StockAdjustmentAsWriteOff</name>
   <synonym>
     <key>en</key>
-    <value>Inventory write-off</value>
+    <value>Stock adjustment as write-off</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.InventoryWriteOff.StandardAttribute.Number</inputByString>
+  <inputByString>Document.StockAdjustmentAsWriteOff.StandardAttribute.Number</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -22,9 +22,9 @@
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.InventoryWriteOff.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.InventoryWriteOff.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.InventoryWriteOff.Form.ChoiceForm</defaultChoiceForm>
+  <defaultObjectForm>Document.StockAdjustmentAsWriteOff.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.StockAdjustmentAsWriteOff.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.StockAdjustmentAsWriteOff.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>

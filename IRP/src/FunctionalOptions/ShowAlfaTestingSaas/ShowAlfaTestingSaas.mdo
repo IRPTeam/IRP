@@ -140,4 +140,5 @@
   <content>CommonCommand.OpenVendorAgreements</content>
   <content>InformationRegister.PartnerSegments</content>
   <content>Document.InventoryWriteOff</content>
+  <content>Document.StockAdjustmentAsSurplus</content>
 </mdclass:FunctionalOption>

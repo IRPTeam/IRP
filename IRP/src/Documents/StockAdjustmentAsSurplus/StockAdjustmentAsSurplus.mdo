@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5fcc8fb9-aa7d-4870-a0fa-af5136886963">
+  <producedTypes>
+    <objectType typeId="65ec8627-97f8-40dd-959c-704a1b904a01" valueTypeId="cfc2412e-0ced-4e1e-8b65-17949d667718"/>
+    <refType typeId="7f30b2bb-c43f-4310-9ca2-db4c0fb09f5b" valueTypeId="4699cad2-e21c-4923-b33b-74e92e3c4ce6"/>
+    <selectionType typeId="41ee0eb5-2eca-4936-bb5c-208dd2bb9902" valueTypeId="94032dc6-d629-48c2-abea-969ea1554695"/>
+    <listType typeId="ea336510-32e4-438f-a65e-52899e07248b" valueTypeId="cb416da1-1959-472f-b70f-967de4c33db4"/>
+    <managerType typeId="2d4912f5-7ef4-4a5e-aacf-4497b0f6ddc7" valueTypeId="4af6f70b-f8be-482a-8b0e-3eaf2b529a77"/>
+  </producedTypes>
+  <name>StockAdjustmentAsSurplus</name>
+  <synonym>
+    <key>en</key>
+    <value>Stock adjustment as surplus</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.StockAdjustmentAsSurplus.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.StockAdjustmentAsSurplus.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.StockAdjustmentAsSurplus.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.StockAdjustmentAsSurplus.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
+  <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.RevenuesTurnovers</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="28b47246-0308-42f6-8bb7-80b83f84a7ec">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5b799080-8aeb-4ddf-a493-e187e470a3dd">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="e6d376a5-fb4e-4c35-bd59-e86bdb3e0074">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="889fa7f0-d60b-478a-bdac-11ee180d95c6">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="3d46ecbd-c6e0-4c42-9981-ff9c876e9c5b">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="5501341b-0832-4c9b-bf38-9af1afe37b29">
+    <producedTypes>
+      <objectType typeId="19af985c-f741-4c68-bf22-4a3e26c01e2a" valueTypeId="d90256a7-23b8-482a-82a5-f438f67aa2bf"/>
+      <rowType typeId="d6871627-0324-4c9f-87f6-8566cd74c2b3" valueTypeId="2f6d86dd-d719-4d40-a9eb-ee1b128b3863"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="ba101878-8d5c-4568-8c05-8ebd3015c069">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8e97cbc9-8973-46e4-94c0-f2ef0e05bf61">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="641b1fd8-2294-48cf-85aa-78229dc410ee">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ef977ea8-1fbc-4a1b-8ce5-f7925f1352e3">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="775a953a-d0c7-4d0a-bfb6-4aaaf7e1b2de">
+      <name>BusinessUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Business unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f0a16dde-c0ab-4ec1-9c19-71b2e412d188">
+      <name>RevenueType</name>
+      <synonym>
+        <key>en</key>
+        <value>Revenue type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

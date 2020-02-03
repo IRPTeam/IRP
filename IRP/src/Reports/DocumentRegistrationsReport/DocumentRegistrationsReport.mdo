@@ -74,6 +74,7 @@
       <types>DocumentRef.CashExpense</types>
       <types>DocumentRef.CashRevenue</types>
       <types>DocumentRef.InventoryWriteOff</types>
+      <types>DocumentRef.StockAdjustmentAsSurplus</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

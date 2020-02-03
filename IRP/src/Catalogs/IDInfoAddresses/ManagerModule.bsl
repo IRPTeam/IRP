@@ -19,7 +19,8 @@ Function FindCatalogItem(Deep, Parent, Level, Value, Country)
 		|	AND IDInfoAddresses.Country = &Country
 		|	AND IDInfoAddresses.Parent = &Parent
 		|	AND IDInfoAddresses.Level = &Level
-		|	AND IDInfoAddresses.Description = &Value";
+		|	AND IDInfoAddresses.Description = &Value
+		|	AND NOT IDInfoAddresses.DeletionMark";
 	
 	Query.Text = StrTemplate(Query.Text, ConditionString);
 	Query.SetParameter("Country", Country);
@@ -82,7 +83,7 @@ Function WriteDataToCatalog(Values, Country, IDInfoType) Export
 		CommitTransaction();
 	Except
 		RollbackTransaction();
-		Raise ErrorInfo();
+		Raise ErrorDescription();
 	EndTry;
 		
 	Return CatalogItem.Ref;

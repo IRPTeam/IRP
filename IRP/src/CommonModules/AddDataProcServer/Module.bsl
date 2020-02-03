@@ -54,9 +54,9 @@ Function CallMetodAddDataProc(Info, AddInfo = Undefined) Export
 	If UseInternalDataProcessor(Info.ExternalDataProcName) Then
 		Result = DataProcessors[Info.ExternalDataProcName].Create();
 		If AddInfo <> Undefined And AddInfo.Property("ClientCall") And AddInfo.ClientCall Then
-			Result = Undefined;
+			Return Undefined;
 		Else
-			Result = Result;
+			Return Result;
 		EndIf;
 	Else
 		ExtDataProc = Undefined;

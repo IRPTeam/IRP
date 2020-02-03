@@ -11,7 +11,7 @@ Procedure PreparePostingDataTables(Parameters, AddInfo = Undefined) Export
 			EndIf;
 		EndIf;
 	EndDo;
-	If ArrayOfPostingInfo.Count() Then
+	If ArrayOfPostingInfo.Count() And Parameters.Object.Metadata().TabularSections.Find("Currencies") <> Undefined Then
 		TempTableManager = New TempTablesManager();
 		Query = New Query();
 		Query.TempTablesManager = TempTableManager;

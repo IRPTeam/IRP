@@ -44,8 +44,6 @@ Procedure ItemListOnStartEdit(Item, NewRow, Clone)
 	EndIf;
 EndProcedure
 
-//*****************************************************************************
-
 &AtClient
 Procedure ItemListItemOnChange(Item)
 	DocInventoryWriteOffClient.ItemListItemOnChange(Object, ThisObject, Item);

@@ -15,7 +15,6 @@
     <value>ID Info</value>
   </synonym>
   <comment></comment>
-  <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="f704a578-563f-49d8-85f9-8232e7b2f17e">
     <name>Value</name>

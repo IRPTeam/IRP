@@ -15,7 +15,6 @@
     <value>Add properties</value>
   </synonym>
   <comment></comment>
-  <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="1eb0cbdc-acff-4879-b2c7-5c801d7b2483">
     <name>Value</name>

@@ -73,6 +73,7 @@
       <types>DocumentRef.ChequeBondTransaction</types>
       <types>DocumentRef.CashExpense</types>
       <types>DocumentRef.CashRevenue</types>
+      <types>DocumentRef.InventoryWriteOff</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

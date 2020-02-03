@@ -293,6 +293,8 @@
   <commonModules>CommonModule.UniqueIDReuse</commonModules>
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
   <commonModules>CommonModule.ExtentionServer</commonModules>
+  <commonModules>CommonModule.DocInventoryWriteOffServer</commonModules>
+  <commonModules>CommonModule.DocInventoryWriteOffClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -492,6 +494,7 @@
   <documents>Document.Unboxing</documents>
   <documents>Document.Unbundling</documents>
   <documents>Document.ZReport</documents>
+  <documents>Document.InventoryWriteOff</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AgreementTypes</enums>

@@ -139,4 +139,5 @@
   <content>CommonCommand.OpenCustomerAgreements</content>
   <content>CommonCommand.OpenVendorAgreements</content>
   <content>InformationRegister.PartnerSegments</content>
+  <content>Document.InventoryWriteOff</content>
 </mdclass:FunctionalOption>

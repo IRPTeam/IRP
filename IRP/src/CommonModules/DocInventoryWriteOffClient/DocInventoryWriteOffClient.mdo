@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="583b0762-f7b9-4df5-adbd-80cb0ca1f1f1">
+  <name>DocInventoryWriteOffClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc inventory write off client</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+</mdclass:CommonModule>

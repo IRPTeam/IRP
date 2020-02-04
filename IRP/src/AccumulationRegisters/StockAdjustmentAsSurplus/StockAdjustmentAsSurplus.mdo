@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2e2a3243-cf2b-456b-943a-fdbe7cab87dc">
+  <producedTypes>
+    <selectionType typeId="3d85dd9b-8a95-494d-a7f7-f9dbf301946d" valueTypeId="4a6db9e4-d178-4751-9158-cbe71018c0be"/>
+    <listType typeId="8bca2713-bf8d-48db-a25b-1570fbc78121" valueTypeId="873f333d-95d9-4e89-a8e7-5750625d5b52"/>
+    <managerType typeId="d091807b-f071-4eca-b6cb-aa633968233a" valueTypeId="0372076a-9e49-4680-996f-1c1e19d3c53d"/>
+    <recordSetType typeId="93c54f98-358f-4631-abc7-31b8e8ac4c7d" valueTypeId="90014cac-aaf9-4104-8708-ab7643a34132"/>
+    <recordKeyType typeId="f5e9f852-ce49-4a3f-a448-adcc6eab89ed" valueTypeId="bcd6fb87-7481-4206-8a0c-a1d8fa7f3841"/>
+    <recordType typeId="d81bc39a-f57d-46a6-8c6c-2d3234b890e3" valueTypeId="592561d9-1ac5-45b4-8d76-37a13c42bae4"/>
+  </producedTypes>
+  <name>StockAdjustmentAsSurplus</name>
+  <synonym>
+    <key>en</key>
+    <value>Stock adjustment as surplus</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="4e16e853-e203-4bb1-b2ed-d11b2fa60f7f">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <dimensions uuid="dea9d05a-47a3-455c-be6e-4e310e2d5d90">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="ad05d6d7-3814-4d9c-ba1b-75e832b03482">
+    <name>BasisDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis document</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeStockAdjustmentAsSurplusBasises</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="209b7b57-7af4-4235-9676-c5e73fea2936">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

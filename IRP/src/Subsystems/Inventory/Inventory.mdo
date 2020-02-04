@@ -16,6 +16,7 @@
   <content>Document.PhysicalCountByLocation</content>
   <content>Document.StockAdjustmentAsWriteOff</content>
   <content>Document.StockAdjustmentAsSurplus</content>
+  <content>Document.PhysicalInventory</content>
   <subsystems>ComposedItems</subsystems>
   <subsystems>Items</subsystems>
   <subsystems>Transfers</subsystems>

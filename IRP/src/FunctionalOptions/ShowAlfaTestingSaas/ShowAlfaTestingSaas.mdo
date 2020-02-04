@@ -141,4 +141,5 @@
   <content>InformationRegister.PartnerSegments</content>
   <content>Document.StockAdjustmentAsWriteOff</content>
   <content>Document.StockAdjustmentAsSurplus</content>
+  <content>Document.PhysicalInventory</content>
 </mdclass:FunctionalOption>

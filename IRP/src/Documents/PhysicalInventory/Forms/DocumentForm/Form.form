@@ -307,68 +307,6 @@
         <name>GroupTitleLeft</name>
         <id>205</id>
         <items xsi:type="form:FormField">
-          <name>Company</name>
-          <id>10</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Company</segments>
-          </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>CompanyOnChange</name>
-          </handlers>
-          <extendedTooltip>
-            <name>CompanyExtendedTooltip</name>
-            <id>12</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>CompanyContextMenu</name>
-            <id>11</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>InputField</type>
-          <editMode>EnterOnInput</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <handlers>
-              <event>StartChoice</event>
-              <name>CompanyStartChoice</name>
-            </handlers>
-            <handlers>
-              <event>EditTextChange</event>
-              <name>CompanyEditTextChange</name>
-            </handlers>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
-        </items>
-        <items xsi:type="form:FormField">
           <name>Store</name>
           <id>7</id>
           <visible>true</visible>
@@ -900,7 +838,7 @@
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
           <name>ItemListKey</name>
-          <id>293</id>
+          <id>287</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -911,7 +849,7 @@
           </dataPath>
           <extendedTooltip>
             <name>ItemListKeyExtendedTooltip</name>
-            <id>295</id>
+            <id>289</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -926,7 +864,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListKeyContextMenu</name>
-            <id>294</id>
+            <id>288</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1113,56 +1051,6 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ItemListQuantity</name>
-          <id>267</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Quantity</segments>
-          </dataPath>
-          <extendedTooltip>
-            <name>ItemListQuantityExtendedTooltip</name>
-            <id>269</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>ItemListQuantityContextMenu</name>
-            <id>268</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>InputField</type>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
-        </items>
-        <items xsi:type="form:FormField">
           <name>ItemListUnit</name>
           <id>270</id>
           <visible>true</visible>
@@ -1219,7 +1107,111 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ItemListBusinessUnit</name>
+          <name>ItemListExpCount</name>
+          <id>281</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.ExpCount</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListExpCountExtendedTooltip</name>
+            <id>283</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListExpCountContextMenu</name>
+            <id>282</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListPhysCount</name>
+          <id>278</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.PhysCount</segments>
+          </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListPhysCountOnChange</name>
+          </handlers>
+          <extendedTooltip>
+            <name>ItemListPhysCountExtendedTooltip</name>
+            <id>280</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListPhysCountContextMenu</name>
+            <id>279</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListDifference</name>
           <id>284</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1227,10 +1219,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.BusinessUnit</segments>
+            <segments>Object.ItemList.Difference</segments>
           </dataPath>
           <extendedTooltip>
-            <name>ItemListBusinessUnitExtendedTooltip</name>
+            <name>ItemListDifferenceExtendedTooltip</name>
             <id>286</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1245,108 +1237,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ItemListBusinessUnitContextMenu</name>
+            <name>ItemListDifferenceContextMenu</name>
             <id>285</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>InputField</type>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
-        </items>
-        <items xsi:type="form:FormField">
-          <name>ItemListExpenseType</name>
-          <id>290</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.ExpenseType</segments>
-          </dataPath>
-          <extendedTooltip>
-            <name>ItemListExpenseTypeExtendedTooltip</name>
-            <id>292</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>ItemListExpenseTypeContextMenu</name>
-            <id>291</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>InputField</type>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
-        </items>
-        <items xsi:type="form:FormField">
-          <name>ItemListBasisDocument</name>
-          <id>296</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.BasisDocument</segments>
-          </dataPath>
-          <extendedTooltip>
-            <name>ItemListBasisDocumentExtendedTooltip</name>
-            <id>298</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>ItemListBasisDocumentContextMenu</name>
-            <id>297</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1773,7 +1665,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>DocumentObject.StockAdjustmentAsWriteOff</types>
+      <types>DocumentObject.PhysicalInventory</types>
     </valueType>
     <view>
       <common>true</common>

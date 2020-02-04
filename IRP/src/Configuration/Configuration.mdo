@@ -297,6 +297,8 @@
   <commonModules>CommonModule.DocStockAdjustmentAsWriteOffClient</commonModules>
   <commonModules>CommonModule.DocStockAdjustmentAsSurplusClient</commonModules>
   <commonModules>CommonModule.DocStockAdjustmentAsSurplusServer</commonModules>
+  <commonModules>CommonModule.DocPhysicalInventoryClient</commonModules>
+  <commonModules>CommonModule.DocPhysicalInventoryServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -358,6 +360,8 @@
   <definedTypes>DefinedType.typeTrackTask</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
   <definedTypes>DefinedType.typeCashAdvanceBasises</definedTypes>
+  <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
+  <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.IDInfo</commonCommands>
   <commonCommands>CommonCommand.OpenPartnersCustomer</commonCommands>
@@ -498,6 +502,7 @@
   <documents>Document.ZReport</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.StockAdjustmentAsSurplus</documents>
+  <documents>Document.PhysicalInventory</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AgreementTypes</enums>
@@ -588,6 +593,8 @@
   <accumulationRegisters>AccumulationRegister.TransferOrderBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.SalesOrderTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.CashAdvance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.StockAdjustmentAsWriteOff</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.StockAdjustmentAsSurplus</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

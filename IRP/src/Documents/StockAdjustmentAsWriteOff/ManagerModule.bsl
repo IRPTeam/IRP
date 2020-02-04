@@ -7,6 +7,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("StockReservation", PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("StockBalance", PostingServer.CreateTable(AccReg.StockBalance));
 	Tables.Insert("ExpensesTurnovers", PostingServer.CreateTable(AccReg.ExpensesTurnovers));
+	Tables.Insert("StockAdjustmentAsWriteOff", PostingServer.CreateTable(AccReg.StockAdjustmentAsWriteOff));
 	
 	QueryItemList = New Query();
 	QueryItemList.Text = GetQueryTextInventoryWriteOffItemList();
@@ -25,6 +26,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.StockReservation = QueryResults[2].Unload();
 	Tables.StockBalance = QueryResults[3].Unload();
 	Tables.ExpensesTurnovers = QueryResults[4].Unload();
+	Tables.StockAdjustmentAsWriteOff = QueryResults[5].Unload();
 	
 	Parameters.IsReposting = False;
 	
@@ -46,7 +48,9 @@ Function GetQueryTextInventoryWriteOffItemList()
 		|	StockAdjustmentAsWriteOffItemList.ItemKey.Item.Unit AS ItemUnit,
 		|	StockAdjustmentAsWriteOffItemList.ItemKey.Unit AS ItemKeyUnit,
 		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	StockAdjustmentAsWriteOffItemList.ItemKey.Item AS Item
+		|	StockAdjustmentAsWriteOffItemList.ItemKey.Item AS Item,
+		|	NOT StockAdjustmentAsWriteOffItemList.BasisDocument.Date IS NULL AS HaveBasisDocument,
+		|	StockAdjustmentAsWriteOffItemList.BasisDocument AS BasisDocument
 		|FROM
 		|	Document.StockAdjustmentAsWriteOff.ItemList AS StockAdjustmentAsWriteOffItemList
 		|WHERE
@@ -62,13 +66,15 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.BasisQuantity AS Quantity,
 		|	QueryTable.BusinessUnit AS BusinessUnit,
 		|	QueryTable.ExpenseType AS ExpenseType,
-		|	QueryTable.Period AS Period
+		|	QueryTable.Period AS Period,
+		|	QueryTable.HaveBasisDocument AS HaveBasisDocument,
+		|	QueryTable.BasisDocument AS BasisDocument
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.ItemKey AS ItemKey,
@@ -82,7 +88,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
@@ -90,13 +96,15 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|FROM
 		|	tmp AS tmp
+		|WHERE
+		|	NOT tmp.HaveBasisDocument
 		|GROUP BY
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.Period
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
@@ -104,13 +112,15 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|FROM
 		|	tmp AS tmp
+		|WHERE
+		|	NOT tmp.HaveBasisDocument
 		|GROUP BY
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.Period
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[4]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BusinessUnit AS BusinessUnit,
@@ -125,7 +135,24 @@ Function GetQueryTextQueryTable()
 		|	tmp.BusinessUnit,
 		|	tmp.ExpenseType,
 		|	tmp.ItemKey,
-		|	tmp.Period";
+		|	tmp.Period;
+		|//[5]//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.Store AS Store,
+		|	tmp.BasisDocument AS BasisDocument,
+		|	tmp.ItemKey AS ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.HaveBasisDocument
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.BasisDocument,
+		|	tmp.ItemKey,
+		|	tmp.Period;
+		|";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -146,6 +173,11 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	StockBalance = 
 	AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance);
 	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
+	
+	// StockAdjustmentAsWriteOff
+	StockAdjustmentAsWriteOff = 
+	AccumulationRegisters.StockAdjustmentAsWriteOff.GetLockFields(DocumentDataTables.StockAdjustmentAsWriteOff);
+	DataMapWithLockFields.Insert(StockAdjustmentAsWriteOff.RegisterName, StockAdjustmentAsWriteOff.LockInfo);
 	
 	Return DataMapWithLockFields;
 EndFunction
@@ -180,6 +212,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ExpensesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.ExpensesTurnovers));
 	
+	// StockAdjustmentAsWriteOff
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockAdjustmentAsWriteOff,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Expense,
+			Parameters.DocumentDataTables.StockAdjustmentAsWriteOff));
+			
 	Return PostingDataTables;
 EndFunction
 

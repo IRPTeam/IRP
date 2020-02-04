@@ -30,6 +30,7 @@
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.RevenuesTurnovers</registerRecords>
+  <registerRecords>AccumulationRegister.StockAdjustmentAsSurplus</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -173,5 +174,30 @@
       <fillChecking>ShowError</fillChecking>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="d8fa1936-9087-4b93-8b20-d712cf23a900">
+      <name>BasisDocument</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis document</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeStockAdjustmentAsSurplusBasises</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
+  <commands uuid="4e6fc5c0-6446-4663-b8ed-5b746de8c017">
+    <name>GenerateStockAdjustmentAsSurplus</name>
+    <synonym>
+      <key>en</key>
+      <value>Stock adjustment as surplus</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.PhysicalInventory</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

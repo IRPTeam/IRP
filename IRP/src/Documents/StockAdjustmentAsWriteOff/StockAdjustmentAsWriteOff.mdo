@@ -30,6 +30,7 @@
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.ExpensesTurnovers</registerRecords>
+  <registerRecords>AccumulationRegister.StockAdjustmentAsWriteOff</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -173,5 +174,30 @@
       <fillChecking>ShowError</fillChecking>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="70ed0e2d-9519-4d36-96eb-a5d502031d3a">
+      <name>BasisDocument</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis document</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeStockAdjustmentAsWriteOffBasises</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
+  <commands uuid="bba91882-3996-4f31-86b9-c3dcca0c9127">
+    <name>GenerateStockAdjustmentAsWriteOff</name>
+    <synonym>
+      <key>en</key>
+      <value>Stock adjustment as write-off</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.PhysicalInventory</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

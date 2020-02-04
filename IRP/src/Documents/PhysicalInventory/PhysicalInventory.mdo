@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="64f8841a-efd1-435d-9d2d-5e25d1201068">
+  <producedTypes>
+    <objectType typeId="73c69778-1ac3-402b-8a15-f3ca398f5182" valueTypeId="d4fb8158-9954-47b8-8e24-2630ef6ed09f"/>
+    <refType typeId="de5cb134-4fdc-4acc-825b-bcbd0f32a834" valueTypeId="316d9a01-630a-42af-beff-1b834485b075"/>
+    <selectionType typeId="cfc4fda9-cb14-489e-b366-c32ed38aeb80" valueTypeId="cc3df39f-e126-4fe2-a5ad-814821f03553"/>
+    <listType typeId="4bac14d2-ca0a-40ac-b016-eb25f01ec3ad" valueTypeId="8e2f646b-e1a5-4941-ac52-52233e41c316"/>
+    <managerType typeId="9ec59ffb-716a-45c2-9043-8f366dd78586" valueTypeId="fdafb6ef-9e88-4f3d-af62-d55ddd799ead"/>
+  </producedTypes>
+  <name>PhysicalInventory</name>
+  <synonym>
+    <key>en</key>
+    <value>Physical inventory</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.PhysicalInventory.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.PhysicalInventory.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.PhysicalInventory.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.PhysicalInventory.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.StockAdjustmentAsWriteOff</registerRecords>
+  <registerRecords>AccumulationRegister.StockAdjustmentAsSurplus</registerRecords>
+  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="413b3e0f-32a8-4251-abdd-70f3e79990e1">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="bc5cd7bd-03a1-4451-bbe6-3a4d64b043e7">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="94dd9127-0043-4162-8b94-49c47a269871">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="7a53caab-91a2-4514-9ee0-e2a5d917a31c">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="fb1633a5-3aab-4d38-850c-8b4c728cee44">
+    <producedTypes>
+      <objectType typeId="67cb341d-fd20-4cdc-aaec-630fa2cc60db" valueTypeId="b869bcb2-c40c-4bbe-962f-371502164605"/>
+      <rowType typeId="53433763-7625-449c-a44a-f66076775d7b" valueTypeId="e99bd027-a72b-4c53-866c-c896569c0a65"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="10cab0f0-5716-4699-a565-9457214c3917">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5f42dfc2-499c-46e0-a55d-32402d8c33c3">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e8f98dfd-60cb-45e4-a63e-36246f121ad0">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b90caa7c-73c9-4e5e-acbf-6e8a6c875fbf">
+      <name>ExpCount</name>
+      <synonym>
+        <key>en</key>
+        <value>Exp. count</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="566e8c06-177f-4760-98e0-03ba1f463594">
+      <name>PhysCount</name>
+      <synonym>
+        <key>en</key>
+        <value>Phys. count</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0ebe481f-113c-4e61-8644-385586aba996">
+      <name>Difference</name>
+      <synonym>
+        <key>en</key>
+        <value>Difference</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dfe26fbd-ef90-4415-ac7d-7b93d24a7057">
+  <producedTypes>
+    <selectionType typeId="091d30da-d4c4-4ebb-922d-76182c76d6da" valueTypeId="406f14e8-e265-4d6b-93e7-26c5d4b98211"/>
+    <listType typeId="95f976d2-d159-4a43-b6bb-f2cafe6f5a9d" valueTypeId="2d9bc3bc-a4a2-4d23-8227-7df791c91b8b"/>
+    <managerType typeId="ed7ae804-6f86-4720-a29e-d646979c3b5c" valueTypeId="f9dbc6da-210d-418d-ae5c-0dd0f96828d4"/>
+    <recordSetType typeId="2959974c-8b5b-4a40-8cf0-219115649730" valueTypeId="e3fce879-a959-423a-8a53-09a0e911d461"/>
+    <recordKeyType typeId="69392c6b-485a-4d2e-b79c-77baaa62f048" valueTypeId="9a94df24-a4b7-4286-a0f0-93fca71c6703"/>
+    <recordType typeId="b8c18e17-0037-475b-97b5-d21ec930f9ae" valueTypeId="6139af93-da0f-42e2-9f2d-ac8c26a7cc12"/>
+  </producedTypes>
+  <name>StockAdjustmentAsWriteOff</name>
+  <synonym>
+    <key>en</key>
+    <value>Stock adjustment as write-off</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="f915d68f-7056-44d6-b20e-f0404c52cfd8">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <dimensions uuid="db8791fc-e694-412d-bc51-8a83903b62e4">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="5a5cd9f6-ccca-4cae-ba69-74d2959ae782">
+    <name>BasisDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis document</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeStockAdjustmentAsWriteOffBasises</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="b5691afc-248d-4689-bed4-69c0008a79b6">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

@@ -38,3 +38,4 @@ Procedure SetGroupItemsList(Object, Form)
 EndProcedure
 
 #EndRegion
+

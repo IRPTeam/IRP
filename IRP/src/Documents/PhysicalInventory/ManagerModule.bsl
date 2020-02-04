@@ -290,3 +290,33 @@ EndProcedure
 
 #EndRegion
 
+Function GetItemListWithFillingExpCount(Ref, ItemList = Undefined)
+	Query = New Query();
+	 
+	If ItemList = Undefined Then
+		Query.Text = GetQueryTextFillExpCount();
+	Else
+		Query.Text = GetQueryTextFillExpCount_BytItemList();
+		Query.SetParameter("ItemList", ItemList);
+	EndIf;
+	
+	If ValueIsFilled(Ref) Then
+		Query.SetParameter("Period", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		Query.SetParameter("Period", Undefined);
+	EndIf;
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Function GetQueryTextFillExpCount()
+	Return "";
+EndFunction
+
+Function GetQueryTextFillExpCount_BytItemList()
+	Return "";
+EndFunction
+
+

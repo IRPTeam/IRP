@@ -134,3 +134,6 @@ Procedure SearchByBarcode(Command, Object, Form) Export
 	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject);
 EndProcedure
 
+Procedure FillExpCount(Object, Form) Export
+	NewRow = Object.ItemList.Add();
+EndProcedure

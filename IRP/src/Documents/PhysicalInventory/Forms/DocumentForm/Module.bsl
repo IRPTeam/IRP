@@ -128,4 +128,10 @@ Procedure ItemListPhysCountOnChange(Item)
 	CurrentRow.Difference = CurrentRow.PhysCount - CurrentRow.ExpCount;
 EndProcedure
 
+&AtClient
+Procedure FillExpCount(Command)
+	DocPhysicalInventoryClient.FillExpCount(Object, ThisObject);
+EndProcedure
+
+
 

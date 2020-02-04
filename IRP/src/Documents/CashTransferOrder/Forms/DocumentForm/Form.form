@@ -2303,16 +2303,7 @@
     </columns>
   </attributes>
   <commandInterface>
-    <navigationPanel>
-      <cmiFragmentRecord>
-        <command>InformationRegister.AddProperties.StandardCommand.OpenByValue.Object</command>
-        <userVisible/>
-      </cmiFragmentRecord>
-      <cmiFragmentRecord>
-        <command>InformationRegister.IDInfo.StandardCommand.OpenByValue.Object</command>
-        <userVisible/>
-      </cmiFragmentRecord>
-    </navigationPanel>
+    <navigationPanel/>
     <commandBar/>
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">

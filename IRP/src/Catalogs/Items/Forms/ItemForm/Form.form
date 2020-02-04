@@ -808,18 +808,6 @@
         <group>FormNavigationPanelGoTo</group>
         <index>5</index>
       </cmiFragmentRecord>
-      <cmiFragmentRecord>
-        <command>InformationRegister.IDInfo.StandardCommand.OpenByValue.Object</command>
-        <group>FormNavigationPanelGoTo</group>
-        <index>6</index>
-        <userVisible/>
-      </cmiFragmentRecord>
-      <cmiFragmentRecord>
-        <command>InformationRegister.AddProperties.StandardCommand.OpenByValue.Object</command>
-        <group>FormNavigationPanelGoTo</group>
-        <index>7</index>
-        <userVisible/>
-      </cmiFragmentRecord>
     </navigationPanel>
     <commandBar/>
   </commandInterface>

@@ -1175,20 +1175,7 @@
     <savedData>true</savedData>
   </attributes>
   <commandInterface>
-    <navigationPanel>
-      <cmiFragmentRecord>
-        <command>InformationRegister.AddProperties.StandardCommand.OpenByValue.Object</command>
-        <group>FormNavigationPanelGoTo</group>
-        <index>0</index>
-        <userVisible/>
-      </cmiFragmentRecord>
-      <cmiFragmentRecord>
-        <command>InformationRegister.IDInfo.StandardCommand.OpenByValue.Object</command>
-        <group>FormNavigationPanelGoTo</group>
-        <index>1</index>
-        <userVisible/>
-      </cmiFragmentRecord>
-    </navigationPanel>
+    <navigationPanel/>
     <commandBar/>
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo"/>

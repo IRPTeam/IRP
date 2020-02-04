@@ -105,6 +105,9 @@
       <types>DocumentRef.Labeling</types>
       <types>DocumentRef.CreditDebitNote</types>
       <types>DocumentRef.ChequeBondTransaction</types>
+      <types>DocumentRef.PhysicalInventory</types>
+      <types>DocumentRef.StockAdjustmentAsSurplus</types>
+      <types>DocumentRef.StockAdjustmentAsWriteOff</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

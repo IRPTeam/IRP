@@ -2,16 +2,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure
 
-Procedure Posting(Cancel, PostingMode)
-	
-	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
-	
+Procedure Posting(Cancel, PostingMode)	
+	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);	
 EndProcedure
 
-Procedure UndoPosting(Cancel)
-	
-	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
-	
+Procedure UndoPosting(Cancel)	
+	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);	
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
@@ -32,6 +28,14 @@ Procedure Filling_BasedOnSalesInvoice(FillingData)
 		NewRow = ThisObject.ItemList.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
+	For Each Row In FillingData.TaxList Do
+		NewRow = ThisObject.TaxList.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	For Each Row In FillingData.SpecialOffers Do
+		NewRow = ThisObject.SpecialOffers.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
 EndProcedure
 
 Procedure Filling_BasedOnSalesReturnOrder(FillingData)
@@ -40,6 +44,14 @@ Procedure Filling_BasedOnSalesReturnOrder(FillingData)
 	
 	For Each Row In FillingData.ItemList Do
 		NewRow = ThisObject.ItemList.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	For Each Row In FillingData.TaxList Do
+		NewRow = ThisObject.TaxList.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	For Each Row In FillingData.SpecialOffers Do
+		NewRow = ThisObject.SpecialOffers.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
 EndProcedure

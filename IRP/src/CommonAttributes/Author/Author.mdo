@@ -100,6 +100,18 @@
     <metadata>Document.CashRevenue</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Document.StockAdjustmentAsWriteOff</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.StockAdjustmentAsSurplus</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.PhysicalInventory</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

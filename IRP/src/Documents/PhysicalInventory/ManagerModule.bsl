@@ -290,13 +290,25 @@ EndProcedure
 
 #EndRegion
 
-Function GetItemListWithFillingExpCount(Ref, ItemList = Undefined)
+Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined)
 	Query = New Query();
 	 
 	If ItemList = Undefined Then
 		Query.Text = GetQueryTextFillExpCount();
 	Else
 		Query.Text = GetQueryTextFillExpCount_BytItemList();
+		
+		AccReg = Metadata.AccumulationRegisters.StockBalance;
+		
+		ItemListTyped = New ValueTable();
+		ItemListTyped.Columns.Add("Store", AccReg.Dimensions.Store.Type);
+		ItemListTyped.Columns.Add("ItemKey", AccReg.Dimensions.ItemKey.Type);
+		For Each Row In ItemList Do
+			NewRow = ItemListTyped.Add();
+			NewRow.Store = Store;
+			NewRow.ItemKey = Row.ItemKey;
+		EndDo;
+		
 		Query.SetParameter("ItemList", ItemList);
 	EndIf;
 	
@@ -306,17 +318,31 @@ Function GetItemListWithFillingExpCount(Ref, ItemList = Undefined)
 		Query.SetParameter("Period", Undefined);
 	EndIf;
 	
+	Query.SetParameter("Store", Store);
+	
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
 EndFunction
 
 Function GetQueryTextFillExpCount()
-	Return "";
+	Return 
+	"SELECT
+	|	StockBalanceBalance.Store,
+	|	StockBalanceBalance.ItemKey,
+	|	CASE
+	|		WHEN StockBalanceBalance.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
+	|			THEN StockBalanceBalance.ItemKey.Unit
+	|		ELSE StockBalanceBalance.ItemKey.Item.Unit
+	|	END AS Unit,
+	|	StockBalanceBalance.QuantityBalance
+	|FROM
+	|	AccumulationRegister.StockBalance.Balance(&Period, Store = &Store) AS StockBalanceBalance";
 EndFunction
 
 Function GetQueryTextFillExpCount_BytItemList()
-	Return "";
+	Return 
+	"";
 EndFunction
 
 

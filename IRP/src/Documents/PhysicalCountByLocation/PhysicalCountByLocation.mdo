@@ -27,6 +27,7 @@
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.PhysicalCountByLocation.Form.DocumentForm</defaultObjectForm>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -54,6 +55,24 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <forms uuid="ad32094a-4a4e-4485-b0b6-db7b8efb2696">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="637d9187-67a8-44c3-ad50-b90f4dbdd71f">
+    <name>DocumentFormMobile</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form mobile</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <tabularSections uuid="942e8a25-95aa-4552-83b4-30c03cbe4d9d">
     <producedTypes>
       <objectType typeId="47ebebbf-d447-479a-a2f5-150f52feb653" valueTypeId="3e679140-e25f-4022-bdde-089669543de0"/>

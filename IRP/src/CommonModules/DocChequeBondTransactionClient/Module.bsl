@@ -102,7 +102,7 @@ Procedure CurrencyOnChange(Object, Form, Item) Export
 	
 	QuestionToUserNotify = New NotifyDescription("CurrencyOnChangeEnd", ThisObject, Parameters);
 	
-	ShowQueryBox(QuestionToUserNotify, StrTemplate(R()["QuestionToUser_003"], Item.Title), QuestionDialogMode.YesNo);
+	ShowQueryBox(QuestionToUserNotify, StrTemplate(R().QuestionToUser_003, Item.Title), QuestionDialogMode.YesNo);
 EndProcedure
 
 Procedure CurrencyOnChangeEnd(Result, Parameters) Export
@@ -131,14 +131,17 @@ Procedure CompanyOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;
 	
-	Parameters = New Structure();
-	Parameters.Insert("Item", Item);
-	Parameters.Insert("Form", Form);
-	Parameters.Insert("Object", Object);
-	
-	QuestionToUserNotify = New NotifyDescription("CompanyOnChangeEnd", ThisObject, Parameters);
-	
-	ShowQueryBox(QuestionToUserNotify,StrTemplate(R()["QuestionToUser_003"], Item.Title), QuestionDialogMode.YesNo);
+	If Object.PaymentList.Count() OR Object.ChequeBonds.Count() Then
+		Parameters = New Structure();
+		Parameters.Insert("Item", Item);
+		Parameters.Insert("Form", Form);
+		Parameters.Insert("Object", Object);
+		
+		QuestionToUserNotify = New NotifyDescription("CompanyOnChangeEnd", ThisObject, Parameters);
+		ShowQueryBox(QuestionToUserNotify,StrTemplate(R().QuestionToUser_003, Item.Title), QuestionDialogMode.YesNo);
+		Return;
+	EndIf;
+	Form.CurrentCompany = Object.Company;
 EndProcedure
 
 Procedure CompanyOnChangeEnd(Result, Parameters) Export

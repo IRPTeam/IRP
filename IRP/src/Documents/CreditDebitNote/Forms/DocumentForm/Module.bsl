@@ -28,6 +28,13 @@ Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocCreditDebitNoteClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "SetVisibility" Then
+		SetVisibility(Object, ThisObject);
+	EndIf;
+EndProcedure
+
 &AtServer
 Procedure SetConditionalAppearence() Export
 	Return;
@@ -148,6 +155,15 @@ EndProcedure
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocCreditDebitNoteClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ItemPartner
+
+&AtClient
+Procedure PartnerOnChange(Item)
+	DocCreditDebitNoteClient.PartnerOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -409,11 +425,6 @@ EndProcedure
 &AtServer
 Procedure Currencies_CalculateRate(Amount, MovementType, RowKey) Export
 	CurrenciesServer.CalculateRate(Object, Amount, MovementType, RowKey);
-EndProcedure
-
-&AtClient
-Procedure PartnerOnChange(Item)
-	DocCreditDebitNoteClient.PartnerOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

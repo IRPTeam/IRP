@@ -26,6 +26,20 @@ Procedure Filling_BasedOnSalesInvoice(FillingData)
 		NewRow = ThisObject.ItemList.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
+	For Each Row In FillingData.TaxList Do
+		NewRow = ThisObject.TaxList.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	
+	LinkedTables = New Array();
+	LinkedTables.Add(SpecialOffers);
+	LinkedTables.Add(TaxList);
+	LinkedTables.Add(Currencies);
+	DocumentsServer.SetNewTabelUUID(ItemList, LinkedTables);
+	
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

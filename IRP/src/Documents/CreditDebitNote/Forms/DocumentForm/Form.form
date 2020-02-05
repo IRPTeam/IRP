@@ -2455,6 +2455,10 @@
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
+  <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
+  </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -2601,6 +2605,23 @@
     <id>9</id>
     <valueType>
       <types>CatalogRef.Companies</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>CurrentPartner</name>
+    <title>
+      <key>en</key>
+      <value>Current partner</value>
+    </title>
+    <id>12</id>
+    <valueType>
+      <types>CatalogRef.Partners</types>
     </valueType>
     <view>
       <common>true</common>

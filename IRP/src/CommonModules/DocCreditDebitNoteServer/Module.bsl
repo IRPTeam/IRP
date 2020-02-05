@@ -6,6 +6,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		Form.CurrentOperationType = Object.OperationType;
 		Form.CurrentLegalName = Object.LegalName;
 		Form.CurrentCompany = Object.Company;
+		Form.CurrentPartner = Object.Partner;
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
@@ -15,6 +16,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	Form.CurrentOperationType = Object.OperationType;
 	Form.CurrentLegalName = Object.LegalName;
 	Form.CurrentCompany = Object.Company;
+	Form.CurrentPartner = Object.Partner;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
@@ -22,6 +24,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	Form.CurrentOperationType = Object.OperationType;
 	Form.CurrentLegalName = Object.LegalName;
 	Form.CurrentCompany = Object.Company;
+	Form.CurrentPartner = Object.Partner;
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;

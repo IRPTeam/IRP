@@ -267,7 +267,8 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	ISNULL(ItemList.TotalAmount, 0) AS TotalAmount,
 		|	ISNULL(ItemList.NetAmount, 0) AS NetAmount,
 		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
-		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType
+		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
+		|	ISNULL(ItemList.Store, VALUE(Catalog.Stores.EmptyRef)) AS Store
 		|FROM
 		|	tmpQueryTable AS tmpQueryTable
 		|		INNER JOIN Document.PurchaseInvoice.ItemList AS ItemList

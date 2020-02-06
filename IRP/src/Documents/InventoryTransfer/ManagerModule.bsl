@@ -1,12 +1,58 @@
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	
+	AccReg = Metadata.AccumulationRegisters;
+	Tables = New Structure();
+	Tables.Insert("TransferOrderBalance", PostingServer.CreateTable(AccReg.TransferOrderBalance));
+	Tables.Insert("StockReservation_Expense", AccReg.StockReservation);
+	Tables.Insert("StockReservation_Receipt", AccReg.StockReservation);
+	Tables.Insert("StockBalance_Expense", AccReg.StockBalance);
+	Tables.Insert("StockBalance_Receipt", AccReg.StockBalance);
+	Tables.Insert("StockBalance_Transit", AccReg.StockBalance);
+	Tables.Insert("GoodsInTransitIncoming", AccReg.GoodsInTransitIncoming);
+	Tables.Insert("GoodsInTransitOutgoing", AccReg.GoodsInTransitOutgoing);
+	
+	QueryItemList = New Query();
+	QueryItemList.Text = GetQueryTextInventoryTransferItemList();
+	QueryItemList.SetParameter("Ref", Ref);
+	QueryResultsItemList = QueryItemList.Execute();
+	QueryTableItemList = QueryResultsItemList.Unload();
+	
+	PostingServer.CalculateQuantityByUnit(QueryTableItemList);
+	
 	Query = New Query();
-	Query.Text =
-		"SELECT
+	Query.Text = GetQueryTextQueryTable();
+	Query.SetParameter("QueryTable", QueryTableItemList);
+	QueryResults = Query.ExecuteBatch();
+	
+	Tables.TransferOrderBalance = QueryResults[1].Unload();
+	Tables.StockReservation_Expense = QueryResults[2].Unload();
+	Tables.StockReservation_Receipt = QueryResults[4].Unload();
+	Tables.StockBalance_Expense = QueryResults[5].Unload();
+	Tables.StockBalance_Receipt = QueryResults[3].Unload();
+	Tables.GoodsInTransitIncoming = QueryResults[6].Unload();
+	Tables.GoodsInTransitOutgoing = QueryResults[7].Unload();
+	Tables.StockBalance_Transit = QueryResults[8].Unload();
+	
+	Header = New Structure();
+	Header.Insert("StoreReceiverUseGoodsReceipt", Ref.StoreReceiver.UseGoodsReceipt);
+	Header.Insert("StoreSenderUseShipmentConfirmation", Ref.StoreSender.UseShipmentConfirmation);
+	
+	Tables.Insert("Header", Header);
+	
+	Parameters.IsReposting = False;
+	
+	Return Tables;
+EndFunction
+
+Function GetQueryTextInventoryTransferItemList()
+	Return
+	"SELECT
 		|	InventoryTransferItemList.Ref.Company AS Company,
 		|	InventoryTransferItemList.Ref.StoreSender AS StoreSender,
 		|	InventoryTransferItemList.Ref.StoreReceiver AS StoreReceiver,
+		|	InventoryTransferItemList.Ref.StoreTransit AS StoreTransit,
 		|	InventoryTransferItemList.InventoryTransferOrder AS Order,
 		|	InventoryTransferItemList.ItemKey AS ItemKey,
 		|	SUM(InventoryTransferItemList.Quantity) AS Quantity,
@@ -38,20 +84,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	InventoryTransferItemList.Ref.Date,
 		|	InventoryTransferItemList.Ref,
 		|	VALUE(Catalog.Units.EmptyRef)";
-	
-	Query.SetParameter("Ref", Ref);
-	QueryResults = Query.Execute();
-	
-	QueryTable = QueryResults.Unload();
-	
-	PostingServer.CalculateQuantityByUnit(QueryTable);
-	
-	Query = New Query();
-	Query.Text =
-		"SELECT
+EndFunction
+
+Function GetQueryTextQueryTable()
+	Return
+	"SELECT
 		|	QueryTable.Company AS Company,
 		|	QueryTable.StoreSender AS StoreSender,
 		|	QueryTable.StoreReceiver AS StoreReceiver,
+		|	QueryTable.StoreTransit AS StoreTransit,
 		|	QueryTable.Order AS Order,
 		|	QueryTable.ItemKey AS ItemKey,
 		|	QueryTable.RowKey AS RowKey,
@@ -65,9 +106,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	&QueryTable AS QueryTable
 		|;
 		|
-		|// 1//////////////////////////////////////////////////////////////////////////////
+		|// 1 - OrderBalance//////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	tmp.Company,
+		//|	tmp.Company,
 		|	tmp.StoreSender,
 		|	tmp.StoreReceiver,
 		|	tmp.Order,
@@ -80,7 +121,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|	tmp.Order <> VALUE(Document.InventoryTransferOrder.EmptyRef)
 		|GROUP BY
-		|	tmp.Company,
+		//|	tmp.Company,
 		|	tmp.StoreSender,
 		|	tmp.StoreReceiver,
 		|	tmp.Order,
@@ -89,9 +130,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period
 		|;
 		|
-		|// 2//////////////////////////////////////////////////////////////////////////////
+		|// 2 - StockReservation_Expense //////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	tmp.Company,
+		//|	tmp.Company,
 		|	tmp.StoreSender AS Store,
 		|	tmp.ItemKey,
 		|	SUM(Quantity) AS Quantity,
@@ -101,37 +142,37 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|	tmp.Order = VALUE(Document.InventoryTransferOrder.EmptyRef)
 		|GROUP BY
-		|	tmp.Company,
+		//|	tmp.Company,
 		|	tmp.StoreSender,
 		|	tmp.ItemKey,
 		|	tmp.Period
 		|;
 		|
-		|// 3//////////////////////////////////////////////////////////////////////////////
+		|// 3 - StockBalance_Receipt//////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	tmp.Company,
+		//|	tmp.Company,
 		|	tmp.StoreReceiver AS Store,
 		|	tmp.ItemKey,
 		|	SUM(Quantity) AS Quantity,
-		|	tmp.Period,
-		|	tmp.ReceiptBasis,
-		|	tmp.ShipmentBasis,
-		|   tmp.RowKey
+		|	tmp.Period
+		//|	tmp.ReceiptBasis,
+		//|	tmp.ShipmentBasis,
+		//|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
 		|GROUP BY
-		|	tmp.Company,
+		//|	tmp.Company,
 		|	tmp.StoreReceiver,
 		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	tmp.ReceiptBasis,
-		|	tmp.ShipmentBasis,
-		|   tmp.RowKey
+		|	tmp.Period
+		//|	tmp.ReceiptBasis,
+		//|	tmp.ShipmentBasis,
+		//|   tmp.RowKey
 		|;
 		|
-		|// 4//////////////////////////////////////////////////////////////////////////////
+		|// 4 - StockReservation_Receipt //////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	tmp.Company,
+		//|	tmp.Company,
 		|	tmp.StoreReceiver AS Store,
 		|	tmp.ItemKey,
 		|	SUM(Quantity) AS Quantity,
@@ -139,199 +180,192 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|FROM
 		|	tmp AS tmp
 		|GROUP BY
-		|	tmp.Company,
+		//|	tmp.Company,
 		|	tmp.StoreReceiver,
 		|	tmp.ItemKey,
 		|	tmp.Period
 		|;
 		|
-		|// 5//////////////////////////////////////////////////////////////////////////////
+		|// 5 - StockBalance_Expense //////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	tmp.Company,
+		//|	tmp.Company,
+		|	tmp.StoreSender AS Store,
+		|	tmp.ItemKey,
+		|	SUM(Quantity) AS Quantity,
+		|	tmp.Period
+		//|	tmp.ReceiptBasis,
+		//|	tmp.ShipmentBasis,
+		//|   tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		//|	tmp.Company,
+		|	tmp.StoreSender,
+		|	tmp.ItemKey,
+		|	tmp.Period
+		//|	tmp.ReceiptBasis,
+		//|	tmp.ShipmentBasis,
+		//|   tmp.RowKey
+		|;
+		|// 6 - GoodsInTransitIncoming//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		//|	tmp.Company,
+		|	tmp.StoreReceiver AS Store,
+		|	tmp.ItemKey,
+		|	SUM(Quantity) AS Quantity,
+		|	tmp.Period,
+		|	tmp.ReceiptBasis,
+		//|	tmp.ShipmentBasis,
+		|   tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		//|	tmp.Company,
+		|	tmp.StoreReceiver,
+		|	tmp.ItemKey,
+		|	tmp.Period,
+		|	tmp.ReceiptBasis,
+		//|	tmp.ShipmentBasis,
+		|   tmp.RowKey
+		|;
+		|// 7 - GoodsInTransitOutgoing //////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		//|	tmp.Company,
 		|	tmp.StoreSender AS Store,
 		|	tmp.ItemKey,
 		|	SUM(Quantity) AS Quantity,
 		|	tmp.Period,
-		|	tmp.ReceiptBasis,
+		//|	tmp.ReceiptBasis,
 		|	tmp.ShipmentBasis,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
 		|GROUP BY
-		|	tmp.Company,
+		//|	tmp.Company,
 		|	tmp.StoreSender,
 		|	tmp.ItemKey,
 		|	tmp.Period,
-		|	tmp.ReceiptBasis,
+		//|	tmp.ReceiptBasis,
 		|	tmp.ShipmentBasis,
-		|   tmp.RowKey";
-	
-	Query.SetParameter("QueryTable", QueryTable);
-	QueryResults = Query.ExecuteBatch();
-	
-	Tables = New Structure();
-	
-	Tables.Insert("ItemList_TransferOrderBalance", QueryResults[1].Unload());
-	Tables.Insert("ItemList_StockReservation_Sender", QueryResults[2].Unload());
-	Tables.Insert("ItemList_StockBalance_Receiver", QueryResults[3].Unload());
-	Tables.Insert("ItemList_StockReservation_Receiver", QueryResults[4].Unload());
-	Tables.Insert("ItemList_StockBalance_Sender", QueryResults[5].Unload());
-	
-	Header = New Structure();
-	Header.Insert("StoreReceiverUseGoodsReceipt", Ref.StoreReceiver.UseGoodsReceipt);
-	Header.Insert("StoreSenderUseShipmentConfirmation", Ref.StoreSender.UseShipmentConfirmation);
-	
-	Tables.Insert("Header", Header);
-	
-	Parameters.IsReposting = False;
-	
-	Return Tables;
+		|   tmp.RowKey
+		|;
+		|// 8 - StockBalance_Transit //////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		//|	tmp.Company,
+		|	tmp.StoreTransit AS Store,
+		|	tmp.ItemKey,
+		|	SUM(Quantity) AS Quantity,
+		|	tmp.Period
+		//|	tmp.ReceiptBasis,
+		//|	tmp.ShipmentBasis,
+		//|   tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|Where
+		|	tmp.StoreTransit <> VALUE(Catalog.Stores.EmptyRef)
+		|GROUP BY
+		//|	tmp.Company,
+		|	tmp.StoreTransit,
+		|	tmp.ItemKey,
+		|	tmp.Period
+		//|	tmp.ReceiptBasis,
+		//|	tmp.ShipmentBasis,
+		//|   tmp.RowKey
+		|";
 EndFunction
-
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
 	
 	// TransferOrderBalance
-	Fields = New Map();
-	Fields.Insert("StoreSender", "StoreSender");
-	Fields.Insert("StoreReceiver", "StoreReceiver");
-	Fields.Insert("Order", "Order");
-	Fields.Insert("ItemKey", "ItemKey");
-	
-	DataMapWithLockFields.Insert("AccumulationRegister.TransferOrderBalance",
-		New Structure("Fields, Data", Fields, DocumentDataTables.ItemList_TransferOrderBalance));
+	TransferOrderBalance = 
+	AccumulationRegisters.TransferOrderBalance.GetLockFields(DocumentDataTables.TransferOrderBalance);
+	DataMapWithLockFields.Insert(TransferOrderBalance.RegisterName, TransferOrderBalance.LockInfo);
 	
 	If Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
 		And Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
 		
-		// StockReservation (Sender) 
-		Fields = New Map();
-		Fields.Insert("Store", "Store");
-		Fields.Insert("ItemKey", "ItemKey");
-		
-		DataMapWithLockFields.Insert("AccumulationRegister.StockReservation",
-			New Structure("Fields, Data", Fields,
-				DocumentDataTables.ItemList_StockReservation_Sender));
+		// StockReservation
+		StockReservation = 
+		AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Expense);
+		DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
 		
 		// GoodsInTransitIncoming (Receiver) 
-		Fields = New Map();
-		Fields.Insert("Store", "Store");
-		Fields.Insert("ReceiptBasis", "ReceiptBasis");
-		Fields.Insert("ItemKey", "ItemKey");
+		GoodsInTransitIncoming = 
+		AccumulationRegisters.GoodsInTransitIncoming.GetLockFields(DocumentDataTables.GoodsInTransitIncoming);
+		DataMapWithLockFields.Insert(GoodsInTransitIncoming.RegisterName, GoodsInTransitIncoming.LockInfo);
 		
-		DataMapWithLockFields.Insert("AccumulationRegister.GoodsInTransitIncoming",
-			New Structure("Fields, Data", Fields,
-				DocumentDataTables.ItemList_StockBalance_Receiver));
-		
-		// GoodsInTransitOutgoing (Sender) 
-		Fields = New Map();
-		Fields.Insert("Store", "Store");
-		Fields.Insert("ShipmentBasis", "ShipmentBasis");
-		Fields.Insert("ItemKey", "ItemKey");
-		
-		DataMapWithLockFields.Insert("AccumulationRegister.GoodsInTransitOutgoing",
-			New Structure("Fields, Data", Fields,
-				DocumentDataTables.ItemList_StockBalance_Sender));
-		
+		// GoodsInTransitOutgoing (Sender)
+		GoodsInTransitOutgoing = 
+		AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing);
+		DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
+		 
 	ElsIf Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
 		And Not Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
 		
-		// StockReservation (Sender) 		
-		Fields = New Map();
-		Fields.Insert("Store", "Store");
-		Fields.Insert("ItemKey", "ItemKey");
-		
-		DataMapWithLockFields.Insert("AccumulationRegister.StockReservation",
-			New Structure("Fields, Data", Fields,
-				DocumentDataTables.ItemList_StockReservation_Sender));
+		// StockReservation (Sender)
+		StockReservation = 
+		AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Expense);
+		DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
 		
 		// GoodsInTransitIncoming (Receiver) 
-		Fields = New Map();
-		Fields.Insert("Store", "Store");
-		Fields.Insert("ReceiptBasis", "ReceiptBasis");
-		Fields.Insert("ItemKey", "ItemKey");
-		
-		DataMapWithLockFields.Insert("AccumulationRegister.GoodsInTransitIncoming",
-			New Structure("Fields, Data", Fields,
-				DocumentDataTables.ItemList_StockBalance_Receiver));
-		
+		GoodsInTransitIncoming = 
+		AccumulationRegisters.GoodsInTransitIncoming.GetLockFields(DocumentDataTables.GoodsInTransitIncoming);
+		DataMapWithLockFields.Insert(GoodsInTransitIncoming.RegisterName, GoodsInTransitIncoming.LockInfo);
 		
 		// StockBalance (Sender) 
-		Fields = New Map();
-		Fields.Insert("Store", "Store");
-		Fields.Insert("ItemKey", "ItemKey");
+		ArrayOfTables = New Array();
+		ArrayOfTables.Add(DocumentDataTables.StockBalance_Expense);
+		ArrayOfTables.Add(DocumentDataTables.StockBalance_Transit);
 		
-		DataMapWithLockFields.Insert("AccumulationRegister.StockBalance",
-			New Structure("Fields, Data", Fields,
-				DocumentDataTables.ItemList_StockBalance_Sender));
+		StockBalance = 
+		AccumulationRegisters.StockBalance.GetLockFields(PostingServer.JoinTables(ArrayOfTables, "Store, ItemKey"));
+		DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
 		
 	ElsIf Not Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
 		And Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
 		
-		// StockReservation (Sender and Receiver)	 	
+		// StockReservation (Sender and Receiver)
 		ArrayOfTables = New Array();
-		ArrayOfTables.Add(DocumentDataTables.ItemList_StockReservation_Sender);
-		ArrayOfTables.Add(DocumentDataTables.ItemList_StockReservation_Receiver);
+		ArrayOfTables.Add(DocumentDataTables.StockReservation_Expense);
+		ArrayOfTables.Add(DocumentDataTables.StockReservation_Receipt);
 		
-		Fields = New Map();
-		Fields.Insert("Store", "Store");
-		Fields.Insert("ItemKey", "ItemKey");
-		
-		DataMapWithLockFields.Insert("AccumulationRegister.StockReservation",
-			New Structure("Fields, Data", Fields,
-				PostingServer.JoinTables(ArrayOfTables, "Store, ItemKey")));
-		
+		StockReservation = 
+		AccumulationRegisters.StockReservation.GetLockFields(PostingServer.JoinTables(ArrayOfTables, "Store, ItemKey"));
+		DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
 		
 		// StockBalance (Receiver) 
-		Fields = New Map();
-		Fields.Insert("Store", "Store");
-		Fields.Insert("ItemKey", "ItemKey");
-		
-		DataMapWithLockFields.Insert("AccumulationRegister.StockBalance",
-			New Structure("Fields, Data", Fields,
-				DocumentDataTables.ItemList_StockBalance_Receiver));
+		StockBalance = 
+		AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Receipt);
+		DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
 		
 		// GoodsInTransitOutgoing (Sender) 
-		Fields = New Map();
-		Fields.Insert("Store", "Store");
-		Fields.Insert("ShipmentBasis", "ShipmentBasis");
-		Fields.Insert("ItemKey", "ItemKey");
-		
-		DataMapWithLockFields.Insert("AccumulationRegister.GoodsInTransitOutgoing",
-			New Structure("Fields, Data", Fields,
-				DocumentDataTables.ItemList_StockBalance_Sender));
+		GoodsInTransitOutgoing = 
+		AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing);
+		DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
 		
 	ElsIf Not Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
 		And Not Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
 		
 		// StockReservation (Sender and Receiver) 
 		ArrayOfTables = New Array();
-		ArrayOfTables.Add(DocumentDataTables.ItemList_StockReservation_Sender);
-		ArrayOfTables.Add(DocumentDataTables.ItemList_StockReservation_Receiver);
+		ArrayOfTables.Add(DocumentDataTables.StockReservation_Expense);
+		ArrayOfTables.Add(DocumentDataTables.StockReservation_Receipt);
 		
-		Fields = New Map();
-		Fields.Insert("Store", "Store");
-		Fields.Insert("ItemKey", "ItemKey");
-		
-		DataMapWithLockFields.Insert("AccumulationRegister.StockReservation",
-			New Structure("Fields, Data", Fields,
-				PostingServer.JoinTables(ArrayOfTables, "Store, ItemKey")));
-		
+		StockReservation = 
+		AccumulationRegisters.StockReservation.GetLockFields(PostingServer.JoinTables(ArrayOfTables, "Store, ItemKey"));
+		DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
+	
 		// StockBalance (Sender and Receiver) 
 		ArrayOfTables = New Array();
-		ArrayOfTables.Add(DocumentDataTables.ItemList_StockBalance_Sender);
-		ArrayOfTables.Add(DocumentDataTables.ItemList_StockBalance_Receiver);
+		ArrayOfTables.Add(DocumentDataTables.StockBalance_Expense);
+		ArrayOfTables.Add(DocumentDataTables.StockBalance_Receipt);
 		
-		Fields = New Map();
-		Fields.Insert("Store", "Store");
-		Fields.Insert("ItemKey", "ItemKey");
-		
-		DataMapWithLockFields.Insert("AccumulationRegister.StockBalance",
-			New Structure("Fields, Data", Fields,
-				PostingServer.JoinTables(ArrayOfTables, "Store, ItemKey")));
-		
+		StockBalance = 
+		AccumulationRegisters.StockBalance.GetLockFields(PostingServer.JoinTables(ArrayOfTables, "Store, ItemKey"));
+		DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
+	
 	EndIf;
 	
 	Return DataMapWithLockFields;
@@ -349,130 +383,148 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TransferOrderBalance,
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.ItemList_TransferOrderBalance,
+			Parameters.DocumentDataTables.TransferOrderBalance,
 			Parameters.IsReposting));
 	
 	If Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
 		And Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
 		
-		// StockReservation (Sender) ItemList_StockReservation_Sender [Expense]
+		// StockReservation (Sender) StockReservation_Expense [Expense]
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
 			New Structure("RecordType, RecordSet, WriteInTransaction",
 				AccumulationRecordType.Expense,
-				Parameters.DocumentDataTables.ItemList_StockReservation_Sender,
+				Parameters.DocumentDataTables.StockReservation_Expense,
 				Parameters.IsReposting));
 		
 		
-		// GoodsInTransitIncoming (Receiver) ItemList_StockBalance_Receiver [Receipt]
+		// GoodsInTransitIncoming (Receiver) GoodsInTransitIncoming [Receipt]
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitIncoming,
 			New Structure("RecordType, RecordSet, WriteInTransaction",
 				AccumulationRecordType.Receipt,
-				Parameters.DocumentDataTables.ItemList_StockBalance_Receiver,
+				Parameters.DocumentDataTables.GoodsInTransitIncoming,
 				Parameters.IsReposting));
 		
-		// GoodsInTransitOutgoing (Sender) ItemList_StockBalance_Sender [Receipt]
+		// GoodsInTransitOutgoing (Sender) GoodsInTransitOutgoing [Receipt]
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
 			New Structure("RecordType, RecordSet, WriteInTransaction",
 				AccumulationRecordType.Receipt,
-				Parameters.DocumentDataTables.ItemList_StockBalance_Sender,
+				Parameters.DocumentDataTables.GoodsInTransitOutgoing,
 				Parameters.IsReposting));
 		
 	ElsIf Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
 		And Not Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
 		
-		// StockReservation (Sender) ItemList_StockReservation_Sender [Expense] 		 
+		// StockReservation (Sender) StockReservation_Expense [Expense] 		 
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
 			New Structure("RecordType, RecordSet, WriteInTransaction",
 				AccumulationRecordType.Expense,
-				Parameters.DocumentDataTables.ItemList_StockReservation_Sender,
+				Parameters.DocumentDataTables.StockReservation_Expense,
 				Parameters.IsReposting));
 		
-		// GoodsInTransitIncoming (Receiver) ItemList_StockBalance_Receiver [Receipt]
+		// GoodsInTransitIncoming (Receiver) GoodsInTransitIncoming [Receipt]
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitIncoming,
 			New Structure("RecordType, RecordSet, WriteInTransaction",
 				AccumulationRecordType.Receipt,
-				Parameters.DocumentDataTables.ItemList_StockBalance_Receiver,
+				Parameters.DocumentDataTables.GoodsInTransitIncoming,
 				Parameters.IsReposting));
 		
-		// StockBalance (Sender) ItemList_StockBalance_Sender [Expense]
+		// StockBalance (Sender) 
+		// StockBalance_Expense [Expense]
+		// StockBalance_Transit [Receipt]
+		ArrayOfTables = New Array();
+		Table1 = Parameters.DocumentDataTables.StockBalance_Expense.Copy();
+		Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+		Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+		ArrayOfTables.Add(Table1);
+		
+		Table2 = Parameters.DocumentDataTables.StockBalance_Transit.Copy();
+		Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+		Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
+		ArrayOfTables.Add(Table2);
+		
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
-			New Structure("RecordType, RecordSet, WriteInTransaction",
-				AccumulationRecordType.Expense,
-				Parameters.DocumentDataTables.ItemList_StockBalance_Sender,
+			New Structure("RecordSet, WriteInTransaction",
+				PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Store, ItemKey, Quantity"),
 				Parameters.IsReposting));
+		
+		//PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
+		//	New Structure("RecordType, RecordSet, WriteInTransaction",
+		//		AccumulationRecordType.Expense,
+		//		Parameters.DocumentDataTables.StockBalance_Expense,
+		//		Parameters.IsReposting));
 		
 	ElsIf Not Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
 		And Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
 		
 		// StockReservation (Sender and Receiver) 
-		// ItemList_StockReservation_Sender [Expense] 
-		// ItemList_StockReservation_Receiver [Receipt]
+		// StockReservation_Expense [Expense] 
+		// StockReservation_Receipt [Receipt]
 		ArrayOfTables = New Array();
-		ItemList_StockReservation_Sender = Parameters.DocumentDataTables.ItemList_StockReservation_Sender.Copy();
-		ItemList_StockReservation_Sender.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-		ItemList_StockReservation_Sender.FillValues(AccumulationRecordType.Expense, "RecordType");
-		ArrayOfTables.Add(ItemList_StockReservation_Sender);
+		Table1 = Parameters.DocumentDataTables.StockReservation_Expense.Copy();
+		Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+		Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+		ArrayOfTables.Add(Table1);
 		
-		ItemList_StockReservation_Receiver = Parameters.DocumentDataTables.ItemList_StockReservation_Receiver.Copy();
-		ItemList_StockReservation_Receiver.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-		ItemList_StockReservation_Receiver.FillValues(AccumulationRecordType.Receipt, "RecordType");
-		ArrayOfTables.Add(ItemList_StockReservation_Receiver);
+		Table2 = Parameters.DocumentDataTables.StockReservation_Receipt.Copy();
+		Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+		Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
+		ArrayOfTables.Add(Table2);
 		
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
 			New Structure("RecordSet, WriteInTransaction",
-				PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Company, Store, ItemKey, Quantity"),
+				PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Store, ItemKey, Quantity"),
 				Parameters.IsReposting));
 		
-		// StockBalance (Receiver) ItemList_StockBalance_Receiver 
+		// StockBalance (Receiver) StockBalance_Receipt [Receipt]
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
 			New Structure("RecordType, RecordSet, WriteInTransaction",
 				AccumulationRecordType.Receipt,
-				Parameters.DocumentDataTables.ItemList_StockBalance_Receiver,
+				Parameters.DocumentDataTables.StockBalance_Receipt,
 				Parameters.IsReposting));
 		
-		// GoodsInTransitOutgoing (Sender) ItemList_StockBalance_Sender [Receipt] 
+		// GoodsInTransitOutgoing (Sender) GoodsInTransitOutgoing [Receipt] 
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
 			New Structure("RecordType, RecordSet, WriteInTransaction",
 				AccumulationRecordType.Receipt,
-				Parameters.DocumentDataTables.ItemList_StockBalance_Sender,
+				Parameters.DocumentDataTables.GoodsInTransitOutgoing,
 				Parameters.IsReposting));
 		
 	ElsIf Not Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
 		And Not Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
 		
 		// StockReservation (Sender and Receiver) 
-		// ItemList_StockReservation_Sender [Expense]  
-		// ItemList_StockReservation_Receiver [Receipt]
+		// StockReservation_Expense [Expense]  
+		// StockReservation_Receipt [Receipt]
 		ArrayOfTables = New Array();
-		ItemList_StockReservation_Sender = Parameters.DocumentDataTables.ItemList_StockReservation_Sender.Copy();
-		ItemList_StockReservation_Sender.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-		ItemList_StockReservation_Sender.FillValues(AccumulationRecordType.Expense, "RecordType");
-		ArrayOfTables.Add(ItemList_StockReservation_Sender);
+		Table1 = Parameters.DocumentDataTables.StockReservation_Expense.Copy();
+		Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+		Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+		ArrayOfTables.Add(Table1);
 		
-		ItemList_StockReservation_Receiver = Parameters.DocumentDataTables.ItemList_StockReservation_Receiver.Copy();
-		ItemList_StockReservation_Receiver.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-		ItemList_StockReservation_Receiver.FillValues(AccumulationRecordType.Receipt, "RecordType");
-		ArrayOfTables.Add(ItemList_StockReservation_Receiver);
+		Table2 = Parameters.DocumentDataTables.StockReservation_Receipt.Copy();
+		Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+		Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
+		ArrayOfTables.Add(Table2);
 		
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
 			New Structure("RecordSet, WriteInTransaction",
-				PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Company, Store, ItemKey, Quantity"),
+				PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Store, ItemKey, Quantity"),
 				Parameters.IsReposting));
 		
 		
 		// StockBalance (Sender and Receiver) 
-		// ItemList_StockBalance_Sender [Expense]  
-		// ItemList_StockBalance_Receiver [Receipt]
+		// StockBalance_Expense [Expense]  
+		// StockBalance_Receipt [Receipt]
 		ArrayOfTables = New Array();
-		ItemList_StockBalance_Sender = Parameters.DocumentDataTables.ItemList_StockBalance_Sender.Copy();
-		ItemList_StockBalance_Sender.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-		ItemList_StockBalance_Sender.FillValues(AccumulationRecordType.Expense, "RecordType");
-		ArrayOfTables.Add(ItemList_StockBalance_Sender);
+		Table1 = Parameters.DocumentDataTables.StockBalance_Expense.Copy();
+		Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+		Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+		ArrayOfTables.Add(Table1);
 		
-		ItemList_StockBalance_Receiver = Parameters.DocumentDataTables.ItemList_StockBalance_Receiver.Copy();
-		ItemList_StockBalance_Receiver.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-		ItemList_StockBalance_Receiver.FillValues(AccumulationRecordType.Receipt, "RecordType");
-		ArrayOfTables.Add(ItemList_StockBalance_Receiver);
+		Table2 = Parameters.DocumentDataTables.StockBalance_Receipt.Copy();
+		Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+		Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
+		ArrayOfTables.Add(Table2);
 		
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
 			New Structure("RecordSet, WriteInTransaction",

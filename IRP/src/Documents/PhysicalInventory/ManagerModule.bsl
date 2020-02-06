@@ -290,7 +290,7 @@ EndProcedure
 
 #EndRegion
 
-Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined)
+Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 	Query = New Query();
 	 
 	If ItemList = Undefined Then
@@ -301,15 +301,17 @@ Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined)
 		AccReg = Metadata.AccumulationRegisters.StockBalance;
 		
 		ItemListTyped = New ValueTable();
+		ItemListTyped.Columns.Add("Key", New TypeDescription("UUID"));
+		ItemListTyped.Columns.Add("LineNumber", New TypeDescription("Number"));
 		ItemListTyped.Columns.Add("Store", AccReg.Dimensions.Store.Type);
 		ItemListTyped.Columns.Add("ItemKey", AccReg.Dimensions.ItemKey.Type);
+		ItemListTyped.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
+		ItemListTyped.Columns.Add("PhysCount", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
 		For Each Row In ItemList Do
-			NewRow = ItemListTyped.Add();
-			NewRow.Store = Store;
-			NewRow.ItemKey = Row.ItemKey;
+			FillPropertyValues(ItemListTyped.Add(), Row);
 		EndDo;
 		
-		Query.SetParameter("ItemList", ItemList);
+		Query.SetParameter("ItemList", ItemListTyped);
 	EndIf;
 	
 	If ValueIsFilled(Ref) Then
@@ -322,6 +324,20 @@ Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined)
 	
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
+	
+	If QueryTable.Columns.Find("Key") = Undefined Then
+		QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
+	EndIf;
+	
+	If QueryTable.Columns.Find("LineNumber") <> Undefined Then
+		QueryTable.Columns.Delete("LineNumber");
+	EndIf;
+	
+	For Each Row In QueryTable Do
+		If Not ValueIsFilled(Row.Key) Then
+			Row.Key = New UUID();
+		EndIf;
+	EndDo;
 	Return QueryTable;
 EndFunction
 
@@ -329,20 +345,67 @@ Function GetQueryTextFillExpCount()
 	Return 
 	"SELECT
 	|	StockBalanceBalance.Store,
+	|	StockBalanceBalance.ItemKey.Item AS Item,
 	|	StockBalanceBalance.ItemKey,
 	|	CASE
 	|		WHEN StockBalanceBalance.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
 	|			THEN StockBalanceBalance.ItemKey.Unit
 	|		ELSE StockBalanceBalance.ItemKey.Item.Unit
 	|	END AS Unit,
-	|	StockBalanceBalance.QuantityBalance
+	|	StockBalanceBalance.QuantityBalance AS ExpCount,
+	|	0 AS PhysCount
 	|FROM
 	|	AccumulationRegister.StockBalance.Balance(&Period, Store = &Store) AS StockBalanceBalance";
 EndFunction
 
 Function GetQueryTextFillExpCount_BytItemList()
-	Return 
-	"";
+	Return
+	"SELECT
+	|	tmp.Key AS Key,
+	|	tmp.LineNumber AS LineNumber,
+	|	tmp.Store AS Store,
+	|	tmp.ItemKey AS ItemKey,
+	|	tmp.Unit AS Unit,
+	|	tmp.PhysCount AS PhysCount
+	|INTO ItemList
+	|FROM
+	|	&ItemList AS tmp
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	StockBalanceBalance.Store,
+	|	StockBalanceBalance.ItemKey,
+	|	CASE
+	|		WHEN StockBalanceBalance.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
+	|			THEN StockBalanceBalance.ItemKey.Unit
+	|		ELSE StockBalanceBalance.ItemKey.Item.Unit
+	|	END AS Unit,
+	|	StockBalanceBalance.QuantityBalance AS ExpCount
+	|INTO StockBalance
+	|FROM
+	|	AccumulationRegister.StockBalance.Balance(&Period, (Store) IN
+	|		(SELECT
+	|			ItemList.Store
+	|		FROM
+	|			ItemList AS ItemList)) AS StockBalanceBalance
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Key,
+	|	ISNULL(ItemList.Store, StockBalance.Store) AS Store,
+	|	ISNULL(ItemList.ItemKey, StockBalance.ItemKey) AS ItemKey,
+	|	ISNULL(ItemList.ItemKey.Item, StockBalance.ItemKey.Item) AS Item,
+	|	ISNULL(ItemList.Unit, StockBalance.Unit) AS Unit,
+	|	ISNULL(ItemList.PhysCount, 0) AS PhysCount,
+	|	ISNULL(StockBalance.ExpCount, 0) AS ExpCount,
+	|	ISNULL(ItemList.LineNumber, -1) AS LineNumber
+	|FROM
+	|	ItemList AS ItemList
+	|		FULL JOIN StockBalance AS StockBalance
+	|		ON ItemList.Store = StockBalance.Store
+	|		AND ItemList.ItemKey = StockBalance.ItemKey
+	|ORDER BY
+	|	LineNumber";
 EndFunction
 
 

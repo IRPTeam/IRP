@@ -135,5 +135,30 @@ Procedure SearchByBarcode(Command, Object, Form) Export
 EndProcedure
 
 Procedure FillExpCount(Object, Form) Export
-	NewRow = Object.ItemList.Add();
+	FillItemList(Object, 
+				Form, 
+				DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store));
 EndProcedure
+
+Procedure UpdateExpCount(Object, Form) Export
+	ItemList = New Array();
+	For Each Row In Object.ItemList Do
+		NewRow = New Structure("Key, LineNumber, Store, ItemKey, Unit, PhysCount");
+		FillPropertyValues(NewRow, Row);
+		NewRow.Store = Object.Store;
+		ItemList.Add(NewRow);
+	EndDo;
+	FillItemList(Object, 
+				Form, 
+				DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store, ItemList));
+EndProcedure
+
+Procedure FillItemList(Object, Form, Result)
+	Object.ItemList.Clear();
+	For Each Row In Result Do
+		NewRow = Object.ItemList.Add();
+		FillPropertyValues(NewRow, Row);
+		NewRow.Difference = NewRow.PhysCount - NewRow.ExpCount;
+	EndDo;
+EndProcedure
+

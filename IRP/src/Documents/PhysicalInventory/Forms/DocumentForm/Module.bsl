@@ -133,5 +133,11 @@ Procedure FillExpCount(Command)
 	DocPhysicalInventoryClient.FillExpCount(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure UpdateExpCount(Command)
+	DocPhysicalInventoryClient.UpdateExpCount(Object, ThisObject);
+EndProcedure
+
+
 
 

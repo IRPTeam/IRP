@@ -39,3 +39,13 @@ EndProcedure
 
 #EndRegion
 
+Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
+	Result = Documents.PhysicalInventory.GetItemListWithFillingExpCount(Ref, Store, ItemList);
+	ArrayOfResult = New Array();
+	For Each Row In Result Do
+		NewRow = New Structure("Key, Store, Item, ItemKey, Unit, ExpCount, PhysCount");
+		FillPropertyValues(NewRow, Row);
+		ArrayOfResult.Add(NewRow);
+	EndDo;
+	Return ArrayOfResult;
+EndFunction

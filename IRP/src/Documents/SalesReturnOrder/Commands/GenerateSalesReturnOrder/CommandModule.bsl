@@ -18,10 +18,16 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndIf;
 	
 	For Each FillingData In DocumentStructure Do
-		OpenForm("Document.SalesReturnOrder.ObjectForm", New Structure("FillingValues", FillingData), , New UUID());
+		FormParameters = New Structure("FillingValues", FillingData);
+		InfoMessage = GetInfoMessage(FillingData);
+		If Not IsBlankString(InfoMessage) Then
+			FormParameters.Insert("InfoMessage", InfoMessage);
+		EndIf;
+		OpenForm("Document.SalesReturnOrder.ObjectForm", FormParameters, , New UUID());
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	
 	ArrayOf_SalesInvoice = New Array();
@@ -37,85 +43,139 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables = New Array();
 	ArrayOfTables.Add(GetDocumentTable_SalesInvoice(ArrayOf_SalesInvoice));
 	
-	Return JoinDocumentsStructure(ArrayOfTables);
+	Return JoinDocumentsStructure(ArrayOfTables,
+	"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, ManagerSegment");
 EndFunction
 
-Function JoinDocumentsStructure(ArrayOfTables)
+&AtServer
+Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	
 	ItemList = New ValueTable();
-	ItemList.Columns.Add("BasedOn", New TypeDescription("String"));
-	ItemList.Columns.Add("Company", New TypeDescription("CatalogRef.Companies"));
-	ItemList.Columns.Add("Partner", New TypeDescription("CatalogRef.Partners"));
-	ItemList.Columns.Add("LegalName", New TypeDescription("CatalogRef.Companies"));
-	ItemList.Columns.Add("Agreement", New TypeDescription("CatalogRef.Agreements"));
-	ItemList.Columns.Add("Currency", New TypeDescription("CatalogRef.Currencies"));
-	ItemList.Columns.Add("Store", New TypeDescription("CatalogRef.Stores"));
-	ItemList.Columns.Add("PriceIncludeTax", New TypeDescription("Boolean"));
-	ItemList.Columns.Add("ManagerSegment", New TypeDescription("CatalogRef.PartnerSegments"));
+	ItemList.Columns.Add("BasedOn"			, New TypeDescription("String"));
+	ItemList.Columns.Add("Company"			, New TypeDescription("CatalogRef.Companies"));
+	ItemList.Columns.Add("Partner"			, New TypeDescription("CatalogRef.Partners"));
+	ItemList.Columns.Add("LegalName"		, New TypeDescription("CatalogRef.Companies"));
+	ItemList.Columns.Add("Agreement"		, New TypeDescription("CatalogRef.Agreements"));
+	ItemList.Columns.Add("ManagerSegment"	, New TypeDescription("CatalogRef.PartnerSegments"));
+	ItemList.Columns.Add("PriceIncludeTax"	, New TypeDescription("Boolean"));
+	ItemList.Columns.Add("Currency"			, New TypeDescription("CatalogRef.Currencies"));
+	ItemList.Columns.Add("ItemKey"			, New TypeDescription("CatalogRef.ItemKeys"));
+	ItemList.Columns.Add("Store"			, New TypeDescription("CatalogRef.Stores"));
+	ItemList.Columns.Add("Unit"				, New TypeDescription("CatalogRef.Units"));
+	ItemList.Columns.Add("Quantity"			, New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
+	ItemList.Columns.Add("TaxAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
+	ItemList.Columns.Add("TotalAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
+	ItemList.Columns.Add("NetAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
+	ItemList.Columns.Add("OffersAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
+	ItemList.Columns.Add("PriceType"		, New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
+	ItemList.Columns.Add("Price"			, New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
+	ItemList.Columns.Add("BusinessUnit"		, New TypeDescription("CatalogRef.BusinessUnits"));
+	ItemList.Columns.Add("Key"				, New TypeDescription("UUID"));
+	ItemList.Columns.Add("RowKey"			, New TypeDescription("String"));	
+	ItemList.Columns.Add("SalesInvoice"	, New TypeDescription("DocumentRef.SalesInvoice"));
 	
-	ItemList.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
-	ItemList.Columns.Add("Key", New TypeDescription("UUID"));
-	ItemList.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
-	ItemList.Columns.Add("Quantity", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
-	ItemList.Columns.Add("Price", New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
-	ItemList.Columns.Add("PriceType", New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
-	ItemList.Columns.Add("SalesInvoice", New TypeDescription("DocumentRef.SalesInvoice"));
+	TaxListMetadataColumns = Metadata.Documents.SalesInvoice.TabularSections.TaxList.Attributes;
+	TaxList = New ValueTable();
+	TaxList.Columns.Add("Key"					, TaxListMetadataColumns.Key.Type);
+	TaxList.Columns.Add("Tax"					, TaxListMetadataColumns.Tax.Type);
+	TaxList.Columns.Add("Analytics"				, TaxListMetadataColumns.Analytics.Type);
+	TaxList.Columns.Add("TaxRate"				, TaxListMetadataColumns.TaxRate.Type);
+	TaxList.Columns.Add("Amount"				, TaxListMetadataColumns.Amount.Type);
+	TaxList.Columns.Add("IncludeToTotalAmount"	, TaxListMetadataColumns.IncludeToTotalAmount.Type);
+	TaxList.Columns.Add("ManualAmount"			, TaxListMetadataColumns.ManualAmount.Type);
+	TaxList.Columns.Add("Ref"					, New TypeDescription("DocumentRef.SalesInvoice"));
 	
-	For Each Table In ArrayOfTables Do
-		For Each Row In Table Do
+	SpecialOffersMetadataColumns = Metadata.Documents.SalesInvoice.TabularSections.SpecialOffers.Attributes;
+	SpecialOffers = New ValueTable();
+	SpecialOffers.Columns.Add("Key"		, SpecialOffersMetadataColumns.Key.Type);
+	SpecialOffers.Columns.Add("Offer"	, SpecialOffersMetadataColumns.Offer.Type);
+	SpecialOffers.Columns.Add("Amount"	, SpecialOffersMetadataColumns.Amount.Type);
+	SpecialOffers.Columns.Add("Percent"	, SpecialOffersMetadataColumns.Percent.Type);
+	SpecialOffers.Columns.Add("Ref"		, New TypeDescription("DocumentRef.SalesInvoice"));
+	
+	For Each TableStructure In ArrayOfTables Do
+		For Each Row In TableStructure.ItemList Do
 			FillPropertyValues(ItemList.Add(), Row);
+		EndDo;
+		For Each Row In TableStructure.TaxList Do
+			FillPropertyValues(TaxList.Add(), Row);
+		EndDo;
+		For Each Row In TableStructure.SpecialOffers Do
+			FillPropertyValues(SpecialOffers.Add(), Row);
 		EndDo;
 	EndDo;
 	
-	ValueTableCopy = ItemList.Copy();
-	ValueTableCopy.GroupBy("BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, ManagerSegment");
+	ItemListCopy = ItemList.Copy();
+	ItemListCopy.GroupBy(UnjoinFileds);
 	
 	ArrayOfResults = New Array();
 	
-	For Each Row In ValueTableCopy Do
-		Result = New Structure();
-		Result.Insert("BasedOn", Row.BasedOn);
-		Result.Insert("Company", Row.Company);
-		Result.Insert("Partner", Row.Partner);
-		Result.Insert("LegalName", Row.LegalName);
-		Result.Insert("Agreement", Row.Agreement);
-		Result.Insert("Currency", Row.Currency);
-		Result.Insert("ItemList", New Array());
-		Result.Insert("PriceIncludeTax", Row.PriceIncludeTax);
-		Result.Insert("ManagerSegment", Row.ManagerSegment);
+	For Each Row In ItemListCopy Do
+		Result = New Structure(UnjoinFileds);
+		FillPropertyValues(Result, Row);
 		
-		Filter = New Structure();
-		Filter.Insert("BasedOn", Row.BasedOn);
-		Filter.Insert("Company", Row.Company);
-		Filter.Insert("Partner", Row.Partner);
-		Filter.Insert("LegalName", Row.LegalName);
-		Filter.Insert("Agreement", Row.Agreement);
-		Filter.Insert("Currency", Row.Currency);
-		Filter.Insert("PriceIncludeTax", Row.PriceIncludeTax);
-		Filter.Insert("ManagerSegment", Row.ManagerSegment);
+		Result.Insert("ItemList"		, New Array());
+		Result.Insert("TaxList"			, New Array());
+		Result.Insert("SpecialOffers"	, New Array());
 		
-		ItemList = ItemList.Copy(Filter);
-		For Each RowItemList In ItemList Do
+		Filter = New Structure(UnjoinFileds);
+		FillPropertyValues(Filter, Row);
+		
+		ArrayOfTaxListFilters = New Array();
+		ArrayOfSpecialOffersFilters = New Array();
+		
+		ItemListFiltered = ItemList.Copy(Filter);
+		For Each RowItemList In ItemListFiltered Do
 			NewRow = New Structure();
-			NewRow.Insert("ItemKey", RowItemList.ItemKey);
-			NewRow.Insert("Key", RowItemList.Key);
-			NewRow.Insert("Store", RowItemList.Store);
-			NewRow.Insert("Unit", RowItemList.Unit);
-			NewRow.Insert("Quantity", RowItemList.Quantity);
-			NewRow.Insert("Price", RowItemList.Price);
-			NewRow.Insert("PriceType", RowItemList.PriceType);
-			NewRow.Insert("SalesInvoice", RowItemList.SalesInvoice);
+			
+			For Each ColumnItemList In ItemListFiltered.Columns Do
+				NewRow.Insert(ColumnItemList.Name, RowItemList[ColumnItemList.Name]);
+			EndDo;
+			
+			NewRow.Key = New UUID(RowItemList.RowKey);
+			
+			ArrayOfTaxListFilters.Add(New Structure("Ref, Key", RowItemList.SalesInvoice, NewRow.Key));
+			ArrayOfSpecialOffersFilters.Add(New Structure("Ref, Key", RowItemList.SalesInvoice, NewRow.Key));
+			
 			Result.ItemList.Add(NewRow);
 		EndDo;
+		
+		For Each TaxListFilter In ArrayOfTaxListFilters Do
+			For Each RowTaxList In TaxList.Copy(TaxListFilter) Do
+				NewRow = New Structure();
+				NewRow.Insert("Key"					, RowTaxList.Key);
+				NewRow.Insert("Tax"					, RowTaxList.Tax);
+				NewRow.Insert("Analytics"			, RowTaxList.Analytics);
+				NewRow.Insert("TaxRate"				, RowTaxList.TaxRate);
+				NewRow.Insert("Amount"				, RowTaxList.Amount);
+				NewRow.Insert("IncludeToTotalAmount", RowTaxList.IncludeToTotalAmount);
+				NewRow.Insert("ManualAmount"		, RowTaxList.ManualAmount);
+				Result.TaxList.Add(NewRow);
+			EndDo;
+		EndDo;
+		
+		For Each SpecialOffersFilter In ArrayOfSpecialOffersFilters Do
+			For Each RowSpecialOffers In SpecialOffers.Copy(SpecialOffersFilter) Do
+				NewRow = New Structure();
+				NewRow.Insert("Key", RowSpecialOffers.Key);
+				NewRow.Insert("Offer", RowSpecialOffers.Offer);
+				NewRow.Insert("Amount", RowSpecialOffers.Amount);
+				NewRow.Insert("Percent", RowSpecialOffers.Percent);
+				Result.SpecialOffers.Add(NewRow);
+			EndDo;
+		EndDo;
+		
 		ArrayOfResults.Add(Result);
 	EndDo;
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_SalesInvoice(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "SalesInvoice");
 EndFunction
 
+&AtServer
 Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 	Query = New Query();
 	Query.Text =
@@ -143,6 +203,7 @@ Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 	Return ExtractInfoFromOrderRows(QueryTable);
 EndFunction
 
+&AtServer
 Function ExtractInfoFromOrderRows(QueryTable)
 	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
 	For Each Row In QueryTable Do
@@ -157,6 +218,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	QueryTable.SalesInvoice,
 		|	QueryTable.ItemKey,
 		|	QueryTable.Key,
+		|	QueryTable.RowKey,
 		|	QueryTable.Unit,
 		|	QueryTable.Quantity
 		|INTO tmpQueryTable
@@ -173,38 +235,113 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	CAST(tmpQueryTable.SalesInvoice AS Document.SalesInvoice).LegalName AS LegalName,
 		|	CAST(tmpQueryTable.SalesInvoice AS Document.SalesInvoice).PriceIncludeTax AS PriceIncludeTax,
 		|	CAST(tmpQueryTable.SalesInvoice AS Document.SalesInvoice).Agreement AS Agreement,
-		|	CAST(tmpQueryTable.SalesInvoice AS Document.SalesInvoice).Currency AS Currency,
 		|	CAST(tmpQueryTable.SalesInvoice AS Document.SalesInvoice).ManagerSegment AS ManagerSegment,
-		|	tmpQueryTable.Key AS Key,
+		|	CAST(tmpQueryTable.SalesInvoice AS Document.SalesInvoice).Currency AS Currency,
+		|	tmpQueryTable.Key,
+		|	tmpQueryTable.RowKey,
 		|	tmpQueryTable.Unit AS QuantityUnit,
 		|	tmpQueryTable.Quantity AS Quantity,
-		|	ISNULL(Doc.Price, 0) AS Price,
-		|	ISNULL(Doc.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
-		|	Doc.PriceType AS PriceType,
-		|	Doc.Store AS Store
+		|	ISNULL(ItemList.Price, 0) AS Price,
+		|	ISNULL(ItemList.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
+		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,
+		|	ISNULL(ItemList.TotalAmount, 0) AS TotalAmount,
+		|	ISNULL(ItemList.NetAmount, 0) AS NetAmount,
+		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
+		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
+		|	ISNULL(ItemList.Store, VALUE(Catalog.Stores.EmptyRef)) AS Store,
+		|	ItemList.BusinessUnit
 		|FROM
-		|	Document.SalesInvoice.ItemList AS Doc
+		|	Document.SalesInvoice.ItemList AS ItemList
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable
-		|		ON tmpQueryTable.Key = Doc.Key
-		|		AND tmpQueryTable.SalesInvoice = Doc.Ref";
+		|		ON tmpQueryTable.Key = ItemList.Key
+		|		AND tmpQueryTable.SalesInvoice = ItemList.Ref
+		|ORDER BY 
+		|	ItemList.LineNumber
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	TaxList.Ref,
+		|	TaxList.Key,
+		|	TaxList.Tax,
+		|	TaxList.Analytics,
+		|	TaxList.TaxRate,
+		|	TaxList.Amount,
+		|	TaxList.IncludeToTotalAmount,
+		|	TaxList.ManualAmount
+		|FROM
+		|	Document.SalesInvoice.TaxList AS TaxList
+		|		INNER JOIN tmpQueryTable AS tmpQueryTable
+		|		ON tmpQueryTable.SalesInvoice = TaxList.Ref
+		|		AND tmpQueryTable.Key = TaxList.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SpecialOffers.Ref,
+		|	SpecialOffers.Key,
+		|	SpecialOffers.Offer,
+		|	SpecialOffers.Amount,
+		|	SpecialOffers.Percent
+		|FROM
+		|	Document.SalesInvoice.SpecialOffers AS SpecialOffers
+		|		INNER JOIN tmpQueryTable AS tmpQueryTable
+		|		ON tmpQueryTable.SalesInvoice = SpecialOffers.Ref
+		|		AND tmpQueryTable.Key = SpecialOffers.Key";
 	
 	Query.SetParameter("QueryTable", QueryTable);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	DocumentsServer.RecalculateQuantityInTable(QueryTable);
-	Return QueryTable;
+	QueryResults = Query.ExecuteBatch();
+	
+	QueryTable_ItemList = QueryResults[1].Unload();
+	DocumentsServer.RecalculateQuantityInTable(QueryTable_ItemList);
+	
+	QueryTable_TaxList = QueryResults[2].Unload();
+	QueryTable_SpecialOffers = QueryResults[3].Unload();
+	
+	Return New Structure("ItemList, TaxList, SpecialOffers", QueryTable_ItemList, QueryTable_TaxList, QueryTable_SpecialOffers);	
 EndFunction
 
 #Region Errors
 
+&AtClient
 Function GetErrorMessageKey(BasisDocument)
 	ErrorMessageKey = Undefined;
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.SalesInvoice") Then
-		ErrorMessageKey = "Error_022";
+		ErrorMessageKey = "Error_021";
 	EndIf;
 	
 	Return ErrorMessageKey;
+EndFunction
+
+&AtServer
+Function GetInfoMessage(FillingData)
+	InfoMessage = "";
+	If FillingData.BasedOn = "SalesInvoice" Then
+		BasisDocument = New Array();
+		For Each Row In FillingData.ItemList Do
+			BasisDocument.Add(Row.SalesInvoice);
+		EndDo;
+		If SalesReturnOrderExist(BasisDocument) Then
+			InfoMessage = StrTemplate(R()["InfoMessage_001"], 
+										Metadata.Documents.SalesReturnOrder.Synonym,
+										Metadata.Documents.SalesInvoice.Synonym);
+		EndIf;
+	EndIf;
+	Return InfoMessage;	
+EndFunction
+
+&AtServer
+Function SalesReturnOrderExist(BasisDocument)
+	Query = New Query(
+	"SELECT TOP 1
+	|	OrderBalanceTurnovers.Recorder
+	|FROM
+	|	AccumulationRegister.OrderBalance.Turnovers(, , Recorder, Order IN (&BasisDocument)) AS OrderBalanceTurnovers
+	|WHERE
+	|	VALUETYPE(OrderBalanceTurnovers.Recorder) = TYPE(Document.SalesReturnOrder)");
+	Query.SetParameter("BasisDocument", BasisDocument);
+	Return Not Query.Execute().IsEmpty();
 EndFunction
 
 #EndRegion

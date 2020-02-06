@@ -308,6 +308,9 @@ Function FormItems_PaymentList_CallChainHandler(Object, Form, ActionHandler, Add
 	ElsIf Upper(ActionHandler) = Upper("PaymentListPayeeOnChange") Then
 		Form.PaymentListPayeeOnChange(P1, AddInfo);
 		Return True;
+	ElsIf Upper(ActionHandler) = Upper("PayeeOnChange") Then
+		Form.PayeeOnChange(P1, AddInfo);
+		Return True;
 	ElsIf Upper(ActionHandler) = Upper("PaymentListPlaningTransactionBasisOnChange") Then
 		Form.PaymentListPlaningTransactionBasisOnChange(P1, AddInfo);
 		Return True;

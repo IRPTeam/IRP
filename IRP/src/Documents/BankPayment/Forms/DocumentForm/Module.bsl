@@ -129,6 +129,11 @@ Procedure PaymentListBeforeRowChange(Item, Cancel)
 	DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item, Cancel);
 EndProcedure
 
+&AtClient
+Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocBankPaymentClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
 #Region Partner
 
 &AtClient
@@ -548,10 +553,6 @@ Function CashTransferOrdersInPaymentList(Val CashTransferOrderCurrency)
 	EndDo;
 	Return Answer;
 EndFunction
-
-
-
-
 
 #EndRegion
 

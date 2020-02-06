@@ -2,11 +2,11 @@
 #Region FormEvents
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	DocCashReceiptClient.FillPayers(Object, Form);
+	FillPayers(Object, Form);
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	DocCashReceiptClient.FillPayers(Object, Form);
+	FillPayers(Object, Form);
 	
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
@@ -214,7 +214,7 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	DocCashReceiptClient.FillPayers(Object, Form);
+	FillPayers(Object, Form);
 	SetAvailability(Object, Form);
 EndProcedure
 
@@ -242,7 +242,23 @@ Procedure PaymentListBasisDocumentOnChange(Object, Form, Item) Export
 
 EndProcedure
 
-&AtClient
+Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	If Clone Then
+		Return;
+	EndIf;
+	Cancel = True;
+	NewRow = Object.PaymentList.Add();
+	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
+	Form.Items.PaymentList.ChangeRow();
+	PaymentListOnChange(Object, Form, Item);
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData <> Undefined And ValueIsFilled(Form.Payer) Then
+		CurrentData.Payer = Form.Payer;
+		CurrentData.Partner = DocCashReceiptServer.GetPartnerByLegalName(CurrentData.Payer, CurrentData.Partner);
+		PaymentListPartnerOnChange(Object, Form, Item);
+	EndIf;
+EndProcedure
+
 Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	
@@ -631,8 +647,10 @@ Procedure FillPayers(Object, Form) Export
 		EndIf;
 	EndDo;
 	If PayerArray.Count() = 0 Then
-		Form.Items.Payer.InputHint = "";
-		Form.Payer = PredefinedValue("Catalog.Companies.EmptyRef");
+		If Not ValueIsFilled(Form.Payer) Then
+			Form.Items.Payer.InputHint = "";
+			Form.Payer = PredefinedValue("Catalog.Companies.EmptyRef");
+		EndIf;
 	ElsIf PayerArray.Count() = 1 Then
 		Form.Items.Payer.InputHint = "";
 		Form.Payer = PayerArray[0];

@@ -1305,6 +1305,10 @@
           <event>AfterDeleteRow</event>
           <name>PaymentListAfterDeleteRow</name>
         </handlers>
+        <handlers>
+          <event>BeforeAddRow</event>
+          <name>PaymentListBeforeAddRow</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>

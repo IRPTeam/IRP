@@ -2,11 +2,11 @@
 #Region FormEvents
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	DocCashPaymentClient.FillPayees(Object, Form);
+	FillPayees(Object, Form);
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	DocCashPaymentClient.FillPayees(Object, Form);
+	FillPayees(Object, Form);
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
@@ -91,8 +91,8 @@ EndProcedure
 #Region ItemPayee
 
 Procedure PayeeOnChange(Object, Form, Item) Export
-	DocCashPaymentClient.SetCurrentPayee(Form, Form.Payee);
-	DocCashPaymentClient.ChangePaymentListPayee(Object.PaymentList, Form.Payee);
+	SetCurrentPayee(Form, Form.Payee);
+	ChangePaymentListPayee(Object.PaymentList, Form.Payee);
 EndProcedure
 
 #EndRegion
@@ -182,7 +182,7 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	DocCashPaymentClient.FillPayees(Object, Form);
+	FillPayees(Object, Form);
 	SetAvailability(Object, Form);
 EndProcedure
 
@@ -193,7 +193,7 @@ Procedure PaymentListOnActivateRow(Object, Form, Item) Export
 	CurrentRowPayee = Form.Items.PaymentList.CurrentData.Payee;
 	If ValueIsFilled(CurrentRowPayee)
 		And CurrentRowPayee <> Form.CurrentPayee Then
-		DocCashPaymentClient.SetCurrentPayee(Form, CurrentRowPayee);
+		SetCurrentPayee(Form, CurrentRowPayee);
 	EndIf;
 EndProcedure
 
@@ -250,6 +250,23 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 	If ValueIsFilled(Result) Then
 		Form = AdditionalParameters.Form;
 		Form.Items.PaymentList.CurrentData.BasisDocument = Result;
+	EndIf;
+EndProcedure
+
+Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	If Clone Then
+		Return;
+	EndIf;
+	Cancel = True;
+	NewRow = Object.PaymentList.Add();
+	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
+	Form.Items.PaymentList.ChangeRow();
+	PaymentListOnChange(Object, Form, Item);
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData <> Undefined And ValueIsFilled(Form.Payee) Then
+		CurrentData.Payee = Form.Payee;
+		CurrentData.Partner = DocCashPaymentServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
+		PaymentListPartnerOnChange(Object, Form, Item);
 	EndIf;
 EndProcedure
 
@@ -611,8 +628,10 @@ Procedure FillPayees(Object, Form) Export
 		EndIf;
 	EndDo;
 	If PayeeArray.Count() = 0 Then
-		Form.Items.Payee.InputHint = "";
-		Form.Payee = PredefinedValue("Catalog.Companies.EmptyRef");
+		If Not ValueIsFilled(Form.Payee) Then
+			Form.Items.Payee.InputHint = "";
+			Form.Payee = PredefinedValue("Catalog.Companies.EmptyRef");
+		EndIf;
 	ElsIf PayeeArray.Count() = 1 Then
 		Form.Items.Payee.InputHint = "";
 		Form.Payee = PayeeArray[0];

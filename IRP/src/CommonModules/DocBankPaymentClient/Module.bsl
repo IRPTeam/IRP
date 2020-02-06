@@ -2,11 +2,11 @@
 #Region FormEvents
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	DocBankPaymentClient.FillPayees(Object, Form);
+	FillPayees(Object, Form);
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	DocBankPaymentClient.FillPayees(Object, Form);
+	FillPayees(Object, Form);
 	
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
@@ -201,7 +201,7 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	DocBankPaymentClient.FillPayees(Object, Form);
+	FillPayees(Object, Form);
 	SetAvailability(Object, Form);
 EndProcedure
 
@@ -259,7 +259,23 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 	EndIf;
 EndProcedure
 
-&AtClient
+Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	If Clone Then
+		Return;
+	EndIf;
+	Cancel = True;
+	NewRow = Object.PaymentList.Add();
+	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
+	Form.Items.PaymentList.ChangeRow();
+	PaymentListOnChange(Object, Form, Item);
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData <> Undefined And ValueIsFilled(Form.Payee) Then
+		CurrentData.Payee = Form.Payee;
+		CurrentData.Partner = DocBankPaymentServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
+		PaymentListPartnerOnChange(Object, Form, Item);
+	EndIf;
+EndProcedure
+
 Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	
@@ -435,7 +451,7 @@ EndProcedure
 Procedure PaymentListPayeeOnChange(Object, Form, Item) Export
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If ValueIsFilled(CurrentData.Payee) Then
-		CurrentData.Partner = DocCashReceiptServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
+		CurrentData.Partner = DocBankPaymentServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
 	EndIf;
 EndProcedure
 
@@ -602,8 +618,10 @@ Procedure FillPayees(Object, Form) Export
 		EndIf;
 	EndDo;
 	If PayeeArray.Count() = 0 Then
-		Form.Items.Payee.InputHint = "";
-		Form.Payee = PredefinedValue("Catalog.Companies.EmptyRef");
+		If Not ValueIsFilled(Form.Payee) Then
+			Form.Items.Payee.InputHint = "";
+			Form.Payee = PredefinedValue("Catalog.Companies.EmptyRef");
+		EndIf;
 	ElsIf PayeeArray.Count() = 1 Then
 		Form.Items.Payee.InputHint = "";
 		Form.Payee = PayeeArray[0];

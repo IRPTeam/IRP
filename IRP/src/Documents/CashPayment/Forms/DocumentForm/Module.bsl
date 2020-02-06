@@ -116,6 +116,11 @@ Procedure PaymentListBeforeRowChange(Item, Cancel)
 	DocCashPaymentClient.OnActiveCell(Object, ThisObject, Item, Cancel);
 EndProcedure
 
+&AtClient
+Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocCashPaymentClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
 #Region Partner
 
 &AtClient

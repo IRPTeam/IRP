@@ -1071,6 +1071,10 @@
           <event>OnChange</event>
           <name>CompanyTaxesOnChange</name>
         </handlers>
+        <handlers>
+          <event>OnStartEdit</event>
+          <name>CompanyTaxesOnStartEdit</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>

@@ -80,6 +80,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="e585b9b0-decc-47f5-a52e-241f40e7f411">
+    <name>FullDescription</name>
+    <synonym>
+      <key>en</key>
+      <value>Full description</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>500</length>
+      </stringQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="23652c9c-63d4-4c58-b035-2e529ba406b0">
     <name>ItemForm</name>
     <synonym>

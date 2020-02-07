@@ -98,7 +98,7 @@ Function FieldsListForDescriptions(Val Source) Export
 		Fields.Add("Ref");
 		Return Fields;
 	ElsIf TypeOf(Source) = Type("CatalogManager.IDInfoAddresses") Then
-		Fields.Add("Description");
+		Fields.Add("FullDescription");
 		Return Fields;
 	ElsIf NOT LocalizationReuse.UseMultiLanguage(Metadata.FindByType(TypeOf(Source)).FullName()) Then
 		Fields.Add("Description");

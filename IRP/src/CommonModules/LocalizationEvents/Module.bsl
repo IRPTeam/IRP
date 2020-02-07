@@ -111,6 +111,8 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 		Presentation = LocalizationReuse.CatalogDescriptionWithAddAttributes(Data.Ref);
 	ElsIf Data.Property("Description") Then
 		Presentation = Data["Description"];
+	ElsIf Data.Property("FullDescription") Then
+		Presentation = Data["FullDescription"];
 	Else
 		Presentation = Data["Description_" + LocalizationReuse.UserLanguageCode()];
 		If Presentation = "" Then

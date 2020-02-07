@@ -1,6 +1,6 @@
 #Region WriteDataToCatalog
 
-Function FindCatalogItem(Deep, Parent, Level, Value, Country)
+Function FindCatalogItem(Deep, Parent, Level, Value, Country, IDInfoType)
 	Result = New Structure("Success, Ref", False, Undefined);
 	
 	ConditionString = "Parent";
@@ -20,6 +20,7 @@ Function FindCatalogItem(Deep, Parent, Level, Value, Country)
 		|	AND IDInfoAddresses.Parent = &Parent
 		|	AND IDInfoAddresses.Level = &Level
 		|	AND IDInfoAddresses.Description = &Value
+		|	AND IDInfoAddresses.Owner = &Owner
 		|	AND NOT IDInfoAddresses.DeletionMark";
 	
 	Query.Text = StrTemplate(Query.Text, ConditionString);
@@ -27,6 +28,7 @@ Function FindCatalogItem(Deep, Parent, Level, Value, Country)
 	Query.SetParameter("Level", Level);
 	Query.SetParameter("Value", Value);
 	Query.SetParameter("Parent", ?(ValueIsFilled(Parent), Parent, Catalogs.IDInfoAddresses.EmptyRef()));
+	Query.SetParameter("Owner", IDInfoType);
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -67,7 +69,7 @@ Function WriteDataToCatalog(Values, Country, IDInfoType) Export
 	BeginTransaction(DataLockControlMode.Managed);
 	Try
 		For Each Row In Values Do
-			CatalogItem = FindCatalogItem(Deep, CurrentParent, Row.Level, Row.Value, Country);
+			CatalogItem = FindCatalogItem(Deep, CurrentParent, Row.Level, Row.Value, Country, IDInfoType);
 			If Not CatalogItem.Success Then
 				CatalogItem = CreateCatalogItem(CurrentParent, Row.Level, Row.Value, Country, IDInfoType);
 				If Not CatalogItem.Success Then

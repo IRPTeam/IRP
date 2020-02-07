@@ -68,7 +68,8 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 			Row = AdditionalParameters.Object.ItemList.Add();
 			FillPropertyValues(Row, ResultElement, FilterString);
 		EndIf;
-		Row.ExpCount = Row.ExpCount + ResultElement.Quantity;
+		Row.PhysCount = Row.PhysCount + ResultElement.Quantity;
+		Row.Difference = Row.PhysCount - Row.ExpCount;
 	EndDo;
 	ItemListOnChange(AdditionalParameters.Object, AdditionalParameters.Form, Undefined, Undefined);
 EndProcedure

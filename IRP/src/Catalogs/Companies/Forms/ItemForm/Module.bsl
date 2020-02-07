@@ -133,6 +133,13 @@ Procedure CompanyTaxesOnChange(Item)
 	RewriteTaxes = True;
 EndProcedure
 
+&AtClient
+Procedure CompanyTaxesOnStartEdit(Item, NewRow, Clone)
+	If NewRow Then
+		Item.CurrentData.Use = True;
+	EndIf;
+EndProcedure
+
 &AtServer
 Procedure ReadTaxes()
 	CatCompaniesServer.ReadTaxesIntoFormTable(ThisObject);

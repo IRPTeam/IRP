@@ -317,6 +317,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.Store</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>StoreOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>StoreExtendedTooltip</name>
             <id>9</id>

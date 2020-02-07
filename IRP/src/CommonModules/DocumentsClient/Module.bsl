@@ -1002,9 +1002,14 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 				Row.ProcurementMethod = PredefinedValue("Enum.ProcurementMethods.Stock");
 			EndIf;
 		EndIf;
+		
 		If Row.Property("Quantity") Then
 			Row.Quantity = Row.Quantity + ResultElement.Quantity;
+		ElsIF Row.Property("PhysCount") Then
+			Row.PhysCount = Row.PhysCount + ResultElement.Quantity;
+			Row.Difference = Row.PhysCount - Row.ExpCount;
 		EndIf;
+		
 		If Row.Property("NetAmount") Then
 			ItemListCalculateRowAmounts(Object, Form, Row);
 		EndIf;	

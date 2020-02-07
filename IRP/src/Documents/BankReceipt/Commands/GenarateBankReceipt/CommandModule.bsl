@@ -189,60 +189,8 @@ Function GetDocumentTable_IncomingPaymentOrder(ArrayOfBasisDocuments)
 EndFunction
 
 Function GetDocumentTable_SalesInvoice(ArrayOfBasisDocuments)
-	ArrayOf_ApArPostingDetail_ByDocuments = New Array();
-	ArrayOf_ApArPostingDetail_ByAgreements = New Array();
-	For Each SalesInvoiceRef In ArrayOfBasisDocuments Do
-		If ValueIsFilled(SalesInvoiceRef.Agreement) Then
-			If SalesInvoiceRef.Agreement.ApArPostingDetail = Enums.ApArPostingDetail.ByDocuments Then
-				ArrayOf_ApArPostingDetail_ByDocuments.Add(SalesInvoiceRef);
-			Else
-				ArrayOf_ApArPostingDetail_ByAgreements.Add(SalesInvoiceRef.Agreement);
-			EndIf;
-		EndIf;
-	EndDo;
 	
-	Query = New Query();
-	Query.Text =
-		"SELECT ALLOWED
-		|	""SalesInvoice"" AS BasedOn,
-		|	VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS TransactionType,
-		|	PartnerApTransactionsBalance.Company,
-		|	PartnerApTransactionsBalance.Currency,
-		|	PartnerApTransactionsBalance.BasisDocument,
-		|	PartnerApTransactionsBalance.Agreement,
-		|	PartnerApTransactionsBalance.Partner,
-		|	PartnerApTransactionsBalance.LegalName AS Payer,
-		|	PartnerApTransactionsBalance.AmountBalance AS Amount
-		|FROM
-		|	AccumulationRegister.PartnerArTransactions.Balance(, BasisDocument IN (&ArrayOf_ApArPostingDetail_ByDocuments)
-		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-		|		PartnerApTransactionsBalance
-		|WHERE
-		|	PartnerApTransactionsBalance.AmountBalance > 0
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	""SalesInvoice"",
-		|	VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer),
-		|	PartnerApTransactionsBalance.Company,
-		|	PartnerApTransactionsBalance.Currency,
-		|	UNDEFINED,
-		|	PartnerApTransactionsBalance.Agreement,
-		|	PartnerApTransactionsBalance.Partner,
-		|	PartnerApTransactionsBalance.LegalName,
-		|	PartnerApTransactionsBalance.AmountBalance
-		|FROM
-		|	AccumulationRegister.PartnerArTransactions.Balance(, Agreement IN (&ArrayOf_ApArPostingDetail_ByAgreements)
-		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-		|		PartnerApTransactionsBalance
-		|WHERE
-		|	PartnerApTransactionsBalance.AmountBalance > 0";
-		
-	Query.SetParameter("ArrayOf_ApArPostingDetail_ByDocuments", ArrayOf_ApArPostingDetail_ByDocuments);
-	Query.SetParameter("ArrayOf_ApArPostingDetail_ByAgreements", ArrayOf_ApArPostingDetail_ByAgreements);
+	Return DocumentsGenerationServer.GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments);
 	
-	QueryResult = Query.Execute();
-	Return QueryResult.Unload();
 EndFunction
 

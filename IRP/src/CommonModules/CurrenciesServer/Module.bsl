@@ -39,7 +39,8 @@ EndProcedure
 Function IsUseAgreementMovementType(ItemOfPostingInfo)
 	UseAgreementMovementType = True;
 	If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AdvanceFromCustomers")
-		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AdvanceToSuppliers") Then
+		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AdvanceToSuppliers") 
+		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AccountBalance") Then
 		UseAgreementMovementType = False;
 	EndIf;
 	Return UseAgreementMovementType;

@@ -434,7 +434,7 @@ Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo
 		|	PartnerTransactionsBalance.BasisDocument,
 		|	PartnerTransactionsBalance.Partner,
 		|	PartnerTransactionsBalance.Agreement,
-		|	PartnerTransactionsBalance.LegalName AS Payee,
+		|	PartnerTransactionsBalance.LegalName AS Payer,
 		|	PartnerTransactionsBalance.AmountBalance AS Amount
 		|FROM
 		|	AccumulationRegister.PartnerArTransactions.Balance(, BasisDocument IN

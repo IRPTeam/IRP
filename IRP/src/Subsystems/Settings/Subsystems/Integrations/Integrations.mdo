@@ -12,6 +12,7 @@
   <content>Catalog.DataRegistrationRules</content>
   <content>InformationRegister.JobSettings</content>
   <content>InformationRegister.FullDataExchangeMessages</content>
+  <content>InformationRegister.ExternalCommands</content>
   <subsystems>GoogleDrive</subsystems>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

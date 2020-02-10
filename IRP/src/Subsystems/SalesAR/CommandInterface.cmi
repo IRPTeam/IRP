@@ -28,5 +28,6 @@
     <subsystems>Subsystem.SalesAR.Subsystem.Sales</subsystems>
     <subsystems>Subsystem.SalesAR.Subsystem.SalesReturn</subsystems>
     <subsystems>Subsystem.SalesAR.Subsystem.Pricing</subsystems>
+    <subsystems>Subsystem.SalesAR.Subsystem.SpecialOffers</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

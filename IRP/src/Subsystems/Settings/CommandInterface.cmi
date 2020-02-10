@@ -3,5 +3,10 @@
   <subsystemsOrder>
     <subsystems>Subsystem.Settings.Subsystem.Users</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.AttributeAndProperty</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.Contacts</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.Equipment</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.Integrations</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.ItemsSettings</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.OrdersSettings</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

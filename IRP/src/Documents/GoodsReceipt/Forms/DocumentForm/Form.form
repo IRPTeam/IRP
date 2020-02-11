@@ -562,10 +562,31 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
+            <listChoiceMode>true</listChoiceMode>
             <autoMarkIncomplete>true</autoMarkIncomplete>
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
+            <choiceList>
+              <value xsi:type="core:ReferenceValue">
+                <value>Enum.GoodsReceiptTransactionTypes.EnumValue.Purchase</value>
+              </value>
+            </choiceList>
+            <choiceList>
+              <value xsi:type="core:ReferenceValue">
+                <value>Enum.GoodsReceiptTransactionTypes.EnumValue.ReturnFromCustomer</value>
+              </value>
+            </choiceList>
+            <choiceList>
+              <value xsi:type="core:ReferenceValue">
+                <value>Enum.GoodsReceiptTransactionTypes.EnumValue.InventoryTransfer</value>
+              </value>
+            </choiceList>
+            <choiceList>
+              <value xsi:type="core:ReferenceValue">
+                <value>Enum.GoodsReceiptTransactionTypes.EnumValue.BundlingBoxing</value>
+              </value>
+            </choiceList>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">

@@ -75,6 +75,18 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="e41f0dc6-81b5-43c8-b95c-ae96df4c8649">
+    <name>TransactionType</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.ShipmentConfirmationTransactionTypes</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="f6578bfa-a325-46b9-afca-68594934b925">
     <name>ListForm</name>
     <synonym>

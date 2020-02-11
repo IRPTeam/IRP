@@ -190,24 +190,6 @@ Procedure CleanDataByArray(Object, Val ArrayAll, Val ArrayVisible) Export
 	EndDo;
 EndProcedure
 
-Function DocumentBasedOnBoxingBundling(Object, BasisName = "ReceiptBasis") Export
-	BasedOnBoxingBundling = False;
-	BoxingBundlingTypes = New Array();
-	BoxingBundlingTypes.Add(Type("DocumentRef.Boxing"));
-	BoxingBundlingTypes.Add(Type("DocumentRef.Unboxing"));
-	BoxingBundlingTypes.Add(Type("DocumentRef.Bundling"));
-	BoxingBundlingTypes.Add(Type("DocumentRef.Unbundling"));
-	BoxingBundlingTypeDesc = New TypeDescription(BoxingBundlingTypes);
-	For Each Row In Object.ItemList Do
-		If BoxingBundlingTypeDesc.ContainsType(TypeOf(Row[BasisName]))
-			And ValueIsFilled(Row[BasisName]) Then
-			BasedOnBoxingBundling = True;
-			Break;
-		EndIf;
-	EndDo;
-	Return BasedOnBoxingBundling;
-EndFunction
-
 #Region Stores
 Procedure FillStores(ObjectData, Form) Export
 	

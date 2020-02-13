@@ -120,6 +120,22 @@
         <isFolder>true</isFolder>
       </content>
     </items>
+    <items id="748479bd-dbd2-459d-ac53-92c750c6505d">
+      <name>PhysicalCountByLocation</name>
+      <description>Physical count by location</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+    </items>
+    <items id="83a9eeaa-a8f6-4fa4-9496-74fd8b74d65a">
+      <name>PhysicalInventory</name>
+      <description>Physical inventory</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+      <isFolder>true</isFolder>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <quickChoice>true</quickChoice>

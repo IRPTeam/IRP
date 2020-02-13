@@ -184,6 +184,10 @@
     <metadata>Document.PhysicalInventory</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Document.PhysicalCountByLocation</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

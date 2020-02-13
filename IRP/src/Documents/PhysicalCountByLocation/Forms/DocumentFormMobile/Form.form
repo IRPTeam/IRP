@@ -469,9 +469,6 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>Object.ItemList.ExpectedQuantity</segments>
-              </dataPath>
               <extendedTooltip>
                 <name>ItemListExpectedQuantityExtendedTooltip</name>
                 <id>70</id>
@@ -497,21 +494,10 @@
                 </userVisible>
                 <autoFill>true</autoFill>
               </contextMenu>
-              <type>InputField</type>
               <editMode>Enter</editMode>
               <showInHeader>true</showInHeader>
               <headerHorizontalAlign>Left</headerHorizontalAlign>
               <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:InputFieldExtInfo">
-                <width>6</width>
-                <autoMaxWidth>true</autoMaxWidth>
-                <maxWidth>5</maxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <wrap>true</wrap>
-                <chooseType>true</chooseType>
-                <typeDomainEnabled>true</typeDomainEnabled>
-                <textEdit>true</textEdit>
-              </extInfo>
             </items>
             <items xsi:type="form:FormField">
               <name>ItemListQuantity</name>
@@ -526,9 +512,6 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>Object.ItemList.Quantity</segments>
-              </dataPath>
               <extendedTooltip>
                 <name>ItemListQuantityExtendedTooltip</name>
                 <id>83</id>
@@ -554,21 +537,10 @@
                 </userVisible>
                 <autoFill>true</autoFill>
               </contextMenu>
-              <type>InputField</type>
               <editMode>Enter</editMode>
               <showInHeader>true</showInHeader>
               <headerHorizontalAlign>Left</headerHorizontalAlign>
               <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:InputFieldExtInfo">
-                <width>6</width>
-                <autoMaxWidth>true</autoMaxWidth>
-                <maxWidth>5</maxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <wrap>true</wrap>
-                <chooseType>true</chooseType>
-                <typeDomainEnabled>true</typeDomainEnabled>
-                <textEdit>true</textEdit>
-              </extInfo>
             </items>
             <visible>true</visible>
             <enabled>true</enabled>

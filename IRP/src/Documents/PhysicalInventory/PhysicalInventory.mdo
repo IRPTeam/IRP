@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="64f8841a-efd1-435d-9d2d-5e25d1201068">
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="64f8841a-efd1-435d-9d2d-5e25d1201068">
   <producedTypes>
     <objectType typeId="73c69778-1ac3-402b-8a15-f3ca398f5182" valueTypeId="d4fb8158-9954-47b8-8e24-2630ef6ed09f"/>
     <refType typeId="de5cb134-4fdc-4acc-825b-bcbd0f32a834" valueTypeId="316d9a01-630a-42af-beff-1b834485b075"/>
@@ -43,6 +43,25 @@
       <types>CatalogRef.Stores</types>
     </type>
     <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="aa8143df-e470-4da2-9a0a-0a1171943451">
+    <name>Status</name>
+    <synonym>
+      <key>en</key>
+      <value>Status</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ObjectStatuses</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameters>
+      <name>Filter.Parent</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Catalog.ObjectStatuses.PhysicalInventory</value>
+      </value>
+    </choiceParameters>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -152,6 +171,18 @@
       </synonym>
       <type>
         <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c8bb103f-f054-469a-b798-fa6a619fd9cb">
+      <name>ResponsiblePerson</name>
+      <synonym>
+        <key>en</key>
+        <value>Responsible person</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
       </type>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>

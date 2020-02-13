@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="68776962-9298-4319-98da-22abfc39c643">
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="68776962-9298-4319-98da-22abfc39c643">
   <producedTypes>
     <objectType typeId="3c21905f-94db-4a0f-9408-2e3c6837d94f" valueTypeId="6d46a42b-5758-4186-9cd7-25e1e1e4ac95"/>
     <refType typeId="7e0906a1-5e1f-4885-a670-98c1e26a21ed" valueTypeId="9ab978ce-deaa-4c2b-a109-6752db329f62"/>
@@ -15,19 +15,22 @@
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Document.PhysicalCountByLocation.StandardAttribute.Number</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
+  <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
   <listPresentation>
     <key>en</key>
     <value>Physical count by location list</value>
   </listPresentation>
-  <numberType>String</numberType>
-  <numberLength>9</numberLength>
+  <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.PhysicalCountByLocation.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.PhysicalCountByLocation.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.PhysicalCountByLocation.Form.ChoiceForm</defaultChoiceForm>
+  <posting>Deny</posting>
+  <realTimePosting>Deny</realTimePosting>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -55,7 +58,72 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <forms uuid="ad32094a-4a4e-4485-b0b6-db7b8efb2696">
+  <attributes uuid="c9902a9d-1174-45fa-bbc5-41b9ea756f1f">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="0670f01e-a581-46af-b5d8-968db0acec20">
+    <name>PhysicalInventory</name>
+    <synonym>
+      <key>en</key>
+      <value>Physical inventory</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PhysicalInventory</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4774f18c-b89a-48c7-8498-587dc88fc10b">
+    <name>ResponsiblePerson</name>
+    <synonym>
+      <key>en</key>
+      <value>Responsible person</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="617d2d2e-4327-4dde-bf74-cae8fd0ef57f">
+    <name>Status</name>
+    <synonym>
+      <key>en</key>
+      <value>Status</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ObjectStatuses</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameters>
+      <name>Filter.Parent</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Catalog.ObjectStatuses.PhysicalCountByLocation</value>
+      </value>
+    </choiceParameters>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="637d9187-67a8-44c3-ad50-b90f4dbdd71f">
+    <name>DocumentFormMobile</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form mobile</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="ad26591d-5369-4c93-9de5-6ffa616f750a">
     <name>DocumentForm</name>
     <synonym>
       <key>en</key>
@@ -64,11 +132,20 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="637d9187-67a8-44c3-ad50-b90f4dbdd71f">
-    <name>DocumentFormMobile</name>
+  <forms uuid="5710b461-fe76-41e1-b168-8f34f9d4946d">
+    <name>ListForm</name>
     <synonym>
       <key>en</key>
-      <value>Document form mobile</value>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="abb77983-2652-4630-8d3b-d7f0e0b73023">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
@@ -83,6 +160,18 @@
       <key>en</key>
       <value>Item list</value>
     </synonym>
+    <attributes uuid="adbcd93d-59b8-4572-8b4c-cbbbff9f728c">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="0b4a2426-e0df-4e0b-9723-b57404f2de24">
       <name>ItemKey</name>
       <synonym>
@@ -96,11 +185,23 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="542811d0-9ecc-4298-8241-3739211a6f29">
-      <name>ExpectedQuantity</name>
+    <attributes uuid="6f24d3f6-3c19-408a-9a11-0f5aca352919">
+      <name>Unit</name>
       <synonym>
         <key>en</key>
-        <value>Expected quantity</value>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6d61c175-fc85-47f0-899a-619b8afcb279">
+      <name>ExpCount</name>
+      <synonym>
+        <key>en</key>
+        <value>Exp. count</value>
       </synonym>
       <type>
         <types>DefinedType.typeQuantity</types>
@@ -108,11 +209,23 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="5584cc79-d126-486f-a6a6-8a39f55a7151">
-      <name>Quantity</name>
+    <attributes uuid="8c76278a-732a-45fb-990f-ee828502d953">
+      <name>PhysCount</name>
       <synonym>
         <key>en</key>
-        <value>Quantity</value>
+        <value>Phys. count</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e8610d01-491d-459f-8cdf-f3ed0cc0bcea">
+      <name>Difference</name>
+      <synonym>
+        <key>en</key>
+        <value>Difference</value>
       </synonym>
       <type>
         <types>DefinedType.typeQuantity</types>
@@ -121,4 +234,16 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <commands uuid="a71b490b-dfb3-4b07-acc2-d59c1fd274ec">
+    <name>GeneratePhysicalCountByLocation</name>
+    <synonym>
+      <key>en</key>
+      <value>Physical count by location</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.PhysicalInventory</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

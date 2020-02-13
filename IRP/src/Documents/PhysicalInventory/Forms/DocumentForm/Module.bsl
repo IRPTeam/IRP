@@ -134,10 +134,154 @@ Procedure FillExpCount(Command)
 EndProcedure
 
 &AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If CurrentData.Locked Then
+		Cancel = True;
+	EndIf;
+EndProcedure
+
+&AtClient
 Procedure UpdateExpCount(Command)
 	DocPhysicalInventoryClient.UpdateExpCount(Object, ThisObject);
+	UpdatePhysicalCountsByLocations();
+EndProcedure
+
+&AtClient
+Procedure UpdatePhysCount(Command)
+	DocPhysicalInventoryClient.UpdatePhysCount(Object, ThisObject);
+	UpdatePhysicalCountsByLocations();
+EndProcedure
+
+&AtServer
+Procedure UpdatePhysicalCountsByLocations()
+	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	If Upper(Field.Name) = Upper("ItemListPhysicalCountByLocationPresentation") Then
+		CurrentData = Items.ItemList.CurrentData;
+		If CurrentData  = Undefined Then
+			Return;
+		EndIf;
+		StandardProcessing = False;
+		If ValueIsFilled(CurrentData.PhysicalCountByLocation) Then
+			OpenForm("Document.PhysicalCountByLocation.ObjectForm", 
+					New Structure("Key", CurrentData.PhysicalCountByLocation), 
+					ThisObject);
+		EndIf;
+	EndIf;
 EndProcedure
 
 
+&AtClient
+Procedure SetResponsiblePerson(Command)
+	SelectedRows = Items.ItemList.SelectedRows;
+	If Not SelectedRows.Count() Then
+		Return;
+	EndIf;
+	
+	Filter = New Structure("Employee", True);
+	
+	OpenFormParameters = New Structure("ChoiceMode, CloseOnChoice, Filter", True, True, Filter);
+	
+	OnChoiseNotify = New NotifyDescription("OnChoiceResponsiblePerson", ThisObject, 
+	New Structure("SelectedRows", SelectedRows));
+	
+	OpenForm("Catalog.Partners.ChoiceForm", OpenFormParameters,ThisObject,,,,OnChoiseNotify);
+EndProcedure
+
+&AtClient
+Procedure OnChoiceResponsiblePerson(Result, AdditionalsParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	For Each RowID In AdditionalsParameters.SelectedRows Do
+		Object.ItemList.FindByID(RowID).ResponsiblePerson = Result;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure GeneratePhysicalCountByLocation(Command = Undefined) Export
+	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
+		Notify = New NotifyDescription("GeneratePhysicalCountByLocationDoWrite", ThisObject);
+		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
+	Else
+		GeneratePhysicalCountByLocationAtServer();
+		//GeneratePhysicalCountByLocationDoWrite(DialogReturnCode.Yes, Undefined);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure GeneratePhysicalCountByLocationDoWrite(Result, AdditionalsParameters) Export
+	If Result = DialogReturnCode.Yes And Write() Then
+		GeneratePhysicalCountByLocationAtServer();
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure GeneratePhysicalCountByLocationAtServer() Export
+	GenerateParameters = New Structure();
+	GenerateParameters.Insert("PhysicalInventory", Object.Ref);
+	GenerateParameters.Insert("Store", Object.Store);
+	GenerateParameters.Insert("ArrayOfInstance", GetArrayOfInstance(Object.Ref));
+	Documents.PhysicalCountByLocation.GeneratePhysicalCountByLocation(GenerateParameters);
+	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
+EndProcedure
+
+&AtServer
+Function GetArrayOfInstance(PhysicalInventoryRef)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	PhysicalInventoryItemList.Key AS Key,
+	|	PhysicalInventoryItemList.ItemKey AS ItemKey,
+	|	PhysicalInventoryItemList.Unit AS Unit,
+	|	PhysicalInventoryItemList.ExpCount AS ExpCount,
+	|	PhysicalInventoryItemList.Difference AS Difference,
+	|	PhysicalInventoryItemList.ResponsiblePerson AS ResponsiblePerson
+	|FROM
+	|	Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
+	|WHERE
+	|	PhysicalInventoryItemList.Ref = &PhysicalInventoryRef
+	|	AND PhysicalInventoryItemList.ResponsiblePerson <> VALUE(Catalog.Partners.EmptyRef)
+	|TOTALS
+	|BY
+	|	ResponsiblePerson";
+	Query.SetParameter("PhysicalInventoryRef", PhysicalInventoryRef);
+	QueryResult = Query.Execute();
+	QuerySelection  = QueryResult.Select(QueryResultIteration.ByGroups);
+	Result = New Array();
+	While QuerySelection.Next() Do
+		Instance = New Structure("ResponsiblePerson, ItemList", QuerySelection.ResponsiblePerson, New Array());
+		QuerySelectionDetails = QuerySelection.Select();
+		While QuerySelectionDetails.Next() Do
+			ItemListRow = New Structure();
+			ItemListRow.Insert("Key", QuerySelectionDetails.Key);
+			ItemListRow.Insert("ItemKey", QuerySelectionDetails.ItemKey);
+			ItemListRow.Insert("Unit", QuerySelectionDetails.Unit);
+			ItemListRow.Insert("ExpCount", QuerySelectionDetails.ExpCount);
+			ItemListRow.Insert("Difference", QuerySelectionDetails.Difference);
+			Instance.ItemList.Add(ItemListRow);
+		EndDo;
+		Result.Add(Instance);
+	EndDo;
+	Return Result;
+EndFunction
+
+&AtClient
+Procedure PhysicalCountByLocationListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure DecorationStatusHistoryClick(Item)
+	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
+EndProcedure
 
 

@@ -16,5 +16,7 @@
     <types>DocumentRef.SalesOrder</types>
     <types>DocumentRef.SalesReturnOrder</types>
     <types>DocumentRef.ReconciliationStatement</types>
+    <types>DocumentRef.PhysicalCountByLocation</types>
+    <types>DocumentRef.PhysicalInventory</types>
   </type>
 </mdclass:DefinedType>

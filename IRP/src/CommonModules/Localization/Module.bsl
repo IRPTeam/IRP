@@ -166,6 +166,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Error_072", NStr("en = 'Store is required on line %1'", CodeLanguage));
 	Strings.Insert("Error_073", NStr("en = 'All items in %1(s) are already received by %2(s).'", CodeLanguage));
 	Strings.Insert("Error_074", NStr("en = 'Currency transfer is possible only when amounts is equal.'", CodeLanguage));
+	Strings.Insert("Error_075", NStr("en = 'Not yet all Physical count by location is closed'", CodeLanguage));
 	#EndRegion
 	
 	#Region InfoMessages
@@ -174,6 +175,8 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("InfoMessage_003", NStr("en = 'This is the service form.'", CodeLanguage));
 	Strings.Insert("InfoMessage_004", NStr("en = 'Save object before continue'", CodeLanguage));
 	Strings.Insert("InfoMessage_005", NStr("en = 'Done'", CodeLanguage));
+	Strings.Insert("InfoMessage_006", NStr("en = 'Document Physical count by location already created, use update'", CodeLanguage));
+	Strings.Insert("InfoMessage_007", NStr("en = '#%1 date: %2'", CodeLanguage));
 	#EndRegion
 	
 	#Region QuestionToUser
@@ -227,6 +230,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Exc_006", NStr("en = 'Library data not contain version'", CodeLanguage));
 	Strings.Insert("Exc_007", NStr("en = 'Not implemented for library version: %1'", CodeLanguage));
 	Strings.Insert("Exc_008", NStr("en = 'Unknown row key'", CodeLanguage));
+	Strings.Insert("Exc_009", NStr("en = 'Error: %1'", CodeLanguage));
 	#EndRegion
 	
 	#Region Saas

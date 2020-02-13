@@ -136,6 +136,12 @@ Procedure SearchByBarcode(Command, Object, Form) Export
 EndProcedure
 
 Procedure FillExpCount(Object, Form) Export
+	
+	If DocPhysicalInventoryServer.HavePhysicalCountByLocation(Object.Ref) Then
+		ShowMessageBox(Undefined, R().InfoMessage_006);
+		Return;
+	EndIf;
+	
 	FillItemList(Object, 
 				Form, 
 				DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store));
@@ -154,6 +160,18 @@ Procedure UpdateExpCount(Object, Form) Export
 				DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store, ItemList));
 EndProcedure
 
+Procedure UpdatePhysCount(Object, Form) Export
+	ItemList = New Array();
+	For Each Row In Object.ItemList Do
+		NewRow = New Structure("Key, ItemKey");
+		FillPropertyValues(NewRow, Row);
+		ItemList.Add(NewRow);
+	EndDo;
+	UpdateItemList(Object, 
+					Form, 
+					DocPhysicalInventoryServer.GetItemListWithFillingPhysCount(Object.Ref, ItemList));
+EndProcedure
+
 Procedure FillItemList(Object, Form, Result)
 	Object.ItemList.Clear();
 	For Each Row In Result Do
@@ -163,3 +181,16 @@ Procedure FillItemList(Object, Form, Result)
 	EndDo;
 EndProcedure
 
+Procedure UpdateItemList(Object, Form, Result)
+	For Each ItemListRow In Object.ItemList Do
+		ItemListRow.PhysCount = 0;
+		ItemListRow.Difference = ItemListRow.PhysCount - ItemListRow.ExpCount;
+	EndDo;
+	
+	For Each Row In Result Do
+		For Each ItemListRow In Object.ItemList.FindRows(New Structure("Key, ItemKey", Row.Key, Row.ItemKey)) Do
+			FillPropertyValues(ItemListRow, Row);
+			ItemListRow.Difference = ItemListRow.PhysCount - ItemListRow.ExpCount;
+		EndDo;
+	EndDo;
+EndProcedure

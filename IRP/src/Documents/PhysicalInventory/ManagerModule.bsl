@@ -10,6 +10,13 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("StockAdjustmentAsWriteOff", PostingServer.CreateTable(AccReg.StockAdjustmentAsWriteOff));
 	Tables.Insert("StockAdjustmentAsSurplus", PostingServer.CreateTable(AccReg.StockAdjustmentAsSurplus));
 	
+	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
+	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	
+	If Not StatusInfo.Posting Then
+		Return Tables;
+	EndIf;
+	
 	QueryItemList = New Query();
 	QueryItemList.Text = GetQueryTextPhysicalInventoryItemList();
 	QueryItemList.SetParameter("Ref", Ref);
@@ -289,6 +296,55 @@ Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefine
 EndProcedure
 
 #EndRegion
+
+Function GetItemListWithFillingPhysCount(Ref, ItemList) Export
+	Query = New Query();
+	Query.Text = GetQueryTextFillPhysCount_BytItemList();
+	
+	AccReg = Metadata.AccumulationRegisters.StockBalance;
+		
+	ItemListTyped = New ValueTable();
+	ItemListTyped.Columns.Add("Key", New TypeDescription("UUID"));
+	ItemListTyped.Columns.Add("ItemKey", AccReg.Dimensions.ItemKey.Type);
+	For Each Row In ItemList Do
+		FillPropertyValues(ItemListTyped.Add(), Row);
+	EndDo;
+		
+	Query.SetParameter("ItemList", ItemListTyped);
+	Query.SetParameter("Ref", Ref);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Function GetQueryTextFillPhysCount_BytItemList()
+	Return
+	"SELECT
+	|	tmp.Key AS Key,
+	|	tmp.ItemKey AS ItemKey
+	|INTO ItemList
+	|FROM
+	|	&ItemList AS tmp
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PhysicalCountByLocationItemList.Key,
+	|	PhysicalCountByLocationItemList.ItemKey,
+	|	SUM(ISNULL(PhysicalCountByLocationItemList.PhysCount, 0)) AS PhysCount
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
+	|		ON ItemList.Key = PhysicalCountByLocationItemList.Key
+	|		AND ItemList.ItemKey = PhysicalCountByLocationItemList.ItemKey
+	|		AND PhysicalCountByLocationItemList.Ref.PhysicalInventory = &Ref
+	|		AND
+	|		NOT PhysicalCountByLocationItemList.Ref.DeletionMark
+	|		AND PhysicalCountByLocationItemList.Ref.Status.Posting
+	|GROUP BY
+	|	PhysicalCountByLocationItemList.Key,
+	|	PhysicalCountByLocationItemList.ItemKey";
+EndFunction
 
 Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 	Query = New Query();

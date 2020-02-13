@@ -27,10 +27,11 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form) Export
-	BasedOnBoxingBundling = DocumentsClientServer.DocumentBasedOnBoxingBundling(Object);
-	Form.Items.LegalName.Enabled = Not BasedOnBoxingBundling AND ValueIsFilled(Object.Partner);
-	Form.Items.Partner.Visible = Not BasedOnBoxingBundling;
-	Form.Items.LegalName.Visible = Not BasedOnBoxingBundling;
+	PartnerVisible = (Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer")
+			OR Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase"));
+	Form.Items.LegalName.Enabled = PartnerVisible AND ValueIsFilled(Object.Partner);
+	Form.Items.Partner.Visible   = PartnerVisible;
+	Form.Items.LegalName.Visible = PartnerVisible;
 #If Client Then	
 	For Each Row In Object.ItemList Do
 		If ValueIsFilled(Row.ReceiptBasis) Then
@@ -63,6 +64,11 @@ Procedure StoreOnChange(Item)
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure TransactionTypeOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
 
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export

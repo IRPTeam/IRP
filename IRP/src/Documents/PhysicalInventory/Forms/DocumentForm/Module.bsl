@@ -202,7 +202,10 @@ Procedure OnChoiceResponsiblePerson(Result, AdditionalsParameters) Export
 	EndIf;
 	
 	For Each RowID In AdditionalsParameters.SelectedRows Do
-		Object.ItemList.FindByID(RowID).ResponsiblePerson = Result;
+		Row = Object.ItemList.FindByID(RowID);
+		If Not ValueIsFilled(Row.ResponsiblePerson) Then
+			Row.ResponsiblePerson = Result;
+		EndIf;
 	EndDo;
 EndProcedure
 
@@ -213,7 +216,6 @@ Procedure GeneratePhysicalCountByLocation(Command = Undefined) Export
 		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
 		GeneratePhysicalCountByLocationAtServer();
-		//GeneratePhysicalCountByLocationDoWrite(DialogReturnCode.Yes, Undefined);
 	EndIf;
 EndProcedure
 
@@ -243,6 +245,7 @@ Function GetArrayOfInstance(PhysicalInventoryRef)
 	|	PhysicalInventoryItemList.ItemKey AS ItemKey,
 	|	PhysicalInventoryItemList.Unit AS Unit,
 	|	PhysicalInventoryItemList.ExpCount AS ExpCount,
+	|	PhysicalInventoryItemList.PhysCount AS PhysCount,
 	|	PhysicalInventoryItemList.Difference AS Difference,
 	|	PhysicalInventoryItemList.ResponsiblePerson AS ResponsiblePerson
 	|FROM
@@ -273,6 +276,7 @@ Function GetArrayOfInstance(PhysicalInventoryRef)
 			ItemListRow.Insert("ItemKey", QuerySelectionDetails.ItemKey);
 			ItemListRow.Insert("Unit", QuerySelectionDetails.Unit);
 			ItemListRow.Insert("ExpCount", QuerySelectionDetails.ExpCount);
+			ItemListRow.Insert("PhysCount", QuerySelectionDetails.PhysCount);
 			ItemListRow.Insert("Difference", QuerySelectionDetails.Difference);
 			Instance.ItemList.Add(ItemListRow);
 		EndDo;

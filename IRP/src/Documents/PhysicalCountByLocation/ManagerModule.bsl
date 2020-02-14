@@ -25,6 +25,7 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 				NewRow.ItemKey = ItemListRow.ItemKey;
 				NewRow.Unit = ItemListRow.Unit;
 				NewRow.ExpCount = ItemListRow.ExpCount;
+				NewRow.PhysCount = ItemListRow.PhysCount;
 				NewRow.Difference = ItemListRow.Difference;
 			EndDo;
 			PhysicalCountByLocationObject.Write();

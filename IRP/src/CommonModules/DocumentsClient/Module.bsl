@@ -987,7 +987,9 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 			Row = ExistingRows[0];
 		Else
 			Row = Object.ItemList.Add();
-			Row.Key = New UUID();
+			If Row.Property("Key") Then
+				Row.Key = New UUID();
+			EndIf;
 			FillPropertyValues(Row, ResultElement, FilterString);
 			If Row.Property("Store") Then
 				Row.Store = Form.CurrentStore;
@@ -1024,7 +1026,19 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
 	NotifyDescription = New NotifyDescription("PickupItemsEnd", ThisObject, NotifyParameters);
-	OpenFormParameters = New Structure;
+	OpenFormParameters = PickupItemsParameters(Object, Form);	
+	#If MobileClient Then
+	FormName = "CommonForm.PickUpItemsMobile";
+	#Else
+	FormName = "CommonForm.PickUpItems";
+	#EndIf
+	OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
+EndProcedure
+
+//TODO: Some parameters do not exist. Fix
+Function PickupItemsParameters(Object, Form)
+	ReturnValue = New Structure();
+	
 	StoreArray = New Array;
 	For Each Row In Object.ItemList Do
 		If ValueIsFilled(Row.Store) Then
@@ -1033,19 +1047,26 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 			EndIf;
 		EndIf;
 	EndDo;
-	If Not StoreArray.Count() And ValueIsFilled(Form.CurrentStore) Then
-		StoreArray.Add(Form.CurrentStore);
-	EndIf;
-	OpenFormParameters.Insert("Stores", StoreArray);
-	OpenFormParameters.Insert("EndPeriod", CommonFunctionsServer.GetCurrentSessionDate());
-	OpenFormParameters.Insert("PriceType", Form.CurrentPriceType);
-	#If MobileClient Then
-	FormName = "CommonForm.PickUpItemsMobile";
-	#Else
-	FormName = "CommonForm.PickUpItems";
-	#EndIf
-	OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
-EndProcedure
+	Try
+		If Not StoreArray.Count() And ValueIsFilled(Form.CurrentStore) Then
+			StoreArray.Add(Form.CurrentStore);
+		EndIf;
+	Except
+		
+	EndTry;
+	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
+	Try
+		PriceType = Form.CurrentPriceType;
+	Except
+		PriceType = PredefinedValue("Catalog.PriceTypes.EmptyRef");
+	EndTry;
+	
+	ReturnValue.Insert("Stores", StoreArray);
+	ReturnValue.Insert("EndPeriod", EndPeriod);
+	ReturnValue.Insert("PriceType", PriceType);
+	
+	Return ReturnValue;
+EndFunction
 
 #EndRegion
 

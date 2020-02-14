@@ -1122,7 +1122,7 @@
             <horizontalStretch>true</horizontalStretch>
             <verticalStretch>true</verticalStretch>
             <valuesPicture xsi:type="core:PictureRef">
-              <picture>CommonPicture.Lock</picture>
+              <picture>CommonPicture.LockedRow</picture>
             </valuesPicture>
             <fileDragMode>AsFileRef</fileDragMode>
           </extInfo>

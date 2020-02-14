@@ -113,7 +113,7 @@
   <commonPictures>CommonPicture.BarcodePicture</commonPictures>
   <commonPictures>CommonPicture.Cloud</commonPictures>
   <commonPictures>CommonPicture.CurrencyRateDirection</commonPictures>
-  <commonPictures>CommonPicture.Lock</commonPictures>
+  <commonPictures>CommonPicture.LockedRow</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUser</sessionParameters>

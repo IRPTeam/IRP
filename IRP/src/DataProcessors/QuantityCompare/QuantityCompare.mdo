@@ -21,6 +21,16 @@
       <key>en</key>
       <value>Item list</value>
     </synonym>
+    <attributes uuid="fb993afc-27df-495f-8656-d1c96ca8f08a">
+      <name>Item</name>
+      <synonym>
+        <key>en</key>
+        <value>Item</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Items</types>
+      </type>
+    </attributes>
     <attributes uuid="5e9174ed-f93e-4dd2-95a8-5034f8e6ccf1">
       <name>ItemKey</name>
       <synonym>
@@ -98,6 +108,16 @@
         <types>UUID</types>
       </type>
     </attributes>
+    <attributes uuid="765e1811-b2ad-4863-8042-e2d7fee0eb52">
+      <name>Item</name>
+      <synonym>
+        <key>en</key>
+        <value>Item</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Items</types>
+      </type>
+    </attributes>
     <attributes uuid="c7e0208d-1b1f-4e0a-ac35-5232f2229785">
       <name>ItemKey</name>
       <synonym>
@@ -150,6 +170,16 @@
       </synonym>
       <type>
         <types>UUID</types>
+      </type>
+    </attributes>
+    <attributes uuid="b882bd5e-05b4-4f6a-8882-24c8658405c9">
+      <name>Item</name>
+      <synonym>
+        <key>en</key>
+        <value>Item</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Items</types>
       </type>
     </attributes>
     <attributes uuid="f764f44a-573f-4ae1-951f-e0a2a324edb5">

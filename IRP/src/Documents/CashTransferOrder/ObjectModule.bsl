@@ -15,12 +15,14 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		If SendCurrency = ReceiveCurrency Then
 			
 			If SendAmount <> ReceiveAmount Then
+				Cancel = True;
 				CommonFunctionsClientServer.ShowUsersMessage(R().Error_074, "SendAmount", ThisObject);
 				CommonFunctionsClientServer.ShowUsersMessage(R().Error_074, "ReceiveAmount", ThisObject);
 			EndIf;
 		Else
 			// Currency exchange is possible only through accounts with the same type (cash account or bank account)
 			If Sender.Type <> Receiver.Type Then
+				Cancel = True;
 				CommonFunctionsClientServer.ShowUsersMessage(R().Error_050, "Sender", ThisObject);
 				CommonFunctionsClientServer.ShowUsersMessage(R().Error_050, "Receiver", ThisObject);
 			EndIf;

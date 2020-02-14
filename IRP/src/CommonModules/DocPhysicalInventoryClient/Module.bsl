@@ -150,7 +150,7 @@ EndProcedure
 Procedure UpdateExpCount(Object, Form) Export
 	ItemList = New Array();
 	For Each Row In Object.ItemList Do
-		NewRow = New Structure("Key, LineNumber, Store, ItemKey, Unit, PhysCount");
+		NewRow = New Structure("Key, LineNumber, Store, ItemKey, Unit, PhysCount, ResponsiblePerson");
 		FillPropertyValues(NewRow, Row);
 		NewRow.Store = Object.Store;
 		ItemList.Add(NewRow);

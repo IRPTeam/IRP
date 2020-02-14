@@ -8,12 +8,9 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 		For Each Instance In Parameters.ArrayOfInstance Do
 			PhysicalCountByLocationRef = FindPhysicalCountByLocation(Parameters.PhysicalInventory, 
 																	 Instance.ResponsiblePerson);
-			PhysicalCountByLocationObject = Undefined;
-			If ValueIsFilled(PhysicalCountByLocationRef) Then
-				PhysicalCountByLocationObject = PhysicalCountByLocationRef.GetObject();
-			Else
-				PhysicalCountByLocationObject = Documents.PhysicalCountByLocation.CreateDocument();
-			EndIf;
+
+			PhysicalCountByLocationObject = Documents.PhysicalCountByLocation.CreateDocument();
+
 			// try lock for modify
 			PhysicalCountByLocationObject.Lock();
 			PhysicalCountByLocationObject.Fill(Undefined);

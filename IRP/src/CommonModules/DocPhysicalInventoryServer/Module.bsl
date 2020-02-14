@@ -33,6 +33,7 @@ Procedure UpdatePhysicalCountByLocations(Object, Form) Export
 	
 	For Each Row In Object.ItemList Do
 		Row.PhysicalCountByLocation = Undefined;
+		Row.PhysicalCountByLocationPresentation = Undefined;
 		Row.Locked = False;
 	EndDo;
 	
@@ -40,7 +41,6 @@ Procedure UpdatePhysicalCountByLocations(Object, Form) Export
 		For Each LinkedRow In Object.ItemList.FindRows(New Structure("Key", Row.Key)) Do
 			LinkedRow.PhysicalCountByLocation = Row.Ref;
 			LinkedRow.PhysicalCountByLocationPresentation = StrTemplate(R().InfoMessage_007, Row.Number, Row.Date);
-			LinkedRow.ResponsiblePerson = Row.ResponsiblePerson;
 			LinkedRow.Locked = True;
 		EndDo;
 	EndDo;
@@ -69,7 +69,7 @@ Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 	Result = Documents.PhysicalInventory.GetItemListWithFillingExpCount(Ref, Store, ItemList);
 	ArrayOfResult = New Array();
 	For Each Row In Result Do
-		NewRow = New Structure("Key, Store, Item, ItemKey, Unit, ExpCount, PhysCount");
+		NewRow = New Structure("Key, Store, Item, ItemKey, Unit, ExpCount, PhysCount, ResponsiblePerson");
 		FillPropertyValues(NewRow, Row);
 		ArrayOfResult.Add(NewRow);
 	EndDo;

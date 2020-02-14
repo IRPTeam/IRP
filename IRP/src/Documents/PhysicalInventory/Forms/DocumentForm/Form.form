@@ -2362,6 +2362,10 @@
           <event>BeforeAddRow</event>
           <name>PhysicalCountByLocationListBeforeAddRow</name>
         </handlers>
+        <handlers>
+          <event>OnChange</event>
+          <name>PhysicalCountByLocationListOnChange</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>

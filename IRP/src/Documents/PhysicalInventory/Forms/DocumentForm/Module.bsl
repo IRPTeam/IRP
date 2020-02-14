@@ -247,9 +247,16 @@ Function GetArrayOfInstance(PhysicalInventoryRef)
 	|	PhysicalInventoryItemList.ResponsiblePerson AS ResponsiblePerson
 	|FROM
 	|	Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
+	|		LEFT JOIN Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
+	|		ON PhysicalCountByLocationItemList.Ref.PhysicalInventory = PhysicalInventoryItemList.Ref
+	|		AND PhysicalCountByLocationItemList.Key = PhysicalInventoryItemList.Key
+	|		AND PhysicalCountByLocationItemList.ItemKey = PhysicalInventoryItemList.ItemKey
+	|		AND
+	|		NOT PhysicalCountByLocationItemList.Ref.DeletionMark
 	|WHERE
 	|	PhysicalInventoryItemList.Ref = &PhysicalInventoryRef
 	|	AND PhysicalInventoryItemList.ResponsiblePerson <> VALUE(Catalog.Partners.EmptyRef)
+	|	AND PhysicalCountByLocationItemList.Key IS NULL
 	|TOTALS
 	|BY
 	|	ResponsiblePerson";
@@ -284,4 +291,7 @@ Procedure DecorationStatusHistoryClick(Item)
 	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
 EndProcedure
 
-
+&AtClient
+Procedure PhysicalCountByLocationListOnChange(Item)
+	UpdatePhysicalCountsByLocations();
+EndProcedure

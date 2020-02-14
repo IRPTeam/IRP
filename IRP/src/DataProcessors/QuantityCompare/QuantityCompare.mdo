@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a2e1d861-0f4d-4e8b-ba0a-6c3c24d24c44">
+  <producedTypes>
+    <objectType typeId="1365f7c4-64d3-4c09-aa34-4c667a8a4f8b" valueTypeId="f88c4411-7323-4f55-aebd-fcbbe2a08d76"/>
+    <managerType typeId="2f41a3a0-4378-4664-abbc-d3356141cdb9" valueTypeId="962181fb-7aad-4f56-bd84-480aa33384ea"/>
+  </producedTypes>
+  <name>QuantityCompare</name>
+  <synonym>
+    <key>en</key>
+    <value>Quantity compare</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.QuantityCompare.Form.Form</defaultForm>
+  <tabularSections uuid="996a99ed-1f86-4815-911a-1ad6e02fcc0c">
+    <producedTypes>
+      <objectType typeId="93ebbfc4-23e1-42b8-ac5d-436ea2bcda0c" valueTypeId="e823f54d-70e1-4c4a-9f33-6fe212fd9ae3"/>
+      <rowType typeId="b48226cd-4cf5-41dc-8613-0110557b2aac" valueTypeId="a6dea1c1-4171-468c-81e5-7563f1528b47"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="5e9174ed-f93e-4dd2-95a8-5034f8e6ccf1">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+    </attributes>
+    <attributes uuid="4c1fd5d8-b032-4542-9974-6707f7991118">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+    </attributes>
+    <attributes uuid="b24c2d73-3e98-49ae-b59e-deea4fabbb0a">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+    </attributes>
+    <attributes uuid="6ab7577f-f3a9-44c0-be78-bbe72ff9aa0d">
+      <name>Count</name>
+      <synonym>
+        <key>en</key>
+        <value>Count</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+    </attributes>
+    <attributes uuid="2dd3f69e-ea1b-492d-b73f-546117589b78">
+      <name>Difference</name>
+      <synonym>
+        <key>en</key>
+        <value>Difference</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="669827f7-5bc2-45e1-b256-4163f8ed533b">
+    <producedTypes>
+      <objectType typeId="16cf0aff-d331-4be4-99cc-849836b8bb1a" valueTypeId="408a5abd-ef21-40fb-8a5b-7bdfbdf5686e"/>
+      <rowType typeId="34d913ee-42b5-4418-9db0-d75d640cfd8c" valueTypeId="f49271d5-9aa2-4fc6-9abf-1686fd9c00cf"/>
+    </producedTypes>
+    <name>ExpItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Exp. item list</value>
+    </synonym>
+    <attributes uuid="9d0e86ef-8ef7-4a82-9482-aba8ae314542">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+    </attributes>
+    <attributes uuid="c7e0208d-1b1f-4e0a-ac35-5232f2229785">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+    </attributes>
+    <attributes uuid="b473405d-f1ab-4915-83cf-59239b96f5b3">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Q</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+    </attributes>
+    <attributes uuid="18f193af-3c7f-4154-8d76-3ed9af5fe883">
+      <name>BaseOn</name>
+      <synonym>
+        <key>en</key>
+        <value>Base on</value>
+      </synonym>
+      <type>
+        <types>AnyRef</types>
+      </type>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="36bb4869-bb91-4a85-9b08-4a8c1be985f1">
+    <producedTypes>
+      <objectType typeId="7a8d0888-9b5b-4491-ad30-21f0b0b65574" valueTypeId="acf5adb0-8192-4850-b8da-5d30f8754385"/>
+      <rowType typeId="68704e6f-df81-418f-ba07-90b1db91f80f" valueTypeId="c3d49e03-b121-4be4-839a-b01fd6deb60a"/>
+    </producedTypes>
+    <name>PhysItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Phys. item list</value>
+    </synonym>
+    <attributes uuid="2043f7a7-b761-4238-bf7e-966930a53137">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+    </attributes>
+    <attributes uuid="f764f44a-573f-4ae1-951f-e0a2a324edb5">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+    </attributes>
+    <attributes uuid="36f892e6-9247-495a-ae58-b6f406b1a030">
+      <name>Count</name>
+      <synonym>
+        <key>en</key>
+        <value>Q</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+    </attributes>
+    <attributes uuid="c469c42a-0a04-4e8a-b268-2a8c8a31bb4a">
+      <name>Barcode</name>
+      <synonym>
+        <key>en</key>
+        <value>Barcode</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeBarcode</types>
+      </type>
+    </attributes>
+  </tabularSections>
+  <forms uuid="41897455-0e35-4b97-bf90-9e5e634d4f1a">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:DataProcessor>

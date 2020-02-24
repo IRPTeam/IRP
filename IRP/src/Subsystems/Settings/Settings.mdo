@@ -12,6 +12,7 @@
   </picture>
   <content>CommonModule.IntegrationClientServer</content>
   <content>Constant.NotFirstStart</content>
+  <content>Constant.DefaultPictureStorageVolume</content>
   <subsystems>AttributeAndProperty</subsystems>
   <subsystems>Contacts</subsystems>
   <subsystems>Equipment</subsystems>

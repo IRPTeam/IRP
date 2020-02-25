@@ -40,6 +40,10 @@
       <type>
         <types>CatalogRef.ItemKeys</types>
       </type>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <field>DataProcessor.QuantityCompare.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
     </attributes>
     <attributes uuid="4c1fd5d8-b032-4542-9974-6707f7991118">
       <name>Unit</name>
@@ -50,6 +54,10 @@
       <type>
         <types>CatalogRef.Units</types>
       </type>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <field>DataProcessor.QuantityCompare.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
     </attributes>
     <attributes uuid="b24c2d73-3e98-49ae-b59e-deea4fabbb0a">
       <name>Quantity</name>
@@ -127,6 +135,24 @@
       <type>
         <types>CatalogRef.ItemKeys</types>
       </type>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <field>DataProcessor.QuantityCompare.TabularSection.ExpItemList.Attribute.Item</field>
+      </choiceParameterLinks>
+    </attributes>
+    <attributes uuid="135ded6f-08a8-4de6-9907-5db25e6dbe9e">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <field>DataProcessor.QuantityCompare.TabularSection.ExpItemList.Attribute.Item</field>
+      </choiceParameterLinks>
     </attributes>
     <attributes uuid="b473405d-f1ab-4915-83cf-59239b96f5b3">
       <name>Quantity</name>
@@ -191,6 +217,24 @@
       <type>
         <types>CatalogRef.ItemKeys</types>
       </type>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <field>DataProcessor.QuantityCompare.TabularSection.PhysItemList.Attribute.Item</field>
+      </choiceParameterLinks>
+    </attributes>
+    <attributes uuid="030fd7fa-64e3-463f-8a85-b5a6a124dafa">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <field>DataProcessor.QuantityCompare.TabularSection.PhysItemList.Attribute.Item</field>
+      </choiceParameterLinks>
     </attributes>
     <attributes uuid="36f892e6-9247-495a-ae58-b6f406b1a030">
       <name>Count</name>
@@ -214,6 +258,79 @@
       <type>
         <types>DefinedType.typeBarcode</types>
       </type>
+    </attributes>
+    <attributes uuid="28d994ee-5ef2-4bde-8811-1ebd8e64eed0">
+      <name>Date</name>
+      <synonym>
+        <key>en</key>
+        <value>Date</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers/>
+      </type>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="b2dbf8bd-60dd-447e-9fa8-30bcd2709066">
+    <producedTypes>
+      <objectType typeId="89c5b72b-7502-483e-a2f1-9b8e54f1e5c1" valueTypeId="3bcec3e2-f02a-4f46-a831-f5c5153b9907"/>
+      <rowType typeId="df4a53cd-ebde-40cd-9931-29749328682e" valueTypeId="2e8bab31-b969-4f8f-a8df-7b4920197d08"/>
+    </producedTypes>
+    <name>CollapsedPhysItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Collapsed phys. item list</value>
+    </synonym>
+    <attributes uuid="400f78e2-4f35-4c3d-a9e3-79ffd12a0564">
+      <name>Item</name>
+      <synonym>
+        <key>en</key>
+        <value>Item</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Items</types>
+      </type>
+    </attributes>
+    <attributes uuid="4a2e5cf2-e7aa-43e6-9718-44bb46b17110">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <field>DataProcessor.QuantityCompare.TabularSection.CollapsedPhysItemList.Attribute.Item</field>
+      </choiceParameterLinks>
+    </attributes>
+    <attributes uuid="6c91ddc4-eb7a-4205-bb29-5efaf6adacd5">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <field>DataProcessor.QuantityCompare.TabularSection.CollapsedPhysItemList.Attribute.Item</field>
+      </choiceParameterLinks>
+    </attributes>
+    <attributes uuid="f2d27447-bd78-4ab0-bec1-9dea1f1e142c">
+      <name>Count</name>
+      <synonym>
+        <key>en</key>
+        <value>Q</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
     </attributes>
   </tabularSections>
   <forms uuid="41897455-0e35-4b97-bf90-9e5e634d4f1a">

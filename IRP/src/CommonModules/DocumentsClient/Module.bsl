@@ -1264,36 +1264,29 @@ EndProcedure
 #Region Commands
 
 &AtClient
-Procedure SearchByBarcode(Command, Object, Form, DocumentClientModule, PriceType = Undefined) Export
-	NotifyParameters = New Structure;
-	NotifyParameters.Insert("Form", Form);
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("DocumentClientModule", ThisObject);
+Procedure SearchByBarcode(Command, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined) Export
+	TransferParameters = New Structure;
+	If DocumentClientModule = Undefined Then
+		TransferParameters.Insert("DocumentClientModule", ThisObject);
+	Else
+		TransferParameters.Insert("DocumentClientModule", DocumentClientModule);
+	EndIf;
 	If PriceType <> Undefined Then
-		NotifyParameters.Insert("PriceType", PriceType);
+		TransferParameters.Insert("PriceType", PriceType);
 		If Object.Ref = Undefined Then
-			NotifyParameters.Insert("PricePeriod", CurrentDate());
+			TransferParameters.Insert("PricePeriod", CurrentDate());
 		Else
-			NotifyParameters.Insert("PricePeriod", Object.Date);
+			TransferParameters.Insert("PricePeriod", Object.Date);
 		EndIf;
 	EndIf;
-	
-	DescriptionField = "";
-	
-	#If MobileClient Then
-		If MultimediaTools.BarcodeScanningSupported() Then
-			NotifyScan = New NotifyDescription("ScanBarcodeEnd", BarcodeClient, NotifyParameters);
-			NotifyScanCancel = New NotifyDescription("InputBarcodeCancel", BarcodeClient, NotifyParameters);
-			MultimediaTools.ShowBarcodeScanning(DescriptionField, NotifyScan, NotifyScanCancel, BarcodeType.All);
-		Else
-			Return;
-		EndIf;
-	#Else
-		DescriptionField = "";
-		NotifyDescription = New NotifyDescription("InputBarcodeEnd", BarcodeClient, NotifyParameters);
-		ShowInputString(NotifyDescription, "", DescriptionField);
-	#EndIf
+	SearchByBarcode(Command, Object, Form, DocumentClientModule, TransferParameters);
 EndProcedure
+
+Procedure SearchByBarcodeEnd(BarcodeItems, Parameters) Export
+	DocumentModule = Parameters.ClientModule;
+	DocumentModule.PickupItemsEnd(BarcodeItems, Parameters);
+EndProcedure
+
 #EndRegion
 
 #Region Common

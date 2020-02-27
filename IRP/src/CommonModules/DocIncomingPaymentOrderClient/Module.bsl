@@ -71,6 +71,12 @@ EndProcedure
 #Region ItemAccount
 
 Procedure AccountOnChange(Object, Form, Item) Export
+	If ValueIsFilled(Object.Account) Then
+		AccountCurrency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
+		If ValueIsFilled(AccountCurrency) Then
+			Object.Currency = AccountCurrency;
+		EndIf;
+	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 

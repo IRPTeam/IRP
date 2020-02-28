@@ -26,7 +26,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocSalesOrderClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
 &AtClient
@@ -154,4 +154,19 @@ Procedure AddItemToItemList(ItemsData)
 		ItemRow.Difference = ItemRow.Quantity - ItemRow.Count;
 	EndDo;
 EndProcedure
+
+&AtClient
+Procedure TransferToDocument(Command)
+	ItemListAddress = ItemListToTempStorage(FormOwner.UUID);
+	Notify("TransferDataFromQuantityCompare", ItemListAddress, FormOwner);
+	Close();
+EndProcedure
+
+&AtServer
+Function ItemListToTempStorage(FormUUID)
+	ItemListValue = Object.ItemList.Unload();
+	Return PutToTempStorage(ItemListValue, FormUUID);	
+EndFunction
+
+
 

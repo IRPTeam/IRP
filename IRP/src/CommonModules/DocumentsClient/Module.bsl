@@ -1007,7 +1007,7 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 		
 		If Row.Property("Quantity") Then
 			Row.Quantity = Row.Quantity + ResultElement.Quantity;
-		ElsIF Row.Property("PhysCount") Then
+		ElsIF Row.Property("PhysCount") And Row.Property("Difference") Then
 			Row.PhysCount = Row.PhysCount + ResultElement.Quantity;
 			Row.Difference = Row.PhysCount - Row.ExpCount;
 		EndIf;

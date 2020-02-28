@@ -95,81 +95,7 @@ EndProcedure
 
 #EndRegion
 
-Function GetItemCompareListArray(Val ObjectItemList, Val FormItemBasisList) Export
-	
-	ItemCompareListArray = New Array;
-	
-	ItemList = ObjectItemList.Unload( , "ItemKey, Quantity");
-	ItemList.GroupBy("ItemKey", "Quantity");
-	ItemBasisList = FormItemBasisList.Unload( , "ItemKey, Quantity");
-	ItemBasisList.GroupBy("ItemKey", "Quantity");
-	
-	Query = New Query;
-	Query.Text = "SELECT
-		|	ItemListSource.ItemKey,
-		|	ItemListSource.Quantity
-		|INTO ItemList
-		|FROM
-		|	&ItemList AS ItemListSource
-		|;
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	ItemBasisList.ItemKey,
-		|	ItemBasisList.Quantity AS ExpectedQuantity
-		|INTO ItemBasisList
-		|FROM
-		|	&ItemBasisList AS ItemBasisList
-		|;
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	ItemList.ItemKey.Item AS Item,
-		|	ItemList.ItemKey,
-		|	ItemList.Quantity AS Quantity,
-		|	0 AS ExpectedQuantity
-		|INTO MergedTable
-		|FROM
-		|	ItemList AS ItemList
-		|GROUP BY
-		|	ItemList.ItemKey.Item,
-		|	ItemList.ItemKey,
-		|	ItemList.Quantity
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	ItemBasisList.ItemKey.Item,
-		|	ItemBasisList.ItemKey,
-		|	0,
-		|	ItemBasisList.ExpectedQuantity
-		|FROM
-		|	ItemBasisList AS ItemBasisList
-		|;
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	MergedTable.Item,
-		|	MergedTable.ItemKey,
-		|	SUM(MergedTable.Quantity) AS Quantity,
-		|	SUM(MergedTable.ExpectedQuantity) AS ExpectedQuantity,
-		|	SUM(MergedTable.ExpectedQuantity - MergedTable.Quantity) AS Difference
-		|FROM
-		|	MergedTable AS MergedTable
-		|GROUP BY
-		|	MergedTable.ItemKey,
-		|	MergedTable.Item";
-	Query.SetParameter("ItemList", ItemList);
-	Query.SetParameter("ItemBasisList", ItemBasisList);
-	QueryExecute = Query.Execute();
-	QueryUnload = QueryExecute.Unload();
-	For Each Row In QueryUnload Do
-		RowStructure = New Structure;
-		For Each Column In QueryUnload.Columns Do
-			RowStructure.Insert(Column.Name, Row[Column.Name]);
-		EndDo;
-		RowStructure.Insert("Title", "" + Row.Item + " " + Row.ItemKey);
-		ItemCompareListArray.Add(RowStructure);
-	EndDo;
-	Return ItemCompareListArray;
-EndFunction
+
 
 Function InfoReceiptBasisesFilling(FilterValues, ExistingRows, Ref) Export
 	
@@ -436,6 +362,23 @@ EndFunction
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+
+#Region AdditionalFunctions
+
+&AtServer
+Procedure LoadDataFromQuantityCompare(Object, Form, ItemListAddress) Export
+	QuantityCompareItemList = Form.GetFromTempStorage(ItemListAddress);
+	Object.ItemList.Clear();
+	For Each Row In QuantityCompareItemList Do
+		NewRow = Object.ItemList.Add();
+		FillPropertyValues(NewRow, Row);
+		NewRow.Quantity = Row.Count;
+		NewRow.Store = Form.CurrentStore;
+	EndDo;
 EndProcedure
 
 #EndRegion

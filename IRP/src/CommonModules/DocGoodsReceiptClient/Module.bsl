@@ -5,8 +5,6 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 	
-	DocGoodsReceiptClient.FillItemBasisList(Object, Form);
-	
 	#If MobileClient Then
 	ItemListOnChange(Object, Form);
 	SerialLotNumberListOnChange(Object, Form);
@@ -230,14 +228,6 @@ Procedure SerialLotNumberListOnChange(Object, Form, Item = Undefined) Export
 	EndDo;
 EndProcedure
 
-Procedure ItemBasisListOnChange(Object, Form, Item = Undefined) Export
-	For Each Row In Form.ItemBasisList Do
-		#If MobileClient Then
-		Row.Title = "" + Row.Item + " " + Row.ItemKey;
-		#EndIf
-	EndDo;
-EndProcedure
-
 Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
 	StandardProcessing = False;
 	CommonFormActions.EditMultilineText(Item.Name, Form);
@@ -396,57 +386,7 @@ Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel) Export
 EndProcedure
 
 Procedure SearchByBarcode(Object, Form, Command) Export
-	If Not Form.FillByScan And Object.ItemList.Count() Then
-		QuestionMode = QuestionDialogMode.YesNo;
-		QuestionPresentation = R()["QuestionToUser_002"];
-		NotifyParameters = New Structure;
-		NotifyParameters.Insert("Object", Object);
-		NotifyParameters.Insert("Form", Form);
-		NotifyParameters.Insert("Command", Command);
-		Notify = New NotifyDescription("StartSearchByBarcode", ThisObject, NotifyParameters);
-		ShowQueryBox(Notify, QuestionPresentation, QuestionMode);
-	Else
-		DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject);
-	EndIf;
-EndProcedure
-
-Procedure StartSearchByBarcode(Result, AdditionalParameters) Export
-	
-	Object = AdditionalParameters.Object;
-	Form = AdditionalParameters.Form;
-	CommAnd = AdditionalParameters.Command;
-	
-	If Result = DialogReturnCode.Yes Then
-		
-		DocGoodsReceiptClient.FillItemBasisList(Object, Form);
-		
-		Object.ItemList.Clear();
-		Form.FillByScan = True;
-		
-		DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject);
-	EndIf;
-EndProcedure
-
-Procedure FillItemBasisList(Object, Form) Export
-	
-	Form.ItemBasisList.Clear();
-	For Each Row In Object.ItemList Do
-		NewRow = Form.ItemBasisList.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;
-	
-EndProcedure
-
-Procedure GroupPagesOnCurrentPageChange(Object, Form, Item, CurrentPage) Export
-	If CurrentPage = Form.Items.GroupCompare Then
-		Form.ItemCompareList.Clear();
-		ItemCompareListArray = DocGoodsReceiptServer.GetItemCompareListArray(Object.ItemList,
-				Form.ItemBasisList);
-		For Each ItemArray In ItemCompareListArray Do
-			NewRow = Form.ItemCompareList.Add();
-			FillPropertyValues(NewRow, ItemArray);
-		EndDo;
-	EndIf;
+	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject);
 EndProcedure
 
 Procedure SelectReceiptBasises(Object, Form, Command) Export
@@ -499,7 +439,6 @@ Procedure SelectReceiptBasisesContinue(Result, AdditionalParameters) Export
 	EndDo;
 	
 	DocGoodsReceiptClient.ItemListOnChange(Object, Form, Form.Items.ItemList);
-	DocGoodsReceiptClient.FillItemBasisList(Object, Form);
 	
 	Notify("ChoiceReceiptBasis", New Structure(), Result);
 EndProcedure
@@ -520,7 +459,6 @@ Procedure SelectReceiptBasisInRowContinue(Result, AdditionalParameters) Export
 	FillPropertyValues(Row, Result[0], "Key, ReceiptBasis, SalesOrder");
 	
 	DocGoodsReceiptClient.ItemListOnChange(Object, Form, Form.Items.ItemList);
-	DocGoodsReceiptClient.FillItemBasisList(Object, Form);
 	
 	Notify("ChoiceReceiptBasis", New Structure(), Result);
 EndProcedure
@@ -545,6 +483,5 @@ Procedure FillReceiptBasises(Object, Form, Command) Export
 	EndDo;
 	
 	DocGoodsReceiptClient.ItemListOnChange(Object, Form, Form.Items.ItemList);
-	DocGoodsReceiptClient.FillItemBasisList(Object, Form);
 EndProcedure
 

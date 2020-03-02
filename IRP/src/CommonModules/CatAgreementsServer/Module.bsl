@@ -25,52 +25,6 @@ Procedure OnCreateAtServer(Cancel, StandartProcessing, Form, Parameters) Export
 	EndIf;
 EndProcedure
 
-Function GetAgreementByPartner(Partner, Agreement) Export
-	If Not Partner.IsEmpty() Then
-		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", Enums.AgreementTypes.Customer, ComparisonType.Equal));
-		If ValueIsFilled(Agreement) Then
-			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", Agreement, ComparisonType.Equal));
-		EndIf;
-		AdditionalParameters = New Structure();
-		AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
-		AdditionalParameters.Insert("IncludeFilterByPartner", True);
-		AdditionalParameters.Insert("IncludePartnerSegments", True);
-		AdditionalParameters.Insert("EndOfUseDate", CurrentDate());
-		AdditionalParameters.Insert("Partner", Partner);
-		Parameters = New Structure("CustomSearchFilter, AdditionalParameters",
-				DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
-				DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
-		Return Catalogs.Agreements.GetDefaultChoiseRef(Parameters);
-	EndIf;
-	Return Undefined;
-EndFunction
-
-Function GetAgreementByLegalName(LegalName, Agreement) Export
-	If Not LegalName.IsEmpty() Then
-		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", Enums.AgreementTypes.Customer, ComparisonType.Equal));
-		
-		If ValueIsFilled(Agreement) Then
-			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", Agreement, ComparisonType.Equal));
-		EndIf;
-		
-		AdditionalParameters = New Structure();
-		AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
-		AdditionalParameters.Insert("IncludeFilterByPartner", True);
-		AdditionalParameters.Insert("IncludePartnerSegments", True);
-		AdditionalParameters.Insert("EndOfUseDate", CurrentDate());
-		AdditionalParameters.Insert("LegalName", LegalName);
-		Parameters = New Structure("CustomSearchFilter, AdditionalParameters",
-				DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
-				DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
-		Return Catalogs.Agreements.GetDefaultChoiseRef(Parameters);
-	EndIf;
-	Return Undefined;
-EndFunction
-
 Function GetAgreementInfo(Agreement) Export
 	Return Catalogs.Agreements.GetAgreementInfo(Agreement);
 EndFunction

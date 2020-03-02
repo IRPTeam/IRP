@@ -103,15 +103,3 @@ EndProcedure
 
 #EndRegion
 
-Procedure ItemListPriceOnChange(Object, Form, Item) Export
-	Return;
-EndProcedure
-
-Procedure ImportPricesFromSpreadsheet(Object, Form, Command) Export
-	Return;
-EndProcedure
-
-Procedure ImportSpreadsheet(Object, Form, Command) Export
-	Return;
-EndProcedure
-

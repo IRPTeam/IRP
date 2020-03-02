@@ -41,26 +41,6 @@ EndProcedure
 
 #EndRegion
 
-Function GetLegalNameByPartner(Partner, LegalName) Export
-	If Not Partner.IsEmpty() Then
-		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		If ValueIsFilled(LegalName) Then
-			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", LegalName, ComparisonType.Equal));
-		EndIf;
-		AdditionalParameters = New Structure();
-		If ValueIsFilled(Partner) Then
-			AdditionalParameters.Insert("Partner", Partner);
-			AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
-		EndIf;
-		Parameters = New Structure("CustomSearchFilter, AdditionalParameters",
-				DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
-				DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
-		Return Catalogs.Companies.GetDefaultChoiseRef(Parameters);
-	EndIf;
-	Return Undefined;
-EndFunction
-
 Function GetUnitFactor(FromUnit, ToUnit) Export
 	Return Catalogs.Units.GetUnitFactor(FromUnit, ToUnit);
 EndFunction

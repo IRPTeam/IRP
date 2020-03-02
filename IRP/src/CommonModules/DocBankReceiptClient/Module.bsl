@@ -450,7 +450,7 @@ Procedure PaymentListPartnerOnChange(Object, Form, Item) Export
 	EndIf;
 
 	If ValueIsFilled(CurrentData.Partner) Then
-		CurrentData.Payer = DocBankReceiptServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.Payer);
+		CurrentData.Payer = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.Payer);
 		AgreementParameters = New Structure();
 		AgreementParameters.Insert("Partner"		, CurrentData.Partner);
 		AgreementParameters.Insert("Agreement"		, CurrentData.Agreement);

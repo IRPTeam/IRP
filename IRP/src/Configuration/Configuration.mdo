@@ -63,7 +63,6 @@
   <subsystems>Subsystem.AddAttributesAndProperties</subsystems>
   <subsystems>Subsystem.AddDataProc</subsystems>
   <subsystems>Subsystem.AutoTest</subsystems>
-  <subsystems>Subsystem.CustomOverride</subsystems>
   <subsystems>Subsystem.Delivery</subsystems>
   <subsystems>Subsystem.Equipment</subsystems>
   <subsystems>Subsystem.Finance</subsystems>
@@ -165,7 +164,6 @@
   <commonModules>CommonModule.CommonFormActions</commonModules>
   <commonModules>CommonModule.CommonFunctionsClientServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsServer</commonModules>
-  <commonModules>CommonModule.CustomOverride</commonModules>
   <commonModules>CommonModule.DocBankPaymentClient</commonModules>
   <commonModules>CommonModule.DocBankPaymentServer</commonModules>
   <commonModules>CommonModule.DocBankReceiptClient</commonModules>

@@ -62,7 +62,7 @@ EndProcedure
 #Region ItemPartner
 
 Procedure PartnerOnChange(Object, Form, Item) Export
-	Object.LegalName = DocGoodsReceiptServer.GetLegalNameByPartner(Object.Partner, Object.LegalName);
+	Object.LegalName = DocumentsServer.GetLegalNameByPartner(Object.Partner, Object.LegalName);
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 

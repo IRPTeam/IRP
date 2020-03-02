@@ -393,7 +393,7 @@ Procedure PaymentListPartnerOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;
 	If ValueIsFilled(CurrentData.Partner) Then
-		CurrentData.Payee = DocCashPaymentServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.Payee);
+		CurrentData.Payee = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.Payee);
 		
 		AgreementParameters = New Structure();
 		AgreementParameters.Insert("Partner"		, CurrentData.Partner);

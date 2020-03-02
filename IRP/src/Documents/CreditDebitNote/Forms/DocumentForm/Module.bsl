@@ -49,7 +49,7 @@ Procedure OperationTypeOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
-Procedure DateOnChange(Item)
+Procedure DateOnChange(Item, AddInfo = Undefined) Export
 	DocCreditDebitNoteClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -107,21 +107,24 @@ Procedure FillTransactionsAtServer()
 		Return;
 	EndIf;
 	
-	Query = New Query(
-			"SELECT
-			|	Table.Company,
-			|	Table.BasisDocument AS %2,
-			|	Table.Partner,
-			|	Table.LegalName,
-			|	Table.Agreement,
-			|	Table.Currency,
-			|	Table.AmountBalance AS Amount
-			|FROM
-			|	AccumulationRegister.%1.Balance(&Moment, Company = &Company
-			|	AND LegalName = &LegalName) AS Table
-			|WHERE
-			|	Table.AmountBalance > 0");
-	Query.SetParameter("Moment", ?(ValueIsFilled(Object.Date),
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	Table.Company,
+		|	Table.BasisDocument AS %2,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.Agreement,
+		|	Table.Currency,
+		|	Table.AmountBalance AS Amount
+		|FROM
+		|	AccumulationRegister.%1.Balance(&Period, 
+		|	Company = &Company
+		|	AND LegalName = &LegalName 
+		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS Table
+		|WHERE
+		|	Table.AmountBalance > 0";
+	Query.SetParameter("Period", ?(ValueIsFilled(Object.Ref),
 			New Boundary(Object.Date, BoundaryType.Excluding),
 			Undefined));
 	Query.SetParameter("Company", Object.Company);

@@ -108,48 +108,6 @@ Function GetManagerSegmentByPartner(Partner) Export
 	Return Partner.ManagerSegment;
 EndFunction
 
-Function GetAgreementByPartner(Partner, Agreement) Export
-	If Not Partner.IsEmpty() Then
-		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", Enums.AgreementTypes.Customer, ComparisonType.Equal));
-		If ValueIsFilled(Agreement) Then
-			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", Agreement, ComparisonType.Equal));
-		EndIf;
-		AdditionalParameters = New Structure();
-		AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
-		AdditionalParameters.Insert("IncludeFilterByPartner", True);
-		AdditionalParameters.Insert("IncludePartnerSegments", True);
-		AdditionalParameters.Insert("EndOfUseDate", CurrentDate());
-		AdditionalParameters.Insert("Partner", Partner);
-		Parameters = New Structure("CustomSearchFilter, AdditionalParameters",
-				DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
-				DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
-		Return Catalogs.Agreements.GetDefaultChoiseRef(Parameters);
-	EndIf;
-	Return Undefined;
-EndFunction
-
-Function GetLegalNameByPartner(Partner, LegalName) Export
-	If Not Partner.IsEmpty() Then
-		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		If ValueIsFilled(LegalName) Then
-			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", LegalName, ComparisonType.Equal));
-		EndIf;
-		AdditionalParameters = New Structure();
-		If ValueIsFilled(Partner) Then
-			AdditionalParameters.Insert("Partner", Partner);
-			AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
-		EndIf;
-		Parameters = New Structure("CustomSearchFilter, AdditionalParameters",
-				DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
-				DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
-		Return Catalogs.Companies.GetDefaultChoiseRef(Parameters);
-	EndIf;
-	Return Undefined;
-EndFunction
-
 Procedure StoreOnChange(TempStructure) Export
 	For Each Row In TempStructure.Object.ItemList Do
 		Row.Store = TempStructure.Store;

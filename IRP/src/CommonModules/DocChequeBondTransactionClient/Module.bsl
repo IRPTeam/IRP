@@ -485,8 +485,15 @@ Procedure TablePartnerOnChange(Object, Form, Item) Export
 	EndIf;
 	
 	If CurrentData.Partner <> Form.CurrentPartner Then
-		CurrentData.LegalName = DocSalesInvoiceServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.LegalName);
-		CurrentData.Agreement = DocSalesInvoiceServer.GetAgreementByPartner(CurrentData.Partner, CurrentData.Agreement);
+		AgreementParameters = New Structure();
+		AgreementParameters.Insert("Partner"		, CurrentData.Partner);
+		AgreementParameters.Insert("Agreement"		, CurrentData.Agreement);
+		AgreementParameters.Insert("CurrentDate"	, Object.Date);
+		AgreementParameters.Insert("ArrayOfFilters"	, New Array());
+		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	
+		CurrentData.LegalName = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.LegalName);
+		CurrentData.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 		SetVisibleEnabled(Object, Form, CurrentData);
 	EndIf;
 	Form.CurrentPartner = CurrentData.Partner;
@@ -570,7 +577,7 @@ Procedure TableAgreementTextChange(Object, Form, Item, Text, StandardProcessing)
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", 
 																	PredefinedValue("Enum.AgreementKinds.Standard"), 
-																	DataCompositionComparisonType.NotEqual));												
+																	ComparisonType.NotEqual));												
 	AdditionalParameters = New Structure();
 	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
 	AdditionalParameters.Insert("IncludeFilterByPartner", True);

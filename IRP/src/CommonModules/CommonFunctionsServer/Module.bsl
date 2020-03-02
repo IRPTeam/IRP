@@ -167,9 +167,9 @@ EndFunction
 Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export
 	QueryText = GetQueryText(ObjectName, CustomParameters.OptionsString, CustomParameters.Fields);
 	QueryBuilder = New QueryBuilder(QueryText);
-	QueryBuilder.FillSettings();		
+	QueryBuilder.FillSettings();
 	SetQueryBuilderFilters(QueryBuilder, CustomParameters.Filters);
-	Query = QueryBuilder.GetQuery();	
+	Query = QueryBuilder.GetQuery();
 	ObjectServerModule.SetQueryComplexFilters(Query, CustomParameters.ComplexFilters);	
 	QueryTable = Query.Execute().Unload();
 	Return QueryTable;

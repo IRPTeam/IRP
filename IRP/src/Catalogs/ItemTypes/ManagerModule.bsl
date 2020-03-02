@@ -10,38 +10,6 @@ Procedure SetDataLock(DataLock, ItemType)
 	DataLock.Lock();
 EndProcedure
 
-Procedure AddAvailableAttribute(ItemType, Attribute) Export
-	If Not TransactionActive() Then
-		BeginTransaction(DataLockControlMode.Managed);
-		Try
-			AddDataToObject(ItemType, Attribute);
-			If TransactionActive() Then
-				CommitTransaction();
-			EndIf;
-		Except
-			If TransactionActive() Then
-				RollbackTransaction();
-			EndIf;
-		EndTry;
-	Else
-		AddDataToObject(ItemType, Attribute);
-	EndIf;
-EndProcedure
-
-Procedure AddDataToObject(ItemType, Attribute)
-	DataLock = New DataLock();
-	SetDataLock(DataLock, ItemType);
-	
-	CatalogObject = ItemType.GetObject();
-	Filter = New Structure("Attribute", Attribute);
-	ArrayOfRows = CatalogObject.AvailableAttributes.FindRows(Filter);
-	If Not ArrayOfRows.Count() Then
-		NewRow = CatalogObject.AvailableAttributes.Add();
-		NewRow.Attribute = Attribute;
-		CatalogObject.Write();
-	EndIf;
-EndProcedure
-
 Procedure DeleteAvailableAttribute(ItemType, Attribute) Export
 	If Not TransactionActive() Then
 		BeginTransaction(DataLockControlMode.Managed);

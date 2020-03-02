@@ -102,8 +102,3 @@ Procedure SetListComplexFilters(List, QueryParameters) Export
 		EndIf;
 	EndDo;
 EndProcedure
-
-Function QueryTable(Parameters) Export
-	QueryTable = CommonFunctionsServer.QueryTable("Catalog.CashAccounts", CatCashAccountsServer, Parameters);
-	Return QueryTable;
-EndFunction

@@ -371,7 +371,7 @@ EndProcedure
 
 &AtServer
 Procedure LoadDataFromQuantityCompare(Object, Form, ItemListAddress) Export
-	QuantityCompareItemList = Form.GetFromTempStorage(ItemListAddress);
+	QuantityCompareItemList = GetFromTempStorage(ItemListAddress);
 	Object.ItemList.Clear();
 	For Each Row In QuantityCompareItemList Do
 		NewRow = Object.ItemList.Add();

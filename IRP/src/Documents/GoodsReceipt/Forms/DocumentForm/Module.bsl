@@ -258,19 +258,11 @@ EndProcedure
 
 &AtClient
 Procedure CompareQuantity(Command)
-	QuantityCompareParameters = ParametersForQuantityCompare();
+	QuantityCompareParameters = DocumentsServer.ParametersForQuantityCompare(Object, UUID);
 	OpenForm("DataProcessor.QuantityCompare.Form.Form", QuantityCompareParameters, ThisObject, UUID, , , , );
 EndProcedure
 
 #EndRegion
-
-&AtServer
-Function ParametersForQuantityCompare()
-	ReturnValue = New Structure;
-	ItemListValue = Object.ItemList.Unload();
-	ReturnValue.Insert("ItemList", ItemListValue);
-	Return ReturnValue;
-EndFunction
 
 &AtServer
 Procedure LoadDataFromQuantityCompareAtServer(Parameter)

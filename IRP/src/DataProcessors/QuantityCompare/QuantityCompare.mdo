@@ -70,7 +70,6 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
     </attributes>
     <attributes uuid="6ab7577f-f3a9-44c0-be78-bbe72ff9aa0d">
       <name>Count</name>

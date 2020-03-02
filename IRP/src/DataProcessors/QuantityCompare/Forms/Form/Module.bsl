@@ -1,6 +1,18 @@
 
 #Region FormEvents
 
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	If ValueIsFilled(Parameters.IncomingItemListAddress) Then
+		IncomingItemListValue = GetFromTempStorage(Parameters.IncomingItemListAddress);
+		Object.ItemList.Load(IncomingItemListValue);
+	EndIf;
+	If ValueIsFilled(Parameters.IncomingExpItemListAddress) Then
+		IncomingExpItemListValue = GetFromTempStorage(Parameters.IncomingExpItemListAddress);
+		Object.ExpItemList.Load(IncomingExpItemListValue);
+	EndIf;
+EndProcedure
+
 &AtClient
 Procedure OnOpen(Cancel)
 	RevertPhysListsVisible();

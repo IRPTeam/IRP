@@ -570,7 +570,7 @@ Procedure TableAgreementTextChange(Object, Form, Item, Text, StandardProcessing)
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", 
 																	PredefinedValue("Enum.AgreementKinds.Standard"), 
-																	DataCompositionComparisonType.NotEqual));												
+																	ComparisonType.NotEqual));												
 	AdditionalParameters = New Structure();
 	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
 	AdditionalParameters.Insert("IncludeFilterByPartner", True);

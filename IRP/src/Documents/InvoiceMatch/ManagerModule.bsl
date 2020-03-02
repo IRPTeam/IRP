@@ -272,8 +272,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|//[4]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp_advances.Company,
-		|	tmp_advances.DocumentPartner AS Partner,
 		|	tmp_advances.LegalName,
+		|	tmp_advances.Partner,
 		|	tmp_advances.Currency,
 		|	tmp_advances.ReceiptDocument,
 		|	tmp_advances.Period,
@@ -285,8 +285,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp_advances.OperationType = VALUE(enum.InvoiceMatchOperationsTypes.WithCustomer)
 		|GROUP BY
 		|	tmp_advances.Company,
-		|	tmp_advances.DocumentPartner,
 		|	tmp_advances.LegalName,
+		|	tmp_advances.Partner,
 		|	tmp_advances.Currency,
 		|	tmp_advances.ReceiptDocument,
 		|	tmp_advances.Period,

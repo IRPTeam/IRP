@@ -47,9 +47,7 @@ EndProcedure
 
 &AtClient
 Procedure OperationTypeOnChange(Item)
-	
 	DocInvoiceMatchClient.OperationTypeOnChange(Object, ThisObject, Item);
-	
 	FillByBasisDocument();
 	SetVisibility();
 EndProcedure
@@ -76,9 +74,7 @@ EndProcedure
 &AtClient
 Procedure PartnerApTransactionsBasisDocumentOnChange(Item)
 	FillByBasisDocument();
-	
 	DocInvoiceMatchClient.PartnerApTransactionsBasisDocumentOnChange(Object, ThisObject, Item);
-	
 EndProcedure
 
 &AtClient
@@ -91,9 +87,7 @@ EndProcedure
 &AtClient
 Procedure PartnerArTransactionsBasisDocumentOnChange(Item)
 	FillByBasisDocument();
-	
 	DocInvoiceMatchClient.PartnerArTransactionsBasisDocumentOnChange(Object, ThisObject, Item);
-	
 EndProcedure
 
 &AtClient
@@ -102,7 +96,6 @@ Procedure PartnerArTransactionsBasisDocumentStartChoice(Item, ChoiceData, Standa
 				Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
-// TODO: Move to common module And refact
 &AtServer
 Procedure FillByBasisDocument()
 	If Object.OperationType = Enums.InvoiceMatchOperationsTypes.WithVendor Then
@@ -117,13 +110,10 @@ Procedure FillByBasisDocument()
 			Object.Partner = Catalogs.Partners.EmptyRef();
 			Object.Agreement = Catalogs.Agreements.EmptyRef();
 		EndIf;
-		
 		FillDebtAndAmount();
-		
 	EndIf;
 	
 	If Object.OperationType = Enums.InvoiceMatchOperationsTypes.WithCustomer Then
-		
 		If ValueIsFilled(Object.PartnerArTransactionsBasisDocument) Then
 			Object.Currency = Object.PartnerArTransactionsBasisDocument.Currency;
 			Object.LegalName = Object.PartnerArTransactionsBasisDocument.LegalName;
@@ -135,26 +125,26 @@ Procedure FillByBasisDocument()
 			Object.Partner = Catalogs.Partners.EmptyRef();
 			Object.Agreement = Catalogs.Agreements.EmptyRef();
 		EndIf;
-		
 		FillDebtAndAmount();
-		
 	EndIf;
 EndProcedure
 
-// TODO: Replace by common function
 &AtServer
-Function GetApDebtByDocument(DocumentRef, EndPeriod)
+Function GetApDebtByDocument(Object)
 	ReturnValue = 0;
 	
 	QueryDebt = New Query;
 	QueryDebt.Text = "SELECT ALLOWED
-		|	PartnerApTransactionsBalance.BasisDocument,
-		|	PartnerApTransactionsBalance.AmountBalance
-		|FROM
-		|	AccumulationRegister.PartnerApTransactions.Balance(&EndPeriod, BasisDocument = &BasisDocument) AS
-		|		PartnerApTransactionsBalance";
-	QueryDebt.SetParameter("EndPeriod", EndPeriod);
-	QueryDebt.SetParameter("BasisDocument", DocumentRef);
+	|	PartnerApTransactionsBalance.BasisDocument,
+	|	PartnerApTransactionsBalance.AmountBalance
+	|FROM
+	|	AccumulationRegister.PartnerApTransactions.Balance(&EndPeriod, BasisDocument = &BasisDocument
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+	|		PartnerApTransactionsBalance";
+	QueryDebt.SetParameter("EndPeriod", ?(ValueIsFilled(Object.Ref),
+			New Boundary(Object.Date, BoundaryType.Excluding),
+			Undefined));
+	QueryDebt.SetParameter("BasisDocument", Object.PartnerApTransactionsBasisDocument);
 	QueryExecute = QueryDebt.Execute();
 	
 	If Not QueryExecute.IsEmpty() Then
@@ -166,20 +156,22 @@ Function GetApDebtByDocument(DocumentRef, EndPeriod)
 	Return ReturnValue;
 EndFunction
 
-// TODO: Replace by common function
 &AtServer
-Function GetArDebtByDocument(DocumentRef, EndPeriod)
+Function GetArDebtByDocument(Object)
 	ReturnValue = 0;
 	
 	QueryDebt = New Query;
 	QueryDebt.Text = "SELECT ALLOWED
-		|	PartnerApTransactionsBalance.BasisDocument,
-		|	PartnerApTransactionsBalance.AmountBalance
-		|FROM
-		|	AccumulationRegister.PartnerArTransactions.Balance(&EndPeriod, BasisDocument = &BasisDocument) AS
-		|		PartnerApTransactionsBalance";
-	QueryDebt.SetParameter("EndPeriod", EndPeriod);
-	QueryDebt.SetParameter("BasisDocument", DocumentRef);
+	|	PartnerApTransactionsBalance.BasisDocument,
+	|	PartnerApTransactionsBalance.AmountBalance
+	|FROM
+	|	AccumulationRegister.PartnerArTransactions.Balance(&EndPeriod, BasisDocument = &BasisDocument
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+	|		PartnerApTransactionsBalance";
+	QueryDebt.SetParameter("EndPeriod", ?(ValueIsFilled(Object.Ref),
+			New Boundary(Object.Date, BoundaryType.Excluding),
+			Undefined));
+	QueryDebt.SetParameter("BasisDocument", Object.PartnerArTransactionsBasisDocument);
 	QueryExecute = QueryDebt.Execute();
 	
 	If Not QueryExecute.IsEmpty() Then
@@ -199,6 +191,7 @@ EndProcedure
 &AtClient
 Procedure FillAdvances(Command)
 	FillAdvancesAtServer();
+	FillDebtAndAmount();
 EndProcedure
 
 &AtServer
@@ -359,7 +352,6 @@ EndProcedure
 
 #EndRegion
 
-// TODO: Move to document common module
 &AtServer
 Procedure FillDebtAndAmount()
 	ThisObject.PartnerTransactionsBasisDocumentDebt = 0;
@@ -367,15 +359,13 @@ Procedure FillDebtAndAmount()
 	
 	If Object.OperationType = Enums.InvoiceMatchOperationsTypes.WithVendor
 		And ValueIsFilled(Object.PartnerApTransactionsBasisDocument) Then
-		ThisObject.PartnerTransactionsBasisDocumentDebt = GetApDebtByDocument(
-						Object.PartnerApTransactionsBasisDocument, Object.Date);
+		ThisObject.PartnerTransactionsBasisDocumentDebt = GetApDebtByDocument(Object);
 		ThisObject.PartnerTransactionsBasisDocumentAmount = Object.PartnerApTransactionsBasisDocument.DocumentAmount;
 	EndIf;
 	
 	If Object.OperationType = Enums.InvoiceMatchOperationsTypes.WithCustomer
 		And ValueIsFilled(Object.PartnerArTransactionsBasisDocument) Then
-		ThisObject.PartnerTransactionsBasisDocumentDebt = GetArDebtByDocument(
-						Object.PartnerArTransactionsBasisDocument, Object.Date);
+		ThisObject.PartnerTransactionsBasisDocumentDebt = GetArDebtByDocument(Object);
 		ThisObject.PartnerTransactionsBasisDocumentAmount = Object.PartnerArTransactionsBasisDocument.DocumentAmount;
 	EndIf;
 EndProcedure

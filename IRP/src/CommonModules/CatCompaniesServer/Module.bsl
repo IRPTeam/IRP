@@ -54,3 +54,11 @@ Procedure WriteTaxesIntoFormTable(Form, CurrentCompany) Export
 	EndDo;
 	Set.Write();
 EndProcedure
+
+Procedure ClearTaxesIntoFormTable(CurrentCompany) Export
+	Set = InformationRegisters.Taxes.CreateRecordSet();
+	Set.Filter.Company.Set(CurrentCompany);
+	Set.Clear();
+	Set.Write();
+EndProcedure
+

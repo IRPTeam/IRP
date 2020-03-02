@@ -34,8 +34,19 @@ EndProcedure
 
 &AtServer
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	If RewriteTaxes AND Object.Our Then
-		WriteTaxes(CurrentObject.Ref);
+	If Object.Our Then
+		If RewriteTaxes Then
+			CatCompaniesServer.WriteTaxesIntoFormTable(ThisObject, CurrentObject.Ref);
+		EndIf;
+	Else
+		CatCompaniesServer.ClearTaxesIntoFormTable(CurrentObject.Ref);
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	If Not Object.Our Then
+		CurrentObject.Currencies.Clear();
 	EndIf;
 EndProcedure
 
@@ -145,9 +156,9 @@ Procedure ReadTaxes()
 	CatCompaniesServer.ReadTaxesIntoFormTable(ThisObject);
 EndProcedure
 
-&AtServer
-Procedure WriteTaxes(CurrentCompany)
-	CatCompaniesServer.WriteTaxesIntoFormTable(ThisObject, CurrentCompany);
-EndProcedure
+//&AtServer
+//Procedure WriteTaxes(CurrentCompany)
+//	CatCompaniesServer.WriteTaxesIntoFormTable(ThisObject, CurrentCompany);
+//EndProcedure
 
 #EndRegion

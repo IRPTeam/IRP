@@ -156,9 +156,4 @@ Procedure ReadTaxes()
 	CatCompaniesServer.ReadTaxesIntoFormTable(ThisObject);
 EndProcedure
 
-//&AtServer
-//Procedure WriteTaxes(CurrentCompany)
-//	CatCompaniesServer.WriteTaxesIntoFormTable(ThisObject, CurrentCompany);
-//EndProcedure
-
 #EndRegion

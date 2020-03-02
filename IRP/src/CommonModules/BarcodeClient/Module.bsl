@@ -28,7 +28,10 @@ EndFunction
 
 Function ProcessBarcodes(Barcodes, Parameters)
 	ReturnResult = False;	
-	AddInfo = Parameters.AddInfo;	
+	AddInfo = Parameters.AddInfo;
+	If AddInfo.Property("ClientModule") Then
+		AddInfo.Delete("ClientModule");
+	EndIf;	
 	FoundedItems = BarcodeServer.SearchByBarcodes(Barcodes, AddInfo);
 	If FoundedItems.Count() Then
 		ClientModule = Parameters.ClientModule;

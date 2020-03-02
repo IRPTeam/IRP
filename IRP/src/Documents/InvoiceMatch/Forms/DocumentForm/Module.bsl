@@ -212,7 +212,9 @@ Procedure FillAdvancesAtServer()
 		Raise R().Error_044;
 	EndIf;
 	
-	Query.SetParameter("Period", Object.Date);
+	Query.SetParameter("Period", ?(ValueIsFilled(Object.Ref),
+			New Boundary(Object.Date, BoundaryType.Excluding),
+			Undefined));
 	Query.SetParameter("LegalName", Object.LegalName);
 	Query.SetParameter("Company", Object.Company);
 	
@@ -249,7 +251,9 @@ Function GetQueryTextByAdvanceToSuppliers()
 	|	AdvanceToSuppliersBalance.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.AdvanceToSuppliers.Balance(&Period, Company = &Company
-	|	AND LegalName = &LegalName) AS AdvanceToSuppliersBalance
+	|	AND LegalName = &LegalName
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+	|		AdvanceToSuppliersBalance
 	|ORDER BY
 	|	AdvanceToSuppliersBalance.PaymentDocument.Date";
 EndFunction
@@ -266,7 +270,9 @@ Function GetQueryTextByAdvanceFromCustomers()
 	|	AdvanceFromCustomersBalance.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.AdvanceFromCustomers.Balance(&Period, Company = &Company
-	|	AND LegalName = &LegalName) AS AdvanceFromCustomersBalance
+	|	AND LegalName = &LegalName
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+	|		AdvanceFromCustomersBalance
 	|ORDER BY
 	|	AdvanceFromCustomersBalance.ReceiptDocument.Date";
 EndFunction

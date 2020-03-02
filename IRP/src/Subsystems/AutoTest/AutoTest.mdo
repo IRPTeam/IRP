@@ -103,4 +103,5 @@
   <content>Document.BankReceipt</content>
   <content>Document.Labeling</content>
   <content>FunctionalOption.ShowAlfaTestingSaas</content>
+  <content>DataProcessor.QuantityCompare</content>
 </mdclass:Subsystem>

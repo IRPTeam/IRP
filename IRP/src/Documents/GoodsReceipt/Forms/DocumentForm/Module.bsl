@@ -48,6 +48,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "ChoiceReceiptBasis" Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
+	If EventName = "TransferDataFromQuantityCompare" Then
+		LoadDataFromQuantityCompareAtServer(Parameter);		
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -233,11 +236,6 @@ Procedure SearchByBarcode(Command)
 EndProcedure
 
 &AtClient
-Procedure GroupMainPagesOnCurrentPageChange(Item, CurrentPage)
-	DocGoodsReceiptClient.GroupPagesOnCurrentPageChange(Object, ThisObject, Item, CurrentPage);
-EndProcedure
-
-&AtClient
 Procedure SelectReceiptBasises(Command)
 	DocGoodsReceiptClient.SelectReceiptBasises(Object, ThisObject, Command);
 EndProcedure
@@ -258,6 +256,15 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
+&AtClient
+Procedure CompareQuantity(Command)
+	QuantityCompareParameters = DocumentsServer.ParametersForQuantityCompare(Object, UUID);
+	OpenForm("DataProcessor.QuantityCompare.Form.Form", QuantityCompareParameters, ThisObject, UUID, , , , );
+EndProcedure
 
 #EndRegion
 
+&AtServer
+Procedure LoadDataFromQuantityCompareAtServer(Parameter)
+	DocGoodsReceiptServer.LoadDataFromQuantityCompare(Object, ThisObject, Parameter);
+EndProcedure

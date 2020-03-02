@@ -1,4 +1,4 @@
-Function SearchByBarcodes(Barcodes, PriceType = Undefined, PricePeriod = Undefined) Export
+Function SearchByBarcodes(Barcodes, AddInfo) Export
 	
 	ReturnValue = New Array;
 	Query = New Query;
@@ -7,9 +7,7 @@ Function SearchByBarcodes(Barcodes, PriceType = Undefined, PricePeriod = Undefin
 		|	Barcodes.ItemKey.Item AS Item,
 		|	ISNULL(Barcodes.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
 		|	Barcodes.Unit AS Unit,
-		|	0 AS Price,
 		|	1 AS Quantity,
-		|	Value(Catalog.PriceTypes.EmptyRef) AS PriceType,
 		|	Barcodes.Barcode AS Barcode
 		|FROM
 		|	InformationRegister.Barcodes AS Barcodes
@@ -23,11 +21,13 @@ Function SearchByBarcodes(Barcodes, PriceType = Undefined, PricePeriod = Undefin
 	QueryUnload = QueryExecution.Unload();
 	
 	// TODO: Refact by query
-	If PriceType <> Undefined Then
-		If PricePeriod = Undefined Then
-			PricePeriod = CurrentDate();
-		EndIf;
-		PrePriceTable = QueryUnload.Copy( , "ItemKey, PriceType, Unit");
+	PricePeriod = CurrentDate();
+	PriceType = Catalogs.PriceTypes.EmptyRef();
+	If AddInfo.Property("PriceType", PriceType) Then
+		AddInfo.Property("PricePeriod", PricePeriod);
+		QueryUnload.Columns.Add("Price", Metadata.DefinedTypes.typePrice.Type);		
+		PrePriceTable = QueryUnload.Copy( , "ItemKey, Unit");
+		PrePriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
 		PrePriceTable.FillValues(PriceType, "PriceType");
 		ItemsInfo = GetItemInfo.ItemPriceInfoByTable(PrePriceTable, PricePeriod);
 		For Each Row In ItemsInfo Do

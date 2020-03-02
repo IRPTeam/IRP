@@ -28,22 +28,11 @@ EndFunction
 
 Function ProcessBarcodes(Barcodes, Parameters)
 	ReturnResult = False;	
-	If Parameters.Property("PriceType") Then
-		PriceType = Parameters.PriceType;
-	Else
-		PriceType = Undefined;
-	EndIf;
-	If Parameters.Property("PricePeriod") Then
-		PricePeriod = Parameters.PricePeriod;
-	Else
-		PricePeriod = CurrentDate();
-	EndIf;	
-	FoundedItems = BarcodeServer.SearchByBarcodes(Barcodes, PriceType, PricePeriod);
-	If FoundedItems.Count() Then		
-		If Parameters.Property("DocumentClientModule") Then
-			DocumentModule = Parameters.DocumentClientModule;
-			DocumentModule.PickupItemsEnd(FoundedItems, Parameters);
-		EndIf;		
+	AddInfo = Parameters.AddInfo;	
+	FoundedItems = BarcodeServer.SearchByBarcodes(Barcodes, AddInfo);
+	If FoundedItems.Count() Then
+		ClientModule = Parameters.ClientModule;
+		ClientModule.SearchByBarcodeEnd(FoundedItems, Parameters);		
 		ReturnResult = True;
 	EndIf;	
 	Return ReturnResult;
@@ -53,3 +42,29 @@ Function GetBarcodesByItemKey(ItemKey) Export
 	Return BarcodeServer.GetBarcodesByItemKey(ItemKey);
 EndFunction
 
+&AtClient
+Procedure SearchByBarcode(Command, Object, Form, ClientModule, AddInfo = Undefined) Export
+	NotifyParameters = New Structure;
+	NotifyParameters.Insert("Form", Form);
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("ClientModule", ClientModule);
+	If AddInfo = Undefined Then
+		NotifyParameters.Insert("AddInfo", New Structure());
+	Else
+		NotifyParameters.Insert("AddInfo", AddInfo);
+	EndIf;	
+	DescriptionField = "";	
+	#If MobileClient Then
+		If MultimediaTools.BarcodeScanningSupported() Then
+			NotifyScan = New NotifyDescription("ScanBarcodeEnd", BarcodeClient, NotifyParameters);
+			NotifyScanCancel = New NotifyDescription("InputBarcodeCancel", BarcodeClient, NotifyParameters);
+			MultimediaTools.ShowBarcodeScanning(DescriptionField, NotifyScan, NotifyScanCancel, BarcodeType.All);
+		Else
+			Return;
+		EndIf;
+	#Else
+		DescriptionField = "";
+		NotifyDescription = New NotifyDescription("InputBarcodeEnd", BarcodeClient, NotifyParameters);
+		ShowInputString(NotifyDescription, "", DescriptionField);
+	#EndIf
+EndProcedure

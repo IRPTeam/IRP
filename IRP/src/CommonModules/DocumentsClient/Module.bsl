@@ -987,7 +987,9 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 			Row = ExistingRows[0];
 		Else
 			Row = Object.ItemList.Add();
-			Row.Key = New UUID();
+			If Row.Property("Key") Then
+				Row.Key = New UUID();
+			EndIf;
 			FillPropertyValues(Row, ResultElement, FilterString);
 			If Row.Property("Store") Then
 				Row.Store = Form.CurrentStore;
@@ -1005,7 +1007,7 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 		
 		If Row.Property("Quantity") Then
 			Row.Quantity = Row.Quantity + ResultElement.Quantity;
-		ElsIF Row.Property("PhysCount") Then
+		ElsIF Row.Property("PhysCount") And Row.Property("Difference") Then
 			Row.PhysCount = Row.PhysCount + ResultElement.Quantity;
 			Row.Difference = Row.PhysCount - Row.ExpCount;
 		EndIf;
@@ -1024,7 +1026,19 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
 	NotifyDescription = New NotifyDescription("PickupItemsEnd", ThisObject, NotifyParameters);
-	OpenFormParameters = New Structure;
+	OpenFormParameters = PickupItemsParameters(Object, Form);	
+	#If MobileClient Then
+	FormName = "CommonForm.PickUpItemsMobile";
+	#Else
+	FormName = "CommonForm.PickUpItems";
+	#EndIf
+	OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
+EndProcedure
+
+//TODO: Some parameters do not exist. Fix
+Function PickupItemsParameters(Object, Form)
+	ReturnValue = New Structure();
+	
 	StoreArray = New Array;
 	For Each Row In Object.ItemList Do
 		If ValueIsFilled(Row.Store) Then
@@ -1033,19 +1047,26 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 			EndIf;
 		EndIf;
 	EndDo;
-	If Not StoreArray.Count() And ValueIsFilled(Form.CurrentStore) Then
-		StoreArray.Add(Form.CurrentStore);
-	EndIf;
-	OpenFormParameters.Insert("Stores", StoreArray);
-	OpenFormParameters.Insert("EndPeriod", CommonFunctionsServer.GetCurrentSessionDate());
-	OpenFormParameters.Insert("PriceType", Form.CurrentPriceType);
-	#If MobileClient Then
-	FormName = "CommonForm.PickUpItemsMobile";
-	#Else
-	FormName = "CommonForm.PickUpItems";
-	#EndIf
-	OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
-EndProcedure
+	Try
+		If Not StoreArray.Count() And ValueIsFilled(Form.CurrentStore) Then
+			StoreArray.Add(Form.CurrentStore);
+		EndIf;
+	Except
+		
+	EndTry;
+	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
+	Try
+		PriceType = Form.CurrentPriceType;
+	Except
+		PriceType = PredefinedValue("Catalog.PriceTypes.EmptyRef");
+	EndTry;
+	
+	ReturnValue.Insert("Stores", StoreArray);
+	ReturnValue.Insert("EndPeriod", EndPeriod);
+	ReturnValue.Insert("PriceType", PriceType);
+	
+	Return ReturnValue;
+EndFunction
 
 #EndRegion
 
@@ -1243,36 +1264,29 @@ EndProcedure
 #Region Commands
 
 &AtClient
-Procedure SearchByBarcode(Command, Object, Form, DocumentClientModule, PriceType = Undefined) Export
-	NotifyParameters = New Structure;
-	NotifyParameters.Insert("Form", Form);
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("DocumentClientModule", ThisObject);
+Procedure SearchByBarcode(Command, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined) Export
+	TransferParameters = New Structure;
+	If DocumentClientModule = Undefined Then
+		TransferParameters.Insert("DocumentClientModule", ThisObject);
+	Else
+		TransferParameters.Insert("DocumentClientModule", DocumentClientModule);
+	EndIf;
 	If PriceType <> Undefined Then
-		NotifyParameters.Insert("PriceType", PriceType);
+		TransferParameters.Insert("PriceType", PriceType);
 		If Object.Ref = Undefined Then
-			NotifyParameters.Insert("PricePeriod", CurrentDate());
+			TransferParameters.Insert("PricePeriod", CurrentDate());
 		Else
-			NotifyParameters.Insert("PricePeriod", Object.Date);
+			TransferParameters.Insert("PricePeriod", Object.Date);
 		EndIf;
 	EndIf;
-	
-	DescriptionField = "";
-	
-	#If MobileClient Then
-		If MultimediaTools.BarcodeScanningSupported() Then
-			NotifyScan = New NotifyDescription("ScanBarcodeEnd", BarcodeClient, NotifyParameters);
-			NotifyScanCancel = New NotifyDescription("InputBarcodeCancel", BarcodeClient, NotifyParameters);
-			MultimediaTools.ShowBarcodeScanning(DescriptionField, NotifyScan, NotifyScanCancel, BarcodeType.All);
-		Else
-			Return;
-		EndIf;
-	#Else
-		DescriptionField = "";
-		NotifyDescription = New NotifyDescription("InputBarcodeEnd", BarcodeClient, NotifyParameters);
-		ShowInputString(NotifyDescription, "", DescriptionField);
-	#EndIf
+	SearchByBarcode(Command, Object, Form, DocumentClientModule, TransferParameters);
 EndProcedure
+
+Procedure SearchByBarcodeEnd(BarcodeItems, Parameters) Export
+	DocumentModule = Parameters.ClientModule;
+	DocumentModule.PickupItemsEnd(BarcodeItems, Parameters);
+EndProcedure
+
 #EndRegion
 
 #Region Common

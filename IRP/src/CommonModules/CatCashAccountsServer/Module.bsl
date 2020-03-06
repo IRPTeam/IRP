@@ -29,7 +29,7 @@ Function GetCashAccountByCompany(Company, CustomParameters) Export
 EndFunction
 
 Function GetDefaultChoiseRef(Parameters) Export
-	QueryTable = CatCashAccountsServer.QueryTable(Parameters);	
+	QueryTable = CommonFunctionsServer.QueryTable("Catalog.CashAccounts", CatCashAccountsServer, Parameters);
 	If QueryTable.Count() = 1 Then
 		Return QueryTable[0].Ref;
 	Else 

@@ -792,7 +792,6 @@
         <items xsi:type="form:FormField">
           <name>PaymentListKey</name>
           <id>178</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>

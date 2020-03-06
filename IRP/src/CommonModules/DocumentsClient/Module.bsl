@@ -1040,6 +1040,7 @@ Function PickupItemsParameters(Object, Form)
 	ReturnValue = New Structure();
 	
 	StoreArray = New Array;
+	Try
 	For Each Row In Object.ItemList Do
 		If ValueIsFilled(Row.Store) Then
 			If StoreArray.Find(Row.Store) = Undefined Then
@@ -1047,12 +1048,12 @@ Function PickupItemsParameters(Object, Form)
 			EndIf;
 		EndIf;
 	EndDo;
-	Try
+	
 		If Not StoreArray.Count() And ValueIsFilled(Form.CurrentStore) Then
 			StoreArray.Add(Form.CurrentStore);
 		EndIf;
 	Except
-		
+		StoreArray = New Array;
 	EndTry;
 	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
 	Try

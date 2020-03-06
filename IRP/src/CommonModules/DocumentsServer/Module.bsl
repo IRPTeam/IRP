@@ -424,22 +424,3 @@ Procedure DeleteUnavailableTitleItemNames(ItemNames) Export
 EndProcedure
 
 #EndRegion
-
-
-#Region QuantityCompare
-
-Function ParametersForQuantityCompare(Val Object, UUID) Export
-	ReturnValue = New Structure;
-	ItemListValue = Object.ItemList.Unload();
-	IncomingItemListAddress = PutToTempStorage(ItemListValue, UUID);
-	ReturnValue.Insert("IncomingItemListAddress", IncomingItemListAddress);
-	ExpItemListValue = Object.ItemList.Unload();
-	ExpItemListValue.Columns.Add("BaseOn", ExpItemListValue.Columns.ReceiptBasis.ValueType);
-	ExpItemListValue.LoadColumn(ExpItemListValue.UnloadColumn("ReceiptBasis"), "BaseOn");
-	ExpItemListValue.Columns.Delete("ReceiptBasis");
-	IncomingExpItemListAddress = PutToTempStorage(ExpItemListValue, UUID);
-	ReturnValue.Insert("IncomingExpItemListAddress", IncomingExpItemListAddress);
-	Return ReturnValue;
-EndFunction
-
-#EndRegion

@@ -385,6 +385,7 @@ Function AccountByDocumentsMainTablePartnerOnChange(Item, AgreementType, ApArPos
 	AgreementParameters.Insert("CurrentDate", Object.Date);
 	AgreementParameters.Insert("PartnerType", AgreementType);
 	AgreementParameters.Insert("ApArPostingDetail", ApArPostingDetail);
+	AgreementParameters.Insert("ArrayOfFilters", New Array());
 	
 	CurrentData.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
@@ -417,7 +418,7 @@ Procedure AccountPayableByDocumentsPartnerOnChange(Item, AddInfo = Undefined) Ex
 EndProcedure
 
 &AtClient
-Procedure AccountReceivableByDocumentsPartnerOnChange(Item, AddInfo = Undefined)
+Procedure AccountReceivableByDocumentsPartnerOnChange(Item, AddInfo = Undefined) Export
 	TableName = AccountByDocumentsMainTablePartnerOnChange(Item, 
 	                                                       PredefinedValue("Enum.AgreementTypes.Customer"),
 	                                                       PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));

@@ -942,37 +942,6 @@
             <horizontalAlign>Left</horizontalAlign>
           </extInfo>
         </items>
-        <items xsi:type="form:Button">
-          <name>SpecialOffersSetSpecialOffers</name>
-          <id>312</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <extendedTooltip>
-            <name>SpecialOffersSetSpecialOffersExtendedTooltip</name>
-            <id>313</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <type>UsualButton</type>
-          <commandName>Form.Command.SetSpecialOffers</commandName>
-          <representation>Auto</representation>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <placementArea>UserCmds</placementArea>
-          <representationInContextMenu>Auto</representationInContextMenu>
-        </items>
         <items xsi:type="form:FormField">
           <name>InputType</name>
           <id>90</id>
@@ -4913,42 +4882,6 @@
         <name>SelectPurchaseReturnOrders</name>
       </handler>
     </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>SetSpecialOffers</name>
-    <title>
-      <key>en</key>
-      <value>% Offers</value>
-    </title>
-    <id>4</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>SetSpecialOffers</name>
-      </handler>
-    </action>
-    <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>SetSpecialOffersAtRow</name>
-    <title>
-      <key>en</key>
-      <value>% Discount</value>
-    </title>
-    <id>5</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>SetSpecialOffersAtRow</name>
-      </handler>
-    </action>
-    <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

@@ -258,8 +258,7 @@ EndProcedure
 
 &AtClient
 Procedure CompareQuantity(Command)
-	QuantityCompareParameters = DocumentsServer.ParametersForQuantityCompare(Object, UUID);
-	OpenForm("DataProcessor.QuantityCompare.Form.Form", QuantityCompareParameters, ThisObject, UUID, , , , );
+	DocGoodsReceiptClient.CompareQuantity(Object, ThisObject, Command);
 EndProcedure
 
 #EndRegion

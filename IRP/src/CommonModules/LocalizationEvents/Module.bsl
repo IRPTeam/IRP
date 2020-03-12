@@ -97,6 +97,9 @@ EndProcedure
 
 
 Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing) Export
+	If Not StandardProcessing Then
+		Return;
+	EndIf;
 	StandardProcessing = False;
 	SourceType = TypeOf(Source);
 	If SourceType = Type("CatalogManager.ItemKeys") Then		
@@ -210,7 +213,9 @@ Procedure CreateSubFormItemDescription(Form, Values, GroupName, AddInfo = Undefi
 EndProcedure
 
 Procedure GetCatalogPresentationFieldsPresentationFieldsGetProcessing(Source, Fields, StandardProcessing) Export
-	
+	If Not StandardProcessing Then
+		Return;
+	EndIf;
 	StandardProcessing = False;
 	Fields = LocalizationServer.FieldsListForDescriptions(Source);
 	

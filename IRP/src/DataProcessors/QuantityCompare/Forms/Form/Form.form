@@ -228,6 +228,10 @@
             <dataPath xsi:type="form:DataPath">
               <segments>Object.CompareItemList.Quantity</segments>
             </dataPath>
+            <handlers>
+              <event>OnChange</event>
+              <name>CompareItemListQuantityOnChange</name>
+            </handlers>
             <extendedTooltip>
               <name>ExtendedTooltip</name>
               <id>41</id>
@@ -477,6 +481,10 @@
           <handlers>
             <event>BeforeDeleteRow</event>
             <name>CompareItemListBeforeDeleteRow</name>
+          </handlers>
+          <handlers>
+            <event>AfterDeleteRow</event>
+            <name>CompareItemListAfterDeleteRow</name>
           </handlers>
           <searchStringAddition>
             <visible>true</visible>
@@ -922,6 +930,10 @@
                 <segments>Object.PhysItemList.Count</segments>
               </paths>
             </dataPath>
+            <handlers>
+              <event>OnChange</event>
+              <name>PhysItemListCountOnChange</name>
+            </handlers>
             <extendedTooltip>
               <name>ExtendedTooltip</name>
               <id>234</id>
@@ -1062,6 +1074,14 @@
             <horizontalAlign>Left</horizontalAlign>
             <autoFill>true</autoFill>
           </autoCommandBar>
+          <handlers>
+            <event>BeforeDeleteRow</event>
+            <name>PhysItemListBeforeDeleteRow</name>
+          </handlers>
+          <handlers>
+            <event>AfterDeleteRow</event>
+            <name>PhysItemListAfterDeleteRow</name>
+          </handlers>
           <searchStringAddition>
             <visible>true</visible>
             <enabled>true</enabled>

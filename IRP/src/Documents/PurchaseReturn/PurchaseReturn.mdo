@@ -495,14 +495,6 @@
       <type>
         <types>DefinedType.typeAmount</types>
       </type>
-      <format>
-        <key>en</key>
-        <value>NZ=0</value>
-      </format>
-      <editFormat>
-        <key>en</key>
-        <value>NZ=0</value>
-      </editFormat>
       <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

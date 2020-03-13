@@ -21,16 +21,6 @@
       <key>en</key>
       <value>Compare item list</value>
     </synonym>
-    <attributes uuid="c25934c1-763a-4977-8ac4-0ff393d023d2">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>UUID</types>
-      </type>
-    </attributes>
     <attributes uuid="fb993afc-27df-495f-8656-d1c96ca8f08a">
       <name>Item</name>
       <synonym>
@@ -115,16 +105,6 @@
       <key>en</key>
       <value>Exp. item list</value>
     </synonym>
-    <attributes uuid="9d0e86ef-8ef7-4a82-9482-aba8ae314542">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>UUID</types>
-      </type>
-    </attributes>
     <attributes uuid="765e1811-b2ad-4863-8042-e2d7fee0eb52">
       <name>Item</name>
       <synonym>

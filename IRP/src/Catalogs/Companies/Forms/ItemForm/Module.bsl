@@ -5,6 +5,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
+	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	
 	If Parameters.Key.IsEmpty() Then
 		If Parameters.FillingValues.Property("Partner") Then
@@ -24,6 +25,9 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	IDInfoClient.NotificationProcessing(ThisObject, Object.Ref, EventName, Parameter, Source);
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -45,6 +49,7 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	If Not Object.Our Then
 		CurrentObject.Currencies.Clear();
 	EndIf;
@@ -154,6 +159,21 @@ EndProcedure
 &AtServer
 Procedure ReadTaxes()
 	CatCompaniesServer.ReadTaxesIntoFormTable(ThisObject);
+EndProcedure
+
+#EndRegion
+
+
+#Region AddAttributes
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
 #EndRegion

@@ -26,6 +26,18 @@
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
   </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_Specifications</value>
+    </typesFilterValue>
+    <characteristicValues>Catalog.Specifications.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.Specifications.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.Specifications.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.Specifications.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
@@ -172,6 +184,56 @@
       </synonym>
       <type>
         <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="5423a013-f335-4379-84e1-540d83e4a00e">
+    <producedTypes>
+      <objectType typeId="bb0b0349-5e67-4d79-b33b-39d910a89635" valueTypeId="a0869b6e-0897-46e5-9686-7e537550c1a4"/>
+      <rowType typeId="234d08bf-f6eb-45b6-af8f-78d43425e11f" valueTypeId="aa698e41-6696-4fa7-88a5-3b0fd3b51664"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="efb3de71-7745-4c2f-83f1-805bb336a9a6">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d85592ed-2834-4413-8c5f-e35b30948cc0">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a6e7b415-471b-483f-b4fc-03c765346851">
+      <name>SearchLiteral</name>
+      <synonym>
+        <key>en</key>
+        <value>Search literal</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>500</length>
+        </stringQualifiers>
       </type>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>

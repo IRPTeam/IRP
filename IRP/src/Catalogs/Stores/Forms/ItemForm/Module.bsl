@@ -1,8 +1,32 @@
+
+#Region FormEvents
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	IDInfoServer.AfterWriteAtServer(ThisObject, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	IDInfoClient.NotificationProcessing(ThisObject, Object.Ref, EventName, Parameter, Source);
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
 EndProcedure
+
+#EndRegion
 
 &AtClient
 Procedure UseGoodsReceiptOnChange(Item)
@@ -83,14 +107,19 @@ Procedure EndEditIDInfo(Result, Parameters) Export
 	IDInfoClient.EndEditIDInfo(Object, Result, Parameters);
 EndProcedure
 
+#EndRegion
+
+
+#Region AddAttributes
+
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source)
-	IDInfoClient.NotificationProcessing(ThisObject, Object.Ref, EventName, Parameter, Source);
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
 EndProcedure
 
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	IDInfoServer.AfterWriteAtServer(ThisObject, CurrentObject, WriteParameters);
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
 #EndRegion

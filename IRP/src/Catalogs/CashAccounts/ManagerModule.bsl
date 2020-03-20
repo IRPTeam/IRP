@@ -35,9 +35,10 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	EndIf;
 	
 	StandardProcessing = False;
+	
 	CustomParameters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.CustomParameters);
 	CustomParameters.ComplexFilters.Add(DocumentsClientServer.CreateFilterItem("BySearchString", Parameters.SearchString));
-	QueryTable = CommonFunctionsServer.QueryTable("Catalog.CashAccounts", CatCashAccountsServer, Parameters);
+	QueryTable = CommonFunctionsServer.QueryTable("Catalog.CashAccounts", CatCashAccountsServer, CustomParameters);
 	ChoiceData = New ValueList();
 	For Each Row In QueryTable Do
 		ChoiceData.Add(Row.Ref, Row.Presentation);

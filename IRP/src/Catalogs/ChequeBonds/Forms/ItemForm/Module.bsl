@@ -1,11 +1,8 @@
+#Region FormEvents
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject, "GroupAdditionalAttributes");
-EndProcedure
-
-&AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 EndProcedure
 
 &AtServer
@@ -20,8 +17,20 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	EndIf;
 EndProcedure
 
+#EndRegion
+
+
+#Region AddAttributes
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
 &AtServer
 Procedure AddAttributesCreateFormControll()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
+
+#EndRegion
 

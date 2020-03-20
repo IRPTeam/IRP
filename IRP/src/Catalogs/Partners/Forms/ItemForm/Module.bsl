@@ -1,26 +1,39 @@
+
+#Region FormEvents
+
 &AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	SalesOrdersList.Parameters.SetParameterValue("Partner", Object.Ref);
-	CommonFunctionsServer.SetConditionalAppearanceDataField(ThisObject, "SalesOrdersList.Date");
-	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
-	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
-	Items.Parent.Visible = GetFunctionalOption("ShowAlfaTestingSaas");
-EndProcedure
-
-&AtClient
-Procedure DescriptionOpening(Item, StandardProcessing) Export
-	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	IDInfoServer.AfterWriteAtServer(ThisObject, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	IDInfoClient.NotificationProcessing(ThisObject, Object.Ref, EventName, Parameter, Source);
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
+	SalesOrdersList.Parameters.SetParameterValue("Partner", Object.Ref);
+	CommonFunctionsServer.SetConditionalAppearanceDataField(ThisObject, "SalesOrdersList.Date");
+	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
+	Items.Parent.Visible = GetFunctionalOption("ShowAlfaTestingSaas");
+EndProcedure
+
+#EndRegion
+
+&AtClient
+Procedure DescriptionOpening(Item, StandardProcessing) Export
+	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -38,12 +51,11 @@ Procedure EndEditIDInfo(Result, Parameters) Export
 	IDInfoClient.EndEditIDInfo(Object, Result, Parameters);
 EndProcedure
 
+#Region AddAttributes
+
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source)
-	IDInfoClient.NotificationProcessing(ThisObject, Object.Ref, EventName, Parameter, Source);
-	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
-	EndIf;
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
 EndProcedure
 
 &AtServer
@@ -51,8 +63,5 @@ Procedure AddAttributesCreateFormControll()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
-&AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	IDInfoServer.AfterWriteAtServer(ThisObject, CurrentObject, WriteParameters);
-EndProcedure
+#EndRegion
 

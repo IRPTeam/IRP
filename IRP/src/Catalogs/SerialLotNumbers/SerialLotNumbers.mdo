@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e7f6fd71-4e01-4dca-aab2-67e2d20575d6">
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e7f6fd71-4e01-4dca-aab2-67e2d20575d6">
   <producedTypes>
     <objectType typeId="87cd82b2-1f05-4222-8087-b0c090b0aa12" valueTypeId="16c35377-4303-4060-92ab-c26bda017e07"/>
     <refType typeId="a96d472a-f8df-4b43-9456-0099957cf341" valueTypeId="579260e5-a6cd-4871-82b0-1133bb47422e"/>
@@ -14,6 +14,18 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_SerialLotNumbers</value>
+    </typesFilterValue>
+    <characteristicValues>Catalog.SerialLotNumbers.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.SerialLotNumbers.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.SerialLotNumbers.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.SerialLotNumbers.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
@@ -28,6 +40,7 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.SerialLotNumbers.Form.ItemForm</defaultObjectForm>
   <attributes uuid="b1910d24-9155-47dd-82b1-92d92ca46f00">
     <name>Item</name>
     <synonym>
@@ -42,4 +55,63 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <tabularSections uuid="ef605c80-fa78-4080-af6f-a89ca3452c86">
+    <producedTypes>
+      <objectType typeId="a069c6dd-b2ef-4730-94be-aa7292aaf35a" valueTypeId="d08be586-09e2-4600-baf1-9b7864cb7368"/>
+      <rowType typeId="8785f5af-14b8-4d2b-8d65-7696106661c3" valueTypeId="f15d4ffe-e33a-4a6f-8216-86e8219c71d0"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="204f3584-a26f-4549-b73c-5fa5f1af3c9f">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="25d22f17-81f4-4d77-9757-c1d396de6d09">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b88ebafd-ca76-4bb8-bcda-fc4934655eac">
+      <name>SearchLiteral</name>
+      <synonym>
+        <key>en</key>
+        <value>Search literal</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>500</length>
+        </stringQualifiers>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="4012058a-2719-416a-87de-1c070120f477">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:Catalog>

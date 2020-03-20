@@ -1,22 +1,34 @@
 
+&AtClient
+Var DeleteRows;
+
 #Region FormEvents
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	If ValueIsFilled(Parameters.IncomingItemListAddress) Then
-		IncomingItemListValue = GetFromTempStorage(Parameters.IncomingItemListAddress);
-		Object.ItemList.Load(IncomingItemListValue);
-	EndIf;
 	If ValueIsFilled(Parameters.IncomingExpItemListAddress) Then
 		IncomingExpItemListValue = GetFromTempStorage(Parameters.IncomingExpItemListAddress);
-		Object.ExpItemList.Load(IncomingExpItemListValue);
+		CompareItemListValue = Object.CompareItemList.Unload();
+		For Each Row In IncomingExpItemListValue Do
+			NewRow = CompareItemListValue.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;
+		CompareItemListValue.GroupBy("Item, ItemKey, Unit", "Quantity, Difference, Count");
+		For Each Row In CompareItemListValue Do
+			CalculateRowDifference(Row);
+		EndDo;
+		Object.CompareItemList.Load(CompareItemListValue);
+		For Each Row In IncomingExpItemListValue Do
+			NewRow = Object.ExpItemList.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;		
 	EndIf;
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	RevertPhysListsVisible();
-	RevertListsVisible();
+	RevertItemListsVisible();
+	DeleteRows = New Array;
 EndProcedure
 
 #EndRegion
@@ -32,152 +44,218 @@ EndProcedure
 &AtClient
 Procedure SearchByBarcodeEnd(BarcodeItems, Parameters) Export
 	AddItemToPhysItemList(BarcodeItems);
-	AddItemToCollapsedPhysItemList(BarcodeItems);
-	AddItemToItemList(BarcodeItems);
+	AddItemToCompareItemList(BarcodeItems);
 EndProcedure
 
 &AtClient
-Procedure OpenPickupItems(Command)
-	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+Procedure OpenPickupItems(Command, AddInfo = Undefined) Export
+	PickupItemsClient.OpenPickupItems(Object, ThisObject, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure SwitchList(Command)
-	RevertListsVisible();
+Procedure OpenPickupItemsEnd(Result, AdditionalParameters) Export
+	If Result <> Undefined Then
+		AddItemToPhysItemList(Result);
+		AddItemToCompareItemList(Result);
+	EndIf;
 EndProcedure
 
 &AtClient
-Procedure CollapseExpandPhysItemList(Command)
-	RevertPhysListsVisible();
-EndProcedure
-
-#EndRegion
-
-&AtClient
-Procedure RevertListsVisible()
-	ItemListVisible = Items.GroupItemList.Visible;
-	Items.GroupItemList.Visible = Not ItemListVisible;
-	Items.GroupExpItemList.Visible = ItemListVisible;
-	Items.GroupPhysItemLists.Visible = ItemListVisible;
+Procedure SwitchItemLists(Command)
+	RevertItemListsVisible();
 EndProcedure
 
 &AtClient
-Procedure RevertPhysListsVisible()
-	ItemListVisible = Items.GroupPhysItemList.Visible;
-	Items.GroupPhysItemList.Visible = Not ItemListVisible;
-	Items.GroupCollapsedPhysItemList.Visible = ItemListVisible;
-EndProcedure
-
-#Region ItemListEvents
-
-&AtClient
-Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	//TODO: Insert the handler content
+Procedure ShowHideExpItemList(Command)
+	RevertExpItemListVisible();
 EndProcedure
 
 #EndRegion
 
-
-#Region PhysItemListEvents
-
 &AtClient
-Procedure PhysItemListOnChange(Item)
-	FillPhysItemListFields();
+Procedure RevertItemListsVisible()
+	ItemListVisible = Items.GroupCompareItemList.Visible;
+	Items.GroupCompareItemList.Visible = Not ItemListVisible;
+	Items.GroupPhysItemList.Visible = ItemListVisible;
 EndProcedure
 
-#EndRegion
-
-
-#Region CollapsedPhysItemListEvents
-
 &AtClient
-Procedure CollapsedPhysItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-	RevertPhysListsVisible();
-	ItemRow = Object.PhysItemList.Add();
-	ItemRow.Key = New UUID(); 	
+Procedure CompareItemListCountOnChange(Item)
+	CurrentData = Items.CompareItemList.CurrentData;
+	CalculateRowDifference(CurrentData);
 EndProcedure
 
-#EndRegion
-
-
+&AtClient
+Procedure CompareItemListBeforeDeleteRow(Item, Cancel)
+	DeleteRows.Clear();
+	For Each Row In Items.CompareItemList.SelectedRows Do
+		CurrentData = Items.CompareItemList.RowData(Row);
+		If isExistItemKeyAtExpItemList(CurrentData.ItemKey, CurrentData.Unit) Then
+			Cancel = True;
+			Break;
+		EndIf;
+		RowStructure = New Structure();
+		RowStructure.Insert("ItemKey", CurrentData.ItemKey);
+		RowStructure.Insert("Unit", CurrentData.Unit);
+		DeleteRows.Add(RowStructure);
+	EndDo;
+	If Cancel Then
+		DeleteRows.Clear();
+	EndIf;
+EndProcedure
 
 &AtClient
-Procedure FillPhysItemListFields()
-	
+Procedure CompareItemListAfterDeleteRow(Item)
+	For Each Row In DeleteRows Do
+		PhysItemListFilter = New Structure();
+		PhysItemListFilter.Insert("ItemKey", Row.ItemKey);
+		PhysItemListFilter.Insert("Unit", Row.Unit);
+		PhysItemListFoundedRows = Object.PhysItemList.FindRows(PhysItemListFilter);
+		For Each FoundedRow In PhysItemListFoundedRows Do
+			Object.PhysItemList.Delete(FoundedRow);
+		EndDo;
+	EndDo;
+	DeleteRows.Clear();
+EndProcedure
+
+&AtClient
+Procedure PhysItemListBeforeDeleteRow(Item, Cancel)
+	DeleteRows.Clear();
+	For Each Row In Items.PhysItemList.SelectedRows Do
+		CurrentData = Items.PhysItemList.RowData(Row);
+		RowStructure = New Structure();
+		RowStructure.Insert("ItemKey", CurrentData.ItemKey);
+		RowStructure.Insert("Unit", CurrentData.Unit);
+		DeleteRows.Add(RowStructure);
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure PhysItemListAfterDeleteRow(Item)
+	For Each Row In DeleteRows Do
+		CompareItemListFilter = New Structure();
+		CompareItemListFilter.Insert("ItemKey", Row.ItemKey);
+		CompareItemListFilter.Insert("Unit", Row.Unit);
+		CompareItemListFoundedRows = Object.CompareItemList.FindRows(CompareItemListFilter);		
+		For Each FoundedRow In CompareItemListFoundedRows Do
+			If isExistItemKeyAtExpItemList(FoundedRow.ItemKey, FoundedRow.Unit) Then
+				FoundedRow.Count = 0;
+			Else
+				Object.CompareItemList.Delete(FoundedRow);
+			EndIf;			
+		EndDo;
+	EndDo;
+	DeleteRows.Clear();
+EndProcedure
+
+&AtClient
+Function isExistItemKeyAtExpItemList(ItemKey, Unit)
+	ReturnValue = False;
+	ExpItemListFilter = New Structure();
+	ExpItemListFilter.Insert("ItemKey", ItemKey);
+	ExpItemListFilter.Insert("Unit", Unit);
+	FoundedRows = Object.ExpItemList.FindRows(ExpItemListFilter);
+	If FoundedRows.Count() Then
+		ReturnValue = True;
+	EndIf;
+	Return ReturnValue;
+EndFunction
+
+&AtClientAtServerNoContext
+Procedure CalculateRowDifference(RowData)
+	RowData.Difference = RowData.Count - RowData.Quantity;
+EndProcedure
+
+&AtClient
+Procedure RevertExpItemListVisible()
+	ItemListVisible = Items.GroupExpItemList.Visible;
+	Items.GroupExpItemList.Visible = Not ItemListVisible;
 EndProcedure
 
 &AtClient
 Procedure AddItemToPhysItemList(ItemsData)
-	DateOfAdd = CurrentDate();
-	For Each DataRow In ItemsData Do
-		ItemRow = Object.PhysItemList.Add();
-		ItemRow.Key = New UUID();
-		ItemRow.Item = DataRow.Item;
-		ItemRow.ItemKey = DataRow.ItemKey;
-		ItemRow.Unit = DataRow.Unit;
-		ItemRow.Count = DataRow.Quantity;
-		ItemRow.Barcode = DataRow.Barcode;
-		ItemRow.Date = DateOfAdd;
-	EndDo;
-EndProcedure
-
-&AtClient
-Procedure AddItemToCollapsedPhysItemList(ItemsData)
-	For Each DataRow In ItemsData Do
-		RowsFilter = New Structure();
-		RowsFilter.Insert("ItemKey", DataRow.ItemKey);
-		RowsFilter.Insert("Unit", DataRow.Unit);
-		CollapsedPhysItemListFoundedRows = Object.CollapsedPhysItemList.FindRows(RowsFilter);
-		If CollapsedPhysItemListFoundedRows.Count() Then
-			ItemRow = CollapsedPhysItemListFoundedRows[0];
+	For Each Row In ItemsData Do
+		PhysItemListFilter = New Structure();
+		PhysItemListFilter.Insert("ItemKey", Row.ItemKey);
+		PhysItemListFilter.Insert("Unit", Row.Unit);
+		PhysItemListFoundedRows = Object.PhysItemList.FindRows(PhysItemListFilter);
+		If PhysItemListFoundedRows.Count() Then
+			ItemRow = PhysItemListFoundedRows[0];
 		Else
-			ItemRow = Object.CollapsedPhysItemList.Add();
+			ItemRow = Object.PhysItemList.Add();
 		EndIf;
-		ItemRow.Item = DataRow.Item;
-		ItemRow.ItemKey = DataRow.ItemKey;
-		ItemRow.Unit = DataRow.Unit;
-		ItemRow.Count = ItemRow.Count + DataRow.Quantity;
+		ItemRow.Item = Row.Item;
+		ItemRow.ItemKey = Row.ItemKey;
+		ItemRow.Unit = Row.Unit;
+		ItemRow.Count = ItemRow.Count + Row.Quantity;
 	EndDo;
 EndProcedure
 
 &AtClient
-Procedure AddItemToItemList(ItemsData)
-	For Each DataRow In ItemsData Do
-		RowsFilter = New Structure();
-		RowsFilter.Insert("ItemKey", DataRow.ItemKey);
-		RowsFilter.Insert("Unit", DataRow.Unit);
-		ExpItemListFoundedRows = Object.ExpItemList.FindRows(RowsFilter);
+Procedure AddItemToCompareItemList(ItemsData)
+	For Each Row In ItemsData Do		
+		ItemListsFilter = New Structure();
+		ItemListsFilter.Insert("ItemKey", Row.ItemKey);
+		ItemListsFilter.Insert("Unit", Row.Unit);
+		ExpItemListFoundedRows = Object.ExpItemList.FindRows(ItemListsFilter);
 		Quantity = 0;
 		For Each ExpItemListRow In ExpItemListFoundedRows Do
 			Quantity = Quantity + ExpItemListRow.Quantity;
 		EndDo;
-		ItemListFoundedRows = Object.ItemList.FindRows(RowsFilter);
-		If ItemListFoundedRows.Count() Then
-			ItemRow = ItemListFoundedRows[0];
+		CompareItemListFoundedRows = Object.CompareItemList.FindRows(ItemListsFilter);
+		If CompareItemListFoundedRows.Count() Then
+			ItemRow = CompareItemListFoundedRows[0];
 		Else
-			ItemRow = Object.ItemList.Add();
+			ItemRow = Object.CompareItemList.Add();
 		EndIf;
-		ItemRow.Item = DataRow.Item;
-		ItemRow.ItemKey = DataRow.ItemKey;
-		ItemRow.Unit = DataRow.Unit;
+		ItemRow.Item = Row.Item;
+		ItemRow.ItemKey = Row.ItemKey;
+		ItemRow.Unit = Row.Unit;
 		ItemRow.Quantity = Quantity;
-		ItemRow.Count = ItemRow.Count + DataRow.Quantity;
-		ItemRow.Difference = ItemRow.Quantity - ItemRow.Count;
+		ItemRow.Count = ItemRow.Count + Row.Quantity;
+		CalculateRowDifference(ItemRow);
 	EndDo;
 EndProcedure
 
 &AtClient
+Procedure CompareItemListQuantityOnChange(Item)
+	CurrentData = Items.CompareItemList.CurrentData;
+	PhysItemListFilter = New Structure();
+	PhysItemListFilter.Insert("ItemKey", CurrentData.ItemKey);
+	PhysItemListFilter.Insert("Unit", CurrentData.Unit);
+	PhysItemListFoundedRows = Object.PhysItemList.FindRows(PhysItemListFilter);
+	If PhysItemListFoundedRows.Count() Then
+		PhysItemListFoundedRows[0].Count = CurrentData.Count;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure PhysItemListCountOnChange(Item)
+	CurrentData = Items.PhysItemList.CurrentData;
+	CompareItemListFilter = New Structure();
+	CompareItemListFilter.Insert("ItemKey", CurrentData.ItemKey);
+	CompareItemListFilter.Insert("Unit", CurrentData.Unit);
+	CompareItemListFoundedRows = Object.CompareItemList.FindRows(CompareItemListFilter);
+	If CompareItemListFoundedRows.Count() Then
+		CompareItemListFoundedRows[0].Count = CurrentData.Count;
+	EndIf;
+EndProcedure
+
+&AtClient
 Procedure TransferToDocument(Command)
-	ItemListAddress = ItemListToTempStorage(FormOwner.UUID);
-	Notify("TransferDataFromQuantityCompare", ItemListAddress, FormOwner);
+	If FormOwner <> Undefined Then
+		ListsAddress = ListsToTempStorage(FormOwner.UUID);
+		Notify("TransferDataFromQuantityCompare", ListsAddress, FormOwner);
+	EndIf;
 	Close();
 EndProcedure
 
 &AtServer
-Function ItemListToTempStorage(FormUUID)
-	ItemListValue = Object.ItemList.Unload();
-	Return PutToTempStorage(ItemListValue, FormUUID);	
+Function ListsToTempStorage(FormUUID)
+	Lists = New Structure();
+	Lists.Insert("PhysItemList", Object.PhysItemList.Unload());
+	Lists.Insert("ExpItemList", Object.ExpItemList.Unload());
+	Return PutToTempStorage(Lists, FormUUID);	
 EndFunction
 
 

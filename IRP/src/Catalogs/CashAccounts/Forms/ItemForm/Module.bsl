@@ -1,6 +1,21 @@
+#Region FormEvents
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
+EndProcedure
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	If ValueIsFilled(Object.Currency) Or Object.Type = Enums.CashAccountTypes.Bank Then
 		ThisObject.CurrencyType = "Fixed";
 	Else
@@ -10,6 +25,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		CurrencyType = Parameters.CurrencyType;	
 	EndIf;
 EndProcedure
+
+#EndRegion
 
 &AtClient
 Procedure CurrencyTypeOnChange(Item)
@@ -66,3 +83,17 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_047, "Currency"), "Object.Currency");
 	EndIf;
 EndProcedure
+
+#Region AddAttributes
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+EndProcedure
+
+#EndRegion

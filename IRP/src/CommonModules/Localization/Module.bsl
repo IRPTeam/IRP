@@ -199,6 +199,7 @@ Function Strings(CodeLanguage) Export
 	
 	#Region SuggestionToUser
 	Strings.Insert("SuggestionToUser_1", NStr("en = 'Choice value'", CodeLanguage));
+	Strings.Insert("SuggestionToUser_2", NStr("en = 'Enter barcode'", CodeLanguage));
 	#EndRegion
 	
 	#Region UsersEvent

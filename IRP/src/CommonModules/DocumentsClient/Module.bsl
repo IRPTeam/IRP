@@ -1040,6 +1040,7 @@ Function PickupItemsParameters(Object, Form)
 	ReturnValue = New Structure();
 	
 	StoreArray = New Array;
+	Try
 	For Each Row In Object.ItemList Do
 		If ValueIsFilled(Row.Store) Then
 			If StoreArray.Find(Row.Store) = Undefined Then
@@ -1047,12 +1048,12 @@ Function PickupItemsParameters(Object, Form)
 			EndIf;
 		EndIf;
 	EndDo;
-	Try
+	
 		If Not StoreArray.Count() And ValueIsFilled(Form.CurrentStore) Then
 			StoreArray.Add(Form.CurrentStore);
 		EndIf;
 	Except
-		
+		StoreArray = New Array;
 	EndTry;
 	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
 	Try
@@ -1267,9 +1268,9 @@ EndProcedure
 Procedure SearchByBarcode(Command, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined) Export
 	TransferParameters = New Structure;
 	If DocumentClientModule = Undefined Then
-		TransferParameters.Insert("DocumentClientModule", ThisObject);
+		TransferParameters.Insert("ClientModule", ThisObject);
 	Else
-		TransferParameters.Insert("DocumentClientModule", DocumentClientModule);
+		TransferParameters.Insert("ClientModule", DocumentClientModule);
 	EndIf;
 	If PriceType <> Undefined Then
 		TransferParameters.Insert("PriceType", PriceType);
@@ -1279,7 +1280,7 @@ Procedure SearchByBarcode(Command, Object, Form, DocumentClientModule = Undefine
 			TransferParameters.Insert("PricePeriod", Object.Date);
 		EndIf;
 	EndIf;
-	SearchByBarcode(Command, Object, Form, DocumentClientModule, TransferParameters);
+	BarcodeClient.SearchByBarcode(Command, Object, Form, ThisObject, TransferParameters);
 EndProcedure
 
 Procedure SearchByBarcodeEnd(BarcodeItems, Parameters) Export

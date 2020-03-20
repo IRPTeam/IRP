@@ -347,19 +347,63 @@ EndProcedure
 #EndRegion
 
 
-#Region AdditionalFunctions
+#Region QuantityCompare
 
 &AtServer
 Procedure LoadDataFromQuantityCompare(Object, Form, ItemListAddress) Export
-	QuantityCompareItemList = GetFromTempStorage(ItemListAddress);
+	Lists = GetFromTempStorage(ItemListAddress);
+	QuantityCompareExpItemList = Lists.ExpItemList;
+	QuantityComparePhysItemList = Lists.PhysItemList;
 	Object.ItemList.Clear();
-	For Each Row In QuantityCompareItemList Do
-		NewRow = Object.ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-		NewRow.Quantity = Row.Count;
-		NewRow.Store = Form.CurrentStore;
+	For Each Row In QuantityComparePhysItemList Do
+		ExpItemListFilter = New Structure();
+		ExpItemListFilter.Insert("ItemKey", Row.ItemKey);
+		ExpItemListFilter.Insert("Unit", Row.Unit);
+		FoundedExpItemListRows = QuantityCompareExpItemList.FindRows(ExpItemListFilter);
+		If FoundedExpItemListRows.Count() Then
+			For Each FoundedRow In FoundedExpItemListRows Do
+				NewRow = Object.ItemList.Add();
+				NewRow.ItemKey = Row.ItemKey;
+				NewRow.Item = Row.Item;
+				NewRow.Unit = Row.Unit;				
+				NewRow.ReceiptBasis = FoundedRow.BaseOn;
+				NewRow.Store = Form.CurrentStore;
+				If Row.Count <= FoundedRow.Quantity Then
+					NewRow.Quantity = Row.Count;
+					FoundedRow.Quantity = FoundedRow.Quantity - Row.Count;
+					Row.Count = 0;
+					Break;
+				Else
+					NewRow.Quantity = FoundedRow.Quantity;
+					Row.Count = Row.Count - FoundedRow.Quantity;
+					FoundedRow.Quantity = 0;					
+				EndIf;				
+			EndDo;
+			If Row.Count Then
+				NewRow = Object.ItemList.Add();
+				NewRow.ItemKey = Row.ItemKey;
+				NewRow.Item = Row.Item;
+				NewRow.Unit = Row.Unit;
+				NewRow.Quantity = Row.Count;
+				NewRow.Store = Form.CurrentStore;
+			EndIf;
+		Else
+			NewRow = Object.ItemList.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.Store = Form.CurrentStore;
+		EndIf;
 	EndDo;
 EndProcedure
 
-#EndRegion
+Function ParametersForQuantityCompare(Val Object, UUID) Export
+	ReturnValue = New Structure;
+	ExpItemListValue = Object.ItemList.Unload(, "ItemKey, Item, Unit, Quantity, ReceiptBasis");
+	ExpItemListValue.Columns.Add("BaseOn", ExpItemListValue.Columns.ReceiptBasis.ValueType);
+	ExpItemListValue.LoadColumn(ExpItemListValue.UnloadColumn("ReceiptBasis"), "BaseOn");
+	ExpItemListValue.Columns.Delete("ReceiptBasis");
+	IncomingExpItemListAddress = PutToTempStorage(ExpItemListValue, UUID);
+	ReturnValue.Insert("IncomingExpItemListAddress", IncomingExpItemListAddress);
+	Return ReturnValue;
+EndFunction
 
+#EndRegion

@@ -28,7 +28,10 @@ EndFunction
 
 Function ProcessBarcodes(Barcodes, Parameters)
 	ReturnResult = False;	
-	AddInfo = Parameters.AddInfo;	
+	AddInfo = Parameters.AddInfo;
+	If AddInfo.Property("ClientModule") Then
+		AddInfo.Delete("ClientModule");
+	EndIf;	
 	FoundedItems = BarcodeServer.SearchByBarcodes(Barcodes, AddInfo);
 	If FoundedItems.Count() Then
 		ClientModule = Parameters.ClientModule;
@@ -53,7 +56,7 @@ Procedure SearchByBarcode(Command, Object, Form, ClientModule, AddInfo = Undefin
 	Else
 		NotifyParameters.Insert("AddInfo", AddInfo);
 	EndIf;	
-	DescriptionField = "";	
+	DescriptionField = R().SuggestionToUser_2;	
 	#If MobileClient Then
 		If MultimediaTools.BarcodeScanningSupported() Then
 			NotifyScan = New NotifyDescription("ScanBarcodeEnd", BarcodeClient, NotifyParameters);
@@ -63,7 +66,6 @@ Procedure SearchByBarcode(Command, Object, Form, ClientModule, AddInfo = Undefin
 			Return;
 		EndIf;
 	#Else
-		DescriptionField = "";
 		NotifyDescription = New NotifyDescription("InputBarcodeEnd", BarcodeClient, NotifyParameters);
 		ShowInputString(NotifyDescription, "", DescriptionField);
 	#EndIf

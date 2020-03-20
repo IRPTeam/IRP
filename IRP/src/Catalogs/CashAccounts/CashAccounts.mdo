@@ -15,6 +15,18 @@
   <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_CashAccounts</value>
+    </typesFilterValue>
+    <characteristicValues>Catalog.CashAccounts.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.CashAccounts.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.CashAccounts.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.CashAccounts.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
@@ -118,6 +130,41 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <tabularSections uuid="e4e2c63b-a0fc-494f-8196-b38a6ddb475c">
+    <producedTypes>
+      <objectType typeId="f17642bd-0685-4d6c-8cf9-1c8be00bb9b9" valueTypeId="6413d6f8-0579-45ce-9ca5-14ad0721fb28"/>
+      <rowType typeId="f1c98902-3647-4833-9b8b-3a0fe688257c" valueTypeId="ac92fa39-4162-4db3-87c2-ea0a3c9f1e0a"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="5949cb91-1cb8-49f8-973b-5f3784022eed">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d3d05137-f059-4ecd-bdb6-0631b3ecf1a4">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="96c824bc-0aa4-496b-978f-cd079767bc52">
     <name>ItemForm</name>
     <synonym>

@@ -1,46 +1,15 @@
-&AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	
-	If Not ValueIsFilled(Object.Type) Then
-		Object.Type = Enums.SpecificationType.Bundle;
-	EndIf;
-	
-	DrawForm();
-	
-	If Items.GroupMainPages.ChildItems.Count() Then
-		Items.GroupMainPages.CurrentPage =
-			Items.GroupMainPages.ChildItems[0];
-	EndIf;
-	SetVisible();
-EndProcedure
+
+#Region FormEvents
 
 &AtClient
-Procedure DescriptionOpening(Item, StandardProcessing) Export
-	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure SetVisible()
-	Items.GroupAddNewPage.Visible = Object.Type = Enums.SpecificationType.Bundle;
-	Items.ItemBundle.Visible = Object.Type = Enums.SpecificationType.Bundle;
-	SavedDataStructure = GetSavedData();
-	For Each Row In SavedDataStructure.Commands Do
-		ThisObject.Items[Row.Value.ButtonName].Visible = SavedDataStructure.Commands.Count() > 1;
-	EndDo;
-EndProcedure
-
-&AtServer
-Procedure DrawForm()
-	If Object.DataSet.Count() Then
-		RestoreData();
-	Else
-		CreatePage();
-	EndIf;
+Procedure AfterWrite(WriteParameters)
+	Notify("UpdateAvailableSpecificationsByItem", New Structure(), ThisObject);
+	Notify("UpdateAffectPricingMD5", New Structure(), ThisObject);
 EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	SavedDataStructure = GetSavedData();
 	// Fill cheking
 	HaveError = False;
@@ -132,12 +101,49 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	EndDo;
 EndProcedure
 
-&AtClient
-Procedure AfterWrite(WriteParameters)
-	Notify("UpdateAvailableSpecificationsByItem", New Structure(), ThisObject);
-	Notify("UpdateAffectPricingMD5", New Structure(), ThisObject);
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
+	
+	If Not ValueIsFilled(Object.Type) Then
+		Object.Type = Enums.SpecificationType.Bundle;
+	EndIf;
+	
+	DrawForm();
+	
+	If Items.GroupMainPages.ChildItems.Count() Then
+		Items.GroupMainPages.CurrentPage =
+			Items.GroupMainPages.ChildItems[0];
+	EndIf;
+	SetVisible();
 EndProcedure
 
+#EndRegion
+
+&AtClient
+Procedure DescriptionOpening(Item, StandardProcessing) Export
+	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure SetVisible()
+	Items.GroupAddNewPage.Visible = Object.Type = Enums.SpecificationType.Bundle;
+	Items.ItemBundle.Visible = Object.Type = Enums.SpecificationType.Bundle;
+	SavedDataStructure = GetSavedData();
+	For Each Row In SavedDataStructure.Commands Do
+		ThisObject.Items[Row.Value.ButtonName].Visible = SavedDataStructure.Commands.Count() > 1;
+	EndDo;
+EndProcedure
+
+&AtServer
+Procedure DrawForm()
+	If Object.DataSet.Count() Then
+		RestoreData();
+	Else
+		CreatePage();
+	EndIf;
+EndProcedure
 
 #Region FormDrawer
 
@@ -495,6 +501,21 @@ Procedure TypeOnChange(Item)
 	EndDo;
 	DrawForm();
 	SetVisible();
+EndProcedure
+
+#EndRegion
+
+
+#Region AddAttributes
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
 #EndRegion

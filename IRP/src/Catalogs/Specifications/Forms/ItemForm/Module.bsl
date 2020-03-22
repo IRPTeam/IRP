@@ -9,7 +9,6 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	SavedDataStructure = GetSavedData();
 	// Fill cheking
 	HaveError = False;
@@ -104,7 +103,6 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	
 	If Not ValueIsFilled(Object.Type) Then
 		Object.Type = Enums.SpecificationType.Bundle;
@@ -504,19 +502,3 @@ Procedure TypeOnChange(Item)
 EndProcedure
 
 #EndRegion
-
-
-#Region AddAttributes
-
-&AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure AddAttributesCreateFormControll()
-	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
-EndProcedure
-
-#EndRegion
-

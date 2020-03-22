@@ -321,6 +321,111 @@
         <value></value>
       </code>
     </items>
+    <items id="250546bc-ecf2-4173-933a-dcd17d2c8fd7">
+      <name>Document_OpeningEntry</name>
+      <description>Document Opening entry</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="ae211661-bece-46b7-8946-c29d131b45fc">
+      <name>Document_OutgoingPaymentOrder</name>
+      <description>Document Outgoing payment order</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="b07e942f-58ef-4049-b954-37ab8f4d6820">
+      <name>Document_PhysicalCountByLocation</name>
+      <description>Document Physical count by location</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="b90b3451-a811-4a27-b15d-1a8fd6827de8">
+      <name>Document_PhysicalInventory</name>
+      <description>Document Physical inventory</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="edde0b2e-e4c3-435d-8f04-61a431134d32">
+      <name>Document_PriceList</name>
+      <description>Document Price list</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="9bad61d7-11f0-483c-9ab0-da72bb315745">
+      <name>Document_PurchaseReturn</name>
+      <description>Document Purchase return</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="6c9873c1-9449-40b1-bd65-02a7648dc9f4">
+      <name>Document_PurchaseReturnOrder</name>
+      <description>Document Purchase return order</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="50d761b3-30ae-4bb0-afd5-3e011e8083c0">
+      <name>Document_ReconciliationStatement</name>
+      <description>Document Reconciliation statement</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="906608c9-2fa7-421e-9b37-b1dea20ae04e">
+      <name>Document_SalesReturn</name>
+      <description>Document Sales return</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="c7ba1218-4713-4028-b9e7-35514690620c">
+      <name>Document_SalesReturnOrder</name>
+      <description>Document Sales return order</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="de357601-3033-45a8-b7c3-2e46ac141890">
+      <name>Document_ShipmentConfirmation</name>
+      <description>Document Shipment confirmation</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="07e4eae5-710d-4c5b-9ad8-28013e48abe9">
+      <name>Document_StockAdjustmentAsSurplus</name>
+      <description>Document Stock adjustment as surplus</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="eae67cef-3488-4f12-afb0-d130932ad37c">
+      <name>Document_StockAdjustmentAsWriteOff</name>
+      <description>Document Stock adjustment as write off</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="a1e91179-ddb2-45d6-a6a0-a8cd51eb130d">
+      <name>Document_Unboxing</name>
+      <description>Document Unboxing</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="b8ae16fc-14a3-4f14-a1f2-11d01097bcec">
+      <name>Document_Unbundling</name>
+      <description>Document Unbundling</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

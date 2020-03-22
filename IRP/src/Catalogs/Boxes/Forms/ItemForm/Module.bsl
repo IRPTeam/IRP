@@ -1,7 +1,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject, "GroupAttributes");
+	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 EndProcedure
 
 &AtClient

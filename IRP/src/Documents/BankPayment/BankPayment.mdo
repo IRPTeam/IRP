@@ -376,6 +376,43 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="6191848c-f533-4689-bae3-46499b265e84">
+    <producedTypes>
+      <objectType typeId="a6850450-fa18-4391-8a40-367a327188e5" valueTypeId="5ec631ea-c88e-4344-a79e-5674d2c31e3d"/>
+      <rowType typeId="94d2f221-d4c3-40c1-86e7-10cfcb7a60cf" valueTypeId="10e66145-697b-4449-a16f-2c3e74417aab"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="f3b4a028-2329-45ba-8c9a-374e69978712">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="4078739b-56ae-49e4-aadd-2e9db7b5fa1d">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
   <commands uuid="652eb8c0-9773-4733-818c-e405dc646823">
     <name>GenarateBankPayment</name>
     <synonym>

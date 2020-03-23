@@ -298,6 +298,7 @@
   <commonModules>CommonModule.DocStockAdjustmentAsSurplusServer</commonModules>
   <commonModules>CommonModule.DocPhysicalInventoryClient</commonModules>
   <commonModules>CommonModule.DocPhysicalInventoryServer</commonModules>
+  <commonModules>CommonModule.PickupItemsClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>

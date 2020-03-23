@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8cf3f74a-010c-45eb-9c50-3057fa3505f8">
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8cf3f74a-010c-45eb-9c50-3057fa3505f8">
   <producedTypes>
     <objectType typeId="87b6bc4a-26fa-47c9-9c01-50e65128cb86" valueTypeId="c5bf0df1-5380-4ca7-a4bc-695680776e40"/>
     <refType typeId="c7bbd371-f97b-42f8-b35b-f495bb901434" valueTypeId="72fd7e7c-5769-4094-8074-79e34ac1c470"/>
@@ -22,6 +22,18 @@
       <value>Price key</value>
     </synonym>
   </standardAttributes>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_PriceKeys</value>
+    </typesFilterValue>
+    <characteristicValues>Catalog.PriceKeys.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.PriceKeys.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.PriceKeys.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.PriceKeys.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>

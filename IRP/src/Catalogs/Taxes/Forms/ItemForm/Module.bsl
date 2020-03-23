@@ -1,3 +1,21 @@
+
+#Region FormEvents
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	If Object.Type <> Enums.TaxType.Rate Then
+		Object.TaxRates.Clear();
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
+EndProcedure
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
@@ -5,6 +23,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	= PutToTempStorage(FormAttributeToValue("Object").ExternalDataProcSettings.Get(), ThisObject.UUID);
 	SetVisible();
 EndProcedure
+
+#EndRegion
 
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
@@ -57,15 +77,21 @@ Procedure SetVisible()
 	Items.ExternalDataProcSettings.Visible = UseTaxRate;
 EndProcedure
 
-&AtServer
-Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	If Object.Type <> Enums.TaxType.Rate Then
-		Object.TaxRates.Clear();
-	EndIf;
-EndProcedure
-
 &AtClient
 Procedure TypeOnChange(Item)
 	SetVisible();
 EndProcedure
 
+#Region AddAttributes
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+EndProcedure
+
+#EndRegion

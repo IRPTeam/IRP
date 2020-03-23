@@ -125,6 +125,202 @@
         <value></value>
       </code>
     </items>
+    <items id="8bbe12f5-44d2-4a75-85e2-32bcb48692a7">
+      <name>Catalog_Agreements</name>
+      <description>Catalog Agreements</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="328f6f83-a86a-4b9d-bd6b-ffead46c0953">
+      <name>Catalog_CashAccounts</name>
+      <description>Catalog Cash accounts</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="9ed15691-1df1-4020-a825-4989f860a90e">
+      <name>Catalog_Companies</name>
+      <description>Catalog Companies</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="49d5fa3f-515b-4d80-8b1c-307112a4158a">
+      <name>Catalog_CompanyTypes</name>
+      <description>Catalog Company types</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="60670f4a-f08a-4ca4-a6d3-05236f383207">
+      <name>Catalog_Countries</name>
+      <description>Catalog countries</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="7908e42a-a00e-4866-8ea2-7221edb32a1b">
+      <name>Catalog_Currencies</name>
+      <description>Catalog currencies</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="7fffca8e-8a3f-4fbf-af29-37de18151417">
+      <name>Catalog_PriceTypes</name>
+      <description>Catalog price types</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="632e8c44-ec2d-403c-af75-10ea3a0b99a3">
+      <name>Catalog_SerialLotNumbers</name>
+      <description>Catalog serial lot numbers</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="95c158df-fb51-4bbf-9f83-44f6f333861f">
+      <name>Catalog_Stores</name>
+      <description>Catalog stores</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="1bfd69ac-1570-431e-80e6-5b393b1688d3">
+      <name>Catalog_Taxes</name>
+      <description>Catalog taxes</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="612953b5-4272-4603-9467-f51deca79a3a">
+      <name>Catalog_Units</name>
+      <description>Catalog units</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="e602c645-ae74-4566-8b79-b902ab223c46">
+      <name>Catalog_Users</name>
+      <description>Catalog users</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="b51b4fc3-9af0-49be-bc0f-1f50629c4951">
+      <name>Document_BankPayment</name>
+      <description>Document Bank payment</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="5e98ef39-7a7f-4e2e-ac27-ef61c75418a4">
+      <name>Document_BankReceipt</name>
+      <description>Document Bank receipt</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="1f28fc11-db64-481f-b606-75619921551b">
+      <name>Document_Boxing</name>
+      <description>Document Boxing</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="dbc9ff5e-39a5-4968-a585-dad9f87c15a4">
+      <name>Document_Bundling</name>
+      <description>Document Bundling</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="1ea8bd75-b87f-48b4-af96-1b7d6dfdd4b0">
+      <name>Document_CashExpense</name>
+      <description>Document Cash expense</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="4a3c08bd-dd13-4e82-92f9-a0002041d98c">
+      <name>Document_CashPayment</name>
+      <description>Document Cash payment</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="59e6837a-c968-415c-81c5-454ed7728831">
+      <name>Document_CashReceipt</name>
+      <description>Document Cash receipt</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="0b05d183-3aef-4b78-9897-0beebfb766ae">
+      <name>Document_CashRevenue</name>
+      <description>Document Cash revenue</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="a1216e62-2d10-48b2-9c15-7c7632e37c9f">
+      <name>Document_CashTransferOrder</name>
+      <description>Document Cash transfer order</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="81ea25f6-8b13-4e90-8dfa-b2ba20b26a83">
+      <name>Document_ChequeBondTransaction</name>
+      <description>Document Cheque bond transaction</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="d165f449-9d6e-49bb-aac3-2d86efda2eae">
+      <name>Document_GoodsReceipt</name>
+      <description>Document Goods receipt</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="ef6ee0a7-b975-4ed0-9efc-4737f1890c54">
+      <name>Document_IncomingPaymentOrder</name>
+      <description>Document Incoming payment order</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="70839530-948e-4961-bdd6-17632148e6a9">
+      <name>Document_InventoryTransfer</name>
+      <description>Document Inventory transfer</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="74d7ecaa-6ac0-45ca-93ba-6be5806c5f7a">
+      <name>Document_InventoryTransferOrder</name>
+      <description>Document Inventory transfer order</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="c092fb1e-3000-41ed-babb-7a9dff84d16c">
+      <name>Document_InvoiceMatch</name>
+      <description>Document Invoice match</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="027d2fc5-5f0b-4955-9d72-599fca2c241d">
+      <name>Document_Labeling</name>
+      <description>Document Labeling</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

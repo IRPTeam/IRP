@@ -105,12 +105,16 @@ Procedure TypeOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure ApArPostingDetailOnChange(Object, Form, Item) Export
+	If Object.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement") Then
+		Object.StandardAgreement = Undefined;
+	EndIf;
 	SetVisible(Object, Form);
 EndProcedure
 
 Procedure KindOnChange(Object, Form, Item) Export
 	If Object.Kind = PredefinedValue("Enum.AgreementKinds.Standard") Then
 		Object.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByAgreements");
+		Object.StandardAgreement = Undefined;
 	EndIf;
 	SetVisible(Object, Form);
 EndProcedure

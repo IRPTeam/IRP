@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5217e8bd-666f-48d2-b0b6-96174de1abfa">
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5217e8bd-666f-48d2-b0b6-96174de1abfa">
   <producedTypes>
     <objectType typeId="27b6fc0c-8bf3-489e-8331-ad03fbe47e20" valueTypeId="097a66ba-e1fb-49ff-94e6-56c9a2acd51d"/>
     <refType typeId="35556de8-f2a9-4d07-8a13-9de98d599b15" valueTypeId="11e68c36-a5a1-46f4-9c88-9a7c3a483a83"/>
@@ -14,6 +14,18 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_CompanyTypes</value>
+    </typesFilterValue>
+    <characteristicValues>Catalog.CompanyTypes.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.CompanyTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.CompanyTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.CompanyTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
@@ -32,6 +44,41 @@
   <defaultListForm>Catalog.CompanyTypes.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.CompanyTypes.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <tabularSections uuid="585a246d-596a-4051-9c81-3bf77d910db2">
+    <producedTypes>
+      <objectType typeId="9cbaa9b6-46a8-466c-ac8c-19d9fd668538" valueTypeId="b62bfcde-df0f-4025-bb6e-ce8fb96dd4c0"/>
+      <rowType typeId="d2d913e7-b074-47f9-b8b2-08977246c4d8" valueTypeId="860ae6f6-4a11-4a1f-9857-634d6b1bf13c"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="f487c78f-87de-4fce-9f7e-83facf1bdf0a">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="115261f6-e280-4ebf-9bf4-9f7d3da9b649">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="0c8493f7-eaeb-4c4a-b7c7-056f82ef85ed">
     <name>ItemForm</name>
     <synonym>

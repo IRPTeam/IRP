@@ -15,6 +15,18 @@
   <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_Units</value>
+    </typesFilterValue>
+    <characteristicValues>Catalog.Units.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.Units.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.Units.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.Units.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
@@ -90,6 +102,56 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <tabularSections uuid="c0f9951d-d6b4-4220-a20f-82d6d97d352b">
+    <producedTypes>
+      <objectType typeId="a06fe70c-764b-4da4-9209-711bd73450f1" valueTypeId="f5289add-efc2-4e58-834c-799033c8dbf0"/>
+      <rowType typeId="716c8a34-5aa5-4c28-8aef-5fb173b2be32" valueTypeId="ddbf60a0-e242-46f5-b1ec-1d47a9eb9fb4"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="1684b5c0-67c9-4393-a7cc-2e564f1d966c">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="bdb9a87d-eb64-48ce-b01e-590c5f8acf9c">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3a73dd46-b2e2-4481-8a72-937a3ce51869">
+      <name>SearchLiteral</name>
+      <synonym>
+        <key>en</key>
+        <value>Search literal</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>500</length>
+        </stringQualifiers>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="59b5c950-0af8-47d0-af1b-4bcb5f8f5592">
     <name>ItemForm</name>
     <synonym>

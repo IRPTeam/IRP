@@ -320,5 +320,9 @@
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
     </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
+    </handlers>
   </extInfo>
 </form:Form>

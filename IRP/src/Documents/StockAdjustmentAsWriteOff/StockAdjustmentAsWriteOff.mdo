@@ -187,6 +187,43 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="e2847958-4d60-44e9-a799-50b6e08d9f47">
+    <producedTypes>
+      <objectType typeId="6668b73d-c8e6-4647-a695-423d1b5fadff" valueTypeId="9810fe97-843e-47da-896b-97b722860517"/>
+      <rowType typeId="5aaf1a78-7969-44f5-9643-def867877fa8" valueTypeId="64a8e0a1-e9a2-4c55-81ae-72e0f0533766"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="f5164595-35f0-4e4c-a45f-6309051f895b">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="88466b69-60bb-4a70-b7c0-985a48b0cbb2">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
   <commands uuid="bba91882-3996-4f31-86b9-c3dcca0c9127">
     <name>GenerateStockAdjustmentAsWriteOff</name>
     <synonym>

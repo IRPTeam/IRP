@@ -1,9 +1,7 @@
 #Region FormEvents
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
-	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
-	
+	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);	
 	If Form.Parameters.Key.IsEmpty() Then
 		Form.CurrentPartner = Object.Partner;
 		Form.CurrentAgreement = Object.Agreement;

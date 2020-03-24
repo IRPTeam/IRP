@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e21fc0a4-9f3b-43c1-873d-952dbbb8ae63">
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e21fc0a4-9f3b-43c1-873d-952dbbb8ae63">
   <producedTypes>
     <objectType typeId="7e81414b-7b79-4d60-956c-c44703019269" valueTypeId="8fc9572e-dde1-4257-a2fe-3c33981365fb"/>
     <refType typeId="dd72e931-9eea-40fc-b419-9ff578908f82" valueTypeId="abbba13c-1786-4b57-90cd-5a8f5d906cc4"/>
@@ -271,6 +271,43 @@
       <type>
         <types>DefinedType.typeQuantity</types>
       </type>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="4261d984-e2d6-4900-9460-fae58406fafe">
+    <producedTypes>
+      <objectType typeId="e8e37006-a702-445f-8359-06dfeb0800d1" valueTypeId="892fbbe8-c907-48d9-9581-06f69e9771dc"/>
+      <rowType typeId="b46b0f6e-d9d8-4eef-9a1b-cb4296a5b116" valueTypeId="89475e13-a18e-4010-830f-4a1e69ff392e"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="6957d6db-362f-40c3-ab38-48e5a8fd0c26">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="3a43fa13-cb3f-45a1-a09d-be9f7b42f68f">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>

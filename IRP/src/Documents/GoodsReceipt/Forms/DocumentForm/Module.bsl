@@ -1,6 +1,11 @@
 #Region FormEvents
 
 &AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
@@ -50,6 +55,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	EndIf;
 	If EventName = "TransferDataFromQuantityCompare" Then
 		LoadDataFromQuantityCompareAtServer(Parameter);		
+	EndIf;
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
 	EndIf;
 EndProcedure
 
@@ -267,3 +275,18 @@ EndProcedure
 Procedure LoadDataFromQuantityCompareAtServer(Parameter)
 	DocGoodsReceiptServer.LoadDataFromQuantityCompare(Object, ThisObject, Parameter);
 EndProcedure
+
+
+#Region AddAttributes
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion

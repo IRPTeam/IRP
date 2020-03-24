@@ -1,9 +1,21 @@
 #Region FormEvents
 
 &AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocInvoiceMatchServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibility();
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -423,4 +435,16 @@ EndProcedure
 #EndRegion
 
 
+#Region AddAttributes
 
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion

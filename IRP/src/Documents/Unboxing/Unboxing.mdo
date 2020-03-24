@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6e23e9ef-6bd9-457f-8cd9-9a910d041a88">
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6e23e9ef-6bd9-457f-8cd9-9a910d041a88">
   <producedTypes>
     <objectType typeId="8501c562-cd60-40a1-b010-94a38985b7b9" valueTypeId="ed188972-b60a-46eb-a510-0a6ef94f71f3"/>
     <refType typeId="0f07dfd1-5bd9-4330-85ee-e64dbfa86e23" valueTypeId="aa42a1dc-8f62-4e5f-b358-2c93db014cb7"/>
@@ -162,6 +162,43 @@
       </type>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="c036e131-6a37-40d7-9126-1a155b1dbe2e">
+    <producedTypes>
+      <objectType typeId="542a18f5-568b-40d4-9bc1-d3a9dd1f29f4" valueTypeId="8c91c93e-70ef-4bf0-bc8b-1fca4f5b440b"/>
+      <rowType typeId="7bd088f1-0b78-4109-a530-49a48c332af0" valueTypeId="eae1fb18-729f-484c-bd9d-3dda48726a75"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="35f0f3de-ec0a-462c-93ea-94a5d55c1b54">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="79a0cc10-c9c3-405e-808d-e46a814fc5d2">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
   <commands uuid="ec814dfd-bef7-4234-b30f-884aab7d6e84">

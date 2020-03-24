@@ -1,13 +1,25 @@
 #Region FormEvents
 
 &AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocUnboxingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	DocUnboxingServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	DocUnboxingServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	DocUnboxingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
 &AtServer
@@ -170,6 +182,20 @@ Procedure DescriptionClick(Item, StandardProcessing)
 	DocUnboxingClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
+#EndRegion
+
+
+#Region AddAttributes
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
 
 #EndRegion
 

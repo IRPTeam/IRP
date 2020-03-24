@@ -1,14 +1,26 @@
 #Region FormEvents
 
 &AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	DocReconciliationStatementServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SetConditionalAppearence();
 	DocReconciliationStatementServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
-&AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	DocReconciliationStatementServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -232,6 +244,21 @@ EndProcedure
 &AtClient
 Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
 	DocReconciliationStatementClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+
+#Region AddAttributes
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 
 #EndRegion

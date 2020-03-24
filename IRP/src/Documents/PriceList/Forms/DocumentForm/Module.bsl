@@ -2,6 +2,7 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	DocumentsServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	BuildForm();
 	SetVisible();
 EndProcedure
@@ -53,6 +54,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		And Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByProperties") Then
 		DrawFormTablePriceKeyList();
 	EndIf;
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -62,6 +66,7 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	If Object.PriceListType = Enums.PriceListTypes.PriceByProperties Then
 		SaveTablePriceKeyList(Cancel, CurrentObject, WriteParameters);
 	EndIf;
@@ -525,3 +530,16 @@ Procedure OnReadAtServer(CurrentObject)
 EndProcedure
 
 
+#Region AddAttributes
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion

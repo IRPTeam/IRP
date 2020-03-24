@@ -4,8 +4,11 @@
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export	
 	If Not Object.Ref.Metadata().TabularSections.Find("AddAttributes") = Undefined Then
 		AddAttributesAndPropertiesServer.OnCreateAtServer(Form, "GroupOther");
+	EndIf;
+	//TODO: Cut If after fix all documents
+	If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then
+		DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
 	EndIf;	
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));	
 	ExternalCommandsServer.CreateCommands(Form, Object.Ref.Metadata().Name, Catalogs.ConfigurationMetadata.Documents);	
 EndProcedure
 

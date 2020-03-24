@@ -121,6 +121,43 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="8c81be8f-5203-4012-8c4d-75b695a38c0d">
+    <producedTypes>
+      <objectType typeId="8455bc44-c06c-43fe-9027-eb7c1441a89f" valueTypeId="c7938bd9-1b84-47eb-a895-f86f7bd7e446"/>
+      <rowType typeId="5b892769-c13c-481e-bc9d-75c260e3250c" valueTypeId="b186c86b-ee47-4709-a1c1-a8af70e43a70"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="506af94a-702b-44e8-8676-b48b10bee70c">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="1abd48b8-9db2-4523-bc7e-d4efa9728bb9">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
   <commands uuid="7244e3b7-050d-47eb-b6ef-1b6153ee8801">
     <name>GenerateLabeling</name>
     <synonym>

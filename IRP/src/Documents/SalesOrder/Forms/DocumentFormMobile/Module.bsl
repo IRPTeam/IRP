@@ -15,7 +15,7 @@ Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source)
+Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	DocSalesOrderClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 EndProcedure
 

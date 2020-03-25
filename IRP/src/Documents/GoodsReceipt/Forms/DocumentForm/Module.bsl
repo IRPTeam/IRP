@@ -49,7 +49,7 @@ Procedure SetVisibilityAvailability(Object, Form) Export
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source)
+Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "ChoiceReceiptBasis" Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;

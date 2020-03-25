@@ -1585,7 +1585,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormGroup">
-      <name>GroupInfo</name>
+      <name>GroupOther</name>
       <id>43</id>
       <items xsi:type="form:FormGroup">
         <name>GroupNumberDate</name>

@@ -12,7 +12,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source)
+Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	IDInfoClient.NotificationProcessing(ThisObject, Object.Ref, EventName, Parameter, Source);
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControll();

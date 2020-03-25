@@ -3328,7 +3328,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormGroup">
-      <name>GroupInfo</name>
+      <name>GroupOther</name>
       <id>40</id>
       <items xsi:type="form:FormField">
         <name>PriceIncludeTax</name>

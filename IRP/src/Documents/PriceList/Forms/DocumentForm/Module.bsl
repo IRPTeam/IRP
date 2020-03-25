@@ -49,7 +49,7 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source)
+Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAffectPricing"
 		And Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByProperties") Then
 		DrawFormTablePriceKeyList();
@@ -382,8 +382,8 @@ EndProcedure
 
 &AtServer
 Function GetSavedData()
-	If ValueIsFilled(ThisObject.SavedData) Then
-		SavedDataStructure = CommonFunctionsServer.DeserializeXMLUseXDTO(ThisObject.SavedData);
+	If ValueIsFilled(ThisObject.DynamicDataForm) Then
+		SavedDataStructure = CommonFunctionsServer.DeserializeXMLUseXDTO(ThisObject.DynamicDataForm);
 	Else
 		SavedDataStructure = New Structure();
 		SavedDataStructure.Insert("Fields", New Structure());
@@ -399,7 +399,7 @@ EndFunction
 
 &AtServer
 Procedure SetSavedData(SavedDataStructure)
-	ThisObject.SavedData = CommonFunctionsServer.SerializeXMLUseXDTO(SavedDataStructure);
+	ThisObject.DynamicDataForm = CommonFunctionsServer.SerializeXMLUseXDTO(SavedDataStructure);
 EndProcedure
 
 &AtServer

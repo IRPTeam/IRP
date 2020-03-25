@@ -7,7 +7,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source)
+Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "Writing_CatCompany" Then
 		SetFormParametersAtServer();
 		Items.List.Refresh();

@@ -29,7 +29,7 @@ Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source)
+Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "SetVisibility" Then
 		SetVisibility(Object, ThisObject);
 	EndIf;

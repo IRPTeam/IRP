@@ -382,8 +382,8 @@ EndProcedure
 
 &AtServer
 Function GetSavedData()
-	If ValueIsFilled(ThisObject.SavedData) Then
-		SavedDataStructure = CommonFunctionsServer.DeserializeXMLUseXDTO(ThisObject.SavedData);
+	If ValueIsFilled(ThisObject.DynamicDataForm) Then
+		SavedDataStructure = CommonFunctionsServer.DeserializeXMLUseXDTO(ThisObject.DynamicDataForm);
 	Else
 		SavedDataStructure = New Structure();
 		SavedDataStructure.Insert("Fields", New Structure());
@@ -399,7 +399,7 @@ EndFunction
 
 &AtServer
 Procedure SetSavedData(SavedDataStructure)
-	ThisObject.SavedData = CommonFunctionsServer.SerializeXMLUseXDTO(SavedDataStructure);
+	ThisObject.DynamicDataForm = CommonFunctionsServer.SerializeXMLUseXDTO(SavedDataStructure);
 EndProcedure
 
 &AtServer

@@ -2093,10 +2093,10 @@
     </additionalColumns>
   </attributes>
   <attributes>
-    <name>SavedData</name>
+    <name>DynamicDataForm</name>
     <title>
       <key>en</key>
-      <value>Saved data</value>
+      <value>Dynamic data form</value>
     </title>
     <id>4</id>
     <valueType>

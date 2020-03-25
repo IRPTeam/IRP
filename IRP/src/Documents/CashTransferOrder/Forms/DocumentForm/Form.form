@@ -2001,7 +2001,7 @@
       </extendedTooltip>
       <type>Page</type>
       <extInfo xsi:type="form:PageGroupExtInfo">
-        <group>AlwaysHorizontal</group>
+        <group>Vertical</group>
         <showTitle>true</showTitle>
       </extInfo>
     </items>

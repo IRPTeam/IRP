@@ -835,4 +835,41 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="a0b0d180-6e2b-4348-aabb-118766ce88d3">
+    <producedTypes>
+      <objectType typeId="3e0db584-eb4a-4a73-9c09-2c94a44b7082" valueTypeId="b6d7ecc8-fde9-4c28-8315-d5d9f2e9982b"/>
+      <rowType typeId="61b3722b-9f58-43b1-b6a0-8ae267a96ac6" valueTypeId="52edbde0-8103-437b-9868-e5548c936b5d"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="02abebf8-e1e7-4df6-972a-b9a70f5b5e68">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="f997319a-3a9c-4126-9d63-cf3eebcd9803">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
 </mdclass:Document>

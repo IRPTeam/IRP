@@ -1,7 +1,7 @@
 #Region FormEvents
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
+	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If ValueIsFilled(Object.ItemKeyBox) Then
 		Form.ItemBox = Object.ItemKeyBox.Item;
 	EndIf;

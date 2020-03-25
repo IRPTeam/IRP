@@ -1,7 +1,7 @@
 #Region FormEvents
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
+	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If ValueIsFilled(Object.ItemKeyBundle) Then
 		Form.ItemBundle = Object.ItemKeyBundle.Item;
 	EndIf;

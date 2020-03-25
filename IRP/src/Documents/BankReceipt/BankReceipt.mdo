@@ -405,6 +405,43 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="ac22a476-7797-41e4-a25d-532735a8caeb">
+    <producedTypes>
+      <objectType typeId="b4d531d3-cbcb-4dd9-9722-fe593e42b14c" valueTypeId="58372e2b-e76c-47e5-8064-2cf8c412a5f5"/>
+      <rowType typeId="87b681f7-9733-466d-8378-8144e2f7c1f1" valueTypeId="32a3efde-50b0-49d8-a908-2569c227bd44"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="5f9295a3-2e80-4284-82bd-2321cf0971a2">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="1bddfba9-70c6-46c6-8f42-02fb514f0a30">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
   <commands uuid="0df3afaf-0448-450f-a0c1-566622a59038">
     <name>GenarateBankReceipt</name>
     <synonym>

@@ -1,6 +1,17 @@
 #Region FormEvents
 
 &AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+	DocShipmentConfirmationServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
@@ -13,10 +24,11 @@ Procedure OnOpen(Cancel)
 	DocShipmentConfirmationClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
-&AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-	DocShipmentConfirmationServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -202,8 +214,6 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 
-
-
 #Region Commands
 
 &AtClient
@@ -222,7 +232,19 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
+#EndRegion
 
 
+#Region AddAttributes
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
 
 #EndRegion

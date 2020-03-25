@@ -843,6 +843,43 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="d5a43e31-7685-47fd-82f9-b59d8fa48f61">
+    <producedTypes>
+      <objectType typeId="d8779164-e861-483d-b18a-c9414684475b" valueTypeId="d1b2d6af-741d-4084-92e7-58c5612f24f3"/>
+      <rowType typeId="49ae28e7-963b-47dd-9399-3c010c015b29" valueTypeId="6389acb7-0f90-4f37-935b-d4a1938f48d8"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Add attributes</value>
+    </synonym>
+    <attributes uuid="619f65c5-9877-48ef-98bd-a3c323d36227">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="dc7eed20-da36-47cc-97e8-595fc5ef81b8">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
   <commands uuid="5d7fe07b-4c48-4b3f-88e6-db41ed5c7076">
     <name>GeneratePurchaseReturn</name>
     <synonym>

@@ -1,12 +1,5 @@
 #Region FormEvents
 
-&AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
-	EndIf;
-EndProcedure
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocBoxingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
@@ -20,7 +13,6 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	AddAttributesTable = New ValueTable();
 	AddAttributesTable.Columns.Add("Property");
 	AddAttributesTable.Columns.Add("Value");
@@ -187,21 +179,6 @@ EndProcedure
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
 	DocBoxingClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-
-#Region AddAttributes
-
-&AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure AddAttributesCreateFormControll()
-	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 
 #EndRegion

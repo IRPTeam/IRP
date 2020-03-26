@@ -353,7 +353,6 @@ Function Currencies_GetDeclaration(Object, Form)
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_OnOpen", "OnOpen", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWriteAtServer", "AfterWriteAtServer", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWrite", "AfterWrite", Form);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_NotificationProcessing", "NotificationProcessing", Form);
 	
 	ArrayOfItems_MainTable = New Array();
 	ArrayOfItems_MainTable.Add(Form.Items.PaymentList);

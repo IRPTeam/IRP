@@ -21,15 +21,16 @@ EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+	
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
+	
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
 	
 	DocSalesReturnOrderClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-	
-	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
-	EndIf;
 	
 	// {TAXES}
 	If EventName = "CalculateTax" Then

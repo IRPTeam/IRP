@@ -91,6 +91,7 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	AddAmountsColumns(RecordSet, "Amount");	
 	AddAmountsColumns(RecordSet, "ManualAmount");
 	AddAmountsColumns(RecordSet, "NetAmount");
+	AddAmountsColumns(RecordSet, "OffersAmount");
 	
 	Query = New Query();
 	Query.TempTablesManager = TempTableManager;
@@ -124,6 +125,12 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|			THEN 0
 	|		ELSE RecordSet.NetAmount / (CurrencyTable.Rate * CurrencyTable.Multiplicity)
 	|	END AS NetAmount,
+	|	CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE RecordSet.OffersAmount / (CurrencyTable.Rate * CurrencyTable.Multiplicity)
+	|	END AS OffersAmount,
 	|	CurrencyTable.MovementType.DeferredCalculation AS DeferredCalculation,
 	|	CurrencyTable.MovementType.Currency AS Currency
 	|FROM
@@ -152,6 +159,7 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|	RecordSet.Amount,
 	|	RecordSet.ManualAmount,
 	|	RecordSet.NetAmount,
+	|	RecordSet.OffersAmount,	
 	|	FALSE,
 	|	RecordSet.Currency
 	|FROM

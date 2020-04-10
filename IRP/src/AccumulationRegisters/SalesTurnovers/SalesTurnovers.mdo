@@ -50,6 +50,17 @@
     </type>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="2b902a7d-f0ac-4931-938f-d9e4dadf0ee6">
+    <name>OffersAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Offers amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <attributes uuid="305650de-0bd8-4857-96f7-81274bc82814">
     <name>DeferredCalculation</name>
     <synonym>

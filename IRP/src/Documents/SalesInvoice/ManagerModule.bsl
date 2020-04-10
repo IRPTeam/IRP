@@ -126,7 +126,8 @@ Function GetQueryTextSalesInvoiceItemList()
 		|			THEN SalesInvoiceItemList.Ref
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
-		|	SUM(SalesInvoiceItemList.NetAmount) AS NetAmount
+		|	SUM(SalesInvoiceItemList.NetAmount) AS NetAmount,
+		|	SUM(SalesInvoiceItemList.OffersAmount) AS OffersAmount
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
 		|WHERE
@@ -234,6 +235,7 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.RevenueType AS RevenueType,
 		|	QueryTable.AdditionalAnalytic AS AdditionalAnalytic,
 		|	QueryTable.NetAmount AS NetAmount,
+		|	QueryTable.OffersAmount AS OffersAmount,
 		|	QueryTable.IsService AS IsService,
 		|	QueryTable.BasisDocument AS BasisDocument
 		|INTO tmp
@@ -341,6 +343,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.SalesInvoice AS SalesInvoice,
 		|	SUM(tmp.Amount) AS Amount,
 		|	SUM(tmp.NetAmount) AS NetAmount,
+		|	SUM(tmp.OffersAmount) AS OffersAmount,
 		|	tmp.RowKey AS RowKey
 		|FROM
 		|	tmp AS tmp

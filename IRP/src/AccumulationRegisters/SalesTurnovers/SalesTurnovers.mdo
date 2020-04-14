@@ -147,4 +147,16 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="8a9f99b6-54d5-4895-8ef4-69163555a749">
+    <name>IsOrder</name>
+    <synonym>
+      <key>en</key>
+      <value>Is order</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
 </mdclass:AccumulationRegister>

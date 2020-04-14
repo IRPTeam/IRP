@@ -31,7 +31,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	SalesReturnOrderItemList.SalesInvoice AS SalesInvoice,
 		|	ISNULL(SalesReturnOrderItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
 		|	SUM(SalesReturnOrderItemList.TotalAmount) AS TotalAmount,
-		|	SalesReturnOrderItemList.Key AS RowKey
+		|	SalesReturnOrderItemList.Key AS RowKey,
+		|	TRUE AS IsOrder
 		|FROM
 		|	Document.SalesReturnOrder.ItemList AS SalesReturnOrderItemList
 		|WHERE
@@ -74,7 +75,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.SalesInvoice AS SalesInvoice,
 		|	QueryTable.Currency AS Currency,
 		|	QueryTable.TotalAmount AS Amount,
-		|	QueryTable.RowKey AS RowKey
+		|	QueryTable.RowKey AS RowKey,
+		|	QueryTable.IsOrder AS IsOrder
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -111,7 +113,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	-SUM(tmp.Amount) AS Amount,
 		|	tmp.Period,
 		|	tmp.SalesInvoice,
-		|	tmp.RowKey
+		|	tmp.RowKey,
+		|	tmp.IsOrder
 		|FROM
 		|	tmp AS tmp
 		|GROUP BY
@@ -120,7 +123,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.ItemKey,
 		|	tmp.Period,
 		|	tmp.SalesInvoice,
-		|	tmp.RowKey";
+		|	tmp.RowKey,
+		|	tmp.IsOrder";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();

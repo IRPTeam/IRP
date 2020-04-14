@@ -598,6 +598,7 @@
   <accumulationRegisters>AccumulationRegister.CashAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.StockAdjustmentAsWriteOff</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.StockAdjustmentAsSurplus</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.SalesReturnTurnovers</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

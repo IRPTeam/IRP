@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ab753e93-4e2c-4487-8310-85765392b872">
+<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="65d28cd9-d0ab-4370-82f9-19d6ae05a9b1">
   <producedTypes>
-    <selectionType typeId="8b1c2048-7974-4fc8-93cd-60a0d5a18170" valueTypeId="db885365-322a-4b9d-a97a-316d012fec34"/>
-    <listType typeId="d4328e8c-350a-4659-a8a8-31e6369e5be1" valueTypeId="c7abfc26-8de2-4399-8e7f-c35a5f4705f5"/>
-    <managerType typeId="68f83a67-53af-4f19-9213-246f5b959ce8" valueTypeId="81061e61-2e4c-4757-be87-b230e2d2d306"/>
-    <recordSetType typeId="ea1d194b-07a1-45c9-8e68-ff739d209c57" valueTypeId="76f2a217-5dfe-4aaf-976e-13a5200996ec"/>
-    <recordKeyType typeId="ad560133-cfaa-4ac4-867a-8f3de2463ca2" valueTypeId="48bfaaa6-0b92-48fc-9fe2-58ba1d33c482"/>
-    <recordType typeId="2bf48c78-2cc9-4652-8875-212b2d58f532" valueTypeId="b2d7fc1f-cc1e-4131-a0d8-ab3147642fb3"/>
+    <selectionType typeId="0e122343-58bf-4887-a8ff-de5222a4a6f7" valueTypeId="9ecbc426-8192-4ea7-8d5a-1f988c04d0f0"/>
+    <listType typeId="48800bec-e006-4e38-867e-e694f3d7c195" valueTypeId="0f04ee7e-8602-4815-8198-360364f2081f"/>
+    <managerType typeId="e5988a73-74c7-461e-be31-283ce035de9b" valueTypeId="df3a2cf6-3f05-464d-bdc1-3cce7eab43e3"/>
+    <recordSetType typeId="e0701902-e59a-4037-be5a-e43cd8d0fdde" valueTypeId="d51f6c50-851c-40a8-bd7a-8876d01c2bfb"/>
+    <recordKeyType typeId="72f26731-3477-45a4-a92d-94d9e720cfbe" valueTypeId="313c04a5-d4dc-4975-be89-893579227bf9"/>
+    <recordType typeId="c4847287-e354-4f5c-853e-05ced82e1fa2" valueTypeId="ff3babc8-4384-41ba-a2a3-3f301bd4308c"/>
   </producedTypes>
-  <name>SalesTurnovers</name>
+  <name>SalesReturnTurnovers</name>
   <synonym>
     <key>en</key>
-    <value>Sales turnovers</value>
+    <value>Sales return turnovers</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="03457f95-0137-4096-a759-773d668b4ccb">
+  <resources uuid="a64020b0-2a5e-4461-8e1b-2ac97cde0736">
     <name>Quantity</name>
     <synonym>
       <key>en</key>
@@ -28,7 +28,7 @@
     </type>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <resources uuid="914f090d-b55e-4255-abee-454ad7dbc377">
+  <resources uuid="717bb571-f74b-45e3-8773-bca060d58d5d">
     <name>Amount</name>
     <synonym>
       <key>en</key>
@@ -39,29 +39,7 @@
     </type>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <resources uuid="6ad2a5fa-dd25-4736-b94b-61e08f2f2260">
-    <name>NetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="2b902a7d-f0ac-4931-938f-d9e4dadf0ee6">
-    <name>OffersAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Offers amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="305650de-0bd8-4857-96f7-81274bc82814">
+  <attributes uuid="9cf289be-67a6-4450-bda4-9958e704dca0">
     <name>DeferredCalculation</name>
     <synonym>
       <key>en</key>
@@ -72,7 +50,7 @@
     </type>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <dimensions uuid="30090737-563a-4e73-a1bf-b494750f7b44">
+  <dimensions uuid="5c3e841a-d76c-44be-8903-761384be363a">
     <name>Company</name>
     <synonym>
       <key>en</key>
@@ -84,7 +62,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="6d6939ad-a436-491f-bc99-a99ee8a4498e">
+  <dimensions uuid="6e01b3ea-4849-471a-b9f5-f01866305cca">
     <name>SalesInvoice</name>
     <synonym>
       <key>en</key>
@@ -96,7 +74,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="881bc076-1ca6-4170-a6bb-9140a9f2eb13">
+  <dimensions uuid="52dd157c-8f57-42c2-a521-3c80b6fbc716">
     <name>Currency</name>
     <synonym>
       <key>en</key>
@@ -108,7 +86,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="48534ee8-c5ba-4117-a2bf-b46e2ae7db21">
+  <dimensions uuid="cb2c0c26-4c9b-4e73-97a8-94c9e5a76539">
     <name>ItemKey</name>
     <synonym>
       <key>en</key>
@@ -120,7 +98,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="2bcc3214-56ff-45b7-ab17-3cd38a8f7f5f">
+  <dimensions uuid="e6680cbf-dd86-45e7-b4b2-f01103674cb7">
     <name>RowKey</name>
     <synonym>
       <key>en</key>
@@ -135,7 +113,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="8a410ceb-8ee6-4c81-956b-0d246d33c54c">
+  <dimensions uuid="844f7309-219c-4220-9e09-fd6ecd9eff2e">
     <name>CurrencyMovementType</name>
     <synonym>
       <key>en</key>

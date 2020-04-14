@@ -309,7 +309,28 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.LegalName,
 		|	tmp.Currency,
 		|	tmp.Period,
-		|	Period";
+		|	Period
+		|;
+		|// 10//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.Company,
+		|	tmp.Currency,
+		|	tmp.ItemKey,
+		|	-SUM(tmp.Quantity) AS Quantity,
+		|	-SUM(tmp.Amount) AS Amount,
+		|	tmp.Period,
+		|	tmp.SalesInvoice,
+		|	tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.Currency,
+		|	tmp.ItemKey,
+		|	tmp.Period,
+		|	tmp.SalesInvoice,
+		|	tmp.RowKey
+		|";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
@@ -328,7 +349,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	// For Registrations
 	Tables.Insert("AdvanceToSuppliers_Registrations", New ValueTable());
 	Tables.Insert("ReconciliationStatement", QueryResults[9].Unload());
-	
+	Tables.Insert("SalesReturnTurnovers", QueryResults[10].Unload());
 	Parameters.IsReposting = False;
 	
 	Return Tables;
@@ -357,6 +378,16 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	
 	DataMapWithLockFields.Insert("AccumulationRegister.SalesTurnovers",
 		New Structure("Fields, Data", Fields, DocumentDataTables.SalesTurnovers));
+	
+	// SalesReturnTurnovers
+	Fields = New Map();
+	Fields.Insert("Company", "Company");
+	Fields.Insert("SalesInvoice", "SalesInvoice");
+	Fields.Insert("Currency", "Currency");
+	Fields.Insert("ItemKey", "ItemKey");
+	
+	DataMapWithLockFields.Insert("AccumulationRegister.SalesReturnTurnovers",
+		New Structure("Fields, Data", Fields, DocumentDataTables.SalesReturnTurnovers));
 	
 	// InventoryBalance
 	Fields = New Map();
@@ -444,6 +475,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SalesTurnovers,
 		New Structure("RecordSet, WriteInTransaction",
 			Parameters.DocumentDataTables.SalesTurnovers,
+			Parameters.IsReposting));
+	
+	// SalesReturnTurnovers
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SalesReturnTurnovers,
+		New Structure("RecordSet, WriteInTransaction",
+			Parameters.DocumentDataTables.SalesReturnTurnovers,
 			Parameters.IsReposting));
 	
 	// InventoryBalance

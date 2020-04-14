@@ -205,6 +205,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="398f7c96-84ca-49d9-acca-423dc050244d">
+    <name>ItemKeyID</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key ID</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="1a7c6880-e7a8-4604-b4f4-2a08e91f04e2">
     <producedTypes>
       <objectType typeId="61efd4e4-2f07-483b-9e8d-75f7ecdc5a18" valueTypeId="05634248-679c-4559-a990-3ce9087709af"/>

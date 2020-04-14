@@ -1150,6 +1150,7 @@ Procedure GetTables_UsePurchaseOrder_NotUseSalesOrder_NotUseGoodsReceiptBeforeIn
 		|	tmp.ExpenseType AS ExpenseType,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.Currency AS Currency,
+		|	tmp.AdditionalAnalytic AS AdditionalAnalytic,
 		|	tmp.Period AS Period,
 		|	SUM(tmp.Amount) AS Amount
 		|FROM
@@ -1160,6 +1161,7 @@ Procedure GetTables_UsePurchaseOrder_NotUseSalesOrder_NotUseGoodsReceiptBeforeIn
 		|	tmp.ExpenseType,
 		|	tmp.ItemKey,
 		|	tmp.Currency,
+		|	tmp.AdditionalAnalytic,
 		|	tmp.Period
 		|;
 		|
@@ -1790,6 +1792,7 @@ Procedure GetTables_UsePurchaseOrder_UseSalesOrder_NotGoodsReceiptBeforeInvoice_
 		|	tmp.ExpenseType AS ExpenseType,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.Currency AS Currency,
+		|	tmp.AdditionalAnalytic AS AdditionalAnalytic,
 		|	tmp.Period AS Period,
 		|	SUM(tmp.Amount) AS Amount
 		|FROM
@@ -1800,6 +1803,7 @@ Procedure GetTables_UsePurchaseOrder_UseSalesOrder_NotGoodsReceiptBeforeInvoice_
 		|	tmp.ExpenseType,
 		|	tmp.ItemKey,
 		|	tmp.Currency,
+		|	tmp.AdditionalAnalytic,
 		|	tmp.Period
 		|;
 		|
@@ -2149,6 +2153,7 @@ Procedure GetTables_NotUsePurchaseOrder_UseSalesOrder_NotGoodsReceiptBeforeInvoi
 		|	tmp.ExpenseType AS ExpenseType,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.Currency AS Currency,
+		|	tmp.AdditionalAnalytic AS AdditionalAnalytic,
 		|	tmp.Period AS Period,
 		|	SUM(tmp.Amount) AS Amount
 		|FROM
@@ -2159,6 +2164,7 @@ Procedure GetTables_NotUsePurchaseOrder_UseSalesOrder_NotGoodsReceiptBeforeInvoi
 		|	tmp.ExpenseType,
 		|	tmp.ItemKey,
 		|	tmp.Currency,
+		|	tmp.AdditionalAnalytic,
 		|	tmp.Period
 		|;
 		|
@@ -2398,6 +2404,7 @@ Procedure GetTables_UsePurchaseOrder_UseSalesOrder_GoodsReceiptBeforeInvoice_Not
 		|	tmp.ExpenseType AS ExpenseType,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.Currency AS Currency,
+		|	tmp.AdditionalAnalytic AS AdditionalAnalytic,
 		|	tmp.Period AS Period,
 		|	SUM(tmp.Amount) AS Amount
 		|FROM
@@ -2408,6 +2415,7 @@ Procedure GetTables_UsePurchaseOrder_UseSalesOrder_GoodsReceiptBeforeInvoice_Not
 		|	tmp.ExpenseType,
 		|	tmp.ItemKey,
 		|	tmp.Currency,
+		|	tmp.AdditionalAnalytic,
 		|	tmp.Period
 		|;
 		|

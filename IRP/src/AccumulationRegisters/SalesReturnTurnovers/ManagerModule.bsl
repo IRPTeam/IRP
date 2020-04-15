@@ -1,7 +1,7 @@
 
 Function GetLockFields(Data) Export
 	Result = New Structure();
-	Result.Insert("RegisterName", "AccumulationRegister.SalesTurnovers");
+	Result.Insert("RegisterName", "AccumulationRegister.SalesReturnTurnovers");
 	Fields = New Map();
 	Fields.Insert("Company", "Company");
 	Fields.Insert("SalesInvoice", "SalesInvoice");

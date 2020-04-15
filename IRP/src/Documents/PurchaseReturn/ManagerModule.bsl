@@ -315,7 +315,27 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Company,
 		|	tmp.LegalName,
 		|	tmp.Currency,
-		|	tmp.Period";
+		|	tmp.Period
+		|;
+		|// 11//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.Company,
+		|	tmp.PurchaseInvoice AS PurchaseInvoice,
+		|	tmp.Currency,
+		|	tmp.ItemKey,
+		|	-SUM(tmp.Quantity) AS Quantity,
+		|	-SUM(tmp.Amount) AS Amount,
+		|	tmp.Period,
+		|	tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.PurchaseInvoice,
+		|	tmp.Currency,
+		|	tmp.ItemKey,
+		|	tmp.Period,
+		|	tmp.RowKey";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
@@ -334,7 +354,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	// For Registrations
 	Tables.Insert("ItemList_AdvanceFromCustomers_Registrations", New ValueTable());
 	Tables.Insert("ReconciliationStatement", QueryResults[10].Unload());
-	
+	Tables.Insert("PurchaseReturnTurnovers", QueryResults[11].Unload());
 	Return Tables;
 EndFunction
 
@@ -358,6 +378,15 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Fields.Insert("ItemKey", "ItemKey");
 	DataMapWithLockFields.Insert("AccumulationRegister.PurchaseTurnovers",
 		New Structure("Fields, Data", Fields, DocumentDataTables.ItemList_PurchaseTurnovers));
+	
+	// PurchaseReturnTurnovers
+	Fields = New Map();
+	Fields.Insert("Company", "Company");
+	Fields.Insert("PurchaseInvoice", "PurchaseInvoice");
+	Fields.Insert("Currency", "Currency");
+	Fields.Insert("ItemKey", "ItemKey");
+	DataMapWithLockFields.Insert("AccumulationRegister.PurchaseReturnTurnovers",
+		New Structure("Fields, Data", Fields, DocumentDataTables.PurchaseReturnTurnovers));
 	
 	// InventoryBalance
 	Fields = New Map();
@@ -447,6 +476,9 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PurchaseTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.ItemList_PurchaseTurnovers));
 	
+	// PurchaseReturnTurnovers
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PurchaseReturnTurnovers,
+		New Structure("RecordSet", Parameters.DocumentDataTables.PurchaseReturnTurnovers));
 	
 	// InventoryBalance
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.InventoryBalance,

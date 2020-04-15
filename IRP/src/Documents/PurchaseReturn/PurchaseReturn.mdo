@@ -104,6 +104,7 @@
   <registerRecords>AccumulationRegister.PartnerArTransactions</registerRecords>
   <registerRecords>AccumulationRegister.AdvanceFromCustomers</registerRecords>
   <registerRecords>AccumulationRegister.ReconciliationStatement</registerRecords>
+  <registerRecords>AccumulationRegister.PurchaseReturnTurnovers</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

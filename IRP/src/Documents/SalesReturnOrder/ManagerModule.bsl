@@ -120,8 +120,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.ItemKey,
 		|	tmp.Period,
 		|	tmp.SalesInvoice,
-		|	tmp.RowKey,
-		|	tmp.IsOrder";
+		|	tmp.RowKey";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();

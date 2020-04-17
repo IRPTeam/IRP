@@ -9,7 +9,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then
 		DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
 	EndIf;	
-	ExternalCommandsServer.CreateCommands(Form, Object.Ref.Metadata().Name, Catalogs.ConfigurationMetadata.Documents);	
+	ExternalCommandsServer.CreateCommands(Form, Object.Ref.Metadata().Name, Catalogs.ConfigurationMetadata.Documents, Enums.FormTypes.ObjectForm);	
 EndProcedure
 
 &AtServer
@@ -400,7 +400,7 @@ EndProcedure
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export	
 	FormNamesArray = StrSplit(Form.FormName, ".");
 	DocumentName = FormNamesArray[1];
-	ExternalCommandsServer.CreateCommands(Form, DocumentName, Catalogs.ConfigurationMetadata.Documents);	
+	ExternalCommandsServer.CreateCommands(Form, DocumentName, Catalogs.ConfigurationMetadata.Documents, Enums.FormTypes.ListForm);	
 EndProcedure
 
 #EndRegion

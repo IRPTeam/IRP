@@ -1,16 +1,19 @@
 
-Procedure CreateCommands(Form, ObjectName, ObjectType, AddInfo = Undefined) Export	
+Procedure CreateCommands(Form, ObjectName, ObjectType, FormType, AddInfo = Undefined) Export	
 	
 	Query = New Query;
 	Query.Text = "SELECT
-		|	ExternalCommands.ExternalDataProc,
-		|	ExternalCommands.InterfaceGroup
-		|FROM
-		|	InformationRegister.ExternalCommands AS ExternalCommands
-		|WHERE
-		|	ExternalCommands.ConfigurationMetadata = &ConfigurationMetadata";
+	|	ExternalCommands.ExternalDataProc,
+	|	ExternalCommands.InterfaceGroup
+	|FROM
+	|	InformationRegister.ExternalCommands AS ExternalCommands
+	|WHERE
+	|	ExternalCommands.ConfigurationMetadata = &ConfigurationMetadata
+	|	AND (ExternalCommands.FormType = &FormType
+	|	OR ExternalCommands.FormType = VALUE(Enum.FormTypes.EmptyRef))";
 	ConfigurationMetadata = Catalogs.ConfigurationMetadata.FindByDescription(ObjectName, True, ObjectType);
 	Query.SetParameter("ConfigurationMetadata", ConfigurationMetadata);
+	Query.SetParameter("FormType", FormType);
 	QueryExecution = Query.Execute();
 	
 	If QueryExecution.IsEmpty() Then

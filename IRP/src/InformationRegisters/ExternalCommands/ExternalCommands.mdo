@@ -54,4 +54,17 @@
     <dataHistory>Use</dataHistory>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="f335d9fa-da17-426d-a51c-1b468ba3a8f7">
+    <name>FormType</name>
+    <synonym>
+      <key>en</key>
+      <value>Form type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.FormTypes</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <mainFilter>true</mainFilter>
+  </dimensions>
 </mdclass:InformationRegister>

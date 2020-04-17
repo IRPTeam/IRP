@@ -536,6 +536,7 @@
   <enums>Enum.AgreementKinds</enums>
   <enums>Enum.GoodsReceiptTransactionTypes</enums>
   <enums>Enum.ShipmentConfirmationTransactionTypes</enums>
+  <enums>Enum.FormTypes</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>

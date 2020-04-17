@@ -223,13 +223,6 @@
         <value></value>
       </code>
     </items>
-    <items id="1f28fc11-db64-481f-b606-75619921551b">
-      <name>Document_Boxing</name>
-      <description>Document Boxing</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
-      </code>
-    </items>
     <items id="dbc9ff5e-39a5-4968-a585-dad9f87c15a4">
       <name>Document_Bundling</name>
       <description>Document Bundling</description>

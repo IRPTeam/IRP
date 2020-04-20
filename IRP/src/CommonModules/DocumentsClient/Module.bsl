@@ -742,20 +742,24 @@ EndProcedure
 
 #Region GroupTitleDecorationsEvents
 
-Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
+//TODO: Delete parameter Object
+Procedure DecorationGroupTitleCollapsedPictureClick(Object = Undefined, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(, Form, True);
 EndProcedure
 
-Procedure DecorationGroupTitleCollapsedLalelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
+//TODO: Delete parameter Object
+Procedure DecorationGroupTitleCollapsedLalelClick(Object = Undefined, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(, Form, True);
 EndProcedure
 
-Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
+//TODO: Delete parameter Object
+Procedure DecorationGroupTitleUncollapsedPictureClick(Object = Undefined, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(, Form, False);
 EndProcedure
 
-Procedure DecorationGroupTitleUncollapsedLalelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
+//TODO: Delete parameter Object
+Procedure DecorationGroupTitleUncollapsedLalelClick(Object = Undefined, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(, Form, False);
 EndProcedure
 
 #EndRegion

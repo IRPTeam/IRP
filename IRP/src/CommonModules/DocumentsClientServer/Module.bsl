@@ -134,8 +134,8 @@ Procedure ChangeTitleGroupTitle(Object, Form) Export
 	
 EndProcedure
 
-
-Procedure ChangeTitleCollapse(Object, Form, TitleVisible = True) Export
+//TODO: Delete parameter Object
+Procedure ChangeTitleCollapse(Object = Undefined, Form, TitleVisible = True) Export
 	
 	#If Server Then
 	If SessionParameters.isMobile Then

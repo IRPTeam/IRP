@@ -46,6 +46,20 @@
         <value></value>
       </code>
     </items>
+    <items id="35c8b407-96be-4355-87d0-9be6a1c66c9c">
+      <name>Reports</name>
+      <description>Reports</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="98da3047-c361-4bad-9e87-e34a4cfaefa9">
+      <name>DataProcessors</name>
+      <description>Data processors</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

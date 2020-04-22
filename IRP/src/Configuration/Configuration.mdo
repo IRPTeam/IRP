@@ -15,12 +15,23 @@
   <defaultRunMode>ManagedApplication</defaultRunMode>
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
-  <vendor>Bilist</vendor>
+  <vendor>IRP Team</vendor>
   <version>0.6.4</version>
+  <updateCatalogAddress>https://github.com/DitriXNew/irp</updateCatalogAddress>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>
-  <mainSectionPicture/>
   <defaultLanguage>Language.English</defaultLanguage>
-  <logo/>
+  <copyright>
+    <key>en</key>
+    <value>IRP Team</value>
+  </copyright>
+  <vendorInformationAddress>
+    <key>en</key>
+    <value>https://github.com/DitriXNew/irp</value>
+  </vendorInformationAddress>
+  <configurationInformationAddress>
+    <key>en</key>
+    <value>https://github.com/DitriXNew/irp</value>
+  </configurationInformationAddress>
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectAutonumerationMode>NotAutoFree</objectAutonumerationMode>
   <modalityUseMode>DontUse</modalityUseMode>

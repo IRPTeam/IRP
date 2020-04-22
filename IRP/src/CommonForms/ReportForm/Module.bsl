@@ -9,7 +9,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SplitedFormName = StrSplit(ThisObject.FormName, ".");
 	SplitedFormName.Delete(SplitedFormName.UBound());
 	ReportName = SplitedFormName.Get(SplitedFormName.UBound());
-	ExternalCommandsServer.CreateCommands(ThisObject, ReportName, Catalogs.ConfigurationMetadata.Reports);	
+	ExternalCommandsServer.CreateCommands(ThisObject, ReportName, Catalogs.ConfigurationMetadata.Reports, Enums.FormTypes.ObjectForm);	
 EndProcedure
 
 #Region GroupTitleDecorations

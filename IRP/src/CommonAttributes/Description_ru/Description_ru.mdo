@@ -27,15 +27,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.LoyalityCards</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.Units</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.PricingRules</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -52,18 +44,6 @@
   </content>
   <content>
     <metadata>Catalog.AddAttributeAndPropertySets</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.LocalizationStrings</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.Vehicles</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.ReturnReasons</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -84,10 +64,6 @@
   </content>
   <content>
     <metadata>Catalog.SpecialOffers</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.PaymentTerminals</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -135,19 +111,11 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.DeliveryAreas</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.ExternalDataProc</metadata>
     <use>Use</use>
   </content>
   <content>
     <metadata>Catalog.Partners</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.CashFlowItems</metadata>
     <use>Use</use>
   </content>
   <content>

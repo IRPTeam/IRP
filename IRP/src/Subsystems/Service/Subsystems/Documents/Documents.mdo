@@ -12,7 +12,6 @@
   <content>Document.CashPayment</content>
   <content>Document.CashReceipt</content>
   <content>Document.PriceList</content>
-  <content>Document.SalesReceipt</content>
   <content>Document.SetupOfSpecialOffers</content>
   <content>Document.ZReport</content>
   <parentSubsystem>Subsystem.Service</parentSubsystem>

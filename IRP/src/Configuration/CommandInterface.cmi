@@ -16,7 +16,6 @@
     <subsystems>Subsystem.PurchaseAP</subsystems>
     <subsystems>Subsystem.SalesAR</subsystems>
     <subsystems>Subsystem.Inventory</subsystems>
-    <subsystems>Subsystem.Delivery</subsystems>
     <subsystems>Subsystem.Treasury</subsystems>
     <subsystems>Subsystem.MasterData</subsystems>
     <subsystems>Subsystem.Settings</subsystems>

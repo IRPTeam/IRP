@@ -9,6 +9,5 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Catalog.PriceTypes</content>
   <content>Document.PriceList</content>
-  <content>Catalog.PricingRules</content>
   <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

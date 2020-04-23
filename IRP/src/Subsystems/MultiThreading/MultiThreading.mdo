@@ -7,9 +7,4 @@
   </synonym>
   <comment></comment>
   <includeHelpInContents>true</includeHelpInContents>
-  <content>InformationRegister.ThreadsInfo</content>
-  <content>CommonModule.MultiThreadingClientServer</content>
-  <content>InformationRegister.JobSettings</content>
-  <content>Enum.ThreadState</content>
-  <content>ScheduledJob.ThreadLauncher</content>
 </mdclass:Subsystem>

@@ -9,7 +9,6 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Catalog.AccessProfiles</content>
   <content>Catalog.AccessGroups</content>
-  <content>Catalog.LocalizationStrings</content>
   <content>Catalog.Workstations</content>
   <content>Catalog.Users</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>

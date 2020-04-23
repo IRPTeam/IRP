@@ -23,10 +23,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.SalesReceipt</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.SalesReturn</metadata>
     <use>Use</use>
   </content>

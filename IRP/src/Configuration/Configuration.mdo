@@ -74,8 +74,6 @@
   <subsystems>Subsystem.AddAttributesAndProperties</subsystems>
   <subsystems>Subsystem.AddDataProc</subsystems>
   <subsystems>Subsystem.AutoTest</subsystems>
-  <subsystems>Subsystem.Delivery</subsystems>
-  <subsystems>Subsystem.Equipment</subsystems>
   <subsystems>Subsystem.Finance</subsystems>
   <subsystems>Subsystem.FullDataExchange</subsystems>
   <subsystems>Subsystem.Inventory</subsystems>
@@ -245,7 +243,6 @@
   <commonModules>CommonModule.DocUnboxingServer</commonModules>
   <commonModules>CommonModule.DocUnbundlingClient</commonModules>
   <commonModules>CommonModule.DocUnbundlingServer</commonModules>
-  <commonModules>CommonModule.EquipmentClient</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataEvent</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataReuse</commonModules>
   <commonModules>CommonModule.FormItemsSize</commonModules>
@@ -266,7 +263,6 @@
   <commonModules>CommonModule.LocalizationServer</commonModules>
   <commonModules>CommonModule.MobileEvents</commonModules>
   <commonModules>CommonModule.MobileSubsystem</commonModules>
-  <commonModules>CommonModule.MultiThreadingClientServer</commonModules>
   <commonModules>CommonModule.ObjectStatusesClient</commonModules>
   <commonModules>CommonModule.ObjectStatusesServer</commonModules>
   <commonModules>CommonModule.OffersClient</commonModules>
@@ -336,7 +332,6 @@
   <eventSubscriptions>EventSubscription.GetCatalogPresentationFields</eventSubscriptions>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <scheduledJobs>ScheduledJob.FullDataExchange</scheduledJobs>
-  <scheduledJobs>ScheduledJob.ThreadLauncher</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <functionalOptions>FunctionalOption.BetaTesting</functionalOptions>
   <functionalOptions>FunctionalOption.UseCompany</functionalOptions>
@@ -346,7 +341,6 @@
   <definedTypes>DefinedType.typeApTransactionBasises</definedTypes>
   <definedTypes>DefinedType.typeArTransactionBasises</definedTypes>
   <definedTypes>DefinedType.typeBarcode</definedTypes>
-  <definedTypes>DefinedType.typeBasisDelivery</definedTypes>
   <definedTypes>DefinedType.typeBasisDocumentSalesInvoice</definedTypes>
   <definedTypes>DefinedType.typeCurrencyRate</definedTypes>
   <definedTypes>DefinedType.typeDescription</definedTypes>
@@ -368,7 +362,6 @@
   <definedTypes>DefinedType.typeReceiptBasis</definedTypes>
   <definedTypes>DefinedType.typeReconciliationStatementDocuments</definedTypes>
   <definedTypes>DefinedType.typeShipmentBasis</definedTypes>
-  <definedTypes>DefinedType.typeTrackTask</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
   <definedTypes>DefinedType.typeCashAdvanceBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
@@ -382,10 +375,7 @@
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <constants>Constant.ConnectionStatus</constants>
-  <constants>Constant.DefaulDeliveryAddress</constants>
-  <constants>Constant.DefaultDeliveryGPS</constants>
   <constants>Constant.DefaultPictureStorageVolume</constants>
-  <constants>Constant.MaximumThreads</constants>
   <constants>Constant.ShowBetaTesting</constants>
   <constants>Constant.UseCompany</constants>
   <constants>Constant.NotFirstStart</constants>
@@ -416,7 +406,6 @@
   <catalogs>Catalog.Boxes</catalogs>
   <catalogs>Catalog.BusinessUnits</catalogs>
   <catalogs>Catalog.CashAccounts</catalogs>
-  <catalogs>Catalog.CashFlowItems</catalogs>
   <catalogs>Catalog.ChequeBonds</catalogs>
   <catalogs>Catalog.Companies</catalogs>
   <catalogs>Catalog.CompanyTypes</catalogs>
@@ -424,8 +413,6 @@
   <catalogs>Catalog.Countries</catalogs>
   <catalogs>Catalog.Currencies</catalogs>
   <catalogs>Catalog.DataRegistrationRules</catalogs>
-  <catalogs>Catalog.DeliveryAreas</catalogs>
-  <catalogs>Catalog.Equipment</catalogs>
   <catalogs>Catalog.ExpenseAndRevenueTypes</catalogs>
   <catalogs>Catalog.ExternalDataProc</catalogs>
   <catalogs>Catalog.Files</catalogs>
@@ -440,18 +427,13 @@
   <catalogs>Catalog.ItemSegments</catalogs>
   <catalogs>Catalog.ItemTypes</catalogs>
   <catalogs>Catalog.PrintTemplates</catalogs>
-  <catalogs>Catalog.LocalizationStrings</catalogs>
-  <catalogs>Catalog.LoyalityCards</catalogs>
   <catalogs>Catalog.ObjectStatuses</catalogs>
   <catalogs>Catalog.Partners</catalogs>
   <catalogs>Catalog.PartnerSegments</catalogs>
   <catalogs>Catalog.PaymentSchedules</catalogs>
-  <catalogs>Catalog.PaymentTerminals</catalogs>
   <catalogs>Catalog.PaymentTypes</catalogs>
   <catalogs>Catalog.PriceKeys</catalogs>
   <catalogs>Catalog.PriceTypes</catalogs>
-  <catalogs>Catalog.PricingRules</catalogs>
-  <catalogs>Catalog.ReturnReasons</catalogs>
   <catalogs>Catalog.SerialLotNumbers</catalogs>
   <catalogs>Catalog.SpecialOfferRules</catalogs>
   <catalogs>Catalog.SpecialOffers</catalogs>
@@ -464,7 +446,6 @@
   <catalogs>Catalog.Units</catalogs>
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
-  <catalogs>Catalog.Vehicles</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.CurrencyMovementSets</catalogs>
   <catalogs>Catalog.DataAreas</catalogs>
@@ -482,7 +463,6 @@
   <documents>Document.ChequeBondTransaction</documents>
   <documents>Document.ChequeBondTransactionItem</documents>
   <documents>Document.CreditDebitNote</documents>
-  <documents>Document.DeliveryList</documents>
   <documents>Document.GoodsReceipt</documents>
   <documents>Document.IncomingPaymentOrder</documents>
   <documents>Document.InternalSupplyRequest</documents>
@@ -502,12 +482,10 @@
   <documents>Document.ReconciliationStatement</documents>
   <documents>Document.SalesInvoice</documents>
   <documents>Document.SalesOrder</documents>
-  <documents>Document.SalesReceipt</documents>
   <documents>Document.SalesReturn</documents>
   <documents>Document.SalesReturnOrder</documents>
   <documents>Document.SetupOfSpecialOffers</documents>
   <documents>Document.ShipmentConfirmation</documents>
-  <documents>Document.TrackList</documents>
   <documents>Document.Unboxing</documents>
   <documents>Document.Unbundling</documents>
   <documents>Document.ZReport</documents>
@@ -522,7 +500,6 @@
   <enums>Enum.CashFlowDirections</enums>
   <enums>Enum.ChequeBondTypes</enums>
   <enums>Enum.CreditDebitNoteOperationsTypes</enums>
-  <enums>Enum.DeliveryConditions</enums>
   <enums>Enum.DocumentPostingTypes</enums>
   <enums>Enum.FileTypes</enums>
   <enums>Enum.IncomingPaymentTransactionType</enums>
@@ -538,7 +515,6 @@
   <enums>Enum.SpecificationType</enums>
   <enums>Enum.SystemClientType</enums>
   <enums>Enum.TaxType</enums>
-  <enums>Enum.ThreadState</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.CurrencyType</enums>
@@ -565,7 +541,6 @@
   <informationRegisters>InformationRegister.FullDataExchangeMessages</informationRegisters>
   <informationRegisters>InformationRegister.IDInfo</informationRegisters>
   <informationRegisters>InformationRegister.ItemSegments</informationRegisters>
-  <informationRegisters>InformationRegister.JobSettings</informationRegisters>
   <informationRegisters>InformationRegister.ObjectStatuses</informationRegisters>
   <informationRegisters>InformationRegister.PartnerSegments</informationRegisters>
   <informationRegisters>InformationRegister.PricesByItemKeys</informationRegisters>
@@ -575,7 +550,6 @@
   <informationRegisters>InformationRegister.SavedItems</informationRegisters>
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxRates</informationRegisters>
-  <informationRegisters>InformationRegister.ThreadsInfo</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.IntegrationInfo</informationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>

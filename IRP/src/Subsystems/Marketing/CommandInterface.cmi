@@ -8,7 +8,6 @@
       <commands>Catalog.SpecialOfferTypes.StandardCommand.OpenList</commands>
       <commands>Document.PriceList.StandardCommand.OpenList</commands>
       <commands>Catalog.PriceTypes.StandardCommand.OpenList</commands>
-      <commands>Catalog.PricingRules.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

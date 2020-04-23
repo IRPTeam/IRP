@@ -10,7 +10,6 @@
   <content>Catalog.IntegrationSettings</content>
   <content>Catalog.ExternalDataProc</content>
   <content>Catalog.DataRegistrationRules</content>
-  <content>InformationRegister.JobSettings</content>
   <content>InformationRegister.FullDataExchangeMessages</content>
   <content>InformationRegister.ExternalCommands</content>
   <subsystems>GoogleDrive</subsystems>

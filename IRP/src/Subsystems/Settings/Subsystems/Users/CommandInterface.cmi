@@ -6,7 +6,6 @@
       <commands>Catalog.Users.StandardCommand.OpenList</commands>
       <commands>Catalog.AccessGroups.StandardCommand.OpenList</commands>
       <commands>Catalog.AccessProfiles.StandardCommand.OpenList</commands>
-      <commands>Catalog.LocalizationStrings.StandardCommand.OpenList</commands>
       <commands>Catalog.Workstations.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>

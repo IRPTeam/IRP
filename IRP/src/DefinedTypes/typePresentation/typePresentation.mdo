@@ -15,21 +15,15 @@
     <types>CatalogManager.AddAttributeAndPropertySets</types>
     <types>CatalogManager.CashAccounts</types>
     <types>CatalogManager.AddAttributeAndPropertyValues</types>
-    <types>CatalogManager.PaymentTerminals</types>
     <types>CatalogManager.ItemSegments</types>
     <types>CatalogManager.PaymentTypes</types>
-    <types>CatalogManager.PricingRules</types>
     <types>CatalogManager.TaxRates</types>
-    <types>CatalogManager.CashFlowItems</types>
     <types>CatalogManager.Items</types>
     <types>CatalogManager.SpecialOffers</types>
     <types>CatalogManager.Stores</types>
     <types>CatalogManager.Countries</types>
-    <types>CatalogManager.LoyalityCards</types>
     <types>CatalogManager.Partners</types>
     <types>CatalogManager.Companies</types>
-    <types>CatalogManager.ReturnReasons</types>
-    <types>CatalogManager.LocalizationStrings</types>
     <types>CatalogManager.Currencies</types>
   </type>
 </mdclass:DefinedType>

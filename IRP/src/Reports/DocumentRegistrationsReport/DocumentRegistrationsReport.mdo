@@ -44,7 +44,6 @@
       <types>DocumentRef.CashReceipt</types>
       <types>DocumentRef.CashTransferOrder</types>
       <types>DocumentRef.InvoiceMatch</types>
-      <types>DocumentRef.DeliveryList</types>
       <types>DocumentRef.GoodsReceipt</types>
       <types>DocumentRef.InternalSupplyRequest</types>
       <types>DocumentRef.InventoryTransfer</types>
@@ -57,11 +56,9 @@
       <types>DocumentRef.PurchaseReturnOrder</types>
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.SalesOrder</types>
-      <types>DocumentRef.SalesReceipt</types>
       <types>DocumentRef.SalesReturn</types>
       <types>DocumentRef.SalesReturnOrder</types>
       <types>DocumentRef.ShipmentConfirmation</types>
-      <types>DocumentRef.TrackList</types>
       <types>DocumentRef.SetupOfSpecialOffers</types>
       <types>DocumentRef.Unboxing</types>
       <types>DocumentRef.Unbundling</types>

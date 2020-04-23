@@ -25,14 +25,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.SalesReceipt</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.DeliveryList</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.SalesReturn</metadata>
     <use>Use</use>
   </content>
@@ -118,10 +110,6 @@
   </content>
   <content>
     <metadata>Document.InventoryTransferOrder</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.TrackList</metadata>
     <use>Use</use>
   </content>
   <content>

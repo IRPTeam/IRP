@@ -27,7 +27,6 @@
   <content>Document.ChequeBondTransactionItem.Attribute.ChequeBondTransaction</content>
   <content>Document.ChequeBondTransactionItem.TabularSection.PaymentList.Attribute.PartnerArBasisDocument</content>
   <content>Document.ChequeBondTransactionItem.TabularSection.PaymentList.Attribute.PartnerApBasisDocument</content>
-  <content>Document.DeliveryList.TabularSection.Basises.Attribute.Basis</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.ReceiptBasis</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesOrder</content>
   <content>Document.InventoryTransfer.TabularSection.ItemList.Attribute.InventoryTransferOrder</content>
@@ -50,14 +49,12 @@
   <content>Document.SalesInvoice.Attribute.BasisDocument</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.SalesOrder</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ShipmentConfirmation</content>
-  <content>Document.SalesReceipt.Attribute.ZReport</content>
   <content>Document.SalesReturn.Attribute.BaseDocument</content>
   <content>Document.SalesReturn.TabularSection.ItemList.Attribute.SalesReturnOrder</content>
   <content>Document.SalesReturn.TabularSection.ItemList.Attribute.SalesInvoice</content>
   <content>Document.SalesReturnOrder.Attribute.BaseDocument</content>
   <content>Document.SalesReturnOrder.TabularSection.ItemList.Attribute.SalesInvoice</content>
   <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.ShipmentBasis</content>
-  <content>Document.TrackList.TabularSection.Tasks.Attribute.Task</content>
   <content>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.BasisDocument</content>
   <content>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.BasisDocument</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
@@ -78,7 +75,6 @@
       <types>DocumentRef.CashReceipt</types>
       <types>DocumentRef.CashTransferOrder</types>
       <types>DocumentRef.InvoiceMatch</types>
-      <types>DocumentRef.DeliveryList</types>
       <types>DocumentRef.GoodsReceipt</types>
       <types>DocumentRef.InternalSupplyRequest</types>
       <types>DocumentRef.InventoryTransfer</types>
@@ -91,12 +87,10 @@
       <types>DocumentRef.PurchaseReturnOrder</types>
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.SalesOrder</types>
-      <types>DocumentRef.SalesReceipt</types>
       <types>DocumentRef.SalesReturn</types>
       <types>DocumentRef.SalesReturnOrder</types>
       <types>DocumentRef.SetupOfSpecialOffers</types>
       <types>DocumentRef.ShipmentConfirmation</types>
-      <types>DocumentRef.TrackList</types>
       <types>DocumentRef.Unboxing</types>
       <types>DocumentRef.Unbundling</types>
       <types>DocumentRef.ZReport</types>

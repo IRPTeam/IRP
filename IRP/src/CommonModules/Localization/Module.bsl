@@ -207,10 +207,6 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("UsersEvent_002", NStr("en = 'User found by UUID: %1 Name: %2'", CodeLanguage));
 	#EndRegion
 	
-	#Region TrackList
-	Strings.Insert("TrackList_001", NStr("en = 'Delivery list'", CodeLanguage));
-	#EndRegion
-	
 	#Region Items
 	
 	// Interface

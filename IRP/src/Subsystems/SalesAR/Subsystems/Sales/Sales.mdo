@@ -8,7 +8,6 @@
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Document.SalesOrder</content>
-  <content>Document.SalesReceipt</content>
   <content>Document.SalesInvoice</content>
   <content>Document.ZReport</content>
   <content>Document.ShipmentConfirmation</content>

@@ -9,6 +9,5 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Document.SalesReturnOrder</content>
   <content>Document.SalesReturn</content>
-  <content>Catalog.ReturnReasons</content>
   <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

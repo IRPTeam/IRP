@@ -58,13 +58,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.MaximumThreads</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>CommonForm.PickupSpecialOffers</name>
 		<right>
 			<name>View</name>

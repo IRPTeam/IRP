@@ -11,15 +11,12 @@
   <picture xsi:type="core:PictureRef">
     <picture>CommonPicture.AutoTest</picture>
   </picture>
-  <content>Constant.MaximumThreads</content>
   <content>Catalog.PaymentTypes</content>
   <content>Catalog.Companies</content>
   <content>Catalog.ItemKeys</content>
   <content>Catalog.AddAttributeAndPropertyValues</content>
   <content>Catalog.Countries</content>
   <content>Catalog.SpecialOffers</content>
-  <content>Catalog.PricingRules</content>
-  <content>Catalog.LoyalityCards</content>
   <content>Catalog.Stores</content>
   <content>Catalog.Users</content>
   <content>Catalog.Currencies</content>
@@ -28,15 +25,10 @@
   <content>Catalog.Partners</content>
   <content>Catalog.PriceTypes</content>
   <content>Catalog.IntegrationSettings</content>
-  <content>Catalog.PaymentTerminals</content>
   <content>Catalog.Items</content>
-  <content>Catalog.LocalizationStrings</content>
   <content>Catalog.ItemSegments</content>
   <content>Catalog.ItemTypes</content>
-  <content>Catalog.CashFlowItems</content>
   <content>Catalog.TaxRates</content>
-  <content>Catalog.ReturnReasons</content>
-  <content>Document.SalesReceipt</content>
   <content>Document.SetupOfSpecialOffers</content>
   <content>Document.CashReceipt</content>
   <content>Document.CashPayment</content>
@@ -45,19 +37,16 @@
   <content>Document.PriceList</content>
   <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
   <content>InformationRegister.PricesByItemKeys</content>
-  <content>InformationRegister.JobSettings</content>
   <content>InformationRegister.TaxRates</content>
   <content>InformationRegister.Barcodes</content>
   <content>InformationRegister.AddProperties</content>
   <content>InformationRegister.ItemSegments</content>
-  <content>InformationRegister.ThreadsInfo</content>
   <content>Document.SalesInvoice</content>
   <content>Document.SalesOrder</content>
   <content>Catalog.DataRegistrationRules</content>
   <content>Constant.UseCompany</content>
   <content>Constant.ConnectionStatus</content>
   <content>InformationRegister.FullDataExchangeMessages</content>
-  <content>Enum.ThreadState</content>
   <content>Enum.TypeExternalObject</content>
   <content>Catalog.PaymentSchedules</content>
   <content>Catalog.PartnerSegments</content>
@@ -82,20 +71,15 @@
   <content>Document.Bundling</content>
   <content>Document.Unbundling</content>
   <content>Document.InternalSupplyRequest</content>
-  <content>Document.TrackList</content>
-  <content>Document.DeliveryList</content>
   <content>Document.PurchaseInvoice</content>
   <content>Document.PurchaseOrder</content>
   <content>Document.GoodsReceipt</content>
   <content>Document.ShipmentConfirmation</content>
   <content>Document.InventoryTransferOrder</content>
   <content>Document.InventoryTransfer</content>
-  <content>Catalog.Equipment</content>
   <content>Catalog.Workstations</content>
   <content>Catalog.IDInfoAddresses</content>
   <content>Catalog.IDInfoSets</content>
-  <content>Catalog.Vehicles</content>
-  <content>Catalog.DeliveryAreas</content>
   <content>Catalog.ObjectStatuses</content>
   <content>Catalog.CompanyTypes</content>
   <content>Catalog.Specifications</content>

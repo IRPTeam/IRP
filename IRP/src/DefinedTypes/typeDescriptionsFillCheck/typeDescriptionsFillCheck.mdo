@@ -10,17 +10,11 @@
   </synonym>
   <comment></comment>
   <type>
-    <types>CatalogObject.LoyalityCards</types>
     <types>CatalogObject.TaxRates</types>
-    <types>CatalogObject.CashFlowItems</types>
-    <types>CatalogObject.PricingRules</types>
     <types>CatalogObject.CashAccounts</types>
-    <types>CatalogObject.LocalizationStrings</types>
     <types>CatalogObject.SpecialOffers</types>
     <types>CatalogObject.AddAttributeAndPropertySets</types>
-    <types>CatalogObject.PaymentTerminals</types>
     <types>CatalogObject.Currencies</types>
-    <types>CatalogObject.ReturnReasons</types>
     <types>CatalogObject.Companies</types>
     <types>CatalogObject.PaymentTypes</types>
     <types>CatalogObject.Stores</types>

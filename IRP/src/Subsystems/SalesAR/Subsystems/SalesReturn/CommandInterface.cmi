@@ -5,7 +5,6 @@
       <group>NavigationPanelOrdinary</group>
       <commands>Document.SalesReturnOrder.StandardCommand.OpenList</commands>
       <commands>Document.SalesReturn.StandardCommand.OpenList</commands>
-      <commands>Catalog.ReturnReasons.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

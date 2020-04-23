@@ -8,7 +8,6 @@
   <comment></comment>
   <content>CommonModule.LocalizationClientServer</content>
   <content>Enum.TypeExternalObject</content>
-  <content>Catalog.LocalizationStrings</content>
   <content>CommonModule.Localization</content>
   <content>CommonModule.LocalizationReuse</content>
   <content>CommonAttribute.Description_en</content>

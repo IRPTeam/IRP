@@ -2,10 +2,6 @@
 <cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
   <commandsVisibility>
     <visibilityFragments>
-      <command>Document.SalesReceipt.StandardCommand.OpenList</command>
-      <visible/>
-    </visibilityFragments>
-    <visibilityFragments>
       <command>Document.ZReport.StandardCommand.OpenList</command>
       <visible/>
     </visibilityFragments>
@@ -16,7 +12,6 @@
       <commands>Document.SalesOrder.StandardCommand.OpenList</commands>
       <commands>Document.SalesInvoice.StandardCommand.OpenList</commands>
       <commands>Document.ShipmentConfirmation.StandardCommand.OpenList</commands>
-      <commands>Document.SalesReceipt.StandardCommand.OpenList</commands>
       <commands>Document.ZReport.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>

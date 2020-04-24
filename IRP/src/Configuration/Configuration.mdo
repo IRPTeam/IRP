@@ -19,6 +19,7 @@
   <version>0.6.4</version>
   <updateCatalogAddress>https://github.com/DitriXNew/irp</updateCatalogAddress>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>
+  <mainSectionPicture/>
   <defaultLanguage>Language.English</defaultLanguage>
   <copyright>
     <key>en</key>

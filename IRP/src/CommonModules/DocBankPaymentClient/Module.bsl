@@ -269,7 +269,8 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 	Form.Items.PaymentList.ChangeRow();
 	PaymentListOnChange(Object, Form, Item);
 	CurrentData = Form.Items.PaymentList.CurrentData;
-	If CurrentData <> Undefined And ValueIsFilled(Form.Payee) Then
+	If CurrentData <> Undefined And ValueIsFilled(Form.Payee)
+		And Not Saas.SeparationUsed() Then
 		CurrentData.Payee = Form.Payee;
 		CurrentData.Partner = DocBankPaymentServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
 		PaymentListPartnerOnChange(Object, Form, Item);

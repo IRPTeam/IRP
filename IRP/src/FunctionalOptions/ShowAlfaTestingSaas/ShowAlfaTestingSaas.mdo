@@ -7,9 +7,7 @@
   </synonym>
   <location>Constant.ShowAlfaTestingSaas</location>
   <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.ItemKeys</content>
   <content>Catalog.SpecialOfferRules</content>
-  <content>Catalog.ConfigurationMetadata</content>
   <content>Catalog.Equipment</content>
   <content>Catalog.PriceKeys</content>
   <content>Catalog.FileStoragesInfo</content>
@@ -139,7 +137,34 @@
   <content>CommonCommand.OpenCustomerAgreements</content>
   <content>CommonCommand.OpenVendorAgreements</content>
   <content>InformationRegister.PartnerSegments</content>
-  <content>Document.StockAdjustmentAsWriteOff</content>
-  <content>Document.StockAdjustmentAsSurplus</content>
   <content>Document.PhysicalInventory</content>
+  <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.Agreement</content>
+  <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.BasisDocument</content>
+  <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.Agreement</content>
+  <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.BasisDocument</content>
+  <content>Document.BankPayment.TabularSection.PaymentList.Attribute.Agreement</content>
+  <content>Document.BankPayment.TabularSection.PaymentList.Attribute.BasisDocument</content>
+  <content>Document.CashPayment.TabularSection.PaymentList.Attribute.Agreement</content>
+  <content>Document.CashPayment.TabularSection.PaymentList.Attribute.BasisDocument</content>
+  <content>Catalog.Units.Attribute.BasisUnit</content>
+  <content>Catalog.Units.Attribute.Quantity</content>
+  <content>Catalog.Units.Attribute.Item</content>
+  <content>Catalog.ItemTypes.TabularSection.AddAttributes</content>
+  <content>Catalog.ItemTypes.TabularSection.AvailableAttributes</content>
+  <content>Subsystem.AutoTest</content>
+  <content>Document.SalesReturnOrder</content>
+  <content>Document.PurchaseReturnOrder</content>
+  <content>Document.StockAdjustmentAsSurplus</content>
+  <content>Document.StockAdjustmentAsWriteOff</content>
+  <content>Document.CashExpense.TabularSection.PaymentList.Attribute.AdditionalAnalytic</content>
+  <content>Document.CashRevenue.TabularSection.PaymentList.Attribute.AdditionalAnalytic</content>
+  <content>Document.CreditDebitNote.TabularSection.Transactions.Attribute.AdditionalAnalytic</content>
+  <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.AdditionalAnalytic</content>
+  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.AdditionalAnalytic</content>
+  <content>Document.ChequeBondTransaction.TabularSection.ChequeBonds.Attribute.Agreement</content>
+  <content>Document.ChequeBondTransaction.TabularSection.PaymentList</content>
+  <content>Document.OpeningEntry.TabularSection.AccountReceivableByDocuments</content>
+  <content>Document.OpeningEntry.TabularSection.AccountPayableByDocuments</content>
+  <content>Document.OpeningEntry.TabularSection.AccountReceivableByAgreements.Attribute.Agreement</content>
+  <content>Document.OpeningEntry.TabularSection.AccountPayableByAgreements.Attribute.Agreement</content>
 </mdclass:FunctionalOption>

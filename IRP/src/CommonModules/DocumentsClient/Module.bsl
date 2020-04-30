@@ -1724,8 +1724,9 @@ EndProcedure
 
 Procedure ItemListItemOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
 	ItemListName = "ItemList";
-	If Settings <> Undefined Then
-		Settings.Property("ItemListName", ItemListName);			
+	If Settings <> Undefined
+		And Settings.Property("ItemListName") Then
+		ItemListName = Settings.ItemListName; 			
 	EndIf;
 	CurrentRow = Form.Items[ItemListName].CurrentData;
 	If CurrentRow = Undefined Then
@@ -1760,8 +1761,9 @@ EndProcedure
 
 Procedure ItemListItemKeyOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
 	ItemListName = "ItemList";
-	If Settings <> Undefined Then
-		Settings.Property("ItemListName", ItemListName);			
+	If Settings <> Undefined
+		And Settings.Property("ItemListName") Then
+		ItemListName = Settings.ItemListName; 			
 	EndIf;
 	CurrentRow = Form.Items[ItemListName].CurrentData;
 	If CurrentRow = Undefined Then

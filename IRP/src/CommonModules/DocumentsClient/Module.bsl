@@ -1723,12 +1723,15 @@ EndProcedure
 #Region ItemListItemsEvents
 
 Procedure ItemListItemOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
-	CurrentRow = Form.Items.ItemList.CurrentData;
+	ItemListName = "ItemList";
+	If Settings <> Undefined Then
+		Settings.Property("ItemListName", ItemListName);			
+	EndIf;
+	CurrentRow = Form.Items[ItemListName].CurrentData;
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
 	
-	// If Item was chenged we hawe to clear itemkey
 	If Settings = Undefined Then
 		Settings = GetSettingsStructure(Module);
 	EndIf;
@@ -1756,12 +1759,15 @@ Procedure ItemListItemOnChange(Object, Form, Module, Item = Undefined, Settings 
 EndProcedure
 
 Procedure ItemListItemKeyOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
-	CurrentRow = Form.Items.ItemList.CurrentData;
+	ItemListName = "ItemList";
+	If Settings <> Undefined Then
+		Settings.Property("ItemListName", ItemListName);			
+	EndIf;
+	CurrentRow = Form.Items[ItemListName].CurrentData;
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
 	
-	// If Item was changed we have to clear itemkey
 	If Settings = Undefined Then
 		Settings = GetSettingsStructure(Module);
 	EndIf;

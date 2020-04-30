@@ -818,3 +818,17 @@ Procedure AddAttributesCreateFormControll()
 EndProcedure
 
 #EndRegion
+
+#Region InventoryItemsEvents
+
+&AtClient
+Procedure InventoryItemOnChange(Item, AddInfo = Undefined) Export
+	DocOpeningEntryClient.InventoryItemOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure InventoryItemKeyOnChange(Item, AddInfo = Undefined) Export
+	DocOpeningEntryClient.InventoryItemKeyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion

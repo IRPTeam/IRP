@@ -1,6 +1,7 @@
 Procedure SessionParametersSetting(RequiredParameters)
 	SessionParameters.LocalizationCode = Metadata.DefaultLanguage.LanguageCode;
 	SessionParameters.InterfaceLocalizationCode = Metadata.DefaultLanguage.LanguageCode;
+	SessionParameters.OurCompanies = OurCompanies();
 	If Saas.isAreaActive() Then
 		CurrentUser = UsersEvent.SessionParametersSetCurrentUser();		
 		SessionParameters.CurrentUser = CurrentUser;
@@ -22,3 +23,16 @@ Procedure SessionParametersSetting(RequiredParameters)
 	SessionParameters.ConnectedAddDataProc = New FixedStructure;
 EndProcedure
 
+Function OurCompanies()
+	OurCompanies = New Array();
+	Query = New Query;
+	Query.Text = "SELECT ALLOWED
+	|	Companies.Ref
+	|FROM
+	|	Catalog.Companies AS Companies
+	|WHERE
+	|	Companies.Our";
+	QueryUnload = Query.Execute().Unload();
+	OurCompanies = QueryUnload.UnloadColumn("Ref");		
+	Return New FixedArray(OurCompanies);
+EndFunction

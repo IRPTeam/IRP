@@ -134,6 +134,7 @@
   <sessionParameters>SessionParameter.IDValue</sessionParameters>
   <sessionParameters>SessionParameter.IDUse</sessionParameters>
   <sessionParameters>SessionParameter.InterfaceLocalizationCode</sessionParameters>
+  <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
   <roles>Role.BasicRole</roles>
   <roles>Role.FilterForUserSettings</roles>
   <roles>Role.FullAccess</roles>
@@ -380,6 +381,7 @@
   <commonCommands>CommonCommand.OpenPartnersVendor</commonCommands>
   <commonCommands>CommonCommand.OpenCustomerAgreements</commonCommands>
   <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
+  <commonCommands>CommonCommand.OpenOurCompany</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <constants>Constant.ConnectionStatus</constants>

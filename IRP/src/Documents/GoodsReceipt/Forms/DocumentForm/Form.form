@@ -2427,6 +2427,7 @@
         <name>CompareQuantity</name>
       </handler>
     </action>
+    <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

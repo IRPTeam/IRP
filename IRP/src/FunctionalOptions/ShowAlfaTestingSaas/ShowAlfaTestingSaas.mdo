@@ -167,4 +167,6 @@
   <content>Document.OpeningEntry.TabularSection.AccountPayableByDocuments</content>
   <content>Document.OpeningEntry.TabularSection.AccountReceivableByAgreements.Attribute.Agreement</content>
   <content>Document.OpeningEntry.TabularSection.AccountPayableByAgreements.Attribute.Agreement</content>
+  <content>Document.PurchaseInvoice.Attribute.IsOpeningEntry</content>
+  <content>Document.PurchaseReturn.Attribute.IsOpeningEntry</content>
 </mdclass:FunctionalOption>

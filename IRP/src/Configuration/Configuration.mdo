@@ -579,7 +579,7 @@
   <informationRegisters>InformationRegister.RemainingItemsInfo</informationRegisters>
   <informationRegisters>InformationRegister.SavedItems</informationRegisters>
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
-  <informationRegisters>InformationRegister.TaxRates</informationRegisters>
+  <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.ThreadsInfo</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.IntegrationInfo</informationRegisters>

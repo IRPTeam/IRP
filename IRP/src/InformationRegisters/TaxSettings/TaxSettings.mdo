@@ -9,14 +9,14 @@
     <recordType typeId="b1328652-0270-4072-8bb2-203b08391419" valueTypeId="8546998e-da00-4dae-9e09-6dca814d1008"/>
     <recordManagerType typeId="24813a52-f8ec-41dc-b5ae-631dc4582bc4" valueTypeId="052540f9-203d-498d-aee1-1c0728dd160b"/>
   </producedTypes>
-  <name>TaxRates</name>
+  <name>TaxSettings</name>
   <synonym>
     <key>en</key>
-    <value>Tax rates</value>
+    <value>Tax settings</value>
   </synonym>
   <comment></comment>
   <useStandardCommands>true</useStandardCommands>
-  <defaultRecordForm>InformationRegister.TaxRates.Form.RecordForm</defaultRecordForm>
+  <defaultRecordForm>InformationRegister.TaxSettings.Form.RecordForm</defaultRecordForm>
   <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSliceLast>true</enableTotalsSliceLast>

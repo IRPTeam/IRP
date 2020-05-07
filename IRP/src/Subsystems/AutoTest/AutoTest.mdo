@@ -46,7 +46,7 @@
   <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
   <content>InformationRegister.PricesByItemKeys</content>
   <content>InformationRegister.JobSettings</content>
-  <content>InformationRegister.TaxRates</content>
+  <content>InformationRegister.TaxSettings</content>
   <content>InformationRegister.Barcodes</content>
   <content>InformationRegister.AddProperties</content>
   <content>InformationRegister.ItemSegments</content>

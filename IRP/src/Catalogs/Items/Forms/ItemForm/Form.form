@@ -843,7 +843,7 @@
         <index>3</index>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
-        <command>InformationRegister.TaxRates.StandardCommand.OpenByValue.Item</command>
+        <command>InformationRegister.TaxSettings.StandardCommand.OpenByValue.Item</command>
         <commandParameter xsi:type="form:DataPath">
           <segments>Object.Ref</segments>
         </commandParameter>

@@ -183,11 +183,11 @@ Procedure FillDefaultCompanyTaxes() Export
 		EndIf;
 	EndDo;
 	
-	// 3.Information register TaxRates
-	RecordSet = InformationRegisters.TaxRates.CreateRecordSet();
+	// 3.Information register TaxSettings
+	RecordSet = InformationRegisters.TaxSettings.CreateRecordSet();
 	RecordSet.Filter.Company.Set(Company);
 	
-	ClassifierElements = FillingFromClassifiers.GetClassifierData("InformationRegister.TaxRates");
+	ClassifierElements = FillingFromClassifiers.GetClassifierData("InformationRegister.TaxSettings");
 	For Each ClassifierElement In ClassifierElements Do
 		CurrentTax     = FillingFromClassifiers.CheckExistingAndCreateCatalogItemFromClassifierElement(
 								"Catalog.Taxes", ClassifierElement.Tax);

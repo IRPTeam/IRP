@@ -312,6 +312,7 @@
   <commonModules>CommonModule.DocPhysicalInventoryClient</commonModules>
   <commonModules>CommonModule.DocPhysicalInventoryServer</commonModules>
   <commonModules>CommonModule.PickupItemsClient</commonModules>
+  <commonModules>CommonModule.SessionParametersClientServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -343,6 +344,7 @@
   <functionalOptions>FunctionalOption.BetaTesting</functionalOptions>
   <functionalOptions>FunctionalOption.UseCompany</functionalOptions>
   <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
+  <functionalOptions>FunctionalOption.SaasMode</functionalOptions>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
   <definedTypes>DefinedType.typeApTransactionBasises</definedTypes>

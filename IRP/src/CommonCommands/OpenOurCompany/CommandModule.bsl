@@ -1,19 +1,8 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
-	Filters = New Structure("Ref", True);
-	OurCompany = OurCompany();
-	If ValueIsFilled(OurCompany) Then
-		Filters = New Structure("Key", OurCompany);
+	OurCompanies = SessionParametersClientServer.GetSessionParameter("OurCompanies");
+	If OurCompanies.Count() And ValueIsFilled(OurCompanies[0]) Then
+		Filters = New Structure("Key", OurCompanies[0]);
 		OpenForm("Catalog.Companies.ObjectForm", Filters, , , , , ,  FormWindowOpeningMode.Independent);
-	EndIf; 
+	EndIf;	 
 EndProcedure
-
-&AtServer
-Function OurCompany()
-	If SessionParameters.OurCompanies.Count() Then
-		OurCompany = SessionParameters.OurCompanies.Get(0);
-	Else
-		OurCompany = Catalogs.Companies.EmptyRef();
-	EndIf;
-	Return OurCompany;
-EndFunction

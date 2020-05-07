@@ -13,6 +13,7 @@
   <content>CommonModule.IntegrationClientServer</content>
   <content>Constant.NotFirstStart</content>
   <content>Constant.DefaultPictureStorageVolume</content>
+  <content>CommonCommand.OpenOurCompany</content>
   <subsystems>AttributeAndProperty</subsystems>
   <subsystems>Contacts</subsystems>
   <subsystems>Equipment</subsystems>

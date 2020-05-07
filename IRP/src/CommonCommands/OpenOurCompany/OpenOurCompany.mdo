@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a7351908-7c36-4bfe-8311-94a3eeccdb24">
+  <name>OpenOurCompany</name>
+  <synonym>
+    <key>en</key>
+    <value>Our company</value>
+  </synonym>
+  <group>NavigationPanelImportant</group>
+  <representation>Auto</representation>
+</mdclass:CommonCommand>

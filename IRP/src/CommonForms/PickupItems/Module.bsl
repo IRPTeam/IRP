@@ -94,13 +94,13 @@ Procedure ItemTypeAfterSelection()
 		|	Items.Item.Unit AS Unit,
 		|	CASE
 		|		WHEN Items.ItemItemTypeType = Value(Enum.ItemTypes.Product)
-		|			Then IsNull(ItemBalance.QuantityBalance, 0)
-		|		ELSE 0
+		|			Then IsNull(ItemBalance.QuantityBalance, """")
+		|		ELSE """"
 		|	END As QuantityBalance,
 		|	CASE
 		|		WHEN Items.ItemItemTypeType = Value(Enum.ItemTypes.Product)
-		|			Then IsNull(ItemBalanceReceiver.QuantityBalanceReceiver, 0)
-		|		ELSE 0
+		|			Then IsNull(ItemBalanceReceiver.QuantityBalanceReceiver, """")
+		|		ELSE """"
 		|	END As QuantityBalanceReceiver,
 		|	ItemPickedOut.Quantity AS QuantityPickedOut,
 		|	Items.ItemKeyCount,

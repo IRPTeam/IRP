@@ -253,6 +253,19 @@ Function Strings(CodeLanguage) Export
     #EndRegion
     
     #Region PredefinedObjectDescriptions
+	PredefinedDescriptions(Strings, CodeLanguage);
+	#EndRegion
+    
+	#Region Titles
+	Strings.Insert("Title_00100", NStr("en = 'Select basis documents in Cheque bond transaction'", CodeLanguage));	// Form PickUpDocuments
+	
+	#EndRegion
+	Return Strings;
+EndFunction
+
+
+Procedure PredefinedDescriptions(Strings, CodeLanguage)
+
 	Strings.Insert("Description_A001", NStr("en = 'Catalog Agreements'", CodeLanguage));
 	Strings.Insert("Description_A002", NStr("en = 'Catalog Boxes'", CodeLanguage));
 	Strings.Insert("Description_A003", NStr("en = 'Catalog Business units'", CodeLanguage));
@@ -267,7 +280,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Description_A012", NStr("en = 'Catalog Items'", CodeLanguage));
 	Strings.Insert("Description_A013", NStr("en = 'Catalog Item types'", CodeLanguage));
 	Strings.Insert("Description_A014", NStr("en = 'Catalog Partners'", CodeLanguage));
-	Strings.Insert("Description_A015", NStr("en = 'Catalog Price teys'", CodeLanguage));
+	Strings.Insert("Description_A015", NStr("en = 'Catalog Price keys'", CodeLanguage));
 	Strings.Insert("Description_A016", NStr("en = 'Catalog Price types'", CodeLanguage));
 	Strings.Insert("Description_A017", NStr("en = 'Catalog Serial lot numbers'", CodeLanguage));
 	Strings.Insert("Description_A018", NStr("en = 'Catalog Specifications'", CodeLanguage));
@@ -283,8 +296,8 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Description_A028", NStr("en = 'Document Cash receipt'", CodeLanguage));
 	Strings.Insert("Description_A029", NStr("en = 'Document Cash revenue'", CodeLanguage));
 	Strings.Insert("Description_A030", NStr("en = 'Document Cash transfer order'", CodeLanguage));
-	Strings.Insert("Description_A031", NStr("en = 'Document cheque bond transaction'", CodeLanguage));
-	Strings.Insert("Description_A032", NStr("en = 'Document goods receipt'", CodeLanguage));
+	Strings.Insert("Description_A031", NStr("en = 'Document Cheque bond transaction'", CodeLanguage));
+	Strings.Insert("Description_A032", NStr("en = 'Document Goods receipt'", CodeLanguage));
 	Strings.Insert("Description_A033", NStr("en = 'Document Incoming payment order'", CodeLanguage));
 	Strings.Insert("Description_A034", NStr("en = 'Document Inventory transfer'", CodeLanguage));
 	Strings.Insert("Description_A035", NStr("en = 'Document Inventory transfer order'", CodeLanguage));
@@ -295,11 +308,11 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Description_A040", NStr("en = 'Document Physical count by location'", CodeLanguage));
 	Strings.Insert("Description_A041", NStr("en = 'Document Physical inventory'", CodeLanguage));
 	Strings.Insert("Description_A042", NStr("en = 'Document Price list'", CodeLanguage));
-	Strings.Insert("Description_A043", NStr("en = 'Document Purchase lnvoice'", CodeLanguage));
+	Strings.Insert("Description_A043", NStr("en = 'Document Purchase invoice'", CodeLanguage));
 	Strings.Insert("Description_A044", NStr("en = 'Document Purchase order'", CodeLanguage));
 	Strings.Insert("Description_A045", NStr("en = 'Document Purchase return'", CodeLanguage));
 	Strings.Insert("Description_A046", NStr("en = 'Document Purchase return order'", CodeLanguage));
-	Strings.Insert("Description_A047", NStr("en = 'Document Reconciliation Statement'", CodeLanguage));
+	Strings.Insert("Description_A047", NStr("en = 'Document Reconciliation statement'", CodeLanguage));
 	Strings.Insert("Description_A048", NStr("en = 'Document Sales invoice'", CodeLanguage));
 	Strings.Insert("Description_A049", NStr("en = 'Document Sales order'", CodeLanguage));
 	Strings.Insert("Description_A050", NStr("en = 'Document Sales return'", CodeLanguage));
@@ -309,49 +322,11 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Description_A054", NStr("en = 'Document Stock adjustment as write off'", CodeLanguage));
 	Strings.Insert("Description_A055", NStr("en = 'Document Unboxing'", CodeLanguage));
 	Strings.Insert("Description_A056", NStr("en = 'Document Unbundling'", CodeLanguage));
-	Strings.Insert("Description_A056", NStr("en = 'Document Unbundling'", CodeLanguage));
-	
 	Strings.Insert("Description_A057", NStr("en = 'User defined'", CodeLanguage));
-	
-	Strings.Insert("Description_A058", NStr("en = 'Cheque bond transaction'", CodeLanguage));
-	Strings.Insert("Description_A059", NStr("en = 'Cheque bond incoming'", CodeLanguage));
-	Strings.Insert("Description_A060", NStr("en = 'Cheque bond outgoing'", CodeLanguage));
-	Strings.Insert("Description_A061", NStr("en = 'Inventory transfer order'", CodeLanguage));
-	Strings.Insert("Description_A062", NStr("en = 'Outgoing payment order'", CodeLanguage));
-	Strings.Insert("Description_A063", NStr("en = 'Physical count by location'", CodeLanguage));
-	Strings.Insert("Description_A064", NStr("en = 'Physical inventory'", CodeLanguage));
-	Strings.Insert("Description_A065", NStr("en = 'Purchase order'", CodeLanguage));
-	Strings.Insert("Description_A066", NStr("en = 'Purchase return order'", CodeLanguage));
-	Strings.Insert("Description_A067", NStr("en = 'Reconciliation statement'", CodeLanguage));
-	Strings.Insert("Description_A068", NStr("en = 'Sales order'", CodeLanguage));
-	Strings.Insert("Description_A069", NStr("en = 'Sales return order'", CodeLanguage));
-	
-	Strings.Insert("Description_A070", NStr("en = 'Document Purchase return order'", CodeLanguage));
-	Strings.Insert("Description_A071", NStr("en = 'Document Bank payment'", CodeLanguage));
-	Strings.Insert("Description_A072", NStr("en = 'Document Bank receipt'", CodeLanguage));
-	Strings.Insert("Description_A073", NStr("en = 'Document Cash expense'", CodeLanguage));
-	Strings.Insert("Description_A074", NStr("en = 'Document Cash payment'", CodeLanguage));
-	Strings.Insert("Description_A075", NStr("en = 'Document Cash receipt'", CodeLanguage));
-	Strings.Insert("Description_A076", NStr("en = 'Document Cash revenue'", CodeLanguage));
-	Strings.Insert("Description_A077", NStr("en = 'Document Cash transfer order'", CodeLanguage));
-	Strings.Insert("Description_A078", NStr("en = 'Document Credit debit note'", CodeLanguage));
-	Strings.Insert("Description_A079", NStr("en = 'Document Incoming payment order'", CodeLanguage));
-	Strings.Insert("Description_A080", NStr("en = 'Document Invoice match'", CodeLanguage));
-	Strings.Insert("Description_A081", NStr("en = 'Document Outgoing payment order'", CodeLanguage));
-	Strings.Insert("Description_A082", NStr("en = 'Document purchase invoice'", CodeLanguage));
-	Strings.Insert("Description_A083", NStr("en = 'Document purchase order'", CodeLanguage));
-	Strings.Insert("Description_A084", NStr("en = 'Document purchase return'", CodeLanguage));
-	Strings.Insert("Description_A085", NStr("en = 'Document Sales invoice'", CodeLanguage));
-	Strings.Insert("Description_A086", NStr("en = 'Document Sales order'", CodeLanguage));
-	Strings.Insert("Description_A087", NStr("en = 'Document Sales return'", CodeLanguage));
-	Strings.Insert("Description_A088", NStr("en = 'Document Sales return order'", CodeLanguage));
-	
-	Strings.Insert("Description_A089", NStr("en = 'Settlement currency'", CodeLanguage));
-	#EndRegion
-    
-	#Region Titles
-	Strings.Insert("Title_00100", NStr("en = 'Select basis documents in Cheque bond transaction'", CodeLanguage));	// Form PickUpDocuments
-	
-	#EndRegion
-	Return Strings;
-EndFunction
+	Strings.Insert("Description_A058", NStr("en = 'Cheque bond incoming'", CodeLanguage));
+	Strings.Insert("Description_A059", NStr("en = 'Cheque bond outgoing'", CodeLanguage));
+	Strings.Insert("Description_A060", NStr("en = 'Document Credit debit note'", CodeLanguage));
+	Strings.Insert("Description_A061", NStr("en = 'Settlement currency'", CodeLanguage));
+
+EndProcedure
+

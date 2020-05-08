@@ -201,3 +201,151 @@ Function DescriptionStructure(Description = "") Export
 	Str.Insert("Description"											, Description);
 	Return Str;
 EndFunction
+
+Procedure FillDescriptionOfPredefinedCatalogs() Export
+    
+    LocalCodes = LocalicationCodesList();
+
+	ValueTable = New ValueTable;
+	ValueTable.Columns.Add("Ref");
+	ValueTable.Columns.Add("DescriptionMap");
+
+	Obj = Catalogs.AddAttributeAndPropertySets;
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Agreements, 					"Description_A001");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Boxes, 						"Description_A002");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_BusinessUnits, 				"Description_A003");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_CashAccounts, 					"Description_A004");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_ChequeBonds, 					"Description_A005");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Companies, 					"Description_A006");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_CompanyTypes, 					"Description_A007");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Countries, 					"Description_A008");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Currencies, 					"Description_A009");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_ExpenseAndRevenueTypes, 		"Description_A010");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_ItemKeys, 						"Description_A011");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Items, 						"Description_A012");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_ItemTypes, 					"Description_A013");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Partners, 						"Description_A014");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_PriceKeys, 					"Description_A015");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_PriceTypes, 					"Description_A016");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_SerialLotNumbers, 				"Description_A017");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Specifications, 				"Description_A018");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Stores, 						"Description_A019");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Taxes, 						"Description_A020");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Units, 						"Description_A021");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Users, 						"Description_A022");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_BankPayment, 					"Description_A023");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_BankReceipt, 					"Description_A024");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_Bundling, 					"Description_A025");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashExpense, 					"Description_A026");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashPayment, 					"Description_A027");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashReceipt, 					"Description_A028");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashRevenue, 					"Description_A029");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashTransferOrder, 			"Description_A030");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_ChequeBondTransaction, 		"Description_A031");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_GoodsReceipt, 				"Description_A032");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_IncomingPaymentOrder, 		"Description_A033");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_InventoryTransfer, 			"Description_A034");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_InventoryTransferOrder, 		"Description_A035");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_InvoiceMatch, 				"Description_A036");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_Labeling, 					"Description_A037");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_OpeningEntry, 				"Description_A038");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_OutgoingPaymentOrder, 		"Description_A039");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_PhysicalCountByLocation, 		"Description_A040");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_PhysicalInventory, 			"Description_A041");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_PriceList, 					"Description_A042");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_PurchaseInvoice, 				"Description_A043");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_PurchaseOrder, 				"Description_A044");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_PurchaseReturn, 				"Description_A045");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_PurchaseReturnOrder, 			"Description_A046");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_ReconciliationStatement, 		"Description_A047");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_SalesInvoice, 				"Description_A048");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_SalesOrder, 					"Description_A049");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_SalesReturn, 					"Description_A050");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_SalesReturnOrder, 			"Description_A051");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_ShipmentConfirmation, 		"Description_A052");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_StockAdjustmentAsSurplus, 	"Description_A053");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_StockAdjustmentAsWriteOff, 	"Description_A054");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_Unboxing, 					"Description_A055");
+    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_Unbundling, 					"Description_A056");
+
+	AddRowToDescriptionList (ValueTable, LocalCodes, Catalogs.PriceTypes.ManualPriceType, "Description_A057");
+	
+	Obj = Catalogs.ObjectStatuses;
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.ChequeBondTransaction, 	"Description_A058");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.ChequeBondIncoming, 		"Description_A059");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.ChequeBondOutgoing, 		"Description_A060");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.InventoryTransferOrder, 	"Description_A061");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.OutgoingPaymentOrder, 		"Description_A062");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.PhysicalCountByLocation, 	"Description_A063");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.PhysicalInventory, 		"Description_A064");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.PurchaseOrder, 			"Description_A065");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.PurchaseReturnOrder, 		"Description_A066");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.ReconciliationStatement, 	"Description_A067");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.SalesOrder, 				"Description_A068");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.SalesReturnOrder, 			"Description_A069");
+
+	Obj = Catalogs.CurrencyMovementSets;
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_PurchaseReturnOrder, 	"Description_A070");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_BankPayment, 			"Description_A071");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_BankReceipt, 			"Description_A072");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashExpense, 			"Description_A073");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashPayment, 			"Description_A074");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashReceipt, 			"Description_A075");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashRevenue, 			"Description_A076");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashTransferOrder, 	"Description_A077");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CreditDebitNote, 		"Description_A078");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_IncomingPaymentOrder, "Description_A079");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_InvoiceMatch, 		"Description_A080");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_OutgoingPaymentOrder, "Description_A081");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_PurchaseInvoice, 		"Description_A082");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_PurchaseOrder, 		"Description_A083");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_PurchaseReturn, 		"Description_A084");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_SalesInvoice, 		"Description_A085");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_SalesOrder, 			"Description_A086");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_SalesReturn, 			"Description_A087");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_SalesReturnOrder, 	"Description_A088");
+	
+	Obj = ChartsOfCharacteristicTypes.CurrencyMovementType;
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.SettlementCurrency, "Description_A089");
+	
+	FillAndWriteDescriptions (ValueTable);
+
+EndProcedure
+
+Function LocalicationCodesList()
+    
+    LocalizationCodes = New Array;
+    LocalizationCodes.Add("en");
+    Return LocalizationCodes;
+    
+EndFunction
+
+Procedure AddRowToDescriptionList (CatalogList, LocalizationCodes,  Ref, R_StringName)
+
+    NewRow = CatalogList.Add();
+    NewRow.Ref = Ref;
+    Map = New Map;
+    For Each LocalCodeRow In LocalizationCodes Do
+        Map.Insert("Description_" + LocalCodeRow, R(LocalCodeRow)[R_StringName]);
+    EndDo;
+    NewRow.DescriptionMap = Map;
+    
+EndProcedure
+
+Procedure FillAndWriteDescriptions(ObjectTable)
+
+	For Each CurRow In ObjectTable Do
+		Object = CurRow.Ref.GetObject();
+		ObjectChanged = False;
+		For Each Description In CurRow.DescriptionMap Do
+			If Not Object[Description.Key] = Description.Value Then
+				Object[Description.Key] = Description.Value;
+				ObjectChanged = True;
+			EndIf;
+		EndDo;
+		If ObjectChanged Then
+			Object.Write();
+		EndIf;
+	EndDo;
+
+EndProcedure

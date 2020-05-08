@@ -311,7 +311,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Description_A056", NStr("en = 'Document Unbundling'", CodeLanguage));
 	Strings.Insert("Description_A056", NStr("en = 'Document Unbundling'", CodeLanguage));
 	
-	Strings.Insert("Description_A057", NStr("en = 'Manuel'", CodeLanguage));
+	Strings.Insert("Description_A057", NStr("en = 'Manual'", CodeLanguage));
 	
 	Strings.Insert("Description_A058", NStr("en = 'Cheque bond transaction'", CodeLanguage));
 	Strings.Insert("Description_A059", NStr("en = 'Cheque bond incoming'", CodeLanguage));

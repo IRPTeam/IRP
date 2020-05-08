@@ -30,7 +30,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>Order status</value>
+    <value>Object status</value>
   </objectPresentation>
   <hierarchical>true</hierarchical>
   <limitLevelCount>true</limitLevelCount>

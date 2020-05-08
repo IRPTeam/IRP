@@ -169,4 +169,6 @@
   <content>Document.OpeningEntry.TabularSection.AccountPayableByAgreements.Attribute.Agreement</content>
   <content>Document.PurchaseInvoice.Attribute.IsOpeningEntry</content>
   <content>Document.PurchaseReturn.Attribute.IsOpeningEntry</content>
+  <content>InformationRegister.TaxSettings.Dimension.Agreement</content>
+  <content>InformationRegister.TaxSettings.Dimension.ItemKey</content>
 </mdclass:FunctionalOption>

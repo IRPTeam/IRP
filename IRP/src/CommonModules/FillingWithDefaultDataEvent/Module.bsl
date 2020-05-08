@@ -1,7 +1,7 @@
 Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, StandardProcessing) Export
 	Data = New Structure();
 	
-	Data.Insert("Author", SessionParameters.CurrentUserPartner);
+	Data.Insert("Author", SessionParameters.CurrentUser);
 	FillPropertyValues(Source, Data);
 	FilterParameters = New Structure();
 	FilterParameters.Insert("MetadataObject", Source.Metadata());

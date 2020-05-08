@@ -7,7 +7,7 @@
   </synonym>
   <comment></comment>
   <type>
-    <types>CatalogRef.Partners</types>
+    <types>CatalogRef.Users</types>
   </type>
   <mask></mask>
   <minValue xsi:type="core:UndefinedValue"/>
@@ -19,7 +19,6 @@
     </value>
   </choiceParameters>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
   <content>
     <metadata>Document.SalesOrder</metadata>
     <use>Use</use>

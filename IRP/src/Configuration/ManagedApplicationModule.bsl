@@ -22,10 +22,13 @@ Procedure OnStart()
 	ServiceSystemClient.SetSessionParameter("isMobile", isMobile);
 	ServiceSystemClient.SetSessionParameter("ClientType", ClientType);
 	
-	If Saas.isAreaActive() Then
-		If Not ServiceSystemServer.GetConstantValue("NotFirstStart") 
-				And ServiceSystemServer.GetConstantValue("SaasMode") Then
-			OpenForm("DataProcessor.FillingNewAreaAssistant.Form.Form", , , , , , , FormWindowOpeningMode.LockWholeInterface);
+	If Not ServiceSystemServer.GetConstantValue("NotFirstStart") Then
+	    
+	    FillingFromClassifiers.FillDescriptionOfPredefinedCatalogs();
+	    
+		If Saas.isAreaActive() And ServiceSystemServer.GetConstantValue("SaasMode") Then
+			OpenForm("DataProcessor.FillingNewAreaAssistant.Form.Form", , , , , , ,
+				FormWindowOpeningMode.LockWholeInterface);
 		EndIf;
 	EndIf;
 EndProcedure

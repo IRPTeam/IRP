@@ -7,7 +7,7 @@
   </synonym>
   <comment></comment>
   <type>
-    <types>CatalogRef.Partners</types>
+    <types>CatalogRef.Users</types>
   </type>
   <mask></mask>
   <minValue xsi:type="core:UndefinedValue"/>
@@ -19,7 +19,6 @@
     </value>
   </choiceParameters>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
   <content>
     <metadata>Document.SalesOrder</metadata>
     <use>Use</use>
@@ -106,6 +105,74 @@
   </content>
   <content>
     <metadata>Document.PhysicalCountByLocation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.Boxing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.GoodsReceipt</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.CashTransferOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.InventoryTransferOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ChequeBondTransaction</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.CreditDebitNote</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ShipmentConfirmation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.OpeningEntry</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.IncomingPaymentOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.OutgoingPaymentOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ReconciliationStatement</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.InternalSupplyRequest</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.InvoiceMatch</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.Unbundling</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.Unboxing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.Bundling</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.InventoryTransfer</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

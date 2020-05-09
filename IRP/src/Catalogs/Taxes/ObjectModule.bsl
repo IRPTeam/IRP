@@ -5,7 +5,7 @@ EndProcedure
 Procedure OnWrite(Cancel)
 	If ThisObject.Type = Enums.TaxType.Amount Then
 		ThisObject.TaxRates.Clear();
-		RecordSet = InformationRegisters.TaxRates.CreateRecordSet();
+		RecordSet = InformationRegisters.TaxSettings.CreateRecordSet();
 		RecordSet.Filter.Tax.Set(ThisObject.Ref);
 		RecordSet.Clear();
 		RecordSet.Write();

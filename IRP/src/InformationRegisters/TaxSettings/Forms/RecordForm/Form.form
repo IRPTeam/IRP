@@ -531,7 +531,7 @@
     <name>Record</name>
     <id>1</id>
     <valueType>
-      <types>InformationRegisterRecordManager.TaxRates</types>
+      <types>InformationRegisterRecordManager.TaxSettings</types>
     </valueType>
     <view>
       <common>true</common>

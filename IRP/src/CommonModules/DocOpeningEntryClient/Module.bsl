@@ -66,3 +66,48 @@ Procedure DecorationGroupTitleUncollapsedLalelClick(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
+
+#Region InventoryItemsEvents
+
+Procedure InventoryItemOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
+	TransferSettings = DocumentsClient.GetSettingsStructure(ThisObject);
+	TransferSettings.Insert("ItemListName", "Inventory");
+	DocumentsClient.ItemListItemOnChange(Object, Form, ThisObject, Item, TransferSettings);	
+EndProcedure
+
+Function ItemListItemSettings() Export
+	Return InventoryItemSettings();
+EndFunction
+
+Function InventoryItemSettings()
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
+	Actions = New Structure();
+	Actions.Insert("UpdateItemKey"				, "UpdateItemKey");
+	
+	Settings.Actions = Actions;
+	Settings.ObjectAttributes = "ItemKey";
+	Settings.FormAttributes = "";
+	Return Settings;
+EndFunction
+
+Procedure InventoryItemKeyOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
+	TransferSettings = DocumentsClient.GetSettingsStructure(ThisObject);
+	TransferSettings.Insert("ItemListName", "Inventory");
+	DocumentsClient.ItemListItemKeyOnChange(Object, Form, ThisObject, Item, TransferSettings);	
+EndProcedure
+
+Function ItemListItemKeySettings() Export
+	Return InventoryItemKeySettings();
+EndFunction
+
+Function InventoryItemKeySettings()
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");	
+	Actions = New Structure();
+	
+	Settings.Actions = Actions;
+	Settings.ObjectAttributes = "ItemKey";
+	Settings.FormAttributes = "";
+	Return Settings;
+EndFunction
+
+#EndRegion

@@ -2197,6 +2197,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
   </attributes>
   <attributes>
     <name>InputTypeItemList</name>
@@ -2215,6 +2216,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
   </attributes>
   <formCommands>
     <name>FillByRules</name>

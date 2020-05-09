@@ -4,7 +4,7 @@ EndFunction
 
 Function isAreaActive() Export
 	AreaMode = NOT Saas.SeparationUsed() OR (Saas.SeparationUsed() AND SessionParameters.IDUse);
-	Return AreaMode
+	Return AreaMode;
 EndFunction
 
 Procedure SetSeparationParameters(Separators) Export

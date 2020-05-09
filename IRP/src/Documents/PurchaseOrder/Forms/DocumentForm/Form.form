@@ -5158,6 +5158,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
   </attributes>
   <attributes>
     <name>CurrentStore</name>

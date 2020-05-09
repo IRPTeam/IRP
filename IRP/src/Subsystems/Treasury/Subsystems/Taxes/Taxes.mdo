@@ -7,7 +7,7 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>InformationRegister.TaxRates</content>
+  <content>InformationRegister.TaxSettings</content>
   <content>Catalog.TaxRates</content>
   <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

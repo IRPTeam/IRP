@@ -73,24 +73,35 @@ Procedure ItemTypeAfterSelection()
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	ItemKey.Item,
+		|	ItemKey.Item.ItemType.Type,
 		|	SUM(1) AS ItemKeyCount
 		|INTO Items
 		|FROM
 		|	Catalog.ItemKeys AS ItemKey
 		|WHERE
 		|	NOT ItemKey.DeletionMark
-		|	AND NOT ItemKey.Item.DeletionMark
+		|	AND
+		|	NOT ItemKey.Item.DeletionMark
 		|	AND &ItemType
 		|	AND &UseBox
 		|GROUP BY
-		|	ItemKey.Item
+		|	ItemKey.Item,
+		|	ItemKey.Item.ItemType.Type
 		|;
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	Items.Item AS Item,
 		|	Items.Item.Unit AS Unit,
-		|	ItemBalance.QuantityBalance,
-		|	ItemBalanceReceiver.QuantityBalanceReceiver,
+		|	CASE
+		|		WHEN Items.ItemItemTypeType = Value(Enum.ItemTypes.Product)
+		|			Then IsNull(ItemBalance.QuantityBalance, """")
+		|		ELSE """"
+		|	END As QuantityBalance,
+		|	CASE
+		|		WHEN Items.ItemItemTypeType = Value(Enum.ItemTypes.Product)
+		|			Then IsNull(ItemBalanceReceiver.QuantityBalanceReceiver, """")
+		|		ELSE """"
+		|	END As QuantityBalanceReceiver,
 		|	ItemPickedOut.Quantity AS QuantityPickedOut,
 		|	Items.ItemKeyCount,
 		|	&PriceType AS PriceType,

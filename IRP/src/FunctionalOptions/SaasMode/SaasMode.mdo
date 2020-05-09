@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="42683d6e-98f7-4a07-ba24-3eabc16ac687">
+  <name>SaasMode</name>
+  <synonym>
+    <key>en</key>
+    <value>Saas mode</value>
+  </synonym>
+  <location>Constant.SaasMode</location>
+  <privilegedGetMode>true</privilegedGetMode>
+  <content>CommonCommand.OpenOurCompany</content>
+</mdclass:FunctionalOption>

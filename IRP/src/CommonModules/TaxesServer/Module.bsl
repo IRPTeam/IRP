@@ -19,7 +19,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 		|INTO Taxes_ItemKeys
 		|FROM
 		|	ItemKeys AS ItemKeys
-		|		LEFT JOIN InformationRegister.TaxRates.SliceLast(&Date, (Company, Tax, ItemKey) IN
+		|		LEFT JOIN InformationRegister.TaxSettings.SliceLast(&Date, (Company, Tax, ItemKey) IN
 		|			(SELECT
 		|				ItemKeys.Company AS Company,
 		|				ItemKeys.Tax AS Tax,
@@ -56,7 +56,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 		|INTO Taxes_Items
 		|FROM
 		|	Items AS Items
-		|		LEFT JOIN InformationRegister.TaxRates.SliceLast(&Date, (Company, Tax, Item) IN
+		|		LEFT JOIN InformationRegister.TaxSettings.SliceLast(&Date, (Company, Tax, Item) IN
 		|			(SELECT
 		|				Items.Company AS Company,
 		|				Items.Tax AS Tax,
@@ -95,7 +95,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 		|INTO Taxes_ItemTypes
 		|FROM
 		|	ItemTypes AS ItemTypes
-		|		LEFT JOIN InformationRegister.TaxRates.SliceLast(&Date, (Company, Tax, ItemType) IN
+		|		LEFT JOIN InformationRegister.TaxSettings.SliceLast(&Date, (Company, Tax, ItemType) IN
 		|			(SELECT
 		|				ItemTypes.Company AS Company,
 		|				ItemTypes.Tax AS Tax,
@@ -134,7 +134,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 		|INTO Taxes_Companies
 		|FROM
 		|	Companies AS Companies
-		|		LEFT JOIN InformationRegister.TaxRates.SliceLast(&Date, (Company, Tax) IN
+		|		LEFT JOIN InformationRegister.TaxSettings.SliceLast(&Date, (Company, Tax) IN
 		|			(SELECT
 		|				Companies.Company AS Company,
 		|				Companies.Tax AS Tax
@@ -245,7 +245,7 @@ Function TaxRatesForAgreement(Parameters) Export
 		|	TaxRatesSliceLast.TaxRate,
 		|	TaxRatesSliceLast.TaxRate.Rate AS Rate
 		|FROM
-		|	InformationRegister.TaxRates.SliceLast(&Date, Company = &Company
+		|	InformationRegister.TaxSettings.SliceLast(&Date, Company = &Company
 		|	AND Tax = &Tax
 		|	AND Agreement = &Agreement) AS TaxRatesSliceLast";
 	

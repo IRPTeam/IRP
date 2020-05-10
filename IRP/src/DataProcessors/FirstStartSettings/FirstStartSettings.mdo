@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d44b9864-06f9-4cd2-b631-37590c329f55">
+  <producedTypes>
+    <objectType typeId="b68ba470-df11-493c-847c-913b3b442c7a" valueTypeId="31afb41b-1b55-467e-aef9-efe49fff9527"/>
+    <managerType typeId="b72e6344-da62-4b1a-a968-0d73d5d2b7a8" valueTypeId="226d09fb-f70f-431f-8813-86ba2f7132e8"/>
+  </producedTypes>
+  <name>FirstStartSettings</name>
+  <synonym>
+    <key>en</key>
+    <value>First start settings</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.FirstStartSettings.Form.Form</defaultForm>
+  <forms uuid="ed0a55b9-4ff0-477c-8353-63d9280b1267">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:DataProcessor>

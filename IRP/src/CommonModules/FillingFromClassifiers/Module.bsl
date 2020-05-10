@@ -10,7 +10,6 @@ Procedure OnCreateAtServer(Form, Cancel, StandardProcessing) Export
 	NewItem.CommandName = "CreateFromClassifier";
 EndProcedure
 
-
 Function GetClassifierData(MetadataName) Export
 	ClassifierData = New Array;
 	CurrentMetadata = Metadata.FindByFullName(MetadataName);

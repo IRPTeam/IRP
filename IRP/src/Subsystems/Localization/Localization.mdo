@@ -15,4 +15,5 @@
   <content>CommonModule.LocalizationEvents</content>
   <content>EventSubscription.GetCatalogPresentation</content>
   <content>EventSubscription.CheckDescriptionsFillCheck</content>
+  <content>DataProcessor.FirstStartSettings</content>
 </mdclass:Subsystem>

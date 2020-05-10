@@ -12,6 +12,10 @@ Function GetConstantValue(ConstantName) Export
 	Return Constants[ConstantName].Get();
 EndFunction
 
+Procedure SetConstantValue(ConstantName, Value) Export
+    Constants[ConstantName].Set(Value);
+EndProcedure
+
 Function GetCompositeObjectAttribute(Object, AttributeName) Export
 	If ObjectHasAttribute(AttributeName, Object) Then
 		Return GetObjectAttribute(Object, AttributeName);

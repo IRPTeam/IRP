@@ -32,3 +32,9 @@ Procedure DescriptionEditEnd(Result, AdditionalParameters) Export
 		EndIf;
 	EndDo;
 EndProcedure
+
+Procedure OpenFirstStartSettingsForm() Export
+
+	OpenForm("DataProcessor.FirstStartSettings.Form.Form", , , , , , , FormWindowOpeningMode.LockWholeInterface);
+
+EndProcedure

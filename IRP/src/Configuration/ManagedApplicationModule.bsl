@@ -22,15 +22,12 @@ Procedure OnStart()
 	ServiceSystemClient.SetSessionParameter("isMobile", isMobile);
 	ServiceSystemClient.SetSessionParameter("ClientType", ClientType);
 	
-	If Not ServiceSystemServer.GetConstantValue("NotFirstStart") Then
-	    
-	    FillingFromClassifiers.FillDescriptionOfPredefinedCatalogs();
-	    
-		If Saas.isAreaActive() And ServiceSystemServer.GetConstantValue("SaasMode") Then
-			OpenForm("DataProcessor.FillingNewAreaAssistant.Form.Form", , , , , , ,
-				FormWindowOpeningMode.LockWholeInterface);
-		EndIf;
+	If Not ServiceSystemServer.GetConstantValue("NotFirstStart") Then	    
+	    FillingFromClassifiers.FillDescriptionOfPredefinedCatalogs(); 
+	    LocalizationClient.OpenFirstStartSettingsForm();   
+	    ServiceSystemServer.SetConstantValue("NotFirstStart", True);
 	EndIf;
+	
 EndProcedure
 
 

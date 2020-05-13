@@ -143,7 +143,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.Agreement AS Agreement,
 		|	tmp.Currency AS Currency,
 		|	SUM(tmp.Amount) AS Amount,
-		|	tmp.Period
+		|	tmp.Period,
+		|	tmp.Key
 		|FROM
 		|	tmp AS tmp
 		|WHERE
@@ -159,7 +160,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.Agreement,
 		|	tmp.Currency,
 		|	tmp.Period,
-		|	tmp.BasisDocument
+		|	tmp.BasisDocument,
+		|	tmp.Key
 		|;
 		|
 		|//[2]//////////////////////////////////////////////////////////////////////////////
@@ -360,6 +362,29 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.PartnerApTransactions));
+	
+	// AccountsStatement
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.PartnerApTransactions.Copy();
+	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+	Table1.Columns.Add("AdvanceToSupliers", Metadata.DefinedTypes.typeAmount.Type);
+	Table1.Columns.Amount.Name = "TransactionAP";
+	ArrayOfTables.Add(Table1);
+	
+	Table2 = Parameters.DocumentDataTables.AdvanceToSuppliers.Copy();
+	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
+	Table2.Columns.Add("BasisDocument", Metadata.DefinedTypes.typeAccountStatementBasises.Type);
+	Table2.Columns.Add("TransactionAP", Metadata.DefinedTypes.typeAmount.Type);
+	Table2.Columns.Amount.Name = "AdvanceToSupliers";
+	ArrayOfTables.Add(Table2);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+				"RecordType, Period, Company, Partner, LegalName, 
+				|BasisDocument, Currency, TransactionAP, AdvanceToSupliers"),
+			Parameters.IsReposting));
 	
 	// AccountBalance
 	ArrayOfTables = New Array();

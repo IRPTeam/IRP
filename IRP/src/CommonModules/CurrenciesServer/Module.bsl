@@ -159,7 +159,7 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|	RecordSet.Amount,
 	|	RecordSet.ManualAmount,
 	|	RecordSet.NetAmount,
-	|	RecordSet.OffersAmount,	
+	|	RecordSet.OffersAmount,
 	|	FALSE,
 	|	RecordSet.Currency
 	|FROM

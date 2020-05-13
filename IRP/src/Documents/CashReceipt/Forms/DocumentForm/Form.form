@@ -2782,6 +2782,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseCompany</functionalOptions>
   </attributes>
   <attributes>
     <name>Description</name>

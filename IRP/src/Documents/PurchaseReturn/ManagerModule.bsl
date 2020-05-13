@@ -539,6 +539,36 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.ItemList_AdvanceFromCustomers_Registrations));
 	
+    // AccountsStatement
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.ItemList_PartnerArTransactions.Copy();
+	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+	Table1.Columns.Add("AdvanceToSupliers", Metadata.DefinedTypes.typeAmount.Type);
+	Table1.Columns.Amount.Name = "TransactionAP";
+	ArrayOfTables.Add(Table1);
+	
+	Table2 = Parameters.DocumentDataTables.ItemList_AdvanceFromCustomers_Registrations.Copy();
+	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
+	Table2.Columns.Add("AdvanceToSupliers", Metadata.DefinedTypes.typeAmount.Type);
+	Table2.Columns.Amount.Name = "TransactionAP";
+	ArrayOfTables.Add(Table2);
+	
+	Table3 = Parameters.DocumentDataTables.ItemList_AdvanceFromCustomers_Registrations.Copy();
+	Table3.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table3.FillValues(AccumulationRecordType.Receipt, "RecordType");
+	Table3.Columns.Add("TransactionAP", Metadata.DefinedTypes.typeAmount.Type);
+	Table3.Columns.Amount.Name = "AdvanceToSupliers";
+	ArrayOfTables.Add(Table3);
+	
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+				"RecordType, Period, Company, Partner, LegalName, 
+				|BasisDocument, Currency, TransactionAP, AdvanceToSupliers"),
+			Parameters.IsReposting));
+	
 	// ReconciliationStatement
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReconciliationStatement,
 		New Structure("RecordType, RecordSet",

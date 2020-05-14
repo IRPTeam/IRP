@@ -355,7 +355,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Return Tables;
 EndFunction
 
-
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
@@ -509,6 +508,42 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.StockReservation,
+			Parameters.IsReposting));
+	
+	// AccountsStatement
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.PartnerApTransactions.Copy();
+	Table1.Columns.Amount.Name = "TransactionAR";
+	PostingServer.AddColumnsToAccountsStatementTable(Table1);
+	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
+	For Each row in Table1 Do
+		row.TransactionAR = - row.TransactionAR;
+	EndDo;
+	ArrayOfTables.Add(Table1);
+	
+	Table2 = Parameters.DocumentDataTables.AdvanceToSuppliers_Registrations.Copy();
+	Table2.Columns.Amount.Name = "TransactionAR";
+	PostingServer.AddColumnsToAccountsStatementTable(Table2);
+	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
+	For Each row in Table2 Do
+		row.TransactionAR = - row.TransactionAR;
+	EndDo;
+	ArrayOfTables.Add(Table2);
+	
+	Table3 = Parameters.DocumentDataTables.AdvanceToSuppliers_Registrations.Copy();
+	Table3.Columns.Amount.Name = "AdvanceFromCustomers";
+	PostingServer.AddColumnsToAccountsStatementTable(Table3);
+	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");
+	For Each row in Table3 Do
+		row.AdvanceToSupliers = - row.AdvanceToSupliers;
+	EndDo;
+	ArrayOfTables.Add(Table3);
+	
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+				"RecordType, Period, Company, Partner, LegalName, 
+				|BasisDocument, Currency, TransactionAR, AdvanceFromCustomers"),
 			Parameters.IsReposting));
 	
 	// PartnerApTransactions

@@ -822,7 +822,34 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordSet, WriteInTransaction",
 			Parameters.DocumentDataTables.RevenuesTurnovers,
 			Parameters.IsReposting));
-			
+	
+	// AccountsStatement
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.PartnerArTransactions.Copy();
+	Table1.Columns.Amount.Name = "TransactionAR";
+	PostingServer.AddColumnsToAccountsStatementTable(Table1);
+	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
+	ArrayOfTables.Add(Table1);
+	
+	Table2 = Parameters.DocumentDataTables.AdvanceFromCustomers_Registrations.Copy();
+	Table2.Columns.Amount.Name = "TransactionAR";
+	PostingServer.AddColumnsToAccountsStatementTable(Table2);
+	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table2);
+	
+	Table3 = Parameters.DocumentDataTables.AdvanceFromCustomers_Registrations.Copy();
+	Table3.Columns.Amount.Name = "AdvanceFromCustomers";
+	PostingServer.AddColumnsToAccountsStatementTable(Table3);
+	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table3);
+		
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+				"RecordType, Period, Company, Partner, LegalName, 
+				|BasisDocument, Currency, TransactionAR, AdvanceFromCustomers"),
+			Parameters.IsReposting));	
+		
 	// PartnerArTransactions
 	// PartnerArTransactions [Receipt]  
 	// AdvanceFromCustomers_Registrations [Expense]

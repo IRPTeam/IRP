@@ -340,6 +340,7 @@
   <functionalOptions>FunctionalOption.UseCompany</functionalOptions>
   <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
   <functionalOptions>FunctionalOption.SaasMode</functionalOptions>
+  <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
   <definedTypes>DefinedType.typeApTransactionBasises</definedTypes>
@@ -386,6 +387,7 @@
   <constants>Constant.NotFirstStart</constants>
   <constants>Constant.SaasMode</constants>
   <constants>Constant.ShowAlfaTestingSaas</constants>
+  <constants>Constant.UseItemKey</constants>
   <commonForms>CommonForm.EditAddProperties</commonForms>
   <commonForms>CommonForm.EditDescriptions</commonForms>
   <commonForms>CommonForm.EditIDInfo</commonForms>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3e1a536f-0364-4b56-ac5c-e0d5bf281bd4">
+  <producedTypes>
+    <managerType typeId="39ae18c3-1673-4d04-bcab-0c525a4e357f" valueTypeId="724e0ad6-2101-47e8-b372-ee268d0c4f94"/>
+    <valueManagerType typeId="7ec0c97e-1c74-492f-a5c1-b70319539753" valueTypeId="e764ace8-d499-4be6-abb1-5f911e8ced72"/>
+    <valueKeyType typeId="a92207cd-1906-49a8-aeab-cf2b19b54daa" valueTypeId="2c36ca7f-6d3d-4eac-80fa-2f9c004ece69"/>
+  </producedTypes>
+  <name>UseItemKey</name>
+  <synonym>
+    <key>en</key>
+    <value>Use item key</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

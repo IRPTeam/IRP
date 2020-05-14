@@ -265,6 +265,68 @@ EndProcedure
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
 	
+	// AccountsStatement
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.PartnerApTransactions.CopyColumns();
+	Table1.Columns.Amount.Name = "TransactionAP";
+	PostingServer.AddColumnsToAccountsStatementTable(Table1);
+	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions Do
+		If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
+			NewRow = Table1.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.TransactionAP = Row.Amount;
+		EndIf;
+	EndDo;
+	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table1);
+	
+	Table2 = Parameters.DocumentDataTables.PartnerApTransactions.CopyColumns();
+	Table2.Columns.Amount.Name = "TransactionAR";
+	PostingServer.AddColumnsToAccountsStatementTable(Table2);
+	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions Do
+		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
+			NewRow = Table2.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.TransactionAR = - Row.Amount;
+		EndIf;
+	EndDo;
+	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table2);
+	
+	Table3 = Parameters.DocumentDataTables.PartnerArTransactions.CopyColumns();
+	Table3.Columns.Amount.Name = "TransactionAP";
+	PostingServer.AddColumnsToAccountsStatementTable(Table3);
+	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
+		If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
+			NewRow = Table3.Add(); 
+			FillPropertyValues(NewRow, Row);
+			NewRow.TransactionAP = - Row.Amount;
+		EndIf;
+	EndDo;
+	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");	
+	ArrayOfTables.Add(Table3);
+	
+	Table4 = Parameters.DocumentDataTables.PartnerArTransactions.CopyColumns();
+	Table4.Columns.Amount.Name = "TransactionAR";
+	PostingServer.AddColumnsToAccountsStatementTable(Table4);
+	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
+		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
+			NewRow = Table4.Add(); 
+			FillPropertyValues(NewRow, Row);
+			NewRow.TransactionAR = Row.Amount;
+		EndIf;
+	EndDo;
+	Table4.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table4);
+	
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency, 
+				|TransactionAP, AdvanceToSupliers,
+				|TransactionAR, AdvanceFromCustomers"),
+			Parameters.IsReposting));
+			
 	// PartnerApTransactions
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerApTransactions,
 		New Structure("RecordType, RecordSet",

@@ -225,9 +225,10 @@
       <key>en</key>
       <value>Company</value>
     </synonym>
-    <group>FormNavigationPanelImportant</group>
+    <group>FormNavigationPanelGoTo</group>
     <commandParameterType>
       <types>CatalogRef.Partners</types>
     </commandParameterType>
+    <representation>Auto</representation>
   </commands>
 </mdclass:Catalog>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d03c1fd8-ca72-4887-a70f-942bec1c6dc5">
-  <name>UseCompany</name>
+  <name>UseCompanies</name>
   <synonym>
     <key>en</key>
-    <value>Use company</value>
+    <value>Use companies</value>
   </synonym>
   <comment></comment>
-  <location>Constant.UseCompany</location>
+  <location>Constant.UseCompanies</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Document.Bundling.Attribute.Company</content>
   <content>Document.InventoryTransfer.Attribute.Company</content>
@@ -57,4 +57,5 @@
   <content>Document.ChequeBondTransactionItem.Attribute.LegalName</content>
   <content>Document.GoodsReceipt.Attribute.LegalName</content>
   <content>Document.ShipmentConfirmation.Attribute.LegalName</content>
+  <content>Catalog.Companies.Command.OpenCompanyList</content>
 </mdclass:FunctionalOption>

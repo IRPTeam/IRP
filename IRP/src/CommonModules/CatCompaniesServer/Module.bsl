@@ -62,3 +62,6 @@ Procedure ClearTaxesIntoFormTable(CurrentCompany) Export
 	Set.Write();
 EndProcedure
 
+Function isUseCompanies() Export
+	Return GetFunctionalOption("UseCompanies");
+EndFunction

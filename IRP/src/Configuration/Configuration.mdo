@@ -406,6 +406,7 @@
   <commonForms>CommonForm.DataClassifier</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.HTMLField</commonForms>
+  <commonForms>CommonForm.MainSettings</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>

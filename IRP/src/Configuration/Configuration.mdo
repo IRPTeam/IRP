@@ -371,6 +371,7 @@
   <definedTypes>DefinedType.typeCashAdvanceBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
+  <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.IDInfo</commonCommands>
   <commonCommands>CommonCommand.OpenPartnersCustomer</commonCommands>
@@ -593,6 +594,7 @@
   <accumulationRegisters>AccumulationRegister.StockAdjustmentAsSurplus</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.SalesReturnTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PurchaseReturnTurnovers</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

@@ -56,6 +56,7 @@
   <registerRecords>AccumulationRegister.OrderProcurement</registerRecords>
   <registerRecords>AccumulationRegister.ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.TaxesTurnovers</registerRecords>
+  <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -2661,6 +2661,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseCompany</functionalOptions>
   </attributes>
   <attributes>
     <name>CurrentPayee</name>

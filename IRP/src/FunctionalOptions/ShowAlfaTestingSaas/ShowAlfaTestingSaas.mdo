@@ -31,7 +31,6 @@
   <content>Document.SalesOrder.Attribute.ManagerSegment</content>
   <content>Document.SalesOrder.Attribute.Agreement</content>
   <content>Document.SalesOrder.TabularSection.SpecialOffers</content>
-  <content>Document.SalesOrder.Attribute.LegalName</content>
   <content>Document.SalesOrder.TabularSection.ItemList.Attribute.OffersAmount</content>
   <content>Document.SalesReturnOrder.TabularSection.SpecialOffers</content>
   <content>Document.Unbundling</content>
@@ -41,46 +40,30 @@
   <content>Document.IncomingPaymentOrder</content>
   <content>Document.GoodsReceipt.TabularSection.SerialLotNumberList</content>
   <content>Document.PurchaseReturn.TabularSection.SpecialOffers</content>
-  <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.SalesReturn.Attribute.LegalName</content>
-  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.InvoiceMatch</content>
   <content>Document.PhysicalCountByLocation</content>
   <content>Document.SalesInvoice.Attribute.IsOpeningEntry</content>
   <content>Document.CashInPOS</content>
   <content>Document.PriceList.TabularSection.DataSet</content>
-  <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.SalesInvoice.TabularSection.SpecialOffers</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.OffersAmount</content>
   <content>Catalog.Partners.Attribute.Opponent</content>
   <content>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.Store</content>
-  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.OffersAmount</content>
   <content>Document.SalesReturn.TabularSection.SpecialOffers</content>
   <content>Document.PurchaseReturn.Attribute.ManagerSegment</content>
   <content>Document.InventoryTransferOrder</content>
   <content>Document.BankPayment.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
-  <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.PurchaseInvoice.Attribute.LegalName</content>
-  <content>Document.SalesReturnOrder.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.CashPayment.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
-  <content>Document.SalesOrder.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.SalesReturn.TabularSection.ItemList.Attribute.OffersAmount</content>
   <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.OffersAmount</content>
   <content>Document.SalesReturnOrder.TabularSection.ItemList.Attribute.OffersAmount</content>
   <content>Document.SalesReturn.Attribute.ManagerSegment</content>
-  <content>Document.CreditDebitNote.Attribute.LegalName</content>
   <content>Document.InventoryTransfer</content>
-  <content>Document.PurchaseReturn.Attribute.LegalName</content>
   <content>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.OffersAmount</content>
   <content>Document.InternalSupplyRequest</content>
   <content>Document.SetupOfSpecialOffers</content>
-  <content>Document.PurchaseReturnOrder.Attribute.LegalName</content>
-  <content>Document.SalesInvoice.Attribute.LegalName</content>
   <content>Document.SalesReturnOrder.Attribute.ManagerSegment</content>
-  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.Labeling</content>
   <content>Document.ZReport</content>
   <content>Document.Boxing</content>
@@ -88,7 +71,6 @@
   <content>Document.ItemsFlow</content>
   <content>Document.PurchaseInvoice.TabularSection.SpecialOffers</content>
   <content>Document.PurchaseReturnOrder.TabularSection.SpecialOffers</content>
-  <content>Document.PurchaseOrder.Attribute.LegalName</content>
   <content>Document.PurchaseReturnOrder.Attribute.ManagerSegment</content>
   <content>Document.SalesInvoice.Attribute.ManagerSegment</content>
   <content>Document.PurchaseOrder.TabularSection.SpecialOffers</content>
@@ -117,7 +99,6 @@
   <content>InformationRegister.IDInfo</content>
   <content>ChartOfCharacteristicTypes.IDInfoTypes</content>
   <content>Document.OpeningEntry.TabularSection.Inventory.Attribute.Store</content>
-  <content>Document.OpeningEntry.TabularSection.Inventory.Attribute.ItemKey</content>
   <content>CommonCommand.IDInfo</content>
   <content>Catalog.Partners.Attribute.ManagerSegment</content>
   <content>Catalog.Agreements.Command.OpenAgreementsList</content>

@@ -337,7 +337,7 @@
   <scheduledJobs>ScheduledJob.FullDataExchange</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <functionalOptions>FunctionalOption.BetaTesting</functionalOptions>
-  <functionalOptions>FunctionalOption.UseCompany</functionalOptions>
+  <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
   <functionalOptions>FunctionalOption.SaasMode</functionalOptions>
   <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
@@ -378,13 +378,13 @@
   <commonCommands>CommonCommand.OpenPartnersVendor</commonCommands>
   <commonCommands>CommonCommand.OpenCustomerAgreements</commonCommands>
   <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
-  <commonCommands>CommonCommand.OpenOurCompany</commonCommands>
+  <commonCommands>CommonCommand.OpenCompanies</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <constants>Constant.ConnectionStatus</constants>
   <constants>Constant.DefaultPictureStorageVolume</constants>
   <constants>Constant.ShowBetaTesting</constants>
-  <constants>Constant.UseCompany</constants>
+  <constants>Constant.UseCompanies</constants>
   <constants>Constant.NotFirstStart</constants>
   <constants>Constant.SaasMode</constants>
   <constants>Constant.ShowAlfaTestingSaas</constants>

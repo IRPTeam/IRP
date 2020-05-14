@@ -23,6 +23,5 @@
   <content>Constant.SaasMode</content>
   <content>HTTPService.SaasService</content>
   <content>CommonModule.FillingFromClassifiers</content>
-  <content>CommonCommand.OpenOurCompany</content>
   <content>FunctionalOption.SaasMode</content>
 </mdclass:Subsystem>

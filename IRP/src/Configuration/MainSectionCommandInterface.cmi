@@ -14,12 +14,6 @@
       </visible>
     </visibilityFragments>
     <visibilityFragments>
-      <command>Catalog.Partners.StandardCommand.OpenList</command>
-      <visible>
-        <common>true</common>
-      </visible>
-    </visibilityFragments>
-    <visibilityFragments>
       <command>Document.SalesOrder.StandardCommand.OpenList</command>
       <visible>
         <common>true</common>
@@ -34,7 +28,6 @@
     <placementFragments>
       <group>NavigationPanelOrdinary</group>
       <commands>Document.SalesOrder.StandardCommand.OpenList</commands>
-      <commands>Catalog.Partners.StandardCommand.OpenList</commands>
       <commands>Catalog.Items.StandardCommand.OpenList</commands>
     </placementFragments>
   </commandsPlacement>

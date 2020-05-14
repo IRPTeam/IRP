@@ -10,55 +10,33 @@
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>AccumulationRegister.OrderProcurement.Dimension.ItemKey</content>
   <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>AccumulationRegister.OrderBalance.Dimension.ItemKey</content>
-  <content>AccumulationRegister.TransferOrderBalance.Dimension.ItemKey</content>
   <content>Document.PhysicalCountByLocation.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>AccumulationRegister.GoodsInTransitIncoming.Dimension.ItemKey</content>
-  <content>AccumulationRegister.StockAdjustmentAsSurplus.Dimension.ItemKey</content>
   <content>Document.InventoryTransferOrder.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>InformationRegister.BoxingItemKeys.Resource.ItemKey</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>AccumulationRegister.ItemsInStores.Dimension.ItemKey</content>
   <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>AccumulationRegister.OrderReservation.Dimension.ItemKey</content>
-  <content>AccumulationRegister.ShipmentOrders.Dimension.ItemKey</content>
   <content>Document.InternalSupplyRequest.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.OpeningEntry.TabularSection.Inventory.Attribute.ItemKey</content>
   <content>InformationRegister.RemainingItemsInfo.Dimension.ItemKey</content>
-  <content>AccumulationRegister.InventoryBalance.Dimension.ItemKey</content>
   <content>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>AccumulationRegister.SalesReturnTurnovers.Dimension.ItemKey</content>
   <content>Document.Unbundling.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.PriceList.TabularSection.ItemKeyList.Attribute.ItemKey</content>
   <content>Document.SalesOrder.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.PhysicalInventory.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>InformationRegister.BundleContents.Dimension.ItemKey</content>
-  <content>AccumulationRegister.GoodsInTransitOutgoing.Dimension.ItemKey</content>
-  <content>AccumulationRegister.ShipmentConfirmationSchedule.Dimension.ItemKey</content>
   <content>InformationRegister.ItemSegments.Dimension.ItemKey</content>
   <content>Document.SalesReturnOrder.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>AccumulationRegister.GoodsReceiptSchedule.Dimension.ItemKey</content>
   <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>AccumulationRegister.PurchaseReturnTurnovers.Dimension.ItemKey</content>
-  <content>AccumulationRegister.SalesOrderTurnovers.Dimension.ItemKey</content>
   <content>Catalog.ItemKeys.Command.OpenItemKeysList</content>
-  <content>AccumulationRegister.SalesTurnovers.Dimension.ItemKey</content>
   <content>InformationRegister.BoxContents.Dimension.ItemKey</content>
-  <content>AccumulationRegister.StockBalance.Dimension.ItemKey</content>
-  <content>AccumulationRegister.StockAdjustmentAsWriteOff.Dimension.ItemKey</content>
   <content>InformationRegister.Barcodes.Resource.ItemKey</content>
-  <content>AccumulationRegister.StockReservation.Dimension.ItemKey</content>
   <content>Document.Unboxing.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>AccumulationRegister.ReceiptOrders.Dimension.ItemKey</content>
   <content>Document.Labeling.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.Bundling.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>InformationRegister.PricesByItemKeys.Dimension.ItemKey</content>
-  <content>AccumulationRegister.PurchaseTurnovers.Dimension.ItemKey</content>
   <content>Document.InventoryTransfer.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.Boxing.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>AccumulationRegister.RevenuesTurnovers.Dimension.ItemKey</content>
 </mdclass:FunctionalOption>

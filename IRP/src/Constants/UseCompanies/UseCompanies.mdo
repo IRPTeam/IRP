@@ -3,11 +3,12 @@
   <producedTypes>
     <managerType typeId="c8c40952-726c-4c7a-ae74-cb92d44a6ec3" valueTypeId="5eff19f0-056e-4473-987a-82b11159ea6e"/>
     <valueManagerType typeId="e612ca76-5671-43f8-8395-ea70b6931807" valueTypeId="b6f8ab3b-f5d8-460c-ac54-5c327ce54e4d"/>
+    <valueKeyType typeId="b14f1026-55ec-4e89-b529-5e5b47869663" valueTypeId="aaac9ffa-c572-4cc3-a2a8-4b7d4e97eb02"/>
   </producedTypes>
-  <name>UseCompany</name>
+  <name>UseCompanies</name>
   <synonym>
     <key>en</key>
-    <value>Use company</value>
+    <value>Use companies</value>
   </synonym>
   <comment></comment>
   <type>

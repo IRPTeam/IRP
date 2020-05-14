@@ -44,7 +44,7 @@
   <content>Document.SalesInvoice</content>
   <content>Document.SalesOrder</content>
   <content>Catalog.DataRegistrationRules</content>
-  <content>Constant.UseCompany</content>
+  <content>Constant.UseCompanies</content>
   <content>Constant.ConnectionStatus</content>
   <content>InformationRegister.FullDataExchangeMessages</content>
   <content>Enum.TypeExternalObject</content>

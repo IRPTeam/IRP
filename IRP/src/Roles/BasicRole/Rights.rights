@@ -163,7 +163,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.UseCompany</name>
+		<name>Constant.UseCompanies</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

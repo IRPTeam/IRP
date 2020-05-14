@@ -7,7 +7,6 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.Companies</content>
   <content>Catalog.CompanyTypes</content>
   <content>Catalog.Partners</content>
   <content>Catalog.PartnerSegments</content>
@@ -18,5 +17,6 @@
   <content>Catalog.PriceTypes</content>
   <content>Catalog.SpecialOfferRules</content>
   <content>Catalog.Stores</content>
+  <content>CommonCommand.OpenCompanies</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

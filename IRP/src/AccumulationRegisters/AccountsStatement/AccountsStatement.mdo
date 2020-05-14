@@ -60,17 +60,6 @@
     </type>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <attributes uuid="48697661-c594-4eab-95a6-9db30bc370c3">
-    <name>DeferredCalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Deferred calculation</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
   <dimensions uuid="018a61b0-e34f-4e25-bccf-9d021c1364e5">
     <name>Company</name>
     <synonym>

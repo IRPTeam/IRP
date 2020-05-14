@@ -871,3 +871,25 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 		EndIf;
 	EndDo;
 EndProcedure
+
+Procedure AddColumnsToAccountsStatementTable(Table) Export
+	If Table.Columns.Find("RecordType") = Undefined Then
+		Table.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	EndIf;
+	If Table.Columns.Find("BasisDocument") = Undefined Then
+		Table.Columns.Add("BasisDocument", Metadata.DefinedTypes.typeAccountStatementBasises.Type);
+	EndIf;
+	If Table.Columns.Find("AdvanceToSupliers") = Undefined Then
+		Table.Columns.Add("AdvanceToSupliers", Metadata.DefinedTypes.typeAmount.Type);
+	EndIf;
+	If Table.Columns.Find("AdvanceFromCustomers") = Undefined Then
+		Table.Columns.Add("AdvanceFromCustomers", Metadata.DefinedTypes.typeAmount.Type);
+	EndIf;
+	If Table.Columns.Find("TransactionAR") = Undefined Then
+		Table.Columns.Add("TransactionAR", Metadata.DefinedTypes.typeAmount.Type);
+	EndIf;
+	If Table.Columns.Find("TransactionAP") = Undefined Then
+		Table.Columns.Add("TransactionAP", Metadata.DefinedTypes.typeAmount.Type);
+	EndIf;
+EndProcedure
+

@@ -831,4 +831,10 @@ Procedure InventoryItemKeyOnChange(Item, AddInfo = Undefined) Export
 	DocOpeningEntryClient.InventoryItemKeyOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure InventoryOnStartEdit(Item, NewRow, Clone)
+	UserSettingsClient.TableOnStartEdit(Object, ThisObject, "Object.Inventory", Item, NewRow, Clone);
+EndProcedure
+
+
 #EndRegion

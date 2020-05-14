@@ -837,6 +837,10 @@
           <event>OnChange</event>
           <name>MainTableOnChange</name>
         </handlers>
+        <handlers>
+          <event>OnStartEdit</event>
+          <name>InventoryOnStartEdit</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>

@@ -1188,6 +1188,136 @@ EndProcedure
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
 	
+	// AccountsStatement
+	ArrayOfTables = New Array;
+	If Parameters.DocumentDataTables.PartnerApTransactions.Count() Then
+		Table1 = Parameters.DocumentDataTables.PartnerApTransactions.CopyColumns();
+		Table1.Columns.Amount.Name = "TransactionAP";
+		PostingServer.AddColumnsToAccountsStatementTable(Table1);
+		For Each Row In Parameters.DocumentDataTables.PartnerApTransactions Do
+			If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
+				NewRow = Table1.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.TransactionAP = Row.Amount;
+			EndIf;
+		EndDo;
+		Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+		ArrayOfTables.Add(Table1);
+	EndIf;
+
+	If Parameters.DocumentDataTables.AdvanceToSuppliers.Count() Then
+		Table2 = Parameters.DocumentDataTables.AdvanceToSuppliers.CopyColumns();
+		Table2.Columns.Amount.Name = "AdvanceToSupliers";
+		PostingServer.AddColumnsToAccountsStatementTable(Table2);
+		For Each Row In Parameters.DocumentDataTables.AdvanceToSuppliers Do
+			If Row.Partner.Vendor Then
+				NewRow = Table2.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.AdvanceToSupliers = Row.Amount;
+			EndIf;
+		EndDo;
+		Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
+		ArrayOfTables.Add(Table2);
+	EndIf;
+
+	If Parameters.DocumentDataTables.PartnerApTransactions.Count() Then
+		Table3 = Parameters.DocumentDataTables.PartnerApTransactions.CopyColumns();
+		Table3.Columns.Amount.Name = "TransactionAR";
+		PostingServer.AddColumnsToAccountsStatementTable(Table3);
+		For Each Row In Parameters.DocumentDataTables.PartnerApTransactions Do
+			If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
+				NewRow = Table3.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.TransactionAR = -Row.Amount;
+			EndIf;
+		EndDo;
+		Table3.FillValues(AccumulationRecordType.Expense, "RecordType");
+		ArrayOfTables.Add(Table3);
+	EndIf;
+
+	If Parameters.DocumentDataTables.AdvanceToSuppliers.Count() Then
+		Table4 = Parameters.DocumentDataTables.AdvanceToSuppliers.CopyColumns();
+		Table4.Columns.Amount.Name = "AdvanceFromCustomers";
+		PostingServer.AddColumnsToAccountsStatementTable(Table4);
+		For Each Row In Parameters.DocumentDataTables.AdvanceToSuppliers Do
+			If Row.Partner.Customer Then
+				NewRow = Table4.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.AdvanceFromCustomers = -Row.Amount;
+			EndIf;
+		EndDo;
+		Table4.FillValues(AccumulationRecordType.Receipt, "RecordType");
+		ArrayOfTables.Add(Table4);
+	EndIf;
+
+	If Parameters.DocumentDataTables.PartnerArTransactions.Count() Then
+		Table5 = Parameters.DocumentDataTables.PartnerArTransactions.CopyColumns();
+		Table5.Columns.Amount.Name = "TransactionAP";
+		PostingServer.AddColumnsToAccountsStatementTable(Table5);
+		For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
+			If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
+				NewRow = Table5.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.TransactionAP = -Row.Amount;
+			EndIf;
+		EndDo;
+		Table5.FillValues(AccumulationRecordType.Expense, "RecordType");
+		ArrayOfTables.Add(Table5);
+	EndIf;
+
+	If Parameters.DocumentDataTables.AdvanceFromCustomers.Count() Then
+		Table6 = Parameters.DocumentDataTables.AdvanceFromCustomers.CopyColumns();
+		Table6.Columns.Amount.Name = "AdvanceToSupliers";
+		PostingServer.AddColumnsToAccountsStatementTable(Table6);
+		For Each Row In Parameters.DocumentDataTables.AdvanceFromCustomers Do
+			If Row.Partner.Vendor Then
+				NewRow = Table6.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.AdvanceToSupliers = -Row.Amount;
+			EndIf;
+		EndDo;
+		Table6.FillValues(AccumulationRecordType.Receipt, "RecordType");
+		ArrayOfTables.Add(Table6);
+	EndIf;
+
+	If Parameters.DocumentDataTables.AdvanceFromCustomers.Count() Then
+		Table7 = Parameters.DocumentDataTables.AdvanceFromCustomers.CopyColumns();
+		Table7.Columns.Amount.Name = "AdvanceFromCustomers";
+		PostingServer.AddColumnsToAccountsStatementTable(Table7);
+		For Each Row In Parameters.DocumentDataTables.AdvanceFromCustomers Do
+			If Row.Partner.Customer Then
+				NewRow = Table7.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.AdvanceFromCustomers = Row.Amount;
+			EndIf;
+		EndDo;
+		Table7.FillValues(AccumulationRecordType.Receipt, "RecordType");
+		ArrayOfTables.Add(Table7);
+	EndIf;
+
+	If Parameters.DocumentDataTables.PartnerArTransactions.Count() Then
+		Table8 = Parameters.DocumentDataTables.PartnerArTransactions.CopyColumns();
+		Table8.Columns.Amount.Name = "TransactionAR";
+		PostingServer.AddColumnsToAccountsStatementTable(Table8);
+		For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
+			If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
+				NewRow = Table8.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.TransactionAR = Row.Amount;
+			EndIf;
+		EndDo;
+		Table8.FillValues(AccumulationRecordType.Expense, "RecordType");
+		ArrayOfTables.Add(Table8);
+	EndIf;
+	
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency, 
+				|TransactionAP, AdvanceToSupliers,
+				|TransactionAR, AdvanceFromCustomers"),
+			Parameters.IsReposting));
+	
 	// AdvanceFromCustomers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceFromCustomers,
 		New Structure("RecordSet, WriteInTransaction",

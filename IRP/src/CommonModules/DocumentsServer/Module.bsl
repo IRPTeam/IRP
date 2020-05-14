@@ -410,8 +410,10 @@ EndProcedure
 Procedure DeleteUnavailableTitleItemNames(ItemNames) Export
 	UnavailableNames = New Array;
 	ShowAlfaTestingSaas = GetFunctionalOption("ShowAlfaTestingSaas");
-	If Not ShowAlfaTestingSaas Then
+	If Not CatCompaniesServer.isUseCompanies() Then
 		UnavailableNames.Add("Company");
+	EndIf;
+	If Not ShowAlfaTestingSaas Then		
 		UnavailableNames.Add("Store");
 		UnavailableNames.Add("LegalName");
 		UnavailableNames.Add("Agreement");

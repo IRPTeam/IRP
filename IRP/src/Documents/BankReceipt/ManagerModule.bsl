@@ -403,7 +403,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		If Row.Partner.Vendor Then
 			NewRow = Table2.Add();
 			FillPropertyValues(NewRow, Row);
-			NewRow.AdvanceToSupliers = Row.Amount;
+			NewRow.AdvanceToSupliers = - Row.Amount;
 		EndIf;
 	EndDo;
 	Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");

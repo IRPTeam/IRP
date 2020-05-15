@@ -1213,7 +1213,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			If Row.Partner.Vendor Then
 				NewRow = Table2.Add();
 				FillPropertyValues(NewRow, Row);
-				NewRow.AdvanceToSupliers = Row.Amount;
+				If Row.RecordType = AccumulationRecordType.Receipt Then
+					NewRow.AdvanceToSupliers = Row.Amount;
+				Else
+					NewRow.AdvanceToSupliers = - Row.Amount;
+				EndIf;
 			EndIf;
 		EndDo;
 		Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
@@ -1243,7 +1247,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			If Row.Partner.Customer Then
 				NewRow = Table4.Add();
 				FillPropertyValues(NewRow, Row);
-				NewRow.AdvanceFromCustomers = -Row.Amount;
+				If Row.RecordType = AccumulationRecordType.Receipt Then
+					NewRow.AdvanceFromCustomers = -Row.Amount;
+				Else
+					NewRow.AdvanceFromCustomers = Row.Amount;
+				EndIf;
 			EndIf;
 		EndDo;
 		Table4.FillValues(AccumulationRecordType.Receipt, "RecordType");
@@ -1273,7 +1281,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			If Row.Partner.Vendor Then
 				NewRow = Table6.Add();
 				FillPropertyValues(NewRow, Row);
-				NewRow.AdvanceToSupliers = -Row.Amount;
+				If Row.RecordType = AccumulationRecordType.Receipt Then
+					NewRow.AdvanceToSupliers = -Row.Amount;
+				Else
+					NewRow.AdvanceToSupliers = Row.Amount;
+				EndIf;
 			EndIf;
 		EndDo;
 		Table6.FillValues(AccumulationRecordType.Receipt, "RecordType");
@@ -1288,7 +1300,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			If Row.Partner.Customer Then
 				NewRow = Table7.Add();
 				FillPropertyValues(NewRow, Row);
-				NewRow.AdvanceFromCustomers = Row.Amount;
+				If Row.RecordType = AccumulationRecordType.Receipt Then
+					NewRow.AdvanceFromCustomers = Row.Amount;
+				Else
+					NewRow.AdvanceFromCustomers = - Row.Amount;
+				EndIf;
 			EndIf;
 		EndDo;
 		Table7.FillValues(AccumulationRecordType.Receipt, "RecordType");

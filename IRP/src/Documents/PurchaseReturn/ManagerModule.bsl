@@ -461,6 +461,50 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		AccumulationRegisters.AdvanceFromCustomers.GetTableExpenceAdvance(Parameters.Object.RegisterRecords
 			, Parameters.PointInTime
 			, Parameters.DocumentDataTables.ItemList_AdvanceFromCustomers_Lock);
+			
+	If Parameters.DocumentDataTables.ItemList_AdvanceFromCustomers_Registrations.Count() Then
+    	Query = New Query();
+    	Query.Text = 
+    	"SELECT
+    	|	tmp.Company,
+    	|	tmp.Partner,
+    	|	tmp.LegalName,
+    	|	tmp.BasisDocument,
+    	|	tmp.Currency,
+    	|	tmp.Amount
+    	|INTO tmp
+    	|FROM
+    	|	&QueryTable AS tmp
+    	|;
+    	|////////////////////////////////////////////////////////////////////////////////
+    	|SELECT
+    	|	AccountsStatementBalance.Company,
+    	|	AccountsStatementBalance.Partner,
+    	|	AccountsStatementBalance.LegalName,
+    	|	AccountsStatementBalance.Currency,
+    	|	&Period AS Period,
+    	|	AccountsStatementBalance.AdvanceToSupliersBalance AS AdvanceFromCustomersBalance,
+    	|	tmp.Amount AS AdvanceFromCustomers
+    	|FROM
+    	|	AccumulationRegister.AccountsStatement.Balance(&PointInTime, (Company, Partner, LegalName, Currency) IN
+    	|		(SELECT
+    	|			tmp.Company,
+    	|			tmp.Partner,
+    	|			tmp.LegalName,
+    	|			tmp.Currency
+    	|		FROM
+    	|			tmp AS tmp)) AS AccountsStatementBalance
+    	|		INNER JOIN tmp AS tmp
+    	|		ON AccountsStatementBalance.Company = tmp.Company
+    	|		AND AccountsStatementBalance.Partner = tmp.Partner
+    	|		AND AccountsStatementBalance.LegalName = tmp.LegalName
+    	|		AND AccountsStatementBalance.Currency = tmp.Currency";
+    	Query.SetParameter("QueryTable", Parameters.DocumentDataTables.ItemList_AdvanceFromCustomers_Registrations);
+    	Query.SetParameter("PointInTime", Parameters.PointInTime);
+    	Query.SetParameter("Period", Parameters.Object.Date);
+    	Parameters.DocumentDataTables.Insert("AdvanceFromCustomers_Registrations_AccountStatement",
+    	Query.Execute().Unload());
+    EndIf;
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -568,11 +612,19 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	EndDo;
 	ArrayOfTables.Add(Table3);
 	
+	If Parameters.DocumentDataTables.Property("AdvanceFromCustomers_Registrations_AccountStatement") Then
+		Table4 = Parameters.DocumentDataTables.AdvanceFromCustomers_Registrations_AccountStatement.Copy();
+		PostingServer.AddColumnsToAccountsStatementTable(Table4);
+		Table4.FillValues(AccumulationRecordType.Expense, "RecordType");
+		ArrayOfTables.Add(Table4);
+	EndIf;
+	
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
 		New Structure("RecordSet, WriteInTransaction",
 			PostingServer.JoinTables(ArrayOfTables,
-				"RecordType, Period, Company, Partner, LegalName, 
-				|BasisDocument, Currency, TransactionAP, AdvanceToSupliers"),
+				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency, 
+				|TransactionAP, AdvanceToSupliers,
+				|TransactionAR, AdvanceFromCustomers"),
 			Parameters.IsReposting));
 	
 	// ReconciliationStatement

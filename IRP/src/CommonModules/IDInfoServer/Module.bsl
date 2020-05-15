@@ -1,4 +1,49 @@
 Procedure OnCreateAtServer(Form, GroupNameForPlacement, AddInfo = Undefined) Export
+	CreateFormControls(Form, GroupNameForPlacement, AddInfo);
+EndProcedure
+
+Procedure AfterWriteAtServer(Form, CurrentObject, WriteParameters, AddInfo = Undefined) Export
+	HaveAttribute = False;
+	ArrayOfAllAttributes = Form.GetAttributes();
+	For Each Row In ArrayOfAllAttributes Do
+		If Row.Name = "ListOfIDInfoAttributes" Then
+			HaveAttribute = True;
+			Break;
+		EndIf;
+	EndDo;
+	
+	If Not HaveAttribute Then
+		Return;
+	EndIf;
+	
+	ArrayOfAttributes = StrSplit(Form["ListOfIDInfoAttributes"], ",");
+	For Each AttributeName In ArrayOfAttributes Do
+		If Not ValueIsFilled(AttributeName) Then
+			Continue;
+		EndIf;
+		
+		UpdateIDInfoTypeValue(CurrentObject.Ref
+			, GetIDInfoRefByUniqueID(NameToUniqueId(AttributeName))
+			, Form[AttributeName]
+			, Undefined);
+	EndDo;
+EndProcedure
+
+Procedure CreateFormControls(Form, GroupNameForPlacement = "GroupContactInformation", AddInfo = Undefined) Export
+	
+	//Clear form
+	NotSavedAttrValues = New Structure();
+	If CommonFunctionsServer.FormHaveAttribute(Form, "ListOfIDInfoAttributes") Then
+		ArrayForDelete = New Array();
+		ArrayForDelete.Add("ListOfIDInfoAttributes");
+		For Each AttrName In StrSplit(Form.ListOfIDInfoAttributes, ",") Do
+			ArrayForDelete.Add(AttrName);
+			NotSavedAttrValues.Insert(AttrName, Form[AttrName]);
+			Form.Items.Delete(Form.Items[AttrName]);
+		EndDo;
+		Form.ChangeAttributes(,ArrayForDelete);
+	EndIf;
+	
 	Attributes = New Array();
 	FormAttributesInfo = New Array();
 	SetName = GetSetName(Form.Object.Ref, AddInfo);
@@ -38,6 +83,11 @@ Procedure OnCreateAtServer(Form, GroupNameForPlacement, AddInfo = Undefined) Exp
 	IDInfoValueTable = QueryResult.Unload();
 	
 	For Each Row In IDInfoValueTable Do
+		If NotSavedAttrValues.Property(AttributeInfo.Name) 
+			And ValueIsFilled(NotSavedAttrValues[AttributeInfo.Name]) Then
+			Form[AttributeInfo.Name] = NotSavedAttrValues[AttributeInfo.Name];
+			Continue;
+		EndIf;
 		AttributeInfo = AttributeAndPropertyInfo(Row.IDInfoType, AddInfo);
 		FillPropertyValues(Form, New Structure(AttributeInfo.Name, Row.Value));
 	EndDo;
@@ -52,33 +102,6 @@ Procedure OnCreateAtServer(Form, GroupNameForPlacement, AddInfo = Undefined) Exp
 		NewFormElement.OpenButton = True;
 		
 		NewFormElement.SetAction("Opening", "IDInfoOpening");
-	EndDo;
-EndProcedure
-
-Procedure AfterWriteAtServer(Form, CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	HaveAttribute = False;
-	ArrayOfAllAttributes = Form.GetAttributes();
-	For Each Row In ArrayOfAllAttributes Do
-		If Row.Name = "ListOfIDInfoAttributes" Then
-			HaveAttribute = True;
-			Break;
-		EndIf;
-	EndDo;
-	
-	If Not HaveAttribute Then
-		Return;
-	EndIf;
-	
-	ArrayOfAttributes = StrSplit(Form["ListOfIDInfoAttributes"], ",");
-	For Each AttributeName In ArrayOfAttributes Do
-		If Not ValueIsFilled(AttributeName) Then
-			Continue;
-		EndIf;
-		
-		UpdateIDInfoTypeValue(CurrentObject.Ref
-			, GetIDInfoRefByUniqueID(NameToUniqueId(AttributeName))
-			, Form[AttributeName]
-			, Undefined);
 	EndDo;
 EndProcedure
 

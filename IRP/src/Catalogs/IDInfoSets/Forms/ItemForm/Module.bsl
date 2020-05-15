@@ -4,6 +4,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure AfterWrite(WriteParameters)
+	Notify("UpdateIDInfo");
+EndProcedure
+
+&AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure

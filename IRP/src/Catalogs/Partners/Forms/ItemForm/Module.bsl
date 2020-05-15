@@ -17,6 +17,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControll();
 	EndIf;
+	If EventName = "UpdateIDInfo" Then
+		IDInfoCreateFormControll();
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -61,6 +64,11 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControll()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+EndProcedure
+
+&AtServer
+Procedure IDInfoCreateFormControll()
+	IDInfoServer.CreateFormControls(ThisObject);
 EndProcedure
 
 #EndRegion

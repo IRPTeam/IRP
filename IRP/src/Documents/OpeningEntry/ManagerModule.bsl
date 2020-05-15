@@ -350,7 +350,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 				NewRow.TransactionAP = Row.Amount;
 			EndIf;
 		EndDo;
-		Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+		Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
 		ArrayOfTables.Add(Table1);
 	EndIf;
 
@@ -384,21 +384,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		ArrayOfTables.Add(Table3);
 	EndIf;
 
-	If Parameters.DocumentDataTables.AdvanceToSuppliers.Count() Then
-		Table4 = Parameters.DocumentDataTables.AdvanceToSuppliers.CopyColumns();
-		Table4.Columns.Amount.Name = "AdvanceFromCustomers";
-		PostingServer.AddColumnsToAccountsStatementTable(Table4);
-		For Each Row In Parameters.DocumentDataTables.AdvanceToSuppliers Do
-			If Row.Partner.Customer Then
-				NewRow = Table4.Add();
-				FillPropertyValues(NewRow, Row);
-				NewRow.AdvanceFromCustomers = -Row.Amount;
-			EndIf;
-		EndDo;
-		Table4.FillValues(AccumulationRecordType.Receipt, "RecordType");
-		ArrayOfTables.Add(Table4);
-	EndIf;
-
 	If Parameters.DocumentDataTables.PartnerArTransactions.Count() Then
 		Table5 = Parameters.DocumentDataTables.PartnerArTransactions.CopyColumns();
 		Table5.Columns.Amount.Name = "TransactionAP";
@@ -412,21 +397,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		EndDo;
 		Table5.FillValues(AccumulationRecordType.Expense, "RecordType");
 		ArrayOfTables.Add(Table5);
-	EndIf;
-
-	If Parameters.DocumentDataTables.AdvanceFromCustomers.Count() Then
-		Table6 = Parameters.DocumentDataTables.AdvanceFromCustomers.CopyColumns();
-		Table6.Columns.Amount.Name = "AdvanceToSupliers";
-		PostingServer.AddColumnsToAccountsStatementTable(Table6);
-		For Each Row In Parameters.DocumentDataTables.AdvanceFromCustomers Do
-			If Row.Partner.Vendor Then
-				NewRow = Table6.Add();
-				FillPropertyValues(NewRow, Row);
-				NewRow.AdvanceToSupliers = -Row.Amount;
-			EndIf;
-		EndDo;
-		Table6.FillValues(AccumulationRecordType.Receipt, "RecordType");
-		ArrayOfTables.Add(Table6);
 	EndIf;
 
 	If Parameters.DocumentDataTables.AdvanceFromCustomers.Count() Then
@@ -455,7 +425,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 				NewRow.TransactionAR = Row.Amount;
 			EndIf;
 		EndDo;
-		Table8.FillValues(AccumulationRecordType.Expense, "RecordType");
+		Table8.FillValues(AccumulationRecordType.Receipt, "RecordType");
 		ArrayOfTables.Add(Table8);
 	EndIf;
 	

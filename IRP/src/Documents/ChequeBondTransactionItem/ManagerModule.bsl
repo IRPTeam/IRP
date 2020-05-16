@@ -1198,7 +1198,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
 				NewRow = Table1.Add();
 				FillPropertyValues(NewRow, Row);
-				NewRow.TransactionAP = Row.Amount;
+				If Row.RecordType = AccumulationRecordType.Receipt Then
+					NewRow.TransactionAP = - Row.Amount;
+				Else
+					NewRow.TransactionAP = Row.Amount;
+				EndIf;	
 			EndIf;
 		EndDo;
 		Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
@@ -1266,7 +1270,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
 				NewRow = Table5.Add();
 				FillPropertyValues(NewRow, Row);
-				NewRow.TransactionAP = -Row.Amount;
+				If Row.RecordType = AccumulationRecordType.Expense Then
+					NewRow.TransactionAP = -Row.Amount;
+				Else
+					NewRow.TransactionAP = Row.Amount;
+				EndIf;	
 			EndIf;
 		EndDo;
 		Table5.FillValues(AccumulationRecordType.Expense, "RecordType");
@@ -1319,7 +1327,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
 				NewRow = Table8.Add();
 				FillPropertyValues(NewRow, Row);
-				NewRow.TransactionAR = Row.Amount;
+				If Row.RecordType = AccumulationRecordType.Receipt Then
+					NewRow.TransactionAR = - Row.Amount;
+				Else
+					NewRow.TransactionAR = Row.Amount;	
+				EndIf;
 			EndIf;
 		EndDo;
 		Table8.FillValues(AccumulationRecordType.Expense, "RecordType");

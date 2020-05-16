@@ -508,18 +508,12 @@ Procedure TablePartnerStartChoice(Object, Form, Item, ChoiceData, StandardProces
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
 																		True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Customer", 
-																		True, DataCompositionComparisonType.Equal));
-	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FillingData = New Structure("Customer", True);
-	
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure TablePartnerTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Customer", True, ComparisonType.Equal));
 	AdditionalParameters = New Structure();
 	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing,
 		ArrayOfFilters, AdditionalParameters);

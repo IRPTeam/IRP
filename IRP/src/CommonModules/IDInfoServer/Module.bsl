@@ -37,11 +37,16 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "GroupContactInformat
 		ArrayForDelete = New Array();
 		ArrayForDelete.Add("ListOfIDInfoAttributes");
 		For Each AttrName In StrSplit(Form.ListOfIDInfoAttributes, ",") Do
+			If Not ValueIsFilled(AttrName) Then 
+				Continue;
+			EndIf;
 			ArrayForDelete.Add(AttrName);
 			NotSavedAttrValues.Insert(AttrName, Form[AttrName]);
 			Form.Items.Delete(Form.Items[AttrName]);
 		EndDo;
-		Form.ChangeAttributes(,ArrayForDelete);
+		If ArrayForDelete.Count() Then
+			Form.ChangeAttributes(,ArrayForDelete);
+		EndIf;
 	EndIf;
 	
 	Attributes = New Array();
@@ -83,12 +88,12 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "GroupContactInformat
 	IDInfoValueTable = QueryResult.Unload();
 	
 	For Each Row In IDInfoValueTable Do
+		AttributeInfo = AttributeAndPropertyInfo(Row.IDInfoType, AddInfo);
 		If NotSavedAttrValues.Property(AttributeInfo.Name) 
 			And ValueIsFilled(NotSavedAttrValues[AttributeInfo.Name]) Then
 			Form[AttributeInfo.Name] = NotSavedAttrValues[AttributeInfo.Name];
 			Continue;
 		EndIf;
-		AttributeInfo = AttributeAndPropertyInfo(Row.IDInfoType, AddInfo);
 		FillPropertyValues(Form, New Structure(AttributeInfo.Name, Row.Value));
 	EndDo;
 	

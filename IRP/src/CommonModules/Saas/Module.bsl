@@ -114,3 +114,24 @@ Function AvailableCompanyLocalizations() Export
 	Array.Add("ua");
 	Return Array;
 EndFunction
+
+Function GetCurrencyMovementType_Legal() Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	CurrencyMovementType.Ref
+	|FROM
+	|	ChartOfCharacteristicTypes.CurrencyMovementType AS CurrencyMovementType
+	|WHERE
+	|	CurrencyMovementType.Type = VALUE(Enum.CurrencyType.Legal)";
+	QuerySelection = Query.Execute().Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.Ref;
+	Else
+		Return ChartsOfCharacteristicTypes.CurrencyMovementType.EmptyRef();
+	EndIf;
+EndFunction
+
+Function GetCurrencyMovementType_Transaction() Export
+	Return ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency;
+EndFunction

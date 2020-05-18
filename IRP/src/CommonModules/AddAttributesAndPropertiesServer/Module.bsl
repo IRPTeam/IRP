@@ -61,7 +61,9 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "", AddInfo = Undefin
 	If FormInfo = Undefined Then
 		FormInfo = GetFormInfo(Form);
 	EndIf;
-	
+	If Not FormInfo.Property("Form") Then
+		FormInfo.Insert("Form", Form);
+	EndIf;
 	ClearForm(Form);
 	
 	SavedData = New Structure("FormGroups, FormArributes, FormItemFields, ArrayOfAttributesInfo");

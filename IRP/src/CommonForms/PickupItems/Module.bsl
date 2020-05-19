@@ -291,6 +291,7 @@ Function ItemListSelectionAfter(ParametersStructure)
 		|		ELSE ItemKeys.Unit
 		|	END AS Unit,
 		|	ItemKeys.Item,
+		|	ItemKeys.Item.ItemType.Type,
 		|	ItemKeys.AffectPricingMD5
 		|INTO ItemKeyTempTable
 		|FROM
@@ -316,8 +317,16 @@ Function ItemListSelectionAfter(ParametersStructure)
 		|SELECT
 		|	ItemKeyTempTable.ItemKey AS ItemKey,
 		|	ItemKeyTempTable.Unit AS Unit,
-		|	StockReservationBalance.QuantityBalance,
-		|	StockReservationBalanceReceiver.QuantityBalance AS QuantityBalanceReceiver,
+		|	CASE
+		|		WHEN ItemKeyTempTable.ItemItemTypeType = Value(Enum.ItemTypes.Product)
+		|			Then IsNull(StockReservationBalance.QuantityBalance, """")
+		|		ELSE """"
+		|	END As QuantityBalance,
+		|	CASE
+		|		WHEN ItemKeyTempTable.ItemItemTypeType = Value(Enum.ItemTypes.Product)
+		|			Then IsNull(StockReservationBalanceReceiver.QuantityBalance, """")
+		|		ELSE """"
+		|	END As QuantityBalanceReceiver,
 		|	ItemPickedOut.Quantity AS QuantityPickedOut,
 		|	PricesResult.Price
 		|FROM

@@ -195,4 +195,28 @@
 			</dcscor:item>
 		</appearance>
 	</item>
+	<item>
+		<use>false</use>
+		<selection>
+			<item>
+				<field>GroupAccountPayableByAgreementsAndByDocuments</field>
+			</item>
+			<item>
+				<field>GroupAccountReceivableByAgreementsAndByDocuments</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">isSaasMode</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">true</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>Visible</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
 </ConditionalAppearance>

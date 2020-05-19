@@ -256,6 +256,11 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Title_00100", NStr("en = 'Select basis documents in Cheque bond transaction'", CodeLanguage));	// Form PickUpDocuments
 	
 	#EndRegion
+	
+	#Region ChoiceListValues
+	Strings.Insert("CLV_1", NStr("en = 'All'", CodeLanguage));
+	#EndRegion
+	
 	Return Strings;
 EndFunction
 

@@ -41,6 +41,6 @@ EndProcedure
 Procedure VerifyAtServer()
 	DCSTemplate = AddAttributesAndPropertiesServer.GetDCSTemplate(ThisObject.Ref.PredefinedDataName);
 	Settings = ThisObject.SettingsComposer.GetSettings();
-	Result = AddAttributesAndPropertiesServer.GetRefsByCondition(DCSTemplate, Settings);
+	Result = AddAttributesAndPropertiesServer.GetRefsByCondition(DCSTemplate, Settings,  New ValueTable());
 	ThisObject.ResultTable.Load(Result);
 EndProcedure

@@ -16,7 +16,6 @@
   <content>Catalog.Workstations</content>
   <content>Catalog.FileStorageVolumes</content>
   <content>Catalog.Files</content>
-  <content>Catalog.CurrencyMovementSets</content>
   <content>Catalog.PrintTemplates</content>
   <content>Catalog.PaymentSchedules</content>
   <content>Catalog.DataAreas</content>

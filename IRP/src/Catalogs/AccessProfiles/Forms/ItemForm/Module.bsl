@@ -22,6 +22,10 @@ Procedure UpdateRolesAtServer()
 		ExtRole = Role.ConfigurationExtension();
 		NameExt = ?(ExtRole = Undefined, "IRP", ExtRole.Name);
 		
+		If ThisObject.Roles.FindRows(New Structure("Role, Configuration", Role.Name, NameExt)).Count() Then
+			Continue;
+		EndIf;
+		
 		StrRole = Roles.Add();
 		StrRole.Role = Role.Name;
 		StrRole.Presentation = Role.Presentation();

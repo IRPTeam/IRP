@@ -135,3 +135,7 @@ EndFunction
 Function GetCurrencyMovementType_Transaction() Export
 	Return ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency;
 EndFunction
+
+Function isSaasMode() Export
+	Return GetFunctionalOption("SaasMode");
+EndFunction

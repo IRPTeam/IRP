@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormField">
     <name>RecordType</name>
     <id>19</id>
@@ -48,51 +48,6 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
       <radioButtonsType>Tumbler</radioButtonsType>
-      <choiceList>
-        <presentation>
-          <key>en</key>
-          <value>All</value>
-        </presentation>
-        <value xsi:type="core:StringValue">
-          <value>All</value>
-        </value>
-      </choiceList>
-      <choiceList>
-        <presentation>
-          <key>en</key>
-          <value>Item key</value>
-        </presentation>
-        <value xsi:type="core:StringValue">
-          <value>ItemKey</value>
-        </value>
-      </choiceList>
-      <choiceList>
-        <presentation>
-          <key>en</key>
-          <value>Item</value>
-        </presentation>
-        <value xsi:type="core:StringValue">
-          <value>Item</value>
-        </value>
-      </choiceList>
-      <choiceList>
-        <presentation>
-          <key>en</key>
-          <value>Item type</value>
-        </presentation>
-        <value xsi:type="core:StringValue">
-          <value>ItemType</value>
-        </value>
-      </choiceList>
-      <choiceList>
-        <presentation>
-          <key>en</key>
-          <value>Agreement</value>
-        </presentation>
-        <value xsi:type="core:StringValue">
-          <value>Agreement</value>
-        </value>
-      </choiceList>
     </extInfo>
   </items>
   <items xsi:type="form:FormField">

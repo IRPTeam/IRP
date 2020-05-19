@@ -13,9 +13,8 @@
     <value>Currency movement sets</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.CurrencyMovementSets.StandardAttribute.Description</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
+  <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
@@ -24,140 +23,139 @@
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
-  <descriptionLength>50</descriptionLength>
   <codeType>String</codeType>
   <codeAllowedLength>Variable</codeAllowedLength>
   <defaultPresentation>AsDescription</defaultPresentation>
   <predefined>
     <items id="d50dbacb-cae9-4f65-8c2b-a2a5ebacda37">
       <name>Document_SalesInvoice</name>
-      <description>Document - Sales invoice</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="25198824-1fc9-4749-b7fc-0dded1c3a3ab">
       <name>Document_CashExpense</name>
-      <description>Document - Cash expense</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="71c11cfc-caf7-4922-86df-b2e5e570cd65">
       <name>Document_CashRevenue</name>
-      <description>Document - Cash revenue</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="8bb87871-4746-4dfa-8b52-8221dd7c9241">
       <name>Document_IncomingPaymentOrder</name>
-      <description>Document - Incoming payment order</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="bfa8102d-9b5f-497a-8a61-6f80bd884370">
       <name>Document_OutgoingPaymentOrder</name>
-      <description>Document - Outgoing payment order</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="dbf502f5-8369-489e-b9e4-5209a8ca7dd9">
       <name>Document_CashTransferOrder</name>
-      <description>Document - Cash transfer order</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="0ec927ef-5791-4545-8e44-88b7fbe76143">
       <name>Document_BankReceipt</name>
-      <description>Document - Bank receipt</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="33aa1781-da12-4df7-899a-95d9699b9768">
       <name>Document_CashPayment</name>
-      <description>Document - Cash payment</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="171747fe-dc8b-4bed-be8a-ee75f9281870">
       <name>Document_BankPayment</name>
-      <description>Document - Bank payment</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="d47ab430-94af-4ef0-8b8f-9ef4d9b63423">
       <name>Document_CashReceipt</name>
-      <description>Document - Cash receipt</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="2a2008ac-52d6-4eb1-b809-b54bfe589b83">
       <name>Document_SalesOrder</name>
-      <description>Document - Sales order</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="964c111d-f051-44dd-a6bc-5f7725ad659c">
       <name>Document_PurchaseOrder</name>
-      <description>Document - Purchase order</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="8c378aa3-53c5-4efe-be32-e4ed59dd6d9c">
       <name>Document_PurchaseInvoice</name>
-      <description>Document - Purchase invoice</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="6e928ee3-afac-4628-874c-e2cf5461f826">
       <name>Document_SalesReturnOrder</name>
-      <description>Document - Sales return order</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="dddee130-7c15-4654-9138-ac8abff3192e">
       <name>Document_SalesReturn</name>
-      <description>Document - Sales return</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="1ac460c8-902b-4275-b831-ba70b97272fe">
       <name>Document_PurchaseReturnOrder</name>
-      <description>Document  - Purchase return order</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="5a246425-1bb6-4fe6-b41f-b8051364f750">
       <name>Document_PurchaseReturn</name>
-      <description>Document - Purchase return</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="36df8729-ddf2-4c2a-81ed-892c0f000422">
       <name>Document_InvoiceMatch</name>
-      <description>Document - Invoice match</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="e633c6be-1975-4b52-bbd4-a7f3a27f4eaa">
       <name>Document_CreditDebitNote</name>
-      <description>Document - Credit debit note</description>
+      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
@@ -168,6 +166,7 @@
   <defaultObjectForm>Catalog.CurrencyMovementSets.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.CurrencyMovementSets.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.CurrencyMovementSets.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <tabularSections uuid="2f9a0d62-28cc-4f22-a05c-642279fd6410">
     <producedTypes>
       <objectType typeId="2d8114c4-56a3-4f1f-a0b8-8f1ce1d07132" valueTypeId="75e66731-30d0-455b-bbcf-89a4f203a06d"/>

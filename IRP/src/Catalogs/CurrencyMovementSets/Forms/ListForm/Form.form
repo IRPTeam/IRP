@@ -40,7 +40,7 @@
   </items>
   <items xsi:type="form:Table">
     <name>List</name>
-    <id>3</id>
+    <id>34</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -49,23 +49,26 @@
     <dataPath xsi:type="form:DataPath">
       <segments>List</segments>
     </dataPath>
-    <defaultItem>true</defaultItem>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormField">
       <name>Description</name>
-      <id>16</id>
+      <id>53</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Description</segments>
+        </paths>
+        <paths xsi:type="form:DataPath">
+          <segments>List.Description</segments>
+        </paths>
       </dataPath>
-      <defaultItem>true</defaultItem>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
-        <id>18</id>
+        <id>55</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -80,7 +83,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>DescriptionContextMenu</name>
-        <id>17</id>
+        <id>54</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -88,19 +91,23 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <type>LabelField</type>
+      <type>InputField</type>
       <editMode>Enter</editMode>
       <showInHeader>true</showInHeader>
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:LabelFieldExtInfo">
+      <extInfo xsi:type="form:InputFieldExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
       <name>PredefinedDataName</name>
-      <id>19</id>
+      <id>65</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -111,7 +118,7 @@
       </dataPath>
       <extendedTooltip>
         <name>PredefinedDataNameExtendedTooltip</name>
-        <id>21</id>
+        <id>67</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -126,7 +133,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>PredefinedDataNameContextMenu</name>
-        <id>20</id>
+        <id>66</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -134,20 +141,78 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <type>LabelField</type>
+      <type>InputField</type>
       <editMode>Enter</editMode>
       <showInHeader>true</showInHeader>
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:LabelFieldExtInfo">
+      <extInfo xsi:type="form:InputFieldExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
       </extInfo>
     </items>
-    <commandBarLocation>None</commandBarLocation>
+    <items xsi:type="form:FormField">
+      <name>Ref</name>
+      <id>47</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Ref</segments>
+        </paths>
+        <paths xsi:type="form:DataPath">
+          <segments>List.Ссылка</segments>
+        </paths>
+      </dataPath>
+      <extendedTooltip>
+        <name>RefExtendedTooltip</name>
+        <id>49</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>RefContextMenu</name>
+        <id>48</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
     <autoCommandBar>
       <name>ListCommandBar</name>
-      <id>5</id>
+      <id>35</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -162,10 +227,10 @@
         <common>true</common>
       </userVisible>
       <name>ListSearchString</name>
-      <id>7</id>
+      <id>38</id>
       <extendedTooltip>
         <name>ListSearchStringExtendedTooltip</name>
-        <id>9</id>
+        <id>40</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -180,7 +245,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>ListSearchStringContextMenu</name>
-        <id>8</id>
+        <id>39</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -188,7 +253,6 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>ListSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -200,10 +264,10 @@
         <common>true</common>
       </userVisible>
       <name>ListViewStatus</name>
-      <id>10</id>
+      <id>44</id>
       <extendedTooltip>
         <name>ListViewStatusExtendedTooltip</name>
-        <id>12</id>
+        <id>46</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -218,7 +282,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>ListViewStatusContextMenu</name>
-        <id>11</id>
+        <id>45</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -227,7 +291,6 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>ListViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
         <horizontalLocation>Left</horizontalLocation>
@@ -240,10 +303,10 @@
         <common>true</common>
       </userVisible>
       <name>ListSearchControl</name>
-      <id>13</id>
+      <id>41</id>
       <extendedTooltip>
         <name>ListSearchControlExtendedTooltip</name>
-        <id>15</id>
+        <id>43</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -258,7 +321,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>ListSearchControlContextMenu</name>
-        <id>14</id>
+        <id>42</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -267,14 +330,13 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>List</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
     </searchControlAddition>
     <extendedTooltip>
       <name>ListExtendedTooltip</name>
-      <id>6</id>
+      <id>37</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -289,7 +351,7 @@
     </extendedTooltip>
     <contextMenu>
       <name>ListContextMenu</name>
-      <id>4</id>
+      <id>36</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -311,21 +373,14 @@
     <verticalScrollBar>AutoUse</verticalScrollBar>
     <horizontalLines>true</horizontalLines>
     <verticalLines>true</verticalLines>
-    <useAlternationRowColor>true</useAlternationRowColor>
     <searchOnInput>Auto</searchOnInput>
     <initialListView>Auto</initialListView>
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
-    <enableStartDrag>true</enableStartDrag>
-    <enableDrag>true</enableDrag>
     <fileDragMode>AsFileRef</fileDragMode>
-    <rowPictureDataPath xsi:type="form:DataPath">
-      <segments>List.DefaultPicture</segments>
-    </rowPictureDataPath>
     <extInfo xsi:type="form:DynamicListTableExtInfo">
       <autoRefreshPeriod>60</autoRefreshPeriod>
       <showRoot>true</showRoot>
-      <userSettingsGroup>ListSettingsComposerUserSettings</userSettingsGroup>
     </extInfo>
   </items>
   <autoCommandBar>
@@ -339,6 +394,10 @@
     <horizontalAlign>Left</horizontalAlign>
     <autoFill>true</autoFill>
   </autoCommandBar>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
+  </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -361,9 +420,18 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT 
+       Table.Ref, 
+       Table.DeletionMark,
+       Table.Description_en AS Description, 
+       Table.Predefined, 
+       Table.PredefinedDataName
+ FROM 
+       Catalog.CurrencyMovementSets AS Table</queryText>
       <mainTable>Catalog.CurrencyMovementSets</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>

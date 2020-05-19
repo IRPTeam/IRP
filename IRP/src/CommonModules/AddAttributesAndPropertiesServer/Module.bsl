@@ -12,6 +12,9 @@ Procedure BeforeWriteAtServer(Form, Cancel, CurrentObject, WriteParameters, AddI
 	
 	CurrentObject.AddAttributes.Clear();
 	FormInfo = GetFormInfo(Form);
+	If Not FormInfo.Property("Form") Then
+		FormInfo.Insert("Form", Form);
+	EndIf;
 	AddAttributeAndPropertySetName = AddAttributeAndPropertySetName(FormInfo, AddInfo);
 	ObjectAttributes = ObjectAttributes(FormInfo, AddAttributeAndPropertySetName, AddInfo);
 	RequiredFiler = New Structure("Required", True);

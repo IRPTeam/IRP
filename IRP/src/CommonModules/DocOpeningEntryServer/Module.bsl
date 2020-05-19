@@ -1,11 +1,17 @@
 #Region FormEvents
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
+	
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
+	
+	isSaasMode = Saas.isSaasMode();	
+	Form.Items.GroupAccountPayableByDocuments.Visible = Not isSaasMode;
+	Form.Items.GroupAccountReceivableByDocuments.Visible = Not isSaasMode;
+	 
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export

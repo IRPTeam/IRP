@@ -377,7 +377,20 @@ Procedure FillTableOfAvailableAttributesBy_AllItems(TableOfAvailableAttributes
 			NewFilter.Use = True;
 			NewFilter.ComparisonType = DataCompositionComparisonType.Equal;
 			NewFilter.RightValue = FormInfo.Ref;
-			RefsByConditions = GetRefsByCondition(Template, Settings, AddInfo);
+			
+			ExternalDataSet = New ValueTable();
+			If TypeOf(FormInfo.Form.Object.Ref) = Type("CatalogRef.Items") Then
+				
+				ExternalDataSet.Columns.Add("ItemType", New TypeDescription("CatalogRef.ItemTypes"));
+				ExternalDataSet.Columns.Add("Ref", New TypeDescription("CatalogRef.Items"));
+				
+				NewRow = ExternalDataSet.Add();
+				NewRow.ItemType = FormInfo.Form.Object.ItemType;
+				NewRow.Ref = FormInfo.Form.Object.Ref;
+			EndIf;	
+
+			RefsByConditions = GetRefsByCondition(Template, Settings, ExternalDataSet, AddInfo);
+			
 			If RefsByConditions.Count() Then
 				ArrayOfCollection.Add(Row);
 			EndIf;
@@ -453,24 +466,24 @@ Function GetDCSTemplate(PredefinedDataName, AddInfo = Undefined) Export
 	If StrStartsWith(PredefinedDataName, "Catalog") Then
 		TableName = StrReplace(PredefinedDataName, "_", ".");
 		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Catalog");
+		Template.DataSets[0].Items[0].Query = StrTemplate(Template.DataSets[0].Items[0].Query, TableName);
 	ElsIf StrStartsWith(PredefinedDataName, "Document") Then
 		TableName = StrReplace(PredefinedDataName, "_", ".");
 		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Document");
+		Template.DataSets[0].Query = StrTemplate(Template.DataSets[0].Query, TableName);
 	Else
 		Raise R()["Error_004"];
 	EndIf;
-	Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Catalog");
-	Template.DataSets[0].Query = StrTemplate(Template.DataSets[0].Query, TableName);
 	Return Template;
 EndFunction
 
-Function GetRefsByCondition(DCSTemplate, Settings, AddInfo = Undefined) Export
+Function GetRefsByCondition(DCSTemplate, Settings, ExternalDataSet, AddInfo = Undefined) Export
 	Composer = New DataCompositionTemplateComposer();
 	Tempalte = Composer.Execute(DCSTemplate, Settings, , ,
 			Type("DataCompositionValueCollectionTemplateGenerator"));
 	
 	Processor = New DataCompositionProcessor();
-	Processor.Initialize(Tempalte);
+	Processor.Initialize(Tempalte, New Structure("ExternalDataSet", ExternalDataSet));	
 	
 	Output = New DataCompositionResultValueCollectionOutputProcessor();
 	Result = New ValueTable();

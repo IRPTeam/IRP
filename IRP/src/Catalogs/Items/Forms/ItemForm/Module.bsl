@@ -44,30 +44,8 @@ Procedure AfterWrite(WriteParameters)
 EndProcedure
 
 &AtClient
-Procedure ItemTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	ThisObject.StoredItemType = Object.ItemType;
-EndProcedure
-
-&AtClient
-Procedure ItemTypeEditTextChange(Item, Text, StandardProcessing)
-	ThisObject.StoredItemType = Object.ItemType;
-EndProcedure
-
-&AtClient
 Procedure ItemTypeOnChange(Item)
-	If ThisObject.StoredItemType <> Object.ItemType Then
-		QuestionToUserNotify = New NotifyDescription("WriteObjectNotify", ThisObject);
-		ShowQueryBox(QuestionToUserNotify, R()["QuestionToUser_001"], QuestionDialogMode.YesNo);
-	EndIf;	
-EndProcedure
-
-&AtClient
-Procedure WriteObjectNotify(Result, AddInfo = Undefined) Export
-	If Result = DialogReturnCode.Yes And Write() Then
-		ThisObject.StoredItemType = Object.ItemType;
-	Else
-		Object.ItemType = ThisObject.StoredItemType;
-	EndIf;
+	AddAttributesCreateFormControll();
 EndProcedure
 
 #EndRegion

@@ -51,13 +51,6 @@
 		</right>
 	</object>
 	<object>
-		<name>ExchangePlan.FullDataExchange</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>CommonForm.PickupSpecialOffers</name>
 		<right>
 			<name>View</name>
@@ -68,13 +61,6 @@
 		<name>CommonForm.EditAddProperties</name>
 		<right>
 			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>ExchangePlan.NodeDataExchange</name>
-		<right>
-			<name>Read</name>
 			<value>true</value>
 		</right>
 	</object>

@@ -9,8 +9,6 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Catalog.IntegrationSettings</content>
   <content>Catalog.ExternalDataProc</content>
-  <content>Catalog.DataRegistrationRules</content>
-  <content>InformationRegister.FullDataExchangeMessages</content>
   <content>InformationRegister.ExternalCommands</content>
   <subsystems>GoogleDrive</subsystems>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>

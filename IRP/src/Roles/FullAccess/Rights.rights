@@ -271,21 +271,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.DataRegistrationRules</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeletePredefinedData</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeleteMarkedPredefinedData</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.SpecialOffers</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -349,17 +334,6 @@
 		</right>
 		<right>
 			<name>InteractiveDeleteMarkedPredefinedData</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>ExchangePlan.FullDataExchange</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeleteMarked</name>
 			<value>false</value>
 		</right>
 	</object>
@@ -684,17 +658,6 @@
 		</right>
 		<right>
 			<name>InteractiveDeleteMarkedPredefinedData</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>ExchangePlan.NodeDataExchange</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeleteMarked</name>
 			<value>false</value>
 		</right>
 	</object>

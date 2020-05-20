@@ -76,7 +76,6 @@
   <subsystems>Subsystem.AddDataProc</subsystems>
   <subsystems>Subsystem.AutoTest</subsystems>
   <subsystems>Subsystem.Finance</subsystems>
-  <subsystems>Subsystem.FullDataExchange</subsystems>
   <subsystems>Subsystem.Inventory</subsystems>
   <subsystems>Subsystem.Localization</subsystems>
   <subsystems>Subsystem.Marketing</subsystems>
@@ -249,7 +248,6 @@
   <commonModules>CommonModule.FillingWithDefaultDataReuse</commonModules>
   <commonModules>CommonModule.FormItemsSize</commonModules>
   <commonModules>CommonModule.FormItemsSizeReuse</commonModules>
-  <commonModules>CommonModule.FullDataExchangeServer</commonModules>
   <commonModules>CommonModule.GetItemInfo</commonModules>
   <commonModules>CommonModule.IDInfoClient</commonModules>
   <commonModules>CommonModule.IDInfoServer</commonModules>
@@ -319,8 +317,6 @@
   <commonAttributes>CommonAttribute.ID</commonAttributes>
   <commonAttributes>CommonAttribute.Description_ru</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
-  <exchangePlans>ExchangePlan.FullDataExchange</exchangePlans>
-  <exchangePlans>ExchangePlan.NodeDataExchange</exchangePlans>
   <httpServices>HTTPService.FileTransferService</httpServices>
   <httpServices>HTTPService.SaasService</httpServices>
   <eventSubscriptions>EventSubscription.CheckDescriptionsFillCheck</eventSubscriptions>
@@ -334,7 +330,6 @@
   <eventSubscriptions>EventSubscription.ClearDocumentBasisesOnCopy</eventSubscriptions>
   <eventSubscriptions>EventSubscription.GetCatalogPresentationFields</eventSubscriptions>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
-  <scheduledJobs>ScheduledJob.FullDataExchange</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <functionalOptions>FunctionalOption.BetaTesting</functionalOptions>
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
@@ -421,7 +416,6 @@
   <catalogs>Catalog.ConfigurationMetadata</catalogs>
   <catalogs>Catalog.Countries</catalogs>
   <catalogs>Catalog.Currencies</catalogs>
-  <catalogs>Catalog.DataRegistrationRules</catalogs>
   <catalogs>Catalog.ExpenseAndRevenueTypes</catalogs>
   <catalogs>Catalog.ExternalDataProc</catalogs>
   <catalogs>Catalog.Files</catalogs>
@@ -547,7 +541,6 @@
   <informationRegisters>InformationRegister.ChequeBondStatuses</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
   <informationRegisters>InformationRegister.ExternalCommands</informationRegisters>
-  <informationRegisters>InformationRegister.FullDataExchangeMessages</informationRegisters>
   <informationRegisters>InformationRegister.IDInfo</informationRegisters>
   <informationRegisters>InformationRegister.ItemSegments</informationRegisters>
   <informationRegisters>InformationRegister.ObjectStatuses</informationRegisters>

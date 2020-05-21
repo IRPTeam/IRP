@@ -1573,7 +1573,9 @@ EndProcedure
 Procedure ChangeAgreement(Object, Form, Settings) Export
 	Object.Agreement = Settings.PartnerInfo.Agreement;
 	If Object.Agreement = Settings.CurrentValuesStructure.Agreement Then
-		ChangePriceType(Object, Form, Settings);
+		If Settings.CalculateSettings.Property("UpdatePrice") Then
+			ChangePriceType(Object, Form, Settings);
+		EndIf;
 		ChangeCurrency(Object, Form, Settings);
 	Else
 		AgreementOnChange(Object, Form, Settings.Module, , Settings);

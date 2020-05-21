@@ -75,18 +75,23 @@ Procedure InventoryItemOnChange(Object, Form, Module, Item = Undefined, Settings
 	DocumentsClient.ItemListItemOnChange(Object, Form, ThisObject, Item, TransferSettings);	
 EndProcedure
 
-Function ItemListItemSettings() Export
-	Return InventoryItemSettings();
+Function ItemListItemSettings(Form) Export
+	Return InventoryItemSettings(Form);
 EndFunction
 
-Function InventoryItemSettings()
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
+Function InventoryItemSettings(Form)
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");
+	
 	Actions = New Structure();
 	Actions.Insert("UpdateItemKey"				, "UpdateItemKey");
+	
+	AfterActionsCalculateSettings = New Structure;
+	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date, Form.CurrentPriceType));
 	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "ItemKey";
 	Settings.FormAttributes = "";
+	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
 	Return Settings;
 EndFunction
 
@@ -96,17 +101,22 @@ Procedure InventoryItemKeyOnChange(Object, Form, Module, Item = Undefined, Setti
 	DocumentsClient.ItemListItemKeyOnChange(Object, Form, ThisObject, Item, TransferSettings);	
 EndProcedure
 
-Function ItemListItemKeySettings() Export
-	Return InventoryItemKeySettings();
+Function ItemListItemKeySettings(Form) Export
+	Return InventoryItemKeySettings(Form);
 EndFunction
 
-Function InventoryItemKeySettings()
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");	
+Function InventoryItemKeySettings(Form)
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");	
+	
 	Actions = New Structure();
+	
+	AfterActionsCalculateSettings = New Structure;
+	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date, Form.CurrentPriceType));
 	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "ItemKey";
 	Settings.FormAttributes = "";
+	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
 	Return Settings;
 EndFunction
 

@@ -12,6 +12,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
+	FillTransactionTypeChoiceList(Form);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -90,3 +91,13 @@ Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
+
+Procedure FillTransactionTypeChoiceList(Form)
+	isSaasMode = Saas.isSaasMode();
+	Form.Items.TransactionType.ChoiceList.Add(Enums.ShipmentConfirmationTransactionTypes.Sales, Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues.Sales.Synonym);
+	Form.Items.TransactionType.ChoiceList.Add(Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor, Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues.ReturnToVendor.Synonym);
+	If Not isSaasMode Then
+		Form.Items.TransactionType.ChoiceList.Add(Enums.ShipmentConfirmationTransactionTypes.InventoryTransfer, Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues.InventoryTransfer.Synonym);
+		Form.Items.TransactionType.ChoiceList.Add(Enums.ShipmentConfirmationTransactionTypes.BundlingBoxing, Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues.BundlingBoxing.Synonym);
+	EndIf;
+EndProcedure

@@ -13,6 +13,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 	
+	FillTransactionTypeChoiceList(Form);	
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -406,3 +407,13 @@ Function ParametersForQuantityCompare(Val Object, UUID) Export
 EndFunction
 
 #EndRegion
+
+Procedure FillTransactionTypeChoiceList(Form)
+	isSaasMode = Saas.isSaasMode();
+	Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.Purchase, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.Purchase.Synonym);
+	Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.ReturnFromCustomer.Synonym);
+	If Not isSaasMode Then
+		Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.InventoryTransfer, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.InventoryTransfer.Synonym);
+		Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.BundlingBoxing, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.BundlingBoxing.Synonym);
+	EndIf;
+EndProcedure

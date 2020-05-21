@@ -419,6 +419,13 @@
         <value></value>
       </code>
     </items>
+    <items id="cce02b56-5a53-4cee-af83-062f1d468981">
+      <name>Catalog_Files</name>
+      <description>Catalog files</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

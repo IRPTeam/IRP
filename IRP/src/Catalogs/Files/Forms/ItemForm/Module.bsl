@@ -1,6 +1,22 @@
+
+#Region FormEvents
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
+EndProcedure
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SetVisible();
+	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 EndProcedure
 
 &AtClient
@@ -9,13 +25,15 @@ Procedure OnOpen(Cancel)
 EndProcedure
 
 &AtClient
-Procedure VolumeOnChange(Item)
-	SetVisible();
-EndProcedure
-
-&AtClient
 Procedure AfterWrite(WriteParameters)
 	ShowPicture();
+EndProcedure
+
+#EndRegion
+
+&AtClient
+Procedure VolumeOnChange(Item)
+	SetVisible();
 EndProcedure
 
 &AtServer
@@ -72,3 +90,16 @@ Procedure SelectFileEnd(Files, AdditionalParameters) Export
 	EndIf;
 EndProcedure
 
+#Region AddAttributes
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControll()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+EndProcedure
+
+#EndRegion

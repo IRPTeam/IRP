@@ -1,7 +1,3 @@
-&AtClient
-Procedure SendTo(Command)
-	MobileSubsystem.SENDTO(Result);
-EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)

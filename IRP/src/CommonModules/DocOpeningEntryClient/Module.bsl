@@ -86,7 +86,6 @@ Function InventoryItemSettings(Form)
 	Actions.Insert("UpdateItemKey"				, "UpdateItemKey");
 	
 	AfterActionsCalculateSettings = New Structure;
-	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date, Form.CurrentPriceType));
 	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "ItemKey";
@@ -111,7 +110,6 @@ Function InventoryItemKeySettings(Form)
 	Actions = New Structure();
 	
 	AfterActionsCalculateSettings = New Structure;
-	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date, Form.CurrentPriceType));
 	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "ItemKey";

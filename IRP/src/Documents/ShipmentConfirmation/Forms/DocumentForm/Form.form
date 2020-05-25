@@ -567,26 +567,6 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
-            <choiceList>
-              <value xsi:type="core:ReferenceValue">
-                <value>Enum.ShipmentConfirmationTransactionTypes.EnumValue.Sales</value>
-              </value>
-            </choiceList>
-            <choiceList>
-              <value xsi:type="core:ReferenceValue">
-                <value>Enum.ShipmentConfirmationTransactionTypes.EnumValue.ReturnToVendor</value>
-              </value>
-            </choiceList>
-            <choiceList>
-              <value xsi:type="core:ReferenceValue">
-                <value>Enum.ShipmentConfirmationTransactionTypes.EnumValue.InventoryTransfer</value>
-              </value>
-            </choiceList>
-            <choiceList>
-              <value xsi:type="core:ReferenceValue">
-                <value>Enum.ShipmentConfirmationTransactionTypes.EnumValue.BundlingBoxing</value>
-              </value>
-            </choiceList>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">

@@ -132,15 +132,20 @@ Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessin
 	EndIf;
 EndProcedure
 
-Function ItemListItemSettings() Export
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
+Function ItemListItemSettings(Form) Export
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");
+	
 	Actions = New Structure();
 	Actions.Insert("UpdateRowPriceType"	, "UpdateRowPriceType");
 	Actions.Insert("UpdateItemKey"		, "UpdateItemKey");
 	
+	AfterActionsCalculateSettings = New Structure;
+	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date, Form.CurrentPriceType));
+	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "ItemKey";
 	Settings.FormAttributes = "";
+	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
 	Return Settings;
 EndFunction
 
@@ -148,16 +153,20 @@ Procedure ItemListItemKeyOnChange(Object, Form, Item = Undefined) Export
 	DocumentsClient.ItemListItemKeyOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
-Function ItemListItemKeySettings() Export
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
+Function ItemListItemKeySettings(Form) Export
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");
 	
 	Actions = New Structure();
 	Actions.Insert("UpdateRowPriceType"	, "UpdateRowPriceType");
 	Actions.Insert("UpdateRowUnit"		, "UpdateRowUnit");
 	
+	AfterActionsCalculateSettings = New Structure;
+	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date, Form.CurrentPriceType));
+	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "ItemKey";
 	Settings.FormAttributes = "";
+	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
 	Return Settings;
 EndFunction
 
@@ -450,16 +459,21 @@ Procedure DateOnChange(Object, Form, Item = Undefined, Settings = Undefined) Exp
 	DocumentsClient.DateOnChange(Object, Form, Thisobject, Item);
 EndProcedure
 
-Function DateSettings() Export
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType");
+Function DateSettings(Form) Export
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType, AfterActionsCalculateSettings");
+	
 	Actions = New Structure();
 	Actions.Insert("ChangeAgreement"	, "ChangeAgreement");
+	
+	AfterActionsCalculateSettings = New Structure;
+	
 	Settings.Insert("TableName"			, "ItemList");
 	Settings.Insert("EmptyBasisDocument", New Structure("PurchaseReturnOrder", PredefinedValue("Document.PurchaseReturnOrder.EmptyRef")));
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, Agreement, LegalName";
 	Settings.FormAttributes = "CurrentPriceType";
 	Settings.AgreementType = PredefinedValue("Enum.AgreementTypes.Vendor");
+	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
 	
 	Return Settings;
 EndFunction

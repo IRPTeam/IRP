@@ -779,7 +779,7 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 		Settings = GetSettingsStructure(Module);	
 	EndIf;
 	
-	DateSettings = Module.DateSettings();
+	DateSettings = Module.DateSettings(Form);
 	Settings.Insert("ObjectAttributes"		, DateSettings.ObjectAttributes);
 	Settings.Insert("FormAttributes"	, DateSettings.FormAttributes);
 
@@ -803,8 +803,10 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 	EndIf;
 	#EndRegion
 	
-	Settings.CalculateSettings.Insert("UpdatePrice"	, "UpdatePrice");
-	Settings.CalculateSettings.UpdatePrice = New Structure("Period, PriceType", Object.Date, Form.CurrentPriceType);
+	//TODO: Refact	
+	For Each AfterActionsCalculateSettingsItem In DateSettings.AfterActionsCalculateSettings Do
+		Settings.CalculateSettings.Insert(AfterActionsCalculateSettingsItem.Key, AfterActionsCalculateSettingsItem.Value);
+	EndDo;
 	
 	CurrentValuesStructure = CreateCurrentValuesStructure(Object, Settings.ObjectAttributes, Settings.FormAttributes);
 	FillPropertyValues(CurrentValuesStructure, Form, Settings.FormAttributes);
@@ -839,7 +841,9 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 		Return;
 	EndIf;
 	
-	If CalculationStringsClientServer.PricesChenged(Object, Form, Settings) Then
+	If Settings.CalculateSettings.Property("UpdatePrice")
+		//TODO: Refact
+		And CalculationStringsClientServer.PricesChenged(Object, Form, Settings) Then
 		QuestionStructure = New Structure;
 		QuestionStructure.Insert("ProcedureName", "PricesChengedContinue");
 		QuestionStructure.Insert("QuestionText"	, R()["QuestionToUser_013"]);
@@ -1569,7 +1573,9 @@ EndProcedure
 Procedure ChangeAgreement(Object, Form, Settings) Export
 	Object.Agreement = Settings.PartnerInfo.Agreement;
 	If Object.Agreement = Settings.CurrentValuesStructure.Agreement Then
-		ChangePriceType(Object, Form, Settings);
+		If Settings.CalculateSettings.Property("UpdatePrice") Then
+			ChangePriceType(Object, Form, Settings);
+		EndIf;
 		ChangeCurrency(Object, Form, Settings);
 	Else
 		AgreementOnChange(Object, Form, Settings.Module, , Settings);
@@ -1737,7 +1743,7 @@ Procedure ItemListItemOnChange(Object, Form, Module, Item = Undefined, Settings 
 		Settings = GetSettingsStructure(Module);
 	EndIf;
 	
-	ItemListItemSettings = Module.ItemListItemSettings();
+	ItemListItemSettings = Module.ItemListItemSettings(Form);
 	
 	Settings.Insert("ObjectAttributes", ItemListItemSettings.ObjectAttributes);
 	Settings.Insert("CurrentRow", CurrentRow);
@@ -1753,8 +1759,9 @@ Procedure ItemListItemOnChange(Object, Form, Module, Item = Undefined, Settings 
 		Return;
 	EndIf;
 	
-	Settings.CalculateSettings.Insert("UpdatePrice");
-	Settings.CalculateSettings.UpdatePrice = New Structure("Period, PriceType", Object.Date, Form.CurrentPriceType);
+	For Each AfterActionsCalculateSettingsItem In ItemListItemSettings.AfterActionsCalculateSettings Do
+		Settings.CalculateSettings.Insert(AfterActionsCalculateSettingsItem.Key, AfterActionsCalculateSettingsItem.Value);
+	EndDo;
 	
 	ItemListCalculateRowsAmounts(Object, Form, Settings);
 EndProcedure
@@ -1774,7 +1781,7 @@ Procedure ItemListItemKeyOnChange(Object, Form, Module, Item = Undefined, Settin
 		Settings = GetSettingsStructure(Module);
 	EndIf;
 	
-	ItemListItemKeySettings = Module.ItemListItemKeySettings();
+	ItemListItemKeySettings = Module.ItemListItemKeySettings(Form);
 	Settings.Insert("ObjectAttributes", ItemListItemKeySettings.ObjectAttributes);
 
 	Settings.Insert("Rows", New Array());
@@ -1787,8 +1794,9 @@ Procedure ItemListItemKeyOnChange(Object, Form, Module, Item = Undefined, Settin
 		Return;
 	EndIf;
 	
-	Settings.CalculateSettings.Insert("UpdatePrice");
-	Settings.CalculateSettings.UpdatePrice = New Structure("Period, PriceType", Object.Date, Form.CurrentPriceType);
+	For Each AfterActionsCalculateSettingsItem In ItemListItemKeySettings.AfterActionsCalculateSettings Do
+		Settings.CalculateSettings.Insert(AfterActionsCalculateSettingsItem.Key, AfterActionsCalculateSettingsItem.Value);
+	EndDo;
 	
 	ItemListCalculateRowsAmounts(Object, Form, Settings);
 EndProcedure
@@ -1835,6 +1843,7 @@ Procedure ItemListPriceTypeOnChange(Object, Form, Module, Item = Undefined, Sett
 		Settings = GetSettingsStructure(Module);
 	EndIf;
 	
+	//TODO: Unit?
 	ItemListUnitSettings = Module.ItemListUnitSettings();
 	
 	Settings.Insert("ObjectAttributes", ItemListUnitSettings.ObjectAttributes);

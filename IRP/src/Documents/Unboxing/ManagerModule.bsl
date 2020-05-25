@@ -204,6 +204,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.Insert("Header", Header);
 	
+	Tables.Insert("QueryTable_ItemList", QueryTable_ItemList);
+	Tables.Insert("QueryTable_Header", QueryTable_Header);
+	
 	Parameters.IsReposting = False;
 	
 	Return Tables;

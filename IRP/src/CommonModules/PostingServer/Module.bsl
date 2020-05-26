@@ -79,7 +79,7 @@ Function Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	// Multi currency integration
 	CurrenciesServer.PreparePostingDataTables(Parameters, AddInfo);
 
-	RegisteredRecords = RegisterRecords(PostingDataTables, Parameters.Object.RegisterRecords);
+	RegisteredRecords = RegisterRecords(DocObject, PostingDataTables, Parameters.Object.RegisterRecords);
 	Parameters.Insert("RegisteredRecords", RegisteredRecords);
 	
 	Module.PostingCheckAfterWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
@@ -105,7 +105,7 @@ Function SetLock(LockDataSources)
 	Return DataLock;
 EndFunction
 
-Function RegisterRecords(PostingDataTables, AllRegisterRecords)
+Function RegisterRecords(DocObject, PostingDataTables, AllRegisterRecords)
 	For Each RecordSet In AllRegisterRecords Do
 		If PostingDataTables.Get(RecordSet) = Undefined Then
 			RecordSet.Write = True;
@@ -136,11 +136,7 @@ Function RegisterRecords(PostingDataTables, AllRegisterRecords)
 		EndIf;
 			
 		// MD5
-		RecordSet.Read();
-		TableOldRecords = RecordSet.Unload();
-		
-		RecordSet.Load(TableForLoad);
-		If TablesIsEqual(RecordSet.Unload(), TableOldRecords) Then
+		If RecordSetIsEqual(DocObject, RecordSet, TableForLoad) Then
 			Continue;
 		EndIf;
 		
@@ -157,6 +153,14 @@ Function RegisterRecords(PostingDataTables, AllRegisterRecords)
 	EndDo;
 	Return RegisteredRecords;
 EndFunction
+
+Function RecordSetIsEqual(DocObject, RecordSet, TableForLoad)
+	RecordSet.Read();
+	TableOldRecords = RecordSet.Unload();
+		
+	RecordSet.Load(TableForLoad);
+	Return TablesIsEqual(RecordSet.Unload(), TableOldRecords);
+EndFunction	
 
 Function TablesIsEqual(Table1, Table2) Export
     If Table1.Count() <> Table2.Count() Then

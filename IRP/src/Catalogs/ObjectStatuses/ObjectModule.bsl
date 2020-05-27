@@ -71,3 +71,9 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	ThisObject.PostingChequeBondBalance = Enums.DocumentPostingTypes.Nothing;
 EndProcedure
 
+Procedure OnCopy(CopiedObject)
+	UniqueID = "";
+EndProcedure
+
+
+

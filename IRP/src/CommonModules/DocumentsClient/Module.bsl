@@ -942,8 +942,9 @@ Procedure ShowUserQueryBoxContinue(Result, AdditionalParameters) Export
 	If Result.Property("UpdatePrices") Then
 		
 		Settings.CalculateSettings = New Structure();
+		PriceDate = ?(Object.Ref.IsEmpty(), CurrentDate(), Object.Date);
 		Settings.CalculateSettings.Insert("UpdatePrice",
-					New Structure("Period, PriceType", Object.Date, Form.CurrentPriceType));
+					New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 					
 		Settings.Insert("Rows", Rows);
 		CalculateTable(Object, Form, Settings);
@@ -977,8 +978,9 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	CalculationSettings = New Structure;
 	If Object.Property("Agreement") Then
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
+		PriceDate = ?(Object.Ref.IsEmpty(), CurrentDate(), Object.Date);
 		CalculationSettings.Insert("UpdatePrice",
-					New Structure("Period, PriceType", Object.Date, AgreementInfo.PriceType));
+					New Structure("Period, PriceType", PriceDate, AgreementInfo.PriceType));
 		FilterString = "Item, ItemKey, Unit, Price";
 	Else
 		FilterString = "Item, ItemKey, Unit";

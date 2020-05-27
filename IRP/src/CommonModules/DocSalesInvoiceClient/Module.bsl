@@ -125,7 +125,8 @@ Function ItemListItemSettings(Form) Export
 	Actions.Insert("UpdateItemKey"		, "UpdateItemKey");
 	
 	AfterActionsCalculateSettings = New Structure;
-	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date, Form.CurrentPriceType));
+	PriceDate = ?(Form.Object.Ref.IsEmpty(), CurrentDate(), Form.Object.Date);
+	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "ItemKey";
@@ -146,7 +147,8 @@ Function ItemListItemKeySettings(Form) Export
 	Actions.Insert("UpdateRowUnit"		, "UpdateRowUnit");
 	
 	AfterActionsCalculateSettings = New Structure;
-	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date, Form.CurrentPriceType));
+	PriceDate = ?(Form.Object.Ref.IsEmpty(), CurrentDate(), Form.Object.Date);
+	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "ItemKey";
@@ -456,7 +458,8 @@ Function DateSettings(Form) Export
 	Actions.Insert("ChangeDeliveryDate"	, "ChangeDeliveryDate");
 	
 	AfterActionsCalculateSettings = New Structure;
-	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date, Form.CurrentPriceType));
+	PriceDate = ?(Form.Object.Ref.IsEmpty(), CurrentDate(), Form.Object.Date);
+	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	
 	Settings.Insert("EmptyBasisDocument", New Structure("SalesOrder", PredefinedValue("Document.SalesOrder.EmptyRef")));
 	Settings.Insert("TableName"			, "ItemList");

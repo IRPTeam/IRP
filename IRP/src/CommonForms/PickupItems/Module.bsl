@@ -190,6 +190,7 @@ Procedure ItemTypeAfterSelection()
 			LastQuery = New Query;
 			LastQuery.Text = "SELECT
 				|	Items.Item,
+				|	Items.Unit,
 				|	Items.QuantityBalance,
 				|	Items.QuantityBalanceReceiver,
 				|	Items.QuantityPickedOut,
@@ -209,6 +210,7 @@ Procedure ItemTypeAfterSelection()
 				|////////////////////////////////////////////////////////////////////////////////
 				|SELECT
 				|	Items.Item,
+				|	Items.Unit,
 				|	Items.QuantityBalance,
 				|	Items.QuantityBalanceReceiver,
 				|	Items.QuantityPickedOut,
@@ -235,6 +237,7 @@ Procedure ItemTypeAfterSelection()
 			NewRow.PickedOut = Row.QuantityPickedOut;
 			NewRow.ItemKeyCount = Row.ItemKeyCount;
 			NewRow.Price = Row.Price;
+			NewRow.Unit = Row.Unit;
 		EndDo;
 	EndIf;
 EndProcedure

@@ -592,8 +592,9 @@ Function Priceschenged(Object, Form, Settings) Export
 	ListCache = GetCacheTable(Object, "ItemList", CachedColumns);
 	
 	CalculationSettings = New Structure();
+	PriceDate = ?(Object.Ref.IsEmpty(), CurrentDate(), Object.Date);
 	CalculationSettings.Insert("UpdatePrice",
-					New Structure("Period, PriceType", Object.Date, Form.CurrentPriceType));
+					New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	
 	CalculateItemsRows(Object, Form, ListCache, CalculationSettings);
 

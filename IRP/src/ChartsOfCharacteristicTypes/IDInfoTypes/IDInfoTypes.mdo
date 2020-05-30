@@ -11,7 +11,7 @@
   <name>IDInfoTypes</name>
   <synonym>
     <key>en</key>
-    <value>IDInfo types</value>
+    <value>ID Info types</value>
   </synonym>
   <comment></comment>
   <useStandardCommands>true</useStandardCommands>
@@ -162,7 +162,7 @@
       <name>IDInfoType</name>
       <synonym>
         <key>en</key>
-        <value>IDInfo type</value>
+        <value>ID Info type</value>
       </synonym>
       <comment></comment>
       <type>

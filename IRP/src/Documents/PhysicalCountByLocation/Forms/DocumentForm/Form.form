@@ -952,9 +952,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.ItemList.LineNumber</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.НомерСтроки</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListLineNumberExtendedTooltip</name>

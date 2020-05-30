@@ -2618,7 +2618,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Special Offers</value>
+        <value>Special offers</value>
       </title>
       <extendedTooltip>
         <name>GroupSpecialOffersExtendedTooltip</name>
@@ -3417,7 +3417,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Tax List</value>
+        <value>Tax list</value>
       </title>
       <extendedTooltip>
         <name>GroupTaxListExtendedTooltip</name>

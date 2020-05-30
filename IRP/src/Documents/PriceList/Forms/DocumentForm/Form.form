@@ -63,7 +63,7 @@
       <choiceList>
         <presentation>
           <key>en</key>
-          <value>By Item keys</value>
+          <value>By item keys</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
           <value>Enum.PriceListTypes.EnumValue.PriceByItemKeys</value>
@@ -72,7 +72,7 @@
       <choiceList>
         <presentation>
           <key>en</key>
-          <value>By Properties</value>
+          <value>By properties</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
           <value>Enum.PriceListTypes.EnumValue.PriceByProperties</value>

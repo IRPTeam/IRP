@@ -2540,7 +2540,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>SpecialOffers</value>
+        <value>Special offers</value>
       </title>
       <extendedTooltip>
         <name>GroupSpecialOffersExtendedTooltip</name>

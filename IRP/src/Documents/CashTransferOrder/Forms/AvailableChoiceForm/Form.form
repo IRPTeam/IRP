@@ -654,8 +654,8 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
-выбор когда &amp;UseArrayOfChoisedDocuments тогда
-	CashTransferOrder.Ref in (&amp;ArrayOfChoisedDocuments) иначе ложь конец как Choiced,
+CASE WHEN &amp;UseArrayOfChoisedDocuments THEN
+	CashTransferOrder.Ref in (&amp;ArrayOfChoisedDocuments) ELSE False End AS Choiced,
 
 
 	CashTransferOrder.Ref,

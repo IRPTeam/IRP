@@ -510,9 +510,6 @@
         <paths xsi:type="form:DataPath">
           <segments>Object.Extensions.LineNumber</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>Object.Extensions.НомерСтроки</segments>
-        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ExtensionsLineNumberExtendedTooltip</name>

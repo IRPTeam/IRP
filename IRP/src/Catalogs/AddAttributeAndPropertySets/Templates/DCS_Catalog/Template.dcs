@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>ItemType</v8:content>
+					<v8:content>Item type</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -41,7 +41,7 @@ FROM
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>ItemType</v8:content>
+						<v8:content>Item type</v8:content>
 					</v8:item>
 				</title>
 				<valueType>

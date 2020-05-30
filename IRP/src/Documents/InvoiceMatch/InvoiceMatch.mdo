@@ -90,7 +90,7 @@
     <name>PartnerArTransactionsBasisDocument</name>
     <synonym>
       <key>en</key>
-      <value>Partner ar transactions basis document</value>
+      <value>Partner AR transactions basis document</value>
     </synonym>
     <type>
       <types>DefinedType.typeArTransactionBasises</types>
@@ -202,7 +202,7 @@
       <name>PartnerArTransactionsBasisDocument</name>
       <synonym>
         <key>en</key>
-        <value>Partner ar transactions basis document</value>
+        <value>Partner AR transactions basis document</value>
       </synonym>
       <type>
         <types>DefinedType.typeArTransactionBasises</types>

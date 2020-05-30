@@ -22,7 +22,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
-Procedure Ок(Command)
+Procedure OK(Command)
 	Actions = New Structure();
 	
 	If Stores Then

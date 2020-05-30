@@ -706,9 +706,6 @@
               <paths xsi:type="form:DataPath">
                 <segments>Object.PhysItemList.LineNumber</segments>
               </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.PhysItemList.НомерСтроки</segments>
-              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ExtendedTooltip</name>
@@ -1295,9 +1292,6 @@
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
                 <segments>Object.ExpItemList.LineNumber</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.ExpItemList.НомерСтроки</segments>
               </paths>
             </dataPath>
             <extendedTooltip>

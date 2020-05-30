@@ -167,9 +167,6 @@
         <paths xsi:type="form:DataPath">
           <segments>List.Ref</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>List.Ссылка</segments>
-        </paths>
       </dataPath>
       <extendedTooltip>
         <name>RefExtendedTooltip</name>

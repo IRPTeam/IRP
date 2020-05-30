@@ -51,7 +51,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>ItemKey</v8:content>
+					<v8:content>Item Key</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -901,7 +901,7 @@
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>ItemKey</v8:content>
+								<v8:content>Item Key</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>

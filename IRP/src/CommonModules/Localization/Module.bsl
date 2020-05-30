@@ -51,14 +51,14 @@ Function Strings(CodeLanguage) Export
 	
 	
 	Strings.Insert("S_021", NStr("en = 'Goods receipt'", CodeLanguage));
-	Strings.Insert("S_022", NStr("en = 'Multicurrency receipt basises!'", CodeLanguage));
+	Strings.Insert("S_022", NStr("en = 'Multicurrency receipt basises'", CodeLanguage));
 	
 	Strings.Insert("S_023", NStr("en = 'Procurement method'", CodeLanguage));
 	
 	
 	// name templates
-	Strings.Insert("S_024", NStr("en = 'Customer Agreement, %1'", CodeLanguage));
-	Strings.Insert("S_025", NStr("en = 'Vendor Agreement, %1'", CodeLanguage));
+	Strings.Insert("S_024", NStr("en = 'Customer agreement, %1'", CodeLanguage));
+	Strings.Insert("S_025", NStr("en = 'Vendor agreement, %1'", CodeLanguage));
 	Strings.Insert("S_026", NStr("en = 'Selected icon will be resized to 16x16 px'", CodeLanguage));
 	
 	Strings.Insert("S_027", NStr("en = '[Not filled]'", CodeLanguage));
@@ -91,9 +91,9 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Form_020", NStr("en = 'Retail, %1'", CodeLanguage));
 	Strings.Insert("Form_021", NStr("en = 'Download currency rate type'", CodeLanguage));
 	// PriceInfo report 
-	Strings.Insert("Form_022", NStr("en = '1. By Item keys'", CodeLanguage));
-	Strings.Insert("Form_023", NStr("en = '2. By Properties'", CodeLanguage));
-	Strings.Insert("Form_024", NStr("en = '3. By Items'", CodeLanguage));
+	Strings.Insert("Form_022", NStr("en = '1. By item keys'", CodeLanguage));
+	Strings.Insert("Form_023", NStr("en = '2. By properties'", CodeLanguage));
+	Strings.Insert("Form_024", NStr("en = '3. By items'", CodeLanguage));
 	#EndRegion
 	
 	#Region ErrorMessages

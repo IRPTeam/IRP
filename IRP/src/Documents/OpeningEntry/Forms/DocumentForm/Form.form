@@ -542,9 +542,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.Inventory.LineNumber</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Inventory.НомерСтроки</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>InventoryLineNumberExtendedTooltip</name>
@@ -1055,9 +1052,6 @@
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
               <segments>Object.AccountBalance.LineNumber</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.AccountBalance.НомерСтроки</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -2150,9 +2144,6 @@
               <dataPath xsi:type="form:MultiLanguageDataPath">
                 <paths xsi:type="form:DataPath">
                   <segments>Object.AdvanceFromCustomers.LineNumber</segments>
-                </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.AdvanceFromCustomers.НомерСтроки</segments>
                 </paths>
               </dataPath>
               <extendedTooltip>
@@ -3305,9 +3296,6 @@
               <dataPath xsi:type="form:MultiLanguageDataPath">
                 <paths xsi:type="form:DataPath">
                   <segments>Object.AdvanceToSuppliers.LineNumber</segments>
-                </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.AdvanceToSuppliers.НомерСтроки</segments>
                 </paths>
               </dataPath>
               <extendedTooltip>
@@ -4537,9 +4525,6 @@
                 <paths xsi:type="form:DataPath">
                   <segments>Object.AccountPayableByAgreements.LineNumber</segments>
                 </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.AccountPayableByAgreements.НомерСтроки</segments>
-                </paths>
               </dataPath>
               <extendedTooltip>
                 <name>AccountPayableByAgreementsLineNumberExtendedTooltip</name>
@@ -5758,9 +5743,6 @@
               <dataPath xsi:type="form:MultiLanguageDataPath">
                 <paths xsi:type="form:DataPath">
                   <segments>Object.AccountPayableByDocuments.LineNumber</segments>
-                </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.AccountPayableByDocuments.НомерСтроки</segments>
                 </paths>
               </dataPath>
               <extendedTooltip>
@@ -7076,9 +7058,6 @@
                 <paths xsi:type="form:DataPath">
                   <segments>Object.AccountReceivableByAgreements.LineNumber</segments>
                 </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.AccountReceivableByAgreements.НомерСтроки</segments>
-                </paths>
               </dataPath>
               <extendedTooltip>
                 <name>AccountReceivableByAgreementsLineNumberExtendedTooltip</name>
@@ -8267,9 +8246,6 @@
               <dataPath xsi:type="form:MultiLanguageDataPath">
                 <paths xsi:type="form:DataPath">
                   <segments>Object.AccountReceivableByDocuments.LineNumber</segments>
-                </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.AccountReceivableByDocuments.НомерСтроки</segments>
                 </paths>
               </dataPath>
               <extendedTooltip>

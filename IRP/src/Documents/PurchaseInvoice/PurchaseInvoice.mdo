@@ -209,7 +209,7 @@
     <name>SelectPurchaseOrdersForm</name>
     <synonym>
       <key>en</key>
-      <value>Select Purchase orders</value>
+      <value>Select purchase orders</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

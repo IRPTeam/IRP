@@ -77,7 +77,7 @@ Function Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	EndDo;
 	
 	// Multi currency integration
-	CurrenciesServer.PreparePostingDataTables(Parameters, AddInfo);
+	CurrenciesServer.PreparePostingDataTables(Parameters, Undefined, AddInfo);
 
 	RegisteredRecords = RegisterRecords(DocObject, PostingDataTables, Parameters.Object.RegisterRecords);
 	Parameters.Insert("RegisteredRecords", RegisteredRecords);

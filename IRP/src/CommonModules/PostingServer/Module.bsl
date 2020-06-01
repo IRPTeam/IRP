@@ -38,7 +38,11 @@ Function Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	EndIf;
 	
 	PostingDataTables = Module.PostingGetPostingDataTables(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
-	Parameters.Insert("PostingDataTables", PostingDataTables);
+	If Parameters.Property("PostingDataTables") Then
+		Parameters.PostingDataTables = PostingDataTables;
+	Else	
+		Parameters.Insert("PostingDataTables", PostingDataTables);
+	EndIf;
 	If Cancel Then
 		Return Undefined;
 	EndIf;

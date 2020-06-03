@@ -40,6 +40,7 @@
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.IncomingPaymentOrder.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.IncomingPaymentOrder.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.IncomingPaymentOrder.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.PlaningCashTransactions</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
@@ -114,6 +115,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="817a500a-c5b4-49ff-969e-15da67dd91c2">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

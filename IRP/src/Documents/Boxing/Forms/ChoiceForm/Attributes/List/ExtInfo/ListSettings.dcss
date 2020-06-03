@@ -9,6 +9,20 @@
 		<userSettingID>bd51f5d6-0dd7-40f7-a31b-9993f8f3ce29</userSettingID>
 	</order>
 	<conditionalAppearance>
+		<item>
+			<selection>
+				<item>
+					<field>Ref</field>
+				</item>
+			</selection>
+			<filter/>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>Visible</dcscor:parameter>
+					<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</item>
 		<viewMode>Normal</viewMode>
 		<userSettingID>cbf27598-0280-4b67-9d02-a5111e6efc4a</userSettingID>
 	</conditionalAppearance>

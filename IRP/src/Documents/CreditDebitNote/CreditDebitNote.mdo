@@ -40,6 +40,7 @@
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.CreditDebitNote.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.CreditDebitNote.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.CreditDebitNote.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
   <registerRecords>AccumulationRegister.PartnerArTransactions</registerRecords>
@@ -126,6 +127,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="329013e4-7cda-45b1-b80f-6d4272e24c3c">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

@@ -40,6 +40,7 @@
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.PurchaseOrder.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.PurchaseOrder.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.PurchaseOrder.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.ReceiptOrders</registerRecords>
@@ -172,6 +173,15 @@
     <synonym>
       <key>en</key>
       <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="7f2b79a9-374b-439f-b5cf-b197026b8c1c">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

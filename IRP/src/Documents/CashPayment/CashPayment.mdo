@@ -45,6 +45,7 @@
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.CashPayment.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.CashPayment.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.CashPayment.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
   <registerRecords>AccumulationRegister.AccountBalance</registerRecords>
@@ -131,6 +132,15 @@
         <lang>en</lang>
       </pages>
     </help>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="b231a6eb-e409-4667-8b32-17a3bc9b1771">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>

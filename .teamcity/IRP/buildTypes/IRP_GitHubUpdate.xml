@@ -68,9 +68,9 @@ echo "##teamcity[setParameter name='env.StartVA' value='$StartVA']"]]></param>
       <extension id="BUILD_EXT_8" type="pullRequests">
         <parameters>
           <param name="authenticationType" value="token" />
-          <param name="filterAuthorRole" value="EVERYBODY" />
+          <param name="filterAuthorRole" value="MEMBER" />
           <param name="providerType" value="github" />
-          <param name="secure:accessToken" value="credentialsJSON:4800d23b-677d-4b3e-acfe-f608deb5bb8a" />
+          <param name="secure:accessToken" value="credentialsJSON:7f350f35-7665-4b1b-b6e1-d624efb86189" />
           <param name="vcsRootId" value="IRP_GitTC" />
         </parameters>
       </extension>

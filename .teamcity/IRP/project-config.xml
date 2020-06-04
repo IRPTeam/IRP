@@ -36,7 +36,7 @@
         <param name="buildSettings" value="ALWAYS_USE_CURRENT" />
         <param name="credentialsStorageType" value="credentialsJSON" />
         <param name="enabled" value="true" />
-        <param name="rootId" value="Irp_HttpsGithubComDitriXTempIrpRefsHeadsMaster" />
+        <param name="rootId" value="Irp_HttpsGithubComIRPTeamIrpRefsHeadsDevelop" />
         <param name="showChanges" value="false" />
       </parameters>
     </extension>

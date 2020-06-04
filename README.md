@@ -1,3 +1,8 @@
+[![Quality Gate Status](http://95.216.127.147:9000/api/project_badges/measure?project=IRP&metric=alert_status)](http://95.216.127.147:9000/dashboard?id=IRP)
+[![Reliability Rating](http://95.216.127.147:9000/api/project_badges/measure?project=IRP&metric=reliability_rating)](http://95.216.127.147:9000/dashboard?id=IRP)
+[![Coverage](http://95.216.127.147:9000/api/project_badges/measure?project=IRP&metric=coverage)](http://95.216.127.147:9000/dashboard?id=IRP)
+
+
 # IRP: Individual resource planning
 
 **Программное решение "IRP"** предназначено для автоматизации товарного учета, оптовой торговли и финансовых операций.

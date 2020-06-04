@@ -8,7 +8,7 @@
       <param name="env.Database1CName" value="IRP" />
       <param name="env.Login" value="Admin" />
       <param name="env.Password" value="credentialsJSON:eb5b1b39-2d6f-4d9b-ae06-8105b917f27e" spec="password display='hidden'" />
-      <param name="env.ProjectID" value="2c652187-a449-11ea-8b89-cad6cda125fe" />
+      <param name="env.ProjectID" value="credentialsJSON:00b5b2d0-aa48-4634-9239-15d22ed572d5" spec="password display='hidden'" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_27" name="Run translations" type="jetbrains_powershell">

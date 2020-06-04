@@ -1,81 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="b3640ebf-e9da-4f82-81ed-89cc7352321d" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
-  <name>SonarQube</name>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="93d141f2-4bbe-4e39-82dc-50ee5e38d12b" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
+  <name>Build</name>
   <description />
   <settings>
-    <options>
-      <option name="allowExternalStatus" value="true" />
-    </options>
-    <parameters>
-      <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />
-    </parameters>
-    <build-runners>
-      <runner id="RUNNER_4" name="SonarQube Branch or PR Prepare" type="SonarQubeBranch">
-        <parameters>
-          <param name="teamcity.step.mode" value="default" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_2" name="Sonar Start scan" type="sonar-plugin">
-        <parameters>
-          <param name="additionalParameters" value="%dep.IRP_GitHubUpdate.env.SonarParamCover%" />
-          <param name="sonarProjectKey" value="%teamcity.project.id%" />
-          <param name="sonarProjectName" value="%system.teamcity.projectName%" />
-          <param name="sonarProjectSources" value="src" />
-          <param name="sonarProjectVersion" value="%build.number%" />
-          <param name="sonarServer" value="a133f208-e43b-4b6f-b50b-f454a3e96592" />
-          <param name="teamcity.step.mode" value="default" />
-          <param name="teamcity.tool.sonarquberunner" value="%teamcity.tool.sonar-qube-scanner.4.2.0.1873-scanner%" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_23" name="" type="DropDB">
-        <parameters>
-          <param name="teamcity.step.mode" value="default" />
-        </parameters>
-      </runner>
-    </build-runners>
+    <parameters />
+    <build-runners />
     <vcs-settings>
       <vcs-entry-ref root-id="IRP_GitTC" />
     </vcs-settings>
     <requirements />
     <build-triggers>
-      <build-trigger id="TRIGGER_2" type="buildDependencyTrigger">
+      <build-trigger id="vcsTrigger" type="vcsTrigger">
         <parameters>
-          <param name="afterSuccessfulBuildOnly" value="true" />
           <param name="branchFilter" value="+:*" />
-          <param name="dependsOn" value="IRP_GitHubUpdate" />
+          <param name="enableQueueOptimization" value="true" />
+          <param name="quietPeriodMode" value="DO_NOT_USE" />
         </parameters>
       </build-trigger>
     </build-triggers>
-    <build-extensions>
-      <extension id="BUILD_EXT_1" type="commit-status-publisher">
-        <parameters>
-          <param name="github_authentication_type" value="token" />
-          <param name="github_host" value="https://api.github.com" />
-          <param name="github_oauth_user" value="DitriXTemp" />
-          <param name="publisherId" value="githubStatusPublisher" />
-          <param name="secure:github_access_token" value="credentialsJSON:4800d23b-677d-4b3e-acfe-f608deb5bb8a" />
-          <param name="vcsRootId" value="IRP_GitTC" />
-        </parameters>
-      </extension>
-      <extension id="BUILD_EXT_2" type="pullRequests">
-        <parameters>
-          <param name="authenticationType" value="token" />
-          <param name="filterAuthorRole" value="EVERYBODY" />
-          <param name="providerType" value="github" />
-          <param name="secure:accessToken" value="credentialsJSON:4800d23b-677d-4b3e-acfe-f608deb5bb8a" />
-          <param name="vcsRootId" value="IRP_GitTC" />
-        </parameters>
-      </extension>
-    </build-extensions>
-    <dependencies>
-      <depend-on sourceBuildTypeId="IRP_RunVA">
-        <options>
-          <option name="run-build-if-dependency-failed" value="CANCEL" />
-          <option name="take-started-build-with-same-revisions" value="true" />
-          <option name="take-successful-builds-only" value="true" />
-        </options>
-      </depend-on>
-    </dependencies>
     <cleanup />
   </settings>
 </build-type>

@@ -1,37 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="300b3740-643d-40ab-89f4-9c4bf977c11d" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="2c86963a-8b57-4508-a1aa-5148ab426907" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
   <name>IRP</name>
-  <parameters>
-    <param name="env.BranchToStartVA" value="master" />
-    <param name="env.ConnectionTo1C" value="/Slocalhost/%env.Database1CName% /N %env.LoginTo1C% /P %env.PassTo1C%" />
-    <param name="env.Database1CName" value="IRP" />
-    <param name="env.LogFile1C" value="%system.teamcity.build.tempDir%\Log1C.log" />
-    <param name="env.LoginTo1C" value="Admin" />
-    <param name="env.PassTo1C" value="Admin" />
-    <param name="env.PathTo1CBin" value="C:\Program Files (x86)\1cv8\8.3.15.1958\bin" />
-    <param name="env.PathTo1CPlatform" value="&quot;%env.PathTo1CBin%\1cv8.exe&quot;" />
-  </parameters>
+  <parameters />
   <project-extensions>
-    <extension id="PROJECT_EXT_3" type="sonar-qube">
-      <parameters>
-        <param name="id" value="a133f208-e43b-4b6f-b50b-f454a3e96592" />
-        <param name="login" value="admin" />
-        <param name="name" value="Main SQ" />
-        <param name="password" value="scrambled:YWRtaW4=" />
-        <param name="url" value="http://localhost:9000" />
-      </parameters>
-    </extension>
-    <extension id="PROJECT_EXT_4" type="ReportTab">
-      <parameters>
-        <param name="buildTypeId" value="IRP_RunVA" />
-        <param name="revisionRuleBranchFilter" value="+:*" />
-        <param name="revisionRuleName" value="lastSuccessful" />
-        <param name="startPage" value="allure-report.zip!/allure-report/index.html" />
-        <param name="title" value="Allure" />
-        <param name="type" value="ProjectReportTab" />
-      </parameters>
-    </extension>
-    <extension id="PROJECT_EXT_6" type="versionedSettings">
+    <extension id="PROJECT_EXT_4" type="versionedSettings">
       <parameters>
         <param name="buildSettings" value="ALWAYS_USE_CURRENT" />
         <param name="credentialsStorageType" value="credentialsJSON" />

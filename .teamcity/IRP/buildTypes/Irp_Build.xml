@@ -34,7 +34,7 @@
       </runner>
     </build-runners>
     <vcs-settings>
-      <vcs-entry-ref root-id="Irp_HttpsGithubComDitriXTempIrpRefsHeadsMaster" />
+      <vcs-entry-ref root-id="IRP_GitTC" />
     </vcs-settings>
     <requirements />
     <build-triggers>
@@ -54,7 +54,7 @@
           <param name="github_oauth_user" value="DitriXTemp" />
           <param name="publisherId" value="githubStatusPublisher" />
           <param name="secure:github_access_token" value="credentialsJSON:4800d23b-677d-4b3e-acfe-f608deb5bb8a" />
-          <param name="vcsRootId" value="Irp_HttpsGithubComDitriXTempIrpRefsHeadsMaster" />
+          <param name="vcsRootId" value="IRP_GitTC" />
         </parameters>
       </extension>
       <extension id="BUILD_EXT_2" type="pullRequests">
@@ -63,7 +63,7 @@
           <param name="filterAuthorRole" value="EVERYBODY" />
           <param name="providerType" value="github" />
           <param name="secure:accessToken" value="credentialsJSON:4800d23b-677d-4b3e-acfe-f608deb5bb8a" />
-          <param name="vcsRootId" value="Irp_HttpsGithubComDitriXTempIrpRefsHeadsMaster" />
+          <param name="vcsRootId" value="IRP_GitTC" />
         </parameters>
       </extension>
     </build-extensions>

@@ -44,7 +44,7 @@ echo "##teamcity[setParameter name='env.AgentNameForVA' value='$AgentNameForVA']
       </runner>
     </build-runners>
     <vcs-settings>
-      <vcs-entry-ref root-id="Irp_HttpsGithubComDitriXTempIrpRefsHeadsMaster" />
+      <vcs-entry-ref root-id="IRP_GitTC" />
     </vcs-settings>
     <requirements />
     <build-triggers>
@@ -73,7 +73,7 @@ echo "##teamcity[setParameter name='env.AgentNameForVA' value='$AgentNameForVA']
           <param name="filterAuthorRole" value="EVERYBODY" />
           <param name="providerType" value="github" />
           <param name="secure:accessToken" value="credentialsJSON:4800d23b-677d-4b3e-acfe-f608deb5bb8a" />
-          <param name="vcsRootId" value="Irp_HttpsGithubComDitriXTempIrpRefsHeadsMaster" />
+          <param name="vcsRootId" value="IRP_GitTC" />
         </parameters>
       </extension>
     </build-extensions>

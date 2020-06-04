@@ -38,7 +38,7 @@ Invoke-WebRequest -UseBasicParsing -uri https://web.bilist.com.tr:1512/Translato
       </runner>
     </build-runners>
     <vcs-settings>
-      <vcs-entry-ref root-id="Irp_HttpsGithubComDitriXTempIrpRefsHeadsMaster" />
+      <vcs-entry-ref root-id="IRP_GitTC" />
     </vcs-settings>
     <requirements />
     <build-triggers>

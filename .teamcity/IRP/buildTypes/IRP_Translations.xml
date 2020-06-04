@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="95ce3150-7b97-4935-91b7-e904cc99673c" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
+  <name>Translations</name>
+  <description />
+  <settings>
+    <parameters>
+      <param name="env.CustomerRegion" value="15" />
+      <param name="env.Login" value="Admin" />
+      <param name="env.Password" value="credentialsJSON:778f5da0-674f-4328-9423-050467465cd8" spec="password display='hidden'" />
+      <param name="env.ProjectID" value="2c652187-a449-11ea-8b89-cad6cda125fe" />
+    </parameters>
+    <build-runners>
+      <runner id="RUNNER_27" name="Run translations" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[$pair = "$('%env.Login%'):$('%env.Password%')"
+
+$encodedCreds = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($pair))
+
+$basicAuthValue = "Basic $encodedCreds"
+
+$Headers = @{
+    Authorization = $basicAuthValue
+}
+
+$PostData = "{
+    'callback_id' : 'config_translate', 
+    'actions':
+    [{
+    'value' : '%env.ProjectID%'
+    }]
+    }"
+Invoke-WebRequest -UseBasicParsing -uri https://web.bilist.com.tr:1512/Translator/hs/sync/command?Z=%env.CustomerRegion% -Method POST -Body $PostData -Headers $Headers]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings>
+      <vcs-entry-ref root-id="Irp_HttpsGithubComDitriXTempIrpRefsHeadsMaster" />
+    </vcs-settings>
+    <requirements />
+    <build-triggers>
+      <build-trigger id="vcsTrigger" type="vcsTrigger">
+        <parameters>
+          <param name="branchFilter" value="+:master" />
+          <param name="enableQueueOptimization" value="true" />
+          <param name="quietPeriodMode" value="DO_NOT_USE" />
+          <param name="triggerRules" value="-:.teamcity/**" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
+    <build-extensions>
+      <extension id="BUILD_EXT_15" type="BuildFailureOnMessage">
+        <parameters>
+          <param name="buildFailureOnMessage.conditionType" value="contains" />
+          <param name="buildFailureOnMessage.messagePattern" value="Start translate..." />
+          <param name="buildFailureOnMessage.reverse" value="true" />
+        </parameters>
+      </extension>
+    </build-extensions>
+    <cleanup />
+  </settings>
+</build-type>
+

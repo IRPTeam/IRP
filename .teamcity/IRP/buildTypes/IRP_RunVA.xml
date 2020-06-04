@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="7f2b4266-2190-45dc-8a50-eaa7d2e2fa01" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
+  <name>RunVA</name>
+  <description />
+  <settings>
+    <parameters>
+      <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />
+      <param name="env.OScript" value="C:/OneScript" />
+      <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features" />
+    </parameters>
+    <build-runners>
+      <runner id="RUNNER_10" name="" type="jetbrains_powershell">
+        <conditions>
+          <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
+        </conditions>
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[$allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
+$irfvpath = "%teamcity.tool.iview%/i_view32.exe" | ForEach-Object { $_ -replace '\\', '/' }
+$text = "
+{
+'Version': '1.2.031',
+'Lang': 'en',
+'DebugLog': true,
+'VersionVA': 'ver 1.2.031',
+'vanessarun': true,
+'addtofeaturefilter': true,
+'DownloadFeaturesOpen': 1,
+'platformversiongenerateepf': 'C:\\Program Files\\1cv8\\8.3.15.1869\\bin\\',
+'usersettingsprovider': 'FILE',
+'RunningScripts': {
+'makestepsasync': false,
+'SpacingStepSpecifiedUser': 0.1,
+'updatestatistics': true,
+'updatetreewhenscenariostarts': true,
+'stoponerror': false,
+'showrownumberonerror': false,
+'pendingequalfailed': false,
+'timeoutforasynchronoussteps': 0,
+'timetofindwindow': 5,
+'numberofattemptstoperformanaction': 3,
+'safeexecutionofsteps': false,
+'pauseonwindowopening': 0
+},
+'TestClient': {
+'runtestclientwithmaximizedwindow': false,
+'testclienttimeout': 25,
+'datatestclients': [
+{
+'Name': 'This client',
+'PathToInfobase': '/Slocalhost/%env.Database1CName%',
+'PortTestClient': 48001,
+'AddItionalParameters': ' /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls /DEBUG -http -attach /DEBUGGERURL http://localhost:1550',
+'ClientType': 'Thin',
+'ComputerName': 'localhost'
+}
+]
+},
+'allurecreatereport': true,
+'AllureReport': {
+'allurepath': '$allurePath/tmp',
+'allurepathbase': '$allurePath/base',
+'reportlevel1': '#report.epic=;catalog1',
+'reportlevel2': '#report.feature=;catalog2',
+'reportlevel3': '#report.story=;scenarioname',
+'testsuites': '',
+'attacheventlogtotheallurereport': true,
+'attachactiveformdatatotheallurereport': true,
+'attachallformsdatatotheallurereport': false,
+'attachnetworkconnectiondatatotheallurereport': false,
+'attachdataoftheoperatingsystemprocessestotheallurereport': false,
+'directorytobuildhierarchy': '',
+'DataAllureMarks': []
+},
+'junitcreatereport': false,
+'cucumbercreatereport': false,
+'ModelingCreateReport': false,
+'htmlcreate': false,
+'markdowncreate': false,
+'simplereport': false,
+'librarycatalogs': [
+'C:\\OneScript\\lib\\vanessa-automation\\features\\Libraries'
+],
+'ignoretags': [
+'IgnoreOnCIMainBuild',
+'Negative'
+],
+'filtertags': [
+
+],
+'logtogr': true,
+'logtotext': false,
+'logstepstotext': false,
+'logerrorstotext': false,
+'getactiveformdataonerror': false,
+'getallformsdataonerror': false,
+'collectnetworkconnectiondata': false,
+'collectdataoftheoperatingsystemprocesses': false,
+'useaddin': false,
+'useaddinforscreencapture': false,
+'screencaptureaddinmethod': 0,
+'onerrorscreenshot': true,
+'onerrorscreenshoteverywindow': false,
+'videcreate': false,
+'usesikulixserver': false,
+'searchformelementsbyname': false,
+'addmetainformationclicking': false,
+'thetreetagisenabledbydefault': true,
+'vanessashutdown': true,
+'closetestclient': true
+}"
+
+$a = $text | ConvertFrom-Json
+$a | Add-Member -Type NoteProperty -Name 'commandscreenshot' -Value $irfvpath'  /capture=1 /convert='
+$a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%'
+$a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.tempDir%/ScreenShots'
+$a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value '%system.teamcity.build.tempDir%/errors_json'
+$a | Add-Member -Type NoteProperty -Name 'textlogname' -Value '%system.teamcity.build.tempDir%/test.txt'
+ 
+$a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va.json]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_14" name="Start Coverage" type="simpleRunner">
+        <conditions>
+          <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
+        </conditions>
+        <parameters>
+          <param name="script.content" value="coverage-cli start --infobase %env.Database1CName% --debugger http://localhost:1550 --output %system.teamcity.build.workingDir%/Cover.csv" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_12" name="Start VA" type="simpleRunner">
+        <conditions>
+          <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
+        </conditions>
+        <parameters>
+          <param name="script.content"><![CDATA[start /wait "1cv8.exe" %env.PathTo1CPlatform%  %env.ConnectionTo1C% /Out %env.LogFile1C% /Execute "%env.OScript%/lib/vanessa-automation/vanessa-automation.epf" /TestManager /C"StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va.json"
+echo ##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']
+sh -c "while read line; do if [[ $line == *"Error"* ]]; then echo -e ""\e[31m $line""; else  echo -e ""\e[34m $line""; fi;  done < ""%env.LogFile1C%"";"
+echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_15" name="Cover stop" type="simpleRunner">
+        <conditions>
+          <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
+        </conditions>
+        <parameters>
+          <param name="script.content" value="coverage-cli stop" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_16" name="Cover convert" type="simpleRunner">
+        <conditions>
+          <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
+        </conditions>
+        <parameters>
+          <param name="script.content" value="coverage-cli convert --input %system.teamcity.build.workingDir%/Cover.csv --output  %system.teamcity.build.workingDir%/Cover.xml --sources src\IRP\src --format EDT &amp; powershell -command &quot;(Get-Content %system.teamcity.build.workingDir%/Cover.xml) | ForEach-Object { $_ -replace '\\', '/' } | Set-Content %system.teamcity.build.workingDir%/Cover.xml&quot;" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_13" name="" type="allureReportGeneratorRunner">
+        <conditions>
+          <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
+        </conditions>
+        <parameters>
+          <param name="allure.publish.mode" value="ARCHIVE" />
+          <param name="allure.report.path.prefix" value="allure-report" />
+          <param name="allure.result.directory" value="allure/base" />
+          <param name="allure.version" value="%teamcity.tool.allure.DEFAULT%" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings>
+      <vcs-entry-ref root-id="Irp_HttpsGithubComDitriXTempIrpRefsHeadsMaster" />
+    </vcs-settings>
+    <requirements />
+    <build-triggers>
+      <build-trigger id="TRIGGER_5" type="buildDependencyTrigger">
+        <parameters>
+          <param name="afterSuccessfulBuildOnly" value="true" />
+          <param name="branchFilter" value="+:*" />
+          <param name="dependsOn" value="IRP_GitHubUpdate" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
+    <dependencies>
+      <depend-on sourceBuildTypeId="IRP_BuildCF">
+        <options>
+          <option name="run-build-if-dependency-failed" value="CANCEL" />
+          <option name="run-build-on-the-same-agent" value="true" />
+          <option name="take-started-build-with-same-revisions" value="true" />
+          <option name="take-successful-builds-only" value="true" />
+        </options>
+      </depend-on>
+    </dependencies>
+    <cleanup />
+  </settings>
+</build-type>
+

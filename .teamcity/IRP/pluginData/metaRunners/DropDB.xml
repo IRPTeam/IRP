@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta-runner name="Drop DB">
+  <description>Drop DB</description>
+  <settings>
+    <parameters />
+    <build-runners>
+      <runner id="DropBD" name="Drop DB" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[$DBName = '%env.Database1CName%'
+$cmdOutput = cmd /c "%env.PathToRACTools%" cluster list '2>&1' | Out-String
+
+$FirstClusterID = $cmdOutput.Split(':') | ForEach-Object {
+    $_.Trim().Split([environment]::NewLine,[StringSplitOptions]::RemoveEmptyEntries) | ForEach-Object {
+       $_.Trim()
+    }
+}
+$ClusterIndex = (0..($FirstClusterID.Count-1)) | where {$FirstClusterID[$_] -eq 'cluster'}
+$ClusterID = $FirstClusterID[ $ClusterIndex + 1 ]
+Write-Output "Work on cluster: $ClusterID"
+
+$cmdOutput = cmd /c "%env.PathToRACTools%" infobase --cluster=$ClusterID summary list '2>&1' | Out-String
+$AllDB = $cmdOutput.Split(':') | ForEach-Object {
+    $_.Trim().Split([environment]::NewLine,[StringSplitOptions]::RemoveEmptyEntries) | ForEach-Object {
+       $_.Trim()
+    }
+}
+
+$DBIndex = (0..($AllDB.Count-1)) | where {$AllDB[$_] -eq $DBName} 
+If ($DBIndex -eq $null) {
+    Write-Output "DB not found: $DBName"
+    exit 0
+} 
+else {  
+    $DatabaseID = $AllDB[ $DBIndex - 2 ]
+    Write-Output "DatabaseID: $DatabaseID"
+}
+
+#echo "cmd /c ""%env.PathToRACTools%"" infobase --cluster=$ClusterID drop --infobase=$DatabaseID --infobase-user=%env.LoginTo1C% --infobase-pwd=%env.PassTo1C% --drop-database"
+$cmdOutput = cmd /c "%env.PathToRACTools%" infobase --cluster=$ClusterID drop --infobase=$DatabaseID --infobase-user=%env.LoginTo1C% --infobase-pwd=%env.PassTo1C% --drop-database '2>&1' | Out-String
+
+$cmdOutput]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <requirements />
+  </settings>
+</meta-runner>
+

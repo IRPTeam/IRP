@@ -21,6 +21,12 @@ $ClusterID = $FirstClusterID[ $ClusterIndex + 1 ]
 Write-Output "Work on cluster: $ClusterID"
 
 $cmdOutput = cmd /c "%env.PathToRACTools%" infobase --cluster=$ClusterID summary list '2>&1' | Out-String
+
+If ($cmdOutput -eq $null) {
+    Write-Output "DB list is empty"
+    exit 0
+} 
+
 $AllDB = $cmdOutput.Split(':') | ForEach-Object {
     $_.Trim().Split([environment]::NewLine,[StringSplitOptions]::RemoveEmptyEntries) | ForEach-Object {
        $_.Trim()

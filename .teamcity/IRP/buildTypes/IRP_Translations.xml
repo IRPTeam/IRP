@@ -5,6 +5,7 @@
   <settings>
     <parameters>
       <param name="env.CustomerRegion" value="1" />
+      <param name="env.Database1CName" value="IRP" />
       <param name="env.Login" value="Admin" />
       <param name="env.Password" value="credentialsJSON:eb5b1b39-2d6f-4d9b-ae06-8105b917f27e" spec="password display='hidden'" />
       <param name="env.ProjectID" value="2c652187-a449-11ea-8b89-cad6cda125fe" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="721bf779-20d2-47bd-b4c6-dfa6b0402e5f" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
-  <name>GitHubUpdate</name>
+  <name>1. GitHubUpdate</name>
   <description />
   <settings>
     <parameters>

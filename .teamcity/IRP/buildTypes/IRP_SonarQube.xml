@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="9a3d9fcb-39f0-45be-828d-fab1e9b20e9e" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
-  <name>SonarQube</name>
+  <name>4. SonarQube</name>
   <description />
   <settings>
+    <options>
+      <option name="allowExternalStatus" value="true" />
+    </options>
     <parameters>
       <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />
     </parameters>

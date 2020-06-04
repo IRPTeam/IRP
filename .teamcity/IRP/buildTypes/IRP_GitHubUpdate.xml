@@ -33,6 +33,11 @@ else
 	$SonarParamCover = ""
 	$InfobaseName = "%env.Database1CName%_%teamcity.build.branch%"
 }
+
+$InfobaseName = $InfobaseName -replace "\\", "_" 
+$InfobaseName = $InfobaseName -replace "\/", "_" 
+$InfobaseName = $InfobaseName -replace "\-", "_"
+
 echo "##teamcity[setParameter name='env.Database1CName' value='$InfobaseName']"
 echo "##teamcity[setParameter name='env.SonarParamCover' value='$SonarParamCover']"
 echo "##teamcity[setParameter name='env.StartVA' value='$StartVA']"]]></param>

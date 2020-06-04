@@ -122,7 +122,9 @@ $a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.team
 $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value '%system.teamcity.build.tempDir%/errors_json'
 $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value '%system.teamcity.build.tempDir%/test.txt'
  
-$a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va.json]]></param>
+$a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va.json
+
+New-Item -Path '%system.teamcity.build.tempDir%' -Name "errors_json" -ItemType "directory" -force]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

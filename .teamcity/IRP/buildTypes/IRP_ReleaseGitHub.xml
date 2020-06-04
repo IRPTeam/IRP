@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="30f0c91e-5ea3-4f1f-ab5f-ca78a39f428e" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
+  <name>5. ReleaseGitHub</name>
+  <description />
+  <settings>
+    <options>
+      <option name="allowPersonalBuildTriggering" value="false" />
+      <option name="buildConfigurationType" value="DEPLOYMENT" />
+      <option name="maximumNumberOfBuilds" value="1" />
+    </options>
+    <disabled-settings>
+      <setting-ref ref="TRIGGER_6" />
+    </disabled-settings>
+    <parameters>
+      <param name="env.Database1CName" value="IRP_master" />
+      <param name="env.GitHubSecurityToken" value="credentialsJSON:dea25710-6762-4b8c-ad3c-c8ea384b82c1" spec="password display='hidden'" />
+    </parameters>
+    <build-runners>
+      <runner id="RUNNER_18" name="Dump Cfg" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[start /wait "1cv8.exe" %env.PathTo1CPlatform%  Designer %env.ConnectionTo1C% /Out %env.LogFile1C% /DumpCfg %system.teamcity.build.workingDir%\irp.cf
+echo ##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']
+sh -c "while read line; do if [[ $line == *"Error"* ]]; then echo -e ""\e[31m $line""; else  echo -e ""\e[34m $line""; fi;  done < ""%env.LogFile1C%"";"
+echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_17" name="Upload to github" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe release --security-token %env.GitHubSecurityToken% --user DitriXTemp --repo irp --tag Release-v0.%build.number% 
+%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe upload  --security-token %env.GitHubSecurityToken% --user DitriXTemp --repo irp --tag Release-v0.%build.number%  --name Release-v0.%build.number%.cf --file %system.teamcity.build.workingDir%\irp.cf]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings>
+      <vcs-entry-ref root-id="IRP_GitTC" />
+    </vcs-settings>
+    <requirements />
+    <build-triggers>
+      <build-trigger id="TRIGGER_6" type="buildDependencyTrigger">
+        <parameters>
+          <param name="afterSuccessfulBuildOnly" value="true" />
+          <param name="branchFilter" value="+:&lt;default&gt;" />
+          <param name="dependsOn" value="Irp_Build" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
+    <dependencies>
+      <depend-on sourceBuildTypeId="IRP_SonarQube">
+        <options>
+          <option name="run-build-if-dependency-failed" value="CANCEL" />
+          <option name="take-started-build-with-same-revisions" value="true" />
+          <option name="take-successful-builds-only" value="true" />
+        </options>
+      </depend-on>
+    </dependencies>
+    <cleanup />
+  </settings>
+</build-type>
+

@@ -4,7 +4,13 @@
   <description />
   <settings>
     <parameters />
-    <build-runners />
+    <build-runners>
+      <runner id="RUNNER_1" name="SonarQube Branch or PR Prepare" type="SonarQubeBranch">
+        <parameters>
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+    </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="IRP_GitTC" />
     </vcs-settings>

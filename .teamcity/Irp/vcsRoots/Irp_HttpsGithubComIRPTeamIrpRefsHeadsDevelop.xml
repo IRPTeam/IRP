@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vcs-root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="982e3a17-fcce-484a-8dc0-11df7aad162d" type="jetbrains.git" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
+  <name>https://github.com/IRPTeam/IRP#refs/heads/develop</name>
+  <param name="agentCleanFilesPolicy" value="ALL_UNTRACKED" />
+  <param name="agentCleanPolicy" value="ON_BRANCH_CHANGE" />
+  <param name="authMethod" value="PASSWORD" />
+  <param name="branch" value="develop" />
+  <param name="ignoreKnownHosts" value="true" />
+  <param name="secure:password" value="credentialsJSON:ec5a1a85-861d-464b-9097-1eed4a84edeb" />
+  <param name="submoduleCheckout" value="CHECKOUT" />
+  <param name="teamcity:branchSpec" value="+:refs/heads/" />
+  <param name="url" value="https://github.com/IRPTeam/IRP" />
+  <param name="useAlternates" value="true" />
+  <param name="username" value="DitriXNew" />
+  <param name="usernameStyle" value="USERID" />
+</vcs-root>
+

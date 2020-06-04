@@ -5,6 +5,7 @@
     <param name="env.BranchToStartVA" value="develop" />
     <param name="env.ConnectionTo1C" value="/Slocalhost/%env.Database1CName% /N %env.LoginTo1C% /P %env.PassTo1C%" />
     <param name="env.LogFile1C" value="%system.teamcity.build.tempDir%\Log1C.log" />
+    <param name="env.LoginTo1C" value="CI" />
   </parameters>
   <project-extensions>
     <extension id="PROJECT_EXT_4" type="versionedSettings">

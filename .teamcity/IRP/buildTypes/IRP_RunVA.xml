@@ -186,15 +186,7 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
       <vcs-entry-ref root-id="IRP_GitTC" />
     </vcs-settings>
     <requirements />
-    <build-triggers>
-      <build-trigger id="TRIGGER_5" type="buildDependencyTrigger">
-        <parameters>
-          <param name="afterSuccessfulBuildOnly" value="true" />
-          <param name="branchFilter" value="+:*" />
-          <param name="dependsOn" value="IRP_GitHubUpdate" />
-        </parameters>
-      </build-trigger>
-    </build-triggers>
+    <build-triggers />
     <build-extensions>
       <extension id="BUILD_EXT_3" type="commit-status-publisher">
         <parameters>

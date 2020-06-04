@@ -41,16 +41,7 @@ Invoke-WebRequest -UseBasicParsing -uri https://web.bilist.com.tr:1512/Translato
       <vcs-entry-ref root-id="IRP_GitTC" />
     </vcs-settings>
     <requirements />
-    <build-triggers>
-      <build-trigger id="vcsTrigger" type="vcsTrigger">
-        <parameters>
-          <param name="branchFilter" value="+:master" />
-          <param name="enableQueueOptimization" value="true" />
-          <param name="quietPeriodMode" value="DO_NOT_USE" />
-          <param name="triggerRules" value="-:.teamcity/**" />
-        </parameters>
-      </build-trigger>
-    </build-triggers>
+    <build-triggers />
     <build-extensions>
       <extension id="BUILD_EXT_15" type="BuildFailureOnMessage">
         <parameters>

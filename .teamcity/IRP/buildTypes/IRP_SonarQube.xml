@@ -45,6 +45,15 @@
           <param name="secure:github_access_token" value="credentialsJSON:7f350f35-7665-4b1b-b6e1-d624efb86189" />
         </parameters>
       </extension>
+      <extension id="BUILD_EXT_2" type="pullRequests">
+        <parameters>
+          <param name="authenticationType" value="token" />
+          <param name="filterAuthorRole" value="MEMBER" />
+          <param name="providerType" value="github" />
+          <param name="secure:accessToken" value="credentialsJSON:7f350f35-7665-4b1b-b6e1-d624efb86189" />
+          <param name="vcsRootId" value="IRP_GitTC" />
+        </parameters>
+      </extension>
     </build-extensions>
     <dependencies>
       <depend-on sourceBuildTypeId="IRP_RunVA">

@@ -207,6 +207,14 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
           <param name="vcsRootId" value="IRP_GitTC" />
         </parameters>
       </extension>
+      <extension id="BUILD_EXT_4" type="pullRequests">
+        <parameters>
+          <param name="authenticationType" value="token" />
+          <param name="filterAuthorRole" value="MEMBER" />
+          <param name="providerType" value="github" />
+          <param name="secure:accessToken" value="credentialsJSON:7f350f35-7665-4b1b-b6e1-d624efb86189" />
+        </parameters>
+      </extension>
     </build-extensions>
     <dependencies>
       <depend-on sourceBuildTypeId="IRP_BuildCF">

@@ -8,6 +8,9 @@
       <option name="buildConfigurationType" value="DEPLOYMENT" />
       <option name="maximumNumberOfBuilds" value="1" />
     </options>
+    <disabled-settings>
+      <setting-ref ref="TRIGGER_6" />
+    </disabled-settings>
     <parameters>
       <param name="env.Database1CName" value="IRP_master" />
       <param name="env.GitHubSecurityToken" value="credentialsJSON:dea25710-6762-4b8c-ad3c-c8ea384b82c1" spec="password display='hidden'" />

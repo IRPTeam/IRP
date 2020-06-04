@@ -4,6 +4,7 @@
   <description />
   <settings>
     <parameters>
+      <param name="env.BranchToStartVA" value="develop" />
       <param name="env.SonarParamCover" value="" />
       <param name="env.StartVA" value="" />
     </parameters>

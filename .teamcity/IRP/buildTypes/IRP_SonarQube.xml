@@ -3,7 +3,9 @@
   <name>SonarQube</name>
   <description />
   <settings>
-    <parameters />
+    <parameters>
+      <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />
+    </parameters>
     <build-runners>
       <runner id="RUNNER_1" name="SonarQube Branch or PR Prepare" type="SonarQubeBranch">
         <parameters>

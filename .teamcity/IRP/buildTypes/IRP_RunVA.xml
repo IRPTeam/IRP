@@ -13,7 +13,7 @@
       <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features" />
     </parameters>
     <build-runners>
-      <runner id="RUNNER_10" name="" type="jetbrains_powershell">
+      <runner id="RUNNER_10" name="Generate JSON settings" type="jetbrains_powershell">
         <conditions>
           <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
         </conditions>
@@ -93,7 +93,7 @@ $text = "
 'filtertags': [
 	%env.FilterTagsForVA%
 ],
-'logtogr': true,
+'logtogr': false,
 'logtotext': false,
 'logstepstotext': false,
 'logerrorstotext': false,

@@ -75,9 +75,9 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
         <parameters>
           <param name="github_authentication_type" value="token" />
           <param name="github_host" value="https://api.github.com" />
-          <param name="github_oauth_user" value="DitriXTemp" />
+          <param name="github_oauth_user" value="DitriXNew" />
           <param name="publisherId" value="githubStatusPublisher" />
-          <param name="secure:github_access_token" value="credentialsJSON:4800d23b-677d-4b3e-acfe-f608deb5bb8a" />
+          <param name="secure:github_access_token" value="credentialsJSON:7f350f35-7665-4b1b-b6e1-d624efb86189" />
           <param name="vcsRootId" value="IRP_GitTC" />
         </parameters>
       </extension>

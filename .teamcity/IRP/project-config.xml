@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="2c86963a-8b57-4508-a1aa-5148ab426907" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
   <name>IRP</name>
-  <parameters />
+  <parameters>
+    <param name="env.BranchToStartVA" value="develop" />
+  </parameters>
   <project-extensions>
     <extension id="PROJECT_EXT_4" type="versionedSettings">
       <parameters>

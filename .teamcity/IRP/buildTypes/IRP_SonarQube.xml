@@ -10,6 +10,18 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
+      <runner id="RUNNER_2" name="Sonar Start scan" type="sonar-plugin">
+        <parameters>
+          <param name="additionalParameters" value="%dep.IRP_GitHubUpdate.env.SonarParamCover%" />
+          <param name="sonarProjectKey" value="%teamcity.project.id%" />
+          <param name="sonarProjectName" value="%system.teamcity.projectName%" />
+          <param name="sonarProjectSources" value="src" />
+          <param name="sonarProjectVersion" value="%build.number%" />
+          <param name="sonarServer" value="4ebba3c9-2abc-4f9a-9c9c-7760b6ad6607" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.tool.sonarquberunner" value="%teamcity.tool.sonar-qube-scanner.DEFAULT%" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="IRP_GitTC" />

@@ -92,6 +92,7 @@
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.SalesReturn.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.SalesReturn.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.SalesReturn.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
@@ -312,6 +313,15 @@
     <synonym>
       <key>en</key>
       <value>Choice form with dept</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="865df11c-390b-4e1b-bb48-fddfcecba7a3">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

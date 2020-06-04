@@ -40,7 +40,7 @@
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.PurchaseInvoice.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.PurchaseInvoice.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.PurchaseInvoice.Form.ChoiceFormWithDept</defaultChoiceForm>
+  <defaultChoiceForm>Document.PurchaseInvoice.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
@@ -210,6 +210,15 @@
     <synonym>
       <key>en</key>
       <value>Select purchase orders</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="782d5d05-48c6-4127-9e0b-4263e528150d">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

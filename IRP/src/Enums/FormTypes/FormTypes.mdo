@@ -26,4 +26,11 @@
       <value>List form</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="4a79a2a6-6549-46de-9d65-cbbb728abfe9">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

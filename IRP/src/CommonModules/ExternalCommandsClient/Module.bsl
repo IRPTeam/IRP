@@ -7,7 +7,7 @@ Procedure GeneratedFormCommandActionByName(Object, Form, CommandName, AddInfo = 
 	ReceivedForm.CommandProcedure(Object, Form);	
 EndProcedure
 
-Procedure GeneratedListFormCommandActionByName(SelectedRows, Form, CommandName, AddInfo = Undefined) Export	
+Procedure GeneratedListChoiceFormCommandActionByName(SelectedRows, Form, CommandName, AddInfo = Undefined) Export	
 	ExtProc = ExternalCommandsServer.GetRefOfExternalDataProcByName(CommandName);	
 	Info = AddDataProcServer.AddDataProcInfo(ExtProc);	
 	CallMetodAddDataProc(Info);	

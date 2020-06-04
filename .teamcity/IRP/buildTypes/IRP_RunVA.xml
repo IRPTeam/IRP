@@ -119,13 +119,11 @@ $text = "
 $a = $text | ConvertFrom-Json
 $a | Add-Member -Type NoteProperty -Name 'commandscreenshot' -Value $irfvpath'  /capture=1 /convert='
 $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%'
-$a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.tempDir%/ScreenShots'
-$a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value '%system.teamcity.build.tempDir%/errors_json'
+$a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.tempDir%'
+$a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value '%system.teamcity.build.tempDir%'
 $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value '%system.teamcity.build.tempDir%/test.txt'
  
-$a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va.json
-
-New-Item -Path '%system.teamcity.build.tempDir%' -Name "errors_json" -ItemType "directory" -force]]></param>
+$a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va.json]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

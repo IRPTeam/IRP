@@ -12,6 +12,16 @@
     <param name="env.PathTo1CPlatform" value="&quot;%env.PathTo1CBin%\1cv8.exe&quot;" />
   </parameters>
   <project-extensions>
+    <extension id="PROJECT_EXT_3" type="ReportTab">
+      <parameters>
+        <param name="buildTypeId" value="IRP_RunVA" />
+        <param name="revisionRuleBranchFilter" value="+:&lt;default&gt;" />
+        <param name="revisionRuleName" value="lastSuccessful" />
+        <param name="startPage" value="allure-report.zip!/allure-report/index.html" />
+        <param name="title" value="Allure" />
+        <param name="type" value="ProjectReportTab" />
+      </parameters>
+    </extension>
     <extension id="PROJECT_EXT_4" type="versionedSettings">
       <parameters>
         <param name="buildSettings" value="PREFER_VCS" />

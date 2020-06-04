@@ -7,6 +7,7 @@
     <param name="env.LogFile1C" value="%system.teamcity.build.tempDir%\Log1C.log" />
     <param name="env.LoginTo1C" value="CI" />
     <param name="env.PassTo1C" value="8HRUYXL2UC" />
+    <param name="env.PathTo1CBin" value="C:\Program Files\1cv8\8.3.15.1869\bin" />
   </parameters>
   <project-extensions>
     <extension id="PROJECT_EXT_4" type="versionedSettings">

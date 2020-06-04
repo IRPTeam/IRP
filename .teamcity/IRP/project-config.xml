@@ -20,6 +20,15 @@
         <param name="showChanges" value="false" />
       </parameters>
     </extension>
+    <extension id="PROJECT_EXT_7" type="sonar-qube">
+      <parameters>
+        <param name="id" value="4ebba3c9-2abc-4f9a-9c9c-7760b6ad6607" />
+        <param name="name" value="Main SQ" />
+        <param name="token" value="scrambled:NTFhNzBmOThhYmE1Mzg1ZTMxODE5Y2VmMDhiYWNlYzg3NmVkNGI5Ng==" />
+        <param name="url" value="localhost:9000" />
+        <param name="useToken" value="true" />
+      </parameters>
+    </extension>
   </project-extensions>
   <cleanup />
 </project>

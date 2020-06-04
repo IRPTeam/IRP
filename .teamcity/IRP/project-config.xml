@@ -15,7 +15,7 @@
     <extension id="PROJECT_EXT_3" type="ReportTab">
       <parameters>
         <param name="buildTypeId" value="IRP_RunVA" />
-        <param name="revisionRuleBranchFilter" value="+:&lt;default&gt;" />
+        <param name="revisionRuleBranchFilter" value="+:*" />
         <param name="revisionRuleName" value="lastSuccessful" />
         <param name="startPage" value="allure-report.zip!/allure-report/index.html" />
         <param name="title" value="Allure" />

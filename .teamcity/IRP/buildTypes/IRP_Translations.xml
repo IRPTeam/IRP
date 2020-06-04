@@ -4,7 +4,7 @@
   <description />
   <settings>
     <parameters>
-      <param name="env.CustomerRegion" value="15" />
+      <param name="env.CustomerRegion" value="1" />
       <param name="env.Login" value="Admin" />
       <param name="env.Password" value="credentialsJSON:778f5da0-674f-4328-9423-050467465cd8" spec="password display='hidden'" />
       <param name="env.ProjectID" value="2c652187-a449-11ea-8b89-cad6cda125fe" />

@@ -405,6 +405,18 @@ EndProcedure
 
 #EndRegion
 
+#Region ChoiceFormEvents
+
+&AtServer
+Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export	
+	FormNamesArray = StrSplit(Form.FormName, ".");
+	DocumentName = FormNamesArray[1];
+	ExternalCommandsServer.CreateCommands(Form, DocumentName, Catalogs.ConfigurationMetadata.Documents, Enums.FormTypes.ChoiceForm);	
+EndProcedure
+
+#EndRegion
+
+
 #Region TitleItems
 
 Procedure DeleteUnavailableTitleItemNames(ItemNames) Export

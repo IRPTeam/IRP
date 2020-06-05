@@ -28,6 +28,7 @@
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.Unbundling.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.Unbundling.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.Unbundling.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
@@ -114,6 +115,15 @@
     <synonym>
       <key>en</key>
       <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="98eb47eb-7083-4b7d-aa79-51500379142d">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

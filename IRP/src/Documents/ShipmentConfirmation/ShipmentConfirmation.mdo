@@ -28,6 +28,7 @@
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.ShipmentConfirmation.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.ShipmentConfirmation.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.ShipmentConfirmation.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
@@ -110,6 +111,15 @@
     <synonym>
       <key>en</key>
       <value>Select receipt basises</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="f0e628cf-6ce1-4ee3-bee2-bfaf8fc2addc">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

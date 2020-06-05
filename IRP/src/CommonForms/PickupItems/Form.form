@@ -2285,6 +2285,7 @@
       <edit>
         <common>true</common>
       </edit>
+      <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
     </columns>
     <columns>
       <name>Quantity</name>

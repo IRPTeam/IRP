@@ -37,3 +37,19 @@ Procedure SetGroupItemsList(Object, Form)
 				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
+
+#Region ListFormEvents
+
+Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ChoiceFormEvents
+
+Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion

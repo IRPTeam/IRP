@@ -525,3 +525,11 @@ Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
+
+#Region ChoiceFormEvents
+
+Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion

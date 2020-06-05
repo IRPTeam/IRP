@@ -28,6 +28,7 @@
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.OpeningEntry.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.OpeningEntry.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.OpeningEntry.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.AdvanceFromCustomers</registerRecords>
   <registerRecords>AccumulationRegister.AdvanceToSuppliers</registerRecords>
@@ -68,6 +69,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="0b5e850e-ae4b-408b-b849-66f1783e595a">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

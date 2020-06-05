@@ -40,6 +40,7 @@
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.BankReceipt.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.BankReceipt.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.BankReceipt.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.PartnerArTransactions</registerRecords>
   <registerRecords>AccumulationRegister.AccountBalance</registerRecords>
@@ -166,6 +167,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="96fb1425-b8a9-4546-8bef-762f176ba1b1">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

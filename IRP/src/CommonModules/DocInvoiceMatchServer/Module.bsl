@@ -43,3 +43,19 @@ EndProcedure
 Function GetAttributeTypeDescription(AttributeName) Export
 	Return Metadata.Documents.InvoiceMatch.Attributes[AttributeName].Type;
 EndFunction
+
+#Region ListFormEvents
+
+Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ChoiceFormEvents
+
+Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion

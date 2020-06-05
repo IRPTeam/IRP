@@ -69,7 +69,7 @@
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_1" sourceBuildTypeId="IRP_RunVA" cleanDestination="false">
         <revisionRule name="sameChainOrLastFinished" revision="latest.sameChainOrLastFinished" />
-        <artifact sourcePath="+:Cover.xml=&gt;Cover/Cover.xml" />
+        <artifact sourcePath="+:Cover.xml" />
       </dependency>
     </artifact-dependencies>
     <dependencies>

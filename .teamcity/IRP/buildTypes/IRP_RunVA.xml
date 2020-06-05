@@ -16,9 +16,6 @@
     </parameters>
     <build-runners>
       <runner id="RUNNER_10" name="Generate JSON settings" type="jetbrains_powershell">
-        <conditions>
-          <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
-        </conditions>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />

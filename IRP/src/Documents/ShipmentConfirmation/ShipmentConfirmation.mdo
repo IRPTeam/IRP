@@ -15,6 +15,18 @@
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Document.ShipmentConfirmation.StandardAttribute.Number</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_ShipmentConfirmation</value>
+    </typesFilterValue>
+    <characteristicValues>Document.ShipmentConfirmation.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.ShipmentConfirmation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.ShipmentConfirmation.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.ShipmentConfirmation.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>

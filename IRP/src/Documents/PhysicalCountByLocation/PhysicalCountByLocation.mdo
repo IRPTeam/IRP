@@ -15,6 +15,18 @@
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Document.PhysicalCountByLocation.StandardAttribute.Number</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_PhysicalCountByLocation</value>
+    </typesFilterValue>
+    <characteristicValues>Document.PhysicalCountByLocation.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>

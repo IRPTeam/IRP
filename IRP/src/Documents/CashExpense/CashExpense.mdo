@@ -27,6 +27,18 @@
     <typeField>Document.CashExpense.TabularSection.Currencies.Attribute.MovementType</typeField>
     <valueField>Document.CashExpense.TabularSection.Currencies.Attribute.Amount</valueField>
   </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_CashExpense</value>
+    </typesFilterValue>
+    <characteristicValues>Document.CashExpense.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.CashExpense.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.CashExpense.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.CashExpense.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>

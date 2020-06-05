@@ -79,6 +79,18 @@
     <typeField>Document.SalesReturnOrder.TabularSection.Currencies.Attribute.MovementType</typeField>
     <valueField>Document.SalesReturnOrder.TabularSection.Currencies.Attribute.Amount</valueField>
   </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_SalesReturnOrder</value>
+    </typesFilterValue>
+    <characteristicValues>Document.SalesReturnOrder.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.SalesReturnOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.SalesReturnOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.SalesReturnOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>

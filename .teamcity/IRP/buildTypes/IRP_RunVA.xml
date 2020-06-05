@@ -134,10 +134,6 @@ $a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va
         </parameters>
       </runner>
       <runner id="RUNNER_12" name="Start VA" type="simpleRunner">
-        <conditions>
-          <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
-          <equals name="dep.IRP_GitHubUpdate.env.SkipRunVA" value="False" />
-        </conditions>
         <parameters>
           <param name="script.content"><![CDATA[start /wait "1cv8.exe" %env.PathTo1CPlatform%  %env.ConnectionTo1C% /Out %env.LogFile1C% /Execute "%env.OScript%/lib/vanessa-automation/vanessa-automation.epf" /TestManager /C"StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va.json"
 echo ##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']

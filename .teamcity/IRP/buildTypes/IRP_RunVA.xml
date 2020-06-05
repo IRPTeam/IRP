@@ -159,8 +159,9 @@ $cmdOutput = Get-Content "%system.teamcity.build.tempDir%\Cover.Log" -First 1
 $cmdOutput
 $PIDArray = $cmdOutput.Split('.')
 $PID_ID = $PIDArray[ $PIDArray.Count - 2 ]
-$cmdOutput = coverage-cli stop -p  $PID_ID
-$cmdOutput
+
+echo "##teamcity[setParameter name='env.PID_ID' value='$PID_ID']"
+
 Start-Sleep -s 5]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />

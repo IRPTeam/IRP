@@ -171,11 +171,11 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_6" name="Start-Sleep -s 10" type="jetbrains_powershell">
+      <runner id="RUNNER_6" name="Start-Sleep -s 20" type="jetbrains_powershell">
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code" value="Start-Sleep -s 10" />
+          <param name="jetbrains_powershell_script_code" value="Start-Sleep -s 20" />
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

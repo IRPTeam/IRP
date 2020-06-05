@@ -168,9 +168,6 @@ Start-Sleep -s 5]]></param>
         </parameters>
       </runner>
       <runner id="RUNNER_25" name="taskkill" type="simpleRunner">
-        <conditions>
-          <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
-        </conditions>
         <parameters>
           <param name="script.content" value="taskkill /F /PID %env.PID_ID%" />
           <param name="teamcity.step.mode" value="default" />

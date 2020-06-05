@@ -294,7 +294,7 @@
     <name>SelectSalesOrdersForm</name>
     <synonym>
       <key>en</key>
-      <value>Select Sales orders</value>
+      <value>Select sales orders</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

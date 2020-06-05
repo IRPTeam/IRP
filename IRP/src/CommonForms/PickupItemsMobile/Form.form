@@ -623,7 +623,7 @@
               </userVisible>
               <title>
                 <key>en</key>
-                <value>Item list group row r ight</value>
+                <value>Item list group row right</value>
               </title>
               <extendedTooltip>
                 <name>ItemListGroupRowRIghtExtendedTooltip</name>
@@ -1373,7 +1373,7 @@
               </userVisible>
               <title>
                 <key>en</key>
-                <value>Item list group row r ight</value>
+                <value>Item list group row right</value>
               </title>
               <extendedTooltip>
                 <name>ItemKeyListGroupRowRIghtExtendedTooltip</name>

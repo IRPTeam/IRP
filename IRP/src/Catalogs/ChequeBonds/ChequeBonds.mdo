@@ -192,7 +192,7 @@
     <name>PickUpForm</name>
     <synonym>
       <key>en</key>
-      <value>PickUpForm</value>
+      <value>Pickup form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

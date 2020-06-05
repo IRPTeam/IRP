@@ -63,13 +63,13 @@
     <name>IDInfoTypes</name>
     <synonym>
       <key>en</key>
-      <value>IDInfo types</value>
+      <value>ID Info types</value>
     </synonym>
     <attributes uuid="6d89c214-8d2d-400b-832d-b3b2a2a84fc7">
       <name>IDInfoType</name>
       <synonym>
         <key>en</key>
-        <value>IDInfo type</value>
+        <value>ID Info type</value>
       </synonym>
       <type>
         <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>

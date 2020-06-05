@@ -11,7 +11,7 @@
   <name>PartnerApTransactions</name>
   <synonym>
     <key>en</key>
-    <value>Partner Ap transactions</value>
+    <value>Partner AP transactions</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>

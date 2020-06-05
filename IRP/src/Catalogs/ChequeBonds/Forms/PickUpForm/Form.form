@@ -1516,7 +1516,7 @@ FROM
     <name>FilterByChequeBondType</name>
     <title>
       <key>en</key>
-      <value>FilterByChequeBondType</value>
+      <value>Filter by cheque bond type</value>
     </title>
     <id>12</id>
     <valueType>

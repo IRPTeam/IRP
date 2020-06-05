@@ -109,7 +109,7 @@
     <name>SelectShipmentBasisesForm</name>
     <synonym>
       <key>en</key>
-      <value>Select Receipt basises</value>
+      <value>Select receipt basises</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

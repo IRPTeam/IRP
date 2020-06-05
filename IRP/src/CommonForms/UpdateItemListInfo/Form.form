@@ -426,7 +426,7 @@
     </use>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>Ок</name>
+        <name>OK</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

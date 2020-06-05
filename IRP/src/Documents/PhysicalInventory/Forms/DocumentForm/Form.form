@@ -2151,9 +2151,6 @@
             <paths xsi:type="form:DataPath">
               <segments>PhysicalCountByLocationList.DefaultPicture</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>PhysicalCountByLocationList.СтандартнаяКартинка</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PhysicalCountByLocationListDefaultPictureExtendedTooltip</name>
@@ -2204,9 +2201,6 @@
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
               <segments>PhysicalCountByLocationList.Ref</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>PhysicalCountByLocationList.Ссылка</segments>
             </paths>
           </dataPath>
           <extendedTooltip>

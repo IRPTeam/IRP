@@ -109,15 +109,15 @@ Function SendToDrive(IntegrationSettingsRef, Name, RequestBody) Export
 	DataTXT.Add("Content-Type: application/json; charset=UTF-8");
 	DataTXT.Add("");
 	DataTXT.Add("{");
-	Если НЕ ЗначениеЗаполнено("") Тогда
+	If Not ValueIsFilled("") Then
 		DataTXT.Add("  ""title"": """+Name+"""");
-	Иначе
+	Else
 		DataTXT.Add("  ""title"": """+Name+""",");
 		DataTXT.Add("  ""parents"": [{");
 		DataTXT.Add("  ""kind"": ""drive#fileLink"",");
 		DataTXT.Add("  ""id"": """+Name+"""");
 		DataTXT.Add("  }]");
-	КонецЕсли;
+	EndIf;
 	DataTXT.Add("}");
 	DataTXT.Add("");
 	DataTXT.Add("--" + boundary);
@@ -131,10 +131,10 @@ Function SendToDrive(IntegrationSettingsRef, Name, RequestBody) Export
 	DataTXT.Add("--"+boundary+"--");
 
 	Headers = New Map();
-	Headers.Вставить("POST /upload/drive/v2/files?uploadType=multipart HTTP/1.1");
-	Headers.Вставить("Host", "www.googleapis.com");
-	Headers.Вставить("Content-Type", "multipart/related; boundary="+boundary);
-	Headers.Вставить("Authorization", "OAuth " + access_token);
+	Headers.Insert("POST /upload/drive/v2/files?uploadType=multipart HTTP/1.1");
+	Headers.Insert("Host", "www.googleapis.com");
+	Headers.Insert("Content-Type", "multipart/related; boundary="+boundary);
+	Headers.Insert("Authorization", "OAuth " + access_token);
 
 
 	HTTPConnection = New HTTPConnection("accounts.google.com", 443, , , , 5, New OpenSSLSecureConnection());

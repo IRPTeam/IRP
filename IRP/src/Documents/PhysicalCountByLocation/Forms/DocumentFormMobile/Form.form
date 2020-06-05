@@ -462,7 +462,7 @@
               <displayImportance>VeryHigh</displayImportance>
               <title>
                 <key>en</key>
-                <value>Exp. Q.</value>
+                <value>Exp Q</value>
               </title>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -505,7 +505,7 @@
               <displayImportance>VeryHigh</displayImportance>
               <title>
                 <key>en</key>
-                <value>Q.</value>
+                <value>Q</value>
               </title>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -639,7 +639,7 @@
             </userVisible>
             <title>
               <key>en</key>
-              <value>Item list group row r ight</value>
+              <value>Item list group row right</value>
             </title>
             <extendedTooltip>
               <name>ItemListGroupRowRIghtExtendedTooltip</name>

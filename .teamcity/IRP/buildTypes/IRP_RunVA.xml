@@ -128,14 +128,20 @@ $a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <runner id="RUNNER_14" name="Start Coverage" type="simpleRunner">
-        <conditions>
-          <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
-        </conditions>
+      <runner id="RUNNER_14" name="Start Coverage" type="jetbrains_powershell">
         <parameters>
-          <param name="script.content" value="coverage-cli start --infobase %env.Database1CName% --debugger http://localhost:1550 --output %system.teamcity.build.workingDir%/Cover.csv" />
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[$cmdOutput = cmd /c coverage-cli start --infobase %env.Database1CName%  --debugger http://localhost:1550 --output %system.teamcity.build.workingDir%/Cover.csv '2>&1' | Out-String
+$cmdOutput
+
+$PIDArray = $cmdOutput.Split('.')
+$PID_ID = $PIDArray[ $PIDArray.Count - 2 ]
+$PID_ID
+
+echo "##teamcity[setParameter name='env.PID_ID' value='$PID_ID']"]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
       <runner id="RUNNER_4" name="Start-Sleep -s 15" type="jetbrains_powershell">

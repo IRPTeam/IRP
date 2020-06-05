@@ -12,7 +12,7 @@
       <param name="env.FilterTagsForVA" value="'Test'" />
       <param name="env.OScript" value="C:/OneScript" />
       <param name="env.PID_ID" value="0" />
-      <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features" />
+      <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features/_9000SaasMode" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_10" name="Generate JSON settings" type="jetbrains_powershell">

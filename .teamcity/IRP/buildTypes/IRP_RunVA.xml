@@ -154,8 +154,13 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[$cmdOutput = cmd /c coverage-cli stop -p %env.PID_ID% '2>&1' | Out-String
-$cmdOutput]]></param>
+          <param name="jetbrains_powershell_script_code"><![CDATA[Start-Sleep -s 5
+$cmdOutput = Get-Content "%system.teamcity.build.tempDir%/Cover.Log" -First 1
+$PIDArray = $cmdOutput.Split('.')
+$PID_ID = $PIDArray[ $PIDArray.Count - 2 ]
+$cmdOutput = coverage-cli stop -p $PID_ID
+$cmdOutput
+Start-Sleep -s 5]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

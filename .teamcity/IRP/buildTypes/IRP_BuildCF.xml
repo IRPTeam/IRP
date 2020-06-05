@@ -5,6 +5,7 @@
   <settings>
     <options>
       <option name="allowExternalStatus" value="true" />
+      <option name="artifactRules" value="%env.Database1CName%.cf" />
     </options>
     <parameters>
       <param name="env.CheckConfigSettings" value="-IncorrectReferences -ThinClient -WebClient -Server -UnreferenceProcedures -HandlersExistence -EmptyHandlers -ExtendedModulesCheck -CheckUseModality -CheckUseSynchronousCalls" />

@@ -10,6 +10,7 @@
     <param name="env.PassTo1C" value="8HRUYXL2UC" />
     <param name="env.PathTo1CBin" value="C:\Program Files\1cv8\8.3.15.1869\bin" />
     <param name="env.PathTo1CPlatform" value="&quot;%env.PathTo1CBin%\1cv8.exe&quot;" />
+    <param name="env.SkipRunVA" value="False" spec="select data_2='False' data_1='True' display='normal'" />
   </parameters>
   <project-extensions>
     <extension id="PROJECT_EXT_3" type="ReportTab">

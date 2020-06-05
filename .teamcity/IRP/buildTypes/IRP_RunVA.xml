@@ -141,6 +141,7 @@ $a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va
       <runner id="RUNNER_12" name="Start VA" type="simpleRunner">
         <conditions>
           <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
+          <equals name="env.SkipRunVA" value="False" />
         </conditions>
         <parameters>
           <param name="script.content"><![CDATA[start /wait "1cv8.exe" %env.PathTo1CPlatform%  %env.ConnectionTo1C% /Out %env.LogFile1C% /Execute "%env.OScript%/lib/vanessa-automation/vanessa-automation.epf" /TestManager /C"StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va.json"
@@ -174,6 +175,7 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
       <runner id="RUNNER_13" name="Allure Reoprt" type="simpleRunner">
         <conditions>
           <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
+          <equals name="env.SkipRunVA" value="False" />
         </conditions>
         <parameters>
           <param name="script.content"><![CDATA[%teamcity.tool.allure-commandline%\bin\allure.bat generate "allure/base" --clean -o "allure-report"
@@ -203,7 +205,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="github_host" value="https://api.github.com" />
           <param name="github_oauth_user" value="DitriXNew" />
           <param name="publisherId" value="githubStatusPublisher" />
-          <param name="secure:github_access_token" value="credentialsJSON:7f350f35-7665-4b1b-b6e1-d624efb86189" />
+          <param name="secure:github_access_token" value="credentialsJSON:1fa3b09b-5cd9-4521-80c7-3c52664962a9" />
           <param name="vcsRootId" value="IRP_GitTC" />
         </parameters>
       </extension>
@@ -212,7 +214,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="authenticationType" value="token" />
           <param name="filterAuthorRole" value="MEMBER" />
           <param name="providerType" value="github" />
-          <param name="secure:accessToken" value="credentialsJSON:7f350f35-7665-4b1b-b6e1-d624efb86189" />
+          <param name="secure:accessToken" value="credentialsJSON:1fa3b09b-5cd9-4521-80c7-3c52664962a9" />
         </parameters>
       </extension>
     </build-extensions>

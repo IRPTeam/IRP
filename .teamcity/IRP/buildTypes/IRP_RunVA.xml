@@ -150,7 +150,6 @@ $a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va
       <runner id="RUNNER_12" name="Start VA" type="simpleRunner">
         <conditions>
           <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
-          <equals name="env.SkipRunVA" value="False" />
           <equals name="dep.IRP_GitHubUpdate.env.SkipRunVA" value="False" />
         </conditions>
         <parameters>

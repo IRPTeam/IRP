@@ -167,7 +167,7 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
         </conditions>
         <parameters>
           <param name="script.content" value="coverage-cli stop" />
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>

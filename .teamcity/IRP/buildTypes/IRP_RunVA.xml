@@ -179,8 +179,7 @@ Start-Sleep -s 5]]></param>
           <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
         </conditions>
         <parameters>
-          <param name="script.content"><![CDATA[taskkill /F /PID %env.PID_ID%
-coverage-cli convert --input %system.teamcity.build.workingDir%/Cover.csv --output  %system.teamcity.build.workingDir%/Cover.xml --sources IRP\src --format EDT & powershell -command "(Get-Content %system.teamcity.build.workingDir%/Cover.xml) | ForEach-Object { $_ -replace '\\', '/' } | Set-Content %system.teamcity.build.workingDir%/Cover.xml"]]></param>
+          <param name="script.content" value="coverage-cli convert --input %system.teamcity.build.workingDir%/Cover.csv --output  %system.teamcity.build.workingDir%/Cover.xml --sources IRP\src --format EDT &amp; powershell -command &quot;(Get-Content %system.teamcity.build.workingDir%/Cover.xml) | ForEach-Object { $_ -replace '\\', '/' } | Set-Content %system.teamcity.build.workingDir%/Cover.xml&quot;" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>

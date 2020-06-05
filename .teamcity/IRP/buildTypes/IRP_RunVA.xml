@@ -150,7 +150,7 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_15" name="Cover stop" type="jetbrains_powershell">
+      <runner id="RUNNER_15" name="Cover. Find PID proccess" type="jetbrains_powershell">
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />

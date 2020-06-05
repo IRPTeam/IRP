@@ -182,10 +182,6 @@ Start-Sleep -s 5]]></param>
         </parameters>
       </runner>
       <runner id="RUNNER_13" name="Allure Reoprt" type="simpleRunner">
-        <conditions>
-          <equals name="dep.IRP_GitHubUpdate.env.StartVA" value="true" />
-          <equals name="env.SkipRunVA" value="False" />
-        </conditions>
         <parameters>
           <param name="script.content"><![CDATA[%teamcity.tool.allure-commandline%\bin\allure.bat generate "allure/base" --clean -o "allure-report"
 Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]></param>

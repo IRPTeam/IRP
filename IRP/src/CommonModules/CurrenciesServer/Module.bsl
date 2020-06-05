@@ -1,9 +1,15 @@
 
-Procedure PreparePostingDataTables(Parameters, AddInfo = Undefined) Export
+Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefined) Export
 	ArrayOfPostingInfo = New Array();
 	For Each PostingInfo In Parameters.PostingDataTables Do
 		RecordSetMetadata = PostingInfo.Key.Metadata();
-		If Metadata.AccumulationRegisters.Contains(RecordSetMetadata) Then
+		If Parameters.Property("MultiCurrencyExcludePostingDataTables") 
+			And Parameters.MultiCurrencyExcludePostingDataTables.Find(RecordSetMetadata) <> Undefined Then
+				Continue;
+		EndIf;
+		
+		If Metadata.AccumulationRegisters.Contains(RecordSetMetadata)
+			Or Metadata.InformationRegisters.Contains(RecordSetMetadata) Then
 			Dimension = RecordSetMetadata.Dimensions.Find("CurrencyMovementType");
 			// Register supported multicurrency
 			If Dimension <> Undefined Then
@@ -21,7 +27,11 @@ Procedure PreparePostingDataTables(Parameters, AddInfo = Undefined) Export
 		|INTO CurrencyTable
 		|FROM
 		|	&CurrencyTable AS CurrencyTable";
-		Query.SetParameter("CurrencyTable", Parameters.Object.Currencies.Unload());
+		If CurrencyTable = Undefined Then
+			Query.SetParameter("CurrencyTable", Parameters.Object.Currencies.Unload());
+		Else
+			Query.SetParameter("CurrencyTable", CurrencyTable);
+		EndIf;
 		Query.Execute();
 		For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
 			If ItemOfPostingInfo.Value.RecordSet.Count() Then
@@ -223,7 +233,7 @@ Procedure FiilCurrencyTable(Object, Date, Company, Currency, RowKey, AgreementIn
 	
 EndProcedure
 
-Procedure AddRowToCurrencyTable(Date, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType)
+Procedure AddRowToCurrencyTable(Date, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType) Export
 	NewRow = CurrenciesTable.Add();
 	NewRow.Key = RowKey;
 	NewRow.CurrencyFrom = CurrencyFrom;
@@ -275,12 +285,16 @@ Procedure CalculateAmount(Object, DocumentAmount, RowKeyFilter, CurrencyFilter =
 			Row.Amount = 0;
 			Continue;
 		EndIf;
-		If Row.ShowReverseRate Then
-			Row.Amount = (DocumentAmount * Row.ReverseRate) / Row.Multiplicity;
-		Else
-			Row.Amount = DocumentAmount / (Row.Rate * Row.Multiplicity);
-		EndIf;
+		CalculateAmountByRow(Row, DocumentAmount);
 	EndDo;
+EndProcedure
+
+Procedure CalculateAmountByRow(Row, DocumentAmount) Export
+	If Row.ShowReverseRate Then
+		Row.Amount = (DocumentAmount * Row.ReverseRate) / Row.Multiplicity;
+	Else
+		Row.Amount = DocumentAmount / (Row.Rate * Row.Multiplicity);
+	EndIf;
 EndProcedure
 
 Procedure CalculateRate(Object, DocumentAmount, MovementType, RowKeyFilter, CurrencyFilter = Undefined) Export

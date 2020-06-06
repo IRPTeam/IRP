@@ -15,7 +15,7 @@
     <property name="teamcity.build.branch.is_default" value="%teamcity.build.branch.is_default%" />
     <property name="teamcity.pullRequest.number" value="%teamcity.pullRequest.number%" />
     <property name="teamcity.pullRequest.target.branch" value="%teamcity.pullRequest.target.branch%" />
-    <property name="teamcity.pullRequest.title" value="from %teamcity.build.branch%" />
+    <property name="teamcity.pullRequest.title" value="%teamcity.pullRequest.title%" />
     <!-- Matching process (PR vs branch) -->
     <condition property="isPullRequest">
         <and>

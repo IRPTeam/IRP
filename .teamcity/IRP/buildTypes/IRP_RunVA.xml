@@ -186,12 +186,14 @@ If ($Proc) {
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_13" name="Allure Reoprt" type="simpleRunner">
+      <runner id="RUNNER_13" name="Allure Reoprt" type="jetbrains_powershell">
         <parameters>
-          <param name="script.content"><![CDATA[%teamcity.tool.allure-commandline%\bin\allure.bat generate "allure/base" --clean -o "allure-report"
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[%teamcity.tool.allure-commandline%\bin\allure.bat generate "allure/base" --clean -o "allure-report"
 Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]></param>
-          <param name="teamcity.step.mode" value="execute_if_failed" />
-          <param name="use.custom.script" value="true" />
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
     </build-runners>

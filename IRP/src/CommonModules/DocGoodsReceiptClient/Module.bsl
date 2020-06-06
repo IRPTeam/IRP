@@ -491,3 +491,11 @@ Procedure CompareQuantity(Object, Form, Command) Export
 	OpenForm("DataProcessor.QuantityCompare.Form.Form", QuantityCompareParameters, Form, Form.UUID, , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
+#Region PickUpItems
+
+Procedure OpenPickupItems(Object, Form, Command) Export
+	DocumentsClient.OpenPickupItems(Object, Form, Command); 
+EndProcedure
+
+#EndRegion
+

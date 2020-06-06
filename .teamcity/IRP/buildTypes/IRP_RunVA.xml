@@ -167,11 +167,16 @@ Start-Sleep -s 5]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_25" name="taskkill" type="simpleRunner">
+      <runner id="RUNNER_25" name="taskkill" type="jetbrains_powershell">
         <parameters>
-          <param name="script.content" value="taskkill /F /PID %env.PID_ID%" />
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[$Proc = Get-Process -ID %env.PID_ID% -ErrorAction SilentlyContinue
+If ($Proc) {
+    Stop-Process -ID %env.PID_ID% -Force
+}]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
       <runner id="RUNNER_16" name="Cover convert" type="simpleRunner">

@@ -18,7 +18,7 @@
         <param name="buildTypeId" value="IRP_RunVA" />
         <param name="revisionRuleBranchFilter" value="+:*" />
         <param name="revisionRuleName" value="lastSuccessful" />
-        <param name="startPage" value="allure-report.zip!/allure-report/index.html" />
+        <param name="startPage" value="allure-report.zip!/index.html" />
         <param name="title" value="Allure" />
         <param name="type" value="ProjectReportTab" />
       </parameters>

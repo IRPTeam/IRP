@@ -124,6 +124,7 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
       <depend-on sourceBuildTypeId="IRP_GitHubUpdate">
         <options>
           <option name="run-build-if-dependency-failed" value="CANCEL" />
+          <option name="run-build-on-the-same-agent" value="true" />
           <option name="take-started-build-with-same-revisions" value="true" />
           <option name="take-successful-builds-only" value="true" />
         </options>

@@ -37,7 +37,7 @@
         <param name="id" value="4ebba3c9-2abc-4f9a-9c9c-7760b6ad6607" />
         <param name="name" value="Main SQ" />
         <param name="token" value="scrambled:NTFhNzBmOThhYmE1Mzg1ZTMxODE5Y2VmMDhiYWNlYzg3NmVkNGI5Ng==" />
-        <param name="url" value="http://localhost:9000" />
+        <param name="url" value="http://95.216.127.147:9000/" />
         <param name="useToken" value="true" />
       </parameters>
     </extension>

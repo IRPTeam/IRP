@@ -9,7 +9,7 @@
     </options>
     <parameters>
       <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />
-      <param name="env.FilterTagsForVA" value="'Test'" />
+      <param name="env.FilterTagsForVA" value="" />
       <param name="env.OScript" value="C:/OneScript" />
       <param name="env.PID_ID" value="0" />
       <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features/" />
@@ -234,7 +234,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="teamcity.file.content.replacer.failBuild" value="true" />
           <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
           <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
-          <param name="teamcity.file.content.replacer.pattern" value="#workingDir#\\features" />
+          <param name="teamcity.file.content.replacer.pattern" value="#workingDir#" />
           <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
           <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
           <param name="teamcity.file.content.replacer.replacement" value="%system.teamcity.build.workingDir%" />

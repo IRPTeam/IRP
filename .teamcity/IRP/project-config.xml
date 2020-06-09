@@ -5,7 +5,6 @@
     <param name="env.BranchToStartVA" value="develop" />
     <param name="env.ConnectionTo1C" value="/Slocalhost/%env.Database1CName% /N %env.LoginTo1C% /P %env.PassTo1C%" />
     <param name="env.GitToken" value="credentialsJSON:dea25710-6762-4b8c-ad3c-c8ea384b82c1" spec="password display='hidden' readOnly='true'" />
-    <param name="env.LogFile1C" value="%system.teamcity.build.tempDir%\Log1C.log" />
     <param name="env.LoginTo1C" value="CI" />
     <param name="env.PassTo1C" value="8HRUYXL2UC" />
     <param name="env.PathTo1CBin" value="C:\Program Files\1cv8\8.3.15.1869\bin" />

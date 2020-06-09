@@ -234,10 +234,10 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="teamcity.file.content.replacer.failBuild" value="true" />
           <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
           <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
-          <param name="teamcity.file.content.replacer.pattern" value="#workingDir#" />
+          <param name="teamcity.file.content.replacer.pattern" value="#workingDir#\\features" />
           <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
           <param name="teamcity.file.content.replacer.regexMode" value="REGEX" />
-          <param name="teamcity.file.content.replacer.replacement" value="%system.teamcity.build.workingDir%" />
+          <param name="teamcity.file.content.replacer.replacement" value="%system.teamcity.build.workingDir%\\ExternalDataProcessors" />
           <param name="teamcity.file.content.replacer.wildcards" value="+:features/**" />
         </parameters>
       </extension>

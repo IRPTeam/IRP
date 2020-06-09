@@ -1,6 +1,0 @@
-Данные = новый двоичныеданные("W:\IRP\DataProcessor\Новая папка\DefaultExt_tr.cfe");
-CurrentObject = catalogs.extensions.createitem();
-CurrentObject.description = "DefaultExt_tr";
-CurrentObject.UniqueID = "DefaultExt_tr";
-CurrentObject.FileData = New ValueStorage(Данные);
-CurrentObject.записать()

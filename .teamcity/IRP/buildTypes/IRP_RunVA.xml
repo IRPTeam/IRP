@@ -229,7 +229,25 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="secure:accessToken" value="credentialsJSON:1fa3b09b-5cd9-4521-80c7-3c52664962a9" />
         </parameters>
       </extension>
+      <extension id="BUILD_EXT_13" type="JetBrains.FileContentReplacer">
+        <parameters>
+          <param name="teamcity.file.content.replacer.failBuild" value="true" />
+          <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
+          <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
+          <param name="teamcity.file.content.replacer.pattern" value="#workingDir#\\features" />
+          <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
+          <param name="teamcity.file.content.replacer.regexMode" value="REGEX" />
+          <param name="teamcity.file.content.replacer.replacement" value="%system.teamcity.build.workingDir%\\ExternalDataProcessors" />
+          <param name="teamcity.file.content.replacer.wildcards" value="+:features/**" />
+        </parameters>
+      </extension>
     </build-extensions>
+    <artifact-dependencies>
+      <dependency id="ARTIFACT_DEPENDENCY_2" sourceBuildTypeId="ExternalDataProcessors_Build" cleanDestination="false">
+        <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" />
+        <artifact sourcePath="ExternalDataProcessors=&gt;ExternalDataProcessors" />
+      </dependency>
+    </artifact-dependencies>
     <dependencies>
       <depend-on sourceBuildTypeId="IRP_BuildCF">
         <options>

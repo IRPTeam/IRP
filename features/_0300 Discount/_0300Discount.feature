@@ -17,7 +17,7 @@
 Сценарий: _030001 добавление обработки External data proc SpecialMessage
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я буду выбирать внешний файл "W:\IRP\DataProcessor\Новая папка\SpecialOffer_Message.epf"
+	И я буду выбирать внешний файл "#workingDir#\features\DataProcessor\Новая папка\SpecialOffer_Message.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
 	И в поле 'Path to ext data proc for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'ExternalSpecialMessage'
@@ -32,7 +32,7 @@
 Сценарий: _030002 добавление обработки External data proc DocumentDiscount
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я буду выбирать внешний файл "W:\IRP\DataProcessor\DocumentDiscount.epf"
+	И я буду выбирать внешний файл "#workingDir#\features\DataProcessor\DocumentDiscount.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
 	И в поле 'Path to ext data proc for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'DocumentDiscount'
@@ -47,7 +47,7 @@
 Сценарий: _030003 добавление обработки External data proc SpecialRules
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я буду выбирать внешний файл "W:\IRP\DataProcessor\SpecialOfferRules.epf"
+	И я буду выбирать внешний файл "#workingDir#\features\DataProcessor\SpecialOfferRules.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
 	И в поле 'Path to ext data proc for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'ExternalSpecialOfferRules'
@@ -62,7 +62,7 @@
 Сценарий: _030004 добавление обработки External data proc RangeDiscount
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я буду выбирать внешний файл "W:\IRP\DataProcessor\RangeDiscount.epf"
+	И я буду выбирать внешний файл "#workingDir#\features\DataProcessor\RangeDiscount.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
 	И в поле 'Path to ext data proc for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'ExternalRangeDiscount'
@@ -80,7 +80,7 @@
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	И я добавляю обработку FivePlusOneType
-		И я буду выбирать внешний файл "W:\IRP\DataProcessor\FivePlusOne.epf"
+		И я буду выбирать внешний файл "#workingDir#\features\DataProcessor\FivePlusOne.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
 		И в поле 'Path to ext data proc for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'ExternalFivePlusOne'

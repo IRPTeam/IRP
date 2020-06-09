@@ -10,7 +10,7 @@
       <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />
     </parameters>
     <build-runners>
-      <runner id="RUNNER_1" name="SonarQube Branch or PR Prepare" type="SonarQubeBranch">
+      <runner id="RUNNER_1" name="SonarQube Branch or PR Prepare" type="SQ_Setting">
         <parameters>
           <param name="teamcity.step.mode" value="default" />
         </parameters>
@@ -28,6 +28,9 @@
         </parameters>
       </runner>
       <runner id="RUNNER_3" name="" type="DropDB">
+        <conditions>
+          <equals name="teamcity.build.branch.is_default" value="false" />
+        </conditions>
         <parameters>
           <param name="teamcity.step.mode" value="default" />
         </parameters>

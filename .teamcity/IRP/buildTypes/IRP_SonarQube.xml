@@ -28,6 +28,9 @@
         </parameters>
       </runner>
       <runner id="RUNNER_3" name="" type="DropDB">
+        <conditions>
+          <equals name="teamcity.build.branch.is_default" value="false" />
+        </conditions>
         <parameters>
           <param name="teamcity.step.mode" value="default" />
         </parameters>

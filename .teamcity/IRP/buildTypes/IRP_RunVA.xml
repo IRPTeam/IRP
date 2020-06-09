@@ -176,7 +176,7 @@ If ($Proc) {
     Stop-Process -ID %env.PID_ID% -Force
 }]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
         </parameters>
       </runner>
       <runner id="RUNNER_16" name="Cover convert" type="simpleRunner">

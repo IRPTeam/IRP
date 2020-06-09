@@ -209,7 +209,7 @@
 		| 'Item'  | 'Price'    | 'Item key' | 'Store'         | 'Q'     | 'Offers amount' | 'Unit'           | 'Total amount'    |
 		| 'Dress' | '520,00'   | 'XS/Blue'  | 'Store 01'      | '5,000' | '655,00'        | 'pcs'            | '1 945,00'        |
 		| 'Boots' | '8 400,00' | '36/18SD'  | 'Store 01'      | '2,000' | '3 600,00'      | 'Boots (12 pcs)' | '13 200,00'       |
-	И я перехожу к закладке "SpecialOffers"
+	И я перехожу к закладке "Special offers"
 	И таблица "SpecialOffers" стала равной:
 		| 'Special offer'    | 'Amount'   |
 		| 'Discount Price 2' | '655,00'   |

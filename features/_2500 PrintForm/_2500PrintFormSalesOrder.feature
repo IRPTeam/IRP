@@ -18,7 +18,7 @@
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение данных по обработке и добавление её в базу
-		И я буду выбирать внешний файл "W:\IRP\DataProcessor\PrintFormSalesOrder.epf"
+		И я буду выбирать внешний файл "#workingDir#\DataProcessor\PrintFormSalesOrder.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
 		И в поле 'Path to ext data proc for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'PrintFormSalesOrder'

@@ -1323,7 +1323,7 @@
 	* Добавление обработки для расчета цены
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я буду выбирать внешний файл "#workingDir#\feature\DataProcessor\Новая папка\SalesPriceCalculation.epf"
+		И я буду выбирать внешний файл "#workingDir#\DataProcessor\SalesPriceCalculation.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
 		И в поле 'Path to ext data proc for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'SalesPriceCalculation'

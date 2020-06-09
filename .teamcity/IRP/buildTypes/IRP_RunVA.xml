@@ -245,7 +245,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_2" sourceBuildTypeId="ExternalDataProcessors_Build" cleanDestination="false">
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" />
-        <artifact sourcePath="ExternalDataProcessors=&gt;ExternalDataProcessors" />
+        <artifact sourcePath="ExternalDataProcessors=&gt;DataProcessors" />
       </dependency>
     </artifact-dependencies>
     <dependencies>

@@ -163,7 +163,7 @@ Start-Sleep -s 5]]></param>
       <runner id="RUNNER_4" name="Cover stop" type="simpleRunner">
         <parameters>
           <param name="script.content" value="coverage-cli stop -p %env.PID_ID%" />
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>

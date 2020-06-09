@@ -27,7 +27,7 @@
 Сценарий: _300201 добавление обработки для генерации уникальных баркодов
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я буду выбирать внешний файл "W:\IRP\DataProcessor\GenerateBarcode.epf"
+	И я буду выбирать внешний файл "#workingDir#\features\DataProcessor\GenerateBarcode.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
 	И в поле 'Path to ext data proc for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'GenerateBarcode'

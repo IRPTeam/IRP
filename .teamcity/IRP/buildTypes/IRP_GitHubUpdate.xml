@@ -3,6 +3,9 @@
   <name>1. GitHubUpdate</name>
   <description />
   <settings>
+    <options>
+      <option name="excludeDefaultBranchChanges" value="true" />
+    </options>
     <parameters>
       <param name="env.BranchToStartVA" value="develop" />
       <param name="env.Database1CName" value="%teamcity.project.id%" />

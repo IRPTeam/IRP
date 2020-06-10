@@ -269,6 +269,11 @@ Procedure CompareQuantity(Command)
 	DocGoodsReceiptClient.CompareQuantity(Object, ThisObject, Command);
 EndProcedure
 
+&AtClient
+Procedure OpenPickupItems(Command)
+	DocGoodsReceiptClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
+
 #EndRegion
 
 &AtServer

@@ -163,7 +163,7 @@ Start-Sleep -s 5]]></param>
       <runner id="RUNNER_4" name="Cover stop" type="simpleRunner">
         <parameters>
           <param name="script.content" value="coverage-cli stop -p %env.PID_ID%" />
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
@@ -176,7 +176,7 @@ If ($Proc) {
     Stop-Process -ID %env.PID_ID% -Force
 }]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
         </parameters>
       </runner>
       <runner id="RUNNER_16" name="Cover convert" type="simpleRunner">
@@ -234,10 +234,10 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="teamcity.file.content.replacer.failBuild" value="true" />
           <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
           <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
-          <param name="teamcity.file.content.replacer.pattern" value="#workingDir#\\features" />
+          <param name="teamcity.file.content.replacer.pattern" value="#workingDir#" />
           <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
-          <param name="teamcity.file.content.replacer.regexMode" value="REGEX" />
-          <param name="teamcity.file.content.replacer.replacement" value="%system.teamcity.build.workingDir%\\ExternalDataProcessors" />
+          <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
+          <param name="teamcity.file.content.replacer.replacement" value="%system.teamcity.build.workingDir%" />
           <param name="teamcity.file.content.replacer.wildcards" value="+:features/**" />
         </parameters>
       </extension>
@@ -245,7 +245,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_2" sourceBuildTypeId="ExternalDataProcessors_Build" cleanDestination="false">
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" />
-        <artifact sourcePath="ExternalDataProcessors=&gt;ExternalDataProcessors" />
+        <artifact sourcePath="ExternalDataProcessors=&gt;DataProcessors" />
       </dependency>
     </artifact-dependencies>
     <dependencies>

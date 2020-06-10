@@ -17,17 +17,17 @@
     * Внесение настроек в справочник File storages info
         И я открываю навигационную ссылку 'e1cib/list/Catalog.FileStoragesInfo'
         Тогда я нажимаю на кнопку 'Create'
-        И в поле 'Path to catalog at server' я ввожу текст '#workingDir#\features\Picture\Preview'
+        И в поле 'Path to catalog at server' я ввожу текст '#workingDir#\Picture\Preview'
         И в поле 'URL Alias' я ввожу текст 'preview'
         И я нажимаю на кнопку 'Save and close'
         И я открываю навигационную ссылку 'e1cib/list/Catalog.FileStoragesInfo'
         Тогда я нажимаю на кнопку 'Create'
-        И в поле 'Path to catalog at server' я ввожу текст '#workingDir#\features\Picture\Script'
+        И в поле 'Path to catalog at server' я ввожу текст '#workingDir#\Picture\Script'
         И в поле 'URL Alias' я ввожу текст 'js'
         И я нажимаю на кнопку 'Save and close'
         И я открываю навигационную ссылку 'e1cib/list/Catalog.FileStoragesInfo'
         Тогда я нажимаю на кнопку 'Create'
-        И в поле 'Path to catalog at server' я ввожу текст '#workingDir#\features\Picture\Source'
+        И в поле 'Path to catalog at server' я ввожу текст '#workingDir#\Picture\Source'
         И в поле 'URL Alias' я ввожу текст 'pic'
         И я нажимаю на кнопку 'Save and close'
    * Внесение настроек в справочник Integration Settings для PICTURE STORAGE
@@ -41,7 +41,7 @@
             | 'AddressPath' |
         И в таблице "ConnectionSetting" я активизирую поле "Value"
         И в таблице "ConnectionSetting" я выбираю текущую строку
-        И в таблице "ConnectionSetting" в поле 'Value' я ввожу текст '#workingDir#\features\Picture\Source'
+        И в таблице "ConnectionSetting" в поле 'Value' я ввожу текст '#workingDir#\Picture\Source'
         И в таблице "ConnectionSetting" я завершаю редактирование строки
         И в таблице "ConnectionSetting" я перехожу к строке:
             | 'Key'       | 'Value' |
@@ -174,7 +174,7 @@
         | 'Description' |
         | 'Brand TR'     |
         И в таблице "List" я выбираю текущую строку
-        И я буду выбирать внешний файл "#workingDir#\features\_3000Other\16466.png"
+        И я буду выбирать внешний файл "#workingDir#\_3000Other\16466.png"
         И я нажимаю на гиперссылку "Icon"
     * Проверка добавления картинки к доп реквизиту
         Тогда значение поля с именем "Icon" содержит текст 'e1cib/tempstorage/'
@@ -199,7 +199,7 @@
         | 'Description' |
         | 'Brand TR'     |
         И в таблице "List" я выбираю текущую строку
-        И я буду выбирать внешний файл "#workingDir#\features\_3000Other\16466.png"
+        И я буду выбирать внешний файл "#workingDir#\_3000Other\16466.png"
         И я нажимаю на гиперссылку "Icon"
     * Проверка добавления картинки к доп реквизиту
         Тогда значение поля с именем "Icon" содержит текст 'e1cib/tempstorage/'
@@ -241,7 +241,7 @@
             | 'Trousers TR'     |
         И в таблице "List" я выбираю текущую строку
     * Добавление картинки
-        И я буду выбирать внешний файл "#workingDir#\features\_3000Other\16466.png"
+        И я буду выбирать внешний файл "#workingDir#\_3000Other\16466.png"
         И Пауза 3
         Затем клик на картинку "plus"
     * Проверка добавления картинки 
@@ -251,7 +251,7 @@
             | 'Trousers TR'    | '16466.png' |
     * Добавление ещё одной картинки
         И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-        И я буду выбирать внешний файл "#workingDir#\features\_3000Other\dressblue.jpg"
+        И я буду выбирать внешний файл "#workingDir#\_3000Other\dressblue.jpg"
         Дано курсор к картинке "plus3"
         Затем клик на картинку "plus3"
         Дано я нажимаю ENTER
@@ -307,7 +307,7 @@
             | '38/Yellow TR' |
         И в таблице "List" я выбираю текущую строку
     * Добавление картинки
-        И я буду выбирать внешний файл "#workingDir#\features\_3000Other\16466.png"
+        И я буду выбирать внешний файл "#workingDir#\_3000Other\16466.png"
         И Пауза 3
         Затем клик на картинку "plus"
     * Проверка добавления картинки
@@ -317,7 +317,7 @@
             | '38/Yellow TR' | '16466.png' |
     * Добавление ещё одной картинки
         И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-        И я буду выбирать внешний файл "#workingDir#\features\_3000Other\pinkdress.jpg"
+        И я буду выбирать внешний файл "#workingDir#\_3000Other\pinkdress.jpg"
         Дано курсор к картинке "plus3"
         Затем клик на картинку "plus3"
         Дано я нажимаю ENTER

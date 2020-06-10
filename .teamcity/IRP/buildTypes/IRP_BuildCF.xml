@@ -33,7 +33,7 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
       </runner>
       <runner id="RUNNER_7" name="Convert from EDT to XML" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="ring edt workspace export --configuration-files %system.teamcity.build.tempDir%\xml --project %system.teamcity.build.workingDir%\src\IRP --workspace-location %system.teamcity.build.tempDir%\WP&quot;" />
+          <param name="script.content" value="ring edt workspace export --configuration-files %system.teamcity.build.tempDir%\xml --project %system.teamcity.build.workingDir%\IRP --workspace-location %system.teamcity.build.tempDir%\WP&quot;" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>

@@ -14,7 +14,12 @@
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[if('%teamcity.pullRequest.target.branch%' -eq '%env.BranchToStartVA%')
+          <param name="jetbrains_powershell_script_code"><![CDATA[echo "BranchToStartVA %env.BranchToStartVA%"
+echo "teamcity.pullRequest.target.branch %teamcity.pullRequest.target.branch%"
+echo "teamcity.build.branch %teamcity.build.branch%"
+
+
+if('%teamcity.pullRequest.target.branch%' -eq '%env.BranchToStartVA%')
 {
 	$StartVA = 'true'
 	$SonarParamCover = "-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml"

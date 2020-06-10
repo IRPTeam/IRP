@@ -122,6 +122,15 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
           <param name="teamcity.file.content.replacer.wildcards" value="+:IRP\src\Configuration\Configuration.mdo" />
         </parameters>
       </extension>
+      <extension id="BUILD_EXT_14" type="BuildFailureOnMessage">
+        <parameters>
+          <param name="buildFailureOnMessage.conditionType" value="contains" />
+          <param name="buildFailureOnMessage.messagePattern" value="Directory not found" />
+          <param name="buildFailureOnMessage.outputText" value="Directory not found" />
+          <param name="buildFailureOnMessage.reverse" value="false" />
+          <param name="buildFailureOnMessage.stopBuildOnFailure" value="true" />
+        </parameters>
+      </extension>
     </build-extensions>
     <dependencies>
       <depend-on sourceBuildTypeId="IRP_GitHubUpdate">

@@ -4,7 +4,7 @@
   <description />
   <settings>
     <parameters>
-      <param name="env.BranchToStartVA" value="refs/heads/develop" />
+      <param name="env.BranchToStartVA" value="develop" />
       <param name="env.Database1CName" value="%teamcity.project.id%" />
       <param name="env.SonarParamCover" value="" />
       <param name="env.StartVA" value="false" />

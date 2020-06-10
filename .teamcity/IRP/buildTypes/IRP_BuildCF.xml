@@ -33,7 +33,7 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
       </runner>
       <runner id="RUNNER_7" name="Convert from EDT to XML" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[start /wait "1cv8.exe" %env.PathTo1CPlatform%  Designer %env.ConnectionTo1C% /Out %env.LogFile1C% /LoadConfigFromFiles %system.teamcity.build.tempDir%\xml /UpdateDBCfg
+          <param name="script.content"><![CDATA[start /wait "1cv8.exe" %env.PathTo1CPlatform%  Designer %env.ConnectionTo1C% /Out %env.LogFile1C% /LoadConfigFromFiles "%system.teamcity.build.tempDir%\xml" /UpdateDBCfg
 echo ##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']
 sh -c "while read line; do if [[ $line == *"Error"* ]]; then echo -e ""\e[31m $line""; else  echo -e ""\e[34m $line""; fi;  done < ""%env.LogFile1C%"";"
 echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]></param>

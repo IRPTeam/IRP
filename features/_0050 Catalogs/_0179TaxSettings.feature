@@ -1,7 +1,7 @@
 #language: ru
 @tree
 @Positive
-
+@TestExtDataProc
 
 Функционал: заполнение налоговых ставок
 

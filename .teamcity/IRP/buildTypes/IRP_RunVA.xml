@@ -6,6 +6,7 @@
     <options>
       <option name="allowExternalStatus" value="true" />
       <option name="artifactRules" value="+:allure-report.zip&#xA;+:Cover.xml" />
+      <option name="cleanBuild" value="true" />
     </options>
     <parameters>
       <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />

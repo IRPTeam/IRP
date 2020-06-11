@@ -65,8 +65,8 @@ $text = "
   'AllureReport': {
     'allurepath': '$allurePath/tmp',
     'allurepathbase': '$allurePath/base',
-    'reportlevel1': '#report.epic=;catalog4',
-    'reportlevel2': '#report.feature=;catalog5',
+    'reportlevel1': '#report.epic=;catalog1',
+    'reportlevel2': '#report.feature=;catalog2',
     'reportlevel3': '#report.story=;scenarioname',
     'testsuites': '',
     'attacheventlogtotheallurereport': true,

@@ -58,7 +58,7 @@ echo "##teamcity[setParameter name='env.StartVA' value='$StartVA']"]]></param>
     <build-triggers>
       <build-trigger id="vcsTrigger" type="vcsTrigger">
         <parameters>
-          <param name="branchFilter" value="+:*" />
+          <param name="branchFilter" value="+:develop" />
           <param name="enableQueueOptimization" value="true" />
           <param name="quietPeriodMode" value="DO_NOT_USE" />
           <param name="triggerRules" value="-:.teamcity/**" />

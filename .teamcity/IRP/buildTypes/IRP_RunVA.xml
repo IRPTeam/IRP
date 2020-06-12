@@ -127,6 +127,15 @@ $a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
+      <runner id="RUNNER_31" name="Copy add data  proc from tools" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code" value="Copy-Item -Path &quot;%teamcity.tool.ExtDataProc%/*&quot; -Destination &quot;%teamcity.build.workingDir%/DataProcessor&quot;" />
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_14" name="Start Coverage" type="simpleRunner">
         <parameters>
           <param name="script.content" value="coverage-cli start --infobase %env.Database1CName%  --debugger http://localhost:1550 --output %system.teamcity.build.workingDir%/Cover.csv &gt; %system.teamcity.build.tempDir%/Cover.Log" />
@@ -193,15 +202,6 @@ If ($Proc) {
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[%teamcity.tool.allure-commandline%\bin\allure.bat generate "allure/base" --clean -o "allure-report"
 Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]></param>
-          <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_31" name="Copy add data  proc from tools" type="jetbrains_powershell">
-        <parameters>
-          <param name="jetbrains_powershell_execution" value="PS1" />
-          <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code" value="Copy-Item -Path &quot;%teamcity.tool.ExtDataProc%/*&quot; -Destination &quot;%teamcity.build.workingDir%/DataProcessor&quot;" />
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

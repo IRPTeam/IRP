@@ -8,6 +8,7 @@
       <param name="env.Database1CName" value="%teamcity.project.id%" />
       <param name="env.SonarParamCover" value="" />
       <param name="env.StartVA" value="false" />
+      <param name="env.VA_Tags" value="" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_19" name="Set infobase name" type="jetbrains_powershell">

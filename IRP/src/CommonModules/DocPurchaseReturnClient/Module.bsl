@@ -13,10 +13,6 @@ Procedure BeforeWrite(Object, Form, Cancel, WriteParameters) Export
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	
-	Form.InputType = "Item";
-	ChangeInputType(Object, Form);
-	
 	Settings = New Structure;
 	Settings.Insert("UpdateInfoString");
 	If AddInfo <> Undefined And AddInfo.Property("RemovedActions") Then

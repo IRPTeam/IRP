@@ -17,13 +17,14 @@
           <param name="jetbrains_powershell_script_code"><![CDATA[echo "BranchToStartVA %env.BranchToStartVA%"
 echo "teamcity.pullRequest.target.branch %teamcity.pullRequest.target.branch%"
 echo "teamcity.build.branch %teamcity.build.branch%"
-
+$VA_Tags = ""
 
 if('%teamcity.pullRequest.target.branch%' -eq '%env.BranchToStartVA%')
 {
 	$StartVA = 'true'
 	$SonarParamCover = "-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml"
  	$InfobaseName = "%env.Database1CName%_%teamcity.pullRequest.target.branch%_pull%teamcity.pullRequest.number%"
+    $VA_Tags = "Test"
 }
 elseif('%teamcity.build.branch%' -eq '%env.BranchToStartVA%')
 {
@@ -34,6 +35,7 @@ elseif('%teamcity.build.branch%' -eq '%env.BranchToStartVA%')
 }
 else
 {
+	$VA_Tags = "Test"
 	$StartVA = 'false'
 	$SonarParamCover = ""
 	$InfobaseName = "%env.Database1CName%_%teamcity.build.branch%"
@@ -45,7 +47,8 @@ $InfobaseName = $InfobaseName -replace "\-", "_"
 
 echo "##teamcity[setParameter name='env.Database1CName' value='$InfobaseName']"
 echo "##teamcity[setParameter name='env.SonarParamCover' value='$SonarParamCover']"
-echo "##teamcity[setParameter name='env.StartVA' value='$StartVA']"]]></param>
+echo "##teamcity[setParameter name='env.StartVA' value='$StartVA']"
+echo "##teamcity[setParameter name='env.VA_Tags' value='$VA_Tags']"]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

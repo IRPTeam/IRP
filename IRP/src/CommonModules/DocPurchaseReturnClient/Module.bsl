@@ -98,18 +98,6 @@ Procedure ItemListOnActivateRow(Object, Form, Item) Export
 	
 EndProcedure
 
-Procedure InputTypeOnChange(Object, Form, Item) Export
-	ChangeInputType(Object, Form);
-EndProcedure
-
-Procedure ChangeInputType(Object, Form) Export
-	If Form.InputType = "Item" Then
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Items");
-	Else
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Boxes");
-	EndIf;
-EndProcedure
-
 #EndRegion
 
 #Region ItemListItemsEvents

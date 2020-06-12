@@ -1,12 +1,6 @@
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	
-	Form.InputType = "Item";
-	DocInventoryTransferClient.ChangeInputType(Object, Form);
-	
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
-	
 EndProcedure
-
 
 #Region ItemCompany
 
@@ -44,22 +38,6 @@ Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
 	StandardProcessing = False;
 	CommonFormActions.EditMultilineText(Item.Name, Form);
 EndProcedure
-
-#Region ItemInputType
-
-Procedure InputTypeOnChange(Object, Form, Item) Export
-	DocGoodsReceiptClient.ChangeInputType(Object, Form);
-EndProcedure
-
-Procedure ChangeInputType(Object, Form) Export
-	If Form.InputType = "Item" Then
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Items");
-	Else
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Boxes");
-	EndIf;
-EndProcedure
-
-#EndRegion
 
 #Region PickUpItems
 

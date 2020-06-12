@@ -14,7 +14,6 @@
   <content>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.PhysicalCountByLocation.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.InventoryTransferOrder.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>InformationRegister.BoxingItemKeys.Resource.ItemKey</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.ItemKey</content>
@@ -31,12 +30,9 @@
   <content>Document.SalesReturnOrder.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Catalog.ItemKeys.Command.OpenItemKeysList</content>
-  <content>InformationRegister.BoxContents.Dimension.ItemKey</content>
   <content>InformationRegister.Barcodes.Resource.ItemKey</content>
-  <content>Document.Unboxing.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.Labeling.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Document.Bundling.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>InformationRegister.PricesByItemKeys.Dimension.ItemKey</content>
   <content>Document.InventoryTransfer.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.Boxing.TabularSection.ItemList.Attribute.ItemKey</content>
 </mdclass:FunctionalOption>

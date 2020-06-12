@@ -6,9 +6,6 @@
       <commands>Document.InternalSupplyRequest.StandardCommand.OpenList</commands>
       <commands>Document.InventoryTransferOrder.StandardCommand.OpenList</commands>
       <commands>Document.InventoryTransfer.StandardCommand.OpenList</commands>
-      <commands>Catalog.Boxes.StandardCommand.OpenList</commands>
-      <commands>Document.Boxing.StandardCommand.OpenList</commands>
-      <commands>Document.Unboxing.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

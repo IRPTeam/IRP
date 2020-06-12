@@ -40,11 +40,6 @@ EndProcedure
 #EndRegion
 
 &AtClient
-Procedure InputTypeOnChange(Item)
-	DocPhysicalCountByLocationClient.InputTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	DocPhysicalCountByLocationClient.ItemListOnChange(Object, ThisObject, Item);
 EndProcedure

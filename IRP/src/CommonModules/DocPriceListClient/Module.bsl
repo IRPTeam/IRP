@@ -1,33 +1,6 @@
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	Form.InputTypePriceKeyList = "Item";
-	Form.InputTypeItemList = "Item";
-	Form.InputTypeItemKeyList = "Item";
-	DocPriceListClient.ChangeInputType(Object, Form);
-EndProcedure
-
-#Region ItemInputType
-
-Procedure InputTypeOnChange(Object, Form, Item) Export
-	DocPriceListClient.ChangeInputType(Object, Form);
-EndProcedure
-
-Procedure ChangeInputType(Object, Form) Export
 	
-	InputTypeStructure = New Structure();
-	InputTypeStructure.Insert("InputTypePriceKeyList", "PriceKeyListItem");
-	InputTypeStructure.Insert("InputTypeItemList", "ItemListItem");
-	InputTypeStructure.Insert("InputTypeItemKeyList", "ItemKeyListItem");
-	
-	For Each Row In InputTypeStructure Do
-		If Form[Row.Key] = "Item" Then
-			Form.Items[Row.Value].TypeRestriction = New TypeDescription("CatalogRef.Items");
-		Else
-			Form.Items[Row.Value].TypeRestriction = New TypeDescription("CatalogRef.Boxes");
-		EndIf;
-	EndDo;
 EndProcedure
-
-#EndRegion
 
 #Region Item
 
@@ -41,11 +14,7 @@ Procedure PriceKeyListItemStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType"
 			, Object.ItemType, DataCompositionComparisonType.Equal));
 	
-	If Form.InputTypePriceKeyList = "Item" Then
-		DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-	Else
-		DocumentsClient.BoxesStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-	EndIf;
+	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure PriceKeyListItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
@@ -53,11 +22,7 @@ Procedure PriceKeyListItemEditTextChange(Object, Form, Item, Text, StandardProce
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType", Object.ItemType, ComparisonType.Equal));
 	
-	If Form.InputTypePriceKeyList = "Item" Then
-		DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-	Else
-		DocumentsClient.BoxesEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-	EndIf;
+	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
 Procedure ItemKeyListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

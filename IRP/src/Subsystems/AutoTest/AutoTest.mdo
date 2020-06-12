@@ -63,9 +63,6 @@
   <content>Document.SalesReturn</content>
   <content>Document.SalesReturnOrder</content>
   <content>Catalog.InterfaceGroups</content>
-  <content>Document.Boxing</content>
-  <content>Document.Unboxing</content>
-  <content>Catalog.Boxes</content>
   <content>Document.Bundling</content>
   <content>Document.Unbundling</content>
   <content>Document.InternalSupplyRequest</content>

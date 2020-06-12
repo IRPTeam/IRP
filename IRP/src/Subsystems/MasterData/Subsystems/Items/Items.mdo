@@ -11,7 +11,6 @@
   <content>Catalog.Items</content>
   <content>Catalog.ItemSegments</content>
   <content>Catalog.Units</content>
-  <content>Catalog.Boxes</content>
   <content>Catalog.Specifications</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

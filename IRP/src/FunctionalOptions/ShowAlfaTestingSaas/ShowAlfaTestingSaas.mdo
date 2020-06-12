@@ -64,7 +64,6 @@
   <content>Document.SalesReturnOrder.Attribute.ManagerSegment</content>
   <content>Document.Labeling</content>
   <content>Document.ZReport</content>
-  <content>Document.Boxing</content>
   <content>Document.SalesInvoice.Attribute.Manager</content>
   <content>Document.ItemsFlow</content>
   <content>Document.PurchaseInvoice.TabularSection.SpecialOffers</content>
@@ -74,7 +73,6 @@
   <content>Document.PurchaseOrder.TabularSection.SpecialOffers</content>
   <content>Document.OutgoingPaymentOrder</content>
   <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.OffersAmount</content>
-  <content>Document.Unboxing</content>
   <content>Document.Bundling</content>
   <content>Document.SalesInvoice.Attribute.Agreement</content>
   <content>Document.SalesReturnOrder.Attribute.Agreement</content>
@@ -83,13 +81,10 @@
   <content>Document.SalesReturn.Attribute.Agreement</content>
   <content>Document.PurchaseOrder.Attribute.Agreement</content>
   <content>Document.PurchaseReturn.Attribute.Agreement</content>
-  <content>Catalog.Boxes</content>
   <content>DataProcessor.PrintLabels</content>
-  <content>InformationRegister.BoxingItemKeys</content>
   <content>InformationRegister.PricesByProperties</content>
   <content>InformationRegister.Barcodes</content>
   <content>InformationRegister.AttachedFiles</content>
-  <content>InformationRegister.BoxContents</content>
   <content>Catalog.Specifications</content>
   <content>InformationRegister.BundleContents</content>
   <content>Document.CreditDebitNote</content>

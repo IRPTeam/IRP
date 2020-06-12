@@ -31,10 +31,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.Items.ItemTableValueAmount.Visible = False;
 	EndIf;
 	
-	If Parameters.Property("UseBox") Then
-		ThisObject.UseBox = Parameters.UseBox;
-	EndIf;
-	
 	ItemTypeAfterSelection();
 EndProcedure
 
@@ -87,7 +83,7 @@ Procedure ItemTypeAfterSelection()
 		|	NOT ItemKey.DeletionMark
 		|	AND NOT ItemKey.Item.DeletionMark
 		|	AND &ItemType
-		|	AND &UseBox
+		|	AND ItemKey.Item REFS Catalog.Items
 		|GROUP BY
 		|	ItemKey.Item
 		|;
@@ -119,11 +115,6 @@ Procedure ItemTypeAfterSelection()
 		Query.SetParameter("ItemType", ThisObject.ItemType);
 	Else
 		Query.SetParameter("ItemType", True);
-	EndIf;
-	If ThisObject.UseBox Then
-		Query.SetParameter("UseBox", True);
-	Else
-		Query.Text = StrReplace(Query.Text, "&UseBox", "ItemKey.Item REFS Catalog.Items");
 	EndIf;
 	QueryExecution = Query.Execute();
 	If Not QueryExecution.IsEmpty() Then

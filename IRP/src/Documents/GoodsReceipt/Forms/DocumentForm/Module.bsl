@@ -147,13 +147,6 @@ EndProcedure
 
 #EndRegion
 
-
-&AtClient
-Procedure InputTypeOnChange(Item)
-	DocGoodsReceiptClient.InputTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-
 #Region GroupTitleDecorations
 
 &AtClient

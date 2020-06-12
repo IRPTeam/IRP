@@ -2,7 +2,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load = True Then
 		Return;
 	EndIf;
-	If TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.BundlingBoxing")
+	If TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Bundling")
 			OR TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer") Then
 		Partner = Undefined;
 		LegalName = Undefined;
@@ -24,13 +24,8 @@ EndProcedure
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	
 	If TypeOf(FillingData) = Type("Structure") Then
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Boxing" Then
-			TransactionType = Enums.ShipmentConfirmationTransactionTypes.BundlingBoxing;
-			Filling_BasedOn(FillingData);
-		EndIf;
-		
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Bundling" Then
-			TransactionType = Enums.ShipmentConfirmationTransactionTypes.BundlingBoxing;
+			TransactionType = Enums.ShipmentConfirmationTransactionTypes.Bundling;
 			Filling_BasedOn(FillingData);
 		EndIf;
 		
@@ -54,13 +49,8 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 			Filling_BasedOn(FillingData);
 		EndIf;
 		
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Unboxing" Then
-			TransactionType = Enums.ShipmentConfirmationTransactionTypes.BundlingBoxing;
-			Filling_BasedOn(FillingData);
-		EndIf;
-		
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Unbundling" Then
-			TransactionType = Enums.ShipmentConfirmationTransactionTypes.BundlingBoxing;
+			TransactionType = Enums.ShipmentConfirmationTransactionTypes.Bundling;
 			Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;

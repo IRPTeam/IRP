@@ -37,7 +37,6 @@
     <commandParameterType>
       <types>DocumentRef.BankReceipt</types>
       <types>DocumentRef.BankPayment</types>
-      <types>DocumentRef.Boxing</types>
       <types>DocumentRef.Bundling</types>
       <types>DocumentRef.CashInPOS</types>
       <types>DocumentRef.CashPayment</types>
@@ -60,7 +59,6 @@
       <types>DocumentRef.SalesReturnOrder</types>
       <types>DocumentRef.ShipmentConfirmation</types>
       <types>DocumentRef.SetupOfSpecialOffers</types>
-      <types>DocumentRef.Unboxing</types>
       <types>DocumentRef.Unbundling</types>
       <types>DocumentRef.ZReport</types>
       <types>DocumentRef.IncomingPaymentOrder</types>

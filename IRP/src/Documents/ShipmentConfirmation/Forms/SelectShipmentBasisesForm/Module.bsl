@@ -78,28 +78,6 @@ Procedure FillDocumentsTree(FilterValues, ExistingRows, Ref)
 			|SELECT
 			|	Table.Ref
 			|FROM
-			|	Document.Boxing AS Table
-			|WHERE
-			|	Table.Company = &Company
-			|	AND &Partner = UNDEFINED
-			|	AND &LegalName = UNDEFINED
-			|
-			|UNION ALL
-			|
-			|SELECT
-			|	Table.Ref
-			|FROM
-			|	Document.Unboxing AS Table
-			|WHERE
-			|	Table.Company = &Company
-			|	AND &Partner = UNDEFINED
-			|	AND &LegalName = UNDEFINED
-			|
-			|UNION ALL
-			|
-			|SELECT
-			|	Table.Ref
-			|FROM
 			|	Document.Bundling AS Table
 			|WHERE
 			|	Table.Company = &Company
@@ -229,12 +207,8 @@ Procedure FillDocumentsTree(FilterValues, ExistingRows, Ref)
 		|			THEN DocSalesInvoice.Unit
 		|		WHEN NOT DocSalesOrder.Unit IS NULL
 		|			THEN DocSalesOrder.Unit
-		|		WHEN NOT DocBoxing.Unit IS NULL
-		|			THEN DocBoxing.Unit
 		|		WHEN NOT DocBundling.Unit IS NULL
 		|			THEN DocBundling.Unit
-		|		WHEN NOT DocUnboxing.Unit IS NULL
-		|			THEN DocUnboxing.Unit
 		|		WHEN NOT DocUnbundling.Unit IS NULL
 		|			THEN DocUnbundling.Unit
 		|		WHEN NOT DocInventoryTransfer.Unit IS NULL
@@ -254,17 +228,9 @@ Procedure FillDocumentsTree(FilterValues, ExistingRows, Ref)
 		|		ON tmpQueryTable.Key = DocSalesOrder.Key
 		|		AND tmpQueryTable.ShipmentBasis = DocSalesOrder.Ref
 		|
-		|		LEFT JOIN Document.Boxing.ItemList AS DocBoxing
-		|		ON tmpQueryTable.Key = DocBoxing.Key
-		|		AND tmpQueryTable.ShipmentBasis = DocBoxing.Ref
-		|
 		|		LEFT JOIN Document.Bundling.ItemList AS DocBundling
 		|		ON tmpQueryTable.Key = DocBundling.Key
 		|		AND tmpQueryTable.ShipmentBasis = DocBundling.Ref
-		|
-		|		LEFT JOIN Document.Unboxing.ItemList AS DocUnboxing
-		|		ON tmpQueryTable.Key = DocUnboxing.Key
-		|		AND tmpQueryTable.ShipmentBasis = DocUnboxing.Ref
 		|
 		|		LEFT JOIN Document.Unbundling.ItemList AS DocUnbundling
 		|		ON tmpQueryTable.Key = DocUnbundling.Key

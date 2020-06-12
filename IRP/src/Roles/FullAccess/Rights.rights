@@ -78,13 +78,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.Boxing</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.Labeling</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -437,13 +430,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.Unboxing</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.Taxes</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -506,21 +492,6 @@
 		<name>Document.SalesInvoice</name>
 		<right>
 			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.Boxes</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeletePredefinedData</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeleteMarkedPredefinedData</name>
 			<value>false</value>
 		</right>
 	</object>

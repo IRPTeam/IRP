@@ -9,8 +9,6 @@
     <value>Type object with item list</value>
   </synonym>
   <type>
-    <types>DocumentRef.Boxing</types>
-    <types>DocumentRef.Unboxing</types>
     <types>DocumentRef.Bundling</types>
     <types>DocumentRef.Unbundling</types>
     <types>DocumentRef.GoodsReceipt</types>

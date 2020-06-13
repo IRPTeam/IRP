@@ -146,6 +146,14 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
           <param name="buildFailureOnMessage.stopBuildOnFailure" value="true" />
         </parameters>
       </extension>
+      <extension id="BUILD_EXT_18" type="BuildFailureOnMessage">
+        <parameters>
+          <param name="buildFailureOnMessage.conditionType" value="contains" />
+          <param name="buildFailureOnMessage.messagePattern" value="The Infobase connections list is not empty" />
+          <param name="buildFailureOnMessage.reverse" value="false" />
+          <param name="buildFailureOnMessage.stopBuildOnFailure" value="true" />
+        </parameters>
+      </extension>
     </build-extensions>
     <dependencies>
       <depend-on sourceBuildTypeId="IRP_GitHubUpdate">

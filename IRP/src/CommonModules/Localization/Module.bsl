@@ -268,7 +268,6 @@ EndFunction
 Procedure PredefinedDescriptions(Strings, CodeLanguage)
 
 	Strings.Insert("Description_A001", NStr("en = 'Catalog Agreements'", CodeLanguage));
-	Strings.Insert("Description_A002", NStr("en = 'Catalog Boxes'", CodeLanguage));
 	Strings.Insert("Description_A003", NStr("en = 'Catalog Business units'", CodeLanguage));
 	Strings.Insert("Description_A004", NStr("en = 'Catalog Cash accounts'", CodeLanguage));
 	Strings.Insert("Description_A005", NStr("en = 'Catalog Cheque bonds'", CodeLanguage));
@@ -321,7 +320,6 @@ Procedure PredefinedDescriptions(Strings, CodeLanguage)
 	Strings.Insert("Description_A052", NStr("en = 'Document Shipment confirmation'", CodeLanguage));
 	Strings.Insert("Description_A053", NStr("en = 'Document Stock adjustment as surplus'", CodeLanguage));
 	Strings.Insert("Description_A054", NStr("en = 'Document Stock adjustment as write off'", CodeLanguage));
-	Strings.Insert("Description_A055", NStr("en = 'Document Unboxing'", CodeLanguage));
 	Strings.Insert("Description_A056", NStr("en = 'Document Unbundling'", CodeLanguage));
 	Strings.Insert("Description_A057", NStr("en = 'User defined'", CodeLanguage));
 	Strings.Insert("Description_A058", NStr("en = 'Cheque bond incoming'", CodeLanguage));

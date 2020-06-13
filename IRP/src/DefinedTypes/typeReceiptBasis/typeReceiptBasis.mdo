@@ -14,8 +14,6 @@
     <types>DocumentRef.InventoryTransfer</types>
     <types>DocumentRef.Bundling</types>
     <types>DocumentRef.Unbundling</types>
-    <types>DocumentRef.Boxing</types>
-    <types>DocumentRef.Unboxing</types>
     <types>DocumentRef.PurchaseOrder</types>
   </type>
 </mdclass:DefinedType>

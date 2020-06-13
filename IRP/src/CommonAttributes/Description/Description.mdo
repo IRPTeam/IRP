@@ -121,15 +121,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.Boxing</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.Unbundling</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.Unboxing</metadata>
     <use>Use</use>
   </content>
   <content>

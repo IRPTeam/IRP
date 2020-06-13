@@ -1,10 +1,5 @@
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	
-	Form.InputType = "Item";
-	DocShipmentConfirmationClient.ChangeInputType(Object, Form);
-	
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
-	
 EndProcedure
 
 #Region ItemCompany
@@ -31,23 +26,6 @@ Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Our", True, ComparisonType.Equal));
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-EndProcedure
-
-#EndRegion
-
-
-#Region ItemInputType
-
-Procedure InputTypeOnChange(Object, Form, Item) Export
-	DocShipmentConfirmationClient.ChangeInputType(Object, Form);
-EndProcedure
-
-Procedure ChangeInputType(Object, Form) Export
-	If Form.InputType = "Item" Then
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Items");
-	Else
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Boxes");
-	EndIf;
 EndProcedure
 
 #EndRegion

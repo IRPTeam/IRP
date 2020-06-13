@@ -421,6 +421,6 @@ Procedure FillTransactionTypeChoiceList(Form)
 	Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.ReturnFromCustomer.Synonym);
 	If Not isSaasMode Then
 		Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.InventoryTransfer, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.InventoryTransfer.Synonym);
-		Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.BundlingBoxing, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.BundlingBoxing.Synonym);
+		Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.Bundling, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.Bundling.Synonym);
 	EndIf;
 EndProcedure

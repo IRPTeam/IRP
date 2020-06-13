@@ -73,11 +73,6 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 EndProcedure
 
 &AtClient
-Procedure InputTypeOnChange(Item)
-	DocPriceListClient.InputTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure PriceKeyListItemStartChoice(Item, ChoiceData, StandardProcessing)
 	DocPriceListClient.PriceKeyListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure

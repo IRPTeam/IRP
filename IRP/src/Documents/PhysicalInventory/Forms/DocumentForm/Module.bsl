@@ -40,11 +40,6 @@ EndProcedure
 #EndRegion
 
 &AtClient
-Procedure InputTypeOnChange(Item)
-	DocPhysicalInventoryClient.InputTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	DocPhysicalInventoryClient.ItemListOnChange(Object, ThisObject, Item);
 EndProcedure

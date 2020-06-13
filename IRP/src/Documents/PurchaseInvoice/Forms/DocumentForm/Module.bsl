@@ -127,11 +127,6 @@ Procedure PriceIncludeTaxOnChange(Item)
 	DocPurchaseInvoiceClient.PriceIncludeTaxOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure InputTypeOnChange(Item)
-	DocPurchaseInvoiceClient.InputTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
 #EndRegion
 
 #Region ItemListEvents

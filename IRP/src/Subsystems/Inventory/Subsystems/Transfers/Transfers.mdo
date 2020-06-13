@@ -8,10 +8,7 @@
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Document.InventoryTransfer</content>
-  <content>Catalog.Boxes</content>
   <content>Document.InventoryTransferOrder</content>
-  <content>Document.Boxing</content>
-  <content>Document.Unboxing</content>
   <content>Document.InternalSupplyRequest</content>
   <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

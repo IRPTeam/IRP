@@ -40,11 +40,6 @@ EndProcedure
 #EndRegion
 
 &AtClient
-Procedure InputTypeOnChange(Item)
-	DocStockAdjustmentAsSurplusClient.InputTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	DocStockAdjustmentAsSurplusClient.ItemListOnChange(Object, ThisObject, Item);
 EndProcedure

@@ -211,7 +211,6 @@ Procedure FillDescriptionOfPredefinedCatalogs() Export
 
 	Obj = Catalogs.AddAttributeAndPropertySets;
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Agreements, 					"Description_A001");
-    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_Boxes, 						"Description_A002");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_BusinessUnits, 				"Description_A003");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_CashAccounts, 					"Description_A004");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Catalog_ChequeBonds, 					"Description_A005");
@@ -264,7 +263,6 @@ Procedure FillDescriptionOfPredefinedCatalogs() Export
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_ShipmentConfirmation, 		"Description_A052");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_StockAdjustmentAsSurplus, 	"Description_A053");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_StockAdjustmentAsWriteOff, 	"Description_A054");
-    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_Unboxing, 					"Description_A055");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_Unbundling, 					"Description_A056");
 
 	AddRowToDescriptionList (ValueTable, LocalCodes, Catalogs.PriceTypes.ManualPriceType, "Description_A057");

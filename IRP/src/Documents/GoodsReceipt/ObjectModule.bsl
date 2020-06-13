@@ -2,7 +2,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load = True Then
 		Return;
 	EndIf;
-	If TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.BundlingBoxing")
+	If TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Bundling")
 			OR TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.InventoryTransfer") Then
 		Partner = Undefined;
 		LegalName = Undefined;
@@ -24,13 +24,8 @@ EndProcedure
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	
 	If TypeOf(FillingData) = Type("Structure") Then
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Boxing" Then
-			TransactionType = Enums.GoodsReceiptTransactionTypes.BundlingBoxing;
-			Filling_BasedOn(FillingData);
-		EndIf;
-		
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Bundling" Then
-			TransactionType = Enums.GoodsReceiptTransactionTypes.BundlingBoxing;
+			TransactionType = Enums.GoodsReceiptTransactionTypes.Bundling;
 			Filling_BasedOn(FillingData);
 		EndIf;
 		
@@ -54,13 +49,8 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 			Filling_BasedOn(FillingData);
 		EndIf;
 		
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Unboxing" Then
-			TransactionType = Enums.GoodsReceiptTransactionTypes.BundlingBoxing;
-			Filling_BasedOn(FillingData);
-		EndIf;
-		
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Unbundling" Then
-			TransactionType = Enums.GoodsReceiptTransactionTypes.BundlingBoxing;
+			TransactionType = Enums.GoodsReceiptTransactionTypes.Bundling;
 			Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;

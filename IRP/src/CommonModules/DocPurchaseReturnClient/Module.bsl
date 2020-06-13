@@ -13,10 +13,6 @@ Procedure BeforeWrite(Object, Form, Cancel, WriteParameters) Export
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	
-	Form.InputType = "Item";
-	ChangeInputType(Object, Form);
-	
 	Settings = New Structure;
 	Settings.Insert("UpdateInfoString");
 	If AddInfo <> Undefined And AddInfo.Property("RemovedActions") Then
@@ -96,18 +92,6 @@ Procedure ItemListOnActivateRow(Object, Form, Item) Export
 		DocumentsClient.SetCurrentPriceType(Form, CurrentRow.PriceType);
 	EndIf;
 	
-EndProcedure
-
-Procedure InputTypeOnChange(Object, Form, Item) Export
-	ChangeInputType(Object, Form);
-EndProcedure
-
-Procedure ChangeInputType(Object, Form) Export
-	If Form.InputType = "Item" Then
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Items");
-	Else
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Boxes");
-	EndIf;
 EndProcedure
 
 #EndRegion

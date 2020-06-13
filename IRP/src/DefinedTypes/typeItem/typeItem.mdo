@@ -10,6 +10,5 @@
   </synonym>
   <type>
     <types>CatalogRef.Items</types>
-    <types>CatalogRef.Boxes</types>
   </type>
 </mdclass:DefinedType>

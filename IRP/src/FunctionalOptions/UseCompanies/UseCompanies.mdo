@@ -39,11 +39,9 @@
   <content>Document.CashRevenue.Attribute.Company</content>
   <content>Document.SalesInvoice.Attribute.LegalName</content>
   <content>Document.Unbundling.Attribute.Company</content>
-  <content>Document.Boxing.Attribute.Company</content>
   <content>Document.BankPayment.TabularSection.PaymentList.Attribute.Payee</content>
   <content>Document.IncomingPaymentOrder.Attribute.Company</content>
   <content>Document.SalesReturnOrder.Attribute.Company</content>
-  <content>Document.Unboxing.Attribute.Company</content>
   <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.Payer</content>
   <content>Document.ReconciliationStatement.Attribute.LegalName</content>
   <content>Document.PurchaseReturnOrder.Attribute.LegalName</content>

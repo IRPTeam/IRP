@@ -178,8 +178,6 @@
   <commonModules>CommonModule.DocBankPaymentServer</commonModules>
   <commonModules>CommonModule.DocBankReceiptClient</commonModules>
   <commonModules>CommonModule.DocBankReceiptServer</commonModules>
-  <commonModules>CommonModule.DocBoxingClient</commonModules>
-  <commonModules>CommonModule.DocBoxingServer</commonModules>
   <commonModules>CommonModule.DocBundlingClient</commonModules>
   <commonModules>CommonModule.DocBundlingServer</commonModules>
   <commonModules>CommonModule.DocCashExpenseRevenueClient</commonModules>
@@ -240,8 +238,6 @@
   <commonModules>CommonModule.DocumentsClient</commonModules>
   <commonModules>CommonModule.DocumentsClientServer</commonModules>
   <commonModules>CommonModule.DocumentsServer</commonModules>
-  <commonModules>CommonModule.DocUnboxingClient</commonModules>
-  <commonModules>CommonModule.DocUnboxingServer</commonModules>
   <commonModules>CommonModule.DocUnbundlingClient</commonModules>
   <commonModules>CommonModule.DocUnbundlingServer</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataEvent</commonModules>
@@ -407,7 +403,6 @@
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertyValues</catalogs>
   <catalogs>Catalog.Agreements</catalogs>
-  <catalogs>Catalog.Boxes</catalogs>
   <catalogs>Catalog.BusinessUnits</catalogs>
   <catalogs>Catalog.CashAccounts</catalogs>
   <catalogs>Catalog.ChequeBonds</catalogs>
@@ -455,7 +450,6 @@
   <catalogs>Catalog.Extensions</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
-  <documents>Document.Boxing</documents>
   <documents>Document.Bundling</documents>
   <documents>Document.CashExpense</documents>
   <documents>Document.CashInPOS</documents>
@@ -489,7 +483,6 @@
   <documents>Document.SalesReturnOrder</documents>
   <documents>Document.SetupOfSpecialOffers</documents>
   <documents>Document.ShipmentConfirmation</documents>
-  <documents>Document.Unboxing</documents>
   <documents>Document.Unbundling</documents>
   <documents>Document.ZReport</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>
@@ -535,8 +528,6 @@
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>
-  <informationRegisters>InformationRegister.BoxContents</informationRegisters>
-  <informationRegisters>InformationRegister.BoxingItemKeys</informationRegisters>
   <informationRegisters>InformationRegister.BundleContents</informationRegisters>
   <informationRegisters>InformationRegister.ChequeBondStatuses</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>

@@ -17,12 +17,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocInventoryTransferOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
-&AtClient
-Procedure OnOpen(Cancel)
-	ThisObject.InputType = "Item";
-	ChangeInputType();
-EndProcedure
-
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocInventoryTransferOrderServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
@@ -39,21 +33,6 @@ Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 EndProcedure
 
 #EndRegion
-
-
-&AtClient
-Procedure InputTypeOnChange(Item)
-	ChangeInputType();
-EndProcedure
-
-&AtClient
-Procedure ChangeInputType()
-	If InputType = "Item" Then
-		Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Items");
-	Else
-		Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Boxes");
-	EndIf;
-EndProcedure
 
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export

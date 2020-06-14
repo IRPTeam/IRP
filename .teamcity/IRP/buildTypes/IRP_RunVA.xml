@@ -110,7 +110,7 @@ $text = "
   'searchformelementsbyname': false,
   'addmetainformationclicking': false,
   'thetreetagisenabledbydefault': true,
-  'vanessashutdown': true,
+  'vanessashutdown': %env.CloseVA%,
   'closetestclient': true
 }"
 

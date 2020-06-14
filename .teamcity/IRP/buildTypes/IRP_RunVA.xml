@@ -10,7 +10,7 @@
     </options>
     <parameters>
       <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />
-      <param name="env.FilterTagsForVA" value="'%dep.IRP_GitHubUpdate.env.VA_Tags%'" />
+      <param name="env.FilterTagsForVA" value="'%dep.IRP_GitHubUpdate.env.VA_Tags%', 'Test'" />
       <param name="env.OScript" value="C:/OneScript" />
       <param name="env.PID_ID" value="0" />
       <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features/" />

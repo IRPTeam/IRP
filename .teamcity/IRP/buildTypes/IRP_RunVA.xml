@@ -27,7 +27,7 @@ $text = "
 {
   'Version': '1.2.031',
   'Lang': 'en',
-  'DebugLog': true,
+  'DebugLog': false,
   'VersionVA': 'ver 1.2.031',
   'vanessarun': true,
   'addtofeaturefilter': true,

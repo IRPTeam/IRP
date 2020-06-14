@@ -122,7 +122,8 @@ $a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.team
 $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value '%system.teamcity.build.tempDir%'
 $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value '%system.teamcity.build.tempDir%/test.txt'
 $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value '%env.VA.FeaturePath%'
- 
+$a.librarycatalogs.Add('%system.teamcity.build.workingDir%\\DataProcessor')
+
 $a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va.json]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />

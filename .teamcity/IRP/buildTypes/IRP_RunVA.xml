@@ -9,6 +9,7 @@
       <option name="cleanBuild" value="true" />
     </options>
     <parameters>
+      <param name="env.CloseVA" value="true" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />
       <param name="env.FilterTagsForVA" value="'%dep.IRP_GitHubUpdate.env.VA_Tags%', 'Test'" />
       <param name="env.OScript" value="C:/OneScript" />

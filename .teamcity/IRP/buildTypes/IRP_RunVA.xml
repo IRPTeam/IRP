@@ -91,7 +91,7 @@ $text = "
     'Negative'
   ],
   'filtertags': [
-      %env.FilterTagsForVA%
+      
   ],
   'logtogr': false,
   'logtotext': false,
@@ -123,10 +123,20 @@ $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value '%system.tea
 $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value '%system.teamcity.build.tempDir%/test.txt'
 $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value '%env.VA.FeaturePath%'
 $a.librarycatalogs += '%system.teamcity.build.workingDir%\DataProcessor'
+$addTags = %env.FilterTagsForVA%;
+If ($addTags -eq '')
+{
+
+}else
+{
+	$a.filtertags += $addTags
+}
 
 $a = $a | ConvertTo-Json -depth 32
 $a | set-content %system.teamcity.build.workingDir%/va.json
-$a]]></param>
+echo ##teamcity[compilationStarted compiler='VA settings']
+echo $a
+echo ##teamcity[compilationFinished compiler='VA settings']]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

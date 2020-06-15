@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4ddefb9a-15e7-462b-9bd2-93eb33c8f0e2">
-  <name>DocBoxingClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc boxing client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-</mdclass:CommonModule>

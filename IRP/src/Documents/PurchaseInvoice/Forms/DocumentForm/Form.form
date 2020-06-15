@@ -951,75 +951,6 @@
           <placementArea>UserCmds</placementArea>
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
-        <items xsi:type="form:FormField">
-          <name>InputType</name>
-          <id>148</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>InputType</segments>
-            </paths>
-          </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>InputTypeOnChange</name>
-          </handlers>
-          <extendedTooltip>
-            <name>InputTypeExtendedTooltip</name>
-            <id>150</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>InputTypeContextMenu</name>
-            <id>149</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>RadioButtonField</type>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
-            <radioButtonsType>Tumbler</radioButtonsType>
-            <choiceList>
-              <presentation>
-                <key>en</key>
-                <value>Item</value>
-              </presentation>
-              <value xsi:type="core:StringValue">
-                <value>Item</value>
-              </value>
-            </choiceList>
-            <choiceList>
-              <presentation>
-                <key>en</key>
-                <value>Box</value>
-              </presentation>
-              <value xsi:type="core:StringValue">
-                <value>Box</value>
-              </value>
-            </choiceList>
-          </extInfo>
-        </items>
         <items xsi:type="form:FormGroup">
           <name>GroupItemCommandBarRight</name>
           <id>301</id>
@@ -5050,7 +4981,6 @@
         <id>2</id>
         <valueType>
           <types>CatalogRef.Items</types>
-          <types>CatalogRef.Boxes</types>
         </valueType>
         <view>
           <common>true</common>
@@ -5169,27 +5099,6 @@
     <edit>
       <common>true</common>
     </edit>
-  </attributes>
-  <attributes>
-    <name>InputType</name>
-    <title>
-      <key>en</key>
-      <value>Input type</value>
-    </title>
-    <id>7</id>
-    <valueType>
-      <types>String</types>
-      <stringQualifiers>
-        <length>10</length>
-      </stringQualifiers>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-    <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
   </attributes>
   <attributes>
     <name>CurrentStore</name>

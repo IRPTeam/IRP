@@ -25,19 +25,15 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 EndProcedure
 
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
-	ArrayOf_Boxing = New Array();
 	ArrayOf_Bundling = New Array();
 	ArrayOf_InventoryTransfer = New Array();
 	ArrayOf_PurchaseInvoice = New Array();
 	ArrayOf_PurchaseOrder = New Array();
 	ArrayOf_SalesReturn = New Array();
-	ArrayOf_Unboxing = New Array();
 	ArrayOf_Unbundling = New Array();
 	
 	For Each Row In ArrayOfBasisDocuments Do
-		If TypeOf(Row) = Type("DocumentRef.Boxing") Then
-			ArrayOf_Boxing.Add(Row);
-		ElsIf TypeOf(Row) = Type("DocumentRef.Bundling") Then
+		If TypeOf(Row) = Type("DocumentRef.Bundling") Then
 			ArrayOf_Bundling.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.InventoryTransfer") Then
 			ArrayOf_InventoryTransfer.Add(Row);
@@ -47,8 +43,6 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 			ArrayOf_PurchaseOrder.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.SalesReturn") Then
 			ArrayOf_SalesReturn.Add(Row);
-		ElsIf TypeOf(Row) = Type("DocumentRef.Unboxing") Then
-			ArrayOf_Unboxing.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.Unbundling") Then
 			ArrayOf_Unbundling.Add(Row);
 		Else
@@ -57,13 +51,11 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	EndDo;
 	
 	ArrayOfTables = New Array();
-	ArrayOfTables.Add(GetDocumentTable_Boxing(ArrayOf_Boxing));
 	ArrayOfTables.Add(GetDocumentTable_Bundling(ArrayOf_Bundling));
 	ArrayOfTables.Add(GetDocumentTable_InventoryTransfer(ArrayOf_InventoryTransfer));
 	ArrayOfTables.Add(GetDocumentTable_PurchaseInvoice(ArrayOf_PurchaseInvoice));
 	ArrayOfTables.Add(GetDocumentTable_PurchaseOrder(ArrayOf_PurchaseOrder));
 	ArrayOfTables.Add(GetDocumentTable_SalesReturn(ArrayOf_SalesReturn));
-	ArrayOfTables.Add(GetDocumentTable_Unboxing(ArrayOf_Unboxing));
 	ArrayOfTables.Add(GetDocumentTable_Unbundling(ArrayOf_Unbundling));
 	
 	Return JoinDocumentsStructure(ArrayOfTables, "BasedOn, Company, Partner, LegalName, Agreement, Store");
@@ -219,10 +211,6 @@ Function ExtractInfoFrom_PurchaseInvoice(QueryTable)
 	Return QueryTable;
 EndFunction
 
-Function GetDocumentTable_Boxing(ArrayOfBasisDocuments)
-	Return GetDocumentTable(ArrayOfBasisDocuments, "Boxing");
-EndFunction
-
 Function GetDocumentTable_Bundling(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "Bundling");
 EndFunction
@@ -315,10 +303,6 @@ Function GetDocumentTable_SalesReturn(ArrayOfBasisDocuments)
 	
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();
-EndFunction
-
-Function GetDocumentTable_Unboxing(ArrayOfBasisDocuments)
-	Return GetDocumentTable(ArrayOfBasisDocuments, "Unboxing");
 EndFunction
 
 Function GetDocumentTable_Unbundling(ArrayOfBasisDocuments)

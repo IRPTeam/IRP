@@ -1,25 +1,6 @@
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	Form.InputType = "Item";
-	ChangeInputType(Object, Form);
-	
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
-
-#Region ItemInputType
-
-Procedure InputTypeOnChange(Object, Form, Item) Export
-	ChangeInputType(Object, Form);
-EndProcedure
-
-Procedure ChangeInputType(Object, Form) Export
-	If Form.InputType = "Item" Then
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Items");
-	Else
-		Form.Items.ItemListItem.TypeRestriction = New TypeDescription("CatalogRef.Boxes");
-	EndIf;
-EndProcedure
-
-#EndRegion
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
 	For Each Row In Object.ItemList Do

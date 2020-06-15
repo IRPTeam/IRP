@@ -280,9 +280,7 @@
       <types>DocumentRef.PurchaseReturn</types>
       <types>DocumentRef.InventoryTransfer</types>
       <types>DocumentRef.Bundling</types>
-      <types>DocumentRef.Unboxing</types>
       <types>DocumentRef.Unbundling</types>
-      <types>DocumentRef.Boxing</types>
       <types>DocumentRef.SalesOrder</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>

@@ -130,13 +130,11 @@
     </synonym>
     <type>
       <types>CatalogRef.Items</types>
-      <types>CatalogRef.Boxes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
     <indexing>Index</indexing>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -352,7 +350,6 @@
     <group>FormNavigationPanelGoTo</group>
     <commandParameterType>
       <types>CatalogRef.Items</types>
-      <types>CatalogRef.Boxes</types>
     </commandParameterType>
     <shortcut></shortcut>
   </commands>

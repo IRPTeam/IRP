@@ -167,12 +167,6 @@ EndProcedure
 
 #EndRegion
 
-&AtClient
-Procedure InputTypeOnChange(Item)
-	DocShipmentConfirmationClient.InputTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-
 #Region GroupTitleDecorations
 
 &AtClient

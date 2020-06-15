@@ -84,11 +84,6 @@ Procedure ItemListBeforeDeleteRow(Item, Cancel)
 EndProcedure
 
 &AtClient
-Procedure InputTypeOnChange(Item)
-	DocGoodsReceiptClient.InputTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure ItemBasisListOnChange(Item)
 	DocGoodsReceiptClient.ItemBasisListOnChange(Object, ThisObject, Item);
 EndProcedure

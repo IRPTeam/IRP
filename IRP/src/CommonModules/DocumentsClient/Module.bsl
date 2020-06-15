@@ -1183,48 +1183,6 @@ Procedure ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, Array
 EndProcedure
 #EndRegion
 
-#Region Boxes
-
-Procedure BoxesStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
-	If  OpenSettings = Undefined Then
-		OpenSettings = GetOpenSettingsStructure();
-	EndIf;
-	
-	StandardProcessing = False;
-	
-	If OpenSettings.FormName = Undefined Then
-		OpenSettings.FormName = "Catalog.Boxes.ChoiceForm";
-	EndIf;
-	
-	If OpenSettings.ArrayOfFilters = Undefined Then
-		OpenSettings.ArrayOfFilters = New Array();
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
-	EndIf;
-	
-	OpenSettings.FormParameters = New Structure();
-	If OpenSettings.FillingData = Undefined Then
-		OpenSettings.FormParameters.Insert("FillingData", New Structure());
-	Else
-		OpenSettings.FormParameters.Insert("FillingData", OpenSettings.FillingData);
-	EndIf;
-	
-	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-EndProcedure
-
-Procedure BoxesEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters = Undefined) Export
-	If ArrayOfFilters = Undefined Then
-		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	EndIf;
-	
-	ArrayOfChoiceParameters = New Array();
-	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter", 
-															DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
-	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
-EndProcedure
-#EndRegion
-
 #Region Cheque
 
 Procedure ChequeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export

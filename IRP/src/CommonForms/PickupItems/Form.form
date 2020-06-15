@@ -2449,23 +2449,6 @@
     </edit>
   </attributes>
   <attributes>
-    <name>UseBox</name>
-    <title>
-      <key>en</key>
-      <value>Use box</value>
-    </title>
-    <id>27</id>
-    <valueType>
-      <types>Boolean</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
-  <attributes>
     <name>ReceiverStores</name>
     <title>
       <key>en</key>

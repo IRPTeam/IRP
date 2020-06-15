@@ -39,12 +39,6 @@ EndProcedure
 
 #EndRegion
 
-
-&AtClient
-Procedure InputTypeOnChange(Item)
-	DocInventoryTransferClient.InputTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	DocInventoryTransferClient.ItemListOnChange(Object, ThisObject, Item);

@@ -55,13 +55,6 @@
         <value></value>
       </code>
     </items>
-    <items id="f06b9b7d-444a-4e73-96c2-21c3ddf63a0d">
-      <name>Catalog_Boxes</name>
-      <description>Catalog boxes</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
-      </code>
-    </items>
     <items id="8846cea1-3716-4606-bdc5-f47a7aa533ce">
       <name>Catalog_Partners</name>
       <description>Catalog partners</description>
@@ -401,13 +394,6 @@
     <items id="eae67cef-3488-4f12-afb0-d130932ad37c">
       <name>Document_StockAdjustmentAsWriteOff</name>
       <description>Document Stock adjustment as write off</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
-      </code>
-    </items>
-    <items id="a1e91179-ddb2-45d6-a6a0-a8cd51eb130d">
-      <name>Document_Unboxing</name>
-      <description>Document Unboxing</description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>

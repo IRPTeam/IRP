@@ -335,8 +335,6 @@
       <types>DocumentRef.SalesReturn</types>
       <types>DocumentRef.InventoryTransfer</types>
       <types>DocumentRef.Bundling</types>
-      <types>DocumentRef.Boxing</types>
-      <types>DocumentRef.Unboxing</types>
       <types>DocumentRef.Unbundling</types>
       <types>DocumentRef.PurchaseOrder</types>
     </commandParameterType>

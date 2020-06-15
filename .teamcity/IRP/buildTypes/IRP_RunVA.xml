@@ -9,8 +9,9 @@
       <option name="cleanBuild" value="true" />
     </options>
     <parameters>
+      <param name="env.CloseVA" value="true" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />
-      <param name="env.FilterTagsForVA" value="'TestExtDataProc'" />
+      <param name="env.FilterTagsForVA" value="" />
       <param name="env.OScript" value="C:/OneScript" />
       <param name="env.PID_ID" value="0" />
       <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features/" />
@@ -24,95 +25,94 @@
 $irfvpath = "%teamcity.tool.iview%/i_view32.exe" | ForEach-Object { $_ -replace '\\', '/' }
 $text = "
 {
-'Version': '1.2.031',
-'Lang': 'en',
-'DebugLog': true,
-'VersionVA': 'ver 1.2.031',
-'vanessarun': true,
-'addtofeaturefilter': true,
-'DownloadFeaturesOpen': 1,
-'platformversiongenerateepf': 'C:\\Program Files\\1cv8\\8.3.15.1869\\bin\\',
-'usersettingsprovider': 'FILE',
-'RunningScripts': {
-'makestepsasync': false,
-'SpacingStepSpecifiedUser': 0.1,
-'updatestatistics': true,
-'updatetreewhenscenariostarts': true,
-'stoponerror': false,
-'showrownumberonerror': false,
-'pendingequalfailed': false,
-'timeoutforasynchronoussteps': 0,
-'timetofindwindow': 5,
-'numberofattemptstoperformanaction': 3,
-'safeexecutionofsteps': false,
-'pauseonwindowopening': 0
-},
-'TestClient': {
-'runtestclientwithmaximizedwindow': false,
-'testclienttimeout': 25,
-'datatestclients': [
-{
-'Name': 'This client',
-'PathToInfobase': '/Slocalhost/%env.Database1CName%',
-'PortTestClient': 48001,
-'AddItionalParameters': ' /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls /DEBUG -http -attach /DEBUGGERURL http://localhost:1550',
-'ClientType': 'Thin',
-'ComputerName': 'localhost'
-}
-]
-},
-'allurecreatereport': true,
-'AllureReport': {
-'allurepath': '$allurePath/tmp',
-'allurepathbase': '$allurePath/base',
-'reportlevel1': '#report.epic=;catalog1',
-'reportlevel2': '#report.feature=;catalog2',
-'reportlevel3': '#report.story=;scenarioname',
-'testsuites': '',
-'attacheventlogtotheallurereport': true,
-'attachactiveformdatatotheallurereport': true,
-'attachallformsdatatotheallurereport': false,
-'attachnetworkconnectiondatatotheallurereport': false,
-'attachdataoftheoperatingsystemprocessestotheallurereport': false,
-'directorytobuildhierarchy': '',
-'DataAllureMarks': []
-},
-'junitcreatereport': false,
-'cucumbercreatereport': false,
-'ModelingCreateReport': false,
-'htmlcreate': false,
-'markdowncreate': false,
-'simplereport': false,
-'librarycatalogs': [
-'C:\\OneScript\\lib\\vanessa-automation\\features\\Libraries'
-],
-'ignoretags': [
-'IgnoreOnCIMainBuild',
-'Negative'
-],
-'filtertags': [
-	%env.FilterTagsForVA%
-],
-'logtogr': false,
-'logtotext': false,
-'logstepstotext': false,
-'logerrorstotext': false,
-'getactiveformdataonerror': false,
-'getallformsdataonerror': false,
-'collectnetworkconnectiondata': false,
-'collectdataoftheoperatingsystemprocesses': false,
-'useaddin': true,
-'useaddinforscreencapture': true,
-'screencaptureaddinmethod': 2,
-'onerrorscreenshot': true,
-'onerrorscreenshoteverywindow': true,
-'videcreate': false,
-'usesikulixserver': false,
-'searchformelementsbyname': false,
-'addmetainformationclicking': false,
-'thetreetagisenabledbydefault': true,
-'vanessashutdown': true,
-'closetestclient': true
+  'Version': '1.2.031',
+  'Lang': 'en',
+  'DebugLog': false,
+  'VersionVA': 'ver 1.2.031',
+  'vanessarun': true,
+  'addtofeaturefilter': true,
+  'DownloadFeaturesOpen': 1,
+  'platformversiongenerateepf': 'C:\\Program Files\\1cv8\\8.3.15.1869\\bin\\',
+  'usersettingsprovider': 'FILE',
+  'RunningScripts': {
+    'makestepsasync': false,
+    'SpacingStepSpecifiedUser': 0.1,
+    'updatestatistics': true,
+    'updatetreewhenscenariostarts': true,
+    'stoponerror': false,
+    'showrownumberonerror': false,
+    'pendingequalfailed': false,
+    'timeoutforasynchronoussteps': 0,
+    'timetofindwindow': 5,
+    'numberofattemptstoperformanaction': 3,
+    'safeexecutionofsteps': false,
+    'pauseonwindowopening': 0
+  },
+  'TestClient': {
+    'runtestclientwithmaximizedwindow': false,
+    'testclienttimeout': 25,
+    'datatestclients': [
+      {
+      'Name': 'This client',
+      'PathToInfobase': '/Slocalhost/%env.Database1CName%',
+      'PortTestClient': 48001,
+      'AddItionalParameters': ' /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls /DEBUG -http -attach /DEBUGGERURL http://localhost:1550',
+      'ClientType': 'Thin',
+      'ComputerName': 'localhost'
+      }
+  	]
+  },
+  'allurecreatereport': true,
+  'AllureReport': {
+    'allurepath': '$allurePath/tmp',
+    'allurepathbase': '$allurePath/base',
+    'reportlevel1': '#report.epic=;catalog1',
+    'reportlevel2': '#report.feature=;catalog2',
+    'reportlevel3': '#report.story=;scenarioname',
+    'testsuites': '',
+    'attacheventlogtotheallurereport': true,
+    'attachactiveformdatatotheallurereport': true,
+    'attachallformsdatatotheallurereport': false,
+    'attachnetworkconnectiondatatotheallurereport': false,
+    'attachdataoftheoperatingsystemprocessestotheallurereport': false,
+    'DataAllureMarks': []
+  },
+  'junitcreatereport': false,
+  'cucumbercreatereport': false,
+  'ModelingCreateReport': false,
+  'htmlcreate': false,
+  'markdowncreate': false,
+  'simplereport': false,
+  'librarycatalogs': [
+  	'C:\\OneScript\\lib\\vanessa-automation\\features\\Libraries'
+  ],
+  'ignoretags': [
+    'IgnoreOnCIMainBuild',
+    'Negative'
+  ],
+  'filtertags': [
+      %env.FilterTagsForVA%
+  ],
+  'logtogr': false,
+  'logtotext': false,
+  'logstepstotext': false,
+  'logerrorstotext': false,
+  'getactiveformdataonerror': false,
+  'getallformsdataonerror': false,
+  'collectnetworkconnectiondata': false,
+  'collectdataoftheoperatingsystemprocesses': false,
+  'useaddin': true,
+  'useaddinforscreencapture': true,
+  'screencaptureaddinmethod': 2,
+  'onerrorscreenshot': true,
+  'onerrorscreenshoteverywindow': true,
+  'videcreate': false,
+  'usesikulixserver': false,
+  'searchformelementsbyname': false,
+  'addmetainformationclicking': false,
+  'thetreetagisenabledbydefault': true,
+  'vanessashutdown': %env.CloseVA%,
+  'closetestclient': true
 }"
 
 $a = $text | ConvertFrom-Json
@@ -121,8 +121,19 @@ $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePa
 $a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.tempDir%'
 $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value '%system.teamcity.build.tempDir%'
 $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value '%system.teamcity.build.tempDir%/test.txt'
- 
+$a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value '%env.VA.FeaturePath%'
+$a.librarycatalogs += '%system.teamcity.build.workingDir%\DataProcessor'
+
 $a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va.json]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_31" name="Copy add data  proc from tools" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code" value="Copy-Item -Path &quot;%teamcity.tool.ExtDataProc%/*&quot; -Destination &quot;%teamcity.build.workingDir%/DataProcessor&quot;" />
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
@@ -136,7 +147,8 @@ $a | ConvertTo-Json -depth 32| set-content %system.teamcity.build.workingDir%/va
       </runner>
       <runner id="RUNNER_12" name="Start VA" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[start /wait "1cv8.exe" %env.PathTo1CPlatform%  %env.ConnectionTo1C% /Out %env.LogFile1C% /Execute "%env.OScript%/lib/vanessa-automation/vanessa-automation.epf" /TestManager /C"StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va.json"
+          <param name="script.content"><![CDATA[chcp 65001
+start /wait "1cv8.exe" %env.PathTo1CPlatform%  %env.ConnectionTo1C% /Out %env.LogFile1C% /Execute "%env.OScript%/lib/vanessa-automation/vanessa-automation.epf" /TestManager /C"StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va.json"
 echo ##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']
 sh -c "while read line; do if [[ $line == *"Error"* ]]; then echo -e ""\e[31m $line""; else  echo -e ""\e[34m $line""; fi;  done < ""%env.LogFile1C%"";"
 echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]></param>
@@ -246,7 +258,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_2" sourceBuildTypeId="ExternalDataProcessors_Build" cleanDestination="false">
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" />
-        <artifact sourcePath="ExternalDataProcessors=&gt;DataProcessors" />
+        <artifact sourcePath="ExternalDataProcessors=&gt;DataProcessor" />
       </dependency>
     </artifact-dependencies>
     <dependencies>

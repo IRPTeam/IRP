@@ -4,7 +4,6 @@
     <orderFragments>
       <group>NavigationPanelOrdinary</group>
       <commands>Catalog.Items.StandardCommand.OpenList</commands>
-      <commands>Catalog.Boxes.StandardCommand.OpenList</commands>
       <commands>Catalog.Units.StandardCommand.OpenList</commands>
       <commands>Catalog.ItemTypes.StandardCommand.OpenList</commands>
       <commands>Catalog.ItemSegments.StandardCommand.OpenList</commands>

@@ -84,7 +84,7 @@
 		| '5,000'    | 'Sales invoice 1*'    | 'Main Company' | 'L/Green'  |
 		| '4,000'    | 'Sales invoice 1*'    | 'Main Company' | '36/Yellow'   |
 
- Сценарий: _024005 проверка движений документа sales invoice с неордерного склада на основании заказа клиента по регистру StockBalance (минус)
+Сценарий: _024005 проверка движений документа sales invoice с неордерного склада на основании заказа клиента по регистру StockBalance (минус)
 	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 	Тогда таблица "List" содержит строки:

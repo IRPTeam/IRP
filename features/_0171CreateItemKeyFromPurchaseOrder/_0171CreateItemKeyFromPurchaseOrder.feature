@@ -114,7 +114,7 @@
 		И я нажимаю на кнопку 'No'
 
 
- Сценарий: фильтр при выборе item key в документе Purchase order
+Сценарий: фильтр при выборе item key в документе Purchase order
 	* Открытие формы для создания Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'

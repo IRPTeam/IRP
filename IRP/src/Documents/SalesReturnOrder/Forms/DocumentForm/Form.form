@@ -4608,26 +4608,6 @@
       <common>true</common>
     </edit>
   </attributes>
-  <attributes>
-    <name>InputType</name>
-    <title>
-      <key>en</key>
-      <value>Input type</value>
-    </title>
-    <id>31</id>
-    <valueType>
-      <types>String</types>
-      <stringQualifiers>
-        <length>10</length>
-      </stringQualifiers>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
   <formCommands>
     <name>SearchByBarcode</name>
     <title>

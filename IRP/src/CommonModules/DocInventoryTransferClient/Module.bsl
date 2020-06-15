@@ -113,15 +113,11 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	If Form.InputType = "Item" Then
-		DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
-	EndIf;
+	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	If Form.InputType = "Item" Then
-		DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing);
-	EndIf;
+	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing);
 EndProcedure
 
 #Region GroupTitle

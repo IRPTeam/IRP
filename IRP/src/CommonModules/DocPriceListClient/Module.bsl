@@ -48,22 +48,14 @@ Procedure ItemStartChoice(Object, Form, InputTypeName, Item, ChoiceData, Standar
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
 																		True, DataCompositionComparisonType.NotEqual));
 	
-	If Form[InputTypeName] = "Item" Then
-		DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-	Else
-		DocumentsClient.BoxesStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-	EndIf;
+	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure ItemEditTextChange(Object, Form, InputTypeName, Item, Text, StandardProcessing)
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	
-	If Form[InputTypeName] = "Item" Then
-		DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-	Else
-		DocumentsClient.BoxesEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-	EndIf;
+	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
 #EndRegion

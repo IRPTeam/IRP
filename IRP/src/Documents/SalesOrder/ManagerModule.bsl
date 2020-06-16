@@ -1,97 +1,247 @@
+#Region Public
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	
-	Tables = New Structure();
-	AccReg = Metadata.AccumulationRegisters;
-	Tables.Insert("StockReservation", PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("OrderBalance", PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("OrderBalance_Exists", PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("OrderReservation", PostingServer.CreateTable(AccReg.OrderReservation));
-	Tables.Insert("InventoryBalance", PostingServer.CreateTable(AccReg.InventoryBalance));
-	Tables.Insert("GoodsInTransitOutgoing", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-	Tables.Insert("StockBalance", PostingServer.CreateTable(AccReg.StockBalance));
-	Tables.Insert("ShipmentOrders", PostingServer.CreateTable(AccReg.ShipmentOrders));
-	Tables.Insert("ShipmentConfirmationSchedule_Receipt", PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
-	Tables.Insert("ShipmentConfirmationSchedule_Expense", PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
-	Tables.Insert("OrderProcurement", PostingServer.CreateTable(AccReg.OrderProcurement));
-	Tables.Insert("SalesOrderTurnovers", PostingServer.CreateTable(AccReg.SalesOrderTurnovers));
+	DocumentDataTables = GetRegisterTables();	
 	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	
-	Tables.OrderBalance_Exists = GetExistsOrderBalance(Ref, AddInfo);
+	DocumentDataTables.OrderBalance_Exists = GetExistsOrderBalance(Ref, AddInfo);
 	
 	If Not StatusInfo.Posting Then
-		Return Tables;
+		Return DocumentDataTables;
 	EndIf;
+
+	QueryTables = GetQueryTables(Ref, StatusInfo);
 	
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	SalesOrderItemList.Ref.Company AS Company,
-		|	SalesOrderItemList.Ref.ShipmentConfirmationsBeforeSalesInvoice AS ShipmentConfirmationsBeforeSalesInvoice,
-		|	SalesOrderItemList.Store AS Store,
-		|	SalesOrderItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
-		|	SalesOrderItemList.ItemKey AS ItemKey,
-		|	SalesOrderItemList.Ref AS SalesOrder,
-		|	SUM(SalesOrderItemList.Quantity) AS Quantity,
-		|	0 AS BasisQuantity,
-		|	SalesOrderItemList.Unit,
-		|	SalesOrderItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	SalesOrderItemList.ItemKey.Unit AS ItemKeyUnit,
-		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	SalesOrderItemList.ItemKey.Item AS Item,
-		|	&Period AS Period,
-		|	SalesOrderItemList.Key AS RowKey,
-		|	SalesOrderItemList.DeliveryDate AS DeliveryDate,
-		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
-		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
-		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Repeal) AS IsProcurementMethod_Repeal,
-		|	CASE
-		|		WHEN SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END AS IsService,
-		|	SUM(SalesOrderItemList.TotalAmount) AS Amount,
-		|	SalesOrderItemList.Ref.Currency AS Currency
-		|FROM
-		|	Document.SalesOrder.ItemList AS SalesOrderItemList
-		|WHERE
-		|	SalesOrderItemList.Ref = &Ref
-		|GROUP BY
-		|	SalesOrderItemList.Ref.Company,
-		|	SalesOrderItemList.Store,
-		|	SalesOrderItemList.ItemKey,
-		|	SalesOrderItemList.Ref,
-		|	SalesOrderItemList.Unit,
-		|	SalesOrderItemList.ItemKey.Item.Unit,
-		|	SalesOrderItemList.ItemKey.Unit,
-		|	SalesOrderItemList.ItemKey.Item,
-		|	VALUE(Catalog.Units.EmptyRef),
-		|	SalesOrderItemList.Ref.ShipmentConfirmationsBeforeSalesInvoice,
-		|	SalesOrderItemList.Store.UseShipmentConfirmation,
-		|	SalesOrderItemList.Key,
-		|	SalesOrderItemList.DeliveryDate,
-		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock),
-		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase),
-		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Repeal),
-		|	CASE
-		|		WHEN SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END,
-		|	SalesOrderItemList.Ref.Currency";
+	FillRegisterTables(QueryTables, DocumentDataTables);	
 	
-	Query.SetParameter("Ref", Ref);
-	Query.SetParameter("Period", StatusInfo.Period);
+	Parameters.IsReposting = False;
 	
-	QueryResults = Query.Execute();
+	Return DocumentDataTables;
+EndFunction
+
+Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	DocumentDataTables = Parameters.DocumentDataTables;	
 	
-	QueryTable = QueryResults.Unload();
+	DataMapWithLockFields = New Map();
 	
+	// StockReservation
+	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation);
+	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
+	
+	// OrderBalance
+	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance);
+	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
+	
+	// OrderReservation
+	OrderReservation = AccumulationRegisters.OrderReservation.GetLockFields(DocumentDataTables.OrderReservation);
+	DataMapWithLockFields.Insert(OrderReservation.RegisterName, OrderReservation.LockInfo);
+	
+	// InventoryBalance
+	InventoryBalance = AccumulationRegisters.InventoryBalance.GetLockFields(DocumentDataTables.InventoryBalance);
+	DataMapWithLockFields.Insert(InventoryBalance.RegisterName, InventoryBalance.LockInfo);
+	
+	// GoodsInTransitOutgoing
+	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing);
+	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
+	
+	// StockBalance
+	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance);
+	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
+	
+	// ShipmentOrders
+	ShipmentOrders = AccumulationRegisters.ShipmentOrders.GetLockFields(DocumentDataTables.ShipmentOrders);
+	DataMapWithLockFields.Insert(ShipmentOrders.RegisterName, ShipmentOrders.LockInfo);
+	
+	// ShipmentConfirmationSchedule
+	ShipmentConfirmationSchedule 
+	= AccumulationRegisters.ShipmentConfirmationSchedule.GetLockFields(DocumentDataTables.ShipmentConfirmationSchedule_Expense);
+	DataMapWithLockFields.Insert(ShipmentConfirmationSchedule.RegisterName, ShipmentConfirmationSchedule.LockInfo);
+	
+	// OrderProcurement
+	OrderProcurement = AccumulationRegisters.OrderProcurement.GetLockFields(DocumentDataTables.OrderProcurement);
+	DataMapWithLockFields.Insert(OrderProcurement.RegisterName, OrderProcurement.LockInfo);
+	
+	Return DataMapWithLockFields;
+	
+EndFunction
+
+Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	Return;
+EndProcedure
+
+Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+
+	PostingDataTables = New Map();
+		
+	// StockReservation
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Expense,
+			Parameters.DocumentDataTables.StockReservation,
+			Parameters.IsReposting));
+	
+	// OrderBalance
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderBalance,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.OrderBalance,
+			Parameters.DocumentDataTables.OrderBalance_Exists.Count() > 0));
+	
+	// OrderReservation
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderReservation,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.OrderReservation,
+			Parameters.IsReposting));
+	
+	// InventoryBalance
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.InventoryBalance,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Expense,
+			Parameters.DocumentDataTables.InventoryBalance,
+			Parameters.IsReposting));
+	
+	
+	// GoodsInTransitOutgoing
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.GoodsInTransitOutgoing,
+			Parameters.IsReposting));
+	
+	// StockBalance
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Expense,
+			Parameters.DocumentDataTables.StockBalance,
+			Parameters.IsReposting));
+	
+	// ShipmentOrders
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ShipmentOrders,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.ShipmentOrders,
+			Parameters.IsReposting));
+	
+	// ShipmentConfirmationSchedule
+	// ShipmentConfirmationSchedule_Receipt [Receipt]  
+	// ShipmentConfirmationSchedule_Expense [Expense]
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.ShipmentConfirmationSchedule_Receipt.Copy();
+	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
+	ArrayOfTables.Add(Table1);
+	
+	Table2 = Parameters.DocumentDataTables.ShipmentConfirmationSchedule_Expense.Copy();
+	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table2);
+	
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ShipmentConfirmationSchedule,
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+				"RecordType, Period, Company, Order, Store, ItemKey, RowKey, Quantity, DeliveryDate"),
+			Parameters.IsReposting));
+	
+	// OrderProcurement
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderProcurement,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.OrderProcurement,
+			Parameters.IsReposting));
+	
+	// SalesOrderTurnovers
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SalesOrderTurnovers,
+		New Structure("RecordSet, WriteInTransaction",
+			Parameters.DocumentDataTables.SalesOrderTurnovers,
+			Parameters.IsReposting));
+	
+	Return PostingDataTables;
+
+EndFunction
+
+Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	If Not CheckOrderBalance(Ref, Parameters, AddInfo) Then
+		Cancel = True;
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region Undoposting
+
+Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	Tables = New Structure();
+	AccReg = Metadata.AccumulationRegisters;
+	Tables.Insert("OrderBalance_Exists", PostingServer.CreateTable(AccReg.OrderBalance));
+	Tables.OrderBalance_Exists = GetExistsOrderBalance(Ref, AddInfo);	
+	Return Tables;
+EndFunction
+
+Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	DocumentDataTables = Parameters.DocumentDataTables;
+	DataMapWithLockFields = New Map();
+	
+	// OrderBalance
+	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance_Exists);
+	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
+	
+	Return DataMapWithLockFields;
+EndFunction
+
+Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	Return;
+EndProcedure
+
+Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	Parameters.Insert("Unposting", True);
+	If Not CheckOrderBalance(Ref, Parameters, AddInfo) Then
+		Cancel = True;
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region Private
+
+#Region PostingProcedures
+
+#Region PostingGetDocumentDataTables
+
+Function GetRegisterTables()
+	AccReg = Metadata.AccumulationRegisters;
+	DocumentDataTables = New Structure();
+	DocumentDataTables.Insert("StockReservation", PostingServer.CreateTable(AccReg.StockReservation));
+	DocumentDataTables.Insert("OrderBalance", PostingServer.CreateTable(AccReg.OrderBalance));
+	DocumentDataTables.Insert("OrderBalance_Exists", PostingServer.CreateTable(AccReg.OrderBalance));
+	DocumentDataTables.Insert("OrderReservation", PostingServer.CreateTable(AccReg.OrderReservation));
+	DocumentDataTables.Insert("InventoryBalance", PostingServer.CreateTable(AccReg.InventoryBalance));
+	DocumentDataTables.Insert("GoodsInTransitOutgoing", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	DocumentDataTables.Insert("StockBalance", PostingServer.CreateTable(AccReg.StockBalance));
+	DocumentDataTables.Insert("ShipmentOrders", PostingServer.CreateTable(AccReg.ShipmentOrders));
+	DocumentDataTables.Insert("ShipmentConfirmationSchedule_Receipt", PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
+	DocumentDataTables.Insert("ShipmentConfirmationSchedule_Expense", PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
+	DocumentDataTables.Insert("OrderProcurement", PostingServer.CreateTable(AccReg.OrderProcurement));
+	DocumentDataTables.Insert("SalesOrderTurnovers", PostingServer.CreateTable(AccReg.SalesOrderTurnovers));
+	Return DocumentDataTables;
+EndFunction
+
+function GetQueryTables(Ref, StatusInfo)
+	QueryTables = New Structure();
+	QueryTable = QueryTable(Ref, StatusInfo);	
 	PostingServer.CalculateQuantityByUnit(QueryTable);
-	
+	QueryTables.Insert("QueryTable", QueryTable);
+	Return QueryTables;
+EndFunction
+
+Procedure FillRegisterTables(QueryTables, Tables)
 	TempManager = New TempTablesManager();
 	
 	Query = New Query();
@@ -118,7 +268,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable";
-	Query.SetParameter("QueryTable", QueryTable);
+	Query.SetParameter("QueryTable", QueryTables.QueryTable);
 	Query.Execute();
 	
 	GetTables_Common(Tables, TempManager, "tmp");
@@ -218,18 +368,77 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	If Not Query.TempTablesManager.Tables.Find("tmp_7").GetData().IsEmpty() Then
 		GetTables_IsService(Tables, TempManager, "tmp_7");
 	EndIf;
+EndProcedure
+
+Function QueryTable(Ref, StatusInfo)
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	SalesOrderItemList.Ref.Company AS Company,
+		|	SalesOrderItemList.Ref.ShipmentConfirmationsBeforeSalesInvoice AS ShipmentConfirmationsBeforeSalesInvoice,
+		|	SalesOrderItemList.Store AS Store,
+		|	SalesOrderItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
+		|	SalesOrderItemList.ItemKey AS ItemKey,
+		|	SalesOrderItemList.Ref AS SalesOrder,
+		|	SUM(SalesOrderItemList.Quantity) AS Quantity,
+		|	0 AS BasisQuantity,
+		|	SalesOrderItemList.Unit,
+		|	SalesOrderItemList.ItemKey.Item.Unit AS ItemUnit,
+		|	SalesOrderItemList.ItemKey.Unit AS ItemKeyUnit,
+		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
+		|	SalesOrderItemList.ItemKey.Item AS Item,
+		|	&Period AS Period,
+		|	SalesOrderItemList.Key AS RowKey,
+		|	SalesOrderItemList.DeliveryDate AS DeliveryDate,
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Repeal) AS IsProcurementMethod_Repeal,
+		|	CASE
+		|		WHEN SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+		|			THEN TRUE
+		|		ELSE FALSE
+		|	END AS IsService,
+		|	SUM(SalesOrderItemList.TotalAmount) AS Amount,
+		|	SalesOrderItemList.Ref.Currency AS Currency
+		|FROM
+		|	Document.SalesOrder.ItemList AS SalesOrderItemList
+		|WHERE
+		|	SalesOrderItemList.Ref = &Ref
+		|GROUP BY
+		|	SalesOrderItemList.Ref.Company,
+		|	SalesOrderItemList.Store,
+		|	SalesOrderItemList.ItemKey,
+		|	SalesOrderItemList.Ref,
+		|	SalesOrderItemList.Unit,
+		|	SalesOrderItemList.ItemKey.Item.Unit,
+		|	SalesOrderItemList.ItemKey.Unit,
+		|	SalesOrderItemList.ItemKey.Item,
+		|	VALUE(Catalog.Units.EmptyRef),
+		|	SalesOrderItemList.Ref.ShipmentConfirmationsBeforeSalesInvoice,
+		|	SalesOrderItemList.Store.UseShipmentConfirmation,
+		|	SalesOrderItemList.Key,
+		|	SalesOrderItemList.DeliveryDate,
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock),
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase),
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Repeal),
+		|	CASE
+		|		WHEN SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+		|			THEN TRUE
+		|		ELSE FALSE
+		|	END,
+		|	SalesOrderItemList.Ref.Currency";
 	
-	
-	Parameters.IsReposting = False;
-	
-	Return Tables;
+	Query.SetParameter("Ref", Ref);
+	Query.SetParameter("Period", StatusInfo.Period);	
+	QueryResults = Query.Execute();
+		
+	Return QueryResults.Unload();
 EndFunction
 
 Procedure GetTables_Common(Tables, TempManager, TableName)
 	// tmp
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
-	#Region QueryText
 	Query.Text =
 		// [0]
 		"SELECT
@@ -244,12 +453,15 @@ Procedure GetTables_Common(Tables, TempManager, TableName)
 		|FROM
 		|	tmp AS tmp";
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
-	#EndRegion
 	
 	QueryResults = Query.ExecuteBatch();
 	
 	Tables.SalesOrderTurnovers = QueryResults[0].Unload();
 EndProcedure
+
+#EndRegion
+
+#Region FillRegisterTables
 
 #Region Table_tmp_1
 
@@ -1341,182 +1553,7 @@ EndProcedure
 
 #EndRegion
 
-Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
-	DataMapWithLockFields = New Map();
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// OrderBalance
-	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance);
-	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
-	
-	// OrderReservation
-	OrderReservation = AccumulationRegisters.OrderReservation.GetLockFields(DocumentDataTables.OrderReservation);
-	DataMapWithLockFields.Insert(OrderReservation.RegisterName, OrderReservation.LockInfo);
-	
-	// InventoryBalance
-	InventoryBalance = AccumulationRegisters.InventoryBalance.GetLockFields(DocumentDataTables.InventoryBalance);
-	DataMapWithLockFields.Insert(InventoryBalance.RegisterName, InventoryBalance.LockInfo);
-	
-	// GoodsInTransitOutgoing
-	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing);
-	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
-	// ShipmentOrders
-	ShipmentOrders = AccumulationRegisters.ShipmentOrders.GetLockFields(DocumentDataTables.ShipmentOrders);
-	DataMapWithLockFields.Insert(ShipmentOrders.RegisterName, ShipmentOrders.LockInfo);
-	
-	// ShipmentConfirmationSchedule
-	ShipmentConfirmationSchedule 
-	= AccumulationRegisters.ShipmentConfirmationSchedule.GetLockFields(DocumentDataTables.ShipmentConfirmationSchedule_Expense);
-	DataMapWithLockFields.Insert(ShipmentConfirmationSchedule.RegisterName, ShipmentConfirmationSchedule.LockInfo);
-	
-	// OrderProcurement
-	OrderProcurement = AccumulationRegisters.OrderProcurement.GetLockFields(DocumentDataTables.OrderProcurement);
-	DataMapWithLockFields.Insert(OrderProcurement.RegisterName, OrderProcurement.LockInfo);
-	
-	Return DataMapWithLockFields;
-EndFunction
-
-Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
-EndProcedure
-
-Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map();
-	
-	// StockReservation
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.StockReservation,
-			Parameters.IsReposting));
-	
-	// OrderBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.OrderBalance,
-			Parameters.DocumentDataTables.OrderBalance_Exists.Count() > 0));
-	
-	// OrderReservation
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderReservation,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.OrderReservation,
-			Parameters.IsReposting));
-	
-	// InventoryBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.InventoryBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.InventoryBalance,
-			Parameters.IsReposting));
-	
-	
-	// GoodsInTransitOutgoing
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-			Parameters.IsReposting));
-	
-	// StockBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.StockBalance,
-			Parameters.IsReposting));
-	
-	// ShipmentOrders
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ShipmentOrders,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.ShipmentOrders,
-			Parameters.IsReposting));
-	
-	// ShipmentConfirmationSchedule
-	// ShipmentConfirmationSchedule_Receipt [Receipt]  
-	// ShipmentConfirmationSchedule_Expense [Expense]
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.ShipmentConfirmationSchedule_Receipt.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.ShipmentConfirmationSchedule_Expense.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ShipmentConfirmationSchedule,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-				"RecordType, Period, Company, Order, Store, ItemKey, RowKey, Quantity, DeliveryDate"),
-			Parameters.IsReposting));
-	
-	// OrderProcurement
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderProcurement,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.OrderProcurement,
-			Parameters.IsReposting));
-	
-	// SalesOrderTurnovers
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SalesOrderTurnovers,
-		New Structure("RecordSet, WriteInTransaction",
-			Parameters.DocumentDataTables.SalesOrderTurnovers,
-			Parameters.IsReposting));
-	
-	Return PostingDataTables;
-EndFunction
-
-Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	If Not CheckOrderBalance(Ref, Parameters, AddInfo) Then
-		Cancel = True;
-	EndIf;
-EndProcedure
-
 #EndRegion
-
-#Region Undoposting
-
-Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Tables = New Structure();
-	AccReg = Metadata.AccumulationRegisters;
-	Tables.Insert("OrderBalance_Exists", PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.OrderBalance_Exists = GetExistsOrderBalance(Ref, AddInfo);	
-	Return Tables;
-EndFunction
-
-Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
-	DataMapWithLockFields = New Map();
-	
-	// OrderBalance
-	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance_Exists);
-	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
-	
-	Return DataMapWithLockFields;
-EndFunction
-
-Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
-EndProcedure
-
-Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Parameters.Insert("Unposting", True);
-	If Not CheckOrderBalance(Ref, Parameters, AddInfo) Then
-		Cancel = True;
-	EndIf;
-EndProcedure
 
 #EndRegion
 
@@ -1708,3 +1745,5 @@ Function GetExistsOrderBalance(Ref, AddInfo = Undefined)
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();
 EndFunction
+
+#EndRegion

@@ -6,13 +6,13 @@
   <param name="authMethod" value="PASSWORD" />
   <param name="branch" value="develop" />
   <param name="ignoreKnownHosts" value="true" />
-  <param name="secure:password" value="credentialsJSON:670abf51-3690-414c-b712-ed60e503a0bf" />
+  <param name="secure:password" value="credentialsJSON:7d55d5f9-41a5-4650-8299-bc27f05a3bce" />
   <param name="submoduleCheckout" value="CHECKOUT" />
   <param name="teamcity:branchSpec"><![CDATA[+:refs/heads/*
 +:refs/pull/*/head]]></param>
-  <param name="url" value="https://github.com/IRPTeam/IRP" />
+  <param name="url" value="https://github.com/DitriXTemp/IRP-1" />
   <param name="useAlternates" value="true" />
-  <param name="username" value="DitriXNew" />
+  <param name="username" value="DitriXTemp" />
   <param name="usernameStyle" value="USERID" />
 </vcs-root>
 

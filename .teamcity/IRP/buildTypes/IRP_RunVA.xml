@@ -133,10 +133,10 @@ If ($addTags -eq '')
 	$a.filtertags += $addTags
 }
 
-$a = $a | ConvertTo-Json -depth 32
-$a | set-content %system.teamcity.build.workingDir%/va.json
+$b = $a | ConvertTo-Json -depth 32
+$b | set-content %system.teamcity.build.workingDir%/va.json
 Write-Output ##teamcity[compilationStarted compiler='VA settings']
-Write-Output $a
+Write-Output "$b"
 Write-Output ##teamcity[compilationFinished compiler='VA settings']]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />

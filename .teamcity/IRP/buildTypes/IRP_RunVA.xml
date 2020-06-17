@@ -306,6 +306,18 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="teamcity.file.content.replacer.wildcards" value="+:features/**" />
         </parameters>
       </extension>
+      <extension id="BUILD_EXT_19" type="JetBrains.FileContentReplacer">
+        <parameters>
+          <param name="teamcity.file.content.replacer.failBuild" value="false" />
+          <param name="teamcity.file.content.replacer.file.encoding" value="UTF-8" />
+          <param name="teamcity.file.content.replacer.file.encoding.custom" value="UTF-8" />
+          <param name="teamcity.file.content.replacer.pattern" value="И Пауза" />
+          <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="false" />
+          <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
+          <param name="teamcity.file.content.replacer.replacement" value="# И Пауза" />
+          <param name="teamcity.file.content.replacer.wildcards" value="+:features/**" />
+        </parameters>
+      </extension>
     </build-extensions>
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_2" sourceBuildTypeId="ExternalDataProcessors_Build" cleanDestination="false">

@@ -296,14 +296,14 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
       </extension>
       <extension id="BUILD_EXT_13" type="JetBrains.FileContentReplacer">
         <parameters>
-          <param name="teamcity.file.content.replacer.failBuild" value="true" />
+          <param name="teamcity.file.content.replacer.failBuild" value="false" />
           <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
           <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
           <param name="teamcity.file.content.replacer.pattern" value="#workingDir#" />
           <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
           <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
           <param name="teamcity.file.content.replacer.replacement" value="%system.teamcity.build.workingDir%" />
-          <param name="teamcity.file.content.replacer.wildcards" value="+:features/**" />
+          <param name="teamcity.file.content.replacer.wildcards" value="+:features/**.feature" />
         </parameters>
       </extension>
       <extension id="BUILD_EXT_19" type="JetBrains.FileContentReplacer">

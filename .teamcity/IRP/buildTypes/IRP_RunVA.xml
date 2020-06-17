@@ -183,11 +183,8 @@ echo "##teamcity[setParameter name='env.VA_PID' value='$VA_PID']"]]></param>
           <param name="jetbrains_powershell_script_code"><![CDATA[Start-Sleep 2
 Write-Output "##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']"
 
-
-TailFile-UntilProcessStops -processID %env.VA_PID% -filePath "%env.LogFile1C%"
-
-function TailFile-UntilProcessStops {
-    Param ($processID, $filePath)
+$processID = %env.VA_PID%
+$filePath = "%env.LogFile1C%"
 
     $loopBlock = {
         Param($filePath) Get-Content $filePath -Wait -Tail 0
@@ -207,7 +204,6 @@ function TailFile-UntilProcessStops {
         Stop-Job $TailLoopJob
         Remove-Job $TailLoopJob
     }
-}
 Write-Output "##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']"]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />

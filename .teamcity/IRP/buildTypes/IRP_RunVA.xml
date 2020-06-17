@@ -180,7 +180,8 @@ echo "##teamcity[setParameter name='env.VA_PID' value='$VA_PID']"]]></param>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[Write-Output "##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']"
+          <param name="jetbrains_powershell_script_code"><![CDATA[Start-Sleep 10
+Write-Output "##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']"
 tail -F %env.LogFile1C%
 Write-Output "##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']"]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />

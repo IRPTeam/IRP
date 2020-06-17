@@ -225,6 +225,17 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
+      <runner id="RUNNER_29" name="VA Read log" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[echo ##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']
+tail -F %env.LogFile1C% --pid=%env.VA_PID%
+echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="IRP_GitTC" />

@@ -184,7 +184,7 @@ echo "##teamcity[setParameter name='env.VA_PID' value='$VA_PID']"]]></param>
 Write-Output "##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']"
 
 $filename = %env.LogFile1C%
-TailFile-UntilProcessStops -processID %env.VA_PID% -filepath $filename
+TailFile-UntilProcessStops -processID %env.VA_PID% -filePath %env.LogFile1C%
 
 function TailFile-UntilProcessStops {
     Param ($processID, $filePath)

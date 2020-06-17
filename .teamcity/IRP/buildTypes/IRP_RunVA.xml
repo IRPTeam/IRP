@@ -97,7 +97,7 @@ $text = "
   ],
   'logtogr': true,
   'logtotext': true,
-  'logstepstotext': true,
+  'logstepstotext': false,
   'logerrorstotext': true,
   'getactiveformdataonerror': false,
   'getallformsdataonerror': false,

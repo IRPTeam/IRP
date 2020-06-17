@@ -315,7 +315,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="false" />
           <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
           <param name="teamcity.file.content.replacer.replacement" value="# И Пауза" />
-          <param name="teamcity.file.content.replacer.wildcards" value="+:features/**" />
+          <param name="teamcity.file.content.replacer.wildcards" value="+:features/**.feature" />
         </parameters>
       </extension>
     </build-extensions>

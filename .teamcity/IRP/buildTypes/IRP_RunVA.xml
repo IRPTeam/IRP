@@ -95,10 +95,10 @@ $text = "
   'filtertags': [
       
   ],
-  'logtogr': false,
-  'logtotext': false,
+  'logtogr': true,
+  'logtotext': true,
   'logstepstotext': true,
-  'logerrorstotext': false,
+  'logerrorstotext': true,
   'getactiveformdataonerror': false,
   'getallformsdataonerror': false,
   'collectnetworkconnectiondata': false,

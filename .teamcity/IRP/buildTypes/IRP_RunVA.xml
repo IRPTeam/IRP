@@ -185,6 +185,7 @@ Write-Host "##teamcity[progressStart 'Read VA steps']"
 
 $processID = %env.VA_PID%
 $filePath = "%system.teamcity.build.tempDir%/test.txt"
+while (!(Test-Path $filePath)) { Start-Sleep 10 }
 
     $loopBlock = {
         Param($filePath) Get-Content $filePath -Wait -Tail 0

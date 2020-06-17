@@ -180,9 +180,8 @@ echo "##teamcity[setParameter name='env.VA_PID' value='$VA_PID']"]]></param>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[Start-Sleep 2
+          <param name="jetbrains_powershell_script_code"><![CDATA[chcp 65001
 Write-Host "##teamcity[progressStart 'Read VA steps']"
-
 $processID = %env.VA_PID%
 $filePath = "%system.teamcity.build.tempDir%/test.txt"
 while (!(Test-Path $filePath)) { Start-Sleep 1 }

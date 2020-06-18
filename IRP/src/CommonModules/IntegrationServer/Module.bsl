@@ -1,7 +1,7 @@
 Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 	Result = New Structure("Success, Value, Message", False, Undefined, "");
 	
-	IntegrationSettings = IntegrationServerReuse.GetIntegrationSettingsRef(IntegrationSettingName);
+	IntegrationSettings = IntegrationServerReuse.GetIntegrationSettings(IntegrationSettingName);
 	
 	If Not ValueIsFilled(IntegrationSettings.Ref) Then
 		Result.Success = False;

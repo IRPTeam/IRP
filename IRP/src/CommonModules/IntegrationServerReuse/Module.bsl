@@ -1,5 +1,5 @@
 
-Function GetIntegrationSettingsRef(IntegrationSettingName, AddInfo = Undefined) Export
+Function GetIntegrationSettings(IntegrationSettingName, AddInfo = Undefined) Export
 	IntegrationSettingsRef = UniqueID.UniqueIDByName(Metadata.Catalogs.IntegrationSettings, IntegrationSettingName);
 	CustomizedSetting = New Structure();
 	For Each Str In IntegrationSettingsRef.ConnectionSetting Do

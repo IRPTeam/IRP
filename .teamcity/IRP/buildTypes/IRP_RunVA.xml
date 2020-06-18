@@ -8,6 +8,9 @@
       <option name="artifactRules" value="+:allure-report.zip&#xA;+:Cover.xml" />
       <option name="cleanBuild" value="true" />
     </options>
+    <disabled-settings>
+      <setting-ref ref="BUILD_EXT_19" />
+    </disabled-settings>
     <parameters>
       <param name="env.CloseVA" value="true" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />

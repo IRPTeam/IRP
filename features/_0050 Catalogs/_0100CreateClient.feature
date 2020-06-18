@@ -3,11 +3,11 @@
 @Positive
 
 
-Функционал: внесение контактной информации по клиенту
+Функционал: filling in customer contact information
 
-Как Разработчик
-Я хочу добавить механизм по внесению контактной информации по клиентам
-Чтобы можно было указать: адрес, телефон, e-mail, gps координату на карте
+As an owner
+I want there to be a mechanism for entering customer contact information
+To specify: address, phone, e-mail, gps coordinate on the map
 
 
 Контекст:
@@ -15,11 +15,11 @@
    
 
 
-Сценарий: _010001 добавление обработок для внесения адресов
-	* Открытие формы для добавления обработки
+Сценарий: _010001 add external data processing for entering addresses
+	* Opening a form to add external data processing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных по обработке и добавление её в базу
+	* Adding external data processing 
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\InputAddress.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
 		И в поле 'Path to ext data proc for test' я ввожу текст ''
@@ -30,14 +30,14 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Проверка добавления обработки
+	* Check adding external data processing
 		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalInputAddress"
 
-Сценарий: _010002 добавление обработок для внесения координат
-	* Открытие формы для добавления обработки
+Сценарий: _010002 add external data processing for GPS
+	* Opening a form to add external data processing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных по обработке и добавление её в базу
+	* Adding external data processing 
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\Coordinates.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
 		И в поле 'Path to ext data proc for test' я ввожу текст ''
@@ -48,14 +48,14 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Проверка добавления обработки
+	* Check adding external data processing
 		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalCoordinates"
 
-Сценарий: _010003 добавление обработок для внесения телефонов
-	* Открытие формы для добавления обработки
+Сценарий: _010003 add external data processing for phone
+	* Opening a form to add external data processing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных по обработке 'External Input Phone Ukraine' и добавление её в базу
+	* Filling in the 'External Input Phone Ukraine' and adding it to the database
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\InputPhoneUkraine.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
 		И в поле 'Path to ext data proc for test' я ввожу текст ''
@@ -67,7 +67,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalInputPhoneUkraine"
-	* Добавление обработки Phone TR
+	* Add processing Phone TR
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\InputPhoneUkraine.epf"
@@ -82,8 +82,8 @@
 		И Пауза 5
 	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "Phone TR"
 
-Сценарий: _010004 создание ID Info Type - Adreses
-	* Открытие формы для добавления обработки
+Сценарий: _010004 creating ID Info Type - Adreses
+	* Opening a form to add external data processing
 		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -94,7 +94,7 @@
 		И в поле 'Unique ID' я ввожу текст 'Adr_10'
 		И я изменяю флаг 'Show on form'
 		И я изменяю флаг 'Read only'
-	* Добавление обработки по адресам
+	* Adding external data processing for addresses
 		И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -113,9 +113,8 @@
 		| 'Description' |
 		| 'Google Addreses'  |
 
-Сценарий: _010004 проверка контроля уникальности UNIQ ID в элементах плана вида характеристик IDInfoTypes
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-278' с именем 'IRP-278'
-	* Создание еще одного элемента с ID Adr_10
+Сценарий: _010004 verification of UNIQ ID uniqueness control in IDInfoTypes
+	* Create one more item with ID Adr_10
 		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -128,16 +127,16 @@
 		И я изменяю флаг 'Read only'
 		И я нажимаю на кнопку 'Save and close'
 		И Я закрываю окно предупреждения
-	* Проверка сообщения по неуникальнольму ID
+	* Checking message by non-unique ID
 		Затем я жду, что в сообщениях пользователю будет подстрока "Value is not unique" в течение 30 секунд
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _010005 создание контрагентов для Partners (Ferron, Kalipso, Lomaniti)
-	* Открытие формы для создания контрагентов
+Сценарий: _010005 creating company for Partners (Ferron, Kalipso, Lomaniti)
+	* Opening the form for filling in Company
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Companies'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
-	* Заполнение данных по контрагенту 'Company Ferron BP'
+	* Filling in company data 'Company Ferron BP'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Company Ferron BP'
 		И в поле 'TR' я ввожу текст 'Company Ferron BP TR'
@@ -146,10 +145,10 @@
 		И в поле "Partner" я ввожу текст 'Ferron BP'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Проверка создания контрагента "Company Ferron BP"
+	* Checking the availability of the created company  "Company Ferron BP"
 		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_en" "Company Ferron BP" 
 		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_tr" "Company Ferron BP TR"
-	* Создание контрагента "Company Kalipso"
+	* Creating "Company Kalipso"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -162,7 +161,7 @@
 		И Пауза 5
 		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_en" "Company Kalipso" 
 		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_tr" "Company Kalipso TR" 
-	* Создание контрагента "Company Lomaniti"
+	* Creating "Company Lomaniti"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -176,12 +175,12 @@
 		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_en" "Company Lomaniti" 
 		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_tr" "Company Lomaniti TR"
 
-Сценарий: _010006 создание структуры партнеров (Partners), 1 главный партнер и несколько подчиненных
-	* Открытие формы для создания партнеров
+Сценарий: _010006 creating a structure of partners (partners), 1 main partner and several subordinates
+	* Opening the form for filling in partners
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
-	* Создание партнеров: 'Alians', 'MIO', 'Seven Brand'
+	* Creating partners: 'Alians', 'MIO', 'Seven Brand'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Alians'
 		И в поле 'TR' я ввожу текст 'Alians TR'
@@ -207,11 +206,11 @@
 		И я изменяю флаг 'Customer'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Проверка создания партнеров: 'Alians', 'MIO', 'Seven Brand'
+	* Checking for created partners: 'Alians', 'MIO', 'Seven Brand'
 		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Alians" 
 		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "MIO"
 		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Seven Brand" 
-	* Подчинение партнеров 'Alians', 'MIO' главному партнеру 'Seven Brand'
+	* Subordination of partners 'Alians', 'MIO' to the main partner 'Seven Brand'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Alians'  |
@@ -237,7 +236,7 @@
 		И     элемент формы с именем "Parent" стал равен 'Seven Brand'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Проверка структуры
+	* Structure check
 		И таблица  "List" не содержит строки:
 			| 'Description' |
 			| 'MIO' |
@@ -252,21 +251,21 @@
 			| 'Alians' |
 			| 'MIO' |
 
-Сценарий: _010007 добавление доп реквизита по партнерам "Business region"
-	* Открытие формы добавления доп реквизитов для партнеров
+Сценарий: _010007 adding additional details for partners "Business region"
+	* Opening a form for adding additional attributes for partners
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| Catalog_Partners          |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение имени настройки добаления дор реквизитов для партнеров
+	* Filling in the name of the settings for adding additional details for partners
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Partners'
 		И в поле 'TR' я ввожу текст 'Partners TR'
 		И я нажимаю на кнопку 'Ok'
 		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
 		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-	* Добавление доп реквизита Business region
+	* Adding additional attribute Business region
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Business region'
@@ -276,7 +275,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		И я нажимаю на кнопку с именем 'FormChoose'
-	* Создание для доп реквизита интерфейсной группы
+	* Create an interface group for additional attribute
 		И в таблице "Attributes" я активизирую поле "Interface group"
 		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Interface group"
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -292,7 +291,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		И Я закрыл все окна клиентского приложения
-	* Заполнение у партнеров созданного доп реквизита
+	* Filling in the created additional attribute for partners
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -366,10 +365,10 @@
 		И Пауза 2
 
 
-Сценарий: _010008 создание структуры партнеров (Partners), 1 главный партнер, под ним партнер 2-го уровня и под ним 2 партнера 3-го уровня
-	* Открытие справочника Partners
+Сценарий: _010008 creating of a partner structure (Partners), 1 main partner, under which a 2nd level partner and under which 2 3rd level partners
+	* Opening the catalog Partners
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-	* Указание у партнера "Seven Brand" партнера "Kalipso" как главного
+	* Filling in the "Seven Brand" partner Kalipso as the main partner
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Seven Brand'  |
@@ -382,7 +381,7 @@
 		И     элемент формы с именем "Parent" стал равен 'Kalipso'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Проверка подчиненности "Seven Brand" (вместе с подчиненными "Alians" и "MIO" ) партнеру "Kalipso"
+	* Checking the subordination of "Seven Brand" (together with the "Alians" and "MIO" subordinates) to Kalipso partner
 		И я нажимаю на кнопку 'Hierarchical list'
 		И таблица  "List" содержит строки:
 			| 'Description' |
@@ -398,10 +397,10 @@
 			| 'Alians' |
 			| 'MIO' |
 
-Сценарий: _010009 добавление телефонов в ID info type
-	* Открытие формы для создания типов контактной информации
+Сценарий: _010009 adding phones to ID info type
+	* Opening the form for filling in ID Info Types
 		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
-	* Создание элемента Company phone
+	* Creation Company phone
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Value type"
 		И я заполняю наименование и тип данных
@@ -433,11 +432,11 @@
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 5
 			И я ввожу значение поля UniqueID для телефона String
-	* Проверка наличия созданного элемента плана вида характеристик "IDInfoTypes" "Company phone"
+	* Checking for created "Company phone"
 		И таблица "List" содержит строки
 		| 'Description'     |
 		| 'Company phone' |
-	* Создание элемента Partner phone
+	* Creation Partner phone
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я заполняю наименование и тип данных
 			Тогда открылось окно 'ID Info types (create)'
@@ -471,15 +470,15 @@
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 5
 			И я ввожу значение поля UniqueID для телефона партнера String
-	* Проверка наличия элемента Partner phone
+	* Checking for created Partner phone
 		И таблица "List" содержит строки
 			| 'Description'     |
 			| 'Partner phone' |
 
-Сценарий: _010010 добавление адресов в ID info type
-	* Открытие формы для создания типов контактной информации
+Сценарий: _010010 adding addresses to an ID info type
+	* Opening the form for filling in ID Info Types
 		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
-	* Добавление элемента фактического адреса для партнеров
+	* Adding an actual address for partners
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я заполняю вид и тип данных
 			И я нажимаю кнопку выбора у поля "Value type"
@@ -490,15 +489,14 @@
 			И я нажимаю на кнопку 'OK'
 			И в поле 'Unique ID' я ввожу текст 'Adr_1'
 			И я изменяю флаг 'Show on form'
-			# И я устанавливаю флаг с именем "ReadOnly"
-		И я заполняю наименование реквизита адреса
+		* Filling in the name of the address
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
 			И в поле 'ENG' я ввожу текст 'Location address (Partner)'
 			И в поле 'TR' я ввожу текст 'Location address (Partner) TR'
 			И я нажимаю на кнопку 'Ok'
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 5
-	* Добавление элемента фактического адреса для компании
+	* Adding an actual address for company
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я заполняю вид и тип данных
 			И я нажимаю кнопку выбора у поля "Value type"
@@ -510,13 +508,13 @@
 			И в поле 'Unique ID' я ввожу текст 'Adr_2'
 			И я изменяю флаг 'Show on form'
 			И я устанавливаю флаг с именем "ReadOnly"
-		И я заполняю наименование реквизита адреса
+		* Filling in the name of the address
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
 			И в поле 'ENG' я ввожу текст 'Billing address (Company)'
 			И в поле 'TR' я ввожу текст 'Billing address (Company) TR'
 			И я нажимаю на кнопку 'Ok'
 			И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'
-		И я добавляю обработку для указания адреса для Украины
+		* Adding external data processing to specify the address for Ukraine
 			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -530,7 +528,7 @@
 				| 'ExternalInputAddress' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ExternalDataProces" я завершаю редактирование строки
-		И я добавляю обработку для указания фактического адреса для Турции
+		* Adding external data processing to specify the address for Turkey
 			И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'
 			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
@@ -547,7 +545,7 @@
 			И в таблице "ExternalDataProces" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 5
-	* Добавление элемента юридического адреса для компании
+	* Adding a legal address for a company
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я заполняю вид и тип данных
 			И я нажимаю кнопку выбора у поля "Value type"
@@ -559,13 +557,13 @@
 			И в поле 'Unique ID' я ввожу текст 'Adr_3'
 			И я изменяю флаг 'Show on form'
 			И я устанавливаю флаг с именем "ReadOnly"
-		И я заполняю наименование реквизита адреса
+		* Filling in the name of the address detail
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
 			И в поле 'ENG' я ввожу текст 'Registered address  (Company)'
 			И в поле 'TR' я ввожу текст 'Registered address (Company) TR'
 			И я нажимаю на кнопку 'Ok'
 			И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'
-		И я добавляю обработку для указания адреса для Украины
+		* Adding external data processing to specify the address for Ukraine
 			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -579,7 +577,7 @@
 				| 'ExternalInputAddress' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ExternalDataProces" я завершаю редактирование строки
-		И я добавляю обработку для указания фактического адреса для Турции
+		* Adding external data processing to specify the address for Turkey
 			И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'
 			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
@@ -596,9 +594,9 @@
 			И в таблице "ExternalDataProces" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 5
-		И по адресу Location address (Partner) я указываю произвольную структуру
+		* Specify an arbitrary structure at Location address (Partner)
 			И я ввожу значение поля UniqueID для адреса партнера String
-		И я проверяю наличие созданных элементов
+		* Checking for created
 			Тогда таблица "List" содержит строки
 				| 'Description'                     |
 				| 'Location address (Partner)'    |
@@ -606,10 +604,10 @@
 				| 'Registered address  (Company)' |
 
 
-Сценарий: _010011 добавление gps в ID info type
-	* Открытие формы для создания типов контактной информации
+Сценарий: _010011 adding gps to an ID info type
+	* Opening the form for filling in ID Info Types
 		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
-	* Добавление ID info gps  координаты для партнеров в Украине
+	* Adding ID info gps coordinates for partners in Ukraine
 		И я нажимаю на кнопку с именем 'FormCreate'
 		Тогда открылось окно 'ID Info types (create)'
 		И я нажимаю кнопку выбора у поля "Value type"
@@ -623,7 +621,6 @@
 		И я изменяю флаг 'Show on form'
 		И я устанавливаю флаг с именем "ReadOnly"
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле 'ENG' я ввожу текст 'GPS Ukraine'
 		И в поле 'TR' я ввожу текст 'GPS Ukraine TR'
 		И я нажимаю на кнопку 'Ok'
@@ -641,7 +638,7 @@
 			| Ukraine   |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ExternalDataProces" я завершаю редактирование строки
-	* Добавление структуры адреса по gps для Украины
+	* Adding address structure by gps for Ukraine
 		И в таблице "ExternalDataProces" я нажимаю на кнопку 'Set settings'
 		Тогда открылось окно 'Coordinates'
 		И я указываю адрес который будет перезаполнятся при выборе gps
@@ -692,7 +689,7 @@
 		И я нажимаю на кнопку 'Ok'
 		Тогда открылось окно 'Coordinates'
 		И я нажимаю на кнопку 'Ok'
-	* Заполнение настроек по определению gps
+	* Filling in settings for gps coordinates
 		И я перехожу к закладке "Related values"
 		И в таблице "RelatedValues" я нажимаю на кнопку с именем 'RelatedValuesAdd'
 		И в таблице "RelatedValues" я нажимаю кнопку выбора у реквизита "ID Info type"
@@ -706,11 +703,11 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		И я ввожу значение поля UniqueID String
-	* Проверка наличия созданных элементов
+	* Checking for created items
 		Тогда таблица "List" содержит строки
 		| 'Description'                     |
 		| 'GPS Ukraine'    |
-	* Добавление ID info gps координаты для партнеров в Турции
+	* Adding ID info gps coordinates for partners in Turkey
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Value type"
 		И в таблице "" я перехожу к строке:
@@ -739,7 +736,7 @@
 			| Turkey   |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ExternalDataProces" я завершаю редактирование строки
-	* Добавление структуры адреса по gps для Турции
+	* Adding gps address structure for Turkey
 		И в таблице "ExternalDataProces" я нажимаю на кнопку 'Set settings'
 		И я указываю адрес который будет перезаполнятся при выборе gps
 			И я нажимаю кнопку выбора у поля "Structured address"
@@ -787,7 +784,7 @@
 		И в таблице 'AllLevels' я удаляю строку
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Ok'
-	* Внесение настроек по определению gps
+	* Filling in gps coordinates settings
 		И я перехожу к закладке "Related values"
 		И в таблице "RelatedValues" я нажимаю на кнопку с именем 'RelatedValuesAdd'
 		И в таблице "RelatedValues" я нажимаю кнопку выбора у реквизита "ID Info type"
@@ -801,14 +798,14 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		И я ввожу значение поля UniqueID для GPS Turkey String
-	* Проверка наличия созданных элементов
+	* Checking for created items
 		Тогда таблица "List" содержит строки
 		| 'Description'                     |
 		| 'GPS Turkey'    |
 
 
-Сценарий: _010012 настройки отображение контактной информации в карточках Stores, Partners, Company
-	* Внесение настроек для отображения контактной информации по Partners
+Сценарий: _010012 settings for displaying contact information in Stores, Partners, Company
+	* Complete settings to display contact information for Partners
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.IDInfoSets'
 		И в таблице "List" я перехожу к строке:
 		| 'Predefined data item name' |
@@ -899,7 +896,7 @@
 		И в таблице "IDInfoTypes" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
 		И я жду закрытия окна 'Partners (ID Info sets) *' в течение 20 секунд
-	* Внесение настроек для отображения контактной информации по Company
+	* Fill in the settings for displaying Company contact information
 		И в таблице "List" я перехожу к строке:
 			| 'Predefined data item name' |
 			| 'Catalog_Companies'          |
@@ -932,7 +929,7 @@
 		И в таблице "IDInfoTypes" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Внесение настроек для отображения контактной информации по Stores
+	* Fill in the settings for displaying Store contact information
 		И в таблице "List" я перехожу к строке:
 			| 'Predefined data item name' |
 			| 'Catalog_Stores'          |
@@ -954,10 +951,10 @@
 		И я жду закрытия окна 'en descriptions is empty (ID Info sets) *' в течение 20 секунд
 		
 
-Сценарий: _010013 заполнение телефонов по партнеру
-	* Открытие формы справочника партнеров
+Сценарий: _010013 filling phones for partners
+	* Opening a partner catalog form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-	* Заполнение телефона по партнеру Ferron BP
+	* Filling a phone for partner Ferron BP
 		И я нажимаю на кнопку с именем "FormList"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -968,7 +965,7 @@
 		И в поле 'Phone' я ввожу текст '+305500077043'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-	* Заполнение телефона по партнеру Kalipso
+	* Filling a phone for partner Kalipso
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Kalipso' |
@@ -978,7 +975,7 @@
 		И в поле 'Phone' я ввожу текст '+305300040042'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-	* Заполнение телефона по партнеру Lomaniti
+	* Filling a phone for partner Lomaniti
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Lomaniti' |
@@ -988,7 +985,7 @@
 		И в поле 'Phone' я ввожу текст '+30560105055'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-	* Заполнение телефона по партнеру Alians
+	* Filling a phone for partner Alians
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Alians' |
@@ -998,7 +995,7 @@
 		И в поле 'Phone' я ввожу текст '+30920107011'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-	* Заполнение телефона по партнеру Seven Brand
+	* Filling a phone for partner Seven Brand
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Seven Brand' |
@@ -1008,7 +1005,7 @@
 		И в поле 'Phone' я ввожу текст '+30420209012'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-	* Заполнение телефона по партнеру MIO
+	* Filling a phone for partner MIO
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'MIO' |
@@ -1021,33 +1018,31 @@
 
 
 
-Сценарий: _010014 заполнение адреса по партнеру
-		# И Я устанавливаю ссылку 'https://bilist.atlassian.net/projects/IRP/issues/IRP-166' с именем 'BugIRP-166'
-	* Открытие формы справочника партнеров
+Сценарий: _010014 partner address filling
+	* Opening a partner catalog form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-	* Заполнение адреса по партнеру Kalipso
+	* Filling address partner Kalipso
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Kalipso' |
 		И в таблице "List" я выбираю текущую строку
 		И я перехожу к закладке "Contact information"
-	* Проверка отображения контактной информации
+	* Checking the display of contact information
 		И     элемент формы с именем "_Adr_1" присутствует на форме
 		И     элемент формы с именем "_Adr_10" присутствует на форме
 		И     элемент формы с именем "_GPS" присутствует на форме
 		И     элемент формы с именем "_Phone_2" присутствует на форме
-	* Заполнение адреса
+	* Address Filling
 		И в поле 'Location address (Partner)' я ввожу текст 'Odessa, Bunina, 2, №32'
-	* Проверка отображения адреса
+	* Checking address display
 		И элемент формы с именем "_Adr_1" стал равен 'Odessa, Bunina, 2, №32'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 	
-Сценарий: _010015 ввод структуры адреса
-#  Billing address (Company)
-	* Открытие справочника компаний
+Сценарий: _010015 address structure input
+	* Opening a company catalog form
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Companies"
-	* Задание структуры адреса для компаний
+	* Filling in address structure for companies
 		И в таблице "List" я перехожу к строке:
 			| Description       |
 			| Company Ferron BP |
@@ -1072,7 +1067,7 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Проверка сохранения структуры адреса для Billing address (Company)
+	* Checking to save the address structure for Billing address (Company)
 		И в таблице "List" я перехожу к строке:
 		| Description     |
 		| Company Kalipso |
@@ -1100,11 +1095,10 @@
 		И я нажимаю на кнопку 'Save and close'
 
 
-Сценарий: _010016 определение gps координаты на карте по клиентам из разных стран и заполнение адреса с гугл карты
-# Поиск координаты осуществляется по Location adress, для каждой страны своя структура адреса
-	* Открытие справочника Partners
+Сценарий: _010016 gps coordinates on the map for clients from different countries and filling in the address from Google map
+	* Opening the catalog Partners
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-	* Заполнение gps координаты по клиенту Kalipso путем поиска адреса на карте (Украина)
+	* Filling in gps coordinates for Kalipso client by searching for the address on the map (Ukraine)
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Kalipso' |
@@ -1116,12 +1110,12 @@
 		И Пауза 10
 		И я нажимаю на кнопку 'Ok'
 		И Пауза 10
-	* Проверка сохранения gps координаты
+	* Checking gps coordinates saved
 		И     элемент формы с именем "_GPS" стал равен '46.48082,30.748159'
 		И поле с именем "_Adr_10" заполнено
 		И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
-	* Заполнение gps координаты по клиенту Alians путем поиска адреса на карте (Украина)
+	* Filling in gps coordinates for Alians client by searching for the address on the map (Ukraine)
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -1135,7 +1129,7 @@
 		И Пауза 10
 		И я нажимаю на кнопку 'Ok'
 		И Пауза 10
-	* Проверка сохранения gps координаты
+	* Checking gps coordinates saved
 		И поле с именем "_GPSTurkey" заполнено
 		И поле с именем "_Adr_10" заполнено
 		И я нажимаю на кнопку 'Save and close'

@@ -3,20 +3,20 @@
 @Positive
 @TestExtDataProc
 
-Функционал: заполнение налоговых ставок
+Функционал: filling in tax rates
 
-Как Разработчик
-Я хочу создать систему расчета налогов
-Для налогового учета
+As an owner
+I want to filling in tax rates
+For tax accounting
+
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
-Сценарий: _017901 подключение обработки расчета налогов TaxCalculateVAT_TR
-# ставка НДС заполняется на каждый ItemKey
-	* Открытие формы для добавления внешней обработки
+Сценарий: _017901 connection of tax calculation external data processing TaxCalculateVAT_TR
+	* Opening a form to add external data processing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-	* Добавление обработки для расчета налогов для Турции (VAT)
+	* Addition of external data processing for calculating taxes for Turkey (VAT)
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\TaxCalculateVAT_TR.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
@@ -28,15 +28,15 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И я жду закрытия окна 'External data proc (create)' в течение 10 секунд
-	* Проверка добавления обработки
+	* Checking added processing
 		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "TaxCalculateVAT_TR"	
 
 
-Сценарий: _017902 заполнение справочника 'Taxes'
-	* Открытие формы создания налога
+Сценарий: _017902 filling in catalog 'Taxes'
+	* Opening a tax creation form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Taxes'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение настроек налога VAT
+	* Filling VAT settings
 		И в поле 'ENG' я ввожу текст 'VAT'
 		И я нажимаю кнопку выбора у поля "External data proc"
 		И в таблице "List" я перехожу к строке:
@@ -119,10 +119,10 @@
 		И из выпадающего списка "Tax rate" я выбираю точное значение '18%'
 		И я нажимаю на кнопку 'Save and close'
 		И я закрыл все окна клиентского приложения
-	* Открытие формы создания налога
+	* Opening a tax creation form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Taxes'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение настроек налога Sales Tax
+	* Filling in Sales Tax settings
 		И в поле 'ENG' я ввожу текст 'SalesTax'
 		И я нажимаю кнопку выбора у поля "External data proc"
 		И в таблице "List" я перехожу к строке:
@@ -150,20 +150,20 @@
 		И из выпадающего списка "Tax rate" я выбираю точное значение '1%'
 		И я нажимаю на кнопку 'Save and close'
 		И я закрыл все окна клиентского приложения
-	* Проверка создания элементов справочника Taxes
+	* Checking the creation of Taxes catalog elements
 		Тогда я проверяю наличие элемента справочника "Taxes" со значением поля "Description_en" "SalesTax"
 		Тогда я проверяю наличие элемента справочника "Taxes" со значением поля "Description_en" "VAT"
 
 
 
-Сценарий: _017903 указание налоговых ставок для компании
-	* Открытие карточки собственной компании
+Сценарий: _017903 company tax compliance
+	* Opening the form of your own company
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Companies'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение настроек по SalesTax
+	* Filling in Sales tax settings
 		И я перехожу к закладке "Taxes"
 		И в таблице "CompanyTaxes" я нажимаю на кнопку с именем 'CompanyTaxesAdd'
 		И я нажимаю кнопку выбора у поля "Tax"
@@ -176,7 +176,7 @@
 		И в поле 'Period' я ввожу текст '01.10.2019'
 		И я устанавливаю флаг 'Use'
 		И в поле 'Priority' я ввожу текст '2'
-	* Заполнение настроек по VAT
+	* Filling settings by VAT
 		И в таблице "CompanyTaxes" я нажимаю на кнопку с именем 'CompanyTaxesAdd'
 		И в поле 'Period' я ввожу текст '01.10.2019'
 		И я нажимаю кнопку выбора у поля "Tax"

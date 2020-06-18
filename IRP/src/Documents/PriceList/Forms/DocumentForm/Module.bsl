@@ -491,7 +491,7 @@ Procedure LoadDataAtServer(DataForLoad)
 		For Each Row In DataForLoad.ItemKeyList Do
 			NewRow = Object.ItemKeyList.Add();
 			FillPropertyValues(NewRow, Row);
-		EndDo;
+		EndDo; 
 	ElsIf Object.PriceListType = Enums.PriceListTypes.PriceByProperties Then
 		Object.DataSet.Clear();
 		Object.DataPrice.Clear();

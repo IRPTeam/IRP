@@ -3,21 +3,21 @@
 @Positive
 @Test
 
-Функционал: назначение прав доступа пользователям
+Функционал: access rights
 
-Как Разработчик
-Я хочу создать группы, профили доступа и пользователей
-Чтобы ограничить права доступа пользователям
+As an owner
+I want to create groups, access profiles and users
+To restrict user access rights
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _008001 добавление сотрудников в справочник Partners
-	* Открытие формы создания партнеров
+Сценарий: _008001 adding employees to the Partners catalog
+	* Opening the form for filling in Partners
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
 		И Пауза 2
-	* Создание тестовых партнеров для сотрудников: Alexander Orlov, Anna Petrova, David Romanov, Arina Brown
+	* Creating test partners for employees: Alexander Orlov, Anna Petrova, David Romanov, Arina Brown
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Alexander Orlov'
@@ -50,7 +50,7 @@
 		И я нажимаю на кнопку 'Ok'
 		И я устанавливаю флаг с именем 'Employee'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Проверка создания партнеров для сотрудников
+	* Checking for created elements
 		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Alexander Orlov"
 		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Anna Petrova"
 		И Пауза 2
@@ -61,50 +61,46 @@
 
 
 
-Сценарий: _008002 создание групп доступа "AccessGroups"
-	* Открытие формы создания AccessGroups
+Сценарий: _008002 access groups creation
+	* Opening the form for filling in Access Groups
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AccessGroups"
-	* Создание группы доступа Commercial Agent
+	* Access group creation Commercial Agent
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Commercial Agent'
 		И в поле с именем 'Description_tr' я ввожу текст 'Commercial Agent TR'
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание группы доступа "Manager"
+	* Access group creation "Manager"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Manager'
 		И в поле с именем 'Description_tr' я ввожу текст 'Manager TR'
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание группы доступа "Administrators"
+	* Access group creation "Administrators"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Administrators'
 		И в поле с именем 'Description_tr' я ввожу текст 'Administrators TR'
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание группы доступа "Financier"
+	* Access group creation "Financier"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Financier'
 		И в поле с именем 'Description_tr' я ввожу текст 'Financier TR'
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Проверка созданных групп доступа
+	* Checking for created elements
 		Тогда В базе появился хотя бы один элемент справочника "AccessGroups"
 		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_en" "Commercial Agent"  
 		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_tr" "Commercial Agent TR"
@@ -112,11 +108,11 @@
 		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_en" "Administrators"  
 		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_en" "Financier" 
 
-Сценарий: _008003 создание профилей доступа"AccessProfiles"
-	* Открытие формы создания профилей
+Сценарий: _008003 access profiles creation
+	* Opening the form for filling in profiles
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AccessProfiles"
 		И Пауза 2
-	* Создание профиля Commercial Agent
+	* Access profiles creation Commercial Agent
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -147,7 +143,7 @@
 			И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 			И я жду закрытия окна 'Access profiles (create)' в течение 20 секунд
 			И Пауза 5
-	* Создание профиля Manager
+	* Access profiles creation Manager
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -175,7 +171,7 @@
 			И в таблице "Roles" я завершаю редактирование строки
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И я жду закрытия окна 'Access profiles (create)' в течение 20 секунд
-	* Создание профиля Financier
+	* Access profiles creation Financier
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -195,7 +191,7 @@
 			И в таблице "Roles" я изменяю флаг 'Use'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И я жду закрытия окна 'Access profiles (create)' в течение 20 секунд
-	* Создание профиля Administrators
+	* Access profiles creation Administrators
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -237,7 +233,7 @@
 			И в таблице "Roles" я завершаю редактирование строки
 			И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 			И я жду закрытия окна 'Access profiles (create)' в течение 20 секунд
-	* Проверка создания профилей доступа
+	* Checking for created elements
 		Тогда В базе появился хотя бы один элемент справочника "AccessProfiles"
 		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_en" "Commercial Agent"  
 		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_en" "Manager"  
@@ -246,13 +242,13 @@
 
 
 
-Сценарий: _008004 создание пользователей "Users"
-	* Открытие формы для создания пользователя
+Сценарий: _008004 filling in the "Users" catalog 
+	* Opening the form for filling in users
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Users"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
-	* Создание пользователя Commercial Agent 1
+	* User creation Commercial Agent 1
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Daniel Smith (Commercial Agent 1)'
 		И в поле с именем 'Description_tr' я ввожу текст 'Daniel Smith (Commercial Agent 1) TR'
@@ -264,7 +260,7 @@
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
 		Тогда В базе появился хотя бы один элемент справочника "Users"
-	* Создание пользователя Commercial Agent 2
+	* User creation Commercial Agent 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -282,7 +278,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание пользователя Commercial Agent 3
+	* User creation Commercial Agent 3
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -300,7 +296,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание пользователя Manager 1
+	* User creation Manager 1
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -313,7 +309,7 @@
 		И я устанавливаю флаг с именем "ShowInList"
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание пользователя Manager 2
+	* User creation Manager 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -326,7 +322,7 @@
 		И я устанавливаю флаг с именем "ShowInList"
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание пользователя Manager 3
+	* User creation Manager 3
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -339,7 +335,7 @@
 		И я устанавливаю флаг с именем "ShowInList"
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание пользователя Financier 1
+	* User creation Financier 1
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -356,7 +352,7 @@
 			| David Romanov |
 		И в таблице "List" я выбираю текущую строку
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Создание пользователя Financier 2
+	* User creation Financier 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -368,7 +364,7 @@
 		И в поле 'Interface localization code' я ввожу текст 'tr'
 		И я устанавливаю флаг с именем "ShowInList"
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Создание пользователя Financier 3
+	* User creation Financier 3
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -385,7 +381,7 @@
 			| Arina Brown |
 		И в таблице "List" я выбираю текущую строку
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Проверка наличия созданных пользователей
+	* Checking for created elements
 		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "Daniel Smith (Commercial Agent 1)"
 		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "Alexander Orlov (Commercial Agent 2)"  
 		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "Anna Petrova (Commercial Agent 3)"
@@ -400,10 +396,10 @@
 		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "Arina Brown (Financier 3)"
 
 
-Сценарий: _008005 назначение прав доступа пользователям
-	* Открытие справочника AccessGroups
+Сценарий: _008005 assignment of access rights to users
+	* Opening the Access Groups catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AccessGroups'
-	* Назначение прав доступа торговым агентам
+	* Assignment of access rights to sales rep
 		И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Commercial Agent'       |
@@ -444,7 +440,7 @@
 		И в таблице "Users" я завершаю редактирование строки
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Назначение прав доступа менеджерам
+	* Assignment of access rights to managers
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Manager'       |
@@ -484,7 +480,7 @@
 		И в таблице "Users" я завершаю редактирование строки
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Назначение прав доступа финансистам
+	* Assignment of access rights to financiers
 		И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Financier'       |
@@ -523,7 +519,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Users" я завершаю редактирование строки
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Добавление пользователя с доступом администратора (турецкая локализация)
+	* Adding a user with administrator access (Turkish localization)
 		И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Administrators'       |
@@ -549,22 +545,22 @@
 		И Пауза 5
 
 
-Сценарий: _008006 создание Partner segments (employee)
-	* Открытие формы для заполнения Partner segments
+Сценарий: _008006 creating Partner segments (employee)
+	* Opening the form for filling Partner segments
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.PartnerSegments'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
-	* Заполнение данных по сегменту Region 1
+	* Filling in segment information Region 1
 		И я изменяю флаг 'Managers'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Region 1'
 		И в поле с именем 'Description_tr' я ввожу текст '1 Region'
 		И я нажимаю на кнопку 'Ok'
-	* Сохранение и проверка результата
+	* Saving and checking the result
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 10
 		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_en" "Region 1" 
-	* Заполнение данных по сегменту Region 2
+	* Filling in segment information Region 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я изменяю флаг 'Managers'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -573,14 +569,14 @@
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 10
-	* Проверка создания сегмента Region 2
+	* Checking for segment creation Region 2
 		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_en" "Region 2" 
 
 
-Сценарий: _008007 добавление сотрудников в сегмент Region 1 (А+B) из формы
-	* Открытие справочника партнеров
+Сценарий: _008007 adding employees to the Region 1 (A+B) segment from the form
+	* Opening Partners catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-	* Добавление "Alexander Orlov" в сегмент Region 1
+	* Adding "Alexander Orlov" to the segment Region 1
 		И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Alexander Orlov' |
@@ -595,7 +591,7 @@
 		И Пауза 2
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 2
-	* Добавление "Anna Petrova" в сегмент Region 1
+	* Adding "Anna Petrova" to the segment Region 1
 		И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Anna Petrova' |
@@ -611,10 +607,10 @@
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 2
 
-Сценарий: _008008 добавление сотрудников в сегмент Region 2 (A) из формы
-	* Открытие справочника партнеров
+Сценарий: _008008 adding employees to the Region 2 (A) segment from the form
+	* Opening Partners catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-	* Добавление сотрудника Alexander Orlov в сегмент Region 2
+	*  Adding Alexander Orlov to the segment Region 2
 		И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Alexander Orlov' |
@@ -631,10 +627,10 @@
 		И Пауза 5
 
 
-Сценарий: _008009 добавление сотрудников в сегмент Region 1 из формы, сотрудник является клиентом
-	* Открытие справочника партнеров
+Сценарий: _008009 adding employees to the segment Region 1 from the form (the employee also is a client)
+	* Opening Partners catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-	* Добавление сотрудника Anna Petrova в сегмент Region 1
+	* Adding Anna Petrova to the segment Region 1
 		И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Anna Petrova' |
@@ -659,10 +655,10 @@
 
 
 
-Сценарий: _008010 добавление сотрудников в сегмент Region 2 (C) регистр
-	* Открытие регистра PartnerSegments
+Сценарий: _008010 addition of employees to the segment Region 2 (C) in register
+	* Opening register Partner segments
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
-	* Добавление сотрудника David Romanov в сегмент Region 1
+	* Adding David Romanov to the segment Region 1
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю кнопку выбора у поля "Segment"

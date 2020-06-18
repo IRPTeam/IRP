@@ -11,6 +11,8 @@ Function GetCalculationSettings(Actions = Undefined, AddInfo = Undefined) Export
 	Return Actions;
 EndFunction
 
+
+// TODO: Test
 Procedure ClearDependentData(Object, AddInfo = Undefined) Export
 	If AddInfo = Undefined Or not AddInfo.Property("TableParent") Then
 		TableName = "ItemList"
@@ -211,6 +213,7 @@ Procedure UpdateInfoStringWithOffers(Object, ItemRow, AddInfo = Undefined)
 	EndIf;
 EndProcedure
 
+#Region Region
 Procedure UpdateInfoString(ItemRow) Export
 	ItemRow.Info = BuildInfoString(ItemRow);
 EndProcedure
@@ -270,6 +273,7 @@ Procedure CalculateTotalAmount_PriceIncludeTax(Object, ItemRow, AddInfo = Undefi
 		ItemRow.TotalAmount = ItemRow.NetAmount;
 	EndIf;
 EndProcedure
+#EndRegion
 
 Procedure CalculateTotalAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo = Undefined)
 	ItemRow.TotalAmount = ItemRow.NetAmount + ItemRow.TaxAmount;

@@ -4,11 +4,11 @@
 @Test
 
 
-Функционал: заполнение наименования в справочниках
+Функционал: filling in catalogs
 
-Как Разработчик
-Я хочу создать формы справочников
-Чтобы пользователь мог заполнить первоначальные данные
+As an owner
+I want to fill out information on the company
+To further use it when reflecting in the program of business processes
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
@@ -19,17 +19,17 @@
 
 
 
-Сценарий: _005010 заполнение наименования в справочнике "Countries"
-	* Очистка справочника Countries
+Сценарий: _005010 filling in the "Countries" catalog
+	* Clearing the Countries catalog
 		И    Я закрыл все окна клиентского приложения
 		И я удаляю все элементы Справочника "Countries"
 		И в базе нет элементов Справочника "Countries"
-	* Открытие формы создания Country
+	* Opening the Country creation form
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Countries"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
-	* Заполнение данных по Turkey
+	* Data Filling - Turkey
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Turkey'
 		И в поле 'TR' я ввожу текст 'Turkey TR'
@@ -37,7 +37,7 @@
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
 		Тогда В базе появился хотя бы один элемент справочника "Countries"
-	* Заполнение данных по Ukraine и Kazakhstan
+	* Data Filling - Ukraine and Kazakhstan
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -54,7 +54,7 @@
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Проверка наличия добавленных стран в справочнике
+	* Checking for added countries in the catalog
 		Тогда я проверяю наличие элемента справочника "Countries" со значением поля "Description_en" "Turkey"
 		Тогда я проверяю наличие элемента справочника "Countries" со значением поля "Description_tr" "Turkey TR"
 		Тогда я проверяю наличие элемента справочника "Countries" со значением поля "Description_en" "Kazakhstan"
@@ -62,16 +62,16 @@
 
 
 
-Сценарий: _005011 заполнение наименования в справочнике "Currencies"
-	* Очистка справочника Currencies
+Сценарий: _005011 filling in the "Currencies" catalog
+	* Clearing the Currencies catalog
 		И я удаляю все элементы Справочника "Currencies"
 		И в базе нет элементов Справочника "Currencies"
-	* Открытие формы создания Currencies
+	* Opening the Currency creation form
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Currencies"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
-	* Создание валют: Turkish lira, American dollar, Euro, Ukraine Hryvnia
+	* Creating currencies: Turkish lira, American dollar, Euro, Ukraine Hryvnia
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Turkish lira'
 		И в поле с именем 'Description_tr' я ввожу текст 'Turkish lira'
@@ -110,7 +110,7 @@
 		И в поле 'Code' я ввожу текст 'UAH'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Проверка создания валют
+	* Checking for added currencies in the catalog
 		Тогда В базе появился хотя бы один элемент справочника "Currencies"
 		Тогда я проверяю наличие элемента справочника "Currencies" со значением поля "Description_en" "Turkish lira"
 		Тогда я проверяю наличие элемента справочника "Currencies" со значением поля "Description_tr" "Turkish lira"
@@ -119,8 +119,8 @@
 		Тогда я проверяю наличие элемента справочника "Currencies" со значением поля "Description_en" "Ukraine Hryvnia"
 
 
-Сценарий: _005012 создание Integration settings для загрузки курса валют (без подключения обработки)
-	* Создание настройки для загрузки курса Forex Seling (сайт tcmb.gov.tr)
+Сценарий: _005012 create integration settings to load the currency rate (without external data processing connected)
+	* Creating a setting to download the Forex Seling course (tcmb.gov.tr)
 		И я открываю навигационную ссылку "e1cib/list/Catalog.IntegrationSettings"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'Description' я ввожу текст 'Forex Seling'
@@ -134,7 +134,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	* Создание настройки для загрузки курса Forex Buying (сайт tcmb.gov.tr)
+	* Creating a setting to download the Forex Buying course (tcmb.gov.tr)
 		И я открываю навигационную ссылку "e1cib/list/Catalog.IntegrationSettings"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'Description' я ввожу текст 'Forex Buying'
@@ -148,7 +148,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	* Создание настройки для загрузки курса (сайт bank.gov.ua)
+	* Creating a setting to download the course (bank.gov.ua)
 		И я открываю навигационную ссылку "e1cib/list/Catalog.IntegrationSettings"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'Description' я ввожу текст 'Bank UA'
@@ -165,16 +165,16 @@
 
 
 
-Сценарий: _005013 заполнение наименования в справочнике "Companies"
-	* Очистка справочника Companies
+Сценарий: _005013 filling in the "Companies" catalog
+	* Clearing the Companies catalog
 		И я удаляю все элементы Справочника "Companies"
 		И в базе нет элементов Справочника "Companies"
-	* Открытие формы для заполнения 
+	* Opening the form for filling in
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Companies"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
-	* Заполнение данных о компании
+	* Filling in company information
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Main Company'
 		И в поле с именем 'Description_tr' я ввожу текст 'Main Company TR'
@@ -182,9 +182,9 @@
 		И в поле с именем 'Country' я ввожу текст 'Turkey'
 		И я устанавливаю флаг 'Our'
 		И я нажимаю на кнопку 'Save'
-	* Заполнение информации по Currency (Local currency и Reporting currency)
+	* Filling in currency information (Local currency and Reporting currency)
 		И я перехожу к закладке "Currencies"
-		* Создание и добавление Local currency
+		* Creation and addition of Local currency
 			И в таблице "Currencies" я нажимаю на кнопку с именем 'CurrenciesAdd'
 			И в таблице "Currencies" я нажимаю кнопку выбора у реквизита "Movement type"
 			И я нажимаю на кнопку с именем 'FormCreate'
@@ -204,7 +204,7 @@
 			И Пауза 5
 			И я нажимаю на кнопку с именем 'FormChoose'
 			И в таблице "Currencies" я завершаю редактирование строки
-		* Создание и добавление Reporting currency
+		* Creation and addition of Reporting currency
 			И в таблице "Currencies" я нажимаю на кнопку с именем 'CurrenciesAdd'
 			И в таблице "Currencies" я нажимаю кнопку выбора у реквизита "Movement type"
 			И я нажимаю на кнопку с именем 'FormCreate'
@@ -227,16 +227,16 @@
 			И в таблице "Currencies" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Проверка наличия созданной компании в справочнике
+	* Checking the availability of the created company in the catalog
 		Тогда В базе появился хотя бы один элемент справочника "Companies"
 		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_en" "Main Company" 
 		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_tr" "Main Company TR"
 
 
-Сценарий: создание Сurrency Movement type для валют соглашений
-	* Открытие плана вида характеристик Currency movement type
+Сценарий: _005017 creation Movement Type for agreement currencies
+	* Opening charts of characteristic types - Currency movement
 		И я открываю навигационную ссылку "e1cib/list/ChartOfCharacteristicTypes.CurrencyMovementType"
-	* Создание валюты для соглашений TRY
+	* Create currency for agreements - TRY
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'TRY'
 		И я нажимаю кнопку выбора у поля "Currency"
@@ -251,7 +251,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И из выпадающего списка "Type" я выбираю точное значение 'Agreement'
 		И я нажимаю на кнопку 'Save and close'
-	* Создание валюты для соглашений EUR
+	* Create currency for agreements - EUR
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'EUR'
 		И я нажимаю кнопку выбора у поля "Currency"
@@ -267,7 +267,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И из выпадающего списка "Type" я выбираю точное значение 'Agreement'
 		И я нажимаю на кнопку 'Save and close'
-	* Создание валюты для соглашений USD
+	* Create currency for agreements - USD
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'USD'
 		И я нажимаю кнопку выбора у поля "Currency"
@@ -286,59 +286,55 @@
 		И Пауза 5
 
 
-Сценарий: _005014 заполнение наименования в справочнике "Units"
-	* Очистка справочника Units
+Сценарий: _005014 filling in the "Units" catalog
+	* Clearing the Units catalog
 		И я удаляю все элементы Справочника "Units"
 		И в базе нет элементов Справочника "Units"
-	* Открытие формы для заполнения "Units"
+	* Opening the form for filling in "Units"
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Units"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Создание единицы измерения 'pcs'
+	* Creating a unit of measurement 'pcs'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'pcs'
 		И в поле с именем 'Description_tr' я ввожу текст 'adet'
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание единицы измерения для упаковки из 4-х pcs
+	* Create a unit of measurement for 4 pcs packaging
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля с именем "BasisUnit"
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'box (4 pcs)'
 		И в поле с именем 'Description_tr' я ввожу текст 'box (4 adet)'
 		И я нажимаю на кнопку 'Ok'
 		И в поле с именем 'Quantity' я ввожу текст '4'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание единицы измерения для упаковки из 8 pcs
+	* Create a unit of measurement for 8 pcs packaging
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля с именем "BasisUnit"
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'box (8 pcs)'
 		И в поле с именем 'Description_tr' я ввожу текст 'box (8 adet)'
 		И я нажимаю на кнопку 'Ok'
 		И в поле с именем 'Quantity' я ввожу текст '8'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание единицы измерения для упаковки из 16 pcs
+	* Create a unit of measurement for 16 pcs packaging
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля с именем "BasisUnit"
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'box (16 pcs)'
 		И в поле с именем 'Description_tr' я ввожу текст 'box (16 adet)'
 		И я нажимаю на кнопку 'Ok'
 		И в поле с именем 'Quantity' я ввожу текст '16'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Проверка наличия созданных элементов
+	* Checking for created elements
 		Тогда В базе появился хотя бы один элемент справочника "Units"
 		Тогда я проверяю наличие элемента справочника "Units" со значением поля "Description_en" "pcs"  
 		Тогда я проверяю наличие элемента справочника "Units" со значением поля "Description_tr" "adet"
@@ -347,46 +343,44 @@
 		Тогда я проверяю наличие элемента справочника "Units" со значением поля "Description_en" "box (16 pcs)"
 
 
-Сценарий: _005015 заполнение элемента справочника "AccessGroups"
-	* Очистка справочника AccessGroups
+Сценарий: _005015 filling in the "AccessGroups" catalog
+	* Clearing the Access groups catalog
 		И я удаляю все элементы Справочника "AccessGroups"
 		И в базе нет элементов Справочника "AccessGroups"
-	* Открытие формы для заполнения AccessGroups
+	* Opening the form for filling in AccessGroups
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AccessGroups"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
-	* Заполнение данных по Admin
+	* Data Filling - Admin
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Admin'
 		И в поле с именем 'Description_tr' я ввожу текст 'Admin TR'
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Проверка наличия созданных AccessGroups
+	* Checking for created AccessGroups
 		Тогда В базе появился хотя бы один элемент справочника "AccessGroups"
 		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_en" "Admin"  
 		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_tr" "Admin TR"
 
-Сценарий: _005016 заполнение элемента справочника "AccessProfiles"
-	* Очистка справочника AccessProfiles
+Сценарий: _005016 filling in the "AccessProfiles" catalog
+	* Clearing the Access profile catalog
 		И я удаляю все элементы Справочника "AccessProfiles"
 		И в базе нет элементов Справочника "AccessProfiles"
-	* Открытие формы для заполнения  AccessProfiles
+	* Opening the form for filling in AccessProfiles
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AccessProfiles"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
-	* Заполнение данных по Admin
+	* Data Filling - Admin
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Admin'
 		И в поле с именем 'Description_tr' я ввожу текст 'Admin TR'
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем 'RolesUpdateRoles'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Проверка наличия созданных AccessProfiles
+	* Checking for created Access profiles
 		Тогда В базе появился хотя бы один элемент справочника "AccessProfiles"
 		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_en" "Admin"  
 		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_tr" "Admin TR"
@@ -394,16 +388,15 @@
 
 
 
-Сценарий: _005018 заполнение наименования в справочнике "CashAccounts"
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-324' с именем 'IRP-324'
-	* Очистка справочника CashAccounts
+Сценарий: _005018 filling in the "Cash accounts" catalog
+	* Clearing the Cash accounts catalog
 		И я удаляю все элементы Справочника "CashAccounts"
 		И в базе нет элементов Справочника "CashAccounts"
-	* Открытие формы для заполнения Accounts
+	* Opening the form for filling in Accounts
 		И я открываю навигационную ссылку "e1cib/list/Catalog.CashAccounts"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Создание и проверка создания касс: Cash desk №1, Cash desk №2, Cash desk №3
+	* Create and check the creation of cash account: Cash desk №1, Cash desk №2, Cash desk №3
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Cash desk №1'
 		И в поле с именем 'Description_tr' я ввожу текст 'Cash desk №1 TR'
@@ -449,7 +442,7 @@
 		И Пауза 5
 		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Cash desk №3"  
 		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_tr" "Cash desk №3 TR" 
-	* Создание и проверка создания банковских счетов: Bank account TRY, Bank account USD, Bank account EUR
+	* Create and check the creation of bank account: Bank account TRY, Bank account USD, Bank account EUR
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Bank account, TRY'
@@ -516,8 +509,8 @@
 		И Пауза 5
 		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Bank account, EUR"  
 		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_tr" "Bank account, EUR TR"
-	* Создание банковского счета с признаком Transit
-		* Создание Transit Main
+	* Create Transit bank account
+		* Create Transit Main
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
 			И в поле с именем 'Description_en' я ввожу текст 'Transit Main'
@@ -532,7 +525,7 @@
 			И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 			И Пауза 5
 			Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Transit Main"
-		* Создание Transit Second
+		* Create Transit Second
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
 			И в поле с именем 'Description_en' я ввожу текст 'Transit Second'
@@ -547,7 +540,7 @@
 			И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 			И Пауза 5
 			Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Transit Second"
-	* Указание Transit account в Bank account, TRY
+	* Filling Transit account in the Bank account, TRY
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.CashAccounts'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'       |
@@ -559,7 +552,7 @@
 			| 'Transit Main' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
-	* Указание Transit account в Bank account, USD
+	* Filling Transit account in the Bank account, USD
 		И в таблице "List" я перехожу к строке:
 			| 'Description'       |
 			| 'Bank account, USD' |
@@ -572,14 +565,14 @@
 		И я нажимаю на кнопку 'Save and close'
 
 
-Сценарий: _005022 создание клиентов в справочнике "Partners"
-	* Очистка справочника Partners
+Сценарий: _005022 filling in the "Partners" catalog
+	* Clearing the Partners catalog
 		И я удаляю все элементы Справочника "Partners"
 		И в базе нет элементов Справочника "Partners"
-	* Открытие формы создания Partners
+	* Opening the form for filling in Partners
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
 		И Пауза 2
-	* Создание партнеров: Ferron BP, Kalipso, Manager B, Lomaniti
+	* Create partners: Ferron BP, Kalipso, Manager B, Lomaniti
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -615,7 +608,7 @@
 		И я нажимаю на кнопку 'Ok'
 		И я устанавливаю флаг с именем 'Customer'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Проверка создания партнеров
+	* Checking for created partners
 		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Ferron BP"  
 		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_tr" "Ferron BP TR"
 		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Kalipso"
@@ -623,18 +616,17 @@
 		И Пауза 2
 		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Lomaniti"
 
-Сценарий: _005023 заполнение наименования в справочнике "PartnerSegments"
-	* Очистка справочника PartnerSegments
+Сценарий: _005023 filling in the "Partner segments" catalog
+	* Clearing the PartnerSegments catalog
 		И я удаляю все элементы Справочника "PartnerSegments"
 		И в базе нет элементов Справочника "PartnerSegments"
-	* Открытие формы создания PartnerSegments
+	* Opening the form for filling in Partner segments
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PartnerSegments"
 		И Пауза 2
-	* Создание сегментов: Retail, Dealer
+	* Сreate segments: Retail, Dealer
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Retail'
 		И в поле с именем 'Description_tr' я ввожу текст 'Retail TR'
 		И я нажимаю на кнопку 'Ok'
@@ -644,35 +636,34 @@
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Dealer'
 		И в поле с именем 'Description_tr' я ввожу текст 'Dealer TR'
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 2
-	* Проверка создания сегментов
+	* Checking for created Partner Segments
 		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_en" "Dealer"  
 		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_tr" "Dealer TR"
 		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_tr" "Retail TR"
 		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_en" "Retail" 
 
-Сценарий: _005024 заполнение наименования в справочнике "PaymentSchedules"
-	* Очистка справочника PaymentSchedules
+Сценарий: _005024 filling in the "Payment schedules" catalog 
+	* Clearing the Payment schedules catalog
 		И я удаляю все элементы Справочника "PaymentSchedules"
 		И в базе нет элементов Справочника "PaymentSchedules"
-	* Открытие формы и создание PaymentSchedules
+	* Opening a form and creating Payment schedules
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PaymentSchedules"
 		Когда создаю элемент справочника с наименованием Test
-	* Проверка создания PaymentSchedules
+	* Checking for created Payment schedules
 		Тогда В базе появился хотя бы один элемент справочника "PaymentSchedules"
 		Тогда я проверяю наличие элемента справочника "PaymentSchedules" со значением поля "Description_en" "Test ENG"  
 		Тогда я проверяю наличие элемента справочника "PaymentSchedules" со значением поля "Description_tr" "Test TR"
-	* Удаление созданных элементов 
+	* Deletion of created elements 
 		И я удаляю все элементы Справочника "PaymentSchedules"
 
 
-Сценарий: _005026 заполнение наименования в справочнике "ItemSegments"
-	* Открытие формы и создание ItemSegments
+Сценарий: _005026 filling in the "Item segments" catalog 
+	* Opening a form and creating Item segments
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ItemSegments"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -681,33 +672,30 @@
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 2
-	* Проверка создания ItemSegments
+	* Checking creation Item segments
 		Тогда я проверяю наличие элемента справочника "ItemSegments" со значением поля "Description_en" "Sale autum"
 		Тогда я проверяю наличие элемента справочника "ItemSegments" со значением поля "Description_tr" "Sale autum TR"
 
 
 
-Сценарий: _005027 заполнение наименования в справочнике "PaymentTypes"
-	* Очистка справочника PaymentTypes
+Сценарий: _005027 filling in the "Payment types" catalog  
+	* Clearing the Payment types catalog
 		И я удаляю все элементы Справочника "PaymentTypes"
 		И в базе нет элементов Справочника "PaymentTypes"
-	* Открытие формы и создание PaymentTypes
+	* Opening a form and creating Payment types
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PaymentTypes"
 		Когда создаю элемент справочника с наименованием Test
 		И Я закрываю текущее окно
-	* Проверка создания PaymentTypes
+	* Checking for created Payment types
 		Тогда В базе появился хотя бы один элемент справочника "PaymentTypes"
 		Тогда я проверяю наличие элемента справочника "PaymentTypes" со значением поля "Description_en" "Test ENG"  
 		Тогда я проверяю наличие элемента справочника "PaymentTypes" со значением поля "Description_tr" "Test TR"
-	* Удаление созданных элементов 
+	* Deletion of created elements 
 		И я удаляю все элементы Справочника "PaymentTypes"
 
 
-Сценарий: _005028 заполнение наименования в справочнике "PriceTypes"
-	# * Очистка справочника PriceTypes
-		# И я удаляю все элементы Справочника "PriceTypes"
-		# И в базе нет элементов Справочника "PriceTypes"
-	* Открытие формы и создание цен клиентов Basic Price Types, Price USD, Discount Price TRY 1, Discount Price TRY 2, Basic Price without VAT, Discount 1 TRY without VAT, Discount 2 TRY without VAT
+Сценарий: _005028 filling in the "Price types" catalog  
+	* Opening a form and creating customer prices Basic Price Types, Price USD, Discount Price TRY 1, Discount Price TRY 2, Basic Price without VAT, Discount 1 TRY without VAT, Discount 2 TRY without VAT
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PriceTypes"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -800,7 +788,7 @@
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Создание видов цен для поставщиков: Vendor price, TRY, Vendor price, USD, Vendor price, EUR
+	* Creating price types for vendors: Vendor price, TRY, Vendor price, USD, Vendor price, EUR
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Vendor price, TRY'
@@ -836,13 +824,12 @@
 			| EUR  |
 		И в таблице "List" я выбираю текущую строку
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Проверка созданных видов цен поставщиков
+	* Checking for created price types
 		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Vendor price, TRY"
 		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Vendor price, USD"
 		И Пауза 2
 		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Vendor price, EUR"
 		И Пауза 2
-	* Проверка созданных видов цен клиентов
 		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Basic Price Types"
 		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_tr" "Basic Price Types TR"
 		И Пауза 2
@@ -858,11 +845,11 @@
 
 
 
-Сценарий: _005031 заполнение справочника "SpecialOffers"
-	* Очистка справочника SpecialOffers
+Сценарий: _005031 filling in the "Special offers" catalog
+	* Clearing the Special offers catalog
 		И я удаляю все элементы Справочника "SpecialOffers"
 		И в базе нет элементов Справочника "SpecialOffers"
-	* Открытие формы и создание SpecialOffers: Special Price
+	* Opening a form and creating Special offers: Special Price
 		И я открываю навигационную ссылку "e1cib/list/Catalog.SpecialOffers"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -898,26 +885,23 @@
 		И я устанавливаю флаг с именем 'Launch'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 2
-	* Проверка создания
+	* Checking creation
 		Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Special Price"  
 		Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_tr" "Special Price TR"
-	* Удаление созданных элементов 
+	* Deletion of created elements 
 		И я удаляю все элементы Справочника "SpecialOffers"
 
-Сценарий: _005032 заполнение наименования в справочнике "Stores" + создание ордерного склада (UseGoodsReceipt и UseShipmentConfirmation)
-	* Очистка справочника Stores
+Сценарий: _005032 filling in the "Stores" catalog
+	* Clearing the Stores catalog
 		И я удаляю все элементы Справочника "Stores"
 		И в базе нет элементов Справочника "Stores"
-	* Открытие формы для создания "Stores"
-		# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-185' с именем 'IRP-185'
-		# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-195' с именем 'IRP-195'
+	* Opening a form for creating Stores
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Stores"
 		И Пауза 2
-	* Заполнение данных по 'Store 01'
+	* Create Store 01
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Store 01'
 		И в поле с именем 'Description_tr' я ввожу текст 'Store 01 TR'
 		И я нажимаю на кнопку 'Ok'
@@ -925,11 +909,10 @@
 		И Пауза 5
 		Тогда В базе появился хотя бы один элемент справочника "Stores"
 		И Пауза 2
-	* Заполнение данных по 'Store 02'
+	* Create Store 02
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Store 02'
 		И в поле с именем 'Description_tr' я ввожу текст 'Store 02 TR'
 		И я нажимаю на кнопку 'Ok'
@@ -938,11 +921,10 @@
 		И     элемент формы с именем "Transit" стал равен 'No'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Заполнение данных по 'Store 03'
+	* Create Store 03
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Store 03'
 		И в поле с именем 'Description_tr' я ввожу текст 'Store 03 TR'
 		И я нажимаю на кнопку 'Ok'
@@ -951,86 +933,80 @@
 		И     элемент формы с именем "Transit" стал равен 'No'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Заполнение данных по 'Store 04'
+	* Create Store 04
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Store 04'
 		И в поле с именем 'Description_tr' я ввожу текст 'Store 04 TR'
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Проверка создания "Stores"
+	* Checking creation "Stores"
 		Тогда я проверяю наличие элемента справочника "Stores" со значением поля "Description_en" "Store 01"  
 		Тогда я проверяю наличие элемента справочника "Stores" со значением поля "Description_tr" "Store 01 TR"
 		Тогда я проверяю наличие элемента справочника "Stores" со значением поля "Description_en" "Store 02"  
 		Тогда я проверяю наличие элемента справочника "Stores" со значением поля "Description_en" "Store 03"
 		Тогда я проверяю наличие элемента справочника "Stores" со значением поля "Description_en" "Store 04"
 
-Сценарий: _005033 заполнение наименования в справочнике "TaxRates"
-	* Очистка справочника TaxRates
+Сценарий: _005033 filling in the "Tax rates" catalog  
+	* Clearing the Tax rates catalog
 		И я удаляю все элементы Справочника "TaxRates"
 		И в базе нет элементов Справочника "TaxRates"
-	* Открытие формы для создания "TaxRates"
+	* Opening a form for creating Tax rates
 		И я открываю навигационную ссылку "e1cib/list/Catalog.TaxRates"
 		И Пауза 2
-	* Создание налоговой ставки '8%'
+	* Create tax rate '8%'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст '8%'
 		И в поле с именем 'Description_tr' я ввожу текст '8% TR'
 		И я нажимаю на кнопку 'Ok'
 		И в поле с именем 'Rate' я ввожу текст '8,000000000000'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание налоговой ставки '18%'
+	* Create tax rate '18%'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст '18%'
 		И в поле с именем 'Description_tr' я ввожу текст '18% TR'
 		И я нажимаю на кнопку 'Ok'
 		И в поле 'Rate' я ввожу текст '18,000000000000'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание налоговой ставки 'Without VAT'
+	* Create tax rate 'Without VAT'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст 'Without VAT'
 		И в поле с именем 'Description_tr' я ввожу текст 'Without VAT TR'
 		И я нажимаю на кнопку 'Ok'
 		И в поле с именем 'Rate' я ввожу текст '0,000000000000'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание налоговой ставки '0%'
+	* Create tax rate '0%'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст '0%'
 		И в поле с именем 'Description_tr' я ввожу текст '0%'
 		И я нажимаю на кнопку 'Ok'
 		И в поле с именем 'Rate' я ввожу текст '0,000000000000'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание налоговой ставки '1%'
+	* Create tax rate '1%'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле с именем 'Description_en' я ввожу текст '1%'
 		И в поле с именем 'Description_tr' я ввожу текст '1%'
 		И я нажимаю на кнопку 'Ok'
 		И в поле с именем 'Rate' я ввожу текст '1,000000000000'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Проверка создания налоговых ставок
+	* Checking creation tax rates
 		Тогда В базе появился хотя бы один элемент справочника "TaxRates"
 		Тогда я проверяю наличие элемента справочника "TaxRates" со значением поля "Description_en" "8%"  
 		Тогда я проверяю наличие элемента справочника "TaxRates" со значением поля "Description_tr" "8% TR"
@@ -1040,11 +1016,10 @@
 
 
 
-Сценарий: _005038 заполнение значений в справочнике "CompanyTypes"
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-170' с именем 'IRP-170'
-	* Открытие формы создания CompanyTypes
+Сценарий: _005038 filling in the "Company types" catalog  
+	* Opening a form for creating Company types
 		И я открываю навигационную ссылку "e1cib/list/Catalog.CompanyTypes"
-	* Создание типов компаний: Entrepreneur, Legal entity, Private individual
+	* Create company types: Entrepreneur, Legal entity, Private individual
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Entrepreneur'
@@ -1063,16 +1038,16 @@
 		И в поле с именем 'Description_tr' я ввожу текст 'Private individual TR'
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Проверка создания 
+	* Checking creation 
 		Тогда я проверяю наличие элемента справочника "CompanyTypes" со значением поля "Description_en" "Entrepreneur"  
 		Тогда я проверяю наличие элемента справочника "CompanyTypes" со значением поля "Description_en" "Legal entity"
 		И Пауза 2
 		Тогда я проверяю наличие элемента справочника "CompanyTypes" со значением поля "Description_en" "Private individual" 
 
-Сценарий: _005039 заполнение справочника статусов для InventoryTransferOrder
-	* Открытие формы создания ObjectStatuses
+Сценарий: _005039 filling in the status catalog for Inventory transfer order
+	* Opening a form for creating Object statuses
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
-	* Присвоение предопределенному элементу InventoryTransferOrder наименования 
+	* Filling the name for the predefined element InventoryTransferOrder
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
 			| 'Object statuses' |
@@ -1085,65 +1060,56 @@
 		И в поле 'TR' я ввожу текст 'Inventory transfer order TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	* Добавление статуса "Wait"
+	* Adding status "Wait"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Inventory transfer order' |
 		И я нажимаю на кнопку с именем 'FormCreate'
-		# И из выпадающего списка "Object" я выбираю точное значение 'Inventory transfer order'
 		И я устанавливаю флаг 'Set by default'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Wait'
 		И в поле 'TR' я ввожу текст 'Wait TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-	* Добавление статуса "Approved"
+	* Adding status "Approved"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Inventory transfer order' |
 		И я нажимаю на кнопку с именем 'FormCreate'
-		# И из выпадающего списка "Object" я выбираю точное значение 'Inventory transfer order'
 		И я устанавливаю флаг 'Posting'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Approved'
 		И в поле 'TR' я ввожу текст 'Approved TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-	* Добавление статуса "Send"
+	* Adding status "Send"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Inventory transfer order' |
 		И я нажимаю на кнопку с именем 'FormCreate'
-		# И из выпадающего списка "Object" я выбираю точное значение 'Inventory transfer order'
 		И я устанавливаю флаг 'Posting'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Send'
 		И в поле 'TR' я ввожу текст 'Send TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-	* Добавление статуса "Receive"
+	* Adding status "Receive"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Inventory transfer order' |
 		И я нажимаю на кнопку с именем 'FormCreate'
-		# И из выпадающего списка "Object" я выбираю точное значение 'Inventory transfer order'
 		И я устанавливаю флаг 'Posting'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Receive'
 		И в поле 'TR' я ввожу текст 'Receive TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
 		И Я закрываю текущее окно
 
-Сценарий: _005040 заполнение справочника статусов для Outgoing Payment Order
-	* Открытие формы создания ObjectStatuses
+Сценарий: _005040 filling in the status catalog for Outgoing Payment Order
+	* Opening a form for creating Object statuses
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
-	* Присвоение предопределенному элементу OutgoingPaymentOrder наименования 
+	* Filling the name for the predefined element OutgoingPaymentOrder
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
 			| 'Object statuses' |
@@ -1156,38 +1122,33 @@
 		И в поле 'TR' я ввожу текст 'Outgoing payment order TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	* Добавление статуса "Wait"
+	* Adding status "Wait"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Outgoing payment order' |
 		И я нажимаю на кнопку с именем 'FormCreate'
-		# И из выпадающего списка "Object" я выбираю точное значение 'Outgoing payment order'
 		И я устанавливаю флаг 'Set by default'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Wait'
 		И в поле 'TR' я ввожу текст 'Wait TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-	* Добавление статуса "Approved"
+	* Adding status "Approved"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Outgoing payment order' |
 		И я нажимаю на кнопку с именем 'FormCreate'
-		# И из выпадающего списка "Object" я выбираю точное значение 'Outgoing payment order'
 		И я устанавливаю флаг 'Posting'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Approved'
 		И в поле 'TR' я ввожу текст 'Approved TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
 
-Сценарий: _005041 заполнение справочника статусов для Purchase return order
-	* Открытие формы создания ObjectStatuses
+Сценарий: _005041 filling in the status catalog for Purchase return order
+	* Opening a form for creating Object statuses
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
-	* Присвоение предопределенному элементу PurchaseReturnOrder наименования 
+	* Filling the name for the predefined element  PurchaseReturnOrder
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
 			| 'Object statuses' |
@@ -1200,39 +1161,34 @@
 		И в поле 'TR' я ввожу текст 'Purchase return order TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	* Добавление статуса "Wait"
+	* Adding status "Wait"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Purchase return order' |
 		И я нажимаю на кнопку с именем 'FormCreate'
-		# И из выпадающего списка "Object" я выбираю точное значение 'Purchase return order'
 		И я устанавливаю флаг 'Set by default'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Wait'
 		И в поле 'TR' я ввожу текст 'Wait TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-	* Добавление статуса "Approved"
+	* Adding status "Approved"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Purchase return order' |
 		И я нажимаю на кнопку с именем 'FormCreate'
-		# И из выпадающего списка "Object" я выбираю точное значение 'Purchase return order'
 		И я устанавливаю флаг 'Posting'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Approved'
 		И в поле 'TR' я ввожу текст 'Approved TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
 
 
-Сценарий: _005042 заполнение справочника статусов для Purchase order
-	* Открытие формы создания ObjectStatuses
+Сценарий: _005042 filling in the status catalog for Purchase order
+	* Opening a form for creating Object statuses
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
-	* Присвоение предопределенному элементу PurchaseOrder наименования 
+	* Filling the name for the predefined element PurchaseOrder
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
 			| 'Object statuses' |
@@ -1245,38 +1201,33 @@
 		И в поле 'TR' я ввожу текст 'Purchase order TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	* Добавление статуса "Wait"
+	* Adding status "Wait"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Purchase order' |
 		И я нажимаю на кнопку с именем 'FormCreate'
-		# И из выпадающего списка "Object" я выбираю точное значение 'Purchase order'
 		И я устанавливаю флаг 'Set by default'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Wait'
 		И в поле 'TR' я ввожу текст 'Wait TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-	* Добавление статуса "Approved"
+	* Adding status "Approved"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Purchase order' |
 		И я нажимаю на кнопку с именем 'FormCreate'
-		# И из выпадающего списка "Object" я выбираю точное значение 'Purchase order'
 		И я устанавливаю флаг 'Posting'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Approved'
 		И в поле 'TR' я ввожу текст 'Approved TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
 
-Сценарий: _005043 заполнение справочника статусов для Sales return order
-	* Открытие формы создания ObjectStatuses
+Сценарий: _005043 filling in the status catalog for Sales return order
+	* Opening a form for creating Object statuses
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
-	* Присвоение предопределенному элементу SalesReturnOrder наименования 
+	* Filling the name for the predefined element  SalesReturnOrder
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
 			| 'Object statuses' |
@@ -1289,38 +1240,33 @@
 		И в поле 'TR' я ввожу текст 'Sales return order TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	* Добавление статуса "Wait"
+	* Adding status "Wait"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Sales return order' |
 		И я нажимаю на кнопку с именем 'FormCreate'
-		# И из выпадающего списка "Object" я выбираю точное значение 'Sales return order'
 		И я устанавливаю флаг 'Set by default'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Wait'
 		И в поле 'TR' я ввожу текст 'Wait TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-	* Добавление статуса "Approved"
+	* Adding status "Approved"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Sales return order' |
 		И я нажимаю на кнопку с именем 'FormCreate'
-		# И из выпадающего списка "Object" я выбираю точное значение 'Sales return order'
 		И я устанавливаю флаг 'Posting'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Approved'
 		И в поле 'TR' я ввожу текст 'Approved TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
 
-Сценарий: _005044 заполнение справочника статусов для Sales order
-	* Открытие формы создания ObjectStatuses
+Сценарий: _005044 filling in the status catalog for Sales order
+	* Opening a form for creating Object statuses
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
-	* Присвоение предопределенному элементу SalesOrder наименования 
+	* Filling the name for the predefined element  SalesOrder
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
 			| 'Object statuses' |
@@ -1333,8 +1279,7 @@
 		И в поле 'TR' я ввожу текст 'Sales order TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	* Добавление статуса "Wait"
+	* Adding status "Wait"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Sales order' |
@@ -1344,8 +1289,7 @@
 		И в поле 'TR' я ввожу текст 'Wait TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-	* Добавление статуса "Approved"
+	* Adding status "Approved"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Sales order' |
@@ -1357,8 +1301,7 @@
 		И в поле 'TR' я ввожу текст 'Approved TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-	* Добавление статуса "Done"
+	* Adding status "Done"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'              |
 		| 'Sales order' |
@@ -1369,16 +1312,15 @@
 		И в поле 'TR' я ввожу текст 'Done TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _005045 проверка очистки поля UniqueID при копировании статуса
-	* Открытие формы создания ObjectStatuses
+Сценарий: _005045 check for clearing the UniqueID field when copying the status
+	* Opening a form for creating Object statuses
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
 			| 'Object statuses' |
-	* Копирование статуса
+	* Copy status
 		И в таблице "List" я разворачиваю строку:
 			| 'Description' | 'Predefined data item name' |
 			| 'Sales order' | 'SalesOrder'                |
@@ -1386,7 +1328,7 @@
 			| 'Description' |
 			| 'Wait'        |
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuCopy'
-	* Проверка очистки поля UniqueID
+	* Checking UniqueID field cleaning
 		И     элемент формы с именем "UniqueID" стал равен ''
 		И     элемент формы с именем "Description_en" стал равен 'Wait'
 	И Я закрыл все окна клиентского приложения
@@ -1394,7 +1336,7 @@
 
 
 Сценарий: _005046 заполнение Business units
-	* Открытие формы создания BusinessUnits
+	* Открытие формы создания Business units
 		И я открываю навигационную ссылку "e1cib/list/Catalog.BusinessUnits"
 	* Создание подразделения 'Front office'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -1424,7 +1366,7 @@
 		И в поле 'TR' я ввожу текст 'Logistics department TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка создания Business units
+	* Checking creation Business units
 		Тогда я проверяю наличие элемента справочника "BusinessUnits" со значением поля "Description_en" "Front office"
 		Тогда я проверяю наличие элемента справочника "BusinessUnits" со значением поля "Description_en" "Accountants office"
 		И Пауза 2
@@ -1470,7 +1412,7 @@
 		И в поле 'TR' я ввожу текст 'Delivery TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка создания Expense type
+	* Checking creation Expense type
 		Тогда я проверяю наличие элемента справочника "ExpenseAndRevenueTypes" со значением поля "Description_en" "Rent"
 		Тогда я проверяю наличие элемента справочника "ExpenseAndRevenueTypes" со значением поля "Description_en" "Telephone communications"
 		Тогда я проверяю наличие элемента справочника "ExpenseAndRevenueTypes" со значением поля "Description_en" "Fuel"
@@ -1479,7 +1421,7 @@
 		И Пауза 2
 		Тогда я проверяю наличие элемента справочника "ExpenseAndRevenueTypes" со значением поля "Description_en" "Delivery"
 
-Сценарий: _005048 заполнение наименования в справочнике "Tax analytics"
+Сценарий: _005048 filling in the "Item segments" catalog  "Tax analytics"
 	* Открытие и заполнение формы Tax analytics
 		И я открываю навигационную ссылку "e1cib/list/Catalog.TaxAnalytics"
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -1490,7 +1432,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 		И Пауза 2
-	* Проверка наличия созданных Tax analytics
+	* Checking for created  Tax analytics
 		Тогда я проверяю наличие элемента справочника "TaxAnalytics" со значением поля "Description_en" "Analytics 01"  
 		Тогда я проверяю наличие элемента справочника "TaxAnalytics" со значением поля "Description_tr" "Analytics 01 TR"
 

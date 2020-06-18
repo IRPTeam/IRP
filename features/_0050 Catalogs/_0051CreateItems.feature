@@ -3,28 +3,29 @@
 @Positive
 
 
-Функционал: создание номенклатуры
+Функционал: filling in catalogs Items
 
-Как Разработчик
-Я хочу создать форму создания номенклатуры
-Чтобы пользователь мог заполнить справочник номенклатуры
+As an owner
+I want to fill out items information
+To further use it when reflecting in the program of business processes
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-# Все неделимые упаковки одного и того же товара заводятся с помощью Specifiсation c типом Set. Далее по товару создается отдельный Item key в котором указывается нужный сет
-# и на него устанавливается цена. На остатках хранится именно Set. Для того чтобы set разорвать необходимо провести документ Unbandling
-# Для простого учета товара в упаковках по документам (на остатках хранятся штуки) используются единицицы измерения pcs. Под каждый товар создается свой Unit
-# например pcs состоящий из 6 штук, из 10 шт. и т.д. При этом цена в заказ попадает как цена штуки. По регистрам тоже проходят штуки. 
+# All indivisible packages of the same product are wound up using Specifiсation with type Set. Then a separate Item key is created for the product, in which the necessary set is specified.
+# and a price is set on it. It's the Set that's stored on the remains. In order to break it up you need to run the Unbandling document
+# For the simple accounting of goods in the packages of documents (the remnants are stored pieces) used units of measurement pcs. For each product, a different Unit is specified
+# like pcs consisting of 6 pieces, 10 pieces, etc. # In this case, the price of the order gets as the price of a piece. There's pcs going through the registers, too. 
 
 
-Сценарий: _005110 заполнение наименований в справочнике Interface groups
-# С правочник предназначен для создания групп доп реквизитов для номенклатуры. Также предусматривает указание места расположения группы на форме номенклатуры (справа или слева)
-	* Открытие формы создания InterfaceGroups
+
+Сценарий: _005110 filling in the "Interface groups" catalog 
+# Catalog "Interface group" is designed to create groups of additional attributes for the items. Also provides for the location of the group on the item's form (right or left)
+	* Opening the Interface Groups creation form 
 		И я открываю навигационную ссылку "e1cib/list/Catalog.InterfaceGroups"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Создание интерфейсных групп: Product information, Accounting information, Purchase and production 
+	* Creating interface groups: Product information, Accounting information, Purchase and production 
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Product information'
 		И в поле 'TR' я ввожу текст 'Product information TR'
@@ -46,7 +47,7 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И я жду закрытия окна 'Interface groups (create)' в течение 5 секунд
-	* Проверка наличия созданных Interface groups
+	* Checking for added Interface groups in the catalog 
 		Тогда В базе появился хотя бы один элемент справочника "InterfaceGroups"
 		Тогда я проверяю наличие элемента справочника "InterfaceGroups" со значением поля "Description_en" "Product information"  
 		Тогда я проверяю наличие элемента справочника "InterfaceGroups" со значением поля "Description_tr" "Product information TR"
@@ -56,12 +57,12 @@
 		Тогда я проверяю наличие элемента справочника "InterfaceGroups" со значением поля "Description_tr" "Purchase and production TR"
 
 
-Сценарий: _005111 заполнение наименования в справочнике "AddAttributeAndProperty"
-	* Открытие формы создания AddAttributeAndProperty
+Сценарий: _005111 filling in the "Add attribute and property" catalog 
+	* Opening the Add attribute and property creation form 
 		И я открываю навигационную ссылку "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 5
-	* Создание доп реквизита Type
+	* Creating additional attribute Type
 		И я нажимаю кнопку выбора у поля с именем "ValueType"
 		И Пауза 2
 		И в таблице "*" я перехожу к строке:
@@ -75,7 +76,7 @@
 		И я нажимаю на кнопку с именем 'FormWrite'
 		И в поле с именем 'UniqueID' я ввожу текст 'V123445'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Создание доп реквизита Brand
+	* Creating additional attribute Brand
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 5
 		И я нажимаю кнопку выбора у поля с именем "ValueType"
@@ -91,7 +92,7 @@
 		И я нажимаю на кнопку с именем 'FormWrite'
 		И в поле с именем 'UniqueID' я ввожу текст 'V123446'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Создание доп реквизита producer 
+	* Creating additional attribute producer 
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 5
 		И я нажимаю кнопку выбора у поля с именем "ValueType"
@@ -107,7 +108,7 @@
 		И я нажимаю на кнопку с именем 'FormWrite'
 		И в поле с именем 'UniqueID' я ввожу текст 'V123447'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Создание доп реквизита Size
+	* Creating additional attribute Size
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 5
 		И я нажимаю кнопку выбора у поля с именем "ValueType"
@@ -123,7 +124,7 @@
 		И я нажимаю на кнопку с именем 'FormWrite'
 		И в поле с именем 'UniqueID' я ввожу текст 'Size1'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Создание доп реквизита Color
+	* Creating additional attribute Color
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 5
 		И я нажимаю кнопку выбора у поля с именем "ValueType"
@@ -139,7 +140,7 @@
 		И я нажимаю на кнопку с именем 'FormWrite'
 		И в поле с именем 'UniqueID' я ввожу текст 'Color1'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Создание доп свойства article
+	* Creating additional property article
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 5
 		И я нажимаю кнопку выбора у поля с именем "ValueType"
@@ -156,7 +157,7 @@
 		И я нажимаю на кнопку с именем 'FormWrite'
 		И в поле с именем 'UniqueID' я ввожу текст 'V123448'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Создание доп свойства country of consignment
+	* Creating additional property country of consignment
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 5
 		И я нажимаю кнопку выбора у поля с именем "ValueType"
@@ -172,7 +173,7 @@
 		И я нажимаю на кнопку с именем 'FormWrite'
 		И в поле с именем 'UniqueID' я ввожу текст 'V123449'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Создание доп свойства season
+	* Creating additional property season
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 5
 		И я нажимаю кнопку выбора у поля с именем "ValueType"
@@ -190,11 +191,11 @@
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И я жду закрытия окна 'Add attribute and property (create) *' в течение 20 секунд	
 
-Сценарий: _005112 заполнение AddAttributeAndPropertyValues с типом Add attribute and property values
-# значения доп реквизитов (Producer, Color, Size,Season, Country of consignment)
-	* Открытие формы AddAttributeAndProperty
+Сценарий: _005112 filling in Add attribute and property values with type Add attribute and property values
+# the value of additional attributes (Producer, Color, Size,Season, Country of consignment)
+	* Opening the Add attribute and property form
 		И я открываю навигационную ссылку "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
-	* Добавление значения Size
+	* Adding value Size
 		И в таблице "List" я перехожу к строке:
 		| 'Description' |
 		| 'Size'      |
@@ -272,7 +273,7 @@
 		И Пауза 2
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 		И Я нажимаю на кнопку 'Save and close'
-	* Добавление значения Color
+	* Adding value Color
 		И в таблице "List" я перехожу к строке:
 		| 'Description' |
 		| 'Color'      |
@@ -329,7 +330,7 @@
 		И Пауза 2
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 		И Я нажимаю на кнопку 'Save and close'
-	* Добавление значения Season
+	* Adding value Season
 		И в таблице "List" я перехожу к строке:
 		| 'Description' |
 		| 'Season'      |
@@ -358,7 +359,7 @@
 		И Пауза 2
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 		И я нажимаю на кнопку 'Save and close'
-	* Добавление значения Country of consignment
+	* Adding value Country of consignment
 		И в таблице "List" я перехожу к строке:
 		| 'Description' |
 		| 'Country of consignment'      |
@@ -394,7 +395,7 @@
 		И Пауза 2
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 		И я нажимаю на кнопку 'Save and close'
-	* Добавление значения Producer
+	* Adding value Producer
 		И в таблице "List" я перехожу к строке:
 		| 'Description' |
 		| 'Producer'      |
@@ -423,7 +424,7 @@
 		И Пауза 2
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 		И я нажимаю на кнопку 'Save and close'
-	* Добавление значения Brand
+	* Adding value Brand
 		И в таблице "List" я перехожу к строке:
 		| 'Description' |
 		| 'Brand'      |
@@ -461,17 +462,16 @@
 		И я нажимаю на кнопку 'Save and close'
 
 
-Сценарий: _005113 заполнение наименования в справочнике "ItemTypes"
-	# Доп реквизиты для ItemKey в ItemTypes пока не добавляются, проставляются в сетах 
-	* Очистка справочника ItemTypes
+Сценарий: _005113 filling in the "Item types" catalog 
+	* Clearing the Item types catalog 
 		И я удаляю все элементы Справочника "ItemTypes"
 		И в базе нет элементов Справочника "ItemTypes"
-	* Открытие формы создания ItemTypes
+	* Opening the form for filling in Item types
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
-	* Создание видов номенклатуры: Сlothes, Box, Shoes
+	* Creating item types: Сlothes, Box, Shoes
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Сlothes'
 		И в поле с именем 'Description_tr' я ввожу текст 'Сlothes TR'
@@ -495,7 +495,7 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Проверка созданных элементов
+	* Checking for created elements
 		Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_en" "Сlothes"  
 		Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_tr" "Сlothes TR"
 		Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_en" "Shoes"  
@@ -504,15 +504,15 @@
 		Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_tr" "Box TR"
 
 
-Сценарий: _005114 добавление общих доп реквизитов для номенклатуры
+Сценарий: _005114 adding general additional attributes for Item
 # AddAttributeAndPropertySets (Catalog_Items)
-	* Открытие формы для добавления доп реквизитов для Items
+	* Opening the form for adding additional attributes for Items
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		И в таблице "List" я перехожу к строке:
 			| 'Predefined data item name' |
 			| 'Catalog_Items'      |
 		И в таблице "List" я выбираю текущую строку
-	* Добавление доп реквизитов
+	* Adding additional attributes
 		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
 		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
 		И в таблице "List" я перехожу к строке:
@@ -544,7 +544,7 @@
 		И в таблице "Attributes" я перехожу к строке:
 			| 'Attribute' |
 			| 'Producer'  |
-	* Распределение добавленных доп реквизитов по интерфейсным группам
+	* Distribution of added additional attributes by interface groups
 		И в таблице "Attributes" я активизирую поле "Interface group"
 		И в таблице "Attributes" я выбираю текущую строку
 		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Interface group"
@@ -589,16 +589,16 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 
-Сценарий: _005115 создание номенклатуры (справочник "Items")
-	* Очистка справочника Items
+Сценарий: _005115 filling in the "Items" catalog 
+	* Clearing the Items catalog 
 		И я удаляю все элементы Справочника "Items"
 		И в базе нет элементов Справочника "Items"
-	* Открытие формы создания Items
+	* Opening the form for creating Items
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
-	* Создание тестовой номенклатуры Dress
+	* Test item creation Dress
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Dress'
 		И в поле с именем 'Description_tr' я ввожу текст 'Dress TR'
@@ -625,10 +625,9 @@
 			| 'Description' |
 			| 'Poland'      |
 		И в таблице "List" я выбираю текущую строку
-		# И в поле 'Article' я ввожу текст 'AN534126'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание тестовой номенклатуры Trousers
+	* Test item creation Trousers
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -644,7 +643,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание тестовой номенклатуры Shirt
+	* Test item creation Shirt
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -660,7 +659,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание тестовой номенклатуры Boots
+	* Test item creation Boots
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -676,7 +675,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание тестовой номенклатуры High shoes
+	* Test item creation High shoes
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -692,7 +691,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание тестовой номенклатуры Box
+	* Test item creation Box
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -718,7 +717,7 @@
 			| 'Box'       |
 		И в таблице "List" я выбираю текущую строку
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Создание тестовой номенклатуры на набор Bound Dress+Shirt
+	* Test item creation на набор Bound Dress+Shirt
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
@@ -735,7 +734,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Создание тестовой номенклатуры на набор Bound Dress+Trousers
+	* Test item creation на набор Bound Dress+Trousers
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
@@ -754,12 +753,12 @@
 		И Пауза 5
 
 
-Сценарий: _005116 указание настроек создания ItemKeys для ItemType Сlothes и Shoes
-# для Сlothes указываем цвет, для Shoes - сезон
-# Указывается через Item type с дублированием в сеты
-	* Открытие формы для указания настроек создания ItemKeys
+Сценарий: _005116 filling in the settings for creating ItemKeys for Item type Closets and Shoes
+# for clothes specify the color, for shoes - season
+# It is indicated through the type of item with duplication in sets
+	* Opening the form for filling in Item keys settings 
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-	* Установка параметров создания Item key для Сlothes
+	* Item key creation options for Сlothes
 		И в таблице "List" я перехожу к строке:
 			| Description      |
 			| Сlothes |
@@ -779,7 +778,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "AvailableAttributes" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
-	* Установка параметров создания Item key для Shoes
+	* Item key creation options for Shoes
 		И в таблице "List" я перехожу к строке:
 			| Description      |
 			| Shoes |
@@ -802,10 +801,10 @@
 		И Я закрываю текущее окно
 
 
-Сценарий: _005117 заполнение ItemKeys по номенклатуре 
+Сценарий: _005117 fill in Item keys
 # Dress, Trousers, Shirt, Boots, High shoes, Box
 	И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-	* Заполнение ItemKeys для Dress
+	* Filling in Item keys for Dress
 		И в таблице "List" я перехожу к строке:
 		| 'Description'      |
 		| 'Dress' |
@@ -902,8 +901,7 @@
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 		И я нажимаю на кнопку 'Save and close'
 		И я жду закрытия окна 'Dress (Item)' в течение 20 секунд
-		# И я загружаю макет "ItemsKey"
-	* Заполнение ItemKeys для Trousers
+	* Filling in Item keys for Trousers
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' | 'Item type' |
@@ -1107,10 +1105,10 @@
 
 		
 
-Сценарий: _005119 создание упаковок на High shoes
-	* Открытие формы элемента справочника Units
+Сценарий: _005119 packaging for High shoes
+	* Opening the form for creating Units
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Units"
-	* Создание упаковки High shoes box (8 pcs)
+	* Create packaging High shoes box (8 pcs)
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'High shoes box (8 pcs)'
@@ -1128,7 +1126,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И в поле 'Quantity' я ввожу текст '8'
 		И я нажимаю на кнопку 'Save and close'
-	* Создание упаковки Boots (12 pcs)
+	* Create packaging Boots (12 pcs)
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Boots (12 pcs)'
@@ -1148,10 +1146,9 @@
 		И я нажимаю на кнопку 'Save and close'
 	И Я закрываю текущее окно
 
-Сценарий: _005120 создание спецификации set Сlothes/Shoes
-# Set - это размерная сетка, устанавливается на вид номенклатуры
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-263' с именем 'IRP-263'
-	* Создание спецификации на Сlothes
+Сценарий: _005120 set Closets/Shoes specification creation
+# Set is a dimensional grid, set to the type of item
+	* Create a specification for Сlothes
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Specifications"
 		И я нажимаю на кнопку с именем "FormCreate"
 		И я меняю значение переключателя 'Type' на 'Set'
@@ -1225,7 +1222,7 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	* Создание спецификации на Shoes
+	* Create a specification for Shoes
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Specifications"
 		И я нажимаю на кнопку с именем "FormCreate"
 		И я меняю значение переключателя 'Type' на 'Set'
@@ -1304,15 +1301,14 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
 
-Сценарий: _005121 указание item key по спецификации для set
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-263' с именем 'IRP-263'
-	* Открытие элемента Dress в справочнике Items 
+Сценарий: _005121 filling item key according to specification for set
+	* Opening the Dress element in the Items catalog
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' | 'Item type' |
 			| 'Dress'       | 'Сlothes'   |
 		И в таблице "List" я выбираю текущую строку
-	* Создание для Dress нового item key на спецификацию
+	* Creating for Dress a new item key for the specification
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я изменяю флаг 'Specification'
@@ -1330,13 +1326,13 @@
 			| 'Item key'   |
 			| 'Dress/A-8'  |
 		И Я закрываю текущее окно
-	* Открытие элемента Boots в справочнике Items 
+	* Opening the Boots element in the Items catalog
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' | 'Item type' |
 			| 'Boots'       | 'Shoes'   |
 		И в таблице "List" я выбираю текущую строку
-	* Создание для Boots нового item key на спецификацию
+	* Creating for Boots a new item key for the specification
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я изменяю флаг 'Specification'

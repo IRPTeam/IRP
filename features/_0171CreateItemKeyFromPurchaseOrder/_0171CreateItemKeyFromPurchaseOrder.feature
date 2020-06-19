@@ -3,27 +3,27 @@
 @Positive
 
 
-Функционал: создание недостающих Item key по Item при формировании Purchase Order
+Функционал: creating missing Item key by Item when creating Purchase Order
 
-Как менеджер по закупкам
-Я хочу создать Item key по товарам
-Для того чтобы сформировать заказ поставщику
+As a procurement manager
+I want to create an Item key for the items
+In order to form an order with a vendor
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _017101 проверка ввода item key по строке
-	* Открытие формы для создания Purchase Order
+Сценарий: _017101 checking input item key by line
+	* Opening a form to create a purchase order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов
+	* Filling in details
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Store"
 		Тогда открылось окно 'Stores'
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение информации о поставщике
+	* Filling out vendor information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -35,7 +35,7 @@
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка ввода item key по строке
+	* Check input item key line by line
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -54,17 +54,17 @@
 		И я нажимаю на кнопку 'No'
 
 
-Сценарий: _017102 проверка создания недостающего item key из документа Purchase order
-	* Открытие формы для создания Purchase Order
+Сценарий: _017102 checking for the creation of the missing item key from the Purchase order document
+	* Opening a form to create a purchase order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов
+	* Filling in details
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Store"
 		Тогда открылось окно 'Stores'
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение информации о поставщике
+	* Filling out vendor information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -81,7 +81,7 @@
 			| Description        |
 			| Vendor Ferron, TRY |
 		И в таблице "List" я выбираю текущую строку
-	* Создание item key при заполнении табличной части
+	* Creating an item key when filling out the tabular part
 		И я перехожу к закладке "Item list"
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -114,17 +114,17 @@
 		И я нажимаю на кнопку 'No'
 
 
-Сценарий: фильтр при выборе item key в документе Purchase order
-	* Открытие формы для создания Purchase Order
+Сценарий: _017105 filter when selecting item key in a purchase order document
+	* Opening a form to create a purchase order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов
+	* Filling in details
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Store"
 		Тогда открылось окно 'Stores'
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение информации о поставщике
+	* Filling out vendor information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -136,7 +136,7 @@
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка фильтра по item key при заполнении товарной части
+	* Filter check on item key when filling out the commodity part
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:

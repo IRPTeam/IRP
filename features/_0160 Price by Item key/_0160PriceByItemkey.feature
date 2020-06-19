@@ -4,21 +4,22 @@
 
 
 
-Функционал: установка цен номенклатуры по item key
+Функционал: item key pricing
 
-Как разработчик
-Я хочу создать документ прайс лист
-Чтобы внести цены
+As commercial director 
+I want to fill in the prices
+To sell and purchase goods and services
+
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _016001 внесение базовой цены с НДС
-	* Открытие формы прайс листа
+Сценарий: _016001 base price fill (incl. VAT)
+	* Opening  price list
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов прайс-листа по item key
+	* Filling in the details of the price list by item key
 		И я меняю значение переключателя 'Set price' на 'By Item keys'
 		И я перехожу к закладке "Other"
 		И в поле 'Description' я ввожу текст 'Basic price'
@@ -30,7 +31,7 @@
 		Когда изменяю номер прайс-листа
 		И в поле 'Number' я ввожу текст '100'
 		И в поле 'Date' я ввожу текст '01.11.2018  12:32:21'
-	* Заполнение цен по item key по виду цен Basic Price Types
+	* Filling in prices by item key by price type Basic Price Types
 		И я перехожу к закладке "Item keys"
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
@@ -271,20 +272,20 @@
 		И в таблице "ItemKeyList" я активизирую поле "Price"
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '3 000,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
-	* Проведение документа
+	* Posting document
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
-	* Проверка сохранения документа
+	* Checking document saving
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		Тогда таблица "List" содержит строки:
 		| 'Number' | 'Price list type'     | 'Price type'                 | 'Description' | 'Reference'       |
 		| '100'    | 'Price by item keys'  | 'Basic Price Types'          | 'Basic price' | 'Price list 100*' |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: проверка проводок документа прайс лист по item key по регистру PricesByItemKeys
-	* Открытие регистра PricesByItemKeys
+Сценарий: check the posting of the price list document by item key register Prices by item keys
+	* Opening register Prices by item keys
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PricesByItemKeys'
-	* Проверка движений документа Price list 100
+	* Checking document posting Price list 100
 		Тогда таблица "List" содержит строки:
 		| 'Price'    | 'Recorder'                                 | 'Price type'        | 'Item key'  |
 		| '550,00'   | 'Price list 100 dated 01.11.2018 12:32:21' | 'Basic Price Types' | 'S/Yellow'  |
@@ -311,10 +312,10 @@
 
 
 Сценарий: _016002 внесение цены без НДС (базовая + скидочная)
-	* Открытие формы прайс листа
+	* Opening  price list
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов прайс-листа по item key Basic Price without VAT
+	* Filling in the details of the price list by item key Basic Price without VAT
 		И я меняю значение переключателя 'Set price' на 'By Item keys'
 		И я перехожу к закладке "Other"
 		И в поле 'Description' я ввожу текст 'Basic price'
@@ -327,7 +328,7 @@
 		И в поле 'Number' я ввожу текст '103'
 		И в поле 'Date' я ввожу текст '01.11.2018  12:32:21'
 		И я перехожу к закладке "Item keys"
-	* Заполнение цен по item key по виду цен Basic Price without VAT
+	* Filling in prices by item key by price type Basic Price without VAT
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я выбираю текущую строку
@@ -534,7 +535,7 @@
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов прайс-листа по item key Discount 1 TRY without VAT
+	* Filling in the details of the price list by item key Discount 1 TRY without VAT
 		И я меняю значение переключателя 'Set price' на 'By Item keys'
 		И я перехожу к закладке "Other"
 		И в поле 'Description' я ввожу текст 'Basic price'
@@ -546,7 +547,7 @@
 		Когда изменяю номер прайс-листа
 		И в поле 'Number' я ввожу текст '104'
 		И в поле 'Date' я ввожу текст '01.11.2018  12:32:21'
-	* Заполнение цен по item key по виду цен Discount 1 TRY without VAT
+	* Filling in prices by item key by price type Discount 1 TRY without VAT
 		И я перехожу к закладке "Item keys"
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
@@ -707,7 +708,7 @@
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов прайс-листа по item key Discount 2 TRY without VAT
+	* Filling in the details of the price list by item key Discount 2 TRY without VAT
 		И я меняю значение переключателя 'Set price' на 'By Item keys'
 		И я перехожу к закладке "Other"
 		И в поле 'Description' я ввожу текст 'Basic price'
@@ -719,7 +720,7 @@
 		Когда изменяю номер прайс-листа
 		И в поле 'Number' я ввожу текст '105'
 		И в поле 'Date' я ввожу текст '01.11.2018  12:32:21'
-	* Заполнение цен по item key по виду цен Discount 2 TRY without VAT
+	* Filling in prices by item key by price type Discount 2 TRY without VAT
 		И я перехожу к закладке "Item keys"
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
@@ -891,10 +892,10 @@
 
 
 Сценарий: _016003 внесение цен - скидочная цена Discount Price TRY 1 и  Discount Price TRY 2 (через прайс)
-	* Открытие формы прайс листа
+	* Opening  price list
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов прайс-листа по item key Discount Price TRY 1
+	* Filling in the details of the price list by item key Discount Price TRY 1
 		И я меняю значение переключателя 'Set price' на 'By Item keys'
 		И я перехожу к закладке "Other"
 		И в поле 'Description' я ввожу текст 'Basic price'
@@ -906,7 +907,7 @@
 		Когда изменяю номер прайс-листа
 		И в поле 'Number' я ввожу текст '101'
 		И в поле 'Date' я ввожу текст '03.11.2018  10:24:21'
-	* Заполнение цен по item key по виду цен Discount Price TRY 1
+	* Filling in prices by item key by price type Discount Price TRY 1
 		И я перехожу к закладке "Item keys"
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
@@ -1102,7 +1103,7 @@
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
-	* Заполнение реквизитов прайс-листа по item key Discount Price TRY 2
+	* Filling in the details of the price list by item key Discount Price TRY 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я заполняю данные прайс листа по item key
 			И я меняю значение переключателя 'Set price' на 'By Item keys'
@@ -1116,7 +1117,7 @@
 			Когда изменяю номер прайс-листа
 			И в поле 'Number' я ввожу текст '102'
 			И в поле 'Date' я ввожу текст '05.11.2018  10:24:21'
-	* Заполнение цен по item key по виду цен Discount Price TRY 2
+	* Filling in prices by item key by price type Discount Price TRY 2
 		И я перехожу к закладке "Item keys"
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
@@ -1365,10 +1366,10 @@
 		И я нажимаю на кнопку 'Save and close'
 		И я жду закрытия окна 'Dependent Price (Price type) *' в течение 20 секунд
 	* Проверка расчета зависимой цены в прайс листе
-		* Открытие формы прайс листа
+		* Opening  price list
 			И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение реквизитов прайс-листа по item key Discount Price TRY 1
+		* Filling in the details of the price list by item key Discount Price TRY 1
 			И я меняю значение переключателя 'Set price' на 'By Item keys'
 			И я перехожу к закладке "Other"
 			И в поле 'Description' я ввожу текст 'Basic price'

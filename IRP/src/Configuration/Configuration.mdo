@@ -16,7 +16,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>0.6.4</version>
+  <version>1.0.1.#BuildNumber#</version>
   <updateCatalogAddress>https://github.com/DitriXNew/irp</updateCatalogAddress>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>
   <mainSectionPicture/>
@@ -27,11 +27,11 @@
   </copyright>
   <vendorInformationAddress>
     <key>en</key>
-    <value>https://github.com/DitriXNew/irp</value>
+    <value>https://github.com/IRPTeam/irp</value>
   </vendorInformationAddress>
   <configurationInformationAddress>
     <key>en</key>
-    <value>https://github.com/DitriXNew/irp</value>
+    <value>https://github.com/IRPTeam/irp</value>
   </configurationInformationAddress>
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectAutonumerationMode>NotAutoFree</objectAutonumerationMode>

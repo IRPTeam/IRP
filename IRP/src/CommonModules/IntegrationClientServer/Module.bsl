@@ -29,6 +29,7 @@ Function SendRequestClientServer(ConnectionSetting,
 		ResourceParameters,
 		RequestParameters,
 		RequestBody,
+		EndPoint,
 		AddInfo = Undefined)
 	
 	ServerResponse = ServerResponse(AddInfo);
@@ -58,7 +59,14 @@ Function SendRequestClientServer(ConnectionSetting,
 	
 	SetRequestParameters(ConnectionSetting.ResourceAddress, RequestParameters, AddInfo);
 	
-	HTTPRequest = New HTTPRequest(ConnectionSetting.ResourceAddress);
+	If Not ValueIsFilled(EndPoint) Then
+		ResourceAddress = ConnectionSetting.ResourceAddress;
+	Else
+		ResourceAddress = ConnectionSetting.ResourceAddress + 
+		?(StrStartsWith(EndPoint, "/"),EndPoint,"/"+EndPoint);
+	EndIf;
+	
+	HTTPRequest = New HTTPRequest(ResourceAddress);
 	
 	SetRequestHeaders(HTTPRequest, ConnectionSetting.Headers, AddInfo);
 	
@@ -104,6 +112,7 @@ Function SendRequest(Val ConnectionSetting,
 		Val ResourceParameters = Undefined,
 		Val RequestParameters = Undefined,
 		Val RequestBody = Undefined,
+		Val EndPoint = Undefined,
 		AddInfo = Undefined) Export
 	
 	#If WebClient Then
@@ -119,6 +128,7 @@ Function SendRequest(Val ConnectionSetting,
 		ResourceParameters,
 		RequestParameters,
 		RequestBody,
+		EndPoint,
 		AddInfo);
 	#EndIf
 	

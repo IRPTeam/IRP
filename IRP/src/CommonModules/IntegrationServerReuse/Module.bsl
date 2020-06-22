@@ -1,31 +1,18 @@
-Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
-	Result = New Structure("Success, Value, Message", False, Undefined, "");
-	
+
+Function GetIntegrationSettings(IntegrationSettingName, AddInfo = Undefined) Export
 	IntegrationSettingsRef = UniqueID.UniqueIDByName(Metadata.Catalogs.IntegrationSettings, IntegrationSettingName);
-	
-	If Not ValueIsFilled(IntegrationSettingsRef) Then
-		Result.Success = False;
-		Result.Message = StrTemplate(R()["S_005"], IntegrationSettingName);
-		Return Result;
-	EndIf;
-	
-	ConnectionSetting = ConnectionSettingTemplate(IntegrationSettingsRef.IntegrationType, AddInfo);
-	
-	// Customize setting with according IntegrationSettings catalog
 	CustomizedSetting = New Structure();
 	For Each Str In IntegrationSettingsRef.ConnectionSetting Do
 		If ValueIsFilled(Str.Value) Then
 			CustomizedSetting.Insert(Str.Key, Str.Value);
 		EndIf;
 	EndDo;
-	FillPropertyValues(ConnectionSetting, CustomizedSetting);
-	
-	ConnectionSetting.Insert("IntegrationSettingsRef", IntegrationSettingsRef);
-	ConnectionSetting.Insert("IntegrationType", IntegrationSettingsRef.IntegrationType);
-	Result.Success = True;
-	Result.Value = ConnectionSetting;
+	Result = New Structure();
+	Result.Insert("Ref", IntegrationSettingsRef);
+	Result.Insert("IntegrationType", IntegrationSettingsRef.IntegrationType);
+	Result.Insert("CustomizedSetting", CustomizedSetting);
 	Return Result;
-EndFunction
+EndFunction	
 
 Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefined) Export
 	ConnectionSetting = New Structure();

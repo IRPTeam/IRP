@@ -104,7 +104,7 @@ I want to check opening and closing of documents and catalogs forms
 	И Я закрываю текущее окно
 
 Сценарий: Open object form "BusinessUnits"
-	И я закрыл все окна клиентского приложенияС
+	И я закрыл все окна клиентского приложения
 	Дано Я открываю основную форму справочника "BusinessUnits"
 	Если появилось предупреждение тогда
 		Тогда я вызываю исключение "Не удалось открыть форму справочника BusinessUnits"

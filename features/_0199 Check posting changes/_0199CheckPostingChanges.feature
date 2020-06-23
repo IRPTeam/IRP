@@ -3,21 +3,21 @@
 @Positive
 
 
-Функционал: отображение изменений в регистрах при изменении ранее проведенных документов 
+Функционал: register changes when documents are changed 
 
-Как Разработчик
-Я хочу разработать систему проверки необходимости изменении проводок при изменении документов
-Для того чтобы не задвоить проводки по регистрам
+As a Developer
+I want to develop a system to check if the postings need to be changed when documents are changed.
+In order not to double entries in the registers
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
 
-Сценарий: _019901 проверка изменения проводок по документу Purchase Order при изменении количества
+Сценарий: _019901 Checking changes in postings on a Purchase Order document when quantity changes
 	Когда создаю документ Purchase Order
 	Когда устанавливаю номер Purchase order №103
-	И я проверяю проводки по регистру OrderBalance
+	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
@@ -34,7 +34,7 @@
 			| '200,000'  | 'Purchase order 103*' | '11'          | 'Store 03' | 'Purchase order 103*' | '38/18SD'   |
 			| '200,000'  | 'Purchase order 103*' | '12'          | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
 		И Я закрыл все окна клиентского приложения
-	И я меняю количество по Item Dress 'S/Yellow' на 250 штук
+	* Changing the quantity by Item Dress 'S/Yellow' by 250 pcs
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И Пауза 2
 		И в таблице "List" я перехожу к строке:
@@ -49,7 +49,7 @@
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '250,000'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-	И я проверяю изменение записей регистра OrderBalance
+	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
@@ -58,8 +58,8 @@
 			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
 			| '200,000'  | 'Purchase order 103*' | '1'           | 'Store 03' | 'Purchase order 103*' | 'S/Yellow'  |
 	
-Сценарий: _019902 проверка изменения проводок по документу Purchase Order при удалении строк
-	И я удаляю последнюю строку из заказа
+Сценарий: _019902 delete line in Purchase order and chek postings changes
+	* Delete last line in the order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И Пауза 2
 		И в таблице "List" я перехожу к строке:
@@ -70,14 +70,14 @@
 		И в таблице "ItemList" я перехожу к последней строке
 		И в таблице "ItemList" я удаляю текущую строку
 		И я нажимаю на кнопку 'Post and close'
-	И я проверяю изменение записей регистра OrderBalance
+	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" не содержит строки:
 			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
 			| '200,000'  | 'Purchase order 103*' | '12'          | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
 	
-Сценарий: _019903 проверка изменения проводок по документу Purchase Order при добавлении строк
-	И я добавляю строку в заказ
+Сценарий: _019903 add line in Purchase order and chek postings changes
+	* Add line in the order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| 'Number'    |
@@ -128,15 +128,15 @@
 		И в таблице "ItemList" в поле 'Store' я ввожу текст 'Store 03'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-	И я проверяю изменение записей регистра OrderBalance
+	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
 			| '100,000'  | 'Purchase order 103*' | '12'          | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
 			| '50,000'   | 'Purchase order 103*' | '13'          | 'Store 03' | 'Purchase order 103*' | '39/19SD'   |
 	
-Сценарий: _019904 проверка проводок по документу Purchase Order при добавлении коробок (пересчет в единицу хранения)
-	И я добавляю в заказ упаковку
+Сценарий: _019904 add package in Purchase order and chek postings (conversion to storage unit)
+	* Add package in the order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| 'Number'    |
@@ -174,15 +174,15 @@
 		И в таблице "ItemList" в поле 'Store' я ввожу текст 'Store 03'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-	И я проверяю изменение записей регистра OrderBalance
-	# Упаковки пересчитываются в штуки
+	* Checking registry entries (Order Balance)
+	# Packages are converted into pcs.
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
 			| '80,000'   | 'Purchase order 103*' | '13'          | 'Store 03' | 'Purchase order 103*' | '39/19SD'   |
 	
-Сценарий: _019905 проверка отмены проводок при пометке на удаление
-	И я помечаю на удаление документ заказа поставщику на удаление
+Сценарий: _019905 mark for deletion document Purchase Order and check cancellation of postings
+	* Mark for deletion document Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 		| 'Number'    |
@@ -190,8 +190,7 @@
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuSetDeletionMark'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
-	И я проверяю изменение записей регистра OrderBalance
-	# Упаковки пересчитываются в штуки
+	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" не содержит строки:
 			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
@@ -208,9 +207,9 @@
 			| '200,000'  | 'Purchase order 103*' | '11'          | 'Store 03' | 'Purchase order 103*' | '38/18SD'   |
 			| '100,000'  | 'Purchase order 103*' | '12'          | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
 			| '80,000'   | 'Purchase order 103*' | '13'          | 'Store 03' | 'Purchase order 103*' | '39/19SD'   |
-
-Сценарий: _019906 проверка проводок при проведении ранее помеченного на удаление документа
-	И я провожу ранее помеченный на удаление документ
+ 
+Сценарий: _019906 post a document previously marked for deletion and check of postings
+	* Post a document previously marked for deletion
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 		| 'Number'    |
@@ -219,7 +218,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-	И я проверяю проводки документа
+	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
@@ -239,15 +238,15 @@
 		И Я закрываю текущее окно
 
 
-Сценарий: _019907 проверка отмены проводок при отмене проведения документа
-	И я распровожу ранее проведенный документ
+Сценарий: _019907 clear posting document Purchase Order and check cancellation of postings
+	* Clear posting document Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 		| 'Number'    |
 		| '103' |
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И Я закрываю текущее окно
-	И я проверяю изменение проводок
+	* Checking registry entries (Order Balance)
 		И Пауза 5
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		И таблица "List" не содержит строки:
@@ -255,14 +254,14 @@
 			| '250,000'  | 'Purchase order 103*' |
 			| '200,000'  | 'Purchase order 103*' |
 		И Я закрываю текущее окно
-	И я провожу ранее распроведенный документ
+	* Post a document with previously cleared postings
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 		| 'Number'    |
 		| '103' |
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
 		И Я закрываю текущее окно
-	И я проверяю проводки документа
+	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
@@ -281,8 +280,8 @@
 			| '80,000'   | 'Purchase order 103*' | '13'          | 'Store 03' | 'Purchase order 103*' | '39/19SD'   |
 		И Я закрываю текущее окно
 	
-Сценарий: _019908 проведение поступления по штукам и приходного ордера
-	# Коробки пересчитываются в штуки
+Сценарий: _019908 create Purchase invoice and Goods receipt based on a Purchase order with that contains packages
+	# Packages are converted into pcs.
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И в таблице "List" я перехожу к строке:
 		| 'Number'    |

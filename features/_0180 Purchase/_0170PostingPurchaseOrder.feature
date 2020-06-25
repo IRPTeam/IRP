@@ -3,23 +3,23 @@
 @Positive
 
 
-Функционал: проведение документа Заказ поставщику по регистрам складского учета
+Функционал: creating document Purchase order
 
-Как Разработчик
-Я хочу создать проводки документа Заказ поставщику
-Для того чтобы фиксировать какой товар заказан у поставщика
+As a procurement manager
+I want to create a Purchase order document
+For tracking an item that has been ordered from a vendor
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _017001 создание документа заказ поставщику - не ордерная схема
-	* Открытие формы для создания Purchase Order
+Сценарий: _017001 creating document Purchase order - Goods receipt is not used
+	* Opening a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение статуса
+	* Status filling
 		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-	* Заполнение информации о поставщике
+	* Filling in vendor information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -41,13 +41,13 @@
 			| 'Description' |
 			| 'Store 01'  |
 		И в таблице "List" я выбираю текущую строку
-	* Присвоение документу номера №2
+	* Filling in the document number №2
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '2'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '2'
-	* Заполнение товарной части документа
+	* Filling in items table
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я выбираю текущую строку
@@ -103,18 +103,16 @@
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '300'
 		И в таблице "ItemList" в поле 'Price' я ввожу текст '250'
 		И в таблице "ItemList" я завершаю редактирование строки
-		# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-226' с именем 'IRP-226'
-		И я проверяю наличие склада в табличной части
-			И     таблица "ItemList" содержит строки:
+		И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Q' | 'Item key'  | 'Store' | 'Unit' |
 			| 'Dress'    | '100,000'  | 'M/White'   | 'Store 01'      | 'pcs' |
-	* Проведение документа
+	* Post document
 		И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _017002 проверка проводок по документу Purchase Order по регистру Order Balance (плюс) - не ордерная схема
-	* Открытие регистра Order Balance
+Сценарий: _017002 checking Purchase Order N2 posting by register Order Balance (plus) - Goods receipt is not used
+	* Opening register Order Balance
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-	* Проверка формы регистра
+	* Checking the register form
 		Если в таблице "List" есть колонки Тогда
 			| 'Period' |
 			| 'Quantity' |
@@ -123,25 +121,25 @@
 			| 'Store' |
 			| 'Order' |
 			| 'Item key' |
-	* Проверка движения Purchase Order №2 по регистру Order Balance
-	Тогда таблица "List" содержит строки:
-		| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key' |
-		| '100,000'  | 'Purchase order 2*' | '1'           | 'Store 01' | 'Purchase order 2*' | 'M/White' |
-		| '200,000'  | 'Purchase order 2*' | '2'           | 'Store 01' | 'Purchase order 2*' | 'L/Green'  |
-		| '300,000'  | 'Purchase order 2*' | '3'           | 'Store 01' | 'Purchase order 2*' | '36/Yellow'   |
+	* Checking Purchase Order N2 posting by register Order Balance
+		Тогда таблица "List" содержит строки:
+			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key' |
+			| '100,000'  | 'Purchase order 2*' | '1'           | 'Store 01' | 'Purchase order 2*' | 'M/White' |
+			| '200,000'  | 'Purchase order 2*' | '2'           | 'Store 01' | 'Purchase order 2*' | 'L/Green'  |
+			| '300,000'  | 'Purchase order 2*' | '3'           | 'Store 01' | 'Purchase order 2*' | '36/Yellow'   |
 
-Сценарий: _017003 создание документа заказ поставщику - ордерная схема
-	* Открытие формы для создания Purchase Order
+Сценарий: _017003 creating document Purchase order - Goods receipt is used
+	* Opening a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов
+	* Filling in the details
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 		| Description  |
 		| Main Company |
 		И в таблице "List" я выбираю текущую строку
 		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-	* Заполнение информации о поставщике
+	* Filling in vendor information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -163,13 +161,13 @@
 			| 'Description' |
 			| 'Store 02'  |
 		И в таблице "List" я выбираю текущую строку
-	* Присвоение документу номера №3
+	* Filling in the document number №3
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '3'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '3'
-	* Заполнение товарной части документа
+	* Filling in items table
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		Тогда открылось окно 'Items'
@@ -189,29 +187,29 @@
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '500,000'
 		И в таблице "ItemList" в поле 'Price' я ввожу текст '40,00'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проведение документа
+	* Post document
 		И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _017004 проверка проводок по документу Purchase Order по регистру Order Balance (плюс) - ордерная схема
-	* Открытие регистра Order Balance
+Сценарий: _017004 checking Purchase Order N3 posting by register Order Balance (plus) - Goods receipt is not used
+	* Opening of register Order Balance
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-	* Проверка движения Purchase Order №3 по регистру Order Balance
+	* Checking Purchase Order N3 posting by register Order Balance
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key' |
 			| '500,000'  | 'Purchase order 3*' | '1'           | 'Store 02' | 'Purchase order 3*' | 'L/Green'  |
 
-Сценарий: _017005 проверка движений по статусам и истории статусов документа Purchase Order
+Сценарий: _017005 checking postings by status and status history of a Purchase Order document
 	И    Я закрыл все окна клиентского приложения
-	* Открытие формы для создания Purchase Order
+	* Opening a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов
+	* Filling in the details
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 		| Description  |
 		| Main Company |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение информации о поставщике
+	* Filling in vendor information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -231,15 +229,15 @@
 		И я нажимаю кнопку выбора у поля "Store"
 		Тогда открылось окно 'Stores'
 		И в таблице "List" я выбираю текущую строку
-	* Проверка заполнения статуса по умолчанию "Wait"
+	* Checking the default status "Wait"
 		И элемент формы с именем "Status" стал равен "Wait"
-	* Присвоение документу номера №101
+	* Filling in the document number №101
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '101'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '101'
-	* Заполнение товарной части
+	* Filling in items table
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я выбираю текущую строку
@@ -292,16 +290,16 @@
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '30,000'
 		И в таблице "ItemList" в поле 'Price' я ввожу текст '210,00'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проведение документа
+	* Post document
 		И я нажимаю на кнопку 'Post and close'
 		И я закрываю текущее окно
-	* Проверка отсутствия движений Purchase Order №101 по регистру Order Balance
+	* Checking the absence of postings Purchase Order N101 by register Order Balance
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" не содержит строки:
 			| 'Recorder'          | 'Store'    | 'Order'             |
 			| 'Purchase order 101*' | 'Store 01' | 'Purchase order 101*' |
 		И    Я закрыл все окна клиентского приложения
-	* Установка статуса по Purchase Order №101 'Approved'
+	* Setting the status by Purchase Order №101 'Approved'
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -318,13 +316,13 @@
 		И я закрываю текущее окно
 		И я нажимаю на кнопку 'Post and close'
 		И я закрываю текущее окно
-	* Проверка движений документа после установки статуса Approved
+	* Checking document postings after the status is set to Approved
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
 			| 'Recorder'          | 'Store'    | 'Order'             |
 			| 'Purchase order 101*' | 'Store 01' | 'Purchase order 101*' |
 		И я закрываю текущее окно
-	* Проверка отмены проводок при изменении статуса Approved на Wait
+	* Checking for cancelled postings when the Approved status is changed to Wait
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -350,15 +348,15 @@
 
 
 
-Сценарий: _017011 проверка наличия итогов в документе Purchase Order
-	* Открытие списка документов Purchase Order
+Сценарий: _017011 checking totals in the document Purchase Order
+	* Opening a list of documents Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-	* Выбор документа PurchaseOrder
+	* Selecting PurchaseOrder
 		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 2      |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка наличия итогов документа
+	* Checking totals in the document
 		И     у элемента формы с именем "ItemListTotalOffersAmount" текст редактирования стал равен '0,00'
 		И     элемент формы с именем "ItemListTotalNetAmount" стал равен '116 101,69'
 		И     элемент формы с именем "ItemListTotalTaxAmount" стал равен '20 898,31'
@@ -367,14 +365,12 @@
 	
 
 
-Сценарий: _017003 проверка формы подбора товара в документе Purchase order
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-380' с именем 'IRP-380'
-	# необходимо дописать на проверку цен поставщика. Должны подтягиваться из соглашения
-	* Открытие формы для создания Purchase Order
+Сценарий: _017003 checking the form Pick up items in the document Purchase order
+	* Opening a form to create Purchase Order
 		И    Я закрыл все окна клиентского приложения
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение информации о поставщике
+	* Filling in vendor information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -394,7 +390,7 @@
 		И я нажимаю кнопку выбора у поля "Store"
 		Тогда открылось окно 'Stores'
 		И в таблице "List" я выбираю текущую строку
-	* Проверка формы подбора товара
+	* Checking the form Pick up items
 		Когда проверяю форму подбора товара с информацией по ценам в Purchase order
 		И Я закрыл все окна клиентского приложения
 	

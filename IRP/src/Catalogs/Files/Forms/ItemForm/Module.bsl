@@ -48,11 +48,32 @@ Procedure SetVisible()
 	Items.CreatePreview1.Visible = IsPicture And UsePreview1;
 EndProcedure
 
+&AtServer
+Function CreatePictureParameters()
+	PictureParameters = New Structure();
+	PictureParameters.Insert("Ref", Object.Ref);
+	PictureParameters.Insert("Description", Object.Description);
+	PictureParameters.Insert("FileID", Object.FileID);
+	PictureParameters.Insert("isFilledVolume", Object.Volume <> Catalogs.IntegrationSettings.EmptyRef());
+	PictureParameters.Insert("GETIntegrationSettings", Object.Volume.GETIntegrationSettings);
+	PictureParameters.Insert("UsePreview1", Object.Volume.UsePreview1);
+	PictureParameters.Insert("Preview1GETIntegrationSettings", Object.Volume.Preview1GETIntegrationSettings);
+	PictureParameters.Insert("isLocalPictureURL", 
+	Object.Volume.GETIntegrationSettings.IntegrationType = Enums.IntegrationType.LocalFileStorage);
+	PictureParameters.Insert("isLocalPreview1URL", 
+	Object.Volume.Preview1GETIntegrationSettings.IntegrationType = Enums.IntegrationType.LocalFileStorage);
+	PictureParameters.Insert("Preview1URI", Object.Preview1URI);
+	PictureParameters.Insert("URI", Object.URI);
+	
+	Return PictureParameters;		
+EndFunction	
+
 &AtClient
 Procedure ShowPicture()
 	If PictureViewerServer.IsPictureFile(Object.Volume) Then
+		PictureParameters = CreatePictureParameters();	
 		ThisObject.PictureViewHTML
-			= "<html><img src=""" + PictureViewerServer.GetPictureURL(Object.Ref).PictureURL + """ height=""100%""></html>";
+			= "<html><img src=""" + PictureViewerServer.GetPictureURL(PictureParameters).PictureURL + """ height=""100%""></html>";
 	EndIf;
 EndProcedure
 
@@ -68,7 +89,7 @@ EndProcedure
 
 &AtClient
 Procedure Upload(Command)
-	PictureViewerClient.Upload(ThisForm, ThisObject, Object.Volume);
+	PictureViewerClient.Upload(ThisForm, Object, Object.Volume);
 EndProcedure
 
 &AtClient

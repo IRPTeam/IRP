@@ -5,15 +5,16 @@
 
 Функционал: объединение товара в наборы
 
-Как разработчик
-Я хочу создать документ Bundling
-Чтобы продавать товар совместно
+As a sales manager
+I want to create Bundle
+For joint sale of products
+
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
-Сценарий: _029500 создание тестовых данных
-	* Создание склада ордерного на приемку и неордерного на отгрузку
+Сценарий: _029500 test data creation
+	* Create store that use Goods receipt and doesn't use Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Stores'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -24,7 +25,7 @@
 		И я снимаю флаг с именем 'UseShipmentConfirmation'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 2
-	* Создание склада ордерного на отгрузку и неордерного на приемку
+	* Create store that use Shipment confirmation and doesn't use Goods receipt
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Stores'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -38,16 +39,15 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _029501 создание документа Bundling с неордерного склада
+Сценарий: _029501 create Bundling (Store doesn't use Shipment confirmation and Goods receipt)
 	И Я закрыл все окна клиентского приложения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-265' с именем 'IRP-265'
 	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я меняю номер документа
-			И в поле 'Number' я ввожу текст '1'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '1'
+	* Change number
+		И в поле 'Number' я ввожу текст '1'
+		Тогда открылось окно '1C:Enterprise'
+		И я нажимаю на кнопку 'Yes'
+		И в поле 'Number' я ввожу текст '1'
 	И я нажимаю кнопку выбора у поля "Company"
 	И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -94,8 +94,7 @@
 	И я нажимаю на кнопку 'Post and close'
 	И Пауза 5
 
-Сценарий: _029502 проверка автоматического создания спецификации по созданному Bundle
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-265' с именем 'IRP-265'
+Сценарий: _029502 check the automatic creation of the Bundle specification
 	И Я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
 	И в таблице "List" я перехожу к строке:
@@ -109,8 +108,8 @@
 		| 'XS'   | 'Blue'  | '1*'    |
 	И Я закрываю текущее окно
 
-Сценарий: _029503 проверка проводок по документу Bundling с неордерного склада по регистру StockBalance
-# В случае неордерного склада по регистру приходуется Бандл и списывается товар из бандла
+Сценарий: _029503 checking Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register StockBalance
+# In this case a Bandle is received by register and the goods from the Bandle are written off
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 	Тогда таблица "List" содержит строки:
 	| 'Quantity' | 'Recorder'               | 'Store'    | 'Item key'                      |
@@ -119,7 +118,7 @@
 	| '10,000'   | 'Bundling 1*'            | 'Store 01' | '36/Red'                        |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029504 проверка проводок по документу Bundling с неордерного склада по регистру StockReservation
+Сценарий: _029504 checking Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register StockReservation
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
 	Тогда таблица "List" содержит строки:
 	| 'Quantity' | 'Recorder'               | 'Store'    | 'Item key'                      |
@@ -128,26 +127,25 @@
 	| '10,000'   | 'Bundling 1*'            | 'Store 01' | '36/Red'                        |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029505 проверка отсутствия проводок по документу Bundling с неордерного склада по регистру GoodsInTransitIncoming
+Сценарий: _029505 checking the absence posting of Bundling (store doesn't use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
 	Тогда таблица "List" не содержит строки:
 		| 'Recorder'                 |
 		| 'Bundling 1*'              |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029506 проверка отсутствия проводок по документу Bundling с неордерного склада по регистру GoodsInTransitOutgoing
+Сценарий: _029506 checking the absence posting of Bundling (store doesn't use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
 	Тогда таблица "List" не содержит строки:
 		| 'Recorder'                 |
 		| 'Bundling 1*'              |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029507 создание документа Bundling с ордерного склада
+Сценарий: _029507 create Bundling ( Store use Shipment confirmation and Goods receipt)
 	И Я закрыл все окна клиентского приложения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-265' с именем 'IRP-265'
 	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я меняю номер документа
+	* Change number
 			И в поле 'Number' я ввожу текст '2'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -202,7 +200,6 @@
 	И Пауза 5
 
 Сценарий: _029508 проверка автоматического создания дополнительной спецификации по созданному Bundle
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-265' с именем 'IRP-265'
 	И Я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
 	И в таблице "List" я перехожу к строке:
@@ -219,8 +216,7 @@
 
 
 
-Сценарий: _029509 проверка отсутствия проводок по документу Bundling с ордерного склада по регистру StockBalance
-# В случае неордерного склада по регистру приходуется Бандл и списывается товар из бандла
+Сценарий: _029509 checking the absence posting of Bundling (store use Shipment confirmation and Goods receipt) by register StockBalance
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 	Тогда таблица "List" не содержит строки:
 	| 'Quantity' | 'Recorder'                 | 'Store'    | Item key             |
@@ -229,7 +225,7 @@
 	| '14,000'   | 'Bundling 2*'              | 'Store 02' | 36/Yellow            |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029510 проверка проводок по документу Bundling с ордерного склада по регистру StockReservation
+Сценарий: _029510 checking Bundling posting (store use Shipment confirmation and Goods receipt) by register StockReservation
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
 	Тогда таблица "List" содержит строки:
 	| 'Quantity' | 'Recorder'        | 'Store'    | 'Item key'                      |
@@ -240,14 +236,14 @@
 	| '7,000'    | 'Bundling 2*'              | 'Store 02' | 'Bound Dress+Trousers' |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029511 проверка проводок по документу Bundling с ордерного склада по регистру GoodsInTransitIncoming
+Сценарий: _029511 checking Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'              | 'Receipt basis'         | 'Store'    | 'Item key'                            |
 		| '7,000'    | 'Bundling 2*'           | 'Bundling 2*'           | 'Store 02' | 'Bound Dress+Trousers/Dress+Trousers' |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029512 проверка проводок по документу Bundling с ордерного склада по регистру GoodsInTransitOutgoing
+Сценарий: _029512 checking Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
 	Тогда таблица "List" содержит строки:
 	| 'Quantity' | 'Recorder'                 | 'Shipment basis'        | 'Store'    | 'Item key'  |
@@ -255,7 +251,7 @@
 	| '14,000'   | 'Bundling 2*'              | 'Bundling 2*'           | 'Store 02' | '36/Yellow' |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029513 создание расходного и приходного ордеров по документу Bundling
+Сценарий: _029513 create Shipment confirmation and Goods receipt based on Bundling
 	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 	И в таблице "List" я перехожу к строке:
 		| 'Item bundle'          | 'Number' |
@@ -279,7 +275,7 @@
 	И Пауза 5
 	И Я закрываю текущее окно
 
-Сценарий: _029514 проверка проводок расходного и приходного ордеров по документу Bundling
+Сценарий: _029514 checking Shipment confirmation and Goods receipt postings based on document Bundling
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key'             |
@@ -304,7 +300,7 @@
 		| '14,000'   | 'Shipment confirmation 151*' | 'Bundling 2*'          | 'Store 02' | '36/Yellow' |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029515 проверка автоматического создания ItemKey по бандлам
+Сценарий: _029515 checking automatic creation of ItemKey by bundles
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 	И в таблице "List" я перехожу к строке:
 		| Description       | Item type |
@@ -326,10 +322,9 @@
 		| Bound Dress+Trousers/Dress+Trousers |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029516 проверка дублирования спецификаций при создании того же самого бандла
-	И я создаю бандл
+Сценарий: _029516 hecking duplicate specifications when creating the same bundle
+	* Create Bundle
 		И Я закрыл все окна клиентского приложения
-		# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-265' с именем 'IRP-265'
 		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Company"
@@ -389,12 +384,11 @@
 			| 'Dress+Shirt'    | 'Bundle' |
 			| 'Dress+Trousers' | 'Bundle' |
 
-Сценарий: _029517 проверка создания спецификации при формировании Bundle на один и тот же товар
-	И я создаю бандл
-		# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-265' с именем 'IRP-265'
+Сценарий: _029517 checking the creation of a specification when forming a bundle for the same item
+	* Create Bundle
 		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю номер документа
+		* Change number
 			И в поле 'Number' я ввожу текст '4'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -450,7 +444,7 @@
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
-	И я проверяю создание Item key на бандл по Trousers
+	* Сhecking item key creation for bundle by Trousers
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 		И в таблице "List" я перехожу к строке:
 			| Description    | Item type |
@@ -461,7 +455,7 @@
 			| Item key          |
 			| Trousers/Trousers |
 		И Я закрыл все окна клиентского приложения
-	И я проверяю автоматически созданную спецификацию на Set
+	* Сhecking an auto-generated specification on Set
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' | 'Type'   |
@@ -475,7 +469,7 @@
 			| '38'   | 'Yellow' | '2,000'    |
 		И     элемент формы с именем "ItemField*" стал равен 'Сlothes'
 		И Я закрыл все окна клиентского приложения
-	И я проверяю проводки по регистрам
+	* Сhecking postings
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'                    | 'Store'    | 'Item key'             |
@@ -491,12 +485,11 @@
 			| '20,000'   | 'Bundling 4*'                 | 'Store 01' | '38/Yellow'         |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _029518 создание Bundle на 2 разных свойства + одно повторяющееся одного и того же товара + 1 другой товар
-	И я создаю бандл
-		# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-265' с именем 'IRP-265'
+Сценарий: _029518 creating a bundle of 2 different properties + one repeating of the same item + 1 other item
+	* Create bundle
 		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю номер документа
+		* Change number
 			И в поле 'Number' я ввожу текст '5'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -585,7 +578,7 @@
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
-	И я проверяю создание Item key на бандл по Dress+Shirt
+	* Checking creation of an Item key on a bundle by Dress + Shirt
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 		И в таблице "List" я перехожу к строке:
 			| Description         | Item type |
@@ -597,7 +590,7 @@
 			| Bound Dress+Shirt/Dress+Shirt |
 			| Bound Dress+Shirt/Dress+Shirt |
 		И Я закрыл все окна клиентского приложения
-	И я проверяю автоматически созданную спецификацию на бандл
+	* Сhecking an auto-generated specification on Bundle
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
 		И в таблице "List" я перехожу к последней строке
 		И в таблице "List" я выбираю текущую строку
@@ -609,7 +602,7 @@
 			| 'XS'   | 'Blue'  | '2,000'    |
 			| 'L'    | 'Green' | '2,000'    |
 		И Я закрыл все окна клиентского приложения
-	И я проверяю проводки по регистрам
+	* Сhecking postings
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'              	| 'Store'    | 'Item key'             |
@@ -628,17 +621,17 @@
 			| '4,000'      | 'Bundling 5*'         | 'Store 01' | '36/Red'                            |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _029519 создание документа Bundling с ордерного склада на приемку товара и проверка движений
-	* Открытие формы создания Bundle
+Сценарий: _029519 create Bundling (Store use Goods receipt, doesn't use Shipment confirmation)
+	* Opening form for creating Bundle
 		И Я закрыл все окна клиентского приложения
 		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Изменение номера документа
+	* Change number
 			И в поле 'Number' я ввожу текст '7'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '7'
-	* Заполнение реквизитов
+	* Filling in details
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 				| 'Description'  |
@@ -656,7 +649,7 @@
 			| 'Description' |
 			| 'Store 07'  |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение табличной части по товарам
+	* Filling in items table
 		И в поле с именем 'Quantity' я ввожу текст '7,000'
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -686,7 +679,7 @@
 		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
 		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проведение документа и проверка движений
+	* Post document and check postings
 		И я нажимаю на кнопку 'Post'
 		И Пауза 5
 		И я нажимаю на кнопку 'Registrations report'
@@ -717,17 +710,17 @@
 		| ''                                      | 'Expense'     | '*'         | '14'                                  | 'Store 07'   | '36/Yellow'     | ''                                    | ''        |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _029520 создание документа Bundling с ордерного склада на отгрузку товара  и проверка движений
-	* Открытие формы создания Bundle
+Сценарий: _029520 create Bundling (Store use Shipment confirmation, doesn't use Goods receipt)
+	* Opening form for creating Bundle
 		И Я закрыл все окна клиентского приложения
 		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Изменение номера документа
+	* Change number
 		И в поле 'Number' я ввожу текст '8'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '8'
-	* Заполнение реквизитов
+	* Filling in details
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 				| 'Description'  |
@@ -745,7 +738,7 @@
 			| 'Description' |
 			| 'Store 08'  |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение табличной части по товарам
+	* Filling in items table
 		И в поле с именем 'Quantity' я ввожу текст '7,000'
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -775,7 +768,7 @@
 		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
 		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проведение документа и проверка движений
+	* Post document and check postings
 		И я нажимаю на кнопку 'Post'
 		И Пауза 5
 		И я нажимаю на кнопку 'Registrations report'

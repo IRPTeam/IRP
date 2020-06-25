@@ -6,7 +6,7 @@
 Функционал: creating document Purchase return
 
 As a procurement manager
-I want to create a Purchase return order document
+I want to create a Purchase return document
 To track a product that returned to the vendor
 
 Контекст:

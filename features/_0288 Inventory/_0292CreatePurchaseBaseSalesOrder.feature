@@ -1,22 +1,23 @@
 #language: ru
 @tree
 @Positive
-Функционал: создание заказа поставщику на основании заказа клиента
+Функционал: create Purchase order based on a Sales order
 
-Как Разработчик
-Я хочу создать заказ поставщику на основании заказа клиента
-Чтобы реализовать схему закупки под конкретную продажу
+As a sales manager
+I want to create Purchase order based on a Sales order
+To implement a sales-for-purchase scheme
+
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _029200 создание тестовых данных
-	* Создание Sales order 501
-		* Открытие формы создания заказа
+Сценарий: _029200 test data creation
+	* Create Sales order 501
+		* Open form for create order
 			И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки
+		* Filling the document heading
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -32,7 +33,7 @@
 				| 'Description'                   |
 				| 'Basic Agreements, without VAT' |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение таблицы товаров
+		* Filling items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -67,7 +68,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Purchase'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в таблице "ItemList" я завершаю редактирование строки
 			И в поле 'Number' я ввожу текст '0'
@@ -76,11 +77,11 @@
 			И в поле 'Number' я ввожу текст '501'
 			И я устанавливаю флаг 'Shipment confirmations before sales invoice'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Sales order 502
-		* Открытие формы создания заказа
+	* Create Sales order 502
+		* Open form for create order
 			И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки
+		* Filling the document heading
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -96,7 +97,7 @@
 				| 'Description'                   |
 				| 'Basic Agreements, TRY' |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение таблицы товаров
+		* Filling items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -131,7 +132,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '11,000'
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Purchase'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в таблице "ItemList" я завершаю редактирование строки
 			И в поле 'Number' я ввожу текст '0'
@@ -139,11 +140,11 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '502'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Sales order 503
-		* Открытие формы создания заказа
+	* Create Sales order 503
+		* Open form for create order
 			И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки
+		* Filling the document heading
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -159,7 +160,7 @@
 				| 'Description'                   |
 				| 'Basic Agreements, without VAT' |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение таблицы товаров
+		* Filling items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -194,7 +195,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '7,000'
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Purchase'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в таблице "ItemList" я завершаю редактирование строки
 			И в поле 'Number' я ввожу текст '0'
@@ -203,11 +204,11 @@
 			И в поле 'Number' я ввожу текст '503'
 			И я устанавливаю флаг 'Shipment confirmations before sales invoice'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Sales order 504
-		* Открытие формы создания заказа
+	* Create Sales order 504
+		* Open form for create order
 			И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки
+		* Filling the document heading
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -223,7 +224,7 @@
 				| 'Description'                   |
 				| 'Basic Agreements, without VAT' |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение таблицы товаров
+		* Filling items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -258,7 +259,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Purchase'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в таблице "ItemList" я завершаю редактирование строки
 			И в поле 'Number' я ввожу текст '0'
@@ -267,11 +268,11 @@
 			И в поле 'Number' я ввожу текст '504'
 			И я устанавливаю флаг 'Shipment confirmations before sales invoice'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Sales order 505
-		* Открытие формы создания заказа
+	* Create Sales order 505
+		* Open form for create order
 			И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки
+		* Filling the document heading
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -287,7 +288,7 @@
 				| 'Description'           |
 				| 'Basic Agreements, TRY' |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение таблицы товаров
+		* Filling items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -322,7 +323,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '40,000'
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Purchase'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в таблице "ItemList" я завершаю редактирование строки
 			И в поле 'Number' я ввожу текст '0'
@@ -333,10 +334,10 @@
 
 
 
-# Непрямая схема отгрузки Sales order - Purchase order - Goods reciept - Purchase invoice - Shipment confirmation - Sales invoice
-Сценарий: _029201 создание Purchase order на основании Sales order (непрямая схема поставки)
+#  Sales order - Purchase order - Goods reciept - Purchase invoice - Shipment confirmation - Sales invoice
+Сценарий: _029201 create Purchase order based on Sales order (Shipment confirmation before Sales invoice)
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
-	Тогда я меняю метод обеспечения по строкам и добавляю новую строку
+	* Change the procurement method by rows and add a new row
 		И в таблице "ItemList" я перехожу к строке:
 			| Item  |
 			| Dress |
@@ -362,10 +363,10 @@
 		И в таблице "ItemList" я активизирую поле "Procurement method"
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Purchase'
 		И я перехожу к следующему реквизиту
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
+		И в таблице "ItemList" я активиQ'зирую поле "Q"
+		И в таблице "ItemList" в поле ' я ввожу текст '10,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	И я меняю номер документа на 455
+	* Change of document number 455
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И я устанавливаю флаг 'Shipment confirmations before sales invoice'
@@ -373,12 +374,12 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '455'
-	* Проведение заказа
+	* Post Sales order
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post and close'
-	* Проверка проводок заказа
+	* Check postings
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 		| Number |
@@ -454,9 +455,9 @@
 		| ''                                           | 'Expense'     | '*'         | '1'         | 'Main Company'     | 'Sales order 455*'      | 'Store 01'  | '36/18SD'   | '*'       | '*'                        | ''                     |
 
 		И Я закрыл все окна клиентского приложения
-	И я создаю ещё один заказ клиента для заказа поставщику
+	* Create one more Sales order
 		Когда создаю заказ на Ferron BP Basic Agreements, TRY (Dress -10 и Trousers - 5)
-		И я меняю склад на ордерный
+		* Change of store to the one with Shipment confirmation
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -465,7 +466,7 @@
 			Тогда открылось окно 'Update item list info'
 			И     элемент формы с именем "Stores" стал равен 'Yes'
 			И я нажимаю на кнопку 'OK'
-	Тогда я меняю метод обеспечения по строкам и добавляю новую строку
+	* Change the procurement method by rows and add a new row
 			И в таблице "ItemList" я перехожу к строке:
 				| Item  |
 				| Dress |
@@ -497,7 +498,7 @@
 			И в таблице "ItemList" я активизирую поле "Q"
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-	И я меняю номер документа на 456
+	* Change of document number 456
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И я устанавливаю флаг 'Shipment confirmations before sales invoice'
@@ -505,13 +506,13 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '456'
-	И я провожу заказ
+	* Post Sales order
 			И я перехожу к закладке "Item list"
 			И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 			Тогда открылось окно 'Pickup special offers'
 			И в таблице "Offers" я нажимаю на кнопку 'OK'
 			И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю проводки заказа
+	* Check postings
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 		| Number |
@@ -564,14 +565,14 @@
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | 'Sales order 456*' | 'Store 02'  | 'XS/Blue'   | '*'       | '*'                        | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | 'Sales order 456*' | 'Store 02'  | '38/Yellow' | '*'       | '*'                        | ''                     |
 		И Я закрыл все окна клиентского приложения
-	Тогда на основании созданных заказов я создаю один Purchase order
+	* Create one Purchase order based on two Sales orders
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 		| Number | Partner  |
 		| 455    | Lomaniti |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentPurchaseOrderGeneratePurchaseOrder'
-	И я проверяю заполнение табличной части Purchase order
+	* Check filling of the tabular part of the Purchase order
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  | 'Store'    | 'Unit' | 'Q'      | 'Purchase basis'   |
 		| 'Dress'    | 'XS/Blue'   | 'Store 01' | 'pcs'  | '5,000'  | 'Sales order 455*' |
@@ -579,7 +580,7 @@
 		| 'Dress'    | 'XS/Blue'   | 'Store 02' | 'pcs'  | '10,000' | 'Sales order 456*' |
 		| 'Trousers' | '36/Yellow' | 'Store 02' | 'pcs'  | '5,000'  | 'Sales order 456*' |
 		| 'Trousers' | '38/Yellow' | 'Store 02' | 'pcs'  | '10,000' | 'Sales order 456*' |
-	И я заполняю данные по поставщику и цены
+	* Filling in vendors and prices
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -595,11 +596,11 @@
 			| Description        |
 			| Vendor Ferron, TRY |
 		И в таблице "List" я выбираю текущую строку
-		# сообщение по изменению цен
+		# message on price changes
 		И я снимаю флаг 'Update filled price types on Vendor price, TRY'
 		И я снимаю флаг 'Update filled prices.'
 		И я нажимаю на кнопку 'OK'
-		# сообщение по изменению цен
+		# message on price changes
 		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'  | 'Item key' | 'Store'    |
@@ -631,7 +632,7 @@
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Price' я ввожу текст '180,00'
 		И в таблице "ItemList" я завершаю редактирование строки
-	И я устанавливаю номер документа 456
+	* Change of document number - 456
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И я устанавливаю флаг 'Goods receipt before purchase invoice'
@@ -640,7 +641,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '456'
 	И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю проводки Purchase order
+	* Check postings Purchase order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И в таблице "List" я перехожу к строке:
 		| Number |
@@ -712,26 +713,26 @@
 		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 01'            | '38/Yellow'           | ''          | ''          | ''        | ''              |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _029202 создание Goods reciept на основании Purchase order созданного по заказу клиента (непрямая схема поставки)
-	И я создаю Goods reciept
+Сценарий: _029202 create Goods reciept based on Purchase order that based on Sales order (Goods receipt before Purchase invoice)
+	* Create Goods reciept
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 456    |
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	Тогда я проверяю заполнение табличной части
+	* Check filling of the tabular part
 		И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Sales order'      | 'Store'    | 'Receipt basis'       |
 			| 'Dress'    | '10,000'   | 'XS/Blue'   | 'pcs'  | 'Sales order 456*' | 'Store 02' | 'Purchase order 456*' |
 			| 'Trousers' | '5,000'    | '36/Yellow' | 'pcs'  | 'Sales order 456*' | 'Store 02' | 'Purchase order 456*' |
 			| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | 'Sales order 456*' | 'Store 02' | 'Purchase order 456*' |
-	И я устанавливаю номер документа 456
+	* Change of document number - 456
 		И в поле 'Number' я ввожу текст '456'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '456'
 		И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю движения документа
+	* Check postings
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -791,12 +792,10 @@
 		| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'            | '36/Yellow'           | ''          | ''          | ''        | ''              |
 		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'            | 'XS/Blue'             | ''          | ''          | ''        | ''              |
 		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'            | '38/Yellow'           | ''          | ''          | ''        | ''              |
-
-
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029203 проверка проводок в случае если в Purchase order будет дополнительная строка которой нет в Sales order (непрямая схема поставки)
-	И я помечаю Goods reciept 456 пометкой на удаление
+Сценарий: _029203 check postings if there is an additional line in the Purchase order that is not in the Sales order (Goods receipt before Purchase invoice)
+	* Mark for deletion Goods reciept 456
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -805,7 +804,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И Я закрыл все окна клиентского приложения
-	И я добавляю в Purchase order 456 ещё одну строку не по заказу
+	* Adding one more line to Purchase order 456 which is not in the Sales order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -830,7 +829,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-		И я проверяю движения документа
+		* Check postings
 			И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 			И в таблице "List" я перехожу к строке:
 			| Number |
@@ -903,27 +902,26 @@
 			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                                        | 'Item key'            | ''          | ''          | ''        | ''              |
 			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 01'                                     | 'XS/Blue'             | ''          | ''          | ''        | ''              |
 			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 01'                                     | '38/Yellow'           | ''          | ''          | ''        | ''              |
-
-	Тогда я создаю GoodsReceipt 457
+	* Create GoodsReceipt 457
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 456   |
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	Тогда я проверяю заполнение табличной части Goods receipt
+	* Check filling of the tabular part of Goods receipt
 			И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Sales order'      | 'Store'    | 'Receipt basis'       |
 			| 'Dress'    | '10,000'   | 'XS/Blue'   | 'pcs'  | 'Sales order 456*' | 'Store 02' | 'Purchase order 456*' |
 			| 'Dress'    | '50,000'   | 'M/White'   | 'pcs'  | ''                 | 'Store 02' | 'Purchase order 456*' |
 			| 'Trousers' | '5,000'    | '36/Yellow' | 'pcs'  | 'Sales order 456*' | 'Store 02' | 'Purchase order 456*' |
 			| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | 'Sales order 456*' | 'Store 02' | 'Purchase order 456*' |
-	И я устанавливаю номер документа 457
+	* Change of document number - 457
 		И в поле 'Number' я ввожу текст '457'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '457'
 		И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю движения документа
+	* Check postings
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -991,8 +989,8 @@
 		| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'            | 'M/White'             | ''          | ''          | ''        | ''              |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029204 создание Purchase invoice на основании Purchase order связаного с заказом клиента (непрямая схема поставки)
-	И я создаю Purchase invoice на основании Purchase order
+Сценарий: _029204 create Purchase invoice based on Purchase order that based on Sales order (Goods receipt before Purchase invoice)
+	* Create Purchase invoice based on Purchase order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -1000,7 +998,7 @@
 		И я нажимаю на кнопку с именем 'FormDocumentPurchaseInvoiceGeneratePurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormSelectAll'
 		И я нажимаю на кнопку 'OK'
-	Тогда я проверяю заполнение табличной части
+	* Check filling of the tabular part
 		И     таблица "ItemList" содержит строки:
 		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      |'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'                             | 'Goods receipt'      | 'Sales order'      |
 		| '762,71'     | 'Trousers' | '180,00' | '36/Yellow' | '5,000'  |'137,29'     | 'pcs'  | '900,00'       | 'Store 02' | 'Purchase order 456*'                        | 'Goods receipt 457*' | 'Sales order 456*' |
@@ -1009,13 +1007,13 @@
 		| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' |'274,58'     | 'pcs'  | '1 800,00'     | 'Store 02' | 'Purchase order 456*'                        | 'Goods receipt 457*' | 'Sales order 456*' |
 		| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' |'274,58'     | 'pcs'  | '1 800,00'     | 'Store 01' | 'Purchase order 456*'                        | ''                   | 'Sales order 455*' |
 		| '847,46'     | 'Dress'    | '200,00' | 'XS/Blue'   | '5,000'  |'152,54'     | 'pcs'  | '1 000,00'     | 'Store 01' | 'Purchase order 456*'                        | ''                   | 'Sales order 455*' |
-	И я устанавливаю номер документа 457
+	* Change of document number - 457
 		И в поле 'Number' я ввожу текст '457'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '457'
 		И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю движения документа
+	* Check postings
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -1115,27 +1113,27 @@
 		| ''                                     | 'Expense'     | '*'         | '50'            | 'Store 02'            | 'Purchase order 456*'   | 'M/White'               | '*'                 | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _029205 создание Shipment confirmation на основании Sales order под заказ поставщику (непрямая схема отгрузки, склад ордерный)
-	И я создаю Shipment confirmation на основании Sales order
+Сценарий: _029205 create Shipment confirmation based on Sales order, procurement method - purchase (Shipment confirmation before Sales invoice, store use Shipment confirmation)
+	* Create Shipment confirmation на основании Sales order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 456   |
 		И я нажимаю на кнопку с именем 'FormDocumentShipmentConfirmationGenerateShipmentConfirmation'
-	Тогда я проверяю заполнение табличной части
+	* Check filling of the tabular part
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Shipment basis'   |
 		| 'Dress'    | '10,000'   | 'XS/Blue'   | 'pcs'  | 'Store 02' | 'Sales order 456*' |
 		| 'Trousers' | '5,000'    | '36/Yellow' | 'pcs'  | 'Store 02' | 'Sales order 456*' |
 		| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | 'Store 02' | 'Sales order 456*' |
-	И я меняю номер документа и провожу его
+	* Change of document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '0'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '456'
 		И я нажимаю на кнопку 'Post'
-	Тогда я проверяю движения документа
+	* Check postings
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Shipment confirmation 456*'                 | ''            | ''       | ''          | ''                 | ''                           | ''          | ''          | ''        | ''              |
@@ -1176,8 +1174,8 @@
 		| ''                                           | 'Expense'     | '*'      | '10'        | 'Main Company'     | 'Sales order 456*'           | 'Store 02'  | '38/Yellow' | '*'       | '*'             |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _029206 создание Sales invoice на основании Sales order под заказ поставщику (непрямая схема отгрузки, склад ордерный)
-	И я создаю Sales invoice на основании Sales order
+Сценарий: _029206 create Sales invoice based on Sales order, procurement method - purchase (Shipment confirmation before Sales invoice, store use Shipment confirmation)
+	* Create Sales invoice based on Sales order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -1185,26 +1183,26 @@
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
 		И я нажимаю на кнопку с именем 'FormSelectAll'
 		И я нажимаю на кнопку 'OK'
-	Тогда я проверяю заполнение табличной части
+	* Check filling of the tabular part
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Price'  | 'Item key'  | 'Q'      |'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 		| 'Dress'    | '520,00' | 'XS/Blue'   | '10,000' |'793,22'     | 'pcs'  | '4 406,78'   | '5 200,00'     | 'Store 02' |
 		| 'Trousers' | '400,00' | '36/Yellow' | '5,000'  |'305,08'     | 'pcs'  | '1 694,92'   | '2 000,00'     | 'Store 02' |
 		| 'Trousers' | '400,00' | '38/Yellow' | '10,000' |'610,17'     | 'pcs'  | '3 389,83'   | '4 000,00'     | 'Store 02' |
-	И я устанавливаю номер документа 456
+	* Change of document number - 456
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '456'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '456'
-	И я провожу инвойс
+	* Post Sales invoice
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		Тогда открылось окно 'Pickup special offers'
 		И в таблице "Offers" я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю проводки Sales invoice
+	* Check postings Sales invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
 		И в таблице "List" я перехожу к строке:
 		| Number |
@@ -1302,11 +1300,11 @@
 		И Я закрыл все окна клиентского приложения
 
 
-# Прямая схема отгрузки Sales order - Purchase order - Purchase invoice- Goods reciept - Sales invoice - Shipment confirmation 
+# Sales order - Purchase order - Purchase invoice- Goods reciept - Sales invoice - Shipment confirmation 
 
-Сценарий: _029207 создание Purchase order на основании Sales order (прямая схема поставки, услуги в заказе клиента + товары)
+Сценарий: _029207 create Purchase order based on Sales order (Purchase invoice before Goods receipt, Sales order contains services and products)
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
-	Тогда я меняю метод обеспечения по строкам и добавляю новую строку
+	* Change the procurement method by rows and add a new row
 		И в таблице "ItemList" я перехожу к строке:
 			| Item  |
 			| Dress |
@@ -1335,7 +1333,7 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	Тогда я добавляю услугу
+	* Add service
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -1351,20 +1349,20 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
 		И в таблице "ItemList" в поле 'Price' я ввожу текст '200,00'
-	И я меняю номер документа на 460
+	* Change of document number 460
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '0'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '460'
-	И я провожу заказ
+	* Post Sales order
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		Тогда открылось окно 'Pickup special offers'
 		И в таблице "Offers" я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю проводки заказа
+	* Check postings
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 		| Number |
@@ -1427,17 +1425,16 @@
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | 'Sales order 460*' | 'Store 01'  | '38/Yellow' | '*'       | '*'                        | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | 'Sales order 460*' | 'Store 01'  | 'Rent'      | '*'       | '*'                        | ''                     |
 		И Я закрыл все окна клиентского приложения
-	И я создаю ещё один заказ клиента для заказа поставщику
+	* Create one more Sales order with procurement methot - purchase
 		Когда создаю заказ на Ferron BP Basic Agreements, TRY (Dress -10 и Trousers - 5)
-		И я меняю склад на ордерный
+		* Change of Store to Store that use Shipment confirmation
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
 				| Description |
 				| Store 02    |
 			И в таблице "List" я выбираю текущую строку
-			# Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
-	Тогда я меняю метод обеспечения по строкам и добавляю новую строку
+	* Change the procurement method by rows and add a new row
 			И в таблице "ItemList" я перехожу к строке:
 				| Item  |
 				| Dress |
@@ -1469,7 +1466,7 @@
 			И в таблице "ItemList" я активизирую поле "Q"
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		Тогда я добавляю услугу
+		* Add service
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -1485,20 +1482,20 @@
 			И в таблице "ItemList" я активизирую поле "Q"
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '300,00'
-	И я меняю номер документа на 461
+	* Change of document number 461
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '461'
-	И я провожу заказ
+	* Post Sales order
 			И я перехожу к закладке "Item list"
 			И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 			Тогда открылось окно 'Pickup special offers'
 			И в таблице "Offers" я нажимаю на кнопку 'OK'
 			И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю проводки заказа
+	* Check postings
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 		| Number |
@@ -1558,14 +1555,14 @@
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | 'Sales order 461*' | 'Store 02'  | '38/Yellow' | '*'       | '*'                        | ''                     |
 
 		И Я закрыл все окна клиентского приложения
-	Тогда на основании созданных заказов я создаю один Purchase order
+	* Create Purchase order based on Sales orders
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 		| Number | Partner  |
 		| 460    | Lomaniti |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentPurchaseOrderGeneratePurchaseOrder'
-	И я проверяю заполнение табличной части Purchase order
+	* Checking the filling of the tabular part of the Purchase order
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  | 'Store'    | 'Unit' | 'Q'      | 'Purchase basis'   |
 		| 'Dress'    | 'XS/Blue'   | 'Store 01' | 'pcs'  | '5,000'  | 'Sales order 460*' |
@@ -1573,7 +1570,7 @@
 		| 'Dress'    | 'XS/Blue'   | 'Store 02' | 'pcs'  | '10,000' | 'Sales order 461*' |
 		| 'Trousers' | '36/Yellow' | 'Store 02' | 'pcs'  | '5,000'  | 'Sales order 461*' |
 		| 'Trousers' | '38/Yellow' | 'Store 02' | 'pcs'  | '10,000' | 'Sales order 461*' |
-	И я заполняю данные по поставщику и цены
+	* Filling in vendor and prices
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -1589,11 +1586,11 @@
 			| Description        |
 			| Vendor Ferron, TRY |
 		И в таблице "List" я выбираю текущую строку
-		# сообщение по ценам
+		# message about prices
 		И я изменяю флаг 'Update filled price types on Vendor price, TRY'
 		И я изменяю флаг 'Update filled prices.'
 		И я нажимаю на кнопку 'OK'
-		# сообщение по ценам
+		# message about prices
 		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'  | 'Item key' | 'Store'    |
@@ -1625,7 +1622,7 @@
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Price' я ввожу текст '180,00'
 		И в таблице "ItemList" я завершаю редактирование строки
-	И я устанавливаю номер документа 456
+	* Change of document number - 456
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '460'
@@ -1633,7 +1630,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '460'
 	И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю проводки Purchase order
+	* Check postings Purchase order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И в таблице "List" я перехожу к строке:
 		| Number |
@@ -1670,14 +1667,14 @@
 		| ''                                   | 'Receipt'     | '*'      | '10'        | 'Store 02'     | 'Purchase order 460*' | '38/Yellow' | '*'         | ''        | ''              |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _029208 создание Purchase invoice на основании Purchase order (прямая схема поставки, товары)
-	И я создаю Purchase invoice на основании Purchase order
+Сценарий: _029208 create Purchase invoice based on Purchase order (Purchase invoice before Goods receipt, products)
+	* Create Purchase invoice based on Purchase order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 460   |
 		И я нажимаю на кнопку с именем 'FormDocumentPurchaseInvoiceGeneratePurchaseInvoice'
-	Тогда я проверяю заполнение табличной части
+	* Check filling of the tabular part
 		И     таблица "ItemList" содержит строки:
 			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      |'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date'| Purchase order        | Goods receipt | 'Sales order'      |
 			| '847,46'     | 'Dress'    | '200,00' | 'XS/Blue'   | '5,000'  |'152,54'     | 'pcs'  | '1 000,00'     | 'Store 01' | '*'            | 'Purchase order 460*' | ''            | 'Sales order 460*' |
@@ -1685,13 +1682,13 @@
 			| '762,71'     | 'Trousers' | '180,00' | '36/Yellow' | '5,000'  |'137,29'     | 'pcs'  | '900,00'       | 'Store 02' | '*'            | 'Purchase order 460*' | ''            | 'Sales order 461*' |
 			| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' |'274,58'     | 'pcs'  | '1 800,00'     | 'Store 01' | '*'            | 'Purchase order 460*' | ''            | 'Sales order 460*' |
 			| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' |'274,58'     | 'pcs'  | '1 800,00'     | 'Store 02' | '*'            | 'Purchase order 460*' | ''            | 'Sales order 461*' |
-	И я устанавливаю номер документа 460
+	* Change of document number - 460
 		И в поле 'Number' я ввожу текст '460'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '460'
 		И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю движения документа
+	* Check postings
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -1819,26 +1816,26 @@
 
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029209 создание Goods reciept на основании Purchase invoice (прямая схема поставки, товары)
-	И я создаю Goods receipt на основании Purchase invoice
+Сценарий: _029209 create Goods reciept based on Purchase invoice (Purchase invoice before Goods receipt, products)
+	* Create Goods receipt based on Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 460   |
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	Тогда я проверяю заполнение табличной части
+	* Check filling of the tabular part
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Sales order'      | 'Store'    | 'Receipt basis'         |
 		| 'Dress'    | '10,000'   | 'XS/Blue'   | 'pcs'  | 'Sales order 461*' | 'Store 02' | 'Purchase invoice 460*' |
 		| 'Trousers' | '5,000'    | '36/Yellow' | 'pcs'  | 'Sales order 461*' | 'Store 02' | 'Purchase invoice 460*' |
 		| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | 'Sales order 461*' | 'Store 02' | 'Purchase invoice 460*' |
-	И я устанавливаю номер документа 460
+	* Change of document number - 460
 		И в поле 'Number' я ввожу текст '460'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '460'
 		И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю движения документа
+	* Check postings
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -1878,34 +1875,34 @@
 		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'     | 'XS/Blue'               | ''          | ''          | ''        | ''              |
 		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'     | '38/Yellow'             | ''          | ''          | ''        | ''              |
 
-Сценарий: _029210 создание Sales invoice на основании Sales orders по которым делалась закупка у поставщика - неордерный склад
-	И я создаю Sales invoice по Sales order 460
+Сценарий: _029210 create Sales invoice based on Sales orders (purchase has already been made) - Store doesn't use Shipment confirmation
+	* Create Sales invoice based on Sales order 460
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 460  |
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
-	Тогда я проверяю заполнение табличной части
+	* Check filling of the tabular part
 		И     таблица "ItemList" содержит строки:
 		| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'      |
 		| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '5,000'  | '396,61'     | 'pcs'  | '2 203,39'   | '2 600,00'     | 'Store 01' | 'Sales order 460*' |
 		| '700,00' | 'Boots'    | '18%' | '36/18SD'   | '1,000'  | '106,78'     | 'pcs'  | '593,22'     | '700,00'       | 'Store 01' | 'Sales order 460*' |
 		| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '10,000' | '610,17'     | 'pcs'  | '3 389,83'   | '4 000,00'     | 'Store 01' | 'Sales order 460*' |
 		| '200,00' | 'Service'  | '18%' | 'Rent'      | '10,000' | '305,08'     | 'pcs'  | '1 694,92'   | '2 000,00'     | 'Store 01' | 'Sales order 460*' |
-	И я устанавливаю номер документа 460
+	* Change of document number - 460
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '460'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '460'
-	И я провожу инвойс
+	* Post Sales invoice
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		Тогда открылось окно 'Pickup special offers'
 		И в таблице "Offers" я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю проводки Sales invoice
+	* Check postings Sales invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
 		И в таблице "List" я перехожу к строке:
 		| Number |
@@ -2030,34 +2027,34 @@
 		| ''                                           | 'Expense'     | '*'         | '10'            | 'Main Company'  | 'Sales order 460*'    | 'Store 01'     | 'Rent'                | '*'                   | '*'                        | ''                         | ''                         | ''                         | ''                     |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _029211 создание Sales invoice на основании Sales orders по которым делалась закупка у поставщика - ордерный склад
-	И я создаю Sales invoice по Sales order 461
+Сценарий: _029211 create Sales invoice based on Sales orders (purchase has already been made) - Store use Shipment confirmation
+	* Create Sales invoice по Sales order 461
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 461  |
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
-	Тогда я проверяю заполнение табличной части
+	* Check filling of the tabular part
 		И     таблица "ItemList" содержит строки:
 		| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 		| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '10,000' | '793,22'     | 'pcs'  | '4 406,78'   | '5 200,00'     | 'Store 02' |
 		| '400,00' | 'Trousers' | '18%' | '36/Yellow' | '5,000'  | '305,08'     | 'pcs'  | '1 694,92'   | '2 000,00'     | 'Store 02' |
 		| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '10,000' | '610,17'     | 'pcs'  | '3 389,83'   | '4 000,00'     | 'Store 02' |
 		| '300,00' | 'Service'  | '18%' | 'Rent'      | '1,000'  | '45,76'      | 'pcs'  | '254,24'     | '300,00'       | 'Store 02' |
-	И я устанавливаю номер документа 461
+	* Change of document number - 461
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '461'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '461'
-	И я провожу инвойс
+	* Post Sales invoice
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		Тогда открылось окно 'Pickup special offers'
 		И в таблице "Offers" я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post and close'
-	Тогда я проверяю проводки Sales invoice
+	* Check postings Sales invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
 		И в таблице "List" я перехожу к строке:
 		| Number |
@@ -2188,19 +2185,19 @@
 
 
 
-# To Do выровнять движения и дописать тесты которые ниже
+# To Do align postings and add tests below
 
-# Схема отгрузки Sales order (№501) - Purchase order- Purchase invoice - Goods reciept - Shipment confirmation - Sales invoice
+# Sales order (№501) - Purchase order- Purchase invoice - Goods reciept - Shipment confirmation - Sales invoice
 
-Сценарий: _029221 схема отгрузки Sales order - Purchase order - Purchase invoice - Goods reciept - Shipment confirmation - Sales invoice
-	* Создание Purchase order на основании Sales order №501
-		* Выбор нужного Sales order
+Сценарий: _029221 Sales order - Purchase order - Purchase invoice - Goods reciept - Shipment confirmation - Sales invoice
+	* Create Purchase order based on Sales order №501
+		* Select Sales order
 			И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 			И в таблице "List" я перехожу к строке:
 				| Number |
 				| 501    |
 			И я нажимаю на кнопку с именем 'FormDocumentPurchaseOrderGeneratePurchaseOrder'
-		* Заполнение Purchase order
+		* Fill in Purchase order
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -2216,11 +2213,11 @@
 				| Description        |
 				| Vendor Ferron, TRY |
 			И в таблице "List" я выбираю текущую строку
-			# сообщение по ценам
+			# message about prices
 			И я изменяю флаг 'Update filled price types on Vendor price, TRY'
 			И я изменяю флаг 'Update filled prices.'
 			И я нажимаю на кнопку 'OK'
-			# сообщение по ценам
+			# message about prices
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Item'     |
@@ -2234,7 +2231,7 @@
 			И в таблице "ItemList" я выбираю текущую строку
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '180,00'
 			И в таблице "ItemList" я завершаю редактирование строки
-			* Изменение номера документа
+			* Change number
 				И я перехожу к закладке "Other"
 				И я разворачиваю группу "More"
 				И в поле 'Number' я ввожу текст '501'
@@ -2242,40 +2239,40 @@
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '501'
 			И я нажимаю на кнопку 'Post'
-	* Создание Purchase invoice на основании Purchase order №501
+	* Create Purchase invoice based on Purchase order №501
 		И я нажимаю на кнопку 'Purchase invoice'
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '501'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '501'
 		И я нажимаю на кнопку 'Post'
-	* Создание Goods reciept на основании Purchase invoice №501
+	* Create Goods reciept based on Purchase invoice №501
 		И я нажимаю на кнопку 'Goods receipt'
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '501'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '501'
 		И я нажимаю на кнопку 'Post'
-	* Создание Shipment confirmation на основании Sales order №501
+	* Create Shipment confirmation based on Sales order №501
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 501    |
 		И я нажимаю на кнопку с именем 'FormDocumentShipmentConfirmationGenerateShipmentConfirmation'
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '501'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '501'
 		И я нажимаю на кнопку 'Post'
-	* Создание Sales invoice на основании Shipment confirmation №501
+	* Create Sales invoice based on Shipment confirmation №501
 		И я нажимаю на кнопку 'Sales invoice'
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '501'
 			Тогда открылось окно '1C:Enterprise'
@@ -2287,17 +2284,17 @@
 
 
 
-# Схема отгрузки Sales order (№502) - Purchase order - Purchase invoice - Sales invoice
-Сценарий: _029222 cхема отгрузки Sales order - Purchase order - Purchase invoice - Sales invoice
+# Sales order (№502) - Purchase order - Purchase invoice - Sales invoice
+Сценарий: _029222 Sales order - Purchase order - Purchase invoice - Sales invoice
 	И Я закрыл все окна клиентского приложения
-	* Создание Purchase order на основании Sales order №502
-		* Выбор нужного Sales order
+	* Create Purchase order based on Sales order №502
+		* Select Sales order
 			И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 			И в таблице "List" я перехожу к строке:
 				| Number |
 				| 502    |
 			И я нажимаю на кнопку с именем 'FormDocumentPurchaseOrderGeneratePurchaseOrder'
-		* Заполнение Purchase order
+		* Fill in Purchase order
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -2313,11 +2310,11 @@
 				| Description        |
 				| Vendor Ferron, TRY |
 			И в таблице "List" я выбираю текущую строку
-			# сообщение по ценам
+			# message about prices
 			И я изменяю флаг 'Update filled price types on Vendor price, TRY'
 			И я изменяю флаг 'Update filled prices.'
 			И я нажимаю на кнопку 'OK'
-			# сообщение по ценам
+			# message about prices
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Item'     |
@@ -2331,7 +2328,7 @@
 			И в таблице "ItemList" я выбираю текущую строку
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '180,00'
 			И в таблице "ItemList" я завершаю редактирование строки
-			* Изменение номера документа
+			* Change number
 				И я перехожу к закладке "Other"
 				И я разворачиваю группу "More"
 				И в поле 'Number' я ввожу текст '502'
@@ -2339,22 +2336,22 @@
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '502'
 			И я нажимаю на кнопку 'Post'
-	* Создание Purchase invoice на основании Purchase order №502
+	* Create Purchase invoice based on Purchase order №502
 		И я нажимаю на кнопку 'Purchase invoice'
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '502'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '502'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание Sales invoice на основании Sales order №502
+	* Create Sales invoice based on Sales order №502
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 502    |
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '502'
 			Тогда открылось окно '1C:Enterprise'
@@ -2365,17 +2362,17 @@
 
 
 
-# Схема отгрузки Sales order (№504)- Purchase invoice - Goods reciept - Shipment confirmation - Sales invoice
-Сценарий: _029224 cхема отгрузки Sales order - Purchase invoice - Goods reciept - Shipment confirmation - Sales invoice
+# Sales order (№504)- Purchase invoice - Goods reciept - Shipment confirmation - Sales invoice
+Сценарий: _029224 Sales order - Purchase invoice - Goods reciept - Shipment confirmation - Sales invoice
 	И Я закрыл все окна клиентского приложения
-	* Создание Purchase invoice на основании Sales order №504
-		* Выбор нужного Sales order
+	* Create Purchase invoice based on Sales order №504
+		* Select Sales order
 			И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 			И в таблице "List" я перехожу к строке:
 				| Number |
 				| 504    |
 			И я нажимаю на кнопку с именем 'FormDocumentPurchaseInvoiceGeneratePurchaseInvoice'
-		* Заполнение Purchase invoice
+		* Filling in Purchase invoice
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -2391,11 +2388,11 @@
 				| Description        |
 				| Vendor Ferron, TRY |
 			И в таблице "List" я выбираю текущую строку
-			# сообщение по ценам
+			# message about prices
 			И я изменяю флаг 'Update filled price types on Vendor price, TRY'
 			И я изменяю флаг 'Update filled prices.'
 			И я нажимаю на кнопку 'OK'
-			# сообщение по ценам
+			# message about prices
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Item'     |
 				| 'Trousers' |
@@ -2408,7 +2405,7 @@
 			И в таблице "ItemList" я выбираю текущую строку
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '180,00'
 			И в таблице "ItemList" я завершаю редактирование строки
-			* Изменение номера документа
+			* Change number
 				И я перехожу к закладке "Other"
 				И я разворачиваю группу "More"
 				И в поле 'Number' я ввожу текст '504'
@@ -2416,22 +2413,22 @@
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '504'
 			И я нажимаю на кнопку 'Post'
-	* Создание Goods reciept на основании Purchase invoice №504
+	* Create Goods reciept based on Purchase invoice №504
 		И я нажимаю на кнопку 'Goods receipt'
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '504'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '504'
 		И я нажимаю на кнопку 'Post'
-	* Создание Shipment confirmation на основании Sales order №504
+	* Create Shipment confirmation based on Sales order №504
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 504    |
 		И я нажимаю на кнопку с именем 'FormDocumentShipmentConfirmationGenerateShipmentConfirmation'
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '504'
 			Тогда открылось окно '1C:Enterprise'
@@ -2440,7 +2437,7 @@
 		И я нажимаю на кнопку 'Post'
 	* Создание Sales invoice на основании Shipment confirmation №504
 		И я нажимаю на кнопку 'Sales invoice'
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '504'
 			Тогда открылось окно '1C:Enterprise'
@@ -2450,18 +2447,18 @@
 		И Я закрыл все окна клиентского приложения
 
 
-# Схема отгрузки Sales order (№505)- Purchase invoice - Sales invoice
+# Sales order (№505)- Purchase invoice - Sales invoice
 
-Сценарий: _029225 cхема отгрузки Sales order - Purchase invoice - Sales invoice
+Сценарий: _029225 Sales order - Purchase invoice - Sales invoice
 	И Я закрыл все окна клиентского приложения
-	* Создание Purchase invoice на основании Sales order №505
-		* Выбор нужного Sales order
+	* Create Purchase invoice based on Sales order №505
+		*Select Sales order
 			И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 			И в таблице "List" я перехожу к строке:
 				| Number |
 				| 505    |
 			И я нажимаю на кнопку с именем 'FormDocumentPurchaseInvoiceGeneratePurchaseInvoice'
-		* Заполнение Purchase invoice
+		* Filling in Purchase invoice
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -2477,11 +2474,11 @@
 				| Description        |
 				| Vendor Ferron, TRY |
 			И в таблице "List" я выбираю текущую строку
-			# сообщение по ценам
+			# message about prices
 			И я изменяю флаг 'Update filled price types on Vendor price, TRY'
 			И я изменяю флаг 'Update filled prices.'
 			И я нажимаю на кнопку 'OK'
-			# сообщение по ценам
+			# message about prices
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Item'     |
 				| 'Trousers' |
@@ -2494,7 +2491,7 @@
 			И в таблице "ItemList" я выбираю текущую строку
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '180,00'
 			И в таблице "ItemList" я завершаю редактирование строки
-			* Изменение номера документа
+			* Change number
 				И я перехожу к закладке "Other"
 				И я разворачиваю группу "More"
 				И в поле 'Number' я ввожу текст '505'
@@ -2502,13 +2499,13 @@
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '505'
 			И я нажимаю на кнопку 'Post'
-	* Создание Sales invoice на основании Sales order №502
+	* Create Sales invoice based on Sales order №502
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 505    |
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
-		* Изменение номера документа
+		* Change number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '505'
 			Тогда открылось окно '1C:Enterprise'
@@ -2517,10 +2514,10 @@
 		И я нажимаю на кнопку 'Post and close'
 
 
-# Схема отгрузки Sales order (№503) - Purchase order - Purchase invoice - Shipment confirmation - Sales invoice
+#  Sales order (№503) - Purchase order - Purchase invoice - Shipment confirmation - Sales invoice
 
-# Схема отгрузки Sales order - Purchase order - Purchase invoice - Goods reciept - Sales invoice
+#  Sales order - Purchase order - Purchase invoice - Goods reciept - Sales invoice
 
-# Схема отгрузки Sales order - Purchase order - Purchase invoice - Sales invoice - Shipment confirmation
+#  Sales order - Purchase order - Purchase invoice - Sales invoice - Shipment confirmation
 
 

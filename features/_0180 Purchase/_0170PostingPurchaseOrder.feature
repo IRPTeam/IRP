@@ -109,7 +109,7 @@ For tracking an item that has been ordered from a vendor
 	* Post document
 		И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _017002 checking Purchase Order N2 posting by register Order Balance (plus) - Goods receipt is not used
+Сценарий: _017002 checking Purchase Order N2 posting by register Order Balance (+) - Goods receipt is not used
 	* Opening register Order Balance
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 	* Checking the register form
@@ -190,7 +190,7 @@ For tracking an item that has been ordered from a vendor
 	* Post document
 		И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _017004 checking Purchase Order N3 posting by register Order Balance (plus) - Goods receipt is not used
+Сценарий: _017004 checking Purchase Order N3 posting by register Order Balance (+) - Goods receipt is not used
 	* Opening of register Order Balance
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 	* Checking Purchase Order N3 posting by register Order Balance

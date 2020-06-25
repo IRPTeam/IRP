@@ -152,7 +152,7 @@ To track a product that has been received from a vendor
 		| 'Quantity' | 'Recorder'             | 'Line number' | 'Store'    | 'Item key' |
 		| '500,000'  | 'Purchase invoice 2*'  | '1'           | 'Store 01' | 'L/Green'  |
 
-Сценарий: _018012 Purchase invoice creation on set (indivisible packaging), store does not use Goods receipt
+Сценарий: _018012 Purchase invoice creation on set, store does not use Goods receipt
 	* Creating Purchase Invoice without Purchase order	
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -184,7 +184,7 @@ To track a product that has been received from a vendor
 			| Description        |
 			| Vendor Ferron, EUR |
 		И в таблице "List" я выбираю текущую строку
-	* Filling in store information
+	* Filling in store
 		И я нажимаю кнопку выбора у поля "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -245,12 +245,12 @@ To track a product that has been received from a vendor
 
 Сценарий: _018018 checking totals in the document Purchase invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-	И я выбираю документ PurchaseInvoice
+	* Select Purchase Invoice
 		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 2      |
 		И в таблице "List" я выбираю текущую строку
-	И я проверяю наличие итогов документа
+	* Checking totals
 		И     элемент формы с именем "ItemListTotalNetAmount" стал равен '16 949,15'
 		И     элемент формы с именем "ItemListTotalTaxAmount" стал равен '3 050,85'
 		И     элемент формы с именем "ItemListTotalTotalAmount" стал равен '20 000,00'
@@ -258,10 +258,10 @@ To track a product that has been received from a vendor
 
 Сценарий: _018020 checking the form Pick up items in the document Purchase invoice
 	И    Я закрыл все окна клиентского приложения
-	И я открываю форму для создания Purchase invoice
+	* Opening a form for creating Purchase invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	Filling in the main details of the document
+	* Filling in the main details of the document
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| Description  |

@@ -369,7 +369,6 @@ Function Currencies_GetDeclaration(Object, Form)
 	ArrayOfItems_Header.Add(Form.Items.CashAccount);
 	ArrayOfItems_Header.Add(Form.Items.TransactionType);
 	ArrayOfItems_Header.Add(Form.Items.Currency);
-	ArrayOfItems_Header.Add(Form.Items.Payee);
 	ArrayOfItems_Header.Add(Form.Items.Date);
 	
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_HeaderOnChange", "OnChange", ArrayOfItems_Header);

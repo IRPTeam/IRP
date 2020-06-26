@@ -137,6 +137,10 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <choiceParameters>
+      <name>Filter.Predefined</name>
+      <value xsi:type="core:BooleanValue"/>
+    </choiceParameters>
     <createOnInput>DontUse</createOnInput>
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>

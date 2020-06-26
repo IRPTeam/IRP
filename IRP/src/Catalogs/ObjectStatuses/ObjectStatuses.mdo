@@ -221,7 +221,7 @@
     <name>PostingPlaningCashTransactions</name>
     <synonym>
       <key>en</key>
-      <value>Planing cash transactions</value>
+      <value>Planning cash transactions</value>
     </synonym>
     <type>
       <types>EnumRef.DocumentPostingTypes</types>

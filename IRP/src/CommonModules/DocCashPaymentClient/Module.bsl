@@ -2,11 +2,10 @@
 #Region FormEvents
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	FillPayees(Object, Form);
+	Return;
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	FillPayees(Object, Form);
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
@@ -182,7 +181,6 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	FillPayees(Object, Form);
 	SetAvailability(Object, Form);
 EndProcedure
 
@@ -615,29 +613,6 @@ Procedure ChangePaymentListPayee(PaymentList, Payee) Export
 			Row.Payee = Payee;
 		EndIf;
 	EndDo;
-EndProcedure
-
-Procedure FillPayees(Object, Form) Export
-	PayeeArray = New Array;
-	For Each Row In Object.PaymentList Do
-		If ValueIsFilled(Row.Payee) Then
-			If PayeeArray.Find(Row.Payee) = Undefined Then
-				PayeeArray.Add(Row.Payee);
-			EndIf;
-		EndIf;
-	EndDo;
-	If PayeeArray.Count() = 0 Then
-		If Not ValueIsFilled(Form.Payee) Then
-			Form.Items.Payee.InputHint = "";
-			Form.Payee = PredefinedValue("Catalog.Companies.EmptyRef");
-		EndIf;
-	ElsIf PayeeArray.Count() = 1 Then
-		Form.Items.Payee.InputHint = "";
-		Form.Payee = PayeeArray[0];
-	Else
-		Form.Payee = PredefinedValue("Catalog.Companies.EmptyRef");
-		Form.Items.Payee.InputHint = StrConcat(PayeeArray, "; ");
-	EndIf;
 EndProcedure
 
 Procedure FillUnfilledPayeeInRow(Object, Item, Payee) Export

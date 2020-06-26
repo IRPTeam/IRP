@@ -2,12 +2,10 @@
 #Region FormEvents
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	FillPayers(Object, Form);
+	Return;
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	FillPayers(Object, Form);
-	
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
@@ -216,7 +214,6 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	FillPayers(Object, Form);
 	SetAvailability(Object, Form);
 EndProcedure
 
@@ -648,29 +645,6 @@ Procedure ChangePaymentListPayer(PaymentList, Payer) Export
 			Row.Payer = Payer;
 		EndIf;
 	EndDo;
-EndProcedure
-
-Procedure FillPayers(Object, Form) Export
-	PayerArray = New Array;
-	For Each Row In Object.PaymentList Do
-		If ValueIsFilled(Row.Payer) Then
-			If PayerArray.Find(Row.Payer) = Undefined Then
-				PayerArray.Add(Row.Payer);
-			EndIf;
-		EndIf;
-	EndDo;
-	If PayerArray.Count() = 0 Then
-		If Not ValueIsFilled(Form.Payer) Then
-			Form.Items.Payer.InputHint = "";
-			Form.Payer = PredefinedValue("Catalog.Companies.EmptyRef");
-		EndIf;
-	ElsIf PayerArray.Count() = 1 Then
-		Form.Items.Payer.InputHint = "";
-		Form.Payer = PayerArray[0];
-	Else
-		Form.Payer = PredefinedValue("Catalog.Companies.EmptyRef");
-		Form.Items.Payer.InputHint = StrConcat(PayerArray, "; ");
-	EndIf;
 EndProcedure
 
 Procedure FillUnfilledPayerInRow(Object, Item, Payer) Export

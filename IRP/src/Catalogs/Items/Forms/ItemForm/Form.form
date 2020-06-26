@@ -837,6 +837,7 @@
         </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>2</index>
+        <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>Catalog.PriceKeys.Command.OpenPriceKeysList</command>
@@ -845,6 +846,7 @@
         </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>3</index>
+        <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.TaxSettings.StandardCommand.OpenByValue.Item</command>

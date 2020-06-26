@@ -1301,6 +1301,39 @@
         <fileDragMode>AsFileRef</fileDragMode>
         <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <title>
+        <key>en</key>
+        <value>Payment list</value>
+      </title>
+      <extendedTooltip>
+        <name>GroupPaymentListExtendedTooltip</name>
+        <id>132</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <type>Page</type>
+      <extInfo xsi:type="form:PageGroupExtInfo">
+        <group>Vertical</group>
+        <showTitle>true</showTitle>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormGroup">
+      <name>GroupCurrency</name>
+      <id>598</id>
       <items xsi:type="form:Table">
         <name>PaymentListCurrencies</name>
         <id>549</id>
@@ -1937,11 +1970,11 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Payment list</value>
+        <value>Currency</value>
       </title>
       <extendedTooltip>
-        <name>GroupPaymentListExtendedTooltip</name>
-        <id>132</id>
+        <name>GroupCurrencyExtendedTooltip</name>
+        <id>599</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>

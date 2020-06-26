@@ -43,16 +43,16 @@ For shipment of products from store
 Сценарий: _028802 checking Shipment confirmation posting (based on Sales invoice with Sales order) by register GoodsInTransitOutgoing (-)
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
 	Тогда таблица "List" содержит строки:
-		| 'Quantity' | 'Recorder'                 | 'Shipment basis'   | 'Line number' | 'Store'    | 'Item key' |
-		| '10,000'   | 'Shipment confirmation 95*' | 'Sales invoice 2*' | '1'           | 'Store 02' | 'L/Green'  |
-		| '14,000'   | 'Shipment confirmation 95*' | 'Sales invoice 2*' | '2'           | 'Store 02' | '36/Yellow'   |
+		| 'Quantity' | 'Recorder'                  | 'Shipment basis'    | 'Store'    | 'Item key' |
+		| '10,000'   | 'Shipment confirmation 95*' | 'Sales invoice 2*' | 'Store 02' | 'L/Green'  |
+		| '14,000'   | 'Shipment confirmation 95*' | 'Sales invoice 2*' | 'Store 02' | '36/Yellow'   |
 
 Сценарий: _028803 checking Shipment confirmation posting (based on Sales invoice with Sales order) by register StockBalance (-)
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 	Тогда таблица "List" содержит строки:
-		| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key' |
-		| '10,000'   | 'Shipment confirmation 95*' | '1'           | 'Store 02' | 'L/Green'  |
-		| '14,000'   | 'Shipment confirmation 95*' | '2'           | 'Store 02' | '36/Yellow'   |
+		| 'Quantity' | 'Recorder'                  | 'Store'    | 'Item key' |
+		| '10,000'   | 'Shipment confirmation 95*' | 'Store 02' | 'L/Green'  |
+		| '14,000'   | 'Shipment confirmation 95*' | 'Store 02' | '36/Yellow'   |
 
 
 Сценарий: _028804 creating document Shipment confirmation  based on Sales Invoice (without Sales order)

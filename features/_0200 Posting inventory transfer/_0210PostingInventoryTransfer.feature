@@ -51,16 +51,16 @@ To transfer items from one store to another
 Сценарий: _021002 checking Inventory transfer (based on order) posting by register TransferOrderBalance (-) (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.TransferOrderBalance'
 	Тогда таблица "List" содержит строки:
-		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store sender' | 'Store receiver' | 'Order'                       | 'Item key'  |
-		| '10,000'   | 'Inventory transfer 1*'       | '1'           | 'Store 01'     | 'Store 02'       | 'Inventory transfer order 201*' | 'S/Yellow'  |
-		| '50,000'   | 'Inventory transfer 1*'       | '2'           | 'Store 01'     | 'Store 02'       | 'Inventory transfer order 201*' | 'M/White'   |
+		| 'Quantity' | 'Recorder'                    | 'Store sender' | 'Store receiver' | 'Order'                       | 'Item key'  |
+		| '10,000'   | 'Inventory transfer 1*'       | 'Store 01'     | 'Store 02'       | 'Inventory transfer order 201*' | 'S/Yellow'  |
+		| '50,000'   | 'Inventory transfer 1*'       | 'Store 01'     | 'Store 02'       | 'Inventory transfer order 201*' | 'M/White'   |
 
 Сценарий: _021002 checking Inventory transfer (based on order) posting by register StockReservation (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
 	Тогда таблица "List" не содержит строки:
-		| 'Quantity' | 'Recorder'              | 'Line number' | 'Item key'  |
-		| '10,000'    | 'Inventory transfer 1*' | '1'          | 'S/Yellow'   |
-		| '50,000'    | 'Inventory transfer 1*' | '1'          | 'M/White'   |
+		| 'Quantity' | 'Recorder'               | 'Item key'  |
+		| '10,000'    | 'Inventory transfer 1*' | 'S/Yellow'   |
+		| '50,000'    | 'Inventory transfer 1*' | 'M/White'   |
 
 Сценарий: _021003 checking Inventory transfer (based on order) posting by register GoodsInTransitOutgoing (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
@@ -72,17 +72,17 @@ To transfer items from one store to another
 Сценарий: _021004 checking Inventory transfer (based on order) posting by register GoodsInTransitIncoming (+)  (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
 	Тогда таблица "List" содержит строки:
-	| 'Quantity' | 'Recorder'              | 'Receipt basis'         | 'Line number' | 'Store'    | 'Item key' |
-	| '10,000'   | 'Inventory transfer 1*' | 'Inventory transfer 1*' | '1'           | 'Store 02' | 'S/Yellow' |
-	| '50,000'   | 'Inventory transfer 1*' | 'Inventory transfer 1*' | '2'           | 'Store 02' | 'M/White'  |
+	| 'Quantity' | 'Recorder'              | 'Receipt basis'         | 'Store'    | 'Item key' |
+	| '10,000'   | 'Inventory transfer 1*' | 'Inventory transfer 1*' | 'Store 02' | 'S/Yellow' |
+	| '50,000'   | 'Inventory transfer 1*' | 'Inventory transfer 1*' | 'Store 02' | 'M/White'  |
 
 
 Сценарий: _021005 checking Inventory transfer (based on order) posting by register StockBalance (-) (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 	Тогда таблица "List" содержит строки:
-	| 'Quantity' | 'Recorder'              | 'Line number' | 'Store'    | 'Item key' |
-	| '10,000'   | 'Inventory transfer 1*' | '1'           | 'Store 01' | 'S/Yellow' |
-	| '50,000'   | 'Inventory transfer 1*' | '2'           | 'Store 01' | 'M/White'  |
+	| 'Quantity' | 'Recorder'              | 'Store'    | 'Item key' |
+	| '10,000'   | 'Inventory transfer 1*' | 'Store 01' | 'S/Yellow' |
+	| '50,000'   | 'Inventory transfer 1*' | 'Store 01' | 'M/White'  |
 
 
 	# 2

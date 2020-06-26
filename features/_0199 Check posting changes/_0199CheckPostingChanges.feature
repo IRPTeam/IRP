@@ -20,19 +20,19 @@ In order not to double entries in the registers
 	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
-			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
-			| '200,000'  | 'Purchase order 103*' | '1'           | 'Store 03' | 'Purchase order 103*' | 'S/Yellow'  |
-			| '200,000'  | 'Purchase order 103*' | '2'           | 'Store 03' | 'Purchase order 103*' | 'XS/Blue'   |
-			| '200,000'  | 'Purchase order 103*' | '3'           | 'Store 03' | 'Purchase order 103*' | 'M/White'   |
-			| '200,000'  | 'Purchase order 103*' | '4'           | 'Store 03' | 'Purchase order 103*' | 'XL/Green'  |
-			| '200,000'  | 'Purchase order 103*' | '5'           | 'Store 03' | 'Purchase order 103*' | '36/Yellow' |
-			| '200,000'  | 'Purchase order 103*' | '6'           | 'Store 03' | 'Purchase order 103*' | '38/Yellow' |
-			| '200,000'  | 'Purchase order 103*' | '7'           | 'Store 03' | 'Purchase order 103*' | '36/Red'    |
-			| '200,000'  | 'Purchase order 103*' | '8'           | 'Store 03' | 'Purchase order 103*' | '38/Black'  |
-			| '200,000'  | 'Purchase order 103*' | '9'           | 'Store 03' | 'Purchase order 103*' | '36/18SD'   |
-			| '200,000'  | 'Purchase order 103*' | '10'          | 'Store 03' | 'Purchase order 103*' | '37/18SD'   |
-			| '200,000'  | 'Purchase order 103*' | '11'          | 'Store 03' | 'Purchase order 103*' | '38/18SD'   |
-			| '200,000'  | 'Purchase order 103*' | '12'          | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
+			| 'Quantity' | 'Recorder'            | 'Store'    | 'Order'             | 'Item key'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'S/Yellow'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'XS/Blue'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'M/White'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'XL/Green'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '36/Yellow' |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '38/Yellow' |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '36/Red'    |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '38/Black'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '36/18SD'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '37/18SD'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '38/18SD'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
 		И Я закрыл все окна клиентского приложения
 	* Changing the quantity by Item Dress 'S/Yellow' by 250 pcs
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
@@ -73,8 +73,8 @@ In order not to double entries in the registers
 	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" не содержит строки:
-			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
-			| '200,000'  | 'Purchase order 103*' | '12'          | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
+			| 'Quantity' | 'Recorder'            | 'Store'    | 'Order'             | 'Item key'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
 	
 Сценарий: _019903 add line in Purchase order and chek postings changes
 	* Add line in the order
@@ -193,20 +193,20 @@ In order not to double entries in the registers
 	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" не содержит строки:
-			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
-			| '250,000'  | 'Purchase order 103*' | '1'           | 'Store 03' | 'Purchase order 103*' | 'S/Yellow'  |
-			| '200,000'  | 'Purchase order 103*' | '2'           | 'Store 03' | 'Purchase order 103*' | 'XS/Blue'   |
-			| '200,000'  | 'Purchase order 103*' | '3'           | 'Store 03' | 'Purchase order 103*' | 'M/White'   |
-			| '200,000'  | 'Purchase order 103*' | '4'           | 'Store 03' | 'Purchase order 103*' | 'XL/Green'  |
-			| '200,000'  | 'Purchase order 103*' | '5'           | 'Store 03' | 'Purchase order 103*' | '36/Yellow' |
-			| '200,000'  | 'Purchase order 103*' | '6'           | 'Store 03' | 'Purchase order 103*' | '38/Yellow' |
-			| '200,000'  | 'Purchase order 103*' | '7'           | 'Store 03' | 'Purchase order 103*' | '36/Red'    |
-			| '200,000'  | 'Purchase order 103*' | '8'           | 'Store 03' | 'Purchase order 103*' | '38/Black'  |
-			| '200,000'  | 'Purchase order 103*' | '9'           | 'Store 03' | 'Purchase order 103*' | '36/18SD'   |
-			| '200,000'  | 'Purchase order 103*' | '10'          | 'Store 03' | 'Purchase order 103*' | '37/18SD'   |
-			| '200,000'  | 'Purchase order 103*' | '11'          | 'Store 03' | 'Purchase order 103*' | '38/18SD'   |
-			| '100,000'  | 'Purchase order 103*' | '12'          | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
-			| '80,000'   | 'Purchase order 103*' | '13'          | 'Store 03' | 'Purchase order 103*' | '39/19SD'   |
+			| 'Quantity' | 'Recorder'            | 'Store'    | 'Order'             | 'Item key'  |
+			| '250,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'S/Yellow'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'XS/Blue'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'M/White'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'XL/Green'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '36/Yellow' |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '38/Yellow' |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '36/Red'    |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '38/Black'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '36/18SD'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '37/18SD'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '38/18SD'   |
+			| '100,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
+			| '80,000'   | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '39/19SD'   |
  
 Сценарий: _019906 post a document previously marked for deletion and check of postings
 	* Post a document previously marked for deletion
@@ -221,20 +221,20 @@ In order not to double entries in the registers
 	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
-			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
-			| '250,000'  | 'Purchase order 103*' | '1'           | 'Store 03' | 'Purchase order 103*' | 'S/Yellow'  |
-			| '200,000'  | 'Purchase order 103*' | '2'           | 'Store 03' | 'Purchase order 103*' | 'XS/Blue'   |
-			| '200,000'  | 'Purchase order 103*' | '3'           | 'Store 03' | 'Purchase order 103*' | 'M/White'   |
-			| '200,000'  | 'Purchase order 103*' | '4'           | 'Store 03' | 'Purchase order 103*' | 'XL/Green'  |
-			| '200,000'  | 'Purchase order 103*' | '5'           | 'Store 03' | 'Purchase order 103*' | '36/Yellow' |
-			| '200,000'  | 'Purchase order 103*' | '6'           | 'Store 03' | 'Purchase order 103*' | '38/Yellow' |
-			| '200,000'  | 'Purchase order 103*' | '7'           | 'Store 03' | 'Purchase order 103*' | '36/Red'    |
-			| '200,000'  | 'Purchase order 103*' | '8'           | 'Store 03' | 'Purchase order 103*' | '38/Black'  |
-			| '200,000'  | 'Purchase order 103*' | '9'           | 'Store 03' | 'Purchase order 103*' | '36/18SD'   |
-			| '200,000'  | 'Purchase order 103*' | '10'          | 'Store 03' | 'Purchase order 103*' | '37/18SD'   |
-			| '200,000'  | 'Purchase order 103*' | '11'          | 'Store 03' | 'Purchase order 103*' | '38/18SD'   |
-			| '100,000'  | 'Purchase order 103*' | '12'          | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
-			| '80,000'   | 'Purchase order 103*' | '13'          | 'Store 03' | 'Purchase order 103*' | '39/19SD'   |
+			| 'Quantity' | 'Recorder'            | 'Store'    | 'Order'             | 'Item key'  |
+			| '250,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'S/Yellow'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'XS/Blue'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'M/White'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'XL/Green'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '36/Yellow' |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '38/Yellow' |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '36/Red'    |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '38/Black'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '36/18SD'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '37/18SD'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '38/18SD'   |
+			| '100,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
+			| '80,000'   | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '39/19SD'   |
 		И Я закрываю текущее окно
 
 
@@ -264,20 +264,20 @@ In order not to double entries in the registers
 	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
-			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
-			| '250,000'  | 'Purchase order 103*' | '1'           | 'Store 03' | 'Purchase order 103*' | 'S/Yellow'  |
-			| '200,000'  | 'Purchase order 103*' | '2'           | 'Store 03' | 'Purchase order 103*' | 'XS/Blue'   |
-			| '200,000'  | 'Purchase order 103*' | '3'           | 'Store 03' | 'Purchase order 103*' | 'M/White'   |
-			| '200,000'  | 'Purchase order 103*' | '4'           | 'Store 03' | 'Purchase order 103*' | 'XL/Green'  |
-			| '200,000'  | 'Purchase order 103*' | '5'           | 'Store 03' | 'Purchase order 103*' | '36/Yellow' |
-			| '200,000'  | 'Purchase order 103*' | '6'           | 'Store 03' | 'Purchase order 103*' | '38/Yellow' |
-			| '200,000'  | 'Purchase order 103*' | '7'           | 'Store 03' | 'Purchase order 103*' | '36/Red'    |
-			| '200,000'  | 'Purchase order 103*' | '8'           | 'Store 03' | 'Purchase order 103*' | '38/Black'  |
-			| '200,000'  | 'Purchase order 103*' | '9'           | 'Store 03' | 'Purchase order 103*' | '36/18SD'   |
-			| '200,000'  | 'Purchase order 103*' | '10'          | 'Store 03' | 'Purchase order 103*' | '37/18SD'   |
-			| '200,000'  | 'Purchase order 103*' | '11'          | 'Store 03' | 'Purchase order 103*' | '38/18SD'   |
-			| '100,000'  | 'Purchase order 103*' | '12'          | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
-			| '80,000'   | 'Purchase order 103*' | '13'          | 'Store 03' | 'Purchase order 103*' | '39/19SD'   |
+			| 'Quantity' | 'Recorder'            | 'Store'    | 'Order'             | 'Item key'  |
+			| '250,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'S/Yellow'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'XS/Blue'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'M/White'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | 'XL/Green'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '36/Yellow' |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '38/Yellow' |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '36/Red'    |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '38/Black'  |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '36/18SD'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '37/18SD'   |
+			| '200,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '38/18SD'   |
+			| '100,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
+			| '80,000'   | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '39/19SD'   |
 		И Я закрываю текущее окно
 	
 Сценарий: _019908 create Purchase invoice and Goods receipt based on a Purchase order with that contains packages

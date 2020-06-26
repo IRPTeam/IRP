@@ -3,7 +3,7 @@
 @Positive
 
 
-Функционал: объединение товара в наборы
+Функционал: Bundling
 
 As a sales manager
 I want to create Bundle

@@ -123,10 +123,10 @@ For tracking an item that has been ordered from a vendor
 			| 'Item key' |
 	* Checking Purchase Order N2 posting by register Order Balance
 		Тогда таблица "List" содержит строки:
-			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key' |
-			| '100,000'  | 'Purchase order 2*' | '1'           | 'Store 01' | 'Purchase order 2*' | 'M/White' |
-			| '200,000'  | 'Purchase order 2*' | '2'           | 'Store 01' | 'Purchase order 2*' | 'L/Green'  |
-			| '300,000'  | 'Purchase order 2*' | '3'           | 'Store 01' | 'Purchase order 2*' | '36/Yellow'   |
+			| 'Quantity' | 'Recorder'          | 'Store'    | 'Order'             | 'Item key' |
+			| '100,000'  | 'Purchase order 2*' | 'Store 01' | 'Purchase order 2*' | 'M/White' |
+			| '200,000'  | 'Purchase order 2*' | 'Store 01' | 'Purchase order 2*' | 'L/Green'  |
+			| '300,000'  | 'Purchase order 2*' | 'Store 01' | 'Purchase order 2*' | '36/Yellow'   |
 
 Сценарий: _017003 creating document Purchase order - Goods receipt is used
 	* Opening a form to create Purchase Order

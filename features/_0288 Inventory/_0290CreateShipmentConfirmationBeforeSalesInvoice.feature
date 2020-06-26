@@ -54,17 +54,17 @@ To sell a product when customer first receives items and then the documents arri
 Сценарий: _029003 checking Sales order posting (store use Shipment confirmation, Shipment confirmation before Sales invoice) by register OrderBalance
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 	Тогда таблица "List" содержит строки:
-		| 'Quantity' | 'Recorder'         | 'Line number' | 'Store'    | 'Order'            | 'Item key'  |
-		| '12,000'   | 'Sales order 180*' | '1'           | 'Store 02' | 'Sales order 180*' | '36/Yellow' |
-		| '10,000'   | 'Sales order 180*' | '2'           | 'Store 02' | 'Sales order 180*' | '36/Red'    |
+		| 'Quantity' | 'Recorder'         | 'Store'    | 'Order'            | 'Item key'  |
+		| '12,000'   | 'Sales order 180*' | 'Store 02' | 'Sales order 180*' | '36/Yellow' |
+		| '10,000'   | 'Sales order 180*' | 'Store 02' | 'Sales order 180*' | '36/Red'    |
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: _029004 checking Sales order posting (store use Shipment confirmation, Shipment confirmation before Sales invoice) by register StockReservation
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
 	Тогда таблица "List" содержит строки:
-		| 'Quantity' | 'Recorder'         | 'Line number' | 'Store'    | 'Item key'  |
-		| '12,000'   | 'Sales order 180*' | '1'           | 'Store 02' | '36/Yellow' |
-		| '10,000'   | 'Sales order 180*' | '2'           | 'Store 02' | '36/Red'    |
+		| 'Quantity' | 'Recorder'         | 'Store'    | 'Item key'  |
+		| '12,000'   | 'Sales order 180*' | 'Store 02' | '36/Yellow' |
+		| '10,000'   | 'Sales order 180*' | 'Store 02' | '36/Red'    |
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: _029005 checking Sales order posting (store use Shipment confirmation, Shipment confirmation before Sales invoice) by register InventoryBalance
@@ -78,9 +78,9 @@ To sell a product when customer first receives items and then the documents arri
 Сценарий: _029006 checking Sales order posting (store use Shipment confirmation, Shipment confirmation before Sales invoice) by register GoodsInTransitOutgoing
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
 	Тогда таблица "List" содержит строки:
-		| 'Quantity' | 'Recorder'         | 'Shipment basis'   | 'Line number' | 'Store'    | 'Item key'  |
-		| '12,000'   | 'Sales order 180*' | 'Sales order 180*' | '1'           | 'Store 02' | '36/Yellow' |
-		| '10,000'   | 'Sales order 180*' | 'Sales order 180*' | '2'           | 'Store 02' | '36/Red'    |
+		| 'Quantity' | 'Recorder'         | 'Shipment basis'   | 'Store'    | 'Item key'  |
+		| '12,000'   | 'Sales order 180*' | 'Sales order 180*' | 'Store 02' | '36/Yellow' |
+		| '10,000'   | 'Sales order 180*' | 'Sales order 180*' | 'Store 02' | '36/Red'    |
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: _029007 checking the absence posting of Sales order (store use Shipment confirmation, Shipment confirmation before Sales invoice) by register StockBalance
@@ -279,17 +279,17 @@ To sell a product when customer first receives items and then the documents arri
 		* Checking posting by register Order Balance
 			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 			Тогда таблица "List" содержит строки:
-				| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Order'            | 'Item key'  |
-				| '12,000'   | 'Sales invoice 180*' | '1'           | 'Store 02' | 'Sales order 180*' | '36/Yellow' |
-				| '10,000'   | 'Sales invoice 180*' | '2'           | 'Store 02' | 'Sales order 180*' | '36/Red'    |
-				| '10,000'   | 'Sales invoice 180*' | '3'           | 'Store 02' | 'Sales order 181*' | '36/Red'    |
+				| 'Quantity' | 'Recorder'           | 'Store'    | 'Order'            | 'Item key'  |
+				| '12,000'   | 'Sales invoice 180*' | 'Store 02' | 'Sales order 180*' | '36/Yellow' |
+				| '10,000'   | 'Sales invoice 180*' | 'Store 02' | 'Sales order 180*' | '36/Red'    |
+				| '10,000'   | 'Sales invoice 180*' | 'Store 02' | 'Sales order 181*' | '36/Red'    |
 			И Я закрыл все окна клиентского приложения
 		* Checking posting by register OrderReservation
 			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderReservation'
 			Тогда таблица "List" содержит строки:
-				| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Item key'  |
-				| '12,000'   | 'Sales invoice 180*' | '1'           | 'Store 02' | '36/Yellow' |
-				| '20,000'   | 'Sales invoice 180*' | '2'           | 'Store 02' | '36/Red'    |
+				| 'Quantity' | 'Recorder'           | 'Store'    | 'Item key'  |
+				| '12,000'   | 'Sales invoice 180*' | 'Store 02' | '36/Yellow' |
+				| '20,000'   | 'Sales invoice 180*' | 'Store 02' | '36/Red'    |
 			И Я закрыл все окна клиентского приложения
 		* Checking posting by register OrderReservation
 			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.SalesTurnovers'
@@ -302,10 +302,10 @@ To sell a product when customer first receives items and then the documents arri
 		* Checking posting by register ShipmentOrders
 			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.ShipmentOrders'
 			Тогда таблица "List" содержит строки:
-				| 'Quantity' | 'Recorder'           | 'Line number' | 'Order'            | 'Shipment confirmation'      | 'Item key'  |
-				| '12,000'   | 'Sales invoice 180*' | '1'           | 'Sales order 180*' | 'Shipment confirmation 180*' | '36/Yellow' |
-				| '10,000'   | 'Sales invoice 180*' | '2'           | 'Sales order 180*' | 'Shipment confirmation 180*' | '36/Red'    |
-				| '10,000'   | 'Sales invoice 180*' | '3'           | 'Sales order 181*' | 'Shipment confirmation 181*' | '36/Red'    |
+				| 'Quantity' | 'Recorder'           | 'Order'            | 'Shipment confirmation'      | 'Item key'  |
+				| '12,000'   | 'Sales invoice 180*' | 'Sales order 180*' | 'Shipment confirmation 180*' | '36/Yellow' |
+				| '10,000'   | 'Sales invoice 180*' | 'Sales order 180*' | 'Shipment confirmation 180*' | '36/Red'    |
+				| '10,000'   | 'Sales invoice 180*' | 'Sales order 181*' | 'Shipment confirmation 181*' | '36/Red'    |
 			И Я закрыл все окна клиентского приложения
 
 Сценарий: _029014 availability check for selection shipment confirmation for which sales invoice has already been issued

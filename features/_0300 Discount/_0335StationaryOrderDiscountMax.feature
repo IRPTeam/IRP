@@ -6,7 +6,7 @@
 @SpecialOffersMaxInRow
 
 
-Функционал: создание заказа со скидкой по видам цены (Type joings MaxInRow, Special Offers MaxInRow)
+Функционал: create заказа со скидкой по видам цены (Type joings MaxInRow, Special Offers MaxInRow)
 
 Как тестировщик
 Я хочу проверить порядок применения скидок в общей группе SpecialOffersMaxInRow, подгруппа Максимум (MaxInRow)
@@ -38,7 +38,7 @@
 	И    Я закрыл все окна клиентского приложения
 
 
-Сценарий: _033502 создание заказа со скидкой во виду цен Discount Price 1 (цена с НДС)
+Сценарий: _033502 create заказа со скидкой во виду цен Discount Price 1 (цена с НДС)
 # Скидка Discount Price 1 отрабатывает по соглашению Basic Price (цена включает НДС), параллельно по этому соглашению работает скидка Discount Price 2 (цены ниже чем Discount Price 1)
 # В группе максимум находится 2 скидки Discount Price 1 и Discount Price 2
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -117,7 +117,7 @@
 
 
 
-Сценарий: _033503 создание заказа со скидкой во виду цен Discount Price 2 (цена с НДС)
+Сценарий: _033503 create заказа со скидкой во виду цен Discount Price 2 (цена с НДС)
 # Скидка Discount Price 2 отрабатывает по соглашению Basic Price (цена включает НДС), параллельно по этому соглашению работает скидка Discount Price 1 (цены ниже чем Discount Price 1)
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
@@ -220,7 +220,7 @@
 		| 'Partner'   | 'Σ'         |
 		| 'Lomaniti' | '15 145,00' |
 
-Сценарий: _033505 создание заказа со скидкой во виду цен Discount Price 1 without Vat (цена не включает НДС) - ручное назначение в группе минимум со скидкой Discount Price 2 without Vat
+Сценарий: _033505 create заказа со скидкой во виду цен Discount Price 1 without Vat (цена не включает НДС) - ручное назначение в группе минимум со скидкой Discount Price 2 without Vat
 	Когда переношу скидку Discount 2 without Vat из группы Maximum в Minimum
 	Когда меняю ручное проведение скидки Discount 2 without Vat
 	Когда переношу скидку Discount 1 without Vat из группы Maximum в группу Minimum
@@ -246,7 +246,7 @@
 	# 	| 'Kalipso' | '6 639,93' |
 
 
-Сценарий: _033506 создание заказа со скидкой во виду цен Discount Price 2 without Vat (цена не включает НДС)- ручное назначение в группе минимум со скидкой Discount Price 1 without Vat
+Сценарий: _033506 create заказа со скидкой во виду цен Discount Price 2 without Vat (цена не включает НДС)- ручное назначение в группе минимум со скидкой Discount Price 1 without Vat
 	Когда создаю заказ на Kalipso Basic Agreements, without VAT, TRY (Dress и Shirt)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:

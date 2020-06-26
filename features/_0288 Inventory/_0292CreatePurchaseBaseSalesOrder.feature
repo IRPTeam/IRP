@@ -363,7 +363,7 @@ To implement a sales-for-purchase scheme
 		И в таблице "ItemList" я активизирую поле "Procurement method"
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Purchase'
 		И я перехожу к следующему реквизиту
-		И в таблице "ItemList" я активиQ'зирую поле "Q"
+		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле ' я ввожу текст '10,000'
 		И в таблице "ItemList" я завершаю редактирование строки
 	* Change of document number 455
@@ -453,7 +453,6 @@ To implement a sales-for-purchase scheme
 		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Main Company'     | 'Sales order 455*'      | 'Store 01'  | 'XS/Blue'   | '*'       | '*'                        | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company'     | 'Sales order 455*'      | 'Store 01'  | '38/Yellow' | '*'       | '*'                        | ''                     |
 		| ''                                           | 'Expense'     | '*'         | '1'         | 'Main Company'     | 'Sales order 455*'      | 'Store 01'  | '36/18SD'   | '*'       | '*'                        | ''                     |
-
 		И Я закрыл все окна клиентского приложения
 	* Create one more Sales order
 		Когда создаю заказ на Ferron BP Basic Agreements, TRY (Dress -10 и Trousers - 5)

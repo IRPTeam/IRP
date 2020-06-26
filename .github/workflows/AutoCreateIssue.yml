@@ -1,0 +1,17 @@
+# This is a basic workflow to help you get started with Actions
+
+name: AutoCreateIssue
+on:
+    issues:
+        types: [assigned]
+    issue_comment:
+        types: [created]
+
+jobs:
+    create_issue_branch_job:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Create Issue Branch
+          uses: robvanderleek/create-issue-branch@master
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

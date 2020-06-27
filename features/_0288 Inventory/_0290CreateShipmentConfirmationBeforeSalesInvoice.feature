@@ -116,9 +116,9 @@ To sell a product when customer first receives items and then the documents arri
 Сценарий: _029011 checking Shipment confirmation posting (store use Shipment confirmation, Shipment confirmation before Sales invoice) by register ShipmentOrders
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.ShipmentOrders'
 	Тогда таблица "List" содержит строки:
-		| 'Quantity' | 'Recorder'                   | 'Line number' | 'Order'            | 'Shipment confirmation'      | 'Item key'  |
-		| '12,000'   | 'Shipment confirmation 180*' | '1'           | 'Sales order 180*' | 'Shipment confirmation 180*' | '36/Yellow' |
-		| '10,000'   | 'Shipment confirmation 180*' | '2'           | 'Sales order 180*' | 'Shipment confirmation 180*' | '36/Red'    |
+		| 'Quantity' | 'Recorder'                   | 'Order'            | 'Shipment confirmation'      | 'Item key'  |
+		| '12,000'   | 'Shipment confirmation 180*' | 'Sales order 180*' | 'Shipment confirmation 180*' | '36/Yellow' |
+		| '10,000'   | 'Shipment confirmation 180*' | 'Sales order 180*' | 'Shipment confirmation 180*' | '36/Red'    |
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: _029012 creating document Sales order and Shipment confirmation (partner Kalipso, one Store use Shipment confirmation and Second not)

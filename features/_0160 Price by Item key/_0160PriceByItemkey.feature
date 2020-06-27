@@ -1380,6 +1380,7 @@ To sell and purchase goods and services
 			И в таблице "List" я выбираю текущую строку
 		* Заполнение прайс-листа с помощью расчета цен
 			И я нажимаю на кнопку 'Fill by rules'
+			И Пауза 2
 			И я меняю значение переключателя 'PriceListType' на 'By Item keys'
 			И в таблице "PriceTypes" я изменяю флаг 'Use'
 			И в таблице "PriceTypes" я завершаю редактирование строки

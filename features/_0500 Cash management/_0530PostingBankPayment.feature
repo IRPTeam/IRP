@@ -24,7 +24,6 @@
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
 		И     элемент формы с именем "Currency" стал равен 'TRY'
-		И     элемент формы с именем "Payee" стал равен 'Company Ferron BP'
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Payee'             | 'Agreement'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '136 000,00' | 'Purchase invoice 1*' |
@@ -40,7 +39,6 @@
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Account" стал равен 'Bank account, USD'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
-		И     элемент формы с именем "Payee" стал равен 'Company Ferron BP'
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Payee'             | 'Agreement'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '136 000,00' | 'Purchase invoice 1*' |
@@ -424,7 +422,6 @@
 		И     элемент формы с именем "Description" доступен
 		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
 		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Payee" доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "TransitAccount" не доступен
 	И я проверяю отображение табличной части
@@ -454,7 +451,6 @@
 		И     элемент формы с именем "Description" доступен
 		И     элемент формы с именем "TransactionType" стал равен 'Cash transfer order'
 		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Payee" не доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "TransitAccount" не доступен
 	И я проверяю отображение табличной части

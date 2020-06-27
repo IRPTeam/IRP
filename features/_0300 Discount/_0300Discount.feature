@@ -638,7 +638,7 @@ For calculating special offers in documents
 
 
 Сценарий: _030013 create Special Offer Rules (agreement)
-	* Selecting external processor to create a special offer rule
+	Когда выбираю обработку для создания правила скидки
 	И в поле 'ENG' я ввожу текст 'Discount on Basic Agreements'
 	И в поле 'TR' я ввожу текст 'Discount on Basic Agreements'
 	И я нажимаю на кнопку 'Ok'
@@ -659,7 +659,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку 'OK'
 	Когда сохраняю настройки скидки
 	Тогда я проверяю наличие элемента справочника "SpecialOfferRules" со значением поля "Description_en" "Discount on Basic Agreements"
-	* Selecting external processor to create a special offer rule
+	Когда выбираю обработку для создания правила скидки
 	И в поле 'ENG' я ввожу текст 'Discount on Basic Agreements without Vat'
 	И в поле 'TR' я ввожу текст 'Discount on Basic Agreements without Vat'
 	И я нажимаю на кнопку 'Ok'
@@ -683,7 +683,7 @@ For calculating special offers in documents
 # Сценарий: create Special Offer Rules (вхождение клиента в сегмент)
 
 Сценарий: _030014 create Special Offer (group Maximum by row/Special Offers Maximum by row)
-	* Select external data processor for special offer rule
+	Когда выбираю обработку для создания скидки
 	И в поле 'ENG' я ввожу текст 'Special Offers'
 	И в поле 'TR' я ввожу текст 'Special Offers'
 	И я нажимаю на кнопку 'Ok'
@@ -702,7 +702,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку 'Save and close'
 	И Пауза 10
 	Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Special Offers"
-	* Select external data processor for special offer rule
+	Когда выбираю обработку для создания скидки
 	И в поле 'ENG' я ввожу текст 'Maximum'
 	И в поле 'TR' я ввожу текст 'Maximum'
 	И я нажимаю на кнопку 'Ok'

@@ -364,7 +364,7 @@ To implement a sales-for-purchase scheme
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Purchase'
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле ' я ввожу текст '10,000'
+		И в таблице "ItemList" в поле "Q" я ввожу текст '10,000'
 		И в таблице "ItemList" я завершаю редактирование строки
 	* Change of document number 455
 		И я перехожу к закладке "Other"

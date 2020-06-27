@@ -23,7 +23,6 @@
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
 		И     элемент формы с именем "Currency" стал равен 'TRY'
-		И     элемент формы с именем "Payer" стал равен 'Company Ferron BP'
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Agreement'             | 'Amount'   | 'Payer'             | 'Basis document'   | 'Planing transaction basis' |
 			| 'Ferron BP' | 'Basic Agreements, TRY' | '4 250,00' | 'Company Ferron BP' | 'Sales invoice 1*' | ''                          |
@@ -37,7 +36,6 @@
 			| 'USD'      | 'Bank account, USD' |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Currency" стал равен 'USD'
-		И     элемент формы с именем "Payer" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
 		И     элемент формы с именем "Account" стал равен 'Bank account, USD'
 		И     таблица "PaymentList" содержит строки:
@@ -440,7 +438,6 @@
 		И     элемент формы с именем "Description" доступен
 		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
 		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Payer" доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "TransitAccount" не доступен
 		И     элемент формы с именем "CurrencyExchange" не доступен
@@ -467,7 +464,6 @@
 		И     элемент формы с именем "Description" доступен
 		И     элемент формы с именем "TransactionType" стал равен 'Currency exchange'
 		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Payer" не доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "TransitAccount" доступен
 	И я проверяю отображение табличной части
@@ -492,7 +488,6 @@
 		И     элемент формы с именем "Description" доступен
 		И     элемент формы с именем "TransactionType" стал равен 'Cash transfer order'
 		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Payer" не доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "TransitAccount" не доступен
 	И я проверяю отображение табличной части

@@ -137,6 +137,12 @@ Procedure SearchByBarcode(Command, Object, Form) Export
 	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject);
 EndProcedure
 
+#Region PickUpItems
+
+Procedure OpenPickupItems(Object, Form, Command) Export
+	DocumentsClient.OpenPickupItems(Object, Form, Command); 
+EndProcedure
+
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	If NOT ValueIsFilled(Result)
 		OR Not AdditionalParameters.Property("Object")
@@ -159,3 +165,5 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	EndDo;
 	ItemListOnChange(AdditionalParameters.Object, AdditionalParameters.Form, Undefined, Undefined);
 EndProcedure
+
+#EndRegion

@@ -180,6 +180,11 @@ Procedure DateOnChange(Item)
 	DocBundlingClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure OpenPickupItems(Command)
+	DocBundlingClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
+
 #Region AddAttributes
 
 &AtClient

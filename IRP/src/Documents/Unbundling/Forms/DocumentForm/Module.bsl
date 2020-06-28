@@ -42,6 +42,11 @@ Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
+&AtClient
+Procedure OpenPickupItems(Command)
+	DocUnbundlingClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
+
 #EndRegion
 
 &AtClient

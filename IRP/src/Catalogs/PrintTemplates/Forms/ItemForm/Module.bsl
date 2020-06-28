@@ -22,7 +22,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	DataSourceScheme = GenerateDataSourceScheme();
 	
-	
+	GetDefaultAtServer();
 EndProcedure
 
 &AtClient

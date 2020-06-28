@@ -67,11 +67,18 @@ Procedure HTMLGalleryOnClick(Item, EventData, StandardProcessing)
 		Return;
 	EndIf;
 	
+	
 	If EventData.Event.propertyName = "call1C" Then
-//		EventData.Event.Data
-	A = 1;
-	s=A;
+		Array = New Array;
+		Data = CommonFunctionsServer.DeserializeJSON(EventData.Event.Data);
+		If Data.value = "selected_images" Then
+			ArrayPictureIDs = StrSplit(Data.ids, ",");
+			Array = PictureViewerServer.GetFileRefsByFileIDs(ArrayPictureIDs);
+		EndIf;
+		Close(Array);
 	EndIf;
+		
+	
 EndProcedure
 
 

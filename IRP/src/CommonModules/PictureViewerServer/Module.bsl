@@ -95,6 +95,19 @@ Function GetFileRefByFileID(FileID) Export
 	EndIf;
 EndFunction
 
+Function GetFileRefsByFileIDs(FileIDs) Export
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	Files.Ref
+		|FROM
+		|	Catalog.Files AS Files
+		|WHERE
+		|	Files.FileID In (&FileIDs)";
+	Query.SetParameter("FileIDs", FileIDs);
+	Return Query.Execute().Unload().UnloadColumn("Ref");
+EndFunction
+
 Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefined) Export
 	Query = New Query();
 	If Not DirectLink And TypeOf(OwnerRef) = Type("CatalogRef.Items") Then

@@ -310,7 +310,8 @@ Function HTMLEvent(Form, Object, Val Data, AddInfo = Undefined) Export
 	If Data.value = "add_picture" Then
 		Upload(Form, Object, PictureViewerServer.GetIntegrationSettingsPicture().DefaultPictureStorageVolume);
 	ElsIf Data.value = "addImagesFromGallery" Then
-		OpenForm("CommonForm.PictureGalleryForm");
+		NotifyOnClose = New NotifyDescription("AddPictureFromGallery", ThisObject, New Structure("Object, Form", Object, Form));
+		OpenForm("CommonForm.PictureGalleryForm", , ThisObject, , , , NotifyOnClose);
 	ElsIf Data.value = "update_slider" Then	
 		Notify("UpdateObjectPictures_UpdateAll", , Form.UUID);
 	ElsIf Data.value = "remove_picture" Then
@@ -332,6 +333,25 @@ Procedure HTMLEventAction(Val EventName, Val Parameter, Val Source, Form) Export
 		HTMLWindow.removeCurrentSlide(Parameter);		
 	ElsIf EventName = "UpdateObjectPictures_UpdateAll" AND Source = Form.UUID Then
 		UpdateHTMLPicture(Form.Items.PictureViewHTML, Form);
+	EndIf;
+EndProcedure
+
+Procedure AddPictureFromGallery(ClosureResult, AdditionalParameters) Export
+	
+	If Not ValueIsFilled(ClosureResult) Then
+		Return;
+	EndIf;
+	
+	isAddedNew = False;
+	For Each FileRef In ClosureResult Do
+		If Not PictureViewerServer.IsFileRefBelongToOwner(FileRef, AdditionalParameters.Object.Ref) Then
+			isAddedNew = True;
+			PictureViewerServer.LinkFileToObject(FileRef, AdditionalParameters.Object.Ref);
+		EndIf;
+	EndDo;
+	
+	If isAddedNew Then
+		Notify("UpdateObjectPictures_UpdateAll", , AdditionalParameters.Form.UUID);
 	EndIf;
 EndProcedure
 

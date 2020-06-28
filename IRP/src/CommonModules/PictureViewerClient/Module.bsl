@@ -315,7 +315,8 @@ Function HTMLEvent(Form, Object, Val Data, AddInfo = Undefined) Export
 	ElsIf Data.value = "update_slider" Then	
 		Notify("UpdateObjectPictures_UpdateAll", , Form.UUID);
 	ElsIf Data.value = "remove_picture" Then
-		PictureViewerServer.UnlinkFileFromObject(PictureViewerServer.GetFileRefByFileID(Data.ID), Object.Ref);
+		FileRef = PictureViewerServer.GetFileRefByFileID(Data.ID);
+		PictureViewerServer.UnlinkFileFromObject(FileRef.Ref, Object.Ref);
 		Notify("UpdateObjectPictures_Delete", Data.ID, Form.UUID);
 	EndIf;
 EndFunction

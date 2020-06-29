@@ -239,28 +239,16 @@ Function PrintLabels(Object, Form) Export
 						Drawing.Picture = New Picture();
 						ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(QuerySelection.Item);
 						If ArrayOfFiles.Count() Then
-							FileInfo = PictureViewerServer.GetFileInfo(ArrayOfFiles[0]);	
-							IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(ServiceSystemServer.GetObjectAttribute(ArrayOfFiles[0], "Volume"));
-							TmpAddress = GetPictureAndPutToTempStorage(ArrayOfFiles[0]
-	                                     , New UUID
-	                                     , FileInfo.Preview1URI
-	                                     , IntegrationSettings.Preview1GETIntegrationSettings);
-							If IsTempStorageURL(TmpAddress) Then
-								Drawing.Picture = GetFromTempStorage(TmpAddress);
+							If ArrayOfFiles[0].isPreviewSet Then
+								Drawing.Picture = ArrayOfFiles[0].Preview.Get();
 							EndIf;
 						EndIf;
 					ElsIf Drawing.Name = "ItemKeyPicture" Then
 						Drawing.Picture = New Picture();
 						ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(QuerySelection.ItemKey);
 						If ArrayOfFiles.Count() Then
-							FileInfo = PictureViewerServer.GetFileInfo(ArrayOfFiles[0]);	
-							IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(ServiceSystemServer.GetObjectAttribute(ArrayOfFiles[0], "Volume"));
-							TmpAddress = GetPictureAndPutToTempStorage(ArrayOfFiles[0]
-	                                     , New UUID
-	                                     , FileInfo.Preview1URI
-	                                     , IntegrationSettings.Preview1GETIntegrationSettings);
-							If IsTempStorageURL(TmpAddress) Then
-								Drawing.Picture = GetFromTempStorage(TmpAddress);
+							If ArrayOfFiles[0].isPreviewSet Then
+								Drawing.Picture = ArrayOfFiles[0].Preview.Get();
 							EndIf;
 						EndIf;
 					Endif;

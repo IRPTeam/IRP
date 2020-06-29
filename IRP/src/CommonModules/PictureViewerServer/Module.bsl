@@ -6,7 +6,7 @@ Function MD5ByBinaryData(TmpAddress) Export
 EndFunction
 
 Function PictureURLStructure()
-	Return New Structure("PictureURL, isLocalPictureURL, Preview1URL, isLocalPreview1URL", "", False, "", False);
+	Return New Structure("PictureURL, isLocalPictureURL", "", False);
 EndFunction
 
 Function GetPictureURL(RefStructure) Export
@@ -19,11 +19,6 @@ Function GetPictureURL(RefStructure) Export
 	If RefStructure.isFilledVolume Then
 		Result.PictureURL = GetVolumeURLByIntegrationSettings(RefStructure.GETIntegrationSettings, RefStructure.URI);
 		Result.isLocalPictureURL = RefStructure.isLocalPictureURL;
-		If RefStructure.UsePreview1 Then
-			Result.Preview1URL = GetVolumeURLByIntegrationSettings(RefStructure.Preview1GETIntegrationSettings
-					, RefStructure.Preview1URI);
-			Result.isLocalPreview1URL =	RefStructure.isLocalPreview1URL;
-		EndIf;
 	EndIf;
 	Return Result;
 EndFunction
@@ -44,14 +39,9 @@ Function GetFileRefByMD5(MD5) Export
 		|	Files.Ref,
 		|	NOT Files.Volume = VALUE(Catalog.IntegrationSettings.EmptyRef) AS isFilledVolume,
 		|	Files.Volume.GETIntegrationSettings AS GETIntegrationSettings,
-		|	Files.Volume.UsePreview1 AS UsePreview1,
-		|	Files.Volume.Preview1GETIntegrationSettings AS Preview1GETIntegrationSettings,
 		|	Files.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 		|		isLocalPictureURL,
-		|	Files.Volume.Preview1GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
-		|		isLocalPreview1URL,
-		|	Files.URI,
-		|	Files.Preview1URI
+		|	Files.URI
 		|FROM
 		|	Catalog.Files AS Files
 		|WHERE
@@ -73,14 +63,9 @@ Function GetFileRefByFileID(FileID) Export
 		|	Files.Ref,
 		|	NOT Files.Volume = VALUE(Catalog.IntegrationSettings.EmptyRef) AS isFilledVolume,
 		|	Files.Volume.GETIntegrationSettings AS GETIntegrationSettings,
-		|	Files.Volume.UsePreview1 AS UsePreview1,
-		|	Files.Volume.Preview1GETIntegrationSettings AS Preview1GETIntegrationSettings,
 		|	Files.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 		|		isLocalPictureURL,
-		|	Files.Volume.Preview1GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
-		|		isLocalPreview1URL,
-		|	Files.URI,
-		|	Files.Preview1URI
+		|	Files.URI
 		|FROM
 		|	Catalog.Files AS Files
 		|WHERE
@@ -89,8 +74,8 @@ Function GetFileRefByFileID(FileID) Export
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
-	Answer = New Structure("Ref, isFilledVolume, GETIntegrationSettings, UsePreview1, Preview1GETIntegrationSettings,
-							|isLocalPictureURL, isLocalPreview1URL, URI, Preview1URI");
+	Answer = New Structure("Ref, isFilledVolume, GETIntegrationSettings,
+							|isLocalPictureURL, URI");
 	
 	If QuerySelection.Next() Then
 		FillPropertyValues(Answer, QuerySelection);
@@ -142,14 +127,9 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 			|	AttachedFiles.File.FileID AS FileID,
 			|	NOT AttachedFiles.File.Volume = VALUE(Catalog.IntegrationSettings.EmptyRef) AS isFilledVolume,
 			|	AttachedFiles.File.Volume.GETIntegrationSettings AS GETIntegrationSettings,
-			|	AttachedFiles.File.Volume.UsePreview1 AS UsePreview1,
-			|	AttachedFiles.File.Volume.Preview1GETIntegrationSettings AS Preview1GETIntegrationSettings,
 			|	AttachedFiles.File.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 			|		isLocalPictureURL,
-			|	AttachedFiles.File.Volume.Preview1GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
-			|		isLocalPreview1URL,
-			|	AttachedFiles.File.URI AS URI,
-			|	AttachedFiles.File.Preview1URI AS Preview1URI
+			|	AttachedFiles.File.URI AS URI
 			|FROM
 			|	InformationRegister.AttachedFiles AS AttachedFiles
 			|		INNER JOIN tmp AS tmp
@@ -167,14 +147,9 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 			|	AttachedFiles.File.FileID AS FileID,
 			|	NOT AttachedFiles.File.Volume = VALUE(Catalog.IntegrationSettings.EmptyRef) AS isFilledVolume,
 			|	AttachedFiles.File.Volume.GETIntegrationSettings AS GETIntegrationSettings,
-			|	AttachedFiles.File.Volume.UsePreview1 AS UsePreview1,
-			|	AttachedFiles.File.Volume.Preview1GETIntegrationSettings AS Preview1GETIntegrationSettings,
 			|	AttachedFiles.File.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 			|		isLocalPictureURL,
-			|	AttachedFiles.File.Volume.Preview1GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
-			|		isLocalPreview1URL,
-			|	AttachedFiles.File.URI AS URI,
-			|	AttachedFiles.File.Preview1URI AS Preview1URI
+			|	AttachedFiles.File.URI AS URI
 			|FROM
 			|	InformationRegister.AttachedFiles AS AttachedFiles
 			|WHERE
@@ -223,11 +198,6 @@ Function GetIntegrationSettingsPicture(Val FileStorageVolume = Undefined) Export
 	Result.Insert("DefaultPictureStorageVolume", FileStorageVolume);
 	Result.Insert("POSTIntegrationSettings", FileStorageVolume.POSTIntegrationSettings);
 	Result.Insert("GETIntegrationSettings", FileStorageVolume.GETIntegrationSettings);
-	Result.Insert("UsePreview1", FileStorageVolume.UsePreview1);
-	Result.Insert("Preview1POSTIntegrationSettings", FileStorageVolume.Preview1POSTIntegrationSettings);
-	Result.Insert("Preview1GETIntegrationSettings", FileStorageVolume.Preview1GETIntegrationSettings);
-	Result.Insert("Preview1Sizepx", FileStorageVolume.Preview1Sizepx);
-	
 	Return Result;
 EndFunction
 
@@ -375,7 +345,6 @@ Function GetFileInfo(FileRef) Export
 		|	Files.SizeBytes AS Size,
 		|	Files.Extension AS Extension,
 		|	Files.MD5 AS MD5,
-		|	Files.Preview1URI AS Preview1URI,
 		|	Files.Ref AS Ref
 		|FROM
 		|	Catalog.Files AS Files
@@ -405,12 +374,8 @@ Function PicturesInfoForSlider(ItemRef, FileRef = Undefined) Export
 			Except
 			EndTry;
 		EndIf;
-		Map.Preview = PicInfo.Preview1URL;
-		If PicInfo.isLocalPreview1URL Then
-			Try
-				Map.PreviewBD = New BinaryData(Map.Preview);
-			Except
-			EndTry;
+		If Picture.Ref.isPreviewSet Then
+			Map.PreviewBD = Picture.Ref.Preview.Get();
 		EndIf;
 		Map.ID = Picture.FileID;
 		PicArray.Add(Map);

@@ -14,14 +14,10 @@ Function GetPicturesRefs()
 		|	Files.FileID,
 		|	NOT Files.Volume = VALUE(Catalog.IntegrationSettings.EmptyRef) AS isFilledVolume,
 		|	Files.Volume.GETIntegrationSettings AS GETIntegrationSettings,
-		|	Files.Volume.UsePreview1 AS UsePreview1,
-		|	Files.Volume.Preview1GETIntegrationSettings AS Preview1GETIntegrationSettings,
 		|	Files.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 		|		isLocalPictureURL,
-		|	Files.Volume.Preview1GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
-		|		isLocalPreview1URL,
 		|	Files.URI,
-		|	Files.Preview1URI
+		|	Files.isPreviewSet
 		|FROM
 		|	Catalog.Files AS Files
 		|WHERE
@@ -31,15 +27,12 @@ Function GetPicturesRefs()
 	QuerySelection = QueryResult.Select();
 	
 	While QuerySelection.Next() Do
-		Map = New Structure("ID, Src, Name, Preview");
+		Map = New Structure("ID, Src, Name, Preview, isPreviewSet");
 		PicInfo = PictureViewerServer.GetPictureURL(QuerySelection);
 		Map.Src = PicInfo.PictureURL;
-		If PicInfo.isLocalPictureURL Then
-//			Map.SrcBD = New BinaryData(Map.Src);
-		EndIf;
-		Map.Preview = PicInfo.Preview1URL;
-		If PicInfo.isLocalPreview1URL Then
-//			Map.PreviewBD = New BinaryData(Map.Preview);
+		Map.isPreviewSet = QuerySelection.isPreviewSet;
+		If QuerySelection.isPreviewSet Then
+			Map.Preview = QuerySelection.Ref.Preview.Get();
 		EndIf;
 		Map.ID = QuerySelection.FileID;
 		Map.Name = QuerySelection.Description;
@@ -55,8 +48,15 @@ EndFunction
 &AtClient
 Procedure HTMLGalleryDocumentComplete(Item)
 	HTMLWindow = PictureViewerClient.InfoDocumentComplete(Item);
-	GetPictures = GetPicturesRefs();
-	JSON = CommonFunctionsServer.SerializeJSON(GetPictures);
+	PicturesArray = GetPicturesRefs();
+	
+	For Each Pic In PicturesArray.Pictures Do
+		If Pic.isPreviewSet Then
+			Pic.Preview = PutToTempStorage(Pic.Preview, UUID);
+		EndIf;
+	EndDo;
+	
+	JSON = CommonFunctionsServer.SerializeJSON(PicturesArray);
 	HTMLWindow.fillImageGallery(JSON);
 EndProcedure
 

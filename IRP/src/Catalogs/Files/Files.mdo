@@ -143,22 +143,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="03737161-83de-44bd-8356-2b7958ff4d2a">
-    <name>Preview1URI</name>
-    <synonym>
-      <key>en</key>
-      <value>Preview1 URI</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>512</length>
-      </stringQualifiers>
-    </type>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="d781f0b4-e76f-423f-96fb-92822515db13">
     <name>Extension</name>
     <synonym>

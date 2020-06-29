@@ -86,6 +86,10 @@ Function UploadPicture(File, Volume) Export
 		Return PictureViewerServer.GetFileInfo(FileRef);
 	EndIf;
 	RequestBody = GetFromTempStorage(File.Location);
+	
+	PictureScaleSize = 200;
+	FileInfo.Preview = PictureViewerServer.ScalePicture(RequestBody, PictureScaleSize);
+	
 	IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture();
 	
 	FileID = String(New UUID());

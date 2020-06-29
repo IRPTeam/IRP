@@ -17,6 +17,10 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SetVisible();
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
+	If Object.isPreviewSet Then
+		CurrentObject = FormAttributeToValue("Object");
+		Preview = PutToTempStorage(CurrentObject.Preview.Get());
+	EndIf;
 EndProcedure
 
 &AtClient

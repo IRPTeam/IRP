@@ -190,6 +190,30 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="00f6585a-15e0-44c6-aab6-20b264d2d167">
+    <name>Preview</name>
+    <synonym>
+      <key>en</key>
+      <value>Preview</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="42380b59-961e-49cd-9b4f-5be9dc30c4c7">
+    <name>isPreviewSet</name>
+    <synonym>
+      <key>en</key>
+      <value>Is preview set</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="d199093a-d6ed-4204-82e8-ccd2e47d6b33">
     <producedTypes>
       <objectType typeId="c26f695f-f115-44a8-9f9c-487ab561a3c1" valueTypeId="b37fb1f8-8db3-47eb-bde2-b6dc3b5e8d35"/>

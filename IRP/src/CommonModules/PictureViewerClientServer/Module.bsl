@@ -10,7 +10,8 @@ Function FileInfo() Export
 		|URI,
 		|Preview1URI,
 		|MD5,
-		|Ref");
+		|Ref,
+		|Preview");
 EndFunction
 
 Procedure SetFileInfo(FileInfo, Object) Export

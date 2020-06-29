@@ -327,6 +327,10 @@ Function CreateFile(Volume, FileInfo) Export
 	EndIf;
 	FileObject.Volume = Volume;
 	PictureViewerClientServer.SetFileInfo(FileInfo, FileObject);
+	
+	FileObject.Preview = New ValueStorage(FileInfo.Preview);
+	FileObject.isPreviewSet = True;
+	
 	FileObject.Write();
 	Return FileObject.Ref;
 EndFunction

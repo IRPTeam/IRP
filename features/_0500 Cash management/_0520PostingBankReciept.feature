@@ -12,7 +12,7 @@
 # Валюта отчетов - лира
 # экспортные сценарии CashBankDocFilters
 
-Сценарий: _050001 проверка создания Bank reciept на основании Sales invoice
+Сценарий: _052001 проверка создания Bank reciept на основании Sales invoice
 	* Открытие формы списка Sales invoice и выбор SI №1
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
 		И в таблице "List" я перехожу к строке:

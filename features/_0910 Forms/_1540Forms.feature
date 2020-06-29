@@ -1668,16 +1668,6 @@
 	И в таблице "Attributes" я активизирую поле "Attribute"
 	И в таблице 'Attributes' я удаляю строку
 	И я нажимаю на кнопку 'Save and close'
-	И в таблице "List" я перехожу к строке:
-		| Predefined data item name |
-		| Catalog_Boxes             |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "Attributes" я перехожу к строке:
-		| Attribute |
-		| Test      |
-	И в таблице "Attributes" я активизирую поле "Attribute"
-	И в таблице 'Attributes' я удаляю строку
-	И я нажимаю на кнопку 'Save and close'
 	И я удаляю элемент справочника "Items" со значением поля Description_en "Test"
 	И я удаляю элемент справочника "ItemTypes" со значением поля Description_en "Test"
 	# И я удаляю элементы плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"

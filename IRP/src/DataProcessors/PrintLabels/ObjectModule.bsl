@@ -13,7 +13,7 @@ Procedure FillAtServer(Object, Form) Export
 	|FROM
 	|	InformationRegister.Barcodes AS Barcodes
 	|WHERE
-	|	Barcodes.ItemKey.Specification <> VALUE(Catalog.Specifications.EmptyRef)
+	|	NOT Barcodes.ItemKey.Specification <> VALUE(Catalog.Specifications.EmptyRef)
 	|GROUP BY
 	|	Barcodes.ItemKey
 	|;

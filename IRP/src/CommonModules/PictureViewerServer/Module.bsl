@@ -88,11 +88,29 @@ Function GetFileRefByFileID(FileID) Export
 	Query.SetParameter("FileID", FileID);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
+	
+	Answer = New Structure("Ref, isFilledVolume, GETIntegrationSettings, UsePreview1, Preview1GETIntegrationSettings,
+							|isLocalPictureURL, isLocalPreview1URL, URI, Preview1URI");
+	
 	If QuerySelection.Next() Then
-		Return QuerySelection;
+		FillPropertyValues(Answer, QuerySelection);
+		Return Answer;
 	Else
 		Return Undefined;
 	EndIf;
+EndFunction
+
+Function GetFileRefsByFileIDs(FileIDs) Export
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	Files.Ref
+		|FROM
+		|	Catalog.Files AS Files
+		|WHERE
+		|	Files.FileID In (&FileIDs)";
+	Query.SetParameter("FileIDs", FileIDs);
+	Return Query.Execute().Unload().UnloadColumn("Ref");
 EndFunction
 
 Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefined) Export

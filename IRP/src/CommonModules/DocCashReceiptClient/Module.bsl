@@ -88,15 +88,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPayer
-
-Procedure PayerOnChange(Object, Form, Item) Export
-	DocCashReceiptClient.SetCurrentPayer(Form, Form.Payer);
-	DocCashReceiptClient.ChangePaymentListPayer(Object.PaymentList, Form.Payer);
-EndProcedure
-
-#EndRegion
-
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export
@@ -215,17 +206,6 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 	SetAvailability(Object, Form);
 EndProcedure
 
-Procedure PaymentListOnActivateRow(Object, Form, Item) Export
-	If Form.Items.PaymentList.CurrentData = Undefined Then
-		Return;
-	EndIf;
-	CurrentRowPayer = Form.Items.PaymentList.CurrentData.Payer;
-	If ValueIsFilled(CurrentRowPayer)
-		And CurrentRowPayer <> Form.CurrentPayer Then
-		DocCashReceiptClient.SetCurrentPayer(Form, CurrentRowPayer);
-	EndIf;
-EndProcedure
-
 Procedure PaymentListBasisDocumentOnChange(Object, Form, Item) Export
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	
@@ -249,7 +229,7 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 	Form.Items.PaymentList.ChangeRow();
 	PaymentListOnChange(Object, Form, Item);
 	CurrentData = Form.Items.PaymentList.CurrentData;
-	If CurrentData <> Undefined And ValueIsFilled(Form.Payer)
+	If CurrentData <> Undefined
 		And Not Saas.SeparationUsed() Then
 		CurrentData.Partner = DocCashReceiptServer.GetPartnerByLegalName(CurrentData.Payer, CurrentData.Partner);
 		PaymentListPartnerOnChange(Object, Form, Item);
@@ -621,18 +601,6 @@ Function GetCalculateRowsActions() Export
 	Actions.Insert("CalculateNetAmountByTotalAmount");
 	Return Actions;
 EndFunction
-
-Procedure SetCurrentPayer(Form, Payer) Export
-	Form.CurrentPayer = Payer;
-EndProcedure
-
-Procedure ChangePaymentListPayer(PaymentList, Payer) Export
-	For Each Row In PaymentList Do
-		If Row.Payer <> Payer Then
-			Row.Payer = Payer;
-		EndIf;
-	EndDo;
-EndProcedure
 
 Procedure FillUnfilledPayerInRow(Object, Item, Payer) Export
 	If Not ValueIsFilled(Item.CurrentData.Payer) Then

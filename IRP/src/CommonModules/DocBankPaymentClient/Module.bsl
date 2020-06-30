@@ -266,8 +266,7 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 	Form.Items.PaymentList.ChangeRow();
 	PaymentListOnChange(Object, Form, Item);
 	CurrentData = Form.Items.PaymentList.CurrentData;
-	If CurrentData <> Undefined And ValueIsFilled(Form.Payee)
-		And Not Saas.SeparationUsed() Then
+	If CurrentData <> Undefined And Not Saas.SeparationUsed() Then
 		CurrentData.Partner = DocBankPaymentServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
 		PaymentListPartnerOnChange(Object, Form, Item);
 	EndIf;
@@ -592,26 +591,6 @@ EndProcedure
 #EndRegion
 
 #Region Common
-
-Procedure SetCurrentPayee(Form, Payee) Export
-	Form.CurrentPayee = Payee;
-EndProcedure
-
-Procedure ChangePaymentListPayee(PaymentList, Payee) Export
-	For Each Row In PaymentList Do
-		If Row.Payee <> Payee Then
-			Row.Payee = Payee;
-		EndIf;
-	EndDo;
-EndProcedure
-
-Procedure FillUnfilledPayeeInRow(Object, Item, Payee) Export
-	If Not ValueIsFilled(Item.CurrentData.Payee) Then
-		IdentifyRow = Item.CurrentRow;
-		RowPaymentList = Object.PaymentList.FindByID(IdentifyRow);
-		RowPaymentList.Payee = Payee;
-	EndIf;
-EndProcedure
 
 Procedure PaymentListBasisDocumentOnChange(Object, Form, Item) Export
 	CurrentData = Form.Items.PaymentList.CurrentData;

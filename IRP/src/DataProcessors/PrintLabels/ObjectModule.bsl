@@ -240,7 +240,7 @@ Function PrintLabels(Object, Form) Export
 						ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(QuerySelection.Item);
 						If ArrayOfFiles.Count() Then
 							If ArrayOfFiles[0].isPreviewSet Then
-								Drawing.Picture = ArrayOfFiles[0].Preview.Get();
+								Drawing.Picture = New Picture(ArrayOfFiles[0].Preview.Get());
 							EndIf;
 						EndIf;
 					ElsIf Drawing.Name = "ItemKeyPicture" Then
@@ -248,7 +248,7 @@ Function PrintLabels(Object, Form) Export
 						ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(QuerySelection.ItemKey);
 						If ArrayOfFiles.Count() Then
 							If ArrayOfFiles[0].isPreviewSet Then
-								Drawing.Picture = ArrayOfFiles[0].Preview.Get();
+								Drawing.Picture =  New Picture(ArrayOfFiles[0].Preview.Get());
 							EndIf;
 						EndIf;
 					Endif;

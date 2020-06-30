@@ -138,5 +138,5 @@ Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessin
 EndProcedure
 
 Procedure SearchByBarcode(Command, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject);
+	DocumentsClient.SearchByBarcode(Command, Object, Form);
 EndProcedure

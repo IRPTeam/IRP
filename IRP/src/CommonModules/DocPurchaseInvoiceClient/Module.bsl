@@ -493,7 +493,7 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 EndProcedure
 
 Procedure SearchByBarcode(Command, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject, Form.CurrentPriceType);
+	DocumentsClient.SearchByBarcode(Command, Object, Form, , Form.CurrentPriceType);
 EndProcedure
 
 #EndRegion

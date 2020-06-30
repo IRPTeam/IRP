@@ -362,7 +362,7 @@ Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel) Export
 EndProcedure
 
 Procedure SearchByBarcode(Object, Form, Command) Export
-	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject);
+	DocumentsClient.SearchByBarcode(Command, Object, Form);
 EndProcedure
 
 Procedure SelectReceiptBasises(Object, Form, Command) Export

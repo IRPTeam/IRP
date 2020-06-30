@@ -84,7 +84,7 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnActivateRow(Item, AddInfo = Undefined) Export
-	DocCashReceiptClient.PaymentListOnActivateRow(Object, ThisObject, Item);
+	Return;
 EndProcedure
 
 &AtClient

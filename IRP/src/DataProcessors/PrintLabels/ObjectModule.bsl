@@ -1,8 +1,5 @@
 
 Procedure FillAtServer(Object, Form) Export
-	
-	Form.ItemList.Clear();
-	
 	ItemTable = Form.FormAttributeToValue("ItemList");
 	
 	Query = New Query;
@@ -165,7 +162,8 @@ Function PrintLabels(Object, Form) Export
 		SettingsComposerSettings = SettingsComposer.GetSettings();		
 			
 		TemplateComposer = New DataCompositionTemplateComposer;		
-		ComposerOfTemplate = TemplateComposer.Execute(DataSourceScheme, SettingsComposerSettings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
+		ComposerOfTemplate = TemplateComposer.Execute(DataSourceScheme, SettingsComposerSettings, , , 
+										Type("DataCompositionValueCollectionTemplateGenerator"));
 		
 		QueryTextArray = New Array;
 		QueryTextArray.Add("SELECT");
@@ -299,34 +297,6 @@ Function PrintLabels(Object, Form) Export
 	
 	Return SpreadDocsArray;	
 	
-EndFunction
-
-Function GetPictureAndPutToTempStorage(FileRef, UUID, URI, GETIntegrationSettings)
-	
-	If Not ValueIsFilled(FileRef) Then
-		Return "";
-	EndIf;
-	
-	ConnectionSettings = IntegrationClientServer.ConnectionSetting(	
-	ServiceSystemServer.GetObjectAttribute(GETIntegrationSettings, "UniqueID"));
-	
-	If Not ConnectionSettings.Success Then
-		Raise ConnectionSettings.Message;
-	EndIf;
-	ConnectionSettings.Value.QueryType = "GET";
-	ResourceParameters = New Structure();
-	ResourceParameters.Insert("filename", URI);
-	RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters);
-	
-	If RequestResult.Success Then
-		Try
-			Return PutToTempStorage(New Picture(RequestResult.ResponseBody), UUID);
-		Except
-			Return "";
-		EndTry;
-	Else
-		Return "";
-	EndIf;	
 EndFunction
 
 Procedure SetDataSetFields(DataSet, AddDataProc)	

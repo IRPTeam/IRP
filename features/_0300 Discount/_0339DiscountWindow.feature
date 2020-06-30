@@ -4,19 +4,21 @@
 @Discount
 @IgnoreOnCIMainBuild
 @tree
-Функционал: проверка отображения окна скидок в Sales Order
+Функционал: check that the discount window is displayed in Sales Order
 
-Как разработчик
-Я хочу добавить в заказ клиента окно с отображением действующих скидок
-Чтобы торговый агент сразу видел процент и сумму скидки по заказу
+As a developer
+I want to add a discount window to the order.
+So that the manager can immediately see the interest and discount amount on the order.
+
+
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
-# По каждому товару задается скидка в виде процента (например Товар А от 2 до 5%, Товар В от 3 до 7%). 
-# Агент самостоятельно в заказе может проставить скидку из указанного диапазона
+# For each product, a percentage discount is given (e.g. Product A from 2 to 5%, Product B from 3 to 7%). 
+# The sales rep can set a discount from the specified range in the order himself
 
-Сценарий: _033901 проверка окна скидок в заказе (отображение начисленных по заказу скидок)
-	И я ставлю скидку Discount on Basic Agreements недействующей
+Сценарий: _033901 check the discount window in the order (displaying discounts accrued on the order)
+	* Inactive Discount on Basic Agreements
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 		И я нажимаю на кнопку 'List'
 		И в таблице "List" я перехожу к строке:
@@ -27,7 +29,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
 	Когда создаю заказ на Partner A Basic Agreements, TRY (Product 1 -10 и Product 3 - 5)
-	И я проверяю отображение действующих скидок в окне % Offers
+	* Check display of valid discounts in % Offers window
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И     таблица "Offers" стала равной:
 			| 'Presentation'                                                                 | 'Is select' | '%' | '∑' |
@@ -43,7 +45,7 @@
 			| 'Discount 2 without Vat'                                                       | ' '         | ''  | ''  |
 			| 'All items 5+1, Discount on Basic Agreements'                                  | ' '         | ''  | ''  |
 			| '4+1 Product 1 and Product 2, Discount on Basic Agreements'                    | ' '         | ''  | ''  |
-	И я проверяю отображение выбранной скидки, её суммы и процента
+	* Check display of selected discount, its amount and percentage
 		И в таблице "Offers" я перехожу к строке:
 			| 'Presentation'                  |
 			| 'All items 5+1, Discount on Basic Agreements' |
@@ -79,7 +81,7 @@
 			| 'Discount 2 without Vat'                                                       | ' '         | ''      | ''         |
 			| 'All items 5+1, Discount on Basic Agreements'                                  | '✔'         | '15,00' | '1 650,00' |
 			| '4+1 Product 1 and Product 2, Discount on Basic Agreements'                    | ' '         | ''      | ''         |
-	И я проверяю, что скидка не отображается после её отмены в заказе
+	* Check that the discount is not displayed after cancellation in the order.
 		И в таблице "Offers" я перехожу к строке:
 			| 'Presentation'                  |
 			| 'All items 5+1, Discount on Basic Agreements' |
@@ -105,7 +107,7 @@
 		И в таблице "Offers" я активизирую поле "Is select"
 		И в таблице "Offers" я выбираю текущую строку
 		И я нажимаю на кнопку 'OK'
-	И я проверяю что скидка в окне скидок пересчитывается
+	* Check the discount recalculation in the discount window
 		И я меняю количество по Product 1 на 30 штук
 			И в таблице "ItemList" я нажимаю на кнопку 'Add'
 			Тогда открылось окно 'Pick up items'
@@ -116,7 +118,7 @@
 			И в таблице "ItemsList" я активизирую поле "Info"
 			И в таблице "ItemsList" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
-	И я проверяю перерасчет акции
+	* Discount recalculation check
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И я нажимаю на кнопку 'OK'
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
@@ -135,7 +137,7 @@
 			| 'All items 5+1, Discount on Basic Agreements'                                  | '✔'         | '16,67' | '2 750,00' |
 			| '4+1 Product 1 and Product 2, Discount on Basic Agreements'                    | ' '         | ''      | ''         |
 		И я нажимаю на кнопку 'OK'
-	И я проверяю что в окне скидок отображается несколько действующих скидок по заказу
+	* The discount window shows several valid discounts on order
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я перехожу к строке:
 			| 'Presentation'                  |
@@ -159,7 +161,7 @@
 			| 'All items 5+1, Discount on Basic Agreements'                                  | '✔'         | '16,67' | '2 750,00' |
 			| '4+1 Product 1 and Product 2, Discount on Basic Agreements'                    | ' '         | ''      | ''         |
 		И я нажимаю на кнопку 'OK'
-	И я проверяю отображение диапазонной скидки (в этом окне не отображается)
+	* Checking the range discount display (not displayed in this window)
 		И я по Product 1 ставлю диапазонную скидку 8%
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Item'      |

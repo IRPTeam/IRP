@@ -73,7 +73,7 @@ To track the items ordered by the customer
 	| '5,000'    | 'Sales order 1*' | 'Store 01' | 'L/Green'  |
 	| '4,000'    | 'Sales order 1*' | 'Store 01' | '36/Yellow'   |
 
-Сценарий: _023005 создание документа заказа клиента с ордерного склада
+Сценарий: _023005 creating document Sales order - Shipment confirmation used
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in customer information
@@ -93,10 +93,7 @@ To track the items ordered by the customer
 				| 'Company Ferron BP'  |
 		И в таблице "List" я выбираю текущую строку
 	Когда добавляю товар в заказ клиента (Dress и Trousers)
-	И я перерасчитываю скидки
-		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-	И я проверяю статус заказа клиента установленный по умолчанию
+	* Checking default sales order status
 		И я перехожу к закладке "Other"
 		И     элемент формы с именем "Status" стал равен 'Approved'
 	И я нажимаю на кнопку 'Post and close'

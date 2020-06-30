@@ -155,7 +155,7 @@
 	И я нажимаю на кнопку "Save and close"
 	И Я закрываю окно 'Special offers'
 
-Сценарий: меняю автоматическое проведение скидки по Discount 1 without Vat
+Сценарий: меняю auto проведение скидки по Discount 1 without Vat
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
@@ -168,7 +168,7 @@
 	И я нажимаю на кнопку "Save and close"
 	И Я закрываю окно 'Special offers'
 
-Сценарий: меняю автоматическое проведение скидки Discount 2 without Vat
+Сценарий: меняю auto проведение скидки Discount 2 without Vat
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
@@ -200,7 +200,7 @@
 			| 'Description' |
 			| 'Company Lomaniti'  |
 	И в таблице "List" я выбираю текущую строку
-	И я добавляю в заказ клиента товар
+	* Adding items to sales order
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		Тогда открылось окно 'Items'
@@ -253,7 +253,7 @@
 			| 'Description'                     |
 			| 'Basic Agreements, without VAT' |
 	И в таблице "List" я выбираю текущую строку
-	И я добавляю в заказ клиента товар
+	* Adding items to sales order
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		Тогда открылось окно 'Items'
@@ -305,7 +305,7 @@
 			| 'Description'                     |
 			| 'Basic Agreements, without VAT' |
 	И в таблице "List" я выбираю текущую строку
-	И я добавляю в заказ клиента товар
+	* Adding items to sales order
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		Тогда открылось окно 'Items'
@@ -377,7 +377,7 @@
 			| 'Description' |
 			| 'Company Kalipso'  |
 	И в таблице "List" я выбираю текущую строку
-	И я добавляю в заказ клиента товар
+	* Adding items to sales order
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		Тогда открылось окно 'Items'

@@ -416,12 +416,12 @@ For calculating special offers in documents
 			| 'ExternalFivePlusOne' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И я заполняю наименование типа
+	* Fiiling in type name
 		И в поле 'ENG' я ввожу текст 'All items 5+1, Discount on Basic Agreements'
 		И в поле 'TR' я ввожу текст 'All items 5+1 TR, Discount on Basic Agreements'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save'
-	И я заполняю тип: Basic Agreements TRY, весь товар, 5+1, кратна 
+	* Fiiling in type: Basic Agreements TRY, all items, 5+1, multiple
 		И я нажимаю на кнопку с именем "FormSetSettings"
 		И Пауза 2
 		И я нажимаю кнопку выбора у поля "Agreements"
@@ -452,7 +452,7 @@ For calculating special offers in documents
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
 	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "All items 5+1, Discount on Basic Agreements"
-	И я создаю тип Basic Agreements TRY, Dress and Trousers 4+1, кратна
+	* Create type Basic Agreements TRY, Dress and Trousers 4+1, multiple
 		Когда выбираю обработку для создания типа скидки 4+1
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferTypes'
 			И я нажимаю на кнопку с именем 'FormCreate'
@@ -462,12 +462,12 @@ For calculating special offers in documents
 				| 'ExternalFivePlusOne' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И я заполняю наименование типа
+		* Fiiling in type name
 			И в поле 'ENG' я ввожу текст 'Dress,2 4+1, Discount on Basic Agreements'
 			И в поле 'TR' я ввожу текст 'Dress,2 4+1 TR, Discount on Basic Agreements'
 			И я нажимаю на кнопку 'Ok'
 			И я нажимаю на кнопку 'Save'
-		И я заполняю тип: Basic Agreements TRY, весь товар, 4+1, кратна 
+		* Fiiling in type: Basic Agreements TRY, all items, 4+1, multiple 
 			И я нажимаю на кнопку с именем "FormSetSettings"
 			И Пауза 2
 			И я нажимаю кнопку выбора у поля "Agreements"
@@ -505,7 +505,7 @@ For calculating special offers in documents
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 10
 		Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Dress,2 4+1, Discount on Basic Agreements"
-	И я создаю тип Basic Agreements TRY, товар А, В, 3+1, не кратна
+	* Create type Basic Agreements TRY, Dress 3+1, not multiple
 		Когда выбираю обработку для создания типа скидки 4+1
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferTypes'
 			И я нажимаю на кнопку с именем 'FormCreate'
@@ -515,12 +515,12 @@ For calculating special offers in documents
 				| 'ExternalFivePlusOne' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И я заполняю наименование типа
+		* Fiiling in type name
 			И в поле 'ENG' я ввожу текст 'Dress,2 3+1, Discount on Basic Agreements'
 			И в поле 'TR' я ввожу текст 'Dress,2 3+1 TR, Discount on Basic Agreements'
 			И я нажимаю на кнопку 'Ok'
 			И я нажимаю на кнопку 'Save'
-		И я заполняю тип: Basic Agreements TRY, весь товар, 4+1, кратна 
+		* Fiiling in type: Basic Agreements TRY, all items, 4+1, multiple
 			И я нажимаю на кнопку с именем "FormSetSettings"
 			И Пауза 2
 			И я нажимаю кнопку выбора у поля "Agreements"
@@ -568,12 +568,12 @@ For calculating special offers in documents
 			| 'ExternalRangeDiscount' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И я заполняю наименование типа
+	* Fiiling in type name
 		И в поле 'ENG' я ввожу текст 'Range Discount Basic (Dress)'
 		И в поле 'TR' я ввожу текст 'Range Discount Basic (Dress)'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save'
-	И я заполняю тип: Basic Agreements TRY, Dress,3
+	* Fiiling in type: Basic Agreements TRY, Dress,3
 		И я нажимаю на кнопку 'Set settings'
 		И в таблице "ItemKeysTable" я нажимаю на кнопку с именем 'ItemKeysTableAdd'
 		И в таблице "ItemKeysTable" я нажимаю кнопку выбора у реквизита "Item key"
@@ -602,7 +602,7 @@ For calculating special offers in documents
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
 	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Range Discount Basic (Dress)"
-	И я создаю Types Range Discount Basic (Trousers)
+	* Create Types Range Discount Basic (Trousers)
 		Когда выбираю обработку для создания типа скидки Range Discount
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferTypes'
 			И я нажимаю на кнопку с именем 'FormCreate'
@@ -612,12 +612,12 @@ For calculating special offers in documents
 				| 'ExternalRangeDiscount' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И я заполняю наименование типа
+		* Fiiling in type name
 			И в поле 'ENG' я ввожу текст 'Range Discount Basic (Trousers)'
 			И в поле 'TR' я ввожу текст 'Range Discount Basic (Trousers)'
 			И я нажимаю на кнопку 'Ok'
 			И я нажимаю на кнопку 'Save'
-		И я заполняю тип: Basic Agreements TRY, Dress,3
+		* Fiiling in type: Basic Agreements TRY, Dress
 			И я нажимаю на кнопку 'Set settings'
 			И в таблице "ItemKeysTable" я нажимаю на кнопку с именем 'ItemKeysTableAdd'
 			И в таблице "ItemKeysTable" я нажимаю кнопку выбора у реквизита "Item key"
@@ -680,7 +680,7 @@ For calculating special offers in documents
 	Когда сохраняю настройки скидки
 	Тогда я проверяю наличие элемента справочника "SpecialOfferRules" со значением поля "Description_en" "Discount on Basic Agreements"
 
-# Сценарий: create Special Offer Rules (вхождение клиента в сегмент)
+
 
 Сценарий: _030014 create Special Offer (group Maximum by row/Special Offers Maximum by row)
 	Когда выбираю обработку для создания скидки
@@ -722,7 +722,7 @@ For calculating special offers in documents
 	И Пауза 10
 	Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Maximum"
 
-Сценарий: _030015 create Special Offer (group Sum )
+Сценарий: _030015 create Special Offer (group Sum)
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку с именем 'FormCreateFolder'
 	И я нажимаю кнопку выбора у поля "Special offer type"
@@ -782,7 +782,7 @@ For calculating special offers in documents
 	И Пауза 10
 	Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Minimum"
 
-Сценарий: _030017 create Special Offer ручное назначение Discount Price 1-2 (discount price, с перемещением в group maximum)
+Сценарий: _030017 create Special Offer (manual) Discount Price 1-2 (discount price, group maximum)
 	Когда открываю окно создания скидки
 	И в таблице "List" я перехожу к строке:
 		| 'Description'        |
@@ -838,7 +838,7 @@ For calculating special offers in documents
 	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Discount Price 1"
 	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Discount Price 2"
 
-Сценарий: _030018 create Special Offer в виде информационного сообщения (Notification)
+Сценарий: _030018 create Special Offer - Special Message (Notification)
 	Когда открываю окно создания скидки
 	И в таблице "List" я перехожу к строке:
 		| 'Description'        |
@@ -869,7 +869,7 @@ For calculating special offers in documents
 	| 'Maximum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: _030019 create Special Offer в виде информационного сообщения (DialogBox)
+Сценарий: _030019 create Special Offer - Special Message (DialogBox)
 	Когда открываю окно создания скидки
 	И в таблице "List" я перехожу к строке:
 		| 'Description'        |
@@ -901,14 +901,9 @@ For calculating special offers in documents
 	И я нажимаю на кнопку с именем 'FormChoose'
 
 
-Сценарий: _030020 create Special Offer автоматическое назначение Discount Price 1-2 without Vat (discount price, в group minimum)
+Сценарий: _030020 create Special Offer, automatic use Discount Price 1-2 without Vat (discount price, group minimum)
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
-	# И в таблице  "List" я перехожу на один уровень вниз
-	# И в таблице "List" я перехожу к строке:
-	# 	| 'Description' |
-	# 	| 'Minimum'   |
-	# И в таблице "List" я выбираю текущую строку
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Special offer type"
 	Тогда открылось окно 'Special offer types'
@@ -951,13 +946,13 @@ For calculating special offers in documents
 		| 'Description'                    |
 		| 'Discount on Basic Agreements without Vat' |
 	Когда сохраняю правило в скидке
-	Когда переношу скидку Discount 1 without Vat в минимум
-	Когда переношу скидку Discount 2 without Vat в группу минимум 
+	Когда переношу скидку Discount 1 without Vat в Minimum
+	Когда переношу скидку Discount 2 without Vat в группу Minimum 
 	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Discount 2 without Vat"
 	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Discount 1 without Vat"
 
 
-Сценарий: _030021 перемещение скидки из одной группы в другую
+Сценарий: _030021 moving special offer from one group to another
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку "Hierarchical list"
 	И в таблице "List" я перехожу к строке:
@@ -984,9 +979,9 @@ For calculating special offers in documents
 		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
 		| 'No'     | 'No'       | '3'        | 'Maximum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
-	Когда переношу скидку Discount Price 1 в максимум
+	Когда переношу скидку Discount Price 1 в Maximum
 
-Сценарий: _030022 create группы скидкок внутри группы скидок
+Сценарий: _030022 creating special offer group within another special offer group
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'Hierarchical list'
 	И в таблице "List" я перехожу к строке:
@@ -1011,7 +1006,7 @@ For calculating special offers in documents
 	И поле с именем "Parent" равно переменной "Minimum"
 	И я нажимаю на кнопку 'Save and close'
 
-Сценарий: _030023 перемещение группы скидок во внутрь другой группы скидок (изменение Parent)
+Сценарий: _030023 moving a special offer inside another special offer (Parent change)
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
@@ -1032,8 +1027,6 @@ For calculating special offers in documents
 		| 'Special Offers'     |
 	И я нажимаю на кнопку с именем 'FormChoose'
 	Тогда открылось окно 'Special offers'
-	# И я нажимаю на кнопку 'Move to folder'
-	# Тогда открылось окно 'Special offers'
 	И в таблице "List" я перехожу к строке:
 		| 'Description' |
 		| 'Maximum'   |
@@ -1059,9 +1052,9 @@ For calculating special offers in documents
 	И я нажимаю на кнопку 'Move to folder'
 	И Я закрываю текущее окно
 
-Сценарий: _030024 create скидки Present Discount
+Сценарий: _030024 create special offer Present Discount
 	Когда открываю окно создания скидки
-	И я заполняю данные скидки 5+1 (ручное назначение)
+	* Filling in special offer 5+1 (manual)
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                                   |
 			| 'All items 5+1, Discount on Basic Agreements' |
@@ -1084,9 +1077,9 @@ For calculating special offers in documents
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	И я создаю скидку 4+1, кратна, товар 1 и 2
+	* Create  special offer 4+1, multiple
 		Когда открываю окно создания скидки
-		И я заполняю данные скидки 4+1 (ручное назначение)
+		* Filling in special offer 4+1 (manual)
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                                   |
 				| 'Dress,2 4+1, Discount on Basic Agreements' |
@@ -1109,9 +1102,9 @@ For calculating special offers in documents
 			И я нажимаю на кнопку 'Ok'
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 10
-	И я создаю скидку 3+1, не кратна, товар 1 и 2
+	* Create special offer 3+1, not multiple
 		Когда открываю окно создания скидки
-		И я заполняю данные скидки 3+1 (ручное назначение)
+		* Filling in special offer 3+1 (manual)
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                                   |
 				| 'Dress,2 3+1, Discount on Basic Agreements' |
@@ -1134,20 +1127,20 @@ For calculating special offers in documents
 			И я нажимаю на кнопку 'Ok'
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 10
-	И я проверяю наличие созданных скидок
+	* Save verification
 		И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements"
 		И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "4+1 Dress and Trousers, Discount on Basic Agreements"
 		И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "All items 5+1, Discount on Basic Agreements"
-	И я перемещаю созданные скидки в группу Максимум
+	* Moving special offers to the group Maximum
 		Когда переношу скидку All items 5+1, Discount on Basic Agreements в группу Maximum
 		Когда переношу скидку 3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements в группу Maximum
 		Когда переношу скидку 4+1 Dress and Trousers, Discount on Basic Agreements в группу Maximum
 
 
 
-Сценарий: _030025 create скидки Range Discount
+Сценарий: _030025 create Range Discount
 	Когда открываю окно создания скидки
-	И я заполняю данные скидки Range Discount Basic (Trousers)
+	* Filling in special offer Range Discount Basic (Trousers)
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                                   |
 			| 'Range Discount Basic (Trousers)' |
@@ -1173,7 +1166,7 @@ For calculating special offers in documents
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
 	Когда открываю окно создания скидки
-	И я заполняю данные скидки Range Discount Basic (Dress)
+	* Filling in special offer Range Discount Basic (Dress)
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                                   |
 			| 'Range Discount Basic (Dress)' |
@@ -1198,12 +1191,12 @@ For calculating special offers in documents
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	И я проверяю наличие созданных скидок
+	* Save verification
 		И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Range Discount Basic (Dress)"
 		И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Range Discount Basic (Trousers)"
 		И Я закрываю текущее окно
 
-Сценарий: _030026 create скидки DocumentDiscount
+Сценарий: _030026 create Document discount
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И в поле 'ENG' я ввожу текст 'Document discount'

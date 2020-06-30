@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Use companies</value>
   </synonym>
-  <comment></comment>
   <location>Constant.UseCompanies</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Document.Bundling.Attribute.Company</content>

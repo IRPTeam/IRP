@@ -191,15 +191,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPayee
-
-&AtClient
-Procedure PayeeOnChange(Item, AddInfo = Undefined) Export
-	DocCashPaymentClient.PayeeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
 #Region ItemCompany
 
 &AtClient
@@ -247,7 +238,6 @@ Procedure CurrencyOnChangeContinue(Answer, AdditionalParameters) Export
 		ClearCashTransferOrders(Object.Currency);
 		CurrentCurrency = Object.Currency;
 		DocCashPaymentClient.CurrencyOnChange(Object, ThisObject, Items.Currency);
-		DocCashPaymentClient.FillPayees(Object, ThisObject);
 	Else
 		Object.Currency = CurrentCurrency;
 	EndIf;
@@ -272,7 +262,6 @@ Procedure AccountOnChangeContinue(Answer, AdditionalParameters) Export
 	If Answer = DialogReturnCode.Yes Then
 		CurrentAccount = Object.CashAccount;
 		DocCashPaymentClient.AccountOnChange(Object, ThisObject, Items.Currency);
-		DocCashPaymentClient.FillPayees(Object, ThisObject);
 		ClearCashTransferOrders(Object.Currency);
 	Else
 		Object.CashAccount = CurrentAccount;

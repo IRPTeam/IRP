@@ -190,6 +190,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -228,11 +229,11 @@
         <name>Decoration1</name>
         <id>20</id>
         <title>
-          <key>en</key>
+          <key>tr</key>
           <value>Empty classifier</value>
         </title>
         <title>
-          <key>tr</key>
+          <key>en</key>
           <value>Empty classifier</value>
         </title>
         <visible>true</visible>
@@ -378,12 +379,12 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>BeforeClose</event>
     <name>BeforeClose</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -451,11 +452,11 @@
   <formCommands>
     <name>CreateItem</name>
     <title>
-      <key>en</key>
+      <key>tr</key>
       <value>Create item</value>
     </title>
     <title>
-      <key>tr</key>
+      <key>en</key>
       <value>Create item</value>
     </title>
     <id>1</id>

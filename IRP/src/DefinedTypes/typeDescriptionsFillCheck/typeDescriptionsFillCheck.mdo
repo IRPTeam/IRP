@@ -8,7 +8,6 @@
     <key>en</key>
     <value>Type descriptions fill check</value>
   </synonym>
-  <comment></comment>
   <type>
     <types>CatalogObject.TaxRates</types>
     <types>CatalogObject.CashAccounts</types>

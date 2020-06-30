@@ -518,5 +518,12 @@ Procedure AddAttributesCreateFormControll()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControll();
+	EndIf;
+EndProcedure
+
 #EndRegion
 

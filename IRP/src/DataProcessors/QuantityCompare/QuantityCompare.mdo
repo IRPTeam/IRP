@@ -30,6 +30,9 @@
       <type>
         <types>CatalogRef.Items</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="5e9174ed-f93e-4dd2-95a8-5034f8e6ccf1">
       <name>ItemKey</name>
@@ -40,10 +43,13 @@
       <type>
         <types>CatalogRef.ItemKeys</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
         <name>Filter.Item</name>
         <field>DataProcessor.QuantityCompare.TabularSection.CompareItemList.Attribute.Item</field>
       </choiceParameterLinks>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="4c1fd5d8-b032-4542-9974-6707f7991118">
       <name>Unit</name>
@@ -54,10 +60,13 @@
       <type>
         <types>CatalogRef.Units</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
         <name>Filter.Item</name>
         <field>DataProcessor.QuantityCompare.TabularSection.CompareItemList.Attribute.Item</field>
       </choiceParameterLinks>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="b24c2d73-3e98-49ae-b59e-deea4fabbb0a">
       <name>Quantity</name>
@@ -70,6 +79,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="6ab7577f-f3a9-44c0-be78-bbe72ff9aa0d">
       <name>Count</name>
@@ -83,6 +93,7 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="2dd3f69e-ea1b-492d-b73f-546117589b78">
       <name>Difference</name>
@@ -93,6 +104,9 @@
       <type>
         <types>DefinedType.typeQuantity</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
   </tabularSections>
   <tabularSections uuid="669827f7-5bc2-45e1-b256-4163f8ed533b">
@@ -114,6 +128,9 @@
       <type>
         <types>CatalogRef.Items</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="c7e0208d-1b1f-4e0a-ac35-5232f2229785">
       <name>ItemKey</name>
@@ -124,10 +141,13 @@
       <type>
         <types>CatalogRef.ItemKeys</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
         <name>Filter.Item</name>
         <field>DataProcessor.QuantityCompare.TabularSection.ExpItemList.Attribute.Item</field>
       </choiceParameterLinks>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="135ded6f-08a8-4de6-9907-5db25e6dbe9e">
       <name>Unit</name>
@@ -138,10 +158,13 @@
       <type>
         <types>CatalogRef.Units</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
         <name>Filter.Item</name>
         <field>DataProcessor.QuantityCompare.TabularSection.ExpItemList.Attribute.Item</field>
       </choiceParameterLinks>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="b473405d-f1ab-4915-83cf-59239b96f5b3">
       <name>Quantity</name>
@@ -155,6 +178,7 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="18f193af-3c7f-4154-8d76-3ed9af5fe883">
       <name>BaseOn</name>
@@ -165,6 +189,9 @@
       <type>
         <types>AnyRef</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
   </tabularSections>
   <tabularSections uuid="b2dbf8bd-60dd-447e-9fa8-30bcd2709066">
@@ -186,6 +213,9 @@
       <type>
         <types>CatalogRef.Items</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="4a2e5cf2-e7aa-43e6-9718-44bb46b17110">
       <name>ItemKey</name>
@@ -196,10 +226,13 @@
       <type>
         <types>CatalogRef.ItemKeys</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
         <name>Filter.Item</name>
         <field>DataProcessor.QuantityCompare.TabularSection.PhysItemList.Attribute.Item</field>
       </choiceParameterLinks>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="6c91ddc4-eb7a-4205-bb29-5efaf6adacd5">
       <name>Unit</name>
@@ -210,10 +243,13 @@
       <type>
         <types>CatalogRef.Units</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
         <name>Filter.Item</name>
         <field>DataProcessor.QuantityCompare.TabularSection.PhysItemList.Attribute.Item</field>
       </choiceParameterLinks>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="f2d27447-bd78-4ab0-bec1-9dea1f1e142c">
       <name>Count</name>
@@ -227,6 +263,7 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
   </tabularSections>
   <forms uuid="41897455-0e35-4b97-bf90-9e5e634d4f1a">

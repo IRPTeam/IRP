@@ -111,8 +111,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Kind</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Kind</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>KindExtendedTooltip</name>
@@ -161,8 +163,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.ApArPostingDetail</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.ApArPostingDetail</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ApArPostingDetailExtendedTooltip</name>

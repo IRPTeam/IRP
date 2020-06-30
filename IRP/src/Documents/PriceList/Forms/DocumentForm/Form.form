@@ -12,8 +12,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.PriceListType</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.PriceListType</segments>
+      </paths>
     </dataPath>
     <handlers>
       <event>OnChange</event>
@@ -91,8 +93,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Object.PriceType</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Object.PriceType</segments>
+        </paths>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -211,8 +215,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.ItemType</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.ItemType</segments>
+          </paths>
         </dataPath>
         <handlers>
           <event>OnChange</event>
@@ -342,8 +348,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>PriceKeyList.Item</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>PriceKeyList.Item</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PriceKeyListItemExtendedTooltip</name>
@@ -377,12 +385,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>PriceKeyListItemStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>PriceKeyListItemEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>PriceKeyListItemStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -561,6 +569,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -736,9 +745,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.ItemKeyList.Item</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemKeyList.Item</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemKeyListItemExtendedTooltip</name>
@@ -772,12 +778,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>ItemKeyListItemStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>ItemKeyListItemEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>ItemKeyListItemStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -796,9 +802,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemKeyList.ItemKey</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.ItemKeyList.ItemKey</segments>
             </paths>
@@ -856,8 +859,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemKeyList.Price</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemKeyList.Price</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemKeyListPriceExtendedTooltip</name>
@@ -945,7 +950,6 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>ItemKeyListSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -984,7 +988,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>ItemKeyListViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -1024,7 +1027,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>ItemKeyList</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1074,6 +1076,7 @@
         <verticalStretch>true</verticalStretch>
         <enableStartDrag>true</enableStartDrag>
         <enableDrag>true</enableDrag>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1249,9 +1252,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.ItemList.Item</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.Item</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListItemExtendedTooltip</name>
@@ -1285,12 +1285,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>ItemListItemStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>ItemListItemEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>ItemListItemStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -1308,8 +1308,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Price</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.Price</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListPriceExtendedTooltip</name>
@@ -1518,6 +1520,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1560,8 +1563,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Author</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Author</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>AuthorExtendedTooltip</name>
@@ -1610,8 +1615,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Description</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Description</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DescriptionExtendedTooltip</name>
@@ -1660,8 +1667,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Date</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Date</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DateExtendedTooltip</name>
@@ -1710,8 +1719,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Number</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Number</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>NumberExtendedTooltip</name>
@@ -1824,16 +1835,16 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
   </handlers>
   <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -1985,16 +1996,16 @@
       <name>AfterWriteAtServer</name>
     </handlers>
     <handlers>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
     </handlers>
     <handlers>
       <event>OnWriteAtServer</event>
       <name>OnWriteAtServer</name>
-    </handlers>
-    <handlers>
-      <event>OnReadAtServer</event>
-      <name>OnReadAtServer</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

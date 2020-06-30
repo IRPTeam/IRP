@@ -43,11 +43,11 @@
   <defaultChoiceForm>Document.InventoryTransfer.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.TransferOrderBalance</registerRecords>
-  <registerRecords>AccumulationRegister.StockReservation</registerRecords>
-  <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -60,7 +60,10 @@
     <type>
       <types>CatalogRef.Stores</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -73,7 +76,10 @@
     <type>
       <types>CatalogRef.Stores</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -86,6 +92,9 @@
     <type>
       <types>CatalogRef.Stores</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -98,7 +107,10 @@
     <type>
       <types>CatalogRef.Companies</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -148,6 +160,8 @@
       <type>
         <types>UUID</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="4a0fa697-0700-4db1-83df-c508e66433ab">
@@ -159,6 +173,8 @@
       <type>
         <types>CatalogRef.ItemKeys</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
     </attributes>
@@ -171,6 +187,8 @@
       <type>
         <types>CatalogRef.Units</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="9c152480-7612-4267-9965-bb329d4d1387">
@@ -182,6 +200,8 @@
       <type>
         <types>DefinedType.typeQuantity</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="a0009ae4-8f66-4853-a53f-cd357eeac231">
@@ -193,6 +213,8 @@
       <type>
         <types>DocumentRef.InventoryTransferOrder</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
@@ -245,5 +267,6 @@
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
+    <shortcut></shortcut>
   </commands>
 </mdclass:Document>

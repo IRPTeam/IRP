@@ -9,8 +9,8 @@
     <value>Type AR transaction basises</value>
   </synonym>
   <type>
-    <types>DocumentRef.SalesInvoice</types>
-    <types>DocumentRef.PurchaseReturn</types>
     <types>DocumentRef.CashTransferOrder</types>
+    <types>DocumentRef.PurchaseReturn</types>
+    <types>DocumentRef.SalesInvoice</types>
   </type>
 </mdclass:DefinedType>

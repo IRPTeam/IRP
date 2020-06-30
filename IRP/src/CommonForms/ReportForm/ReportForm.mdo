@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Report form</value>
   </synonym>
-  <comment></comment>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

@@ -99,15 +99,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPayee
-
-Procedure PayeeOnChange(Object, Form, Item) Export
-	DocBankPaymentClient.SetCurrentPayee(Form, Form.Payee);
-	DocBankPaymentClient.ChangePaymentListPayee(Object.PaymentList, Form.Payee);
-EndProcedure
-
-#EndRegion
-
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export
@@ -203,14 +194,7 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure PaymentListOnActivateRow(Object, Form, Item) Export
-	If Form.Items.PaymentList.CurrentData = Undefined Then
-		Return;
-	EndIf;
-	CurrentRowPayee = Form.Items.PaymentList.CurrentData.Payee;
-	If ValueIsFilled(CurrentRowPayee)
-		And CurrentRowPayee <> Form.CurrentPayee Then
-		DocBankPaymentClient.SetCurrentPayee(Form, CurrentRowPayee);
-	EndIf;
+	Return;
 EndProcedure
 
 Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

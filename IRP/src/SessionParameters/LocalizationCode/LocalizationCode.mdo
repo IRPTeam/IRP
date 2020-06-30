@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Localization code</value>
   </synonym>
-  <comment></comment>
   <type>
     <types>String</types>
     <stringQualifiers>

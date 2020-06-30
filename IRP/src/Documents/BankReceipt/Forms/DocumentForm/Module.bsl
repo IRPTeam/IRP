@@ -196,15 +196,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPayer
-
-&AtClient
-Procedure PayerOnChange(Item)
-	DocBankReceiptClient.PayerOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
 #Region ItemCompany
 
 &AtClient
@@ -252,7 +243,6 @@ Procedure CurrencyOnChangeContinue(Answer, AdditionalParameters) Export
 		ClearCashTransferOrders(Object.Currency);
 		CurrentCurrency = Object.Currency;
 		DocBankReceiptClient.CurrencyOnChange(Object, ThisObject, Items.Currency);
-		DocBankReceiptClient.FillPayers(Object, ThisObject);
 		Notify("CallbackHandler", Undefined, ThisObject);
 	Else
 		Object.Currency = CurrentCurrency;
@@ -279,7 +269,6 @@ Procedure AccountOnChangeContinue(Answer, AdditionalParameters) Export
 	If Answer = DialogReturnCode.Yes Then
 		CurrentAccount = Object.Account;
 		DocBankReceiptClient.AccountOnChange(Object, ThisObject, Items.Currency);
-		DocBankReceiptClient.FillPayers(Object, ThisObject);
 		ClearCashTransferOrders(Object.Currency);
 		Notify("CallbackHandler", Undefined, ThisObject);
 	Else

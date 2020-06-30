@@ -49,8 +49,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>LabelsInRow</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>LabelsInRow</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>LabelsInRowExtendedTooltip</name>
@@ -99,8 +101,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>LabelsInColumn</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>LabelsInColumn</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>LabelsInColumnExtendedTooltip</name>
@@ -178,8 +182,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.ExternalDataProc</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.ExternalDataProc</segments>
+          </paths>
         </dataPath>
         <handlers>
           <event>OnChange</event>
@@ -265,8 +271,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>TemplateSpreadsheet</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>TemplateSpreadsheet</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>TemplateSpreadsheetExtendedTooltip</name>
@@ -360,8 +368,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>DataSource</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>DataSource</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>DataSchemeSourceExtendedTooltip</name>
@@ -411,8 +421,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>PasteFieldAs</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>PasteFieldAs</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PasteTypeExtendedTooltip</name>
@@ -714,10 +726,6 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <title>
-      <key>en</key>
-      <value></value>
-    </title>
     <extendedTooltip>
       <name>GroupMainExtendedTooltip</name>
       <id>15</id>
@@ -785,12 +793,12 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>

@@ -117,16 +117,6 @@ Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
 	DocSalesReturnClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure PriceIncludeTaxOnChange(Item)
-	DocSalesReturnClient.PriceIncludeTaxOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure InputTypeOnChange(Item)
-	DocSalesReturnClient.InputTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
 #EndRegion
 
 #Region ItemListEvents
@@ -393,79 +383,6 @@ Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 	EndIf;
 	
 	TaxesClient.CalculateReverseTaxOnChangeTotalAmount(Object, ThisObject, CurrentData);
-EndProcedure
-
-&AtClient
-Procedure SelectSalesReturnOrders(Command)
-	FilterValues = New Structure("Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
-	FillPropertyValues(FilterValues, Object);
-	
-	ExistingRows = New Array;
-	For Each Row In Object.ItemList Do
-		RowStructure = New Structure("Key, Unit, Quantity");
-		FillPropertyValues(RowStructure, Row);
-		ExistingRows.Add(RowStructure);
-	EndDo;
-	
-	FormParameters = New Structure("FilterValues, ExistingRows, Ref", FilterValues, ExistingRows, Object.Ref);
-	OpenForm("Document.SalesReturn.Form.SelectSalesReturnOrdersForm"
-		, FormParameters, , , ,
-		, New NotifyDescription("SelectSalesReturnOrdersContinue", ThisObject));
-EndProcedure
-
-&AtClient
-Procedure SelectSalesReturnOrdersContinue(Result, AdditionalParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	
-	SelectSalesReturnOrdersContinueAtServer(Result, AdditionalParameters);
-	
-	DocSalesReturnClient.ItemListOnChange(Object, ThisObject, Items.ItemList);
-EndProcedure
-
-&AtServer
-Procedure SelectSalesReturnOrdersContinueAtServer(Result, AdditionalParameters)
-	
-	Settings = New Structure();
-	Settings.Insert("Rows", New Array());
-	Settings.Insert("CalculateSettings", New Structure());
-	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
-	
-	
-	For Each ResultRow In Result Do
-		RowsByKey = Object.ItemList.FindRows(New Structure("Key", ResultRow.Key));
-		If RowsByKey.Count() Then
-			RowByKey = RowsByKey[0];
-			ItemKeyUnit = CatItemsServer.GetItemKeyUnit(ResultRow.ItemKey);
-			UnitFactorFrom = Catalogs.Units.GetUnitFactor(RowByKey.Unit, ItemKeyUnit);
-			UnitFactorTo = Catalogs.Units.GetUnitFactor(ResultRow.Unit, ItemKeyUnit);
-			FillPropertyValues(RowByKey, ResultRow, , "Quantity");
-			RowByKey.Quantity = ?(UnitFactorTo = 0,
-					0,
-					RowByKey.Quantity * UnitFactorFrom / UnitFactorTo) + ResultRow.Quantity;
-			RowByKey.PriceType = ResultRow.PriceType;
-			RowByKey.Price = ResultRow.Price;
-			Settings.Rows.Add(RowByKey);
-		Else
-			NewRow = Object.ItemList.Add();
-			FillPropertyValues(NewRow, ResultRow);
-			NewRow.PriceType = ResultRow.PriceType;
-			NewRow.Price = ResultRow.Price;
-			Settings.Rows.Add(NewRow);
-		EndIf;
-	EndDo;
-	
-	TaxInfo = Undefined;
-	SavedData = TaxesClientServer.GetSavedData(ThisObject, TaxesServer.GetAttributeNames().CacheName);
-	If SavedData.Property("ArrayOfColumnsInfo") Then
-		TaxInfo = SavedData.ArrayOfColumnsInfo;
-	EndIf;
-	CalculationStringsClientServer.CalculateItemsRows(Object,
-		ThisObject,
-		Settings.Rows,
-		Settings.CalculateSettings,
-		TaxInfo);
 EndProcedure
 
 &AtClient

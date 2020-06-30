@@ -12,58 +12,47 @@
     <key>en</key>
     <value>Sales return</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Document.SalesReturn.StandardAttribute.Number</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <standardAttributes>
     <dataHistory>Use</dataHistory>
     <name>Posted</name>
-    <comment></comment>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
   </standardAttributes>
   <standardAttributes>
     <dataHistory>Use</dataHistory>
     <name>Ref</name>
-    <comment></comment>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
   </standardAttributes>
   <standardAttributes>
     <dataHistory>Use</dataHistory>
     <name>DeletionMark</name>
-    <comment></comment>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
   </standardAttributes>
   <standardAttributes>
     <dataHistory>Use</dataHistory>
     <name>Date</name>
-    <comment></comment>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fullTextSearch>Use</fullTextSearch>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
   </standardAttributes>
   <standardAttributes>
     <dataHistory>Use</dataHistory>
     <name>Number</name>
-    <comment></comment>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
   </standardAttributes>
@@ -106,17 +95,17 @@
   <defaultListForm>Document.SalesReturn.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.SalesReturn.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
+  <registerRecords>AccumulationRegister.SalesReturnTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.SalesTurnovers</registerRecords>
-  <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.AdvanceToSuppliers</registerRecords>
   <registerRecords>AccumulationRegister.ReconciliationStatement</registerRecords>
-  <registerRecords>AccumulationRegister.SalesReturnTurnovers</registerRecords>
-  <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
+  <registerRecords>AccumulationRegister.AdvanceToSuppliers</registerRecords>
+  <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
+  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -126,11 +115,9 @@
       <key>en</key>
       <value>Partner</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.Partners</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
@@ -150,11 +137,9 @@
       <key>en</key>
       <value>Company</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.Companies</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
@@ -168,11 +153,9 @@
       <key>en</key>
       <value>Currency</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.Currencies</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -185,7 +168,6 @@
       <key>en</key>
       <value>Date of shipment</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>Date</types>
       <dateQualifiers>
@@ -196,7 +178,6 @@
       <key>en</key>
       <value>Date </value>
     </toolTip>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -209,11 +190,9 @@
       <key>en</key>
       <value>Manager segment</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.PartnerSegments</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <choiceParameters>
@@ -232,11 +211,9 @@
       <key>en</key>
       <value>Agreement</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.Agreements</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
@@ -249,11 +226,9 @@
       <key>en</key>
       <value>Price include tax</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>Boolean</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -266,11 +241,9 @@
       <key>en</key>
       <value>Base document</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>DocumentRef.SalesReturnOrder</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -286,7 +259,10 @@
     <type>
       <types>CatalogRef.Companies</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -299,6 +275,9 @@
     <type>
       <types>Boolean</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -348,14 +327,11 @@
       <key>en</key>
       <value>Item list</value>
     </synonym>
-    <comment></comment>
     <standardAttributes>
       <dataHistory>Use</dataHistory>
       <name>LineNumber</name>
-      <comment></comment>
       <fillValue xsi:type="core:UndefinedValue"/>
       <fullTextSearch>Use</fullTextSearch>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
     </standardAttributes>
@@ -365,11 +341,9 @@
         <key>en</key>
         <value>Key</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>UUID</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -380,11 +354,9 @@
         <key>en</key>
         <value>Cancel</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>Boolean</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -395,11 +367,9 @@
         <key>en</key>
         <value>Item key</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>CatalogRef.ItemKeys</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
@@ -414,6 +384,8 @@
       <type>
         <types>CatalogRef.Stores</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -423,11 +395,9 @@
         <key>en</key>
         <value>Net amount</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>DefinedType.typeAmount</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -438,11 +408,9 @@
         <key>en</key>
         <value>Offers amount</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>DefinedType.typeAmount</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -453,11 +421,9 @@
         <key>en</key>
         <value>Price</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>DefinedType.typePrice</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -468,11 +434,9 @@
         <key>en</key>
         <value>Price type</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>CatalogRef.PriceTypes</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <createOnInput>DontUse</createOnInput>
@@ -483,11 +447,9 @@
         <key>en</key>
         <value>Q</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>DefinedType.typeQuantity</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -498,11 +460,9 @@
         <key>en</key>
         <value>Tax amount</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>DefinedType.typeAmount</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -513,11 +473,9 @@
         <key>en</key>
         <value>Total amount</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>DefinedType.typeAmount</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -528,11 +486,9 @@
         <key>en</key>
         <value>Unit</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>CatalogRef.Units</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <createOnInput>DontUse</createOnInput>
@@ -546,6 +502,8 @@
       <type>
         <types>DocumentRef.SalesReturnOrder</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -558,6 +516,8 @@
       <type>
         <types>DocumentRef.SalesInvoice</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -572,14 +532,11 @@
       <key>en</key>
       <value>Special offers</value>
     </synonym>
-    <comment></comment>
     <standardAttributes>
       <dataHistory>Use</dataHistory>
       <name>LineNumber</name>
-      <comment></comment>
       <fillValue xsi:type="core:UndefinedValue"/>
       <fullTextSearch>Use</fullTextSearch>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
     </standardAttributes>
@@ -589,11 +546,9 @@
         <key>en</key>
         <value>Key</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>UUID</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -604,11 +559,9 @@
         <key>en</key>
         <value>Special offer</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>CatalogRef.SpecialOffers</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <createOnInput>Use</createOnInput>
@@ -619,11 +572,9 @@
         <key>en</key>
         <value>Amount</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>DefinedType.typeAmount</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -639,14 +590,11 @@
       <key>en</key>
       <value>Tax list</value>
     </synonym>
-    <comment></comment>
     <standardAttributes>
       <dataHistory>Use</dataHistory>
       <name>LineNumber</name>
-      <comment></comment>
       <fillValue xsi:type="core:UndefinedValue"/>
       <fullTextSearch>Use</fullTextSearch>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
     </standardAttributes>
@@ -656,11 +604,9 @@
         <key>en</key>
         <value>Key</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>UUID</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -671,11 +617,9 @@
         <key>en</key>
         <value>Tax</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>CatalogRef.Taxes</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -686,11 +630,9 @@
         <key>en</key>
         <value>Amount</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>DefinedType.typeAmount</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -772,6 +714,8 @@
       <type>
         <types>UUID</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -784,6 +728,8 @@
       <type>
         <types>CatalogRef.Currencies</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -796,6 +742,8 @@
       <type>
         <types>DefinedType.typeCurrencyRate</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -808,6 +756,8 @@
       <type>
         <types>DefinedType.typeCurrencyRate</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -820,6 +770,8 @@
       <type>
         <types>Boolean</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -835,6 +787,8 @@
           <precision>10</precision>
         </numberQualifiers>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -847,6 +801,8 @@
       <type>
         <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -859,6 +815,8 @@
       <type>
         <types>DefinedType.typeAmount</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -908,10 +866,11 @@
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
-      <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.SalesReturnOrder</types>
+      <types>DocumentRef.SalesInvoice</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
+    <shortcut></shortcut>
   </commands>
 </mdclass:Document>

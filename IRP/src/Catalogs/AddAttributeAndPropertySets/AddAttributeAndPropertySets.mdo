@@ -12,7 +12,6 @@
     <key>en</key>
     <value>Add attribute and property sets</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>DontUse</createOnInput>
@@ -29,28 +28,24 @@
   <predefined>
     <items id="759d2809-0696-4f6c-befd-bd93aaf90e60">
       <name>Catalog_ItemKeys</name>
-      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="18357eb8-bf37-45d4-b02d-349d9b6347dc">
       <name>Catalog_Items</name>
-      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="a3975cab-9db4-4c45-9ad2-6682721cbdc5">
       <name>Catalog_ItemTypes</name>
-      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
     </items>
     <items id="c02f2c5d-9c88-4433-b318-bcc39d844c69">
       <name>Document_SalesInvoice</name>
-      <description></description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>
@@ -429,18 +424,15 @@
       <key>en</key>
       <value>Attributes</value>
     </synonym>
-    <comment></comment>
     <attributes uuid="80c4cfb8-465c-47b9-956d-60dad6cc77e4">
       <name>Attribute</name>
       <synonym>
         <key>en</key>
         <value>Attribute</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -451,11 +443,9 @@
         <key>en</key>
         <value>Condition</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>ValueStorage</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -466,14 +456,12 @@
         <key>en</key>
         <value>Is condition set</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>Number</types>
         <numberQualifiers>
           <precision>10</precision>
         </numberQualifiers>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -488,6 +476,8 @@
       <type>
         <types>CatalogRef.InterfaceGroups</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -500,6 +490,8 @@
       <type>
         <types>Boolean</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -512,6 +504,8 @@
       <type>
         <types>Boolean</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -526,18 +520,15 @@
       <key>en</key>
       <value>Properties</value>
     </synonym>
-    <comment></comment>
     <attributes uuid="b9140641-608f-4582-8a42-2dfd3e257d41">
       <name>Property</name>
       <synonym>
         <key>en</key>
         <value>Property</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -548,11 +539,9 @@
         <key>en</key>
         <value>Condition</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>ValueStorage</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -563,14 +552,12 @@
         <key>en</key>
         <value>Is condition set</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>Number</types>
         <numberQualifiers>
           <precision>10</precision>
         </numberQualifiers>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -584,6 +571,8 @@
       <type>
         <types>Boolean</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -594,7 +583,6 @@
       <key>en</key>
       <value>Item form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -604,7 +592,6 @@
       <key>en</key>
       <value>Edit condition</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -614,7 +601,6 @@
       <key>en</key>
       <value>List form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -624,7 +610,6 @@
       <key>en</key>
       <value>Choice form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -634,7 +619,6 @@
       <key>en</key>
       <value>DCS catalog</value>
     </synonym>
-    <comment></comment>
     <templateType>DataCompositionSchema</templateType>
   </templates>
   <templates uuid="e550ab2e-fb52-4923-86ef-30b0b9ef15bd">
@@ -643,7 +627,6 @@
       <key>en</key>
       <value>DCS document</value>
     </synonym>
-    <comment></comment>
     <templateType>DataCompositionSchema</templateType>
   </templates>
 </mdclass:Catalog>

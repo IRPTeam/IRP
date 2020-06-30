@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="51464da2-69a0-446f-b4f5-e1489d29db0e">
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="51464da2-69a0-446f-b4f5-e1489d29db0e">
   <producedTypes>
     <selectionType typeId="5d414f31-1670-4aa6-8bb7-aa303b960ec9" valueTypeId="2235a6aa-cbdc-41fc-aa6d-473b6d1fa7b8"/>
     <listType typeId="8ea4f5a6-44dc-4daf-91d8-bdca9547e01a" valueTypeId="ad874464-8a5b-423d-bd8d-ae9c9072d81c"/>
@@ -28,8 +28,11 @@
         <precision>10</precision>
       </numberQualifiers>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <attributes uuid="3a569aa1-4f93-4139-a71b-e285d070886e">
     <name>CreationDate</name>
@@ -41,8 +44,11 @@
       <types>Date</types>
       <dateQualifiers/>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <dimensions uuid="6a2ce54d-155f-4064-9a4b-43c8a8aefc63">
     <name>Owner</name>
@@ -53,8 +59,11 @@
     <type>
       <types>DefinedType.typeFilesOwner</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
@@ -67,8 +76,11 @@
     <type>
       <types>CatalogRef.Files</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
 </mdclass:InformationRegister>

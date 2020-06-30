@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Service</value>
   </synonym>
-  <comment></comment>
   <subsystems>Catalogs</subsystems>
   <subsystems>Documents</subsystems>
 </mdclass:Subsystem>

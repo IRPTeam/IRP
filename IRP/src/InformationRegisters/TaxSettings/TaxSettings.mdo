@@ -14,7 +14,6 @@
     <key>en</key>
     <value>Tax settings</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <defaultRecordForm>InformationRegister.TaxSettings.Form.RecordForm</defaultRecordForm>
   <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
@@ -26,11 +25,9 @@
       <key>en</key>
       <value>Tax rate</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.TaxRates</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
@@ -44,11 +41,9 @@
       <key>en</key>
       <value>Company</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.Companies</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
@@ -73,6 +68,8 @@
     <type>
       <types>CatalogRef.Taxes</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <choiceParameters>
       <name>Filter.Type</name>
@@ -83,6 +80,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
@@ -92,11 +90,9 @@
       <key>en</key>
       <value>Item key</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.ItemKeys</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <dataHistory>Use</dataHistory>
@@ -114,8 +110,11 @@
     <type>
       <types>CatalogRef.Items</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <dataHistory>Use</dataHistory>
     <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
@@ -128,8 +127,11 @@
     <type>
       <types>CatalogRef.ItemTypes</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <dataHistory>Use</dataHistory>
     <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
@@ -142,9 +144,12 @@
     <type>
       <types>CatalogRef.Agreements</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>

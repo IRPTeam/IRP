@@ -14,8 +14,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Volume</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Volume</segments>
+          </paths>
         </dataPath>
         <handlers>
           <event>OnChange</event>
@@ -68,8 +70,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Description</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Description</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DescriptionExtendedTooltip</name>
@@ -118,8 +122,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.URI</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.URI</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>URIExtendedTooltip</name>
@@ -169,8 +175,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.FileID</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.FileID</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>FileIDExtendedTooltip</name>
@@ -220,8 +228,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.MD5</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.MD5</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>MD5ExtendedTooltip</name>
@@ -304,8 +314,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Preview</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Preview</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>PreviewExtendedTooltip</name>
@@ -417,8 +429,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>PictureViewHTML</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>PictureViewHTML</segments>
+        </paths>
       </dataPath>
       <titleLocation>None</titleLocation>
       <extendedTooltip>
@@ -472,8 +486,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Extension</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Extension</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>ExtensionExtendedTooltip</name>
@@ -523,8 +539,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Height</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Height</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>HeightExtendedTooltip</name>
@@ -574,8 +592,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Width</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Width</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>WidthExtendedTooltip</name>
@@ -625,8 +645,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.SizeBytes</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.SizeBytes</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>SizeBytesExtendedTooltip</name>
@@ -697,7 +719,7 @@
         <currentRowUse>DontUse</currentRowUse>
       </extInfo>
     </items>
-   <visible>true</visible>
+    <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
@@ -768,16 +790,16 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
   </handlers>
   <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
   <handlers>
-    <event>NotificationProcessing</event>
-    <name>NotificationProcessing</name>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>
@@ -878,7 +900,7 @@
     <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
-    <commandInterface>
+  <commandInterface>
     <navigationPanel/>
     <commandBar/>
   </commandInterface>

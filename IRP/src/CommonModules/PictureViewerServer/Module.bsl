@@ -372,6 +372,8 @@ Function PicturesInfoForSlider(ItemRef, FileRef = Undefined) Export
 			Try
 				Map.SrcBD = New BinaryData(Map.Src);
 			Except
+				EmptyPic = New Picture();
+				Map.SrcBD = EmptyPic.GetBinaryData();
 			EndTry;
 		EndIf;
 		If Picture.Ref.isPreviewSet Then

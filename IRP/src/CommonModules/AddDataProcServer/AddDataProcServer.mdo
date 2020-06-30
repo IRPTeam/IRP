@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Add data proc server</value>
   </synonym>
-  <comment></comment>
   <server>true</server>
   <serverCall>true</serverCall>
 </mdclass:CommonModule>

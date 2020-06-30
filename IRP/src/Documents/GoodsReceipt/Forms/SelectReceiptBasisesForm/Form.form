@@ -23,8 +23,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>DocumentsTree.Use</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>DocumentsTree.Use</segments>
+          </paths>
         </dataPath>
         <handlers>
           <event>OnChange</event>
@@ -70,8 +72,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>DocumentsTree.Currency</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>DocumentsTree.Currency</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DocumentsTreeCurrencyExtendedTooltip</name>
@@ -121,8 +125,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>DocumentsTree.ReceiptBasis</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>DocumentsTree.ReceiptBasis</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DocumentsTreeReceiptBasisExtendedTooltip</name>
@@ -173,9 +179,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>DocumentsTree.Item</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>DocumentsTree.Item</segments>
           </paths>
@@ -232,9 +235,6 @@
           <paths xsi:type="form:DataPath">
             <segments>DocumentsTree.ItemKey</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>DocumentsTree.ItemKey</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DocumentsTreeItemKeyExtendedTooltip</name>
@@ -285,9 +285,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>DocumentsTree.Unit</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>DocumentsTree.Unit</segments>
           </paths>
@@ -344,9 +341,6 @@
           <paths xsi:type="form:DataPath">
             <segments>DocumentsTree.Quantity</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>DocumentsTree.Quantity</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DocumentsTreeQuantityExtendedTooltip</name>
@@ -400,9 +394,6 @@
           <paths xsi:type="form:DataPath">
             <segments>DocumentsTree.SalesOrder</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>DocumentsTree.SalesOrder</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DocumentsTreeSalesOrderExtendedTooltip</name>
@@ -452,8 +443,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>DocumentsTree.Store</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>DocumentsTree.Store</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DocumentsTreeStoreExtendedTooltip</name>
@@ -536,16 +529,16 @@
       <horizontalAlign>Left</horizontalAlign>
     </autoCommandBar>
     <handlers>
+      <event>Selection</event>
+      <name>DocumentsTreeSelection</name>
+    </handlers>
+    <handlers>
       <event>BeforeAddRow</event>
       <name>DocumentsTreeBeforeAddRow</name>
     </handlers>
     <handlers>
       <event>BeforeDeleteRow</event>
       <name>DocumentsTreeBeforeDeleteRow</name>
-    </handlers>
-    <handlers>
-      <event>Selection</event>
-      <name>DocumentsTreeSelection</name>
     </handlers>
     <searchStringAddition>
       <visible>true</visible>

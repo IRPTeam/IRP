@@ -12,7 +12,6 @@
     <key>en</key>
     <value>Export Data Exchange plan</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <inputByString>ExchangePlan.ED_ExchangePlan.StandardAttribute.Code</inputByString>
   <inputByString>ExchangePlan.ED_ExchangePlan.StandardAttribute.Description</inputByString>

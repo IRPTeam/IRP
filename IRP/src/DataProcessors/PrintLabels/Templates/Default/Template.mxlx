@@ -11,15 +11,24 @@
 		<languageInfo>
 			<id>hash</id>
 			<code>HASH</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>tr</id>
 			<code>Turkish</code>
+			<description/>
 		</languageInfo>
 	</languageSettings>
 	<columns>
 		<size>10</size>
 	</columns>
+	<rowsItem>
+		<index>0</index>
+		<indexTo>8</indexTo>
+		<row>
+			<empty>true</empty>
+		</row>
+	</rowsItem>
 	<rowsItem>
 		<index>9</index>
 		<row>
@@ -33,4 +42,5 @@
 	</rowsItem>
 	<templateMode>true</templateMode>
 	<height>10</height>
+	<vgRows>10</vgRows>
 </document>

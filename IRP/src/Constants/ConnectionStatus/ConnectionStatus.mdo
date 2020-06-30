@@ -3,13 +3,13 @@
   <producedTypes>
     <managerType typeId="8755da1a-910c-4854-b29c-92725003c81f" valueTypeId="7191bdc1-361c-4c65-9ae7-c3e3acf2fb60"/>
     <valueManagerType typeId="b374ee99-072c-4ea7-aa70-860a0e4a927b" valueTypeId="34148a50-47c3-47af-863c-5562c0980456"/>
+    <valueKeyType typeId="e49cf452-7c71-4f38-8709-92433ae3a5e4" valueTypeId="d8fe9eb0-96cf-456f-a1ee-2c83ee36824b"/>
   </producedTypes>
   <name>ConnectionStatus</name>
   <synonym>
     <key>en</key>
     <value>Connection status</value>
   </synonym>
-  <comment></comment>
   <type>
     <types>Number</types>
     <numberQualifiers>
@@ -17,7 +17,6 @@
     </numberQualifiers>
   </type>
   <useStandardCommands>true</useStandardCommands>
-  <mask></mask>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <dataLockControlMode>Managed</dataLockControlMode>

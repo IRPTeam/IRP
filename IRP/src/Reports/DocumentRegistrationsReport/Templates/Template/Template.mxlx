@@ -36,6 +36,13 @@
 		</row>
 	</rowsItem>
 	<rowsItem>
+		<index>1</index>
+		<indexTo>2</indexTo>
+		<row>
+			<empty>true</empty>
+		</row>
+	</rowsItem>
+	<rowsItem>
 		<index>3</index>
 		<row>
 			<formatIndex>4</formatIndex>
@@ -70,6 +77,12 @@
 		</row>
 	</rowsItem>
 	<rowsItem>
+		<index>5</index>
+		<row>
+			<empty>true</empty>
+		</row>
+	</rowsItem>
+	<rowsItem>
 		<index>6</index>
 		<row>
 			<formatIndex>4</formatIndex>
@@ -88,20 +101,15 @@
 	</rowsItem>
 	<templateMode>true</templateMode>
 	<height>7</height>
+	<vgRows>7</vgRows>
 	<namedItem xsi:type="NamedItemCells">
 		<name>MainTitle</name>
 		<area>
 			<type>Rows</type>
 			<beginRow>3</beginRow>
 			<endRow>4</endRow>
-		</area>
-	</namedItem>
-	<namedItem xsi:type="NamedItemCells">
-		<name>Title</name>
-		<area>
-			<type>Rows</type>
-			<beginRow>0</beginRow>
-			<endRow>0</endRow>
+			<beginColumn>0</beginColumn>
+			<endColumn>0</endColumn>
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
@@ -110,12 +118,20 @@
 			<type>Rows</type>
 			<beginRow>6</beginRow>
 			<endRow>6</endRow>
+			<beginColumn>0</beginColumn>
+			<endColumn>0</endColumn>
 		</area>
 	</namedItem>
-	<groupsBackColor>style:FormBackColor</groupsBackColor>
-	<groupsColor>style:FormTextColor</groupsColor>
-	<headersBackColor>style:FormBackColor</headersBackColor>
-	<headersColor>style:FormTextColor</headersColor>
+	<namedItem xsi:type="NamedItemCells">
+		<name>Title</name>
+		<area>
+			<type>Rows</type>
+			<beginRow>0</beginRow>
+			<endRow>0</endRow>
+			<beginColumn>0</beginColumn>
+			<endColumn>0</endColumn>
+		</area>
+	</namedItem>
 	<font faceName="Arial" height="12" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 	<font faceName="Arial" height="14" bold="true" italic="true" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 	<font faceName="Arial" height="12" bold="true" italic="true" underline="false" strikeout="false" kind="Absolute" scale="100"/>

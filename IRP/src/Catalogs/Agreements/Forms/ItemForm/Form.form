@@ -112,8 +112,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Object.Kind</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Object.Kind</segments>
+        </paths>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -208,8 +210,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.ApArPostingDetail</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.ApArPostingDetail</segments>
+      </paths>
     </dataPath>
     <handlers>
       <event>OnChange</event>
@@ -425,12 +429,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-        <event>StartChoice</event>
-        <name>PartnerSegmentStartChoice</name>
-      </handlers>
-      <handlers>
         <event>EditTextChange</event>
         <name>PartnerSegmentEditTextChange</name>
+      </handlers>
+      <handlers>
+        <event>StartChoice</event>
+        <name>PartnerSegmentStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -541,12 +545,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-        <event>StartChoice</event>
-        <name>LegalNameStartChoice</name>
-      </handlers>
-      <handlers>
         <event>EditTextChange</event>
         <name>LegalNameEditTextChange</name>
+      </handlers>
+      <handlers>
+        <event>StartChoice</event>
+        <name>LegalNameStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -601,12 +605,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-        <event>StartChoice</event>
-        <name>CompanyStartChoice</name>
-      </handlers>
-      <handlers>
         <event>EditTextChange</event>
         <name>CompanyEditTextChange</name>
+      </handlers>
+      <handlers>
+        <event>StartChoice</event>
+        <name>CompanyStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -624,8 +628,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.CurrencyMovementType</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.CurrencyMovementType</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>CurrencyMovementTypeExtendedTooltip</name>
@@ -682,8 +688,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.StandardAgreement</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.StandardAgreement</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>StandardAgreementExtendedTooltip</name>
@@ -793,10 +801,6 @@
   <items xsi:type="form:FormField">
     <name>PriceIncludeTax</name>
     <id>39</id>
-    <title>
-      <key>en</key>
-      <value></value>
-    </title>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -1143,16 +1147,16 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
   <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
-    <event>NotificationProcessing</event>
-    <name>NotificationProcessing</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>

@@ -9,14 +9,14 @@
     <value>Type object with statuses</value>
   </synonym>
   <type>
-    <types>DocumentRef.OutgoingPaymentOrder</types>
-    <types>DocumentRef.InventoryTransferOrder</types>
-    <types>DocumentRef.PurchaseOrder</types>
-    <types>DocumentRef.PurchaseReturnOrder</types>
-    <types>DocumentRef.SalesOrder</types>
     <types>DocumentRef.SalesReturnOrder</types>
-    <types>DocumentRef.ReconciliationStatement</types>
+    <types>DocumentRef.PurchaseReturnOrder</types>
+    <types>DocumentRef.PurchaseOrder</types>
+    <types>DocumentRef.OutgoingPaymentOrder</types>
+    <types>DocumentRef.SalesOrder</types>
     <types>DocumentRef.PhysicalCountByLocation</types>
+    <types>DocumentRef.InventoryTransferOrder</types>
+    <types>DocumentRef.ReconciliationStatement</types>
     <types>DocumentRef.PhysicalInventory</types>
   </type>
 </mdclass:DefinedType>

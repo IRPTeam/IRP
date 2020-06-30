@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fe3b00f6-e3d8-49a0-acd4-df7563c5758f">
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fe3b00f6-e3d8-49a0-acd4-df7563c5758f">
   <producedTypes>
     <selectionType typeId="bf17babd-3cc5-4dd2-a383-4d901368a0db" valueTypeId="c13cb7b5-637f-4f6d-b6db-3c5e31ab5483"/>
     <listType typeId="8dec63a8-68dd-469e-842e-d6e3258edbc0" valueTypeId="0aa213e5-0ec9-4223-9c88-be5b088a7982"/>
@@ -25,6 +25,8 @@
     <type>
       <types>DefinedType.typeQuantity</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
   <attributes uuid="cd2c79d5-b7d9-43a7-aa23-fde12827ee3c">
@@ -39,6 +41,8 @@
         <dateFractions>Date</dateFractions>
       </dateQualifiers>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <dimensions uuid="245d33e2-00c8-4fe8-97a3-189987ed288e">
@@ -50,6 +54,8 @@
     <type>
       <types>CatalogRef.Companies</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -62,6 +68,8 @@
     <type>
       <types>DefinedType.typeOrders</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -74,6 +82,8 @@
     <type>
       <types>CatalogRef.Stores</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -86,6 +96,8 @@
     <type>
       <types>CatalogRef.ItemKeys</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -101,6 +113,8 @@
         <length>50</length>
       </stringQualifiers>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>

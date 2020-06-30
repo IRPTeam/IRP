@@ -80,7 +80,7 @@
 			</dcscor:item>
 			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:parameter>Font</dcscor:parameter>
-				<dcscor:value bold="true" height="10" italic="false" kind="Absolute" scale="100" strikeout="false" underline="false" xsi:type="v8ui:Font"/>
+				<dcscor:value xsi:type="v8ui:Font" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 			</dcscor:item>
 		</appearance>
 	</item>
@@ -112,7 +112,7 @@
 			</dcscor:item>
 			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:parameter>Font</dcscor:parameter>
-				<dcscor:value bold="true" height="10" italic="false" kind="Absolute" scale="100" strikeout="false" underline="false" xsi:type="v8ui:Font"/>
+				<dcscor:value xsi:type="v8ui:Font" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 			</dcscor:item>
 		</appearance>
 	</item>

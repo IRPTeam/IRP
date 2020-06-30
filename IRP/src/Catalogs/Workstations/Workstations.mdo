@@ -12,7 +12,6 @@
     <key>en</key>
     <value>Workstations</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Catalog.Workstations.StandardAttribute.Code</inputByString>
   <inputByString>Catalog.Workstations.StandardAttribute.Description</inputByString>

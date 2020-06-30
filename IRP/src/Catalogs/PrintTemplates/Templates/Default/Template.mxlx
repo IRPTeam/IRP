@@ -13,6 +13,13 @@
 		<size>6</size>
 	</columns>
 	<rowsItem>
+		<index>0</index>
+		<indexTo>8</indexTo>
+		<row>
+			<empty>true</empty>
+		</row>
+	</rowsItem>
+	<rowsItem>
 		<index>9</index>
 		<row>
 			<c>
@@ -22,7 +29,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content></v8:content>
+							<v8:content/>
 						</v8:item>
 					</tl>
 				</c>
@@ -31,4 +38,5 @@
 	</rowsItem>
 	<templateMode>true</templateMode>
 	<height>10</height>
+	<vgRows>10</vgRows>
 </document>

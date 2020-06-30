@@ -8,8 +8,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Record.Period</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Record.Period</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>PeriodExtendedTooltip</name>
@@ -58,8 +60,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Record.Company</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Record.Company</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>CompanyExtendedTooltip</name>
@@ -108,8 +112,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Record.Tax</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Record.Tax</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>TaxExtendedTooltip</name>
@@ -161,8 +167,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Record.Use</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Record.Use</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>UseExtendedTooltip</name>
@@ -204,8 +212,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Record.Priority</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Record.Priority</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>PriorityExtendedTooltip</name>

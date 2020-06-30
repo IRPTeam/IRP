@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://g5.1c.ru/v8/dt/form">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormGroup">
     <name>GroupPages</name>
     <id>18</id>
@@ -202,8 +202,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Type</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Type</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>TypeExtendedTooltip</name>
@@ -252,8 +254,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Our</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Our</segments>
+          </paths>
         </dataPath>
         <handlers>
           <event>OnChange</event>
@@ -396,8 +400,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Currencies.MovementType</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Currencies.MovementType</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>CurrenciesMovementTypeExtendedTooltip</name>
@@ -431,12 +437,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>CurrenciesMovementTypeStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>CurrenciesMovementTypeEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>CurrenciesMovementTypeStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -454,8 +460,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Currencies.MovementType.Type</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Currencies.MovementType.Type</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>CurrenciesMovementTypeTypeExtendedTooltip</name>
@@ -504,8 +512,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Currencies.MovementType.Currency</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Currencies.MovementType.Currency</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>CurrenciesMovementTypeCurrencyExtendedTooltip</name>
@@ -554,8 +564,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Currencies.MovementType.Source</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Currencies.MovementType.Source</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>CurrenciesMovementTypeSourceExtendedTooltip</name>
@@ -764,6 +776,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -855,9 +868,6 @@
             <paths xsi:type="form:DataPath">
               <segments>CompanyTaxes.Period</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>CompanyTaxes.Period</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>CompanyTaxesPeriodExtendedTooltip</name>
@@ -910,9 +920,6 @@
             <paths xsi:type="form:DataPath">
               <segments>CompanyTaxes.Use</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>CompanyTaxes.Use</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>CompanyTaxesUseExtendedTooltip</name>
@@ -955,9 +962,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>CompanyTaxes.Tax</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>CompanyTaxes.Tax</segments>
             </paths>
@@ -1013,9 +1017,6 @@
             <paths xsi:type="form:DataPath">
               <segments>CompanyTaxes.Priority</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>CompanyTaxes.Priority</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>CompanyTaxesPriorityExtendedTooltip</name>
@@ -1068,12 +1069,12 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
-          <event>OnChange</event>
-          <name>CompanyTaxesOnChange</name>
-        </handlers>
-        <handlers>
           <event>OnStartEdit</event>
           <name>CompanyTaxesOnStartEdit</name>
+        </handlers>
+        <handlers>
+          <event>OnChange</event>
+          <name>CompanyTaxesOnChange</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -1232,6 +1233,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1305,12 +1307,12 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <handlers>
     <event>FillCheckProcessingAtServer</event>
@@ -1461,7 +1463,7 @@
         <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
-        <command>Form.StandardCommand.OpenCompanyTaxes</command>
+        <command>Form.StandardCommand.RestoreValues</command>
         <commandParameter xsi:type="form:DataPath">
           <segments>Object.Ref</segments>
         </commandParameter>
@@ -1472,24 +1474,24 @@
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
-      <event>AfterWriteAtServer</event>
-      <name>AfterWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>AfterWrite</event>
       <name>AfterWrite</name>
+    </handlers>
+    <handlers>
+      <event>AfterWriteAtServer</event>
+      <name>AfterWriteAtServer</name>
     </handlers>
     <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
     </handlers>
     <handlers>
-      <event>OnWriteAtServer</event>
-      <name>OnWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>OnWriteAtServer</event>
+      <name>OnWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

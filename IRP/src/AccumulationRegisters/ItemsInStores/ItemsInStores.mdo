@@ -13,7 +13,6 @@
     <key>en</key>
     <value>Items in stores</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
@@ -23,11 +22,9 @@
       <key>en</key>
       <value>Quantity</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>DefinedType.typeQuantity</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
@@ -38,11 +35,9 @@
       <key>en</key>
       <value>Store</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.Stores</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
@@ -54,11 +49,9 @@
       <key>en</key>
       <value>Item key</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.ItemKeys</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>

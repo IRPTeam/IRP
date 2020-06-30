@@ -8,8 +8,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Description</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Description</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>DescriptionExtendedTooltip</name>
@@ -58,13 +60,11 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.FilesType</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.FilesType</segments>
+      </paths>
     </dataPath>
-    <handlers>
-      <event>OnChange</event>
-      <name>FilesTypeOnChange</name>
-    </handlers>
     <extendedTooltip>
       <name>FilesTypeExtendedTooltip</name>
       <id>6</id>
@@ -112,8 +112,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.POSTIntegrationSettings</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.POSTIntegrationSettings</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>POSTIntegrationSettingsExtendedTooltip</name>
@@ -162,8 +164,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.GETIntegrationSettings</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.GETIntegrationSettings</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>GETIntegrationSettingsExtendedTooltip</name>
@@ -215,10 +219,6 @@
     <horizontalAlign>Left</horizontalAlign>
     <autoFill>true</autoFill>
   </autoCommandBar>
-  <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

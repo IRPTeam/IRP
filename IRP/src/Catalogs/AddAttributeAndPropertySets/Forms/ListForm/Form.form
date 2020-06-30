@@ -59,8 +59,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Description</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -109,8 +111,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.PredefinedDataName</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.PredefinedDataName</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>PredefinedDataNameExtendedTooltip</name>

@@ -76,9 +76,6 @@
         <paths xsi:type="form:DataPath">
           <segments>IDInfo.Value</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>IDInfo.Value</segments>
-        </paths>
       </dataPath>
       <extendedTooltip>
         <name>IDInfoValueExtendedTooltip</name>

@@ -356,9 +356,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.ExternalDataProces.Country</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ExternalDataProces.Country</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ExternalDataProcesCountryExtendedTooltip</name>
@@ -408,9 +405,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ExternalDataProces.ExternalDataProc</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.ExternalDataProces.ExternalDataProc</segments>
             </paths>
@@ -763,9 +757,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RelatedValues.IDInfoType</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.RelatedValues.IDInfoType</segments>
             </paths>

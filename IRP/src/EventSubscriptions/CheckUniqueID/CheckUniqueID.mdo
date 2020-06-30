@@ -5,13 +5,12 @@
     <key>en</key>
     <value>Check unique ID</value>
   </synonym>
-  <comment></comment>
   <source>
-    <types>CatalogObject.IntegrationSettings</types>
     <types>ChartOfCharacteristicTypesObject.AddAttributeAndProperty</types>
     <types>ChartOfCharacteristicTypesObject.IDInfoTypes</types>
     <types>ChartOfCharacteristicTypesObject.CustomUserSettings</types>
     <types>CatalogObject.ObjectStatuses</types>
+    <types>CatalogObject.IntegrationSettings</types>
     <types>CatalogObject.AddAttributeAndPropertyValues</types>
   </source>
   <event>BeforeWrite</event>

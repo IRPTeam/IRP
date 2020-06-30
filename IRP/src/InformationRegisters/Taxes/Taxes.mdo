@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="abbf0760-acd3-4459-9360-46acbe394b37">
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="abbf0760-acd3-4459-9360-46acbe394b37">
   <producedTypes>
     <selectionType typeId="9fd36c47-1b3b-4ab7-a539-b2fb073b92c4" valueTypeId="36379c33-4e5b-4453-8b19-1c39710c6143"/>
     <listType typeId="3ecc8b98-08ed-48d5-b3e5-097fde00bb60" valueTypeId="cfc46168-b8a2-4aeb-ad84-76c2dd68d6b7"/>
@@ -27,8 +27,11 @@
     <type>
       <types>Boolean</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <resources uuid="a25d893c-31bd-463f-95c2-1b23da47ba5e">
     <name>Priority</name>
@@ -42,8 +45,11 @@
         <precision>3</precision>
       </numberQualifiers>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <dimensions uuid="ea15a6c3-3598-4685-abe5-9fa75df0f291">
     <name>Company</name>
@@ -54,9 +60,12 @@
     <type>
       <types>CatalogRef.Companies</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
@@ -69,8 +78,11 @@
     <type>
       <types>CatalogRef.Taxes</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
   <forms uuid="e106da62-9cde-470d-880e-10c2c65b3b42">

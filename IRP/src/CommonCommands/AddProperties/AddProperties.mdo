@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Add properties</value>
   </synonym>
-  <comment></comment>
   <group>FormCommandBarImportant</group>
   <commandParameterType>
     <types>DefinedType.typeAddPropertyOwners</types>

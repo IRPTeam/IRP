@@ -69,10 +69,10 @@
         </extendedTooltip>
         <commandName>Form.Item.SettingsFilter.StandardCommand.AddFilterItemGroup</commandName>
         <representation>Auto</representation>
-        <onlyInAllActions>false</onlyInAllActions>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <locationInCommandBar>InCommandBarAndInAdditionalSubmenu</locationInCommandBar>
       </items>
       <items xsi:type="form:Button">
         <name>SettingsFilterDelete</name>

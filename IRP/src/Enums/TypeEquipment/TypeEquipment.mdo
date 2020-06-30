@@ -10,7 +10,6 @@
     <key>en</key>
     <value>Type equipment</value>
   </synonym>
-  <comment></comment>
   <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>
   <enumValues uuid="b55052e6-bac8-4642-aca9-2b563fde894f">
@@ -19,7 +18,6 @@
       <key>en</key>
       <value>Bank terminal</value>
     </synonym>
-    <comment></comment>
   </enumValues>
   <enumValues uuid="93331c36-34de-457d-ae04-66f664429268">
     <name>Display</name>
@@ -27,7 +25,6 @@
       <key>en</key>
       <value>Display</value>
     </synonym>
-    <comment></comment>
   </enumValues>
   <enumValues uuid="da26fb28-a4dc-4c61-ab68-1f5c8b3375c2">
     <name>FiscalPrinter</name>
@@ -35,7 +32,6 @@
       <key>en</key>
       <value>Fiscal printer</value>
     </synonym>
-    <comment></comment>
   </enumValues>
   <enumValues uuid="bda90896-6092-4344-8de2-f24591d094d7">
     <name>ReceiptPrinter</name>
@@ -43,6 +39,5 @@
       <key>en</key>
       <value>Receipt printer</value>
     </synonym>
-    <comment></comment>
   </enumValues>
 </mdclass:Enum>

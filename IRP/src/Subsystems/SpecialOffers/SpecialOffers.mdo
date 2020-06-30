@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Special offers</value>
   </synonym>
-  <comment></comment>
   <includeHelpInContents>true</includeHelpInContents>
   <picture xsi:type="core:PictureRef">
     <picture>CommonPicture.SpecialOffer</picture>

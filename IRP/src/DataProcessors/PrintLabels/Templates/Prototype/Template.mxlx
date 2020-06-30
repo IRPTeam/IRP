@@ -12,6 +12,12 @@
 	<columns>
 		<size>2</size>
 	</columns>
+	<rowsItem>
+		<index>0</index>
+		<row>
+			<empty>true</empty>
+		</row>
+	</rowsItem>
 	<drawing>
 		<drawingType>Picture</drawingType>
 		<id>1</id>
@@ -24,16 +30,23 @@
 		<beginColumnOffset>0</beginColumnOffset>
 		<endColumn>1</endColumn>
 		<endColumnOffset>111</endColumnOffset>
+		<autoSize>false</autoSize>
 		<pictureSize>Stretch</pictureSize>
+		<zOrder>1</zOrder>
 		<pictureIndex>1</pictureIndex>
 	</drawing>
 	<templateMode>true</templateMode>
 	<height>7</height>
+	<vgRows>7</vgRows>
 	<namedItem xsi:type="NamedItemDrawing">
 		<name>Square100Pixels</name>
 		<drawingID>1</drawingID>
 	</namedItem>
 	<picture>
-		<picture>iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA0SURBVHhe7cEBDQAAAMKg909tDjcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbNXWUAAEE/b5iAAAAAElFTkSuQmCC</picture>
+		<index>0</index>
+		<picture>iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAAXNSR0IArs4c6QAA
+AARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA0SURBVHhe7cEB
+DQAAAMKg909tDjcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbNXWUAAEE
+/b5iAAAAAElFTkSuQmCC</picture>
 	</picture>
 </document>

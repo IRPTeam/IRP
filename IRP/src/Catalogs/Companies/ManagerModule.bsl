@@ -17,22 +17,19 @@ EndProcedure
 
 Function GetChoiseDataTable(Parameters) Export
 	
-	QueryBuilderText =
-		"SELECT ALLOWED TOP 50
-		|	Table.Ref AS Ref,
-		|	Table.Presentation
-		|FROM
-		|	Catalog.Companies AS Table
-		|WHERE
-		|	Table.Description_en LIKE ""%%"" + &SearchString + ""%%""
-		|	AND CASE
-		|			WHEN &FilterByPartnerHierarchy
-		|				THEN Table.Ref IN (&CompaniesByPartnerHierarchy)
-		|			ELSE TRUE
-		|		END
-		|";
-	QueryBuilderText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryBuilderText);
 	
+	Filter = "
+		|	AND CASE
+		|		WHEN &FilterByPartnerHierarchy
+		|			THEN Table.Ref IN (&CompaniesByPartnerHierarchy)
+		|		ELSE TRUE
+		|	END";
+	Settings = New Structure;
+	Settings.Insert("Name", "Catalog.Companies");
+	Settings.Insert("Filter", Filter);
+	
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
+		
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
 	If TypeOf(Parameters) = Type("Structure") And Parameters.Filter.Property("CustomSearchFilter") Then

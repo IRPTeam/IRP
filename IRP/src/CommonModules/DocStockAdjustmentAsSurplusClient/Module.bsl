@@ -136,6 +136,6 @@ EndProcedure
 #EndRegion
 
 Procedure SearchByBarcode(Command, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject);
+	DocumentsClient.SearchByBarcode(Command, Object, Form);
 EndProcedure
 

@@ -322,6 +322,6 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 EndProcedure
 
 Procedure SearchByBarcode(Command, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject);
+	DocumentsClient.SearchByBarcode(Command, Object, Form);
 EndProcedure
 

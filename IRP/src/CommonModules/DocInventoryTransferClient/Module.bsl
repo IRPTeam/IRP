@@ -153,6 +153,6 @@ Procedure StoreReceiverOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure SearchByBarcode(Command, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject);
+	DocumentsClient.SearchByBarcode(Command, Object, Form);
 EndProcedure
 

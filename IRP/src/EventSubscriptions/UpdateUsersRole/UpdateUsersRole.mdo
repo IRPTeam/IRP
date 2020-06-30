@@ -5,10 +5,9 @@
     <key>en</key>
     <value>Update users role</value>
   </synonym>
-  <comment></comment>
   <source>
-    <types>CatalogObject.AccessGroups</types>
     <types>CatalogObject.AccessProfiles</types>
+    <types>CatalogObject.AccessGroups</types>
   </source>
   <event>OnWrite</event>
   <handler>CommonModule.UsersEvent.UpdateUsersRoleOnWrite</handler>

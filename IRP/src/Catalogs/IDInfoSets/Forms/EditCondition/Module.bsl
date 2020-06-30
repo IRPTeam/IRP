@@ -84,7 +84,7 @@ Function IsObjectAttribute(AttributeName, IDInfoSetRef)
 	ElsIf StrStartsWith(Ref.PredefinedDataName, "Document") Then
 		ObjectMetadata = Metadata.Documents[StrReplace(IDInfoSetRef.PredefinedDataName, "Document_", "")];
 	Else
-		Raise R()["Exc_001"];
+		Raise R().Exc_001;
 	EndIf;
 	Return ObjectMetadata.Attributes.Find(AttributeName) <> Undefined;
 EndFunction

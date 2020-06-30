@@ -373,8 +373,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.ShipmentConfirmationsBeforeSalesInvoice</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.ShipmentConfirmationsBeforeSalesInvoice</segments>
+          </paths>
         </dataPath>
         <titleLocation>Right</titleLocation>
         <extendedTooltip>
@@ -417,8 +419,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.GoodsReceiptBeforePurchaseInvoice</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.GoodsReceiptBeforePurchaseInvoice</segments>
+          </paths>
         </dataPath>
         <titleLocation>Right</titleLocation>
         <extendedTooltip>
@@ -769,9 +773,6 @@
                 <paths xsi:type="form:DataPath">
                   <segments>SalesOrdersList.DocumentAmount</segments>
                 </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>SalesOrdersList.DocumentAmount</segments>
-                </paths>
               </dataPath>
               <extendedTooltip>
                 <name>OrdersListDocumentAmountExtendedTooltip</name>
@@ -821,9 +822,6 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>SalesOrdersList.Currency</segments>
-                </paths>
                 <paths xsi:type="form:DataPath">
                   <segments>SalesOrdersList.Currency</segments>
                 </paths>
@@ -900,9 +898,6 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>SalesOrdersList.Company</segments>
-              </paths>
               <paths xsi:type="form:DataPath">
                 <segments>SalesOrdersList.Company</segments>
               </paths>
@@ -1386,12 +1381,12 @@ WHERE
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
-      <event>BeforeWriteAtServer</event>
-      <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

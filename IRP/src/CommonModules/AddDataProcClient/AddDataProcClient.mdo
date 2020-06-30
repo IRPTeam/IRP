@@ -5,6 +5,5 @@
     <key>en</key>
     <value>Add data proc client</value>
   </synonym>
-  <comment></comment>
   <clientManagedApplication>true</clientManagedApplication>
 </mdclass:CommonModule>

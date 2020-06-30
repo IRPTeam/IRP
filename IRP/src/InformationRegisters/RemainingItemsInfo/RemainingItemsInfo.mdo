@@ -14,7 +14,6 @@
     <key>en</key>
     <value>Remaining items info</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="46dc1d13-93c7-4aeb-9ed7-a195cfaa920d">
@@ -23,11 +22,9 @@
       <key>en</key>
       <value>Q</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>DefinedType.typeQuantity</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <dataHistory>Use</dataHistory>
@@ -39,11 +36,9 @@
       <key>en</key>
       <value>Item key</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.ItemKeys</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
@@ -57,11 +52,9 @@
       <key>en</key>
       <value>Store</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.Stores</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
@@ -75,11 +68,9 @@
       <key>en</key>
       <value>Unit</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.Units</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <createOnInput>DontUse</createOnInput>

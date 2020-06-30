@@ -8,8 +8,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Volume</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Volume</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>VolumeExtendedTooltip</name>
@@ -70,8 +72,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Files.Use</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Files.Use</segments>
+        </paths>
       </dataPath>
       <titleLocation>None</titleLocation>
       <extendedTooltip>
@@ -115,9 +119,6 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Files.FileURI</segments>
-        </paths>
         <paths xsi:type="form:DataPath">
           <segments>Files.FileURI</segments>
         </paths>
@@ -293,16 +294,16 @@
       <horizontalAlign>Left</horizontalAlign>
     </autoCommandBar>
     <handlers>
+      <event>Selection</event>
+      <name>FilesIDSelection</name>
+    </handlers>
+    <handlers>
       <event>BeforeAddRow</event>
       <name>FilesIDBeforeAddRow</name>
     </handlers>
     <handlers>
       <event>BeforeDeleteRow</event>
       <name>FilesIDBeforeDeleteRow</name>
-    </handlers>
-    <handlers>
-      <event>Selection</event>
-      <name>FilesIDSelection</name>
     </handlers>
     <searchStringAddition>
       <visible>true</visible>
@@ -460,6 +461,7 @@
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
   </items>
   <autoCommandBar>
     <name>FormCommandBar</name>

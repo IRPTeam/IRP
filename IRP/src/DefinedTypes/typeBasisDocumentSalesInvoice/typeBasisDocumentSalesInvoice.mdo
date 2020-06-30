@@ -8,7 +8,6 @@
     <key>en</key>
     <value>Type basis document sales invoice</value>
   </synonym>
-  <comment></comment>
   <type>
     <types>DocumentRef.SalesOrder</types>
   </type>

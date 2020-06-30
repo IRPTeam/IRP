@@ -306,10 +306,19 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
+        <type>InputField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
+        </extInfo>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -436,10 +445,19 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
+        <type>InputField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
+        </extInfo>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -520,17 +538,17 @@
           <segments>Object.ItemList</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
+        <excludedCommands>Change</excludedCommands>
         <excludedCommands>Copy</excludedCommands>
         <excludedCommands>CopyToClipboard</excludedCommands>
         <excludedCommands>EndEdit</excludedCommands>
+        <excludedCommands>MoveDown</excludedCommands>
+        <excludedCommands>MoveUp</excludedCommands>
         <excludedCommands>SelectAll</excludedCommands>
         <excludedCommands>ShowMultipleSelection</excludedCommands>
-        <excludedCommands>Change</excludedCommands>
         <excludedCommands>ShowRowRearrangement</excludedCommands>
         <excludedCommands>SortListAsc</excludedCommands>
         <excludedCommands>SortListDesc</excludedCommands>
-        <excludedCommands>MoveDown</excludedCommands>
-        <excludedCommands>MoveUp</excludedCommands>
         <items xsi:type="form:FormGroup">
           <name>ItemListGroupRows</name>
           <id>207</id>
@@ -1143,11 +1161,11 @@
             </extendedTooltip>
             <commandName>Form.Item.ItemList.StandardCommand.Find</commandName>
             <representation>Auto</representation>
-            <onlyInAllActions>true</onlyInAllActions>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
             <representationInContextMenu>Auto</representationInContextMenu>
+            <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
           </items>
           <items xsi:type="form:Button">
             <name>ItemListCommandEmpty</name>
@@ -1238,11 +1256,11 @@
             </extendedTooltip>
             <commandName>Form.Item.ItemList.StandardCommand.CancelSearch</commandName>
             <representation>Auto</representation>
-            <onlyInAllActions>true</onlyInAllActions>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
             <representationInContextMenu>Auto</representationInContextMenu>
+            <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
           </items>
           <items xsi:type="form:Button">
             <name>ItemListOutputList</name>
@@ -2644,9 +2662,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.TaxList.Tax</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.TaxList.Tax</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>TaxListTaxExtendedTooltip</name>
@@ -2701,9 +2716,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.TaxList.Amount</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.TaxList.Amount</segments>
             </paths>

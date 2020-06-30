@@ -4,50 +4,14 @@
 	<setForAttributesByDefault>false</setForAttributesByDefault>
 	<independentRightsOfChildObjects>true</independentRightsOfChildObjects>
 	<object>
-		<name>Document.SalesInvoice</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
+		<name>Document.InvoiceMatch.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.SalesInvoice.Attribute.Agreement</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesInvoice.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesInvoice.TabularSection.ItemList.Attribute.Store</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesOrder</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesOrder.Attribute.Agreement</name>
+		<name>Document.BankReceipt.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -68,7 +32,60 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseOrder.Attribute.Company</name>
+		<name>Document.InventoryTransferOrder.Attribute.StoreReceiver</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ReconciliationStatement.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ShipmentConfirmation.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesOrder.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.PurchaseOrder.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesOrder</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesInvoice.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashReceipt.Attribute.CashAccount</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -82,21 +99,18 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseInvoice.Attribute.Company</name>
+		<name>Document.PurchaseReturnOrder</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.Store</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.InternalSupplyRequest.Attribute.Company</name>
+		<name>Document.OutgoingPaymentOrder.Attribute.Account</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -110,14 +124,21 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseReturn.Attribute.Company</name>
+		<name>Document.InternalSupplyRequest.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseReturnOrder.Attribute.Company</name>
+		<name>Document.SalesInvoice.Attribute.Agreement</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.InventoryTransferOrder.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -131,6 +152,91 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankPayment.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.BankReceipt.Attribute.Currency</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.PurchaseInvoice.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesReturn</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.CashAccounts</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashTransferOrder.Attribute.Receiver</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ShipmentConfirmation.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.GoodsReceipt.TabularSection.ItemList.Attribute.Store</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.PurchaseInvoice.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.InventoryTransfer.Attribute.StoreTransit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.GoodsReceipt.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.SalesReturnOrder.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -138,7 +244,21 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.InternalSupplyRequest</name>
+		<name>Catalog.Companies.Attribute.Country</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.Unbundling.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ReconciliationStatement</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -149,7 +269,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseInvoice</name>
+		<name>Document.CashExpense</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -160,7 +280,56 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseOrder</name>
+		<name>Catalog.Partners.Attribute.ShipmentConfirmationsBeforeSalesInvoice</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashReceipt.Attribute.Currency</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.PurchaseReturnOrder.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.Bundling.Attribute.Store</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.CashAccounts.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashRevenue.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashPayment.Attribute.Currency</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.InventoryTransfer</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -182,39 +351,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseReturnOrder</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesReturn</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesReturnOrder</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.Partners.Attribute.GoodsReceiptBeforePurchaseInvoice</name>
 		<right>
 			<name>View</name>
@@ -222,7 +358,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.Partners</name>
+		<name>Document.SalesInvoice</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -233,14 +369,50 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.Partners.Attribute.ShipmentConfirmationsBeforeSalesInvoice</name>
+		<name>Document.ChequeBondTransaction</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.ShipmentConfirmation.Attribute.Company</name>
+		<name>Document.OpeningEntry.TabularSection.Inventory</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.Store</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.BankPayment.Attribute.Account</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashTransferOrder.Attribute.Sender</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashRevenue</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -258,36 +430,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.GoodsReceipt.Attribute.Company</name>
+		<name>Document.ChequeBondTransaction.Attribute.Currency</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.GoodsReceipt</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.InventoryTransfer</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.InventoryTransfer.Attribute.Company</name>
+		<name>Document.OutgoingPaymentOrder.Attribute.Currency</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -301,217 +451,21 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.InventoryTransfer.Attribute.StoreSender</name>
+		<name>Document.SalesInvoice.TabularSection.ItemList.Attribute.Store</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.InventoryTransfer.Attribute.StoreTransit</name>
+		<name>Document.CashRevenue.Attribute.Account</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.InventoryTransferOrder</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.InventoryTransferOrder.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.InventoryTransferOrder.Attribute.StoreReceiver</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.InventoryTransferOrder.Attribute.StoreSender</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Bundling</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Bundling.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Bundling.Attribute.Store</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Unbundling</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Unbundling.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Unbundling.Attribute.Store</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.Companies.Attribute.Country</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.CashAccounts.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashPayment</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashPayment.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashPayment.Attribute.CashAccount</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashReceipt</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashReceipt.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashReceipt.Attribute.CashAccount</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankPayment</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankPayment.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankPayment.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankReceipt.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankReceipt.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankReceipt</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankReceipt.Attribute.Currency</name>
+		<name>Document.InventoryTransfer.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -525,46 +479,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.CashPayment.Attribute.Currency</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashReceipt.Attribute.Currency</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashTransferOrder</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashTransferOrder.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashTransferOrder.Attribute.Receiver</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashTransferOrder.Attribute.Sender</name>
+		<name>Document.CashReceipt.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -582,6 +497,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.Unbundling.Attribute.Store</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CreditDebitNote.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -589,43 +511,11 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.InvoiceMatch</name>
+		<name>Document.Unbundling</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.InvoiceMatch.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.IncomingPaymentOrder</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.IncomingPaymentOrder.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -639,21 +529,29 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.OutgoingPaymentOrder.Attribute.Company</name>
+		<name>Document.OpeningEntry</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.OutgoingPaymentOrder.Attribute.Account</name>
+		<name>Document.OpeningEntry.TabularSection.Inventory.Attribute.Store</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.OutgoingPaymentOrder.Attribute.Currency</name>
+		<name>Document.Bundling</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -671,14 +569,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.ReconciliationStatement.Attribute.Company</name>
+		<name>Document.PurchaseOrder.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.ReconciliationStatement</name>
+		<name>Catalog.Partners</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -689,21 +587,57 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.SalesOrder.TabularSection.ItemList</name>
+		<name>Document.PurchaseReturn.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseInvoice.TabularSection.ItemList</name>
+		<name>Document.GoodsReceipt.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseOrder.TabularSection.ItemList</name>
+		<name>Document.InvoiceMatch</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashPayment.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.IncomingPaymentOrder</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesOrder.Attribute.Agreement</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashPayment.Attribute.CashAccount</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -717,77 +651,118 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.Store</name>
+		<name>Document.ChequeBondTransaction.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.ShipmentConfirmation.TabularSection.ItemList</name>
+		<name>Document.CashReceipt</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.GoodsReceipt.TabularSection.ItemList.Attribute.Store</name>
+		<name>Document.InventoryTransferOrder.Attribute.StoreSender</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.GoodsReceipt.TabularSection.ItemList</name>
+		<name>Document.SalesReturnOrder</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.Store</name>
+		<name>Document.Bundling.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.ShipmentConfirmation.TabularSection.ItemList</name>
+		<name>Document.InventoryTransfer.Attribute.StoreSender</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.GoodsReceipt.TabularSection.ItemList.Attribute.Store</name>
+		<name>Document.CashTransferOrder.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.GoodsReceipt.TabularSection.ItemList</name>
+		<name>Document.OutgoingPaymentOrder.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.CashRevenue.Attribute.Company</name>
+		<name>Document.PurchaseInvoice</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.CashRevenue.Attribute.Account</name>
+		<name>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.Store</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.CashRevenue</name>
+		<name>Document.InventoryTransferOrder</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.GoodsReceipt</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.IncomingPaymentOrder.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.PurchaseOrder</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -812,18 +787,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.CashExpense</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ChequeBondTransaction</name>
+		<name>Document.BankPayment</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -834,21 +798,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.ChequeBondTransaction.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ChequeBondTransaction.Attribute.Currency</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.OpeningEntry</name>
+		<name>Document.InternalSupplyRequest</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -866,25 +816,47 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.OpeningEntry.TabularSection.Inventory.Attribute.Store</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.OpeningEntry.TabularSection.Inventory</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.CashAccounts</name>
+		<name>Document.CashPayment</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashTransferOrder</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.BankReceipt</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.BankReceipt.Attribute.Account</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

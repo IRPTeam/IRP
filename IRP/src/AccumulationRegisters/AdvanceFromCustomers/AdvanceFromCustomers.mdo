@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ca5624bb-76f2-4a04-b7c8-8d7d3afb8661">
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ca5624bb-76f2-4a04-b7c8-8d7d3afb8661">
   <producedTypes>
     <selectionType typeId="68d461e1-03b3-4e59-9a39-efa2ece699b9" valueTypeId="b966cecc-a119-4979-9f02-4c323ed38695"/>
     <listType typeId="3fc72255-bafa-4db8-95fb-4ca284d8341f" valueTypeId="a2c76103-58c6-459d-a861-d866a4cc8fd2"/>
@@ -25,6 +25,8 @@
     <type>
       <types>DefinedType.typeAmount</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
   <attributes uuid="daa9bdcd-f35d-4745-8269-d729ed7c0763">
@@ -36,6 +38,8 @@
     <type>
       <types>Boolean</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <dimensions uuid="f090644e-bbb0-405e-aea0-b761426f82f2">
@@ -47,6 +51,8 @@
     <type>
       <types>CatalogRef.Companies</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -59,6 +65,8 @@
     <type>
       <types>CatalogRef.Partners</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -71,6 +79,8 @@
     <type>
       <types>CatalogRef.Companies</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -83,6 +93,8 @@
     <type>
       <types>CatalogRef.Currencies</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -93,11 +105,13 @@
       <value>Receipt document</value>
     </synonym>
     <type>
-      <types>DocumentRef.CashReceipt</types>
       <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.CashReceipt</types>
       <types>DocumentRef.OpeningEntry</types>
       <types>DocumentRef.ChequeBondTransactionItem</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -110,6 +124,8 @@
     <type>
       <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>

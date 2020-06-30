@@ -3,39 +3,15 @@
 	<filter>
 		<viewMode>Normal</viewMode>
 		<userSettingID>dfcece9d-5077-440b-b6b3-45a5cb4538eb</userSettingID>
-		<userSettingPresentation xsi:type="v8:LocalStringType">
-			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content/>
-			</v8:item>
-		</userSettingPresentation>
 	</filter>
 	<order>
 		<viewMode>Normal</viewMode>
 		<userSettingID>88619765-ccb3-46c6-ac52-38e9c992ebd4</userSettingID>
-		<userSettingPresentation xsi:type="v8:LocalStringType">
-			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content/>
-			</v8:item>
-		</userSettingPresentation>
 	</order>
 	<conditionalAppearance>
 		<viewMode>Normal</viewMode>
 		<userSettingID>b75fecce-942b-4aed-abc9-e6a02e460fb3</userSettingID>
-		<userSettingPresentation xsi:type="v8:LocalStringType">
-			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content/>
-			</v8:item>
-		</userSettingPresentation>
 	</conditionalAppearance>
 	<itemsViewMode>Normal</itemsViewMode>
 	<itemsUserSettingID>911b6018-f537-43e8-a417-da56b22f9aec</itemsUserSettingID>
-	<itemsUserSettingPresentation xsi:type="v8:LocalStringType">
-		<v8:item>
-			<v8:lang>en</v8:lang>
-			<v8:content/>
-		</v8:item>
-	</itemsUserSettingPresentation>
 </Settings>

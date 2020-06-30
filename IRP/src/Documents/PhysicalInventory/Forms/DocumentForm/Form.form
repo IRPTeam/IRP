@@ -144,10 +144,6 @@
         <items xsi:type="form:Decoration">
           <name>DecorationGroupTitleUncollapsedPicture</name>
           <id>197</id>
-          <title>
-            <key>en</key>
-            <value></value>
-          </title>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -314,8 +310,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Store</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Store</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -368,8 +366,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Status</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Status</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>StatusExtendedTooltip</name>
@@ -418,8 +418,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Description</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Description</segments>
+            </paths>
           </dataPath>
           <defaultItem>true</defaultItem>
           <extendedTooltip>
@@ -557,10 +559,6 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <title>
-      <key>en</key>
-      <value></value>
-    </title>
     <extendedTooltip>
       <name>GroupTitleExtendedTooltip</name>
       <id>184</id>
@@ -1015,8 +1013,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Locked</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.Locked</segments>
+            </paths>
           </dataPath>
           <titleLocation>None</titleLocation>
           <extendedTooltip>
@@ -1068,8 +1068,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.LineNumber</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.LineNumber</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListLineNumberExtendedTooltip</name>
@@ -1114,8 +1116,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Item</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.Item</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -1153,12 +1157,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>ItemListItemStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>ItemListItemEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>ItemListItemStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -1176,8 +1180,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.ItemKey</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.ItemKey</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -1236,8 +1242,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Unit</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.Unit</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListUnitExtendedTooltip</name>
@@ -1292,8 +1300,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.ExpCount</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.ExpCount</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListExpCountExtendedTooltip</name>
@@ -1331,14 +1341,6 @@
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
             <markNegatives>true</markNegatives>
-            <format>
-              <key>en</key>
-              <value></value>
-            </format>
-            <editFormat>
-              <key>en</key>
-              <value></value>
-            </editFormat>
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
@@ -1352,8 +1354,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.PhysCount</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.PhysCount</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -1406,8 +1410,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Difference</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.Difference</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListDifferenceExtendedTooltip</name>
@@ -1458,8 +1464,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.ResponsiblePerson</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.ResponsiblePerson</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListResponsiblePersonExtendedTooltip</name>
@@ -1507,8 +1515,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.PhysicalCountByLocation</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.PhysicalCountByLocation</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListPhysicalCountByLocationExtendedTooltip</name>
@@ -1562,8 +1572,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.PhysicalCountByLocationPresentation</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.PhysicalCountByLocationPresentation</segments>
+            </paths>
           </dataPath>
           <titleLocation>None</titleLocation>
           <extendedTooltip>
@@ -1617,20 +1629,20 @@
           <horizontalAlign>Left</horizontalAlign>
         </autoCommandBar>
         <handlers>
-          <event>OnChange</event>
-          <name>ItemListOnChange</name>
-        </handlers>
-        <handlers>
-          <event>OnStartEdit</event>
-          <name>ItemListOnStartEdit</name>
+          <event>Selection</event>
+          <name>ItemListSelection</name>
         </handlers>
         <handlers>
           <event>BeforeDeleteRow</event>
           <name>ItemListBeforeDeleteRow</name>
         </handlers>
         <handlers>
-          <event>Selection</event>
-          <name>ItemListSelection</name>
+          <event>OnStartEdit</event>
+          <name>ItemListOnStartEdit</name>
+        </handlers>
+        <handlers>
+          <event>OnChange</event>
+          <name>ItemListOnChange</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -1665,7 +1677,6 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>ItemListSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1704,7 +1715,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>ItemListViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -1744,7 +1754,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>ItemList</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1794,6 +1803,7 @@
         <verticalStretch>true</verticalStretch>
         <enableStartDrag>true</enableStartDrag>
         <enableDrag>true</enableDrag>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1885,8 +1895,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Number</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Number</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>NumberExtendedTooltip</name>
@@ -1935,8 +1947,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Date</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Date</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DateExtendedTooltip</name>
@@ -1985,8 +1999,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Author</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Author</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>AuthorExtendedTooltip</name>
@@ -2183,8 +2199,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>PhysicalCountByLocationList.ResponsiblePerson</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>PhysicalCountByLocationList.ResponsiblePerson</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PhysicalCountByLocationListResponsiblePersonExtendedTooltip</name>
@@ -2233,8 +2251,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>PhysicalCountByLocationList.Status</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>PhysicalCountByLocationList.Status</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PhysicalCountByLocationListStatusExtendedTooltip</name>
@@ -2451,6 +2471,11 @@
         <fileDragMode>AsFileRef</fileDragMode>
         <extInfo xsi:type="form:DynamicListTableExtInfo">
           <autoRefreshPeriod>60</autoRefreshPeriod>
+          <period>
+            <startDate>0001-01-01T00:00:00</startDate>
+            <endDate>0001-01-01T00:00:00</endDate>
+          </period>
+          <topLevelParent xsi:type="core:UndefinedValue"/>
           <showRoot>true</showRoot>
         </extInfo>
       </items>
@@ -2526,16 +2551,16 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
   </handlers>
   <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
   <handlers>
-    <event>NotificationProcessing</event>
-    <name>NotificationProcessing</name>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -2729,10 +2754,6 @@ WHERE
   </formCommands>
   <formCommands>
     <name>SearchByBarcode</name>
-    <title>
-      <key>en</key>
-      <value></value>
-    </title>
     <id>2</id>
     <use>
       <common>true</common>
@@ -2827,20 +2848,20 @@ WHERE
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
-      <event>OnReadAtServer</event>
-      <name>OnReadAtServer</name>
-    </handlers>
-    <handlers>
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
     </handlers>
     <handlers>
-      <event>OnWriteAtServer</event>
-      <name>OnWriteAtServer</name>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
     </handlers>
     <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>OnWriteAtServer</event>
+      <name>OnWriteAtServer</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

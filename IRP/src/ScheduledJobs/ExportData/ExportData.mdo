@@ -5,10 +5,7 @@
     <key>en</key>
     <value>Export data</value>
   </synonym>
-  <comment></comment>
   <methodName>CommonModule.ScheduledJobsForExtentions.ScheduledJobExportData</methodName>
-  <description></description>
-  <key></key>
   <predefined>true</predefined>
   <restartCountOnFailure>3</restartCountOnFailure>
   <restartIntervalOnFailure>25</restartIntervalOnFailure>

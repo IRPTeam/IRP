@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:ChartOfCharacteristicTypes xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="78d3d275-5362-4d5a-978a-488685b93e3d">
+<mdclass:ChartOfCharacteristicTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="78d3d275-5362-4d5a-978a-488685b93e3d">
   <producedTypes>
     <objectType typeId="3b33f0d0-e575-46d6-86e5-1f05f8a135b6" valueTypeId="a40c4648-68ea-4256-bac3-f0c3c9d1284a"/>
     <refType typeId="ee081ed5-4b9a-48ff-b9c0-2bca047d7aa3" valueTypeId="e3bacd1a-ed9e-4cb3-a560-edf3fe7741ec"/>
@@ -13,7 +13,6 @@
     <key>en</key>
     <value>Add attribute and property</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>DontUse</createOnInput>
@@ -26,11 +25,11 @@
   <characteristicExtValues>Catalog.AddAttributeAndPropertyValues</characteristicExtValues>
   <type>
     <types>Boolean</types>
+    <types>CatalogRef.Currencies</types>
     <types>CatalogRef.AddAttributeAndPropertyValues</types>
     <types>String</types>
     <types>Date</types>
     <types>Number</types>
-    <types>CatalogRef.Currencies</types>
     <numberQualifiers>
       <precision>10</precision>
       <scale>4</scale>
@@ -59,6 +58,9 @@
     <type>
       <types>ValueStorage</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -71,6 +73,9 @@
     <type>
       <types>Boolean</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -80,7 +85,6 @@
       <key>en</key>
       <value>Item form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -90,7 +94,6 @@
       <key>en</key>
       <value>List form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -100,7 +103,6 @@
       <key>en</key>
       <value>Choice form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>

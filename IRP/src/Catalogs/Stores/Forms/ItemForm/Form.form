@@ -46,8 +46,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.UseGoodsReceipt</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.UseGoodsReceipt</segments>
+          </paths>
         </dataPath>
         <handlers>
           <event>OnChange</event>
@@ -93,8 +95,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.UseShipmentConfirmation</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.UseShipmentConfirmation</segments>
+          </paths>
         </dataPath>
         <handlers>
           <event>OnChange</event>
@@ -140,8 +144,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Transit</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Transit</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>TransitExtendedTooltip</name>

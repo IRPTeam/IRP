@@ -48,11 +48,6 @@ Function ErrorMessagekey(BasisDocument)
 	Return ErrorMessagekey;
 EndFunction
 
-&AtServer 
-Function GetUserMessege()
-	Return StrTemplate(R().Error_051, Metadata.Documents.CashPayment.ListPresentation);
-EndFunction
-
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_CashTransferOrder = New Array();
 	ArrayOf_OutgoingPaymentOrder = New Array();

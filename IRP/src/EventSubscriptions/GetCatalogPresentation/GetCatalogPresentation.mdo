@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Get catalog presentation</value>
   </synonym>
-  <comment></comment>
   <source>
     <types>ChartOfCharacteristicTypesManager</types>
     <types>CatalogManager</types>

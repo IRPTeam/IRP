@@ -169,7 +169,7 @@
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>Font</dcscor:parameter>
-							<dcscor:value bold="true" faceName="Arial" height="10" italic="false" kind="Absolute" scale="100" strikeout="false" underline="false" xsi:type="v8ui:Font"/>
+							<dcscor:value xsi:type="v8ui:Font" faceName="Arial" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>MinimumWidth</dcscor:parameter>
@@ -289,7 +289,7 @@
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>Font</dcscor:parameter>
-							<dcscor:value bold="true" faceName="Arial" height="10" italic="false" kind="Absolute" scale="100" strikeout="false" underline="false" xsi:type="v8ui:Font"/>
+							<dcscor:value xsi:type="v8ui:Font" faceName="Arial" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>HorizontalAlign</dcscor:parameter>
@@ -377,7 +377,7 @@
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>Font</dcscor:parameter>
-							<dcscor:value bold="false" faceName="Arial" height="9" italic="false" kind="Absolute" scale="100" strikeout="false" underline="false" xsi:type="v8ui:Font"/>
+							<dcscor:value xsi:type="v8ui:Font" faceName="Arial" height="9" bold="false" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>HorizontalAlign</dcscor:parameter>
@@ -459,7 +459,7 @@
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>Font</dcscor:parameter>
-							<dcscor:value bold="false" faceName="Arial" height="9" italic="false" kind="Absolute" scale="100" strikeout="false" underline="false" xsi:type="v8ui:Font"/>
+							<dcscor:value xsi:type="v8ui:Font" faceName="Arial" height="9" bold="false" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>HorizontalAlign</dcscor:parameter>
@@ -669,23 +669,23 @@
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>Font</dcscor:parameter>
-							<dcscor:value bold="false" faceName="Arial" height="9" italic="false" kind="Absolute" scale="100" strikeout="false" underline="false" xsi:type="v8ui:Font"/>
-						</dcscor:item>
-						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">22.0</dcscor:value>
-						</dcscor:item>
-						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">22.0</dcscor:value>
-						</dcscor:item>
-						<dcscor:item>
-							<dcscor:parameter>Details</dcscor:parameter>
-							<dcscor:value xsi:type="dcscor:Parameter">Details_Item</dcscor:value>
+							<dcscor:value xsi:type="v8ui:Font" faceName="Arial" height="9" bold="false" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>Placement</dcscor:parameter>
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
+						</dcscor:item>
+						<dcscor:item>
+							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:value xsi:type="xs:decimal">22</dcscor:value>
+						</dcscor:item>
+						<dcscor:item>
+							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:value xsi:type="xs:decimal">22</dcscor:value>
+						</dcscor:item>
+						<dcscor:item>
+							<dcscor:parameter>Details</dcscor:parameter>
+							<dcscor:value xsi:type="dcscor:Parameter">Details_Item</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>WidthWeightFactor</dcscor:parameter>
@@ -704,7 +704,11 @@
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>Font</dcscor:parameter>
-							<dcscor:value bold="false" faceName="Arial" height="9" italic="false" kind="Absolute" scale="100" strikeout="false" underline="false" xsi:type="v8ui:Font"/>
+							<dcscor:value xsi:type="v8ui:Font" faceName="Arial" height="9" bold="false" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
+						</dcscor:item>
+						<dcscor:item>
+							<dcscor:parameter>Placement</dcscor:parameter>
+							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>MinimumWidth</dcscor:parameter>
@@ -717,10 +721,6 @@
 						<dcscor:item>
 							<dcscor:parameter>Details</dcscor:parameter>
 							<dcscor:value xsi:type="dcscor:Parameter">Details_ItemKey</dcscor:value>
-						</dcscor:item>
-						<dcscor:item>
-							<dcscor:parameter>Placement</dcscor:parameter>
-							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>WidthWeightFactor</dcscor:parameter>
@@ -868,7 +868,7 @@
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>Font</dcscor:parameter>
-							<dcscor:value bold="true" faceName="Arial" height="10" italic="false" kind="Absolute" scale="100" strikeout="false" underline="false" xsi:type="v8ui:Font"/>
+							<dcscor:value xsi:type="v8ui:Font" faceName="Arial" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>HorizontalAlign</dcscor:parameter>
@@ -912,7 +912,7 @@
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>Font</dcscor:parameter>
-							<dcscor:value bold="true" faceName="Arial" height="10" italic="false" kind="Absolute" scale="100" strikeout="false" underline="false" xsi:type="v8ui:Font"/>
+							<dcscor:value xsi:type="v8ui:Font" faceName="Arial" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>HorizontalAlign</dcscor:parameter>
@@ -999,7 +999,7 @@
 					<dcsat:appearance>
 						<dcscor:item>
 							<dcscor:parameter>Font</dcscor:parameter>
-							<dcscor:value bold="true" faceName="Arial" height="16" italic="false" kind="Absolute" scale="100" strikeout="false" underline="false" xsi:type="v8ui:Font"/>
+							<dcscor:value xsi:type="v8ui:Font" faceName="Arial" height="16" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>HorizontalStretch</dcscor:parameter>
@@ -1059,7 +1059,7 @@
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>Font</dcscor:parameter>
-							<dcscor:value bold="true" faceName="Arial" height="10" italic="false" kind="Absolute" scale="100" strikeout="false" underline="false" xsi:type="v8ui:Font"/>
+							<dcscor:value xsi:type="v8ui:Font" faceName="Arial" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>HorizontalAlign</dcscor:parameter>
@@ -1215,8 +1215,6 @@
 					<dcsset:field>Price</dcsset:field>
 				</dcsset:item>
 			</dcsset:selection>
-			<dcsset:filter>
-			</dcsset:filter>
 			<dcsset:outputParameters>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 					<dcscor:parameter>HorizontalOverallPlacement</dcscor:parameter>

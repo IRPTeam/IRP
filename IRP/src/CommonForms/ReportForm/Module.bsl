@@ -47,12 +47,3 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
-
-#Region Variants
-
-&AtServer
-Procedure CreateVariantsMenu()
-	
-EndProcedure
-
-#EndRegion

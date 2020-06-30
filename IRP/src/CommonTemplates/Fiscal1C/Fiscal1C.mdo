@@ -5,6 +5,5 @@
     <key>en</key>
     <value>Fiscal 1C</value>
   </synonym>
-  <comment></comment>
   <templateType>BinaryData</templateType>
 </mdclass:CommonTemplate>

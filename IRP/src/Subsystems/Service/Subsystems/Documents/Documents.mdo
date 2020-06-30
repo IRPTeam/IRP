@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Documents</value>
   </synonym>
-  <comment></comment>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Document.CashInPOS</content>

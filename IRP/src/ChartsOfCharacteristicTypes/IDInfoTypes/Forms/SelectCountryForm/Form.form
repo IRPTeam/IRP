@@ -28,9 +28,6 @@
         <paths xsi:type="form:DataPath">
           <segments>CountryTable.Country</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>CountryTable.Country</segments>
-        </paths>
       </dataPath>
       <extendedTooltip>
         <name>CountryTableCountryExtendedTooltip</name>

@@ -2,40 +2,16 @@
 <Settings xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core">
 	<filter>
 		<viewMode>Normal</viewMode>
-		<userSettingID>ff8b8cf0-7a9b-40d5-9b6f-8c3e724ddfa1</userSettingID>
-		<userSettingPresentation xsi:type="v8:LocalStringType">
-			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content/>
-			</v8:item>
-		</userSettingPresentation>
+		<userSettingID>dfcece9d-5077-440b-b6b3-45a5cb4538eb</userSettingID>
 	</filter>
 	<order>
 		<viewMode>Normal</viewMode>
-		<userSettingID>3a9f272f-8d08-4ab0-aa21-1981b51ab960</userSettingID>
-		<userSettingPresentation xsi:type="v8:LocalStringType">
-			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content/>
-			</v8:item>
-		</userSettingPresentation>
+		<userSettingID>88619765-ccb3-46c6-ac52-38e9c992ebd4</userSettingID>
 	</order>
 	<conditionalAppearance>
 		<viewMode>Normal</viewMode>
-		<userSettingID>526cb829-d90e-461f-8bbc-d9027127d594</userSettingID>
-		<userSettingPresentation xsi:type="v8:LocalStringType">
-			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content/>
-			</v8:item>
-		</userSettingPresentation>
+		<userSettingID>b75fecce-942b-4aed-abc9-e6a02e460fb3</userSettingID>
 	</conditionalAppearance>
 	<itemsViewMode>Normal</itemsViewMode>
-	<itemsUserSettingID>e1c08421-a205-4cb5-b81c-358f1abfa129</itemsUserSettingID>
-	<itemsUserSettingPresentation xsi:type="v8:LocalStringType">
-		<v8:item>
-			<v8:lang>en</v8:lang>
-			<v8:content/>
-		</v8:item>
-	</itemsUserSettingPresentation>
+	<itemsUserSettingID>911b6018-f537-43e8-a417-da56b22f9aec</itemsUserSettingID>
 </Settings>

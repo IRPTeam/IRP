@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Find data for input string</value>
   </synonym>
-  <comment></comment>
   <source>
     <types>CatalogManager</types>
     <types>ChartOfCharacteristicTypesManager.CurrencyMovementType</types>

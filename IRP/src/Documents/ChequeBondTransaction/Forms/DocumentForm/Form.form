@@ -8,8 +8,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Company</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Company</segments>
+      </paths>
     </dataPath>
     <handlers>
       <event>OnChange</event>
@@ -70,8 +72,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Currency</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Currency</segments>
+      </paths>
     </dataPath>
     <handlers>
       <event>OnChange</event>
@@ -142,8 +146,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ChequeBonds.LineNumber</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ChequeBonds.LineNumber</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ChequeBondsLineNumberExtendedTooltip</name>
@@ -188,8 +194,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ChequeBonds.Cheque</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ChequeBonds.Cheque</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -227,12 +235,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>ChequeBondsChequeStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>ChequeBondsChequeEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>ChequeBondsChequeStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -250,8 +258,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ChequeBonds.Status</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ChequeBonds.Status</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ChequeBondsStatusExtendedTooltip</name>
@@ -301,8 +311,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ChequeBonds.NewStatus</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ChequeBonds.NewStatus</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -340,16 +352,16 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>TextEditEnd</event>
-              <name>ChequeBondsStatusTextEditEnd</name>
+              <event>EditTextChange</event>
+              <name>ChequeBondsStatusEditTextChange</name>
             </handlers>
             <handlers>
               <event>StartChoice</event>
               <name>ChequeBondsStatusStartChoice</name>
             </handlers>
             <handlers>
-              <event>EditTextChange</event>
-              <name>ChequeBondsStatusEditTextChange</name>
+              <event>TextEditEnd</event>
+              <name>ChequeBondsStatusTextEditEnd</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -367,8 +379,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ChequeBonds.Amount</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ChequeBonds.Amount</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ChequeBondsAmountExtendedTooltip</name>
@@ -417,8 +431,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ChequeBonds.Currency</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ChequeBonds.Currency</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ChequeBondsCurrencyExtendedTooltip</name>
@@ -468,8 +484,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ChequeBonds.Partner</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ChequeBonds.Partner</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -507,12 +525,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>ChequeBondsPartnerStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>ChequeBondsPartnerEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>ChequeBondsPartnerStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -530,8 +548,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ChequeBonds.Agreement</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ChequeBonds.Agreement</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -569,12 +589,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>ChequeBondsAgreementStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>ChequeBondsAgreementEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>ChequeBondsAgreementStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -592,8 +612,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ChequeBonds.LegalName</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ChequeBonds.LegalName</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -631,12 +653,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>ChequeBondsLegalNameStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>ChequeBondsLegalNameEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>ChequeBondsLegalNameStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -654,8 +676,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ChequeBonds.CashAccount</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ChequeBonds.CashAccount</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ChequeBondsCashAccountExtendedTooltip</name>
@@ -689,12 +713,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>ChequeBondsCashAccountStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>ChequeBondsCashAccountEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>ChequeBondsCashAccountStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -712,8 +736,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ChequeBonds.Bank</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ChequeBonds.Bank</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ChequeBondsBankExtendedTooltip</name>
@@ -796,12 +822,8 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
-          <event>OnChange</event>
-          <name>ChequeBondsOnChange</name>
-        </handlers>
-        <handlers>
-          <event>OnStartEdit</event>
-          <name>ChequeBondsOnStartEdit</name>
+          <event>BeforeDeleteRow</event>
+          <name>ChequeBondsBeforeDeleteRow</name>
         </handlers>
         <handlers>
           <event>OnActivateRow</event>
@@ -812,12 +834,16 @@
           <name>ChequeBondsBeforeRowChange</name>
         </handlers>
         <handlers>
+          <event>OnStartEdit</event>
+          <name>ChequeBondsOnStartEdit</name>
+        </handlers>
+        <handlers>
           <event>OnActivateCell</event>
           <name>ChequeBondsOnActivateCell</name>
         </handlers>
         <handlers>
-          <event>BeforeDeleteRow</event>
-          <name>ChequeBondsBeforeDeleteRow</name>
+          <event>OnChange</event>
+          <name>ChequeBondsOnChange</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -852,7 +878,6 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>ChequeBondsSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -891,7 +916,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>ChequeBondsViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -931,7 +955,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>ChequeBonds</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -982,6 +1005,7 @@
         <enableStartDrag>true</enableStartDrag>
         <enableDrag>true</enableDrag>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <items xsi:type="form:FormGroup">
         <name>GroupDependTables</name>
@@ -1066,9 +1090,6 @@
                 <paths xsi:type="form:DataPath">
                   <segments>Object.PaymentList.PartnerArBasisDocument</segments>
                 </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.PaymentList.PartnerArBasisDocument</segments>
-                </paths>
               </dataPath>
               <extendedTooltip>
                 <name>PaymentListPartnerArBasisDocumentExtendedTooltip</name>
@@ -1122,9 +1143,6 @@
                 <paths xsi:type="form:DataPath">
                   <segments>Object.PaymentList.PartnerApBasisDocument</segments>
                 </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.PaymentList.PartnerApBasisDocument</segments>
-                </paths>
               </dataPath>
               <extendedTooltip>
                 <name>PaymentListPartnerApBasisDocumentExtendedTooltip</name>
@@ -1175,9 +1193,6 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.PaymentList.Amount</segments>
-                </paths>
                 <paths xsi:type="form:DataPath">
                   <segments>Object.PaymentList.Amount</segments>
                 </paths>
@@ -1263,16 +1278,16 @@
               <autoFill>true</autoFill>
             </autoCommandBar>
             <handlers>
+              <event>Selection</event>
+              <name>PaymentListSelection</name>
+            </handlers>
+            <handlers>
               <event>BeforeAddRow</event>
               <name>PaymentListBeforeAddRow</name>
             </handlers>
             <handlers>
               <event>OnStartEdit</event>
               <name>PaymentListOnStartEdit</name>
-            </handlers>
-            <handlers>
-              <event>Selection</event>
-              <name>PaymentListSelection</name>
             </handlers>
             <searchStringAddition>
               <visible>true</visible>
@@ -1431,6 +1446,7 @@
             <horizontalStretch>true</horizontalStretch>
             <verticalStretch>true</verticalStretch>
             <fileDragMode>AsFileRef</fileDragMode>
+            <rowFilter xsi:type="core:UndefinedValue"/>
           </items>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1549,9 +1565,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.Currencies.MovementType</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Currencies.MovementType</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>CurrenciesChequeBondsMovementTypeExtendedTooltip</name>
@@ -1601,8 +1614,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Currencies.MovementType.Type</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Currencies.MovementType.Type</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>CurrenciesChequeBondsMovementTypeTypeExtendedTooltip</name>
@@ -1656,9 +1671,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.Currencies.CurrencyFrom</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Currencies.CurrencyFrom</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>CurrenciesChequeBondsCurrencyFromExtendedTooltip</name>
@@ -1708,8 +1720,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Currencies.MovementType.Currency</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Currencies.MovementType.Currency</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>CurrenciesChequeBondsMovementTypeCurrencyExtendedTooltip</name>
@@ -1763,9 +1777,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.Currencies.ShowReverseRate</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Currencies.ShowReverseRate</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>CurrenciesChequeBondsShowReverseRateExtendedTooltip</name>
@@ -1816,8 +1827,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Currencies.RatePresentation</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Currencies.RatePresentation</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -1874,9 +1887,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.Currencies.Multiplicity</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Currencies.Multiplicity</segments>
-            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -1930,9 +1940,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Currencies.Amount</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.Currencies.Amount</segments>
             </paths>
@@ -2000,7 +2007,7 @@
         </handlers>
         <handlers>
           <event>BeforeDeleteRow</event>
-          <name>ChequeBondsBeforeDeleteRow</name>
+          <name>CurrenciesBeforeDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -2158,6 +2165,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -2200,8 +2208,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Number</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Number</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>NumberExtendedTooltip</name>
@@ -2250,8 +2260,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Date</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Date</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DateExtendedTooltip</name>
@@ -2300,8 +2312,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Author</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Author</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>AuthorExtendedTooltip</name>
@@ -2414,16 +2428,16 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
   </handlers>
   <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
   <handlers>
-    <event>NotificationProcessing</event>
-    <name>NotificationProcessing</name>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -2450,11 +2464,6 @@
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <savedData>true</savedData>
-    <additionalColumns>
-      <tablePath xsi:type="form:DataPath">
-        <segments>Object.ChequeBonds</segments>
-      </tablePath>
-    </additionalColumns>
     <additionalColumns>
       <tablePath xsi:type="form:DataPath">
         <segments>Object.Currencies</segments>
@@ -2493,6 +2502,11 @@
           <common>true</common>
         </edit>
       </columns>
+    </additionalColumns>
+    <additionalColumns>
+      <tablePath xsi:type="form:DataPath">
+        <segments>Object.ChequeBonds</segments>
+      </tablePath>
     </additionalColumns>
   </attributes>
   <attributes>
@@ -2722,16 +2736,16 @@
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
-      <event>OnWriteAtServer</event>
-      <name>OnWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
     </handlers>
     <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>OnWriteAtServer</event>
+      <name>OnWriteAtServer</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

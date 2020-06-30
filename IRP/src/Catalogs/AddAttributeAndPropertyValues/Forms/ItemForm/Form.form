@@ -40,8 +40,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.UniqueID</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.UniqueID</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>UniqueIDExtendedTooltip</name>

@@ -56,7 +56,6 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.PaymentList.BasisDocument</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>
@@ -129,7 +128,6 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.CurrencyExchange</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>

@@ -5,10 +5,9 @@
     <key>en</key>
     <value>Get catalog presentation fields</value>
   </synonym>
-  <comment></comment>
   <source>
-    <types>CatalogManager</types>
     <types>ChartOfCharacteristicTypesManager</types>
+    <types>CatalogManager</types>
   </source>
   <event>PresentationFieldsGetProcessing</event>
   <handler>CommonModule.LocalizationEvents.GetCatalogPresentationFieldsPresentationFieldsGetProcessing</handler>

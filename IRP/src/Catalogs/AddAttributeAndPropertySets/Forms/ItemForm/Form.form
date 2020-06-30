@@ -210,9 +210,6 @@
               <paths xsi:type="form:DataPath">
                 <segments>AttributesTree.Picture</segments>
               </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>AttributesTree.Picture</segments>
-              </paths>
             </dataPath>
             <extendedTooltip>
               <name>AttributesTreeItemPictureExtendedTooltip</name>
@@ -264,9 +261,6 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>AttributesTree.Presentation</segments>
-              </paths>
               <paths xsi:type="form:DataPath">
                 <segments>AttributesTree.Presentation</segments>
               </paths>
@@ -666,8 +660,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Attributes.InterfaceGroup</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Attributes.InterfaceGroup</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>AttributesInterfaceGroupExtendedTooltip</name>
@@ -769,8 +765,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Attributes.Required</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Attributes.Required</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>AttributesRequiredExtendedTooltip</name>
@@ -812,8 +810,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Attributes.ShowInHTML</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Attributes.ShowInHTML</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>AttributesShowInHTMLExtendedTooltip</name>
@@ -1257,8 +1257,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Properties.ShowInHTML</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Properties.ShowInHTML</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PropertiesShowInHTMLExtendedTooltip</name>
@@ -1569,12 +1571,12 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>
@@ -1767,12 +1769,12 @@
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
-      <event>BeforeWriteAtServer</event>
-      <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>AfterWrite</event>
       <name>AfterWrite</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

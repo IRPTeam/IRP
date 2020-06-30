@@ -40,8 +40,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.FormPosition</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.FormPosition</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>FormPositionExtendedTooltip</name>
@@ -103,8 +105,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Picture</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Picture</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>PictureExtendedTooltip</name>

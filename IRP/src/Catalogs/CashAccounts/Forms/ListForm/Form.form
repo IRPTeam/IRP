@@ -11,8 +11,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>CashAccountTypeFilter</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>CashAccountTypeFilter</segments>
+        </paths>
       </dataPath>
       <titleLocation>None</titleLocation>
       <handlers>
@@ -56,6 +58,7 @@
             <key>en</key>
             <value>All</value>
           </presentation>
+          <value xsi:type="core:UndefinedValue"/>
         </choiceList>
         <choiceList>
           <presentation>
@@ -180,8 +183,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Description</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -228,8 +233,10 @@
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible/>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Ref</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Ref</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>RefExtendedTooltip</name>

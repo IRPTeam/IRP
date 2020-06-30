@@ -136,11 +136,6 @@ Procedure NumberOnChange(Item)
 	DocPurchaseOrderClient.NumberOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure InputTypeOnChange(Item)
-	DocPurchaseOrderClient.InputTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
 #EndRegion
 
 #Region ItemListEvents

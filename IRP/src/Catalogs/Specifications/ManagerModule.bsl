@@ -5,19 +5,16 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		Return;
 	EndIf;
 	
-	Query = New Query();
-	Query.Text =
-		"SELECT TOP 50
-		|	Specifications.Ref
-		|FROM
-		|	Catalog.Specifications AS Specifications
-		|WHERE
-		|	Specifications.Ref IN (&ArrayOfRef)
-		|	AND Specifications.Description_en LIKE ""%"" + &SearchString + ""%""
-		|GROUP BY
-		|	Specifications.Ref";
+	Filter = "
+		|	AND Specifications.Ref IN (&ArrayOfRef)
+		|";
+
+	Settings = New Structure;
+	Settings.Insert("Name", "Catalog.Specifications");
+	Settings.Insert("Filter", Filter);
 	
-	Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text);
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
+	Query = New Query(QueryBuilderText);
 	Query.SetParameter("ArrayOfRef", GetAvailableSpecificationsByItem(Parameters.Filter.CustomFilterByItem));
 	Query.SetParameter("SearchString", Parameters.SearchString);
 	

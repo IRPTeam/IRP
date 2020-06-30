@@ -89,14 +89,7 @@ EndProcedure
 
 Function GetChoiseDataTable(Parameters) Export
 	
-	QueryBuilderText =
-		"SELECT ALLOWED TOP 50
-		|	Table.Ref AS Ref,
-		|	Table.Presentation
-		|FROM
-		|	Catalog.Agreements AS Table
-		|WHERE
-		|	Table.Description_en LIKE ""%%"" + &SearchString + ""%%""
+	Filter = "
 		|	AND (CASE
 		|		WHEN &IncludeFilterByPartner
 		|			THEN Table.Partner = &Partner
@@ -111,7 +104,11 @@ Function GetChoiseDataTable(Parameters) Export
 		|			OR Table.EndOfUse = DATETIME(1, 1, 1))
 		|		ELSE TRUE
 		|	END)";
-	QueryBuilderText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryBuilderText);
+	Settings = New Structure;
+	Settings.Insert("Name", "Catalog.Agreements");
+	Settings.Insert("Filter", Filter);
+	
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 	
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();

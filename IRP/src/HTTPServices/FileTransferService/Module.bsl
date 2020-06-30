@@ -67,7 +67,6 @@ Function GetArrayOfUnusedFiles(PathForSave)
 		|	tmp AS tmp
 		|		LEFT JOIN Catalog.Files AS Files
 		|		ON tmp.FileURI = Files.URI
-		|		OR tmp.FileURI = Files.Preview1URI
 		|WHERE
 		|	Files.Ref IS NULL";
 	Query.SetParameter("TablesOfFilesURI", TableOfFilesURI);

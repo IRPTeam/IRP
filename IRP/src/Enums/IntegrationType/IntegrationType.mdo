@@ -33,13 +33,6 @@
       <value>File storage</value>
     </synonym>
   </enumValues>
-  <enumValues uuid="9dd45e66-bc37-4a4e-90c4-a3d2d6f495e6">
-    <name>ScriptStorage</name>
-    <synonym>
-      <key>en</key>
-      <value>Script storage</value>
-    </synonym>
-  </enumValues>
   <enumValues uuid="ca0d76ed-ccb7-4f3f-ac27-fff09e19facb">
     <name>LocalFileStorage</name>
     <synonym>

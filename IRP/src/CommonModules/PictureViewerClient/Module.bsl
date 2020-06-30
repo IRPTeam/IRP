@@ -86,6 +86,10 @@ Function UploadPicture(File, Volume) Export
 		Return PictureViewerServer.GetFileInfo(FileRef);
 	EndIf;
 	RequestBody = GetFromTempStorage(File.Location);
+	
+	PictureScaleSize = 200;
+	FileInfo.Preview = PictureViewerServer.ScalePicture(RequestBody, PictureScaleSize);
+	
 	IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture();
 	
 	FileID = String(New UUID());
@@ -132,84 +136,7 @@ Function UploadPicture(File, Volume) Export
 			FileInfo.Success = False;
 		EndIf;	
 	EndIf;
-
-	
-	// Create preview
-	If IntegrationSettings.UsePreview1 Then
-		FileInfo.Preview1URI =
-			UploadPreview("prev1", FileInfo
-				, IntegrationSettings.Preview1POSTIntegrationSettings
-				, IntegrationSettings.Preview1Sizepx
-				, RequestBody);
-	EndIf;
 	Return FileInfo;
-EndFunction
-
-Function CreatePreview1(Object) Export
-	FileInfo = PictureViewerServer.GetFileInfo(Object.Ref);
-	IntegrationSettings = GetIntegrationSettingsPicture(Object.Volume);
-	
-	ConnectionSettings = IntegrationClientServer.ConnectionSetting(
-			ServiceSystemServer.GetObjectAttribute(IntegrationSettings.GETIntegrationSettings, "UniqueID"));
-	
-	If Not ConnectionSettings.Success Then
-		Raise ConnectionSettings.Message;
-	EndIf;
-	ConnectionSettings.Value.QueryType = "GET";
-	ResourceParameters = New Structure();
-	ResourceParameters.Insert("filename", FileInfo.URI);
-	RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters);
-	
-	If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
-		FileInfo.Preview1URI =
-			UploadPreview("prev1", FileInfo
-				, IntegrationSettings.Preview1POSTIntegrationSettings
-				, IntegrationSettings.Preview1Sizepx
-				, RequestResult.ResponseBody);
-		If FileInfo.Success Then
-			Return FileInfo;
-		EndIf;
-	Else
-		Raise RequestResult.Message;
-	EndIf;
-EndFunction
-
-Function UploadPreview(PreviewPrefix, FileInfo, POSTIntegrationSettings, Sizepx, RequestBody) Export
-	
-	ConnectionSettings = IntegrationClientServer.ConnectionSetting(
-			ServiceSystemServer.GetObjectAttribute(POSTIntegrationSettings, "UniqueID"));
-	
-	If Not ConnectionSettings.Success Then
-		Raise ConnectionSettings.Message;
-	EndIf;
-	FileName = "" + PreviewPrefix + FileInfo.FileID + "." + FileInfo.Extension;
-	If ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
-		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileName, RequestBody);
-		Return FileName;
-	ElsIf ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.GoogleDrive") Then
-
-		FileName = GoogleDriveServer.SendToDrive(ConnectionSettings.Value.IntegrationSettingsRef, FileName, RequestBody);	
-		Return FileName;
-	Else
-		ConnectionSettings.Value.QueryType = "POST";
-		ResourceParameters = New Structure();
-		ResourceParameters.Insert("filename", FileName);
-		
-		RequestParameters = New Structure();
-		RequestParameters.Insert("sizepx", Sizepx);
-		
-		RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value
-				, ResourceParameters
-				, RequestParameters
-				, RequestBody);
-		
-		If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
-			DeserializeResponse = CommonFunctionsServer.DeserializeJSON(RequestResult.ResponseBody);
-			Return DeserializeResponse.Data.URI;
-		Else
-			Return "";
-		EndIf;
-	EndIf;
 EndFunction
 
 Function GetMainPictureAndPutToTempStorage(FileRef, UUID) Export
@@ -219,14 +146,6 @@ Function GetMainPictureAndPutToTempStorage(FileRef, UUID) Export
 		, FileInfo.URI
 		, IntegrationSettings.GETIntegrationSettings);
 	
-EndFunction
-
-Function GetPicturePreview1AndPutToTempStorage(FileRef, UUID) Export
-	FileInfo = PictureViewerServer.GetFileInfo(FileRef);
-	IntegrationSettings = GetIntegrationSettingsPicture(ServiceSystemServer.GetObjectAttribute(FileRef, "Volume"));
-	Return GetPictureAndPutToTempStorage(UUID
-		, FileInfo.Preview1URI
-		, IntegrationSettings.Preview1GETIntegrationSettings);
 EndFunction
 
 Function GetPictureAndPutToTempStorage(UUID, URI, GETIntegrationSettings) Export

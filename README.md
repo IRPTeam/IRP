@@ -4,7 +4,7 @@
 [![Allure](https://img.shields.io/badge/allure-open-yellowgreen)](http://95.216.127.147:9200/repository/download/IRP_RunVA/.lastSuccessful/allure-report.zip!/index.html?branch=develop)
 
 
-# IRP Core
+# IRP Core 
 
 **Программное решение "IRP"** предназначено для автоматизации товарного учета, оптовой торговли и финансовых операций.
 

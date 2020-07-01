@@ -226,7 +226,7 @@ EndProcedure
 
 #Region ItemPartner
 
-Procedure PartnerOnChange(Object, Form, Item, Settings) Export
+Procedure PartnerOnChange(Object, Form, Item, Settings = Undefined) Export
 	DocumentsClient.PartnerOnChange(Object, Form, ThisObject, Item, Settings);
 EndProcedure
 

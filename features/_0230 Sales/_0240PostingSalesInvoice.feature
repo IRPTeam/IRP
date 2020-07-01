@@ -1,55 +1,40 @@
 #language: ru
 @tree
 @Positive
-Функционал: проведение документа sales invoice по регистрам складского учета
+Функционал: creating document Sales invoice
 
-Как Разработчик
-Я хочу создать проводки документа реализации клиента
-Для того чтобы фиксировать какой товар будет отгружен клиенту
+As a sales manager
+I want to create a Sales invoice document
+To sell a product to a customer
+
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-# Документ проводится по регистрам:
-# OrderBalance - (расход) только строки т.ч ItemList с заполненным реквизитом Order.
-# OrderReservation - (расход) только строки т.ч ItemList с заполненным реквизитом Order.
-# InventoryBalance - (расход) по всем строкам т.ч ItemList
-# Если у склада в документе "UseShipmentConfirmation" то движения по регистрам:
-# GoodsInTransitOutgoing + (приход) по всем строкам т.ч ItemList
-# Если у склада НЕ используется "UseShipmentConfirmation" то движения по регистрам:
-# StockBalance - (расход) по всем строкам т.ч ItemList
-# StockReservation - (расход) только по тем строкам т.ч ItemList в которых не заполнен SalesOrder
 
-
-Сценарий: _024001 создание документа sales invoice с неордерного склада на основании заказа клиента
-# Из заказа не переносится денежная часть (цена, сумма, НДС и т.д.). Цена, сумма, НДС проставляется после выбора партнера и соглашения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-190' с именем 'IRP-190'
+Сценарий: _024001 creating document Sales Invoice based on order - Shipment confirmation doesn't used
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И в таблице "List" я перехожу к первой строке
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю на кнопку с именем "FormDocumentSalesInvoiceGenerateSalesInvoice"
-	И я проверяю заполнение информации при создании на основании
+	* Checking that information is filled in when creating based on
 		Тогда элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
-	И я проверяю добавление склада в табличную часть
-		# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-232' с именем 'IRP-232'
+	* Check adding Store
 		И я перехожу к закладке "Item list"
 		И     таблица "ItemList" содержит строки:
 			| 'Item'     | Price | 'Item key'  | 'Store'    | 'Shipment confirmation' | 'Sales order'    | 'Unit' | 'Q'     | 'Offers amount'  | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| 'Dress'    | '*'    | 'L/Green'   | 'Store 01' | ''                      | 'Sales order 1*' | 'pcs' | '5,000' | '*'              | '*'          | '*'          | '*'           |
 			| 'Trousers' | '*'    | '36/Yellow' | 'Store 01' | ''                      | 'Sales order 1*' | 'pcs' | '4,000' | '*'              | '*'          | '*'          | '*'           |
-	* Проверка заполнения цен и вида цен
+	* Checking prices and type of prices
 		И     таблица "ItemList" содержит строки:
 		| 'Price'  | 'Item'     | 'Item key'  | 'Q'     | 'Price type'        |
 		| '550,00' | 'Dress'    | 'L/Green'   | '5,000' | 'Basic Price Types' |
 		| '400,00' | 'Trousers' | '36/Yellow' | '4,000' | 'Basic Price Types' |	
-	И я перерасчитываю скидки
-		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-	И я меняю номер sales invoice на 1
+	* Change of document number - 1
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '1'
@@ -59,16 +44,16 @@
 	И я нажимаю на кнопку 'Post and close'
 	И Я закрываю текущее окно
 
-Сценарий: _024002 проверка движений документа sales invoice с неордерного склада на основании заказа клиента по регистру OrderBalance (минус)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024002 checking Sales invoice posting (based on order, store doesn't use Shipment confirmation) by register OrderBalance (-)
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 	Тогда таблица "List" содержит строки:
 	| 'Quantity' | 'Recorder'            | 'Store'    | 'Order'              | 'Item key' |
 	| '5,000'    | 'Sales invoice 1*'    | 'Store 01' | 'Sales order 1*'     | 'L/Green'  |
 	| '4,000'    | 'Sales invoice 1*'    | 'Store 01' | 'Sales order 1*'     | '36/Yellow'   |
 
-Сценарий: _024003 проверка движений документа sales invoice с неордерного склада на основании заказа клиента по регистру OrderReservation (минус)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-189' с именем 'IRP-191'
+Сценарий: _024003 checking Sales invoice posting (based on order, store doesn't use Shipment confirmation) by register OrderReservation (-)
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderReservation'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'         | 'Store'    | 'Item key' |
@@ -76,16 +61,16 @@
 		| '4,000'    | 'Sales invoice 1*' | 'Store 01' | '36/Yellow' |
 
 
-Сценарий: _024004 проверка движений документа sales invoice с неордерного склада на основании заказа клиента по регистру InventoryBalance (минус)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024004 checking Sales invoice posting (based on order, store doesn't use Shipment confirmation) by register InventoryBalance (-)
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'            | 'Company'      | 'Item key' |
 		| '5,000'    | 'Sales invoice 1*'    | 'Main Company' | 'L/Green'  |
 		| '4,000'    | 'Sales invoice 1*'    | 'Main Company' | '36/Yellow'   |
 
- Сценарий: _024005 проверка движений документа sales invoice с неордерного склада на основании заказа клиента по регистру StockBalance (минус)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024005 checking Sales invoice posting (based on order, store doesn't use Shipment confirmation) by register StockBalance (-)
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'           | 'Store'    | 'Item key' |
@@ -93,46 +78,41 @@
 		| '4,000'    | 'Sales invoice 1*'   | 'Store 01' | '36/Yellow'   |
 
 
-Сценарий: _024006 проверка отсутствия движений документа sales invoice с неордерного склада на основании заказа клиента по регистру StockReservation
-#  Все строки в реализации сделаны по заказу
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024006 checking the absence posting of Sales invoice (based on order, store doesn't use Shipment confirmation) by register StockReservation
+# All lines in the sales invoice by order
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
 	Тогда таблица "List" не содержит строки:
 		| 'Quantity' | 'Recorder'               | 'Store'    | 'Item key' |
 		| '5,000'    | 'Sales invoice 1*'       | 'Store 01' | 'L/Green'  |
 		| '4,000'    | 'Sales invoice 1*'       | 'Store 01' | '36/Yellow'   |
 
-Сценарий: _024007 проверка  движений документа sales invoice с неордерного склада на основании заказа клиента по регистру SalesTurnovers
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024007 checking Sales invoice posting (based on order, store doesn't use Shipment confirmation) by register SalesTurnovers
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.SalesTurnovers'
 	Тогда таблица "List"содержит строки:
 		| 'Quantity' | 'Recorder'         | 'Sales invoice'    | 'Item key'  |
 		| '5,000'    | 'Sales invoice 1*' | 'Sales invoice 1*' | 'L/Green'   |
 		| '4,000'    | 'Sales invoice 1*' | 'Sales invoice 1*' | '36/Yellow' |
 
-Сценарий: _024008 создание документа sales invoice с ордерного склада на основании заказа клиента
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-190'
+Сценарий: _024008 creating document Sales Invoice based on order - Shipment confirmation used
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И в таблице "List" я перехожу к строке:
 		| 'Number' | 'Partner'   |
 		| '2'      | 'Ferron BP' |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю на кнопку с именем "FormDocumentSalesInvoiceGenerateSalesInvoice"
-	И я проверяю заполнение реквизитов
+	* Checking the details
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, without VAT'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-	* Проверка заполнения цен и вида цен
+	* Check filling prices and type of prices
 		И     таблица "ItemList" содержит строки:
 		| 'Price'  | 'Item'     | 'Item key'  | 'Price type'              | 'Q'      |
 		| '466,10' | 'Dress'    | 'L/Green'   | 'Basic Price without VAT' | '10,000' |
 		| '338,98' | 'Trousers' | '36/Yellow' | 'Basic Price without VAT' | '14,000' |
-	И я перерасчитываю скидки
-		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-	И я меняю номер sales invoice на 2
+	* Change of document number - 2
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '2'
@@ -142,48 +122,48 @@
 	И я нажимаю на кнопку 'Post and close'
 	И Я закрываю текущее окно
 
-Сценарий: _024009 проверка движений документа sales invoice с ордерного склада на основании заказа клиента по регистру SalesTurnovers
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024009  checking Sales invoice posting (based on order, store use Shipment confirmation) by register SalesTurnovers
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.SalesTurnovers'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'         | 'Sales invoice'    | 'Item key'  |
 		| '10,000'   | 'Sales invoice 2*' | 'Sales invoice 2*' | 'L/Green'   |
 		| '14,000'   | 'Sales invoice 2*' | 'Sales invoice 2*' | '36/Yellow' |
 
-Сценарий: _024010 проверка движений документа sales invoice с ордерного склада на основании заказа клиента по регистру OrderBalance (минус)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024010  checking Sales invoice posting (based on order, store use Shipment confirmation) by register OrderBalance (-)
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 	Тогда таблица "List" содержит строки:
 	| 'Quantity' | 'Recorder'             | 'Store'    | 'Order'              | 'Item key' |
 	| '10,000'    | 'Sales invoice 2*'    | 'Store 02' | 'Sales order 2*'     | 'L/Green'  |
 	| '14,000'    | 'Sales invoice 2*'    | 'Store 02' | 'Sales order 2*'     | '36/Yellow'   |
 
-Сценарий: _024011 проверка движений документа sales invoice с ордерного склада на основании заказа клиента по регистру InventoryBalance (минус)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024011  checking Sales invoice posting (based on order, store use Shipment confirmation) by register InventoryBalance (-)
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'            | 'Company'      | 'Item key' |
 		| '10,000'    | 'Sales invoice 2*'   | 'Main Company' | 'L/Green'  |
 		| '14,000'    | 'Sales invoice 2*'   | 'Main Company' | '36/Yellow'   |
 
-Сценарий: _024012 проверка движений документа sales invoice с ордерного склада на основании заказа клиента по регистру GoodsInTransitOutgoing
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024012  checking Sales invoice posting (based on order, store use Shipment confirmation) by register GoodsInTransitOutgoing
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'         | 'Shipment basis'   | 'Store'    | 'Item key' |
 		| '10,000'   | 'Sales invoice 2*' | 'Sales invoice 2*' | 'Store 02' | 'L/Green'  |
 		| '14,000'   | 'Sales invoice 2*' | 'Sales invoice 2*' | 'Store 02' | '36/Yellow'   |
 
-Сценарий: _024013 проверка отсутствия движений документа sales invoice с ордерного склада на основании заказа клиента по регистру StockBalance
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024013 checking the absence posting of Sales invoice (based on order, store  use Shipment confirmation) by register StockBalance
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 	Тогда таблица "List" не содержит строки:
 		| 'Quantity' | 'Recorder'            | 'Store'    | 'Item key' |
 		| '10,000'    | 'Sales invoice 2*'   | 'Store 02' | 'L/Green'  |
 		| '14,000'    | 'Sales invoice 2*'   | 'Store 02' | '36/Yellow'   |
 
-Сценарий: _024014 проверка движений документа sales invoice с ордерного склада на основании заказа клиента по регистру OrderReservation (минус)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-189' с именем 'IRP-191'
+Сценарий: _024014 checking Sales invoice posting (based on order, store use Shipment confirmation) by register OrderReservation (-)
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderReservation'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'         | 'Store'    | 'Item key'  |
@@ -191,9 +171,8 @@
 		| '14,000'   | 'Sales invoice 2*' | 'Store 02' | '36/Yellow' |
 
 
-Сценарий: _024015 проверка отсутствия движений документа sales invoice с ордерного склада на основании заказа клиента по регистру StockReservation
-# Все строки в реализации сделаны по заказу
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024015 checking the absence posting of Sales invoice (based on order, store  use Shipment confirmation) by register StockReservation
+# All lines in the sales invoice by order
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
 	Тогда таблица "List" не содержит строки:
 		| 'Quantity' | 'Recorder'              | 'Store'    | 'Item key' |
@@ -201,10 +180,10 @@
 		| '4,000'    | 'Sales invoice 2*'      | 'Store 02' | '36/Yellow'   |
 
 
-Сценарий: _024016 создание документа sales invoice без заказа с неордерного склада
+Сценарий: _024016 creating document Sales Invoice order - Shipment confirmation doesn't used
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю данные о клиенте
+	* Filling in customer information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -212,7 +191,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Agreement"
 		И в таблице "List" я выбираю текущую строку
-	И я выбираю склад 
+	* Select store 
 		И я нажимаю кнопку выбора у поля "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -221,14 +200,14 @@
 		И я нажимаю кнопку выбора у поля "Legal name"
 		И в таблице "List" я активизирую поле "Description"
 		И в таблице "List" я выбираю текущую строку
-	И я меняю номер sales invoice на 3
+	* Change of document number - 3
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '3'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '3'
-	И я добавляю в реализацию товар
+	* Filling in items table
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я выбираю текущую строку
@@ -246,57 +225,57 @@
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 	И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _024017 проверка движений документа sales invoice с неордерного склада без заказа клиента по регистру StockReservation
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024017 checking Sales invoice posting (without order, store doesn't use Shipment confirmation) by register StockReservation
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'              | 'Store'    | 'Item key' |
 		| '1,000'    | 'Sales invoice 3*'      | 'Store 01' | 'L/Green'  |
 
-Сценарий: _024018 проверка отсутствия движений документа sales invoice с неордерного склада без заказа клиента по регистру OrderBalance
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024018 checking the absence posting of Sales invoice (without order, store  doesn't use Shipment confirmation) by register OrderBalance
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 	Тогда таблица "List" не содержит строки:
 	| 'Quantity' | 'Recorder'             | 'Store'    | 'Order'              | 'Item key' |
 	| '1,000'    | 'Sales invoice 3 *'    | 'Store 01' | ''     | 'L/Green'  |
 
-Сценарий: _024019 проверка отсутствия движений документа sales invoice с неордерного склада без заказа клиента по регистру OrderReservation
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024019 checking the absence posting of Sales invoice (without order, store  doesn't use Shipment confirmation) by register OrderReservation
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderReservation'
 	Тогда таблица "List" не содержит строки:
 	| 'Quantity' | 'Recorder'             | 'Store'    | 'Item key' |
 	| '1,000'    | 'Sales invoice 3 *'    | 'Store 01' |  'L/Green'  |
 
-Сценарий: _024020 проверка движений документа sales invoice с неордерного склада без заказа клиента по регистру InventoryBalance
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024020 checking Sales invoice posting (without order, store doesn't use Shipment confirmation) by register InventoryBalance
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'            | 'Company'      | 'Item key' |
 		| '1,000'    | 'Sales invoice 3*'    | 'Main Company' | 'L/Green'  |
 
-Сценарий: _024021 проверка движений документа sales invoice с неордерного склада без заказа клиента по регистру StockBalance
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024021 checking Sales invoice posting (without order, store doesn't use Shipment confirmation) by register StockBalance
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'           | 'Store'    | 'Item key' |
 		| '1,000'    | 'Sales invoice 3*'   | 'Store 01' | 'L/Green'  |
 
-Сценарий: _024022 проверка отсутствия движений документа sales invoice с неордерного склада без заказа клиента по регистру GoodsInTransitOutgoing
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024022 checking the absence posting of Sales invoice (without order, store  doesn't use Shipment confirmation) by register GoodsInTransitOutgoing
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
 	Тогда таблица "List" не содержит строки:
 		| 'Quantity' | 'Recorder'         | 'Shipment basis'   | 'Store'    | 'Item key' |
 		| '1,000'   | 'Sales invoice 3*'  | 'Sales invoice 3*' | 'Store 01' | 'L/Green'  |
 
-Сценарий: _024023 проверка  движений документа sales invoice с неордерного склада без заказа клиента по регистру SalesTurnovers
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024023 checking Sales invoice posting (without order, store doesn't use Shipment confirmation) by register SalesTurnovers
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.SalesTurnovers'
 	Тогда таблица "List"содержит строки:
 		| 'Quantity' | 'Recorder'         | 'Sales invoice'    | 'Item key' |
 		| '1,000'    | 'Sales invoice 3*' | 'Sales invoice 3*' | 'L/Green'  |
 
-Сценарий: _024024 проверка отсутствия движений документа sales invoice с неордерного склада без заказа клиента по регистру OrderReservation (минус)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-189' с именем 'IRP-191'
+Сценарий: _024024 checking the absence posting of Sales invoice (without order, store  doesn't use Shipment confirmation) by register OrderReservation (-)
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderReservation'
 	Тогда таблица "List" не содержит строки:
 		| 'Quantity' | 'Recorder'        | 'Store'    | 'Item key'  |
@@ -304,10 +283,10 @@
 
 
 
-Сценарий: _024025 создание документа sales invoice без заказа с ордерного склада
+Сценарий: _024025 creating document Sales Invoice order - Shipment confirmation used
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю данные о клиенте
+	* Filling in customer information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -318,20 +297,20 @@
 		И я нажимаю кнопку выбора у поля "Legal name"
 		И в таблице "List" я активизирую поле "Description"
 		И в таблице "List" я выбираю текущую строку
-	И я меняю номер sales invoice на 4
+	* Change of document number - 4
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '4'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '4'
-	И я меняю склад на Store 02
+	* Change store to Store 02
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Store 02  |
 		И в таблице "List" я выбираю текущую строку
-	И я добавляю в реализацию товар
+	* Filling in items table
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я выбираю текущую строку
@@ -349,66 +328,66 @@
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 	И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _024026 проверка движений документа sales invoice с ордерного склада без заказа клиента по регистру StockReservation
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024026 checking Sales invoice posting (without order, store use Shipment confirmation) by register StockReservation
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'               | 'Store'     | 'Item key' |
 		| '20,000'    | 'Sales invoice 4*'      | 'Store 02' | 'L/Green'  |
 
-Сценарий: _024027 проверка отсутствия движений документа sales invoice с ордерного склада без заказа клиента по регистру OrderBalance
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024027 checking the absence posting of Sales invoice (without order, store  use Shipment confirmation) by register OrderBalance
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 	Тогда таблица "List" не содержит строки:
 	| 'Quantity' | 'Recorder'             | 'Store'    | 'Order'              | 'Item key' |
 	| '20,000'    | 'Sales invoice 4 *'   | 'Store 02' | ''                  | 'L/Green'  |
 
-Сценарий: _024028 проверка отсутствия движений документа sales invoice с ордерного склада без заказа клиента по регистру OrderReservation
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024028 checking the absence posting of Sales invoice (without order, store  use Shipment confirmation) by register OrderReservation
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderReservation'
 	Тогда таблица "List" не содержит строки:
 	| 'Quantity' | 'Recorder'             | 'Store'    | 'Item key' |
 	| '20,000'    | 'Sales invoice 4 *'   | 'Store 02' | 'L/Green'  |
 
-Сценарий: _024029 проверка движений документа sales invoice с ордерного склада без заказа клиента по регистру InventoryBalance
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024029 checking Sales invoice posting (without order, store use Shipment confirmation) by register InventoryBalance
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'           | 'Company'      | 'Item key' |
 		| '20,000'    | 'Sales invoice 4*'  | 'Main Company' | 'L/Green'  |
 
-Сценарий: _024030 проверка движений документа sales invoice с ордерного склада без заказа клиента по регистру GoodsInTransitOutgoing
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024030 checking Sales invoice posting (without order, store use Shipment confirmation) by register GoodsInTransitOutgoing
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'          | 'Shipment basis'   | 'Store'    | 'Item key' |
 		| '20,000'   | 'Sales invoice 4*'  | 'Sales invoice 4*' | 'Store 02' | 'L/Green'  |
 
-Сценарий: _024031 проверка отсутствия движений документа sales invoice с ордерного склада без заказа клиента по регистру StockBalance
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024031 checking the absence posting of Sales invoice (without order, store  use Shipment confirmation) by register StockBalance
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 	Тогда таблица "List" не содержит строки:
 		| 'Quantity' | 'Recorder'             | 'Store'    | 'Item key' |
 		| '20,000'    | 'Sales invoice 4*'    | 'Store 02' | 'L/Green'  |
 
-Сценарий: _024032 проверка  движений документа sales invoice с ордерного склада без заказа клиента по регистру SalesTurnovers
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-191' с именем 'IRP-191'
+Сценарий: _024032 checking Sales invoice posting (without order, store use Shipment confirmation) by register SalesTurnovers
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.SalesTurnovers'
 	Тогда таблица "List"содержит строки:
 		| 'Quantity' | 'Recorder'         | 'Sales invoice'    | 'Item key' |
 		| '20,000'   | 'Sales invoice 4*' | 'Sales invoice 4*' | 'L/Green'  |
 
-Сценарий: _024033 проверка отсутствия движений документа sales invoice с ордерного склада без заказа клиента по регистру OrderReservation (минус)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-189' с именем 'IRP-191'
+Сценарий: _024033 checking the absence posting of Sales invoice (without order, store  use Shipment confirmation) by register OrderReservation (-)
+	
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderReservation'
 	Тогда таблица "List" не содержит строки:
 		| 'Quantity' | 'Recorder'         | 'Store'    | 'Item key'  |
 		| '20,000'   | 'Sales invoice 4*' | 'Store 02' | 'L/Green'   |
 
-Сценарий: _024034 проверка проведение реализации с ордерного склада по сету
+Сценарий: _024034 Sales invoice creation on set, store use Goods receipt
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю данные о клиенте
+	* Filling in customer information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -424,13 +403,13 @@
 			| 'Description' |
 			| 'Company Kalipso'  |
 		И в таблице "List" я выбираю текущую строку
-	И я выбираю склад 
+	* Select store 
 		И я нажимаю кнопку выбора у поля "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Store 02'  |
 		И в таблице "List" я выбираю текущую строку
-	И я добавляю в реализацию товар
+	* Filling in items table
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -461,7 +440,7 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	И я меняю номер sales invoice на 5
+	* Change of document number - 5
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '5'
@@ -477,7 +456,7 @@
 			| 'Partner'       | 'Σ'        |
 			| 'Kalipso'       | '8 000,00' |
 	И Я закрыл все окна клиентского приложения
-	И я проверяю движения по регистрам
+	*  Checking postings by register
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'         | 'Store'    | 'Item key'  |
@@ -497,11 +476,11 @@
 			| '1,000'    | 'Sales invoice 5*' | 'Sales invoice 5*' | 'Boots/S-8' |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _024035 проверка стационарной формы подбора товара (реализация клиента - Sales invoice)
+Сценарий: _024035 checking the form of selection of items (sales invoice)
 	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-379' с именем 'IRP-379'
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю общие реквизиты по заказу
+	* Filling in the main details of the document
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -517,7 +496,7 @@
 			| 'Description' |
 			| 'Company Ferron BP'  |
 		И в таблице "List" я выбираю текущую строку
-	И я выбираю склад 
+	* Select Store
 		И я нажимаю кнопку выбора у поля "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -527,7 +506,7 @@
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 	И я нажимаю на кнопку 'Post and close'
-	И я проверяю сохранение заказа
+	* Save check
 		Тогда таблица "List" содержит строки:
 			| 'Partner'     |'Σ'          |
 			| 'Ferron BP'   | '2 050,00'  |
@@ -535,14 +514,14 @@
 
 
 
-Сценарий: _024042 проверка наличия итогов в документе Sales invoice
+Сценарий: _024042 checking totals in the document Sales invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-	И я выбираю документ SalesInvoice
+	* Select Purchase Sales invoice
 		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И в таблице "List" я выбираю текущую строку
-	И я проверяю наличие итогов документа
+	* Checking totals
 		И     элемент формы с именем "ItemListTotalOffersAmount" стал равен '0,00'
 		И     элемент формы с именем "ItemListTotalNetAmount" стал равен '3 686,44'
 		И     элемент формы с именем "ItemListTotalTaxAmount" стал равен '663,56'

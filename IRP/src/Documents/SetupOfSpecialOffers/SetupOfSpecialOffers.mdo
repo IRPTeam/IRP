@@ -12,7 +12,6 @@
     <key>en</key>
     <value>Setup of special offers</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Document.SetupOfSpecialOffers.StandardAttribute.Number</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>

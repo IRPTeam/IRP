@@ -5,6 +5,5 @@
     <key>en</key>
     <value>Filling with default data event</value>
   </synonym>
-  <comment></comment>
   <server>true</server>
 </mdclass:CommonModule>

@@ -8,9 +8,9 @@ Function FileInfo() Export
 		|Size,
 		|Extension,
 		|URI,
-		|Preview1URI,
 		|MD5,
-		|Ref");
+		|Ref,
+		|Preview");
 EndFunction
 
 Procedure SetFileInfo(FileInfo, Object) Export
@@ -22,6 +22,5 @@ Procedure SetFileInfo(FileInfo, Object) Export
 	Object.SizeBytes = FileInfo.Size;
 	Object.Extension = FileInfo.Extension;
 	Object.MD5 = FileInfo.MD5;
-	Object.Preview1URI = FileInfo.Preview1URI;
 EndProcedure
 

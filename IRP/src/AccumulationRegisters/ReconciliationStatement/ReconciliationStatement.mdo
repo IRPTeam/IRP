@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="afca55ef-546b-4e4f-8c80-867a502d177e">
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="afca55ef-546b-4e4f-8c80-867a502d177e">
   <producedTypes>
     <selectionType typeId="fd91e673-1fcb-46e0-a360-843ddcb45957" valueTypeId="9fc7c9f4-f5ae-4ac1-9399-c4c781c8364f"/>
     <listType typeId="63219f3b-9d8d-4887-9451-ce91e7a23535" valueTypeId="d793d888-3a3d-4696-9318-2b3069feec3d"/>
@@ -25,6 +25,8 @@
     <type>
       <types>DefinedType.typeAmount</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
   <dimensions uuid="60128053-70ed-4b1f-ab2f-8e49978ccf73">
@@ -36,6 +38,8 @@
     <type>
       <types>CatalogRef.Companies</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -48,6 +52,8 @@
     <type>
       <types>CatalogRef.Companies</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -60,6 +66,8 @@
     <type>
       <types>CatalogRef.Currencies</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>

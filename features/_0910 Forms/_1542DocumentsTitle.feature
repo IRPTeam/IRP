@@ -196,28 +196,6 @@
 	И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _029728 проверяю отображения заголовка сворачиваемой группы при создании документа Boxing
-	И я открываю навигационную ссылку 'e1cib/list/Document.Boxing'
-	Когда проверяю отображения заголовка сворачиваемой группы в документах 	приходного и расходного ордера по складу, Bundling/Unbundling, Boxing/Unboxing
-	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Store: Store 03   "
-	И я нажимаю на гиперссылку с именем "DecorationGroupTitleUncollapsedLabel"
-	Когда Проверяю шаги на Исключение:
-        |'И     я нажимаю кнопку выбора у поля "Store"'|
-	И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedPicture"
-	И Я закрыл все окна клиентского приложения
-
-
-
-Сценарий: _029816 проверяю отображения заголовка сворачиваемой группы при создании документа Unboxing
-	И я открываю навигационную ссылку 'e1cib/list/Document.Unboxing'
-	Когда проверяю отображения заголовка сворачиваемой группы в документах 	приходного и расходного ордера по складу, Bundling/Unbundling, Boxing/Unboxing
-	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Store: Store 03   "
-	И я нажимаю на гиперссылку с именем "DecorationGroupTitleUncollapsedLabel"
-	Когда Проверяю шаги на Исключение:
-        |'И     я нажимаю кнопку выбора у поля "Store"'|
-	И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedPicture"
-	И Я закрыл все окна клиентского приложения
-
 
 Сценарий: _050012 проверяю отображения заголовка сворачиваемой группы в в документе Cash reciept
 	И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'

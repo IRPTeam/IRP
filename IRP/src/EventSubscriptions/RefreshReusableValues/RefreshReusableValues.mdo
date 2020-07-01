@@ -6,8 +6,8 @@
     <value>Refresh reusable values</value>
   </synonym>
   <source>
-    <types>CatalogObject</types>
     <types>ChartOfCharacteristicTypesObject</types>
+    <types>CatalogObject</types>
   </source>
   <event>BeforeWrite</event>
   <handler>CommonModule.LocalizationEvents.RefreshReusableValuesBeforeWrite</handler>

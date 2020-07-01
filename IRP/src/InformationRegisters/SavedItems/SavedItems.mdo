@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f2086ec4-3016-421a-b032-e8d96a8d6973">
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f2086ec4-3016-421a-b032-e8d96a8d6973">
   <producedTypes>
     <selectionType typeId="00d4e99f-de5a-49f2-9499-d647d640a88d" valueTypeId="7c80eeab-4558-4b9f-9537-91f8338cfab7"/>
     <listType typeId="cb84a124-3b64-46e4-ad3a-01caf32be1ea" valueTypeId="a98398db-0888-4e3e-b489-f73a813656cf"/>
@@ -26,8 +26,11 @@
     <type>
       <types>CatalogRef.Items</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <dimensions uuid="31b759ee-27d5-4a38-90c3-13ea824c2e17">
     <name>ObjectRef</name>
@@ -38,8 +41,11 @@
     <type>
       <types>DefinedType.typeObjectWithItemList</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="134e6003-6252-4c2a-81c1-6455631f9221">
@@ -51,7 +57,10 @@
     <type>
       <types>UUID</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
   <forms uuid="5f9cf64b-a03d-4c21-94d3-d38b0d4d9f94">

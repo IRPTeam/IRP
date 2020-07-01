@@ -2,11 +2,10 @@
 #Region FormEvents
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	FillPayees(Object, Form);
+	Return;
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	FillPayees(Object, Form);
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
@@ -84,15 +83,6 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 	EndIf;
 	
 	Form.CurrentTransactionType = Object.TransactionType;
-EndProcedure
-
-#EndRegion
-
-#Region ItemPayee
-
-Procedure PayeeOnChange(Object, Form, Item) Export
-	SetCurrentPayee(Form, Form.Payee);
-	ChangePaymentListPayee(Object.PaymentList, Form.Payee);
 EndProcedure
 
 #EndRegion
@@ -182,19 +172,7 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	FillPayees(Object, Form);
 	SetAvailability(Object, Form);
-EndProcedure
-
-Procedure PaymentListOnActivateRow(Object, Form, Item) Export
-	If Form.Items.PaymentList.CurrentData = Undefined Then
-		Return;
-	EndIf;
-	CurrentRowPayee = Form.Items.PaymentList.CurrentData.Payee;
-	If ValueIsFilled(CurrentRowPayee)
-		And CurrentRowPayee <> Form.CurrentPayee Then
-		SetCurrentPayee(Form, CurrentRowPayee);
-	EndIf;
 EndProcedure
 
 Procedure PaymentListBasisDocumentOnChange(Object, Form, Item) Export
@@ -263,8 +241,7 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 	Form.Items.PaymentList.ChangeRow();
 	PaymentListOnChange(Object, Form, Item);
 	CurrentData = Form.Items.PaymentList.CurrentData;
-	If CurrentData <> Undefined And ValueIsFilled(Form.Payee) And Not Saas.SeparationUsed() Then
-		CurrentData.Payee = Form.Payee;
+	If CurrentData <> Undefined And Not Saas.SeparationUsed() Then
 		CurrentData.Partner = DocCashPaymentServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
 		PaymentListPartnerOnChange(Object, Form, Item);
 	EndIf;
@@ -605,41 +582,6 @@ Function GetCalculateRowsActions() Export
 	Actions.Insert("CalculateNetAmountByTotalAmount");
 	Return Actions;
 EndFunction
-
-Procedure SetCurrentPayee(Form, Payee) Export
-	Form.CurrentPayee = Payee;
-EndProcedure
-
-Procedure ChangePaymentListPayee(PaymentList, Payee) Export
-	For Each Row In PaymentList Do
-		If Row.Payee <> Payee Then
-			Row.Payee = Payee;
-		EndIf;
-	EndDo;
-EndProcedure
-
-Procedure FillPayees(Object, Form) Export
-	PayeeArray = New Array;
-	For Each Row In Object.PaymentList Do
-		If ValueIsFilled(Row.Payee) Then
-			If PayeeArray.Find(Row.Payee) = Undefined Then
-				PayeeArray.Add(Row.Payee);
-			EndIf;
-		EndIf;
-	EndDo;
-	If PayeeArray.Count() = 0 Then
-		If Not ValueIsFilled(Form.Payee) Then
-			Form.Items.Payee.InputHint = "";
-			Form.Payee = PredefinedValue("Catalog.Companies.EmptyRef");
-		EndIf;
-	ElsIf PayeeArray.Count() = 1 Then
-		Form.Items.Payee.InputHint = "";
-		Form.Payee = PayeeArray[0];
-	Else
-		Form.Payee = PredefinedValue("Catalog.Companies.EmptyRef");
-		Form.Items.Payee.InputHint = StrConcat(PayeeArray, "; ");
-	EndIf;
-EndProcedure
 
 Procedure FillUnfilledPayeeInRow(Object, Item, Payee) Export
 	If Not ValueIsFilled(Item.CurrentData.Payee) Then

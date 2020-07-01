@@ -53,7 +53,7 @@ EndProcedure
 
 &AtClient
 Procedure AddFileBeforeStartCall(PuttingFile, CancelPut, AddInfo) Export
-	
+	Return;
 EndProcedure
 
 &AtClient

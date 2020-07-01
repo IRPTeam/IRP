@@ -4,21 +4,22 @@
 
 
 
-Функционал: соглашения по клиентам
+Функционал: terms of cooperation with partners
 
-Как Разработчик
-Я хочу добавить механизм по соглашениям с клиентами
-Чтобы можно было указать коммерческие условия работы
+As an accountant
+I want to add a mechanism for partner agreements
+To specify the commercial terms of cooperation
+
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _012001 добавление партнеров (клиента) в сегмент (регистр)
-	* Открытие регистра по сегментам партнеров
+Сценарий: _012001 adding partners (customers) to a segment (register)
+	* Opening a register for partner segments
 		И Я закрыл все окна клиентского приложения 
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
-	* Добавление партнера Ferron BP в сегмент Retail
+	* Adding partner Ferron BP to the Retail Segment
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю кнопку выбора у поля "Segment"
@@ -39,7 +40,7 @@
 		И таблица "List" содержит строки:
 			| Segment | Partner |
 			| Retail | Ferron BP |
-	* Добавление партнера Kalipso в сегмент Dealer
+	* Adding partner Kalipso to the Dealer Segment
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю кнопку выбора у поля "Segment"
@@ -60,7 +61,7 @@
 		И таблица "List" содержит строки:
 			| Segment | Partner |
 			| Dealer | Kalipso |
-	* Добавление партнера Seven Brand в сегмент Retail
+	* Adding partner Seven Brand to the Retail Segment
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю кнопку выбора у поля "Segment"
@@ -79,7 +80,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Добавление партнера MIO в сегмент Retail
+	* Adding partner MIO to the Retail Segment
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю кнопку выбора у поля "Segment"
@@ -98,7 +99,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Добавление партнера Lomaniti в сегмент Retail
+	* Adding partner Lomaniti to the Retail Segment
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю кнопку выбора у поля "Segment"
@@ -117,13 +118,12 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-		# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-81' с именем 'SUP-81'
 
-Сценарий: _012002 добавление партнеров (клиента) в 2 сегмента одновременно (регистр)
-# клиент Ferron BP включен в сегмент розницы и дилеров
-	* Открытие регистра по сегментам партнеров
+Сценарий: _012002 adding partners (customers) to 2 segments at the same time (register)
+# Ferron BP client is included in the retail and dealership segment
+	* Opening a register for partner segments
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
-	* Добавление партнера Ferron BP в сегмент Dealer
+	* Adding partner Ferron BP to the Dealer Segment
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю кнопку выбора у поля "Segment"
@@ -141,16 +141,16 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	* Проверка добавления партнера Ferron BP в 2 сегмента одновременно
+	* Checking to add a Ferron BP partner to 2 segments at the same time
 		И таблица "List" содержит строки:
 			| Segment | Partner |
 			| Retail | Ferron BP |
 			| Dealer | Ferron BP |
 
-Сценарий: _012003 указание сегмента менеджеров в клиенте
-	* Открытие справочника партнеров
+Сценарий: _012003 filling in the segment of managers in the customers
+	* Opening the partner catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-	* Заполнение Manager segment для партнера Ferron BP
+	* Filling Manager segment for partner Ferron BP
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Ferron BP' |
@@ -161,7 +161,7 @@
 			| 'Region 1'  |
 		И в таблице "List" я выбираю текущую строку		
 		И я нажимаю на кнопку 'Save and close'
-	* Заполнение Manager segment для партнера Kalipso
+	* Filling Manager segment for partner Kalipso
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Kalipso' |
@@ -172,7 +172,7 @@
 			| 'Region 2'  |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
-	* Заполнение Manager segment для партнера Lomaniti
+	* Filling Manager segment for partner Lomaniti
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Lomaniti' |
@@ -183,7 +183,7 @@
 			| 'Region 2'  |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
-	* Заполнение Manager segment для партнера Seven Brand
+	* Filling Manager segment for partner Seven Brand
 		И я нажимаю на кнопку с именем "FormList"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -195,7 +195,7 @@
 			| 'Region 1'  |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
-	* Заполнение Manager segment для партнера MIO
+	* Filling Manager segment for partner MIO
 		И я нажимаю на кнопку с именем "FormList"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -209,10 +209,10 @@
 		И я нажимаю на кнопку 'Save and close'
 
 
-Сценарий: _012004 создание типового соглашения
-	* Открытие справочника соглашений
+Сценарий: _012004 creating common agreement
+	* Opening an agreement catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-	* Создание и проверка создания соглашения для клиентов Basic Agreements, TRY
+	* Creating and checking customer agreement Basic Agreements, TRY
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
 		И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
@@ -254,7 +254,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Basic Agreements, TRY'
-	* Создание и проверка создания соглашения для клиентов Basic Agreements, $
+	* Creating and checking customer agreement Basic Agreements, $
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
 		И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
@@ -295,7 +295,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Basic Agreements, $'
-	* Создание и проверка создания соглашения для клиентов Basic Agreements, without VAT
+	* Creating and checking customer agreement Basic Agreements, without VAT
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
@@ -339,10 +339,10 @@
 		И Пауза 5
 		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Basic Agreements, without VAT'
 
-Сценарий: _012005 создание индивидуального соглашения в USD с клиентом и поставщиком
-	* Открытие справочника соглашений
+Сценарий: _012005 creation of an individual agreement in USD 
+	* Opening an agreement catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-	* Создание и проверка создания соглашения для клиентов Personal Agreements, $
+	* Creating and checking customer agreement Personal Agreements, $
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
 		И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
@@ -385,7 +385,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Personal Agreements, $'
-	* Создание и проверка создания соглашения с поставщиком Ferron BP в лирах
+	* Creating and checking vendor agreement Vendor Ferron, TRY
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Vendor'
@@ -421,7 +421,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Vendor Ferron, TRY'
-	* Создание и проверка создания соглашения с поставщиком Ferron BP в долларах
+	* Creating and checking vendor agreement Vendor Ferron, USD
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Vendor'
@@ -456,7 +456,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Vendor Ferron, USD'
-	* Создание и проверка создания соглашения с поставщиком Ferron BP в евро
+	* Creating and checking vendor agreement Vendor Ferron, EUR
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Vendor'
@@ -494,10 +494,10 @@
 
 	
 
-Сценарий: _012007 создание типового соглашения с указанием Item Segment
-	* Открытие справочника соглашений
+Сценарий: _012007 creating common agreement with Item Segment
+	* Opening an agreement catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-	* Создание соглашения с указанием Item Segment
+	* Creating common agreement with Item Segment
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
 		И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
@@ -536,15 +536,15 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Проверка создания соглашения
+	* Checking the creation of the agreement
 		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Sale autum, TRY'
 
 
 
-Сценарий: _012010 создание соглашения без указания валюты (негативный тест)
-	* Открытие справочника соглашений
+Сценарий: _012010 creating agreement without currency (negative test)
+	* Opening an agreement catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-	* Создание соглашения без указания валюты
+	* Сreating agreement without currency
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
 		И в поле 'Number' я ввожу текст '302'
@@ -571,24 +571,22 @@
 				| 'Sale autum'       |
 		И в таблице "List" я выбираю текущую строку
 		И в поле 'Start using' я ввожу текст '01.11.2018'
-		# И в поле 'End of Use' я ввожу текст '01.11.2019'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		# И я перехожу к закладке "< >"
 		И в поле 'ENG' я ввожу текст 'Currency, TRY'
 		И в поле 'TR' я ввожу текст 'Currency, TRY'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	* Проверка на то, что соглашение без указания валюты не создано
+	* Checking that the agreement without currency is not created
 		Если в текущем окне есть сообщения пользователю Тогда
 		И Я закрыл все окна клиентского приложения
 		Когда Проверяю шаги на Исключение:
 			|'Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Currency, TRY''|
 
-Сценарий: _012011 создание соглашения без указания вида цены (негативный тест)
-	* Открытие справочника соглашений
+Сценарий: _012011 creating agreement without price type (negative test)
+	* Opening an agreement catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-	* Создание соглашения без указания ыида цены
+	* Creating agreement without price type
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
 		И в поле 'Number' я ввожу текст '301'
@@ -620,7 +618,7 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	* Проверка на то, что соглашение без указания вида цены не создано
+	*  Checking that the agreement without price type is not created
 		Если в текущем окне есть сообщения пользователю Тогда
 		И Я закрыл все окна клиентского приложения
 		Когда Проверяю шаги на Исключение:

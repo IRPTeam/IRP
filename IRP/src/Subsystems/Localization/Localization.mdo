@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Localization</value>
   </synonym>
-  <comment></comment>
   <content>CommonModule.LocalizationClientServer</content>
   <content>Enum.TypeExternalObject</content>
   <content>CommonModule.Localization</content>

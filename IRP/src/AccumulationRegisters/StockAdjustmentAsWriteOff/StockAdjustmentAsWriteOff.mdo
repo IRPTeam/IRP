@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dfe26fbd-ef90-4415-ac7d-7b93d24a7057">
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dfe26fbd-ef90-4415-ac7d-7b93d24a7057">
   <producedTypes>
     <selectionType typeId="091d30da-d4c4-4ebb-922d-76182c76d6da" valueTypeId="406f14e8-e265-4d6b-93e7-26c5d4b98211"/>
     <listType typeId="95f976d2-d159-4a43-b6bb-f2cafe6f5a9d" valueTypeId="2d9bc3bc-a4a2-4d23-8227-7df791c91b8b"/>
@@ -25,6 +25,8 @@
     <type>
       <types>DefinedType.typeQuantity</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
   <dimensions uuid="db8791fc-e694-412d-bc51-8a83903b62e4">
@@ -36,6 +38,8 @@
     <type>
       <types>CatalogRef.Stores</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -48,6 +52,8 @@
     <type>
       <types>DefinedType.typeStockAdjustmentAsWriteOffBasises</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
@@ -60,6 +66,8 @@
     <type>
       <types>CatalogRef.ItemKeys</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>

@@ -24,7 +24,6 @@
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
 		И     элемент формы с именем "Currency" стал равен 'TRY'
-		И     элемент формы с именем "Payer" стал равен 'Company Ferron BP'
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Agreement'             | 'Amount'   | 'Payer'             | 'Basis document'   | 'Planing transaction basis' |
 			| 'Ferron BP' | 'Basic Agreements, TRY' | '4 350,00' | 'Company Ferron BP' | 'Sales invoice 1*' | ''                          |
@@ -41,7 +40,6 @@
 		И     элемент формы с именем "CashAccount" стал равен 'Cash desk №2'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
 		И     элемент формы с именем "Currency" стал равен 'TRY'
-		И     элемент формы с именем "Payer" стал равен 'Company Ferron BP'
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Agreement'             | 'Amount'   | 'Payer'             | 'Basis document'   | 'Planing transaction basis' |
 			| 'Ferron BP' | 'Basic Agreements, TRY' | '4 350,00' | 'Company Ferron BP' | 'Sales invoice 1*' | ''                          |
@@ -451,7 +449,6 @@
 		И     элемент формы с именем "Description" доступен
 		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
 		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Payer" доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "CurrencyExchange" не доступен
 	И я проверяю отображение табличной части
@@ -477,7 +474,6 @@
 		И     элемент формы с именем "Description" доступен
 		И     элемент формы с именем "TransactionType" стал равен 'Currency exchange'
 		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Payer" не доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "CurrencyExchange" доступен
 	И я проверяю отображение табличной части
@@ -501,7 +497,6 @@
 		И     элемент формы с именем "Description" доступен
 		И     элемент формы с именем "TransactionType" стал равен 'Cash transfer order'
 		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Payer" не доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "CurrencyExchange" не доступен
 	И я проверяю отображение табличной части

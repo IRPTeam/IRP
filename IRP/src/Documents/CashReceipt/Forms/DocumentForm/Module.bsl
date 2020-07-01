@@ -84,7 +84,7 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnActivateRow(Item, AddInfo = Undefined) Export
-	DocCashReceiptClient.PaymentListOnActivateRow(Object, ThisObject, Item);
+	Return;
 EndProcedure
 
 &AtClient
@@ -195,15 +195,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPayer
-
-&AtClient
-Procedure PayerOnChange(Item, AddInfo = Undefined) Export
-	DocCashReceiptClient.PayerOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
 #Region ItemCompany
 
 &AtClient
@@ -251,7 +242,6 @@ Procedure CurrencyOnChangeContinue(Answer, AdditionalParameters) Export
 		ClearCashTransferOrders(Object.Currency);
 		CurrentCurrency = Object.Currency;
 		DocCashReceiptClient.CurrencyOnChange(Object, ThisObject, Items.Currency);
-		DocCashReceiptClient.FillPayers(Object, ThisObject);
 		Notify("CallbackHandler", Undefined, ThisObject);
 	Else
 		Object.Currency = CurrentCurrency;
@@ -278,7 +268,6 @@ Procedure AccountOnChangeContinue(Answer, AdditionalParameters) Export
 	If Answer = DialogReturnCode.Yes Then
 		CurrentAccount = Object.CashAccount;
 		DocCashReceiptClient.AccountOnChange(Object, ThisObject, Items.Currency);
-		DocCashReceiptClient.FillPayers(Object, ThisObject);
 		ClearCashTransferOrders(Object.Currency);
 		Notify("CallbackHandler", Undefined, ThisObject);
 	Else

@@ -142,7 +142,9 @@ EndProcedure
 
 &AtClient
 Procedure PartnerOnChange(Item, AddInfo = Undefined) Export
-	DocSalesOrderClient.PartnerOnChange(Object, ThisObject, Item);
+	Settings = New Structure();
+	Settings.Insert("Actions", New Structure());
+	DocSalesOrderClient.PartnerOnChange(Object, ThisObject, Item, Settings);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 

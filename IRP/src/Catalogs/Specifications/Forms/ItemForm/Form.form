@@ -43,8 +43,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Object.UniqueMD5</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Object.UniqueMD5</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>UniqueMD5ExtendedTooltip</name>
@@ -134,8 +136,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Object.Type</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Object.Type</segments>
+        </paths>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -201,8 +205,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Object.ItemBundle</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Object.ItemBundle</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ItemBundleExtendedTooltip</name>
@@ -282,10 +288,6 @@
       <items xsi:type="form:Decoration">
         <name>DecorationSpacer</name>
         <id>72</id>
-        <title>
-          <key>en</key>
-          <value></value>
-        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -401,6 +403,10 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
@@ -452,12 +458,12 @@
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
-      <event>BeforeWriteAtServer</event>
-      <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>AfterWrite</event>
       <name>AfterWrite</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

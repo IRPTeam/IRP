@@ -42,11 +42,11 @@
   <defaultListForm>Document.Bundling.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.Bundling.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
-  <registerRecords>AccumulationRegister.StockReservation</registerRecords>
-  <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
   <registerRecords>InformationRegister.BundleContents</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

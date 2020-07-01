@@ -89,10 +89,7 @@ Procedure AreaUpdate() Export
 				Catalogs.Extensions.SetupExtentionInCurrentArea(DefaultExtension.Extension, False);
 			EndIf;
 		EndDo;
-		
-		// Access group "Admin"
-		DataProcessors.FillingNewAreaAssistant.CreateAdminAccessGroup(User.Ref);
-		
+				
 		// logout area
 		AreaSettings = New Structure("ID", 0);
 		SetSeparationParameters(AreaSettings);

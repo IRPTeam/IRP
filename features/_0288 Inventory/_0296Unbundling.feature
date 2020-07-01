@@ -2,24 +2,23 @@
 @tree
 @Positive
 
-Функционал: объединение товара в наборы
+Функционал: Unbundling
 
-Как разработчик
-Я хочу создать документ Unbundling
-Чтобы разъединять товары из набора
+As a sales manager
+I want to create Unbundling
+For sale of products from a Bundle separately
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
 
-Сценарий: _029601 создание документа Unbundling по товару c размерной сеткой (спецификация создана заранее) с неордерного склада
-# кнопка заполнения по спецификации. В спецификации указываются все доп свойства
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-264' с именем 'IRP-264'
+Сценарий: _029601 create Unbundling on a product with a specification (specification created in advance, Store doesn't use Shipment confirmation and Goods receipt)
+# the fill button on the specification. The specification specifies all additional properties
 	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-	И я создаю документ Unbundling по Dress/A-8, все item key заранее по товару созданы
+	* Create Unbundling for Dress/A-8, all item keys were created in advance
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я указываю номер документа
+		* Change number
 			И в поле 'Number' я ввожу текст '1'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -53,13 +52,13 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку 'By specification'
 		И я нажимаю на кнопку 'Post and close'
-	И я проверяю создание документа Unbundling
+	* Checking the creation of Unbundling
 		Тогда таблица "List" содержит строки:
 			| Item key bundle | Company      |
 			| Dress/A-8       | Main Company |
 	И Я закрыл все окна клиентского приложения
 	
-Сценарий: _029602 проверка движений документа Unbundling с неордерного склада по регистру Stock Balance
+Сценарий: _029602 checking Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register Stock Balance
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key'                            |
@@ -70,7 +69,7 @@
 		| '2,000'    | 'Unbundling 1*'              | 'Store 01' | 'Dress/A-8'                           |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029603 проверка движений документа Unbundling с неордерного склада по регистру Stock Reservation
+Сценарий: _029603 checking Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register Stock Reservation
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'                    | 'Store'     | 'Item key'                                                            |
@@ -81,13 +80,12 @@
 		| '2,000'    | 'Unbundling 1*'               | 'Store 01'  | 'Dress/A-8'                                                           |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029604 создание документа Unbundling по товару c размерной сеткой (спецификация создана заранее) с ордерного склада
+Сценарий: _029604 create Unbundling on a product with a specification (specification created in advance, Store use Shipment confirmation and Goods receipt)
 	Когда создаю Purchase invoice по закупке наборов и размерных сеток на склад Store 02
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-264' с именем 'IRP-264'
 	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-	И я создаю документ Unbundling по Boots/S-8, все item key заранее по товару созданы
+	* Create Unbundling for Boots/S-8, all item keys were created in advance
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я указываю номер документа
+		* Change number
 			И в поле 'Number' я ввожу текст '2'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -121,34 +119,34 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку 'By specification'
 		И я нажимаю на кнопку 'Post and close'
-	И я проверяю создание документа Unbundling
+	* Checking the creation of Unbundling
 		Тогда таблица "List" содержит строки:
 			| Item key bundle | Company      |
 			| Boots/S-8       | Main Company |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029605 проверка отсутсвтвия движений документа Unbundling с неордерного склада по регистру Stock Balance
+Сценарий: _029605 checking the absence posting of Unbundling (store use Shipment confirmation and Goods receipt) by register Stock Balance
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 	Тогда таблица "List" не содержит строки:
 		| 'Recorder'                   |
 		| 'Unbundling 2*'              |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029606 проверка движений документа Unbundling с неордерного склада по регистру Stock Reservation
+Сценарий: _029606 checking Bundling posting (store use Shipment confirmation and Goods receipt) by register Stock Reservation
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity'   | 'Recorder'                  | 'Store'        | 'Item key'                                                            |
 		| '2,000'    | 'Unbundling 2*'               | 'Store 02'     | 'Boots/S-8'                                                           |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029607 проверка движений документа Unbundling с неордерного склада по регистру GoodsInTransitOutgoing
+Сценарий: _029607 checking Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'                   | 'Shipment basis'        | 'Store'    | 'Item key'  |
 		| '2,000'    | 'Unbundling 2*'              | 'Unbundling 2*'         | 'Store 02' | 'Boots/S-8' |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029608 проверка движений документа Unbundling с неордерного склада по регистру GoodsInTransitIncoming
+Сценарий: _029608 checking Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
 	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
 	Тогда таблица "List" содержит строки:
 		| 'Quantity'   | 'Recorder'                | 'Receipt basis'       | 'Store'    | 'Item key'  |
@@ -158,16 +156,15 @@
 		| '2,000'      | 'Unbundling 2*'         | 'Unbundling 2*'         | 'Store 02' | '39/18SD'                             |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _029609 проведение расходного и приходного ордера по документу Unbundling (ордерный склад) и проверка движений по регистрам
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-264' с именем 'IRP-264'
+Сценарий: _029609 create Goods receipt and Shipment confirmation based on Unbundling
 	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-	И я создаю расходный и приходный ордер со склада
+	* Create Goods receipt and Shipment confirmation
 		И в таблице "List" я перехожу к строке:
 			| Company      | Item key bundle | Number |
 			| Main Company | Boots/S-8       | 2      |
 		И я нажимаю на кнопку с именем 'FormDocumentShipmentConfirmationGenerateShipmentConfirmation'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И я меняю номер ShipmentConfirmation на 152
+		* Change number Shipment confirmation to 152
 			И в поле 'Number' я ввожу текст '152'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -176,7 +173,7 @@
 		И Пауза 5
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И я меняю номер GoodsReceipt на 153
+		* Change number Goods receipt to 153
 			И в поле 'Number' я ввожу текст '153'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -184,7 +181,7 @@
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 5
 		И Я закрыл все окна клиентского приложения
-	И я проверяю проводки документа по регистрам
+	* Check postings
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key'                            |
@@ -216,15 +213,13 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _029610 проведение документа Unbundling (+проверка движений) по bundl который был создан самостоятельно
-# При проведении документа Unbundling по набору от поставщика дополнительно создаются по номенклатуре недостающие item key. Например есть банл кола+шоколадка,
-# на этот бандл создается для распаковки 2 номенклатуры Кола и Шоколадка. Создается спецификация и после этого при распаковке программа создаст по коле и шоколадке 
-# недостающие item key
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-264' с именем 'IRP-264'
+Сценарий: _029610 create Unbundling (+check postings) for bundl which was created independently
+# When creating a Unbundling based on bundle from a vendor, the missing item key is additionally created. 
+# For example, there is a cola+chocolate bandle. When creating Unbundling on this bundle is created to unpack  2 items (Coke and Chocolate) and also item keys 
 	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-	И я создаю документ Unbundling по Bound Dress+Shirt, все item key заранее по товару созданы
+	* Create Unbundling for Bundle Dress+Shirt
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я указываю номер документа
+		* Change number
 			И в поле 'Number' я ввожу текст '3'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -258,16 +253,15 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку 'By specification'
 		И я нажимаю на кнопку 'Post and close'
-		И я проверяю создание документа Unbundling
+		* Checking the creation of Unbundling
 			Тогда таблица "List" содержит строки:
 				| Item key bundle | Company      |
 				| Bound Dress+Shirt/Dress+Shirt       | Main Company |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _029611 проведение документа Unbundling (+проверка движений) по bundl (есть документ bundling) по которому спецификация была изменена
-# недостающие item key по товару создаются автоматически
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-264' с именем 'IRP-264'
-	И я изменяю спецификацию Dress+Trousers
+Сценарий: _029611 create Unbundling (+check postings) for bundl (there is a Bundling document) for which the specification was changed
+# the missing item key on the items is created automatically
+	* Change specification Dress+Trousers
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
 		И в таблице "List" я перехожу к строке:
 			| Description | Type |
@@ -292,10 +286,10 @@
 		И в таблице "FormTable*" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	И я провожу документ Unbundling по номенклатуре Dress+Trousers
+	* Create Unbundling for item Dress+Trousers
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я указываю номер документа
+		* Change number
 			И в поле 'Number' я ввожу текст '4'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -333,22 +327,22 @@
 			| 'Dress'    | '2,000'    | 'XS/Blue'   | 'pcs' |
 			| 'Trousers' | '2,000'    | '36/Yellow' | 'pcs' |
 		И я нажимаю на кнопку 'Post and close'
-		И я проверяю создание документа Unbundling
+		* Checking the creation of Unbundling
 			Тогда таблица "List" содержит строки:
 				| Item key bundle | Company      |
 				| Bound Dress+Trousers/Dress+Trousers       | Main Company |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _029612 проведение документа Unbundling по складу ордерному на приемку
-	* Открытие формы создания Unbundling
+Сценарий: _029612 create Unbundling (Store use Goods receipt and doesn't use Shipment confirmation)
+	* Opening the creation form Unbundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Изменение номера документа
+	* Change number
 			И в поле 'Number' я ввожу текст '8'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '8'
-	* Заполнение реквизитов
+	* Filling in details
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
@@ -377,7 +371,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку 'By specification'
-	* Проведение и проверка движений
+	* Check postings
 		И я нажимаю на кнопку 'Post'
 		И Пауза 5
 		И я нажимаю на кнопку 'Registrations report'
@@ -401,16 +395,16 @@
 			| ''                                      | 'Expense'     | '*'      | '2'         | 'Store 07'   | 'Bound Dress+Shirt/Dress+Shirt' | ''         | ''        |
 		И Я закрыл все окна клиентского приложения
 	
-	Сценарий: _029613 проведение документа Unbundling по складу ордерному на отгрузку
-	* Открытие формы создания Unbundling
+	Сценарий: _029613 create Unbundling (Store use Shipment confirmation and doesn't use Goods receipt)
+	* Opening the creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Изменение номера документа
+	* Change number
 			И в поле 'Number' я ввожу текст '9'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9'
-	* Заполнение реквизитов
+	* Filling in details
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
@@ -439,7 +433,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку 'By specification'
-	* Проведение и проверка движений
+	* Check postings
 		И я нажимаю на кнопку 'Post'
 		И Пауза 5
 		И я нажимаю на кнопку 'Registrations report'

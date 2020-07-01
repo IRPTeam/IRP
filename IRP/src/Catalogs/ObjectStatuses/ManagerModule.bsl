@@ -21,21 +21,20 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 EndProcedure
 
 Function GetChoiseDataTable(Parameters) Export
-	QueryBuilderText =
-		"SELECT ALLOWED TOP 50
-		|	Table.Ref AS Ref,
-		|	Table.Presentation
-		|FROM
-		|	Catalog.ObjectStatuses AS Table
-		|WHERE
-		|	Table.Description_en LIKE ""%%"" + &SearchString + ""%%""
+	Filter = "
 		|	AND CASE
 		|		WHEN &Filter_RefInList
 		|			THEN Table.Ref IN (&RefList)
 		|		ELSE TRUE
 		|	END
 		|";
-	QueryBuilderText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryBuilderText);
+
+	Settings = New Structure;
+	Settings.Insert("Name", "Catalog.ObjectStatuses");
+	Settings.Insert("Filter", Filter);
+	
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
+
 	
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();

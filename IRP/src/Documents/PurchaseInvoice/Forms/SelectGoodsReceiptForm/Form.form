@@ -27,9 +27,6 @@
           <paths xsi:type="form:DataPath">
             <segments>GoodsReceiptTree.Use</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>GoodsReceiptTree.Use</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>GoodsReceiptTreeUseExtendedTooltip</name>
@@ -72,9 +69,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>GoodsReceiptTree.Order</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>GoodsReceiptTree.Order</segments>
           </paths>
@@ -130,9 +124,6 @@
           <paths xsi:type="form:DataPath">
             <segments>GoodsReceiptTree.Item</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>GoodsReceiptTree.Item</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>GoodsReceiptTreeItemExtendedTooltip</name>
@@ -182,9 +173,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>GoodsReceiptTree.ItemKey</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>GoodsReceiptTree.ItemKey</segments>
           </paths>
@@ -240,9 +228,6 @@
           <paths xsi:type="form:DataPath">
             <segments>GoodsReceiptTree.Unit</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>GoodsReceiptTree.Unit</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>GoodsReceiptTreeUnitExtendedTooltip</name>
@@ -295,9 +280,6 @@
           <paths xsi:type="form:DataPath">
             <segments>GoodsReceiptTree.Quantity</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>GoodsReceiptTree.Quantity</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>GoodsReceiptTreeQuantityExtendedTooltip</name>
@@ -347,9 +329,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>GoodsReceiptTree.GoodsReceipt</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>GoodsReceiptTree.GoodsReceipt</segments>
           </paths>

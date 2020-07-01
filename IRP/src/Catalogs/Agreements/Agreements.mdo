@@ -137,6 +137,10 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <choiceParameters>
+      <name>Filter.Predefined</name>
+      <value xsi:type="core:BooleanValue"/>
+    </choiceParameters>
     <createOnInput>DontUse</createOnInput>
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -300,7 +304,10 @@
     <type>
       <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -313,7 +320,10 @@
     <type>
       <types>EnumRef.ApArPostingDetail</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -326,7 +336,10 @@
     <type>
       <types>CatalogRef.Agreements</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -339,6 +352,9 @@
     <type>
       <types>EnumRef.AgreementKinds</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -361,6 +377,8 @@
       <type>
         <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -373,6 +391,8 @@
       <type>
         <types>Characteristic.AddAttributeAndProperty</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -412,8 +432,8 @@
     </synonym>
     <group>FormNavigationPanelGoTo</group>
     <commandParameterType>
-      <types>CatalogRef.Partners</types>
       <types>CatalogRef.PartnerSegments</types>
+      <types>CatalogRef.Partners</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

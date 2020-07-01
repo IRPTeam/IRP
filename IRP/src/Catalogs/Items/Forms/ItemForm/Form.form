@@ -14,8 +14,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>PictureViewHTML</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>PictureViewHTML</segments>
+          </paths>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
@@ -78,8 +80,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>AddAttributeViewHTML</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>AddAttributeViewHTML</segments>
+          </paths>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
@@ -210,8 +214,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.ItemID</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.ItemID</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ExtendedTooltip</name>
@@ -412,8 +418,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.Vendor</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.Vendor</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>VendorExtendedTooltip</name>
@@ -724,16 +732,16 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
   </handlers>
   <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -837,6 +845,7 @@
         </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>2</index>
+        <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>Catalog.PriceKeys.Command.OpenPriceKeysList</command>
@@ -845,6 +854,7 @@
         </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>3</index>
+        <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.TaxSettings.StandardCommand.OpenByValue.Item</command>
@@ -867,12 +877,12 @@
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
-      <event>BeforeWriteAtServer</event>
-      <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>AfterWrite</event>
       <name>AfterWrite</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

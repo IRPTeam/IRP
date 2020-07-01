@@ -12,7 +12,6 @@
     <key>en</key>
     <value>Payment schedules</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>DontUse</createOnInput>
@@ -42,18 +41,15 @@
       <key>en</key>
       <value>Stages of payment</value>
     </synonym>
-    <comment></comment>
     <attributes uuid="8a3181e1-a185-4d68-908f-8bdfb84e4361">
       <name>CalculationType</name>
       <synonym>
         <key>en</key>
         <value>Calculation type</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>EnumRef.CalculationTypes</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
     </attributes>
@@ -63,7 +59,6 @@
         <key>en</key>
         <value>Proportion of payment</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>Number</types>
         <numberQualifiers>
@@ -72,7 +67,6 @@
           <nonNegative>true</nonNegative>
         </numberQualifiers>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -83,7 +77,6 @@
         <key>en</key>
         <value>Due period, days</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>Number</types>
         <numberQualifiers>
@@ -91,7 +84,6 @@
           <nonNegative>true</nonNegative>
         </numberQualifiers>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -103,7 +95,6 @@
       <key>en</key>
       <value>Item form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -113,7 +104,6 @@
       <key>en</key>
       <value>List form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -123,7 +113,6 @@
       <key>en</key>
       <value>Choice form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>

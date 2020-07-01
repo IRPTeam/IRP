@@ -3,21 +3,21 @@
 @Positive
 
 
-Функционал: заполнение курсов валют в регистрах
+Функционал: filling in exchange rates in registers
 
-Как бухгалтер
-Я хочу внести курс валют в регистр
-Чтобы использовать мультивалютный учет
+As an accountant
+I want to fill out the exchange rate
+To use multi-currency accounting
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _006101 заполнение курса валют в регистрах
-* Открытие регистра CurrencyRates
+Сценарий: _006101 filling in exchange rates in registers
+* Opening of register CurrencyRates
 	И я открываю навигационную ссылку 'e1cib/list/InformationRegister.CurrencyRates'
 	И я удаляю все записи РегистрСведений "CurrencyRates"
-* Заполнение курса лиры к евро
+* Filling the lira to euro rate
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Currency from"
 	И в таблице "List" я перехожу к строке:
@@ -38,7 +38,7 @@
 	И в поле 'Rate' я ввожу текст '6,54'
 	И в поле 'Period' я ввожу текст '21.06.2019 17:40:13'
 	И я нажимаю на кнопку 'Save and close'
-* Заполнение курса лиры к долару
+* Filling the lira to USD rate
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Currency from"
 	И в таблице "List" я перехожу к строке:
@@ -59,7 +59,7 @@
 	И в поле 'Rate' я ввожу текст '5,84'
 	И в поле 'Period' я ввожу текст '21.06.2019 17:40:13'
 	И я нажимаю на кнопку 'Save and close'
-* Заполнение курса лиры к лире
+* Filling the lira to lira rate
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Currency from"
 	И в таблице "List" я перехожу к строке:
@@ -80,7 +80,7 @@
 	И в поле 'Rate' я ввожу текст '1'
 	И в поле 'Period' я ввожу текст '01.01.2019 17:40:13'
 	И я нажимаю на кнопку 'Save and close'
-* Заполнение курса долара к евро
+* Filling the USD to euro rate
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Currency from"
 	И в таблице "List" я перехожу к строке:
@@ -101,7 +101,7 @@
 	И в поле 'Rate' я ввожу текст '0,8900'
 	И в поле 'Period' я ввожу текст '21.06.2019 17:40:13'
 	И я нажимаю на кнопку 'Save and close'
-* Заполнение курса долара к лире
+* Filling the USD to lira rate
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Currency from"
 	И в таблице "List" я перехожу к строке:

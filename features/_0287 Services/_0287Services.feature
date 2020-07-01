@@ -1,17 +1,17 @@
 #language: ru
 @tree
 @Positive
-Функционал: проведение входящих услуг
+Функционал: incoming services
 
-Как Разработчик
-Я хочу добавить функционал по услугам
-Для проведения входящих услуг по учёту
+As a financier
+I want to fill out the information on the services I received and which I provided
+For cost analysis
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _029101 создание вида номенклатуры для услуги (не делает движения по складу)
+Сценарий: _029101 create item type for services
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemTypes'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И в поле 'ENG' я ввожу текст 'Service'
@@ -36,7 +36,7 @@
 	И Пауза 2
 	Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_en" "Service"
 
-Сценарий: _029102 создание Item на услугу
+Сценарий: _029102 create Item - Service
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И в поле 'ENG' я ввожу текст 'Service'
@@ -55,7 +55,7 @@
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю на кнопку 'Save'
 	И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-	И я добавляю item key для услуги интернета
+	* Adding an item key for Internet service
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Service type"
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -66,7 +66,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И я нажимаю на кнопку 'Save and close'
-	И я добавляю item key для услуги аренды
+	* Adding an item key for Rent
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Service type"
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -80,18 +80,18 @@
 	И Я закрыл все окна клиентского приложения
 	
 
-Сценарий: _029103 проведение Purchase Order на услугу
-	И я открываю форму для создания Purchase Order
+Сценарий: _029103 create a Purchase order for service
+	* Opening a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю необходимые реквизиты
+	* Filling in Company and Status
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
 		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-	И я заполняю информацию о поставщике
+	* Filling in vendor information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -108,14 +108,14 @@
 			| Description        |
 			| Vendor Ferron, TRY |
 		И в таблице "List" я выбираю текущую строку
-	И я устанавливаю номер документа 123
+	* Filling in the document number 123
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '123'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '123'
-	И я заполняю товарную часть
+	* Filling in items table
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -145,7 +145,7 @@
 		И я нажимаю на кнопку 'Post'
 
 
-Сценарий: _029104 проведение Purchase Invoice на услугу на основании Purchase Order
+Сценарий: _029104 create a Purchase invoice for service (based on Purchase order)
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И в таблице "List" я перехожу к строке:
 		| 'Number' |
@@ -156,14 +156,14 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Price'    | 'Item'    | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Expense type'             | 'Business unit' | 'Purchase order'      |
 		| '1 000,00' | 'Service' | '18%' | 'Interner' | '1,000' | '152,54'     | 'pcs'  | '847,46'     | '1 000,00'     | 'Telephone communications' | 'Front office'  | 'Purchase order 123*' |
-	И я устанавливаю номер документа 123
+	* Filling in the document number 123
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '123'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '123'
 	И я нажимаю на кнопку 'Post'
-	И я проверяю движения документа
+	* Check postings
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PurchaseTurnovers'
 		Тогда таблица "List" содержит строки:
 		| 'Currency' | 'Quantity' | 'Recorder'              | 'Row key'                     | 'Company'      | 'Purchase invoice'      | 'Item key'  | 'Amount'   |
@@ -186,8 +186,8 @@
 		И Я закрыл все окна клиентского приложения
 	
 	
-Сценарий: _029106 создание Purchase invoice на отгрузку товара с ордерного склада и на услугу
-		И я создаю Item Router
+Сценарий: _029106 create a Purchase invoice for service and product (based on Purchase order, Store use Goods receipt)
+		* Create Item Router
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'ENG' я ввожу текст 'Router'
@@ -204,13 +204,13 @@
 			И я нажимаю на кнопку 'Save and close'
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю необходимые реквизиты
+		* Filling in details
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-		И я заполняю информацию о поставщике
+		* Filling in vendor information
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -227,13 +227,13 @@
 				| Description        |
 				| Vendor Ferron, TRY |
 			И в таблице "List" я выбираю текущую строку
-		И я устанавливаю номер документа 124
+		* Filling in the document number 124
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '124'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '124'
-		И я заполняю товарную часть (добавляю услугу и товар)
+		* Filling in items table (добавляю услугу и товар)
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -293,96 +293,86 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '200,00'
 			И в таблице "ItemList" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Post'
-		И я проверяю проводки документа через отчет
-			# временно
-			И я перехожу к закладке "Currency"
-			И я нажимаю кнопку выбора у поля "Currency"
-			И в таблице "List" я перехожу к строке:
-				| 'Code' | 'Description'  |
-				| 'TRY'  | 'Turkish lira' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку 'Post'
-			# end временно
+		* Checking document postings using a report
 			И я нажимаю на кнопку 'Registrations report'
 			Тогда табличный документ "ResultTable" равен по шаблону:
 			| 'Purchase invoice 124*'                 | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| 'Document registrations records'        | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| 'Register  "Inventory balance"'         | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | ''            | ''          | 'Quantity'      | 'Company'       | 'Item key'                 | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Receipt'     | '*'         | '1'             | 'Main Company'  | 'Router'                   | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| 'Register  "Purchase turnovers"'        | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Period'      | 'Resources' | ''              | ''              | 'Dimensions'               | ''                      | ''                  | ''                    | ''                         | ''                         | 'Attributes'           | ''                         | ''                     |
-		| ''                                      | ''            | 'Quantity'  | 'Amount'        | 'Net amount'    | 'Company'                  | 'Purchase invoice'      | 'Currency'          | 'Item key'            | 'Row key'                  | 'Currency movement type'   | 'Deferred calculation' | ''                         | ''                     |
-		| ''                                      | '*'           | '1'         | '17,12'         | '14,51'         | 'Main Company'             | 'Purchase invoice 124*' | 'USD'               | 'Interner'            | '*'                        | 'Reporting currency'       | 'No'                   | ''                         | ''                     |
-		| ''                                      | '*'           | '1'         | '34,25'         | '29,02'         | 'Main Company'             | 'Purchase invoice 124*' | 'USD'               | 'Router'              | '*'                        | 'Reporting currency'       | 'No'                   | ''                         | ''                     |
-		| ''                                      | '*'           | '1'         | '100'           | '84,75'         | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Interner'            | '*'                        | 'en descriptions is empty' | 'No'                   | ''                         | ''                     |
-		| ''                                      | '*'           | '1'         | '100'           | '84,75'         | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Interner'            | '*'                        | 'Local currency'           | 'No'                   | ''                         | ''                     |
-		| ''                                      | '*'           | '1'         | '100'           | '84,75'         | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Interner'            | '*'                        | 'TRY'                      | 'No'                   | ''                         | ''                     |
-		| ''                                      | '*'           | '1'         | '200'           | '169,49'        | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Router'              | '*'                        | 'en descriptions is empty' | 'No'                   | ''                         | ''                     |
-		| ''                                      | '*'           | '1'         | '200'           | '169,49'        | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Router'              | '*'                        | 'Local currency'           | 'No'                   | ''                         | ''                     |
-		| ''                                      | '*'           | '1'         | '200'           | '169,49'        | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Router'              | '*'                        | 'TRY'                      | 'No'                   | ''                         | ''                     |
-		| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| 'Register  "Expenses turnovers"'        | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Period'      | 'Resources' | 'Dimensions'    | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | 'Attributes'               | ''                     | ''                         | ''                     |
-		| ''                                      | ''            | 'Amount'    | 'Company'       | 'Business unit' | 'Expense type'             | 'Item key'              | 'Currency'          | 'Additional analytic' | 'Currency movement type'   | 'Deferred calculation'     | ''                     | ''                         | ''                     |
-		| ''                                      | '*'           | '17,12'     | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'USD'               | ''                    | 'Reporting currency'       | 'No'                       | ''                     | ''                         | ''                     |
-		| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'en descriptions is empty' | 'No'                       | ''                     | ''                         | ''                     |
-		| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'Local currency'           | 'No'                       | ''                     | ''                         | ''                     |
-		| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'TRY'                      | 'No'                       | ''                     | ''                         | ''                     |
-		| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| 'Register  "Taxes turnovers"'           | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Period'      | 'Resources' | ''              | ''              | 'Dimensions'               | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | 'Attributes'           |
-		| ''                                      | ''            | 'Amount'    | 'Manual amount' | 'Net amount'    | 'Document'                 | 'Tax'                   | 'Analytics'         | 'Tax rate'            | 'Include to total amount'  | 'Row key'                  | 'Currency'             | 'Currency movement type'   | 'Deferred calculation' |
-		| ''                                      | '*'           | '2,61'      | '2,61'          | '14,51'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'USD'                  | 'Reporting currency'       | 'No'                   |
-		| ''                                      | '*'           | '5,22'      | '5,22'          | '29,02'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'USD'                  | 'Reporting currency'       | 'No'                   |
-		| ''                                      | '*'           | '15,25'     | '15,25'         | '84,75'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'en descriptions is empty' | 'No'                   |
-		| ''                                      | '*'           | '15,25'     | '15,25'         | '84,75'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'Local currency'           | 'No'                   |
-		| ''                                      | '*'           | '15,25'     | '15,25'         | '84,75'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'TRY'                      | 'No'                   |
-		| ''                                      | '*'           | '30,51'     | '30,51'         | '169,49'        | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'en descriptions is empty' | 'No'                   |
-		| ''                                      | '*'           | '30,51'     | '30,51'         | '169,49'        | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'Local currency'           | 'No'                   |
-		| ''                                      | '*'           | '30,51'     | '30,51'         | '169,49'        | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'TRY'                      | 'No'                   |
-		| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| 'Register  "Goods in transit incoming"' | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | ''            | ''          | 'Quantity'      | 'Store'         | 'Receipt basis'            | 'Item key'              | 'Row key'           | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Receipt'     | '*'         | '1'             | 'Store 02'      | 'Purchase invoice 124*'    | 'Router'                | '*'                 | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| 'Register  "Accounts statement"'        | ''            | ''          | ''                    | ''               | ''                                               | ''                                               | ''                                     | ''                                     | ''                                     | ''                                               | ''                     | ''                         | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources'           | ''               | ''                                               | ''                                               | 'Dimensions'                           | ''                                     | ''                                     | ''                                               | ''                     | ''                         | ''                     |
-		| ''                                      | ''            | ''          | 'Advance to supliers' | 'Transaction AP' | 'Advance from customers'                         | 'Transaction AR'                                 | 'Company'                              | 'Partner'                              | 'Legal name'                           | 'Basis document'                                 | 'Currency'             | ''                         | ''                     |
-		| ''                                      | 'Receipt'     | '*'         | ''                    | '300'            | ''                                               | ''                                               | 'Main Company'                         | 'Ferron BP'                            | 'Company Ferron BP'                    | 'Purchase invoice 124*' | 'TRY'                  | ''                         | ''                     |
-		| ''                                      | ''            | ''          | ''                    | ''               | ''                                               | ''                                               | ''                                     | ''                                     | ''                                     | ''                                               | ''                     | ''                         | ''                     |
-		| 'Register  "Reconciliation statement"'  | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | ''            | ''          | 'Amount'        | 'Company'       | 'Legal name'               | 'Currency'              | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Expense'     | '*'         | '300'           | 'Main Company'  | 'Company Ferron BP'        | 'TRY'                   | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| 'Register  "Goods receipt schedule"'    | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                         | ''                      | ''                  | ''                    | 'Attributes'               | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | ''            | ''          | 'Quantity'      | 'Company'       | 'Order'                    | 'Store'                 | 'Item key'          | 'Row key'             | 'Delivery date'            | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Receipt'     | '*'         | '1'             | 'Main Company'  | 'Purchase invoice 124*'    | ''                      | 'Interner'          | '*'                   | '*'                        | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Receipt'     | '*'         | '1'             | 'Main Company'  | 'Purchase invoice 124*'    | 'Store 02'              | 'Router'            | '*'                   | '*'                        | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Expense'     | '*'         | '1'             | 'Main Company'  | 'Purchase invoice 124*'    | ''                      | 'Interner'          | '*'                   | '*'                        | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| 'Register  "Partner AP transactions"'   | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | 'Attributes'           | ''                         | ''                     |
-		| ''                                      | ''            | ''          | 'Amount'        | 'Company'       | 'Basis document'           | 'Partner'               | 'Legal name'        | 'Agreement'           | 'Currency'                 | 'Currency movement type'   | 'Deferred calculation' | ''                         | ''                     |
-		| ''                                      | 'Receipt'     | '*'         | '51,37'         | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'USD'                      | 'Reporting currency'       | 'No'                   | ''                         | ''                     |
-		| ''                                      | 'Receipt'     | '*'         | '300'           | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                      | 'en descriptions is empty' | 'No'                   | ''                         | ''                     |
-		| ''                                      | 'Receipt'     | '*'         | '300'           | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                      | 'Local currency'           | 'No'                   | ''                         | ''                     |
-		| ''                                      | 'Receipt'     | '*'         | '300'           | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                      | 'TRY'                      | 'No'                   | ''                         | ''                     |
-
+			| 'Document registrations records'        | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| 'Register  "Inventory balance"'         | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | ''            | ''          | 'Quantity'      | 'Company'       | 'Item key'                 | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Receipt'     | '*'         | '1'             | 'Main Company'  | 'Router'                   | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| 'Register  "Purchase turnovers"'        | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Period'      | 'Resources' | ''              | ''              | 'Dimensions'               | ''                      | ''                  | ''                    | ''                         | ''                         | 'Attributes'           | ''                         | ''                     |
+			| ''                                      | ''            | 'Quantity'  | 'Amount'        | 'Net amount'    | 'Company'                  | 'Purchase invoice'      | 'Currency'          | 'Item key'            | 'Row key'                  | 'Currency movement type'   | 'Deferred calculation' | ''                         | ''                     |
+			| ''                                      | '*'           | '1'         | '17,12'         | '14,51'         | 'Main Company'             | 'Purchase invoice 124*' | 'USD'               | 'Interner'            | '*'                        | 'Reporting currency'       | 'No'                   | ''                         | ''                     |
+			| ''                                      | '*'           | '1'         | '34,25'         | '29,02'         | 'Main Company'             | 'Purchase invoice 124*' | 'USD'               | 'Router'              | '*'                        | 'Reporting currency'       | 'No'                   | ''                         | ''                     |
+			| ''                                      | '*'           | '1'         | '100'           | '84,75'         | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Interner'            | '*'                        | 'en descriptions is empty' | 'No'                   | ''                         | ''                     |
+			| ''                                      | '*'           | '1'         | '100'           | '84,75'         | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Interner'            | '*'                        | 'Local currency'           | 'No'                   | ''                         | ''                     |
+			| ''                                      | '*'           | '1'         | '100'           | '84,75'         | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Interner'            | '*'                        | 'TRY'                      | 'No'                   | ''                         | ''                     |
+			| ''                                      | '*'           | '1'         | '200'           | '169,49'        | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Router'              | '*'                        | 'en descriptions is empty' | 'No'                   | ''                         | ''                     |
+			| ''                                      | '*'           | '1'         | '200'           | '169,49'        | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Router'              | '*'                        | 'Local currency'           | 'No'                   | ''                         | ''                     |
+			| ''                                      | '*'           | '1'         | '200'           | '169,49'        | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Router'              | '*'                        | 'TRY'                      | 'No'                   | ''                         | ''                     |
+			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| 'Register  "Expenses turnovers"'        | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Period'      | 'Resources' | 'Dimensions'    | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | 'Attributes'               | ''                     | ''                         | ''                     |
+			| ''                                      | ''            | 'Amount'    | 'Company'       | 'Business unit' | 'Expense type'             | 'Item key'              | 'Currency'          | 'Additional analytic' | 'Currency movement type'   | 'Deferred calculation'     | ''                     | ''                         | ''                     |
+			| ''                                      | '*'           | '17,12'     | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'USD'               | ''                    | 'Reporting currency'       | 'No'                       | ''                     | ''                         | ''                     |
+			| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'en descriptions is empty' | 'No'                       | ''                     | ''                         | ''                     |
+			| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'Local currency'           | 'No'                       | ''                     | ''                         | ''                     |
+			| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'TRY'                      | 'No'                       | ''                     | ''                         | ''                     |
+			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| 'Register  "Taxes turnovers"'           | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Period'      | 'Resources' | ''              | ''              | 'Dimensions'               | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | 'Attributes'           |
+			| ''                                      | ''            | 'Amount'    | 'Manual amount' | 'Net amount'    | 'Document'                 | 'Tax'                   | 'Analytics'         | 'Tax rate'            | 'Include to total amount'  | 'Row key'                  | 'Currency'             | 'Currency movement type'   | 'Deferred calculation' |
+			| ''                                      | '*'           | '2,61'      | '2,61'          | '14,51'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'USD'                  | 'Reporting currency'       | 'No'                   |
+			| ''                                      | '*'           | '5,22'      | '5,22'          | '29,02'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'USD'                  | 'Reporting currency'       | 'No'                   |
+			| ''                                      | '*'           | '15,25'     | '15,25'         | '84,75'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'en descriptions is empty' | 'No'                   |
+			| ''                                      | '*'           | '15,25'     | '15,25'         | '84,75'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'Local currency'           | 'No'                   |
+			| ''                                      | '*'           | '15,25'     | '15,25'         | '84,75'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'TRY'                      | 'No'                   |
+			| ''                                      | '*'           | '30,51'     | '30,51'         | '169,49'        | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'en descriptions is empty' | 'No'                   |
+			| ''                                      | '*'           | '30,51'     | '30,51'         | '169,49'        | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'Local currency'           | 'No'                   |
+			| ''                                      | '*'           | '30,51'     | '30,51'         | '169,49'        | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'TRY'                      | 'No'                   |
+			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| 'Register  "Goods in transit incoming"' | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | ''            | ''          | 'Quantity'      | 'Store'         | 'Receipt basis'            | 'Item key'              | 'Row key'           | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Receipt'     | '*'         | '1'             | 'Store 02'      | 'Purchase invoice 124*'    | 'Router'                | '*'                 | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| 'Register  "Accounts statement"'        | ''            | ''          | ''                    | ''               | ''                                               | ''                                               | ''                                     | ''                                     | ''                                     | ''                                               | ''                     | ''                         | ''                     |
+			| ''                                      | 'Record type' | 'Period'    | 'Resources'           | ''               | ''                                               | ''                                               | 'Dimensions'                           | ''                                     | ''                                     | ''                                               | ''                     | ''                         | ''                     |
+			| ''                                      | ''            | ''          | 'Advance to supliers' | 'Transaction AP' | 'Advance from customers'                         | 'Transaction AR'                                 | 'Company'                              | 'Partner'                              | 'Legal name'                           | 'Basis document'                                 | 'Currency'             | ''                         | ''                     |
+			| ''                                      | 'Receipt'     | '*'         | ''                    | '300'            | ''                                               | ''                                               | 'Main Company'                         | 'Ferron BP'                            | 'Company Ferron BP'                    | 'Purchase invoice 124*' | 'TRY'                  | ''                         | ''                     |
+			| ''                                      | ''            | ''          | ''                    | ''               | ''                                               | ''                                               | ''                                     | ''                                     | ''                                     | ''                                               | ''                     | ''                         | ''                     |
+			| 'Register  "Reconciliation statement"'  | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | ''            | ''          | 'Amount'        | 'Company'       | 'Legal name'               | 'Currency'              | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Expense'     | '*'         | '300'           | 'Main Company'  | 'Company Ferron BP'        | 'TRY'                   | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| 'Register  "Goods receipt schedule"'    | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                         | ''                      | ''                  | ''                    | 'Attributes'               | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | ''            | ''          | 'Quantity'      | 'Company'       | 'Order'                    | 'Store'                 | 'Item key'          | 'Row key'             | 'Delivery date'            | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Receipt'     | '*'         | '1'             | 'Main Company'  | 'Purchase invoice 124*'    | ''                      | 'Interner'          | '*'                   | '*'                        | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Receipt'     | '*'         | '1'             | 'Main Company'  | 'Purchase invoice 124*'    | 'Store 02'              | 'Router'            | '*'                   | '*'                        | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Expense'     | '*'         | '1'             | 'Main Company'  | 'Purchase invoice 124*'    | ''                      | 'Interner'          | '*'                   | '*'                        | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| 'Register  "Partner AP transactions"'   | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| ''                                      | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | 'Attributes'           | ''                         | ''                     |
+			| ''                                      | ''            | ''          | 'Amount'        | 'Company'       | 'Basis document'           | 'Partner'               | 'Legal name'        | 'Agreement'           | 'Currency'                 | 'Currency movement type'   | 'Deferred calculation' | ''                         | ''                     |
+			| ''                                      | 'Receipt'     | '*'         | '51,37'         | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'USD'                      | 'Reporting currency'       | 'No'                   | ''                         | ''                     |
+			| ''                                      | 'Receipt'     | '*'         | '300'           | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                      | 'en descriptions is empty' | 'No'                   | ''                         | ''                     |
+			| ''                                      | 'Receipt'     | '*'         | '300'           | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                      | 'Local currency'           | 'No'                   | ''                         | ''                     |
+			| ''                                      | 'Receipt'     | '*'         | '300'           | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                      | 'TRY'                      | 'No'                   | ''                         | ''                     |
 		И Я закрыл все окна клиентского приложения
 
-# Сценарий: создание Purchase order - Goods reciept - Purchase invoice c услугой и товаром по непрямой схеме отгрузки
 
-Сценарий: _029107 создание Sales order услуга + товар с неордерного склада и проверка проводок (прямая схема отгрузки)
+
+Сценарий: _029107 create a Sales order for service and product (Store doesn't use Shipment confirmation, Sales invoice before Shipment confirmation)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
-	И я добавляю товар
+	* Filling in items table
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -423,9 +413,7 @@
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 		И в таблице "ItemList" я завершаю редактирование строки
-	Тогда я меняю номер документа и провожу его
-		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		И в таблице "Offers" я нажимаю на кнопку 'OK'
+	* Filling in document number
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '0'
@@ -433,16 +421,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '700'
 		И я нажимаю на кнопку 'Post'
-	Тогда я проверяю движения документа
-		# временно
-		И я перехожу к закладке "Currency"
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
-			| 'Code' | 'Description'  |
-			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Post'
-		# end временно
+	* Check postings
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Sales order 700*'                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
@@ -483,10 +462,10 @@
 
 
 
-Сценарий: _029108 создание Sales order услуга + товар с ордерного склада и проверка проводок (прямая схема отгрузки)
+Сценарий: _029108 create a Sales order for service and product (Store use Shipment confirmation, Sales invoice before Shipment confirmation)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю данные о клиенте
+	* Filling in customer information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -502,7 +481,7 @@
 				| 'Description' |
 				| 'Company Ferron BP'  |
 		И в таблице "List" я выбираю текущую строку
-	И я добавляю товар
+	* Filling in items table
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		Тогда открылось окно 'Items'
@@ -545,7 +524,7 @@
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 		И в таблице "ItemList" я завершаю редактирование строки
-	Тогда я меняю номер документа и провожу его
+	* Filling in document number
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку 'OK'
 		И я перехожу к закладке "Other"
@@ -555,16 +534,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '701'
 		И я нажимаю на кнопку 'Post'
-	Тогда я проверяю движения документа
-		# временно
-		И я перехожу к закладке "Currency"
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
-			| 'Code' | 'Description'  |
-			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Post'
-		# end временно
+	* Check postings
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Sales order 701*'                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
@@ -606,11 +576,11 @@
 
 
 
-Сценарий: _029109 создание Sales order услуга + товар с неордерного склада и проверка проводок (непрямая схема отгрузки)
+Сценарий: _029109 create a Sales order for service and product (Store doesn't use Shipment confirmation, Shipment confirmation before Sales invoice)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
-	И я добавляю товар
+	* Filling in items table
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		Тогда открылось окно 'Items'
@@ -653,7 +623,7 @@
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 		И в таблице "ItemList" я завершаю редактирование строки
-	Тогда я меняю номер документа и провожу его
+	* Filling in document number
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку 'OK'
 		И я перехожу к закладке "Other"
@@ -664,16 +634,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '702'
 		И я нажимаю на кнопку 'Post'
-	Тогда я проверяю движения документа
-		# временно
-		И я перехожу к закладке "Currency"
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
-			| 'Code' | 'Description'  |
-			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Post'
-		# end временно
+	* Check postings
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Sales order 702*'                           | ''            | ''          | ''          | ''                 | ''                      | ''         | ''         | ''        | ''                         | ''                     |
@@ -732,10 +693,10 @@
 
 
 
-Сценарий: _029110 создание Sales order услуга + товар с ордерного склада и проверка проводок (непрямая схема отгрузки)
+Сценарий: _029110 create a Sales order for service and product (Store use Shipment confirmation, Shipment confirmation before Sales invoice)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю данные о клиенте
+	* Filling in customer information
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -751,7 +712,7 @@
 				| 'Description' |
 				| 'Company Ferron BP'  |
 		И в таблице "List" я выбираю текущую строку
-	И я добавляю товар
+	* Filling in items table
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -790,7 +751,7 @@
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 		И в таблице "ItemList" я завершаю редактирование строки
-	Тогда я меняю номер документа и провожу его
+	* Filling in document number
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку 'OK'
 		И я перехожу к закладке "Other"
@@ -801,16 +762,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '703'
 		И я нажимаю на кнопку 'Post'
-	Тогда я проверяю движения документа
-		# временно
-		И я перехожу к закладке "Currency"
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
-			| 'Code' | 'Description'  |
-			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Post'
-		# end временно
+	* Check postings
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Sales order 703*'                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
@@ -853,19 +805,3 @@
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'            | 'Store'    | 'Item key' | 'Row key' | 'Delivery date'            | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Main Company' | 'Sales order 703*' | 'Store 02' | 'Rent'     | '*'       | '*'                        | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | 'Sales order 703*' | 'Store 02' | '37/18SD'  | '*'       | '*'                        | ''                     |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

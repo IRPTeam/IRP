@@ -5,11 +5,9 @@
     <key>en</key>
     <value>HASH</value>
   </synonym>
-  <comment></comment>
   <type>
     <types>DefinedType.typeDescription</types>
   </type>
-  <mask></mask>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <dataHistory>Use</dataHistory>
@@ -47,6 +45,14 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.InterfaceGroups</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.CurrencyMovementSets</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.Countries</metadata>
     <use>Use</use>
   </content>
@@ -60,6 +66,10 @@
   </content>
   <content>
     <metadata>Catalog.SpecialOffers</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.CompanyTypes</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -79,8 +89,16 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>ChartOfCharacteristicTypes.CustomUserSettings</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.IntegrationSettings</metadata>
     <use>DontUse</use>
+  </content>
+  <content>
+    <metadata>Catalog.Taxes</metadata>
+    <use>Use</use>
   </content>
   <content>
     <metadata>Catalog.SpecialOfferRules</metadata>
@@ -103,7 +121,19 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.Specifications</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.Currencies</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.BusinessUnits</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.ExpenseAndRevenueTypes</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -123,39 +153,11 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>ChartOfCharacteristicTypes.CurrencyMovementType</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.PaymentTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.Companies</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.InterfaceGroups</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.ObjectStatuses</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.Specifications</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.CompanyTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.BusinessUnits</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.ExpenseAndRevenueTypes</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -167,11 +169,11 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>ChartOfCharacteristicTypes.CustomUserSettings</metadata>
+    <metadata>Catalog.ObjectStatuses</metadata>
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.Taxes</metadata>
+    <metadata>Catalog.Companies</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -179,11 +181,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>ChartOfCharacteristicTypes.CurrencyMovementType</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.CurrencyMovementSets</metadata>
+    <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
     <use>Use</use>
   </content>
   <content>

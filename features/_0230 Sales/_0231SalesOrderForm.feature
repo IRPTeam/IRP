@@ -1,21 +1,20 @@
 #language: ru
 @tree
 @Positive
-Функционал: форма документа sales order
+Функционал: Sales order document form
 
 
-Как Разработчик
-Я хочу создать форму документа заказ клиента
-Для удобства формирования заказа клиента
+As a sales manager
+I want the Sales order document form convenient
+For fast data entry
+
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
 
-Сценарий: _023101 проверка отображения в заказе только доступных действующих соглашений по выбранному клиенту
-# должны отображаться только соглашения с клиентом
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-239' с именем 'IRP-239'
+Сценарий: _023101 displaying in the Sales order only available valid agreements for the selected customer
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -42,7 +41,7 @@
 	И я закрываю текущее окно
 	И Я закрываю текущее окно
 	И я нажимаю на кнопку 'No'
-	И я проверяю что в списке выбора не отображаются соглашения по которым закончился срок действия
+	* Сhecking that expired agreements are not displayed in the selection list
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И в таблице "List" я перехожу к строке:
 		| 'Description'           |
@@ -75,8 +74,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И я закрываю текущее окно
 
-Сценарий: _023102 проверка выбора в поле Company только собственных компаний
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-240' с именем 'IRP-240'
+Сценарий: _023102 select only your own companies in the Company field
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -97,8 +95,7 @@
 	И Я закрываю текущее окно
 	И я нажимаю на кнопку 'No'
 
-Сценарий: _023103 проверка подтягивания в поле Company информации из соглашения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-240' с именем 'IRP-240'
+Сценарий: _023103 filling in Company field from the agreement
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -116,8 +113,7 @@
 	И я нажимаю на кнопку 'No'
 
 
-Сценарий: _023104 проверка подтягивания в заказ склада из соглашения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-241' с именем 'IRP-241'
+Сценарий: _023104 filling in Store field from the agreement
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -140,17 +136,16 @@
 	И Я закрываю текущее окно
 	И я нажимаю на кнопку 'No'
 
-Сценарий: _023105 проверка отсутствия в заказе поля Account
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-241' с именем 'IRP-252'
+Сценарий: _023105 check that the Account field is missing from the order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И элемент формы "Account" отсутствует на форме
 
 
-Сценарий: _023106 проверка стационарной формы подбора товара (заказ клиента)
+Сценарий: _023106 checking the form of selection of items (sales order)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю общие реквизиты по заказу
+	* Filling in the details
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -170,7 +165,7 @@
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 	И я нажимаю на кнопку 'Post and close'
-	И я проверяю сохранение заказа
+	* Checking Sales order Saving
 		Тогда таблица "List" содержит строки:
 		| 'Currency'  | 'Partner'     | 'Status'   | 'Σ'         |
 		| 'TRY'       | 'Ferron BP'   | 'Approved' | '2 050,00'  |
@@ -179,7 +174,7 @@
 
 
 
-Сценарий: _023113 проверка наличия итогов в документе Sales order
+Сценарий: _023113 checking totals in the document Sales order
 	* Открытие формы списка документов Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	* Выбор документа Sales order для проверки итогов

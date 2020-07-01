@@ -2,12 +2,10 @@
 #Region FormEvents
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	FillPayers(Object, Form);
+	Return;
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	FillPayers(Object, Form);
-	
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
@@ -104,15 +102,6 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 	EndIf;
 	
 	Form.CurrentTransactionType = Object.TransactionType;
-EndProcedure
-
-#EndRegion
-
-#Region ItemPayer
-
-Procedure PayerOnChange(Object, Form, Item) Export
-	DocBankReceiptClient.SetCurrentPayer(Form, Form.Payer);
-	DocBankReceiptClient.ChangePaymentListPayer(Object.PaymentList, Form.Payer);
 EndProcedure
 
 #EndRegion
@@ -216,19 +205,11 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	FillPayers(Object, Form);
 	SetAvailability(Object, Form);
 EndProcedure
 
 Procedure PaymentListOnActivateRow(Object, Form, Item) Export
-	If Form.Items.PaymentList.CurrentData = Undefined Then
-		Return;
-	EndIf;
-	CurrentRowPayer = Form.Items.PaymentList.CurrentData.Payer;
-	If ValueIsFilled(CurrentRowPayer)
-		And CurrentRowPayer <> Form.CurrentPayer Then
-		DocBankReceiptClient.SetCurrentPayer(Form, CurrentRowPayer);
-	EndIf;
+	Return;
 EndProcedure
 
 Procedure PaymentListBasisDocumentOnChange(Object, Form, Item) Export
@@ -254,9 +235,8 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 	Form.Items.PaymentList.ChangeRow();
 	PaymentListOnChange(Object, Form, Item);
 	CurrentData = Form.Items.PaymentList.CurrentData;
-	If CurrentData <> Undefined And ValueIsFilled(Form.Payer)
+	If CurrentData <> Undefined
 		And Not Saas.SeparationUsed() Then
-		CurrentData.Payer = Form.Payer;
 		CurrentData.Partner = DocBankReceiptServer.GetPartnerByLegalName(CurrentData.Payer, CurrentData.Partner);
 		PaymentListPartnerOnChange(Object, Form, Item);
 	EndIf;
@@ -638,41 +618,6 @@ EndProcedure
 #EndRegion
 
 #Region Common
-
-Procedure SetCurrentPayer(Form, Payer) Export
-	Form.CurrentPayer = Payer;
-EndProcedure
-
-Procedure ChangePaymentListPayer(PaymentList, Payer) Export
-	For Each Row In PaymentList Do
-		If Row.Payer <> Payer Then
-			Row.Payer = Payer;
-		EndIf;
-	EndDo;
-EndProcedure
-
-Procedure FillPayers(Object, Form) Export
-	PayerArray = New Array;
-	For Each Row In Object.PaymentList Do
-		If ValueIsFilled(Row.Payer) Then
-			If PayerArray.Find(Row.Payer) = Undefined Then
-				PayerArray.Add(Row.Payer);
-			EndIf;
-		EndIf;
-	EndDo;
-	If PayerArray.Count() = 0 Then
-		If Not ValueIsFilled(Form.Payer) Then
-			Form.Items.Payer.InputHint = "";
-			Form.Payer = PredefinedValue("Catalog.Companies.EmptyRef");
-		EndIf;
-	ElsIf PayerArray.Count() = 1 Then
-		Form.Items.Payer.InputHint = "";
-		Form.Payer = PayerArray[0];
-	Else
-		Form.Payer = PredefinedValue("Catalog.Companies.EmptyRef");
-		Form.Items.Payer.InputHint = StrConcat(PayerArray, "; ");
-	EndIf;
-EndProcedure
 
 Procedure FillUnfilledPayerInRow(Object, Item, Payer) Export
 	If Not ValueIsFilled(Item.CurrentData.Payer) Then

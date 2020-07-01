@@ -13,18 +13,18 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		EndIf;
 	EndIf;
 	
-	Query = New Query();
-	Query.Text =
-		"SELECT TOP 50
-		|	Table.Ref
-		|FROM
-		|	Catalog.Units AS Table
-		|WHERE
-		|	(Table.Item = &Item
+	Filter = "
+		|	AND (Table.Item = &Item
 		|	OR Table.Item = VALUE(Catalog.Items.EmptyRef))
-		|	AND Table.Description_en LIKE &SearchString";
+		|";
+
+	Settings = New Structure;
+	Settings.Insert("Name", "Catalog.Units");
+	Settings.Insert("Filter", Filter);
 	
-	Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text);
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
+
+	Query = New Query(QueryBuilderText);
 	Query.SetParameter("Item", FilterItem);
 	Query.SetParameter("SearchString", "%" + Parameters.SearchString + "%");
 	

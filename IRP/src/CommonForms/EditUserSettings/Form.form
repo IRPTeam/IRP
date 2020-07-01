@@ -77,9 +77,6 @@
         <paths xsi:type="form:DataPath">
           <segments>MetadataTree.Use</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>MetadataTree.Use</segments>
-        </paths>
       </dataPath>
       <titleLocation>None</titleLocation>
       <extendedTooltip>
@@ -126,9 +123,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>MetadataTree.PictureIndex</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>MetadataTree.PictureIndex</segments>
           </paths>
@@ -187,9 +181,6 @@
           <paths xsi:type="form:DataPath">
             <segments>MetadataTree.GroupName</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>MetadataTree.GroupName</segments>
-          </paths>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
@@ -241,9 +232,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>MetadataTree.Synonym</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>MetadataTree.Synonym</segments>
           </paths>
@@ -327,9 +315,6 @@
         <paths xsi:type="form:DataPath">
           <segments>MetadataTree.Value</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>MetadataTree.Value</segments>
-        </paths>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -388,9 +373,6 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>MetadataTree.ValueFromGroup</segments>
-        </paths>
         <paths xsi:type="form:DataPath">
           <segments>MetadataTree.ValueFromGroup</segments>
         </paths>
@@ -882,10 +864,10 @@
       </title>
       <id>8</id>
       <valueType>
+        <types>Boolean</types>
         <types>String</types>
         <types>Date</types>
         <types>Number</types>
-        <types>Boolean</types>
         <types>AnyRef</types>
         <numberQualifiers>
           <precision>12</precision>
@@ -979,10 +961,10 @@
       </title>
       <id>13</id>
       <valueType>
-        <types>String</types>
-        <types>Number</types>
-        <types>Date</types>
         <types>Boolean</types>
+        <types>String</types>
+        <types>Date</types>
+        <types>Number</types>
         <types>AnyRef</types>
         <numberQualifiers>
           <precision>12</precision>

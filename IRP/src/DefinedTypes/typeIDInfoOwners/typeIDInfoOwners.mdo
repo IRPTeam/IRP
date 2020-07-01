@@ -8,10 +8,9 @@
     <key>en</key>
     <value>Type ID Info owners</value>
   </synonym>
-  <comment></comment>
   <type>
-    <types>CatalogRef.Partners</types>
     <types>CatalogRef.Companies</types>
+    <types>CatalogRef.Partners</types>
     <types>CatalogRef.Stores</types>
   </type>
 </mdclass:DefinedType>

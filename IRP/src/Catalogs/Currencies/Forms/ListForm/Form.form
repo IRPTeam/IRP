@@ -59,8 +59,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.NumericCode</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.NumericCode</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>NumericCodeExtendedTooltip</name>
@@ -109,8 +111,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Code</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Code</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>CodeExtendedTooltip</name>
@@ -159,8 +163,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Description</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -386,7 +392,7 @@
     </extInfo>
   </items>
   <autoCommandBar>
-    <name></name>
+    <name>FormCommandBar</name>
     <id>-1</id>
     <items xsi:type="form:Button">
       <name>FormIntegrations</name>

@@ -40,8 +40,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.DeferredCalculation</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.DeferredCalculation</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>DeferredCalculationExtendedTooltip</name>
@@ -83,8 +85,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Currency</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Currency</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>CurrencyExtendedTooltip</name>
@@ -133,8 +137,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Source</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Source</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>SourceExtendedTooltip</name>
@@ -191,8 +197,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Type</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Type</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>TypeExtendedTooltip</name>

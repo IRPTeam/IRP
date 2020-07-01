@@ -1234,21 +1234,22 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined) Export
-	TransferParameters = New Structure;
-	If DocumentClientModule = Undefined Then
-		TransferParameters.Insert("ClientModule", ThisObject);
-	Else
-		TransferParameters.Insert("ClientModule", DocumentClientModule);
-	EndIf;
-	If PriceType <> Undefined Then
-		TransferParameters.Insert("PriceType", PriceType);
-		If Object.Ref = Undefined Then
-			TransferParameters.Insert("PricePeriod", CurrentDate());
-		Else
-			TransferParameters.Insert("PricePeriod", Object.Date);
-		EndIf;
-	EndIf;
-	BarcodeClient.SearchByBarcode(Command, Object, Form, ThisObject, TransferParameters);
+  TransferParameters = New Structure;
+  If DocumentClientModule = Undefined Then
+    ClientModule = ThisObject;
+  Else
+    ClientModule = DocumentClientModule;
+  EndIf;
+  
+  If PriceType <> Undefined Then
+    TransferParameters.Insert("PriceType", PriceType);
+    If Object.Ref = Undefined Then
+      TransferParameters.Insert("PricePeriod", CurrentDate());
+    Else
+      TransferParameters.Insert("PricePeriod", Object.Date);
+    EndIf;
+  EndIf;
+  BarcodeClient.SearchByBarcode(Command, Object, Form, ClientModule, TransferParameters);
 EndProcedure
 
 Procedure SearchByBarcodeEnd(BarcodeItems, Parameters) Export

@@ -3,7 +3,7 @@
 @Positive
 
 
-Функционал: в форме выбора товара не отображаются помеченные на удаление объекты
+Функционал: check that the item marked for deletion is not displayed
 
 
 Как разработчик
@@ -15,7 +15,7 @@
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _090201 проверка не отображения помеченной на удаление номенклатуры в документе PurchaseOrder
+Сценарий: _090201 check that the items marked for deletion is not displayed in the PurchaseOrder
 	И я временно помечаю на удаление Item Box
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 		И в таблице "List" я перехожу к строке:
@@ -33,7 +33,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090202 проверка не отображения помеченной на удаление номенклатуры в документе Purchase invoice
+Сценарий: _090202 check that the items marked for deletion is not displayed in the Purchase invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку с именем 'Add'
@@ -43,7 +43,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090203 проверка не отображения помеченной на удаление номенклатуры в документе Sales order
+Сценарий: _090203 check that the items marked for deletion is not displayed in the Sales order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -53,7 +53,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090204 проверка не отображения помеченной на удаление номенклатуры в документе Sales invoice
+Сценарий: _090204 check that the items marked for deletion is not displayed in the Sales invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -64,7 +64,7 @@
 	И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _090205 проверка не отображения помеченной на удаление номенклатуры в документе Inventory transfer
+Сценарий: _090205 check that the items marked for deletion is not displayed in the Inventory transfer
 	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку с именем 'Add'
@@ -74,7 +74,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090206 проверка не отображения помеченной на удаление номенклатуры в документе Inventory transfer order
+Сценарий: _090206 check that the items marked for deletion is not displayed in the Inventory transfer order
 	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку "Add"
@@ -84,7 +84,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090207 проверка не отображения помеченной на удаление номенклатуры в документе Internal Supply Request
+Сценарий: _090207 check that the items marked for deletion is not displayed in the Internal Supply Request
 	И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку "Add"
@@ -94,7 +94,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090208 проверка не отображения помеченной на удаление номенклатуры в документе Purchase return order
+Сценарий: _090208 check that the items marked for deletion is not displayed in the Purchase return order
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку с именем 'Add'
@@ -104,7 +104,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090209 проверка не отображения помеченной на удаление номенклатуры в документе Purchase return
+Сценарий: _090209 check that the items marked for deletion is not displayed in the Purchase return
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку с именем 'Add'
@@ -114,7 +114,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090210 проверка не отображения помеченной на удаление номенклатуры в документе Sales Return
+Сценарий: _090210 check that the items marked for deletion is not displayed in the Sales Return
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку с именем 'Add'
@@ -124,7 +124,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090211 проверка не отображения помеченной на удаление номенклатуры в документе Sales return order
+Сценарий: _090211 check that the items marked for deletion is not displayed in the Sales return order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -134,7 +134,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090212 проверка не отображения помеченной на удаление номенклатуры в документе GoodsReceipt
+Сценарий: _090212 check that the items marked for deletion is not displayed in the GoodsReceipt
 	И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку 'Add'
@@ -144,7 +144,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090213 проверка не отображения помеченной на удаление номенклатуры в документе Shipment Confirmation
+Сценарий: _090213 check that the items marked for deletion is not displayed in the Shipment Confirmation
 	И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку с именем 'Add'
@@ -154,29 +154,8 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090214 проверка не отображения помеченной на удаление номенклатуры в документе Boxing
-	И я открываю навигационную ссылку 'e1cib/list/Document.Boxing'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я перехожу к закладке "Item list"
-	И в таблице "ItemList" я нажимаю на кнопку 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
-		| Description       |
-		| Box               |
-	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090215 проверка не отображения помеченной на удаление номенклатуры в документе Unboxing
-	И я открываю навигационную ссылку 'e1cib/list/Document.Unboxing'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я перехожу к закладке "Item list"
-	И в таблице "ItemList" я нажимаю на кнопку 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
-		| Description       |
-		| Box               |
-	И Я закрыл все окна клиентского приложения
-
-Сценарий: _090216 проверка не отображения помеченной на удаление номенклатуры в документе Bundling
+Сценарий: _090216 check that the items marked for deletion is not displayed in the Bundling
 	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Item bundle"
@@ -193,7 +172,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090217 проверка не отображения помеченной на удаление номенклатуры в документе Unbundling
+Сценарий: _090217 check that the items marked for deletion is not displayed in the Unbundling
 	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Item bundle"
@@ -210,7 +189,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090218 проверка не отображения помеченной на удаление номенклатуры в документе PhysicalInventory
+Сценарий: _090218 check that the items marked for deletion is not displayed in the PhysicalInventory
 	И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку "Add"
@@ -220,7 +199,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090219 проверка не отображения помеченной на удаление номенклатуры в документе StockAdjustmentAsSurplus
+Сценарий: _090219 check that the items marked for deletion is not displayed in the StockAdjustmentAsSurplus
 	И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку "Add"
@@ -230,7 +209,7 @@
 		| Box               |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090220 проверка не отображения помеченной на удаление номенклатуры в документе StockAdjustmentAsWriteOff
+Сценарий: _090220 check that the items marked for deletion is not displayed in the StockAdjustmentAsWriteOff
 	И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку "Add"

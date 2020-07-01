@@ -9,7 +9,6 @@
     <key>en</key>
     <value>Related documents</value>
   </synonym>
-  <comment></comment>
   <type>
     <types>DocumentRef</types>
   </type>
@@ -63,43 +62,42 @@
       <key>en</key>
       <value>Related documents</value>
     </synonym>
-    <comment></comment>
     <group>CommandGroup.Service</group>
     <commandParameterType>
-      <types>DocumentRef.BankPayment</types>
-      <types>DocumentRef.BankReceipt</types>
-      <types>DocumentRef.Bundling</types>
-      <types>DocumentRef.CashInPOS</types>
-      <types>DocumentRef.CashPayment</types>
-      <types>DocumentRef.CashReceipt</types>
       <types>DocumentRef.CashTransferOrder</types>
-      <types>DocumentRef.InvoiceMatch</types>
-      <types>DocumentRef.GoodsReceipt</types>
-      <types>DocumentRef.InternalSupplyRequest</types>
-      <types>DocumentRef.InventoryTransfer</types>
-      <types>DocumentRef.InventoryTransferOrder</types>
-      <types>DocumentRef.ItemsFlow</types>
-      <types>DocumentRef.PriceList</types>
+      <types>DocumentRef.IncomingPaymentOrder</types>
+      <types>DocumentRef.SalesReturnOrder</types>
+      <types>DocumentRef.CashPayment</types>
       <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.CashInPOS</types>
+      <types>DocumentRef.InvoiceMatch</types>
+      <types>DocumentRef.BankReceipt</types>
       <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.ChequeBondTransaction</types>
       <types>DocumentRef.PurchaseReturnOrder</types>
-      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.Labeling</types>
+      <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.ShipmentConfirmation</types>
+      <types>DocumentRef.InternalSupplyRequest</types>
+      <types>DocumentRef.Unbundling</types>
+      <types>DocumentRef.PriceList</types>
+      <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.CashReceipt</types>
+      <types>DocumentRef.OutgoingPaymentOrder</types>
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.SalesReturnOrder</types>
       <types>DocumentRef.SetupOfSpecialOffers</types>
-      <types>DocumentRef.ShipmentConfirmation</types>
-      <types>DocumentRef.Unbundling</types>
-      <types>DocumentRef.ZReport</types>
-      <types>DocumentRef.IncomingPaymentOrder</types>
-      <types>DocumentRef.OutgoingPaymentOrder</types>
-      <types>DocumentRef.Labeling</types>
-      <types>DocumentRef.CreditDebitNote</types>
-      <types>DocumentRef.ChequeBondTransaction</types>
-      <types>DocumentRef.PhysicalInventory</types>
       <types>DocumentRef.StockAdjustmentAsSurplus</types>
       <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+      <types>DocumentRef.Bundling</types>
+      <types>DocumentRef.ItemsFlow</types>
+      <types>DocumentRef.ZReport</types>
+      <types>DocumentRef.InventoryTransferOrder</types>
+      <types>DocumentRef.InventoryTransfer</types>
+      <types>DocumentRef.GoodsReceipt</types>
+      <types>DocumentRef.PhysicalInventory</types>
+      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.CreditDebitNote</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

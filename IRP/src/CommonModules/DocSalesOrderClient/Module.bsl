@@ -226,8 +226,8 @@ EndProcedure
 
 #Region ItemPartner
 
-Procedure PartnerOnChange(Object, Form, Item) Export
-	DocumentsClient.PartnerOnChange(Object, Form, ThisObject, Item);
+Procedure PartnerOnChange(Object, Form, Item, Settings) Export
+	DocumentsClient.PartnerOnChange(Object, Form, ThisObject, Item, Settings);
 EndProcedure
 
 Function PartnerSettings() Export
@@ -539,7 +539,7 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 EndProcedure
 
 Procedure SearchByBarcode(Command, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject, Form.CurrentPriceType);
+	DocumentsClient.SearchByBarcode(Command, Object, Form, , Form.CurrentPriceType);
 EndProcedure
 
 #EndRegion

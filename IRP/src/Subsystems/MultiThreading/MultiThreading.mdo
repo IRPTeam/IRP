@@ -5,6 +5,5 @@
     <key>en</key>
     <value>Multi threading</value>
   </synonym>
-  <comment></comment>
   <includeHelpInContents>true</includeHelpInContents>
 </mdclass:Subsystem>

@@ -221,7 +221,7 @@
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '64,98'      | '1%'       | '335,02'     | '400,00'       |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | '2,000' | '227,42'     | '1%'       | '1 172,58'   | '1 400,00'     |
-		И     таблица "TaxTree" стала равной:
+		И     таблица "TaxTree" содержит строки:
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '274,58' | '274,58'        |
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '61,02'         |
@@ -316,7 +316,7 @@
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | 'Stock'              | '1,000' | '76,00'      | '1%'       | 'pcs'  | '400,00'     | '476,00'       |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | 'Stock'              | '2,000' | '266,00'     | '1%'       | 'pcs'  | '1 400,00'   | '1 666,00'     |
-		И     таблица "TaxTree" стала равной:
+		И     таблица "TaxTree" содержит строки:
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '324,00' | '324,00'        |
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '72,00'         |
@@ -406,7 +406,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount'  | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | '152,00'      | '1%'       | 'pcs'   | '800,00'      | '952,00'     |
-		И     таблица "TaxTree" стала равной:
+		И     таблица "TaxTree" содержит строки:
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '144,00' | '144,00'        |
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '144,00' | '144,00'        |
@@ -430,7 +430,7 @@
 		И в таблице "ItemList" я активизирую поле "Price"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Price' я ввожу текст '510,00'
-		И     таблица "TaxTree" стала равной:
+		И     таблица "TaxTree" содержит строки:
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '183,60' | '183,60'        |
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '183,60' | '183,60'        |
@@ -459,7 +459,7 @@
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '36/Yellow' |
 			И в таблице "List" я выбираю текущую строку
-			И     таблица "TaxTree" стала равной:
+			И     таблица "TaxTree" содержит строки:
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '144,00' | '144,00'        |
 			| 'VAT'      | '18%'      | 'Trousers' | '36/Yellow' | ''          | '144,00' | '144,00'        |

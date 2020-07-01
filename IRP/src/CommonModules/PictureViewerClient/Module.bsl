@@ -86,6 +86,10 @@ Function UploadPicture(File, Volume) Export
 		Return PictureViewerServer.GetFileInfo(FileRef);
 	EndIf;
 	RequestBody = GetFromTempStorage(File.Location);
+	
+	PictureScaleSize = 200;
+	FileInfo.Preview = PictureViewerServer.ScalePicture(RequestBody, PictureScaleSize);
+	
 	IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture();
 	
 	FileID = String(New UUID());
@@ -132,84 +136,7 @@ Function UploadPicture(File, Volume) Export
 			FileInfo.Success = False;
 		EndIf;	
 	EndIf;
-
-	
-	// Create preview
-	If IntegrationSettings.UsePreview1 Then
-		FileInfo.Preview1URI =
-			UploadPreview("prev1", FileInfo
-				, IntegrationSettings.Preview1POSTIntegrationSettings
-				, IntegrationSettings.Preview1Sizepx
-				, RequestBody);
-	EndIf;
 	Return FileInfo;
-EndFunction
-
-Function CreatePreview1(Object) Export
-	FileInfo = PictureViewerServer.GetFileInfo(Object.Ref);
-	IntegrationSettings = GetIntegrationSettingsPicture(Object.Volume);
-	
-	ConnectionSettings = IntegrationClientServer.ConnectionSetting(
-			ServiceSystemServer.GetObjectAttribute(IntegrationSettings.GETIntegrationSettings, "UniqueID"));
-	
-	If Not ConnectionSettings.Success Then
-		Raise ConnectionSettings.Message;
-	EndIf;
-	ConnectionSettings.Value.QueryType = "GET";
-	ResourceParameters = New Structure();
-	ResourceParameters.Insert("filename", FileInfo.URI);
-	RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters);
-	
-	If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
-		FileInfo.Preview1URI =
-			UploadPreview("prev1", FileInfo
-				, IntegrationSettings.Preview1POSTIntegrationSettings
-				, IntegrationSettings.Preview1Sizepx
-				, RequestResult.ResponseBody);
-		If FileInfo.Success Then
-			Return FileInfo;
-		EndIf;
-	Else
-		Raise RequestResult.Message;
-	EndIf;
-EndFunction
-
-Function UploadPreview(PreviewPrefix, FileInfo, POSTIntegrationSettings, Sizepx, RequestBody) Export
-	
-	ConnectionSettings = IntegrationClientServer.ConnectionSetting(
-			ServiceSystemServer.GetObjectAttribute(POSTIntegrationSettings, "UniqueID"));
-	
-	If Not ConnectionSettings.Success Then
-		Raise ConnectionSettings.Message;
-	EndIf;
-	FileName = "" + PreviewPrefix + FileInfo.FileID + "." + FileInfo.Extension;
-	If ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
-		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileName, RequestBody);
-		Return FileName;
-	ElsIf ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.GoogleDrive") Then
-
-		FileName = GoogleDriveServer.SendToDrive(ConnectionSettings.Value.IntegrationSettingsRef, FileName, RequestBody);	
-		Return FileName;
-	Else
-		ConnectionSettings.Value.QueryType = "POST";
-		ResourceParameters = New Structure();
-		ResourceParameters.Insert("filename", FileName);
-		
-		RequestParameters = New Structure();
-		RequestParameters.Insert("sizepx", Sizepx);
-		
-		RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value
-				, ResourceParameters
-				, RequestParameters
-				, RequestBody);
-		
-		If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
-			DeserializeResponse = CommonFunctionsServer.DeserializeJSON(RequestResult.ResponseBody);
-			Return DeserializeResponse.Data.URI;
-		Else
-			Return "";
-		EndIf;
-	EndIf;
 EndFunction
 
 Function GetMainPictureAndPutToTempStorage(FileRef, UUID) Export
@@ -219,14 +146,6 @@ Function GetMainPictureAndPutToTempStorage(FileRef, UUID) Export
 		, FileInfo.URI
 		, IntegrationSettings.GETIntegrationSettings);
 	
-EndFunction
-
-Function GetPicturePreview1AndPutToTempStorage(FileRef, UUID) Export
-	FileInfo = PictureViewerServer.GetFileInfo(FileRef);
-	IntegrationSettings = GetIntegrationSettingsPicture(ServiceSystemServer.GetObjectAttribute(FileRef, "Volume"));
-	Return GetPictureAndPutToTempStorage(UUID
-		, FileInfo.Preview1URI
-		, IntegrationSettings.Preview1GETIntegrationSettings);
 EndFunction
 
 Function GetPictureAndPutToTempStorage(UUID, URI, GETIntegrationSettings) Export
@@ -310,11 +229,13 @@ Function HTMLEvent(Form, Object, Val Data, AddInfo = Undefined) Export
 	If Data.value = "add_picture" Then
 		Upload(Form, Object, PictureViewerServer.GetIntegrationSettingsPicture().DefaultPictureStorageVolume);
 	ElsIf Data.value = "addImagesFromGallery" Then
-		OpenForm("CommonForm.PictureGalleryForm");
+		NotifyOnClose = New NotifyDescription("AddPictureFromGallery", ThisObject, New Structure("Object, Form", Object, Form));
+		OpenForm("CommonForm.PictureGalleryForm", , ThisObject, , , , NotifyOnClose);
 	ElsIf Data.value = "update_slider" Then	
 		Notify("UpdateObjectPictures_UpdateAll", , Form.UUID);
 	ElsIf Data.value = "remove_picture" Then
-		PictureViewerServer.UnlinkFileFromObject(PictureViewerServer.GetFileRefByFileID(Data.ID), Object.Ref);
+		FileRef = PictureViewerServer.GetFileRefByFileID(Data.ID);
+		PictureViewerServer.UnlinkFileFromObject(FileRef.Ref, Object.Ref);
 		Notify("UpdateObjectPictures_Delete", Data.ID, Form.UUID);
 	EndIf;
 EndFunction
@@ -332,6 +253,25 @@ Procedure HTMLEventAction(Val EventName, Val Parameter, Val Source, Form) Export
 		HTMLWindow.removeCurrentSlide(Parameter);		
 	ElsIf EventName = "UpdateObjectPictures_UpdateAll" AND Source = Form.UUID Then
 		UpdateHTMLPicture(Form.Items.PictureViewHTML, Form);
+	EndIf;
+EndProcedure
+
+Procedure AddPictureFromGallery(ClosureResult, AdditionalParameters) Export
+	
+	If Not ValueIsFilled(ClosureResult) Then
+		Return;
+	EndIf;
+	
+	isAddedNew = False;
+	For Each FileRef In ClosureResult Do
+		If Not PictureViewerServer.IsFileRefBelongToOwner(FileRef, AdditionalParameters.Object.Ref) Then
+			isAddedNew = True;
+			PictureViewerServer.LinkFileToObject(FileRef, AdditionalParameters.Object.Ref);
+		EndIf;
+	EndDo;
+	
+	If isAddedNew Then
+		Notify("UpdateObjectPictures_UpdateAll", , AdditionalParameters.Form.UUID);
 	EndIf;
 EndProcedure
 

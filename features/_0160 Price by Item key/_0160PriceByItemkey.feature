@@ -4,21 +4,22 @@
 
 
 
-Функционал: установка цен номенклатуры по item key
+Функционал: item key pricing
 
-Как разработчик
-Я хочу создать документ прайс лист
-Чтобы внести цены
+As commercial director 
+I want to fill in the prices
+To sell and purchase goods and services
+
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _016001 внесение базовой цены с НДС
-	* Открытие формы прайс листа
+Сценарий: _016001 base price fill (incl. VAT)
+	* Opening  price list
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов прайс-листа по item key
+	* Filling in the details of the price list by item key
 		И я меняю значение переключателя 'Set price' на 'By Item keys'
 		И я перехожу к закладке "Other"
 		И в поле 'Description' я ввожу текст 'Basic price'
@@ -30,7 +31,7 @@
 		Когда изменяю номер прайс-листа
 		И в поле 'Number' я ввожу текст '100'
 		И в поле 'Date' я ввожу текст '01.11.2018  12:32:21'
-	* Заполнение цен по item key по виду цен Basic Price Types
+	* Filling in prices by item key by price type Basic Price Types
 		И я перехожу к закладке "Item keys"
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
@@ -271,20 +272,20 @@
 		И в таблице "ItemKeyList" я активизирую поле "Price"
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '3 000,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
-	* Проведение документа
+	* Posting document
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
-	* Проверка сохранения документа
+	* Checking document saving
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		Тогда таблица "List" содержит строки:
 		| 'Number' | 'Price list type'     | 'Price type'                 | 'Description' | 'Reference'       |
 		| '100'    | 'Price by item keys'  | 'Basic Price Types'          | 'Basic price' | 'Price list 100*' |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: проверка проводок документа прайс лист по item key по регистру PricesByItemKeys
-	* Открытие регистра PricesByItemKeys
+Сценарий: _016005 check postings of the price list document by item key in register Prices by item keys
+	* Opening register Prices by item keys
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PricesByItemKeys'
-	* Проверка движений документа Price list 100
+	* Checking Price list 100 postings 
 		Тогда таблица "List" содержит строки:
 		| 'Price'    | 'Recorder'                                 | 'Price type'        | 'Item key'  |
 		| '550,00'   | 'Price list 100 dated 01.11.2018 12:32:21' | 'Basic Price Types' | 'S/Yellow'  |
@@ -306,15 +307,11 @@
 		| '5 000,00' | 'Price list 100 dated 01.11.2018 12:32:21' | 'Basic Price Types' | 'Boots/S-8' |
 
 
-
-
-
-
-Сценарий: _016002 внесение цены без НДС (базовая + скидочная)
-	* Открытие формы прайс листа
+Сценарий: _016002 base price fill and special price fill (not incl. VAT)
+	* Opening  price list
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов прайс-листа по item key Basic Price without VAT
+	* Filling in the details of the price list by item key Basic Price without VAT
 		И я меняю значение переключателя 'Set price' на 'By Item keys'
 		И я перехожу к закладке "Other"
 		И в поле 'Description' я ввожу текст 'Basic price'
@@ -327,7 +324,7 @@
 		И в поле 'Number' я ввожу текст '103'
 		И в поле 'Date' я ввожу текст '01.11.2018  12:32:21'
 		И я перехожу к закладке "Item keys"
-	* Заполнение цен по item key по виду цен Basic Price without VAT
+	* Filling in prices by item key by price type Basic Price without VAT
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я выбираю текущую строку
@@ -534,7 +531,7 @@
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов прайс-листа по item key Discount 1 TRY without VAT
+	* Filling in the details of the price list by item key Discount 1 TRY without VAT
 		И я меняю значение переключателя 'Set price' на 'By Item keys'
 		И я перехожу к закладке "Other"
 		И в поле 'Description' я ввожу текст 'Basic price'
@@ -546,7 +543,7 @@
 		Когда изменяю номер прайс-листа
 		И в поле 'Number' я ввожу текст '104'
 		И в поле 'Date' я ввожу текст '01.11.2018  12:32:21'
-	* Заполнение цен по item key по виду цен Discount 1 TRY without VAT
+	* Filling in prices by item key by price type Discount 1 TRY without VAT
 		И я перехожу к закладке "Item keys"
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
@@ -707,7 +704,7 @@
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов прайс-листа по item key Discount 2 TRY without VAT
+	* Filling in the details of the price list by item key Discount 2 TRY without VAT
 		И я меняю значение переключателя 'Set price' на 'By Item keys'
 		И я перехожу к закладке "Other"
 		И в поле 'Description' я ввожу текст 'Basic price'
@@ -719,7 +716,7 @@
 		Когда изменяю номер прайс-листа
 		И в поле 'Number' я ввожу текст '105'
 		И в поле 'Date' я ввожу текст '01.11.2018  12:32:21'
-	* Заполнение цен по item key по виду цен Discount 2 TRY without VAT
+	* Filling in prices by item key by price type Discount 2 TRY without VAT
 		И я перехожу к закладке "Item keys"
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
@@ -879,7 +876,7 @@
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
-	* Проверка сохранения документов
+	* Save verification
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		Тогда таблица "List" содержит строки:
 		| 'Number' | 'Price list type'     | 'Price type'                 | 'Reference'       |
@@ -888,13 +885,11 @@
 		| '105'    | 'Price by item keys'  | 'Discount 2 TRY without VAT' | 'Price list 105*' |
 
 
-
-
-Сценарий: _016003 внесение цен - скидочная цена Discount Price TRY 1 и  Discount Price TRY 2 (через прайс)
-	* Открытие формы прайс листа
+Сценарий: _016003 Discount Price TRY 1 fill and Discount Price TRY 2 fill
+	* Opening  price list
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов прайс-листа по item key Discount Price TRY 1
+	* Filling in the details of the price list by item key Discount Price TRY 1
 		И я меняю значение переключателя 'Set price' на 'By Item keys'
 		И я перехожу к закладке "Other"
 		И в поле 'Description' я ввожу текст 'Basic price'
@@ -906,7 +901,7 @@
 		Когда изменяю номер прайс-листа
 		И в поле 'Number' я ввожу текст '101'
 		И в поле 'Date' я ввожу текст '03.11.2018  10:24:21'
-	* Заполнение цен по item key по виду цен Discount Price TRY 1
+	* Filling in prices by item key by price type Discount Price TRY 1
 		И я перехожу к закладке "Item keys"
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
@@ -914,9 +909,6 @@
 		И в таблице "ItemKeyList" я активизирую поле "Item key"
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '522,50'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -931,9 +923,6 @@
 			| 'Item key' |
 			| 'XS/Blue'  |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '494,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -945,9 +934,6 @@
 			| 'Item key' |
 			| 'M/White'  |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '494,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -959,9 +945,6 @@
 			| 'Item key' |
 			| 'L/Green'  |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '522,50'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -976,9 +959,6 @@
 			| 'Item key' |
 			| 'XL/Green' |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '522,50'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -990,9 +970,6 @@
 		И в таблице "ItemKeyList" я активизирую поле "Item key"
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '320,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1007,9 +984,6 @@
 			| 'Item key'  |
 			| '38/Yellow' |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '320,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1022,9 +996,6 @@
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item key"
 		Тогда открылось окно 'Item keys'
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Unit"
-		# И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemKeyList" я активизирую поле "Price"
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '280,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
@@ -1040,9 +1011,6 @@
 			| 'Item key' |
 			| '38/Black' |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '280,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1060,9 +1028,6 @@
 			| 'Item key' |
 			| '36/18SD'  |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Unit"
-		# И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemKeyList" я активизирую поле "Price"
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '600,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
@@ -1078,9 +1043,6 @@
 			| 'Item key' |
 			| '37/18SD'  |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '600,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1095,14 +1057,11 @@
 			| 'Item key' |
 			| '38/18SD'  |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '250,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
-	* Заполнение реквизитов прайс-листа по item key Discount Price TRY 2
+	* Filling in the details of the price list by item key Discount Price TRY 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я заполняю данные прайс листа по item key
 			И я меняю значение переключателя 'Set price' на 'By Item keys'
@@ -1116,7 +1075,7 @@
 			Когда изменяю номер прайс-листа
 			И в поле 'Number' я ввожу текст '102'
 			И в поле 'Date' я ввожу текст '05.11.2018  10:24:21'
-	* Заполнение цен по item key по виду цен Discount Price TRY 2
+	* Filling in prices by item key by price type Discount Price TRY 2
 		И я перехожу к закладке "Item keys"
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
@@ -1124,9 +1083,6 @@
 		И в таблице "ItemKeyList" я активизирую поле "Item key"
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '411,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1141,9 +1097,6 @@
 			| 'Item key' |
 			| 'XS/Blue'  |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '389,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1155,9 +1108,6 @@
 			| 'Item key' |
 			| 'M/White'  |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '389,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1169,9 +1119,6 @@
 			| 'Item key' |
 			| 'L/Green'  |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '413,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1186,9 +1133,6 @@
 			| 'Item key' |
 			| 'XL/Green' |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '413,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1200,9 +1144,6 @@
 		И в таблице "ItemKeyList" я активизирую поле "Item key"
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '283,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1217,9 +1158,6 @@
 			| 'Item key'  |
 			| '38/Yellow' |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '283,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1232,9 +1170,6 @@
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item key"
 		Тогда открылось окно 'Item keys'
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Unit"
-		# И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemKeyList" я активизирую поле "Price"
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '244,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
@@ -1250,9 +1185,6 @@
 			| 'Item key' |
 			| '38/Black' |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '244,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1270,9 +1202,6 @@
 			| 'Item key' |
 			| '36/18SD'  |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Unit"
-		# И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemKeyList" я активизирую поле "Price"
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '550,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
@@ -1288,9 +1217,6 @@
 			| 'Item key' |
 			| '37/18SD'  |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '550,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
@@ -1305,22 +1231,19 @@
 			| 'Item key' |
 			| '38/18SD'  |
 		И в таблице "List" я выбираю текущую строку
-		# И в таблице "ItemKeyList" я активизирую поле "Unit"
-		# Когда выбираю единицу измерения pcs
-		# И я перехожу к следующему реквизиту
 		И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '240,00'
 		И в таблице "ItemKeyList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10	
-	* Проверка сохранения документов
+	* Checking document saving
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		Тогда таблица "List" содержит строки:
 		| 'Number' | 'Price list type'     | 'Price type'                 | 'Reference'       |
 		| '101'    | 'Price by item keys'  | 'Discount Price TRY 1'       | 'Price list 101*' |
 		| '102'    | 'Price by item keys'  | 'Discount Price TRY 2'       | 'Price list 102*' |
 
-Сценарий: _016010 проверка расчета зависимых цен
-	* Добавление обработки для расчета цены
+Сценарий: _016010 check dependent prices calculation
+	* Adding external data processing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\SalesPriceCalculation.epf"
@@ -1333,7 +1256,7 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И я жду закрытия окна 'External data proc (create)' в течение 10 секунд
-	* Создание вида цены который будет использовать внешнюю обработку
+	* Creating price type that will use external processing
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PriceTypes"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -1345,7 +1268,7 @@
 			| Code |
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
-	* Добавление внешней обработки в вид цены и заполнение настроек
+	* Adding external processing to the price type and filling in the settings
 		И я нажимаю кнопку выбора у поля "External data proc"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'         |
@@ -1364,11 +1287,11 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И я жду закрытия окна 'Dependent Price (Price type) *' в течение 20 секунд
-	* Проверка расчета зависимой цены в прайс листе
-		* Открытие формы прайс листа
+	* Checking dependent prices calculation
+		* Opening price list
 			И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение реквизитов прайс-листа по item key Discount Price TRY 1
+		* Filling in the details of the price list by item key Discount Price TRY 1
 			И я меняю значение переключателя 'Set price' на 'By Item keys'
 			И я перехожу к закладке "Other"
 			И в поле 'Description' я ввожу текст 'Basic price'
@@ -1377,13 +1300,14 @@
 					| 'Description' |
 					| 'Dependent Price'  |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение прайс-листа с помощью расчета цен
+		* Filling in price list
 			И я нажимаю на кнопку 'Fill by rules'
+			И Пауза 2
 			И я меняю значение переключателя 'PriceListType' на 'By Item keys'
 			И в таблице "PriceTypes" я изменяю флаг 'Use'
 			И в таблице "PriceTypes" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Ok'
-		* Проверка заполнения 
+		* Check filling in
 			И     таблица "ItemKeyList" содержит строки:
 			| 'Item'       | 'Price'    | 'Item key'  |
 			| 'Dress'      | '605,00'   | 'S/Yellow'  |

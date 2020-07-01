@@ -156,9 +156,6 @@
         <paths xsi:type="form:DataPath">
           <segments>Object.IDInfoTypes.IDInfoType</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>Object.IDInfoTypes.IDInfoType</segments>
-        </paths>
       </dataPath>
       <extendedTooltip>
         <name>IDInfoTypesIDInfoTypeExtendedTooltip</name>

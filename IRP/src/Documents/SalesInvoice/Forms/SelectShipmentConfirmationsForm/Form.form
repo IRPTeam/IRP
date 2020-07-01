@@ -72,9 +72,6 @@
           <paths xsi:type="form:DataPath">
             <segments>ShipmentConfirmationsTree.Order</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>ShipmentConfirmationsTree.Order</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>ShipmentConfirmationsTreeOrderExtendedTooltip</name>
@@ -124,9 +121,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>ShipmentConfirmationsTree.Item</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>ShipmentConfirmationsTree.Item</segments>
           </paths>
@@ -182,9 +176,6 @@
           <paths xsi:type="form:DataPath">
             <segments>ShipmentConfirmationsTree.ItemKey</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>ShipmentConfirmationsTree.ItemKey</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>ShipmentConfirmationsTreeItemKeyExtendedTooltip</name>
@@ -237,9 +228,6 @@
           <paths xsi:type="form:DataPath">
             <segments>ShipmentConfirmationsTree.Unit</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>ShipmentConfirmationsTree.Unit</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>ShipmentConfirmationsTreeUnitExtendedTooltip</name>
@@ -289,9 +277,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>ShipmentConfirmationsTree.Quantity</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>ShipmentConfirmationsTree.Quantity</segments>
           </paths>
@@ -782,8 +767,8 @@
       </title>
       <id>3</id>
       <valueType>
-        <types>DocumentRef.SalesOrder</types>
         <types>DocumentRef.ShipmentConfirmation</types>
+        <types>DocumentRef.SalesOrder</types>
       </valueType>
       <view>
         <common>true</common>

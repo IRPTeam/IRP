@@ -8,11 +8,10 @@
     <key>en</key>
     <value>Type add property owners</value>
   </synonym>
-  <comment></comment>
   <type>
     <types>CatalogRef.Items</types>
+    <types>CatalogRef.Specifications</types>
     <types>CatalogRef.ItemKeys</types>
     <types>CatalogRef.ItemTypes</types>
-    <types>CatalogRef.Specifications</types>
   </type>
 </mdclass:DefinedType>

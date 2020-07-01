@@ -299,8 +299,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Type</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Type</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>TypeExtendedTooltip</name>
@@ -362,8 +364,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.DocumentType</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.DocumentType</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>DocumentTypeExtendedTooltip</name>

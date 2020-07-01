@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Edit add properties</value>
   </synonym>
-  <comment></comment>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

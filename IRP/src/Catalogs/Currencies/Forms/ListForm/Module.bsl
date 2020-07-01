@@ -37,12 +37,3 @@ EndFunction
 Procedure CallMetodAddDataProc(Info)
 	AddDataProcServer.CallMetodAddDataProc(Info);
 EndProcedure
-
-&AtClient
-Procedure CreateFromClassifier(Command)
-	FormParameters = New Structure("MetadataName", "Catalog.Currencies");
-	OpenForm("CommonForm.DataClassifier", 
-				FormParameters, 
-				ThisObject, , , , ,
-				FormWindowOpeningMode.LockOwnerWindow);
-EndProcedure

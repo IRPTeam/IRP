@@ -103,17 +103,13 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	If Form.InputType = "Item" Then
-		DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
-	EndIf;
+	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	If Form.InputType = "Item" Then
-		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-	EndIf;
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
 Function ItemListItemSettings(Form) Export
@@ -471,7 +467,7 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 EndProcedure
 
 Procedure SearchByBarcode(Command, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject, Form.CurrentPriceType);
+	DocumentsClient.SearchByBarcode(Command, Object, Form, , Form.CurrentPriceType);
 EndProcedure
 
 #EndRegion

@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Open mobile form</value>
   </synonym>
-  <comment></comment>
   <source>
     <types>DocumentManager</types>
   </source>

@@ -1772,13 +1772,8 @@
 
 
 
-
-
-
-
-
-Сценарий: _029725 проверка подключения к документу Boxing Отчета по движениям
-	И я открываю навигационную ссылку "e1cib/list/Document.Boxing"
+Сценарий: _023023 проверка подключения к документу Sales Order Отчета по движениям
+	И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 	И я проверяю вывод отчета по выбранному документу из списка
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
@@ -1786,29 +1781,45 @@
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 	И я проверяю формирование отчета
 		Тогда табличный документ "ResultTable" равен по шаблону:
-		| 'Boxing 1*'                      | ''            | ''          | ''                   | ''           | ''                   |
-		| 'Document registrations records' | ''            | ''          | ''                   | ''           | ''                   |
-		| 'Register  "Box contents"'       | ''            | ''          | ''                   | ''           | ''                   |
-		| ''                               | 'Period'      | 'Resources' | 'Dimensions'         | ''           | ''                   |
-		| ''                               | ''            | 'Quantity'  | 'Item key box'       | 'Item key'   | ''                   |
-		| ''                               | '*'           | '5'         | '101/12150001908090' | '36/Red'     | ''                   |
-		| ''                               | '*'           | '5'         | '101/12150001908090' | '37/18SD'    | ''                   |
-		| ''                               | ''            | ''          | ''                   | ''           | ''                   |
-		| 'Register  "Stock reservation"'  | ''            | ''          | ''                   | ''           | ''                   |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'          | 'Dimensions' | ''                   |
-		| ''                               | ''            | ''          | 'Quantity'           | 'Store'      | 'Item key'           |
-		| ''                               | 'Receipt'     | '*'         | '1'                  | 'Store 01'   | '101/12150001908090' |
-		| ''                               | 'Expense'     | '*'         | '5'                  | 'Store 01'   | '36/Red'             |
-		| ''                               | 'Expense'     | '*'         | '5'                  | 'Store 01'   | '37/18SD'            |
-		| ''                               | ''            | ''          | ''                   | ''           | ''                   |
-		| 'Register  "Stock balance"'      | ''            | ''          | ''                   | ''           | ''                   |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'          | 'Dimensions' | ''                   |
-		| ''                               | ''            | ''          | 'Quantity'           | 'Store'      | 'Item key'           |
-		| ''                               | 'Receipt'     | '*'         | '1'                  | 'Store 01'   | '101/12150001908090' |
-		| ''                               | 'Expense'     | '*'         | '5'                  | 'Store 01'   | '36/Red'             |
-		| ''                               | 'Expense'     | '*'         | '5'                  | 'Store 01'   | '37/18SD'            |
+		| 'Sales order 1*'                             | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'       | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Store 01'     | '36/Yellow'      | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Store 01'     | 'L/Green'        | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| 'Register  "Stock reservation"'              | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'       | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Expense'     | '*'         | '4'         | 'Store 01'     | '36/Yellow'      | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Expense'     | '*'         | '5'         | 'Store 01'     | 'L/Green'        | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| 'Register  "Sales order turnovers"'          | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''               | ''          | ''          | ''        | ''                         | 'Attributes'           |
+		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'    | 'Currency'  | 'Item key'  | 'Row key' | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                           | '*'           | '4'         | '273,97'    | 'Main Company' | 'Sales order 1*' | 'USD'       | '36/Yellow' | '*'       | 'Reporting currency'       | 'No'                   |
+		| ''                                           | '*'           | '4'         | '1 600'     | 'Main Company' | 'Sales order 1*' | 'TRY'       | '36/Yellow' | '*'       | 'en descriptions is empty' | 'No'                   |
+		| ''                                           | '*'           | '4'         | '1 600'     | 'Main Company' | 'Sales order 1*' | 'TRY'       | '36/Yellow' | '*'       | 'Local currency'           | 'No'                   |
+		| ''                                           | '*'           | '4'         | '1 600'     | 'Main Company' | 'Sales order 1*' | 'TRY'       | '36/Yellow' | '*'       | 'TRY'                      | 'No'                   |
+		| ''                                           | '*'           | '5'         | '470,89'    | 'Main Company' | 'Sales order 1*' | 'USD'       | 'L/Green'   | '*'       | 'Reporting currency'       | 'No'                   |
+		| ''                                           | '*'           | '5'         | '2 750'     | 'Main Company' | 'Sales order 1*' | 'TRY'       | 'L/Green'   | '*'       | 'en descriptions is empty' | 'No'                   |
+		| ''                                           | '*'           | '5'         | '2 750'     | 'Main Company' | 'Sales order 1*' | 'TRY'       | 'L/Green'   | '*'       | 'Local currency'           | 'No'                   |
+		| ''                                           | '*'           | '5'         | '2 750'     | 'Main Company' | 'Sales order 1*' | 'TRY'       | 'L/Green'   | '*'       | 'TRY'                      | 'No'                   |
+		| ''                                           | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| 'Register  "Order balance"'                  | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Order'          | 'Item key'  | 'Row key'   | ''        | ''                         | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Store 01'     | 'Sales order 1*' | '36/Yellow' | '*'         | ''        | ''                         | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Store 01'     | 'Sales order 1*' | 'L/Green'   | '*'         | ''        | ''                         | ''                     |
+		| ''                                           | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''               | ''          | ''          | ''        | 'Attributes'               | ''                     |
+		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'          | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date'            | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Main Company' | 'Sales order 1*' | 'Store 01'  | '36/Yellow' | '*'       | '*'                        | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Main Company' | 'Sales order 1*' | 'Store 01'  | 'L/Green'   | '*'       | '*'                        | ''                     |
 	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.Boxing"
+	И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 	И я проверяю вывод отчета по выбранному документу
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
@@ -1817,169 +1828,44 @@
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 	И я проверяю формирование отчета
 		Тогда табличный документ "ResultTable" равен по шаблону:
-		| 'Boxing 1*'                      | ''            | ''          | ''                   | ''           | ''                   |
-		| 'Document registrations records' | ''            | ''          | ''                   | ''           | ''                   |
-		| 'Register  "Box contents"'       | ''            | ''          | ''                   | ''           | ''                   |
-		| ''                               | 'Period'      | 'Resources' | 'Dimensions'         | ''           | ''                   |
-		| ''                               | ''            | 'Quantity'  | 'Item key box'       | 'Item key'   | ''                   |
-		| ''                               | '*'           | '5'         | '101/12150001908090' | '36/Red'     | ''                   |
-		| ''                               | '*'           | '5'         | '101/12150001908090' | '37/18SD'    | ''                   |
-		| ''                               | ''            | ''          | ''                   | ''           | ''                   |
-		| 'Register  "Stock reservation"'  | ''            | ''          | ''                   | ''           | ''                   |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'          | 'Dimensions' | ''                   |
-		| ''                               | ''            | ''          | 'Quantity'           | 'Store'      | 'Item key'           |
-		| ''                               | 'Receipt'     | '*'         | '1'                  | 'Store 01'   | '101/12150001908090' |
-		| ''                               | 'Expense'     | '*'         | '5'                  | 'Store 01'   | '36/Red'             |
-		| ''                               | 'Expense'     | '*'         | '5'                  | 'Store 01'   | '37/18SD'            |
-		| ''                               | ''            | ''          | ''                   | ''           | ''                   |
-		| 'Register  "Stock balance"'      | ''            | ''          | ''                   | ''           | ''                   |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'          | 'Dimensions' | ''                   |
-		| ''                               | ''            | ''          | 'Quantity'           | 'Store'      | 'Item key'           |
-		| ''                               | 'Receipt'     | '*'         | '1'                  | 'Store 01'   | '101/12150001908090' |
-		| ''                               | 'Expense'     | '*'         | '5'                  | 'Store 01'   | '36/Red'             |
-		| ''                               | 'Expense'     | '*'         | '5'                  | 'Store 01'   | '37/18SD'            |
+		| 'Sales order 1*'                             | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'       | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Store 01'     | '36/Yellow'      | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Store 01'     | 'L/Green'        | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| 'Register  "Stock reservation"'              | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'       | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Expense'     | '*'         | '4'         | 'Store 01'     | '36/Yellow'      | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Expense'     | '*'         | '5'         | 'Store 01'     | 'L/Green'        | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| 'Register  "Sales order turnovers"'          | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''               | ''          | ''          | ''        | ''                         | 'Attributes'           |
+		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'    | 'Currency'  | 'Item key'  | 'Row key' | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                           | '*'           | '4'         | '273,97'    | 'Main Company' | 'Sales order 1*' | 'USD'       | '36/Yellow' | '*'       | 'Reporting currency'       | 'No'                   |
+		| ''                                           | '*'           | '4'         | '1 600'     | 'Main Company' | 'Sales order 1*' | 'TRY'       | '36/Yellow' | '*'       | 'en descriptions is empty' | 'No'                   |
+		| ''                                           | '*'           | '4'         | '1 600'     | 'Main Company' | 'Sales order 1*' | 'TRY'       | '36/Yellow' | '*'       | 'Local currency'           | 'No'                   |
+		| ''                                           | '*'           | '4'         | '1 600'     | 'Main Company' | 'Sales order 1*' | 'TRY'       | '36/Yellow' | '*'       | 'TRY'                      | 'No'                   |
+		| ''                                           | '*'           | '5'         | '470,89'    | 'Main Company' | 'Sales order 1*' | 'USD'       | 'L/Green'   | '*'       | 'Reporting currency'       | 'No'                   |
+		| ''                                           | '*'           | '5'         | '2 750'     | 'Main Company' | 'Sales order 1*' | 'TRY'       | 'L/Green'   | '*'       | 'en descriptions is empty' | 'No'                   |
+		| ''                                           | '*'           | '5'         | '2 750'     | 'Main Company' | 'Sales order 1*' | 'TRY'       | 'L/Green'   | '*'       | 'Local currency'           | 'No'                   |
+		| ''                                           | '*'           | '5'         | '2 750'     | 'Main Company' | 'Sales order 1*' | 'TRY'       | 'L/Green'   | '*'       | 'TRY'                      | 'No'                   |
+		| ''                                           | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| 'Register  "Order balance"'                  | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Order'          | 'Item key'  | 'Row key'   | ''        | ''                         | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Store 01'     | 'Sales order 1*' | '36/Yellow' | '*'         | ''        | ''                         | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Store 01'     | 'Sales order 1*' | 'L/Green'   | '*'         | ''        | ''                         | ''                     |
+		| ''                                           | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
+		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''               | ''          | ''          | ''        | 'Attributes'               | ''                     |
+		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'          | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date'            | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Main Company' | 'Sales order 1*' | 'Store 01'  | '36/Yellow' | '*'       | '*'                        | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Main Company' | 'Sales order 1*' | 'Store 01'  | 'L/Green'   | '*'       | '*'                        | ''                     |
 	И я закрыл все окна клиентского приложения
-
-Сценарий: _02961201 проверка отмены проводок при распроведении Boxing
-	* Открытие списка документов Boxing
-		И я открываю навигационную ссылку "e1cib/list/Document.Boxing"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
-		И в таблице "List" я перехожу к строке:
-			| 'Number' |
-			| '1'      |
-	* Распроведение документа и проверка отмены проводок
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
-			| 'Register  "Box contents"'       |
-			| 'Register  "Stock reservation"'  |
-			| 'Register  "Stock balance"'      |
-		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
-		И я открываю навигационную ссылку "e1cib/list/Document.Boxing"
-		И в таблице "List" я перехожу к строке:
-			| 'Number' |
-			| '1'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
-		| 'Boxing 1*'                      | ''            | ''          | ''                   | ''           | ''                   |
-		| 'Document registrations records' | ''            | ''          | ''                   | ''           | ''                   |
-		| 'Register  "Box contents"'       | ''            | ''          | ''                   | ''           | ''                   |
-		| ''                               | 'Period'      | 'Resources' | 'Dimensions'         | ''           | ''                   |
-		| ''                               | ''            | 'Quantity'  | 'Item key box'       | 'Item key'   | ''                   |
-		| ''                               | '*'           | '5'         | '101/12150001908090' | '36/Red'     | ''                   |
-		| ''                               | '*'           | '5'         | '101/12150001908090' | '37/18SD'    | ''                   |
-		| ''                               | ''            | ''          | ''                   | ''           | ''                   |
-		| 'Register  "Stock reservation"'  | ''            | ''          | ''                   | ''           | ''                   |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'          | 'Dimensions' | ''                   |
-		| ''                               | ''            | ''          | 'Quantity'           | 'Store'      | 'Item key'           |
-		| ''                               | 'Receipt'     | '*'         | '1'                  | 'Store 01'   | '101/12150001908090' |
-		| ''                               | 'Expense'     | '*'         | '5'                  | 'Store 01'   | '36/Red'             |
-		| ''                               | 'Expense'     | '*'         | '5'                  | 'Store 01'   | '37/18SD'            |
-		| ''                               | ''            | ''          | ''                   | ''           | ''                   |
-		| 'Register  "Stock balance"'      | ''            | ''          | ''                   | ''           | ''                   |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'          | 'Dimensions' | ''                   |
-		| ''                               | ''            | ''          | 'Quantity'           | 'Store'      | 'Item key'           |
-		| ''                               | 'Receipt'     | '*'         | '1'                  | 'Store 01'   | '101/12150001908090' |
-		| ''                               | 'Expense'     | '*'         | '5'                  | 'Store 01'   | '36/Red'             |
-		| ''                               | 'Expense'     | '*'         | '5'                  | 'Store 01'   | '37/18SD'            |
-		И я закрыл все окна клиентского приложения
-
-
-
-
-
-
-Сценарий: _029813 проверка подключения к документу Unboxing Отчета по движениям
-	И я открываю навигационную ссылку "e1cib/list/Document.Unboxing"
-	И я проверяю вывод отчета по выбранному документу из списка
-		И в таблице "List" я перехожу к строке:
-		| 'Number' |
-		| '1'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
-		Тогда табличный документ "ResultTable" равен по шаблону:
-		| 'Unboxing 1*'                    | ''            | ''       | ''          | ''            | ''                   |
-		| 'Document registrations records' | ''            | ''       | ''          | ''            | ''                   |
-		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''            | ''                   |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'  | ''                   |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'       | 'Item key'           |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'    | '36/Red'             |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'    | '37/18SD'            |
-		| ''                               | 'Expense'     | '*'      | '1'         | 'Store 01'    | '101/12150001908090' |
-		| ''                               | ''            | ''       | ''          | ''            | ''                   |
-		| 'Register  "Stock balance"'      | ''            | ''       | ''          | ''            | ''                   |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'  | ''                   |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'       | 'Item key'           |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'    | '36/Red'             |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'    | '37/18SD'            |
-		| ''                               | 'Expense'     | '*'      | '1'         | 'Store 01'    | '101/12150001908090' |
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.Unboxing"
-	И я проверяю вывод отчета по выбранному документу
-		И в таблице "List" я перехожу к строке:
-		| 'Number' |
-		| '1'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
-		Тогда табличный документ "ResultTable" равен по шаблону:
-		| 'Unboxing 1*'                    | ''            | ''       | ''          | ''            | ''                   |
-		| 'Document registrations records' | ''            | ''       | ''          | ''            | ''                   |
-		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''            | ''                   |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'  | ''                   |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'       | 'Item key'           |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'    | '36/Red'             |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'    | '37/18SD'            |
-		| ''                               | 'Expense'     | '*'      | '1'         | 'Store 01'    | '101/12150001908090' |
-		| ''                               | ''            | ''       | ''          | ''            | ''                   |
-		| 'Register  "Stock balance"'      | ''            | ''       | ''          | ''            | ''                   |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'  | ''                   |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'       | 'Item key'           |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'    | '36/Red'             |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'    | '37/18SD'            |
-		| ''                               | 'Expense'     | '*'      | '1'         | 'Store 01'    | '101/12150001908090' |
-	И я закрыл все окна клиентского приложения
-
-Сценарий: _02981301 проверка отмены проводок при распроведении UnBoxing
-	* Открытие списка документов Unboxing
-		И я открываю навигационную ссылку "e1cib/list/Document.Unboxing"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
-		И в таблице "List" я перехожу к строке:
-			| 'Number' |
-			| '1'      |
-	* Распроведение документа и проверка отмены проводок
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
-			| 'Register  "Stock reservation"'  |
-			| 'Register  "Stock balance"'      |
-		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
-		И я открываю навигационную ссылку "e1cib/list/Document.Unboxing"
-		И в таблице "List" я перехожу к строке:
-			| 'Number' |
-			| '1'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
-		| 'Unboxing 1*'                    | ''            | ''       | ''          | ''            | ''                   |
-		| 'Document registrations records' | ''            | ''       | ''          | ''            | ''                   |
-		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''            | ''                   |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'  | ''                   |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'       | 'Item key'           |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'    | '36/Red'             |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'    | '37/18SD'            |
-		| ''                               | 'Expense'     | '*'      | '1'         | 'Store 01'    | '101/12150001908090' |
-		| ''                               | ''            | ''       | ''          | ''            | ''                   |
-		| 'Register  "Stock balance"'      | ''            | ''       | ''          | ''            | ''                   |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'  | ''                   |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'       | 'Item key'           |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'    | '36/Red'             |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'    | '37/18SD'            |
-		| ''                               | 'Expense'     | '*'      | '1'         | 'Store 01'    | '101/12150001908090' |
-		И я закрыл все окна клиентского приложения
 
 
 

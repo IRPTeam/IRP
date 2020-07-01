@@ -202,15 +202,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPayee
-
-&AtClient
-Procedure PayeeOnChange(Item, AddInfo = Undefined) Export
-	DocBankPaymentClient.PayeeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
 #Region ItemCompany
 
 &AtClient
@@ -249,7 +240,6 @@ Procedure CurrencyOnChangeContinue(Answer, AdditionalParameters) Export
 		ClearCashTransferOrders(Object.Currency);
 		CurrentCurrency = Object.Currency;
 		DocBankPaymentClient.CurrencyOnChange(Object, ThisObject, Items.Currency);
-		DocBankPaymentClient.FillPayees(Object, ThisObject);
 	Else
 		Object.Currency = CurrentCurrency;
 	EndIf;
@@ -275,7 +265,6 @@ Procedure AccountOnChangeContinue(Answer, AdditionalParameters) Export
 	If Answer = DialogReturnCode.Yes Then
 		CurrentAccount = Object.Account;
 		DocBankPaymentClient.AccountOnChange(Object, ThisObject, Items.Currency);
-		DocBankPaymentClient.FillPayees(Object, ThisObject);
 		ClearCashTransferOrders(Object.Currency);
 	Else
 		Object.Account = CurrentAccount;
@@ -398,7 +387,6 @@ Function Currencies_GetDeclaration(Object, Form)
 	ArrayOfItems_Header.Add(Form.Items.Account);
 	ArrayOfItems_Header.Add(Form.Items.TransactionType);
 	ArrayOfItems_Header.Add(Form.Items.Currency);
-	ArrayOfItems_Header.Add(Form.Items.Payee);
 	ArrayOfItems_Header.Add(Form.Items.Date);
 	
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_HeaderOnChange", "OnChange", ArrayOfItems_Header);

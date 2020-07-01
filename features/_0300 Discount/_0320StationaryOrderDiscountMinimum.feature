@@ -4,26 +4,27 @@
 @SpecialOffersMinimum
 
 
-Функционал: расчет скидок в группе минимум (Type joings Minimum, Special Offers MaxInRow)
+Функционал: calculation of discounts in a group Minimum (type joings Minimum, Special Offers MaxInRow)
 
-Как тестировщик
-Я хочу проверить порядок применения скидок в общей группе SpecialOffersMaxInRow, подгруппа Минимум (Minimum)
-Чтобы скидки в группе Минимум начислялись по выбору наименьшей скидки в строке
+As a sales manager
+I want to check the order of discounts in the general group SpecialOffersMaxInRow, subgroup Minimum.
+So that discounts in the Minimal group are calculated by choosing the lowest discount in the line.
+
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
-# Проверка расчета скидки в группе Минимум при созданной внутри группы Минимум, которая находится в групе Максимум
-# При Type joings Minimum в Минимум по заказам со скидками находящимися в этой группе будут отрабатывать те скидки, которые наименее выгодны для клиента. 
-# Проверка скидки в целом на заказ (не по строкам). 
-# При этом скидки которые находятся за пределами группы минимум проверяются по строкам и применяются по правилу "наиболее выгодно клиенту"
+# Checking the discount calculation in the group Minimum created inside the group Minimum, which is in the group Maximum
+# With Type joins Minimum, discounts in this group will work out the discounts that are least beneficial to the client. 
+# Checking for overall discounts on orders (not on lines). 
+# Discounts that are outside the group are at least checked by lines and applied according to the rule "most advantageous to the client". 
 
 
-Сценарий: _032001 порядок расчета скидок Discount 2 without Vat в группе Sum in Minimum и Discount 1 without Vat в группе минимум (ручное назначение)
-	# Должна сработать скидка Discount 1 without Vat
-	Когда переношу группу Sum in Minimum в минимум
+Сценарий: _032001 discount calculation Discount 2 without Vat in the group Sum in Minimum and Discount 1 without Vat in the group Minimum (manual)
+	# Discounted Discount 1 without Vat
+	Когда переношу группу Sum in Minimum в Minimum
 	Когда переношу скидку Discount 2 without Vat в группу Sum in Minimum
-	Когда переношу скидку Discount 1 without Vat в минимум
+	Когда переношу скидку Discount 1 without Vat в Minimum
 	Когда создаю заказ на MIO Basic Agreements, without VAT (Trousers и Shirt)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
@@ -41,22 +42,6 @@
 		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' |
 		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '474,56'        |
 		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '271,20'        |
-		# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		# Тогда таблица "Offers" стала равной:
-		# 	| 'Presentation'                 | 'Is select' | '%'     | '∑'      |
-		# 	| 'Special Offers'               | ''          | ''      | ''       |
-		# 	| 'Sum'                          | ''          | ''      | ''       |
-		# 	| 'Discount Price 2'             | ' '         | ''      | ''       |
-		# 	| 'Special Message DialogBox'    | '✔'         | ''      | ''       |
-		# 	| 'DialogBox2'                   | '✔'         | ''      | ''       |
-		# 	| 'Minimum'                      | ''          | ''      | ''       |
-		# 	| 'Discount Price 1'             | ' '         | ''      | ''       |
-		# 	| 'Discount 1 without Vat'       | '✔'         | '55,00' | '745,76' |
-		# 	| 'Sum in Minimum'               | ''          | ''      | ''       |
-		# 	| 'Discount 2 without Vat'       | ' '         | ''      | ''       |
-		# 	| 'Maximum'                      | ''          | ''      | ''       |
-		# 	| 'Special Message Notification' | '✔'         | ''      | ''       |
-		# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -64,10 +49,10 @@
 		| 'MIO'       | '3 519,99' |
 		| 'MIO'       | '3 519,99' |
 
-Сценарий: _032002 порядок расчета скидок Discount 2 without Vat в группе Sum in Minimum и Discount 1 without Vat в группе минимум (автоматическое назначение)
-	# Должна сработать скидка Discount 1 without Vat
-	Когда меняю автоматическое проведение скидки по Discount 1 without Vat
-	Когда меняю автоматическое проведение скидки Discount 2 without Vat
+Сценарий: _032002 discount calculation Discount 2 without Vat in the group Sum in Minimum и Discount 1 without Vat in the group Minimum (auto)
+	# Discounted Discount 1 without Vat
+	Когда меняю auto проведение скидки по Discount 1 without Vat
+	Когда меняю auto проведение скидки Discount 2 without Vat
 	Когда создаю заказ на MIO Basic Agreements, without VAT (Trousers и Shirt)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
@@ -76,22 +61,6 @@
 		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' |
 		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '474,56'        |
 		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '271,20'        |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'     | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''      | ''       |
-	# 	| 'Sum'                          | ''          | ''      | ''       |
-	# 	| 'Discount Price 2'             | ' '         | ''      | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''      | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''      | ''       |
-	# 	| 'Minimum'                      | ''          | ''      | ''       |
-	# 	| 'Discount Price 1'             | ' '         | ''      | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | '55,00' | '745,76' |
-	# 	| 'Sum in Minimum'               | ''          | ''      | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''      | ''       |
-	# 	| 'Maximum'                      | ''          | ''      | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''      | ''       |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -101,8 +70,8 @@
 		| 'MIO'       | '3 519,99' |
 
 
-Сценарий: _032003 порядок расчета скидок Discount 2 without Vat в главной группе Special Offers, Discount 1 without Vat в группе Sum in Minimum (автоматическое назначение)
-	# Должна сработать скидка Discount 2 without Vat
+Сценарий: _032003 discount calculation Discount 2 without Vat in the main group Special Offers, Discount 1 without Vat in the group Sum in Minimum (auto)
+	# Discounted Discount 2 without Vat
 	Когда переношу скидку Discount 2 without Vat в Special Offers
 	Когда создаю заказ на MIO Basic Agreements, without VAT (Trousers и Shirt)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
@@ -117,21 +86,6 @@
 		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Unit' |
 		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '716,88'        | 'pcs' |
 		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '395,92'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'     | '∑'        |
-	# 	| 'Special Offers'               | ''          | ''      | ''         |
-	# 	| 'Sum'                          | ''          | ''      | ''         |
-	# 	| 'Discount Price 2'             | ' '         | ''      | ''         |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''      | ''         |
-	# 	| 'DialogBox2'                   | '✔'         | ''      | ''         |
-	# 	| 'Minimum'                      | ''          | ''      | ''         |
-	# 	| 'Discount Price 1'             | ' '         | ''      | ''         |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''      | ''         |
-	# 	| 'Maximum'                      | ''          | ''      | ''         |
-	# 	| 'Special Message Notification' | '✔'         | ''      | ''         |
-	# 	| 'Discount 2 without Vat'       | '✔'         | '82,07' | '1 112,80' |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -140,8 +94,8 @@
 	
 	
 
-Сценарий: _032004 порядок расчета скидок Discount 1 without Vat в главной группе Special Offers, Discount 2 without Vat в группе Sum in Minimum (автоматическое назначение)
-	# Должна сработать скидка Discount 2 without Vat
+Сценарий: _032004 discount calculation Discount 1 without Vat in the main group Special Offers, Discount 2 without Vat in the group Sum in Minimum (auto)
+	# Discounted Discount 2 without Vat
 	Когда переношу скидку Discount 2 without Vat в группу Sum in Minimum
 	Когда переношу Discount 1 without Vat в Special Offers
 	Когда создаю заказ на MIO Basic Agreements, without VAT (Trousers и Shirt)
@@ -157,22 +111,6 @@
 		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' |
 		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '716,88'        |
 		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '395,92'        |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'     | '∑'        |
-	# 	| 'Special Offers'               | ''          | ''      | ''         |
-	# 	| 'Sum'                          | ''          | ''      | ''         |
-	# 	| 'Discount Price 2'             | ' '         | ''      | ''         |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''      | ''         |
-	# 	| 'DialogBox2'                   | '✔'         | ''      | ''         |
-	# 	| 'Minimum'                      | ''          | ''      | ''         |
-	# 	| 'Discount Price 1'             | ' '         | ''      | ''         |
-	# 	| 'Sum in Minimum'               | ''          | ''      | ''         |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''      | ''         |
-	# 	| 'Discount 2 without Vat'       | '✔'         | '82,07' | '1 112,80' |
-	# 	| 'Maximum'                      | ''          | ''      | ''         |
-	# 	| 'Special Message Notification' | '✔'         | ''      | ''         |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -181,9 +119,10 @@
 		| 'MIO'       | '3 086,88' |
 
 
-# Порядок расчета скидок в главной группе Минимум
+# Procedure for calculating discounts in the main group Minimum
 
-Сценарий: _032005 меняю в главной группе Special offers правило Maximum by row на Минимум
+
+Сценарий: _032005 change Special offers main group Maximum by row to Minimum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
@@ -201,14 +140,14 @@
 	И Пауза 10
 	И    Я закрыл все окна клиентского приложения
 
-Сценарий: _032006 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Максимум, Discount Price 2 в группе Минимум (автоматическое назначение), приоритет Discount Price 1 выше чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-	И    Я закрыл все окна клиентского приложения
-	Когда переношу скидку Discount Price 1 в максимум
-	Когда переношу скидку Discount Price 2 в группу минимум
-	Когда меняю приоритет Discount Price 1 с 1 на 3
-	Когда меняю приоритет Discount Price 2 с 4 на 2
-	Когда меняю автоматическое проведение скидки Discount Price 1
+Сценарий: _032006 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Minimum (auto), priority Discount Price 1 higher than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification (auto)
+	И  Я закрыл все окна клиентского приложения
+	Когда переношу скидку Discount Price 1 в Maximum
+	Когда переношу скидку Discount Price 2 в группу Minimum
+	Когда меняю priority Discount Price 1 с 1 на 3
+	Когда меняю priority Discount Price 2 с 4 на 2
+	Когда меняю auto проведение скидки Discount Price 1
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
@@ -217,23 +156,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | ' '         | ''     | ''       |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -241,9 +163,9 @@
 		| 'Lomaniti'  |  '3 070,00'|
 	
 
-Сценарий: _032007 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Максимум, Discount Price 2 в группе Минимум (автоматическое назначение), приоритет Discount Price 1 ниже чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-	Когда меняю приоритет Discount Price 1 на 1 
+Сценарий: _032007 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Minimum (auto), priority Discount Price 1 lower than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+	Когда меняю priority Discount Price 1 на 1 
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
@@ -252,22 +174,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | ' '         | ''     | ''       |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -276,9 +182,9 @@
 		| 'Lomaniti'  |  '3 070,00'|
 
 
-Сценарий: _032008 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Максимум, Discount Price 2 в группе Минимум (Discount Price 1 ручное назначение, Discount Price 2 - автоматическое), приоритет Discount Price 1 выше чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-	Когда меняю приоритет Discount Price 1 с 1 на 3
+Сценарий: _032008 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Minimum (Discount Price 1 manual, Discount Price 2 - auto), priority Discount Price 1 higher than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+	Когда меняю priority Discount Price 1 с 1 на 3
 	Когда меняю ручное проведение скидки Discount Price 1
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
@@ -292,22 +198,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit' |
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | ' '         | ''     | ''       |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -318,11 +208,11 @@
 
 
 
-Сценарий: _032009 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Максимум, Discount Price 2 в группе Минимум (Discount Price 2 ручное назначение, Discount Price 1 - автоматическое), приоритет Discount Price 1 ниже чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-		Когда меняю приоритет Discount Price 1 на 1
+Сценарий: _032009 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Minimum (Discount Price 2 manual, Discount Price 1 - auto), priority Discount Price 1 lower than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+		Когда меняю priority Discount Price 1 на 1
 		Когда меняю ручное проведение Discount Price 2
-		Когда меняю автоматическое проведение скидки Discount Price 1
+		Когда меняю auto проведение скидки Discount Price 1
 		Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я перехожу к строке:
@@ -335,22 +225,6 @@
 			| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit' |
 			| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 			| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-		# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		# Тогда таблица "Offers" стала равной:
-		# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-		# 	| 'Special Offers'               | ''          | ''     | ''       |
-		# 	| 'Sum'                          | ''          | ''     | ''       |
-		# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-		# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-		# 	| 'Minimum'                      | ''          | ''     | ''       |
-		# 	| 'Discount Price 2'             | ' '         | ''     | ''       |
-		# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-		# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-		# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-		# 	| 'Maximum'                      | ''          | ''     | ''       |
-		# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-		# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-		# И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку "Post and close"
 		И Пауза 2
 		И таблица 'List' содержит строки
@@ -360,13 +234,13 @@
 			| 'Lomaniti'  |  '3 070,00'|
 			| 'Lomaniti'  |  '3 070,00'|
 
-Сценарий: _032010 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Минимум, Discount Price 2 в группе Максимум (автоматическое назначение 2-х скидок), приоритет Discount Price 1 выше чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-		Когда переношу скидку Discount Price 1 в минимум
-		Когда переношу скидку Discount Price 2 в группу максимум
-		Когда меняю автоматическое проведение Discount Price 2
-		Когда меняю автоматическое проведение Discount Price 1
-		Когда меняю приоритет Discount Price 1 с 1 на 3
+Сценарий: _032010 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (auto назначение 2-х скидок), priority Discount Price 1 higher than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+		Когда переношу скидку Discount Price 1 в Minimum
+		Когда переношу скидку Discount Price 2 в группу Maximum
+		Когда меняю auto проведение Discount Price 2
+		Когда меняю auto проведение Discount Price 1
+		Когда меняю priority Discount Price 1 с 1 на 3
 		Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И я нажимаю на кнопку 'OK'
@@ -375,22 +249,6 @@
 			| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit' |
 			| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 			| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-		# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		# Тогда таблица "Offers" стала равной:
-		# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-		# 	| 'Special Offers'               | ''          | ''     | ''       |
-		# 	| 'Sum'                          | ''          | ''     | ''       |
-		# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-		# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-		# 	| 'Minimum'                      | ''          | ''     | ''       |
-		# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-		# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-		# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-		# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-		# 	| 'Maximum'                      | ''          | ''     | ''       |
-		# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-		# 	| 'Discount Price 2'             | '✔'         | ''     | ''       |
-		# И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку "Post and close"
 		И Пауза 2
 		И таблица 'List' содержит строки
@@ -402,9 +260,9 @@
 			| 'Lomaniti'  |  '3 070,00'|
 
 
-Сценарий: _032011 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Минимум, Discount Price 2 в группе Максимум (автоматическое назначение), приоритет Discount Price 1 ниже чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-		Когда меняю приоритет Discount Price 1 на 1
+Сценарий: _032011 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (auto), priority Discount Price 1 lower than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+		Когда меняю priority Discount Price 1 на 1
 		Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И я нажимаю на кнопку 'OK'
@@ -413,22 +271,6 @@
 			| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit' |
 			| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 			| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-		# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		# Тогда таблица "Offers" стала равной:
-		# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-		# 	| 'Special Offers'               | ''          | ''     | ''       |
-		# 	| 'Sum'                          | ''          | ''     | ''       |
-		# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-		# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-		# 	| 'Minimum'                      | ''          | ''     | ''       |
-		# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-		# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-		# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-		# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-		# 	| 'Maximum'                      | ''          | ''     | ''       |
-		# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-		# 	| 'Discount Price 2'             | '✔'         | ''     | ''       |
-		# И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку "Post and close"
 		И Пауза 2
 		И таблица 'List' содержит строки
@@ -441,10 +283,10 @@
 			| 'Lomaniti'  |  '3 070,00'|
 
 
-Сценарий: _032012 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Минимум, Discount Price 2 в группе Максимум (Discount Price 1 ручное назначение, Discount Price 2 - автоматическое), приоритет Discount Price 1 выше чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
+Сценарий: _032012 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (Discount Price 1 manual, Discount Price 2 - auto), priority Discount Price 1 higher than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю ручное проведение скидки Discount Price 1
-	Когда меняю приоритет Discount Price 1 с 1 на 3
+	Когда меняю priority Discount Price 1 с 1 на 3
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
@@ -457,22 +299,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit' |
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# 	| 'Discount Price 2'             | ' '         | ''     | ''       |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -486,10 +312,10 @@
 		| 'Lomaniti'  |  '3 070,00'|
 
 
-Сценарий: _032013 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Минимум, Discount Price 2 в группе Максимум (Discount Price 2 ручное назначение, Discount Price 1 - автоматическое), приоритет Discount Price 1 ниже чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-	Когда меняю приоритет Discount Price 1 на 1
-	Когда меняю автоматическое проведение скидки Discount Price 1
+Сценарий: _032013 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (Discount Price 2 manual, Discount Price 1 - auto), priority Discount Price 1 lower than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+	Когда меняю priority Discount Price 1 на 1
+	Когда меняю auto проведение скидки Discount Price 1
 	Когда меняю ручное проведение Discount Price 2
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
@@ -503,22 +329,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# 	| 'Discount Price 2'             | ' '         | ''     | ''       |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -533,9 +343,9 @@
 		| 'Lomaniti'  |  '3 070,00'|
 
 
-Сценарий: _032014 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Минимум, Discount Price 2 в группе Максимум (ручное назначение), приоритет Discount Price 1 выше чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-	Когда меняю приоритет Discount Price 1 с 1 на 3
+Сценарий: _032014 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (manual), priority Discount Price 1 higher than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+	Когда меняю priority Discount Price 1 с 1 на 3
 	Когда меняю ручное проведение скидки Discount Price 1
 	Когда меняю ручное проведение Discount Price 2
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
@@ -556,22 +366,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# 	| 'Discount Price 2'             | ' '         | ''     | ''       |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -586,9 +380,9 @@
 		| 'Lomaniti'  |  '3 070,00'|
 		| 'Lomaniti'  |  '3 070,00'|
 
-Сценарий: _032015 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Минимум, Discount Price 2 в группе Максимум (ручное назначение), приоритет Discount Price 1 ниже чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-	Когда меняю приоритет Discount Price 1 на 1
+Сценарий: _032015 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (manual), priority Discount Price 1 lower than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+	Когда меняю priority Discount Price 1 на 1
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
@@ -607,22 +401,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | '✔'         | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -638,13 +416,13 @@
 		| 'Lomaniti'  |  '3 070,00'|
 		| 'Lomaniti'  |  '3 070,00'|
 
-Сценарий: _032016 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Максимум, Discount Price 2 в группе Sum (автоматическое назначение), приоритет Discount Price 1 выше чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-	Когда переношу скидку Discount Price 1 в максимум
-	Когда меняю автоматическое проведение скидки Discount Price 1
-	Когда меняю приоритет Discount Price 1 с 1 на 3
+Сценарий: _032016 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Sum (auto), priority Discount Price 1 higher than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+	Когда переношу скидку Discount Price 1 в Maximum
+	Когда меняю auto проведение скидки Discount Price 1
+	Когда меняю priority Discount Price 1 с 1 на 3
 	Когда переношу скидку Discount Price 2 в группу Sum
-	Когда меняю автоматическое проведение Discount Price 2
+	Когда меняю auto проведение Discount Price 2
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
@@ -653,23 +431,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | '✔'         | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# И я нажимаю на кнопку 'OK'
-	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
 		| 'Partner'   | 'Σ'     |
@@ -685,9 +446,9 @@
 		| 'Lomaniti'  |  '3 070,00'|
 		| 'Lomaniti'  |  '3 070,00'|
 
-Сценарий: _032017 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Максимум, Discount Price 2 в группе Sum (автоматическое назначение), приоритет Discount Price 1 ниже чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-	Когда меняю приоритет Discount Price 1 на 1
+Сценарий: _032017 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Sum (auto), priority Discount Price 1 lower than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+	Когда меняю priority Discount Price 1 на 1
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
@@ -696,21 +457,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | '✔'         | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -728,10 +474,10 @@
 		| 'Lomaniti'  |  '3 070,00'|
 		| 'Lomaniti'  |  '3 070,00'|
 
-Сценарий: _032018 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Максимум, Discount Price 2 в группе Sum (Discount Price 1 ручное назначение, Discount Price 2 - автоматическое), приоритет Discount Price 1 выше чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
+Сценарий: _032018 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Sum (Discount Price 1 manual, Discount Price 2 - auto), priority Discount Price 1 higher than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю ручное проведение скидки Discount Price 1
-	Когда меняю приоритет Discount Price 1 с 1 на 3
+	Когда меняю priority Discount Price 1 с 1 на 3
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
@@ -744,22 +490,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | ' '         | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -779,8 +509,8 @@
 		| 'Lomaniti'  |  '3 070,00'|
 
 
-Сценарий: _032019 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Максимум, Discount Price 2 в группе Sum (ручное назначение), приоритет Discount Price 1 выше чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
+Сценарий: _032019 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Sum (manual), priority Discount Price 1 higher than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю ручное проведение Discount Price 2
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
@@ -800,22 +530,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | '✔'         | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -835,11 +549,11 @@
 		| 'Lomaniti'  |  '3 070,00'|
 		| 'Lomaniti'  |  '3 070,00'|
 
-Сценарий: _032020 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Минимум, Discount Price 2 в группе Sum (автоматическое назначение), приоритет Discount Price 1 выше чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-	Когда переношу скидку Discount Price 1 в минимум
-	Когда меняю автоматическое проведение скидки Discount Price 1
-	Когда меняю автоматическое проведение Discount Price 2
+Сценарий: _032020 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (auto), priority Discount Price 1 higher than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+	Когда переношу скидку Discount Price 1 в Minimum
+	Когда меняю auto проведение скидки Discount Price 1
+	Когда меняю auto проведение Discount Price 2
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
@@ -848,22 +562,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | '✔'         | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -885,9 +583,9 @@
 		| 'Lomaniti'  |  '3 070,00'|
 
 
-Сценарий: _032021 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Минимум, Discount Price 2 в группе Sum (автоматическое назначение), приоритет Discount Price 1 ниже чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-	Когда меняю приоритет Discount Price 1 на 1
+Сценарий: _032021 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (auto), priority Discount Price 1 lower than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+	Когда меняю priority Discount Price 1 на 1
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
@@ -896,22 +594,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | '✔'         | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -933,9 +615,9 @@
 		| 'Lomaniti'  |  '3 070,00'|
 		| 'Lomaniti'  |  '3 070,00'|
 
-Сценарий: _032022 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Минимум, Discount Price 2 в группе Sum (Discount Price 1 ручное назначение, Discount Price 2 - автоматическое), приоритет Discount Price 1 выше чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-	Когда меняю приоритет Discount Price 1 с 1 на 3
+Сценарий: _032022 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (Discount Price 1 manual, Discount Price 2 - auto), priority Discount Price 1 higher than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+	Когда меняю priority Discount Price 1 с 1 на 3
 	Когда меняю ручное проведение скидки Discount Price 1
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
@@ -949,22 +631,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | ' '         | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -987,11 +653,11 @@
 		| 'Lomaniti'  |  '3 070,00'|
 		| 'Lomaniti'  |  '3 070,00'|
 
-Сценарий: _032023 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Минимум, Discount Price 2 в группе Sum (Discount Price 2 ручное назначение, Discount Price 1 - автоматическое), приоритет Discount Price 1 ниже чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
+Сценарий: _032023 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (Discount Price 2 manual, Discount Price 1 - auto), priority Discount Price 1 lower than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю ручное проведение Discount Price 2
-	Когда меняю автоматическое проведение скидки Discount Price 1
-	Когда меняю приоритет Discount Price 1 на 1
+	Когда меняю auto проведение скидки Discount Price 1
+	Когда меняю priority Discount Price 1 на 1
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
@@ -1004,22 +670,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | ' '         | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -1043,10 +693,10 @@
 		| 'Lomaniti'  |  '3 070,00'|
 		| 'Lomaniti'  |  '3 070,00'|
 
-Сценарий: _032024 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Минимум, Discount Price 2 в группе Sum (ручное назначение), приоритет Discount Price 1 выше чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
+Сценарий: _032024 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (manual), priority Discount Price 1 higher than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю ручное проведение скидки Discount Price 1
-	Когда меняю приоритет Discount Price 1 с 1 на 3
+	Когда меняю priority Discount Price 1 с 1 на 3
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
@@ -1065,22 +715,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | ' '         | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
@@ -1105,9 +739,9 @@
 		| 'Lomaniti'  |  '3 070,00'|
 		| 'Lomaniti'  |  '3 070,00'|
 
-Сценарий: _032025 проверка порядка отрабатывания скидки (одинаковое правило применения), Discount Price 1 в группе Минимум, Discount Price 2 в группе Sum (ручное назначение), приоритет Discount Price 1 ниже чем Discount Price 2
-	# Должна сработать скидка Discount Price 1, также срабатывает автоматическая скидка из группы Максимум Special Message Notification
-	Когда меняю приоритет Discount Price 1 на 1
+Сценарий: _032025 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (manual), priority Discount Price 1 lower than Discount Price 2
+	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
+	Когда меняю priority Discount Price 1 на 1
 	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
@@ -1126,22 +760,6 @@
 		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
-	# И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	# Тогда таблица "Offers" стала равной:
-	# 	| 'Presentation'                 | 'Is select' | '%'    | '∑'      |
-	# 	| 'Special Offers'               | ''          | ''     | ''       |
-	# 	| 'Sum'                          | ''          | ''     | ''       |
-	# 	| 'Discount Price 2'             | ' '         | ''     | ''       |
-	# 	| 'Special Message DialogBox'    | '✔'         | ''     | ''       |
-	# 	| 'DialogBox2'                   | '✔'         | ''     | ''       |
-	# 	| 'Minimum'                      | ''          | ''     | ''       |
-	# 	| 'Discount Price 1'             | '✔'         | '8,85' | '230,00' |
-	# 	| 'Sum in Minimum'               | ''          | ''     | ''       |
-	# 	| 'Discount 1 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Discount 2 without Vat'       | '✔'         | ''     | ''       |
-	# 	| 'Maximum'                      | ''          | ''     | ''       |
-	# 	| 'Special Message Notification' | '✔'         | ''     | ''       |
-	# И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки

@@ -5,11 +5,9 @@
     <key>en</key>
     <value>Author</value>
   </synonym>
-  <comment></comment>
   <type>
     <types>CatalogRef.Users</types>
   </type>
-  <mask></mask>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <choiceParameters>
@@ -19,6 +17,7 @@
     </value>
   </choiceParameters>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <content>
     <metadata>Document.SalesOrder</metadata>
     <use>Use</use>
@@ -32,55 +31,11 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ReconciliationStatement</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.ZReport</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.SetupOfSpecialOffers</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.PurchaseReturn</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.SalesInvoice</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.CashInPOS</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.PriceList</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.CashReceipt</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.SalesReturnOrder</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.CashPayment</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.PurchaseInvoice</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.PurchaseOrder</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.BankPayment</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.BankReceipt</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -88,11 +43,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.CashRevenue</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.StockAdjustmentAsWriteOff</metadata>
+    <metadata>Document.SetupOfSpecialOffers</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -108,15 +59,15 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.GoodsReceipt</metadata>
+    <metadata>Document.InventoryTransfer</metadata>
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.CashTransferOrder</metadata>
+    <metadata>Document.PurchaseReturn</metadata>
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.InventoryTransferOrder</metadata>
+    <metadata>Document.SalesInvoice</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -124,7 +75,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.CreditDebitNote</metadata>
+    <metadata>Document.CashRevenue</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -132,27 +83,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.OpeningEntry</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.IncomingPaymentOrder</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.OutgoingPaymentOrder</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ReconciliationStatement</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.InternalSupplyRequest</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.InvoiceMatch</metadata>
+    <metadata>Document.CreditDebitNote</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -160,11 +91,79 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.CashInPOS</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.OpeningEntry</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.Bundling</metadata>
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.InventoryTransfer</metadata>
+    <metadata>Document.OutgoingPaymentOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.StockAdjustmentAsWriteOff</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.InvoiceMatch</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.PriceList</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.IncomingPaymentOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.CashReceipt</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.SalesReturnOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.PurchaseInvoice</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.InventoryTransferOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.GoodsReceipt</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.PurchaseOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.BankPayment</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.InternalSupplyRequest</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.CashPayment</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.CashTransferOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.BankReceipt</metadata>
     <use>Use</use>
   </content>
   <content>

@@ -40,7 +40,7 @@ EndProcedure
 &AtClient
 Procedure SaveAs(Command)
 	Notify = New NotifyDescription("SaveAsEnd", ThisObject);
-	ShowInputString(Notify, "", "New option name", 128);
+	ShowInputString(Notify, "", R().SuggestionToUser_4 , 128);
 EndProcedure
 
 #EndRegion
@@ -52,11 +52,11 @@ Procedure SaveSettingAtClient()
 	Notify = New NotifyDescription("SaveAsEnd", ThisObject);
 	CurrentData = Items.OptionsList.CurrentData;
 	If CurrentData = Undefined Then
-		ShowInputString(Notify, "", "Option name", 150);
+		ShowInputString(Notify, "", R().SuggestionToUser_3, 150);
 	Else
 		OptionDescription = ServiceSystemServer.GetObjectAttribute(CurrentData.ReportOption, "Description");
 		If CurrentData.Author <> SessionParametersClientServer.GetSessionParameter("CurrentUser") Then 
-			ShowInputString(Notify, OptionDescription, "Option name", 150);
+			ShowInputString(Notify, OptionDescription, R().SuggestionToUser_3, 150);
 		Else
 			SaveChoosenSetting(OptionDescription, CurrentData.ReportOption);
 		EndIf;
@@ -119,7 +119,7 @@ EndProcedure
 Procedure ShareEndAtServer(Val OptionKey, Val Parameters)
 	ReportOption = Catalogs.ReportOptions.FindByCode(OptionKey);
 	Users = Parameters.Users.UnloadValues();
-	If Users.Count() > 1
+	If Users.Count()
 		And Users.Find(SessionParameters.CurrentUser) = Undefined Then
 		Users.Add(SessionParameters.CurrentUser);
 	EndIf;

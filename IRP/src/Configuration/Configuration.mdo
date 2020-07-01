@@ -18,6 +18,7 @@
   <vendor>IRP Team</vendor>
   <version>0.6.4</version>
   <updateCatalogAddress>https://github.com/DitriXNew/irp</updateCatalogAddress>
+  <reportsVariantsStorage>SettingsStorage.ReportOptions</reportsVariantsStorage>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>
   <mainSectionPicture/>
   <defaultLanguage>Language.English</defaultLanguage>
@@ -303,6 +304,7 @@
   <commonModules>CommonModule.DocPhysicalInventoryServer</commonModules>
   <commonModules>CommonModule.PickupItemsClient</commonModules>
   <commonModules>CommonModule.SessionParametersClientServer</commonModules>
+  <commonModules>CommonModule.CatUserGroupsServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -327,6 +329,7 @@
   <eventSubscriptions>EventSubscription.GetCatalogPresentationFields</eventSubscriptions>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
+  <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>
   <functionalOptions>FunctionalOption.BetaTesting</functionalOptions>
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
@@ -398,6 +401,7 @@
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.HTMLField</commonForms>
   <commonForms>CommonForm.MainSettings</commonForms>
+  <commonForms>CommonForm.ShareToUserAndUserGroups</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
@@ -448,6 +452,7 @@
   <catalogs>Catalog.CurrencyMovementSets</catalogs>
   <catalogs>Catalog.DataAreas</catalogs>
   <catalogs>Catalog.Extensions</catalogs>
+  <catalogs>Catalog.ReportOptions</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -545,6 +550,7 @@
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.IntegrationInfo</informationRegisters>
+  <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceToSuppliers</accumulationRegisters>

@@ -2,9 +2,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocumentsClientServer.ChangeTitleCollapse(, ThisObject);
-	SplitedFormName = StrSplit(ThisObject.FormName, ".");
-	SplitedFormName.Delete(SplitedFormName.UBound());
-	ReportName = SplitedFormName.Get(SplitedFormName.UBound());
+	ReportName = ReportName();
 	ExternalCommandsServer.CreateCommands(ThisObject, ReportName, Catalogs.ConfigurationMetadata.Reports, Enums.FormTypes.ObjectForm);	
 EndProcedure
 
@@ -48,11 +46,13 @@ EndProcedure
 
 #EndRegion
 
-#Region Variants
+#Region Private
 
-&AtServer
-Procedure CreateVariantsMenu()
-	
-EndProcedure
+Function ReportName()
+	SplitedFormName = StrSplit(ThisObject.FormName, ".");
+	SplitedFormName.Delete(SplitedFormName.UBound());
+	Return SplitedFormName.Get(SplitedFormName.UBound());
+EndFunction
+
 
 #EndRegion

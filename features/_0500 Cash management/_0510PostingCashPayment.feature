@@ -297,7 +297,7 @@ I want to pay cash
 		| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Cash desk №1'      | 'TRY'          | 'Local currency'           | 'No'                    | ''         | ''                         | ''                     |
 		И Я закрыл все окна клиентского приложения
 	* Clear postings Cash payment 1 and check that there is no movement on the registers
-		* Clear postings документа
+		* Clear postings
 			И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
 			И в таблице "List" я перехожу к строке:
 				| 'Number' |

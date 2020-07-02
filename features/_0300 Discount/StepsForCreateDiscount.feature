@@ -323,16 +323,6 @@
 	И я нажимаю на кнопку 'Save and close'
 	И Пауза 2
 
-# Сценарий: меняю priority Discount Price 2 с 2 на 4
-# 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-# 	И я нажимаю на кнопку 'List'
-# 	И в таблице "List" я перехожу к строке:
-# 		| 'Description'              |
-# 		| 'Discount Price 2' |
-# 	И в таблице "List" я выбираю текущую строку
-# 	И в поле 'Priority' я ввожу текст '4'
-# 	И я нажимаю на кнопку 'Save and close'
-# 	И Пауза 2
 
 Сценарий: меняю priority Discount Price 1 на 1
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
@@ -345,16 +335,6 @@
 	И я нажимаю на кнопку 'Save and close'
 	И Пауза 2
 
-# Сценарий: меняю priority Discount Price 2 на 2
-# 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-# 	И я нажимаю на кнопку 'List'
-# 	И в таблице "List" я перехожу к строке:
-# 		| 'Description'              |
-# 		| 'Discount Price 2' |
-# 	И в таблице "List" я выбираю текущую строку
-# 	И в поле 'Priority' я ввожу текст '2'
-# 	И я нажимаю на кнопку 'Save and close'
-# 	И Пауза 2
 
 Сценарий: переношу скидку Discount 1 without Vat в Minimum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
@@ -800,12 +780,5 @@
 		| 'Maximum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: временная заглушка Store 03
-		# При выборе склада при создании заказа склад пропадает
-		И я перехожу к закладке "Info"
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
-			| 'Description' |
-			| 'Store 03'  |
-		И в таблице "List" я выбираю текущую строку
+
 	

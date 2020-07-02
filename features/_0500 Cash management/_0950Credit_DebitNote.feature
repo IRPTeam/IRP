@@ -1,18 +1,18 @@
 #language: ru
 @tree
 @Positive
-Функционал: списание дебиторской и кредиторской задолженности
-Как Разработчик
-Я хочу создать документ Credit_DebitNote
-Для проведения списания дебиторской и кредиторской задолженности
+Функционал: write-off of accounts receivable and payable
+
+As an accountant
+I want to create a Credit_DebitNote document.
+For write-off of accounts receivable and payable
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
-# Cash revenue
 
-Сценарий: _095001 создание тестовых данных
-	* Создание клиента и поставщика
+Сценарий: _095001 preparation
+	* Create customer and vendor
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'Lunch'
@@ -72,7 +72,7 @@
 		И я нажимаю на кнопку 'Save and close'
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 		И я нажимаю на кнопку 'Save and close'
-	* Создание соглашения с поставщиком для Maxim с видом расчетов по соглашениям
+	* Create vendor agreement for Maxim, Ap-Ar - posting details (by agreements)
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'Agreement Maxim'
@@ -107,7 +107,7 @@
 		И в поле 'Start using' я ввожу текст '01.11.2019'
 		И я нажимаю на кнопку 'Save and close'
 	И Пауза 30
-	* Создание Sales invoice по созданному клиенту
+	* Create a Sales invoice for creating customer
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Partner" я выбираю по строке 'Lunch'
@@ -144,12 +144,8 @@
 		И в поле 'Date' я ввожу текст '01.01.2020  10:00:00'
 		И Пауза 1
 		И я перехожу к закладке "Item list"
-		# И Пауза 5
-		# Тогда открылось окно 'Update item list info'
-		# И я изменяю флаг 'Update filled prices.'
-		# И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание Purchase invoice по поставщику
+	* Create Purchase invoice for creating vendor
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение данных о поставщике
@@ -163,13 +159,13 @@
 				| 'Description'   |
 				| 'Company Maxim' |
 			И в таблице "List" я выбираю текущую строку
-		* Изменение номера purchase invoice на 601
+		* Change the document number to 601
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '2 900'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2 900'
-		* Добавление товара в Purchase Invoice
+		* Adding items to Purchase Invoice
 			И я перехожу к закладке "Item list"
 			И  я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -184,7 +180,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '20,000'
 			И в таблице "ItemList" я завершаю редактирование строки
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '550,00'
-		* Изменение даты в Purchase invoice
+		* Change of date in Purchase invoice
 			И я перехожу к закладке "Other"
 			И в поле 'Date' я ввожу текст '01.01.2020  10:00:00'
 			И Пауза 1
@@ -195,7 +191,7 @@
 			И я изменяю флаг 'Update filled prices.'
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание ещё одного Purchase invoice по поставщику
+	* Create one more Purchase invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение данных о поставщике
@@ -209,13 +205,13 @@
 				| 'Description'   |
 				| 'Company Maxim' |
 			И в таблице "List" я выбираю текущую строку
-		* Изменение номера purchase invoice на 2901
+		* Change the document number to 2901
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '2 901'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2 901'
-		* Добавление товара в Purchase Invoice
+		* Adding items to Purchase Invoice
 			И я перехожу к закладке "Item list"
 			И  я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -230,7 +226,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '20,000'
 			И в таблице "ItemList" я завершаю редактирование строки
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '500,00'
-		* Изменение даты в Purchase invoice
+		* Change of date in Purchase invoice
 			И я перехожу к закладке "Other"
 			И в поле 'Date' я ввожу текст '01.01.2020  10:00:00'
 			И Пауза 1
@@ -243,11 +239,11 @@
 			И я нажимаю на кнопку 'Post and close'
 	
 
-Сценарий: _095002 проверка проводок документа Credit_DebitNote по виду операции payable
-	* Создание документа
+Сценарий: _095002 check movements of the document Credit_DebitNote by operation type payable
+	* Create document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов шапки
+	* Filling in the details of the document
 		И из выпадающего списка "Operation type" я выбираю точное значение 'Payable'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -264,7 +260,7 @@
 			| 'Description'   |
 			| 'Company Maxim' |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение документа-основания вручную для списания задолженности
+	* Filling in the basis document for debt write-offs
 		И в таблице "Transactions" я нажимаю на кнопку с именем 'TransactionsAdd'
 		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Partner ap transactions basis document"
 		Тогда открылось окно 'Select data type'
@@ -272,7 +268,7 @@
 			| ''                 |
 			| 'Purchase invoice' |
 		И в таблице "" я выбираю текущую строку
-		* Проверка отбора документов-оснований по указанному партнеру
+		* Checking the selection of basis documents for the specified partner
 			Тогда в таблице "List" количество строк "меньше или равно" 2
 			Тогда таблица "List" содержит строки:
 			| 'Number' | 'Legal name'    | 'Partner' | 'Amount'    | 'Currency' |
@@ -299,13 +295,13 @@
 			| 'Software'    |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Transactions" я завершаю редактирование строки
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '1'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '1'
-	* Проверка проводок документа
+	* Check movements документа
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
@@ -338,14 +334,14 @@
 		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Agreement Maxim'     | 'TRY'                      | 'TRY'                      | 'No'                   |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _095003 проверка проводок при изменении документа-основания и суммы в уже проведенном CreditDebitNote
-	* Выбор уже созданного документа
+Сценарий: _095003 change of the basis document and the amount in the already performed Credit debit note and movement check
+	* Choose a document already created
 		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
 		И в таблице "List" я выбираю текущую строку
-	* Изменение документа-основания и суммы
+	* Сhange of the basis document and the amount
 		И в таблице "Transactions" я выбираю текущую строку
 		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Partner ap transactions basis document"
 		Тогда открылось окно 'Select data type'
@@ -360,7 +356,7 @@
 		И в таблице "Transactions" я активизирую поле с именем "TransactionsAmount"
 		И в таблице "Transactions" в поле с именем 'TransactionsAmount' я ввожу текст '2 000,00'
 		И в таблице "Transactions" я завершаю редактирование строки
-	* Проверка проводок
+	* Check movements
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
@@ -393,11 +389,11 @@
 		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Agreement Maxim'     | 'TRY'                      | 'TRY'                      | 'No'                   |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _095004 проверка проводок документа Credit_DebitNote по виду операции Receivable
-	* Создание документа
+Сценарий: _095004 check movements of the document Credit_DebitNote by operation type Receivable
+	* Create a document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов шапки
+	* Filling in the details of the document
 		И из выпадающего списка "Operation type" я выбираю точное значение 'Receivable'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -414,7 +410,7 @@
 			| 'Description'   |
 			| 'Company Lunch' |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение документа-основания вручную для списания задолженности
+	* Filling in the basis document for debt write-offs
 		И в таблице "Transactions" я нажимаю на кнопку с именем 'TransactionsAdd'
 		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Partner AR transactions basis document"
 		Тогда открылось окно 'Select data type'
@@ -422,7 +418,7 @@
 			| ''                 |
 			| 'Sales invoice' |
 		И в таблице "" я выбираю текущую строку
-		* Проверка отбора документов-оснований по указанному партнеру
+		* Checking the selection of basis documents for the specified partner
 			Тогда в таблице "List" количество строк "меньше или равно" 1
 			Тогда таблица "List" содержит строки:
 			| 'Number' |
@@ -448,13 +444,13 @@
 			| 'Software'    |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Transactions" я завершаю редактирование строки
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '2'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '2'
-	* Проверка проводок документа
+	* Check movements документа
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
@@ -487,18 +483,18 @@
 		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Company Lunch'                                 | 'TRY'      | ''              | ''                      | ''                         | ''                         | ''                     |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _095005 проверка заполнения контрагента если он у партнера только один
-	* Создание документа
+Сценарий: _095005 check the legal name filling if the partner has only one
+	* Create a document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение партнера и проверка заполнения контрагента
+	* Filling in legal name
 		И я нажимаю кнопку выбора у поля с именем "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Lunch'       |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'Company Lunch'
-	* Проверка перезаполнения контрагента при перевыборе партнера
+	* Checking legal name re-filling at partner re-selection.
 		И я нажимаю кнопку выбора у поля с именем "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -506,11 +502,11 @@
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
 
-Сценарий: _095006 проверка перевыбора вида операции в  документе CreditDebitNote
-	* Создание документа
+Сценарий: _095006 check re-selection of the transaction type in the Credit Debit Note document
+	* Create a document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов шапки
+	* Filling in the details of the document
 		И из выпадающего списка "Operation type" я выбираю точное значение 'Receivable'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -527,7 +523,7 @@
 			| 'Description'   |
 			| 'Company Lunch' |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение документа-основания вручную для списания задолженности
+	* Filling in the basis document for debt write-offs
 		И в таблице "Transactions" я нажимаю на кнопку с именем 'TransactionsAdd'
 		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Partner AR transactions basis document"
 		Тогда открылось окно 'Select data type'
@@ -535,7 +531,7 @@
 			| ''                 |
 			| 'Sales invoice' |
 		И в таблице "" я выбираю текущую строку
-		* Проверка отбора документов-оснований по указанному партнеру
+		* Checking the selection of basis documents for the specified partner
 			Тогда в таблице "List" количество строк "меньше или равно" 1
 			Тогда таблица "List" содержит строки:
 			| 'Number' |
@@ -561,20 +557,20 @@
 			| 'Software'    |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Transactions" я завершаю редактирование строки
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '12'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '12'
 		И я нажимаю на кнопку 'Post'
-	* Перевыбор вида операции
+	* Re-select operatiom type
 		И из выпадающего списка "Operation type" я выбираю точное значение 'Payable'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		Тогда в таблице "Transactions" количество строк "равно" 0
 		И Я закрыл все окна клиентского приложения
-	* Нажатие отмены при перевыборе вида операции
+	* Click cancel when re-selecting the operation type
 		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
@@ -595,11 +591,11 @@
 		| 'Sales invoice 2 900*'                          | 'Lunch'   | 'Basic Agreements, TRY' | '1 000,00' | 'Distribution department' | 'TRY'      | 'Software'     |
 	
 
-Сценарий: _095007 проверка заполнения и перезаполнения табличной части с помощью кнопки Fill
-	* Создание документа
+Сценарий: _095007 check filling and refilling of the tabular part using the Fill button
+	* Create a document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов шапки
+	* Filling in the details of the document
 		И из выпадающего списка "Operation type" я выбираю точное значение 'Receivable'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -616,14 +612,14 @@
 			| 'Description'   |
 			| 'Company Kalipso' |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение табличной части
+	* Filling in the tabular part
 		И в таблице "Transactions" я нажимаю на кнопку 'Fill transactions'
 		И     таблица "Transactions" содержит строки:
 			| 'Partner AR transactions basis document'      |
 			| 'Sales invoice 180*'                          |
 			| 'Sales invoice 181*'                          |
 			| 'Sales invoice 3*'                            |
-	* Перевыбор партнера и проверка перезаполнения табличной части
+	* Re-select partner and check re-filling tabular part
 		И я нажимаю кнопку выбора у поля с именем "Partner"
 		Тогда открылось окно 'Partners'
 		И в таблице "List" я перехожу к строке:

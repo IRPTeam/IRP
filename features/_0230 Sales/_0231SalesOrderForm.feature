@@ -175,14 +175,14 @@ For fast data entry
 
 
 Сценарий: _023113 checking totals in the document Sales order
-	* Открытие формы списка документов Sales order
+	* Open list form Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	* Выбор документа Sales order для проверки итогов
+	* Select Sales order
 		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка наличия итогов документа
+	* Check for document results
 		И     элемент формы с именем "ItemListTotalOffersAmount" стал равен '0,00'
 		И     элемент формы с именем "ItemListTotalNetAmount" стал равен '3 686,44'
 		И     элемент формы с именем "ItemListTotalTaxAmount" стал равен '663,56'

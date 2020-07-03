@@ -417,6 +417,7 @@ div.zoom svg{
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha256-IdYuEFP3WJ/mNlzM18Y20Xgav3h5pgXYzl8fW4GnuPo=" crossorigin="anonymous"></script>
     <script>
+    var call1C = null;
     let listerens =  [];
 
 let gallery = {
@@ -825,14 +826,16 @@ function searchInGallery(){
 
 //send data to 1C
 function send_to_1C(name, data){ 
-    var event = new MouseEvent('click', {
-      'view': window,
-      'bubbles': true,
-      'cancelable': true
-    });
-    event.propertyName = name;
-    event.data = data; 
-    document.dispatchEvent(event);
+	call1C = data;
+	call1CEvent.click();
+    //var event = new MouseEvent('click', {
+    //  'view': window,
+    //  'bubbles': true,
+    //  'cancelable': true
+    //});
+    //event.propertyName = name;
+    //event.data = data; 
+    //document.dispatchEvent(event);
 }
 
 function changeSearchMethod(){
@@ -929,5 +932,6 @@ function fillImageGallery(jsonData) {
     window.addEventListener('resize', () =>{UI.resizeGallery()});
 }
     </script>
+    <button id="call1CEvent" style="display: none">call1C</button>
 </body>
 </html>

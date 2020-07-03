@@ -62,23 +62,19 @@ EndProcedure
 
 &AtClient
 Procedure HTMLGalleryOnClick(Item, EventData, StandardProcessing)
-	StandardProcessing = True;
-	If EventData.event = Undefined Then
+	StandardProcessing = EventData.Href = Undefined;
+	
+	If EventData.Button = Undefined OR Not EventData.Button.Id = "call1CEvent" Then
 		Return;
 	EndIf;
 	
-	
-	If EventData.Event.propertyName = "call1C" Then
-		Array = New Array;
-		Data = CommonFunctionsServer.DeserializeJSON(EventData.Event.Data);
-		If Data.value = "selected_images" Then
-			ArrayPictureIDs = StrSplit(Data.ids, ",");
-			Array = PictureViewerServer.GetFileRefsByFileIDs(ArrayPictureIDs);
-		EndIf;
-		Close(Array);
+	Array = New Array;
+	Data = CommonFunctionsServer.DeserializeJSON(Item.Document.defaultView.call1C);
+	If Data.value = "selected_images" Then
+		ArrayPictureIDs = StrSplit(Data.ids, ",");
+		Array = PictureViewerServer.GetFileRefsByFileIDs(ArrayPictureIDs);
 	EndIf;
-		
-	
+	Close(Array);
 EndProcedure
 
 

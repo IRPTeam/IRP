@@ -65,6 +65,14 @@ Procedure UpdateHTMLAddAttributes() Export
 	
 EndProcedure
 
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If StrStartsWith(EventName, "UpdateObjectPictures") Then
+		UpdateHTMLPictures();
+	EndIf;
+EndProcedure
+
+
 #EndRegion
 
 

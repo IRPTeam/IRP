@@ -3,52 +3,15 @@
 
 #Region Get
 
-Function GetUsersAndUserGroupsByReportOption(Val ReportOption) Export
-	ReturnValue = New Array;
-	Query = New Query;
-	Query.Text = "SELECT ALLOWED
-	|	SharedReportOptions.UserOrGroup As Ref
-	|FROM
-	|	InformationRegister.SharedReportOptions AS SharedReportOptions
-	|WHERE
-	|	SharedReportOptions.ReportOption = &ReportOption";
-	Query.SetParameter("ReportOption", ReportOption);
-	QueryExecution = Query.Execute();
-	If Not QueryExecution.IsEmpty() Then
-		QueryUnload = QueryExecution.Unload();
-		ReturnValue = QueryUnload.UnloadColumn("Ref");
-	EndIf;
-	Return ReturnValue;
-EndFunction
-
 Function GetUsersByReportOption(Val ReportOption) Export
 	ReturnValue = New Array;
 	Query = New Query;
 	Query.Text = "SELECT ALLOWED
-	|	SharedReportOptions.UserOrGroup As Ref
+	|	SharedReportOptions.User As Ref
 	|FROM
 	|	InformationRegister.SharedReportOptions AS SharedReportOptions
 	|WHERE
-	|	SharedReportOptions.UserOrGroup REFS Catalog.Users
-	|	AND SharedReportOptions.ReportOption = &ReportOption";
-	Query.SetParameter("ReportOption", ReportOption);
-	QueryExecution = Query.Execute();
-	If Not QueryExecution.IsEmpty() Then
-		QueryUnload = QueryExecution.Unload();
-		ReturnValue = QueryUnload.UnloadColumn("Ref");
-	EndIf;
-	Return ReturnValue;
-EndFunction
-
-Function GetUserGroupsByReportOption(Val ReportOption) Export
-	ReturnValue = New Array;
-	Query = New Query;
-	Query.Text = "SELECT ALLOWED
-	|	SharedReportOptions.UserOrGroup As Ref
-	|FROM
-	|	InformationRegister.SharedReportOptions AS SharedReportOptions
-	|WHERE
-	|	SharedReportOptions.UserOrGroup REFS Catalog.UserGroups
+	|	SharedReportOptions.User REFS Catalog.Users
 	|	AND SharedReportOptions.ReportOption = &ReportOption";
 	Query.SetParameter("ReportOption", ReportOption);
 	QueryExecution = Query.Execute();
@@ -117,7 +80,7 @@ Procedure SetUsersToReportOption(Val ReportOption, Val UsersArray) Export
 		For Each Item In UsersArray Do
 			SharedReportOptionsSetRecord = SharedReportOptionsSet.Add();
 			SharedReportOptionsSetRecord.ReportOption = ReportOption;
-			SharedReportOptionsSetRecord.UserOrGroup = Item;
+			SharedReportOptionsSetRecord.User = Item;
 		EndDo
 	EndIf;
 	SharedReportOptionsSet.Write();

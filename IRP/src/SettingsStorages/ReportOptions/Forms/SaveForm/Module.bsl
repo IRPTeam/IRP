@@ -7,12 +7,10 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.ObjectKey = Parameters.ObjectKey;
 	ThisObject.CurrentSettingsKey = Parameters.CurrentSettingsKey;
-	UserGroups = CatUserGroupsServer.GetUserGroupsByUser(SessionParameters.CurrentUser);
 	
 	OptionsList.Parameters.SetParameterValue("ObjectKey", ThisObject.ObjectKey);
 	OptionsList.Parameters.SetParameterValue("CurrentSettingsKey", ThisObject.CurrentSettingsKey);
 	OptionsList.Parameters.SetParameterValue("Author", SessionParameters.CurrentUser);
-	OptionsList.Parameters.SetParameterValue("GroupsList", UserGroups);
 		
 	Items.OptionsList.CurrentRow = Catalogs.ReportOptions.FindByCode(ThisObject.CurrentSettingsKey);	
 EndProcedure
@@ -81,15 +79,9 @@ Procedure SaveChoosenSetting(Val OptionDescription, Val ReportOption = Undefined
 		Users = GetSharedUsers(OptionKey);
 		UsersValueList = New ValueList();
 		UsersValueList.LoadValues(Users);
-		UserGroups = GetSharedUserGroups(OptionKey);
-		UserGroupsValueList = New ValueList();
-		UserGroupsValueList.LoadValues(UserGroups);
 		OpenFormParameters = New Structure();
-		OpenFormParameters.Insert("UseUsers", True);
 		OpenFormParameters.Insert("Users", UsersValueList);
-		OpenFormParameters.Insert("UseUserGroups", True);
-		OpenFormParameters.Insert("UserGroups", UserGroupsValueList);
-		OpenForm("CommonForm.ShareToUserAndUserGroups", OpenFormParameters, ThisObject, ThisObject.UUID, , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+		OpenForm("CommonForm.ShareToUsers", OpenFormParameters, ThisObject, ThisObject.UUID, , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 	Else
 		CloseForm(OptionKey);
 	EndIf;	
@@ -99,12 +91,6 @@ EndProcedure
 Function GetSharedUsers(Val OptionKey)
 	ReportOption = Catalogs.ReportOptions.FindByCode(OptionKey);
 	Return InformationRegisters.SharedReportOptions.GetUsersByReportOption(ReportOption);
-EndFunction
-
-&AtServer
-Function GetSharedUserGroups(Val OptionKey)
-	ReportOption = Catalogs.ReportOptions.FindByCode(OptionKey);
-	Return InformationRegisters.SharedReportOptions.GetUserGroupsByReportOption(ReportOption);
 EndFunction
 
 &AtClient

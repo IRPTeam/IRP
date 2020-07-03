@@ -372,7 +372,7 @@ For expense and income planning
 
 Сценарий: _080015 check the display of the header of the collapsible group in Incoming payment order
 	И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
-	Когда проверяю отображения заголовка сворачиваемой группы в плановых документах поступления/расхода ДС
+	Когда check the display of the header of the collapsible group in planned incoming/outgoing documents
 	И в поле с именем "PlaningDate" я ввожу текущую дату
 	И     я перехожу к следующему реквизиту
 	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planing date:"
@@ -380,7 +380,7 @@ For expense and income planning
 
 Сценарий: _080016 check the display of the header of the collapsible group in Outgoing payment order
 	И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
-	Когда проверяю отображения заголовка сворачиваемой группы в плановых документах поступления/расхода ДС
+	Когда check the display of the header of the collapsible group in planned incoming/outgoing documents
 	И в поле с именем "PlaningDate" я ввожу текущую дату
 	И     я перехожу к следующему реквизиту
 	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planing date:"

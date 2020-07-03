@@ -1328,7 +1328,7 @@ To further use it when reflecting in the program of business processes
 			| 'Description' |
 			| 'Wait'        |
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuCopy'
-	* Checking UniqueID field cleaning
+	* Checking UniqueID field deleting
 		И     элемент формы с именем "UniqueID" стал равен ''
 		И     элемент формы с именем "Description_en" стал равен 'Wait'
 	И Я закрыл все окна клиентского приложения

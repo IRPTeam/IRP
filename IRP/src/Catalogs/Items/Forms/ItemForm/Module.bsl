@@ -34,7 +34,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		AddAttributesCreateFormControll();
 		UpdateAddAttributesHTMLDocument();
 	EndIf;
-	PictureViewerClient.HTMLEventAction(EventName, Parameter, Source, ThisForm);
+	PictureViewerClient.HTMLEventAction(EventName, Parameter, Source, ThisObject);
 EndProcedure
 
 &AtClient
@@ -72,19 +72,7 @@ EndProcedure
 
 &AtClient
 Procedure PictureViewHTMLOnClick(Item, EventData, StandardProcessing)
-	StandardProcessing = EventData.Href = Undefined;
-	If EventData.event = Undefined Then
-		Return;
-	EndIf;
-	
-	If EventData.Event.propertyName = "call1C" Then
-		If Object.Ref.isEmpty() Then
-			ShowMessageBox(Undefined, R()["InfoMessage_004"]);
-		Else
-			PictureViewerClient.HTMLEvent(ThisForm, Object, EventData.Event.Data);
-		EndIf;
-	EndIf;
-	
+	PictureViewerClient.PictureViewHTMLOnClick(ThisForm, Item, EventData, StandardProcessing)
 EndProcedure
 
 &AtClient

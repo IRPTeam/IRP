@@ -2,17 +2,20 @@
 @tree
 @Positive
 
-Функционал: планирование расходов и поступления ДС
+Функционал: expense and income planning
 
-Как Разработчик
-Я хочу создать документы заявка на расходование ДС и заявка на поступление ДС
-Для планирования расхода и поступления ДС
+
+As a financier
+I want to create documents Incoming payment order and Outgoing payment order
+For expense and income planning
+
+
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _080001 создание заявки на планирования прихода ДС IncomingPaymentOrder
+Сценарий: _080001 create Incoming payment order
 	И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Company"
@@ -31,12 +34,12 @@
 		| USD  | American dollar |
 	И в таблице "List" я выбираю текущую строку
 	И в поле "Planing date" я ввожу начало следующего месяца
-	И я меняю номер документа
+	* Change the document number
 		И в поле 'Number' я ввожу текст '1'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '1'
-	И я заполняю табличную часть
+	* Filling in tabular part
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -58,14 +61,14 @@
 		| 1      |  Main Company |  Bank account, USD | USD      |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _080002 проверка движений документа IncomingPaymentOrder
-	* Проверка движений
+Сценарий: _080002 check Incoming payment order movements
+	* Check movements
 		И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		Тогда таблица "List" содержит строки:
 			| 'Currency' | 'Recorder'                  | 'Basis document'             | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'    |
 			| 'USD'      | 'Incoming payment order 1*' | 'Incoming payment order 1*'  | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti'  | 'Company Kalipso'   | '1 000,00'  |
 		И я закрыл все окна клиентского приложения
-	* Отмена проведения и проверка отмены движений
+	* Clear postings and check that there is no movement on the registers
 		И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -76,7 +79,7 @@
 			| 'Currency' | 'Recorder'                  | 'Basis document'             | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'    |
 			| 'USD'      | 'Incoming payment order 1*' | 'Incoming payment order 1*'  | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti'  | 'Company Kalipso'   | '1 000,00'  |
 		И я закрыл все окна клиентского приложения
-	* Повторное проведение и проверка движений
+	* Re-posting the document and checking postings on the registers
 		И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -89,14 +92,14 @@
 		И я закрыл все окна клиентского приложения
 	
 
-Сценарий: _080003 проверка подключения к документу IncomingPaymentOrder Отчета по движениям
+Сценарий: _080003 check connection to Incoming payment order of the Registration report
 	И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Incoming payment order 1*'             | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
@@ -108,13 +111,13 @@
 		| ''                                      | '*'      | '5 649,72'  | 'Main Company' | 'Incoming payment order 1*' | 'Bank account, USD' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'Local currency'           | 'No'                   |
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Incoming payment order 1*'             | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
@@ -126,31 +129,30 @@
 		| ''                                      | '*'      | '5 649,72'  | 'Main Company' | 'Incoming payment order 1*' | 'Bank account, USD' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'Local currency'           | 'No'                   |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _080004 проверка Description в документе IncomingPaymentOrder
+Сценарий: _080004 check Description in IncomingPaymentOrder
 	И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
 	Когда проверяю работу Description
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _080005 создание Bank reciept на основании IncomingPaymentOrder
+Сценарий: _080005 create Bank reciept based on Incoming payment order
 	И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
 	И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
-	# И в таблице "List" я выбираю текущую строку
-	И я создаю поступление безнала из документа Incoming Payment Order
+	* Create Bank receipt from Incoming Payment Order
 		И я нажимаю на кнопку с именем 'FormDocumentBankReceiptGenarateBankReceipt'
 		И в таблице "PaymentList" я активизирую поле "Amount"
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '250,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
-		И я меняю номер документа на 20
+		* Change the document number to 20
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '20'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '20'
 		И я нажимаю на кнопку 'Post and close'
-	И я создаю второе поступление безнала из списка документов Incoming Payment Order
+	* Create one more Bank receipt from Incoming Payment Order list form
 		И я закрыл все окна клиентского приложения
 		И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
 		И в таблице "List" я перехожу к строке:
@@ -161,14 +163,14 @@
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '250,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
-		И я меняю номер документа на 21
+		* Change the document number to 21
 				И я перехожу к закладке "Other"
 				И в поле 'Number' я ввожу текст '21'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '21'
 		И я нажимаю на кнопку 'Post and close'
-	И я проверяю движения документов по регистру PlaningCashTransactions
+	* Check movements by register Planing cash transactions
 		И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		Тогда таблица "List" содержит строки:
 		| 'Currency' | 'Recorder'                  | 'Basis document'            | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Amount'   |
@@ -176,7 +178,7 @@
 		| 'USD'      | 'Bank receipt 21*'          | 'Incoming payment order 1*' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti' | '*'               | '-250,00'  |
 	
 
-Сценарий: _080006 создание заявки на планирования расхода ДС OutgoingPaymentOrder
+Сценарий: _080006 create Outgoing payment order
 	И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Company"
@@ -195,14 +197,14 @@
 		| TRY  |
 	И в таблице "List" я выбираю текущую строку
 	И в поле "Planing date" я ввожу начало следующего месяца
-	И я меняю номер документа
+	* Change the document number
 		И в поле 'Number' я ввожу текст '1'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '1'
-	И я меняю статус документа 
+	* Change status
 		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-	И я заполняю табличную часть
+	* Filling in tabular part
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -224,14 +226,14 @@
 		| 1      |  Main Company |  Bank account, TRY | TRY      |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _080007 проверка движений документа OutgoingPaymentOrder
-	* Проверка движений
+Сценарий: _080007 check Outgoing payment order movements
+	* Check movements
 		И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		Тогда таблица "List" содержит строки:
 		| 'Currency'   | 'Recorder'                    | 'Basis document'            | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'    |
 		| 'TRY'        | 'Outgoing payment order 1*'   | 'Outgoing payment order 1*' | 'Main Company' | 'Bank account, TRY' | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | '3 000,00'  |
 		И я закрыл все окна клиентского приложения
-	* Отмена проведения и проверка отмены движений
+	* Clear postings and check that there is no movement on the registers
 		И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -242,7 +244,7 @@
 			| 'Currency'   | 'Recorder'                    | 'Basis document'            | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'    |
 			| 'TRY'        | 'Outgoing payment order 1*'   | 'Outgoing payment order 1*' | 'Main Company' | 'Bank account, TRY' | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | '3 000,00'  |
 		И я закрыл все окна клиентского приложения
-	* Повторное проведение и проверка движений
+	* * Re-posting the document and checking postings on the registers
 		И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -255,14 +257,14 @@
 		И я закрыл все окна клиентского приложения
 
 	
-Сценарий: _080008 проверка подключения к документу OutgoingPaymentOrder Отчета по движениям
+Сценарий: _080008 check connection to Outgoing payment order of the Registration report
 	И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Outgoing payment order 1*'             | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''          | ''                  | ''                         | ''                     |
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''          | ''                  | ''                         | ''                     |
@@ -274,13 +276,13 @@
 		| ''                                      | '*'      | '3 000'     | 'Main Company' | 'Outgoing payment order 1*' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Local currency'           | 'No'                   |
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Outgoing payment order 1*'             | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''          | ''                  | ''                         | ''                     |
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''          | ''                  | ''                         | ''                     |
@@ -292,31 +294,30 @@
 		| ''                                      | '*'      | '3 000'     | 'Main Company' | 'Outgoing payment order 1*' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Local currency'           | 'No'                   |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _080009 проверка Description в документе OutgoingPaymentOrder
+Сценарий: _080009 check Description in Outgoing payment order
 	И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
 	Когда проверяю работу Description
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _080010 создание Bank payment на основании OutgoingPaymentOrder
+Сценарий: _080010 create Bank payment based on Outgoing payment order
 	И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
 	И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
-	# И в таблице "List" я выбираю текущую строку
-	И я создаю поступление безнала
+	* Create Bank payment from Outgoing payment order
 		И я нажимаю на кнопку с именем 'FormDocumentBankPaymentGenarateBankPayment'
 		И в таблице "PaymentList" я активизирую поле "Amount"
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '250,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
-		И я меняю номер документа на 20
+		* Change the document number to 20
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '20'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '20'
 		И я нажимаю на кнопку 'Post and close'
-	И я создаю поступление безнала из списка документов Outgoing Payment Order
+	* Create Bank payment from Outgoing payment order list
 		И я закрыл все окна клиентского приложения
 		И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
 		И в таблице "List" я перехожу к строке:
@@ -327,14 +328,14 @@
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '250,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
-		И я меняю номер документа на 21
+		* Change the document number to 21
 				И я перехожу к закладке "Other"
 				И в поле 'Number' я ввожу текст '21'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '21'
 		И я нажимаю на кнопку 'Post and close'
-	И я проверяю движения документов по регистру PlaningCashTransactions
+	* Check movements by register Planing cash transactions
 		И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		Тогда таблица "List" содержит строки:
 		| 'Currency' | 'Recorder'                 | 'Basis document'            | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'   |
@@ -346,7 +347,7 @@
 
 # Filters
 
-Сценарий: _080011 проверка фильтра по собственным компаниям в Incoming payment order
+Сценарий: _080011 filter check by own companies in the document Incoming payment order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
 	Когда проверяю фильтр по собственным компаниям
@@ -357,29 +358,29 @@
 	Когда проверяю ввод Description
 
 
-Сценарий: _080013 проверка фильтра по собственным компаниям в Outgoing payment order
+Сценарий: _080013 filter check by own companies in the document Outgoing payment order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
 	Когда проверяю фильтр по собственным компаниям
 
-Сценарий: _080014 проверка ввода Description в Outgoing payment order
+Сценарий: _080014 check Description in Outgoing payment order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
 	Когда проверяю ввод Description
 
 # EndFilters
 
-Сценарий: _080015 проверяю отображения заголовка сворачиваемой группы в IncomingPaymentOrder
+Сценарий: _080015 check the display of the header of the collapsible group in Incoming payment order
 	И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
-	Когда проверяю отображения заголовка сворачиваемой группы в плановых документах поступления/расхода ДС
+	Когда check the display of the header of the collapsible group in planned incoming/outgoing documents
 	И в поле с именем "PlaningDate" я ввожу текущую дату
 	И     я перехожу к следующему реквизиту
 	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planing date:"
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _080016 проверяю отображения заголовка сворачиваемой группы в OutgoingPaymentOrder
+Сценарий: _080016 check the display of the header of the collapsible group in Outgoing payment order
 	И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
-	Когда проверяю отображения заголовка сворачиваемой группы в плановых документах поступления/расхода ДС
+	Когда check the display of the header of the collapsible group in planned incoming/outgoing documents
 	И в поле с именем "PlaningDate" я ввожу текущую дату
 	И     я перехожу к следующему реквизиту
 	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planing date:"

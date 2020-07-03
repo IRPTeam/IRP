@@ -2,22 +2,19 @@
 @tree
 @Positive
 
-Функционал: проверка расчета налогов
+Функционал: tax calculation check
 
-Как тестировщик
-Я хочу проверить расчет налогов
-Для налогового учета
 
-# применение налогов по отдельности
+# individually applying taxes
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
 
-Сценарий: _0902000 создание тестовых данных
-	* Создание вида номенклатуры
-		* Открытие формы создания ItemTypes
+Сценарий: _0902000 preparation
+	* Create item type
+		* Open a creation form ItemTypes
 			И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Создание видов номенклатуры: Bags
@@ -34,11 +31,11 @@
 			И в таблице "AvailableAttributes" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Save and close'
 			И я закрыл все окна клиентского приложения
-	* Создание Item Bag
-		* Открытие формы создания Items
+	* Create Item Bag
+		* Open a creation form Items
 			И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Создание тестовой номенклатуры Bag
+		* Create Item Bag
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
 			И в поле с именем 'Description_en' я ввожу текст 'Bag'
 			И в поле с именем 'Description_tr' я ввожу текст 'Bag TR'
@@ -51,7 +48,7 @@
 			И я нажимаю кнопку выбора у поля с именем "Unit"
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save'
-	* Создание item key для Bag
+	* Create item key for Bag
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Producer"
@@ -68,7 +65,7 @@
 		И в таблице "List" я активизирую поле "Add attribute"
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
-	* Установка ставки в регистр по Item key
+	* Filling tax rates for Item key in the register
 		И я открываю навигационную ссылку "e1cib/list/InformationRegister.TaxSettings"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя 'RecordType' на 'Item key'
@@ -90,7 +87,7 @@
 		И из выпадающего списка "Tax rate" я выбираю точное значение '0%'
 		И в поле 'Period' я ввожу текст '01.01.2020'
 		И я нажимаю на кнопку 'Save and close'
-	* Установка ставки в регистр по Item
+	* Filling tax rates for Item in the register
 		И я открываю навигационную ссылку "e1cib/list/InformationRegister.TaxSettings"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя 'RecordType' на 'Item'
@@ -112,7 +109,7 @@
 		И из выпадающего списка "Tax rate" я выбираю точное значение '18%'
 		И в поле 'Period' я ввожу текст '01.01.2020'
 		И я нажимаю на кнопку 'Save and close'
-	* Установка ставки в регистр по Item type
+	* Filling tax rates for Item type in the register
 		И я открываю навигационную ссылку "e1cib/list/InformationRegister.TaxSettings"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя 'RecordType' на 'Item type'
@@ -137,7 +134,7 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090200 подключение расчета налога Sales Tax в документах Sales order и Sales invoice
+Сценарий: _090200 activating Sales Tax calculation in Sales order and Sales invoice documents
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.Taxes'
 	И в таблице "List" я перехожу к строке:
 		| 'Description' | 'Reference' |
@@ -152,11 +149,11 @@
 	И в таблице "UseDocuments" я завершаю редактирование строки
 	И я нажимаю на кнопку 'Save and close'
 
-Сценарий: _090201 расчет НДС и Sales Tax в Sales order (галочка Price include tax установлена)
-	* Открытие формы Sales order
+Сценарий: _090201 VAT and Sales Tax calculation in Sales order (Price include tax box is set)
+	* Open the Sales order creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов 
+	* Filling in the details of the document
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -172,7 +169,7 @@
 			| 'Description'           |
 			| 'Basic Agreements, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Добавление товаров в Sales order
+	* Adding items to Sales order
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -189,7 +186,7 @@
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка расчета VAT и Sales Tax
+	* Check the calculation of VAT and Sales Tax
 		И     таблица "ItemList" содержит строки:
 		| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 		| '400,00' | 'Trousers' | '18%' | '38/Yellow' | 'Stock'              | '1,000' | '64,98'      | '1%'       | 'pcs'  | '335,02'     | '400,00'       |
@@ -199,7 +196,7 @@
 		| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '61,02'         |
 		| 'SalesTax' | ''         | ''         | ''          | ''          | '3,96'   | '3,96'          |
 		| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
-	* Добавление ещё одной строки и проверка расчета VAT и Sales Tax
+	* Add one more line and check the calculation of VAT and Sales Tax
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -229,7 +226,7 @@
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '17,82'  | '17,82'         |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
 			| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '13,86'  | '13,86'         |
-	* Удаление строки и проверка перерасчета VAT и Sales Tax
+	* Deleting the row and checking the VAT and Sales Tax recalculation
 		И в таблице "ItemList" я перехожу к строке:
 		| 'Item'     | 'Item key'  |
 		| 'Trousers' | '38/Yellow' |
@@ -244,11 +241,11 @@
 			| 'SalesTax' | ''         | ''     | ''         | ''          | '13,86'  | '13,86'         |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090202 расчет НДС и Sales Tax в Sales order (галочка Price include tax не стоит)
-	* Открытие формы Sales order
+Сценарий: _090202 VAT and Sales Tax calculation in Sales order (Price include tax box isn't set)
+	* Open the Sales order creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов 
+	* Filling in the details of the document
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -267,7 +264,7 @@
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И я снимаю флаг 'Price include tax'
-	* Добавление товаров в Sales order
+	* Adding items to Sales order
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -284,7 +281,7 @@
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка расчета VAT и Sales Tax
+	* Check the calculation of VAT and Sales Tax
 		И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '76,00'      | '1%'       | 'pcs'  | '400,00'     | '476,00'       |
@@ -294,7 +291,7 @@
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '72,00'         |
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '4,00'   | '4,00'          |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
-	* Добавление ещё одной строки и проверка расчета VAT и Sales Tax
+	* Add one more line and check the calculation of VAT and Sales Tax
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -324,7 +321,7 @@
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '18,00'  | '18,00'         |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
 			| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '14,00'  | '14,00'         |
-	* Удаление строки и проверка перерасчета VAT и Sales Tax
+	* Deleting the row and checking the VAT and Sales Tax recalculation
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
@@ -339,11 +336,11 @@
 			| 'SalesTax' | ''         | ''     | ''         | ''          | '14,00'  | '14,00'         |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090203 ручная корректировка налога в документе Sales order
-	* Открытие формы Sales order
+Сценарий: _090203 manual tax correction in Sales order
+	* Open the Sales order creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов 
+	* Filling in the details of the document
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -362,7 +359,7 @@
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И я снимаю флаг 'Price include tax'
-	* Добавление товаров в Sales order
+	* Adding items to Sales order
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -379,7 +376,7 @@
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "TaxTree" я завершаю редактирование строки
-	* Ручная корректировка налога и проверка отображения
+	* Manual tax correction and check display
 		И я перехожу к закладке "Tax list"
 		И в таблице "TaxTree" я перехожу к строке:
 			| 'Amount' | 'Item'     |
@@ -389,7 +386,7 @@
 		И Пауза 60
 		И в таблице "TaxTree" я разворачиваю текущую строку
 		И я перехожу к закладке "Item list"
-	* Проверка сохранения корректировки налога
+	* Save verification
 		И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '75,00'      | '1%'       | 'pcs'  | '400,00'     | '475,00'       |
@@ -399,7 +396,7 @@
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '71,00'         |
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '4,00'   | '4,00'          |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
-	* Проверка очистки ручной корректировки при изменении количества
+	* Check cleaning manual correction when quantity changes
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
@@ -412,7 +409,7 @@
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '144,00' | '144,00'        |
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '8,00'   | '8,00'          |
-	* Проверка очистки ручной корректировки при изменении цены
+	* Check cleaning manual correction when price changes
 		И я перехожу к закладке "Tax list"
 		И в таблице "TaxTree" я перехожу к строке:
 			| 'Item'     | 'Item key'  | 'Tax' | 'Tax rate' |
@@ -436,7 +433,7 @@
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '183,60' | '183,60'        |
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '10,20'  | '10,20'         |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '10,20'  | '10,20'         |
-	* Проверка очистки ручной корректировки при изменении item key
+	* Check cleaning manual correction when iten key changes
 		И я перехожу к закладке "Tax list"
 		И в таблице "TaxTree" я перехожу к строке:
 			| 'Item'     | 'Item key'  | 'Tax' | 'Tax rate' |
@@ -451,21 +448,20 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '510,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | '192,20'     | '1%'       | 'pcs'  | '1 020,00'   | '1 212,20'     |
-		И я перехожу к закладке "Item list"
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '36/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И     таблица "TaxTree" содержит строки:
-			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT'      | ''         | ''         | ''          | ''          | '144,00' | '144,00'        |
-			| 'VAT'      | '18%'      | 'Trousers' | '36/Yellow' | ''          | '144,00' | '144,00'        |
-			| 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
-			| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '8,00'   | '8,00'          |
-	* Выбор налоговой ставки вручную
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я выбираю текущую строку
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		И в таблице "List" я перехожу к строке:
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '36/Yellow' |
+		И в таблице "List" я выбираю текущую строку
+		И     таблица "TaxTree" содержит строки:
+		| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
+		| 'VAT'      | ''         | ''         | ''          | ''          | '144,00' | '144,00'        |
+		| 'VAT'      | '18%'      | 'Trousers' | '36/Yellow' | ''          | '144,00' | '144,00'        |
+		| 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
+		| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '8,00'   | '8,00'          |
+	* Manual selection of tax rate
 		И в таблице "ItemList" я активизирую поле "VAT"
 		И в таблице "ItemList" из выпадающего списка "VAT" я выбираю точное значение '0%'
 		И     таблица "TaxTree" стала равной:
@@ -477,8 +473,8 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090204 проверка переноса налогов в Sales invoice при создании на основании
-	* Создание тестового Sales order
+Сценарий: _090204 check tax transfer in Sales invoice when it is created based on
+	* Create Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -557,7 +553,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '3 000'
 		И я нажимаю на кнопку 'Post'
-	* Создание Sales invoice на основании созданного Sales order и проверка заполнения налогов
+	* Create Sales invoice based on Sales order and check filling taxes
 		И я нажимаю на кнопку 'Sales invoice'
 		И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'SalesTax' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -574,10 +570,10 @@
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090205 проверка налоговой ставки по приоритетам на примере Sales order
+Сценарий: _090205 priority tax rate check on the example of Sales order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов шапки Sales order
+	* Filling in the details of the document Sales order
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -593,7 +589,7 @@
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка налоговой ставки по Item key Bag ODS
+	* Check the tax rate for Item key Bag ODS
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -609,7 +605,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item' | 'VAT' | 'Item key' | 'Q'     |
 			| 'Bag'  | '0%'  | 'ODS'      | '1,000' |
-	* Проверка налоговой ставки по Item
+	* Check the tax rate by item
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:

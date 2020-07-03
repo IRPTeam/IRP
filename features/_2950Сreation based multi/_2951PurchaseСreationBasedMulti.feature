@@ -3,10 +3,10 @@
 @Positive
 
 
-Функционал: создание на основании по цепочке документов закупки
+Функционал: создание based on по цепочке документов закупки
 
 Как разработчик
-Я хочу создать систему создания на основании
+Я хочу создать систему создания based on
 Для удобства заполнения документов
 
 
@@ -18,11 +18,11 @@
 
 
 
-Сценарий: _090302 проверка создания Purchase invoice по нескольким Purchase order с разными контрагентами
+Сценарий: _090302 create Purchase invoice по нескольким Purchase order с разными контрагентами
 	# должно создаться 2 Purchase invoice
 	* Создание тестового Purchase order 124
-		Когда создаю первый тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 124
+		Когда create the first test PO for a test on the creation mechanism based on
+		* * Change the document number to 124
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '124'
@@ -31,8 +31,8 @@
 			И в поле 'Number' я ввожу текст '124'
 		И я нажимаю на кнопку 'Post and close'
 	* Создание Purchase order 125
-		Когда создаю второй тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 125
+		Когда create the second test PO for a test on the creation mechanism based on
+		* * Change the document number to 125
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '125'
@@ -40,7 +40,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '125'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание на основании Purchase order 124 и 125 Purchase invoice (должно создаться 2)
+	* Создание based on Purchase order 124 и 125 Purchase invoice (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -56,7 +56,7 @@
 			И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      | 'Goods receipt' | 'Sales order' |
 			| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '305,08'     | '1 694,92'   | '2 000,00'     | 'Store 02' | 'Purchase order 125*' | ''              | ''            |
-			* Изменение номера документа на 126
+			* * Change the document number to 126
 				И в поле 'Number' я ввожу текст '126'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
@@ -67,7 +67,7 @@
 			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '610,17'     | '3 389,83'   | '4 000,00'     | 'Store 02' | 'Purchase order 124*' | ''              | ''            | ''                    |
 			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | 'Purchase order 124*' | ''              | ''            | ''                    |
 			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | 'Purchase order 124*' | ''              | ''            | ''                    |
-			* Изменение номера документа на 125
+			* * Change the document number to 125
 				И в поле 'Number' я ввожу текст '125'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
@@ -83,7 +83,7 @@
 			И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      | 'Goods receipt' | 'Sales order' |
 			| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '305,08'     | '1 694,92'   | '2 000,00'     | 'Store 02' | 'Purchase order 125*' | ''              | ''            |
-			* Изменение номера документа на 126
+			* * Change the document number to 126
 				И в поле 'Number' я ввожу текст '126'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
@@ -94,14 +94,14 @@
 			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '610,17'     | '3 389,83'   | '4 000,00'     | 'Store 02' | 'Purchase order 124*' | ''              | ''            | ''                    |
 			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | 'Purchase order 124*' | ''              | ''            | ''                    |
 			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | 'Purchase order 124*' | ''              | ''            | ''                    |
-			* Изменение номера документа на 125
+			* * Change the document number to 125
 				И в поле 'Number' я ввожу текст '125'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '125'
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
-	* Проверка создания Purchase invoice
+	* create Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
@@ -114,11 +114,11 @@
 
 		
 
-Сценарий: _090303 проверка создания Purchase invoice по нескольким Purchase order с одинаковым партнером, контрагентом, соглашением, валютой и складом
+Сценарий: _090303 create Purchase invoice по нескольким Purchase order с одинаковым партнером, контрагентом, соглашением, валютой и складом
 # Должен создаться 1 Purchase invoice
 	* Создание тестового Purchase order 126
-		Когда создаю первый тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 126
+		Когда create the first test PO for a test on the creation mechanism based on
+		* * Change the document number to 126
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '126'
@@ -132,8 +132,8 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Post and close'
 	* Создание тестового Purchase order 127
-		Когда создаю второй тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 127
+		Когда create the second test PO for a test on the creation mechanism based on
+		* * Change the document number to 127
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '127'
@@ -146,7 +146,7 @@
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Post and close'
-	* Создание на основании Purchase order 126 и 127 Purchase invoice (должен создаться 1)
+	* Создание based on Purchase order 126 и 127 Purchase invoice (должен создаться 1)
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -164,21 +164,21 @@
 			| '3 559,32'   | 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | 'Purchase order 126*' |
 			| '5 338,98'   | 'Trousers' | '210,00' | '36/Yellow' | '30,000' | 'pcs'  | '6 300,00'     | 'Store 02' | 'Purchase order 126*' |
 			| '1 694,92'   | 'Dress'    | '200,00' | 'M/White'   | '10,000' | 'pcs'  | '2 000,00'     | 'Store 02' | 'Purchase order 127*' |
-		* Изменение номера документа на 127
+		* * Change the document number to 127
 			И в поле 'Number' я ввожу текст '127'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '127'
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
-	* Проверка создания Purchase invoice
+	* create Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
 			| '127'       |
 		И я закрыл все окна клиентского приложения
 	
-Сценарий: _090304 проверка создания Purchase invoice по нескольким Purchase order с разными партнерами одного контрагента (соглашения разные)
+Сценарий: _090304 create Purchase invoice по нескольким Purchase order с разными партнерами одного контрагента (соглашения разные)
 # Должно создаться 2 Purchase invoice
 	И я для Company Ferron BP добавляю нового партнера Partner Ferron 1
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
@@ -288,8 +288,8 @@
 		И я нажимаю на кнопку 'Save and close'
 		И я закрыл все окна клиентского приложения
 	* Создание первого тестового PO 128
-		Когда создаю первый тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 128
+		Когда create the first test PO for a test on the creation mechanism based on
+		* * Change the document number to 128
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '128'
@@ -334,8 +334,8 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '210'
 		И я нажимаю на кнопку 'Post and close'
 	* Создание первого тестового PO 129
-		Когда создаю второй тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 129
+		Когда create the second test PO for a test on the creation mechanism based on
+		* * Change the document number to 129
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '129'
@@ -374,7 +374,7 @@
 			| 'Dress' |'M/White'  |
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '200'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание на основании Purchase order 128 и 129 Purchase invoice (должно создаться 2)
+	* Создание based on Purchase order 128 и 129 Purchase invoice (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -382,7 +382,7 @@
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentPurchaseInvoiceGeneratePurchaseInvoice'
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 3
-		* Изменение номера документа на 130
+		* * Change the document number to 130
 			И в поле 'Number' я ввожу текст '130'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -391,14 +391,14 @@
 		И Я нажимаю кнопку командного интерфейса 'Purchase invoice (create)'
 		И Пауза 2
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 3
-		* Изменение номера документа на 131
+		* * Change the document number to 131
 			И в поле 'Number' я ввожу текст '131'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '131'
 		И я нажимаю на кнопку 'Post and close'
 	И я закрыл все окна клиентского приложения
-	* Проверка создания документов
+	* create документов
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Store'    | 'Order'               | 'Item key'  |
@@ -415,11 +415,11 @@
 
 
 
-Сценарий: _090305 проверка создания Purchase invoice по нескольким Purchase order с разными соглашениями
+Сценарий: _090305 create Purchase invoice по нескольким Purchase order с разными соглашениями
 # Должно создаться 2 Purchase invoice
 	* Создание первого тестового PO 130
-		Когда создаю первый тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 130
+		Когда create the first test PO for a test on the creation mechanism based on
+		* * Change the document number to 130
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '130'
@@ -464,8 +464,8 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '210'
 		И я нажимаю на кнопку 'Post and close'
 	* Создание второго тестового PO 131 Partner Ferron 1 и ставлю соглашение Vendor Ferron Discount
-		Когда создаю второй тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 131
+		Когда create the second test PO for a test on the creation mechanism based on
+		* * Change the document number to 131
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '131'
@@ -501,7 +501,7 @@
 			| 'Dress' |'M/White'  |
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '200'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание на основании Purchase order 130 и 131 Purchase invoice (должно создаться 2)
+	* Создание based on Purchase order 130 и 131 Purchase invoice (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -518,7 +518,7 @@
 				| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '720,00'     | '4 000,00'   | '4 720,00'     | 'Store 02' | 'Purchase order 130*' |
 				| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '756,00'     | '4 200,00'   | '4 956,00'     | 'Store 02' | 'Purchase order 130*' |
 				| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '1 134,00'   | '6 300,00'   | '7 434,00'     | 'Store 02' | 'Purchase order 130*' |
-			* Изменение номера документа на 141
+			* * Change the document number to 141
 				И в поле 'Number' я ввожу текст '141'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
@@ -527,14 +527,14 @@
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | 'Purchase order 131*' |
-			* Изменение номера документа на 140
+			* * Change the document number to 140
 				И в поле 'Number' я ввожу текст '140'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '140'
 		И я нажимаю на кнопку 'Post and close'
 		И Я нажимаю кнопку командного интерфейса 'Purchase invoice (create)'
-		* Проверка заполнения второго PurchaseInvoice
+		* Check filling inвторого PurchaseInvoice
 		И     элемент формы с именем "Partner" стал равен 'Partner Ferron 1'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
@@ -545,7 +545,7 @@
 				| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '720,00'     | '4 000,00'   | '4 720,00'     | 'Store 02' | 'Purchase order 130*' |
 				| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '756,00'     | '4 200,00'   | '4 956,00'     | 'Store 02' | 'Purchase order 130*' |
 				| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '1 134,00'   | '6 300,00'   | '7 434,00'     | 'Store 02' | 'Purchase order 130*' |
-			* Изменение номера документа на 141
+			* * Change the document number to 141
 				И в поле 'Number' я ввожу текст '141'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
@@ -554,14 +554,14 @@
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | 'Purchase order 131*' |
-			* Изменение номера документа на 140
+			* * Change the document number to 140
 				И в поле 'Number' я ввожу текст '140'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '140'
 		И я нажимаю на кнопку 'Post and close'
 	И я закрыл все окна клиентского приложения
-	* Проверка создания документов
+	* create документов
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Store'    | 'Order'               | 'Item key'  |
@@ -578,11 +578,11 @@
 
 
 
-Сценарий: _090306 проверка создания Purchase invoice по нескольким Purchase order с разными складами (создается один)
+Сценарий: _090306 create Purchase invoice по нескольким Purchase order с разными складами (создается один)
 # Создается один PI
 	* Создание первого тестового PO 134
-		Когда создаю первый тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 134
+		Когда create the first test PO for a test on the creation mechanism based on
+		* * Change the document number to 134
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '134'
@@ -628,8 +628,8 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '210'
 		И я нажимаю на кнопку 'Post and close'
 	* Создание второго тестового PO 135
-		Когда создаю второй тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 135
+		Когда create the second test PO for a test on the creation mechanism based on
+		* * Change the document number to 135
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '135'
@@ -665,7 +665,7 @@
 			| 'Dress' |'M/White'  |
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '200'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание на основании Purchase order 135 и 134 Purchase invoice (должен создаться 1)
+	* Создание based on Purchase order 135 и 134 Purchase invoice (должен создаться 1)
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -682,14 +682,14 @@
 			| 'Dress'    | '210,00' | 'L/Green'   |  'Store 01' | 'pcs'  | '20,000' | ''              | '4 200,00'   | '4 956,00'     | 'Purchase order 134*' |
 			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 01' | 'pcs'  | '30,000' | ''              | '6 300,00'   | '7 434,00'     | 'Purchase order 134*' |
 			| 'Dress'    | '200,00' | 'M/White'   |  'Store 02' | 'pcs'  | '10,000' | ''              | '2 000,00'   | '2 360,00'     | 'Purchase order 135*' |
-		* Изменение номера документа на 135
+		* * Change the document number to 135
 			И в поле 'Number' я ввожу текст '135'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '135'
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
-	* Проверка создания Purchase invoice
+	* create Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
@@ -697,11 +697,11 @@
 		И я закрыл все окна клиентского приложения
 
 	
-Сценарий: _090307 проверка создания Purchase invoice по нескольким Purchase order с разными собственными компаниями
+Сценарий: _090307 create Purchase invoice по нескольким Purchase order с разными собственными компаниями
 	# Создается один PI
 	* Создание первого тестового PO 136
-		Когда создаю первый тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 136
+		Когда create the first test PO for a test on the creation mechanism based on
+		* * Change the document number to 136
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '136'
@@ -751,8 +751,8 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '210'
 		И я нажимаю на кнопку 'Post and close'
 	* Создание второго тестового PO 137
-		Когда создаю второй тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 137
+		Когда create the second test PO for a test on the creation mechanism based on
+		* * Change the document number to 137
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '137'
@@ -788,7 +788,7 @@
 			| 'Dress' |'M/White'  |
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '200'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание на основании Purchase order 136 и 137 Purchase invoice (должно создаться 2)
+	* Создание based on Purchase order 136 и 137 Purchase invoice (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -804,7 +804,7 @@
 				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Net amount' | 'Total amount' | 'Purchase order'      |
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'   | '2 360,00'     | 'Purchase order 137*' |
 			И     элемент формы с именем "PriceIncludeTax" стал равен 'No'
-			* Изменение номера документа на 137
+			* * Change the document number to 137
 				И в поле 'Number' я ввожу текст '137'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
@@ -815,7 +815,7 @@
 			| 'Dress'    | '200,00' | 'M/White'   |  'Store 02'  | 'pcs'  | '20,000' | '4 000,00'   | '4 000,00'     | 'Purchase order 136*' |
 			| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02'  | 'pcs'  | '20,000' | '4 200,00'   | '4 200,00'     | 'Purchase order 136*' |
 			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02'  | 'pcs'  | '30,000' | '6 300,00'   | '6 300,00'     | 'Purchase order 136*' |
-			* Изменение номера документа на 136
+			* * Change the document number to 136
 				И в поле 'Number' я ввожу текст '136'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
@@ -831,7 +831,7 @@
 				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Net amount' | 'Total amount' | 'Purchase order'      |
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'   | '2 360,00'     | 'Purchase order 137*' |
 			И     элемент формы с именем "PriceIncludeTax" стал равен 'No'
-			* Изменение номера документа на 137
+			* * Change the document number to 137
 				И в поле 'Number' я ввожу текст '137'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
@@ -842,14 +842,14 @@
 			| 'Dress'    | '200,00' | 'M/White'   |  'Store 02'  | 'pcs'  | '20,000' | '4 000,00'   | '4 000,00'     | 'Purchase order 136*' |
 			| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02'  | 'pcs'  | '20,000' | '4 200,00'   | '4 200,00'     | 'Purchase order 136*' |
 			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02'  | 'pcs'  | '30,000' | '6 300,00'   | '6 300,00'     | 'Purchase order 136*' |
-			* Изменение номера документа на 136
+			* * Change the document number to 136
 				И в поле 'Number' я ввожу текст '136'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '136'
 		И я нажимаю на кнопку 'Post and close'
 	И я закрыл все окна клиентского приложения
-	* Проверка создания Purchase invoice
+	* create Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
@@ -860,7 +860,7 @@
 
 
 
-Сценарий: _090308 проверка создания Goods reciept по Purchase invoice с разными контрагентами по прямой схемой отгрузки 
+Сценарий: _090308 create Goods reciept по Purchase invoice с разными контрагентами по прямой схемой отгрузки 
 # Создается два GR
 	* Создание Goods reciept к PI 125, 126
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
@@ -878,7 +878,7 @@
 				| 125    |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		Если поле с именем "LegalName" имеет значение "Company Ferron BP" тогда 
@@ -901,7 +901,7 @@
 			| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase invoice 126*' |
 		И я нажимаю на кнопку 'Post and close'
 	И Я нажимаю кнопку командного интерфейса 'Goods receipt (create)'
-	* Проверка заполнения второго Goods reciept
+	* Check filling inвторого Goods reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		Если поле с именем "LegalName" имеет значение "Company Ferron BP" тогда 
@@ -923,7 +923,7 @@
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
 			| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase invoice 126*' |
 		И я нажимаю на кнопку 'Post and close'
-	* Проверка создания Goods reciept
+	* create Goods reciept
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
@@ -933,7 +933,7 @@
 
 
 
-Сценарий: _090309 проверка создания Goods reciept по нескольким Purchase invoice с разными партнерами одного контрагента по прямой схемой отгрузки 
+Сценарий: _090309 create Goods reciept по нескольким Purchase invoice с разными партнерами одного контрагента по прямой схемой отгрузки 
 # Создается 2 GR
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И в таблице "List" я перехожу к строке:
@@ -941,7 +941,7 @@
 				| 130    |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
@@ -965,7 +965,7 @@
 			И в поле 'Number' я ввожу текст '130'
 	И я нажимаю на кнопку 'Post and close'
 	И Я нажимаю кнопку командного интерфейса 'Goods receipt (create)'
-	* Проверка заполнения второго Goods reciept
+	* Check filling inвторого Goods reciept
 		Если поле с именем "Partner" имеет значение "Partner Ferron 2" тогда 
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
@@ -985,7 +985,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '130'
 	И я нажимаю на кнопку 'Post and close'
-	* Проверка создания Goods reciept
+	* create Goods reciept
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
@@ -994,7 +994,7 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090310 проверка создания Goods reciept по нескольким Purchase invoice с разными соглашениями по прямой схемой отгрузки 
+Сценарий: _090310 create Goods reciept по нескольким Purchase invoice с разными соглашениями по прямой схемой отгрузки 
 # Создается два GR так как соглашения разные
 	* Создание Goods reciept к PI 140, 141
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
@@ -1003,7 +1003,7 @@
 				| 140    |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
@@ -1030,7 +1030,7 @@
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase invoice 141*' |
 	И я нажимаю на кнопку 'Post and close'
 	И Я нажимаю кнопку командного интерфейса 'Goods receipt (create)'
-	* Проверка заполнения второго Goods reciept
+	* Check filling inвторого Goods reciept
 		И я запоминаю количество строк таблицы "ItemList" как "D"
 		Если переменная "D" имеет значение 1 Тогда
 			И в поле 'Number' я ввожу текст '140'
@@ -1051,7 +1051,7 @@
 			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase invoice 141*' |
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase invoice 141*' |
 	И я нажимаю на кнопку 'Post and close'
-	* Проверка создания Goods reciept
+	* create Goods reciept
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
@@ -1060,7 +1060,7 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090311 проверка создания Goods reciept по нескольким Purchase invoice с разными складами по прямой схемой отгрузки (только один склад ордерный)
+Сценарий: _090311 create Goods reciept по нескольким Purchase invoice с разными складами по прямой схемой отгрузки (только один склад ордерный)
 # Создается один GR
 	* Создание Goods reciept к PI 135
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
@@ -1068,7 +1068,7 @@
 				| Number |
 				| 135    |
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
@@ -1085,7 +1085,7 @@
 			| Number |
 			| 135    |
 	И я закрыл все окна клиентского приложения
-	* Проверка создания Goods reciept
+	* create Goods reciept
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
@@ -1093,7 +1093,7 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090312 проверка создания Goods reciept по нескольким Purchase order с разными собственными компаниями по прямой схеме отгрузки 
+Сценарий: _090312 create Goods reciept по нескольким Purchase order с разными собственными компаниями по прямой схеме отгрузки 
 # Создается два GR
 	* Создание Goods reciept к PI 137, 136
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
@@ -1102,7 +1102,7 @@
 			| 136    |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		Если поле с именем "Company" имеет значение "Second Company" тогда 
 			И     таблица "ItemList" содержит строки:
@@ -1124,7 +1124,7 @@
 			И в поле 'Number' я ввожу текст '137'
 	И я нажимаю на кнопку 'Post and close'
 	И Я нажимаю кнопку командного интерфейса 'Goods receipt (create)'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		Если поле с именем "Company" имеет значение "Second Company" тогда 
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
@@ -1144,7 +1144,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '137'
 	И я нажимаю на кнопку 'Post and close'
-	* Проверка создания Goods reciept
+	* create Goods reciept
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
@@ -1156,11 +1156,11 @@
 
 # Непрямая схема поставки вначале ордер потом инвойс
 
-Сценарий: _090313 проверка создания Goods reciept по Purchase order с разными контрагентами по непрямой схеме отгрузки 
+Сценарий: _090313 create Goods reciept по Purchase order с разными контрагентами по непрямой схеме отгрузки 
 # должно создаться 2 Goods reciept
 	* Создание тестового Purchase order 140
-		Когда создаю первый тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 140
+		Когда create the first test PO for a test on the creation mechanism based on
+		* * Change the document number to 140
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '140'
@@ -1170,8 +1170,8 @@
 		И я устанавливаю флаг с именем "GoodsReceiptBeforePurchaseInvoice"
 		И я нажимаю на кнопку 'Post and close'
 	* Создание Purchase order 141
-		Когда создаю второй тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 141
+		Когда create the second test PO for a test on the creation mechanism based on
+		* * Change the document number to 141
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '141'
@@ -1180,14 +1180,14 @@
 			И в поле 'Number' я ввожу текст '141'
 		И я устанавливаю флаг с именем "GoodsReceiptBeforePurchaseInvoice"
 		И я нажимаю на кнопку 'Post and close'
-	* Создание на основании Purchase order 140 и 141 Goods reciept (должно создаться 2)
+	* Создание based on Purchase order 140 и 141 Goods reciept (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 140    |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		Если поле с именем "LegalName" имеет значение "Second Company Ferron BP" тогда 
@@ -1210,7 +1210,7 @@
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase order 140*' |
 	И я нажимаю на кнопку 'Post and close'
 	И Я нажимаю кнопку командного интерфейса 'Goods receipt (create)'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		Если поле с именем "LegalName" имеет значение "Second Company Ferron BP" тогда 
@@ -1232,7 +1232,7 @@
 				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase order 140*' |
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase order 140*' |
 	И я нажимаю на кнопку 'Post and close'
-	* Проверка создания Goods reciept
+	* create Goods reciept
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
@@ -1242,11 +1242,11 @@
 
 
 
-Сценарий: _090314 проверка создания Goods reciept по нескольким Purchase order с разными партнерами одного контрагента по непрямой схемой отгрузки 
+Сценарий: _090314 create Goods reciept по нескольким Purchase order с разными партнерами одного контрагента по непрямой схемой отгрузки 
 # должно создаться 2 Goods reciept
 	* Создание первого тестового PO 142
-		Когда создаю первый тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 142
+		Когда create the first test PO for a test on the creation mechanism based on
+		* * Change the document number to 142
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '142'
@@ -1294,8 +1294,8 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '210'
 		И я нажимаю на кнопку 'Post and close'
 	* Создание второго тестового PO 143
-		Когда создаю второй тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 143
+		Когда create the second test PO for a test on the creation mechanism based on
+		* * Change the document number to 143
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '143'
@@ -1337,14 +1337,14 @@
 			| 'Dress' |'M/White'  |
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '200'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание на основании Purchase order 142 и 143 Goods reciept (должно создаться 2)
+	* Создание based on Purchase order 142 и 143 Goods reciept (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 142    |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
@@ -1368,7 +1368,7 @@
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase order 142*' |
 	И я нажимаю на кнопку 'Post and close'
 	И Я нажимаю кнопку командного интерфейса 'Goods receipt (create)'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		Если поле с именем "Partner" имеет значение "Partner Ferron 2" тогда 
 			И в поле 'Number' я ввожу текст '154'
 			Тогда открылось окно '1C:Enterprise'
@@ -1388,7 +1388,7 @@
 				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase order 142*' |
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase order 142*' |
 	И я нажимаю на кнопку 'Post and close'
-	* Проверка создания Goods reciept
+	* create Goods reciept
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
@@ -1396,11 +1396,11 @@
 			| '155'       |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090315 проверка создания Goods reciept по нескольким Purchase order с разными соглашениями по непрямой схемой отгрузки 
+Сценарий: _090315 create Goods reciept по нескольким Purchase order с разными соглашениями по непрямой схемой отгрузки 
 # должно создаться 2 Goods reciept
 	* Создание первого тестового PO 144
-		Когда создаю первый тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 144
+		Когда create the first test PO for a test on the creation mechanism based on
+		* * Change the document number to 144
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '144'
@@ -1448,8 +1448,8 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '210'
 		И я нажимаю на кнопку 'Post and close'
 	* Создание второго тестового PO 145 Partner Ferron 1 и ставлю соглашение Vendor Ferron Discount
-		Когда создаю второй тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 144
+		Когда create the second test PO for a test on the creation mechanism based on
+		* * Change the document number to 144
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '145'
@@ -1488,14 +1488,14 @@
 			| 'Dress' |'M/White'  |
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '200'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание на основании Purchase order 144 и 145 Goods reciept (должно создаться 2)
+	* Создание based on Purchase order 144 и 145 Goods reciept (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 144    |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И я запоминаю количество строк таблицы "ItemList" как "N"
@@ -1519,7 +1519,7 @@
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase order 144*' |
 	И я нажимаю на кнопку 'Post and close'
 	И Я нажимаю кнопку командного интерфейса 'Goods receipt (create)'
-	* Проверка заполнения второго Goods reciept
+	* Check filling inвторого Goods reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И я запоминаю количество строк таблицы "ItemList" как "A"
@@ -1542,7 +1542,7 @@
 			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase order 144*' |
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase order 144*' |
 	И я нажимаю на кнопку 'Post and close'
-	* Проверка создания Goods reciept
+	* create Goods reciept
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
@@ -1552,11 +1552,11 @@
 
 
 
-Сценарий: _090316 проверка создания Goods reciept по нескольким Purchase order с разными складами по непрямой схемой отгрузки
+Сценарий: _090316 create Goods reciept по нескольким Purchase order с разными складами по непрямой схемой отгрузки
 # должно создаться 2 Goods reciept
 	* Создание первого тестового PO 146
-		Когда создаю первый тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 146
+		Когда create the first test PO for a test on the creation mechanism based on
+		* * Change the document number to 146
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '146'
@@ -1605,8 +1605,8 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '210'
 		И я нажимаю на кнопку 'Post and close'
 	* Создание второго тестового PO 147
-		Когда создаю второй тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 147
+		Когда create the second test PO for a test on the creation mechanism based on
+		* * Change the document number to 147
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '147'
@@ -1645,14 +1645,14 @@
 			| 'Dress' |'M/White'  |
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '200'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание на основании Purchase order 146 и 147 Goods reciept (должно создаться 2)
+	* Создание based on Purchase order 146 и 147 Goods reciept (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 146    |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		Если поле с именем "Store" имеет значение "Store 02" тогда 
 			И     таблица "ItemList" содержит строки:
@@ -1674,7 +1674,7 @@
 			И в поле 'Number' я ввожу текст '146'
 	И я нажимаю на кнопку 'Post and close'
 	И Я нажимаю кнопку командного интерфейса 'Goods receipt (create)'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		Если поле с именем "Store" имеет значение "Store 02" тогда 
 			И     таблица "ItemList" содержит строки:
@@ -1695,7 +1695,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '146'
 	И я нажимаю на кнопку 'Post and close'
-	* Проверка создания документов
+	* create документов
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
 		Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Receipt basis'       | 'Store'    | 'Item key'  |
@@ -1710,11 +1710,11 @@
 		И Пауза 5
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090317 проверка создания Goods reciept по нескольким Purchase order с разными собственными компаниями по непрямой схемой отгрузки 
+Сценарий: _090317 create Goods reciept по нескольким Purchase order с разными собственными компаниями по непрямой схемой отгрузки 
 # должно создаться 2 Goods reciept
 	* Создание первого тестового PO 148
-		Когда создаю первый тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 148
+		Когда create the first test PO for a test on the creation mechanism based on
+		* * Change the document number to 148
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '148'
@@ -1767,8 +1767,8 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '210'
 		И я нажимаю на кнопку 'Post and close'
 	* Создание второго тестового PO 149
-		Когда создаю второй тестовый PO для теста по механизму создания на основании
-		* Изменение номера документа на 149
+		Когда create the second test PO for a test on the creation mechanism based on
+		* * Change the document number to 149
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '149'
@@ -1814,7 +1814,7 @@
 			| 149    |
 		И В таблице  "List" я перехожу на одну строку вверх с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	* Проверка заполнения Goods reciept
+	* Check filling inGoods reciept
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		Если поле с именем "Company" имеет значение "Main Company" тогда 
 			И     таблица "ItemList" содержит строки:
@@ -1836,7 +1836,7 @@
 			И в поле 'Number' я ввожу текст '148'
 	И я нажимаю на кнопку 'Post and close'
 	И Я нажимаю кнопку командного интерфейса 'Goods receipt (create)'
-	* Проверка заполнения второго Goods reciept
+	* Check filling inвторого Goods reciept
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		Если поле с именем "Company" имеет значение "Main Company" тогда 
 			И     таблица "ItemList" содержит строки:
@@ -1857,7 +1857,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '148'
 	И я нажимаю на кнопку 'Post and close'
-	* Проверка создания документов
+	* create документов
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
 		Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Receipt basis'       | 'Store'    | 'Item key'  |
@@ -1873,7 +1873,7 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090318 проверка создания Purchase invoice по нескольким Purchase order с разными контрагентами по непрямой схеме отгрузки
+Сценарий: _090318 create Purchase invoice по нескольким Purchase order с разными контрагентами по непрямой схеме отгрузки
 # должно создаться 2 Purchase invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И в таблице "List" я перехожу к строке:
@@ -1884,7 +1884,7 @@
 	И я выбираю Goods Receipt по которым необходимо создать Purchase invoice
 		И я нажимаю на кнопку с именем 'FormSelectAll'
 		И я нажимаю на кнопку 'Ok'
-	* Проверка заполнения Purchase invoice 142
+	* Check filling inPurchase invoice 142
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
@@ -1913,7 +1913,7 @@
 			| 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | '*'             |'Purchase order 140*' | 'Goods receipt 142*' |
 	И я нажимаю на кнопку 'Post and close'
 	Когда Я нажимаю кнопку командного интерфейса 'Purchase invoice (create)'
-	* Проверка заполнения второго Purchase invoice
+	* Check filling inвторого Purchase invoice
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
@@ -1940,7 +1940,7 @@
 			| 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | '*'             |'Purchase order 140*' | 'Goods receipt 142*' |
 	И я нажимаю на кнопку 'Post and close'
 	И Я закрыл все окна клиентского приложения
-	* Проверка создания Purchase invoice
+	* create Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		Тогда таблица "List" содержит строки:
 			| 'Number'  |
@@ -1950,7 +1950,7 @@
 
 
 
-Сценарий: _090319 проверка создания Purchase invoice по нескольким Purchase order с разными партнерами одного контрагента по непрямой схеме отгрузки
+Сценарий: _090319 create Purchase invoice по нескольким Purchase order с разными партнерами одного контрагента по непрямой схеме отгрузки
 	# должно создаться 2 Purchase invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И в таблице "List" я перехожу к строке:
@@ -1961,7 +1961,7 @@
 	И я выбираю Goods Receipt по которым необходимо создать Purchase invoice
 		И я нажимаю на кнопку с именем 'FormSelectAll'
 		И я нажимаю на кнопку 'Ok'
-	* Проверка заполнения Purchase invoice 145
+	* Check filling inPurchase invoice 145
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
@@ -1989,7 +1989,7 @@
 			И в поле 'Number' я ввожу текст '155'
 	И я нажимаю на кнопку 'Post and close'
 	Когда Я нажимаю кнопку командного интерфейса 'Purchase invoice (create)'
-	* Проверка заполнения Purchase invoice 146
+	* Check filling inPurchase invoice 146
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
@@ -2017,7 +2017,7 @@
 			И в поле 'Number' я ввожу текст '155'
 	И я нажимаю на кнопку 'Post and close'
 	И Я закрыл все окна клиентского приложения
-	* Проверка создания Purchase invoice
+	* create Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		И я нажимаю на кнопку 'Refresh'
 		Тогда таблица "List" содержит строки:
@@ -2026,7 +2026,7 @@
 			| '154'       |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090320 проверка создания Purchase invoice по нескольким Purchase order с разными соглашениями по непрямой схеме отгрузки
+Сценарий: _090320 create Purchase invoice по нескольким Purchase order с разными соглашениями по непрямой схеме отгрузки
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И в таблице "List" я перехожу к строке:
 			| Number |
@@ -2036,7 +2036,7 @@
 	И я выбираю Goods Receipt по которым необходимо создать Purchase invoice
 		И я нажимаю на кнопку с именем 'FormSelectAll'
 		И я нажимаю на кнопку 'Ok'
-	* Проверка заполнения Purchase invoice 145
+	* Check filling inPurchase invoice 145
 		И     элемент формы с именем "Partner" стал равен 'Partner Ferron 1'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
@@ -2066,7 +2066,7 @@
 			И в поле 'Number' я ввожу текст '147'
 		И я нажимаю на кнопку 'Post and close'
 	Когда Я нажимаю кнопку командного интерфейса 'Purchase invoice (create)'
-	* Проверка заполнения Purchase invoice 144
+	* Check filling inPurchase invoice 144
 		И     элемент формы с именем "Partner" стал равен 'Partner Ferron 1'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
@@ -2095,7 +2095,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '147'
 		И я нажимаю на кнопку 'Post and close'
-	* Проверка создания Purchase invoice
+	* create Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		И я нажимаю на кнопку 'Refresh'
 		Тогда таблица "List" содержит строки:
@@ -2106,7 +2106,7 @@
 
 
 
-Сценарий: _090322 проверка создания Purchase invoice по нескольким Purchase order с разными компаниями по непрямой схеме отгрузки
+Сценарий: _090322 create Purchase invoice по нескольким Purchase order с разными компаниями по непрямой схеме отгрузки
 # должно создаться 2 Purchase invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И в таблице "List" я перехожу к строке:
@@ -2117,7 +2117,7 @@
 	И я выбираю Goods Receipt по которым необходимо создать Purchase invoice
 		И я нажимаю на кнопку с именем 'FormSelectAll'
 		И я нажимаю на кнопку 'Ok'
-	* Проверка заполнения Purchase invoice 148
+	* Check filling inPurchase invoice 148
 		И     элемент формы с именем "Partner" стал равен 'Partner Ferron 1'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron Discount'
@@ -2144,7 +2144,7 @@
 			И в поле 'Number' я ввожу текст '150'
 	И я нажимаю на кнопку 'Post and close'
 	Когда Я нажимаю кнопку командного интерфейса 'Purchase invoice (create)'
-	* Проверка заполнения второго Purchase invoice 149
+	* Check filling inвторого Purchase invoice 149
 		И     элемент формы с именем "Partner" стал равен 'Partner Ferron 1'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron Discount'
@@ -2170,7 +2170,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '150'
 	И я нажимаю на кнопку 'Post and close'
-	* Проверка создания Purchase invoice
+	* create Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		И я нажимаю на кнопку 'Refresh'
 		Тогда таблица "List" содержит строки:

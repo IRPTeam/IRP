@@ -1328,7 +1328,7 @@ To further use it when reflecting in the program of business processes
 			| 'Description' |
 			| 'Wait'        |
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuCopy'
-	* Checking UniqueID field cleaning
+	* Checking UniqueID field deleting
 		И     элемент формы с именем "UniqueID" стал равен ''
 		И     элемент формы с именем "Description_en" стал равен 'Wait'
 	И Я закрыл все окна клиентского приложения
@@ -1336,7 +1336,7 @@ To further use it when reflecting in the program of business processes
 
 
 Сценарий: _005046 заполнение Business units
-	* Открытие формы создания Business units
+	* Open a creation form Business units
 		И я открываю навигационную ссылку "e1cib/list/Catalog.BusinessUnits"
 	* Создание подразделения 'Front office'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -1375,7 +1375,7 @@ To further use it when reflecting in the program of business processes
 		Тогда я проверяю наличие элемента справочника "BusinessUnits" со значением поля "Description_en" "Logistics department"
 
 Сценарий: _005047 заполнение Expense type
-	* Открытие формы создания Expense type
+	* Open a creation form Expense type
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ExpenseAndRevenueTypes"
 	* Создание статьи 'Rent'
 		И я нажимаю на кнопку с именем 'FormCreate'

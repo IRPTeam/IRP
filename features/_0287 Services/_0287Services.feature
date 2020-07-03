@@ -152,7 +152,7 @@ For cost analysis
 		| '123'      |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю на кнопку с именем 'FormDocumentPurchaseInvoiceGeneratePurchaseInvoice'
-	И я проверяю заполнение табличной части
+	* Checking the filling of the tabular part
 		Тогда таблица "ItemList" содержит строки:
 		| 'Price'    | 'Item'    | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Expense type'             | 'Business unit' | 'Purchase order'      |
 		| '1 000,00' | 'Service' | '18%' | 'Interner' | '1,000' | '152,54'     | 'pcs'  | '847,46'     | '1 000,00'     | 'Telephone communications' | 'Front office'  | 'Purchase order 123*' |

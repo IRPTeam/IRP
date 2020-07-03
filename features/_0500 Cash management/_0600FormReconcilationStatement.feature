@@ -1,19 +1,19 @@
 #language: ru
 @tree
 @Positive
-Функционал: проверка формы документа Reconcilation statement
+Функционал: form Reconcilation statement
 
-Как Разработчик
-Я хочу создать форму документа Reconcilation statement
-Для сверки взаиморасчетов
+As an accountant
+I want to create a Reconcilation statement
+For reconciliation of settlements
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
 
-Сценарий: _060004 проверка подключения документа Reconcilation statement  к системе статусов
-	Когда я создаю статусы для документа Reconciliation Statement
+Сценарий: _060004 check that the Reconcilation statement document is connected to the status system
+	* Creating statuses for the document Reconciliation Statement
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
@@ -28,7 +28,7 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-		И я добавляю статус "Send"
+		* Adding status "Send"
 			И в таблице "List" я перехожу к строке:
 			| 'Description'              |
 			| 'Reconciliation statement' |
@@ -40,7 +40,7 @@
 			И я нажимаю на кнопку 'Ok'
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 2
-		И я добавляю статус "Approved"
+		* Adding status "Approved"
 			И в таблице "List" я перехожу к строке:
 			| 'Description'              |
 			| 'Reconciliation statement' |
@@ -51,14 +51,14 @@
 			И я нажимаю на кнопку 'Ok'
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 2
-	Тогда я проверяю их заполнение в документе Reconciliation Statement
+	* Check if they are filled out in the document Reconciliation Statement
 		И я открываю навигационную ссылку "e1cib/list/Document.ReconciliationStatement"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И     элемент формы с именем "Status" стал равен 'Send'
 		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _060005 наличие поля Currency, Begin and End period в документе Reconcilation statement
+Сценарий: _060005 availability of Currency, Begin and End period field in Reconcilation statement
 	И я открываю навигационную ссылку "e1cib/list/Document.ReconciliationStatement"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Currency"

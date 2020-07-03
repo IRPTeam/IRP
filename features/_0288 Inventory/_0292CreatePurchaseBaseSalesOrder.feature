@@ -1113,7 +1113,7 @@ To implement a sales-for-purchase scheme
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _029205 create Shipment confirmation based on Sales order, procurement method - purchase (Shipment confirmation before Sales invoice, store use Shipment confirmation)
-	* Create Shipment confirmation на основании Sales order
+	* Create Shipment confirmation based on Sales order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -2434,7 +2434,7 @@ To implement a sales-for-purchase scheme
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '504'
 		И я нажимаю на кнопку 'Post'
-	* Создание Sales invoice на основании Shipment confirmation №504
+	* Create Sales invoice based on Shipment confirmation №504
 		И я нажимаю на кнопку 'Sales invoice'
 		* Change number
 			И я перехожу к закладке "Other"

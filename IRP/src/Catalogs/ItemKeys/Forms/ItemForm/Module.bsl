@@ -49,18 +49,7 @@ EndProcedure
 
 &AtClient
 Procedure PictureViewHTMLOnClick(Item, EventData, StandardProcessing)
-	StandardProcessing = True;
-	If EventData.event = Undefined Then
-		Return;
-	EndIf;
-	
-	If EventData.Event.propertyName = "call1C" Then
-		If Object.Ref.isEmpty() Then
-			ShowMessageBox(Undefined, R()["InfoMessage_004"]);
-		Else
-			PictureViewerClient.HTMLEvent(ThisForm, Object, EventData.Event.Data);
-		EndIf;
-	EndIf;
+	PictureViewerClient.PictureViewHTMLOnClick(ThisForm, Item, EventData, StandardProcessing)
 EndProcedure
 
 #EndRegion

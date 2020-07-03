@@ -77,7 +77,7 @@ EndProcedure
 
 Function UploadPicture(File, Volume) Export
 	
-	FileInfo = PictureViewerClientServer.FileInfo();
+	
 	
 	
 	md5 = String(PictureViewerServer.MD5ByBinaryData(File.Location));
@@ -87,15 +87,20 @@ Function UploadPicture(File, Volume) Export
 	EndIf;
 	RequestBody = GetFromTempStorage(File.Location);
 	
-	PictureScaleSize = 200;
-	FileInfo.Preview = PictureViewerServer.ScalePicture(RequestBody, PictureScaleSize);
-	
+	If PictureViewerServer.IsPictureFile(Volume) Then
+		PictureScaleSize = 200;
+		FileInfo = PictureViewerServer.UpdatePictureInfoAndGetPreview(RequestBody, PictureScaleSize);
+	Else
+		FileInfo = PictureViewerClientServer.FileInfo();
+	EndIf;
+		
 	IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture();
 	
 	FileID = String(New UUID());
 	FileInfo.FileID = FileID;
 	FileInfo.FileName = File.Name;
 	FileInfo.MD5 = md5;
+	FileInfo.Extension = StrSplit(File.Name, ".")[StrSplit(File.Name, ".").UBound()];
 	
 	ConnectionSettings = IntegrationClientServer.ConnectionSetting(
 			ServiceSystemServer.GetObjectAttribute(IntegrationSettings.POSTIntegrationSettings, "UniqueID"));
@@ -104,28 +109,22 @@ Function UploadPicture(File, Volume) Export
 		Raise ConnectionSettings.Message;
 	EndIf;
 	
-	If PictureViewerServer.IsPictureFile(Volume) Then
-		Picture = New Picture(RequestBody);
-		FileInfo.Height = Picture.Height();
-		FileInfo.Width = Picture.Width();
-		FileInfo.Size = Picture.FileSize();
-		FileInfo.Extension = Picture.Format();
-	EndIf;
+	
 	
 	If ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
-		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileID + "." + Picture.Format(), RequestBody);
+		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileID + "." + FileInfo.Extension, RequestBody);
 		FileInfo.Success = True;
-		FileInfo.URI = FileID + "." + Picture.Format();
+		FileInfo.URI = FileID + "." + FileInfo.Extension;
 		
 	ElsIf ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.GoogleDrive") Then
-		Name = FileID + "." + Picture.Format();
+		Name = FileID + "." + FileInfo.Extension;
 		FileInfo.URI = GoogleDriveServer.SendToDrive(ConnectionSettings.Value.IntegrationSettingsRef, Name, RequestBody);	
 		FileInfo.Success = True;
 			
 	Else
 		ConnectionSettings.Value.QueryType = "POST";
 		ResourceParameters = New Structure();
-		ResourceParameters.Insert("filename", FileID + "." + Picture.Format());
+		ResourceParameters.Insert("filename", FileID + "." + FileInfo.Extension);
 		
 		RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters, , RequestBody);
 		If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
@@ -201,6 +200,19 @@ Function PicturesInfoForSlider(ItemRef, UUID, FileRef = Undefined) Export
 EndFunction
 
 #Region FormEvents
+
+Procedure PictureViewHTMLOnClick(Form, Item, EventData, StandardProcessing) Export
+	StandardProcessing = EventData.Href = Undefined;
+	
+	If EventData.Button = Undefined OR Not EventData.Button.Id = "call1CEvent" Then
+		Return;
+	EndIf;
+	If Form.Object.Ref.isEmpty() Then
+		ShowMessageBox(Undefined, R()["InfoMessage_004"]);
+	Else
+		PictureViewerClient.HTMLEvent(Form, Form.Object, Item.Document.defaultView.call1C);
+	EndIf;
+EndProcedure
 
 Procedure UpdateObjectPictures(Form, OwnerRef) Export
 	UpdateObjectPictureHTML(Form, OwnerRef);

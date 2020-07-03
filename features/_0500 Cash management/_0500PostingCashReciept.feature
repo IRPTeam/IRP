@@ -1,26 +1,28 @@
 #language: ru
 @tree
 @Positive
-Функционал: проведение документа Cash reciept (ПКО)
+Функционал: create Cash reciept
 
-Как Разработчик
-Я хочу создать проводки документа приходно-кассового ордера
-Для того чтобы фиксировать оплаты от клиентов
+As a сashier
+I want to accept the cash in hand.
+For cash accounting
+
+
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
-# Валюта отчетов - лира
-# экспортные сценарии CashBankDocFilters
+# The currency of reports is lira
+# CashBankDocFilters export scenarios
 
 
-Сценарий: _050001 проверка создания Cash reciept на основании Sales invoice
-	* Открытие формы списка Sales invoice и выбор SI №1
+Сценарий: _050001 create Cash reciept based on Sales invoice
+	* Open list form Sales invoice and select SI №1
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
 		И я нажимаю на кнопку с именем 'FormDocumentCashReceiptGenarateCashReceipt'
-	* Проверка создания и заполнения Cash reciept
+	* Create and filling in Cash reciept
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
 		И     элемент формы с именем "Currency" стал равен 'TRY'
@@ -30,7 +32,7 @@
 		И     таблица "CurrenciesPaymentList" содержит строки:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '744,86' | '1'            |
-	* Проверка выбора account и сохранения данных 
+	* Checking account selection and saving 
 		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'  |
@@ -47,7 +49,7 @@
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '744,86' | '1'            |
 		И     элемент формы с именем "DocumentAmount" стал равен '4 350,00'
-	* Изменение соглашения и basis document
+	* Change of agreement and basis document
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я активизирую поле "Agreement"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
@@ -55,17 +57,16 @@
 			| 'Description'                   |
 			| 'Basic Agreements, without VAT' |
 		И в таблице "List" я выбираю текущую строку
-		# костыль
+		# temporarily
 		И Пауза 2
 		Когда Проверяю шаги на Исключение:
 		|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		# костыль
+		# temporarily
 		И в таблице "List" я перехожу к строке:
 			| 'Company'      | 'Document amount' | 'Legal name'        | 'Partner'   |
 			| 'Main Company' | '11 099,93'       | 'Company Ferron BP' | 'Ferron BP' |
 		И я нажимаю на кнопку 'Select'
-		# И в таблице "PaymentList" я завершаю редактирование строки
-	* Изменение суммы платежа
+	* Change in payment amount
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '20 000,00'
@@ -78,12 +79,11 @@
 
 
 
-Сценарий: _050001 создание приходно-кассового ордера Cash reciept 
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-351' с именем 'IRP-351'
-	И я создаю ПКО в лирах по Ferron BP (реализация в лирах)
+Сценарий: _050001 create Cash reciept (independently)
+	* Create Cash receipt in lire for Ferron BP (Sales invoice in lire)
 		И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю реквизиты документа
+		* Filling in the details of the document
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -101,15 +101,13 @@
 				| Description    |
 				| Cash desk №1 |
 			И в таблице "List" я выбираю текущую строку
-		И я меняю номер документа на 1
+		* Change the document number to 1
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '1'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		# временно
-		# временно
-		* Заполнение партнера в табличной части
+		* Filling in a partner in a tabular part
 			И в таблице "PaymentList" я активизирую поле "Partner"
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -121,37 +119,37 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение Agreement
+		* Filling in an Agreement
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
 				| 'Basic Agreements, TRY' |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение документа основания в табличной части
-			# костыль
+		* Filling in basis documents in a tabular part
+			# temporarily
 			И Пауза 2
 			Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-			# костыль
+			# temporarily
 			И Пауза 2
 			Дано В активном окне открылась форма с заголовком "Documents for incoming payment"
 			И в таблице "List" я перехожу к строке:
 				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 				| '4 350,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			И я нажимаю на кнопку 'Select'
-		* Заполнение суммы в табличной части
+		* Filling in amount in a tabular part
 			И в таблице "PaymentList" я активизирую поле "Amount"
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '100,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-		И я проверяю создание приходно-кассового ордера
+		* Check creation a Cash receipt
 			Тогда таблица "List" содержит строки:
 			| Number |
 			|   1    |
-	И я создаю ПКО в долларах по Ferron BP (реализация в лирах)
+	* Create Cash receipt in USD for Ferron BP (Sales invoice in lire)
 		И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 		И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение реквизитов документа
+		* Filling in the details of the document
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -168,13 +166,13 @@
 				| Description    |
 				| Cash desk №1 |
 			И в таблице "List" я выбираю текущую строку
-		И я меняю номер документа на 2
+		* Change the document number to 2
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		* Заполнение партнера в табличной части
+		* Filling in a partner in a tabular part
 			И в таблице "PaymentList" я активизирую поле "Partner"
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -186,39 +184,39 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение Agreement
+		* Filling in an Agreement
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'           |
 					| 'Basic Agreements, TRY' |
 			И в таблице "List" я выбираю текущую строку
-		# временно
-		* Заполнение документа основания в табличной части
-			# костыль
+		# temporarily
+		* Filling in basis documents in a tabular part
+			# temporarily
 			Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-			# костыль
+			# temporarily
 			Дано В активном окне открылась форма с заголовком "Documents for incoming payment"
 			И в таблице "List" я перехожу к строке:
 				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 				| '4 350,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			И я нажимаю на кнопку 'Select'
-		# временно
-		* Заполнение суммы в табличной части
+		# temporarily
+		* Filling in amount in a tabular part
 			И в таблице "PaymentList" я активизирую поле "Amount"
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '100,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-		И я проверяю создание приходно-кассового ордера
+		* Check creation a Cash receipt
 			Тогда таблица "List" содержит строки:
 			| Number |
 			|   2    |
-	И я создаю ПКО в евро по Ferron BP (реализация в долларах)
+	* Create Cash receipt in Euro for Ferron BP (Sales invoice in USD)
 		Когда создаю Sales invoice для Ferron BP в долларах
 		И Я закрыл все окна клиентского приложения
 		И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 		И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение реквизитов документа
+		* Filling in the details of the document
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -235,13 +233,13 @@
 				| Code | Description |
 				| EUR  | Euro        |
 			И в таблице "List" я выбираю текущую строку
-		* Изменение номера документа на 3
+		* Change the document number to 3
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '3'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		* Заполнение партнера в табличной части
+		* Filling in a partner in a tabular part
 			И в таблице "PaymentList" я активизирую поле "Partner"
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -253,35 +251,35 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение Agreement
+		* Filling in an Agreement
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'           |
 					| 'Ferron, USD' |
 			И в таблице "List" я выбираю текущую строку
-		# временно
-		И я заполняю документ основания в табличной части
-			# костыль
+		# temporarily
+		* Filling in basis documents in a tabular part
+			# temporarily
 			Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-			# костыль
+			# temporarily
 			Дано В активном окне открылась форма с заголовком "Documents for incoming payment"
 			И в таблице "List" я перехожу к строке:
 				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 				| '200,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			И я нажимаю на кнопку 'Select'
-		# временно
-		И я заполняю сумму в табличной части
+		# temporarily
+		* Filling in amount in a tabular part
 			И в таблице "PaymentList" я активизирую поле "Amount"
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '50,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-		И я проверяю создание приходно-кассового ордера
+		* Check creation a Cash receipt
 			Тогда таблица "List" содержит строки:
 			| Number |
 			|   3    |
 
-Сценарий: _050002 проверка проведения Cash reciept по регистру PartnerArTransactions
+Сценарий: _050002 check Cash receipt movements by register PartnerArTransactions
 	И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.PartnerArTransactions"
 	Тогда таблица "List" содержит строки:
 	| 'Currency' | 'Recorder'           | 'Legal name'        |  'Basis document'     | 'Company'      | 'Amount'    | 'Agreement'                     | 'Partner'   |
@@ -289,13 +287,13 @@
 	| 'USD'      | 'Cash receipt 2*'    | 'Company Ferron BP' |  'Sales invoice 1*'   | 'Main Company' | '100,00'    | 'Basic Agreements, TRY'         | 'Ferron BP' |
 	| 'EUR'      | 'Cash receipt 3*'    | 'Company Ferron BP' |  'Sales invoice 234*' | 'Main Company' | '50,00'     | 'Ferron, USD'                   | 'Ferron BP' |
 
-Сценарий: _050002 проверка проводок  Cash reciept с видом операции оплата от клиента
-	* Открытие CashReceipt 1
+Сценарий: _050002 check Cash receipt movements with transaction type Payment from customer
+	* Open Cash receipt 1
 		И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
-	* Проверка проводок CashReceipt 1
+	* Check movements Cash receipt 1
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
 			| 'Cash receipt 1*'                      | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
@@ -325,14 +323,14 @@
 			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company'    | 'Cash desk №1'         | 'TRY'          | 'en descriptions is empty' | 'No'                    | ''         | ''                         | ''                     |
 			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company'    | 'Cash desk №1'         | 'TRY'          | 'Local currency'           | 'No'                    | ''         | ''                         | ''                     |
 		И Я закрыл все окна клиентского приложения
-	* Распроведение CashReceipt 1 и проверка отсутствия проводок
-		* Распроведение документа
+	* Clear postings Cash receipt 1 and check that there is no movement on the registers
+		* Clear postings документа
 			И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 			И в таблице "List" я перехожу к строке:
 				| 'Number' |
 				| '1'      |
 			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		* Проверка отсутствия проводок
+		* Сheck that there is no movement on the registers
 			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PartnerArTransactions'
 			Тогда таблица "List" не содержит строки:
 				| 'Recorder'           |
@@ -346,14 +344,14 @@
 				| 'Recorder'           |
 				| 'Cash receipt 1*' |
 			И я закрыл все окна клиентского приложения
-	* Повторное проведение документа и проверка проводок
-		* Проведение документа 
+	* Re-posting the document and checking postings on the registers
+		* Posting the document
 			И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 			И в таблице "List" я перехожу к строке:
 				| 'Number' |
 				| '1'      |
 			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		* Проверка проводок
+		* Check movements
 			И я нажимаю на кнопку 'Registrations report'
 			Тогда табличный документ "ResultTable" равен по шаблону:
 			| 'Cash receipt 1*'                      | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
@@ -389,34 +387,34 @@
 
 # Filters
 
-Сценарий: _050003 проверка фильтра по собственным компаниям в документе Cash reciept
+Сценарий: _050003 filter check by own companies in the document Cash reciept
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 	Когда проверяю фильтр по собственным компаниям
 
-Сценарий: _050004 проверяю фильтр по кассам (выбор банка недоступен)
+Сценарий: _050004 cash filter check (bank selection not available)
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 	Когда проверяю фильтр по кассам (выбор банка недоступен)
 
 
-Сценарий: _050005 проверка ввода Description в документе Cash reciept
+Сценарий: _050005 check input Description in the documentCash reciept
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 	Когда проверяю ввод Description
 
-Сценарий: _050006 проверка выбора вида операции в документе Cash reciept
+Сценарий: _050006 check the choice of transaction type in the documentCash reciept
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 	Когда проверяю выбор вида операции в документах поступления оплаты
 
 
-Сценарий: _050007 проверка фильтра по контрагенту в табличной части в документе Cash reciept
+Сценарий: _050007 check legal name filter in tabular part in document Cash reciept
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 	Когда проверяю фильтр по контрагенту в табличной части в документах поступления оплаты
 
-Сценарий: _050008 проверка фильтра по партнеру в табличной части в документе Cash reciept
+Сценарий: _050008 check partner filter in tabular part in document Cash reciept
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 	Когда проверяю фильтр по партнеру в табличной части в документах поступления оплаты
@@ -426,8 +424,8 @@
 # EndFilters
 
 
-Сценарий: _050011 проверяю выбор валюты в документе Cash reciept в случае если валюта указана в счете
-# выбор не доступен
+Сценарий: _050011 check currency selection in Cash reciept document in case the currency is specified in the account
+# the choice is not available
 	Когда создаю временную кассу Cash desk №4 со строго фиксированной валютой (лиры)
 	И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 	И я нажимаю на кнопку с именем 'FormCreate'
@@ -439,11 +437,11 @@
 
 
 
-Сценарий: _050013 проверка отображения реквизитов на форме Cash reciept с видом операции Payment from customer
+Сценарий: _050013 check the display of details on the form Cash reciept with the type of operation Payment from customer
 	И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
-	Тогда я проверяю отображение на форме доступных полей
+	* Then I check the display on the form of available fields
 		И     элемент формы с именем "Company" доступен
 		И     элемент формы с именем "CashAccount" доступен
 		И     элемент формы с именем "Description" доступен
@@ -451,7 +449,7 @@
 		И     элемент формы с именем "Currency" доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "CurrencyExchange" не доступен
-	И я проверяю отображение табличной части
+	* And I check the display of the tabular part
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -464,11 +462,11 @@
 
 
 
-Сценарий: _050014 проверка отображения реквизитов на форме Cash reciept с видом операции Currency exchange
+Сценарий: _050014 check the display of details on the form Cash reciept with the type of operation Currency exchange
 	И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-	Тогда я проверяю отображение на форме доступных полей
+	* Then I check the display on the form of available fields
 		И     элемент формы с именем "Company" доступен
 		И     элемент формы с именем "CashAccount" доступен
 		И     элемент формы с именем "Description" доступен
@@ -476,7 +474,7 @@
 		И     элемент формы с именем "Currency" доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "CurrencyExchange" доступен
-	И я проверяю отображение табличной части
+	* And I check the display of the tabular part
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '100,00'
 		И в таблице "PaymentList" я активизирую поле "Amount exchange"
@@ -487,11 +485,11 @@
 
 
 
-Сценарий: _050015 проверка отображения реквизитов на форме Cash reciept с видом операции Cash transfer
+Сценарий: _050015 check the display of details on the form Cash reciept with the type of operation Cash transfer
 	И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-	Тогда я проверяю отображение на форме доступных полей
+	* Then I check the display on the form of available fields
 		И     элемент формы с именем "Company" доступен
 		И     элемент формы с именем "CashAccount" доступен
 		И     элемент формы с именем "Description" доступен
@@ -499,7 +497,7 @@
 		И     элемент формы с именем "Currency" доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "CurrencyExchange" не доступен
-	И я проверяю отображение табличной части
+	* And I check the display of the tabular part
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '100,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
@@ -508,14 +506,3 @@
 		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Amount' | 'Planing transaction basis' |
 		| '1' | '100,00' | ''                          |
-
-
-
-
-
-
-
-		
-
-
-

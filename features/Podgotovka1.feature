@@ -125,7 +125,7 @@
 
 
 Сценарий: создаю документ Purchase Order
-	И я открываю форму для создания Purchase Order
+	* Open a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	И я заполняю необходимые реквизиты
@@ -665,8 +665,8 @@
 	И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 	И в таблице "ItemList" я завершаю редактирование строки
 
-Сценарий: создаю первый тестовый PO для теста по механизму создания на основании
-	И я открываю форму для создания Purchase Order
+Сценарий: create the first test PO for a test on the creation mechanism based on
+	* Open a form to create Purchase Order
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		И я заполняю необходимые реквизиты
@@ -755,8 +755,8 @@
 		# И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedPicture"
 
 
-Сценарий: создаю второй тестовый PO для теста по механизму создания на основании
-	И я открываю форму для создания Purchase Order
+Сценарий: create the second test PO for a test on the creation mechanism based on
+	* Open a form to create Purchase Order
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		И я заполняю необходимые реквизиты
@@ -810,8 +810,8 @@
 			# И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedPicture"
 
 
-Сценарий: создаю первый тестовый SO для теста по механизму создания на основании
-	И я открываю форму для создания Sales Order
+Сценарий: create the first test SO for a test on the creation mechanism based on
+	* Open a form to create Sales Order
 			И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		И я заполняю необходимые реквизиты
@@ -899,8 +899,8 @@
 		И я нажимаю на кнопку 'Post'
 
 
-Сценарий: создаю второй тестовый SO для теста по механизму создания на основании
-	И я открываю форму для создания Sales Order
+Сценарий: create the second test SO for a test on the creation mechanism based on
+	* Open a form to create Sales Order
 			И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		И я заполняю необходимые реквизиты

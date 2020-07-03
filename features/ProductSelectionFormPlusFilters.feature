@@ -14,9 +14,9 @@
 Сценарий: проверяю форму подбора товара с информацией по ценам в Sales order
 # sale order и sales invoice, Basic Agreements, TRY, Ferron
 	И я нажимаю на кнопку с именем "ItemListOpenPickupItems"
-	# временно
+	# temporarily
 	Затем Если появилось окно диалога я нажимаю на кнопку 'OK'
-	# временно
+	# temporarily
 	И я проверяю отбор по виду номенклатуры
 		И я нажимаю кнопку выбора у поля "Item type"
 		И в таблице "List" я перехожу к строке:
@@ -114,7 +114,7 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	И я проверяю заполнение табличной части
+	* Checking the filling of the tabular part
 		И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
 			| 'Dress'    | '550,00' | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '550,00'       |
@@ -157,9 +157,9 @@
 Сценарий: проверяю форму подбора товара с информацией по ценам в Sales invoice
 # sale order и sales invoice, Basic Agreements, TRY, Ferron
 	И я нажимаю на кнопку с именем "ItemListOpenPickupItems"
-	# временно
+	# temporarily
 	Затем Если появилось окно диалога я нажимаю на кнопку 'OK'
-	# временно
+	# temporarily
 	И я проверяю отбор по виду номенклатуры
 		И я нажимаю кнопку выбора у поля "Item type"
 		И в таблице "List" я перехожу к строке:
@@ -257,7 +257,7 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	И я проверяю заполнение табличной части
+	* Checking the filling of the tabular part
 		И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
 			| 'Dress'    | '550,00' | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '550,00'       |
@@ -292,9 +292,9 @@
 Сценарий: проверяю форму подбора товара с информацией по ценам в Purchase invoice
 	# purchase order и purchase invoice, Basic Agreements, TRY, Ferron
 	И я нажимаю на кнопку с именем "OpenPickupItems"
-	# временно
+	# temporarily
 	Затем Если появилось окно диалога я нажимаю на кнопку 'OK'
-	# временно
+	# temporarily
 	И я проверяю отбор по виду номенклатуры
 		И я нажимаю кнопку выбора у поля "Item type"
 		И в таблице "List" я перехожу к строке:
@@ -392,7 +392,7 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	И я проверяю заполнение табличной части
+	* Checking the filling of the tabular part
 		И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit'| 'Net amount' | 'Total amount' |
 			| 'Dress'    | '*'      | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs' | '*'          | '*'            |
@@ -427,9 +427,9 @@
 Сценарий: проверяю форму подбора товара с информацией по ценам в Purchase order
 	# purchase order и purchase invoice, Basic Agreements, TRY, Ferron
 	И я нажимаю на кнопку с именем "ItemListOpenPickupItems"
-	# временно
+	# temporarily
 	Затем Если появилось окно диалога я нажимаю на кнопку 'OK'
-	# временно
+	# temporarily
 	И я проверяю отбор по виду номенклатуры
 		И я нажимаю кнопку выбора у поля "Item type"
 		И в таблице "List" я перехожу к строке:
@@ -526,7 +526,7 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	И я проверяю заполнение табличной части
+	* Checking the filling of the tabular part
 		И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit'| 'Net amount' | 'Total amount' |
 			| 'Dress'    | '*'      | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs' | '*'          | '*'            |
@@ -1324,9 +1324,9 @@
 
 # Сollapsible group
 
-Сценарий: проверяю отображения заголовка сворачиваемой группы в документах продажи, закупки и возвратов при создании документа
+Сценарий: check the display of the header of the collapsible group in sales, purchase and return documents
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю реквизиты документа
+	* Filling in the details of the document
 		Если элемент "Partner" доступен для редактирования Тогда
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -1347,9 +1347,9 @@
 		И в таблице "List" я выбираю текущую строку
 
 
-Сценарий: проверяю отображения заголовка сворачиваемой группы в документах расходов/доходов
+Сценарий: check the display of the header of the collapsible group in expence/revenue documents
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю реквизиты документа
+	* Filling in the details of the document
 		Если элемент "Company" доступен для редактирования Тогда
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -1364,9 +1364,9 @@
 		И в таблице "List" я выбираю текущую строку
 
 
-Сценарий: проверяю отображения заголовка сворачиваемой группы в PhysicalCountByLocation
+Сценарий: check the display of the header of the collapsible group in PhysicalCountByLocation
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю реквизиты документа
+	* Filling in the details of the document
 		И я нажимаю кнопку выбора у поля "Store"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -1378,9 +1378,9 @@
 			| Anna Petrova |
 		И в таблице "List" я выбираю текущую строку
 
-Сценарий: проверяю отображения заголовка сворачиваемой группы в PhysicalInventory
+Сценарий: check the display of the header of the collapsible group in PhysicalInventory
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю реквизиты документа
+	* Filling in the details of the document
 		И я нажимаю кнопку выбора у поля "Store"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -1388,9 +1388,9 @@
 		И в таблице "List" я выбираю текущую строку
 	
 
-Сценарий: проверяю отображения заголовка сворачиваемой группы в OpeningEntry
+Сценарий: check the display of the header of the collapsible group in OpeningEntry
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю реквизиты документа
+	* Filling in the details of the document
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 				| Description  |
@@ -1398,9 +1398,9 @@
 		И в таблице "List" я выбираю текущую строку
 
 
-Сценарий: проверяю отображения заголовка сворачиваемой группы в документах перемещения товара
+Сценарий: check the display of the header of the collapsible group in inventory transfer
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю реквизиты документа
+	* Filling in the details of the document
 		Если элемент "Company" присутствует на форме Тогда
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -1420,7 +1420,7 @@
 			| Store 03    |
 		И в таблице "List" я выбираю текущую строку
 
-Сценарий: проверяю отображения заголовка сворачиваемой группы в документах 	приходного и расходного ордера по складу, Bundling/Unbundling, Boxing/Unboxing
+Сценарий: check the display of the header of the collapsible group in Shipment confirmation, Goods receipt, Bundling/Unbundling
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Если элемент "Company" присутствует на форме Тогда
 	И я нажимаю кнопку выбора у поля "Company"
@@ -1434,9 +1434,9 @@
 		| Store 03    |
 	И в таблице "List" я выбираю текущую строку
 
-Сценарий: проверяю отображения заголовка сворачиваемой группы в платежных документах по банку
+Сценарий: check the display of the header of the collapsible group in bank payments documents
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю реквизиты документа
+	* Filling in the details of the document
 		Если элемент "Company" присутствует на форме Тогда
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -1449,9 +1449,9 @@
 			| Bank account, USD |
 		И в таблице "List" я выбираю текущую строку
 
-Сценарий: проверяю отображения заголовка сворачиваемой группы в поступлении денег в кассу
+Сценарий: check the display of the header of the collapsible group in cash receipt document
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю реквизиты документа
+	* Filling in the details of the document
 		Если элемент "Company" присутствует на форме Тогда
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -1470,9 +1470,9 @@
 		И в таблице "List" я выбираю текущую строку
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
 
-Сценарий: проверяю отображения заголовка сворачиваемой группы в оплате из кассы
+Сценарий: check the display of the header of the collapsible group in cash payment document
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю реквизиты документа
+	* Filling in the details of the document
 		Если элемент "Company" присутствует на форме Тогда
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -1494,9 +1494,9 @@
 
 
 
-Сценарий: проверяю отображения заголовка сворачиваемой группы в документе сопоставления оплаты с документами основаниями
+Сценарий: check the display of the header of the collapsible group in invoice match
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю реквизиты документа
+	* Filling in the details of the document
 		Если элемент "Company" присутствует на форме Тогда
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -1514,9 +1514,9 @@
 			| 1    |
 		И в таблице "List" я выбираю текущую строку
 
-Сценарий: проверяю отображения заголовка сворачиваемой группы в плановых документах поступления/расхода ДС
+Сценарий: check the display of the header of the collapsible group in planned incoming/outgoing documents
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю реквизиты документа
+	* Filling in the details of the document
 		Если элемент "Company" присутствует на форме Тогда
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -1671,8 +1671,7 @@
 
 
 
-Сценарий: проверяю автозаполнение item key в документах продажи/возвратов по item у которых только один item key
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-494' с именем 'IRP-494'
+Сценарий: check item key autofilling in sales/returns documents for an item that has only one item key
 	И в таблице товаров я выбираю Item Scarf
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -1687,8 +1686,7 @@
 	И Я закрыл все окна клиентского приложения
 
 
-Сценарий: проверяю автозаполнение item key в документах закупки/возвратов/ордеров по складу по item у которых только один item key
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-494' с именем 'IRP-494'
+Сценарий: check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 	И в таблице товаров я выбираю Item Scarf
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -1702,8 +1700,7 @@
 			| Scarf |XS/Red   | pcs  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: проверяю автозаполнение item key в документах набора товаров по складу по item у которых только один item key
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-494' с именем 'IRP-494'
+Сценарий: check item key autofilling in bundling/transfer documents for an item that has only one item key
 	И я перехожу к закладке "Item list"
 	И в таблице товаров я выбираю Item Scarf
 		И я нажимаю на кнопку 'Add'
@@ -1796,7 +1793,7 @@
 	И я нажимаю на кнопку 'SearchByBarcode'
 	И в поле 'InputFld' я ввожу текст '2202283713'
 	И я нажимаю на кнопку 'OK'
-	И я проверяю добавление товара в табличной части
+	И я проверяю Adding items to табличной части
 		И     таблица "ItemList" содержит строки:
 			| 'Item'    |'Item key'     | 'Unit' |
 			|'Dress TR' |'S/Yellow TR'  | 'adet'  |

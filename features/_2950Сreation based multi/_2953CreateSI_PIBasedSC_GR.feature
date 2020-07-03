@@ -1,10 +1,10 @@
 #language: ru
 @tree
 @Positive
-Функционал: создание инвойсов на основании расходного и приходного ордера при непрямой схемы поставки
+Функционал: создание инвойсов based on расходного и приходного ордера при непрямой схемы поставки
 
 Как Разработчик
-Я хочу добавить возможность создавать инвойс на основании расходного и приходного ордера 
+Я хочу добавить возможность создавать инвойс based on расходного и приходного ордера 
 Чтобы упростить ввод документов
 
 Контекст:
@@ -12,7 +12,7 @@
 
 
 # Непрямая схема отгрузки Sales order - Purchase order - Goods reciept - Purchase invoice - Shipment confirmation - Sales invoice
-Сценарий: _090501 создание Sales invoice на основании Shipment confirmation (один к одному)
+Сценарий: _090501 создание Sales invoice based on Shipment confirmation (один к одному)
 	И я тестово создаю Sales order и на его основании Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -54,7 +54,7 @@
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Shipment confirmation'
 		И я нажимаю на кнопку 'Post'
-	И я созданию Sales invoice на основании Shipment confirmation
+	И я созданию Sales invoice based on Shipment confirmation
 		И я нажимаю на кнопку 'Sales invoice'
 	И я проверяю заполнение Sales invoice
 		И     таблица "ItemList" содержит строки:
@@ -63,7 +63,7 @@
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090502 создание Purchase invoice на основании Goods reciept (один к одному)
+Сценарий: _090502 создание Purchase invoice based on Goods reciept (один к одному)
 	И я тестово создаю Purchase order и на его основании Goods reciept
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -112,7 +112,7 @@
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Goods receipt'
 		И я нажимаю на кнопку 'Post'
-	И я создаю Purchase invoice на основании Goods receipt
+	И я создаю Purchase invoice based on Goods receipt
 		И я нажимаю на кнопку 'Purchase invoice'
 	И я проверяю заполнение Purchase invoice
 		И     таблица "ItemList" содержит строки:
@@ -120,7 +120,7 @@
 		| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | '*'                  |
 		И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _090503 создание Sales invoice на основании нескольких Shipment confirmation
+Сценарий: _090503 создание Sales invoice based on нескольких Shipment confirmation
 	И я тестово создаю первый заказ и Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -161,7 +161,7 @@
 		И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Shipment confirmation'
-		И я меняю номер документа на 458
+		* Change the document number to 458
 			И в поле 'Number' я ввожу текст '1'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -207,7 +207,7 @@
 		И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Shipment confirmation'
-		И я меняю номер документа на 459
+		* Change the document number to 459
 			И в поле 'Number' я ввожу текст '1'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -258,13 +258,13 @@
 		И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Shipment confirmation'
-		И я меняю номер документа на 460
+		* Change the document number to 460
 			И в поле 'Number' я ввожу текст '1'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '460'
 		И я нажимаю на кнопку 'Post and close'
-	И на основании созданных Shipment confirmation я создаю Sales invoice - должно создаться 2
+	И based on созданных Shipment confirmation я создаю Sales invoice - должно создаться 2
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
@@ -297,7 +297,7 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090504 создание Purchase invoice на основании нескольких Goods reciept
+Сценарий: _090504 создание Purchase invoice based on нескольких Goods reciept
 	И я тестово создаю Purchase order и на его основании Goods reciept
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -343,14 +343,14 @@
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И я устанавливаю флаг 'Goods receipt before purchase invoice'
-		И я меняю номер документа на 2023
+		* Change the document number to 2023
 			И в поле 'Number' я ввожу текст '2023'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2023'
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Goods receipt'
-		И я меняю номер документа на 471
+		* Change the document number to 471
 			И в поле 'Number' я ввожу текст '1'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -401,14 +401,14 @@
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И я устанавливаю флаг 'Goods receipt before purchase invoice'
-		И я меняю номер документа на 2024
+		* Change the document number to 2024
 			И в поле 'Number' я ввожу текст '2024'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2024'
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Goods receipt'
-		И я меняю номер документа на 472
+		* Change the document number to 472
 			И в поле 'Number' я ввожу текст '1'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -459,20 +459,20 @@
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И я устанавливаю флаг 'Goods receipt before purchase invoice'
-		И я меняю номер документа на 2025
+		* Change the document number to 2025
 			И в поле 'Number' я ввожу текст '2025'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2025'
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Goods receipt'
-		И я меняю номер документа на 473
+		* Change the document number to 473
 			И в поле 'Number' я ввожу текст '1'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '473'
 		И я нажимаю на кнопку 'Post and close'
-	И на основании созданных Goods receipt я создаю Purchase invoice - должно создаться 2
+	И based on созданных Goods receipt я создаю Purchase invoice - должно создаться 2
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
@@ -512,7 +512,7 @@
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090505 создание Sales invoice на основании нескольких Shipment confirmation (разная валюта)
+Сценарий: _090505 создание Sales invoice based on нескольких Shipment confirmation (разная валюта)
 # должно создаться 2 Sales invoice
 	И я тестово создаю первый заказ и Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -547,7 +547,7 @@
 		И я устанавливаю флаг "Shipment confirmations before sales invoice"
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Shipment confirmation'
-		И я меняю номер документа на 465
+		* Change the document number to 465
 			И в поле 'Number' я ввожу текст '1'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -593,13 +593,13 @@
 		И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Shipment confirmation'
-		И я меняю номер документа на 466
+		* Change the document number to 466
 			И в поле 'Number' я ввожу текст '1'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '466'
 		И я нажимаю на кнопку 'Post and close'
-	И на основании созданных Shipment confirmation я создаю Sales invoice - должно создаться 2
+	И based on созданных Shipment confirmation я создаю Sales invoice - должно создаться 2
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
@@ -629,7 +629,7 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090506 создание Purchase invoice на основании нескольких Goods reciept
+Сценарий: _090506 создание Purchase invoice based on нескольких Goods reciept
 	И я тестово создаю Purchase order и на его основании Goods reciept
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -677,7 +677,7 @@
 		И я устанавливаю флаг 'Goods receipt before purchase invoice'
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Goods receipt'
-		И я меняю номер документа на 465
+		* Change the document number to 465
 			И в поле 'Number' я ввожу текст '1'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
@@ -730,13 +730,13 @@
 		И я устанавливаю флаг 'Goods receipt before purchase invoice'
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Goods receipt'
-		И я меняю номер документа на 466
+		* Change the document number to 466
 			И в поле 'Number' я ввожу текст '1'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '466'
 		И я нажимаю на кнопку 'Post and close'
-	И на основании созданных Goods receipt я создаю Purchase invoice - должно создаться 2
+	И based on созданных Goods receipt я создаю Purchase invoice - должно создаться 2
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |

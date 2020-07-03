@@ -2,18 +2,17 @@
 @tree
 @Positive
 
-Функционал: проверка форм документов
+Функционал: forms check
 
-Как тестировщик
-Я хочу проверить отображение форм и автозаполнение документов
+I want to check the form display and autofill documents
 
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _0154000 создание тестовых данных
-	* Создание ещё одного контрагента для Ferron
+Сценарий: _0154000 preparation
+	* Create one more legal name for Ferron
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -28,7 +27,7 @@
 		И в поле 'TR' я ввожу текст 'Second Company Ferron BP TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-	* Создание ещё одной собственную компанию Second Company
+	* Create one more own company Second Company
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Companies'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'Second Company'
@@ -41,9 +40,9 @@
 			| Ukraine      |
 		И в таблице "List" я выбираю текущую строку
 		И я устанавливаю флаг 'Our'
-		* Заполнение информации по Currency (Local currency и Reporting currency)
+		* Filling in Currency info (Local currency and Reporting currency)
 			И я перехожу к закладке "Currencies"
-			* Создание и добавление Local currency
+			* Create and add Local currency
 				И в таблице "Currencies" я нажимаю на кнопку с именем 'CurrenciesAdd'
 				И в таблице "Currencies" я нажимаю кнопку выбора у реквизита "Movement type"
 				И я нажимаю на кнопку с именем 'FormCreate'
@@ -63,7 +62,7 @@
 				И Пауза 5
 				И я нажимаю на кнопку с именем 'FormChoose'
 				И в таблице "Currencies" я завершаю редактирование строки
-			* Создание и добавление Reporting currency
+			* Create and add Reporting currency
 				И в таблице "Currencies" я нажимаю на кнопку с именем 'CurrenciesAdd'
 				И в таблице "Currencies" я нажимаю кнопку выбора у реквизита "Movement type"
 				И я нажимаю на кнопку с именем 'FormCreate'
@@ -88,8 +87,8 @@
 
 
 
-Сценарий: _0154001 проверка прорисовки доп реквизитов на форме без перезахода (справочник Item key)
-	И я создаю тестовый item type
+Сценарий: _0154001 check that additional attributes are displayed on the form without re-opening (catalog Item key)
+	* Create item type
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemTypes'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'Test'
@@ -98,7 +97,7 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	Тогда я создаю тестовый item
+	* Create item
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'Test'
@@ -115,7 +114,7 @@
 			| Description |
 			| pcs         |
 		И в таблице "List" я выбираю текущую строку
-	Тогда я захожу в item key и проверяю что по нему не отображаются доп свойства (не указаны в item type)
+	Then I go into the item key and check that additional properties are not displayed on it (not specified in the item type)
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -124,7 +123,7 @@
 		И     элемент формы с именем "ItemType" стал равен 'Test'
 		И     элемент формы с именем "InheritUnit" стал равен 'pcs'
 		И     элемент формы с именем "SpecificationMode" стал равен 'No'
-	И я добавляю в item type новый реквизит не перезаходя на форму
+	* Add a new attribute to the item type without re-open the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemTypes'
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -145,23 +144,23 @@
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "AvailableAttributes" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
-	И я проверяю что дополнительный реквизит Test прорисовался на форме для item key
+	* Checking that the additional Test attribute has been displayed on the form for item key
 		И Я нажимаю кнопку командного интерфейса 'Test (Item)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154002 проверка прорисовки доп реквизитов на форме без перезахода (справочник Item)
+Сценарий: _0154002 check that additional attributes are displayed on the form without re-opening (catalog Item)
 	Тогда я проверяю наличие элемента справочника "Items" со значением поля "Description_en" "Test"
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму Item
+	* Open Item form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Test        |
 		И в таблице "List" я выбираю текущую строку
 		И элемент формы "Test" отсутствует на форме
-	И по выбранному Item я добавляю доп реквизит Test не закрывая форму
+	* Adding by selected Item additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
@@ -182,21 +181,21 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
 		И Я нажимаю кнопку командного интерфейса 'Test (Item)'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _0154003 проверка прорисовки доп реквизитов на форме без перезахода (справочник Itemtype)
+Сценарий:  _0154003 check that additional attributes are displayed on the form without re-opening (catalog Item type)
 	Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_en" "Test"
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму Item type
+	* Open Item form type
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemTypes'
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Test        |
 		И в таблице "List" я выбираю текущую строку
 		И элемент формы "Test" отсутствует на форме
-	И по выбранному Item type я добавляю доп реквизит Test не закрывая форму
+	* Adding by selected Item type additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -212,27 +211,27 @@
 		И в поле 'ENG' я ввожу текст 'Item types'
 		И я нажимаю на кнопку 'Save and close'
 		И Я нажимаю кнопку командного интерфейса 'Item types'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 		
 
-Сценарий:  _0154004 проверка прорисовки доп реквизитов на форме без перезахода (справочник Partners)
+Сценарий:  _0154004 check that additional attributes are displayed on the form without re-opening (catalog Partners)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я создаю тестовый элемент справочника Partners
+	* Create Partners
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'Test'
 		И я устанавливаю флаг 'Customer'
 		И я нажимаю на кнопку 'Save and close'
-	И я открываю форму Partners
+	* Open Partners form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Test        |
 		И в таблице "List" я выбираю текущую строку
 		И элемент формы "Test" отсутствует на форме
-	И по выбранному Partners я добавляю доп реквизит Test не закрывая форму
+	* Adding by selected Partners additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -252,20 +251,20 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Attributes" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Test (Partner)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _0154006 проверка прорисовки доп реквизитов на форме без перезахода (документ Sales invoice)
+Сценарий:  _0154006 check that additional attributes are displayed on the form without re-opening (document Sales invoice)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Sales Invoice
+	* Open a form to create Sales Invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по Sales invoice я добавляю доп реквизит Test не закрывая форму
+	* Adding by selected Sales invoice additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -280,19 +279,19 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Sales invoice'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Sales invoice (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _01540060 проверка прорисовки доп реквизитов на форме без перезахода (документ PurchaseInvoice)
+Сценарий:  _01540060 check that additional attributes are displayed on the form without re-opening (document PurchaseInvoice)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания PurchaseInvoice
+	* Open a form to create PurchaseInvoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по Purchase Invoice я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -307,19 +306,19 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Purchase Invoice'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Purchase invoice (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _01540061 проверка прорисовки доп реквизитов на форме без перезахода (документ SalesOrder)
+Сценарий:  _01540061 check that additional attributes are displayed on the form without re-opening (document SalesOrder)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания SalesOrder
+	* Open a form to create SalesOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по Sales Order я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -334,19 +333,19 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Sales Order'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Sales order (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _01540062 проверка прорисовки доп реквизитов на форме без перезахода (документ Purchase Order)
+Сценарий:  _01540062 check that additional attributes are displayed on the form without re-opening (document Purchase Order)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания PurchaseOrder
+	* Open a form to create PurchaseOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по Purchase Order я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -361,19 +360,19 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Purchase Order'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Purchase order (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _01540063 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_ExpenseAndRevenueTypes)
+Сценарий:  _01540063 check that additional attributes are displayed on the form without re-opening (Catalog_ExpenseAndRevenueTypes)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Catalog_ExpenseAndRevenueTypes
+	* Open a form to create Catalog_ExpenseAndRevenueTypes
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExpenseAndRevenueTypes'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по Expense And Revenue Types я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -388,18 +387,18 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Expense and revenue types'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Expense and revenue types'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _01540063 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_BusinessUnits)
+Сценарий:  _01540063 check that additional attributes are displayed on the form without re-opening (Catalog_BusinessUnits)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Catalog_BusinessUnits
+	* Open a form to create Catalog_BusinessUnits
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.BusinessUnits'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по Business Units я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -414,14 +413,14 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Business Units'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Business units'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _01540064 проверка добавления доп свойств к спецификациям (Catalog_Specifications)
+Сценарий:  _01540064 check adding additional properties for Specifications (Catalog_Specifications)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И по Specifications я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -437,7 +436,7 @@
 		И в таблице "Properties" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Specifications'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
 		И в таблице "List" я выбираю текущую строку 
 		И я нажимаю на кнопку 'Add properties'
@@ -446,13 +445,13 @@
 		| 'Test'     | ''      |
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _01540064 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_ChequeBonds)
+Сценарий:  _01540064 check that additional attributes are displayed on the form without re-opening (Catalog_ChequeBonds)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Catalog_ChequeBonds
+	* Open a form to create Catalog_ChequeBonds
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ChequeBonds'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по ChequeBonds я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -467,18 +466,18 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Cheque Bonds'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Cheque bonds'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _015400640 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_Agreements)
+Сценарий:  _015400640 check that additional attributes are displayed on the form without re-opening (Catalog_Agreements)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Agreements
+	* Open a form to create Agreements
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по Agreements я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -493,20 +492,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Agreements'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Agreements'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
 
-Сценарий:  _015400641 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_Cash accounts)
+Сценарий:  _015400641 check that additional attributes are displayed on the form without re-opening (Catalog_Cash accounts)
 Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания CashAccounts
+	* Open a form to create CashAccounts
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.CashAccounts'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по CashAccounts я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -521,18 +520,18 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Cash accounts'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Cash accounts'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _015400642 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_Companies)
+Сценарий:  _015400642 check that additional attributes are displayed on the form without re-opening (Catalog_Companies)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Companies
+	* Open a form to create Companies
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Companies'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по Companies я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -547,19 +546,19 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Companies'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Companies'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400643 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_Company types)
+Сценарий:  _015400643 check that additional attributes are displayed on the form without re-opening (Catalog_Company types)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания CompanyTypes
+	* Open a form to create CompanyTypes
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.CompanyTypes'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по CompanyTypes я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -574,18 +573,18 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Company types'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Company types'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _015400644 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_Countries)
+Сценарий:  _015400644 check that additional attributes are displayed on the form without re-opening (Catalog_Countries)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Countries
+	* Open a form to create Countries
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Countries'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по Countries я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -600,7 +599,7 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Countries'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Countries'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
@@ -608,13 +607,13 @@
 
 
 
-Сценарий:  _015400645 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_Currencies)
+Сценарий:  _015400645 check that additional attributes are displayed on the form without re-opening (Catalog_Currencies)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Currencies
+	* Open a form to create Currencies
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Currencies'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по Currencies я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -629,18 +628,18 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Currencies'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Currencies'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _015400646 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_Price types)
+Сценарий:  _015400646 check that additional attributes are displayed on the form without re-opening (Catalog_Price types)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания PriceTypes
+	* Open a form to create PriceTypes
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.PriceTypes'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по PriceTypes я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -655,19 +654,19 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Price types'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Price types'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400647 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_Serial lot numbers)
+Сценарий:  _015400647 check that additional attributes are displayed on the form without re-opening (Catalog_Serial lot numbers)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания SerialLotNumbers
+	* Open a form to create SerialLotNumbers
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.SerialLotNumbers'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по SerialLotNumbers я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -682,7 +681,7 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Serial lot numbers'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Serial lot numbers'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
@@ -690,13 +689,13 @@
 
 
 
-Сценарий:  _015400648 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_Stores)
+Сценарий:  _015400648 check that additional attributes are displayed on the form without re-opening (Catalog_Stores)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Stores
+	* Open a form to create Stores
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Stores'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по Stores я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -711,19 +710,19 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Stores'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Stores'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400649 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_Taxes)
+Сценарий:  _015400649 check that additional attributes are displayed on the form without re-opening (Catalog_Taxes)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Taxes
+	* Open a form to create Taxes
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Taxes'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по Taxes я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -738,18 +737,18 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Taxes'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Taxes'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _015400650 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_Units)
+Сценарий:  _015400650 check that additional attributes are displayed on the form without re-opening (Catalog_Units)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Units
+	* Open a form to create Units
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Units'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по Units я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -764,20 +763,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Units'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Units'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
 
-Сценарий:  _015400651 проверка прорисовки доп реквизитов на форме без перезахода (Catalog_Users)
+Сценарий:  _015400651 check that additional attributes are displayed on the form without re-opening (Catalog_Users)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Users
+	* Open a form to create Users
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Users'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по Users я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
@@ -792,19 +791,19 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Users'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И В панели открытых я выбираю 'Users'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _015400652 проверка прорисовки доп реквизитов на форме без перезахода (документ Bank payment)
+Сценарий:  _015400652 check that additional attributes are displayed on the form without re-opening (document Bank payment)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания BankPayment
+	* Open a form to create BankPayment
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по BankPayment я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -819,20 +818,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Bank payment'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Bank payment (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400653 проверка прорисовки доп реквизитов на форме без перезахода (документ Bank receipt)
+Сценарий:  _015400653 check that additional attributes are displayed on the form without re-opening (document Bank receipt)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания BankReceipt
+	* Open a form to create BankReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по BankReceipt я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -847,21 +846,21 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Bank receipt'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Bank receipt (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
 
-Сценарий:  _015400655 проверка прорисовки доп реквизитов на форме без перезахода (документ Bundling)
+Сценарий:  _015400655 check that additional attributes are displayed on the form without re-opening (document Bundling)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Bundling
+	* Open a form to create Bundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по Bundling я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -876,20 +875,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Bundling'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Bundling (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400656 проверка прорисовки доп реквизитов на форме без перезахода (документ Cash expense)
+Сценарий:  _015400656 check that additional attributes are displayed on the form without re-opening (document Cash expense)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания CashExpense
+	* Open a form to create CashExpense
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashExpense'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по CashExpense я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -904,20 +903,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Cash expense'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Cash expense (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400657 проверка прорисовки доп реквизитов на форме без перезахода (документ Cash payment)
+Сценарий:  _015400657 check that additional attributes are displayed on the form without re-opening (document Cash payment)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания CashPayment
+	* Open a form to create CashPayment
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по CashPayment я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -932,21 +931,21 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Cash payment'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Cash payment (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
 
-Сценарий:  _015400658 проверка прорисовки доп реквизитов на форме без перезахода (документ Cash receipt)
+Сценарий:  _015400658 check that additional attributes are displayed on the form without re-opening (document Cash receipt)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания CashReceipt
+	* Open a form to create CashReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по CashReceipt я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -961,7 +960,7 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Cash receipt'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Cash receipt (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
@@ -969,14 +968,14 @@
 
 
 
-Сценарий:  _015400659 проверка прорисовки доп реквизитов на форме без перезахода (документ Cash revenue)
+Сценарий:  _015400659 check that additional attributes are displayed on the form without re-opening (document Cash revenue)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания CashRevenue
+	* Open a form to create CashRevenue
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashRevenue'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по CashRevenue я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -991,20 +990,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Cash revenue'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Cash revenue (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400660 проверка прорисовки доп реквизитов на форме без перезахода (документ Cash transfer order)
+Сценарий:  _015400660 check that additional attributes are displayed on the form without re-opening (document Cash transfer order)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания CashTransferOrder
+	* Open a form to create CashTransferOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по CashTransferOrder я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1019,19 +1018,19 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Cash transfer order'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Cash transfer order (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _015400661 проверка прорисовки доп реквизитов на форме без перезахода (документ Cheque bond transaction)
+Сценарий:  _015400661 check that additional attributes are displayed on the form without re-opening (document Cheque bond transaction)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания ChequeBondTransaction
+	* Open a form to create ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по ChequeBondTransaction я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1046,20 +1045,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Cheque bond transaction'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Cheque bond transaction (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400662 проверка прорисовки доп реквизитов на форме без перезахода (документ Goods receipt)
+Сценарий:  _015400662 check that additional attributes are displayed on the form without re-opening (document Goods receipt)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Goods receipt
+	* Open a form to create Goods receipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по GoodsReceipt я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1074,21 +1073,21 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Goods receipt'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Goods receipt (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
 
-Сценарий:  _015400663 проверка прорисовки доп реквизитов на форме без перезахода (документ Incoming payment order)
+Сценарий:  _015400663 check that additional attributes are displayed on the form without re-opening (document Incoming payment order)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания IncomingPaymentOrder
+	* Open a form to create IncomingPaymentOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.IncomingPaymentOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по IncomingPaymentOrder я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1103,20 +1102,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Incoming payment order'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Incoming payment order (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400664 проверка прорисовки доп реквизитов на форме без перезахода (документ Inventory transfer)
+Сценарий:  _015400664 check that additional attributes are displayed on the form without re-opening (document Inventory transfer)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Inventory transfer
+	* Open a form to create Inventory transfer
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по InventoryTransfer я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1131,20 +1130,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Inventory transfer'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Inventory transfer (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400665 проверка прорисовки доп реквизитов на форме без перезахода (документ Inventory transfer order)
+Сценарий:  _015400665 check that additional attributes are displayed on the form without re-opening (document Inventory transfer order)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Inventory transfer order
+	* Open a form to create Inventory transfer order
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по InventoryTransferOrder я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1159,7 +1158,7 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Inventory transfer order'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Inventory transfer order (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
@@ -1167,14 +1166,14 @@
 
 
 
-Сценарий:  _015400667 проверка прорисовки доп реквизитов на форме без перезахода (документ Invoice match)
+Сценарий:  _015400667 check that additional attributes are displayed on the form without re-opening (document Invoice match)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания InvoiceMatch
+	* Open a form to create InvoiceMatch
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по InvoiceMatch я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1189,20 +1188,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Invoice match'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Invoice match (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
 
-Сценарий:  _015400668 проверка прорисовки доп реквизитов на форме без перезахода (документ Labeling)
+Сценарий:  _015400668 check that additional attributes are displayed on the form without re-opening (document Labeling)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Labeling
+	* Open a form to create Labeling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Labeling'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "Test" отсутствует на форме
-	И по Labeling я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1217,20 +1216,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Labeling'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Labeling (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400669 проверка прорисовки доп реквизитов на форме без перезахода (документ Opening entry)
+Сценарий:  _015400669 check that additional attributes are displayed on the form without re-opening (document Opening entry)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания OpeningEntry
+	* Open a form to create OpeningEntry
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по OpeningEntry я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1245,7 +1244,7 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Opening entry'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Opening entry (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
@@ -1254,14 +1253,14 @@
 
 
 
-Сценарий:  _015400670 проверка прорисовки доп реквизитов на форме без перезахода (документ Outgoing payment order)
+Сценарий:  _015400670 check that additional attributes are displayed on the form without re-opening (document Outgoing payment order)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания OutgoingPaymentOrder
+	* Open a form to create OutgoingPaymentOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.OutgoingPaymentOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по OutgoingPaymentOrder я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1276,7 +1275,7 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Outgoing payment order'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Outgoing payment order (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
@@ -1284,14 +1283,14 @@
 
 
 
-Сценарий:  _015400671 проверка прорисовки доп реквизитов на форме без перезахода (документ Physical count by location)
+Сценарий:  _015400671 check that additional attributes are displayed on the form without re-opening (document Physical count by location)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания PhysicalCountByLocation
+	* Open a form to create PhysicalCountByLocation
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalCountByLocation'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по PhysicalCountByLocation я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1306,20 +1305,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Physical count by location'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Physical count by location (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400672 проверка прорисовки доп реквизитов на форме без перезахода (документ Physical inventory)
+Сценарий:  _015400672 check that additional attributes are displayed on the form without re-opening (document Physical inventory)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания PhysicalInventory
+	* Open a form to create PhysicalInventory
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по PhysicalInventory я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1334,19 +1333,19 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Physical inventory'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Physical inventory (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _015400673 проверка прорисовки доп реквизитов на форме без перезахода (документ Price list)
+Сценарий:  _015400673 check that additional attributes are displayed on the form without re-opening (document Price list)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания PriceList
+	* Open a form to create PriceList
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по PriceList я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1361,21 +1360,21 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Price list'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Price list (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
 
-Сценарий:  _015400674 проверка прорисовки доп реквизитов на форме без перезахода (документ Purchase return)
+Сценарий:  _015400674 check that additional attributes are displayed on the form without re-opening (document Purchase return)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания PurchaseReturn
+	* Open a form to create PurchaseReturn
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по PurchaseReturn я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1390,21 +1389,21 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Purchase return'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Purchase return (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
 
-Сценарий:  _015400675 проверка прорисовки доп реквизитов на форме без перезахода (документ Purchase return order)
+Сценарий:  _015400675 check that additional attributes are displayed on the form without re-opening (document Purchase return order)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания PurchaseReturnOrder
+	* Open a form to create PurchaseReturnOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по PurchaseReturnOrder я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1419,7 +1418,7 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Purchase return order'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Purchase return order (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
@@ -1427,14 +1426,14 @@
 
 
 
-Сценарий:  _015400676 проверка прорисовки доп реквизитов на форме без перезахода (документ Reconciliation statement)
+Сценарий:  _015400676 check that additional attributes are displayed on the form without re-opening (document Reconciliation statement)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания ReconciliationStatement
+	* Open a form to create ReconciliationStatement
 		И я открываю навигационную ссылку 'e1cib/list/Document.ReconciliationStatement'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по ReconciliationStatement я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1449,21 +1448,21 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Reconciliation statement'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Reconciliation statement (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
 
-Сценарий:  _015400677 проверка прорисовки доп реквизитов на форме без перезахода (документ Sales return)
+Сценарий:  _015400677 check that additional attributes are displayed on the form without re-opening (document Sales return)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Sales return
+	* Open a form to create Sales return
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по SalesReturn я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1478,20 +1477,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Sales return'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Sales return (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400678 проверка прорисовки доп реквизитов на форме без перезахода (документ Sales return order)
+Сценарий:  _015400678 check that additional attributes are displayed on the form without re-opening (document Sales return order)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Sales return order
+	* Open a form to create Sales return order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по SalesReturnOrder я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1506,21 +1505,21 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Sales return order'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Sales return order (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
 
-Сценарий:  _015400679 проверка прорисовки доп реквизитов на форме без перезахода (документ Shipment confirmation)
+Сценарий:  _015400679 check that additional attributes are displayed on the form without re-opening (document Shipment confirmation)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания ShipmentConfirmation
+	* Open a form to create ShipmentConfirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по ShipmentConfirmation я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1535,20 +1534,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Shipment confirmation'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Shipment confirmation (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400680 проверка прорисовки доп реквизитов на форме без перезахода (документ Stock adjustment as surplus)
+Сценарий:  _015400680 check that additional attributes are displayed on the form without re-opening (document Stock adjustment as surplus)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания StockAdjustmentAsSurplus
+	* Open a form to create StockAdjustmentAsSurplus
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по StockAdjustmentAsSurplus я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1563,19 +1562,19 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Stock adjustment as surplus'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Stock adjustment as surplus (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _015400681 проверка прорисовки доп реквизитов на форме без перезахода (документ Stock adjustment as write-off)
+Сценарий:  _015400681 check that additional attributes are displayed on the form without re-opening (document Stock adjustment as write-off)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания StockAdjustmentAsWriteOff
+	* Open a form to create StockAdjustmentAsWriteOff
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по StockAdjustmentAsWriteOff я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1590,20 +1589,20 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Stock adjustment as write off'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Stock adjustment as write-off (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400683 проверка прорисовки доп реквизитов на форме без перезахода (документ Unbundling)
+Сценарий:  _015400683 check that additional attributes are displayed on the form without re-opening (document Unbundling)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
-	И я открываю форму для создания Unbundling
+	* Open a form to create Unbundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я перехожу к закладке "Other"
 		И элемент формы "Test" отсутствует на форме
-	И по Unbundling я добавляю доп реквизит Test не закрывая форму
+	* Adding additional Test attribute without closing the form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name     |
@@ -1618,13 +1617,13 @@
 		И в таблице "Attributes" я завершаю редактирование строки
 		И в поле 'ENG' я ввожу текст 'Unbundling'
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю отображение доп реквизита на форме
+	* Checking that the additional Test attribute has been displayed on the form
 		И Я нажимаю кнопку командного интерфейса 'Unbundling (create)'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _0154007 очистка от элемента Test
+Сценарий:  _0154007 delete Test attribute
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 	И в таблице "List" я перехожу к строке:
 		| Description |
@@ -1670,150 +1669,148 @@
 	И я нажимаю на кнопку 'Save and close'
 	И я удаляю элемент справочника "Items" со значением поля Description_en "Test"
 	И я удаляю элемент справочника "ItemTypes" со значением поля Description_en "Test"
-	# И я удаляю элементы плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
 	И я удаляю элемент справочника "Partners" со значением поля Description_en "Test"
 
-Сценарий:  _0154008 проверка автозаполнения соглашения в Purchase order
+Сценарий:  _0154008 check autofilling the agreement field in Purchase order
 	Когда создание тестового партнера с одним соглашением поставщика и с одним соглашением клиента
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _0154009 проверка автозаполнения соглашения в Purchase invoice
+Сценарий:  _0154009 check autofilling the agreement field in Purchase invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154010 проверка автозаполнения соглашения в Purchase return
+Сценарий: _0154010 check autofilling the agreement field in Purchase return
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154011  проверка автозаполнения соглашения в Purchase return order
+Сценарий: _0154011  check autofilling the agreement field in Purchase return order
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154012 проверка автозаполнения соглашения в Sales order
+Сценарий: _0154012 check autofilling the agreement field in Sales order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154013 проверка автозаполнения соглашения в Sales invoice
+Сценарий: _0154013 check autofilling the agreement field in Sales invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154014 проверка автозаполнения соглашения в Sales return order
+Сценарий: _0154014 check autofilling the agreement field in Sales return order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154015 проверка автозаполнения соглашения в Sales return
+Сценарий: _0154015 check autofilling the agreement field in Sales return
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154016 проверяю автозаполнение item key в Sales order по item у которых только один item key
+Сценарий: _0154016 check autofilling item key in Sales order by item only with one item key
 	Когда созданию тестовый Item с одним item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах продажи/возвратов по item у которых только один item key
+	Когда check item key autofilling in sales/returns documents for an item that has only one item key
 
-Сценарий: _0154017 проверяю автозаполнение item key в Sales invoice по item у которых только один item key
+Сценарий: _0154017 check autofilling item key in Sales invoice by item only with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах продажи/возвратов по item у которых только один item key
+	Когда check item key autofilling in sales/returns documents for an item that has only one item key
 
-Сценарий: _0154018 проверяю автозаполнение item key в Sales return order по item у которых только один item key
+Сценарий: _0154018 check autofilling item key in Sales return order by item only with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах продажи/возвратов по item у которых только один item key
+	Когда check item key autofilling in sales/returns documents for an item that has only one item key
 
-Сценарий: _0154019 проверяю автозаполнение item key в Sales return по item у которых только один item key
+Сценарий: _0154019 check autofilling item key in Sales return by item only with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах закупки/возвратов/ордеров по складу по item у которых только один item key
+	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
-Сценарий: _0154020 проверяю автозаполнение item key в Shipment Confirmation по item у которых только один item key
+Сценарий: _0154020 check autofilling item key in Shipment Confirmation by item only with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах закупки/возвратов/ордеров по складу по item у которых только один item key
+	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
-Сценарий: _0154021 проверяю автозаполнение item key в GoodsReceipt по item у которых только один item key
+Сценарий: _0154021 check autofilling item key in GoodsReceipt by item only with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах закупки/возвратов/ордеров по складу по item у которых только один item key
+	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
-Сценарий: _0154022 проверяю автозаполнение item key в Purchase order по item у которых только один item key
+Сценарий: _0154022 check autofilling item key in Purchase order by item only with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах закупки/возвратов/ордеров по складу по item у которых только один item key
+	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
-Сценарий: _0154023 проверяю автозаполнение item key в Purchase invoice по item у которых только один item key
+Сценарий: _0154023 check autofilling item key in Purchase invoice by item only with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах закупки/возвратов/ордеров по складу по item у которых только один item key
+	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
-Сценарий: _0154024 проверяю автозаполнение item key в Purchase return по item у которых только один item key
+Сценарий: _0154024 check autofilling item key in Purchase return by item only with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах закупки/возвратов/ордеров по складу по item у которых только один item key
+	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
-Сценарий: _0154025 проверяю автозаполнение item key в Purchase return order по item у которых только один item key
+Сценарий: _0154025 check autofilling item key in Purchase return order by item only with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах закупки/возвратов/ордеров по складу по item у которых только один item key
+	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
 
-Сценарий: _0154026 проверяю автозаполнение item key в Bundling по item у которых только один item key
+Сценарий: _0154026 check autofilling item key in Bundling by item only with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах набора товаров по складу по item у которых только один item key
+	Когда check item key autofilling in bundling/transfer documents for an item that has only one item key
 
-Сценарий: _0154027 проверяю автозаполнение item key в Unbundling по item у которых только один item key
+Сценарий: _0154027 check autofilling item key in Unbundling by item only with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах набора товаров по складу по item у которых только один item key
+	Когда check item key autofilling in bundling/transfer documents for an item that has only one item key
 
 
 
-Сценарий: _0154030 проверяю автозаполнение item key в Inventory transfer по item у которых только один item key 
+Сценарий: _0154030 check autofilling item key in Inventory transfer by item only with one item key 
 	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах закупки/возвратов/ордеров по складу по item у которых только один item key
+	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
-Сценарий: _0154031 проверяю автозаполнение item key в Inventory transfer order по item у которых только один item key 
+Сценарий: _0154031 check autofilling item key in Inventory transfer order by item only with one item key 
 	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах набора товаров по складу по item у которых только один item key
+	Когда check item key autofilling in bundling/transfer documents for an item that has only one item key
 
-Сценарий: _0154032 проверяю автозаполнение item key в Internal Supply Request у которых только один item key 
+Сценарий: _0154032 check autofilling item key in Internal Supply Request у которых только один item key 
 	И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение item key в документах закупки/возвратов/ордеров по складу по item у которых только один item key
+	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
 
 
 
-Сценарий: _0154033 проверка наличия в форме элемента Partner опции включения партнера в сегмент
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-494' с именем 'IRP-428'
+Сценарий: _0154033 check if the Partner form contains an option to include a partner in the segment
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-	Тогда я выбираю тестового партнера
+	* Select partner
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Seven Brand |
 		И в таблице "List" я выбираю текущую строку
-	И я включаю тестового партнера в сегмент Dealer
+	* Add a test partner to the Dealer segment
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments'
 		Тогда таблица "List" не содержит строки:
 		| Segment | Partner     |
@@ -1825,23 +1822,22 @@
 			| Dealer      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
-	Тогда я проверяю добавление тестового партнера в сегмент Dealer
+	* Add a test partner to the Retail segment
 		И в таблице "List" я перехожу к строке:
 			| Partner     | Segment |
 			| Seven Brand | Retail  |
 		И в таблице "List" я перехожу к строке:
 			| Partner     | Segment |
 			| Seven Brand | Dealer  |
-	И я удаляю добавленную запись по сегменту
+	* Delete added record
 		И в таблице 'List' я удаляю строку
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 	Тогда я закрыл все окна клиентского приложения
 
 
-Сценарий:  _0154034 проверка отбора по item key в форме подбора item key
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-496' с именем 'IRP-426'
-	И я открываю форму подбора item key из документа Sales order
+Сценарий:  _0154034 check item key selection in the form of item key
+	* Open the item key selection form from the Sales order document.
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -1857,8 +1853,8 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-	И я проверяю отбор по свойствам
-	# должны отображаться единичные item key + item key спецификаций которые содержат это свойство
+	* Check the selection by properties
+	# Single item key + item key specifications that contain this property should be displayed
 		И из выпадающего списка "Color" я выбираю по строке 'yellow'
 		И я нажимаю кнопку выбора у поля "Color"
 		И в таблице "List" я перехожу к строке:
@@ -1869,7 +1865,7 @@
 			| Item key  | Item  |
 			| S/Yellow  | Dress |
 			| Dress/A-8 | Dress |
-	И я проверяю фильтр по единичным item key и по спецификациям
+	* Checking the filter by single item key and by specifications
 		И я меняю значение переключателя 'IsSpecificationFilter' на 'Single'
 		И     таблица "List" стала равной:
 			| Item key  | Item  |
@@ -1886,9 +1882,8 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _0154035 проверка поиска в списке выбора item key
-	# IRP-268
-	* Открытие формы Sales order
+Сценарий:  _0154035 search the item key selection list
+	* Open the Sales order creation form
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И я нажимаю на кнопку 'Create'
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -1896,7 +1891,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-	* Проверка общего поиска включая отбор по переключателям All/Single/Specification
+	* General search check including All/Single/Specification switch selection
 		И в поле 'SearchString' я ввожу текст 's'
 		Тогда таблица "List" не содержит строки:
 		| 'Item key'  | 'Item'  |
@@ -1938,7 +1933,7 @@
 		| 'XL/Green'  | 'Dress' |
 		| 'XXL/Red'   | 'Dress' |
 		| 'M/Brown'   | 'Dress' |
-	* Проверка поиска по свойствам
+	* Сheck search by properties
 		И я нажимаю кнопку очистить у поля "Size"
 		И из выпадающего списка "Color" я выбираю по строке 'gr'
 		Тогда таблица "List" не содержит строки:
@@ -1964,11 +1959,11 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _0154036 проверка очистки склада по строке с услугой в документе Sales order
-	* Открытие формы создания Sales Order
+Сценарий:  _0154036 check the Deleting of the store field value by line with the service in a document Sales order
+	* Open a creation form Sales Order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Service
+	* Add to the table part of the product with the item type - Service
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -1992,22 +1987,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
-	* Очистка склада по строке с услугой
+	* Deleting of the store field value by line with the service
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Тогда я проверяю, что значение склада очистилось
+	* Check that the store field has been cleared
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | ''         |
 		И я закрыл все окна клиентского приложения
 
-Сценарий:  _0154037 проверка невозможности очистить склад по строке с товаром в документе Sales order
-	* Открытие формы создания Sales Order
+Сценарий:  _0154037 check impossibility deleting of the store field by line with the product in a Sales order
+	* Open a creation form Sales Order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Product
+	* Add to the table part of the product with the item type - Product
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2031,22 +2026,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-	* Очистка склада по строке с товаром
+	* Delete store field by product line 
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка, что значение склада не очистилось
+	* Checking that the store field is still filled
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		И я закрыл все окна клиентского приложения
 	
-Сценарий:  _0154038 проверка очистки склада по строке с услугой в документе Sales invoice
-	* Открытие формы создания Sales invoice
+Сценарий:  _0154038 check the Deleting of the store field value by line with the service in a document Sales invoice
+	* Open a creation form Sales invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Service
+	* Add to the table part of the product with the item type - Service
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2070,22 +2065,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
-	* Очистка склада по строке с услугой
+	* Deleting of the store field value by line with the service
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Тогда я проверяю, что значение склада очистилось
+	* Check that the store field has been cleared
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | ''         |
 		И я закрыл все окна клиентского приложения
 
-Сценарий:  _0154039 проверка невозможности очистить склад по строке с товаром в документе Sales invoice
-	* Открытие формы создания Sales invoice
+Сценарий:  _0154039 check impossibility deleting of the store field by line with the product in a Sales invoice
+	* Open a creation form Sales invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Product
+	* Add to the table part of the product with the item type - Product
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2109,22 +2104,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-	* Очистка склада по строке с товаром
+	* Delete store field by product line 
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка, что значение склада не очистилось
+	* Checking that the store field is still filled
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		И я закрыл все окна клиентского приложения
 	
-Сценарий:  _0154040 проверка очистки склада по строке с услугой в документе Purchase order
-	* Открытие формы создания Purchase order
+Сценарий:  _0154040 check the Deleting of the store field value by line with the service in a document Purchase order
+	* Open a creation form Purchase order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Service
+	* Add to the table part of the product with the item type - Service
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2148,22 +2143,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
-	* Очистка склада по строке с услугой
+	* Deleting of the store field value by line with the service
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Тогда я проверяю, что значение склада очистилось
+	* Check that the store field has been cleared
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | ''         |
 		И я закрыл все окна клиентского приложения
 
-Сценарий:  _0154041 проверка невозможности очистить склад по строке с товаром в документе Purchase Order
-	* Открытие формы создания Purchase order
+Сценарий:  _0154041 check impossibility deleting of the store field by line with the product in a Purchase Order
+	* Open a creation form Purchase order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Product
+	* Add to the table part of the product with the item type - Product
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2187,22 +2182,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-	* Очистка склада по строке с товаром
+	* Delete store field by product line 
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка, что значение склада не очистилось
+	* Checking that the store field is still filled
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		И я закрыл все окна клиентского приложения	
 		
-Сценарий:  _0154042 проверка очистки склада по строке с услугой в документе Purchase invoice
-	* Открытие формы создания Purchase invoice
+Сценарий:  _0154042 check the Deleting of the store field value by line with the service in a document Purchase invoice
+	* Open a creation form Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Service
+	* Add to the table part of the product with the item type - Service
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2226,22 +2221,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
-	* Очистка склада по строке с услугой
+	* Deleting of the store field value by line with the service
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Тогда я проверяю, что значение склада очистилось
+	* Check that the store field has been cleared
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | ''         |
 		И я закрыл все окна клиентского приложения
 
-Сценарий:  _0154043 проверка невозможности очистить склад по строке с товаром в документе Purchase invoice
-	* Открытие формы создания Purchase invoice
+Сценарий:  _0154043 check impossibility deleting of the store field by line with the product in a Purchase invoice
+	* Open a creation form Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Product
+	* Add to the table part of the product with the item type - Product
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2265,22 +2260,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-	* Очистка склада по строке с товаром
+	* Delete store field by product line 
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка, что значение склада не очистилось
+	* Checking that the store field is still filled
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		И я закрыл все окна клиентского приложения	
 
-Сценарий:  _0154044 проверка невозможности очистить склад по строке с товаром в документе Sales return order
-	* Открытие формы создания Sales Return Order
+Сценарий:  _0154044 check impossibility deleting of the store field by line with the product in a Sales return order
+	* Open a creation form Sales Return Order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Product
+	* Add to the table part of the product with the item type - Product
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2304,22 +2299,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-	* Очистка склада по строке с товаром
+	* Delete store field by product line 
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка, что значение склада не очистилось
+	* Checking that the store field is still filled
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		И я закрыл все окна клиентского приложения	
 
-Сценарий:  _0154045 проверка невозможности очистить склад по строке с товаром в документе Sales return
-	* Открытие формы создания Sales Return
+Сценарий:  _0154045 check impossibility deleting of the store field by line with the product in a Sales return
+	* Open a creation form Sales Return
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturn"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Product
+	* Add to the table part of the product with the item type - Product
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2343,22 +2338,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-	* Очистка склада по строке с товаром
+	* Delete store field by product line 
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка, что значение склада не очистилось
+	* Checking that the store field is still filled
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		И я закрыл все окна клиентского приложения	
 
-Сценарий:  _0154046 проверка невозможности очистить склад по строке с товаром в документе Purchase return
-	* Открытие формы создания Purchase Return
+Сценарий:  _0154046 check impossibility deleting of the store field by line with the product in a Purchase return
+	* Open a creation form Purchase Return
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Product
+	* Add to the table part of the product with the item type - Product
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2382,22 +2377,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-	* Очистка склада по строке с товаром
+	* Delete store field by product line 
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка, что значение склада не очистилось
+	* Checking that the store field is still filled
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		И я закрыл все окна клиентского приложения
 	
-Сценарий:  _0154047 проверка невозможности очистить склад по строке с товаром в документе Purchase return order
-	* Открытие формы создания Purchase Return order
+Сценарий:  _0154047 check impossibility deleting of the store field by line with the product in a Purchase return order
+	* Open a creation form Purchase Return order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Product
+	* Add to the table part of the product with the item type - Product
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2421,22 +2416,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-	* Очистка склада по строке с товаром
+	* Delete store field by product line 
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка, что значение склада не очистилось
+	* Checking that the store field is still filled
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий:  _0154048 проверка невозможности очистить склад по строке с товаром в документе GoodsReceipt
-	* Открытие формы создания GoodsReceipt
+Сценарий:  _0154048 check impossibility deleting of the store field by line with the product in a Goods receipt
+	* Open a creation form Goods receipt
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Product
+	* Add to the table part of the product with the item type - Product
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2461,22 +2456,22 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 02' |
-	* Очистка склада по строке с товаром
+	* Delete store field by product line 
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка, что значение склада не очистилось
+	* Checking that the store field is still filled
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 02' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий:  _0154049 проверка невозможности очистить склад по строке с товаром в документе ShipmentConfirmation
-	* Открытие формы создания ShipmentConfirmation
+Сценарий:  _0154049 check impossibility deleting of the store field by line with the product in a  ShipmentConfirmation
+	* Open a creation form ShipmentConfirmation
 		И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление в табличную часть товара с видом номенклатуры - Product
+	* Add to the table part of the product with the item type - Product
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -2500,12 +2495,12 @@
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 02' |
-	* Очистка склада по строке с товаром
+	* Delete store field by product line 
 		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка, что значение склада не очистилось
+	* Checking that the store field is still filled
 		Тогда таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 02' |
@@ -2513,296 +2508,296 @@
 			
 		
 		
-Сценарий:  _0154050 проверка ввода по строке item и item key в документе Sales order на английском
-	* Открытие формы создания Sales order
+Сценарий:  _0154050 check item and item key input by search in line in a document Sales order (in english)
+	* Open a creation form Sales order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 	
 
-Сценарий:  _0154051 проверка ввода по строке item и item key в документе Sales invoice на английском
-	* Открытие формы создания Sales invoice
+Сценарий:  _0154051 check item and item key input by search in line in a document Sales invoice (in english)
+	* Open a creation form Sales invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154052 проверка ввода по строке item и item key в документе Sales return order на английском
-	* Открытие формы создания Sales return order
+Сценарий: _0154052 check item and item key input by search in line in a document Sales return order (in english)
+	* Open a creation form Sales return order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154053 проверка ввода по строке item и item key в документе Sales return на английском
-	* Открытие формы создания Sales return 
+Сценарий: _0154053 check item and item key input by search in line in a document Sales return (in english)
+	* Open a creation form Sales return 
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturn"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154054 проверка ввода по строке item и item key в документе Purchase invoice на английском
-	* Открытие формы создания Purchase invoice
+Сценарий: _0154054 check item and item key input by search in line in a document Purchase invoice (in english)
+	* Open a creation form Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.Purchaseinvoice"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154055 проверка ввода по строке item и item key в документе Purchase order на английском
-	* Открытие формы создания Purchase order
+Сценарий: _0154055 check item and item key input by search in line in a document Purchase order (in english)
+	* Open a creation form Purchase order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154056 проверка ввода по строке item и item key в документе Goods Receipt на английском
-	* Открытие формы создания Goods Receipt
+Сценарий: _0154056 check item and item key input by search in line in a document Goods Receipt (in english)
+	* Open a creation form Goods Receipt
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154057 проверка ввода по строке item и item key в документе Shipment confirmation на английском
-	* Открытие формы создания Shipment confirmation
+Сценарий: _0154057 check item and item key input by search in line in a document Shipment confirmation (in english)
+	* Open a creation form Shipment confirmation
 		И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154058 проверка ввода по строке item и item key в документе InternalSupplyRequest на английском
-	* Открытие формы создания Internal Supply Request
+Сценарий: _0154058 check item and item key input by search in line in a document InternalSupplyRequest (in english)
+	* Open a creation form Internal Supply Request
 		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И в таблице "ItemList" я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154059 проверка ввода по строке item и item key в документе InventoryTransferOrder на английском
-	* Открытие формы создания Inventory Transfer Order
+Сценарий: _0154059 check item and item key input by search in line in a document InventoryTransferOrder (in english)
+	* Open a creation form Inventory Transfer Order
 		И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransferOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154060 проверка ввода по строке item и item key в документе InventoryTransfer на английском
-	* Открытие формы создания Inventory Transfer
+Сценарий: _0154060 check item and item key input by search in line in a document InventoryTransfer (in english)
+	* Open a creation form Inventory Transfer
 		И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransfer"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154061 проверка ввода по строке item и item key в документе Bundling на английском
-	* Открытие формы создания Bundling
+Сценарий: _0154061 check item and item key input by search in line in a document Bundling (in english)
+	* Open a creation form Bundling
 		И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154062 проверка ввода по строке item и item key в документе UnBundling на английском
-	* Открытие формы создания UnBundling
+Сценарий: _0154062 check item and item key input by search in line in a document UnBundling (in english)
+	* Open a creation form UnBundling
 		И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _015406401 проверка ввода по строке item и item key в документе StockAdjustmentAsSurplus на английском
-	* Открытие формы создания StockAdjustmentAsSurplus
+Сценарий: _015406401 check item and item key input by search in line in a document StockAdjustmentAsSurplus (in english)
+	* Open a creation form StockAdjustmentAsSurplus
 		И я открываю навигационную ссылку "e1cib/list/Document.StockAdjustmentAsSurplus"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _015406402 проверка ввода по строке item и item key в документе StockAdjustmentAsWriteOff на английском
-	* Открытие формы создания StockAdjustmentAsWriteOff
+Сценарий: _015406402 check item and item key input by search in line in a document StockAdjustmentAsWriteOff (in english)
+	* Open a creation form StockAdjustmentAsWriteOff
 		И я открываю навигационную ссылку "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _015406403 проверка ввода по строке item и item key в документе PhysicalInventory на английском
-	* Открытие формы создания PhysicalInventory
+Сценарий: _015406403 check item and item key input by search in line in a document PhysicalInventory (in english)
+	* Open a creation form PhysicalInventory
 		И я открываю навигационную ссылку "e1cib/list/Document.PhysicalInventory"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _015406404 проверка ввода по строке item и item key в документе PhysicalCountByLocation на английском
-	* Открытие формы создания PhysicalCountByLocation
+Сценарий: _015406404 check item and item key input by search in line in a document PhysicalCountByLocation (in english)
+	* Open a creation form PhysicalCountByLocation
 		И я открываю навигационную ссылку "e1cib/list/Document.PhysicalCountByLocation"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154065 проверка ввода по строке item, item key, properties, в документе Price list на английском
+Сценарий: _0154065 check item, item key and properties input by search in line in a document Price list (in english)
 	И я закрыл все окна клиентского приложения
-	* Открытие формы создания Price List
+	* Open a creation form Price List
 		И я открываю навигационную ссылку "e1cib/list/Document.PriceList"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя 'Set price' на 'By Item keys'
-	* Ввод по строке item и item key
+	* Item and item key input by search in line
 		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
 		И в таблице "ItemKeyList" из выпадающего списка "Item" я выбираю по строке 'tr'
 		И в таблице "ItemKeyList" я активизирую поле "Item key"
 		И в таблице "ItemKeyList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Проверка введенных значений
+	* Checking entered values
 		И     таблица "ItemKeyList" содержит строки:
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 
 	
 
-Сценарий: _0154066 проверка ввода по строке partner, legal name, agreement, company, store в документе Sales order на английском
-	* Открытие формы создания Sales order
+Сценарий: _0154066 check partner, legal name, agreement, company and store input by search in line in a document Sales order (in english)
+	* Open a creation form Sales order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке legal name
+	* Legal name input by search in line
 		И из выпадающего списка "Legal name" я выбираю по строке 'com'
-	* Ввод по строке Agreement
+	* Agreement input by search in line
 		И из выпадающего списка "Agreement" я выбираю по строке 'TRY'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
@@ -2810,40 +2805,40 @@
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154066 проверка ввода по строке partner, legal name, company, currency  в документе Reconcilation statement на английском
-	* Открытие формы создания Reconciliation Statement
+Сценарий: _0154066 check partner, legal name, company, currency input by search in line in a document Reconcilation statement (in english)
+	* Open a creation form Reconciliation Statement
 		И я открываю навигационную ссылку "e1cib/list/Document.ReconciliationStatement"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке legal name
+	* Legal name input by search in line
 		И из выпадающего списка "Legal name" я выбираю по строке 'com'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке currency
+	* Currency input by search in line
 		И из выпадающего списка с именем "Currency" я выбираю по строке 't'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Currency" стал равен 'TRY'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154067 проверка ввода по строке partner, legal name, agreement, company, store в документе Sales invoice на английском
-	* Открытие формы создания Sales invoice
+Сценарий: _0154067 check partner, legal name, agreement, company and store input by search in line in a document Sales invoice (in english)
+	* Open a creation form Sales invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке legal name
+	* Legal name input by search in line
 		И из выпадающего списка "Legal name" я выбираю по строке 'com'
-	* Ввод по строке Agreement
+	* Agreement input by search in line
 		И из выпадающего списка "Agreement" я выбираю по строке 'TRY'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
@@ -2851,21 +2846,21 @@
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154068 проверка ввода по строке partner, legal name, agreement, company, store в документе Sales return на английском
-	* Открытие формы создания Sales return
+Сценарий: _0154068 check partner, legal name, agreement, company and store input by search in line in a document Sales return (in english)
+	* Open a creation form Sales return
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturn"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке legal name
+	* Legal name input by search in line
 		И из выпадающего списка "Legal name" я выбираю по строке 'com'
-	* Ввод по строке Agreement
+	* Agreement input by search in line
 		И из выпадающего списка "Agreement" я выбираю по строке 'TRY'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
@@ -2873,21 +2868,21 @@
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154069 проверка ввода по строке partner, legal name, agreement, company, store в документе Sales return order на английском
-	* Открытие формы создания Sales return order
+Сценарий: _0154069 check partner, legal name, agreement, company and store input by search in line in a document Sales return order (in english)
+	* Open a creation form Sales return order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке legal name
+	* Legal name input by search in line
 		И из выпадающего списка "Legal name" я выбираю по строке 'com'
-	* Ввод по строке Agreement
+	* Agreement input by search in line
 		И из выпадающего списка "Agreement" я выбираю по строке 'TRY'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
@@ -2895,21 +2890,21 @@
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154070 проверка ввода по строке partner, legal name, agreement, company, store в документе Purchase order на английском
-	* Открытие формы создания Purchase order
+Сценарий: _0154070 check partner, legal name, agreement, company and store input by search in line in a document Purchase order (in english)
+	* Open a creation form Purchase order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке legal name
+	* Legal name input by search in line
 		И из выпадающего списка "Legal name" я выбираю по строке 'com'
-	* Ввод по строке Agreement
+	* Agreement input by search in line
 		И из выпадающего списка "Agreement" я выбираю по строке 'TRY'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
@@ -2917,21 +2912,21 @@
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154071 проверка ввода по строке partner, legal name, agreement, company, store в документе Purchase invoice на английском
-	* Открытие формы создания Purchase invoice
+Сценарий: _0154071 check partner, legal name, agreement, company and store input by search in line in a document Purchase invoice (in english)
+	* Open a creation form Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке legal name
+	* Legal name input by search in line
 		И из выпадающего списка "Legal name" я выбираю по строке 'com'
-	* Ввод по строке Agreement
+	* Agreement input by search in line
 		И из выпадающего списка "Agreement" я выбираю по строке 'TRY'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
@@ -2939,21 +2934,21 @@
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154072 проверка ввода по строке partner, legal name, agreement, company, store в документе Purchase return на английском
-	* Открытие формы создания Purchase return
+Сценарий: _0154072 check partner, legal name, agreement, company and store input by search in line in a document Purchase return (in english)
+	* Open a creation form Purchase return
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке legal name
+	* Legal name input by search in line
 		И из выпадающего списка "Legal name" я выбираю по строке 'com'
-	* Ввод по строке Agreement
+	* Agreement input by search in line
 		И из выпадающего списка "Agreement" я выбираю по строке 'TRY'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
@@ -2961,21 +2956,21 @@
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154073 проверка ввода по строке partner, legal name, agreement, company, store в документе Purchase return order на английском
-	* Открытие формы создания Purchase return order
+Сценарий: _0154073 check partner, legal name, agreement, company and store input by search in line in a document Purchase return order (in english)
+	* Open a creation form Purchase return order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке legal name
+	* Legal name input by search in line
 		И из выпадающего списка "Legal name" я выбираю по строке 'com'
-	* Ввод по строке Agreement
+	* Agreement input by search in line
 		И из выпадающего списка "Agreement" я выбираю по строке 'TRY'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
@@ -2983,87 +2978,87 @@
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154074 проверка ввода по строке partner, legal name, company, store в документе Goods Receipt на английском
-	* Открытие формы создания Goods Receipt
+Сценарий: _0154074 check partner, legal name, company, store input by search in line in a document Goods Receipt (in english)
+	* Open a creation form Goods Receipt
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Purchase'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке legal name
+	* Legal name input by search in line
 		И из выпадающего списка "Legal name" я выбираю по строке 'com'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '02'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154075 проверка ввода по строке partner, legal name, company, store в документе Shipment confirmation на английском
-	* Открытие формы создания Shipment confirmation
+Сценарий: _0154075 check partner, legal name, company, store input by search in line in a document Shipment confirmation (in english)
+	* Open a creation form Shipment confirmation
 		И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке legal name
+	* Legal name input by search in line
 		И из выпадающего списка "Legal name" я выбираю по строке 'com'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '02'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154076 проверка ввода по строке company, store в документе InternalSupplyRequest на английском
-	* Открытие формы создания InternalSupplyRequest
+Сценарий: _0154076 check company, store input by search in line in a document InternalSupplyRequest (in english)
+	* Open a creation form InternalSupplyRequest
 		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	И я закрыл все окна клиентского приложения
 
 
 
-Сценарий: _0154077 проверка ввода по строке partner, legal name, company, store в документе InventoryTransferOrder на английском
-	* Открытие формы создания InventoryTransferOrder
+Сценарий: _0154077 check partner, legal name, company, store input by search in line in a document InventoryTransferOrder (in english)
+	* Open a creation form InventoryTransferOrder
 		И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransferOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "StoreSender" я выбираю по строке '01'
 		И из выпадающего списка с именем "StoreReceiver" я выбираю по строке '02'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "StoreSender" стал равен 'Store 01'
 		И     элемент формы с именем "StoreReceiver" стал равен 'Store 02'
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154078 проверка ввода по строке company, store в документе InventoryTransfer на английском
-	* Открытие формы создания InventoryTransfer
+Сценарий: _0154078 check company, store input by search in line in a InventoryTransfer (in english)
+	* Open a creation form InventoryTransfer
 		И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransfer"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "StoreSender" я выбираю по строке '01'
 		И из выпадающего списка с именем "StoreReceiver" я выбираю по строке '02'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "StoreSender" стал равен 'Store 01'
 		И     элемент формы с именем "StoreReceiver" стал равен 'Store 02'
@@ -3071,60 +3066,60 @@
 
 
 
-Сценарий: _0154081 проверка ввода по строке company, store, item bundle в документе Bundling на английском
-	* Открытие формы создания Bundling
+Сценарий: _0154081 check company, store, item bundle input by search in line in a Bundling (in english)
+	* Open a creation form Bundling
 		И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '01'
 	* Ввод по строке Item bundle
 		И из выпадающего списка с именем "ItemBundle" я выбираю по строке 'Trousers'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 		И     элемент формы с именем "ItemBundle" стал равен 'Trousers'
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _0154082 проверка ввода по строке company, store, item box в документе UnBundling на английском
-	* Открытие формы создания Unbundling
+Сценарий:  _0154082 check company, store, item box input by search in line in a UnBundling (in english)
+	* Open a creation form Unbundling
 		И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке store
+	* Store input by search in line
 		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Ввод по строке Item bundle
+	* Item bundle input by search in line
 		И из выпадающего списка "Item bundle" я выбираю по строке 'Trousers'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 		И     элемент формы с именем "ItemBundle" стал равен 'Trousers'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154083 проверка ввода по строке company, cash account, transaction type, currency, partner, payee, agreement в документе Cash payment на английском
-	* Открытие формы создания Cash payment
+Сценарий: _0154083 check company, cash account, transaction type, currency, partner, payee, agreement input by search in line in a Cash payment (in english)
+	* Open a creation form Cash payment
 		И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке cash account
+	* Cash account input by search in line
 		И из выпадающего списка "Cash account" я выбираю по строке '3'
-	* Ввод по строке transaction type
+	* Transaction type input by search in line
 		И из выпадающего списка "Transaction type" я выбираю по строке 'vendor'
-	* Ввод по строке currency
+	* Currency input by search in line
 		И из выпадающего списка с именем "Currency" я выбираю по строке 'T'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И в таблице "PaymentList" я нажимаю на кнопку 'Add'
 		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке payee
+	* Payee input by search in line
 		И в таблице "PaymentList" я активизирую поле "Payee"
 		И в таблице "PaymentList" из выпадающего списка "Payee" я выбираю по строке 'co'
-	* Ввод по строке agreement
+	* Agreement input by search in line
 		И в таблице "PaymentList" я активизирую поле "Agreement"
 		И в таблице "PaymentList" из выпадающего списка "Agreement" я выбираю по строке 'tr'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "CashAccount" стал равен 'Cash desk №3'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
@@ -3136,28 +3131,28 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154084 проверка ввода по строке company, cash account, transaction type, currency, partner, payee, agreement в документе Bank payment на английском
-	* Открытие формы создания Bank payment
+Сценарий: _0154084 check company, cash account, transaction type, currency, partner, payee, agreement input by search in line in a Bank payment (in english)
+	* Open a creation form Bank payment
 		И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке cash account
+	* Cash account input by search in line
 		И из выпадающего списка "Account" я выбираю по строке 'usd'
-	* Ввод по строке transaction type
+	* Transaction type input by search in line
 		И из выпадающего списка "Transaction type" я выбираю по строке 'vendor'
-	* Ввод по строке currency
+	* Currency input by search in line
 		И из выпадающего списка с именем "Currency" я выбираю по строке 'dol'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И в таблице "PaymentList" я нажимаю на кнопку 'Add'
 		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке payee
+	* Payee input by search in line
 		И в таблице "PaymentList" я активизирую поле "Payee"
 		И в таблице "PaymentList" из выпадающего списка "Payee" я выбираю по строке 'co'
-	* Ввод по строке agreement
+	* Agreement input by search in line
 		И в таблице "PaymentList" я активизирую поле "Agreement"
 		И в таблице "PaymentList" из выпадающего списка "Agreement" я выбираю по строке 'tr'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Account" стал равен 'Bank account, USD'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
@@ -3168,28 +3163,28 @@
 		| 'Ferron BP' | 'Company Ferron BP' | 'Basic Agreements, TRY' |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154085 проверка ввода по строке company, cash account, transaction type, currency, partner, payee, agreement в документе Bank receipt на английском
-	* Открытие формы создания Bank receipt
+Сценарий: _0154085 check company, cash account, transaction type, currency, partner, payee, input by search in line in a Bank receipt (in english)
+	* Open a creation form Bank receipt
 		И я открываю навигационную ссылку "e1cib/list/Document.BankReceipt"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке cash account
+	* Cash account input by search in line
 		И из выпадающего списка "Account" я выбираю по строке 'usd'
-	* Ввод по строке transaction type
+	* Transaction type input by search in line
 		И из выпадающего списка "Transaction type" я выбираю по строке 'customer'
-	* Ввод по строке currency
+	* Currency input by search in line
 		И из выпадающего списка с именем "Currency" я выбираю по строке 'dol'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И в таблице "PaymentList" я нажимаю на кнопку 'Add'
 		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке payee
+	* Payee input by search in line
 		И в таблице "PaymentList" я активизирую поле "Payer"
 		И в таблице "PaymentList" из выпадающего списка "Payer" я выбираю по строке 'co'
-	* Ввод по строке agreement
+	* Agreement input by search in line
 		И в таблице "PaymentList" я активизирую поле "Agreement"
 		И в таблице "PaymentList" из выпадающего списка "Agreement" я выбираю по строке 'usd'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Account" стал равен 'Bank account, USD'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
@@ -3200,28 +3195,28 @@
 		| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, USD' |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154086 проверка ввода по строке company, cash account, transaction type, currency, partner, payee, agreement в документе Cash receipt на английском
-	* Открытие формы создания Cash receipt
+Сценарий: _0154086 check company, cash account, transaction type, currency, partner, payee, input by search in line in a Cash receipt (in english)
+	* Open a creation form Cash receipt
 		И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке cash account
+	* Cash account input by search in line
 		И из выпадающего списка "Cash account" я выбираю по строке '3'
-	* Ввод по строке transaction type
+	* Transaction type input by search in line
 		И из выпадающего списка "Transaction type" я выбираю по строке 'customer'
-	* Ввод по строке currency
+	* Currency input by search in line
 		И из выпадающего списка с именем "Currency" я выбираю по строке 'dol'
-	* Ввод по строке partner
+	* Partner input by search in line
 		И в таблице "PaymentList" я нажимаю на кнопку 'Add'
 		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке payee
+	* Payee input by search in line
 		И в таблице "PaymentList" я активизирую поле "Payer"
 		И в таблице "PaymentList" из выпадающего списка "Payer" я выбираю по строке 'co'
-	* Ввод по строке agreement
+	* Agreement input by search in line
 		И в таблице "PaymentList" я активизирую поле "Agreement"
 		И в таблице "PaymentList" из выпадающего списка "Agreement" я выбираю по строке 'usd'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "CashAccount" стал равен 'Cash desk №3'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
@@ -3233,48 +3228,24 @@
 	И я закрыл все окна клиентского приложения
 
 
-# Сценарий: _01540860 проверка ввода по строке transit account в Bank receipt на английском
-# 	* Открытие формы создания Bank receipt
-# 		И я открываю навигационную ссылку "e1cib/list/Document.BankReceipt"
-# 		И я нажимаю на кнопку с именем 'FormCreate'
-# 	* Заполнение вида операции и выбор счета без строгого указания transit account
-# 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-# 		И из выпадающего списка "Account" я выбираю по строке 'Bank account, EUR'
-# 		И из выпадающего списка "Transit account" я выбираю по строке 'sec'
-# 	* Проверка ввода транзитного счета
-# 		И     элемент формы с именем "TransitAccount" стал равен 'Transit Second'
-# 		И я закрыл все окна клиентского приложения
-
-# Сценарий: _01540861 проверка ввода по строке transit account в Bank payment на английском
-# 	* Открытие формы создания Bank payment
-# 		И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
-# 		И я нажимаю на кнопку с именем 'FormCreate'
-# 	* Заполнение вида операции и выбор счета без строгого указания transit account
-# 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-# 		И из выпадающего списка "Account" я выбираю по строке 'Bank account, EUR'
-# 		И из выпадающего списка "Transit account" я выбираю по строке 'sec'
-# 	* Проверка ввода транзитного счета
-# 		И     элемент формы с именем "TransitAccount" стал равен 'Transit Second'
-# 		И я закрыл все окна клиентского приложения
 
 
-
-Сценарий: _0154087 проверка ввода по строке company, sender, receiver, send currency, receive currency, cash advance holder в документе Cash Transfer Order на английском
-	* Открытие формы создания Cash Transfer Order
+Сценарий: _0154087 check company, sender, receiver, send currency, receive currency, cash advance holder input by search in line in a Cash Transfer Order (in english)
+	* Open a creation form Cash Transfer Order
 		И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке Sender
+	* Sender input by search in line
 		И из выпадающего списка "Sender" я выбираю по строке '3'
 	* Ввод по строке Receiver
 		И из выпадающего списка "Receiver" я выбираю по строке '1'
-	* Ввод по строке currency
+	* Currency input by search in line
 		И из выпадающего списка "Send currency" я выбираю по строке 'dol'
 		И из выпадающего списка "Receive currency" я выбираю по строке 'EUR'
-	* Ввод по строке cash advance holder
+	* Cash advance holder input by search in line
 		И из выпадающего списка "Cash advance holder" я выбираю по строке 'ari'
-	* Проверка введенных значений
+	* Checking entered values
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Sender" стал равен 'Cash desk №3'
 		И     элемент формы с именем "SendCurrency" стал равен 'USD'
@@ -3283,19 +3254,19 @@
 		И     элемент формы с именем "ReceiveCurrency" стал равен 'EUR'
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154088 проверка ввода по строке company, operation type, partner, legal name, agreement, business unit, expence type в документе CreditDebitNote на английском
-	* Открытие формы создания CreditDebitNote
+Сценарий: _0154088 check company, operation type, partner, legal name, agreement, business unit, expence type input by search in line in a CreditDebitNote (in english)
+	* Open a creation form CreditDebitNote
 		И я открываю навигационную ссылку "e1cib/list/Document.CreditDebitNote"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке Operation type
+	* Operation type input by search in line
 		И из выпадающего списка "Operation type" я выбираю по строке 'Recei'
-	* Ввод по строке Partner
+	* Partner input by search in line
 		И из выпадающего списка "Partner" я выбираю по строке 'fer'
-	* Ввод по строке Legal name
+	* Legal name input by search in line
 		И из выпадающего списка "Legal name" я выбираю по строке 'second'
-	* Ввод по строке табличной части
+	* Filling the tabular part by searching the value by line
 		И в таблице "Transactions" я нажимаю на кнопку 'Add'
 		И в таблице "Transactions" я активизирую поле "Partner"
 		И в таблице "Transactions" из выпадающего списка "Partner" я выбираю по строке 'fer'
@@ -3307,7 +3278,7 @@
 		И в таблице "Transactions" из выпадающего списка "Business unit" я выбираю по строке 'lo'
 		И в таблице "Transactions" я активизирую поле "Expense type"
 		И в таблице "Transactions" из выпадающего списка "Expense type" я выбираю по строке 'fu'
-	* Проверка заполнения
+	* Filling check
 		И     элемент формы с именем "OperationType" стал равен 'Receivable'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
@@ -3317,22 +3288,22 @@
 		| 'Ferron BP' | 'Basic Agreements, without VAT' | 'Logistics department' | 'TRY'      | 'Fuel'         |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154089 проверка ввода по строке company, account, currency в документе Incoming payment order на английском
-	* Открытие формы создания IncomingPaymentOrder
+Сценарий: _0154089 check company, account, currency input by search in line in Incoming payment order (in english)
+	* Open a creation form IncomingPaymentOrder
 		И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
 	* Ввод по строке Account
 		И из выпадающего списка "Account" я выбираю по строке '2'
-	* Ввод по строке Currency
+	* Currency input by search in line
 		И из выпадающего списка "Currency" я выбираю по строке 'dol'
-	* Ввод по строке табличной части
+	* Filling the tabular part by searching the value by line
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
 		И в таблице "PaymentList" я активизирую поле "Payer"
 		И в таблице "PaymentList" из выпадающего списка "Payer" я выбираю по строке 'se'
-	* Проверка заполнения
+	* Filling check
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Account" стал равен 'Cash desk №2'
 		И     элемент формы с именем "Currency" стал равен 'USD'
@@ -3341,22 +3312,22 @@
 		| 'Ferron BP' | 'Second Company Ferron BP' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154090 проверка ввода по строке company, account, currency в документе Outgoing payment order на английском
-	* Открытие формы создания OutgoingPaymentOrder
+Сценарий: _0154090 check company, account, currency input by search in line in Outgoing payment order (in english)
+	* Open a creation form OutgoingPaymentOrder
 		И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
 	* Ввод по строке Account
 		И из выпадающего списка "Account" я выбираю по строке '2'
-	* Ввод по строке Currency
+	* Currency input by search in line
 		И из выпадающего списка "Currency" я выбираю по строке 'dol'
-	* Ввод по строке табличной части
+	* Filling the tabular part by searching the value by line
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
 		И в таблице "PaymentList" я активизирую поле "Payee"
 		И в таблице "PaymentList" из выпадающего списка "Payee" я выбираю по строке 'se'
-	* Проверка заполнения
+	* Filling check
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Account" стал равен 'Cash desk №2'
 		И     элемент формы с именем "Currency" стал равен 'USD'
@@ -3366,20 +3337,20 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154091 проверка ввода по строке company, account, currency в документе ChequeBondTransaction на английском
-	* Открытие формы создания ChequeBondTransaction
+Сценарий: _0154091 check company, account, currency input by search in line in ChequeBondTransaction (in english)
+	* Open a creation form ChequeBondTransaction
 		И я открываю навигационную ссылку "e1cib/list/Document.ChequeBondTransaction"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке Currency
+	* Currency input by search in line
 		И из выпадающего списка "Currency" я выбираю по строке 'lir'
-	* Заполнения табличной части (партнер и контрагент)
+	* Filling the tabular part by searching the value by line (partner and legal name)
 		И в таблице "ChequeBonds" я нажимаю на кнопку с именем 'ChequeBondsAdd'
 		И в таблице "ChequeBonds" я активизирую поле "Partner"
 		И в таблице "ChequeBonds" из выпадающего списка "Partner" я выбираю по строке 'fer'
 		И в таблице "ChequeBonds" из выпадающего списка "Legal name" я выбираю по строке 'se'
-	* Проверка заполнения данных
+	* Check filling inданных
 		Тогда элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Currency" стал равен 'TRY'
 		И     таблица "ChequeBonds" содержит строки:
@@ -3388,88 +3359,88 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154092 проверка ввода по строке store, responsible person в документе PhysicalCountByLocation на английском
-	* Открытие формы создания PhysicalCountByLocation
+Сценарий: _0154092 check store, responsible person input by search in line in PhysicalCountByLocation (in english)
+	* Open a creation form PhysicalCountByLocation
 		И я открываю навигационную ссылку "e1cib/list/Document.PhysicalCountByLocation"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Store
+	* Store input by search in line
 		И из выпадающего списка "Store" я выбираю по строке '02'
-	* Ввод по строке Responsible person
+	* Responsible person input by search in line
 		И из выпадающего списка "Responsible person" я выбираю по строке 'Anna'
-	* Проверка заполнения данных
+	* Check filling inданных
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     элемент формы с именем "ResponsiblePerson" стал равен 'Anna Petrova'
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154093 проверка ввода по строке store в документе PhysicalInventory на английском
-	* Открытие формы создания PhysicalInventory
+Сценарий: _0154093 check store input by search in line in PhysicalInventory (in english)
+	* Open a creation form PhysicalInventory
 		И я открываю навигационную ссылку "e1cib/list/Document.PhysicalInventory"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Store
+	* Store input by search in line
 		И из выпадающего списка "Store" я выбираю по строке '02'
-	* Проверка заполнения данных
+	* Check filling inданных
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154094 проверка ввода по строке store, company, табличной части в документе StockAdjustmentAsWriteOff на английском
-	* Открытие формы создания StockAdjustmentAsWriteOff
+Сценарий: _0154094 check store, company, tabular part input by search in line in StockAdjustmentAsWriteOff (in english)
+	* Open a creation form StockAdjustmentAsWriteOff
 		И я открываю навигационную ссылку "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Store
+	* Store input by search in line
 		И из выпадающего списка "Store" я выбираю по строке '02'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'Main'
-	* Проверка заполнения данных в шапке
+	* Check filling in
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Ввод по строке business unit, expence type
+	* Business unit, expence type input by search in line
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я активизирую поле "Business unit"
 		И в таблице "ItemList" из выпадающего списка "Business unit" я выбираю по строке 'log'
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я активизирую поле "Expense type"
 		И в таблице "ItemList" из выпадающего списка "Expense type" я выбираю по строке 'fu'
-	* Проверка заполнения данных
+	* Check filling in
 		И     таблица "ItemList" содержит строки:
 		| 'Business unit'        | 'Expense type' |
 		| 'Logistics department' | 'Fuel'         |
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154095 проверка ввода по строке store, company, табличной части в документе StockAdjustmentAsSurplus на английском
-	* Открытие формы создания StockAdjustmentAsSurplus
+Сценарий: _0154095 check store, company, tabular part input by search in line in StockAdjustmentAsSurplus (in english)
+	* Open a creation form StockAdjustmentAsSurplus
 		И я открываю навигационную ссылку "e1cib/list/Document.StockAdjustmentAsSurplus"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Store
+	* Store input by search in line
 		И из выпадающего списка "Store" я выбираю по строке '02'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'Main'
-	* Проверка заполнения данных в шапке
+	* Check filling in
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Ввод по строке business unit, expence type
+	* Business unit, expence type input by search in line
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я активизирую поле "Business unit"
 		И в таблице "ItemList" из выпадающего списка "Business unit" я выбираю по строке 'log'
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я активизирую поле "Revenue type"
 		И в таблице "ItemList" из выпадающего списка "Revenue type" я выбираю по строке 'fu'
-	* Проверка заполнения данных
+	* Check filling in
 		И     таблица "ItemList" содержит строки:
 		| 'Business unit'        | 'Revenue type' |
 		| 'Logistics department' | 'Fuel'         |
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154096 проверка ввода по строке company, account, currency в документе Opening Entry на английском
-	* Открытие формы создания OpeningEntry
+Сценарий: _0154096 check company, account, currency input by search in line in Opening Entry (in english)
+	* Open a creation form OpeningEntry
 		И я открываю навигационную ссылку "e1cib/list/Document.OpeningEntry"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company
+	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке табличной части Inventory
+	* Filling the tabular part by searching the value by line Inventory
 		И я перехожу к закладке "Inventory"
 		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
 		И в таблице "Inventory" из выпадающего списка "Item" я выбираю по строке 'dress'
@@ -3479,12 +3450,12 @@
 		И в таблице "Inventory" из выпадающего списка "Store" я выбираю по строке '01'
 		И в таблице "Inventory" я активизирую поле "Quantity"
 		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '2,000'
-	* Ввод по строке табличной части Account balance
+	* Filling the tabular part by searching the value by line Account balance
 		И я перехожу к закладке "Account balance"
 		И в таблице "AccountBalance" я нажимаю на кнопку с именем 'AccountBalanceAdd'
 		И в таблице "AccountBalance" из выпадающего списка 'Account' я выбираю по строке '№1'
 		И в таблице "AccountBalance" из выпадающего списка 'Currency' я выбираю по строке 't'
-	* Ввод по строке табличной части Advance
+	* Filling the tabular part by searching the value by line Advance
 		И я перехожу к закладке "Advance"
 		И в таблице "AdvanceFromCustomers" я нажимаю на кнопку с именем 'AdvanceFromCustomersAdd'
 		И в таблице "AdvanceFromCustomers" из выпадающего списка "Partner" я выбираю по строке 'fer'
@@ -3499,8 +3470,8 @@
 		И в таблице "AdvanceFromCustomers" я активизирую поле с именем "AdvanceFromCustomersLegalName"
 		И в таблице "AdvanceToSuppliers" из выпадающего списка "Legal name" я выбираю по строке 'se'
 		И в таблице "AdvanceToSuppliers" из выпадающего списка 'Currency' я выбираю по строке 't'
-	* Ввод по строке табличной части Account payable
-		* По соглашениям
+	* Filling the tabular part by searching the value by line Account payable
+		* By agreements
 			И я перехожу к закладке "Account payable"
 			И в таблице "AccountPayableByAgreements" я нажимаю на кнопку с именем 'AccountPayableByAgreementsAdd'
 			И в таблице "AccountPayableByAgreements" из выпадающего списка с именем "AccountPayableByAgreementsPartner" я выбираю по строке 'fer'
@@ -3508,7 +3479,7 @@
 			И в таблице "AccountPayableByAgreements" из выпадающего списка с именем "AccountPayableByAgreementsLegalName" я выбираю по строке 'sec'
 			И в таблице "AccountPayableByAgreements" из выпадающего списка с именем "AccountPayableByAgreementsAgreement" я выбираю по строке 'usd'
 			И в таблице "AccountPayableByAgreements" из выпадающего списка с именем "AccountPayableByAgreementsCurrency" я выбираю по строке 't'
-		* По документам
+		* By documents
 			И я перехожу к закладке с именем "GroupAccountPayableByDocuments"
 			И в таблице "AccountPayableByDocuments" я нажимаю на кнопку с именем 'AccountPayableByDocumentsAdd'
 			И в таблице "AccountPayableByDocuments" из выпадающего списка с именем "AccountPayableByDocumentsPartner" я выбираю по строке 'fer'
@@ -3518,8 +3489,8 @@
 			И в таблице "AccountPayableByDocuments" из выпадающего списка с именем "AccountPayableByDocumentsAgreement" я выбираю по строке 've'
 			И в таблице "AccountPayableByDocuments" из выпадающего списка с именем "AccountPayableByDocumentsCurrency" я выбираю по строке 't'
 			И в таблице "AccountPayableByDocuments" я завершаю редактирование строки
-	* Ввод по строке табличной части Account receivable
-		* По соглашениям
+	* Filling the tabular part by searching the value by line Account receivable
+		* By agreements
 			И я перехожу к закладке "Account receivable"
 			И в таблице "AccountReceivableByAgreements" я нажимаю на кнопку с именем 'AccountReceivableByAgreementsAdd'
 			И в таблице "AccountReceivableByAgreements" из выпадающего списка с именем "AccountReceivableByAgreementsPartner" я выбираю по строке 'DF'
@@ -3527,7 +3498,7 @@
 			И в таблице "AccountReceivableByAgreements" из выпадающего списка с именем "AccountReceivableByAgreementsLegalName" я выбираю по строке 'DF'
 			# И в таблице "AccountReceivableByAgreements" из выпадающего списка с именем "AccountReceivableByAgreementsAgreement" я выбираю по строке 'DF'
 			И в таблице "AccountReceivableByAgreements" из выпадающего списка с именем "AccountReceivableByAgreementsCurrency" я выбираю по строке 't'
-		* По документам
+		* By documents
 			И я перехожу к закладке с именем "GroupAccountReceivableByDocuments"
 			И в таблице "AccountReceivableByDocuments" я нажимаю на кнопку с именем 'AccountReceivableByDocumentsAdd'
 			И в таблице "AccountReceivableByDocuments" из выпадающего списка с именем "AccountReceivableByDocumentsPartner" я выбираю по строке 'DF'
@@ -3537,7 +3508,7 @@
 			# И в таблице "AccountReceivableByDocuments" из выпадающего списка с именем "AccountReceivableByDocumentsAgreement" я выбираю по строке 'DF'
 			И в таблице "AccountReceivableByDocuments" из выпадающего списка с именем "AccountReceivableByDocumentsCurrency" я выбираю по строке 't'
 			И в таблице "AccountReceivableByDocuments" я завершаю редактирование строки
-	* Проверка заполнения
+	* Filling check
 		И Пауза 2
 		И     таблица "Inventory" содержит строки:
 		| 'Item'  | 'Quantity' | 'Item key' | 'Store'    |
@@ -3565,42 +3536,42 @@
 			| 'DFC'     | 'DFC'        | 'TRY'      |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _0154097 проверка ввода по строке company и account на английском в документе Cash revenue
-	* Открытие формы создания Cash revenue
+Сценарий: _0154097 check company and account (in english) input by search in line in Cash revenue
+	* Open a creation form Cash revenue
 		И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company и account
+	* Company input by search in line и account
 		И из выпадающего списка "Company" я выбираю по строке 'main'
 		И из выпадающего списка "Account" я выбираю по строке 'TRY'
-	* Проверка заполнения
+	* Filling check
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Account" стал равен 'Bank account, TRY'
 	И я закрыл все окна клиентского приложения
 
 
 
-Сценарий: _0154098 проверка ввода по строке company и account на английском в документе CashExpense
-	* Открытие формы создания CashExpense
+Сценарий: _0154098 check company и account (in english) input by search in line in CashExpense
+	* Open a creation form CashExpense
 		И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке Company и account
+	* Company input by search in line и account
 		И из выпадающего списка "Company" я выбираю по строке 'main'
 		И из выпадающего списка "Account" я выбираю по строке 'TRY'
-	* Проверка заполнения
+	* Filling check
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Account" стал равен 'Bank account, TRY'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154099 проверка ввода по строке partner и legal name на английском в документе Invoice Match
+Сценарий: _0154099 check partner и legal name (in english) input by search in line in Invoice Match
 	И я закрыл все окна клиентского приложения
-	* Открытие формы документа
+	* Opening a document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка фильтра при вводе по строке Partner/Legal name
+	* Checking the filter when typing by Partner/Legal name
 		И в таблице "Transactions" я нажимаю на кнопку с именем 'TransactionsAdd'
 		И в таблице "Transactions" из выпадающего списка с именем "TransactionsPartner" я выбираю по строке 'MIO'
 		И в таблице "Transactions" из выпадающего списка с именем "TransactionsLegalName" я выбираю по строке 'Company Kalipso'
-	* Проверка что для выбора доступен только один Legal name
+	* Checking that there is only one legal name available for selection
 		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита с именем "TransactionsLegalName"
 		Тогда таблица "List" стала равной:
 		| 'Description' |
@@ -3610,56 +3581,53 @@
 
 
 
-Сценарий: _010018 проверка отображения на форме Partners Description ENG после внесения изменений (без повторного перезахода)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-214' с именем 'IRP-214'
-	* Открытие справочника Partners
+Сценарий: _010018 check the display on the Partners Description ENG form after changes (without re-open)
+	* Open catalog Partners
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
-	* Выбор элемента Anna Petrova
+	* Select Anna Petrova
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Anna Petrova'         |
 		И в таблице "List" я выбираю текущую строку
-	* Изменение Description_en на Anna Petrova1 и проверка отображения
+	* Changing Description_en to Anna Petrova1 and display checking
 		И в поле 'ENG' я ввожу текст 'Anna Petrova1'
 		И я нажимаю на кнопку 'Save'
 		Тогда элемент формы с именем "Description_en" стал равен 'Anna Petrova1'
-	* Изменение Description_en на первоначальное значение и проверка отображения
+	* Changing Description_en back and display checking
 		И в поле 'ENG' я ввожу текст 'Anna Petrova'
 		И я нажимаю на кнопку 'Save'
 		Тогда элемент формы с именем "Description_en" стал равен 'Anna Petrova'
 		И я нажимаю на кнопку 'Save and close'
 
-Сценарий: _010019 проверка отображения на форме Company Description ENG после внесения изменений (без повторного перезахода)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-214' с именем 'IRP-214'
-	* Открытие справочника Companies
+Сценарий: _010019 check the display on the Company Description ENG form after changes (without re-open)
+	* Open catalog Companies
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Companies"
-	* Выбор элемента Company Lomaniti
+	* Select Company Lomaniti
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Company Lomaniti'         |
 		И в таблице "List" я выбираю текущую строку
-	* Изменение Description_en на Company Lomaniti1 и проверка отображения
+	* Changing Description_en to Company Lomaniti1 and display checking
 		И в поле 'ENG' я ввожу текст 'Company Lomaniti1'
 		И я нажимаю на кнопку 'Save'
 		Тогда элемент формы с именем "Description_en" стал равен 'Company Lomaniti1'
 		И в поле 'ENG' я ввожу текст 'Company Lomaniti'
 		И я нажимаю на кнопку 'Save'
-	* Изменение Description_en на первоначальное значение и проверка отображения
+	* Changing Description_en back and display checking
 		Тогда элемент формы с именем "Description_en" стал равен 'Company Lomaniti'
 		И я нажимаю на кнопку 'Save and close'
 
 
-Сценарий: _010017 проверка перехода в раздел Company из карточки Partner (отображает контрагента по партнеру)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-170' с именем 'IRP-170'
-	* Открытие справочника Partners
+Сценарий: _010017 check the move to the Company tab from the Partner (shows the partner's Legal name)
+	* Open catalog Partners
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-	* Выбор элемента Ferron BP
+	* Select Ferron BP
 		И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
 		И Пауза 2
-	* Проверка перехода во вкладку Company
+	* Check the move to the Company tab
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Company'
 		Тогда таблица "List" стала равной:
 			| 'Description'       |
@@ -3673,7 +3641,7 @@
 		И Я закрываю текущее окно
 		И Я закрываю текущее окно
 
-Сценарий: _005034 проверка заполнения обязательных полей в справочнике "Items"
+Сценарий: _005034 Check filling in обязательных полей в справочнике "Items"
 	И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 	Когда создаю элемент справочника с наименованием Test
 	Если в текущем окне есть сообщения пользователю Тогда
@@ -3682,7 +3650,7 @@
 	И я нажимаю на кнопку 'No'
 
 
-Сценарий: _005035 проверка заполнения обязательных полей в справочнике "AddAttributeAndPropertyValues"
+Сценарий: _005035 Check filling inобязательных полей в справочнике "AddAttributeAndPropertyValues"
 	И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 	Когда создаю элемент справочника с наименованием Test
 	Если в текущем окне есть сообщения пользователю Тогда
@@ -3692,7 +3660,7 @@
 
 
 
-Сценарий: _005037 проверка заполнения обязательных полей в справочнике "Users"
+Сценарий: _005037 Check filling inобязательных полей в справочнике "Users"
 	И я открываю навигационную ссылку "e1cib/list/Catalog.Users"
 	Когда создаю элемент справочника с наименованием Test
 	И Я закрываю текущее окно
@@ -3700,7 +3668,7 @@
 	И я нажимаю на кнопку 'No'
 
 
-Сценарий: _005118 проверка отображения на форме Items Description ENG после внесения изменений (без повторного перезахода)
+Сценарий: _005118 check the display on the Items Description ENG form after changes (without re-open)
 	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-214' с именем 'IRP-214'
 	* Открытие формы элемента Box справочника Items
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
@@ -3708,7 +3676,7 @@
 			| 'Description' |
 			| 'Box'         |
 		И в таблице "List" я выбираю текущую строку
-	* Изменение Description_en на Box1 и проверка отображения
+	* * Changing Description_en to Box1 and display checking
 		И в поле 'ENG' я ввожу текст 'Box1'
 		И я нажимаю на кнопку 'Save'
 		Тогда элемент формы с именем "Description_en" стал равен 'Box1'
@@ -3718,7 +3686,7 @@
 		Тогда элемент формы с именем "Description_en" стал равен 'Box'
 		И я нажимаю на кнопку 'Save and close'
 
-Сценарий: _012008 проверка отображения на форме  Agreement Description ENG после внесения изменений (без повторного перезахода)
+Сценарий: _012008 check the display on the  Agreement Description ENG form after changes (without re-open)
 	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-214' с именем 'IRP-214'
 	* Открытие формы элемента Personal Agreements, $ справочника Agreements
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
@@ -3726,7 +3694,7 @@
 			| 'Description' |
 			| 'Personal Agreements, $'         |
 		И в таблице "List" я выбираю текущую строку
-	* Изменение Description_en на Personal Agreements, $ 1 и проверка отображения
+	* * Changing Description_en to Personal Agreements, $ 1 and display checking
 		И в поле 'ENG' я ввожу текст 'Personal Agreements, $ 1'
 		И я нажимаю на кнопку 'Save'
 		Тогда элемент формы с именем "Description_en" стал равен 'Personal Agreements, $ 1'
@@ -3764,7 +3732,7 @@
 	
 
 Сценарий: проверка фильтра по полю Company и Legal name в форме элемента справочника Agreement
-	* Открытие формы создания Agreement
+	* Open a creation form Agreement
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* И я проверяю фильтр по Company
@@ -3800,7 +3768,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: проверка фильтра по Partner segment в элементе справочника Agreement
-	* Открытие формы создания Agreement
+	* Open a creation form Agreement
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя 'Type' на 'Customer'
@@ -3830,7 +3798,7 @@
 		Если элемент "Our" не доступен для редактирования Тогда
 
 Сценарий: проверка выбора менеджера сегмента в заказе клиента
-	* Открытие формы Sales order
+	* Open the Sales order creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение партнера и Legal name
@@ -3853,7 +3821,7 @@
 
 
 Сценарий: проверка row key при клонировании строки в Sales order
-	* Заполнение реквизитов sales order
+	* Filling in the details of the documentsales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -3899,7 +3867,7 @@
 		Тогда в таблице "List" количество строк "меньше или равно" 1
 
 Сценарий: проверка row key при клонировании строки в Sales invoice
-	* Заполнение реквизитов Sales invoice
+	* Filling in the details of the documentSales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -3945,7 +3913,7 @@
 		Тогда в таблице "List" количество строк "меньше или равно" 1
 
 Сценарий: проверка row key при клонировании строки в Purchase order
-	* Заполнение реквизитов Purchase order
+	* Filling in the details of the documentPurchase order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -4004,7 +3972,7 @@
 		Тогда в таблице "List" количество строк "меньше или равно" 1
 
 Сценарий: проверка row key при клонировании строки в Shipment confirmation
-	* Заполнение реквизитов Shipment confirmation
+	* Filling in the details of the documentShipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
@@ -4067,8 +4035,8 @@
 
 
 
-Сценарий: проверка заполнения Procurement method через кнопку заполнить в SO
-	* Открытие формы создания заказа Sales order
+Сценарий: Check filling inProcurement method через кнопку заполнить в SO
+	* Open a creation form заказа Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение общих реквизитов Sales order
@@ -4087,7 +4055,7 @@
 			| 'Description'           |
 			| 'Basic Agreements, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Добавление товаров в Sales order (4 строки)
+	* Adding items to Sales order (4 строки)
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -4176,7 +4144,7 @@
 		И в таблице "ItemList" я нажимаю на кнопку 'Procurement'
 		И я изменяю флаг 'Repeal'
 		И я нажимаю на кнопку 'OK'
-	* Проверка заполнения Procurement method в созданном Sales order
+	* Check filling inProcurement method в созданном Sales order
 		И     таблица "ItemList" содержит строки:
 		| 'Item'       | 'Item key'  | 'Procurement method' | 'Q'     |
 		| 'Shirt'      | '38/Black'  | 'Stock'              | '5,000' |
@@ -4233,17 +4201,17 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: проверка заполнения partner и признака customer/vendor при создании Agreement из карточки партнера
+Сценарий: Check filling inpartner и признака customer/vendor при создании Agreement из карточки партнера
 	* Открытие карточки партнера-клиента
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Kalipso' |
 		И в таблице "List" я выбираю текущую строку
-	* Открытие формы создания Agreement
+	* Open a creation form Agreement
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка заполнения Partner и признака Customer
+	* Check filling inPartner и признака Customer
 		И     элемент формы с именем "Partner" стал равен 'Kalipso'
 		И     элемент формы с именем "Type" стал равен 'Customer'
 	* Открытие карточки партнера-поставщика
@@ -4252,10 +4220,10 @@
 			| 'Description' |
 			| 'Veritas' |
 		И в таблице "List" я выбираю текущую строку
-	* Открытие формы создания Agreement
+	* Open a creation form Agreement
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка заполнения Partner и признака Customer
+	* Check filling inPartner и признака Customer
 		И     элемент формы с именем "Partner" стал равен 'Veritas'
 		И     элемент формы с именем "Type" стал равен 'Vendor'
 	И я закрыл все окна клиентского приложения

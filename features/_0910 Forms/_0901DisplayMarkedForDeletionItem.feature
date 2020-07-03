@@ -6,9 +6,9 @@
 Функционал: check that the item marked for deletion is not displayed
 
 
-Как разработчик
-Я хочу скрыть помеченную на удаление номенклатуру из формы выбора товара
-Чтобы пользователь не мог её выбрать в документах продажи и закупки
+As a developer
+I want to hide the items marked for deletion from the product selection form.
+So the user can't select it in the sales and purchase documents
 
 
 Контекст:
@@ -16,7 +16,7 @@
 
 
 Сценарий: _090201 check that the items marked for deletion is not displayed in the PurchaseOrder
-	И я временно помечаю на удаление Item Box
+	* Temporary markup for deletion Item Box
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 		И в таблице "List" я перехожу к строке:
 		| Description |

@@ -3,12 +3,12 @@
 @Positive
 
 
-Функционал: создание на основании по цепочке документов продажи
+Функционал: создание based on по цепочке документов продажи
 
 # Sales order - Sales invoice - Shipment confirmation - Bank reciept/Cash reciept
 
 Как разработчик
-Я хочу создать систему создания на основании
+Я хочу создать систему создания based on
 Для удобства заполнения документов
 
 
@@ -18,10 +18,10 @@
 # Прямая схема поставки вначале инвойс, потом ордер
 
 
-Сценарий: _090401 проверка создания Sales invoice по нескольким Sales order с разными контрагентами
+Сценарий: _090401 create Sales invoice по нескольким Sales order с разными контрагентами
 # должно создаться 2 Sales invoice
 	И я создаю тестовый Sales order 324
-		Когда создаю первый тестовый SO для теста по механизму создания на основании
+		Когда create the first test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 324
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
@@ -29,14 +29,14 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '324'
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 		# endвременно
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю Sales order 325
-		Когда создаю второй тестовый SO для теста по механизму создания на основании
+		Когда create the second test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 325
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
@@ -44,13 +44,13 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '325'
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 		# endвременно
 		И я нажимаю на кнопку 'Post and close'
-	И я создаю на основании Sales order 324 и 325 Sales invoice (должно создаться 2)
+	И я создаю based on Sales order 324 и 325 Sales invoice (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -66,13 +66,13 @@
 			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Sales order'      |
 			| 'Dress' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | 'Sales order 325*' |
 		И     элемент формы с именем "PriceIncludeTax" стал равен 'Yes'
-		И я меняю номер документа на 325
+		* Change the document number to 325
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '325'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '325'
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
@@ -92,13 +92,13 @@
 			| 'Dress'    | 'M/White'   | 'Store 02' | 'Sales order 324*' | 'pcs'  | '20,000' |
 			| 'Dress'    | 'L/Green'   | 'Store 02' | 'Sales order 324*' | 'pcs'  | '20,000' |
 			| 'Trousers' | '36/Yellow' | 'Store 02' | 'Sales order 324*' | 'pcs'  | '30,000' |
-		И я меняю номер документа на 324
+		* Change the document number to 324
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '324'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '324'
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
@@ -106,10 +106,10 @@
 		И я нажимаю на кнопку 'Post and close'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _090402 проверка создания Sales invoice по нескольким Sales order с одинаковым партнером, контрагентом, соглашением, валютой и складом
+Сценарий: _090402 create Sales invoice по нескольким Sales order с одинаковым партнером, контрагентом, соглашением, валютой и складом
 # Должен создаться 1 Sales invoice
 	И я создаю тестовый Sales order 326
-		Когда создаю первый тестовый SO для теста по механизму создания на основании
+		Когда create the first test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 326
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
@@ -122,14 +122,14 @@
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 		# endвременно
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю тестовый Sales order 327
-		Когда создаю второй тестовый SO для теста по механизму создания на основании
+		Когда create the second test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 327
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
@@ -142,13 +142,13 @@
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 		# endвременно
 		И я нажимаю на кнопку 'Post and close'
-	И я создаю на основании Sales order 326 и 327 Sales invoice (должен создаться 1)
+	И я создаю based on Sales order 326 и 327 Sales invoice (должен создаться 1)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -166,13 +166,13 @@
 			| 'Dress'    | 'M/White'   | 'Store 02' | 'Sales order 326*' | 'pcs'  | '20,000' |
 			| 'Dress'    | 'L/Green'   | 'Store 02' | 'Sales order 326*' | 'pcs'  | '20,000' |
 			| 'Trousers' | '36/Yellow' | 'Store 02' | 'Sales order 326*' | 'pcs'  | '30,000' |
-		И я меняю номер документа на 327
+		* Change the document number to 327
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '327'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '327'
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
@@ -180,7 +180,7 @@
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
 	
-Сценарий: _090403 проверка создания Sales invoice по нескольким Sales order с разными партнерами одного контрагента (соглашения одинаковые)
+Сценарий: _090403 create Sales invoice по нескольким Sales order с разными партнерами одного контрагента (соглашения одинаковые)
 # Должно создаться 2 Sales invoice
 	И я добавляю Partner Ferron 1 и Partner Ferron 2 в сегмент Retail
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
@@ -209,7 +209,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
 	И я создаю первый тестовый SO 328
-		Когда создаю первый тестовый SO для теста по механизму создания на основании
+		Когда create the first test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 328
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
@@ -240,14 +240,14 @@
 				| Store 02  |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 		# endвременно
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю второй тестовый SO 329
-		Когда создаю второй тестовый SO для теста по механизму создания на основании
+		Когда create the second test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 329
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
@@ -278,13 +278,13 @@
 				| Store 02  |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 		# endвременно
 		И я нажимаю на кнопку 'Post and close'
-	И я создаю на основании Sales order 328 и 329 Sales invoice (должно создаться 2)
+	И я создаю based on Sales order 328 и 329 Sales invoice (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -300,13 +300,13 @@
 			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Q'     | 'Sales order'      |
 			| 'Dress'| 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | 'Sales order 329*' |
 		И     элемент формы с именем "PriceIncludeTax" стал равен 'Yes'
-		И я меняю номер документа на 329
+		* Change the document number to 329
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '329'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '329'
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
@@ -326,13 +326,13 @@
 			| 'Dress'    | 'M/White'   | 'Store 02' | 'Sales order 328*' | 'pcs'  | '20,000' |
 			| 'Dress'    | 'L/Green'   | 'Store 02' | 'Sales order 328*' | 'pcs'  | '20,000' |
 			| 'Trousers' | '36/Yellow' | 'Store 02' | 'Sales order 328*' | 'pcs'  | '30,000' |
-		И я меняю номер документа на 329
+		* Change the document number to 329
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '328'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '328'
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
@@ -341,10 +341,10 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090404 проверка создания Sales invoice по нескольким Sales order с разными соглашениями (цена с НДС и цена без НДС)
+Сценарий: _090404 create Sales invoice по нескольким Sales order с разными соглашениями (цена с НДС и цена без НДС)
 # Должно создаться 2 Sales invoice
 	И я создаю первый тестовый SO 330
-		Когда создаю первый тестовый SO для теста по механизму создания на основании
+		Когда create the first test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 330
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
@@ -375,14 +375,14 @@
 				| Store 02  |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 		# endвременно
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю второй тестовый SO 331 Partner Ferron 1 и ставлю соглашение Vendor Ferron Discount
-		Когда создаю второй тестовый SO для теста по механизму создания на основании
+		Когда create the second test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 331
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
@@ -412,13 +412,13 @@
 				| Description |
 				| Store 02  |
 			И в таблице "List" я выбираю текущую строку
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 		# endвременно
 		И я нажимаю на кнопку 'Post and close'
-	И я создаю на основании Sales order 330 и 331 Sales invoice (должно создаться 2)
+	И я создаю based on Sales order 330 и 331 Sales invoice (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -434,7 +434,7 @@
 			| 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Store'    | 'Delivery date' | 'Sales order'      |
 			| 'Dress' | 'M/White'  | '10,000' | 'pcs'  | 'Store 02' | '*'             | 'Sales order 331*' |
 		И     элемент формы с именем "PriceIncludeTax" стал равен 'No'
-		И я меняю номер документа на 331
+		* Change the document number to 331
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '331'
 			Тогда открылось окно '1C:Enterprise'
@@ -455,7 +455,7 @@
 			| 'Trousers' | '36/Yellow' | '30,000' | 'pcs'  | 'Store 02' | '*'             | 'Sales order 330*'  |
 			| 'Dress'    | 'M/White'   | '20,000' | 'pcs'  | 'Store 02' | '*'             | 'Sales order 330*'  |
 			| 'Dress'    | 'L/Green'   | '20,000' | 'pcs'  | 'Store 02' | '*'             | 'Sales order 330*'  |
-		И я меняю номер документа на 330
+		* Change the document number to 330
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '330'
 			Тогда открылось окно '1C:Enterprise'
@@ -465,10 +465,10 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090405 проверка создания Sales invoice по нескольким Sales order с разными складами (создается один)
+Сценарий: _090405 create Sales invoice по нескольким Sales order с разными складами (создается один)
 # Создается один SI
 	И я создаю первый тестовый PO 334
-		Когда создаю первый тестовый SO для теста по механизму создания на основании
+		Когда create the first test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 334
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
@@ -499,14 +499,14 @@
 				| Store 02  |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 		# endвременно
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю второй тестовый SO 335
-		Когда создаю второй тестовый SO для теста по механизму создания на основании
+		Когда create the second test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 335
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
@@ -537,13 +537,13 @@
 				| Store 03  |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
-		# временно
+		# temporarily
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 		# endвременно
 		И я нажимаю на кнопку 'Post and close'
-	И я создаю на основании Sales order 335 и 334 Sales invoice (должен создаться 1)
+	И я создаю based on Sales order 335 и 334 Sales invoice (должен создаться 1)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -560,7 +560,7 @@
 			| 'Trousers' | '36/Yellow' | '30,000' | 'pcs'  | 'Store 02' | '*'            | 'Sales order 334*' |
 			| 'Dress'    | 'M/White'   | '20,000' | 'pcs'  | 'Store 02' | '*'            | 'Sales order 334*' |
 			| 'Dress'    | 'M/White'   | '10,000' | 'pcs'  | 'Store 03' | '*'            | 'Sales order 335*' |
-		И я меняю номер документа на 335
+		* Change the document number to 335
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '335'
 			Тогда открылось окно '1C:Enterprise'
@@ -570,9 +570,9 @@
 		И я закрыл все окна клиентского приложения
 
 	
-Сценарий: _090406 проверка создания Sales invoice по нескольким Sales order с разными собственными компаниями
+Сценарий: _090406 create Sales invoice по нескольким Sales order с разными собственными компаниями
 	И я создаю первый тестовый SO 336
-		Когда создаю первый тестовый SO для теста по механизму создания на основании
+		Когда create the first test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 336
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
@@ -611,7 +611,7 @@
 			И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю второй тестовый SO 337
-		Когда создаю второй тестовый SO для теста по механизму создания на основании
+		Когда create the second test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 337
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
@@ -643,7 +643,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post and close'
-	И я создаю на основании Sales order 336 и 337 Sales invoice (должно создаться 2)
+	И я создаю based on Sales order 336 и 337 Sales invoice (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -658,7 +658,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Store'    | 'Sales order'      |
 			| 'Dress' | 'M/White'  | '10,000' | 'pcs'  | 'Store 02' | 'Sales order 337*' |
-		И я меняю номер документа на 337
+		* Change the document number to 337
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '337'
@@ -680,7 +680,7 @@
 			| 'Dress'    | 'M/White'   | '20,000' | 'pcs'  | 'Store 02' | 'Sales order 336*' |
 			| 'Dress'    | 'L/Green'   | '20,000' | 'pcs'  | 'Store 02' | 'Sales order 336*' |
 			| 'Trousers' | '36/Yellow' | '30,000' | 'pcs'  | 'Store 02' | 'Sales order 336*' |
-		И я меняю номер документа на 136
+		* Change the document number to 136
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '336'
@@ -690,7 +690,7 @@
 		И я нажимаю на кнопку 'Post and close'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _090407 проверка создания Shipment confirmation по нескольким Sales order с разными procurement method (товары и услуги)
+Сценарий: _090407 create Shipment confirmation по нескольким Sales order с разными procurement method (товары и услуги)
 	* Создание первого тестового SO №800
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -720,7 +720,7 @@
 				| 'Description' |
 				| 'Store 02'    |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение табличной части по товарам
+		* Filling in the tabular part по товарам
 			* Добавление услуги
 				И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 				И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
@@ -795,7 +795,7 @@
 			* Установка галочки Shipment confirmation before Sales invoice и проведение заказа
 				И я перехожу к закладке "Other"
 				И я устанавливаю флаг 'Shipment confirmations before sales invoice'
-				* Изменение номера документа
+				* Change the document number
 					И в поле 'Number' я ввожу текст '800'
 					Тогда открылось окно '1C:Enterprise'
 					И я нажимаю на кнопку 'Yes'
@@ -830,7 +830,7 @@
 				| 'Description' |
 				| 'Store 02'    |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение табличной части по товарам
+		* Filling in the tabular part по товарам
 			* Добавление товара который не будет отгружаться
 				И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 				И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
@@ -870,43 +870,43 @@
 			* Установка галочки Shipment confirmation before Sales invoice и проведение заказа
 				И я перехожу к закладке "Other"
 				И я устанавливаю флаг 'Shipment confirmations before sales invoice'
-				* Изменение номера документа
+				* Change the document number
 					И в поле 'Number' я ввожу текст '801'
 					Тогда открылось окно '1C:Enterprise'
 					И я нажимаю на кнопку 'Yes'
 					И в поле 'Number' я ввожу текст '801'
 				И я нажимаю на кнопку 'Post and close'
-	* Создание Sales invoice на основании SO №800 и SO №801 (должна попасть только услуга)
+	* Создание Sales invoice based on SO №800 и SO №801 (должна попасть только услуга)
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 800    |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
-		* Проверка заполнения табличной части
+		* Check filling inтабличной части
 			И     таблица "ItemList" содержит строки:
 			| 'Item'    | 'Item key' | 'Q'     |
 			| 'Service' | 'Rent'     | '1,000' |
 			Тогда в таблице "ItemList" количество строк "меньше или равно" 1
 			И я закрываю текущее окно
-	* Создание Shipment confirmation на основании SO №800 и SO №801 (должно попасть 2 строки по товарам из двух заказов)
+	* Создание Shipment confirmation based on SO №800 и SO №801 (должно попасть 2 строки по товарам из двух заказов)
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 800    |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentShipmentConfirmationGenerateShipmentConfirmation'
-		* Проверка заполнения реквизитов
+		* Check filling inреквизитов
 			И     элемент формы с именем "Company" стал равен 'Main Company'
 			И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 			И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 			И     элемент формы с именем "Store" стал равен 'Store 02'
-		* Проверка заполнения табличной части
+		* Check filling inтабличной части
 			Тогда в таблице "ItemList" количество строк "меньше или равно" 2
 			И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Shipment basis'   |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 02' | 'Sales order 800*' |
 			| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | 'Store 02' | 'Sales order 801*' |
 		И я закрываю текущее окно
-	* Проверка заполнения Purchase order (должна попасть одна строка)
+	* Check filling inPurchase order (должна попасть одна строка)
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 800    |
@@ -917,7 +917,7 @@
 			| 'Item'  | 'Item key' | 'Q'     | 'Purchase basis'   |
 			| 'Shirt' | '38/Black' | '1,000' | 'Sales order 800*' |
 		И я закрываю текущее окно
-	* Проверка заполнения Purchase invoice (должна попасть одна строка)
+	* Check filling inPurchase invoice (должна попасть одна строка)
 		И в таблице "List" я перехожу к строке:
 			| Number |
 			| 800    |
@@ -935,7 +935,7 @@
 
 
 
-# Сценарий: _090407 проверка создания Shipment confirmation по Sales invoice с разными контрагентами по прямой схемой отгрузки 
+# Сценарий: _090407 create Shipment confirmation по Sales invoice с разными контрагентами по прямой схемой отгрузки 
 # # Создается два SC
 # 	И я создаю Shipment Confirmation к SI 325, 326
 # 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
@@ -983,7 +983,7 @@
 
 
 
-# Сценарий: проверка создания Goods reciept по нескольким Sales invoice с разными партнерами одного контрагента по прямой схемой отгрузки 
+# Сценарий: create Goods reciept по нескольким Sales invoice с разными партнерами одного контрагента по прямой схемой отгрузки 
 # # Создается один SC
 # 	И я создаю Goods reciept к SI 128, 129
 # 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
@@ -1014,7 +1014,7 @@
 # 			| 128    |
 # 	И я закрыл все окна клиентского приложения
 
-# Сценарий: проверка создания Goods reciept по нескольким Sales invoice с разными соглашениями по прямой схемой отгрузки 
+# Сценарий: create Goods reciept по нескольким Sales invoice с разными соглашениями по прямой схемой отгрузки 
 # # Создается один GR
 # 	И я создаю Goods reciept к SI 130, 131
 # 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
@@ -1046,7 +1046,7 @@
 # 	И я закрыл все окна клиентского приложения
 
 
-# Сценарий: проверка создания Goods reciept по нескольким Sales invoice с разными складами по прямой схемой отгрузки (только один склад ордерный)
+# Сценарий: create Goods reciept по нескольким Sales invoice с разными складами по прямой схемой отгрузки (только один склад ордерный)
 # # Создается один GR
 # 	И я создаю Goods reciept к SI 135
 # 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
@@ -1073,7 +1073,7 @@
 # 	И я закрыл все окна клиентского приложения
 
 
-# Сценарий: проверка создания Goods reciept по нескольким Sales order с разными собственными компаниями по прямой схеме отгрузки 
+# Сценарий: create Goods reciept по нескольким Sales order с разными собственными компаниями по прямой схеме отгрузки 
 # # Создается два GR
 # 	И я создаю Goods reciept к SI 137, 136
 # 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
@@ -1119,10 +1119,10 @@
 
 # # Непрямая схема поставки вначале ордер потом инвойс
 
-# Сценарий: проверка создания Goods reciept по Sales order с разными контрагентами по непрямой схеме отгрузки 
+# Сценарий: create Goods reciept по Sales order с разными контрагентами по непрямой схеме отгрузки 
 # # должно создаться 2 Goods reciept
 # 	И я создаю тестовый Sales order 140
-# 		Когда создаю первый тестовый SO для теста по механизму создания на основании
+# 		Когда create the first test SO for a test on the creation mechanism based on
 # 		И я устанавливаю номер документа 140
 # 			И я перехожу к закладке "Other"
 # 			И я разворачиваю группу "More"
@@ -1133,7 +1133,7 @@
 # 		И я устанавливаю флаг с именем "ShipmentConfirmationBeforeSalesInvoice"
 # 		И я нажимаю на кнопку 'Post and close'
 # 	И я создаю Sales order 141
-# 		Когда создаю второй тестовый SO для теста по механизму создания на основании
+# 		Когда create the second test SO for a test on the creation mechanism based on
 # 		И я устанавливаю номер документа 141
 # 			И я перехожу к закладке "Other"
 # 			И я разворачиваю группу "More"
@@ -1143,7 +1143,7 @@
 # 			И в поле 'Number' я ввожу текст '141'
 # 		И я устанавливаю флаг с именем "ShipmentConfirmationBeforeSalesInvoice"
 # 		И я нажимаю на кнопку 'Post and close'
-# 	И я создаю на основании Sales order 140 и 141 Goods reciept (должно создаться 2)
+# 	И я создаю based on Sales order 140 и 141 Goods reciept (должно создаться 2)
 # 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 # 		И в таблице "List" я перехожу к строке:
 # 			| Number |
@@ -1180,10 +1180,10 @@
 
 
 
-# Сценарий: проверка создания Goods reciept по нескольким Sales order с разными партнерами одного контрагента по непрямой схемой отгрузки 
+# Сценарий: create Goods reciept по нескольким Sales order с разными партнерами одного контрагента по непрямой схемой отгрузки 
 # # должно создаться 2 Goods reciept
 # 	И я создаю первый тестовый PO 142
-# 		Когда создаю первый тестовый SO для теста по механизму создания на основании
+# 		Когда create the first test SO for a test on the creation mechanism based on
 # 		И я устанавливаю номер документа 142
 # 			И я перехожу к закладке "Other"
 # 			И я разворачиваю группу "More"
@@ -1217,7 +1217,7 @@
 # 			И я устанавливаю флаг с именем "ShipmentConfirmationBeforeSalesInvoice"
 # 		И я нажимаю на кнопку 'Post and close'
 # 	И я создаю второй тестовый PO 143
-# 		Когда создаю второй тестовый SO для теста по механизму создания на основании
+# 		Когда create the second test SO for a test on the creation mechanism based on
 # 		И я устанавливаю номер документа 143
 # 			И я перехожу к закладке "Other"
 # 			И я разворачиваю группу "More"
@@ -1250,7 +1250,7 @@
 # 			И я разворачиваю группу "More"
 # 			И я устанавливаю флаг с именем "ShipmentConfirmationBeforeSalesInvoice"
 # 		И я нажимаю на кнопку 'Post and close'
-# 	И я создаю на основании Sales order 142 и 143 Goods reciept (должно создаться 2)
+# 	И я создаю based on Sales order 142 и 143 Goods reciept (должно создаться 2)
 # 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 # 		И в таблице "List" я перехожу к строке:
 # 			| Number |
@@ -1285,10 +1285,10 @@
 # 		И в поле 'Number' я ввожу текст '142'
 # 	И я нажимаю на кнопку 'Post and close'
 
-# Сценарий: проверка создания Goods reciept по нескольким Sales order с разными соглашениями по непрямой схемой отгрузки 
+# Сценарий: create Goods reciept по нескольким Sales order с разными соглашениями по непрямой схемой отгрузки 
 # # должно создаться 2 Goods reciept
 # 	И я создаю первый тестовый PO 144
-# 		Когда создаю первый тестовый SO для теста по механизму создания на основании
+# 		Когда create the first test SO for a test on the creation mechanism based on
 # 		И я устанавливаю номер документа 144
 # 			И я перехожу к закладке "Other"
 # 			И я разворачиваю группу "More"
@@ -1322,7 +1322,7 @@
 # 			И я устанавливаю флаг с именем "ShipmentConfirmationBeforeSalesInvoice"
 # 		И я нажимаю на кнопку 'Post and close'
 # 	И я создаю второй тестовый PO 145 Partner Ferron 1 и ставлю соглашение Vendor Ferron Discount
-# 		Когда создаю второй тестовый SO для теста по механизму создания на основании
+# 		Когда create the second test SO for a test on the creation mechanism based on
 # 		И я устанавливаю номер документа 144
 # 			И я перехожу к закладке "Other"
 # 			И я разворачиваю группу "More"
@@ -1355,7 +1355,7 @@
 # 			И я разворачиваю группу "More"
 # 			И я устанавливаю флаг с именем "ShipmentConfirmationBeforeSalesInvoice"
 # 		И я нажимаю на кнопку 'Post and close'
-# 	И я создаю на основании Sales order 144 и 145 Goods reciept (должно создаться 2)
+# 	И я создаю based on Sales order 144 и 145 Goods reciept (должно создаться 2)
 # 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 # 		И в таблице "List" я перехожу к строке:
 # 			| Number |
@@ -1392,10 +1392,10 @@
 	
 
 
-# Сценарий: проверка создания Goods reciept по нескольким Sales order с разными складами по непрямой схемой отгрузки
+# Сценарий: create Goods reciept по нескольким Sales order с разными складами по непрямой схемой отгрузки
 # # должно создаться 2 Goods reciept
 # 	И я создаю первый тестовый PO 146
-# 		Когда создаю первый тестовый SO для теста по механизму создания на основании
+# 		Когда create the first test SO for a test on the creation mechanism based on
 # 		И я устанавливаю номер документа 146
 # 			И я перехожу к закладке "Other"
 # 			И я разворачиваю группу "More"
@@ -1429,7 +1429,7 @@
 # 			И я устанавливаю флаг с именем "ShipmentConfirmationBeforeSalesInvoice"
 # 		И я нажимаю на кнопку 'Post and close'
 # 	И я создаю второй тестовый PO 147
-# 		Когда создаю второй тестовый SO для теста по механизму создания на основании
+# 		Когда create the second test SO for a test on the creation mechanism based on
 # 		И я устанавливаю номер документа 147
 # 			И я перехожу к закладке "Other"
 # 			И я разворачиваю группу "More"
@@ -1462,7 +1462,7 @@
 # 			И я разворачиваю группу "More"
 # 			И я устанавливаю флаг с именем "ShipmentConfirmationBeforeSalesInvoice"
 # 		И я нажимаю на кнопку 'Post and close'
-# 	И я создаю на основании Sales order 146 и 147 Goods reciept (должно создаться 2)
+# 	И я создаю based on Sales order 146 и 147 Goods reciept (должно создаться 2)
 # 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 # 		И в таблице "List" я перехожу к строке:
 # 			| Number |
@@ -1497,10 +1497,10 @@
 # 		И в поле 'Number' я ввожу текст '146'
 # 	И я нажимаю на кнопку 'Post and close'
 
-# Сценарий: проверка создания Goods reciept по нескольким Sales order с разными собственными компаниями по непрямой схемой отгрузки 
+# Сценарий: create Goods reciept по нескольким Sales order с разными собственными компаниями по непрямой схемой отгрузки 
 # # должно создаться 2 Goods reciept
 # 	И я создаю первый тестовый PO 148
-# 		Когда создаю первый тестовый SO для теста по механизму создания на основании
+# 		Когда create the first test SO for a test on the creation mechanism based on
 # 		И я устанавливаю номер документа 148
 # 			И я перехожу к закладке "Other"
 # 			И я разворачиваю группу "More"
@@ -1540,7 +1540,7 @@
 # 			И я устанавливаю флаг с именем "ShipmentConfirmationBeforeSalesInvoice"
 # 		И я нажимаю на кнопку 'Post and close'
 # 	И я создаю второй тестовый PO 149
-# 		Когда создаю второй тестовый SO для теста по механизму создания на основании
+# 		Когда create the second test SO for a test on the creation mechanism based on
 # 		И я устанавливаю номер документа 149
 # 			И я перехожу к закладке "Other"
 # 			И я разворачиваю группу "More"
@@ -1608,7 +1608,7 @@
 # 	И я нажимаю на кнопку 'Post and close'
 
 
-# Сценарий: проверка создания Sales invoice по нескольким Sales order с разными контрагентами по непрямой схеме отгрузки
+# Сценарий: create Sales invoice по нескольким Sales order с разными контрагентами по непрямой схеме отгрузки
 # # должно создаться 2 Sales invoice
 # 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 # 	И в таблице "List" я перехожу к строке:
@@ -1658,7 +1658,7 @@
 # 	И я нажимаю на кнопку 'Post and close'
 
 
-# Сценарий: проверка создания Sales invoice по нескольким Sales order с разными партнерами одного контрагента по непрямой схеме отгрузки
+# Сценарий: create Sales invoice по нескольким Sales order с разными партнерами одного контрагента по непрямой схеме отгрузки
 # 	# должно создаться 2 Sales invoice
 # 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 # 	И в таблице "List" я перехожу к строке:
@@ -1707,7 +1707,7 @@
 # 		И в поле 'Number' я ввожу текст '143'
 # 	И я нажимаю на кнопку 'Post and close'
 
-# Сценарий: проверка создания Sales invoice по нескольким Sales order с разными соглашениями по непрямой схеме отгрузки
+# Сценарий: create Sales invoice по нескольким Sales order с разными соглашениями по непрямой схеме отгрузки
 # 	# должно создаться 2 Sales invoice
 # 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 # 	И в таблице "List" я перехожу к строке:
@@ -1757,7 +1757,7 @@
 # 	И я нажимаю на кнопку 'Post and close'
 
 
-# Сценарий: проверка создания Sales invoice по нескольким Sales order с разными складами по непрямой схеме отгрузки
+# Сценарий: create Sales invoice по нескольким Sales order с разными складами по непрямой схеме отгрузки
 # # должен создаться 1 Sales invoice
 # 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 # 	И в таблице "List" я перехожу к строке:
@@ -1788,7 +1788,7 @@
 # 		И в поле 'Number' я ввожу текст '147'
 # 	И я нажимаю на кнопку 'Post and close'
 
-# Сценарий: проверка создания Sales invoice по нескольким Sales order с разными компаниями по непрямой схеме отгрузки
+# Сценарий: create Sales invoice по нескольким Sales order с разными компаниями по непрямой схеме отгрузки
 # # должно создаться 2 Sales invoice
 # 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 # 	И в таблице "List" я перехожу к строке:

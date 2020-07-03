@@ -1,26 +1,27 @@
 #language: ru
 @tree
 @Positive
-Функционал: проведение документа Bank payment
+Функционал: create Bank payment
 
-Как Разработчик
-Я хочу создать проводки документа оплаты безналичных ДС
-Для того чтобы фиксировать факт оплаты
+
+As an accountant
+I want to pay by bank payment.
+To close debts to partners
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
-# Валюта отчетов - лира
-# экспортные сценарии CashBankDocFilters
+# The currency of reports is lira
+# CashBankDocFilters export scenarios
 
 
-Сценарий: _053001 проверка создания Bank payment на основании Purchase invoice
-	* Открытие формы списка Purchase invoice и выбор PI №1
+Сценарий: _053001 create Bank payment based on Purchase invoice
+	* Open list form Purchase invoice and select PI №1
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
 		И я нажимаю на кнопку с именем 'FormDocumentBankPaymentGenarateBankPayment'
-	* Проверка создания и заполнения Purchase invoice
+	* Create and filling in Purchase invoice
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
 		И     элемент формы с именем "Currency" стал равен 'TRY'
@@ -30,7 +31,7 @@
 		И     таблица "PaymentListCurrencies" содержит строки:
 			| 'Movement type'      | 'Amount'    | 'Multiplicity' |
 			| 'Reporting currency' | '23 287,67' | '1'            |
-	* Проверка выбора перевыбора account и перезаполнения данных
+	* Data overflow check
 		И я нажимаю кнопку выбора у поля "Account"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Description'       |
@@ -46,18 +47,17 @@
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Agreement' | 'USD'           | 'TRY'      | '0,1770'            | '768 361,58' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'            | '768 361,58' | '1'            |
-	* Проверка расчета Document amount
+	* Check calculation Document amount
 		И     элемент формы с именем "DocumentAmount" стал равен '136 000,00'
-	* Изменение basis document
+	* Change in basis document
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"
 		И в таблице "List" я перехожу к строке:
 		| 'Legal name'        | 'Partner'   | 'Document amount'           |
 		| 'Company Ferron BP' | 'Ferron BP' | '496 650,00' |
 		И я нажимаю на кнопку 'Select'
-		# И в таблице "PaymentList" я завершаю редактирование строки
 		И в таблице "PaymentList" я перехожу к следующей ячейке
-	* Изменение суммы платежа
+	* Change in payment amount
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '20 000,00'
@@ -70,14 +70,13 @@
 
 
 
-Сценарий: _053001 создание оплаты безналичных ДС Bank payment 
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-350' с именем 'IRP-350'
-	И я создаю оплату безналичных ДС поставщику в лирах по Ferron BP (поступление в лирах)
+Сценарий: _053001 create Bank payment (independently)
+	* Create Bank payment in lire for Ferron BP (Purchase invoice in lire)
 		И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я выбираю вид операции
+		* Select transaction type
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-		И я заполняю реквизиты документа
+		* Filling in the details of the document
 			И я нажимаю кнопку выбора у поля "Currency"
 			И в таблице "List" я перехожу к строке:
 				| Code | Description  |
@@ -93,13 +92,13 @@
 				| Description    |
 				| Bank account, TRY |
 			И в таблице "List" я выбираю текущую строку
-		И я меняю номер документа на 1
+		* Change the document number to 1
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '1'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И я заполняю партнера в табличной части
+		* Filling in partners in a tabular part
 			И в таблице "PaymentList" я активизирую поле "Partner"
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -111,36 +110,36 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение Agreement
+		* Filling in an Agreement
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'           |
 					| 'Vendor Ferron, TRY' |
 			И в таблице "List" я выбираю текущую строку
-		# временно
-		И я заполняю документ основания в табличной части
-			# костыль
+		# temporarily
+		* Filling in basis documents in a tabular part
+			# temporarily
 			Когда Проверяю шаги на Исключение:
 				|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-			# костыль
+			# temporarily
 			И в таблице "List" я перехожу к строке:
 				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 				| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			И я нажимаю на кнопку 'Select'
-		# временно
-		И я заполняю сумму в табличной части
+		# temporarily
+		* Filling in amount in a tabular part
 			И в таблице "PaymentList" я активизирую поле "Amount"
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '1000,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-		И я проверяю создание оплаты
+		* Check creation
 			Тогда таблица "List" содержит строки:
 				| Number |
 				|   1    |
-	И я создаю оплату безналичных ДС поставщику в долларах по Ferron BP (поступление в лирах)
+	* Create Bank payment in USD for Ferron BP (Purchase invoice in lire)
 		И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю реквизиты документа
+		* Filling in the details of the document
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
 			И я нажимаю кнопку выбора у поля "Currency"
 			И в таблице "List" я активизирую поле "Description"
@@ -158,13 +157,13 @@
 				| Description    |
 				| Bank account, USD |
 			И в таблице "List" я выбираю текущую строку
-		И я меняю номер документа на 2
+		* Change the document number to 2
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И я заполняю партнера в табличной части
+		* Filling in partners in a tabular part
 			И в таблице "PaymentList" я активизирую поле "Partner"
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -176,36 +175,36 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение Agreement
+		* Filling in an Agreement
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'           |
 					| 'Vendor Ferron, TRY' |
 			И в таблице "List" я выбираю текущую строку
-		# временно
-		И я заполняю документ основания в табличной части
-			# костыль
+		# temporarily
+		* Filling in basis documents in a tabular part
+			# temporarily
 			Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-			# костыль
+			# temporarily
 			И в таблице "List" я перехожу к строке:
 				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 				| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			И я нажимаю на кнопку 'Select'
-		# временно
-		И я заполняю сумму в табличной части
+		# temporarily
+		* Filling in amount in a tabular part
 			И в таблице "PaymentList" я активизирую поле "Amount"
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '20,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-		И я проверяю создание приходно-кассового ордера
+		* Check creation a Cash receipt
 			Тогда таблица "List" содержит строки:
 				| Number |
 				|   2    |
-	И я создаю оплату безналичных ДС поставщику в евро по Ferron BP (поступление в долларах)
+	* Create Bank payment in Euro for Ferron BP (Purchase invoice in USD)
 		И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю реквизиты документа
+		* Filling in the details of the document
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
 			И я нажимаю кнопку выбора у поля "Currency"
 			И в таблице "List" я активизирую поле "Description"
@@ -223,13 +222,13 @@
 				| Description    |
 				| Bank account, EUR |
 			И в таблице "List" я выбираю текущую строку
-		И я меняю номер документа на 3
+		* Change the document number to 3
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '3'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И я заполняю партнера в табличной части
+		* Filling in partners in a tabular part
 			И в таблице "PaymentList" я активизирую поле "Partner"
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -241,23 +240,23 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение Agreement
+		* Filling in an Agreement
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
 				| 'Vendor Ferron, USD' |
 			И в таблице "List" я выбираю текущую строку
-		И я заполняю сумму в табличной части
+		* Filling in amount in a tabular part
 			И в таблице "PaymentList" я активизирую поле "Amount"
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '150,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-		И я проверяю создание расходно-кассового ордера
+		* Check creation a Bank payment
 			Тогда таблица "List" содержит строки:
 				| Number |
 				|   3    |
 
-Сценарий: _053002 проверка проведения Bank payment по регистру PartnerApTransactions
+Сценарий: _053002 check Bank payment movements by register PartnerApTransactions
 		И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.PartnerApTransactions"
 		Тогда таблица "List" содержит строки:
 			| 'Currency'   | 'Recorder'            | 'Legal name'        | 'Basis document'     | 'Company'      | 'Amount'     | 'Agreement'            | 'Partner'   |
@@ -267,13 +266,13 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _050002 проверка проводок Bank payment с видом операции оплата поставщику
-	* Открытие Bank payment 1
+Сценарий: _050002 check Bank payment movements with transaction type Payment to the vendor
+	* Open Bank payment 1
 		И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
-	* Проверка проводок BankPayment 1
+	* Check movements Bank payment 1
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
 			| 'Bank payment 1*'                      | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
@@ -303,14 +302,14 @@
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Bank account, TRY' | 'TRY'          | 'en descriptions is empty' | 'No'                    | ''         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Bank account, TRY' | 'TRY'          | 'Local currency'           | 'No'                    | ''         | ''                         | ''                     |
 		И Я закрыл все окна клиентского приложения
-	* Распроведение Bank payment 1 и проверка отсутствия проводок
-		* Распроведение документа
+	* Clear postings Bank payment 1 and check that there is no movement on the registers
+		* Clear postings документа
 			И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 			И в таблице "List" я перехожу к строке:
 				| 'Number' |
 				| '1'      |
 			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		* Проверка отсутствия проводок
+		* Сheck that there is no movement on the registers
 			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PartnerArTransactions'
 			Тогда таблица "List" не содержит строки:
 				| 'Recorder'           |
@@ -324,14 +323,14 @@
 				| 'Recorder'           |
 				| 'Bank payment 1*' |
 			И я закрыл все окна клиентского приложения
-	* Повторное проведение документа и проверка проводок
-		* Проведение документа 
+	* * Re-posting the document and checking postings on the registers
+		* Posting the document
 			И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 			И в таблице "List" я перехожу к строке:
 				| 'Number' |
 				| '1'      |
 			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		* Проверка проводок
+		* Check movements
 			И я нажимаю на кнопку 'Registrations report'
 			Тогда табличный документ "ResultTable" равен по шаблону:
 				| 'Bank payment 1*'                      | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
@@ -364,39 +363,39 @@
 
 # Filters
 
-Сценарий: _053003 проверка фильтра по собственным компаниям в документе Bank payment
+Сценарий: _053003 filter check by own companies in the document Bank payment
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 	Когда проверяю фильтр по собственным компаниям
 
 	
 
-Сценарий: _053004 проверка фильтра по банковским счетам (выбор кассы недоступен) + заполнение валюты из банковского счета в документе Bank payment
+Сценарий: _053004 check the filter by bank accounts (the choice of cash account is not available) + filling in currency from the bank account in Bank payment document
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 	Когда проверяю фильтр по банковским счетам (выбор кассы недоступен) + заполнение валюты из банковского счета
 
-Сценарий: _053005 проверка ввода Description в документе Bank payment
+Сценарий: _053005 check input Description in the document Bank payment
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 	Когда проверяю ввод Description
 
-Сценарий: _053006 проверка выбора вида операции в документе Bank payment
+Сценарий: _053006 checking the choice of transaction type in the document Bank payment
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 	Когда проверяю выбор вида операции в документах оплаты
 	
 
-Сценарий: _053007 проверка фильтра по контрагенту в табличной части в документе Bank payment
-	# при выборе  партнера, в списке выбора контрагентов должны быть доступны только его контрагенты
+Сценарий: _053007 check legal name filter in tabular part in document Bank payment
+	# when selecting a partner, only its legal names should be available on the selection list
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 	Когда проверяю фильтр по контрагенту в табличной части в документах оплаты
 	
 
 
-Сценарий: _053008 проверка фильтра по партнеру в табличной части в документе Bank payment
-	# при выборе  контрагента, в списке выбора партнеров должны быть доступны только его партнеры
+Сценарий: _053008 check partner filter in tabular part in document Bank payment
+	# when selecting a legal name, only its partners should be available on the partner selection list
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 	Когда проверяю фильтр по партнеру в табличной части в документах оплаты
@@ -404,7 +403,7 @@
 
 # EndFilters
 
-Сценарий: _053011 проверка изменения валюты в документе (BankPayment) в случае если она указана в счете
+Сценарий: _053011 check currency selection in Bank payment document in case the currency is specified in the account
 	И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю выбор валюты в банковском платежном документе в случае если валюта указана в счете
@@ -412,11 +411,11 @@
 
 
 
-Сценарий: _053013 проверка отображения реквизитов на форме BankPayment с видом операции Payment to the vendor
+Сценарий: _053013 check the display of details on the form Bank payment with the type of operation Payment to the vendor
 	И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-	Тогда я проверяю отображение на форме доступных полей
+	* Then I check the display on the form of available fields
 		И     элемент формы с именем "Company" доступен
 		И     элемент формы с именем "Account" доступен
 		И     элемент формы с именем "Description" доступен
@@ -424,7 +423,7 @@
 		И     элемент формы с именем "Currency" доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "TransitAccount" не доступен
-	И я проверяю отображение табличной части
+	* And I check the display of the tabular part
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -441,11 +440,11 @@
 
 
 
-Сценарий: _053015 проверка отображения реквизитов на форме BankPayment с видом операции Cash transfer
+Сценарий: _053015 check the display of details on the form Bank payment with the type of operation Cash transfer
 	И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-	Тогда я проверяю отображение на форме доступных полей
+	Then I check the display on the form of available fields
 		И     элемент формы с именем "Company" доступен
 		И     элемент формы с именем "Account" доступен
 		И     элемент формы с именем "Description" доступен
@@ -453,7 +452,7 @@
 		И     элемент формы с именем "Currency" доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "TransitAccount" не доступен
-	И я проверяю отображение табличной части
+	And I check the display of the tabular part
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '100,00'
 		И в таблице "PaymentList" я завершаю редактирование строки

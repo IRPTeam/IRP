@@ -3,20 +3,20 @@
 @Positive
 
 
-Функционал: работа со штрих-кодами
+Функционал: barcode management
 
-Как разработчик
-Я хочу добавить функционал штрих-кодов
-Для работы с товаром
+As a developer
+I want to add barcode functionality
+To work with the products
 
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _0905 добавление штрих-кодов в регистр Barcodes
+Сценарий: _0905 barcode registry entry
 	И я удаляю все записи РегистрСведений "Barcodes"
-	Тогда я добавляю записи по штрих-кодам для Dress
+	* Adding barcode entries for Dress
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -63,7 +63,7 @@
 		И в поле 'Presentation' я ввожу текст '2202283739'
 		И я нажимаю на кнопку 'Save and close'
 	И Я закрыл все окна клиентского приложения
-	Тогда я добавляю записи по штрих-кодам для Boots
+	* Adding barcode entries for Boots
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -102,21 +102,21 @@
 		И я нажимаю на кнопку 'Save and close'
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _0906 проверка отображения штрих-кодов по Item и item key
-	* Открытие справочника item и выбор элемента Dress
+Сценарий: _0906 check barcode display by Item and item key
+	* Opening the item catalog and selecting Dress
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Dress       |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка отображения штрих-кодов по Item
+	* Checking barcodes by Item
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Barcodes'
 		Тогда таблица "List" содержит строки:
 		| 'Barcode'    | 'Unit' | 'Item key' |
 		| '2202283705' | 'pcs'  | 'XS/Blue'  |
 		| '2202283713' | 'pcs'  | 'S/Yellow' |
 		| '2202283739' | 'pcs'  | 'L/Green'  |
-	* Проверка отображения штрих-кодов по Item key
+	* Checking barcodes by Item key
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
 		И в таблице "List" я перехожу к строке:
 		| 'Item key' |

@@ -8,7 +8,7 @@ EndProcedure
 Function GetPicturesRefs()
 	Query = New Query();
 	Query.Text =
-		"SELECT TOP 1000
+		"SELECT
 		|	Files.Ref,
 		|	Files.Description,
 		|	Files.FileID,

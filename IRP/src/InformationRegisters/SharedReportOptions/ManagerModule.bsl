@@ -81,7 +81,7 @@ Procedure SetUsersToReportOption(Val ReportOption, Val UsersArray) Export
 			SharedReportOptionsSetRecord = SharedReportOptionsSet.Add();
 			SharedReportOptionsSetRecord.ReportOption = ReportOption;
 			SharedReportOptionsSetRecord.User = Item;
-		EndDo
+		EndDo;
 	EndIf;
 	SharedReportOptionsSet.Write();
 	

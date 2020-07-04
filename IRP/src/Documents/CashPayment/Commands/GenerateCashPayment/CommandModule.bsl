@@ -16,14 +16,14 @@ Function ErrorMessageStructure(BasisDocuments)
 	ErrorMessageStructure = New Structure();
 	
 	For Each BasisDocument In BasisDocuments Do
-		ErrorMessagekey = ErrorMessagekey(BasisDocument);
-		If ValueIsFilled(ErrorMessagekey) Then
-			ErrorMessageStructure.Insert(ErrorMessagekey, StrTemplate(R()[ErrorMessagekey], Metadata.Documents.CashPayment.Synonym));
+		ErrorMessageKey = ErrorMessageKey(BasisDocument);
+		If ValueIsFilled(ErrorMessageKey) Then
+			ErrorMessageStructure.Insert(ErrorMessageKey, StrTemplate(R()[ErrorMessageKey], Metadata.Documents.CashPayment.Synonym));
 		EndIf;
 	EndDo;
 	
 	If ErrorMessageStructure.Count() = 1 Then
-		ErrorMessageText = ErrorMessageStructure[ErrorMessagekey];	
+		ErrorMessageText = ErrorMessageStructure[ErrorMessageKey];	
 	ElsIf ErrorMessageStructure.Count() = 0 Then
 		ErrorMessageText = StrTemplate(R().Error_051, Metadata.Documents.CashPayment.Synonym);
 	Else
@@ -34,18 +34,18 @@ Function ErrorMessageStructure(BasisDocuments)
 	Return ErrorMessageText;
 EndFunction
 
-Function ErrorMessagekey(BasisDocument)
-	ErrorMessagekey = Undefined;
+Function ErrorMessageKey(BasisDocument)
+	ErrorMessageKey = Undefined;
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.CashTransferOrder") Then
 		If Not BasisDocument.Sender.Type = PredefinedValue("Enum.CashAccountTypes.Cash") Then
-			ErrorMessagekey = "Error_057";
+			ErrorMessageKey = "Error_057";
 		Else
-			ErrorMessagekey = "Error_058";
+			ErrorMessageKey = "Error_058";
 		EndIf;
 	EndIf;
 	
-	Return ErrorMessagekey;
+	Return ErrorMessageKey;
 EndFunction
 
 Function GetDocumentsStructure(ArrayOfBasisDocuments)

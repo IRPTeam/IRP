@@ -6,7 +6,7 @@ Function Auth(Form) Export
 
 EndFunction 
 
-Procedure OnHTMLComplite(Document, UUID) Export
+Procedure OnHTMLComplete(Document, UUID) Export
 	Code = Undefined;
 	If Document.location.host = "localhost" Then
 		Params = StrSplit(Document.location.search, "&?");

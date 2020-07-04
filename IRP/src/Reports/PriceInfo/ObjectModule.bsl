@@ -1,6 +1,6 @@
 
-Procedure OnComposeResult(ResultDocument, DetailsData, StandartProcessing)
-	StandartProcessing = False;
+Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
+	StandardProcessing = False;
 	
 	TemplateComposer = New DataCompositionTemplateComposer();
 	Settings = SettingsComposer.GetSettings();

@@ -15,10 +15,10 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	IDInfoClient.NotificationProcessing(ThisObject, Object.Ref, EventName, Parameter, Source);
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 	If EventName = "UpdateIDInfo" Then
-		IDInfoCreateFormControll();
+		IDInfoCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -29,7 +29,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SalesOrdersList.Parameters.SetParameterValue("Partner", Object.Ref);
 	CommonFunctionsServer.SetConditionalAppearanceDataField(ThisObject, "SalesOrdersList.Date");
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
-	Items.Parent.Visible = GetFunctionalOption("ShowAlfaTestingSaas");
+	Items.Parent.Visible = GetFunctionalOption("ShowAlphaTestingSaas");
 EndProcedure
 
 #EndRegion
@@ -62,12 +62,12 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
 &AtServer
-Procedure IDInfoCreateFormControll()
+Procedure IDInfoCreateFormControl()
 	IDInfoServer.CreateFormControls(ThisObject);
 EndProcedure
 

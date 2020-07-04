@@ -590,7 +590,7 @@ Function DeleteRowsInDependedTable(Object, DependedTableName, MainTableKey, Cach
 	Return Cache;
 EndFunction
 
-Function Priceschenged(Object, Form, Settings) Export
+Function PricesChanged(Object, Form, Settings) Export
 
 	CachedColumns = "Key, Price, PriceType, ItemKey, Unit";
 	ListCache = GetCacheTable(Object, "ItemList", CachedColumns);
@@ -603,9 +603,9 @@ Function Priceschenged(Object, Form, Settings) Export
 	CalculateItemsRows(Object, Form, ListCache, CalculationSettings);
 
 	For Each RowCache In ListCache Do
-		FindedRows = Object.ItemList.FindRows(New Structure("Key", RowCache.Key));
-		For Each FindedRow In FindedRows Do
-			If Not FindedRow.Price = RowCache.Price Then
+		FoundRows = Object.ItemList.FindRows(New Structure("Key", RowCache.Key));
+		For Each FoundRow In FoundRows Do
+			If Not FoundRow.Price = RowCache.Price Then
 				Return True;	
 			EndIf;
 		EndDo;
@@ -644,12 +644,12 @@ EndFunction
 
 Procedure CalculateRow(Object, Form, Settings, Actions) Export
 	
-	DoTabelActions(Object, Form, Settings, Actions);
+	DoTableActions(Object, Form, Settings, Actions);
 	
 EndProcedure
 
 
-Procedure DoTabelActions(Object, Form, Settings, Actions) Export
+Procedure DoTableActions(Object, Form, Settings, Actions) Export
 	
 	For Each Action In Actions Do
 		
@@ -695,7 +695,7 @@ EndProcedure
 
 #EndRegion
 
-#Region TabelItensChanges
+#Region TableItensChanges
 
 Procedure UpdateItemKey(Object, Form, Settings) Export
 

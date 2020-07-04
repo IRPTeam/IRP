@@ -5,10 +5,10 @@
     <valueManagerType typeId="80dc8780-ff6d-467c-95a0-15ec95d6d326" valueTypeId="aef5d691-0ced-4292-b39a-b98cf15c3aac"/>
     <valueKeyType typeId="d0472f74-7ced-43b7-96f1-7bc83b199420" valueTypeId="88ae4084-1828-4b7c-ac0c-a9217ecbb936"/>
   </producedTypes>
-  <name>ShowAlfaTestingSaas</name>
+  <name>ShowAlphaTestingSaas</name>
   <synonym>
     <key>en</key>
-    <value>Show alfa testing saas</value>
+    <value>Show Alpha testing saas</value>
   </synonym>
   <type>
     <types>Boolean</types>

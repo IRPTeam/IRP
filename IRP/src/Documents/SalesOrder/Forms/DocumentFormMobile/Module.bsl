@@ -83,11 +83,11 @@ EndProcedure
 Procedure SetSpecialOffers(Command)
 	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object,
 		ThisObject,
-		"SpecialOffersEditFinish_Automatical");
+		"SpecialOffersEditFinish_Automatically");
 EndProcedure
 
 &AtClient
-Procedure SpecialOffersEditFinish_Automatical(Result, AdditionalParameters) Export
+Procedure SpecialOffersEditFinish_Automatically(Result, AdditionalParameters) Export
 	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
 EndProcedure
 

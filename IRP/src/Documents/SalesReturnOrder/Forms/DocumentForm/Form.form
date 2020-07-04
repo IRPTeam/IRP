@@ -104,7 +104,7 @@
           <extInfo xsi:type="form:LabelDecorationExtInfo">
             <handlers>
               <event>Click</event>
-              <name>DecorationGroupTitleCollapsedLalelClick</name>
+              <name>DecorationGroupTitleCollapsedLabelClick</name>
             </handlers>
             <hyperlink>true</hyperlink>
             <horizontalAlign>Left</horizontalAlign>
@@ -233,7 +233,7 @@
           <extInfo xsi:type="form:LabelDecorationExtInfo">
             <handlers>
               <event>Click</event>
-              <name>DecorationGroupTitleUncollapsedLalelClick</name>
+              <name>DecorationGroupTitleUncollapsedLabelClick</name>
             </handlers>
             <hyperlink>true</hyperlink>
             <horizontalAlign>Left</horizontalAlign>
@@ -4641,7 +4641,7 @@
         <name>SearchByBarcode</name>
       </handler>
     </action>
-    <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
+    <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
     <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>

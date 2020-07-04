@@ -116,7 +116,7 @@ EndProcedure
 Procedure ExternalDataProcOnChangeAtServer()
 	Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 	Info.Create = True;
-	AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If Not AddDataProc = Undefined Then
 		ConnectionSettings = AddDataProc.ConnectionSettings();
 		Object.ConnectionSetting.Clear();
@@ -132,7 +132,7 @@ EndProcedure
 Procedure ExternalDataProcSettings(Command)
 	Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 	Info.Insert("Settings", ThisObject.AddressResult);
-	CallMetodAddDataProc(Info);
+	CallMethodAddDataProc(Info);
 	
 	NotifyDescription = New NotifyDescription("OpenFormProcSettingsEnd", ThisObject);
 	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "Settings");
@@ -145,8 +145,8 @@ Procedure PutSettingsToTempStorage()
 EndProcedure
 
 &AtServerNoContext
-Procedure CallMetodAddDataProc(Info)
-	AddDataProcServer.CallMetodAddDataProc(Info);
+Procedure CallMethodAddDataProc(Info)
+	AddDataProcServer.CallMethodAddDataProc(Info);
 EndProcedure
 
 &AtClient

@@ -444,7 +444,7 @@ For joint sale of products
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
-	* Сhecking item key creation for bundle by Trousers
+	* Checking item key creation for bundle by Trousers
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 		И в таблице "List" я перехожу к строке:
 			| Description    | Item type |
@@ -455,7 +455,7 @@ For joint sale of products
 			| Item key          |
 			| Trousers/Trousers |
 		И Я закрыл все окна клиентского приложения
-	* Сhecking an auto-generated specification on Set
+	* Checking an auto-generated specification on Set
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' | 'Type'   |
@@ -469,7 +469,7 @@ For joint sale of products
 			| '38'   | 'Yellow' | '2,000'    |
 		И     элемент формы с именем "ItemField*" стал равен 'Сlothes'
 		И Я закрыл все окна клиентского приложения
-	* Сhecking postings
+	* Checking postings
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'                    | 'Store'    | 'Item key'             |
@@ -590,7 +590,7 @@ For joint sale of products
 			| Bound Dress+Shirt/Dress+Shirt |
 			| Bound Dress+Shirt/Dress+Shirt |
 		И Я закрыл все окна клиентского приложения
-	* Сhecking an auto-generated specification on Bundle
+	* Checking an auto-generated specification on Bundle
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
 		И в таблице "List" я перехожу к последней строке
 		И в таблице "List" я выбираю текущую строку
@@ -602,7 +602,7 @@ For joint sale of products
 			| 'XS'   | 'Blue'  | '2,000'    |
 			| 'L'    | 'Green' | '2,000'    |
 		И Я закрыл все окна клиентского приложения
-	* Сhecking postings
+	* Checking postings
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
 		Тогда таблица "List" содержит строки:
 			| 'Quantity' | 'Recorder'              	| 'Store'    | 'Item key'             |

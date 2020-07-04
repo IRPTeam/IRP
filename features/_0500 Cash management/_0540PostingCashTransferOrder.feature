@@ -144,7 +144,7 @@ For actual cash accounting
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '5'
-	* Сheck that the tabular part shows the rest of the amount
+	* Check that the tabular part shows the rest of the amount
 		И я перехожу к закладке "Payments"
 		И     таблица "PaymentList" содержит строки:
 		| 'Planing transaction basis'   | 'Amount' |

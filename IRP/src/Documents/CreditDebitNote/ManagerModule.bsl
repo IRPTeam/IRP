@@ -323,7 +323,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordSet, WriteInTransaction",
 			PostingServer.JoinTables(ArrayOfTables,
 				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency, 
-				|TransactionAP, AdvanceToSupliers,
+				|TransactionAP, AdvanceToSuppliers,
 				|TransactionAR, AdvanceFromCustomers"),
 			Parameters.IsReposting));
 			

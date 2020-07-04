@@ -12,7 +12,7 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -37,15 +37,15 @@ EndProcedure
 Procedure ExternalDataProcSettings(Command)
 	Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 	Info.Insert("Settings", ThisObject.AddressResult);
-	CallMetodAddDataProc(Info);
+	CallMethodAddDataProc(Info);
 	
 	NotifyDescription = New NotifyDescription("OpenFormProcSettingsEnd", ThisObject);
 	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "Settings");
 EndProcedure
 
 &AtServerNoContext
-Procedure CallMetodAddDataProc(Info)
-	AddDataProcServer.CallMetodAddDataProc(Info);
+Procedure CallMethodAddDataProc(Info)
+	AddDataProcServer.CallMethodAddDataProc(Info);
 EndProcedure
 
 &AtClient
@@ -90,7 +90,7 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 

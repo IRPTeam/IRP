@@ -120,7 +120,7 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 		And OfferHaveManualInputValue(thisString.Offer)
 		And ThisObject.FormType = "Offers_ForRow" Then
 		
-		Info = AddDataProcServer.AddDataProcInfo(GetExternalDataprocByOffer(thisString.Offer));
+		Info = AddDataProcServer.AddDataProcInfo(GetExternalDataProcessorByOffer(thisString.Offer));
 		Info.Insert("Settings", GetSettingsForOffer(thisString.Offer));
 		Info.Insert("TotalAmount", thisString.TotalAmount);
 		Info.Insert("TotalPercent", thisString.TotalPercent);
@@ -128,7 +128,7 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 		Info.Insert("FormParametersInfo", ThisObject.FormParametersInfo);
 		Info.Insert("SelectedRow", SelectedRow);
 		
-		CallMetodAddDataProc(Info);
+		CallMethodAddDataProc(Info);
 		
 		NotifyDescription = New NotifyDescription("InputManualValueForOfferEnd", ThisObject);
 		
@@ -139,14 +139,14 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 		And OfferHaveManualInputValue(thisString.Offer)
 		And ThisObject.FormType = "Offers_ForDocument" Then
 		
-		Info = AddDataProcServer.AddDataProcInfo(GetExternalDataprocByOffer(thisString.Offer));
+		Info = AddDataProcServer.AddDataProcInfo(GetExternalDataProcessorByOffer(thisString.Offer));
 		Info.Insert("Settings", GetSettingsForOffer(thisString.Offer));
 		Info.Insert("TotalAmount", thisString.TotalAmount);
 		Info.Insert("TotalPercent", thisString.TotalPercent);
 		Info.Insert("FormParametersInfo", ThisObject.FormParametersInfo);
 		Info.Insert("SelectedRow", SelectedRow);
 		
-		CallMetodAddDataProc(Info);
+		CallMethodAddDataProc(Info);
 		
 		NotifyDescription = New NotifyDescription("InputManualValueForOfferEnd", ThisObject);
 		
@@ -172,8 +172,8 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 EndProcedure
 
 &AtServerNoContext
-Procedure CallMetodAddDataProc(Info)
-	AddDataProcServer.CallMetodAddDataProc(Info);
+Procedure CallMethodAddDataProc(Info)
+	AddDataProcServer.CallMethodAddDataProc(Info);
 EndProcedure
 
 &AtClient
@@ -204,7 +204,7 @@ Procedure InputManualValueForOfferEnd(Result, AdditionalParameters) Export
 EndProcedure
 
 &AtServerNoContext
-Function GetExternalDataprocByOffer(OfferRef)
+Function GetExternalDataProcessorByOffer(OfferRef)
 	Return OfferRef.SpecialOfferType.ExternalDataProc;
 EndFunction
 

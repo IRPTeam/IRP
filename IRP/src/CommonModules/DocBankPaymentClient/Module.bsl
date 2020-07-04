@@ -303,11 +303,11 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FormParameters.Insert("OwnerRef", Object.Ref);
 	
-	ArrayOfChoisedDocuments = New Array();
+	ArrayOfSelectedDocuments = New Array();
 	For Each Row In Object.PaymentList Do
-		ArrayOfChoisedDocuments.Add(Row.PlaningTransactionBasis);
+		ArrayOfSelectedDocuments.Add(Row.PlaningTransactionBasis);
 	EndDo;
-	OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
+	OpenSettings.FormParameters.Insert("ArrayOfSelectedDocuments", ArrayOfSelectedDocuments);
 		
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Posted", True, DataCompositionComparisonType.Equal));
@@ -328,11 +328,11 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	EndIf;
 
 	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", True, DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrencyExchange", True, DataCompositionComparisonType.Equal));
 		
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 	ElsIf Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", False, DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrencyExchange", False, DataCompositionComparisonType.Equal));
 		
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 	EndIf;
@@ -558,7 +558,7 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClient.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
-Procedure DecorationGroupTitleCollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClient.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
@@ -566,7 +566,7 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClient.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
-Procedure DecorationGroupTitleUncollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClient.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 

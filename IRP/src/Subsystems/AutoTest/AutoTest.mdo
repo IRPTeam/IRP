@@ -80,6 +80,6 @@
   <content>Document.BankPayment</content>
   <content>Document.BankReceipt</content>
   <content>Document.Labeling</content>
-  <content>FunctionalOption.ShowAlfaTestingSaas</content>
+  <content>FunctionalOption.ShowAlphaTestingSaas</content>
   <content>DataProcessor.QuantityCompare</content>
 </mdclass:Subsystem>

@@ -8,7 +8,7 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -314,8 +314,8 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLalelClick(Item)
-	DocCashReceiptClient.DecorationGroupTitleCollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocCashReceiptClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -324,8 +324,8 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
-	DocCashReceiptClient.DecorationGroupTitleUncollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocCashReceiptClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -479,7 +479,7 @@ EndProcedure
 Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
 	
 	If ValueIsFilled(Object.CurrencyExchange) And Object.CurrencyExchange <> Object.Currency Then
-		CurrenciesServer.FiilCurrencyTable(Object, 
+		CurrenciesServer.FillCurrencyTable(Object, 
 	                                       Object.Date, 
 	                                       Object.Company, 
 	                                       Object.CurrencyExchange, 
@@ -487,7 +487,7 @@ Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
 	                                       AgreementInfo);
 	EndIf;
 
-	CurrenciesServer.FiilCurrencyTable(Object, 
+	CurrenciesServer.FillCurrencyTable(Object, 
 	                                   Object.Date, 
 	                                   Object.Company, 
 	                                   Currency, 
@@ -566,7 +566,7 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 

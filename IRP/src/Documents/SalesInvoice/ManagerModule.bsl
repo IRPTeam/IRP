@@ -65,7 +65,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.ShipmentConfirmationSchedule_Receipt = QueryResult[12].Unload();
 	Tables.ReconciliationStatement = QueryResult[13].Unload();
 	Tables.RevenuesTurnovers = QueryResult[14].Unload();
-	Tables.TaxesTurnovers = QueryTableTaxlist;
+	Tables.TaxesTurnovers = QueryTableTaxList;
 	
 	Tables.GoodsInTransitOutgoing_Exists = GetExistsGoodsInTransitOutgoing(Ref, AddInfo);
 	
@@ -785,8 +785,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
     	|	AccountsStatementBalance.LegalName,
     	|	AccountsStatementBalance.Currency,
     	|	&Period AS Period,
-    	|	AccountsStatementBalance.AdvanceToSupliersBalance AS AdvanceToSupliersBalance,
-    	|	-tmp.Amount AS AdvanceToSupliers
+    	|	AccountsStatementBalance.AdvanceToSuppliersBalance AS AdvanceToSuppliersBalance,
+    	|	-tmp.Amount AS AdvanceToSuppliers
     	|FROM
     	|	AccumulationRegister.AccountsStatement.Balance(&PointInTime, (Company, Partner, LegalName, Currency) IN
     	|		(SELECT
@@ -899,7 +899,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			PostingServer.JoinTables(ArrayOfTables,
 				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency, 
 				|TransactionAR, AdvanceFromCustomers,
-				|TransactionAP, AdvanceToSupliers"),
+				|TransactionAP, AdvanceToSuppliers"),
 			Parameters.IsReposting));	
 		
 	// PartnerArTransactions

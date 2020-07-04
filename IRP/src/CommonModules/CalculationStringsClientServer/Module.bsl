@@ -695,7 +695,7 @@ EndProcedure
 
 #EndRegion
 
-#Region TableItensChanges
+#Region TableItemsChanges
 
 Procedure UpdateItemKey(Object, Form, Settings) Export
 

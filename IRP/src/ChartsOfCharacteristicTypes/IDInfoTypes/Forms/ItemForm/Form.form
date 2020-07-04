@@ -491,7 +491,7 @@
         </autoCommandBar>
         <handlers>
           <event>OnActivateRow</event>
-          <name>ExternalDataProcesssorOnActivateRow</name>
+          <name>ExternalDataProcessorOnActivateRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>

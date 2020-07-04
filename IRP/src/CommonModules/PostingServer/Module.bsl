@@ -712,8 +712,8 @@ Procedure AddColumnsToAccountsStatementTable(Table) Export
 	If Table.Columns.Find("BasisDocument") = Undefined Then
 		Table.Columns.Add("BasisDocument", Metadata.DefinedTypes.typeAccountStatementBasises.Type);
 	EndIf;
-	If Table.Columns.Find("AdvanceToSupliers") = Undefined Then
-		Table.Columns.Add("AdvanceToSupliers", Metadata.DefinedTypes.typeAmount.Type);
+	If Table.Columns.Find("AdvanceToSuppliers") = Undefined Then
+		Table.Columns.Add("AdvanceToSuppliers", Metadata.DefinedTypes.typeAmount.Type);
 	EndIf;
 	If Table.Columns.Find("AdvanceFromCustomers") = Undefined Then
 		Table.Columns.Add("AdvanceFromCustomers", Metadata.DefinedTypes.typeAmount.Type);

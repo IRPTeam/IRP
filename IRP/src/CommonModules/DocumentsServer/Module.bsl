@@ -127,7 +127,7 @@ EndFunction
 
 #Region ItemList
 
-Procedure SetNewTabelUUID(Table, LinkedTables) Export
+Procedure SetNewTableUUID(Table, LinkedTables) Export
 	For Each TableRow In Table Do
 	
 		CurrentKey = TableRow.Key;
@@ -364,7 +364,7 @@ Function GetAgreementByPartner(AgreementParameters) Export
 			DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
 			DocumentsServer.SerializeArrayOfFilters(AdditionalParameters),
 			AgreementParameters.Agreement);
-	Return Catalogs.Agreements.GetDefaultChoiseRef(Parameters);
+	Return Catalogs.Agreements.GetDefaultChoiceRef(Parameters);
 	
 EndFunction
 
@@ -381,7 +381,7 @@ Function GetLegalNameByPartner(Partner, LegalName) Export
 				DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
 				DocumentsServer.SerializeArrayOfFilters(AdditionalParameters),
 				LegalName);
-		Return Catalogs.Companies.GetDefaultChoiseRef(Parameters);
+		Return Catalogs.Companies.GetDefaultChoiceRef(Parameters);
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -421,11 +421,11 @@ EndProcedure
 
 Procedure DeleteUnavailableTitleItemNames(ItemNames) Export
 	UnavailableNames = New Array;
-	ShowAlfaTestingSaas = GetFunctionalOption("ShowAlfaTestingSaas");
+	ShowAlphaTestingSaas = GetFunctionalOption("ShowAlphaTestingSaas");
 	If Not CatCompaniesServer.isUseCompanies() Then
 		UnavailableNames.Add("Company");
 	EndIf;
-	If Not ShowAlfaTestingSaas Then		
+	If Not ShowAlphaTestingSaas Then		
 		UnavailableNames.Add("Store");
 		UnavailableNames.Add("LegalName");
 		UnavailableNames.Add("Agreement");

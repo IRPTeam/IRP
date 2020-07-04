@@ -48,7 +48,7 @@ Function CreateAddDataProc(Info, AddInfo)
 EndFunction
 
 
-Function CallMetodAddDataProc(Info, AddInfo = Undefined) Export
+Function CallMethodAddDataProc(Info, AddInfo = Undefined) Export
 	Result = Undefined;
 	
 	If UseInternalDataProcessor(Info.ExternalDataProcName) Then

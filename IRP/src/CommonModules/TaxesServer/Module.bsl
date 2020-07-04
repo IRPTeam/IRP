@@ -275,7 +275,7 @@ Function CalculateTax(Parameters, AddInfo = Undefined) Export
 	If Parameters.Tax.Type = Enums.TaxType.Rate Then
 		Info = AddDataProcServer.AddDataProcInfo(Parameters.Tax.ExternalDataProc);
 		Info.Create = True;
-		AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+		AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 		If Not AddDataProc = Undefined Then
 			Result = AddDataProc.CalculateTax(Parameters);
 		EndIf;
@@ -551,9 +551,9 @@ EndFunction
 Procedure CreateTaxTree(Object, Form, Parameters) Export
 	
 	PaymentList = New ValueTable();
-	CollumnColection = Parameters.ObjectMainList.Unload().Columns;
+	ColumnCollection = Parameters.ObjectMainList.Unload().Columns;
 	For Each ColumnName In StrSplit(Parameters.MainListColumns, ",") Do
-		PaymentList.Columns.Add(TrimAll(ColumnName), CollumnColection[TrimAll(ColumnName)].ValueType);
+		PaymentList.Columns.Add(TrimAll(ColumnName), ColumnCollection[TrimAll(ColumnName)].ValueType);
 	EndDo;
 	
 	For Each Row In Parameters.ObjectMainList Do

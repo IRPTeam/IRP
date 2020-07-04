@@ -1211,16 +1211,16 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 
 	If Parameters.DocumentDataTables.AdvanceToSuppliers.Count() Then
 		Table2 = Parameters.DocumentDataTables.AdvanceToSuppliers.CopyColumns();
-		Table2.Columns.Amount.Name = "AdvanceToSupliers";
+		Table2.Columns.Amount.Name = "AdvanceToSuppliers";
 		PostingServer.AddColumnsToAccountsStatementTable(Table2);
 		For Each Row In Parameters.DocumentDataTables.AdvanceToSuppliers Do
 			If Row.Partner.Vendor Then
 				NewRow = Table2.Add();
 				FillPropertyValues(NewRow, Row);
 				If Row.RecordType = AccumulationRecordType.Receipt Then
-					NewRow.AdvanceToSupliers = Row.Amount;
+					NewRow.AdvanceToSuppliers = Row.Amount;
 				Else
-					NewRow.AdvanceToSupliers = - Row.Amount;
+					NewRow.AdvanceToSuppliers = - Row.Amount;
 				EndIf;
 			EndIf;
 		EndDo;
@@ -1283,16 +1283,16 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 
 	If Parameters.DocumentDataTables.AdvanceFromCustomers.Count() Then
 		Table6 = Parameters.DocumentDataTables.AdvanceFromCustomers.CopyColumns();
-		Table6.Columns.Amount.Name = "AdvanceToSupliers";
+		Table6.Columns.Amount.Name = "AdvanceToSuppliers";
 		PostingServer.AddColumnsToAccountsStatementTable(Table6);
 		For Each Row In Parameters.DocumentDataTables.AdvanceFromCustomers Do
 			If Row.Partner.Vendor Then
 				NewRow = Table6.Add();
 				FillPropertyValues(NewRow, Row);
 				If Row.RecordType = AccumulationRecordType.Receipt Then
-					NewRow.AdvanceToSupliers = -Row.Amount;
+					NewRow.AdvanceToSuppliers = -Row.Amount;
 				Else
-					NewRow.AdvanceToSupliers = Row.Amount;
+					NewRow.AdvanceToSuppliers = Row.Amount;
 				EndIf;
 			EndIf;
 		EndDo;
@@ -1342,7 +1342,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordSet, WriteInTransaction",
 			PostingServer.JoinTables(ArrayOfTables,
 				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency, 
-				|TransactionAP, AdvanceToSupliers,
+				|TransactionAP, AdvanceToSuppliers,
 				|TransactionAR, AdvanceFromCustomers"),
 			Parameters.IsReposting));
 	
@@ -1498,7 +1498,7 @@ Function SetDeletionMarkForDocuments(DataLock, ArrayOfCheque, ChequeBondTransact
 	Return TableOfDocuments;
 EndFunction
 
-Function UnsetDeletionMerkForDocuments(DataLock, ArrayOfCheque, ChequeBondTransactionRef) Export
+Function UnsetDeletionMarkForDocuments(DataLock, ArrayOfCheque, ChequeBondTransactionRef) Export
 	TableOfDocuments = FindDocuments(ArrayOfCheque, ChequeBondTransactionRef);
 	SetDataLock(DataLock, TableOfDocuments);
 	

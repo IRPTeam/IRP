@@ -1,7 +1,7 @@
 #language: ru
 @tree
 @Positive
-Функционал: accounting of receivables / payables under Standart type agreements
+Функционал: accounting of receivables / payables under Standard type agreements
 
 As an accountant
 I want to settle general agreements for all partners.
@@ -11,10 +11,10 @@ I want to settle general agreements for all partners.
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 Сценарий: _060001 preparation
-	* Create a test segment of Standart clients
+	* Create a test segment of Standard clients
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.PartnerSegments'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Standart'
+		И в поле 'ENG' я ввожу текст 'Standard'
 		И я нажимаю на кнопку 'Save and close'
 	* Create vendor (Veritas) and client (Nicoletta)
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
@@ -30,7 +30,7 @@ I want to settle general agreements for all partners.
 		И я нажимаю кнопку выбора у поля "Segment"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
-			| 'Standart'      |
+			| 'Standard'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
 		И я жду закрытия окна 'Partner segments (create) *' в течение 20 секунд
@@ -62,11 +62,11 @@ I want to settle general agreements for all partners.
 		И я нажимаю на кнопку 'Save and close'
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 		И я нажимаю на кнопку 'Save and close'
-	* Create agreement Standart
+	* Create agreement Standard
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя 'Kind' на 'Standard'
-		И в поле 'ENG' я ввожу текст 'Standart'
+		И в поле 'ENG' я ввожу текст 'Standard'
 		И в поле 'Date' я ввожу текст '01.12.2019'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -80,10 +80,10 @@ I want to settle general agreements for all partners.
 		И в таблице "List" я выбираю текущую строку
 		И в поле 'Start using' я ввожу текст '01.12.2019'
 		И я нажимаю на кнопку 'Save and close'
-	* Create an individual agreement for the vendor with the type of settlements Standart 
+	* Create an individual agreement for the vendor with the type of settlements Standard 
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Posting by standart agreement (Veritas)'
+		И в поле 'ENG' я ввожу текст 'Posting by Standard agreement (Veritas)'
 		И я меняю значение переключателя 'Type' на 'Vendor'
 		И в поле 'Date' я ввожу текст '01.12.2019'
 		И я меняю значение переключателя 'AP-AR posting detail' на 'By standard agreement'
@@ -95,7 +95,7 @@ I want to settle general agreements for all partners.
 		И я нажимаю кнопку выбора у поля "Standard agreement"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
-			| 'Standart'    |
+			| 'Standard'    |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -120,10 +120,10 @@ I want to settle general agreements for all partners.
 		И в таблице "List" я выбираю текущую строку
 		И в поле 'Start using' я ввожу текст '01.11.2018'
 		И я нажимаю на кнопку 'Save and close'
-	* Create an individual agreement for the customer with the type of settlements Standart
+	* Create an individual agreement for the customer with the type of settlements Standard
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Posting by standart agreement Customer'
+		И в поле 'ENG' я ввожу текст 'Posting by Standard agreement Customer'
 		И я меняю значение переключателя 'Type' на 'Customer'
 		И в поле 'Date' я ввожу текст '01.12.2019'
 		И я меняю значение переключателя 'AP-AR posting detail' на 'By standard agreement'
@@ -135,12 +135,12 @@ I want to settle general agreements for all partners.
 		И я нажимаю кнопку выбора у поля "Standard agreement"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
-			| 'Standart'    |
+			| 'Standard'    |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Partner segment"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
-			| 'Standart'     |
+			| 'Standard'     |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -201,10 +201,10 @@ I want to settle general agreements for all partners.
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PartnerArTransactions'
 		Тогда таблица "List" содержит строки:
 		| 'Currency' | 'Recorder'           | 'Legal name'        | 'Basis document' | 'Company'      | 'Amount'    | 'Agreement' | 'Partner'   | 'Currency movement type'   |
-		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Nicoletta' | 'TRY'                      |
-		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Nicoletta' | 'Local currency'           |
-		| 'USD'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standart'  | 'Nicoletta' | 'Reporting currency'       |
-		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Nicoletta' | 'en descriptions is empty' |
+		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'TRY'                      |
+		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'Local currency'           |
+		| 'USD'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Nicoletta' | 'Reporting currency'       |
+		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en descriptions is empty' |
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: _060003 create Cash reciept with the type of settlements under standard agreements and check its movements
@@ -239,7 +239,7 @@ I want to settle general agreements for all partners.
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                            |
-				| 'Posting by standart agreement Customer' |
+				| 'Posting by Standard agreement Customer' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 			И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '11 000,00'
@@ -254,7 +254,7 @@ I want to settle general agreements for all partners.
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PartnerArTransactions'
 		Тогда таблица "List" содержит строки:
 		| 'Currency' | 'Recorder'          | 'Legal name'        | 'Company'      | 'Amount'    | 'Agreement' | 'Partner'   | 'Currency movement type'   |
-		| 'TRY'      | 'Cash receipt 601*' | 'Company Nicoletta' | 'Main Company' | '11 000,00' | 'Standart'  | 'Nicoletta' | 'en descriptions is empty' |
+		| 'TRY'      | 'Cash receipt 601*' | 'Company Nicoletta' | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en descriptions is empty' |
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _060004 check the offset of the advance for Sales invoice with the type of settlement under standard agreements and check its movements
@@ -332,14 +332,14 @@ I want to settle general agreements for all partners.
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PartnerArTransactions'
 		Тогда таблица "List" содержит строки:
 		| 'Currency' | 'Recorder'           | 'Legal name'        | 'Basis document' | 'Company'      | 'Amount'    | 'Agreement' | 'Partner'   | 'Currency movement type'   |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Nicoletta' | 'TRY'                      |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Nicoletta' | 'Local currency'           |
-		| 'USD'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standart'  | 'Nicoletta' | 'Reporting currency'       |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Nicoletta' | 'TRY'                      |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Nicoletta' | 'Local currency'           |
-		| 'USD'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standart'  | 'Nicoletta' | 'Reporting currency'       |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Nicoletta' | 'en descriptions is empty' |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Nicoletta' | 'en descriptions is empty' |
+		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'TRY'                      |
+		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'Local currency'           |
+		| 'USD'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Nicoletta' | 'Reporting currency'       |
+		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'TRY'                      |
+		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'Local currency'           |
+		| 'USD'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Nicoletta' | 'Reporting currency'       |
+		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en descriptions is empty' |
+		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en descriptions is empty' |
 	* Check movements SalesInvoice by register AdvanceFromCustomers
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.AdvanceFromCustomers'
 		Тогда таблица "List" содержит строки:
@@ -388,10 +388,10 @@ I want to settle general agreements for all partners.
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PartnerApTransactions'
 		Тогда таблица "List" содержит строки:
 		| 'Currency' | 'Recorder'              | 'Legal name'       | 'Basis document' | 'Company'      | 'Amount'    | 'Agreement' | 'Partner' | 'Currency movement type'   |
-		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Veritas' | 'TRY'                      |
-		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Veritas' | 'Local currency'           |
-		| 'USD'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '1 883,56'  | 'Standart'  | 'Veritas' | 'Reporting currency'       |
-		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Veritas' | 'en descriptions is empty' |
+		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'TRY'                      |
+		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'Local currency'           |
+		| 'USD'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Veritas' | 'Reporting currency'       |
+		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'en descriptions is empty' |
 		И Я закрыл все окна клиентского приложения
 	
 Сценарий: _060006 create Cash payment with the type of settlements under standard contracts and check its postings
@@ -426,7 +426,7 @@ I want to settle general agreements for all partners.
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                            |
-				| 'Posting by standart agreement (Veritas)' |
+				| 'Posting by Standard agreement (Veritas)' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 			И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '11 000,00'
@@ -441,7 +441,7 @@ I want to settle general agreements for all partners.
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PartnerApTransactions'
 		Тогда таблица "List" содержит строки:
 		| 'Currency' | 'Recorder'          | 'Legal name'        | 'Company'      | 'Amount'    | 'Agreement' | 'Partner'   | 'Currency movement type'   |
-		| 'TRY'      | 'Cash payment 601*' | 'Company Veritas'   | 'Main Company' | '11 000,00' | 'Standart'  | 'Veritas'   | 'en descriptions is empty' |
+		| 'TRY'      | 'Cash payment 601*' | 'Company Veritas'   | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas'   | 'en descriptions is empty' |
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _060007 check the offset of Purchase invoice advance with the type of settlement under standard contracts and check its movements
@@ -520,10 +520,10 @@ I want to settle general agreements for all partners.
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PartnerApTransactions'
 		Тогда таблица "List" содержит строки:
 		| 'Currency' | 'Recorder'              | 'Legal name'       | 'Basis document' | 'Company'      | 'Amount'    | 'Agreement' | 'Partner' | 'Currency movement type'   |
-		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Veritas' | 'TRY'                      |
-		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Veritas' | 'Local currency'           |
-		| 'USD'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '1 883,56'  | 'Standart'  | 'Veritas' | 'Reporting currency'       |
-		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standart'  | 'Veritas' | 'en descriptions is empty' |
+		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'TRY'                      |
+		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'Local currency'           |
+		| 'USD'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Veritas' | 'Reporting currency'       |
+		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'en descriptions is empty' |
 		И Я закрыл все окна клиентского приложения
 	* Check movements Purchase Invoice by register AdvanceFromCustomers
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.AdvanceToSuppliers'

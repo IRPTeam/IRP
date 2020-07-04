@@ -1,4 +1,4 @@
-Procedure OnCreateAtServer(Cancel, StandartProcessing, Form, Parameters) Export
+Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 
 	CustomFilter = Undefined;
 	If Parameters.Property("CustomFilter", CustomFilter) Then

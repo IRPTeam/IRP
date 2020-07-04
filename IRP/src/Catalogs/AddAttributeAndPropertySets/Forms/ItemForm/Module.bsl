@@ -46,7 +46,7 @@ Procedure FillAttributesTree(ItemTypesTree, AttributesTree, OnlyAffectPricing)
 	For Each ItemTypesRow In ItemTypesTree.Rows Do
 		NewItemTypeRow = AttributesTree.GetItems().Add();
 		NewItemTypeRow.Picture = ?(ItemTypesRow.isFolder, 0, 3);
-		NewItemTypeRow.Itemtype = ItemTypesRow.ItemType;
+		NewItemTypeRow.ItemType = ItemTypesRow.ItemType;
 		NewItemTypeRow.Presentation = String(ItemTypesRow.ItemType);
 		If Not ItemTypesRow.IsFolder Then
 			For Each AttributeRow In ItemTypesRow.ItemType.AvailableAttributes Do
@@ -106,7 +106,7 @@ Procedure EditItemType(Command)
 		Return;
 	EndIf;
 	OpenArgs = New Structure();
-	OpenArgs.Insert("Key", CurrentData.Itemtype);
+	OpenArgs.Insert("Key", CurrentData.ItemType);
 	If ServiceSystemServer.GetObjectAttribute(OpenArgs.Key, "IsFolder") Then
 		OpenFormName = "Catalog.ItemTypes.Form.GroupForm";
 	Else

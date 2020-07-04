@@ -56,7 +56,7 @@
     <defaultItem>true</defaultItem>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormField">
-      <name>Choiced</name>
+      <name>Selected</name>
       <id>67</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -65,11 +65,11 @@
       </userVisible>
       <dataPath xsi:type="form:MultiLanguageDataPath">
         <paths xsi:type="form:DataPath">
-          <segments>List.Choiced</segments>
+          <segments>List.Selected</segments>
         </paths>
       </dataPath>
       <extendedTooltip>
-        <name>ChoicedExtendedTooltip</name>
+        <name>SelectedExtendedTooltip</name>
         <id>69</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -84,7 +84,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ChoicedContextMenu</name>
+        <name>SelectedContextMenu</name>
         <id>68</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -361,7 +361,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>IsCurrensyExchange</name>
+      <name>IsCurrencyExchange</name>
       <id>64</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -370,11 +370,11 @@
       </userVisible>
       <dataPath xsi:type="form:MultiLanguageDataPath">
         <paths xsi:type="form:DataPath">
-          <segments>List.IsCurrensyExchange</segments>
+          <segments>List.IsCurrencyExchange</segments>
         </paths>
       </dataPath>
       <extendedTooltip>
-        <name>IsCurrensyExchangeExtendedTooltip</name>
+        <name>IsCurrencyExchangeExtendedTooltip</name>
         <id>66</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -389,7 +389,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>IsCurrensyExchangeContextMenu</name>
+        <name>IsCurrencyExchangeContextMenu</name>
         <id>65</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -629,7 +629,7 @@
       <common>true</common>
     </edit>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.Choiced</segments>
+      <segments>List.Selected</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>List.Company</segments>
@@ -638,7 +638,7 @@
       <segments>List.Date</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.IsCurrensyExchange</segments>
+      <segments>List.IsCurrencyExchange</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>List.Number</segments>
@@ -676,8 +676,8 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
-CASE WHEN &amp;UseArrayOfChoisedDocuments THEN
-	CashTransferOrder.Ref in (&amp;ArrayOfChoisedDocuments) ELSE False End AS Choiced,
+CASE WHEN &amp;UseArrayOfSelectedDocuments THEN
+	CashTransferOrder.Ref in (&amp;ArrayOfSelectedDocuments) ELSE False End AS Selected,
 
 
 	CashTransferOrder.Ref,
@@ -689,11 +689,11 @@ CASE WHEN &amp;UseArrayOfChoisedDocuments THEN
 	CashTransferOrder.Receiver AS Receiver,
 	CashTransferOrder.ReceiveCurrency AS ReceiveCurrency,
 	CashTransferOrder.Posted,
-	CashTransferOrder.SendCurrency &lt;> CashTransferOrder.ReceiveCurrency AS IsCurrensyExchange
+	CashTransferOrder.SendCurrency &lt;> CashTransferOrder.ReceiveCurrency AS IsCurrencyExchange
 FROM
 	Document.CashTransferOrder AS CashTransferOrder
 where
-	CashTransferOrder.Ref in (&amp;ArraytOfPlaningTransactionBasis)</queryText>
+	CashTransferOrder.Ref in (&amp;ArrayOfPlaningTransactionBasis)</queryText>
       <mainTable>Document.CashTransferOrder</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

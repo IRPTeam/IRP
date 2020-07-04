@@ -12,7 +12,7 @@ EndProcedure
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	
 	If ValueIsFilled(Object.Account) Then
-		Form.CurentAccount = Object.Account;
+		Form.CurrentAccount = Object.Account;
 		Form.Currency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
 	EndIf;
 	

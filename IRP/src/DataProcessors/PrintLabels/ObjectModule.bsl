@@ -118,7 +118,7 @@ Function PrintLabels(Object, Form) Export
 		If ValueIsFilled(ExternalDataProc) Then
 			Info = AddDataProcServer.AddDataProcInfo(ExternalDataProc);
 			Info.Create = True;
-			AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);	
+			AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);	
 			If Not AddDataProc = Undefined Then		
 				SetDataSetFields(DataSourceScheme.DataSets.Get(0), AddDataProc);
 				FillDataTable(ItemListValue, AddDataProc);	
@@ -185,7 +185,7 @@ Function PrintLabels(Object, Form) Export
 					|	Item_TT AS Item_TT");
 		
 		Query = New Query;
-		QUery.Text = StrConcat(QueryTextArray, Chars.LF);
+		Query.Text = StrConcat(QueryTextArray, Chars.LF);
 		Query.SetParameter("ItemSource", ItemListValue);
 		QueryExecution = Query.Execute();
 		If QueryExecution.IsEmpty() Then
@@ -300,8 +300,8 @@ Function PrintLabels(Object, Form) Export
 EndFunction
 
 Procedure SetDataSetFields(DataSet, AddDataProc)	
-	AvailableFieds = AddDataProc.GetAvailableFields();	
-	For Each Row In AvailableFieds Do		
+	AvailableFields = AddDataProc.GetAvailableFields();	
+	For Each Row In AvailableFields Do		
 		NewField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
 		NewField.Title = Row.Title;
 		NewField.DataPath = Row.Name;

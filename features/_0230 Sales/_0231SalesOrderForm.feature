@@ -41,7 +41,7 @@ For fast data entry
 	И я закрываю текущее окно
 	И Я закрываю текущее окно
 	И я нажимаю на кнопку 'No'
-	* Сhecking that expired agreements are not displayed in the selection list
+	* Checking that expired agreements are not displayed in the selection list
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И в таблице "List" я перехожу к строке:
 		| 'Description'           |

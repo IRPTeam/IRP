@@ -331,7 +331,7 @@
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>
   <functionalOptions>FunctionalOption.BetaTesting</functionalOptions>
   <functionalOptions>FunctionalOption.SaasMode</functionalOptions>
-  <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
+  <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -378,7 +378,7 @@
   <constants>Constant.DefaultPictureStorageVolume</constants>
   <constants>Constant.NotFirstStart</constants>
   <constants>Constant.SaasMode</constants>
-  <constants>Constant.ShowAlfaTestingSaas</constants>
+  <constants>Constant.ShowAlphaTestingSaas</constants>
   <constants>Constant.ShowBetaTesting</constants>
   <constants>Constant.UseCompanies</constants>
   <constants>Constant.UseItemKey</constants>

@@ -55,7 +55,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		DrawFormTablePriceKeyList();
 	EndIf;
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -112,12 +112,12 @@ EndProcedure
 
 &AtServer
 Procedure SetVisible()
-	ShowAlfaTestingSaas = GetFunctionalOption("ShowAlfaTestingSaas");
-	Items.GroupPriceKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByProperties And ShowAlfaTestingSaas;
-	Items.GroupItemKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByItemKeys And ShowAlfaTestingSaas;
+	ShowAlphaTestingSaas = GetFunctionalOption("ShowAlphaTestingSaas");
+	Items.GroupPriceKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByProperties And ShowAlphaTestingSaas;
+	Items.GroupItemKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByItemKeys And ShowAlphaTestingSaas;
 	Items.GroupItemList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByItems;
 	Items.FillByRules.Visible = ValueIsFilled(Object.PriceType.ExternalDataProc);
-	Items.PriceListType.Visible = ShowAlfaTestingSaas;
+	Items.PriceListType.Visible = ShowAlphaTestingSaas;
 EndProcedure
 
 &AtServer
@@ -459,7 +459,7 @@ Procedure FillByRules(Command)
 	ExternalDataProc = ServiceSystemServer.GetObjectAttribute(Object.PriceType, "ExternalDataProc");
 	Info = AddDataProcServer.AddDataProcInfo(ExternalDataProc);
 	Info.Insert("Settings", PutSettingsToTempStorage(Object.PriceType));
-	CallMetodAddDataProc(Info);
+	CallMethodAddDataProc(Info);
 	NotifyDescription = New NotifyDescription("OpenFormProcEnd", ThisObject);
 	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription);
 EndProcedure
@@ -515,8 +515,8 @@ Function PutSettingsToTempStorage(PriceTypeRef)
 EndFunction
 
 &AtServerNoContext
-Procedure CallMetodAddDataProc(Info)
-	AddDataProcServer.CallMetodAddDataProc(Info);
+Procedure CallMethodAddDataProc(Info)
+	AddDataProcServer.CallMethodAddDataProc(Info);
 EndProcedure
 
 &AtServer
@@ -533,7 +533,7 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 

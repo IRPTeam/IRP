@@ -69,16 +69,16 @@ Procedure OK(Command)
 		Return;
 	EndIf;
 	
-	ProcurementMethodsArrey = New Array();
+	ProcurementMethodsArray = New Array();
 	
 	For Each PickedMethod In PickedProcurementMethods Do
 		
-		ProcurementMethodsArrey.Add(PredefinedValue("Enum.ProcurementMethods." + PickedMethod.Value));
+		ProcurementMethodsArray.Add(PredefinedValue("Enum.ProcurementMethods." + PickedMethod.Value));
 		
 	EndDo;
 	
 	ResultStructure = New Structure();
-	ResultStructure.Insert("ProcurementMethods", ProcurementMethodsArrey);
+	ResultStructure.Insert("ProcurementMethods", ProcurementMethodsArray);
 	
 	ThisObject.Close(ResultStructure);
 	

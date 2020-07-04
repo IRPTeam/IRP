@@ -66,7 +66,7 @@ Procedure StartEditIDInfo(Form, Result, Parameters) Export
 	
 	Parameters.Insert("Country", Result.Country);
 	
-	AddDataProcServer.CallMetodAddDataProc(OpenFormArgs, New Structure("ClientCall", True));
+	AddDataProcServer.CallMethodAddDataProc(OpenFormArgs, New Structure("ClientCall", True));
 	
 	Notify = New NotifyDescription("EndEditIDInfo", Form, Parameters);
 	
@@ -85,8 +85,8 @@ EndProcedure
 
 Procedure NotificationProcessing(Form, Ref, EventName, Parameter, Source) Export
 	If EventName = "IDInfoUpdate" Then
-		ArrayOfArributes = StrSplit(Form["ListOfIDInfoAttributes"], ",");
-		For Each AttributeName In ArrayOfArributes Do
+		ArrayOfAttributes = StrSplit(Form["ListOfIDInfoAttributes"], ",");
+		For Each AttributeName In ArrayOfAttributes Do
 			IDInfoTypeUniqueID = Right(AttributeName, StrLen(AttributeName) - 1);
 			IDInfoType = IDInfoServer.GetIDInfoRefByUniqueID(IDInfoTypeUniqueID);
 			ArrayOfIDInfoTypes = New Array();

@@ -52,7 +52,7 @@ Procedure ChequeBondTypeOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure StstusCheakOnChange(Item)
+Procedure StatusCheckOnChange(Item)
 	SetFilterByStatus();
 EndProcedure
 

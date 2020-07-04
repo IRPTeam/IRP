@@ -10,7 +10,7 @@ EndProcedure
 &AtClient
 Procedure HTMLDocumentComplete(Item)
 	If Type = "GoogleDrive" Then
-		GoogleDriveClient.OnHTMLComplite(Item.Document, SrcUUID);	
+		GoogleDriveClient.OnHTMLComplete(Item.Document, SrcUUID);	
 	EndIf;
 EndProcedure
 

@@ -31,7 +31,7 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 		UpdateAddAttributesHTMLDocument();
 	EndIf;
 	PictureViewerClient.HTMLEventAction(EventName, Parameter, Source, ThisObject);
@@ -40,12 +40,12 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	UpdateAddAttributesHTMLDocument();
-	AddAttributesCreateFormControll();
+	AddAttributesCreateFormControl();
 EndProcedure
 
 &AtClient
 Procedure ItemTypeOnChange(Item)
-	AddAttributesCreateFormControll();
+	AddAttributesCreateFormControl();
 EndProcedure
 
 #EndRegion
@@ -93,7 +93,7 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 

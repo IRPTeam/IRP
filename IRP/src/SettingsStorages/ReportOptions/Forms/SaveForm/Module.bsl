@@ -56,7 +56,7 @@ Procedure SaveSettingAtClient()
 		If CurrentData.Author <> SessionParametersClientServer.GetSessionParameter("CurrentUser") Then 
 			ShowInputString(Notify, OptionDescription, R().SuggestionToUser_3, 150);
 		Else
-			SaveChoosenSetting(OptionDescription, CurrentData.ReportOption);
+			SaveChosenSetting(OptionDescription, CurrentData.ReportOption);
 		EndIf;
 	EndIf;
 EndProcedure
@@ -66,12 +66,12 @@ Procedure SaveAsEnd(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	SaveChoosenSetting(Result);
+	SaveChosenSetting(Result);
 EndProcedure
 
 &AtClient
-Procedure SaveChoosenSetting(Val OptionDescription, Val ReportOption = Undefined)
-	OptionKey = SaveChoosenSettingAtServer(OptionDescription, ReportOption);
+Procedure SaveChosenSetting(Val OptionDescription, Val ReportOption = Undefined)
+	OptionKey = SaveChosenSettingAtServer(OptionDescription, ReportOption);
 	If ThisObject.SetShare Then
 		NotifyParameters = New Structure();
 		NotifyParameters.Insert("OptionKey", OptionKey);
@@ -118,7 +118,7 @@ Procedure CloseForm(OptionKey)
 EndProcedure
 
 &AtServer
-Function SaveChoosenSettingAtServer(Val OptionDescription, Val ReportOption)
+Function SaveChosenSettingAtServer(Val OptionDescription, Val ReportOption)
 	If ReportOption = Undefined Then
 		OptionKey = New UUID();
 		ReportOptionObj = Catalogs.ReportOptions.CreateItem();

@@ -54,7 +54,7 @@ Procedure ChooseDirectoryEnding(Result, AddParameters) Export
 	EndIf;
 	
 	If Result.Count() >= 1 Then
-		PathToDerictory = Result[0];
+		PathToDirectory = Result[0];
 	EndIf;
 	
 	BinaryDataPointer = GetFileFromStorage();
@@ -64,7 +64,7 @@ Procedure ChooseDirectoryEnding(Result, AddParameters) Export
 	EndIf;
 	
 	BinaryData = GetFromTempStorage(BinaryDataPointer);
-	BinaryData.Write(PathToDerictory + "\" + Object.Name + ".epf");
+	BinaryData.Write(PathToDirectory + "\" + Object.Name + ".epf");
 EndProcedure
 
 &AtServer

@@ -8,7 +8,7 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -128,7 +128,7 @@ Procedure ChequeBondsStatusEditTextChange(Item, Text, StandardProcessing)
 		ObjectStatusesClient.GetAvailableStatusesByCheque(Object.Ref, CurrentData.Cheque));
 	
 	ArrayOfFilteredStatusRefs
-	= ObjectStatusesServer.GetObjectStatusesChoiseDataTable(Text, ArrayOfFilters, AdditionalParameters);
+	= ObjectStatusesServer.GetObjectStatusesChoiceDataTable(Text, ArrayOfFilters, AdditionalParameters);
 	If Not ArrayOfFilteredStatusRefs.Count() Then
 		StandardProcessing = False;
 		Return;
@@ -425,7 +425,7 @@ EndProcedure
 
 &AtServer
 Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	CurrenciesServer.FiilCurrencyTable(Object, 
+	CurrenciesServer.FillCurrencyTable(Object, 
 	                                   Object.Date, 
 	                                   Object.Company, 
 	                                   Currency, 
@@ -461,7 +461,7 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 

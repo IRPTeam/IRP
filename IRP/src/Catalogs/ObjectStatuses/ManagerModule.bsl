@@ -13,14 +13,14 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		Return;
 	EndIf;
 	
-	QueryTable = GetChoiseDataTable(Parameters);
+	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = New ValueList();
 	For Each Row In QueryTable Do
 		ChoiceData.Add(Row.Ref, Row.Presentation);
 	EndDo;
 EndProcedure
 
-Function GetChoiseDataTable(Parameters) Export
+Function GetChoiceDataTable(Parameters) Export
 	Filter = "
 		|	AND CASE
 		|		WHEN &Filter_RefInList

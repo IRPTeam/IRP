@@ -26,10 +26,10 @@ Function SearchByBarcodes(Barcodes, AddInfo) Export
 	If AddInfo.Property("PriceType", PriceType) Then
 		AddInfo.Property("PricePeriod", PricePeriod);
 		QueryUnload.Columns.Add("Price", Metadata.DefinedTypes.typePrice.Type);		
-		PervPriceTable = QueryUnload.Copy( , "ItemKey, Unit");
-		PervPriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
-		PervPriceTable.FillValues(PriceType, "PriceType");
-		ItemsInfo = GetItemInfo.ItemPriceInfoByTable(PervPriceTable, PricePeriod);
+		PreviousPriceTable = QueryUnload.Copy( , "ItemKey, Unit");
+		PreviousPriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
+		PreviousPriceTable.FillValues(PriceType, "PriceType");
+		ItemsInfo = GetItemInfo.ItemPriceInfoByTable(PreviousPriceTable, PricePeriod);
 		For Each Row In ItemsInfo Do
 			Filter = New Structure;
 			Filter.Insert("ItemKey", Row.ItemKey);

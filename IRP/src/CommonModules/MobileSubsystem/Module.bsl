@@ -9,7 +9,7 @@ Function RECOGNIZE_SPEECH() Export
 	EndIf;
 EndFunction
 
-Function SENDTO(SpreadsheetDocument) Export
+Function SendTo(SpreadsheetDocument) Export
 	Info = InfoSample();
 	
 	Info.Action = "android.intent.action.SEND";
@@ -17,7 +17,7 @@ Function SENDTO(SpreadsheetDocument) Export
 	Path = DocumentsDir() + "Report.pdf";
 	SpreadsheetDocument.Write(Path, SpreadsheetDocumentFileType.PDF);
 	
-	Info.AdditionalData.Add(New Structure("Name, Value, Type", "android.intent.extra.STREAM", "file://" + Path, "Uri"));
+	Info.AdditionalData.Add(New Structure("Name, Value, Type", "android.intent.extra.STREAM", "file://" + Path, "uri"));
 	Info.AdditionalData.Add(New Structure("Name, Value, Type", "android.intent.extra.SUBJECT", "Info", "String"));
 	Info.Wait = False;
 	Info.Type = "*/*";

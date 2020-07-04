@@ -5,7 +5,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Currency = Parameters.FiltersStructure.Currencies;
 	ChequeAmount = Parameters.FiltersStructure.ChequeAmount;
 	If Parameters.Property("FiltersStructure") Then
-		SetDocumentlistQueryText(Parameters);
+		SetDocumentListQueryText(Parameters);
 		SetVisibility(ThisObject, Parameters.FiltersStructure);
 	EndIf;
 	
@@ -14,7 +14,7 @@ EndProcedure
 
 
 &AtServer
-Procedure SetDocumentlistQueryText(Parameters)
+Procedure SetDocumentListQueryText(Parameters)
 	Filters = Parameters.FiltersStructure;
 	If Filters.QueryType = "ChequeBondTransaction" Then
 		ChequeBondType = Filters.Cheque.Type;
@@ -23,7 +23,7 @@ Procedure SetDocumentlistQueryText(Parameters)
 			SetQueryTextChequeBondTransactionOwnCheque(Parameters);
 		ElsIf ChequeBondType = PredefinedValue("Enum.ChequeBondTypes.PartnerCheque") Then
 			ThisObject.Title = R().Title_00100;
-			SetQueryTextChequeBondTransactionPartneCheque(Parameters);
+			SetQueryTextChequeBondTransactionPartnerCheque(Parameters);
 		Else
 			Return;
 		EndIf;
@@ -93,7 +93,7 @@ Procedure SetQueryTextChequeBondTransactionOwnCheque(Parameters)
 EndProcedure
 
 &AtServer
-Procedure SetQueryTextChequeBondTransactionPartneCheque(Parameters)
+Procedure SetQueryTextChequeBondTransactionPartnerCheque(Parameters)
 	Filters = Parameters.FiltersStructure;
 	
 	DocumentsList.CustomQuery = True;

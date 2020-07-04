@@ -26,10 +26,10 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	IDInfoClient.NotificationProcessing(ThisObject, Object.Ref, EventName, Parameter, Source);
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 	If EventName = "UpdateIDInfo" Then
-		IDInfoCreateFormControll();
+		IDInfoCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -175,12 +175,12 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
 &AtServer
-Procedure IDInfoCreateFormControll()
+Procedure IDInfoCreateFormControl()
 	IDInfoServer.CreateFormControls(ThisObject);
 EndProcedure
 

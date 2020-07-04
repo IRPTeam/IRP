@@ -11,7 +11,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Taxes_CreateFormControls();
 	Taxes_CreateTaxTree();
 	// {TAXES}
-	SetConditionalAppearence();
+	SetConditionalAppearance();
 EndProcedure
 
 &AtClient
@@ -23,7 +23,7 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 	
 	If Not Source = ThisObject Then
@@ -83,11 +83,11 @@ Procedure SetVisibilityAvailability(Object, Form) Export
 EndProcedure
 
 &AtServer
-Procedure SetConditionalAppearence()
+Procedure SetConditionalAppearance()
 	
-	AppearenceElement = ConditionalAppearance.Items.Add();
+	AppearanceElement = ConditionalAppearance.Items.Add();
 	
-	AppearenceElement.Appearance.SetParameterValue("MarkIncomplete", True);
+	AppearanceElement.Appearance.SetParameterValue("MarkIncomplete", True);
 EndProcedure
 
 #EndRegion
@@ -291,8 +291,8 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLalelClick(Item)
-	DocSalesReturnOrderClient.DecorationGroupTitleCollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocSalesReturnOrderClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -301,8 +301,8 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
-	DocSalesReturnOrderClient.DecorationGroupTitleUncollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocSalesReturnOrderClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -551,7 +551,7 @@ EndProcedure
 
 &AtServer
 Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	CurrenciesServer.FiilCurrencyTable(Object, 
+	CurrenciesServer.FillCurrencyTable(Object, 
 	                                   Object.Date, 
 	                                   Object.Company, 
 	                                   Currency, 
@@ -587,7 +587,7 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 

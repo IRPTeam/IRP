@@ -92,9 +92,9 @@ EndProcedure
 
 &AtServer
 Function GetIgnoredAttributeNames()	
-	IgnoredAttibutesNames = New Array;
-	IgnoredAttibutesNames.Add("Object");
-	Return IgnoredAttibutesNames;
+	IgnoredAttributesNames = New Array;
+	IgnoredAttributesNames.Add("Object");
+	Return IgnoredAttributesNames;
 EndFunction
 
 #EndRegion

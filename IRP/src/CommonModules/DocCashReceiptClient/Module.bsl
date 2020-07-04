@@ -295,7 +295,7 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange") Then
 		
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", True, DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrencyExchange", True, DataCompositionComparisonType.Equal));
 		
 		If ValueIsFilled(Object.Currency) Then
 			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ReceiveCurrency", Object.Currency, DataCompositionComparisonType.Equal));
@@ -305,32 +305,32 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("SendCurrency", Object.CurrencyExchange, DataCompositionComparisonType.Equal));
 		EndIf;
 		
-		ArrayOfChoisedDocuments = New Array();
+		ArrayOfSelectedDocuments = New Array();
 		For Each Row In Object.PaymentList Do
-			ArrayOfChoisedDocuments.Add(Row.PlaningTransactionBasis);
+			ArrayOfSelectedDocuments.Add(Row.PlaningTransactionBasis);
 		EndDo;
 		
 		OpenSettings.FormParameters = New Structure();
-		OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
+		OpenSettings.FormParameters.Insert("ArrayOfSelectedDocuments", ArrayOfSelectedDocuments);
 		
 		OpenSettings.FormParameters.Insert("OwnerRef", Object.Ref);
 		
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Then
 		
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", False, DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrencyExchange", False, DataCompositionComparisonType.Equal));
 		
 		If ValueIsFilled(Object.Currency) Then
 			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ReceiveCurrency", Object.Currency, DataCompositionComparisonType.Equal));
 		EndIf;
 		
-		ArrayOfChoisedDocuments = New Array();
+		ArrayOfSelectedDocuments = New Array();
 		For Each Row In Object.PaymentList Do
-			ArrayOfChoisedDocuments.Add(Row.PlaningTransactionBasis);
+			ArrayOfSelectedDocuments.Add(Row.PlaningTransactionBasis);
 		EndDo;
 		
 		OpenSettings.FormParameters = New Structure();
-		OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
+		OpenSettings.FormParameters.Insert("ArrayOfSelectedDocuments", ArrayOfSelectedDocuments);
 		
 		OpenSettings.FormParameters.Insert("OwnerRef", Object.Ref);
 		
@@ -577,7 +577,7 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
-Procedure DecorationGroupTitleCollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
@@ -585,7 +585,7 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
-Procedure DecorationGroupTitleUncollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 

@@ -82,7 +82,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И Пауза 5
 	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "Phone TR"
 
-Сценарий: _010004 creating ID Info Type - Adreses
+Сценарий: _010004 creating ID Info Type - Addresses
 	* Opening a form to add external data processing
 		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -90,18 +90,18 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в поле 'ENG' я ввожу текст 'Google Addreses'
 		И в поле 'TR' я ввожу текст 'Google Addreses TR'
 		И я нажимаю на кнопку 'Ok'
-		И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'	
+		И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'	
 		И в поле 'Unique ID' я ввожу текст 'Adr_10'
 		И я изменяю флаг 'Show on form'
 		И я изменяю флаг 'Read only'
 	* Adding external data processing for addresses
-		И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
+		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
 			| 'Ukraine'    |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProces" я активизирую поле "External data proc"
-		И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "External data proc"
+		И в таблице "ExternalDataProcess" я активизирую поле "External data proc"
+		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
 		Тогда открылось окно 'External data proc'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                |
@@ -121,7 +121,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в поле 'ENG' я ввожу текст 'Test'
 		И в поле 'TR' я ввожу текст 'Test'
 		И я нажимаю на кнопку 'Ok'
-		И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'	
+		И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'	
 		И в поле 'Unique ID' я ввожу текст 'Adr_10'
 		И я изменяю флаг 'Show on form'
 		И я изменяю флаг 'Read only'
@@ -414,21 +414,21 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			И в поле 'TR' я ввожу текст 'Company phone TR'
 			И я нажимаю на кнопку 'Ok'
 			И я изменяю флаг 'Show on form'
-			И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'
-			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "External data proc"
+			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                      |
 				| 'ExternalInputPhoneUkraine' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "ExternalDataProces" я завершаю редактирование строки
-			И в таблице "ExternalDataProces" я активизирую поле "Country"
-			И в таблице "ExternalDataProces" я выбираю текущую строку
-			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
+			И в таблице "ExternalDataProcess" я завершаю редактирование строки
+			И в таблице "ExternalDataProcess" я активизирую поле "Country"
+			И в таблице "ExternalDataProcess" я выбираю текущую строку
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
 				| Description |
 				| Ukraine   |
 			И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProces" я завершаю редактирование строки
+		И в таблице "ExternalDataProcess" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 5
 			И я ввожу значение поля UniqueID для телефона String
@@ -453,16 +453,16 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			И в поле 'TR' я ввожу текст 'Partner phone'
 			И я нажимаю на кнопку 'Ok'
 			И я изменяю флаг 'Show on form'
-			И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'
-			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "External data proc"
+			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                      |
 				| 'ExternalInputPhoneUkraine' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "ExternalDataProces" я завершаю редактирование строки
-			И в таблице "ExternalDataProces" я активизирую поле "Country"
-			И в таблице "ExternalDataProces" я выбираю текущую строку
-			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
+			И в таблице "ExternalDataProcess" я завершаю редактирование строки
+			И в таблице "ExternalDataProcess" я активизирую поле "Country"
+			И в таблице "ExternalDataProcess" я выбираю текущую строку
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
 				| Description |
 				| Ukraine   |
@@ -513,36 +513,36 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			И в поле 'ENG' я ввожу текст 'Billing address (Company)'
 			И в поле 'TR' я ввожу текст 'Billing address (Company) TR'
 			И я нажимаю на кнопку 'Ok'
-			И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'
+			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
 		* Adding external data processing to specify the address for Ukraine
-			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
 				| Description |
 				| Ukraine     |
 			И в таблице "List" я выбираю текущую строку
 			И я перехожу к следующему реквизиту
-			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "External data proc"
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
 			Тогда открылось окно 'External data proc'
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                |
 				| 'ExternalInputAddress' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "ExternalDataProces" я завершаю редактирование строки
+			И в таблице "ExternalDataProcess" я завершаю редактирование строки
 		* Adding external data processing to specify the address for Turkey
-			И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'
-			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
+			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
 				| Description |
 				| Turkey     |
 			И в таблице "List" я выбираю текущую строку
 			И я перехожу к следующему реквизиту
-			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "External data proc"
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
 			Тогда открылось окно 'External data proc'
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                |
 				| 'ExternalInputAddress' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "ExternalDataProces" я завершаю редактирование строки
+			И в таблице "ExternalDataProcess" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 5
 	* Adding a legal address for a company
@@ -562,36 +562,36 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			И в поле 'ENG' я ввожу текст 'Registered address  (Company)'
 			И в поле 'TR' я ввожу текст 'Registered address (Company) TR'
 			И я нажимаю на кнопку 'Ok'
-			И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'
+			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
 		* Adding external data processing to specify the address for Ukraine
-			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
 				| Description |
 				| Ukraine     |
 			И в таблице "List" я выбираю текущую строку
 			И я перехожу к следующему реквизиту
-			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "External data proc"
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
 			Тогда открылось окно 'External data proc'
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                |
 				| 'ExternalInputAddress' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "ExternalDataProces" я завершаю редактирование строки
+			И в таблице "ExternalDataProcess" я завершаю редактирование строки
 		* Adding external data processing to specify the address for Turkey
-			И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'
-			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
+			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
 				| Description |
 				| Turkey     |
 			И в таблице "List" я выбираю текущую строку
 			И я перехожу к следующему реквизиту
-			И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "External data proc"
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
 			Тогда открылось окно 'External data proc'
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                |
 				| 'ExternalInputAddress' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "ExternalDataProces" я завершаю редактирование строки
+			И в таблице "ExternalDataProcess" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 5
 		* Specify an arbitrary structure at Location address (Partner)
@@ -624,22 +624,22 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в поле 'ENG' я ввожу текст 'GPS Ukraine'
 		И в поле 'TR' я ввожу текст 'GPS Ukraine TR'
 		И я нажимаю на кнопку 'Ok'
-		И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'
-		И в таблице "ExternalDataProces" я активизирую поле "External data proc"
-		И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "External data proc"
+		И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
+		И в таблице "ExternalDataProcess" я активизирую поле "External data proc"
+		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                 |
 			| 'ExternalCoordinates'  |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProces" я выбираю текущую строку
-		И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
+		И в таблице "ExternalDataProcess" я выбираю текущую строку
+		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Ukraine   |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProces" я завершаю редактирование строки
+		И в таблице "ExternalDataProcess" я завершаю редактирование строки
 	* Adding address structure by gps for Ukraine
-		И в таблице "ExternalDataProces" я нажимаю на кнопку 'Set settings'
+		И в таблице "ExternalDataProcess" я нажимаю на кнопку 'Set settings'
 		Тогда открылось окно 'Coordinates'
 		И я указываю адрес который будет перезаполнятся при выборе gps
 			И я нажимаю кнопку выбора у поля "Structured address"
@@ -722,22 +722,22 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в поле 'ENG' я ввожу текст 'GPS Turkey'
 		И в поле 'TR' я ввожу текст 'GPS Turkey TR'
 		И я нажимаю на кнопку 'Ok'
-		И в таблице "ExternalDataProces" я нажимаю на кнопку с именем 'ExternalDataProcesAdd'
-		И в таблице "ExternalDataProces" я активизирую поле "External data proc"
-		И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "External data proc"
+		И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
+		И в таблице "ExternalDataProcess" я активизирую поле "External data proc"
+		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                 |
 			| 'ExternalCoordinates'  |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProces" я выбираю текущую строку
-		И в таблице "ExternalDataProces" я нажимаю кнопку выбора у реквизита "Country"
+		И в таблице "ExternalDataProcess" я выбираю текущую строку
+		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Turkey   |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProces" я завершаю редактирование строки
+		И в таблице "ExternalDataProcess" я завершаю редактирование строки
 	* Adding gps address structure for Turkey
-		И в таблице "ExternalDataProces" я нажимаю на кнопку 'Set settings'
+		И в таблице "ExternalDataProcess" я нажимаю на кнопку 'Set settings'
 		И я указываю адрес который будет перезаполнятся при выборе gps
 			И я нажимаю кнопку выбора у поля "Structured address"
 			Тогда открылось окно 'ID Info types'

@@ -3,8 +3,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Ref = Parameters.Ref;
 	
 	DCSTemplate = IDInfoServer.GetDCSTemplate(ThisObject.Ref.PredefinedDataName);
-	Adres = PutToTempStorage(DCSTemplate);
-	ThisObject.SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(Adres));
+	Address = PutToTempStorage(DCSTemplate);
+	ThisObject.SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(Address));
 	
 	If Parameters.SavedSettings = Undefined Then
 		ThisObject.SettingsComposer.LoadSettings(DCSTemplate.DefaultSettings);
@@ -68,9 +68,9 @@ Procedure ExtractItemsFromFilter(Items, ArrayOfFields)
 			ExtractItemsFromFilter(Field.Items, ArrayOfFields);
 		EndIf;
 		If TypeOf(Field) = Type("DataCompositionFilterItem") Then
-			AffayOfParts = StrSplit(String(Field.LeftValue), ".");
-			If AffayOfParts.Count() >= NeedPartsCount Then
-				ArrayOfFields.Add(AffayOfParts[1]);
+			ArrayOfParts = StrSplit(String(Field.LeftValue), ".");
+			If ArrayOfParts.Count() >= NeedPartsCount Then
+				ArrayOfFields.Add(ArrayOfParts[1]);
 			EndIf;
 		EndIf;
 	EndDo;

@@ -169,8 +169,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		Row.RowKey = String(Row.RowKeyUUID);
 	EndDo;
 	
-	QueryTaxlist = New Query();
-	QueryTaxlist.Text =
+	QueryTaxList = New Query();
+	QueryTaxList.Text =
 		"SELECT
 		|	PurchaseInvoiceTaxList.Ref AS Document,
 		|	PurchaseInvoiceTaxList.Ref.Date AS Period,
@@ -193,8 +193,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|	PurchaseInvoiceTaxList.Ref = &Ref";
 	
-	QueryTaxlist.SetParameter("Ref", Ref);
-	QueryResultTaxList = QueryTaxlist.Execute();
+	QueryTaxList.SetParameter("Ref", Ref);
+	QueryResultTaxList = QueryTaxList.Execute();
 	QueryTableTaxList = QueryResultTaxList.Unload();
 	// UUID to String
 	QueryTableTaxList.Columns.Add("RowKey", Metadata.AccumulationRegisters.TaxesTurnovers.Dimensions.RowKey.Type);
@@ -3097,7 +3097,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	ArrayOfTables.Add(Table2);
 	
 	Table3 = Parameters.DocumentDataTables.AdvanceToSuppliers_Registrations.Copy();
-	Table3.Columns.Amount.Name = "AdvanceToSupliers";
+	Table3.Columns.Amount.Name = "AdvanceToSuppliers";
 	PostingServer.AddColumnsToAccountsStatementTable(Table3);
 	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");
 	ArrayOfTables.Add(Table3);
@@ -3113,7 +3113,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordSet, WriteInTransaction",
 			PostingServer.JoinTables(ArrayOfTables,
 				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency,
-				| TransactionAP, AdvanceToSupliers,
+				| TransactionAP, AdvanceToSuppliers,
 				| TransactionAR, AdvanceFromCustomers"),
 			Parameters.IsReposting));	
 	

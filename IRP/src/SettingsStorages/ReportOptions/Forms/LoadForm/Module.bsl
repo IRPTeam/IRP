@@ -3,7 +3,7 @@
 &AtClient
 Procedure OptionsListSelection(Item, RowSelected, Field, StandardProcessing)
 	CurrentData = Items.OptionsList.CurrentData;
-	LoadChoosenSetting(CurrentData.OptionKey);
+	LoadChosenSetting(CurrentData.OptionKey);
 EndProcedure
 
 &AtClient
@@ -12,11 +12,11 @@ Procedure LoadSetting(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	LoadChoosenSetting(CurrentData.OptionKey);
+	LoadChosenSetting(CurrentData.OptionKey);
 EndProcedure
 
 &AtClient
-Procedure LoadChoosenSetting(Val OptionKey)
+Procedure LoadChosenSetting(Val OptionKey)
 	Close(New SettingsChoice(OptionKey));
 EndProcedure
 

@@ -135,7 +135,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	
 	KeyFields = "BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, ManagerSegment";
 	
-	TransferedFields = New Structure(KeyFields);
+	TransferredFields = New Structure(KeyFields);
 		
 	UniqueShipmentConfirmations = ItemList.Copy();
 	UniqueShipmentConfirmations.GroupBy("ShipmentConfirmation");
@@ -147,7 +147,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		ItemListCopy = ItemList.Copy(New Structure("BasedOn, ShipmentConfirmation", 
 			"SalesOrder", RowUniqueShipmentConfirmations.ShipmentConfirmation));
 		If ItemListCopy.Count() Then
-			FillPropertyValues(TransferedFields, ItemListCopy[0]);
+			FillPropertyValues(TransferredFields, ItemListCopy[0]);
 		Else
 			Continue;
 		EndIf;
@@ -155,7 +155,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		For Each RowItemList In ItemList Do
 			If RowItemList.BasedOn = "ShipmentConfirmation" 
 			And RowItemList.ShipmentConfirmation = RowUniqueShipmentConfirmations.ShipmentConfirmation Then
-				FillPropertyValues(RowItemList, TransferedFields);
+				FillPropertyValues(RowItemList, TransferredFields);
 			EndIf;
 		EndDo;
 	EndDo;

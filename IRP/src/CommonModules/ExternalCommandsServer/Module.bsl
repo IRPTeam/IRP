@@ -64,7 +64,7 @@ Procedure GeneratedFormCommandActionByName(Object, Form, CommandName, AddInfo = 
 	ExtProc = GetRefOfExternalDataProcByName(CommandName);	
 	Info = AddDataProcServer.AddDataProcInfo(ExtProc);
 	Info.Create = True;
-	AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If Not AddDataProc = Undefined Then
 		AddDataProc.CommandProcedure(Object, Form);
 	EndIf;
@@ -74,7 +74,7 @@ Procedure GeneratedListChoiceFormCommandActionByName(SelectedRows, Form, Command
 	ExtProc = GetRefOfExternalDataProcByName(CommandName);	
 	Info = AddDataProcServer.AddDataProcInfo(ExtProc);
 	Info.Create = True;
-	AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If Not AddDataProc = Undefined Then
 		AddDataProc.CommandProcedure(SelectedRows, Form);	
 	EndIf;

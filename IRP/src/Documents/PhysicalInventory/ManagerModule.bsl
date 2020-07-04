@@ -299,7 +299,7 @@ EndProcedure
 
 Function GetItemListWithFillingPhysCount(Ref, ItemList) Export
 	Query = New Query();
-	Query.Text = GetQueryTextFillPhysCount_BytItemList();
+	Query.Text = GetQueryTextFillPhysCount_ByItemList();
 	
 	AccReg = Metadata.AccumulationRegisters.StockBalance;
 		
@@ -318,7 +318,7 @@ Function GetItemListWithFillingPhysCount(Ref, ItemList) Export
 	Return QueryTable;
 EndFunction
 
-Function GetQueryTextFillPhysCount_BytItemList()
+Function GetQueryTextFillPhysCount_ByItemList()
 	Return
 	"SELECT
 	|	tmp.Key AS Key,
@@ -352,7 +352,7 @@ Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 	If ItemList = Undefined Then
 		Query.Text = GetQueryTextFillExpCount();
 	Else
-		Query.Text = GetQueryTextFillExpCount_BytItemList();
+		Query.Text = GetQueryTextFillExpCount_ByItemList();
 		
 		AccReg = Metadata.AccumulationRegisters.StockBalance;
 		
@@ -415,7 +415,7 @@ Function GetQueryTextFillExpCount()
 	|	AccumulationRegister.StockBalance.Balance(&Period, Store = &Store) AS StockBalanceBalance";
 EndFunction
 
-Function GetQueryTextFillExpCount_BytItemList()
+Function GetQueryTextFillExpCount_ByItemList()
 	Return
 	"SELECT
 	|	tmp.Key AS Key,

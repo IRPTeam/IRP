@@ -217,7 +217,7 @@ Function GetRefsByOnePropertyWithSpecifications(ArrayOfFoundedItemKeys, Item, At
 	Return Query.Execute().Unload().UnloadColumn("Ref");
 EndFunction
 
-Function GetUniqItemKeyByItem(Item) Export
+Function GetUniqueItemKeyByItem(Item) Export
 	Query = New Query(
 			"SELECT TOP 2
 			|	Table.Ref
@@ -417,7 +417,7 @@ EndFunction
 
 #Region AffectPricingMD5
 
-Procedure SynhronizeAffectPricingMD5ByItemType(ItemType) Export
+Procedure SynchronizeAffectPricingMD5ByItemType(ItemType) Export
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -433,10 +433,10 @@ Procedure SynhronizeAffectPricingMD5ByItemType(ItemType) Export
 		|	ItemKeys.Item.ItemType = &ItemType";
 	Query.SetParameter("ItemType", ItemType);
 	QueryResult = Query.Execute();
-	SynhronizeAffectPricingMD5(QueryResult.Select());
+	SynchronizeAffectPricingMD5(QueryResult.Select());
 EndProcedure
 
-Procedure SynhronizeAffectPricingMD5BySpecification(Specification) Export
+Procedure SynchronizeAffectPricingMD5BySpecification(Specification) Export
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -452,10 +452,10 @@ Procedure SynhronizeAffectPricingMD5BySpecification(Specification) Export
 		|	ItemKeys.Specification = &Specification";
 	Query.SetParameter("Specification", Specification);
 	QueryResult = Query.Execute();
-	SynhronizeAffectPricingMD5(QueryResult.Select());
+	SynchronizeAffectPricingMD5(QueryResult.Select());
 EndProcedure
 
-Procedure SynhronizeAffectPricingMD5(QuerySelection)
+Procedure SynchronizeAffectPricingMD5(QuerySelection)
 	
 	While QuerySelection.Next() Do
 		NeedWrite = False;
@@ -499,7 +499,7 @@ Procedure SynhronizeAffectPricingMD5(QuerySelection)
 		
 		If NeedWrite Then
 			ItemKeyObject = QuerySelection.ItemKey.GetObject();
-			ItemKeyObject.AdditionalProperties.Insert("SynhronizeAffectPricingMD5", True);
+			ItemKeyObject.AdditionalProperties.Insert("SynchronizeAffectPricingMD5", True);
 			If AffectPricingMD5 <> Undefined Then
 				ItemKeyObject.AdditionalProperties.Insert("AffectPricingMD5", AffectPricingMD5);
 			EndIf;

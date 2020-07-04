@@ -203,7 +203,7 @@ EndFunction
 
 Procedure FillDescriptionOfPredefinedCatalogs() Export
     
-    LocalCodes = LocalicationCodesList();
+    LocalCodes = LocalizationCodesList();
 
 	ValueTable = New ValueTable;
 	ValueTable.Columns.Add("Ref");
@@ -309,7 +309,7 @@ Procedure FillDescriptionOfPredefinedCatalogs() Export
 
 EndProcedure
 
-Function LocalicationCodesList()
+Function LocalizationCodesList()
     
     LocalizationCodes = New Array;
     LocalizationCodes.Add("en");

@@ -1494,7 +1494,7 @@
 		И в таблице "List" я выбираю текущую строку
 	* Проверка сообщения при снятии галочки 'Use goods receipt'
 		И я снимаю флаг 'Use goods receipt'
-		Тогда элемент формы с именем "Field1" стал равен 'Unchecking "Use goods receipt" isn`t posible. Goods receipts from store Store 02 have already been created previously.'
+		Тогда элемент формы с именем "Field1" стал равен 'Unchecking "Use goods receipt" isn`t possible. Goods receipts from store Store 02 have already been created previously.'
 	И я закрыл все окна клиентского приложения
 	* Открытие карточки склада Store 02
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Stores"
@@ -1504,7 +1504,7 @@
 		И в таблице "List" я выбираю текущую строку
 	* Проверка сообщения при снятии галочки 'Use shipment confirmation'
 		И я снимаю флаг 'Use shipment confirmation'
-		Тогда элемент формы с именем "Field1" стал равен 'Unchecking "Use shipment confirmation" isn`t posible. Shipment confirmations from store Store 02 have already been created previously.'
+		Тогда элемент формы с именем "Field1" стал равен 'Unchecking "Use shipment confirmation" isn`t possible. Shipment confirmations from store Store 02 have already been created previously.'
 		И я закрыл все окна клиентского приложения
 
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="584d85cd-692a-4c3c-a14f-07c0be899aaa">
-  <name>ShowAlfaTestingSaas</name>
+  <name>ShowAlphaTestingSaas</name>
   <synonym>
     <key>en</key>
-    <value>Show alfa testing saas</value>
+    <value>Show Alpha testing saas</value>
   </synonym>
-  <location>Constant.ShowAlfaTestingSaas</location>
+  <location>Constant.ShowAlphaTestingSaas</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Catalog.SpecialOfferRules</content>
   <content>Catalog.PriceKeys</content>

@@ -74,7 +74,7 @@ Function GenerateDataSourceScheme()
 	If ValueIsFilled(Object.ExternalDataProc) Then
 		Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 		Info.Create = True;
-		AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+		AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 		If Not AddDataProc = Undefined Then
 			AdditionalFields = AddDataProc.GetAvailableFields();
 			
@@ -101,9 +101,9 @@ Procedure SetAvailableFields(DataSourceScheme)
 	SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(DataSourceScheme));
 	SettingsComposer.LoadSettings(DataSourceScheme.DefaultSettings);
 	
-	DataCompositionAdress = PutToTempStorage(DataSourceScheme, New UUID);
+	DataCompositionAddress = PutToTempStorage(DataSourceScheme, New UUID);
 	AvailableFields = SettingsComposer;
-	AvailableFields.Initialize(New DataCompositionAvailableSettingsSource(DataCompositionAdress));
+	AvailableFields.Initialize(New DataCompositionAvailableSettingsSource(DataCompositionAddress));
 	
 EndProcedure
 
@@ -310,7 +310,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	If ValueIsFilled(Object.ExternalDataProc) Then
 		Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 		Info.Create = True;
-		AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+		AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 		If Not AddDataProc = Undefined Then
 			AdditionalFields = AddDataProc.GetAvailableFields();
 			
@@ -469,7 +469,7 @@ Procedure GetDefaultAtServer()
 	If ValueIsFilled(Object.ExternalDataProc) Then
 		Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 		Info.Create = True;
-		AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+		AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 		If Not AddDataProc = Undefined Then
 			For Each AddDataProcTemplate In AddDataProc.Metadata().Templates Do
 				If AddDataProcTemplate.TemplateType = Metadata.ObjectProperties.TemplateType.SpreadsheetDocument Then

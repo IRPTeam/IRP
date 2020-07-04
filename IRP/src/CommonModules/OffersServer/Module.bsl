@@ -310,7 +310,7 @@ EndFunction
 Function CheckOfferRule_ForDocument(Object, StrOffers, Rule) Export
 	Info = AddDataProcServer.AddDataProcInfo(Rule);
 	Info.Create = True;
-	AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If AddDataProc = Undefined Then
 		Return False;
 	Else
@@ -322,7 +322,7 @@ EndFunction
 Function CheckOfferRule_ForRow(Object, StrOffers, Rule, ItemListRowKey) Export
 	Info = AddDataProcServer.AddDataProcInfo(Rule);
 	Info.Create = True;
-	AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If AddDataProc = Undefined Then
 		Return False;
 	Else
@@ -333,7 +333,7 @@ EndFunction
 Function CalculateOffer_ForDocument(Object, StrOffers, OfferType) Export
 	Info = AddDataProcServer.AddDataProcInfo(OfferType);
 	Info.Create = True;
-	AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If AddDataProc = Undefined Then
 		Return False;
 	Else
@@ -344,7 +344,7 @@ EndFunction
 Function CalculateOffer_ForRow(Object, StrOffers, OfferType, ItemListRowKey) Export
 	Info = AddDataProcServer.AddDataProcInfo(OfferType);
 	Info.Create = True;
-	AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If AddDataProc = Undefined Then
 		Return False;
 	Else
@@ -355,7 +355,7 @@ EndFunction
 Function CalculateOfferGroup(Object, StrOffers, OfferType) Export
 	Info = AddDataProcServer.AddDataProcInfo(OfferType);
 	Info.Create = True;
-	AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If AddDataProc = Undefined Then
 		Return False;
 	Else

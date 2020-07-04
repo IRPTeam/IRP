@@ -197,11 +197,11 @@ Procedure SerialLotNumberListOnChange(Object, Form, Item = Undefined) Export
 		#If MobileClient Then
 		ItemListFilterStructure = New Structure;
 		ItemListFilterStructure.Insert("Key", Row.KeyRef);
-		ItemListExistingsRows = Object.ItemList.FindRows(ItemListFilterStructure);
-		If ItemListExistingsRows.Count() Then
-			ItemListExistingsRow = ItemListExistingsRows[0];
-			Row.ItemKey = ItemListExistingsRow.ItemKey;
-			Row.Item = ItemListExistingsRow.Item;
+		ItemListExistingRows = Object.ItemList.FindRows(ItemListFilterStructure);
+		If ItemListExistingRows.Count() Then
+			ItemListExistingRow = ItemListExistingRows[0];
+			Row.ItemKey = ItemListExistingRow.ItemKey;
+			Row.Item = ItemListExistingRow.Item;
 			Row.Title = "" + Row.Item + " " + Row.ItemKey + " " + Row.SerialLotNumber;
 		EndIf;
 		#EndIf
@@ -274,7 +274,7 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
-Procedure DecorationGroupTitleCollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
@@ -282,7 +282,7 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
-Procedure DecorationGroupTitleUncollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
@@ -329,9 +329,9 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 		Row.Quantity = Row.Quantity + ResultElement.Quantity;
 		
 		FillPropertyValues(SerialLotNumberListFilterStructure, ResultElement);
-		SerialLotNumberListExistingsRows = Object.SerialLotNumberList.FindRows(SerialLotNumberListFilterStructure);
-		If SerialLotNumberListExistingsRows.Count() Then
-			SerialLotNumberListRow = SerialLotNumberListExistingsRows[0];
+		SerialLotNumberListExistingRows = Object.SerialLotNumberList.FindRows(SerialLotNumberListFilterStructure);
+		If SerialLotNumberListExistingRows.Count() Then
+			SerialLotNumberListRow = SerialLotNumberListExistingRows[0];
 		Else
 			SerialLotNumberListRow = Object.SerialLotNumberList.Add();
 			FillPropertyValues(SerialLotNumberListRow, ResultElement, SerialLotNumberListString);
@@ -354,8 +354,8 @@ Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel) Export
 	
 	SerialLotNumberListFilterStructure = New Structure;
 	SerialLotNumberListFilterStructure.Insert("KeyRef", CurrentData.Key);
-	SerialLotNumberListExistingsRows = Object.SerialLotNumberList.FindRows(SerialLotNumberListFilterStructure);
-	For Each Row In SerialLotNumberListExistingsRows Do
+	SerialLotNumberListExistingRows = Object.SerialLotNumberList.FindRows(SerialLotNumberListFilterStructure);
+	For Each Row In SerialLotNumberListExistingRows Do
 		Object.SerialLotNumberList.Delete(Row);
 	EndDo;
 	

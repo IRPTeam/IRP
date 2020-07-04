@@ -296,13 +296,13 @@ Function GetNextPossibleStatuses(Status) Export
 	Return QueryResult.Unload().UnloadColumn("Status");
 EndFunction
 
-Function GetObjectStatusesChoiseDataTable(SearchString, ArrayOfFilters,
+Function GetObjectStatusesChoiceDataTable(SearchString, ArrayOfFilters,
 		AdditionalParameters) Export
 	Parameters = New Structure("Filter, SearchString", New Structure(), SearchString);
 	Parameters.Filter.Insert("CustomSearchFilter", DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters));
 	Parameters.Filter.Insert("AdditionalParameters", DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
 	
-	TableOfResult = Catalogs.ObjectStatuses.GetChoiseDataTable(Parameters);
+	TableOfResult = Catalogs.ObjectStatuses.GetChoiceDataTable(Parameters);
 	Return TableOfResult.UnloadColumn("Ref");
 EndFunction
 

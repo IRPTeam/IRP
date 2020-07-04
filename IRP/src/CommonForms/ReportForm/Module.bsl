@@ -14,8 +14,8 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLalelClick(Item)
-	DocumentsClient.DecorationGroupTitleCollapsedLalelClick(, ThisObject, Item);
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocumentsClient.DecorationGroupTitleCollapsedLabelClick(, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -24,8 +24,8 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
-	DocumentsClient.DecorationGroupTitleUncollapsedLalelClick(, ThisObject, Item);
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocumentsClient.DecorationGroupTitleUncollapsedLabelClick(, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -48,9 +48,9 @@ EndProcedure
 #Region Private
 
 Function ReportName()
-	SplitedFormName = StrSplit(ThisObject.FormName, ".");
-	SplitedFormName.Delete(SplitedFormName.UBound());
-	Return SplitedFormName.Get(SplitedFormName.UBound());
+	SplittedFormName = StrSplit(ThisObject.FormName, ".");
+	SplittedFormName.Delete(SplittedFormName.UBound());
+	Return SplittedFormName.Get(SplittedFormName.UBound());
 EndFunction
 
 

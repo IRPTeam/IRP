@@ -483,7 +483,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
     	|	AccountsStatementBalance.LegalName,
     	|	AccountsStatementBalance.Currency,
     	|	&Period AS Period,
-    	|	AccountsStatementBalance.AdvanceToSupliersBalance AS AdvanceFromCustomersBalance,
+    	|	AccountsStatementBalance.AdvanceToSuppliersBalance AS AdvanceFromCustomersBalance,
     	|	tmp.Amount AS AdvanceFromCustomers
     	|FROM
     	|	AccumulationRegister.AccountsStatement.Balance(&PointInTime, (Company, Partner, LegalName, Currency) IN
@@ -604,11 +604,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	ArrayOfTables.Add(Table2);
 	
 	Table3 = Parameters.DocumentDataTables.ItemList_AdvanceFromCustomers_Registrations.Copy();
-	Table3.Columns.Amount.Name = "AdvanceToSupliers";
+	Table3.Columns.Amount.Name = "AdvanceToSuppliers";
 	PostingServer.AddColumnsToAccountsStatementTable(Table3);
 	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");
 	For Each row in Table3 Do
-		row.AdvanceToSupliers = - row.AdvanceToSupliers;
+		row.AdvanceToSuppliers = - row.AdvanceToSuppliers;
 	EndDo;
 	ArrayOfTables.Add(Table3);
 	
@@ -623,7 +623,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordSet, WriteInTransaction",
 			PostingServer.JoinTables(ArrayOfTables,
 				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency, 
-				|TransactionAP, AdvanceToSupliers,
+				|TransactionAP, AdvanceToSuppliers,
 				|TransactionAR, AdvanceFromCustomers"),
 			Parameters.IsReposting));
 	

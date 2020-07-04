@@ -69,7 +69,7 @@
         И я закрыл все окна клиентского приложения
 
 
-Сценарий: проверка очистки значений при изменении переключателя Ap-ar posting/Standart в Agreement
+Сценарий: проверка очистки значений при изменении переключателя Ap-ar posting/Standard в Agreement
     * Открытие формы элемента справочника
         И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
         И я нажимаю на кнопку с именем 'FormCreate'
@@ -84,7 +84,7 @@
         И я нажимаю кнопку выбора у поля "Standard agreement"
         * Создание стандартного соглашения в евро
             И я нажимаю на кнопку с именем 'FormCreate'
-            И в поле 'TR' я ввожу текст 'Standart, EUR'
+            И в поле 'TR' я ввожу текст 'Standard, EUR'
             И я нажимаю на кнопку 'Save and close'
         И я нажимаю на кнопку с именем 'FormChoose'
         И я нажимаю кнопку выбора у поля "Price type"
@@ -94,7 +94,7 @@
         И в таблице "List" я выбираю текущую строку
     * Проверка заполнения реквизитов
         И     элемент формы с именем "CurrencyMovementType" стал равен 'EUR'
-        И     элемент формы с именем "StandardAgreement" стал равен 'Standart, EUR'
+        И     элемент формы с именем "StandardAgreement" стал равен 'Standard, EUR'
         И     элемент формы с именем "PriceType" стал равен 'Basic Price Types TR'
     * Переключение переключателя Ap-ar posting на значение By agreements и проверка очистки поля StandardAgreement
         И я меняю значение переключателя 'AP-AR posting detail' на 'By agreements'

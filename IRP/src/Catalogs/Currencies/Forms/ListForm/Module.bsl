@@ -23,7 +23,7 @@ Procedure SelectIntegrationEnd(Result, AdditionalParameters) Export
 	Info.Insert("IntegrationSettingsName",
 		ServiceSystemServer.GetObjectAttribute(Result.IntegrationSettings, "UniqueID"));
 	
-	CallMetodAddDataProc(Info);
+	CallMethodAddDataProc(Info);
 	
 	AddDataProcClient.OpenFormAddDataProc(Info);
 EndProcedure
@@ -34,6 +34,6 @@ Function PutSettingsToTempStorage(IntegrationSettings)
 EndFunction
 
 &AtServerNoContext
-Procedure CallMetodAddDataProc(Info)
-	AddDataProcServer.CallMetodAddDataProc(Info);
+Procedure CallMethodAddDataProc(Info)
+	AddDataProcServer.CallMethodAddDataProc(Info);
 EndProcedure

@@ -356,13 +356,13 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 
 	If Parameters.DocumentDataTables.AdvanceToSuppliers.Count() Then
 		Table2 = Parameters.DocumentDataTables.AdvanceToSuppliers.CopyColumns();
-		Table2.Columns.Amount.Name = "AdvanceToSupliers";
+		Table2.Columns.Amount.Name = "AdvanceToSuppliers";
 		PostingServer.AddColumnsToAccountsStatementTable(Table2);
 		For Each Row In Parameters.DocumentDataTables.AdvanceToSuppliers Do
 			If Row.Partner.Vendor Then
 				NewRow = Table2.Add();
 				FillPropertyValues(NewRow, Row);
-				NewRow.AdvanceToSupliers = Row.Amount;
+				NewRow.AdvanceToSuppliers = Row.Amount;
 			EndIf;
 		EndDo;
 		Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
@@ -433,7 +433,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordSet, WriteInTransaction",
 			PostingServer.JoinTables(ArrayOfTables,
 				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency, 
-				|TransactionAP, AdvanceToSupliers,
+				|TransactionAP, AdvanceToSuppliers,
 				|TransactionAR, AdvanceFromCustomers"),
 			Parameters.IsReposting));
 	

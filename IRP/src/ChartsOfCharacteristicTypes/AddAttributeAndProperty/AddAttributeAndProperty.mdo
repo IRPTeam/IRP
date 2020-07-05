@@ -11,7 +11,7 @@
   <name>AddAttributeAndProperty</name>
   <synonym>
     <key>en</key>
-    <value>Add attribute and property</value>
+    <value>Additional attributes types</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -20,7 +20,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <listPresentation>
     <key>en</key>
-    <value>Add attributes and properties</value>
+    <value>Additional attributes and properties</value>
   </listPresentation>
   <characteristicExtValues>Catalog.AddAttributeAndPropertyValues</characteristicExtValues>
   <type>

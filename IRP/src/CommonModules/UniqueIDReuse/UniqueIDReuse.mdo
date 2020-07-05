@@ -3,7 +3,7 @@
   <name>UniqueIDReuse</name>
   <synonym>
     <key>en</key>
-    <value>Unique IDReuse</value>
+    <value>Unique ID reuse</value>
   </synonym>
   <server>true</server>
   <serverCall>true</serverCall>

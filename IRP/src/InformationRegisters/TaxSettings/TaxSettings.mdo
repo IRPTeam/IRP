@@ -12,7 +12,7 @@
   <name>TaxSettings</name>
   <synonym>
     <key>en</key>
-    <value>Tax settings</value>
+    <value>Tax rate settings</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <defaultRecordForm>InformationRegister.TaxSettings.Form.RecordForm</defaultRecordForm>
@@ -139,7 +139,7 @@
     <name>Agreement</name>
     <synonym>
       <key>en</key>
-      <value>Agreement</value>
+      <value>Partner term</value>
     </synonym>
     <type>
       <types>CatalogRef.Agreements</types>

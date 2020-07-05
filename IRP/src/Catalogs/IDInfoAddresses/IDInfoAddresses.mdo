@@ -10,7 +10,7 @@
   <name>IDInfoAddresses</name>
   <synonym>
     <key>en</key>
-    <value>ID Info address</value>
+    <value>Addresses hierarchy</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Catalog.IDInfoAddresses.StandardAttribute.Code</inputByString>
@@ -21,7 +21,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>ID Info address</value>
+    <value>Addresses hierarchy</value>
   </objectPresentation>
   <hierarchical>true</hierarchical>
   <hierarchyType>HierarchyOfItems</hierarchyType>

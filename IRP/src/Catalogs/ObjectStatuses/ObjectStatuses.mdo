@@ -10,7 +10,7 @@
   <name>ObjectStatuses</name>
   <synonym>
     <key>en</key>
-    <value>Object statuses</value>
+    <value>Objects status history</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -100,7 +100,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>Object status</value>
+    <value>Objects status history</value>
   </objectPresentation>
   <hierarchical>true</hierarchical>
   <limitLevelCount>true</limitLevelCount>

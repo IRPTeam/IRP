@@ -37,7 +37,7 @@
     <name>ExternalDataProc</name>
     <synonym>
       <key>en</key>
-      <value>External data proc</value>
+      <value>Plugins</value>
     </synonym>
     <type>
       <types>CatalogRef.ExternalDataProc</types>
@@ -67,7 +67,7 @@
     <name>ExternalDataProcSettings</name>
     <synonym>
       <key>en</key>
-      <value>External data proc settings</value>
+      <value>Plugin settings</value>
     </synonym>
     <type>
       <types>ValueStorage</types>

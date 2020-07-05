@@ -10,7 +10,7 @@
   <name>SerialLotNumbers</name>
   <synonym>
     <key>en</key>
-    <value>Serial lot numbers</value>
+    <value>Item serial/lot numbers</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -31,7 +31,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>Serial lot number</value>
+    <value>Item serial/lot number</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
@@ -66,7 +66,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="204f3584-a26f-4549-b73c-5fa5f1af3c9f">
       <name>Property</name>

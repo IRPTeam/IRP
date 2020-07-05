@@ -133,7 +133,7 @@
     <name>CurrencyMovementType</name>
     <synonym>
       <key>en</key>
-      <value>Currency movement type</value>
+      <value>Multi currency movement type</value>
     </synonym>
     <type>
       <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>

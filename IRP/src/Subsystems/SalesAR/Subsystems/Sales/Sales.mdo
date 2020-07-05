@@ -9,7 +9,7 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Document.SalesOrder</content>
   <content>Document.SalesInvoice</content>
-  <content>Document.ZReport</content>
+  <content>5a2a8a1f-b29b-4352-9833-04e70902c2cb</content>
   <content>Document.ShipmentConfirmation</content>
   <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

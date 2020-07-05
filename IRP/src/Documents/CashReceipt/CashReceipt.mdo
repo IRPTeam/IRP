@@ -70,7 +70,7 @@
     <name>CashAccount</name>
     <synonym>
       <key>en</key>
-      <value>Cash account</value>
+      <value>Cash/Bank accounts</value>
     </synonym>
     <type>
       <types>CatalogRef.CashAccounts</types>
@@ -215,7 +215,7 @@
       <name>Agreement</name>
       <synonym>
         <key>en</key>
-        <value>Agreement</value>
+        <value>Partner term</value>
       </synonym>
       <type>
         <types>CatalogRef.Agreements</types>
@@ -270,7 +270,7 @@
       <name>PlaningTransactionBasis</name>
       <synonym>
         <key>en</key>
-        <value>Planing transaction basis</value>
+        <value>Planning transaction basis</value>
       </synonym>
       <type>
         <types>DefinedType.typePlaningTransactionBasises</types>
@@ -429,7 +429,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="664be370-3c8a-4417-97bc-582e691d83dd">
       <name>Property</name>

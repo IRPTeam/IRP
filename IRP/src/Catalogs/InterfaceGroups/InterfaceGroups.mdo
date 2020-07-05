@@ -10,7 +10,7 @@
   <name>InterfaceGroups</name>
   <synonym>
     <key>en</key>
-    <value>Interface groups</value>
+    <value>UI groups</value>
   </synonym>
   <comment>Groups for form items</comment>
   <useStandardCommands>true</useStandardCommands>
@@ -97,7 +97,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>Interface group</value>
+    <value>UI group</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>

@@ -12,7 +12,7 @@
   <name>IntegrationInfo</name>
   <synonym>
     <key>en</key>
-    <value>Integration info</value>
+    <value>Integration additional information</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>

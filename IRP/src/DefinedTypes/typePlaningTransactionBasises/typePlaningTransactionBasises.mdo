@@ -6,7 +6,7 @@
   <name>typePlaningTransactionBasises</name>
   <synonym>
     <key>en</key>
-    <value>Type planing transaction basises</value>
+    <value>Type planning transaction basises</value>
   </synonym>
   <type>
     <types>DocumentRef.CashTransferOrder</types>

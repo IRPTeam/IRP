@@ -10,7 +10,7 @@
   <name>AddAttributeAndPropertyValues</name>
   <synonym>
     <key>en</key>
-    <value>Add attribute and property values</value>
+    <value>Additional attribute values</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -35,7 +35,7 @@
     <name>Ref</name>
     <synonym>
       <key>en</key>
-      <value>Add attribute and property values</value>
+      <value>Additional attribute values</value>
     </synonym>
     <fillValue xsi:type="core:UndefinedValue"/>
     <minValue xsi:type="core:UndefinedValue"/>
@@ -62,7 +62,7 @@
     <name>Owner</name>
     <synonym>
       <key>en</key>
-      <value>Add attribute</value>
+      <value>Additional attribute</value>
     </synonym>
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -101,7 +101,7 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
     <key>en</key>
-    <value>Add attribute and property value</value>
+    <value>Additional attribute value</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>

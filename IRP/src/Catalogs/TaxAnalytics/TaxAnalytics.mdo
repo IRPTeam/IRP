@@ -10,7 +10,7 @@
   <name>TaxAnalytics</name>
   <synonym>
     <key>en</key>
-    <value>Tax analytics</value>
+    <value>Tax additional analytics</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -19,7 +19,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>Tax analytics</value>
+    <value>Tax additional analytics</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>

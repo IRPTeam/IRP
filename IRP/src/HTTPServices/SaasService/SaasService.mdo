@@ -28,7 +28,7 @@
       <name>CompanyLocalizations</name>
       <synonym>
         <key>en</key>
-        <value>Company localizations</value>
+        <value>Company localization</value>
       </synonym>
       <handler>SaasCompanyLocalizations</handler>
     </methods>

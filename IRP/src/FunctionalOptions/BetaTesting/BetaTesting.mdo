@@ -8,7 +8,6 @@
   <location>Constant.ShowBetaTesting</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Catalog.PaymentSchedules</content>
-  <content>Document.ZReport</content>
   <content>Document.CashInPOS</content>
   <content>Document.ItemsFlow</content>
   <content>Catalog.Workstations</content>

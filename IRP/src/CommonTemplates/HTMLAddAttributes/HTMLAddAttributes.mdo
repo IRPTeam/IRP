@@ -3,7 +3,7 @@
   <name>HTMLAddAttributes</name>
   <synonym>
     <key>en</key>
-    <value>HTMLAdd attributes</value>
+    <value>HTML additional attributes</value>
   </synonym>
   <templateType>TextDocument</templateType>
 </mdclass:CommonTemplate>

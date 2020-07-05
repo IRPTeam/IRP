@@ -426,7 +426,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="9f4ef7ae-690b-42db-893d-eaf809ad1e15">
       <name>Property</name>

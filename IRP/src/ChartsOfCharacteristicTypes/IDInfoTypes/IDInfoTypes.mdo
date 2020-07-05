@@ -11,7 +11,7 @@
   <name>IDInfoTypes</name>
   <synonym>
     <key>en</key>
-    <value>ID Info types</value>
+    <value>Contact info types</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -92,7 +92,7 @@
     <name>ExternalDataProcess</name>
     <synonym>
       <key>en</key>
-      <value>External data proces</value>
+      <value>Plugins</value>
     </synonym>
     <attributes uuid="97042539-5fd3-4d0d-9edb-2f2308bb2bbc">
       <name>Country</name>
@@ -110,7 +110,7 @@
       <name>ExternalDataProc</name>
       <synonym>
         <key>en</key>
-        <value>External data proc</value>
+        <value>Plugins</value>
       </synonym>
       <type>
         <types>CatalogRef.ExternalDataProc</types>
@@ -147,7 +147,7 @@
       <name>IDInfoType</name>
       <synonym>
         <key>en</key>
-        <value>ID Info type</value>
+        <value>Contact info type</value>
       </synonym>
       <type>
         <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>

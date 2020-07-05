@@ -10,7 +10,7 @@
   <name>CurrencyMovementSets</name>
   <synonym>
     <key>en</key>
-    <value>Currency movement sets</value>
+    <value>Multi currency movement sets</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -19,7 +19,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>Currency movement set</value>
+    <value>Multi currency movement set</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
@@ -156,13 +156,13 @@
     <name>CurrencyMovements</name>
     <synonym>
       <key>en</key>
-      <value>Currency movements</value>
+      <value>Multi currency movements</value>
     </synonym>
     <attributes uuid="909e88c1-cf12-4c03-9416-f0c0b1fb85d1">
       <name>CurrencyMovementType</name>
       <synonym>
         <key>en</key>
-        <value>Currency movement type</value>
+        <value>Multi currency movement type</value>
       </synonym>
       <type>
         <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>

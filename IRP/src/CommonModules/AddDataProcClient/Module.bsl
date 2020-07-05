@@ -6,10 +6,9 @@ Function OpenFormAddDataProc(Info, NotifyDescription = Undefined, FormName = Und
 	Else
 		ExternalOrInternalDataProcessor = "ExternalDataProcessor";
 	EndIf;
-	
-	OpenForm(ExternalOrInternalDataProcessor + "." + Info.ExternalDataProcName + 
-	         ".Form" + ?(ValueIsFilled(FormName), "." + FormName, "")
-	         , Info, , , , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+	FormName = ExternalOrInternalDataProcessor + "." + Info.ExternalDataProcName + 
+	         		".Form" + ?(ValueIsFilled(FormName), "." + FormName, "");
+	OpenForm(FormName, Info, , , , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
 
 	Return Undefined;
 EndFunction

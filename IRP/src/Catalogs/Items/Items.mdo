@@ -79,7 +79,7 @@
     <name>MainPricture</name>
     <synonym>
       <key>en</key>
-      <value>Main pricture</value>
+      <value>Main picture</value>
     </synonym>
     <comment>Temporary</comment>
     <type>
@@ -140,7 +140,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="81d83f43-5681-4735-a68d-2439d541ab98">
       <name>Property</name>

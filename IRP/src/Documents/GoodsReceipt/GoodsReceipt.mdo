@@ -266,13 +266,13 @@
     <name>SerialLotNumberList</name>
     <synonym>
       <key>en</key>
-      <value>Serial lot number list</value>
+      <value>Item serial/lot number list</value>
     </synonym>
     <attributes uuid="67f6c7ff-5ade-464e-8187-04b079ce6413">
       <name>SerialLotNumber</name>
       <synonym>
         <key>en</key>
-        <value>Serial lot number</value>
+        <value>Item serial/lot number</value>
       </synonym>
       <type>
         <types>CatalogRef.SerialLotNumbers</types>
@@ -317,7 +317,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="6957d6db-362f-40c3-ab38-48e5a8fd0c26">
       <name>Property</name>

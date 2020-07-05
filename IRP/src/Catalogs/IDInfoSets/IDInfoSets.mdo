@@ -10,7 +10,7 @@
   <name>IDInfoSets</name>
   <synonym>
     <key>en</key>
-    <value>ID Info sets</value>
+    <value>Contact info sets</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -19,7 +19,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>ID Info set</value>
+    <value>Contact info set</value>
   </objectPresentation>
   <hierarchyType>HierarchyOfItems</hierarchyType>
   <levelCount>2</levelCount>
@@ -63,13 +63,13 @@
     <name>IDInfoTypes</name>
     <synonym>
       <key>en</key>
-      <value>ID Info types</value>
+      <value>Contact info types</value>
     </synonym>
     <attributes uuid="6d89c214-8d2d-400b-832d-b3b2a2a84fc7">
       <name>IDInfoType</name>
       <synonym>
         <key>en</key>
-        <value>ID Info type</value>
+        <value>Contact info type</value>
       </synonym>
       <type>
         <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>

@@ -1038,7 +1038,7 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 	NotifyDescription = New NotifyDescription("PickupItemsEnd", ThisObject, NotifyParameters);
 	OpenFormParameters = PickupItemsParameters(Object, Form);	
 	#If MobileClient Then
-	FormName = "CommonForm.PickUpItemsMobile";
+	
 	#Else
 	FormName = "CommonForm.PickUpItems";
 	#EndIf

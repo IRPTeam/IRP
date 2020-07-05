@@ -149,7 +149,7 @@
     <name>SetupExtentionsInCurrentArea</name>
     <synonym>
       <key>en</key>
-      <value>Setup extentions in current area</value>
+      <value>Setup extension in current area</value>
     </synonym>
     <group>FormCommandBarImportant</group>
     <commandParameterType>

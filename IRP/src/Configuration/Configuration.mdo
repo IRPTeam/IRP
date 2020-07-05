@@ -28,11 +28,11 @@
   </copyright>
   <vendorInformationAddress>
     <key>en</key>
-    <value>https://github.com/DitriXNew/irp</value>
+    <value>https://github.com/IRPTeam/IRP</value>
   </vendorInformationAddress>
   <configurationInformationAddress>
     <key>en</key>
-    <value>https://github.com/DitriXNew/irp</value>
+    <value>https://github.com/IRPTeam/IRP</value>
   </configurationInformationAddress>
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectAutonumerationMode>NotAutoFree</objectAutonumerationMode>
@@ -392,7 +392,6 @@
   <commonForms>CommonForm.MainSettings</commonForms>
   <commonForms>CommonForm.PickUpDocuments</commonForms>
   <commonForms>CommonForm.PickupItems</commonForms>
-  <commonForms>CommonForm.PickupItemsMobile</commonForms>
   <commonForms>CommonForm.PickupSpecialOffers</commonForms>
   <commonForms>CommonForm.PictureGalleryForm</commonForms>
   <commonForms>CommonForm.PictureViewerFormHTML</commonForms>
@@ -491,7 +490,6 @@
   <documents>Document.StockAdjustmentAsSurplus</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
-  <documents>Document.ZReport</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AgreementKinds</enums>

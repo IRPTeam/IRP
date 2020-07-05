@@ -71,7 +71,7 @@
     <name>ExternalDataProc</name>
     <synonym>
       <key>en</key>
-      <value>External data proc</value>
+      <value>Plugins</value>
     </synonym>
     <type>
       <types>CatalogRef.ExternalDataProc</types>
@@ -86,7 +86,7 @@
     <name>ExternalDataProcSettings</name>
     <synonym>
       <key>en</key>
-      <value>External data proc settings</value>
+      <value>Plugin settings</value>
     </synonym>
     <type>
       <types>ValueStorage</types>
@@ -105,7 +105,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="1a90ce06-9bc7-4a43-8b2a-85c9713b094a">
       <name>Property</name>

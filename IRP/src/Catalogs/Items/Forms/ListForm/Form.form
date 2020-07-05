@@ -649,7 +649,7 @@ FROM
     <name>AddAttributeViewHTML</name>
     <title>
       <key>en</key>
-      <value>Add attribute view HTML</value>
+      <value>Additional attribute view HTML</value>
     </title>
     <id>2</id>
     <valueType>

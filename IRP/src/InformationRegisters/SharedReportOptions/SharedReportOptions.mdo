@@ -17,14 +17,13 @@
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <dimensions uuid="d2a85367-f829-4205-8703-2be39bef8ba2">
-    <name>UserOrGroup</name>
+    <name>User</name>
     <synonym>
       <key>en</key>
-      <value>User or group</value>
+      <value>User</value>
     </synonym>
     <type>
       <types>CatalogRef.Users</types>
-      <types>CatalogRef.UserGroups</types>
     </type>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

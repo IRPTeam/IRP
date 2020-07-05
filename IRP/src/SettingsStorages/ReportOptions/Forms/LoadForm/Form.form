@@ -538,9 +538,8 @@ FROM
 		FROM
 			InformationRegister.SharedReportOptions AS SharedReportOptions
 		WHERE
-			(SharedReportOptions.UserOrGroup = UNDEFINED
-			OR SharedReportOptions.UserOrGroup = &amp;Author
-			OR SharedReportOptions.UserOrGroup IN (&amp;GroupsList))
+			(SharedReportOptions.User = UNDEFINED
+			OR SharedReportOptions.User = &amp;Author)
 			AND SharedReportOptions.ReportOption.ObjectKey = &amp;ObjectKey
 		GROUP BY
 			SharedReportOptions.ReportOption) AS NestedSelect

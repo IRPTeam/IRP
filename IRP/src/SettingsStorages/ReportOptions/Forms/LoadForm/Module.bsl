@@ -24,12 +24,10 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.ObjectKey = Parameters.ObjectKey;
 	ThisObject.CurrentSettingsKey = Parameters.CurrentSettingsKey;
-	UserGroups = CatUserGroupsServer.GetUserGroupsByUser(SessionParameters.CurrentUser);
 	
 	OptionsList.Parameters.SetParameterValue("ObjectKey", ThisObject.ObjectKey);
 	OptionsList.Parameters.SetParameterValue("CurrentSettingsKey", ThisObject.CurrentSettingsKey);
 	OptionsList.Parameters.SetParameterValue("Author", SessionParameters.CurrentUser);
-	OptionsList.Parameters.SetParameterValue("GroupsList", UserGroups);
 	
 	Items.OptionsList.CurrentRow = Catalogs.ReportOptions.FindByCode(ThisObject.CurrentSettingsKey);
 EndProcedure

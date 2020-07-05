@@ -174,7 +174,7 @@
       <name>Agreement</name>
       <synonym>
         <key>en</key>
-        <value>Agreement</value>
+        <value>Partner term</value>
       </synonym>
       <type>
         <types>CatalogRef.Agreements</types>
@@ -202,7 +202,7 @@
       <name>CashAccount</name>
       <synonym>
         <key>en</key>
-        <value>Cash account</value>
+        <value>Cash/Bank accounts</value>
       </synonym>
       <type>
         <types>CatalogRef.CashAccounts</types>
@@ -473,7 +473,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="6ff11660-a2c1-4744-bb0e-95ee722bfb9d">
       <name>Property</name>

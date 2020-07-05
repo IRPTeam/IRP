@@ -12,7 +12,7 @@
   <name>ItemSegments</name>
   <synonym>
     <key>en</key>
-    <value>Item segments</value>
+    <value>Item segments content</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>

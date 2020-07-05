@@ -3,7 +3,7 @@
   <name>AddAttributesAndPropertiesServer</name>
   <synonym>
     <key>en</key>
-    <value>Add attributes and properties server</value>
+    <value>Additional attributes server</value>
   </synonym>
   <server>true</server>
   <externalConnection>true</externalConnection>

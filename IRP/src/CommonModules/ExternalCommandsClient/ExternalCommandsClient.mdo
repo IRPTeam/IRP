@@ -3,7 +3,7 @@
   <name>ExternalCommandsClient</name>
   <synonym>
     <key>en</key>
-    <value>External commands client</value>
+    <value>Definable UI commands client</value>
   </synonym>
   <clientManagedApplication>true</clientManagedApplication>
 </mdclass:CommonModule>

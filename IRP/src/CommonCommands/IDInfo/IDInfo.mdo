@@ -3,7 +3,7 @@
   <name>IDInfo</name>
   <synonym>
     <key>en</key>
-    <value>ID Info</value>
+    <value>Contact info</value>
   </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>

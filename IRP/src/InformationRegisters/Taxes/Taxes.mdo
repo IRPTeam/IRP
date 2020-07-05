@@ -12,7 +12,7 @@
   <name>Taxes</name>
   <synonym>
     <key>en</key>
-    <value>Taxes</value>
+    <value>Company taxes</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <defaultRecordForm>InformationRegister.Taxes.Form.RecordForm</defaultRecordForm>

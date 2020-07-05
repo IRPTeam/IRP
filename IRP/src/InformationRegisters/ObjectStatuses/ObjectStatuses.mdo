@@ -12,7 +12,7 @@
   <name>ObjectStatuses</name>
   <synonym>
     <key>en</key>
-    <value>Object statuses</value>
+    <value>Objects status history</value>
   </synonym>
   <defaultRecordForm>InformationRegister.ObjectStatuses.Form.RecordForm</defaultRecordForm>
   <defaultListForm>InformationRegister.ObjectStatuses.Form.ListForm</defaultListForm>

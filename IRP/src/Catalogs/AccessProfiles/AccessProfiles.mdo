@@ -10,7 +10,7 @@
   <name>AccessProfiles</name>
   <synonym>
     <key>en</key>
-    <value>Access profiles</value>
+    <value>User access profiles</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -18,7 +18,7 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
     <key>en</key>
-    <value>Access profile</value>
+    <value>User access profile</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>

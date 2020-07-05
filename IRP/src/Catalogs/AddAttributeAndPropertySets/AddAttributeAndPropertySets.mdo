@@ -10,7 +10,7 @@
   <name>AddAttributeAndPropertySets</name>
   <synonym>
     <key>en</key>
-    <value>Add attribute and property sets</value>
+    <value>Additional attribute sets</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -18,7 +18,7 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
     <key>en</key>
-    <value>Add attribute and property set</value>
+    <value>Additional attribute set</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
@@ -470,7 +470,7 @@
       <name>InterfaceGroup</name>
       <synonym>
         <key>en</key>
-        <value>Interface group</value>
+        <value>UI group</value>
       </synonym>
       <comment>Name of group for attribute</comment>
       <type>

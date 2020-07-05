@@ -3,7 +3,7 @@
   <name>HTMLPictureSlider</name>
   <synonym>
     <key>en</key>
-    <value>HTMLPicture slider</value>
+    <value>HTML picture slider</value>
   </synonym>
   <templateType>TextDocument</templateType>
 </mdclass:CommonTemplate>

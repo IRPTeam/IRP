@@ -331,13 +331,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.ZReport</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.CashExpense</name>
 		<right>
 			<name>InteractiveDelete</name>

@@ -3898,7 +3898,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Add. attributes</value>
+        <value>Additional attributes</value>
       </title>
       <extendedTooltip>
         <name>GroupAddAttributesExtendedTooltip</name>

@@ -3,7 +3,7 @@
   <name>ExternalCommandsServer</name>
   <synonym>
     <key>en</key>
-    <value>External commands server</value>
+    <value>Definable UI commands server</value>
   </synonym>
   <server>true</server>
   <serverCall>true</serverCall>

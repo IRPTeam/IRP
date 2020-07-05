@@ -12,7 +12,7 @@
   <name>UserSettings</name>
   <synonym>
     <key>en</key>
-    <value>User settings</value>
+    <value>User defaults settings</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>

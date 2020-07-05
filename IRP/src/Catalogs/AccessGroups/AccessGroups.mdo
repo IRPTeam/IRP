@@ -10,7 +10,7 @@
   <name>AccessGroups</name>
   <synonym>
     <key>en</key>
-    <value>Access groups</value>
+    <value>User access groups</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -18,7 +18,7 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
     <key>en</key>
-    <value>Access group</value>
+    <value>User access group</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>

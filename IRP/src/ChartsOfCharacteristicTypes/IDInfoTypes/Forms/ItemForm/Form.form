@@ -658,7 +658,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>External data proc</value>
+        <value>Plugins</value>
       </title>
       <extendedTooltip>
         <name>GroupPageExternalDataProcExtendedTooltip</name>

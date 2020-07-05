@@ -271,10 +271,6 @@
         <items xsi:type="form:Decoration">
           <name>Decoration1</name>
           <id>49</id>
-          <title>
-            <key>en</key>
-            <value>      </value>
-          </title>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -855,7 +851,7 @@
     <name>AddAttributeViewHTML</name>
     <title>
       <key>en</key>
-      <value>Add attribute view HTML</value>
+      <value>Additional attribute view HTML</value>
     </title>
     <id>4</id>
     <valueType>

@@ -10,7 +10,7 @@
   <name>Units</name>
   <synonym>
     <key>en</key>
-    <value>Units</value>
+    <value>Item units</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -103,7 +103,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="1684b5c0-67c9-4393-a7cc-2e564f1d966c">
       <name>Property</name>

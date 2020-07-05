@@ -12,7 +12,7 @@
   <name>Barcodes</name>
   <synonym>
     <key>en</key>
-    <value>Barcodes</value>
+    <value>Item barcodes</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <defaultRecordForm>InformationRegister.Barcodes.Form.RecordForm</defaultRecordForm>
@@ -38,7 +38,7 @@
     <name>SerialLotNumber</name>
     <synonym>
       <key>en</key>
-      <value>Serial lot number</value>
+      <value>Item serial/lot number</value>
     </synonym>
     <type>
       <types>CatalogRef.SerialLotNumbers</types>

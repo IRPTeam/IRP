@@ -20,7 +20,7 @@
     <name>AdvanceToSuppliers</name>
     <synonym>
       <key>en</key>
-      <value>Advance to supliers</value>
+      <value>Advance to suppliers</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>

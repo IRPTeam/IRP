@@ -10,7 +10,7 @@
   <name>Agreements</name>
   <synonym>
     <key>en</key>
-    <value>Agreements</value>
+    <value>Partner terms</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -30,7 +30,7 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
     <key>en</key>
-    <value>Agreement</value>
+    <value>Partner term</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
@@ -299,7 +299,7 @@
     <name>CurrencyMovementType</name>
     <synonym>
       <key>en</key>
-      <value>Currency movement type</value>
+      <value>Multi currency movement type</value>
     </synonym>
     <type>
       <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -315,7 +315,7 @@
     <name>ApArPostingDetail</name>
     <synonym>
       <key>en</key>
-      <value>AP-AR posting detail</value>
+      <value>AP/AR posting detail</value>
     </synonym>
     <type>
       <types>EnumRef.ApArPostingDetail</types>
@@ -366,7 +366,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="f81d586f-8168-4ae0-bf1f-95b06f3744ff">
       <name>Property</name>
@@ -428,7 +428,7 @@
     <name>OpenAgreementsList</name>
     <synonym>
       <key>en</key>
-      <value>Agreements</value>
+      <value>Partner terms</value>
     </synonym>
     <group>FormNavigationPanelGoTo</group>
     <commandParameterType>

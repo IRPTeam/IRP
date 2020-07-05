@@ -30,9 +30,6 @@
             <paths xsi:type="form:DataPath">
               <segments>UsersList.Use</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>UsersList.Use</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>UsersUseExtendedTooltip</name>
@@ -75,9 +72,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>UsersList.User</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>UsersList.User</segments>
             </paths>
@@ -348,6 +342,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>

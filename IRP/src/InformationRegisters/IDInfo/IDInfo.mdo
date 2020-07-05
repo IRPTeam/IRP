@@ -12,7 +12,7 @@
   <name>IDInfo</name>
   <synonym>
     <key>en</key>
-    <value>ID Info</value>
+    <value>Contact info</value>
   </synonym>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="f704a578-563f-49d8-85f9-8232e7b2f17e">
@@ -82,7 +82,7 @@
     <name>IDInfoType</name>
     <synonym>
       <key>en</key>
-      <value>ID Info type</value>
+      <value>Contact info type</value>
     </synonym>
     <type>
       <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>

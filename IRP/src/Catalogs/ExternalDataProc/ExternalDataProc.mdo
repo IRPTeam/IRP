@@ -10,7 +10,7 @@
   <name>ExternalDataProc</name>
   <synonym>
     <key>en</key>
-    <value>External data proc</value>
+    <value>Plugins</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>

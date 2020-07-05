@@ -6,7 +6,7 @@
   <name>typeIDInfoOwners</name>
   <synonym>
     <key>en</key>
-    <value>Type ID Info owners</value>
+    <value>Type contact info owners</value>
   </synonym>
   <type>
     <types>CatalogRef.Companies</types>

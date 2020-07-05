@@ -138,7 +138,7 @@
     <name>Agreement</name>
     <synonym>
       <key>en</key>
-      <value>Agreement</value>
+      <value>Partner term</value>
     </synonym>
     <type>
       <types>CatalogRef.Agreements</types>

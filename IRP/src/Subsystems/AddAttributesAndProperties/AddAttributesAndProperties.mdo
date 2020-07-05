@@ -3,7 +3,7 @@
   <name>AddAttributesAndProperties</name>
   <synonym>
     <key>en</key>
-    <value>Add attributes and properties</value>
+    <value>Additional attributes and properties</value>
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <content>InformationRegister.AddProperties</content>

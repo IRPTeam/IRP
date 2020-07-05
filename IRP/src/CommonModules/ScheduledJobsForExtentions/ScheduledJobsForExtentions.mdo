@@ -3,7 +3,7 @@
   <name>ScheduledJobsForExtentions</name>
   <synonym>
     <key>en</key>
-    <value>Scheduled jobs for extentions</value>
+    <value>Scheduled jobs for extensions</value>
   </synonym>
   <server>true</server>
 </mdclass:CommonModule>

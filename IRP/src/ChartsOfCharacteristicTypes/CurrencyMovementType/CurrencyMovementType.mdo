@@ -11,7 +11,7 @@
   <name>CurrencyMovementType</name>
   <synonym>
     <key>en</key>
-    <value>Currency movement type</value>
+    <value>Multi currency movement type</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>

@@ -6,7 +6,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("S_001", NStr("en = 'Unsupported type of request body'", CodeLanguage));
 	
 	// Can Not connect to: localhost:8080 Detail: There is no internet connection
-	Strings.Insert("S_002", NStr("en = 'Can''t connect to: %1:%2 Detail: %3'", CodeLanguage));
+	Strings.Insert("S_002", NStr("en='Can`t connect to: %1:%2 Detail: %3'", CodeLanguage));
 	
 	// Received response from: localhost:8080
 	Strings.Insert("S_003", NStr("en = 'Received response from: %1:%2'", CodeLanguage));
@@ -29,7 +29,7 @@ Function Strings(CodeLanguage) Export
 	
 	// External system Not defined: IRP
 	Strings.Insert("S_011", NStr("en = 'External system not defined: %1'", CodeLanguage));
-	Strings.Insert("S_012", NStr("en = 'Can''t retrieve value for: Property[%1] Value[%2] Metadata[%3]'", CodeLanguage));
+	Strings.Insert("S_012", NStr("en='Can`t retrieve value for: Property[%1] Value[%2] Metadata[%3]'", CodeLanguage));
 	
 	// Special offers
 	Strings.Insert("S_013", NStr("en = 'Not supported type of object: %1'", CodeLanguage));
@@ -51,7 +51,7 @@ Function Strings(CodeLanguage) Export
 	
 	
 	Strings.Insert("S_021", NStr("en = 'Goods receipt'", CodeLanguage));
-	Strings.Insert("S_022", NStr("en = 'Multicurrency receipt basises'", CodeLanguage));
+	Strings.Insert("S_022", NStr("en='Multi currency receipt basises'", CodeLanguage));
 	
 	Strings.Insert("S_023", NStr("en = 'Procurement method'", CodeLanguage));
 	
@@ -162,7 +162,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Error_066", NStr("en = 'Specification is not unique'", CodeLanguage));
 	Strings.Insert("Error_067", NStr("en = 'Not properly status of %1 to proceed.'", CodeLanguage));	
 	Strings.Insert("Error_068", NStr("en = 'Line No. [%1] [%2 %3] %4 remains: %5 %8 Required: %6 %8 Lacks: %7 %8'", CodeLanguage));
-	Strings.Insert("Error_071", NStr("en = 'External data processor ""%1"" was not connected'", CodeLanguage));
+	Strings.Insert("Error_071", NStr("en='Plugin ""%1"" was not connected'", CodeLanguage));
 	Strings.Insert("Error_072", NStr("en = 'Store is required on line %1'", CodeLanguage));
 	Strings.Insert("Error_073", NStr("en = 'All items in %1(s) are already received by %2(s).'", CodeLanguage));
 	Strings.Insert("Error_074", NStr("en = 'Currency transfer is possible only when amounts is equal.'", CodeLanguage));
@@ -185,7 +185,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("QuestionToUser_003", NStr("en = 'Filled data on cheque bonds transactions will be deleted. Do you want to update %1?'", CodeLanguage));
 	Strings.Insert("QuestionToUser_004", NStr("en = 'Change tax rates according agreement?'", CodeLanguage));
 	Strings.Insert("QuestionToUser_005", NStr("en = 'Do you want to update filled stores?'", CodeLanguage));
-	Strings.Insert("QuestionToUser_006", NStr("en = 'Do you want to update filled Currency?'", CodeLanguage));
+	Strings.Insert("QuestionToUser_006", NStr("en='Do you want to update filled currency?'", CodeLanguage));
 	Strings.Insert("QuestionToUser_007", NStr("en = 'Transaction table will be cleared. Continue?'", CodeLanguage));
 	Strings.Insert("QuestionToUser_008", NStr("en = 'When the currency is changed, rows with cash transfer documents will be cleared. Continue?'", CodeLanguage));
 	Strings.Insert("QuestionToUser_009", NStr("en = 'Update filled stores on %1'", CodeLanguage));
@@ -212,7 +212,7 @@ Function Strings(CodeLanguage) Export
 	#Region Items
 	
 	// Interface
-	Strings.Insert("I_1", NStr("en = 'Enter Description'", CodeLanguage));
+	Strings.Insert("I_1", NStr("en='Enter description'", CodeLanguage));
 	
 	Strings.Insert("I_2", NStr("en = 'Click for input description'", CodeLanguage));
 	

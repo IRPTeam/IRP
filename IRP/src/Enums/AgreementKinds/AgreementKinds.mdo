@@ -8,7 +8,7 @@
   <name>AgreementKinds</name>
   <synonym>
     <key>en</key>
-    <value>Agreement kinds</value>
+    <value>Partner term kinds</value>
   </synonym>
   <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>

@@ -10,7 +10,7 @@
   <name>Taxes</name>
   <synonym>
     <key>en</key>
-    <value>Taxes</value>
+    <value>Tax types</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -31,7 +31,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>Taxes</value>
+    <value>Tax types</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
@@ -48,7 +48,7 @@
     <name>ExternalDataProcSettings</name>
     <synonym>
       <key>en</key>
-      <value>External data proc settings</value>
+      <value>Plugin settings</value>
     </synonym>
     <type>
       <types>ValueStorage</types>
@@ -63,7 +63,7 @@
     <name>ExternalDataProc</name>
     <synonym>
       <key>en</key>
-      <value>External data proc</value>
+      <value>Plugins</value>
     </synonym>
     <type>
       <types>CatalogRef.ExternalDataProc</types>
@@ -150,7 +150,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="9083420a-a5b7-4c23-9627-09df5bd74a36">
       <name>Property</name>

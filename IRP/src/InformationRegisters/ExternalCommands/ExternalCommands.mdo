@@ -12,7 +12,7 @@
   <name>ExternalCommands</name>
   <synonym>
     <key>en</key>
-    <value>External commands</value>
+    <value>Definable UI commands</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -20,7 +20,7 @@
     <name>InterfaceGroup</name>
     <synonym>
       <key>en</key>
-      <value>Interface group</value>
+      <value>UI group</value>
     </synonym>
     <type>
       <types>CatalogRef.InterfaceGroups</types>
@@ -51,7 +51,7 @@
     <name>ExternalDataProc</name>
     <synonym>
       <key>en</key>
-      <value>External data proc</value>
+      <value>Plugins</value>
     </synonym>
     <type>
       <types>CatalogRef.ExternalDataProc</types>

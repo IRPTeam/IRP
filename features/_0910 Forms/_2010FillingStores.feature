@@ -2,30 +2,28 @@
 @tree
 @Positive
 
-Функционал: логика заполнения складов в документах
+Функционал: filling of stores in documents
 
-Как разработчик
-Я хочу создать систему заполнения склада в документе
-Для удобства заполнения документов
+
 
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: проверка заполнение склада в документе Sales order
+Сценарий: check filling in Store field in the document Sales order
 	* Opening a document form Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение партнера и контрагента
-	# остальные реквизиты заполненны из пользовательских настроек
+	* Filling in Partner and Legal name
+	# the other details are filled in from the custom settings
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Ferron BP'   |
 		И в таблице "List" я выбираю текущую строку
 		И из выпадающего списка "Legal name" я выбираю по строке 'comp'
-	* Добавление товаров
+	* Filling in items tab
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'dre'
 		И в таблице "ItemList" я активизирую поле "Item key"
@@ -40,7 +38,7 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Check filling inформы Sales order
+	*Check filling in Sales order
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
@@ -50,7 +48,7 @@
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
-	* Изменение склада на Store 03 (не указан ни в соглашении ни в настройках)
+	* Change store on Store 03 (not specified in agreement or settings)
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -62,15 +60,15 @@
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
-	* Очистка значения склада
+	* Cleaning the store value
 		И в поле с именем 'Store' я ввожу текст ''
 		И я нажимаю на кнопку 'OK'
-	* Check filling inсклада из соглашения
+	* Check filling in store from agreement
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
-	* Выбор соглашения с пустым складом и проверка что склад остался тот который ранее указал пользователь
+	* Choosing an agreement with an empty store field
 		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -83,19 +81,19 @@
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: проверка заполнение склада в документе Sales invoice
+Сценарий: check filling in Store field in the document Sales invoice
 	* Opening a document form Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение партнера и контрагента
-	# остальные реквизиты заполненны из пользовательских настроек
+	* Filling in Partner and Legal name
+	# the other details are filled in from the custom settings
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Ferron BP'   |
 		И в таблице "List" я выбираю текущую строку
 		И из выпадающего списка "Legal name" я выбираю по строке 'comp'
-	* Добавление товаров
+	* Filling in items tab
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'dre'
 		И в таблице "ItemList" я активизирую поле "Item key"
@@ -110,7 +108,7 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Check filling inформы Sales order
+	* Check filling in Sales order
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
@@ -119,7 +117,7 @@
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
-	* Изменение склада на Store 03 (не указан ни в соглашении ни в настройках)
+	* Change store on Store 03 (not specified in agreement or settings)
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -131,15 +129,15 @@
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
-	* Очистка значения склада
+	* Cleaning the store value
 		И в поле с именем 'Store' я ввожу текст ''
 		И я нажимаю на кнопку 'OK'
-	* Check filling inсклада из соглашения
+	* Check filling in store from agreement
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
-	* Выбор соглашения с пустым складом и проверка того что склад не очистился
+	* Choosing an agreement with an empty store field
 		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -153,12 +151,12 @@
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: проверка заполнение склада в документе Purchase order
+Сценарий: check filling in Store field in the document Purchase order
 	* Opening a document form Purchase order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение партнера, контрагента, соглашения (склад не указан)
-	# остальные реквизиты заполненны из пользовательских настроек
+	* Filling in partner, legal name, partner term (store not specified)
+	# the other details are filled in from the custom settings
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -174,7 +172,7 @@
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Добавление товаров
+	* Filling in items tab
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'dre'
 		И в таблице "ItemList" я активизирую поле "Item key"
@@ -189,7 +187,7 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Check filling inформы Purchase order
+	* Check filling in Purchase order
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
@@ -198,7 +196,7 @@
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
-	* Изменение склада на Store 02 (не указан ни в соглашении ни в настройках)
+	* Changing store on Store 02 (not specified in the partner terms or in the settings)
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -210,15 +208,15 @@
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 02' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 02' |
-	* Очистка значения склада
+	* Cleaning the store value
 		И в поле с именем 'Store' я ввожу текст ''
 		И я нажимаю на кнопку 'OK'
-	* Check filling inсклада из пользовательских настроек (склад в соглашении не указан)
+	* Check filling in store from user settings (store not specified in agreement)
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
-	* Перевыбор соглашения с пустым складом и Check filling inсклада из пользовательских настроек
+	* Re-selecting a partner term with an empty store and check filling in the store from user settings
 		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -231,12 +229,12 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: проверка заполнение склада в документе Purchase invoice
+Сценарий: check filling in Store field in the document Purchase invoice
 	* Opening a document form Purchase invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение партнера, контрагента, соглашения (склад не указан)
-	# остальные реквизиты заполненны из пользовательских настроек
+	* Filling in partner, legal name, partner term (store not specified)
+	# the other details are filled in from the custom settings
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -252,7 +250,7 @@
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Добавление товаров
+	* Filling in items tab
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'dre'
 		И в таблице "ItemList" я активизирую поле "Item key"
@@ -267,7 +265,7 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Check filling inформы Purchase order
+	* Check filling in Purchase order
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
@@ -276,7 +274,7 @@
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 02' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 02' |
-	* Изменение склада на Store 04 (не указан ни в соглашении ни в настройках)
+	* Change of store on Store 04 (not specified either in the partner terms or in the settings)
 		И я нажимаю кнопку выбора у поля с именем "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -288,15 +286,15 @@
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 04' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 04' |
-	* Очистка значения склада
+	* Cleaning the store value
 		И в поле с именем 'Store' я ввожу текст ''
 		И я нажимаю на кнопку 'OK'
-	* Check filling inсклада из пользовательских настроек (склад в соглашении не указан)
+	* Check filling in store from user settings (store in partner term not specified)
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 02' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 02' |
-	* Перевыбор соглашения с пустым складом и Check filling inсклада из пользовательских настроек
+	* Re-selecting a partner term with an empty store and check filling in the store from user settings
 		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -309,19 +307,19 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154516 Check filling inсклада в Shipment confirmation
+Сценарий: _0154516  check filling in Store field in the Shipment confirmation
 	* Open a creation form Shipment confirmation
 		И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
 		И я нажимаю на кнопку 'Create'
-	* Перевичное заполнение склада и товаров
-		* Заполнение склада и вида операции
+	* Fillin in store and items tab
+		* Filling store and type of operation
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Store 03'    |
 			И в таблице "List" я выбираю текущую строку
-		* Добавление первой строки с товарами
+		* Add first line with the product
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -337,7 +335,7 @@
 			И в таблице "ItemList" я активизирую поле "Quantity"
 			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Добавление второй строки
+		* Add second line
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -360,12 +358,12 @@
 			| 'Description' |
 			| 'Store 02'    |
 			И в таблице "List" я выбираю текущую строку
-		* Check filling inсклада по строкам
+		* Check filling in store by lines
 			И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
 			| 'Shirt'    | '1,000'    | '38/Black'  | 'pcs'  | 'Store 02' |
-		* Изменение склада в шапке и проверка перезаполнения по строкам
+		* Change the store in the header and check the refill by lines
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -378,10 +376,10 @@
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
 			| 'Shirt'    | '1,000'    | '38/Black'  | 'pcs'  | 'Store 03' |
-		* Удаление строки
+		* Delete a line
 			И в таблице "ItemList" я перехожу к последней строке
 			И в таблице "ItemList" я удаляю текущую строку
-		* Проверка невозможности очистить склад по товаравам
+		* Checking that the warehouse is not cleared on the lines with the products
 			И в таблице "ItemList" я перехожу к строке:
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Store'    | 'Unit' |
 			| 'Trousers' | '38/Yellow' | '2,000'    | 'Store 03' | 'pcs'  |
@@ -389,7 +387,6 @@
 			И в таблице "ItemList" я выбираю текущую строку
 			И в таблице "ItemList" в поле с именем 'ItemListStore' я ввожу текст ''
 			И в таблице "ItemList" я завершаю редактирование строки
-			# склад очиститься не должен
 			И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
@@ -402,19 +399,19 @@
 			И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154517 Check filling inсклада в Goods receipt
+Сценарий: _0154517  check filling in Store field in the Goods receipt
 	* Open a creation form Goods receipt
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		И я нажимаю на кнопку 'Create'
-	* Перевичное заполнение склада и товаров
-		* Заполнение склада и вида операции
+	* Fillin in store and items tab
+		* Filling store and type of operation
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Purchase'
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Store 03'    |
 			И в таблице "List" я выбираю текущую строку
-		* Добавление первой строки с товарами
+		* Adding the first line with the product
 			И я нажимаю на кнопку 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -430,7 +427,7 @@
 			И в таблице "ItemList" я активизирую поле "Quantity"
 			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Добавление второй строки
+		* Add second line
 			И я нажимаю на кнопку 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -453,12 +450,12 @@
 			| 'Description' |
 			| 'Store 02'    |
 			И в таблице "List" я выбираю текущую строку
-		* Check filling inсклада по строкам
+		* Check filling in store by lines
 			И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
 			| 'Shirt'    | '1,000'    | '38/Black'  | 'pcs'  | 'Store 02' |
-		* Изменение склада в шапке и проверка перезаполнения по строкам
+		* Change the store in the header and check the refill by lines
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -471,10 +468,10 @@
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
 			| 'Shirt'    | '1,000'    | '38/Black'  | 'pcs'  | 'Store 03' |
-		* Удаление строки
+		* Delete a line
 			И в таблице "ItemList" я перехожу к последней строке
 			И в таблице "ItemList" я удаляю текущую строку
-		* Проверка невозможности очистить склад по товаравам
+		* Checking that the warehouse is not cleared on the lines with the products
 			И в таблице "ItemList" я перехожу к строке:
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Store'    | 'Unit' |
 			| 'Trousers' | '38/Yellow' | '2,000'    | 'Store 03' | 'pcs'  |
@@ -482,7 +479,6 @@
 			И в таблице "ItemList" я выбираю текущую строку
 			И в таблице "ItemList" в поле с именем 'ItemListStore' я ввожу текст ''
 			И в таблице "ItemList" я завершаю редактирование строки
-			# склад очиститься не должен
 			И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
@@ -493,4 +489,3 @@
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
 			И Я закрыл все окна клиентского приложения
-

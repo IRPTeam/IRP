@@ -2,37 +2,37 @@
 @tree
 @Positive
 
-Функционал: проверка отображения списков элементов справочников по которым стоят отборы
+Функционал: checking the display of lists of catalogs elements for which there are selections
 
 
 
 Контекст: 
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 	
-Сценарий: _0203001 проверка фильтров в справочнике соглашений
-	* Проверка наличия данных
+Сценарий: _0203001 check filters in the partner term catalog
+	* Check for data availability
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		Тогда таблица "List" содержит строки:
 		| 'Description'                             |
 		| 'Basic Partner terms, TRY'                   |
 		| 'Vendor Ferron, TRY'                      |
 		И я закрыл все окна клиентского приложения
-	* Проверка фильтра по соглашениям с клиентами в разделе продаж
-		* Открытие списка
+	* Filter check according to partner term with customers in the sales section
+		* Open list form
 			И В панели разделов я выбираю 'Sales - A/R'
 			И В панели функций я выбираю 'Customer Partner terms'
-		* Проверка фильтра
+		* Filter check
 			Тогда таблица "List" не содержит строки:
 			| 'Description'                             |
 			| 'Vendor Ferron, TRY'                      |
 			Тогда таблица "List" содержит строки:
 			| 'Description'                             |
 			| 'Basic Partner terms, TRY'                   |
-	* Проверка фильтра по соглашениям с клиентами в разделе закупок
-		* Открытие списка
+	* Filter check according to partner term with vendors in the purchase section
+		* Open list form
 			Когда В панели разделов я выбираю 'Purchase  - A/P'
 			И В панели функций я выбираю 'Vendor Partner terms'
-		* Проверка фильтра
+		* Filter check
 			Тогда таблица "List" содержит строки:
 			| 'Description'                             |
 			| 'Vendor Ferron, TRY'                      |
@@ -41,8 +41,8 @@
 			| 'Basic Partner terms, TRY'                   |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0203002 проверка фильтров в справочнике партнеров
-	* Проверка наличия данных
+Сценарий: _0203002 check filters in the partner catalog
+	* Check for data availability
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		Тогда таблица "List" содержит строки:
 			| 'Description'      |
@@ -51,11 +51,11 @@
 			| 'Nicoletta'        |
 			| 'Veritas'          |
 		И я закрыл все окна клиентского приложения
-	* Проверка фильтра по клиентам в разделе продаж
-		* Открытие списка
+	* Filter check customers in the sales section
+		* Open list form
 			И В панели разделов я выбираю 'Sales - A/R'
 			И В панели функций я выбираю 'Customers'
-		* Проверка фильтра по клиентам
+		* Check the selection by customer
 			Тогда таблица "List" не содержит строки:
 			| 'Description'      |
 			| 'Veritas'          |
@@ -64,17 +64,17 @@
 			| 'Ferron BP'        |
 			| 'Kalipso'          |
 			| 'Nicoletta'        |
-		* Проверка фильтра по клиентам которые являются поставщиками
+		* Filter check customers who are suppliers also
 			И я устанавливаю флаг 'Vendor'
 			Тогда таблица "List" не содержит строки:
 			| 'Description'      |
 			| 'Kalipso'          |
 		И я закрыл все окна клиентского приложения
-	* Проверка фильтра по поставщикам в разделе закупок
-		* Открытие списка
+	* Filter check customers in the purchase section
+		* Open list form
 			Когда В панели разделов я выбираю 'Purchase  - A/P'
 			И В панели функций я выбираю 'Vendors'
-		* Проверка фильтра по поставщикам
+		* Check the selection by vendors
 			Тогда таблица "List" содержит строки:
 			| 'Description'      |
 			| 'Ferron BP'        |
@@ -83,16 +83,16 @@
 			Тогда таблица "List" не содержит строки:
 			| 'Description'      |
 			| 'Kalipso'          |
-		* Проверка фильтра по поставщикам которые являются клиентами
+		* Filter check по поставщикам которые являются клиентами
 			И я устанавливаю флаг 'Customer'
 			Тогда таблица "List" не содержит строки:
 			| 'Description'      |
 			| 'Veritas'          |
 		И я закрыл все окна клиентского приложения
-	* Проверка отборов в общем правочнике партнеров
+	* Check filters in the catalog Partners
 		* Open catalog
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-		* Проверка отбора по клиентам
+		* Check the selection by customer
 			И я устанавливаю флаг 'Customer'
 			Тогда таблица "List" содержит строки:
 			| 'Description'      |
@@ -102,7 +102,7 @@
 			Тогда таблица "List" не содержит строки:
 			| 'Description'      |
 			| 'Veritas'          |
-		* Проверка отбора по поставщикам
+		* Check the selection by vendor
 			И я снимаю флаг 'Customer'
 			И я устанавливаю флаг 'Vendor'
 			Тогда таблица "List" не содержит строки:
@@ -113,7 +113,7 @@
 			| 'Ferron BP'        |
 			| 'Veritas'          |
 			| 'Nicoletta'        |
-		* Проверка отбора по сотрудникам
+		* Check the selection by employee
 			И я снимаю флаг 'Vendor'
 			И я устанавливаю флаг 'Employee'
 			Тогда таблица "List" не содержит строки:
@@ -128,7 +128,7 @@
 			| 'Anna Petrova'    |
 			| 'David Romanov'   |
 			| 'Arina Brown'     |
-		* Проверка отбора по конкурентам
+		* Check the selection by opponent
 			И я устанавливаю флаг 'Opponent'
 			И я снимаю флаг 'Employee'
 			Тогда в таблице "List" количество строк "равно" 0
@@ -138,8 +138,8 @@
 
 
 
-Сценарий: _0203003 проверка фильтров в справочнике Cash/Bank accounts
-	* Проверка наличия данных
+Сценарий: _0203003 check filters in the Cash/Bank accounts catalog
+	* Check for data availability
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.CashAccounts'
 		Тогда таблица "List" содержит строки:
 			| 'Description'      |
@@ -149,7 +149,7 @@
 			| 'Transit Second'   |
 			| 'Bank account, TRY'|
 			| 'Bank account, USD'|
-	* Проверка фильтра по кассам
+	* Check the selection by cash account
 		И я меняю значение переключателя 'CashAccountTypeFilter' на 'Cash'
 		Тогда таблица "List" содержит строки:
 			| 'Description'      |
@@ -161,7 +161,7 @@
 			| 'Transit Second'   |
 			| 'Bank account, TRY'|
 			| 'Bank account, USD'|
-	* Проверка фильтра по банковским счетам
+	* Check the selection by bank account
 		И я меняю значение переключателя 'CashAccountTypeFilter' на 'Bank'
 		Тогда таблица "List" содержит строки:
 			| 'Description'      |
@@ -173,7 +173,7 @@
 			| 'Transit Second'   |
 			| 'Cash desk №1'     |
 			| 'Cash desk №2'     |
-	* Проверка фильтра по транзитным счетам
+	* Check the selection by transit account
 		И я меняю значение переключателя 'CashAccountTypeFilter' на 'Transit'
 		Тогда таблица "List" содержит строки:
 			| 'Description'      |
@@ -185,7 +185,7 @@
 			| 'Bank account, USD'|
 			| 'Cash desk №1'     |
 			| 'Cash desk №2'     |
-	* Проверка сброса фильтра
+	* Filter reset check
 		И я меняю значение переключателя 'CashAccountTypeFilter' на 'All'
 		Тогда таблица "List" содержит строки:
 			| 'Description'      |

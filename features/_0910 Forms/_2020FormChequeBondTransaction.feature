@@ -2,19 +2,19 @@
 @tree
 @Positive
 
-Функционал: заполнение банковских чеков
+Функционал: cheque filling
 
-Как тестировщик
-Я хочу проверить заполнение формы Cheque bond transaction
-Для удобства работы
+As a QA
+I want to check the Cheque bond transaction form.
+For ease of filling
 
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _2020001 preparation для проверки заполнения Cheque bond transaction
-	* Создание чека и его пометка на удаление
+Сценарий: _2020001 test data creation
+	* Creating a check and marking it for deletion
 		* Open catalog form
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.ChequeBonds'
 			И я нажимаю на кнопку с именем 'FormCreate'
@@ -30,7 +30,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И в поле 'Amount' я ввожу текст '10 000,00'
 			И я нажимаю на кнопку 'Save and close'
-		* Пометка созданного чека на удаление
+		* Mark the created check for deletion
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.ChequeBonds'
 			И в таблице "List" я перехожу к строке:
 			| 'Amount'    | 'Cheque No'          |
@@ -41,7 +41,7 @@
 			И в таблице "List" я перехожу к строке:
 			| 'Amount'    | 'Cheque No'          |
 			| '10 000,00' | 'Partner cheque 101' |
-	* Create one more партнерского чека
+	* Create one more partner cheque bond
 		* Open catalog form
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.ChequeBonds'
 			И я нажимаю на кнопку с именем 'FormCreate'
@@ -57,7 +57,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И в поле 'Amount' я ввожу текст '15 000,00'
 			И я нажимаю на кнопку 'Save and close'
-	* Создание Cheque bond transaction на изменение статуса чека Partner cheque 1
+	* Create a cheque bond transaction for change the status of Partner cheque 1
 		* Opening a document form ChequeBondTransaction
 			И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 			И я нажимаю на кнопку с именем 'FormCreate'
@@ -72,7 +72,7 @@
 				| 'Description'  |
 				| 'Main Company' |
 			И в таблице "List" я выбираю текущую строку
-		* Добавление чеков в табличную часть
+		* Adding cheques to the table part
 			И в таблице "ChequeBonds" я нажимаю на кнопку с именем 'ChequeBondsAdd'
 			И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Cheque"
 			И в таблице "List" я перехожу к строке:
@@ -100,18 +100,17 @@
 				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ChequeBonds" я завершаю редактирование строки
-		* Изменение номера
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '2'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '11'
 			И я нажимаю на кнопку 'Post and close'
-		* create
 			Тогда таблица "List" содержит строки
 			| 'Number' |
 			| '11'      |
-	* Создание чека выданного поставщику
+	* Create an outgoing check for vendor
 		* Open catalog form
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.ChequeBonds'
 			И я нажимаю на кнопку с именем 'FormCreate'
@@ -128,7 +127,7 @@
 			И в поле 'Amount' я ввожу текст '10 000,00'
 			И я нажимаю на кнопку 'Save and close'
 
-Сценарий: _2020001 проверка отбора по собственным компаниям в документе Cheque bond transaction
+Сценарий: _2020001 check selection for own companies in the document Cheque bond transaction
 	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -136,11 +135,11 @@
 		Когда проверяю работу фильтра по собственной Company в Cheque bond transaction
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _2020002 проверка автоматического заполнения Legal name (у партнера только одно Legal name) в документе Cheque bond transaction
+Сценарий: _2020002 check automatic filling Legal name (the partner has only one Legal name) in the document Cheque bond transaction
 	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление партнера с одним Legal name
+	* Add partner with one Legal name
 		И в таблице "ChequeBonds" я нажимаю на кнопку с именем 'ChequeBondsAdd'
 		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита с именем "ChequeBondsPartner"
 		И в таблице "List" я перехожу к строке:
@@ -154,11 +153,11 @@
 		| 'DFC'        | 'DFC'     |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _2020003 проверка автоматического заполнения Partner (у Legal name только один партнер) в документе Cheque bond transaction
+Сценарий: _2020003 check automatic filling Partner (the partner has only one Legal name) in the document Cheque bond transaction
 	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление партнера с одним Legal name
+	* Add legal name with one partner
 		И в таблице "ChequeBonds" я нажимаю на кнопку с именем 'ChequeBondsAdd'
 		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Legal name"
 		И в таблице "List" я перехожу к строке:
@@ -171,9 +170,9 @@
 		| 'DFC'        | 'DFC'     |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _2020004 проверка автоматического заполнения Partner term (у партнера только одно соглашение) в документе Cheque bond transaction
+Сценарий: _2020004 check the automatic filling in of Partner term (partner has only one Partner term) in Cheque bond transaction document
 	* preparation
-		# Удаление партнера DFC из всех сегментов и создание индивидуального соглашения
+		# Removing a DFC partner from all segments and creating an individual partner term
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -209,31 +208,31 @@
 	* Opening a document form ChequeBondTransaction
 			И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 			И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление партнера с одним соглашением
+	* Add a partner with one Partner term
 			И в таблице "ChequeBonds" я нажимаю на кнопку с именем 'ChequeBondsAdd'
 			И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
-	* Check filling inсоглашения
+	* Check filling in Partner term
 			И     таблица "ChequeBonds" содержит строки:
 				| 'Partner' | 'Partner term'     |
 				| 'DFC'     | 'Partner term DFC' |
 			И я закрыл все окна клиентского приложения
 
-Сценарий: _2020005 проверка отбора только доступных для партнера соглашений в документе Cheque bond transaction
+Сценарий: _2020005 checking the selection of only partner partner terms available in the Cheque bond transaction
 	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление партнера с одним соглашением
+	* Add a partner with one partner term
 		И в таблице "ChequeBonds" я нажимаю на кнопку с именем 'ChequeBondsAdd'
 		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка доступности для выбора только одного соглашения
+	* Checking availability to select only one partner term
 		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner term"
 		Тогда таблица "List" стала равной:
 			| 'Description'   |
@@ -244,7 +243,7 @@
 	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление партнера с одним соглашением
+	* Add a partner with one partner term
 		И в таблице "ChequeBonds" я нажимаю на кнопку с именем 'ChequeBondsAdd'
 		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -436,7 +435,7 @@
 				| 'Description'  |
 				| 'Main Company' |
 			И в таблице "List" я выбираю текущую строку
-		* Добавление чеков в табличную часть
+		* Adding cheques to the table part
 			И в таблице "ChequeBonds" я нажимаю на кнопку с именем 'ChequeBondsAdd'
 			И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Cheque"
 			И в таблице "List" я перехожу к строке:

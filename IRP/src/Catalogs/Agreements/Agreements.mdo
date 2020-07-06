@@ -331,7 +331,7 @@
     <name>StandardAgreement</name>
     <synonym>
       <key>en</key>
-      <value>Standard agreement</value>
+      <value>Standard partner term</value>
     </synonym>
     <type>
       <types>CatalogRef.Agreements</types>

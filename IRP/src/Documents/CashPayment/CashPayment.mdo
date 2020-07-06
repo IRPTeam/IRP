@@ -69,7 +69,7 @@
     <name>CashAccount</name>
     <synonym>
       <key>en</key>
-      <value>Cash/Bank accounts</value>
+      <value>Cash account</value>
     </synonym>
     <type>
       <types>CatalogRef.CashAccounts</types>

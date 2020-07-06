@@ -21,7 +21,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>Addresses hierarchy</value>
+    <value>Address hierarchy</value>
   </objectPresentation>
   <hierarchical>true</hierarchical>
   <hierarchyType>HierarchyOfItems</hierarchyType>

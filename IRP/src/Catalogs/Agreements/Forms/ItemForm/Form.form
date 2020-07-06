@@ -263,7 +263,7 @@
       <choiceList>
         <presentation>
           <key>en</key>
-          <value>By agreements</value>
+          <value>By partner terms</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
           <value>Enum.ApArPostingDetail.EnumValue.ByAgreements</value>
@@ -272,7 +272,7 @@
       <choiceList>
         <presentation>
           <key>en</key>
-          <value>By standard agreement</value>
+          <value>By standard partner term</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
           <value>Enum.ApArPostingDetail.EnumValue.ByStandardAgreement</value>

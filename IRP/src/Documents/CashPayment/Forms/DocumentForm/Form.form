@@ -103,7 +103,7 @@
           <extInfo xsi:type="form:LabelDecorationExtInfo">
             <handlers>
               <event>Click</event>
-              <name>DecorationGroupTitleCollapsedLalelClick</name>
+              <name>DecorationGroupTitleCollapsedLabelClick</name>
             </handlers>
             <hyperlink>true</hyperlink>
             <horizontalAlign>Left</horizontalAlign>
@@ -232,7 +232,7 @@
           <extInfo xsi:type="form:LabelDecorationExtInfo">
             <handlers>
               <event>Click</event>
-              <name>DecorationGroupTitleUncollapsedLalelClick</name>
+              <name>DecorationGroupTitleUncollapsedLabelClick</name>
             </handlers>
             <hyperlink>true</hyperlink>
             <horizontalAlign>Left</horizontalAlign>
@@ -2019,7 +2019,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Сurrency</value>
+        <value>Currency</value>
       </title>
       <extendedTooltip>
         <name>GroupCurrencyExtendedTooltip</name>
@@ -2595,7 +2595,7 @@
         <name>ApArPostingDetail</name>
         <title>
           <key>en</key>
-          <value>Ap ar posting detail</value>
+          <value>AP/AR posting detail</value>
         </title>
         <id>11</id>
         <valueType>

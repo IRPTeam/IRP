@@ -42,12 +42,12 @@ EndFunction
 Procedure AccountOnChange(Object, Form, Item = Undefined) Export
 	
 	CurrencyBeforeChange = Form.Currency;
-	AccountBeforeChange = Form.CurentAccount;
+	AccountBeforeChange = Form.CurrentAccount;
 	
 	Form.Currency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
 	
 	If Not ValueIsFilled(Form.Currency) Then
-		Form.CurentAccount = Object.Account;
+		Form.CurrentAccount = Object.Account;
 		
 		Return;
 	EndIf;
@@ -80,10 +80,10 @@ Procedure AccountOnChangeContinue(Result, AdditionalParameters) Export
 	
 	If Result = DialogReturnCode.No Then
 		Form.Currency		= AdditionalParameters.CurrencyBeforeChange;
-		Form.CurentAccount	= AdditionalParameters.AccountBeforeChange;
+		Form.CurrentAccount	= AdditionalParameters.AccountBeforeChange;
 		Object.Account		= AdditionalParameters.AccountBeforeChange;
 	ElsIf Result = DialogReturnCode.Yes Then
-		Form.CurentAccount = AdditionalParameters.Object.Account;
+		Form.CurrentAccount = AdditionalParameters.Object.Account;
 		For Each RowPaymentList In AdditionalParameters.Object.PaymentList Do
 			RowPaymentList.Currency = Form.Currency;
 		EndDo;

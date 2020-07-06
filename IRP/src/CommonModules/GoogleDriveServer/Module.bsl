@@ -1,8 +1,8 @@
 Function Settings() Export
 	Str = New Structure;
-	Str.Insert("client_id", "968447696884-0431fs3eom677aln94ilrej9ei1hl05j.apps.googleusercontent.com");
-	Str.Insert("client_secret", "tDGHoY99m5LTCsHaWMdd2SVl");
-	Str.Insert("key", "AIzaSyAwhWtBbQrTKJJ4rW4A0KK8FRcROz8b_IQ");
+	Str.Insert("client_id", "");
+	Str.Insert("client_secret", "");
+	Str.Insert("key", "");
 	oauth2 ="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=%1&access_type=offline&scope=%2&redirect_uri=http://localhost";
 	
 	ScopesArray = New Array;
@@ -26,7 +26,7 @@ Function AskGoogle(RequestBody)
 	HTTPSettings.Port = 443;
 	HTTPSettings.ResourceAddress = "/o/oauth2/token";
 	HTTPSettings.Headers.Insert("Content-Type", "application/x-www-form-urlencoded");
-	Answer = IntegrationClientServer.SendRequest(HTTPSettings,,,RequestBody);
+	Answer = IntegrationClientServer.SendRequest(HTTPSettings, , , RequestBody);
 	
 	If NOT Answer.StatusCode = 200 Then
 		Raise Answer.ResponseBody;
@@ -110,12 +110,12 @@ Function SendToDrive(IntegrationSettingsRef, Name, RequestBody) Export
 	DataTXT.Add("");
 	DataTXT.Add("{");
 	If Not ValueIsFilled("") Then
-		DataTXT.Add("  ""title"": """+Name+"""");
+		DataTXT.Add("  ""title"": """ + Name + """");
 	Else
-		DataTXT.Add("  ""title"": """+Name+""",");
+		DataTXT.Add("  ""title"": """ + Name + """,");
 		DataTXT.Add("  ""parents"": [{");
 		DataTXT.Add("  ""kind"": ""drive#fileLink"",");
-		DataTXT.Add("  ""id"": """+Name+"""");
+		DataTXT.Add("  ""id"": """ + Name + """");
 		DataTXT.Add("  }]");
 	EndIf;
 	DataTXT.Add("}");
@@ -123,12 +123,13 @@ Function SendToDrive(IntegrationSettingsRef, Name, RequestBody) Export
 	DataTXT.Add("--" + boundary);
 	DataTXT.Add("Content-Type: image/" + StrSplit(Name, ".")[1]); 
 	DataTXT.Add("Content-Transfer-Encoding: base64");
-	DataTXT.Add("");DataTXT.Add("");
+	DataTXT.Add("");
+	DataTXT.Add("");
 	
 	DataTXT.Add(Base64String(RequestBody));
 	
 	DataTXT.Add("");
-	DataTXT.Add("--"+boundary+"--");
+	DataTXT.Add("--" + boundary + "--");
 
 	Headers = New Map();
 	Headers.Insert("POST /upload/drive/v2/files?uploadType=multipart HTTP/1.1");

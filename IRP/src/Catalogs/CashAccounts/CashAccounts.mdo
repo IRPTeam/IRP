@@ -30,7 +30,7 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
     <key>en</key>
-    <value>Cash account</value>
+    <value>Cash/Bank accounts</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
@@ -154,7 +154,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="5949cb91-1cb8-49f8-973b-5f3784022eed">
       <name>Property</name>

@@ -80,14 +80,14 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	
 	StandardProcessing = False;
 	
-	QueryTable = GetChoiseDataTable(Parameters);
+	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = New ValueList();
 	For Each Row In QueryTable Do
 		ChoiceData.Add(Row.Ref, Row.Presentation);
 	EndDo;
 EndProcedure
 
-Function GetChoiseDataTable(Parameters) Export
+Function GetChoiceDataTable(Parameters) Export
 	
 	Filter = "
 		|	AND (CASE
@@ -147,8 +147,8 @@ Function GetChoiseDataTable(Parameters) Export
 	Return Query.Execute().Unload();
 EndFunction
 
-Function GetDefaultChoiseRef(Parameters) Export
-	QueryTable = GetChoiseDataTable(New Structure("SearchString, Filter", "", Parameters));
+Function GetDefaultChoiceRef(Parameters) Export
+	QueryTable = GetChoiceDataTable(New Structure("SearchString, Filter", "", Parameters));
 	
 	If QueryTable.Count() = 1 Then
 		Return QueryTable[0].Ref;

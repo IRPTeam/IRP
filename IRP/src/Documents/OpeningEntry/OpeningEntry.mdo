@@ -395,7 +395,7 @@
       <name>Agreement</name>
       <synonym>
         <key>en</key>
-        <value>Agreement</value>
+        <value>Partner term</value>
       </synonym>
       <type>
         <types>CatalogRef.Agreements</types>
@@ -516,7 +516,7 @@
       <name>Agreement</name>
       <synonym>
         <key>en</key>
-        <value>Agreement</value>
+        <value>Partner term</value>
       </synonym>
       <type>
         <types>CatalogRef.Agreements</types>
@@ -637,7 +637,7 @@
       <name>Agreement</name>
       <synonym>
         <key>en</key>
-        <value>Agreement</value>
+        <value>Partner term</value>
       </synonym>
       <type>
         <types>CatalogRef.Agreements</types>
@@ -737,7 +737,7 @@
       <name>Agreement</name>
       <synonym>
         <key>en</key>
-        <value>Agreement</value>
+        <value>Partner term</value>
       </synonym>
       <type>
         <types>CatalogRef.Agreements</types>
@@ -983,7 +983,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="02abebf8-e1e7-4df6-972a-b9a70f5b5e68">
       <name>Property</name>

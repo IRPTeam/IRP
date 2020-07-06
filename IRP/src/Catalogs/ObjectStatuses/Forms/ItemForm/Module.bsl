@@ -16,7 +16,7 @@ EndProcedure
 
 &AtClient
 Procedure NextPossibleStatusesStatusStartChoice(Item, ChoiceData, StandardProcessing)
-	ObjectStatusesClient.StatusStartChoise(Object,
+	ObjectStatusesClient.StatusStartChoice(Object,
 	                                       ThisObject,
 	                                       GetArrayOfFilters(),
 	                                       Item,

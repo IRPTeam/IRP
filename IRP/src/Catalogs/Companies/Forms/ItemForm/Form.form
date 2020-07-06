@@ -818,7 +818,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Сontact information</value>
+        <value>Contact information</value>
       </title>
       <extendedTooltip>
         <name>GroupContactInformationExtendedTooltip</name>
@@ -1242,7 +1242,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Taxes</value>
+        <value>Tax types</value>
       </title>
       <extendedTooltip>
         <name>GroupTaxesExtendedTooltip</name>

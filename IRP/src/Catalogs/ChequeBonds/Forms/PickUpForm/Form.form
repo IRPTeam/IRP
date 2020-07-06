@@ -57,7 +57,7 @@
       <titleLocation>None</titleLocation>
       <handlers>
         <event>OnChange</event>
-        <name>StstusCheakOnChange</name>
+        <name>StatusCheckOnChange</name>
       </handlers>
       <extendedTooltip>
         <name>StatusCheckExtendedTooltip</name>
@@ -1480,7 +1480,7 @@ FROM
     <name>Sourse</name>
     <title>
       <key>en</key>
-      <value>Sourse</value>
+      <value>Source</value>
     </title>
     <id>7</id>
     <valueType>

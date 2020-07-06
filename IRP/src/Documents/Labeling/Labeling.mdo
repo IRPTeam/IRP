@@ -103,7 +103,7 @@
       <name>SerialLotNumber</name>
       <synonym>
         <key>en</key>
-        <value>Serial lot number</value>
+        <value>Item serial/lot number</value>
       </synonym>
       <type>
         <types>CatalogRef.SerialLotNumbers</types>
@@ -165,7 +165,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="506af94a-702b-44e8-8676-b48b10bee70c">
       <name>Property</name>

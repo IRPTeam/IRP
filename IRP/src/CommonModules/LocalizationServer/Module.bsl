@@ -1,10 +1,10 @@
 Function Strings(LangCode = "en") Export
 	StringsStructure = Localization.Strings(LangCode);
 	If LangCode <> "en" Then
-		LocalisationStrings_df = Localization.Strings("en");
+		LocalizationStrings_df = Localization.Strings("en");
 		For Each StringsStructureItem In StringsStructure Do
 			If Not ValueIsFilled(StringsStructureItem.Value) Then
-				StringsStructure[StringsStructureItem.Key] = LocalisationStrings_df[StringsStructureItem.Key];
+				StringsStructure[StringsStructureItem.Key] = LocalizationStrings_df[StringsStructureItem.Key];
 			EndIf;
 		EndDo; 
 	EndIf;

@@ -29,7 +29,7 @@
 			| 'Description' |
 			| 'Nicoletta'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Posting by standart agreement Customer'
+		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard agreement Customer'
 	* Check filling inCompany из Agreement
 		* Изменение компании в Sales return order
 			И я нажимаю кнопку выбора у поля "Company"
@@ -150,7 +150,7 @@
 			| 'Description' |
 			| 'Nicoletta'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Posting by standart agreement Customer'
+		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard agreement Customer'
 	* Check filling inCompany из Agreement
 		* Изменение компании в Sales return order
 			И я нажимаю кнопку выбора у поля "Company"
@@ -406,7 +406,7 @@
 			| 'Description' |
 			| 'Veritas'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Posting by standart agreement (Veritas)'
+		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard agreement (Veritas)'
 	* Check filling inCompany из Agreement
 		* Изменение компании в Purchase return
 			И я нажимаю кнопку выбора у поля "Company"

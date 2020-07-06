@@ -306,13 +306,6 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.PickupItemsMobile</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>CommonForm.MainSettings</name>
 		<right>
 			<name>View</name>
@@ -377,7 +370,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.ShowAlfaTestingSaas</name>
+		<name>Constant.ShowAlphaTestingSaas</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

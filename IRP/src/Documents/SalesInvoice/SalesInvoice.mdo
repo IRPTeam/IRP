@@ -176,7 +176,7 @@
     <name>Agreement</name>
     <synonym>
       <key>en</key>
-      <value>Agreement</value>
+      <value>Partner term</value>
     </synonym>
     <type>
       <types>CatalogRef.Agreements</types>
@@ -744,7 +744,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="983f9d5c-e7bb-4dad-9af2-5e0e637a71d5">
       <name>Property</name>

@@ -365,6 +365,7 @@ body.fill-color{
   <script>
 let slideIndex = 0;
 let interval = false;
+var call1C = null;
 
 const slidesDiv = document.querySelector('.slides');
 const thumbnailsDiv = document.querySelector('.thumbnails');
@@ -384,14 +385,17 @@ function zoomImage(e){
 }
 
 function send_to_1C(name, data){ 
- var event = new MouseEvent('click', {
-    'view': window,
-   'bubbles': true,
-    'cancelable': true
-  });
-  event.propertyName = name;
-  event.data = data; 
-  document.dispatchEvent(event);
+	call1C = data;
+	call1CEvent.click();
+	
+	//var event = new MouseEvent('click', {
+    //	'view': window,
+   	//	'bubbles': true,
+    //	'cancelable': true
+  	//	});
+    //event.propertyName = name;
+    //event.data = data; 
+    //document.dispatchEvent(event);
 }
 
 function getCurrentSlideId(){
@@ -610,6 +614,6 @@ document.querySelector('.btn.changeBgColor').addEventListener('click', function 
   document.querySelector('.slides').classList.toggle('fill-color');
 })
   </script>
-
+<button id="call1CEvent" style="display: none">call1C</button>
 </body>
 </html>

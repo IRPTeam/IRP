@@ -3,7 +3,7 @@
   <name>AddAttributesAndPropertiesClient</name>
   <synonym>
     <key>en</key>
-    <value>Add attributes and properties client</value>
+    <value>Additional attributes client</value>
   </synonym>
   <clientManagedApplication>true</clientManagedApplication>
 </mdclass:CommonModule>

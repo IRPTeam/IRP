@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>PriceType</v8:content>
+					<v8:content>Price type</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -64,7 +64,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>PriceDefinitionType</v8:content>
+					<v8:content>Price definition type</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -81,7 +81,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>PriceDefinitionReason</v8:content>
+					<v8:content>Price definition reason</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -96,7 +96,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>IsPriority</v8:content>
+					<v8:content>Is priority</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -407,18 +407,6 @@
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Reason</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>[PriceDefinitionReasonString]null[PriceDefinitionReason]</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>tr</v8:lang>
-								<v8:content>[PriceDefinitionReasonString]null[PriceDefinitionReason]</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>hash</v8:lang>
-								<v8:content>[PriceDefinitionReasonString]null[PriceDefinitionReason]</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1351,7 +1339,7 @@
 						<dcscor:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content> Actual prices </v8:content>
+								<v8:content>Actual prices</v8:content>
 							</v8:item>
 						</dcscor:value>
 					</dcscor:item>
@@ -1486,7 +1474,7 @@
 						<dcscor:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content> All prices</v8:content>
+								<v8:content>All prices</v8:content>
 							</v8:item>
 						</dcscor:value>
 					</dcscor:item>

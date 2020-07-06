@@ -1650,7 +1650,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Agreement'                              | 'Payer'             |
-			| 'Nicoletta' | 'Posting by standart agreement Customer' | 'Company Nicoletta' |
+			| 'Nicoletta' | 'Posting by Standard agreement Customer' | 'Company Nicoletta' |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 	* Проверка отображения для выбора только доступных соглашений по партнеру
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -1703,7 +1703,7 @@
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка недоступности выбора документа-основания при выборе Agreement с расчетом by standart agreement
+	* Проверка недоступности выбора документа-основания при выборе Agreement с расчетом by Standard agreement
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1719,7 +1719,7 @@
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Posting by standart agreement Customer' |
+			| 'Posting by Standard agreement Customer' |
 		И в таблице "List" я выбираю текущую строку
 	* Проверка добавления basis document без выбора документа основания
 		Когда Проверяю шаги на Исключение:
@@ -1858,7 +1858,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Agreement'                              | 'Payer'             |
-			| 'Nicoletta' | 'Posting by standart agreement Customer' | 'Company Nicoletta' |
+			| 'Nicoletta' | 'Posting by Standard agreement Customer' | 'Company Nicoletta' |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 	* Проверка отображения для выбора только доступных соглашений по партнеру
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -1911,7 +1911,7 @@
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка недоступности выбора документа-основания при выборе Agreement с расчетом by standart agreement
+	* Проверка недоступности выбора документа-основания при выборе Agreement с расчетом by Standard agreement
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1927,7 +1927,7 @@
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Posting by standart agreement Customer' |
+			| 'Posting by Standard agreement Customer' |
 		И в таблице "List" я выбираю текущую строку
 	* Проверка добавления basis document без выбора документа основания
 		Когда Проверяю шаги на Исключение:
@@ -2085,7 +2085,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Agreement'                               | 'Payee'             |
-			| 'Veritas'   | 'Posting by standart agreement (Veritas)' | 'Company Veritas' |
+			| 'Veritas'   | 'Posting by Standard agreement (Veritas)' | 'Company Veritas' |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 	* Проверка отображения для выбора только доступных соглашений по партнеру
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -2137,7 +2137,7 @@
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка недоступности выбора документа-основания при выборе Agreement с расчетом by standart agreement
+	* Проверка недоступности выбора документа-основания при выборе Agreement с расчетом by Standard agreement
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2153,7 +2153,7 @@
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Posting by standart agreement (Veritas)' |
+			| 'Posting by Standard agreement (Veritas)' |
 		И в таблице "List" я выбираю текущую строку
 	* Проверка добавления basis document без выбора документа основания
 		Когда Проверяю шаги на Исключение:
@@ -2306,7 +2306,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Agreement'                               | 'Payee'             |
-			| 'Veritas'   | 'Posting by standart agreement (Veritas)' | 'Company Veritas' |
+			| 'Veritas'   | 'Posting by Standard agreement (Veritas)' | 'Company Veritas' |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 	* Проверка отображения для выбора только доступных соглашений по партнеру
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -2358,7 +2358,7 @@
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка недоступности выбора документа-основания при выборе Agreement с расчетом by standart agreement
+	* Проверка недоступности выбора документа-основания при выборе Agreement с расчетом by Standard agreement
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2374,7 +2374,7 @@
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Posting by standart agreement (Veritas)' |
+			| 'Posting by Standard agreement (Veritas)' |
 		И в таблице "List" я выбираю текущую строку
 	* Проверка добавления basis document без выбора документа основания
 		Когда Проверяю шаги на Исключение:
@@ -3197,7 +3197,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
 		| 'Partner'   | 'Agreement'                              | 'Payer'             |
-		| 'Nicoletta' | 'Posting by standart agreement Customer' | 'Company Nicoletta' |
+		| 'Nicoletta' | 'Posting by Standard agreement Customer' | 'Company Nicoletta' |
 	* Проверка очистки полей 'Agreement' и 'Payer' при перевыборе вида операции на Currency exchange
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
@@ -3254,7 +3254,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
 		| 'Partner'   | 'Agreement'                              | 'Payee'             |
-		| 'Nicoletta' | 'Posting by standart agreement Customer' | 'Company Nicoletta' |
+		| 'Nicoletta' | 'Posting by Standard agreement Customer' | 'Company Nicoletta' |
 	* Проверка очистки полей 'Agreement' и 'Payee' при перевыборе вида операции на Currency exchange
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
@@ -3310,7 +3310,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
 		| 'Partner'   | 'Agreement'                              | 'Payer'             |
-		| 'Nicoletta' | 'Posting by standart agreement Customer' | 'Company Nicoletta' |
+		| 'Nicoletta' | 'Posting by Standard agreement Customer' | 'Company Nicoletta' |
 	* Проверка очистки полей 'Agreement' и 'Payer' при перевыборе вида операции на Currency exchange
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
@@ -3370,7 +3370,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
 		| 'Partner'   | 'Agreement'                              | 'Payee'             |
-		| 'Nicoletta' | 'Posting by standart agreement Customer' | 'Company Nicoletta' |
+		| 'Nicoletta' | 'Posting by Standard agreement Customer' | 'Company Nicoletta' |
 	* Проверка очистки полей 'Agreement' и 'Payee' при перевыборе вида операции на Currency exchange
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
@@ -4260,7 +4260,7 @@
 			Дано двойной клик на картинку "reverse"
 			И в таблице "PaymentList" я перехожу к строке:
 				| 'Agreement'                               | 'Amount' | 'Partner' | 'Payer'            |
-				| 'Posting by standart agreement (Veritas)' | '200,00' | 'Veritas' | 'Company Veritas ' |
+				| 'Posting by Standard agreement (Veritas)' | '200,00' | 'Veritas' | 'Company Veritas ' |
 			И в таблице "PaymentList" я активизирую поле "Agreement"
 			Тогда таблица "CurrenciesPaymentList" содержит строки:
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |

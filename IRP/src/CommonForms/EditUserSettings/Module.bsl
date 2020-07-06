@@ -27,11 +27,11 @@ EndProcedure
 
 &AtClient
 Procedure MetadataTreeOnActivateRow(Item)
-	CurrenRowID = Items.MetadataTree.CurrentRow;
-	If CurrenRowID = Undefined Then
+	CurrentRowID = Items.MetadataTree.CurrentRow;
+	If CurrentRowID = Undefined Then
 		Return;
 	EndIf;
-	CurrentRow = ThisObject.MetadataTree.FindByID(CurrenRowID);
+	CurrentRow = ThisObject.MetadataTree.FindByID(CurrentRowID);
 	TypeRestriction = CurrentRow.TypeRestriction;
 	If TypeRestriction <> New typeDescription() Then
 		Items.MetadataTreeValue.TypeRestriction = TypeRestriction;
@@ -48,11 +48,11 @@ EndProcedure
 
 &AtClient
 Procedure MetadataTreeValueOnChange(Item)
-	CurrenRowID = Items.MetadataTree.CurrentRow;
-	If CurrenRowID = Undefined Then
+	CurrentRowID = Items.MetadataTree.CurrentRow;
+	If CurrentRowID = Undefined Then
 		Return;
 	EndIf;
-	CurrentRow = ThisObject.MetadataTree.FindByID(CurrenRowID);
+	CurrentRow = ThisObject.MetadataTree.FindByID(CurrentRowID);
 	CurrentRow.Use = ValueIsFilled(CurrentRow.Value);
 EndProcedure
 

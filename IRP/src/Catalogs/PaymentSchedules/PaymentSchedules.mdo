@@ -10,7 +10,7 @@
   <name>PaymentSchedules</name>
   <synonym>
     <key>en</key>
-    <value>Payment schedules</value>
+    <value>Payment terms</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -18,7 +18,7 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
     <key>en</key>
-    <value>Payment schedule</value>
+    <value>Payment term</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>

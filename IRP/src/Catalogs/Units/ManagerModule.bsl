@@ -39,7 +39,7 @@ Function GetUnitFactor(FromUnit, ToUnit = Undefined) Export
 	
 	If ToUnit <> Undefined Then
 		Result = New Array();
-		GetUnitFactorRecursy(FromUnit, ToUnit, Result);
+		GetUnitFactorRecursion(FromUnit, ToUnit, Result);
 		Factor = 1;
 		For Each Value In Result Do
 			Factor = Factor * Value;
@@ -50,10 +50,10 @@ Function GetUnitFactor(FromUnit, ToUnit = Undefined) Export
 	EndIf;
 EndFunction
 
-Procedure GetUnitFactorRecursy(FromUnit, ToUnit, Result)
+Procedure GetUnitFactorRecursion(FromUnit, ToUnit, Result)
 	If ValueIsFilled(FromUnit.BasisUnit) And FromUnit <> ToUnit Then
 		Result.Add(FromUnit.Quantity);
-		GetUnitFactorRecursy(FromUnit.BasisUnit, ToUnit, Result);
+		GetUnitFactorRecursion(FromUnit.BasisUnit, ToUnit, Result);
 	EndIf;
 EndProcedure
 

@@ -402,6 +402,16 @@ Function ScalePicture(BinaryData, SizePx = Undefined) Export
 	Return NewPicture.GetBinaryData();
 EndFunction
 
+Function UpdatePictureInfoAndGetPreview(BinaryData, SizePx = Undefined) Export
+	FileInfo = PictureViewerClientServer.FileInfo();
+	Picture = New Picture(BinaryData);
+	FileInfo.Height = Picture.Height();
+	FileInfo.Width = Picture.Width();
+	FileInfo.Size = Picture.FileSize();
+	FileInfo.Preview = ScalePicture(BinaryData, SizePx);
+	Return FileInfo;
+EndFunction
+
 #Region HTML
 
 Function HTMLPictureSlider() Export

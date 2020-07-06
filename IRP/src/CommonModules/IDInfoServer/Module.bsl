@@ -155,11 +155,11 @@ Procedure ReplaceItemsFromFilter(StructureOfCondition) Export
 			ReplaceItemsFromFilter(Field.Items);
 		EndIf;
 		If TypeOf(Field) = Type("DataCompositionFilterItem") Then
-			AffayOfParts = StrSplit(String(Field.LeftValue), ".");
+			ArrayOfParts = StrSplit(String(Field.LeftValue), ".");
 			NeedCountOfParts = 2;
-			If AffayOfParts.Count() >= NeedCountOfParts Then
-				NewField = New DataCompositionField(AffayOfParts[0] + "."
-						+ "[" + String(StructureOfCondition.AddAttributesMap.Get(AffayOfParts[1])) + "]");
+			If ArrayOfParts.Count() >= NeedCountOfParts Then
+				NewField = New DataCompositionField(ArrayOfParts[0] + "."
+						+ "[" + String(StructureOfCondition.AddAttributesMap.Get(ArrayOfParts[1])) + "]");
 				Field.LeftValue = NewField;
 			EndIf;
 		EndIf;
@@ -203,11 +203,11 @@ EndFunction
 
 Function GetRefsByCondition(DCSTemplate, Settings, AddInfo = Undefined) Export
 	Composer = New DataCompositionTemplateComposer();
-	Tempalte = Composer.Execute(DCSTemplate, Settings, , ,
+	Template = Composer.Execute(DCSTemplate, Settings, , ,
 			Type("DataCompositionValueCollectionTemplateGenerator"));
 	
 	Processor = New DataCompositionProcessor();
-	Processor.Initialize(Tempalte);
+	Processor.Initialize(Template);
 	
 	Output = New DataCompositionResultValueCollectionOutputProcessor();
 	Result = New ValueTable();
@@ -219,7 +219,7 @@ EndFunction
 
 Function GetCountryByIDInfoType(IDInfoTypeRef, Country, UUIDForSettings, AddInfo = Undefined) Export
 	ArrayOfCountry = New Array();
-	For Each Row In IDInfoTypeRef.ExternalDataProces Do
+	For Each Row In IDInfoTypeRef.ExternalDataProcess Do
 		If ValueIsFilled(Country) And Row.Country <> Country Then
 			Continue;
 		EndIf;
@@ -230,7 +230,7 @@ Function GetCountryByIDInfoType(IDInfoTypeRef, Country, UUIDForSettings, AddInfo
 		ArrayOfCountry.Add(Structure);
 	EndDo;
 	If Not ArrayOfCountry.Count() Then
-		For Each Row In IDInfoTypeRef.ExternalDataProces Do
+		For Each Row In IDInfoTypeRef.ExternalDataProcess Do
 			If Not ValueIsFilled(Row.Country) Then
 				Structure = New Structure();
 				Structure.Insert("Country", Country);

@@ -51,7 +51,7 @@ Function GetPartnerByLegalName(LegalName, Partner) Export
 		Parameters = New Structure("CustomSearchFilter, AdditionalParameters",
 				DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
 				DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
-		Return Catalogs.Partners.GetDefaultChoiseRef(Parameters);
+		Return Catalogs.Partners.GetDefaultChoiceRef(Parameters);
 	EndIf;
 	Return Undefined;
 EndFunction

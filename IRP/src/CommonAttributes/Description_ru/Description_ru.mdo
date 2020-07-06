@@ -125,6 +125,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.ReportOptions</metadata>
+    <use>DontUse</use>
+  </content>
+  <content>
     <metadata>Catalog.Currencies</metadata>
     <use>Use</use>
   </content>

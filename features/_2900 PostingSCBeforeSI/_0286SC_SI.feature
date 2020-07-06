@@ -430,7 +430,7 @@
 				И я нажимаю кнопку выбора у поля "Agreement"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Posting by standart agreement Customer' |
+					| 'Posting by Standard agreement Customer' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 01'
 				И я нажимаю на кнопку 'OK'
@@ -517,7 +517,7 @@
 				И я нажимаю кнопку выбора у поля "Agreement"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Posting by standart agreement Customer' |
+					| 'Posting by Standard agreement Customer' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 01'
 				И я нажимаю на кнопку 'OK'
@@ -604,7 +604,7 @@
 				И я нажимаю кнопку выбора у поля "Agreement"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Posting by standart agreement Customer' |
+					| 'Posting by Standard agreement Customer' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 01'
 				И я нажимаю на кнопку 'OK'
@@ -691,7 +691,7 @@
 				И я нажимаю кнопку выбора у поля "Agreement"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Posting by standart agreement Customer' |
+					| 'Posting by Standard agreement Customer' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 01'
 				И я нажимаю на кнопку 'OK'

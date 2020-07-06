@@ -353,12 +353,12 @@
     <name>AddExtDataProc</name>
     <title>
       <key>en</key>
-      <value>Add ext data proc</value>
+      <value>Add plugin</value>
     </title>
     <id>1</id>
     <toolTip>
       <key>en</key>
-      <value>Add ext data proc</value>
+      <value>Add plugin</value>
     </toolTip>
     <use>
       <common>true</common>
@@ -374,7 +374,7 @@
     <name>ExportExtDataProc</name>
     <title>
       <key>en</key>
-      <value>Export ext data proc</value>
+      <value>Export plugin</value>
     </title>
     <id>2</id>
     <use>

@@ -6,7 +6,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Else
 		Cancel = True;
 	EndIf;
-	SetConditionalAppearence();
+	SetConditionalAppearance();
 	SetVisibility();
 EndProcedure
 
@@ -18,21 +18,21 @@ Procedure SetVisibility()
 EndProcedure
 
 &AtServer
-Procedure SetConditionalAppearence()
+Procedure SetConditionalAppearance()
 	ConditionalAppearance.Items.Clear();
 	
-	AppearenceElement = ConditionalAppearance.Items.Add();
+	AppearanceElement = ConditionalAppearance.Items.Add();
 	
-	FieldElement = AppearenceElement.Fields.Items.Add();
+	FieldElement = AppearanceElement.Fields.Items.Add();
 	FieldElement.Field = New DataCompositionField(Items.DocumentsTreeReceiptBasis.Name);
-	FieldElement = AppearenceElement.Fields.Items.Add();
+	FieldElement = AppearanceElement.Fields.Items.Add();
 	FieldElement.Field = New DataCompositionField(Items.DocumentsTreeCurrency.Name);
 	
-	FilterElement = AppearenceElement.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	FilterElement = AppearanceElement.Filter.Items.Add(Type("DataCompositionFilterItem"));
 	FilterElement.LeftValue = New DataCompositionField("DocumentsTree.ItemKey");
 	FilterElement.ComparisonType = DataCompositionComparisonType.Filled;
 	
-	AppearenceElement.Appearance.SetParameterValue("Text", "");
+	AppearanceElement.Appearance.SetParameterValue("Text", "");
 EndProcedure
 
 &AtServer

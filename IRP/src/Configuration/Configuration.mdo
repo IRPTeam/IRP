@@ -18,6 +18,7 @@
   <vendor>IRP Team</vendor>
   <version>0.6.4</version>
   <updateCatalogAddress>https://github.com/DitriXNew/irp</updateCatalogAddress>
+  <reportsVariantsStorage>SettingsStorage.ReportOptions</reportsVariantsStorage>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>
   <mainSectionPicture/>
   <defaultLanguage>Language.English</defaultLanguage>
@@ -27,11 +28,11 @@
   </copyright>
   <vendorInformationAddress>
     <key>en</key>
-    <value>https://github.com/DitriXNew/irp</value>
+    <value>https://github.com/IRPTeam/IRP</value>
   </vendorInformationAddress>
   <configurationInformationAddress>
     <key>en</key>
-    <value>https://github.com/DitriXNew/irp</value>
+    <value>https://github.com/IRPTeam/IRP</value>
   </configurationInformationAddress>
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectAutonumerationMode>NotAutoFree</objectAutonumerationMode>
@@ -302,6 +303,7 @@
   <commonModules>CommonModule.UserSettingsClient</commonModules>
   <commonModules>CommonModule.UserSettingsServer</commonModules>
   <commonModules>CommonModule.UsersEvent</commonModules>
+  <commonModules>CommonModule.CatUserGroupsServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -326,9 +328,10 @@
   <eventSubscriptions>EventSubscription.UpdateUsersRole</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
+  <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>
   <functionalOptions>FunctionalOption.BetaTesting</functionalOptions>
   <functionalOptions>FunctionalOption.SaasMode</functionalOptions>
-  <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
+  <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -375,7 +378,7 @@
   <constants>Constant.DefaultPictureStorageVolume</constants>
   <constants>Constant.NotFirstStart</constants>
   <constants>Constant.SaasMode</constants>
-  <constants>Constant.ShowAlfaTestingSaas</constants>
+  <constants>Constant.ShowAlphaTestingSaas</constants>
   <constants>Constant.ShowBetaTesting</constants>
   <constants>Constant.UseCompanies</constants>
   <constants>Constant.UseItemKey</constants>
@@ -389,7 +392,6 @@
   <commonForms>CommonForm.MainSettings</commonForms>
   <commonForms>CommonForm.PickUpDocuments</commonForms>
   <commonForms>CommonForm.PickupItems</commonForms>
-  <commonForms>CommonForm.PickupItemsMobile</commonForms>
   <commonForms>CommonForm.PickupSpecialOffers</commonForms>
   <commonForms>CommonForm.PictureGalleryForm</commonForms>
   <commonForms>CommonForm.PictureViewerFormHTML</commonForms>
@@ -397,6 +399,7 @@
   <commonForms>CommonForm.RelatedDocuments</commonForms>
   <commonForms>CommonForm.ReportForm</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
+  <commonForms>CommonForm.ShareToUsers</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
@@ -447,6 +450,7 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.ReportOptions</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -486,7 +490,6 @@
   <documents>Document.StockAdjustmentAsSurplus</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
-  <documents>Document.ZReport</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AgreementKinds</enums>
@@ -544,6 +547,7 @@
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
+  <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>

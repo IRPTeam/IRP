@@ -56,8 +56,8 @@ Procedure BeforeWrite(Cancel)
 		Return;
 	EndIf;
 	
-	If AdditionalProperties.Property("SynhronizeAffectPricingMD5")
-		And AdditionalProperties.SynhronizeAffectPricingMD5 Then
+	If AdditionalProperties.Property("SynchronizeAffectPricingMD5")
+		And AdditionalProperties.SynchronizeAffectPricingMD5 Then
 		
 		If AdditionalProperties.Property("AffectPricingMD5") Then
 			SetAffectPricingMD5(AdditionalProperties.AffectPricingMD5);

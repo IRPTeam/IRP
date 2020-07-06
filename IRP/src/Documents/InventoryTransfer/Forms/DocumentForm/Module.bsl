@@ -8,7 +8,7 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -123,8 +123,8 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLalelClick(Item)
-	DocInventoryTransferClient.DecorationGroupTitleCollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocInventoryTransferClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -133,8 +133,8 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
-	DocInventoryTransferClient.DecorationGroupTitleUncollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocInventoryTransferClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -163,7 +163,7 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 

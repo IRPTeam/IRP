@@ -11,7 +11,7 @@
   <name>IDInfoTypes</name>
   <synonym>
     <key>en</key>
-    <value>ID Info types</value>
+    <value>Contact info types</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -89,10 +89,10 @@
       <objectType typeId="6b8bd8eb-1a94-4c91-8b0b-da553a34904b" valueTypeId="a2c05f04-1a4d-4822-a62b-344b19b92dc0"/>
       <rowType typeId="ae0aca17-9fee-4963-a9b0-1d4e8c3e580d" valueTypeId="849a8035-9eb6-4e6c-811f-4a6ae2ca8766"/>
     </producedTypes>
-    <name>ExternalDataProces</name>
+    <name>ExternalDataProcess</name>
     <synonym>
       <key>en</key>
-      <value>External data proces</value>
+      <value>Plugins</value>
     </synonym>
     <attributes uuid="97042539-5fd3-4d0d-9edb-2f2308bb2bbc">
       <name>Country</name>
@@ -110,7 +110,7 @@
       <name>ExternalDataProc</name>
       <synonym>
         <key>en</key>
-        <value>External data proc</value>
+        <value>Plugins</value>
       </synonym>
       <type>
         <types>CatalogRef.ExternalDataProc</types>
@@ -147,7 +147,7 @@
       <name>IDInfoType</name>
       <synonym>
         <key>en</key>
-        <value>ID Info type</value>
+        <value>Contact info type</value>
       </synonym>
       <type>
         <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>

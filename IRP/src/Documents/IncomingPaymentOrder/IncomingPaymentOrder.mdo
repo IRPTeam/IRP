@@ -110,7 +110,7 @@
     <name>PlaningDate</name>
     <synonym>
       <key>en</key>
-      <value>Planing date</value>
+      <value>Planning date</value>
     </synonym>
     <type>
       <types>Date</types>
@@ -353,7 +353,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="4cde061c-4e0b-4b45-a737-92f8acaefc0f">
       <name>Property</name>

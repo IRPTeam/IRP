@@ -103,18 +103,6 @@
             | Description     |
             | PICTURE STORAGE |
         И в таблице "List" я выбираю текущую строку
-        И я устанавливаю флаг 'Use preview1'
-        И я нажимаю кнопку выбора у поля "Preview1 POST Integration settings"
-        И в таблице "List" я перехожу к строке:
-            | Description     |
-            | PREWIEV STORAGE |
-        И в таблице "List" я выбираю текущую строку
-        И я нажимаю кнопку выбора у поля "Preview1 GET Integration settings"
-        И в таблице "List" я перехожу к строке:
-            | Description     |
-            | PREWIEV STORAGE |
-        И в таблице "List" я выбираю текущую строку
-        И в поле 'Preview1 size px' я ввожу текст '200'
         И я нажимаю на кнопку 'Save and close'
     * Заполнение константы по расположению картинок 
         Когда В панели разделов я выбираю 'Settings'

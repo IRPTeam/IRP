@@ -303,7 +303,7 @@ I want to pay cash
 				| 'Number' |
 				| '1'      |
 			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		* Сheck that there is no movement on the registers
+		* Check that there is no movement on the registers
 			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PartnerApTransactions'
 			Тогда таблица "List" не содержит строки:
 				| 'Recorder'           |

@@ -86,15 +86,15 @@ Procedure StartEditIDInfo(Result, Parameters) Export
 	
 	Parameters.Insert("Country", Result.Country);
 	
-	CallMetodAddDataProc(OpenFormArgs);
+	CallMethodAddDataProc(OpenFormArgs);
 	Notify = New NotifyDescription("EndEditIDInfo", ThisObject, Parameters);
 	
 	AddDataProcClient.OpenFormAddDataProc(OpenFormArgs, Notify, "Form");
 EndProcedure
 
 &AtServer
-Procedure CallMetodAddDataProc(OpenFormArgs)
-	AddDataProcServer.CallMetodAddDataProc(OpenFormArgs);
+Procedure CallMethodAddDataProc(OpenFormArgs)
+	AddDataProcServer.CallMethodAddDataProc(OpenFormArgs);
 EndProcedure
 
 &AtClient

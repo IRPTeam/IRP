@@ -1,5 +1,5 @@
 Function GetItemKeyByItem(Item) Export
-	Return Catalogs.ItemKeys.GetUniqItemKeyByItem(Item);
+	Return Catalogs.ItemKeys.GetUniqueItemKeyByItem(Item);
 EndFunction
 
 Function GetArrayOfItemKeysByItem(Item) Export

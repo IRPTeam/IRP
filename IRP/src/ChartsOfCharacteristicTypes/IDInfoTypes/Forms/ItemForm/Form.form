@@ -281,7 +281,7 @@
       <name>GroupPageExternalDataProc</name>
       <id>33</id>
       <items xsi:type="form:Table">
-        <name>ExternalDataProces</name>
+        <name>ExternalDataProcess</name>
         <id>9</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -289,11 +289,11 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.ExternalDataProces</segments>
+          <segments>Object.ExternalDataProcess</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
-          <name>ExternalDataProcesLineNumber</name>
+          <name>ExternalDataProcessLineNumber</name>
           <id>22</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -302,11 +302,11 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.ExternalDataProces.LineNumber</segments>
+              <segments>Object.ExternalDataProcess.LineNumber</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
-            <name>ExternalDataProcesLineNumberExtendedTooltip</name>
+            <name>ExternalDataProcessLineNumberExtendedTooltip</name>
             <id>24</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -321,7 +321,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ExternalDataProcesLineNumberContextMenu</name>
+            <name>ExternalDataProcessLineNumberContextMenu</name>
             <id>23</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -345,7 +345,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ExternalDataProcesCountry</name>
+          <name>ExternalDataProcessCountry</name>
           <id>25</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -354,11 +354,11 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.ExternalDataProces.Country</segments>
+              <segments>Object.ExternalDataProcess.Country</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
-            <name>ExternalDataProcesCountryExtendedTooltip</name>
+            <name>ExternalDataProcessCountryExtendedTooltip</name>
             <id>27</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -373,7 +373,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ExternalDataProcesCountryContextMenu</name>
+            <name>ExternalDataProcessCountryContextMenu</name>
             <id>26</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -397,7 +397,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ExternalDataProcesExternalDataProc</name>
+          <name>ExternalDataProcessExternalDataProc</name>
           <id>28</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -406,11 +406,11 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.ExternalDataProces.ExternalDataProc</segments>
+              <segments>Object.ExternalDataProcess.ExternalDataProc</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
-            <name>ExternalDataProcesExternalDataProcExtendedTooltip</name>
+            <name>ExternalDataProcessExternalDataProcExtendedTooltip</name>
             <id>30</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -425,7 +425,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ExternalDataProcesExternalDataProcContextMenu</name>
+            <name>ExternalDataProcessExternalDataProcContextMenu</name>
             <id>29</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -449,10 +449,10 @@
           </extInfo>
         </items>
         <autoCommandBar>
-          <name>ExternalDataProcesCommandBar</name>
+          <name>ExternalDataProcessCommandBar</name>
           <id>10</id>
           <items xsi:type="form:Button">
-            <name>ExternalDataProcesSetSettings</name>
+            <name>ExternalDataProcessSetSettings</name>
             <id>68</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -460,7 +460,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>ExternalDataProcesSetSettingsExtendedTooltip</name>
+              <name>ExternalDataProcessSetSettingsExtendedTooltip</name>
               <id>69</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -491,7 +491,7 @@
         </autoCommandBar>
         <handlers>
           <event>OnActivateRow</event>
-          <name>ExternalDataProcesOnActivateRow</name>
+          <name>ExternalDataProcessorOnActivateRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -499,10 +499,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <name>ExternalDataProcesSearchString</name>
+          <name>ExternalDataProcessSearchString</name>
           <id>13</id>
           <extendedTooltip>
-            <name>ExternalDataProcesSearchStringExtendedTooltip</name>
+            <name>ExternalDataProcessSearchStringExtendedTooltip</name>
             <id>15</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -517,7 +517,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ExternalDataProcesSearchStringContextMenu</name>
+            <name>ExternalDataProcessSearchStringContextMenu</name>
             <id>14</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -536,10 +536,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <name>ExternalDataProcesViewStatus</name>
+          <name>ExternalDataProcessViewStatus</name>
           <id>19</id>
           <extendedTooltip>
-            <name>ExternalDataProcesViewStatusExtendedTooltip</name>
+            <name>ExternalDataProcessViewStatusExtendedTooltip</name>
             <id>21</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -554,7 +554,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ExternalDataProcesViewStatusContextMenu</name>
+            <name>ExternalDataProcessViewStatusContextMenu</name>
             <id>20</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -575,10 +575,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <name>ExternalDataProcesSearchControl</name>
+          <name>ExternalDataProcessSearchControl</name>
           <id>16</id>
           <extendedTooltip>
-            <name>ExternalDataProcesSearchControlExtendedTooltip</name>
+            <name>ExternalDataProcessSearchControlExtendedTooltip</name>
             <id>18</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -593,7 +593,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ExternalDataProcesSearchControlContextMenu</name>
+            <name>ExternalDataProcessSearchControlContextMenu</name>
             <id>17</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -608,7 +608,7 @@
           </extInfo>
         </searchControlAddition>
         <extendedTooltip>
-          <name>ExternalDataProcesExtendedTooltip</name>
+          <name>ExternalDataProcessExtendedTooltip</name>
           <id>12</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -623,7 +623,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>ExternalDataProcesContextMenu</name>
+          <name>ExternalDataProcessContextMenu</name>
           <id>11</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -658,7 +658,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>External data proc</value>
+        <value>Plugins</value>
       </title>
       <extendedTooltip>
         <name>GroupPageExternalDataProcExtendedTooltip</name>

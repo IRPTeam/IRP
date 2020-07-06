@@ -1,45 +1,45 @@
 Procedure Posting(Cancel, PostingMode)
 	
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
-	Synhronize("Post", Cancel);
+	Synchronize("Post", Cancel);
 	
 EndProcedure
 
 Procedure UndoPosting(Cancel)
 	
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
-	Synhronize("Unpost", Cancel);
+	Synchronize("Unpost", Cancel);
 	
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
 	
-	Synhronize("Delete", Cancel);
+	Synchronize("Delete", Cancel);
 	
 EndProcedure
 
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
-	If Not ThisObject.AdditionalProperties.Property("DelayedSynhronization") Then
-		ThisObject.AdditionalProperties.Insert("DelayedSynhronization", New Array());
+	If Not ThisObject.AdditionalProperties.Property("DelayedSynchronization") Then
+		ThisObject.AdditionalProperties.Insert("DelayedSynchronization", New Array());
 	EndIf;
 	
 	If Not ThisObject.Ref.DeletionMark And ThisObject.DeletionMark Then
-		ThisObject.AdditionalProperties.DelayedSynhronization.Add("SetDeletionMark");
+		ThisObject.AdditionalProperties.DelayedSynchronization.Add("SetDeletionMark");
 	EndIf;
 	If ThisObject.Ref.DeletionMark And Not ThisObject.DeletionMark Then
-		ThisObject.AdditionalProperties.DelayedSynhronization.Add("UnsetDeletionMark");
+		ThisObject.AdditionalProperties.DelayedSynchronization.Add("UnsetDeletionMark");
 	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
-	If ThisObject.AdditionalProperties.Property("DelayedSynhronization") Then
-		For Each ItemOfDelayedSynhronization In ThisObject.AdditionalProperties.DelayedSynhronization Do
-			Synhronize(ItemOfDelayedSynhronization, Cancel);
+	If ThisObject.AdditionalProperties.Property("DelayedSynchronization") Then
+		For Each ItemOfDelayedSynchronization In ThisObject.AdditionalProperties.DelayedSynchronization Do
+			Synchronize(ItemOfDelayedSynchronization, Cancel);
 		EndDo;
 	EndIf;
 EndProcedure
 
-Procedure Synhronize(Event, Cancel)
+Procedure Synchronize(Event, Cancel)
 	ArrayOfCheque = ThisObject.ChequeBonds.UnloadColumn("Cheque");
 	Try
 		DataLock = New DataLock();
@@ -52,7 +52,7 @@ Procedure Synhronize(Event, Cancel)
 		ElsIf Event = "SetDeletionMark" Then
 			Documents.ChequeBondTransactionItem.SetDeletionMarkForDocuments(DataLock, ArrayOfCheque, ThisObject.Ref);
 		ElsIf Event = "UnsetDeletionMark" Then
-			Documents.ChequeBondTransactionItem.UnsetDeletionMerkForDocuments(DataLock, ArrayOfCheque, ThisObject.Ref);
+			Documents.ChequeBondTransactionItem.UnsetDeletionMarkForDocuments(DataLock, ArrayOfCheque, ThisObject.Ref);
 		Else
 			CommonFunctionsClientServer.ShowUsersMessage(R()["Error_032"]);
 		EndIf;

@@ -117,7 +117,7 @@
     <name>URLAlias</name>
     <synonym>
       <key>en</key>
-      <value>URL Alias</value>
+      <value>URL alias</value>
     </synonym>
     <type>
       <types>String</types>

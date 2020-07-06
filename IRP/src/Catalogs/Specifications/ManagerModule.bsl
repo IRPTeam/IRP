@@ -54,7 +54,7 @@ Function GetAvailableSpecificationsByItem(Item) Export
 EndFunction
 
 Function FindOrCreateRefByProperties(TableOfItems, QuantityTable, ItemBundle, AddInfo = Undefined) Export
-	ArrayOfRefs = GetRefsByProperies(TableOfItems, QuantityTable, ItemBundle, AddInfo);
+	ArrayOfRefs = GetRefsByProperties(TableOfItems, QuantityTable, ItemBundle, AddInfo);
 	If ArrayOfRefs.Count() Then
 		Return ArrayOfRefs;
 	Else
@@ -69,7 +69,7 @@ Function CreateRefByProperties(TableOfItems, QuantityTable, ItemBundle, AddInfo 
 	NewObject.ItemBundle = ItemBundle;
 	NewObject.Type = GetSpecificationType(TableOfItems, AddInfo);
 	
-	SetDescriptionbyTableOfItems(NewObject, TableOfItems, AddInfo);
+	SetDescriptionByTableOfItems(NewObject, TableOfItems, AddInfo);
 	
 	TableOfItemsCopy = TableOfItems.Copy();
 	TableOfItemsCopy.GroupBy("Key");
@@ -104,7 +104,7 @@ Function CreateRefByProperties(TableOfItems, QuantityTable, ItemBundle, AddInfo 
 	Return NewObject.Ref;
 EndFunction
 
-Function GetRefsByProperies(TableOfItems, QuantityTable, ItemBundle, AddInfo = Undefined) Export
+Function GetRefsByProperties(TableOfItems, QuantityTable, ItemBundle, AddInfo = Undefined) Export
 	ArrayOfFoundedSpecifications = New Array();
 	SpecificationType = GetSpecificationType(TableOfItems, AddInfo);
 	For Each ItemRow In TableOfItems Do
@@ -248,7 +248,7 @@ Function GetSpecificationType(TableOfItems, AddInfo = Undefined) Export
 	Return ?(TableOfItemsCopy.Count() > 1, Enums.SpecificationType.Bundle, Enums.SpecificationType.Set);
 EndFunction
 
-Procedure SetDescriptionbyTableOfItems(NewObject, TableOfItems, AddInfo = Undefined)
+Procedure SetDescriptionByTableOfItems(NewObject, TableOfItems, AddInfo = Undefined)
 	ArrayOfDescriptions = LocalizationReuse.AllDescription(AddInfo);
 	
 	TableOfItemsCopy = TableOfItems.Copy();

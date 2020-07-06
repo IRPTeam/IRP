@@ -17,10 +17,10 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="14498871-f261-4d83-b174-067665a003df">
-    <name>AdvanceToSupliers</name>
+    <name>AdvanceToSuppliers</name>
     <synonym>
       <key>en</key>
-      <value>Advance to supliers</value>
+      <value>Advance to suppliers</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>

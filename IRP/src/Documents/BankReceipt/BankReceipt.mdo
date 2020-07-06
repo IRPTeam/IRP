@@ -234,7 +234,7 @@
       <name>Agreement</name>
       <synonym>
         <key>en</key>
-        <value>Agreement</value>
+        <value>Partner term</value>
       </synonym>
       <type>
         <types>CatalogRef.Agreements</types>
@@ -289,7 +289,7 @@
       <name>PlaningTransactionBasis</name>
       <synonym>
         <key>en</key>
-        <value>Planing transaction basis</value>
+        <value>Planning transaction basis</value>
       </synonym>
       <type>
         <types>DefinedType.typePlaningTransactionBasises</types>
@@ -448,7 +448,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="5f9295a3-2e80-4284-82bd-2321cf0971a2">
       <name>Property</name>

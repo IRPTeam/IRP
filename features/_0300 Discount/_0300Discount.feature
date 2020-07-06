@@ -416,12 +416,12 @@ For calculating special offers in documents
 			| 'ExternalFivePlusOne' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-	* Fiiling in type name
+	* Filling in type name
 		И в поле 'ENG' я ввожу текст 'All items 5+1, Discount on Basic Agreements'
 		И в поле 'TR' я ввожу текст 'All items 5+1 TR, Discount on Basic Agreements'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save'
-	* Fiiling in type: Basic Agreements TRY, all items, 5+1, multiple
+	* Filling in type: Basic Agreements TRY, all items, 5+1, multiple
 		И я нажимаю на кнопку с именем "FormSetSettings"
 		И Пауза 2
 		И я нажимаю кнопку выбора у поля "Agreements"
@@ -462,12 +462,12 @@ For calculating special offers in documents
 				| 'ExternalFivePlusOne' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
-		* Fiiling in type name
+		* Filling in type name
 			И в поле 'ENG' я ввожу текст 'Dress,2 4+1, Discount on Basic Agreements'
 			И в поле 'TR' я ввожу текст 'Dress,2 4+1 TR, Discount on Basic Agreements'
 			И я нажимаю на кнопку 'Ok'
 			И я нажимаю на кнопку 'Save'
-		* Fiiling in type: Basic Agreements TRY, all items, 4+1, multiple 
+		* Filling in type: Basic Agreements TRY, all items, 4+1, multiple 
 			И я нажимаю на кнопку с именем "FormSetSettings"
 			И Пауза 2
 			И я нажимаю кнопку выбора у поля "Agreements"
@@ -515,12 +515,12 @@ For calculating special offers in documents
 				| 'ExternalFivePlusOne' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
-		* Fiiling in type name
+		* Filling in type name
 			И в поле 'ENG' я ввожу текст 'Dress,2 3+1, Discount on Basic Agreements'
 			И в поле 'TR' я ввожу текст 'Dress,2 3+1 TR, Discount on Basic Agreements'
 			И я нажимаю на кнопку 'Ok'
 			И я нажимаю на кнопку 'Save'
-		* Fiiling in type: Basic Agreements TRY, all items, 4+1, multiple
+		* Filling in type: Basic Agreements TRY, all items, 4+1, multiple
 			И я нажимаю на кнопку с именем "FormSetSettings"
 			И Пауза 2
 			И я нажимаю кнопку выбора у поля "Agreements"
@@ -568,12 +568,12 @@ For calculating special offers in documents
 			| 'ExternalRangeDiscount' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-	* Fiiling in type name
+	* Filling in type name
 		И в поле 'ENG' я ввожу текст 'Range Discount Basic (Dress)'
 		И в поле 'TR' я ввожу текст 'Range Discount Basic (Dress)'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save'
-	* Fiiling in type: Basic Agreements TRY, Dress,3
+	* Filling in type: Basic Agreements TRY, Dress,3
 		И я нажимаю на кнопку 'Set settings'
 		И в таблице "ItemKeysTable" я нажимаю на кнопку с именем 'ItemKeysTableAdd'
 		И в таблице "ItemKeysTable" я нажимаю кнопку выбора у реквизита "Item key"
@@ -612,12 +612,12 @@ For calculating special offers in documents
 				| 'ExternalRangeDiscount' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
-		* Fiiling in type name
+		* Filling in type name
 			И в поле 'ENG' я ввожу текст 'Range Discount Basic (Trousers)'
 			И в поле 'TR' я ввожу текст 'Range Discount Basic (Trousers)'
 			И я нажимаю на кнопку 'Ok'
 			И я нажимаю на кнопку 'Save'
-		* Fiiling in type: Basic Agreements TRY, Dress
+		* Filling in type: Basic Agreements TRY, Dress
 			И я нажимаю на кнопку 'Set settings'
 			И в таблице "ItemKeysTable" я нажимаю на кнопку с именем 'ItemKeysTableAdd'
 			И в таблице "ItemKeysTable" я нажимаю кнопку выбора у реквизита "Item key"

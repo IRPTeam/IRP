@@ -4,7 +4,7 @@
 @Discount
 @tree
 
-Функционал: сhecking discounts in purchase documents Purchase order/Purchase invoice
+Функционал: Checking discounts in purchase documents Purchase order/Purchase invoice
 
 As a developer
 I want to add discount functionality to the purchase documents.

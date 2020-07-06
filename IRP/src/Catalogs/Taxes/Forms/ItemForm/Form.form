@@ -686,7 +686,7 @@
             <choiceList>
               <presentation>
                 <key>en</key>
-                <value>Saler return</value>
+                <value>Sales return</value>
               </presentation>
               <value xsi:type="core:StringValue">
                 <value>SalesReturn</value>

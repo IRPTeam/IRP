@@ -12,7 +12,7 @@
   <name>PartnerSegments</name>
   <synonym>
     <key>en</key>
-    <value>Partner segments</value>
+    <value>Partner segments content</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>

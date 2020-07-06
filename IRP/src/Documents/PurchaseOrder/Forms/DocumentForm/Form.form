@@ -104,7 +104,7 @@
           <extInfo xsi:type="form:LabelDecorationExtInfo">
             <handlers>
               <event>Click</event>
-              <name>DecorationGroupTitleCollapsedLalelClick</name>
+              <name>DecorationGroupTitleCollapsedLabelClick</name>
             </handlers>
             <hyperlink>true</hyperlink>
             <horizontalAlign>Left</horizontalAlign>
@@ -233,7 +233,7 @@
           <extInfo xsi:type="form:LabelDecorationExtInfo">
             <handlers>
               <event>Click</event>
-              <name>DecorationGroupTitleUncollapsedLalelClick</name>
+              <name>DecorationGroupTitleUncollapsedLabelClick</name>
             </handlers>
             <hyperlink>true</hyperlink>
             <horizontalAlign>Left</horizontalAlign>
@@ -3859,7 +3859,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Add. attributes</value>
+        <value>Additional attributes</value>
       </title>
       <extendedTooltip>
         <name>GroupAddAttributesExtendedTooltip</name>
@@ -5532,7 +5532,7 @@
         <name>SearchByBarcode</name>
       </handler>
     </action>
-    <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
+    <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
     <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
@@ -5551,7 +5551,7 @@
         <name>SetSpecialOffersAtRow</name>
       </handler>
     </action>
-    <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
+    <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -5569,7 +5569,7 @@
         <name>SetSpecialOffers</name>
       </handler>
     </action>
-    <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
+    <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

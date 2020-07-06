@@ -277,13 +277,13 @@ Procedure PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, Repo
 	
 	If Not PutInTable Then
 		
-		NumberOfCurrenColumn = 2;
+		NumberOfCurrentColumn = 2;
 		
 		For Each Row In ArrayOfFields Do
 			If Row.ColumnNumber > 0 Then
-				OutlineOutputArea(TemplateDetails, TemplateHeader, TemplateHeight, Row.Width, NumberOfCurrenColumn);
+				OutlineOutputArea(TemplateDetails, TemplateHeader, TemplateHeight, Row.Width, NumberOfCurrentColumn);
 				
-				NumberOfCurrenColumn = NumberOfCurrenColumn + 1;
+				NumberOfCurrentColumn = NumberOfCurrentColumn + 1;
 			EndIf;
 		EndDo;
 	Else
@@ -291,12 +291,12 @@ Procedure PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, Repo
 		CurrentWidth = - 1;
 		CurrentIndexOfArray = - 1;
 		
-		For NumberOfCurrenColumn = 0 To TotalFieldsForOutput - 1 Do
+		For NumberOfCurrentColumn = 0 To TotalFieldsForOutput - 1 Do
 			If CurrentIndexOfArray <= ArrayOfFields.Count() - 2 Then
 				
 				NumberNextColumn = ArrayOfFields[CurrentIndexOfArray + 1].ColumnNumber - 2;
 				
-				If NumberNextColumn <= NumberOfCurrenColumn Then
+				If NumberNextColumn <= NumberOfCurrentColumn Then
 					CurrentIndexOfArray = CurrentIndexOfArray + 1;
 					CurrentWidth = ArrayOfFields[CurrentIndexOfArray].Width;
 					
@@ -309,25 +309,25 @@ Procedure PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, Repo
 							NumberLastColumn = TotalFieldsForOutput;
 						EndIf;
 						
-						For NumberTempColumn = NumberOfCurrenColumn To NumberLastColumn - 1 Do
+						For NumberTempColumn = NumberOfCurrentColumn To NumberLastColumn - 1 Do
 							AddTitleToColumn(TemplateHeader, NumberTempColumn + 2, ColumnName);
 						EndDo;
 						
-						Area = TemplateHeader.Area(1, NumberOfCurrenColumn + 2, 1, NumberLastColumn + 1);
+						Area = TemplateHeader.Area(1, NumberOfCurrentColumn + 2, 1, NumberLastColumn + 1);
 						Area.Merge();
 						
 					EndIf;
 				EndIf;
 			EndIf;
-			OutlineOutputArea(TemplateDetails, TemplateHeader, TemplateHeight, CurrentWidth, NumberOfCurrenColumn + 2);
+			OutlineOutputArea(TemplateDetails, TemplateHeader, TemplateHeight, CurrentWidth, NumberOfCurrentColumn + 2);
 		EndDo;
 	EndIf;
 	
 	AreaDetails = TemplateDetails.GetArea("Details");
-	AreaHeder = TemplateHeader.GetArea("TableHeader");
+	AreaHeader = TemplateHeader.GetArea("TableHeader");
 	
 	ReportBuilder.DetailRecordsTemplate = AreaDetails;
-	ReportBuilder.TableHeaderTemplate = AreaHeder;
+	ReportBuilder.TableHeaderTemplate = AreaHeader;
 EndProcedure
 
 Procedure PrepareTemplateForOutput(TemplateDetails, TemplateHeader, TemplateHeight, Val AddCounter = 0)

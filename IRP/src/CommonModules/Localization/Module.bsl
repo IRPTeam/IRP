@@ -6,7 +6,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("S_001", NStr("en = 'Unsupported type of request body'", CodeLanguage));
 	
 	// Can Not connect to: localhost:8080 Detail: There is no internet connection
-	Strings.Insert("S_002", NStr("en = 'Can''t connect to: %1:%2 Detail: %3'", CodeLanguage));
+	Strings.Insert("S_002", NStr("en='Can`t connect to: %1:%2 Detail: %3'", CodeLanguage));
 	
 	// Received response from: localhost:8080
 	Strings.Insert("S_003", NStr("en = 'Received response from: %1:%2'", CodeLanguage));
@@ -29,10 +29,10 @@ Function Strings(CodeLanguage) Export
 	
 	// External system Not defined: IRP
 	Strings.Insert("S_011", NStr("en = 'External system not defined: %1'", CodeLanguage));
-	Strings.Insert("S_012", NStr("en = 'Can''t retrive value for: Property[%1] Value[%2] Metadata[%3]'", CodeLanguage));
+	Strings.Insert("S_012", NStr("en='Can`t retrieve value for: Property[%1] Value[%2] Metadata[%3]'", CodeLanguage));
 	
 	// Special offers
-	Strings.Insert("S_013", NStr("en = 'Not supperted type of object: %1'", CodeLanguage));
+	Strings.Insert("S_013", NStr("en = 'Not supported type of object: %1'", CodeLanguage));
 	
 	// FileTransfer
 	Strings.Insert("S_014", NStr("en = 'File name is empty'", CodeLanguage));
@@ -51,7 +51,7 @@ Function Strings(CodeLanguage) Export
 	
 	
 	Strings.Insert("S_021", NStr("en = 'Goods receipt'", CodeLanguage));
-	Strings.Insert("S_022", NStr("en = 'Multicurrency receipt basises'", CodeLanguage));
+	Strings.Insert("S_022", NStr("en='Multi currency receipt basises'", CodeLanguage));
 	
 	Strings.Insert("S_023", NStr("en = 'Procurement method'", CodeLanguage));
 	
@@ -100,7 +100,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Error_001", NStr("en = 'Unsupported type of barcode'", CodeLanguage));
 	Strings.Insert("Error_002", NStr("en = '%1 descriptions is empty'", CodeLanguage));
 	Strings.Insert("Error_003", NStr("en = 'Fill any description'", CodeLanguage));
-	Strings.Insert("Error_004", NStr("en = 'Not supported medatada'", CodeLanguage));
+	Strings.Insert("Error_004", NStr("en = 'Not supported metadata'", CodeLanguage));
 	Strings.Insert("Error_005", NStr("en = 'Fill any additional attribute description %1'", CodeLanguage));
 	Strings.Insert("Error_006", NStr("en = 'Recalculate offers'", CodeLanguage));
 	Strings.Insert("Error_007", NStr("en = 'Not enough free balance: [%1][%2], In stock [%3]: free: %4 %5 necessary: %6 %7'", CodeLanguage));
@@ -121,12 +121,12 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Error_022", NStr("en = 'Lines on which you may create return are missed In the Sales invoice. All products are already returned.'", CodeLanguage));
 	Strings.Insert("Error_023", NStr("en = 'Lines on which you need to order items from suppliers are missed In the Internal supply request'", CodeLanguage));
 	Strings.Insert("Error_024", NStr("en = 'Please, at first create Sales invoice or check the box Shipment confirmation before Sales invoice on the tab Other'", CodeLanguage));
-	Strings.Insert("Error_028", NStr("en = 'Please, check the box Goods receipt before Purche invoice on the tab ""Other""'", CodeLanguage));
+	Strings.Insert("Error_028", NStr("en = 'Please, check the box Goods receipt before Purchase invoice on the tab ""Other""'", CodeLanguage));
 	Strings.Insert("Error_029", NStr("en = 'Please, at first create Purchase invoice or check the box Goods receipt before Purchase invoice on the tab Other'", CodeLanguage));
 	Strings.Insert("Error_030", NStr("en = 'The %1 is required on line %2 of the %3'", CodeLanguage));
 	Strings.Insert("Error_031", NStr("en = 'Items were not received from supplier according to procurement method.'", CodeLanguage));
 	Strings.Insert("Error_032", NStr("en = 'Action not completed'", CodeLanguage));
-	Strings.Insert("Error_033", NStr("en = 'Dublicated attribute'", CodeLanguage));
+	Strings.Insert("Error_033", NStr("en = 'Duplicated attribute'", CodeLanguage));
 	Strings.Insert("Error_034", NStr("en = '%1 is not picture storage volume'", CodeLanguage));
 	Strings.Insert("Error_035", NStr("en = 'Cannot upload more than 1 file'", CodeLanguage));
 	Strings.Insert("Error_036", NStr("en = 'Not found row by index In Files table'", CodeLanguage));
@@ -145,16 +145,16 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Error_049", NStr("en = 'Default picture storage volume not set'", CodeLanguage));
 	Strings.Insert("Error_050", NStr("en = 'Currency exchange is possible only through accounts with the same type (cash account or bank account).'", CodeLanguage));
 	Strings.Insert("Error_051", NStr("en = 'Lines on which you may create %1 are missed. Or all %1 are already created.'", CodeLanguage));
-	Strings.Insert("Error_052", NStr("en = 'Unchecking ""Use shipment confirmation"" isn`t posible. Shipment confirmations from store %1 have already been created previously.'", CodeLanguage));
-	Strings.Insert("Error_053", NStr("en = 'Unchecking ""Use goods receipt"" isn`t posible. Goods receipts from store %1 have already been created previously.'", CodeLanguage));
+	Strings.Insert("Error_052", NStr("en = 'Unchecking ""Use shipment confirmation"" isn`t possible. Shipment confirmations from store %1 have already been created previously.'", CodeLanguage));
+	Strings.Insert("Error_053", NStr("en = 'Unchecking ""Use goods receipt"" isn`t possible. Goods receipts from store %1 have already been created previously.'", CodeLanguage));
 	Strings.Insert("Error_054", NStr("en = 'Not properly status of sales order to proceed.'", CodeLanguage));
 	Strings.Insert("Error_055", NStr("en = 'No lines with properly procurement method.'", CodeLanguage));
 	Strings.Insert("Error_056", NStr("en = 'All items in sales order are already ordered by purchase order(s).'", CodeLanguage));
 	Strings.Insert("Error_057", NStr("en = 'Don`t need to create a %1 for selected Cash transfer order(s).'", CodeLanguage));
 	Strings.Insert("Error_058", NStr("en = 'Whole amount in Cash transfer order(s) are already payed by document %1(s).'", CodeLanguage));
 	Strings.Insert("Error_059", NStr("en = 'In the selected documents there are Cash transfer order(s) by which %1(s) has already been created and those for which %1 doesn`t need to be created.'", CodeLanguage));
-	Strings.Insert("Error_060", NStr("en = 'Whole amount in Cash transfer order(s) are already recieved by document %1(s).'", CodeLanguage));
-	Strings.Insert("Error_061", NStr("en = 'Not posible to change box ""Shipment confirmation before sales invoice"" because for this Sales order already have been created %1(s).'", CodeLanguage));
+	Strings.Insert("Error_060", NStr("en = 'Whole amount in Cash transfer order(s) are already received by document %1(s).'", CodeLanguage));
+	Strings.Insert("Error_061", NStr("en = 'Not possible to change box ""Shipment confirmation before sales invoice"" because for this Sales order already have been created %1(s).'", CodeLanguage));
 	Strings.Insert("Error_062", NStr("en = 'There is no need to create shipment confirmation for the store(s) %1.'", CodeLanguage));
 	Strings.Insert("Error_063", NStr("en = 'There is not possible to post Sales order for the store(s) %1.'", CodeLanguage));
 	Strings.Insert("Error_064", NStr("en = 'There is no need to create Shipment confirmation for store(s) %1. Item will be shipped by Sales order'", CodeLanguage));
@@ -162,7 +162,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Error_066", NStr("en = 'Specification is not unique'", CodeLanguage));
 	Strings.Insert("Error_067", NStr("en = 'Not properly status of %1 to proceed.'", CodeLanguage));	
 	Strings.Insert("Error_068", NStr("en = 'Line No. [%1] [%2 %3] %4 remains: %5 %8 Required: %6 %8 Lacks: %7 %8'", CodeLanguage));
-	Strings.Insert("Error_071", NStr("en = 'External data processor ""%1"" was not connected'", CodeLanguage));
+	Strings.Insert("Error_071", NStr("en='Plugin ""%1"" was not connected'", CodeLanguage));
 	Strings.Insert("Error_072", NStr("en = 'Store is required on line %1'", CodeLanguage));
 	Strings.Insert("Error_073", NStr("en = 'All items in %1(s) are already received by %2(s).'", CodeLanguage));
 	Strings.Insert("Error_074", NStr("en = 'Currency transfer is possible only when amounts is equal.'", CodeLanguage));
@@ -185,7 +185,7 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("QuestionToUser_003", NStr("en = 'Filled data on cheque bonds transactions will be deleted. Do you want to update %1?'", CodeLanguage));
 	Strings.Insert("QuestionToUser_004", NStr("en = 'Change tax rates according agreement?'", CodeLanguage));
 	Strings.Insert("QuestionToUser_005", NStr("en = 'Do you want to update filled stores?'", CodeLanguage));
-	Strings.Insert("QuestionToUser_006", NStr("en = 'Do you want to update filled Currency?'", CodeLanguage));
+	Strings.Insert("QuestionToUser_006", NStr("en='Do you want to update filled currency?'", CodeLanguage));
 	Strings.Insert("QuestionToUser_007", NStr("en = 'Transaction table will be cleared. Continue?'", CodeLanguage));
 	Strings.Insert("QuestionToUser_008", NStr("en = 'When the currency is changed, rows with cash transfer documents will be cleared. Continue?'", CodeLanguage));
 	Strings.Insert("QuestionToUser_009", NStr("en = 'Update filled stores on %1'", CodeLanguage));
@@ -200,6 +200,8 @@ Function Strings(CodeLanguage) Export
 	#Region SuggestionToUser
 	Strings.Insert("SuggestionToUser_1", NStr("en = 'Choice value'", CodeLanguage));
 	Strings.Insert("SuggestionToUser_2", NStr("en = 'Enter barcode'", CodeLanguage));
+	Strings.Insert("SuggestionToUser_3", NStr("en = 'Input option name'", CodeLanguage));
+	Strings.Insert("SuggestionToUser_4", NStr("en = 'Input new option name'", CodeLanguage));
 	#EndRegion
 	
 	#Region UsersEvent
@@ -210,7 +212,7 @@ Function Strings(CodeLanguage) Export
 	#Region Items
 	
 	// Interface
-	Strings.Insert("I_1", NStr("en = 'Enter Description'", CodeLanguage));
+	Strings.Insert("I_1", NStr("en='Enter description'", CodeLanguage));
 	
 	Strings.Insert("I_2", NStr("en = 'Click for input description'", CodeLanguage));
 	

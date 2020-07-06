@@ -1,4 +1,4 @@
-Procedure OnCreateAtServer(Cancel, StandartProcessing, Form, Parameters) Export
+Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 	FillingData = Undefined;
 	If Parameters.Property("FillingData", FillingData) Then
 		Form.FillingData = CommonFunctionsServer.SerializeXMLUseXDTO(FillingData);

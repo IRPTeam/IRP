@@ -1933,7 +1933,7 @@ I want to check the form display and autofill documents
 		| 'XL/Green'  | 'Dress' |
 		| 'XXL/Red'   | 'Dress' |
 		| 'M/Brown'   | 'Dress' |
-	* Сheck search by properties
+	* Check search by properties
 		И я нажимаю кнопку очистить у поля "Size"
 		И из выпадающего списка "Color" я выбираю по строке 'gr'
 		Тогда таблица "List" не содержит строки:

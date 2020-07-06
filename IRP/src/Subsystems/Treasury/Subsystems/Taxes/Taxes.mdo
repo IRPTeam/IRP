@@ -3,7 +3,7 @@
   <name>Taxes</name>
   <synonym>
     <key>en</key>
-    <value>Taxes</value>
+    <value>Tax types</value>
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>

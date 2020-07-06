@@ -12,7 +12,7 @@
   <name>BundleContents</name>
   <synonym>
     <key>en</key>
-    <value>Bundle contents</value>
+    <value>Bundles content</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>

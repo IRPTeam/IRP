@@ -15,7 +15,7 @@
 
 
 Сценарий: сохранении информации по Item без заполненного item key в документе Sales order
-	* Открытие формы документа Sales order
+	* Opening a document form Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -26,7 +26,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -77,7 +77,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: сохранении информации по Item без заполненного item key в документе Sales invoice
-	* Открытие формы документа Sales invoice
+	* Opening a document form Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -88,7 +88,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -136,7 +136,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: сохранении информации по Item без заполненного item key в документе SalesReturn
-	* Открытие формы документа SalesReturn
+	* Opening a document form SalesReturn
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -147,7 +147,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -194,7 +194,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: сохранении информации по Item без заполненного item key в документе SalesReturnOrder
-	* Открытие формы документа SalesReturnOrder
+	* Opening a document form SalesReturnOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -205,7 +205,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -252,7 +252,7 @@
 		И я закрыл все окна клиентского приложения
 	
 Сценарий: сохранении информации по Item без заполненного item key в документе PurchaseOrder
-	* Открытие формы документа PurchaseOrder
+	* Opening a document form PurchaseOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -263,7 +263,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -321,7 +321,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: сохранении информации по Item без заполненного item key в документе PurchaseInvoice
-	* Открытие формы документа PurchaseInvoice
+	* Opening a document form PurchaseInvoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -332,7 +332,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -389,7 +389,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: сохранении информации по Item без заполненного item key в документе PurchaseReturn
-	* Открытие формы документа PurchaseReturn
+	* Opening a document form PurchaseReturn
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -400,7 +400,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -457,7 +457,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: сохранении информации по Item без заполненного item key в документе PurchaseReturnOrder
-	* Открытие формы документа PurchaseReturnOrder
+	* Opening a document form PurchaseReturnOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -468,7 +468,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -527,7 +527,7 @@
 
 
 Сценарий: сохранении информации по Item без заполненного item key в документе Bundling
-	* Открытие формы документа Bundling
+	* Opening a document form Bundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -557,7 +557,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -591,7 +591,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: сохранении информации по Item без заполненного item key в документе Unbundling
-	* Открытие формы документа Unbundling
+	* Opening a document form Unbundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -621,7 +621,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -669,7 +669,7 @@
 
 
 Сценарий: сохранении информации по Item без заполненного item key в документе GoodsReceipt
-	* Открытие формы документа GoodsReceipt
+	* Opening a document form GoodsReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -691,7 +691,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -725,7 +725,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: сохранении информации по Item без заполненного item key в документе ShipmentConfirmation
-	* Открытие формы документа ShipmentConfirmation
+	* Opening a document form ShipmentConfirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -747,7 +747,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -781,7 +781,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: сохранении информации по Item без заполненного item key в документе InternalSupplyRequest
-	* Открытие формы документа InternalSupplyRequest
+	* Opening a document form InternalSupplyRequest
 		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -803,7 +803,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -837,7 +837,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: сохранении информации по Item без заполненного item key в документе InventoryTransfer
-	* Открытие формы документа InventoryTransfer
+	* Opening a document form InventoryTransfer
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -864,7 +864,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -899,7 +899,7 @@
 
 
 Сценарий: сохранении информации по Item без заполненного item key в документе InventoryTransferOrder
-	* Открытие формы документа InventoryTransferOrder
+	* Opening a document form InventoryTransferOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление Item без item key
@@ -926,7 +926,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Проверка сохранения Item
+	* Save verification Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |

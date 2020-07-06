@@ -2,10 +2,7 @@
 @tree
 @Positive
 
-Функционал: проверка форм документов
-
-Как тестировщик
-Я хочу проверить отображение форм и автозаполнение документов
+Функционал: information messages
 
 
 Контекст:
@@ -13,11 +10,11 @@
 
 
 
-Сценарий: сообщение при попытке создать Sales invoice по заказу с непрямой схемой отгрузки (расходный ордер не создан)
-	* Создание тестового Sales order
+Сценарий: message when trying to create a Sales invoice by Sales order with Shipment confirmation before Sales invoice (Shipment confirmation has not been created yet)
+	* Create Sales order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И я нажимаю на кнопку 'Create'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 					| 'Description' |
@@ -34,29 +31,29 @@
 					| 'Company Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
 		Когда добавляю товар в заказ клиента (Dress и Trousers)
-	* Установка галочки отгрузка до реализации
+	* Click Shipment confirmation before Sales invoice
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И я устанавливаю флаг 'Shipment confirmations before sales invoice'
-	* Проверка отображения информационного сообщения при попытке создания Sales invoice
+	* Check the information message display when trying to create Sales invoice
 		И я перехожу к закладке "Item list"
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Sales invoice'
 		Тогда появилось предупреждение, содержащее текст "Please, at first create Shipment confirmation or uncheck the box Shipment confirmation before Sales invoice on the tab Other"
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сообщение при попытке создать Purchase invoice по заказу с непрямой схемой отгрузки (приходный ордер не создан)
-	* Создание тестового Purchase order
+Сценарий: message when trying to create a Purchase invoice by Purchase order with Goods receipt before Purchase invoice (Goods receipt has not been created yet)
+	* Create Purchase order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю необходимые реквизиты
+		* Filling in the necessary details
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Main Company |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		И я заполняю информацию о поставщике
+		* Filling in vendor's info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -78,7 +75,7 @@
 				| 'Description' |
 				| 'Store 02'  |
 			И в таблице "List" я выбираю текущую строку
-		И я заполняю товарную часть
+		* Filling in items table
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			Тогда открылось окно 'Items'
@@ -99,21 +96,21 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '40,00'
 			И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post'
-	* Установка галочки приходный ордер до поступления
+	* Click Goods receipt before Purchase invoice
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И я устанавливаю флаг 'Goods receipt before purchase invoice'
-	* Проверка отображения информационного сообщения при попытке создания Sales invoice
+	* Check the information message display when trying to create Sales invoice
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Purchase invoice'
 		Тогда появилось предупреждение, содержащее текст "Please, at first create Goods receipt or uncheck the box Goods receipt before Purchase invoice on the tab Other"
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сообщение при попытке создать на основании Sales invoice документ Sales return order и Sales return в случае если уже весь товар был возвращен
-	* Создание тестового Sales invoice
+Сценарий: message when trying to create Sales returm order based on Sales invoice when all products have already been returned
+	* Create Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -121,7 +118,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Agreement"
 			И в таблице "List" я выбираю текущую строку
-		И я выбираю склад 
+		* Select Store
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -129,14 +126,14 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-		И я меняю номер sales invoice на 2000
+		* Change the document number to 2000
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '2000'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2000'
-		И я добавляю в реализацию товар
+		* Filling in items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я выбираю текущую строку
@@ -150,11 +147,11 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 			И в таблице "ItemList" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Post'
-	* Создание Sales return order на основании созданного Sales invoice
+	* Create Sales return order based on Sales invoice
 			И я нажимаю на кнопку 'Sales return order'
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
 			И я нажимаю на кнопку 'Post and close'
-	* Проверка вывода сообщения при повторном создании Sales return order или Sales return
+	* Check the message output when creating Sales return order or Sales return again
 			И я нажимаю на кнопку 'Sales return order'
 			Тогда появилось предупреждение, содержащее текст "Lines on which you may create return are missed in the Sales invoice. All products are already returned."
 			И я нажимаю на кнопку 'OK'
@@ -164,17 +161,17 @@
 			И я нажимаю на кнопку 'OK'
 			И я закрыл все окна клиентского приложения
 
-Сценарий: cообщение при попытке создать на основании Purchase invoice документ Purchase return order и Purchase return в случае если уже весь товар был возвращен
-	* Создание тестового Purchase invoice
+Сценарий: message when trying to create Purchase return order and Purchase return based on Purchase invoice document if all products have already been returned.
+	* Create Purchase invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю необходимые реквизиты
+		* Filling in the necessary details
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-		И я заполняю информацию о поставщике
+		* Filling in vendor's info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -196,7 +193,7 @@
 				| 'Description' |
 				| 'Store 02'  |
 			И в таблице "List" я выбираю текущую строку
-		И я заполняю товарную часть
+		* Filling in items table
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			Тогда открылось окно 'Items'
@@ -216,17 +213,17 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '40,00'
 			И в таблице "ItemList" я завершаю редактирование строки
-		И я меняю номер purchase invoice на 2000
+		* Change the document number to 2000
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '2000'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2000'
 		И я нажимаю на кнопку 'Post'
-	* Создание Purchase return на основании созданного Purchase invoice
+	* Create Purchase return based on Purchase invoice
 			И я нажимаю на кнопку 'Purchase return'
 			И я нажимаю на кнопку 'Post and close'
-	* Проверка вывода сообщения при повторном создании Purchase return или Purchase return order
+	* Check the message output when Purchase return or Purchase return order is created again
 			И я нажимаю на кнопку 'Purchase return order'
 			Тогда появилось предупреждение, содержащее текст "Lines on which you may create return are missed in the Purchase invoice. All products are already returned."
 			И я нажимаю на кнопку 'OK'
@@ -236,11 +233,11 @@
 			И я нажимаю на кнопку 'OK'
 			И я закрыл все окна клиентского приложения
 
-Сценарий: сообщение при попытке повторно создать на основании Shipment confirmation документ Sales invoice
-	* Создание тестового Sales order
+Сценарий: message when trying to re-create Sales invoice based on Shipment confirmation
+	* Create Sales order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И я нажимаю на кнопку 'Create'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 					| 'Description' |
@@ -268,7 +265,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2001'
 		И я нажимаю на кнопку 'Post'
-	* Создание Shipment confirmation на основании созданного Sales order
+	* Create Shipment confirmation based on Sales order
 		И я нажимаю на кнопку 'Shipment confirmation'
 		И я меняю номер расходного ордера
 			И в поле 'Number' я ввожу текст '2001'
@@ -276,7 +273,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2001'
 		И я нажимаю на кнопку 'Post'
-	* Создание Sales invoice на основании созданного Shipment confirmation
+	* Create Sales invoice based on Shipment confirmation
 		И я нажимаю на кнопку 'Sales invoice'
 		Тогда открылось окно 'Sales invoice (create)'
 		И я перехожу к закладке "Other"
@@ -287,14 +284,14 @@
 		И в поле 'Number' я ввожу текст '2 001'
 		И я нажимаю на кнопку 'Post and close'
 		И я жду закрытия окна 'Sales invoice (create)' в течение 20 секунд
-	* Проверка отображения сообщения при попытке повторного создания Sales invoice
+	* Checking message display when trying to re-create Sales invoice
 		И я нажимаю на кнопку 'Sales invoice'
 		Тогда появилось предупреждение, содержащее текст "Lines on which you need to create Sales invoice are missed in the Shipment confirmation."
 		И я закрыл все окна клиентского приложения
-	* Создание тестового Sales invoice
+	* Create Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -302,7 +299,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Agreement"
 			И в таблице "List" я выбираю текущую строку
-		И я выбираю склад 
+		* Select Store
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -310,14 +307,14 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-		И я меняю номер sales invoice на 2000
+		* Change the document number to 2000
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '2000'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2000'
-		И я добавляю в реализацию товар
+		* Filling in items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я выбираю текущую строку
@@ -332,18 +329,18 @@
 			И в таблице "ItemList" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Post'
 
-Сценарий: сообщение при попытке повторно создать на основании Goods reciept документ Purchase invoice
-	* Создание тестового Purchase order
+Сценарий: message when trying to re-create Purchase invoice based on Goods reciept
+	* Create Purchase order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю необходимые реквизиты
+		* Filling in the necessary details
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Main Company |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		И я заполняю информацию о поставщике
+		* Filling in vendor's info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -365,7 +362,7 @@
 				| 'Description' |
 				| 'Store 02'  |
 			И в таблице "List" я выбираю текущую строку
-		И я заполняю товарную часть
+		* Filling in items table
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			Тогда открылось окно 'Items'
@@ -385,7 +382,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '40,00'
 			И в таблице "ItemList" я завершаю редактирование строки
-		И я меняю номер документа
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '2001'
@@ -394,7 +391,7 @@
 			И в поле 'Number' я ввожу текст '2001'
 			И я устанавливаю флаг 'Goods receipt before purchase invoice'
 		И я нажимаю на кнопку 'Post'
-	* Создание Goods receipt на основании созданного Purchase order
+	* Create Goods receipt based on urchase order
 		И я нажимаю на кнопку 'Goods receipt'
 		И я меняю номер расходного ордера
 			И в поле 'Number' я ввожу текст '2001'
@@ -402,7 +399,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2001'
 		И я нажимаю на кнопку 'Post'
-	* Создание Purchase invoice на основании созданного Goods reciept
+	* Create Purchase invoice based on Goods reciept
 		И я нажимаю на кнопку 'Purchase invoice'
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '0'
@@ -411,23 +408,23 @@
 		И в поле 'Number' я ввожу текст '2 001'
 		И я нажимаю на кнопку 'Post and close'
 		И я жду закрытия окна 'Purchase invoice (create)' в течение 20 секунд
-	* Проверка отображения сообщения при попытке повторного создания Purchase invoice
+	* Check message display when you try to re-create Purchase invoice
 		И я нажимаю на кнопку 'Purchase invoice'
 		Тогда появилось предупреждение, содержащее текст "Lines on which you need to create Purchase invoice are missed in the Goods receipt."
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сообщение при попытке повторно создать Purchase invoice на основании Purchase order
-	* Создание тестового Purchase order
+Сценарий: message when trying to re-create Purchase invoice based on Purchase order
+	* Create Purchase order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю необходимые реквизиты
+		* Filling in the necessary details
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Main Company |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		И я заполняю информацию о поставщике
+		* Filling in vendor's info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -449,7 +446,7 @@
 				| 'Description' |
 				| 'Store 02'  |
 			И в таблице "List" я выбираю текущую строку
-		И я заполняю товарную часть
+		* Filling in items table
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я выбираю текущую строку
@@ -467,7 +464,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '40,00'
 			И в таблице "ItemList" я завершаю редактирование строки
-		И я меняю номер документа
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '2006'
@@ -475,7 +472,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2006'
 		И я нажимаю на кнопку 'Post'
-	* Создание Purchase invoice на основании созданного Purchase order
+	* Create Purchase invoice based on Purchase order
 		И я нажимаю на кнопку 'Purchase invoice'
 		И я меняю номер расходного ордера
 			И в поле 'Number' я ввожу текст '2006'
@@ -483,23 +480,23 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2006'
 		И я нажимаю на кнопку 'Post and close'
-	* Проверка сообщения при попытке повторно создать Purchase invoice
+	* Check message display when you try to re-create Purchase invoice
 		И я нажимаю на кнопку 'Purchase invoice'
 		Тогда появилось предупреждение, содержащее текст "Lines on which you need to create Purchase invoice are missed in the Purchase order."
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сообщение при  попытке повторно создать Goods reciept на основании Purchase order
-	* Создание тестового Purchase order
+Сценарий: message when trying to re-create Goods reciept based on Purchase order
+	* Create Purchase order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю необходимые реквизиты
+		* Filling in the necessary details
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Main Company |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		И я заполняю информацию о поставщике
+		* Filling in vendor's info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -521,7 +518,7 @@
 				| 'Description' |
 				| 'Store 02'  |
 			И в таблице "List" я выбираю текущую строку
-		И я заполняю товарную часть
+		* Filling in items table
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			Тогда открылось окно 'Items'
@@ -541,7 +538,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '40,00'
 			И в таблице "ItemList" я завершаю редактирование строки
-		И я меняю номер документа
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '2007'
@@ -550,7 +547,7 @@
 			И в поле 'Number' я ввожу текст '2007'
 			И я устанавливаю флаг 'Goods receipt before purchase invoice'
 		И я нажимаю на кнопку 'Post'
-	* Создание Goods receipt на основании созданного Purchase order
+	* Create Goods receipt based on Purchase order
 		И я нажимаю на кнопку 'Goods receipt'
 		И я меняю номер расходного ордера
 			И в поле 'Number' я ввожу текст '2007'
@@ -558,16 +555,16 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2007'
 		И я нажимаю на кнопку 'Post and close'
-	* Проверка отображения сообщения при попытке повторного создания Goods receipt
+	* Check message display when you try to re-create Goods receipt
 		И я нажимаю на кнопку 'Goods receipt'
 		Тогда появилось предупреждение, содержащее текст "All items in Purchase order(s) are already received by Goods receipt(s)."
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сообщение при попытке повторно создать Sales invoice на основании Sales order (прямая схема отгрузки)
-	* Создание тестового Sales order
+Сценарий: message when trying to re-create Sales invoice based on Sales order (Sales invoice before Shipment confirmation)
+	* Create Sales order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И я нажимаю на кнопку 'Create'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 					| 'Description' |
@@ -585,7 +582,7 @@
 			И в таблице "List" я выбираю текущую строку
 		Когда добавляю товар в заказ клиента (Dress и Trousers)
 		И я нажимаю на кнопку 'Save'
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '2004'
@@ -593,7 +590,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '2004'
 		И я нажимаю на кнопку 'Post'
-	* Создание Sales invoice
+	* Create Sales invoice
 		И я нажимаю на кнопку 'Sales invoice'
 		И я меняю номер Sales invoice
 			И я перехожу к закладке "Other"
@@ -603,16 +600,16 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2004'
 			И я нажимаю на кнопку 'Post and close'
-	* Проверка отображения сообщения при попытке повторного создания Sales invoice
+	* Check message display when you try to re-create Sales invoice
 		И я нажимаю на кнопку 'Sales invoice'
 		Тогда появилось предупреждение, содержащее текст "Lines on which you need to create Sales invoice are missed in the Sales order."
 		И я закрыл все окна клиентского приложения
 		
-Сценарий: сообщение при попытке повторно создать Shipment confirmation на основании Sales order (непрямая схема отгрузки)
-	* Создание тестового Sales order
+Сценарий: message when trying to re-create Shipment confirmation based on Sales order (Shipment confirmation before Sales invoic)
+	* Create Sales order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И я нажимаю на кнопку 'Create'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 					| 'Description' |
@@ -630,7 +627,7 @@
 			И в таблице "List" я выбираю текущую строку
 		Когда добавляю товар в заказ клиента (Dress и Trousers)
 		И я нажимаю на кнопку 'Save'
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И я устанавливаю флаг 'Shipment confirmations before sales invoice'
@@ -639,7 +636,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '2005'
 		И я нажимаю на кнопку 'Post'
-	* Создание Shipment confirmation
+	* Create Shipment confirmation
 		И я нажимаю на кнопку 'Shipment confirmation'
 		И я меняю номер Shipment confirmation
 			И я перехожу к закладке "Other"
@@ -648,16 +645,16 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2005'
 			И я нажимаю на кнопку 'Post and close'
-	* Проверка отображения сообщения при попытке повторного создания Shipment confirmation
+	* Check message display when you try to re-create Shipment confirmation
 		И я нажимаю на кнопку 'Shipment confirmation'
 		Тогда появилось предупреждение, содержащее текст "Lines on which you need to create Shipment confirmation are missed in the Sales order."
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сообщение при попытке повторно создать Shipment confirmation на основании Sales invoice
-	Создание тестового Sales invoice
+Сценарий: message when trying to re-create Shipment confirmation based on Sales invoice
+	* Create Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -665,7 +662,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Agreement"
 			И в таблице "List" я выбираю текущую строку
-		И я выбираю склад 
+		* Select Store
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -673,14 +670,14 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-		И я меняю номер sales invoice на 2000
+		* Change the document number to2000
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '2008'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2008'
-		И я добавляю в реализацию товар
+		* Filling in items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я выбираю текущую строку
@@ -694,7 +691,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 			И в таблице "ItemList" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Post'
-	* Создание Shipment confirmation на основании созданного Sales invoice
+	* Create Shipment confirmation based on Sales invoice
 		И я нажимаю на кнопку 'Shipment confirmation'
 		И я меняю номер расходного ордера
 			И в поле 'Number' я ввожу текст '2008'
@@ -702,16 +699,16 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2008'
 		И я нажимаю на кнопку 'Post and close'
-	* Проверка отображения сообщения при попытке повторного создания Shipment confirmation
+	* Check message display when you try to re-create Shipment confirmation
 		И я нажимаю на кнопку 'Shipment confirmation'
 		Тогда появилось предупреждение, содержащее текст "Lines on which you need to create Shipment confirmation are missed in the Sales invoice."
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сообщение при попытке создать Shipment confirmation на основании Sales invoice по неордерному складу
-	* Создание тестового Sales invoice
+Сценарий: message when trying to create Shipment confirmation based on Sales invoice (Stor doesn't use Shipment confirmation)
+	* Create Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -719,7 +716,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Agreement"
 			И в таблице "List" я выбираю текущую строку
-		И я выбираю склад 
+		* Select Store
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -727,14 +724,14 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-		И я меняю номер sales invoice на 2009
+		* Change the document number to 2009
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '2009'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2009'
-		И я добавляю в реализацию товар
+		* Filling in items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я выбираю текущую строку
@@ -748,16 +745,16 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 			И в таблице "ItemList" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Post'
-	* Проверка отображения сообщения при попытке создать Shipment confirmation по Sales invoice по неордерному складу
+	* Check message display when you try to create Shipment confirmation based on Sales invoice (Stor doesn't use Shipment confirmation)
 		И я нажимаю на кнопку 'Shipment confirmation'
 		Тогда появилось предупреждение, содержащее текст "Lines on which you need to create Shipment confirmation are missed in the Sales invoice."
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сообщение при попытке создать Shipment confirmation на основании Sales invoice на услуги
-	* Создание тестового Sales invoice
+Сценарий: message when trying to create Shipment confirmation based on Sales invoice with Service
+	* Create Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -765,7 +762,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Agreement"
 			И в таблице "List" я выбираю текущую строку
-		И я выбираю склад 
+		* Select Store
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -773,14 +770,14 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-		И я меняю номер sales invoice на 2009
+		* Change the document number to 2009
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И в поле 'Number' я ввожу текст '2010'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2010'
-		И я добавляю в реализацию товар
+		* Filling in items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -798,16 +795,16 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '100,00'
 			И в таблице "ItemList" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Post'
-	* Проверка отображения сообщения при попытке создать Shipment confirmation по Sales invoice по неордерному складу
+	* Check message display when you try to create Shipment confirmation based on Sales invoice with Service
 		И я нажимаю на кнопку 'Shipment confirmation'
 		Тогда появилось предупреждение, содержащее текст "Lines on which you need to create Shipment confirmation are missed in the Sales invoice."
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сообщение при попытке создать Goods reciept на основании Purchase invoice на услуги
-	* Создание тестового Purchase invoice
+Сценарий: message when trying to create Goods reciept based on Purchase invoice with Service
+	* Create Purchase invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -815,7 +812,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Agreement"
 			И в таблице "List" я выбираю текущую строку
-		И я выбираю склад 
+		* Select Store
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -823,13 +820,13 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-		И я меняю номер Purchase invoice на 2015
+		* Change the document number to 2015
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '2015'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '2015'
-		И я добавляю в поступление товар
+		* Filling in items tab
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -847,16 +844,16 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '100,00'
 			И в таблице "ItemList" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Post'
-	* Проверка отображения сообщения при попытке создать Goods receipt по Purchase invoice по неордерному складу
+	* Check message display when you try to create Goods receipt based on Purchase invoice with Service
 		И я нажимаю на кнопку 'Goods receipt'
 		Тогда появилось предупреждение, содержащее текст "Lines on which you need to create Goods receipt are missed in the Purchase invoice."
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сообщение при попытке создать Purchase order на основании Sales order по методу обеспечения stock и repeal, включая услуги
-	* Создание тестового Sales order
+Сценарий: message when trying to create Purchase order based on Sales order with procurement nethod stock and repeal, with Service
+	* Create Sales order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И я нажимаю на кнопку 'Create'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 					| 'Description' |
@@ -872,7 +869,7 @@
 					| 'Description' |
 					| 'Company Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-		И я заполняю товарную часть
+		* Filling in items table
 			И в таблице "ItemList" я нажимаю на кнопку 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -914,7 +911,7 @@
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Repeal'
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
 			И я нажимаю на кнопку 'Post'
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '2015'
@@ -922,7 +919,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '2015'
 		И я нажимаю на кнопку 'Post'
-	* Проверка сообщения о том что нет товаров для заказа поставщику
+	* Check the message that there are no items to order with the vendor
 		И я нажимаю на кнопку 'Purchase order'
 		Тогда появилось предупреждение, содержащее текст "No lines with properly procurement method."
 		Когда открылось окно '1C:Enterprise'
@@ -931,8 +928,8 @@
 		Тогда появилось предупреждение, содержащее текст "No lines with properly procurement method."
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сообщение при попытке повторно создать Purchase order/Inventory transfer order на основании Internal supply request
-	* Создание тестового Internal supply request
+Сценарий: message when trying to re-create Purchase order/Inventory transfer order based on Internal supply request
+	* Create Internal supply request
 		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я устанавливаю номер документа
@@ -940,7 +937,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '100'
-		И я заполняю основные реквизиты документа
+		* Filling in the details of the document
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я активизирую поле "Description"
 			И в таблице "List" я перехожу к строке:
@@ -952,7 +949,7 @@
 				| Description |
 				| Store 02  |
 			И в таблице "List" я выбираю текущую строку
-		И я заполняю товарную часть
+		* Filling in items table
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -969,7 +966,7 @@
 			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '10,000'
 			И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post'
-	* Создание тестового Purchase order на основании созданного Internal supply request
+	* Create Purchase order based on созданного Internal supply request
 		И я нажимаю на кнопку 'Purchase order'
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -983,15 +980,13 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Agreement"
 		И в таблице "List" я выбираю текущую строку
-		# Тогда открылось окно '1C:Enterprise'
-		# И я нажимаю на кнопку 'No'
 		И в таблице "ItemList" я активизирую поле "Price"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Price' я ввожу текст '100,00'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
 		И я нажимаю на кнопку 'Post and close'
-	* Проверка вывода сообщения при попытке повторного создания Purchase order/Inventory transfer order
+	* Check message display when you try to re-create Purchase order/Inventory transfer order
 		И я нажимаю на кнопку 'Purchase order'
 		Тогда появилось предупреждение, содержащее текст "Lines on which you need to order items from suppliers are missed In the Internal supply request"
 		Когда открылось окно '1C:Enterprise'
@@ -1001,11 +996,11 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: уведомление пользователя при создании второго частичного инвойса по заказу клиента
-	* Создание тестового Sales order
+Сценарий: user notification when creating a second partial sales invoice based on sales order
+	* Create Sales order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И я нажимаю на кнопку 'Create'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 					| 'Description' |
@@ -1021,7 +1016,7 @@
 					| 'Description' |
 					| 'Company Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-		И я заполняю товарную часть
+		* Filling in items table
 			И в таблице "ItemList" я нажимаю на кнопку 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -1035,7 +1030,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '2020'
@@ -1043,21 +1038,21 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '2020'
 		И я нажимаю на кнопку 'Post'
-	* Создание первого частичного Sales invoice по заказу
+	* Create first Sales invoice
 		И я нажимаю на кнопку 'Sales invoice'
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И я нажимаю на кнопку 'Post and close'
-	* * Создание второго частичного Sales invoice по заказу
+	* Create second Sales invoice
 		И я нажимаю на кнопку 'Sales invoice'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Sales invoice is not the same as the Sales order will be due to the fact that there is already another Sales invoice that partially closed this Sales order" в течение 30 секунд
 		И я закрыл все окна клиентского приложения
 
-Сценарий: уведомление пользователя при создании второго частичного инвойса по заказу поставщику
-	* Создание тестового Purchase order
+Сценарий: user notification when creating a second partial purchase invoice based on purchase order
+	* Create Purchase order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И я нажимаю на кнопку 'Create'
-		И я заполняю данные о клиенте
+		* Filling in customer info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 					| 'Description' |
@@ -1078,7 +1073,7 @@
 				| Description |
 				| Store 03  |
 			И в таблице "List" я выбираю текущую строку
-		И я заполняю товарную часть
+		* Filling in items table
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -1093,7 +1088,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '10,00'
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Number' я ввожу текст '2020'
@@ -1101,20 +1096,20 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '2020'
 		И я нажимаю на кнопку 'Post'
-	* Создание первого частичного Purchase invoice по заказу
+	* Create first Purchase invoice based on Purchase order
 		И я нажимаю на кнопку 'Purchase invoice'
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание второго частичного Purchase invoice по заказу
+	* Create second Purchase invoice based on Purchase order
 		И я нажимаю на кнопку 'Purchase invoice'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Purchase invoice is not the same as the Purchase order will be due to the fact that there is already another Purchase invoice that partially closed this Purchase order" в течение 5 секунд
 
-Сценарий: _0154513 проверка вывода сообщения по SO при попытке создать заказ поставщику/SC
-	* Открытие формы Sales order
+Сценарий: _0154513 check message output for SO when trying to create a purchase order/SC
+	* Open the Sales order creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение Sales order
+	* Filling in Sales order
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -1131,7 +1126,7 @@
 			| 'Description' |
 			| 'Store 02'    |
 		И в таблице "List" я выбираю текущую строку
-		* Добавление строки товаров
+		* Filling in items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -1148,7 +1143,6 @@
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Purchase'
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '4,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Добавление второй строки по товарам
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -1165,7 +1159,6 @@
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Purchase'
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Добавление третей строки по товарам
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -1182,7 +1175,7 @@
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Заполнение менеджера сегмента
+		* Filling in Manager segment
 			И я перехожу к закладке "Other"
 			И я нажимаю кнопку выбора у поля "Manager segment"
 			И в таблице "List" я перехожу к строке:
@@ -1195,39 +1188,39 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '3 024'
 		И я нажимаю на кнопку 'Post'
-	* Проверка вывода сообщения если заказ без проводок
-		* Изменение статуса документа
+	* Checking the message output if the order is unposted
+		* Change of document status
 			И из выпадающего списка "Status" я выбираю точное значение 'Wait'
 			И я нажимаю на кнопку 'Post'
-		* Проверка вывода сообщения при попытке сформировать PO
+		* Checking message output when trying to generate a PO
 			И я нажимаю на кнопку 'Purchase order'
 			Тогда элемент формы с именем "Field1" стал равен шаблону 'Not properly status of Sales order*'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
-		* Проверка вывода сообщения при попытке сформировать PI
+		* Checking message output when trying to generate a PI
 			И я нажимаю на кнопку 'Purchase invoice'
 			Тогда элемент формы с именем "Field1" стал равен шаблону 'Not properly status of Sales order*'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
-	* Проверка вывода сообщения когда нельзя создать SC потому что еще не пришли товары от поставщика при условии что выбран вид снабжения “через заказы”
-		* Изменение статуса документа
+	* Checking the message output when it is impossible to create SC because the goods have not yet come from the vendor provided that the type of supply "through orders" is selected
+		* Change of document status
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
 			И я нажимаю на кнопку 'Post'
-		* Установка галочки 'Shipment confirmations before sales invoice'
+		* Checking a tick 'Shipment confirmations before sales invoice'
 			И я устанавливаю флаг 'Shipment confirmations before sales invoice'
 			И я нажимаю на кнопку 'Post'
-		* Проверка создания SC на строку с типом обеспечения Stock
+		* Create SC for string with procurement method Stock
 			И я нажимаю на кнопку 'Shipment confirmation'
 			Тогда открылось окно 'Shipment confirmation (create)'
 			И я нажимаю на кнопку 'Post and close'
 			И Пауза 2
-		* Проверка вывода сообщения при попытке сформировать SC
+		* Checking message output when trying to generate SC
 			И я нажимаю на кнопку 'Shipment confirmation'
 			Тогда элемент формы с именем "Field1" стал равен 'Items were not received from supplier according to procurement method.'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
-	* Проверка при попытке создать SC когда только создан PO, но товары не поставлены
-		* Создание частичного PO
+	* Check when trying to create SC when only a PO has been created but the goods have not been delivered
+		* Create a partial PO
 			И я нажимаю на кнопку 'Purchase order'
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я выбираю текущую строку
@@ -1261,21 +1254,21 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '3 024'
 			И я нажимаю на кнопку 'Post and close'
-		* Проверка вывода сообщения при попытке создать SC
+		* Checking message output when trying to create SC
 			И я нажимаю на кнопку 'Shipment confirmation'
 			Тогда элемент формы с именем "Field1" стал равен 'Items were not received from supplier according to procurement method.'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И я закрыл все окна клиентского приложения
-		* Создание GR и попытка повторго создания SC
-			* Создание GR
+		* Create GR and try to re-create SC
+			* Create GR
 				И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 				И в таблице "List" я перехожу к строке:
 				| 'Number' | 'Partner'   |
 				| '3 024'  | 'Ferron BP' |
 				И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
 				И я нажимаю на кнопку 'Post and close'
-			* Создание SC
+			* Create SC
 				И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 				И в таблице "List" я перехожу к строке:
 				| 'Number' | 'Partner'   |
@@ -1287,8 +1280,8 @@
 				| 'Trousers' | '1,000'    | '36/Yellow' | 'Store 02' |
 				И я нажимаю на кнопку 'Post and close'
 				И я закрыл все окна клиентского приложения
-	* Проверка вывода сообщения когда заказ уже закрыт заказом поставщику
-		* Создание PO на оставшееся количество
+	* Check the message output when the order is already closed by the purchase order
+		* Create a PO for the remaining amount
 			И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 			И в таблице "List" я перехожу к строке:
 			| 'Number' | 'Partner'   |
@@ -1319,7 +1312,7 @@
 			И в таблице "ItemList" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Post and close'
 			И я закрыл все окна клиентского приложения
-		* Проверка вывода сообщения когда заказ уже закрыт заказом поставщику
+		* Checking the message output when the order is already closed by the purchase order
 			И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 			И в таблице "List" я перехожу к строке:
 			| 'Number' | 'Partner'   |
@@ -1327,8 +1320,8 @@
 			И я нажимаю на кнопку с именем 'FormDocumentPurchaseOrderGeneratePurchaseOrder'
 			Тогда элемент формы с именем "Field1" стал равен 'All items in sales order are already ordered by purchase order(s).'
 			И я закрыл все окна клиентского приложения
-	* Проверка сообщения когда в заказе клиента нет строк с видом обеспечения "под заказ"
-		* Создание тестового заказа с типом обеспечения Stock
+	* Checking the message when there are no lines in the sales  order with procurement method "purchase"
+		* Create SO with procurement method Stock
 			И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Partner"
@@ -1342,7 +1335,7 @@
 					| 'Description'       |
 					| 'Basic Agreements, TRY' |
 			И в таблице "List" я выбираю текущую строку
-			* Добавление строки товаров
+			* Add a row of items
 				И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 				И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 				И в таблице "List" я перехожу к строке:
@@ -1366,18 +1359,18 @@
 					| 'Region 2'    |
 				И в таблице "List" я выбираю текущую строку
 				И я нажимаю на кнопку 'Post'
-		* Проверка вывода сообщения при попытке создать PO
+		* Checking message output when trying to create a PO
 			И я нажимаю на кнопку 'Purchase order'
 			Тогда элемент формы с именем "Field1" стал равен 'No lines with properly procurement method.'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И я закрыл все окна клиентского приложения
 
-Сценарий: _0154514 проверка вывода сообщения при попытке создать последующий документ по заказу со статусом без проводок
-	* Проверка вывода сообщений при создании документов на основании SO со статусом "без проводок"
+Сценарий: _0154514 check message output when trying to create a subsequent order document with the status without postings
+	* Check the output of messages when creating documents based on SO with the status "unposted"
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 		И я нажимаю на кнопку 'Create'
-		* Заполнение Sales order
+		* Filling in Sales order
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -1389,7 +1382,7 @@
 					| 'Description'       |
 					| 'Agreement DFC' |
 			И в таблице "List" я выбираю текущую строку
-			* Добавление строки товаров
+			* Add a row of items
 				И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 				И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 				И в таблице "List" я перехожу к строке:
@@ -1407,7 +1400,7 @@
 				И в таблице "ItemList" в поле 'Q' я ввожу текст '4,000'
 				И в таблице "ItemList" я завершаю редактирование строки
 				И из выпадающего списка "Status" я выбираю точное значение 'Wait'
-		* Заполнение менеджера сегмента
+		* Fiiling in manager segment
 			И я перехожу к закладке "Other"
 			И я нажимаю кнопку выбора у поля "Manager segment"
 			И в таблице "List" я перехожу к строке:
@@ -1420,7 +1413,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '3 027'
 		И я нажимаю на кнопку 'Post'
-		* Проверка вывода сообщения при попытке создать SalesInvoice
+		* Check message output when trying to create SalesInvoice
 			И я нажимаю на кнопку 'Sales invoice'
 			Тогда элемент формы с именем "Field1" стал равен шаблону 'Not properly status of Sales order*'
 			Когда открылось окно '1C:Enterprise'
@@ -1439,9 +1432,9 @@
 			И я нажимаю на кнопку 'OK'
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
 			И я нажимаю на кнопку 'Post'
-	* Проверка вывода сообщений при создании документов на основании PO со статусом "без проводок"
+	* Check the output of messages when creating documents on PO with the status "without posting"
 			И я нажимаю на кнопку 'Purchase order'
-		* Заполнение Purchase order
+		* Filling in Purchase order
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
@@ -1474,7 +1467,7 @@
 			И в поле 'Number' я ввожу текст '3 027'
 			И из выпадающего списка "Status" я выбираю точное значение 'Wait'
 			И я нажимаю на кнопку 'Post'
-		* Проверка вывода сообщения при попытке создать PurchaseInvoice
+		* Check the message output when trying to create PurchaseInvoice
 			И я нажимаю на кнопку 'Purchase invoice'
 			Тогда элемент формы с именем "Field1" стал равен шаблону 'Not properly status of Purchase order*'
 			Когда открылось окно '1C:Enterprise'
@@ -1485,31 +1478,31 @@
 			И я нажимаю на кнопку 'OK'
 			И я закрыл все окна клиентского приложения
 
-Сценарий: _0154515 проверка вывода сообщения при попытке снять галочки ордерности по складу по которому уже были расходные/приходные ордера
-	* Открытие карточки склада Store 02
+Сценарий: _0154515 check the message output when trying to uncheck a tick for Store "Use shipment confirmation" and "Use Goods receipt" for which there were already Shipment confirmation and  Goods receipt
+	* Open Store 02
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Stores"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Store 02'    |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка сообщения при снятии галочки 'Use goods receipt'
+	* Check the message output when trying to uncheck a tick for Store "Use Goods receipt"
 		И я снимаю флаг 'Use goods receipt'
 		Тогда элемент формы с именем "Field1" стал равен 'Unchecking "Use goods receipt" isn`t posible. Goods receipts from store Store 02 have already been created previously.'
 	И я закрыл все окна клиентского приложения
-	* Открытие карточки склада Store 02
+	* Open Store 02
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Stores"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Store 02'    |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка сообщения при снятии галочки 'Use shipment confirmation'
+	* Check the message output when trying to uncheck a tick for Store "Use shipment confirmation"
 		И я снимаю флаг 'Use shipment confirmation'
 		Тогда элемент формы с именем "Field1" стал равен 'Unchecking "Use shipment confirmation" isn`t posible. Shipment confirmations from store Store 02 have already been created previously.'
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154516 уведомление при попытке провести Sales order без заполненного procurement method по товару
-	* Создание и заполнение реквизитов Sales order
+Сценарий: _0154516 notification when trying to post a Sales order without filling procurement method
+	* Create Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение реквизитов
@@ -1538,7 +1531,7 @@
 				| 'Description' |
 				| 'Store 02'    |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение табличной части по товарам
+		* Filling in the tabular part по товарам
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:

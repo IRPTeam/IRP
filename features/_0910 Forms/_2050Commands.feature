@@ -11,7 +11,7 @@
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 	
-Сценарий: _0205001 создание тестовых данных
+Сценарий: _0205001 preparation
 	* Добавление тестовой обработки
 		* Открытие формы для добавления обработки
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
@@ -58,7 +58,7 @@
 					| 'Description' |
 					| 'Store 02'    |
 				И в таблице "List" я выбираю текущую строку
-			* Заполнение табличной части
+			* Filling in the tabular part
 				И я нажимаю на кнопку 'Add'
 				И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 				И в таблице "List" я перехожу к строке:
@@ -107,13 +107,13 @@
 				И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 				И в таблице "ItemList" в поле 'Price' я ввожу текст '100,000'
 				И в таблице "ItemList" я завершаю редактирование строки
-			* Изменение номера документа
+			* Change the document number
 				И я перехожу к закладке "Other"
 				И в поле 'Number' я ввожу текст '3 900'
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '3 900'
-			* Проведение и проверка создания
+			* Проведение и create
 				И я нажимаю на кнопку 'Post and close'
 				И таблица "List" содержит строки:
 					| 'Number' |
@@ -151,7 +151,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'  | 'External data proc' |
@@ -244,7 +244,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'  | 'External data proc' |
@@ -336,7 +336,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'  | 'External data proc' |
@@ -428,7 +428,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'  | 'External data proc' |
@@ -521,7 +521,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'  | 'External data proc' |
@@ -615,7 +615,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'  | 'External data proc' |
@@ -709,7 +709,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'           | 'External data proc' |
@@ -803,7 +803,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'           | 'External data proc' |
@@ -895,7 +895,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -989,7 +989,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -1082,7 +1082,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -1176,7 +1176,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -1269,7 +1269,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -1363,7 +1363,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -1456,7 +1456,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -1550,7 +1550,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -1643,7 +1643,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -1736,7 +1736,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -1829,7 +1829,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -1923,7 +1923,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -2018,7 +2018,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -2112,7 +2112,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -2205,7 +2205,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -2298,7 +2298,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -2391,7 +2391,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -2484,7 +2484,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -2577,7 +2577,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -2670,7 +2670,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -2764,7 +2764,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -2857,7 +2857,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -2950,7 +2950,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -3045,7 +3045,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -3140,7 +3140,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -3233,7 +3233,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -3326,7 +3326,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -3419,7 +3419,7 @@
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'External data proc' |
@@ -3482,7 +3482,7 @@
 
 
 Сценарий: _010017 проверка работы команды открытия контактной информации в списке клиентов
-	* Открытие справочника Partners и выбор нужного партнера
+	* Open catalog Partners и выбор нужного партнера
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -3498,7 +3498,7 @@
 
 
 Сценарий: _010018 проверка редактирования контактной информации из формы EditIDInfo
-	* Открытие справочника Partners и выбор нужного партнера
+	* Open catalog Partners и выбор нужного партнера
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -3508,7 +3508,7 @@
 		И в таблице "IDInfo" в поле 'Value' я ввожу текст 'Odessa, Bunina, 2, №33'
 		И в таблице "IDInfo" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения измененной контактной информации
+	* Save verification измененной контактной информации
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Kalipso' |
@@ -3520,7 +3520,7 @@
 
 
 Сценарий: _010019 проверка работы команды открытия списка номенклатуры из Item type
-	* Открытие справочника Item type и выбор нужного элемента
+	* Open catalog Item type и выбор нужного элемента
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemTypes'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -3540,13 +3540,13 @@
 
 
 Сценарий: _010020 проверка работы обработки QuantityCompare (сравнение плана/факта в Goods reciept)
-	* Создание Goods reciept на основании PI 3900
+	* Создание Goods reciept based on PI 3900
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '3 900' |
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	* Проверка заполнения GoodsReceipt
+	* Check filling inGoodsReceipt
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  | 'Quantity' | 'Currency' | 'Item key' | 'Store'    | 'Unit' | 'Receipt basis'           |
@@ -3574,7 +3574,7 @@
 			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
 			| 'Dress' | 'L/Green'  | 'pcs'  | '3,000' |
-	* Добавление товара вручную через кнопку Add
+	* Adding items toручную через кнопку Add
 		И в таблице "PhysItemList" я нажимаю на кнопку с именем 'PhysItemListAdd'
 		И в таблице "PhysItemList" я нажимаю кнопку выбора у реквизита с именем "PhysItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -3586,13 +3586,13 @@
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '38/18SD'  |
 		И в таблице "List" я выбираю текущую строку
-		# временно
+		# temporarily
 		И в таблице "PhysItemList" я нажимаю кнопку выбора у реквизита с именем "PhysItemListUnit"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'pcs'         |
 		И в таблице "List" я выбираю текущую строку
-		# временно
+		# temporarily
 		И в таблице "PhysItemList" я активизирую поле с именем "PhysItemListCount"
 		И в таблице "PhysItemList" в поле с именем 'PhysItemListCount' я ввожу текст '1,000'
 		Тогда таблица "PhysItemList" содержит строки:

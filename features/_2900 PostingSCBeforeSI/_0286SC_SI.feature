@@ -92,7 +92,7 @@
 			И в таблице "ItemList" я активизирую поле "Quantity"
 			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '4,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Изменение номера документа
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '2 013'
 			Тогда открылось окно '1C:Enterprise'
@@ -149,7 +149,7 @@
 			И в таблице "ItemList" я активизирую поле "Quantity"
 			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '8,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Изменение номера документа
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '5 601'
 			Тогда открылось окно '1C:Enterprise'
@@ -227,7 +227,7 @@
 			И в таблице "ItemList" я активизирую поле "Quantity"
 			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '4,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Изменение номера документа
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '5 602'
 			Тогда открылось окно '1C:Enterprise'
@@ -273,7 +273,7 @@
 			И в таблице "ItemList" я активизирую поле "Quantity"
 			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '18,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Изменение номера документа
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '5 603'
 			Тогда открылось окно '1C:Enterprise'
@@ -340,14 +340,14 @@
 			И в таблице "ItemList" я активизирую поле "Quantity"
 			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Изменение номера документа
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '5 604'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '5 604'
 			И я нажимаю на кнопку 'Post and close'
-	* Проверка создания Shipment confirmation
+	* create Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		Тогда таблица "List" содержит строки:
 		| 'Number' | 'Company'      |
@@ -357,8 +357,8 @@
 		| '5 603'  | 'Main Company' |
 		| '5 604'  | 'Second Company' |
 
-Сценарий: _0290002 создание документа Sales invoice на основании созданных Shipment confirmation
-	# на основании нескольких Shipment confirmation создается несколько Sales invoice
+Сценарий: _0290002 создание документа Sales invoice based on созданных Shipment confirmation
+	# based on нескольких Shipment confirmation создается несколько Sales invoice
 	* Открытие списка Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 	* Выбор нужных SC для создания SI 
@@ -369,9 +369,9 @@
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
-	* Создание SI на основании выбранных SC
+	* Создание SI based on выбранных SC
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
-		* Проверка создания первого SI
+		* create первого SI
 			И я запоминаю количество строк таблицы "ItemList" как "M"
 			Если поле с именем "Company" имеет значение "Second Company" тогда
 				И     элемент формы с именем "Partner" стал равен 'Ferron BP'
@@ -381,7 +381,7 @@
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
-				* Заполнение Agreement
+				* Filling in an Agreement
 					И я нажимаю кнопку выбора у поля "Agreement"
 					И в таблице "List" я перехожу к строке:
 						| 'Description'                   |
@@ -458,7 +458,7 @@
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '5 602'
 			И я нажимаю на кнопку 'Post and close'
-		* Проверка создания второго Si
+		* create второго Si
 			И я запоминаю количество строк таблицы "ItemList" как "M"
 			Если поле с именем "Company" имеет значение "Second Company" тогда
 				И     элемент формы с именем "Partner" стал равен 'Ferron BP'
@@ -468,7 +468,7 @@
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
-				* Заполнение Agreement
+				* Filling in an Agreement
 					И я нажимаю кнопку выбора у поля "Agreement"
 					И в таблице "List" я перехожу к строке:
 						| 'Description'                   |
@@ -545,7 +545,7 @@
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '5 602'
 			И я нажимаю на кнопку 'Post and close'
-		* Проверка создания третьего Si
+		* create третьего Si
 			И я запоминаю количество строк таблицы "ItemList" как "M"
 			Если поле с именем "Company" имеет значение "Second Company" тогда
 				И     элемент формы с именем "Partner" стал равен 'Ferron BP'
@@ -555,7 +555,7 @@
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
-				* Заполнение Agreement
+				* Filling in an Agreement
 					И я нажимаю кнопку выбора у поля "Agreement"
 					И в таблице "List" я перехожу к строке:
 						| 'Description'                   |
@@ -632,7 +632,7 @@
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '5 602'
 			И я нажимаю на кнопку 'Post and close'
-		* Проверка создания четвертого Si
+		* create четвертого Si
 			И я запоминаю количество строк таблицы "ItemList" как "M"
 			Если поле с именем "Company" имеет значение "Second Company" тогда
 				И     элемент формы с именем "Partner" стал равен 'Ferron BP'
@@ -642,7 +642,7 @@
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
-				* Заполнение Agreement
+				* Filling in an Agreement
 					И я нажимаю кнопку выбора у поля "Agreement"
 					И в таблице "List" я перехожу к строке:
 						| 'Description'                   |

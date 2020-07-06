@@ -2,24 +2,22 @@
 @tree
 @Positive
 
-Функционал: проверка подключения к документам отчета по движениям
+Функционал: checking the output of the document movement report
 
-Как тестировщик
-Я хочу проверить подключение к документам отчета о движении
 
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _017002 проверка подключения к документу Purchase Order Отчета по движениям
+Сценарий: _017002 checking the output of the document movement report for Purchase Order
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '2'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Purchase order 2*'                  | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
@@ -38,13 +36,13 @@
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | 'Purchase order 2*' | '36/Yellow' | '*'         | ''        | ''              |
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '2'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Purchase order 2*'                  | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
@@ -63,20 +61,20 @@
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | 'Purchase order 2*' | '36/Yellow' | '*'         | ''        | ''              |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0170020 проверка отмены проводок при распроведении Purchase Order
-	* Выбор Purchase order
+Сценарий: _0170020 clear postings Purchase Order and check that there is no movements on the registers
+	* Select Purchase order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '2'      |
-	* Распроведение документа и проверка отмены проводок
+	* Clear postings Purchase Order and check that there is no movement on the registers
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 		И табличный документ "ResultTable" не содержит значения:
 		| Register  "Goods receipt schedule" |
 		| Register  "Order balance" |
 		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
+	* Posting the document and check movements
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -103,10 +101,10 @@
 
 
 
-Сценарий: _016502 проверка подключения к документу Internal Supply Request Отчета по движениям
-	* Открытие списка документов Internal Supply Request
+Сценарий: _016502 checking the output of the document movement report for Internal Supply Request
+	* Open list form Internal Supply Request
 		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
+	* Check the report generation
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
@@ -121,7 +119,7 @@
 		| ''                               | 'Receipt'     | '*'      | '20'        | 'Store 01'   | 'Internal supply request 1*' | '38/Black'  | '*'       |
 		| ''                               | 'Receipt'     | '*'      | '25'        | 'Store 01'   | 'Internal supply request 1*' | '36/Red'    | '*'       |
 		И я закрыл все окна клиентского приложения
-	* Проверка вывода отчета о движениях из документа
+	* Check the report generation from document
 		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -139,20 +137,20 @@
 		| ''                               | 'Receipt'     | '*'      | '25'        | 'Store 01'   | 'Internal supply request 1*' | '36/Red'    | '*'       |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0170021 проверка отмены проводок при распроведении Internal Supply Request
-	* Открытие списка документов Internal Supply Request
+Сценарий: _0170021 clear postings Internal Supply Request and check that there is no movements on the registers 
+	* Open list form Internal Supply Request
 		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
+	* Check the report generation
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
-	* Распроведение документа и проверка отмены проводок
+	* Clear postings document and check that there is no movement on the registers
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 		И табличный документ "ResultTable" не содержит значения:
 			| Register  "Order balance" |
 		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
+	* Posting the document and check movements
 		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -173,15 +171,15 @@
 
 
 
-Сценарий: _018019 проверка подключения к документу Purchase Invoice Отчета по движениям
+Сценарий: _018019 checking the output of the document movement report for Purchase Invoice
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Purchase invoice 1*'                  | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| 'Document registrations records'       | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
@@ -271,13 +269,13 @@
 		| ''                                     | 'Receipt'     | '*'         | '300'           | 'Store 01'     | '36/Yellow'           | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Purchase invoice 1*'                  | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| 'Document registrations records'       | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
@@ -367,14 +365,14 @@
 		| ''                                     | 'Receipt'     | '*'         | '300'           | 'Store 01'     | '36/Yellow'           | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _01801901 проверка отмены проводок при распроведении Purchase invoice
-	* Открытие списка документов Purchase invoice
+Сценарий: _01801901 clear postings Purchase invoice and check that there is no movements on the registers 
+	* Open list form Purchase invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
+	* Check the report generation
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
-	* Распроведение документа и проверка отмены проводок
+	* Clear postings document and check that there is no movement on the registers
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 		И табличный документ "ResultTable" не содержит значения:
@@ -384,7 +382,7 @@
 			| 'Register  "Stock reservation"'        |
 			| 'Register  "Reconciliation statement"' |
 		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
+	* Posting the document and check movements
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -485,14 +483,14 @@
 
 
 
-Сценарий: _022011 проверка подключения к документу PurchaseReturnOrder Отчета по движениям
+Сценарий: _022011 checking the output of the document movement report for Purchase return order
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Purchase return order 1*'       | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
@@ -520,13 +518,13 @@
 		| ''                               | 'Receipt'     | '*'         | '2'         | 'Store 02'   | 'Purchase return order 1*' | 'L/Green'             | '*'        | ''         | ''        | ''                         | ''                     |
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Purchase return order 1*'       | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
@@ -554,14 +552,14 @@
 		| ''                               | 'Receipt'     | '*'         | '2'         | 'Store 02'   | 'Purchase return order 1*' | 'L/Green'             | '*'        | ''         | ''        | ''                         | ''                     |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _02201101 проверка отмены проводок при распроведении Purchase Return Order
-	* Открытие списка документов Purchase Return Order
+Сценарий: _02201101 clear postings Purchase Return Order and check that there is no movements on the registers 
+	* Open list form Purchase Return Order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
+	* Check the report generation
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
-	* Распроведение документа и проверка отмены проводок
+	* Clear postings document and check that there is no movement on the registers
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 		И табличный документ "ResultTable" не содержит значения:
@@ -570,7 +568,7 @@
 			| 'Register  "Stock reservation"'  |
 			| 'Register  "Order balance"'      |
 		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
+	* Posting the document and check movements
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -609,14 +607,14 @@
 
 
 
-Сценарий: _022336 проверка подключения к документу Purchase Return Отчета по движениям
+Сценарий: _022336 checking the output of the document movement report for Purchase Return
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Purchase return 1*'                    | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
 		| 'Document registrations records'        | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
@@ -667,13 +665,13 @@
 		| ''                                      | 'Expense'     | '*'         | '2'         | 'Store 02'     | 'Purchase return order 1*' | 'L/Green'   | '*'                 | ''                   | ''                         | ''                         | ''                     |
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Purchase return 1*'                    | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
 		| 'Document registrations records'        | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
@@ -725,14 +723,14 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _02233601 проверка отмены проводок при распроведении Purchase Return
-	* Открытие списка документов Purchase Return Order
+Сценарий: _02233601 clear postings Purchase Return and check that there is no movements on the registers 
+	* Open list form Purchase Return Order
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
+	* Check the report generation
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
-	* Распроведение документа и проверка отмены проводок
+	* Clear postings document and check that there is no movement on the registers
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 		И табличный документ "ResultTable" не содержит значения:
@@ -743,7 +741,7 @@
 			| 'Register  "Reconciliation statement"'  |
 			| 'Register  "Order balance"'             |
 		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
+	* Posting the document and check movements
 		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -805,14 +803,14 @@
 
 
 
-Сценарий: _021048 проверка подключения к документу InventoryTransfer Отчета по движениям
+Сценарий: _021048 checking the output of the document movement report for Inventory transfer
 	И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransfer"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Inventory transfer 1*'                 | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
@@ -835,13 +833,13 @@
 		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'M/White'               | ''                              | ''         | ''        |
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransfer"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Inventory transfer 1*'                 | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
@@ -866,14 +864,14 @@
 
 
 
-Сценарий: _02104801 проверка отмены проводок при распроведении InventoryTransfer
-	* Открытие списка документов InventoryTransfer
+Сценарий: _02104801 clear postings Inventory transfer and check that there is no movements on the registers 
+	* Open list form Inventory transfer
 		И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransfer"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
+	* Check the report generation
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
-	* Распроведение документа и проверка отмены проводок
+	* Clear postings document and check that there is no movement on the registers
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 		И табличный документ "ResultTable" не содержит значения:
@@ -881,7 +879,7 @@
 			| 'Register  "Goods in transit incoming"' |
 			| 'Register  "Stock balance"'             |
 		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
+	* Posting the document and check movements
 		И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransfer"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -912,14 +910,14 @@
 
 
 
-Сценарий: _024043 проверка подключения к документу Sales Invoice Отчета по движениям
+Сценарий: _024043 checking the output of the document movement report for Sales Invoice
 	И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Sales invoice 1*'                           | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
@@ -1009,13 +1007,13 @@
 
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Sales invoice 1*'                           | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
@@ -1106,14 +1104,14 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: __02404301 проверка отмены проводок при распроведении SalesInvoice
-	* Открытие списка документов SalesInvoice
+Сценарий: __02404301 clear postings Sales invoice and check that there is no movements on the registers 
+	* Open list form Sales invoice
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
+	* Check the report generation
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
-	* Распроведение документа и проверка отмены проводок
+	* Clear postings document and check that there is no movement on the registers
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 		И табличный документ "ResultTable" не содержит значения:
@@ -1125,7 +1123,7 @@
 			| 'Register  "Reconciliation statement"'       |
 			| 'Register  "Order balance"'                  |
 		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
+	* Posting the document and check movements
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -1225,14 +1223,14 @@
 
 
 
-Сценарий: _028013 проверка подключения к документу Sales Return Order Отчета по движениям
+Сценарий: _028013 checking the output of the document movement report for Sales Return Order
 	И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Sales return order 1*'          | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
@@ -1250,13 +1248,13 @@
 		| ''                               | 'Receipt'     | '*'         | '1'         | 'Store 02'   | 'Sales return order 1*' | 'L/Green'      | '*'                | ''         | ''         | ''        | ''                         | ''                     |
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Sales return order 1*'          | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
@@ -1275,21 +1273,21 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _02801301 проверка отмены проводок при распроведении Sales Return Order
-	* Открытие списка документов Sales Return Order
+Сценарий: _02801301 clear postings Sales Return Order and check that there is no movements on the registers 
+	* Open list form Sales Return Order
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
+	* Check the report generation
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
-	* Распроведение документа и проверка отмены проводок
+	* Clear postings document and check that there is no movement on the registers
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 		И табличный документ "ResultTable" не содержит значения:
 			| 'Register  "Sales turnovers"'    |
 			| 'Register  "Order balance"'      |
 		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
+	* Posting the document and check movements
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -1318,14 +1316,14 @@
 
 
 
-Сценарий: _028811 проверка подключения к документу Shipment Confirmation Отчета по движениям
+Сценарий: _028811 checking the output of the document movement report for Shipment Confirmation
 	И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '95'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Shipment confirmation 95*'                  | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'             | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
@@ -1348,13 +1346,13 @@
 		| ''                                           | 'Expense'     | '*'      | '14'        | 'Main Company' | 'Sales invoice 2*' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '95'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Shipment confirmation 95*'                  | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'             | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
@@ -1378,14 +1376,14 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _02881101 проверка отмены проводок при распроведении Shipment confirmation
-	* Открытие списка документов Shipment confirmation
+Сценарий: _02881101 clear postings Shipment confirmation and check that there is no movements on the registers 
+	* Open list form Shipment confirmation
 		И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
+	* Check the report generation
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '95'      |
-	* Распроведение документа и проверка отмены проводок
+	* Clear postings document and check that there is no movement on the registers
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 		И табличный документ "ResultTable" не содержит значения:
@@ -1393,7 +1391,7 @@
 			| 'Register  "Stock balance"'                  |
 			| 'Register  "Shipment confirmation schedule"' |
 		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
+	* Posting the document and check movements
 		И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -1426,14 +1424,14 @@
 
 
 
-Сценарий: _028905 проверка подключения к документу Goods Receipt Отчета по движениям
+Сценарий: _028905 checking the output of the document movement report for Goods Receipt
 	И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '106'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Goods receipt 106*'                    | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
@@ -1460,13 +1458,13 @@
 
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '106'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Goods receipt 106*'                    | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
@@ -1494,14 +1492,14 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _02890501 проверка отмены проводок при распроведении Goods receipt
-	* Открытие списка документов Goods receipt
+Сценарий: _02890501 clear postings Goods receipt and check that there is no movements on the registers 
+	* Open list form Goods receipt
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
+	* Check the report generation
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '106'      |
-	* Распроведение документа и проверка отмены проводок
+	* Clear postings document and check that there is no movement on the registers
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 		И табличный документ "ResultTable" не содержит значения:
@@ -1510,7 +1508,7 @@
 			| 'Register  "Goods receipt schedule"'    |
 			| 'Register  "Stock balance"'             |
 		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
+	* Posting the document and check movements
 		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -1546,14 +1544,14 @@
 
 
 
-Сценарий: _029519 проверка подключения к документу Bundling Отчета по движениям
+Сценарий: _029519 checking the output of the document movement report for Bundling
 	И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Bundling 1*'                    | ''            | ''          | ''                              | ''           | ''                              |
 		| 'Document registrations records' | ''            | ''          | ''                              | ''           | ''                              |
@@ -1579,13 +1577,13 @@
 
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Bundling 1*'                    | ''            | ''          | ''                              | ''           | ''                              |
 		| 'Document registrations records' | ''            | ''          | ''                              | ''           | ''                              |
@@ -1612,14 +1610,14 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _02951901 проверка отмены проводок при распроведении Bundling
-	* Открытие списка документов Bundling
+Сценарий: _02951901 clear postings Bundling and check that there is no movements on the registers 
+	* Open list form Bundling
 		И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
+	* Check the report generation
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
-	* Распроведение документа и проверка отмены проводок
+	* Clear postings document and check that there is no movement on the registers
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 		И табличный документ "ResultTable" не содержит значения:
@@ -1627,7 +1625,7 @@
 			| 'Register  "Stock reservation"'  |
 			| 'Register  "Stock balance"'      |
 		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
+	* Posting the document and check movements
 		И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -1665,14 +1663,14 @@
 
 
 
-Сценарий: _029612 проверка подключения к документу Unbundling Отчета по движениям
+Сценарий: _029612 checking the output of the document movement report for Unbundling
 	И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Unbundling 1*'                  | ''            | ''       | ''          | ''           | ''          |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
@@ -1696,13 +1694,13 @@
 
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Unbundling 1*'                  | ''            | ''       | ''          | ''           | ''          |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
@@ -1726,21 +1724,21 @@
 
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _02961201 проверка отмены проводок при распроведении Unbundling
-	* Открытие списка документов Unbundling
+Сценарий: _02961201 clear postings Unbundling and check that there is no movements on the registers 
+	* Open list form Unbundling
 		И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
-	* Проверка вывода отчета о движениях по выбранному документу из списка
+	* Check the report generation
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
-	* Распроведение документа и проверка отмены проводок
+	* Clear postings document and check that there is no movement on the registers
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
 		И табличный документ "ResultTable" не содержит значения:
 			| 'Register  "Stock reservation"'  |
 			| 'Register  "Stock balance"'      |
 		И я закрыл все окна клиентского приложения
-	* Проведение документа и проверка проводок
+	* Posting the document and check movements
 		И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -1772,14 +1770,14 @@
 
 
 
-Сценарий: _023023 проверка подключения к документу Sales Order Отчета по движениям
+Сценарий: _023023 checking the output of the document movement report for Sales Order
 	И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
-	И я проверяю вывод отчета по выбранному документу из списка
+	* Check the report output for the selected document from the list
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Sales order 1*'                             | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
@@ -1820,13 +1818,13 @@
 		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Main Company' | 'Sales order 1*' | 'Store 01'  | 'L/Green'   | '*'       | '*'                        | ''                     |
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
-	И я проверяю вывод отчета по выбранному документу
+	* Check the report output from the selected document
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
 		| '1'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-	И я проверяю формирование отчета
+	* Check the report generation
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Sales order 1*'                             | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
@@ -1866,11 +1864,3 @@
 		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Main Company' | 'Sales order 1*' | 'Store 01'  | '36/Yellow' | '*'       | '*'                        | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Main Company' | 'Sales order 1*' | 'Store 01'  | 'L/Green'   | '*'       | '*'                        | ''                     |
 	И я закрыл все окна клиентского приложения
-
-
-
-
-
-
-
-

@@ -25,7 +25,7 @@ So you can display the amount of the vendor's discount
 		И я устанавливаю флаг 'Launch'
 		И я нажимаю на кнопку 'Save and close'
 	* Create Purchase order
-		И я открываю форму для создания Purchase Order
+		* Open a form to create Purchase Order
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Filling in the necessary details

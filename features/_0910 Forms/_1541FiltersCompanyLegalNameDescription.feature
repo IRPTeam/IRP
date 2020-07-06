@@ -2,284 +2,277 @@
 @tree
 @Positive
 
-Функционал: проверка фильтра по Company и Legal name на формах документов
+Функционал: filter by Company and Legal name on document forms
 
-Как тестировщик
-Я хочу проверить фильтры по Company и Legal name
+
 
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _017006 проверяю работу фильтра по Legal name в документе Purchase Order
+Сценарий: _017006 check the filter for Legal name in the document Purchase Order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	Когда проверяю работу фильтра по Legal name (Ferron)
 
 
-Сценарий: _017007 проверяю работу фильтра по Company в документе Purchase Order
+Сценарий: _017007 check the filter for Company in the document Purchase Order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	Когда проверяю работу фильтра по Company (Ferron)
 	
-Сценарий: _017008 проверяю работу Description в документе Purchase Order
+Сценарий: _017008 check Description in the document Purchase Order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	Когда проверяю работу Description
 
-Сценарий: _017009 проверка работы фильтра по отбору поставщиков в документе Purchase Order
+Сценарий: _017009 check the filter for Vendor in the document Purchase Order
 	И я закрыл все окна клиентского приложения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-374' с именем 'IRP-374'
-	И я открываю форму для создания Purchase Order
+	* Open a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по отбору поставщиков в документах закупки
 
 
-Сценарий: _017010 проверяю работу фильтра по соглашениям поставщика в документе Purchase Order
+Сценарий: _017010 check the filter for Vendor agreements in the document Purchase Order
 	И я закрыл все окна клиентского приложения
-	И я открываю форму для создания Purchase Order
+	* Open a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по соглашениям поставщика в документах закупки
 
 
 
-Сценарий: _018013 проверяю работу фильтра по Legal name в документе Purchase Invoice
+Сценарий: _018013 check the filter for Legal name in the document Purchase Invoice
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 	Когда проверяю работу фильтра по Legal name (Ferron)
 
 
-Сценарий: _018014 проверяю работу фильтра по Company в документе Purchase Invoice
+Сценарий: _018014 check the filter for Company in the document Purchase Invoice
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 	Когда проверяю работу фильтра по Company (Ferron)
 	
-Сценарий: _018015 проверяю работу Description в документе Purchase Invoice
+Сценарий: _018015 check Description in the document Purchase Invoice
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 	Когда проверяю работу Description
 
-Сценарий: _018016 проверка работы фильтра по отбору поставщиков в PurchaseInvoice
+Сценарий: _018016 check the filter for Vendor in the document PurchaseInvoice
 	И я закрыл все окна клиентского приложения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-374' с именем 'IRP-374'
-	И я открываю форму для создания Purchase Invoice
+	* Open a form to create Purchase Invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по отбору поставщиков в документах закупки
 
 
-Сценарий: _018017 проверяю работу фильтра по соглашениям поставщика в документе Purchase Invoice
+Сценарий: _018017 check the filter for Vendor agreements in the document Purchase Invoice
 	И я закрыл все окна клиентского приложения
-	И я открываю форму для создания Purchase Invoice
+	* Open a form to create Purchase Invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по соглашениям поставщика в документах закупки
 
 
-Сценарий: _022011 проверяю работу фильтра по Legal name в документе Purchase Return Order
+Сценарий: _022011 check the filter for Legal name in the document Purchase Return Order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 	Когда проверяю работу фильтра по Legal name (Ferron)
 
 
-Сценарий: _022012 проверяю работу фильтра по Company в документе Purchase Return Order
+Сценарий: _022012 check the filter for Company in the document Purchase Return Order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 	Когда проверяю работу фильтра по Company (Ferron)
 	
-Сценарий: _022013 проверяю работу Description
+Сценарий: _022013 check Description in the document Purchase Return Order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 	Когда проверяю работу Description
 
-Сценарий: _022014 проверка работы фильтра по отбору поставщиков в PurchaseReturnOrder
+Сценарий: _022014 check the filter for Vendor in the document PurchaseReturnOrder
 	И я закрыл все окна клиентского приложения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-374' с именем 'IRP-374'
-	И я открываю форму для создания Purchase Order
+	* Open a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по отбору поставщиков в документах закупки
 
-Сценарий: _022015 проверяю работу фильтра по соглашениям поставщика в документе Purchase Return Order
+Сценарий: _022015 check the filter for Vendor agreements in the document Purchase Return Order
 	И я закрыл все окна клиентского приложения
-	И я открываю форму для создания Purchase Invoice
+	* Open a form to create Purchase Invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по соглашениям поставщика в документах закупки
 
 
-Сценарий: _022330 проверяю работу фильтра по Legal name в документе Purchase Return
+Сценарий: _022330 check the filter for Legal name in the document Purchase Return
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 	Когда проверяю работу фильтра по Legal name (Ferron)
 
 
-Сценарий: _022331 проверяю работу фильтра по Company в документе Purchase Return
+Сценарий: _022331 check the filter for Company in the document Purchase Return
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 	Когда проверяю работу фильтра по Company (Ferron)
 	
-Сценарий: _022332 проверяю работу Description в документе Purchase Return
+Сценарий: _022332 check Description in the document Purchase Return
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 	Когда проверяю работу Description
 
-Сценарий: _022333 проверка работы фильтра по отбору поставщиков в PurchaseReturn
+Сценарий: _022333 check the filter for Vendor in the document PurchaseReturn
 	И я закрыл все окна клиентского приложения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-374' с именем 'IRP-374'
-	И я открываю форму для создания Purchase Order
+	* Open a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по отбору поставщиков в документах закупки
 
-Сценарий: _022334 проверяю работу фильтра по соглашениям поставщика в документе Purchase Return
+Сценарий: _022334 check the filter for Vendor agreements in the document Purchase Return
 	И я закрыл все окна клиентского приложения
-	И я открываю форму для создания Purchase Invoice
+	* Open a form to create Purchase Invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по соглашениям поставщика в документах закупки
 
 
 
-Сценарий: _020015 проверяю работу фильтра по Company в документе Inventory Transfer Order
+Сценарий: _020015 check the filter for Company in the document Inventory Transfer Order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
 	Когда проверяю работу фильтра по Company в документах перемещения товара
 
 
 
-Сценарий: _021049 проверяю работу фильтра по Company в документе Inventory Transfer
+Сценарий: _021049 check the filter for Company in the document Inventory Transfer
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
 	Когда проверяю работу фильтра по Company в документах перемещения товара
 
 
 
-Сценарий: _023107 проверяю работу фильтра по Legal name в документе Sales order
+Сценарий: _023107 check the filter for Legal name in the document Sales order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	Когда проверяю работу фильтра по Legal name
 
-Сценарий: _023108 проверяю работу фильтра по Agreement (по сегментам + сроку действия) в документе Sales order
+Сценарий: _023108 check the filter for agreements (segments and validity period) in the document SalesOrder
+	check Agreement filter 
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	Когда проверяю работу фильтра по Agreement (по сегментам + сроку действия)
 
-Сценарий: _023109 проверяю работу фильтра по Company в документе Sales order
+Сценарий: _023109 check the filter for Company in the document Sales order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	Когда проверяю работу фильтра по Company
 	
-Сценарий: _023110 проверяю работу Description в документе Sales order
+Сценарий: _023110 check Description in the document Sales order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	Когда проверяю работу Description
 
-Сценарий: _023111 проверка работы фильтра по отбору клиентов в SalesOrder
+Сценарий: _023111 check the filter for Customer in the document SalesOrder
 	И я закрыл все окна клиентского приложения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-374' с именем 'IRP-374'
-	И я открываю форму для создания Sales Order
+	* Open a form to create Sales Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по отбору клиентов в документах продажи
 
 
-Сценарий: _023112 проверяю работу фильтра по соглашениям клиента в SalesOrder
+Сценарий: _023112 check the filter for Customer agreements in the document SalesOrder
 	И я закрыл все окна клиентского приложения
-	И я открываю форму для создания Sales Order
+	* Open a form to create Sales Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по соглашениям клиента в документах продажи
 
 
-Сценарий: _024036 проверяю работу фильтра по Legal name в документе Sales invoice
+Сценарий: _024036 check the filter for Legal name in the document Sales invoice
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	Когда проверяю работу фильтра по Legal name
 
-Сценарий: _024037 проверяю работу фильтра по Agreement (по сегментам + сроку действия)
+Сценарий: _024037 check the filter for agreements (segments and validity period) in the document
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	Когда проверяю работу фильтра по Agreement (по сегментам + сроку действия)
 
-Сценарий: _024038 проверяю работу фильтра по Company в документе Sales invoice
+Сценарий: _024038 check the filter for Company in the document Sales invoice
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	Когда проверяю работу фильтра по Company
 	
-Сценарий: _024039 проверяю работу Description в документе Sales invoice
+Сценарий: _024039 check Description in the document Sales invoice
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	Когда проверяю работу Description
 
-Сценарий: _024040 проверка работы фильтра по отбору клиентов в SalesInvoice
+Сценарий: _024040 check the filter for Customer in the document SalesInvoice
 	И я закрыл все окна клиентского приложения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-374' с именем 'IRP-374'
-	И я открываю форму для создания Sales Invoice
+	* Open a form to create Sales Invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по отбору клиентов в документах продажи
 
 
-Сценарий: _024041 проверяю работу фильтра по соглашениям клиента в SalesInvoice
+Сценарий: _024041 check the filter for Customer agreements in the document SalesInvoice
 	И я закрыл все окна клиентского приложения
-	И я открываю форму для создания SalesInvoice
+	* Open a form to create SalesInvoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по соглашениям клиента в документах продажи
 
 
 
-Сценарий: _028529 проверяю работу фильтра по Legal name в документе Sales return
+Сценарий: _028529 check the filter for Legal name in the document Sales return
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 	Когда проверяю работу фильтра по Legal name
 
-Сценарий: _028530 проверяю работу фильтра по Agreement (по сегментам + сроку действия) в документе Sales return
+Сценарий: _028530 check the filter for agreements (segments and validity period) in the document Sales return
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 	Когда проверяю работу фильтра по Agreement (по сегментам + сроку действия)
 
-Сценарий: _028531 проверяю работу фильтра по Company в документе Sales return
+Сценарий: _028531 check the filter for Company in the document Sales return
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 	Когда проверяю работу фильтра по Company
 	
-Сценарий: _028532 проверяю работу Description в документе Sales return
+Сценарий: _028532 check Description in the document Sales return
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 	Когда проверяю работу Description
 
-Сценарий: _028533 проверка работы фильтра по отбору клиентов в SalesReturn
+Сценарий: _028533 check the filter for Customer in the document SalesReturn
 	И я закрыл все окна клиентского приложения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-374' с именем 'IRP-374'
-	И я открываю форму для создания Purchase Order
+	* Open a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по отбору клиентов в документах продажи
 
 
-Сценарий: _028812 проверяю работу фильтра по Company в документе Shipment Confirmation
+Сценарий: _028812 check the filter for Company in the document Shipment Confirmation
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 	Когда проверяю работу фильтра по Company в ордерах по складу
 
-Сценарий: _028813 проверяю работу Description
+Сценарий: _028813 check Description in the document Shipment Confirmation
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 	Когда проверяю работу Description
 
 
 
-Сценарий: _028906 проверяю работу фильтра по Company в документе Goods Receipt
+Сценарий: _028906 check the filter for Company in the document Goods Receipt
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 	Когда проверяю работу фильтра по Company в ордерах по складу
 
-Сценарий: _028907 проверяю работу Description в документе Goods Receipt
+Сценарий: _028907 check Description in the document Goods Receipt
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 	Когда проверяю работу Description
@@ -287,110 +280,88 @@
 
 
 
-Сценарий: _029520 проверяю работу фильтра по Company в документе Bundling
+Сценарий: _029520 check the filter for Company in the document Bundling
 	И я закрыл все окна клиентского приложения 
 	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 	Когда проверяю работу фильтра по Company в ордерах по складу
 
-Сценарий: _029521 проверяю работу Description в документе Bundling
+Сценарий: _029521 check Description in the document Bundling
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 	Когда проверяю работу Description
 
 
 
-Сценарий: _029613 проверяю работу фильтра по Company при создании документа Unbundling
+Сценарий: _029613 check the filter for Company in the document Unbundling
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 	Когда проверяю работу фильтра по Company в ордерах по складу
 
-Сценарий: _029614 проверяю работу Description при создании документа Unbundling
+Сценарий: _029614 check Description in the document Unbundling
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 	Когда проверяю работу Description
 
 
-
-# Сценарий: _029726 проверяю работу фильтра по Company в документе Boxing
-# 	И я закрыл все окна клиентского приложения
-# 	И я открываю навигационную ссылку 'e1cib/list/Document.Boxing'
-# 	Когда проверяю работу фильтра по Company в ордерах по складу
-
-# Сценарий: _029727 проверяю работу Description в документе Boxing
-# 	И я закрыл все окна клиентского приложения
-# 	И я открываю навигационную ссылку 'e1cib/list/Document.Boxing'
-# 	Когда проверяю работу Description
-
-Сценарий: _029728 проверяю работу фильтра по Company в документе StockAdjustmentAsWriteOff
+Сценарий: _029728 check the filter for Company in the document StockAdjustmentAsWriteOff
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 	Когда проверяю работу фильтра по Company в ордерах по складу
 
 
-Сценарий: _029729 проверяю работу фильтра по Company в документе StockAdjustmentAsSurplus
+Сценарий: _029729 check the filter for Company in the document StockAdjustmentAsSurplus
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 	Когда проверяю работу фильтра по Company в ордерах по складу
 
 
 
-# Сценарий: _029814 проверяю работу фильтра по Company в документе Unboxing
-# 	И я закрыл все окна клиентского приложения
-# 	И я открываю навигационную ссылку 'e1cib/list/Document.Unboxing'
-# 	Когда проверяю работу фильтра по Company в ордерах по складу
-
-# Сценарий: _029815 проверяю работу Description в документе Unboxing
-# 	И я закрыл все окна клиентского приложения
-# 	И я открываю навигационную ссылку 'e1cib/list/Document.Unboxing'
-# 	Когда проверяю работу Description
-
-Сценарий: _029816 проверяю работу Description в документе PhysicalCountByLocation
+Сценарий: _029816 check Description in the document PhysicalCountByLocation
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalCountByLocation'
 	Когда проверяю работу Description
 
-Сценарий: _029817 проверяю работу Description в документе PhysicalInventory
+Сценарий: _029817 check Description in the document PhysicalInventory
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 	Когда проверяю работу Description
 	
 
-Сценарий: _028007 проверяю работу фильтра по Legal name в документе Sales return order
+Сценарий: _028007 check the filter for Legal name in the document Sales return order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 	Когда проверяю работу фильтра по Legal name
 
-Сценарий: _028008 проверяю работу фильтра по Agreement (по сегментам + сроку действия) в документе Sales return order
+Сценарий: _028008 check the filter for agreements (segments and validity period) in the document Sales return order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 	Когда проверяю работу фильтра по Agreement (по сегментам + сроку действия)
 
-Сценарий: _028009 проверяю работу фильтра по Company в документе Sales return order
+Сценарий: _028009 check the filter for Company in the document Sales return order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 	Когда проверяю работу фильтра по Company
 	
-Сценарий: _028010 проверяю работу Description в документе Sales return order
+Сценарий: _028010 check Description in the document Sales return order
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 	Когда проверяю работу Description
 
-Сценарий: _028011 проверка работы фильтра по отбору клиентов в SalesReturnOrder
+Сценарий: _028011 check the filter for Customer in the document SalesReturnOrder
 	И я закрыл все окна клиентского приложения
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-374' с именем 'IRP-374'
-	И я открываю форму для создания Purchase Order
+	* Open a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по отбору клиентов в документах продажи
 
-Сценарий: _028012 проверяю работу Description в документе Labeling
+Сценарий: _028012 check Description in the document Labeling
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.Labeling'
 	Когда проверяю работу Description
 
 
-Сценарий: проверка фильтра по организации при выборе кассы/банка в документе Cash expense
-	* Временное указание в Cash desk 3 Second Company
+Сценарий: check the filter by Company when selecting cash/bank in Cash expense document
+	* Temporary filling in Cash desk 3 Second Company
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.CashAccounts'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -402,10 +373,10 @@
 			| 'Second Company' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
-	* Открытие формы Cash expense
+	* Open form Cash expense
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashExpense'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка фильтра по организации при выборе кассы/банка
+	* Checking the filter by Company when selecting cash register/bank
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -416,7 +387,7 @@
 			| 'Description'  |
 			| 'Cash desk №3' |
 		И я закрыл все окна клиентского приложения
-	* И я меняю обратно в Cash desk 3 компанию на Main Company
+	* Changing back to Cash Desk 3 to Main Company
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.CashAccounts'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -430,72 +401,72 @@
 		И я нажимаю на кнопку 'Save and close'
 
 
-Сценарий: проверка фильтра по собственным компаниям в документе Cash expense
-	* Открытие формы документа
+Сценарий: check filter by own companies in the document Cash expense
+	* Opening a document form
 		И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
-	* Проверка фильтра по собственной компании
+	* Check the filter for Own Company
 		Когда проверяю работу фильтра по собственной Company в Cash expence/Cash revenue
 
-Сценарий: проверка фильтра по собственным компаниям в документе Cash revenue
-	* Открытие формы документа
+Сценарий: check filter by own companies in the document Cash revenue
+	* Opening a document form
 		И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
-	* Проверка фильтра по собственной компании
+	* Check the filter for Own Company
 		Когда проверяю работу фильтра по собственной Company в Cash expence/Cash revenue
 
-Сценарий: проверка фильтра по компани в документе Reconcilation statement 
+Сценарий: check the filter for Company in the document Reconcilation statement 
 	И я открываю навигационную ссылку "e1cib/list/Document.ReconciliationStatement"
 	Когда проверяю работу фильтра по собственной Company в Reconcilation statement
 
-Сценарий: проверка наличия поля Legal name в документе Reconcilation statement 
+Сценарий: check if the Legal name field in the Reconcilation statement is present 
 	И я открываю навигационную ссылку "e1cib/list/Document.ReconciliationStatement"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Legal name"
 	Тогда открылось окно 'Companies'
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: проверка наличия поля Description в документе Reconcilation statement 
+Сценарий: check Description in the document Reconcilation statement 
 	И я открываю навигационную ссылку "e1cib/list/Document.ReconciliationStatement"
 	Когда проверяю работу Description
 
-Сценарий: проверяю работу фильтра по Company в документе CreditDebitNote
+Сценарий: check the filter for Company in the document CreditDebitNote
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
 	Когда проверяю работу фильтра по Company
 
-Сценарий: проверка наличия поля Description в документе CreditDebitNote
+Сценарий: check Description in the document CreditDebitNote
 	И я открываю навигационную ссылку "e1cib/list/Document.CreditDebitNote"
 	Когда проверяю работу Description
 
-Сценарий: проверяю работу фильтра по Legal name в документе Goods receipt
+Сценарий: check the filter for Legal name in the document Goods receipt
 	И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И из выпадающего списка "Transaction type" я выбираю точное значение 'Purchase'
 	Когда проверяю работу фильтра по Legal name (Ferron) в Goods receipt и Shipment confirmation
 
-Сценарий: проверяю работу фильтра по Legal name в документе Shipment confirmation
+Сценарий: check the filter for Legal name in the document Shipment confirmation
 	И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
 	Когда проверяю работу фильтра по Legal name (Ferron) в Goods receipt и Shipment confirmation
 
-Сценарий: проверка наличия поля Description в документе Opening entry 
+Сценарий: check Description in the document Opening entry 
 	И я открываю навигационную ссылку "e1cib/list/Document.OpeningEntry"
 	Когда проверяю работу Description
 
 
-Сценарий: проверяю работу фильтра по собственной Company в Opening entry
-	* Открытие формы документа
+Сценарий: check filter by own companies in the document  Opening entry
+	* Opening a document form
 		И я открываю навигационную ссылку "e1cib/list/Document.OpeningEntry"
-	* Проверка фильтра по собственной компании
+	* Check the filter for Own Company
 		Когда проверяю работу фильтра по собственной Company в Opening entry
 
-Сценарий: проверяю работу Description в документе Inventory transfer
+Сценарий: check Description in the document Inventory transfer
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
 	Когда проверяю работу Description
 	И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу Description в документе Invoice match
+Сценарий: check Description in the document Invoice match
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 	Когда проверяю работу Description

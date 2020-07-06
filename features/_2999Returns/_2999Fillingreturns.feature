@@ -2,7 +2,7 @@
 @tree
 @Positive
 
-Функционал: проверка заполнения и перезаполнения возвратов
+Функционал: Check filling inи перезаполнения возвратов
 
 Как тестировщик
 Я хочу проверить заполнение и перезаполнение возвратов
@@ -12,25 +12,25 @@
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _299901 проверка заполнения и перезаполнения Sales return order
+Сценарий: _299901 Check filling inи перезаполнения Sales return order
 	* Открытие формы Sales return order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка заполнения legal name если оно у партнера одно
+	* Check filling inlegal name если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Проверка заполнения Agreement если оно у партнера одно
+	* Check filling inAgreement если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Nicoletta'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Agreement" стал равен 'Posting by standart agreement Customer'
-	* Проверка заполнения Company из Agreement
+	* Check filling inCompany из Agreement
 		* Изменение компании в Sales return order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -42,7 +42,7 @@
 			И в таблице "List" я выбираю текущую строку
 		* Проверка перезаполнения при выборе соглашения
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Проверка заполнения Store из Agreement
+	* Check filling inStore из Agreement
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	* Проверка очистки legal name, agreement при перевыборе партнера
 		* Перевыбор партнера
@@ -53,7 +53,7 @@
 			И в таблице "List" я выбираю текущую строку
 		* Проверка очистки полей
 			И     элемент формы с именем "Agreement" стал равен ''
-		* Проверка заполнения Legal name после перевыбора партнера
+		* Check filling inLegal name после перевыбора партнера
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		* Выбор соглашения
 			И я нажимаю кнопку выбора у поля "Agreement"
@@ -61,7 +61,7 @@
 				| 'Description'                   |
 				| 'Basic Agreements, without VAT' |
 			И в таблице "List" я выбираю текущую строку
-	* Проверка заполнения склада и компании из Agreement при перевыборе партнера
+	* Check filling inсклада и компании из Agreement при перевыборе партнера
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
@@ -74,7 +74,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
-	* Проверка заполнения цены при добавлении Item и выборе item key
+	* Check filling inцены при добавлении Item и выборе item key
 		* Заполнение item и Item key
 			И в таблице 'ItemList' я удаляю строку
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -133,25 +133,25 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _299902 проверка заполнения и перезаполнения Sales return
+Сценарий: _299902 Check filling inи перезаполнения Sales return
 	* Открытие формы Sales return
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка заполнения legal name если оно у партнера одно
+	* Check filling inlegal name если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Проверка заполнения Agreement если оно у партнера одно
+	* Check filling inAgreement если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Nicoletta'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Agreement" стал равен 'Posting by standart agreement Customer'
-	* Проверка заполнения Company из Agreement
+	* Check filling inCompany из Agreement
 		* Изменение компании в Sales return order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -163,7 +163,7 @@
 			И в таблице "List" я выбираю текущую строку
 		* Проверка перезаполнения при выборе соглашения
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Проверка заполнения Store из Agreement
+	* Check filling inStore из Agreement
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	* Проверка очистки legal name, agreement при перевыборе партнера
 		* Перевыбор партнера
@@ -174,7 +174,7 @@
 			И в таблице "List" я выбираю текущую строку
 		* Проверка очистки полей
 			И     элемент формы с именем "Agreement" стал равен ''
-		* Проверка заполнения Legal name после перевыбора партнера
+		* Check filling inLegal name после перевыбора партнера
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		* Выбор соглашения
 			И я нажимаю кнопку выбора у поля "Agreement"
@@ -182,7 +182,7 @@
 				| 'Description'                   |
 				| 'Basic Agreements, without VAT' |
 			И в таблице "List" я выбираю текущую строку
-	* Проверка заполнения склада и компании из Agreement при перевыборе партнера
+	* Check filling inсклада и компании из Agreement при перевыборе партнера
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
@@ -261,25 +261,25 @@
 		И в таблице "ItemList" я завершаю редактирование строки
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _299903 проверка заполнения и перезаполнения Purchase return order
+Сценарий: _299903 Check filling inи перезаполнения Purchase return order
 	* Открытие формы Purchase return order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка заполнения legal name если оно у партнера одно
+	* Check filling inlegal name если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Проверка заполнения Agreement если оно у партнера одно
+	* Check filling inAgreement если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Veritas'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Agreement" стал равен 'Posting by standart agreement (Veritas)'
-	* Проверка заполнения Company из Agreement
+	* Check filling inCompany из Agreement
 		* Изменение компании в Purchase return order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -291,7 +291,7 @@
 			И в таблице "List" я выбираю текущую строку
 		* Проверка перезаполнения при выборе соглашения
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Проверка заполнения Store из Agreement
+	* Check filling inStore из Agreement
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	* Проверка очистки legal name, agreement при перевыборе партнера
 		* Перевыбор партнера
@@ -302,7 +302,7 @@
 			И в таблице "List" я выбираю текущую строку
 		* Проверка очистки полей
 			И     элемент формы с именем "Agreement" стал равен ''
-		* Проверка заполнения Legal name после перевыбора партнера
+		* Check filling inLegal name после перевыбора партнера
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		* Выбор соглашения
 			И я нажимаю кнопку выбора у поля "Agreement"
@@ -310,7 +310,7 @@
 				| 'Description'                   |
 				| 'Partner Kalipso Vendor' |
 			И в таблице "List" я выбираю текущую строку
-	* Проверка заполнения склада и компании из Agreement при перевыборе партнера
+	* Check filling inсклада и компании из Agreement при перевыборе партнера
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
@@ -389,25 +389,25 @@
 		И в таблице "ItemList" я завершаю редактирование строки
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _299904 проверка заполнения и перезаполнения Purchase return
+Сценарий: _299904 Check filling inи перезаполнения Purchase return
 	* Открытие формы Purchase return
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка заполнения legal name если оно у партнера одно
+	* Check filling inlegal name если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Проверка заполнения Agreement если оно у партнера одно
+	* Check filling inAgreement если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Veritas'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Agreement" стал равен 'Posting by standart agreement (Veritas)'
-	* Проверка заполнения Company из Agreement
+	* Check filling inCompany из Agreement
 		* Изменение компании в Purchase return
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -419,7 +419,7 @@
 			И в таблице "List" я выбираю текущую строку
 		* Проверка перезаполнения при выборе соглашения
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Проверка заполнения Store из Agreement
+	* Check filling inStore из Agreement
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	* Проверка очистки legal name, agreement при перевыборе партнера
 		* Перевыбор партнера
@@ -430,7 +430,7 @@
 			И в таблице "List" я выбираю текущую строку
 		* Проверка очистки полей
 			И     элемент формы с именем "Agreement" стал равен ''
-		* Проверка заполнения Legal name после перевыбора партнера
+		* Check filling inLegal name после перевыбора партнера
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		* Выбор соглашения
 			И я нажимаю кнопку выбора у поля "Agreement"
@@ -438,7 +438,7 @@
 				| 'Description'                   |
 				| 'Partner Kalipso Vendor' |
 			И в таблице "List" я выбираю текущую строку
-	* Проверка заполнения склада и компании из Agreement при перевыборе партнера
+	* Check filling inсклада и компании из Agreement при перевыборе партнера
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Проверка авто заполнения item key при добавлении Item (у Item один item key)

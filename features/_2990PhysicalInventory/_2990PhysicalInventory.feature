@@ -14,7 +14,7 @@
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий:_2990000 создание тестовых данных
+Сценарий:_2990000 preparation
 	* Создание ордерного склада Store 05
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Stores"
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -42,7 +42,7 @@
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
 	* Добавление остатков по созданным складам (Opening entry)
-		* Открытие формы документа для ввода начального остатка
+		* Opening a document form для ввода начального остатка
 			И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение информации о компании
@@ -57,7 +57,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '8'
-		* Заполнение табличной части по остаткам товара
+		* Filling in the tabular part по остаткам товара
 			И я перехожу к закладке "Inventory"
 			И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
 			И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
@@ -146,7 +146,7 @@
 
 
 Сценарий: _2990001 заполнение справочника статусов для PhysicalInventory и PhysicalCountByLocation
-	* Открытие формы создания ObjectStatuses
+	* Open a creation form ObjectStatuses
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 	* Присвоение предопределенному элементу PhysicalInventory наименования 
 		И в таблице "List" я разворачиваю строку:
@@ -250,7 +250,7 @@
 
 
 Сценарий: _2990002 создание документа оприходования излишков товаров и проверка его проводок
-	* Открытие формы документа
+	* Opening a document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа
@@ -264,7 +264,7 @@
 			| 'Description' |
 			| 'Store 02'      |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение табличной части
+	* Filling in the tabular part
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я выбираю текущую строку
@@ -287,19 +287,19 @@
 			| 'Delivery'  |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка заполнения таблицы
+	* Check filling inтаблицы
 		И     таблица "ItemList" содержит строки:
 		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'           | 'Unit' | 'Revenue type' | 'Basis document' |
 		| 'Dress' | '8,000'    | 'M/White'  | 'Distribution department' | 'pcs'  | 'Delivery'     | ''               |
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '1'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '1'
-	* Проведение документа
+	* Post document
 		И я нажимаю на кнопку 'Post'
-	* Проверка проводок
+	* Check movements
 		И я нажимаю на кнопку 'Registrations report'
 		# заменить после себестоимости
 		Тогда табличный документ "ResultTable" равен по шаблону:
@@ -366,7 +366,7 @@
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _2990003 создание документа списания недостач товаров и проверка его проводок
-	* Открытие формы документа
+	* Opening a document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа
@@ -380,7 +380,7 @@
 			| 'Description' |
 			| 'Store 02'      |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение табличной части
+	* Filling in the tabular part
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я выбираю текущую строку
@@ -403,19 +403,19 @@
 			| 'Delivery'  |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка заполнения таблицы
+	* Check filling inтаблицы
 		И     таблица "ItemList" содержит строки:
 		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'           | 'Unit' | 'Expense type' | 'Basis document' |
 		| 'Dress' | '8,000'    | 'M/White'  | 'Distribution department' | 'pcs'  | 'Delivery'     | ''               |
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '1'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '1'
-	* Проведение документа
+	* Post document
 		И я нажимаю на кнопку 'Post'
-	* Проверка проводок
+	* Check movements
 		И я нажимаю на кнопку 'Registrations report'
 		# заменить после себестоимости
 		Тогда табличный документ "ResultTable" равен по шаблону:
@@ -482,11 +482,11 @@
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _2990004 создание документа инвентаризации и проверка его проводок (склад ордерный)
-	* Открытие формы документа
+	* Opening a document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Status" я выбираю точное значение 'Done'
-	* Проверка заполнения документа остатками по складу
+	* Check filling inдокумента остатками по складу
 		И я нажимаю кнопку выбора у поля "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -512,13 +512,13 @@
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Phys. count' я ввожу текст '125,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '1'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '1'
-	* Проведение документа инвентаризации
+	* Posting the documentинвентаризации
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
@@ -546,7 +546,7 @@
 		| ''                                          | 'Receipt'     | '*'      | '5'         | 'Store 05'   | 'S/Yellow'              | ''         |
 		| ''                                          | 'Expense'     | '*'      | '2'         | 'Store 05'   | 'XS/Blue'               | ''         |
 		И Я закрыл все окна клиентского приложения
-	* Распроведение документа инвентаризации и проверка отмены проводок
+	* Clear postings документа инвентаризации и проверка отмены проводок
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
 			| 'Number'  |
@@ -592,11 +592,11 @@
 
 
 Сценарий: _2990004 создание документа инвентаризации и проверка его проводок (склад неордерный)
-	* Открытие формы документа
+	* Opening a document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Status" я выбираю точное значение 'Done'
-	* Проверка заполнения документа остатками по складу
+	* Check filling inдокумента остатками по складу
 		И я нажимаю кнопку выбора у поля "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -622,13 +622,13 @@
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Phys. count' я ввожу текст '405,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '2'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '2'
-	* Проведение документа инвентаризации
+	* Posting the documentинвентаризации
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
@@ -657,13 +657,13 @@
 		| ''                                          | 'Expense'     | '*'      | '2'         | 'Store 06'   | 'XS/Blue'               | ''          |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990005 создание документа StockAdjustmentAsSurplus на основании инвентаризации и проверка его проводок
-	* Открытие формы документа
+Сценарий: _2990005 создание документа StockAdjustmentAsSurplus based on инвентаризации и проверка его проводок
+	* Opening a document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'    |
-	* Создание документа StockAdjustmentAsSurplus и проверка его заполнения
+	* Create a document StockAdjustmentAsSurplus и проверка его заполнения
 		И я нажимаю на кнопку с именем 'FormDocumentStockAdjustmentAsSurplusGenerateStockAdjustmentAsSurplus'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -681,19 +681,19 @@
 			| 'Delivery'    |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка заполнения документа
+	* Check filling inдокумента
 		И     таблица "ItemList" содержит строки:
 		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Revenue type' | 'Basis document'        |
 		| 'Dress' | '5,000'    | 'S/Yellow' | 'Logistics department' | 'pcs'  | 'Delivery'     | 'Physical inventory 1*' |
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 1
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '0'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		Тогда открылось окно 'Stock adjustment as surplus (create) *'
 		И в поле 'Number' я ввожу текст '2'
-	* Проведение документа и проверка его движений
+	* Posting the documentи проверка его движений
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
@@ -714,7 +714,7 @@
 		| ''                                        | ''            | 'Amount'    | 'Company'      | 'Business unit'        | 'Revenue type'          | 'Item key' | 'Currency' | 'Additional analytic' | 'Currency movement type' | 'Deferred calculation' |
 		| ''                                        | '*'           | ''          | 'Main Company' | 'Logistics department' | 'Delivery'              | 'S/Yellow' | ''         | ''                    | ''                       | 'No'                   |
 		И Я закрыл все окна клиентского приложения
-	* Распроведение документа оприходования излишков и проверка отмены проводок
+	* Clear postings документа оприходования излишков и проверка отмены проводок
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 		И в таблице "List" я перехожу к строке:
 			| 'Number'  |
@@ -752,13 +752,13 @@
 		И Я закрыл все окна клиентского приложения
 	
 
-Сценарий: _2990007 создание документа StockAdjustmentAsWriteOff на основании инвентаризации и проверка его проводок
-	* Открытие формы документа
+Сценарий: _2990007 создание документа StockAdjustmentAsWriteOff based on инвентаризации и проверка его проводок
+	* Opening a document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'    |
-	* Создание документа StockAdjustmentAsWriteOff и проверка его заполнения
+	* Create a document StockAdjustmentAsWriteOff и проверка его заполнения
 		И я нажимаю на кнопку с именем 'FormDocumentStockAdjustmentAsWriteOffGenerateStockAdjustmentAsWriteOff'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -776,18 +776,18 @@
 			| 'Delivery'    |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка заполнения документа
+	* Check filling inдокумента
 		И     таблица "ItemList" содержит строки:
 		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Expense type' | 'Basis document'        |
 		| 'Dress' | '2,000'    | 'XS/Blue'  | 'Logistics department' | 'pcs'  | 'Delivery'     | 'Physical inventory 1*' |
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 1
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '0'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '2'
-	* Проведение документа и проверка его движений
+	* Posting the documentи проверка его движений
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
@@ -808,7 +808,7 @@
 		| ''                                          | ''            | ''          | 'Quantity'     | 'Store'                | 'Basis document'        | 'Item key' | ''         | ''                    | ''                       | ''                     |
 		| ''                                          | 'Expense'     | '*'         | '2'            | 'Store 05'             | 'Physical inventory 1*' | 'XS/Blue'  | ''         | ''                    | ''                       | ''                     |
 		И Я закрыл все окна клиентского приложения
-	* Распроведение документа списания недостач и проверка отмены проводок
+	* Clear postings документа списания недостач и проверка отмены проводок
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 		И в таблице "List" я перехожу к строке:
 			| 'Number'  |
@@ -845,13 +845,13 @@
 		| ''                                          | 'Expense'     | '*'         | '2'            | 'Store 05'             | 'Physical inventory 1*' | 'XS/Blue'  | ''         | ''                    | ''                       | ''                     |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990008 проверка создания документов StockAdjustmentAsSurplus и StockAdjustmentAsWriteOff на основании инвентаризации на частичное количество
-	* Открытие формы документа
+Сценарий: _2990008 create документов StockAdjustmentAsSurplus и StockAdjustmentAsWriteOff based on инвентаризации на частичное количество
+	* Opening a document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '2'    |
-	* Создание документа StockAdjustmentAsWriteOff на частичное количество
+	* Create a document StockAdjustmentAsWriteOff на частичное количество
 		И я нажимаю на кнопку с именем 'FormDocumentStockAdjustmentAsWriteOffGenerateStockAdjustmentAsWriteOff'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -875,7 +875,7 @@
 		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-	* Создание документа StockAdjustmentAsWriteOff на оставшееся количество и проверка его заполнения
+	* Create a document StockAdjustmentAsWriteOff на оставшееся количество и проверка его заполнения
 		И я нажимаю на кнопку с именем 'FormDocumentStockAdjustmentAsWriteOffGenerateStockAdjustmentAsWriteOff'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -898,7 +898,7 @@
 			| 'Dress' | '1,000'    | 'XS/Blue'  | 'Logistics department' | 'pcs'  | 'Delivery'     | 'Physical inventory 2*' |
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 1
 		И я нажимаю на кнопку 'Post and close'
-	* Создание документа StockAdjustmentAsSurplus на частичное количество
+	* Create a document StockAdjustmentAsSurplus на частичное количество
 		И я нажимаю на кнопку с именем 'FormDocumentStockAdjustmentAsSurplusGenerateStockAdjustmentAsSurplus'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -922,7 +922,7 @@
 		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-	* Создание документа StockAdjustmentAsSurplus на оставшееся количество и проверка его заполнения
+	* Create a document StockAdjustmentAsSurplus на оставшееся количество и проверка его заполнения
 		И я нажимаю на кнопку с именем 'FormDocumentStockAdjustmentAsSurplusGenerateStockAdjustmentAsSurplus'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -947,10 +947,10 @@
 		И я нажимаю на кнопку 'Post and close'
 
 Сценарий: _2990009 проверка обновления Update Exp Count
-	* Открытие формы документа
+	* Opening a document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка заполнения документа остатками по складу
+	* Check filling inдокумента остатками по складу
 		И я нажимаю кнопку выбора у поля "Store"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -998,7 +998,7 @@
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: _2990010 создание документа инвентаризации и пересчета к нему с распределением на ответсвенных
-	* Открытие формы документа
+	* Opening a document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнения документа остатками по складу
@@ -1039,14 +1039,14 @@
 			| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count'    |
 			| 'Dress' | '-125,000'   | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date:*'      |
 			| 'Dress' | '-198,000'   | 'XS/Blue'  | '198,000'    | 'pcs'  | 'Arina Brown'        | '#2 date:*'      |
-	* Проверка заполнения данных о пересчете в табличной части
+	* Check filling inданных о пересчете в табличной части
 		И я перехожу к закладке "Physical count by location"
 		И     таблица "PhysicalCountByLocationList" содержит строки:
 			| 'Responsible person' | 'Status'   |
 			| 'Arina Brown'        | 'Prepared' |
 			| 'Anna Petrova'       | 'Prepared' |
 	* Проведение оприходования излишков товара задним числом
-		* Открытие формы документа
+		* Opening a document form
 			И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение шапки документа
@@ -1060,7 +1060,7 @@
 				| 'Description' |
 				| 'Store 05'      |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение табличной части
+		* Filling in the tabular part
 			* Добавление первой строки
 				И я нажимаю на кнопку 'Add'
 				И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -1267,7 +1267,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Post'
 			И я нажимаю на кнопку 'Physical count by location'
-		* Проверка создания новых перерасчетов
+		* create новых перерасчетов
 			И     таблица "ItemList" содержит строки:
 			| 'Item'  | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count' |
 			| 'Dress' | 'M/White'  | '8,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
@@ -1284,7 +1284,7 @@
 			И из выпадающего списка "Status" я выбираю точное значение 'In processing'
 			И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _2990011 перезаполнение инвентаризации на основании данных пересчетов
+Сценарий: _2990011 перезаполнение инвентаризации based on данных пересчетов
 	* Открытие списков пересчетов
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalCountByLocation'
 	* Заполнение фактического количества в первом пересчете и установка статуса который делает проводки
@@ -1396,7 +1396,7 @@
 		И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedPicture"
 		И из выпадающего списка "Status" я выбираю точное значение 'Done'
 		И я нажимаю на кнопку 'Post'
-	* Проверка движений инвентаризации
+	* Check movements инвентаризации
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Physical inventory 3*'                     | ''            | ''       | ''          | ''           | ''                      | ''         |
@@ -1461,7 +1461,7 @@
 			И Я закрыл все окна клиентского приложения
 	
 Сценарий: _2990013 проверка вопроса о сохранении Physical inventory перед созданием Physical count by location
-	* Открытие формы документа
+	* Opening a document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнения документа остатками по складу

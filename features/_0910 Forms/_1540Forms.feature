@@ -3641,7 +3641,7 @@ I want to check the form display and autofill documents
 		И Я закрываю текущее окно
 		И Я закрываю текущее окно
 
-Сценарий: _005034 Check filling in обязательных полей в справочнике "Items"
+Сценарий: _005034 check filling in the required fields in the Items catalog
 	И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 	Когда создаю элемент справочника с наименованием Test
 	Если в текущем окне есть сообщения пользователю Тогда
@@ -3650,7 +3650,7 @@ I want to check the form display and autofill documents
 	И я нажимаю на кнопку 'No'
 
 
-Сценарий: _005035 Check filling inобязательных полей в справочнике "AddAttributeAndPropertyValues"
+Сценарий: _005035 check filling in the required fields in the AddAttributeAndPropertyValues catalog 
 	И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 	Когда создаю элемент справочника с наименованием Test
 	Если в текущем окне есть сообщения пользователю Тогда
@@ -3660,7 +3660,7 @@ I want to check the form display and autofill documents
 
 
 
-Сценарий: _005037 Check filling inобязательных полей в справочнике "Users"
+Сценарий: _005037 check filling in the required fields in the Users catalog 
 	И я открываю навигационную ссылку "e1cib/list/Catalog.Users"
 	Когда создаю элемент справочника с наименованием Test
 	И Я закрываю текущее окно
@@ -3669,53 +3669,50 @@ I want to check the form display and autofill documents
 
 
 Сценарий: _005118 check the display on the Items Description ENG form after changes (without re-open)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-214' с именем 'IRP-214'
-	* Открытие формы элемента Box справочника Items
+	* Open Item Box
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Box'         |
 		И в таблице "List" я выбираю текущую строку
-	* * Changing Description_en to Box1 and display checking
+	* Changing Description_en to Box1 and display checking
 		И в поле 'ENG' я ввожу текст 'Box1'
 		И я нажимаю на кнопку 'Save'
 		Тогда элемент формы с именем "Description_en" стал равен 'Box1'
 		И в поле 'ENG' я ввожу текст 'Box'
 		И я нажимаю на кнопку 'Save'
-	* Замена Description_en на первоначальное значение
+	* Changing Description_en back
 		Тогда элемент формы с именем "Description_en" стал равен 'Box'
 		И я нажимаю на кнопку 'Save and close'
 
-Сценарий: _012008 check the display on the  Agreement Description ENG form after changes (without re-open)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-214' с именем 'IRP-214'
-	* Открытие формы элемента Personal Agreements, $ справочника Agreements
+Сценарий: _012008 check the display on the Agreement Description ENG form after changes (without re-open)
+	* Open Personal Agreements, $ (catalog Agreements)  
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Personal Agreements, $'         |
 		И в таблице "List" я выбираю текущую строку
-	* * Changing Description_en to Personal Agreements, $ 1 and display checking
+	* Changing Description_en to Personal Agreements, $ 1 and display checking
 		И в поле 'ENG' я ввожу текст 'Personal Agreements, $ 1'
 		И я нажимаю на кнопку 'Save'
 		Тогда элемент формы с именем "Description_en" стал равен 'Personal Agreements, $ 1'
-	* Замена Description_en на первоначальное значение
+	* Changing Description_en back
 		И в поле 'ENG' я ввожу текст 'Personal Agreements, $'
 		И я нажимаю на кнопку 'Save'
 		Тогда элемент формы с именем "Description_en" стал равен 'Personal Agreements, $'
 		И я нажимаю на кнопку 'Save and close'
 
-Сценарий: _012009 проверка перехода в раздел Agreements из карточки Partner (отображает доступные соглашения по партнеру)
-	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-170' с именем 'IRP-170'
-	* Открытие формы элемента Ferron BP справочника Partners
+Сценарий: _012009 check the move to Agreements from the Partner card (shows available partner agreements)
+	* Open Ferron BP (catalog Partners)
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
 		И Пауза 2
-	* Переход в раздел Agreements
+	* Moving to Agreements
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Agreements'
-	* Проверка отображения только доступных соглашений
+	* Check the display of only available agreements
 		И я запоминаю количество строк таблицы "List" как "QS"
 		Тогда переменная "QS" имеет значение 8
 		Тогда таблица "List" содержит строки:
@@ -3731,18 +3728,18 @@ I want to check the form display and autofill documents
 		И Я закрываю текущее окно
 	
 
-Сценарий: проверка фильтра по полю Company и Legal name в форме элемента справочника Agreement
+Сценарий: сheck the filter by Company and Legal name field when creating an Agreement
 	* Open a creation form Agreement
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* И я проверяю фильтр по Company
+	* Check the filter by Company
 		И я нажимаю кнопку выбора у поля "Company"
 		Тогда таблица "List" стала равной:
 			| 'Description'              |
 			| 'Main Company'             |
 			| 'Second Company'           |
 		И в таблице "List" я выбираю текущую строку
-	* И я проверяю фильтр по Legal name без заполнения партнера
+	* Check the filter by Legal name
 		И я нажимаю кнопку выбора у поля "Legal name"
 		Тогда таблица "List" не содержит строки:
 			| 'Description'              |
@@ -3752,7 +3749,7 @@ I want to check the form display and autofill documents
 			| 'Description' |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-	* И я проверяю фильтр по Legal name с заполнением партнера
+	* Check the filter by partners Legal name 
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -3767,12 +3764,12 @@ I want to check the form display and autofill documents
 		| 'Second Company Ferron BP' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: проверка фильтра по Partner segment в элементе справочника Agreement
+Сценарий: filter check by Partner segment when creating an agreement
 	* Open a creation form Agreement
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя 'Type' на 'Customer'
-	* И я проверяю фильтр по Partner segment
+	* Check the filter by Partner segment
 		И я нажимаю кнопку выбора у поля "Partner segment"
 		Тогда таблица "List" содержит строки:
 			| 'Description' |
@@ -3785,8 +3782,8 @@ I want to check the form display and autofill documents
 		И я закрыл все окна клиентского приложения
 	
 
-Сценарий: невозможность создания собственной компании из карточки Partner
-	* Открытие карточки партнера
+Сценарий: inability to create your own company for Partner
+	* Open Partner
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -3794,14 +3791,14 @@ I want to check the form display and autofill documents
 		И в таблице "List" я выбираю текущую строку
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Company'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка на то что галочка Our не доступна
+	* Check that Our checkbox is not available
 		Если элемент "Our" не доступен для редактирования Тогда
 
-Сценарий: проверка выбора менеджера сегмента в заказе клиента
+Сценарий: check the selection of the segment manager in the sales order
 	* Open the Sales order creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение партнера и Legal name
+	* Filling in Partner and Legal name
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -3812,7 +3809,7 @@ I want to check the form display and autofill documents
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И я нажимаю кнопку выбора у поля "Manager segment"
-	* Проверка отображения сегментов менеджеров
+	* Check the display of manager segments
 		Тогда таблица "List" стала равной:
 		| 'Description' |
 		| 'Region 1'    |
@@ -3820,7 +3817,7 @@ I want to check the form display and autofill documents
 
 
 
-Сценарий: проверка row key при клонировании строки в Sales order
+Сценарий: check row key when cloning a string in Sales order
 	* Filling in the details of the documentsales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -3834,7 +3831,7 @@ I want to check the form display and autofill documents
 			| 'Description'                   |
 			| 'Basic Agreements, without VAT' |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение Sales order
+	* Filling in Sales order
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -3852,7 +3849,7 @@ I want to check the form display and autofill documents
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListContextMenuCopy'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post'
-	* Проверка что row key по строкам не совпадают
+	* Check that the row keys do not match
 		И я нажимаю на кнопку 'Registrations report'
 		И я запоминаю значение ячейки табличного документа "ResultTable" "R34C8" в переменную "Rov1"
 		И я запоминаю значение ячейки табличного документа "ResultTable" "R35C8" в переменную "Rov2"
@@ -3866,8 +3863,8 @@ I want to check the form display and autofill documents
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuFindByCurrentValue'
 		Тогда в таблице "List" количество строк "меньше или равно" 1
 
-Сценарий: проверка row key при клонировании строки в Sales invoice
-	* Filling in the details of the documentSales invoice
+Сценарий: check row key when cloning a string in Sales invoice
+	* Filling in the details of the document Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -3880,7 +3877,7 @@ I want to check the form display and autofill documents
 			| 'Description'                   |
 			| 'Basic Agreements, without VAT' |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение Sales invoice
+	* Filling in Sales invoice
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -3898,7 +3895,7 @@ I want to check the form display and autofill documents
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListContextMenuCopy'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post'
-	* Проверка что row key по строкам не совпадают
+	* Check that the row keys do not match
 		И я нажимаю на кнопку 'Registrations report'
 		И я запоминаю значение ячейки табличного документа "ResultTable" "R19C8" в переменную "Rov1"
 		И я запоминаю значение ячейки табличного документа "ResultTable" "R20C8" в переменную "Rov2"
@@ -3912,8 +3909,8 @@ I want to check the form display and autofill documents
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuFindByCurrentValue'
 		Тогда в таблице "List" количество строк "меньше или равно" 1
 
-Сценарий: проверка row key при клонировании строки в Purchase order
-	* Filling in the details of the documentPurchase order
+Сценарий: check row key when cloning a string in Purchase order
+	* Filling in the details of the document Purchase order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -3937,7 +3934,7 @@ I want to check the form display and autofill documents
 			| 'Description'   |
 			| 'Store 02'     |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение Purchase order
+	* Filling in Purchase order
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -3957,7 +3954,7 @@ I want to check the form display and autofill documents
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListContextMenuCopy'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post'
-	* Проверка что row key по строкам не совпадают
+	* Check that the row keys do not match
 		И я нажимаю на кнопку 'Registrations report'
 		И я запоминаю значение ячейки табличного документа "ResultTable" "R6C9" в переменную "Rov1"
 		И я запоминаю значение ячейки табличного документа "ResultTable" "R7C9" в переменную "Rov2"
@@ -3971,8 +3968,8 @@ I want to check the form display and autofill documents
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuFindByCurrentValue'
 		Тогда в таблице "List" количество строк "меньше или равно" 1
 
-Сценарий: проверка row key при клонировании строки в Shipment confirmation
-	* Filling in the details of the documentShipment confirmation
+Сценарий: check row key when cloning a string in Shipment confirmation
+	* Filling in the details of the document Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
@@ -3996,7 +3993,7 @@ I want to check the form display and autofill documents
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение Shipment confirmation
+	* Filling in Shipment confirmation
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -4016,7 +4013,7 @@ I want to check the form display and autofill documents
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListContextMenuCopy'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post'
-	* Проверка что row key по строкам не совпадают
+	* Check that the row keys do not match
 		И я нажимаю на кнопку 'Registrations report'
 		И я запоминаю значение ячейки табличного документа "ResultTable" "R6C8" в переменную "Rov1"
 		И я запоминаю значение ячейки табличного документа "ResultTable" "R7C8" в переменную "Rov2"
@@ -4035,11 +4032,11 @@ I want to check the form display and autofill documents
 
 
 
-Сценарий: Check filling inProcurement method через кнопку заполнить в SO
-	* Open a creation form заказа Sales order
+Сценарий: check filling in procurement method using the button Fill in SO
+	* Open a creation form Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение общих реквизитов Sales order
+	* Filling in the details
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -4055,7 +4052,7 @@ I want to check the form display and autofill documents
 			| 'Description'           |
 			| 'Basic Agreements, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Adding items to Sales order (4 строки)
+	* Adding items to Sales order (4 string)
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -4122,7 +4119,7 @@ I want to check the form display and autofill documents
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '3,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка работы кнопки "Procurement"
+	* Check the button
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'  | 'Item key' | 'Q'     |
 			| 'Shirt' | '38/Black' | '5,000' |
@@ -4144,14 +4141,14 @@ I want to check the form display and autofill documents
 		И в таблице "ItemList" я нажимаю на кнопку 'Procurement'
 		И я изменяю флаг 'Repeal'
 		И я нажимаю на кнопку 'OK'
-	* Check filling inProcurement method в созданном Sales order
+	* Check filling in Procurement method in the Sales order
 		И     таблица "ItemList" содержит строки:
 		| 'Item'       | 'Item key'  | 'Procurement method' | 'Q'     |
 		| 'Shirt'      | '38/Black'  | 'Stock'              | '5,000' |
 		| 'Boots'      | '38/18SD'   | 'Repeal'             | '8,000' |
 		| 'High shoes' | '37/19SD'   | 'Repeal'             | '2,000' |
 		| 'Trousers'   | '38/Yellow' | 'Purchase'           | '3,000' |
-	* Добавление строки с услугой
+	* Add a line with the service
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -4168,7 +4165,7 @@ I want to check the form display and autofill documents
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 		И в таблице "ItemList" в поле 'Price' я ввожу текст '100,00'
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка очистки procurement method по строке с услугой и проведении заказа
+	* Check the cleaning method on the line with the service
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'    | 'Item key' | 'Procurement method' |
 			| 'Service' | 'Rent'     | 'Stock'              |
@@ -4187,7 +4184,7 @@ I want to check the form display and autofill documents
 			| 'Trousers'   | '38/Yellow' | 'Purchase'           |
 			| 'Service'    | 'Rent'      | ''                   |
 		И я нажимаю на кнопку 'Post'
-	* Проверка очистки procurement method по строке с товаром и невозможности проведения заказа
+	* Checking the cleaning method on the line with the product
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'     | 'Item key'  | 'Procurement method' |
 			| 'Trousers' | '38/Yellow' | 'Purchase'           |
@@ -4201,8 +4198,8 @@ I want to check the form display and autofill documents
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: Check filling inpartner и признака customer/vendor при создании Agreement из карточки партнера
-	* Открытие карточки партнера-клиента
+Сценарий: check filling in partner and customer/vendor sign when creating Agreement from partner card
+	* Opening a customer partner card
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -4211,10 +4208,10 @@ I want to check the form display and autofill documents
 	* Open a creation form Agreement
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Check filling inPartner и признака Customer
+	* Check filling in partner and customer sign
 		И     элемент формы с именем "Partner" стал равен 'Kalipso'
 		И     элемент формы с именем "Type" стал равен 'Customer'
-	* Открытие карточки партнера-поставщика
+	* Open a supplier partner card
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -4223,7 +4220,7 @@ I want to check the form display and autofill documents
 	* Open a creation form Agreement
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Check filling inPartner и признака Customer
+	* Check filling in Partner and Vendor sign
 		И     элемент формы с именем "Partner" стал равен 'Veritas'
 		И     элемент формы с именем "Type" стал равен 'Vendor'
 	И я закрыл все окна клиентского приложения

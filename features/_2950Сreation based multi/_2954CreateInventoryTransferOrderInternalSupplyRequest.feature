@@ -1,7 +1,7 @@
 #language: ru
 @tree
 @Positive
-Функционал: создание Inventory transfer order на основании нескольких Internal supply request
+Функционал: создание Inventory transfer order based on нескольких Internal supply request
 
 
 Контекст:
@@ -9,9 +9,9 @@
 
 
 
-Сценарий: _295400 создание тестовых данных 
+Сценарий: _295400 preparation 
 	* Создание первого Internal supply request со склада Store 02
-		* Открытие формы создания Internal Supply Request
+		* Open a creation form Internal Supply Request
 			И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение номера документа
@@ -19,7 +19,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '295'
-		* Заполнение основных реквизитов документа
+		* Filling in basic details документа
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я активизирую поле "Description"
 			И в таблице "List" я перехожу к строке:
@@ -31,7 +31,7 @@
 				| Description |
 				| Store 02  |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение табличной части
+		* Filling in the tabular part
 			И я нажимаю на кнопку'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -79,7 +79,7 @@
 			И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
 	* Создание второго Internal supply request со склада Store 02
-		* Открытие формы создания Internal Supply Request
+		* Open a creation form Internal Supply Request
 			И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение номера документа
@@ -87,7 +87,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '296'
-		* Заполнение основных реквизитов документа
+		* Filling in basic details документа
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я активизирую поле "Description"
 			И в таблице "List" я перехожу к строке:
@@ -99,7 +99,7 @@
 				| Description |
 				| Store 02  |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение табличной части
+		* Filling in the tabular part
 			И я нажимаю на кнопку'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -147,7 +147,7 @@
 			И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
 	* Создание третьего Internal supply request со склада Store 03
-		* Открытие формы создания Internal Supply Request
+		* Open a creation form Internal Supply Request
 			И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение номера документа
@@ -155,7 +155,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '297'
-		* Заполнение основных реквизитов документа
+		* Filling in basic details документа
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я активизирую поле "Description"
 			И в таблице "List" я перехожу к строке:
@@ -167,7 +167,7 @@
 				| Description |
 				| Store 03  |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение табличной части
+		* Filling in the tabular part
 			И я нажимаю на кнопку'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -216,7 +216,7 @@
 		И я нажимаю на кнопку 'Post and close'
 
 
-Сценарий: _295401 проверка заполнения Inventory transfer order при создании на основании двух Internal supply request с одинаковым складом
+Сценарий: _295401 Check filling inInventory transfer order при создании based on двух Internal supply request с одинаковым складом
 	* Выбор InternalSupplyRequest
 		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 		И в таблице "List" я перехожу к строке:
@@ -235,7 +235,7 @@
 		| 'High shoes' | '2,000'    | 'Internal supply request 296*' | '37/19SD'   | 'pcs'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _295402 проверка заполнения Inventory transfer order при создании на основании двух Internal supply request с разными складами
+Сценарий: _295402 Check filling inInventory transfer order при создании based on двух Internal supply request с разными складами
 	* Выбор InternalSupplyRequest
 		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 		И в таблице "List" я перехожу к строке:

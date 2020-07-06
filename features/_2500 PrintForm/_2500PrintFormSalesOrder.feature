@@ -65,7 +65,7 @@
 			И я нажимаю на кнопку с именем 'FormChoose'
 	* Сохранение команды
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка сохранения команды
+	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata' | 'External data proc' | 'Interface group' |
@@ -122,7 +122,7 @@
 		И я перехожу к закладке "Item list"
 		# Когда открылось окно 'Update item list info'
 		# И я нажимаю на кнопку 'Ок'
-	* Проведение документа
+	* Post document
 		И я нажимаю на кнопку 'Post and close'
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |

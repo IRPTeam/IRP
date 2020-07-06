@@ -10,7 +10,7 @@
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 	
 
-Сценарий: _2040001 создание тестовых данных 
+Сценарий: _2040001 preparation 
 	* Создание структуры клиентов и поставщиков для теста
 		* Сегмент соглашений с поставщиком Vendor + соглашения
 			* В долларах
@@ -615,7 +615,7 @@
 		И в поле 'Number' я ввожу текст '8 999'
 		И я нажимаю на кнопку 'Post and close'
 		И Я закрыл все окна клиентского приложения
-	* Создание ещё одного Shipment confirmation на Crystal без заказа
+	* Create one more Shipment confirmation на Crystal без заказа
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
@@ -717,7 +717,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '12,000'
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '210'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Проведение документа
+		* Post document
 			И я нажимаю на кнопку 'Post and close'
 	* Создание Purchase order по непрямой схеме отгрузки на Crystal по соглашению Vendor, TRY № 9001
 		* Открытие формы для создания Purchase Order
@@ -1186,7 +1186,7 @@
 
 Сценарий: _2040002 кнопка выбора Sales order в документе Sales invoice
 #  работает для выбора Sales order при прямой схеме работы. Отбор по соглашениям, партнеру, контрагенту, компании. Отображает незакрытые документы
-	* Открытие формы создания SI 
+	* Open a creation form SI 
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа
@@ -1240,15 +1240,15 @@
 		| 'Dress, M/White, pcs, 2,000' | 'No'  |
 		| 'Boots, 37/18SD, pcs, 1,000' | 'No'  |
 		И я нажимаю на кнопку 'Cancel'
-	* Изменение номера документа и его проведение
+	* Change the document number и его проведение
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '0'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '9 000'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание ещё одного Sales invoice на остаток количества
-		* Открытие формы создания SI 
+	* Create one more Sales invoice на остаток количества
+		* Open a creation form SI 
 			И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение шапки документа
@@ -1271,7 +1271,7 @@
 			| 'Boots, 37/18SD, pcs, 1,000' | 'No'  |
 			И я нажимаю на кнопку с именем 'FormSelectAll'
 			И я нажимаю на кнопку 'Ok'
-		* Изменение номера документа и его проведение
+		* Change the document number и его проведение
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
@@ -1279,7 +1279,7 @@
 			И в поле 'Number' я ввожу текст '9 002'
 			И я нажимаю на кнопку 'Post and close'
 	* Создание Sales invoice по соглашению Basic Agreements, without VAT
-		* Открытие формы создания SI 
+		* Open a creation form SI 
 			И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение шапки документа
@@ -1307,7 +1307,7 @@
 			| 'Boots, 37/18SD, pcs, 1,000'            | 'No'  |
 			И я нажимаю на кнопку с именем 'FormSelectAll'
 			И я нажимаю на кнопку 'Ok'
-		* Изменение номера документа и его проведение
+		* Change the document number и его проведение
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
@@ -1318,7 +1318,7 @@
 
 Сценарий: _2040003 кнопка выбора Shipment confirmation в документе Sales invoice
 #  работает для выбора Shipment confirmation при непрямой схеме работы. Отбор по партнеру, контрагенту, компании. Отображает незакрытые документы
-	* Открытие формы создания SI 
+	* Open a creation form SI 
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа
@@ -1368,7 +1368,7 @@
 
 
 Сценарий: _2040004 выбор документов-оснований по строке в Shipment confirmation
-	* Открытие формы создания SC
+	* Open a creation form SC
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа
@@ -1456,7 +1456,7 @@
 
 Сценарий: _2040004 кнопка выбора Purchase order в документе Purchase invoice
 #  работает для выбора Purchase order при прямой схеме работы. Отбор по соглашениям, партнеру, контрагенту, компании. Отображает незакрытые документы
-	* Открытие формы создания PI 
+	* Open a creation form PI 
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа
@@ -1511,15 +1511,15 @@
 		| 'Dress, M/White, pcs, 3,000'            |
 		| 'Boots, 36/18SD, Boots (12 pcs), 3,000' |
 		И я нажимаю на кнопку 'Cancel'
-	* Изменение номера документа и его проведение
+	* Change the document number и его проведение
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '0'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '9 000'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание ещё одного Purchase invoice на остаток количества
-		* Открытие формы создания SI 
+	* Create one more Purchase invoice на остаток количества
+		* Open a creation form SI 
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение шапки документа
@@ -1542,7 +1542,7 @@
 			| 'Boots, 36/18SD, Boots (12 pcs), 3,000' |
 			И я нажимаю на кнопку с именем 'FormSelectAll'
 			И я нажимаю на кнопку 'Ok'
-		* Изменение номера документа и его проведение
+		* Change the document number и его проведение
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
@@ -1550,7 +1550,7 @@
 			И в поле 'Number' я ввожу текст '9 001'
 			И я нажимаю на кнопку 'Post and close'
 	* Создание Purchase invoice на Astar по соглашению 'Vendor, TRY'
-		* Открытие формы создания PI 
+		* Open a creation form PI 
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение шапки документа
@@ -1583,7 +1583,7 @@
 			Тогда в таблице "ItemList" количество строк "меньше или равно" 8
 			И в таблице "ItemList" я перехожу к последней строке
 			И в таблице 'ItemList' я удаляю строку
-		* Изменение номера документа и его проведение
+		* Change the document number и его проведение
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
@@ -1593,7 +1593,7 @@
 
 Сценарий: _2040005 кнопка заполнения товаров из документов-оснований в Goods receipt
 	# работает как по прямой, так и непрямой схеме работы. Нет проверки по соглашениям. Проверка по валютам срабатывает при проведении. На склад проверки нет.
-	* Открытие формы создания GR
+	* Open a creation form GR
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа
@@ -1646,7 +1646,7 @@
 		# | 'Dress'    | '3,000'    | 'M/White'   | 'Store 02' | 'pcs'            | 'Purchase order 9 003*'   |
 		# | 'Trousers' | '5,000'    | '36/Yellow' | 'Store 02' | 'pcs'            | 'Purchase order 9 003*'   |
 		# | 'Boots'    | '60,000'   | '36/18SD'   | 'Store 02' | 'pcs'            | 'Purchase order 9 003*'   |
-	* Изменение номера документа
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '0'
 		Тогда открылось окно '1C:Enterprise'
@@ -1694,8 +1694,8 @@
 		Тогда в таблице "DocumentsTree" количество строк "меньше или равно" 11
 		И я нажимаю на кнопку 'Cancel'
 		И я нажимаю на кнопку 'Post and close'
-	* Создание ещё одного Goods receipt на остаток количества
-		* Открытие формы создания GR
+	* Create one more Goods receipt на остаток количества
+		* Open a creation form GR
 			И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение шапки документа
@@ -1740,7 +1740,7 @@
 				| 'Currency' | 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
 				| 'USD'      | 'Boots' | '36/18SD'  | '60,000'   | 'Store 02' |
 			И в таблице 'ItemList' я удаляю строку
-		# временно
+		# temporarily
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Item'  | 'Item key' | 'Quantity' |
 				| 'Boots' | '36/18SD'  | '24,000'   |
@@ -1749,8 +1749,8 @@
 				| 'Description' |
 				| 'pcs'         |
 			И в таблице "List" я выбираю текущую строку
-		# временно
-		* Изменение номера документа и его проведение
+		# temporarily
+		* Change the document number и его проведение
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
@@ -1759,7 +1759,7 @@
 			И я нажимаю на кнопку 'Post and close'
 	
 Сценарий: _2040006 кнопка заполнения документов-оснований в Goods receipt
-	* Открытие формы создания GR
+	* Open a creation form GR
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -1777,7 +1777,7 @@
 		# И в таблице "ItemList" я завершаю редактирование строки
 	* Заполнение документов-оснований с помощью кнопку Fill receipt basises
 		И я нажимаю на кнопку 'Fill receipt basises'
-	* Проверка заполнения
+	* Filling check
 		И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Store'    | 'Unit' | 'Receipt basis'           |
 			| 'Trousers' | '5,000'    | '36/Yellow' | 'Store 02' | 'pcs'  | 'Purchase order 9 003*'   |
@@ -1809,7 +1809,7 @@
 
 
 Сценарий: _2040007 кнопка заполнения товаров из Goods receipt в Purchase invoice
-	* Открытие формы создания PI
+	* Open a creation form PI
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа

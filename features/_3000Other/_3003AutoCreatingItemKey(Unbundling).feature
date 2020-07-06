@@ -1,16 +1,16 @@
 #language: ru
 @tree
 @Positive
-Функционал: автоматическое создание item key при Unbundling по спецификации
+Функционал: auto создание item key при Unbundling по спецификации
 
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _300301 создание тестовых данных
+Сценарий: _300301 preparation
 	* Создание item для bundle
-		* Открытие формы создания Items
+		* Open a creation form Items
 			И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Создание тестовой номенклатуры Сhewing gum
@@ -134,7 +134,7 @@
 		И Пауза 10
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _300302 создание документа Unbundling и проверка создания item key
+Сценарий: _300302 создание документа Unbundling и create item key
 	* Заполнение шапки документа Unbundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -171,7 +171,7 @@
 			| 'Сhewing gum TR' | '10,000'   | 'Mint/Mango'  | 'adet' |
 			| 'Сhewing gum TR' | '10,000'   | 'Mint/Cherry' | 'adet' |
 		И я нажимаю на кнопку 'Post and close'
-	* Проверка создания недостающих item key
+	* create недостающих item key
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemKeys'
 		Тогда таблица "List" содержит строки:
 		| 'Item key'                                     |
@@ -179,7 +179,7 @@
 		| 'Mint/Cherry'                                  |
 		И я закрыл все окна клиентского приложения
 	* Проверка того, что при повторном создании Unbundling строки не задублируются
-		* Создание ещё одного Unbundling
+		* Create one more Unbundling
 			И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Company"

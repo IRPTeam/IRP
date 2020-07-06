@@ -13,7 +13,7 @@
     * Открытие формы элемента справочника
         И я открываю навигационную ссылку "e1cib/list/Catalog.CashAccounts"
         И я нажимаю на кнопку с именем 'FormCreate'
-    * Заполнение реквизитов для Bank account
+    * Filling in the details of the documentдля Bank account
         И я меняю значение переключателя 'Type' на 'Bank'
         И в поле 'TR' я ввожу текст 'Test Bank'
         И я нажимаю кнопку выбора у поля "Company"
@@ -53,7 +53,7 @@
         И     элемент формы с именем "TransitAccount" стал равен ''
         И     элемент формы с именем "CurrencyType" стал равен 'Fixed'
         И     элемент формы с именем "Currency" стал равен ''
-    * Заполнение реквизитов по Cash
+    * Filling in the details of the documentпо Cash
         И я меняю значение переключателя 'Type' на 'Cash'
         И я меняю значение переключателя с именем 'CurrencyType' на 'Fixed'
         И я нажимаю кнопку выбора у поля с именем "Currency"
@@ -73,7 +73,7 @@
     * Открытие формы элемента справочника
         И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
         И я нажимаю на кнопку с именем 'FormCreate'
-    * Заполнение реквизитов для соглашения с видом расчета по стандартным договорам
+    * Filling in the details of the documentдля соглашения с видом расчета по стандартным договорам
         И я меняю значение переключателя 'Kind' на 'Regular'
         И я нажимаю кнопку выбора у поля "Currency movement type"
         И в таблице "List" я перехожу к строке:
@@ -92,7 +92,7 @@
             | 'Description'       |
             | 'Basic Price Types TR' |
         И в таблице "List" я выбираю текущую строку
-    * Проверка заполнения реквизитов
+    * Check filling inреквизитов
         И     элемент формы с именем "CurrencyMovementType" стал равен 'EUR'
         И     элемент формы с именем "StandardAgreement" стал равен 'Standart, EUR'
         И     элемент формы с именем "PriceType" стал равен 'Basic Price Types TR'

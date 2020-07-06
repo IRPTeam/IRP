@@ -14,7 +14,7 @@
 	* Открытие формы для создания Sales Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов шапки
+	* Filling in the details of the document
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
@@ -74,7 +74,7 @@
 	* Открытие формы для создания Sales Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов шапки
+	* Filling in the details of the document
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| Description  |

@@ -13,12 +13,12 @@
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: _2020001 создание тестовых данных для проверки заполнения Cheque bond transaction
+Сценарий: _2020001 preparation для проверки заполнения Cheque bond transaction
 	* Создание чека и его пометка на удаление
-		* Открытие формы справочника
+		* Open catalog form
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.ChequeBonds'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Создание входящего чека
+		* Create an incoming check
 			И в поле 'Cheque No' я ввожу текст 'Partner cheque 101'
 			И в поле 'Cheque serial No' я ввожу текст 'AN'
 			И из выпадающего списка "Type" я выбираю точное значение 'Partner cheque'
@@ -41,11 +41,11 @@
 			И в таблице "List" я перехожу к строке:
 			| 'Amount'    | 'Cheque No'          |
 			| '10 000,00' | 'Partner cheque 101' |
-	* Создание ещё одного партнерского чека
-		* Открытие формы справочника
+	* Create one more партнерского чека
+		* Open catalog form
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.ChequeBonds'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Создание входящего чека
+		* Create an incoming check
 			И в поле 'Cheque No' я ввожу текст 'Partner cheque 102'
 			И в поле 'Cheque serial No' я ввожу текст 'AN'
 			И из выпадающего списка "Type" я выбираю точное значение 'Partner cheque'
@@ -58,10 +58,10 @@
 			И в поле 'Amount' я ввожу текст '15 000,00'
 			И я нажимаю на кнопку 'Save and close'
 	* Создание Cheque bond transaction на изменение статуса чека Partner cheque 1
-		* Открытие формы документа ChequeBondTransaction
+		* Opening a document form ChequeBondTransaction
 			И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение основных реквизитов
+		* Filling in basic details
 			И я нажимаю кнопку выбора у поля "Currency"
 			И в таблице "List" я перехожу к строке:
 				| 'Code' | 'Description'  |
@@ -107,15 +107,15 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '11'
 			И я нажимаю на кнопку 'Post and close'
-		* Проверка создания
+		* create
 			Тогда таблица "List" содержит строки
 			| 'Number' |
 			| '11'      |
 	* Создание чека выданного поставщику
-		* Открытие формы справочника
+		* Open catalog form
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.ChequeBonds'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Создание исходящего чека
+		* Create an outgoing check
 			И в поле 'Cheque No' я ввожу текст 'Own cheque 2'
 			И в поле 'Cheque serial No' я ввожу текст 'AL'
 			И из выпадающего списка "Type" я выбираю точное значение 'Own cheque'
@@ -129,7 +129,7 @@
 			И я нажимаю на кнопку 'Save and close'
 
 Сценарий: _2020001 проверка отбора по собственным компаниям в документе Cheque bond transaction
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Проверка фильтра
@@ -137,7 +137,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: _2020002 проверка автоматического заполнения Legal name (у партнера только одно Legal name) в документе Cheque bond transaction
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление партнера с одним Legal name
@@ -147,7 +147,7 @@
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка заполнения Legal name
+	* Check filling inLegal name
 		И     таблица "ChequeBonds" содержит строки:
 		| 'Legal name' | 'Partner' |
 		| 'DFC'        | 'DFC'     |
@@ -155,7 +155,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: _2020003 проверка автоматического заполнения Partner (у Legal name только один партнер) в документе Cheque bond transaction
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление партнера с одним Legal name
@@ -165,14 +165,14 @@
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка заполнения Legal name
+	* Check filling inLegal name
 		И     таблица "ChequeBonds" содержит строки:
 		| 'Legal name' | 'Partner' |
 		| 'DFC'        | 'DFC'     |
 		И я закрыл все окна клиентского приложения
 
 Сценарий: _2020004 проверка автоматического заполнения Agreement (у партнера только одно соглашение) в документе Cheque bond transaction
-	* Создание тестовых данных
+	* preparation
 		# Удаление партнера DFC из всех сегментов и создание индивидуального соглашения
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 			И в таблице "List" я перехожу к строке:
@@ -206,7 +206,7 @@
 				| 'Main Company' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 			И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 			И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление партнера с одним соглашением
@@ -216,14 +216,14 @@
 				| 'Description' |
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
-	* Проверка заполнения соглашения
+	* Check filling inсоглашения
 			И     таблица "ChequeBonds" содержит строки:
 				| 'Partner' | 'Agreement'     |
 				| 'DFC'     | 'Agreement DFC' |
 			И я закрыл все окна клиентского приложения
 
 Сценарий: _2020005 проверка отбора только доступных для партнера соглашений в документе Cheque bond transaction
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление партнера с одним соглашением
@@ -241,7 +241,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: _2020006 проверка на очистку поля соглашения после перевыбора партнера (выбранного соглашения у нового партнера нет)
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Добавление партнера с одним соглашением
@@ -270,7 +270,7 @@
 		И я закрыл все окна клиентского приложения
 		
 Сценарий: _2020007 проверка фильтра по чекам в форме выбора 'Cheque bonds' в зависимости от выбранной валюты (перевыбор) и разделения чеков по Partners/Own
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Выбор валюты USD и проверка отсутствия чеков в списке выбора с валютой TRY
@@ -319,7 +319,7 @@
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _2020008 неотображения помеченных на удаление чеков в форме выбора 'Cheque bonds'
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Выбор валюты TRY
@@ -342,7 +342,7 @@
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _2020009 проверка отбора чеков по статусам в форме выбора 'Cheque bonds'
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Выбор валюты TRY
@@ -386,7 +386,7 @@
 	И я закрыл все окна клиентского приложения
 		
 Сценарий: _2020010 проверка удаления выбранных чеков в форме выбора 'Cheque bonds'
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Выбор валюты TRY
@@ -422,10 +422,10 @@
 
 Сценарий: _2020011 проверка фильтра по действующим соглашениям в зависимости от даты Cheque bond transaction
 	* Создание Cheque bond transaction на изменение статуса чека Partner cheque 1
-		* Открытие формы документа ChequeBondTransaction
+		* Opening a document form ChequeBondTransaction
 			И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение основных реквизитов
+		* Filling in basic details
 			И я нажимаю кнопку выбора у поля "Currency"
 			И в таблице "List" я перехожу к строке:
 				| 'Code' | 'Description'  |
@@ -474,7 +474,7 @@
 		И я закрыл все окна клиентского приложения
 
 Сценарий: _2020012 проверка ввода статусов чеков по строке
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение данных и выбор чека
@@ -494,7 +494,7 @@
 			| 'Amount'   | 'Cheque No'        | 'Cheque serial No' |
 			| '2 000,00' | 'Partner cheque 1' | 'AA'               |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка заполнения статусов при вводе по строке
+	* Check filling inстатусов при вводе по строке
 		И в таблице "ChequeBonds" я активизирую поле "New status"
 		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "New status"
 		И в таблице "ChequeBonds" из выпадающего списка "New status" я выбираю по строке '03'
@@ -528,7 +528,7 @@
 		| 'Number'          |
 		| '1'  |
 		И я закрыл все окна клиентского приложения
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Выбор валюты TRY
@@ -639,7 +639,7 @@
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _2020014 проверка очистки чеков из документа Cheque bond transaction при изменении валюты
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Выбор валюты TRY
@@ -703,7 +703,7 @@
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'  |
-	* Распроведение Cheque bond transaction и проверка отмены движений
+	* Clear postings Cheque bond transaction и проверка отмены движений
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда открылось окно 'Document registrations report'
@@ -761,10 +761,10 @@
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _2020016 проверка очистки чеков из документа Cheque bond transaction при изменении компании
-	* Открытие формы документа ChequeBondTransaction
+	* Opening a document form ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Выбор компании
+	* Select company
 		И я нажимаю кнопку выбора у поля с именем "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |

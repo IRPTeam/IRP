@@ -514,7 +514,7 @@ For settlements with partners
 		| ''                                      | 'Receipt'     | '*'                    | '5 000'            | 'Main Company'     | 'Big foot'             | 'Big foot'   | 'TRY'                 | 'Own cheque 1'          | 'en descriptions is empty' | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '5 000'            | 'Main Company'     | 'Big foot'             | 'Big foot'   | 'TRY'                 | 'Own cheque 1'          | 'Local currency'           | 'No'                       | ''                     |
 		И я закрыл все окна клиентского приложения
-	* Checking the cleaning of the added bases document
+	* Checking the deleting of the added bases document
 		* Opening a document form Cheque bond transaction
 			И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 			Тогда открылось окно 'Cheque bond transactions'

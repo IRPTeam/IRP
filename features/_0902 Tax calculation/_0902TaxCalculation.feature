@@ -396,7 +396,7 @@
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '71,00'         |
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '4,00'   | '4,00'          |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
-	* Check cleaning manual correction when quantity changes
+	* Check deleting manual correction when quantity changes
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
@@ -409,7 +409,7 @@
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '144,00' | '144,00'        |
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '8,00'   | '8,00'          |
-	* Check cleaning manual correction when price changes
+	* Check deleting manual correction when price changes
 		И я перехожу к закладке "Tax list"
 		И в таблице "TaxTree" я перехожу к строке:
 			| 'Item'     | 'Item key'  | 'Tax' | 'Tax rate' |
@@ -433,7 +433,7 @@
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '183,60' | '183,60'        |
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '10,20'  | '10,20'         |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '10,20'  | '10,20'         |
-	* Check cleaning manual correction when iten key changes
+	* Check deleting manual correction when iten key changes
 		И я перехожу к закладке "Tax list"
 		И в таблице "TaxTree" я перехожу к строке:
 			| 'Item'     | 'Item key'  | 'Tax' | 'Tax rate' |

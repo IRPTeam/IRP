@@ -13,7 +13,7 @@
 
 
 # необходимо дописать тесты на ввод нач остатка по документам
-Сценарий: _400000 создание тестовых данных
+Сценарий: _400000 preparation
 	* Создание SI для ввода нач остатка по документам
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -91,7 +91,7 @@
 
 
 Сценарий: _400001 ввод начального остатка по кассовым и банковким счетам
-	* Открытие формы документа для ввода начального остатка
+	* Opening a document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании
@@ -105,7 +105,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '1'
-	* Заполнение табличной части по остаткам ДС в кассе и на банковских счетах
+	* Filling in the tabular part по остаткам ДС в кассе и на банковских счетах
 		И в таблице "AccountBalance" я нажимаю на кнопку с именем 'AccountBalanceAdd'
 		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Account"
 		И в таблице "List" я выбираю текущую строку
@@ -176,7 +176,7 @@
 		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceAmount"
 		И в таблице "AccountBalance" в поле 'Amount' я ввожу текст '8 000,00'
 		И в таблице "AccountBalance" я завершаю редактирование строки
-	* Проверка заполнения курса пересчета по вводу начальных остатков
+	* Check filling inкурса пересчета по вводу начальных остатков
 		* Заполнение курса по остатку ДС в Cash desk №2
 			И в таблице "AccountBalance" я перехожу к строке:
 				| 'Account'      | 'Amount'   | 'Currency' |
@@ -257,10 +257,10 @@
 			И в таблице "CurrenciesAccountBalance" я выбираю текущую строку
 			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceMultiplicity' я ввожу текст '1'
 			И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
-	* Проведение документа
+	* Post document
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 5
-		* Проверка движений документа
+		* Check movements документа
 			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.AccountBalance'
 			Тогда таблица "List" содержит строки:
 			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Currency movement type' | 'Amount'    |
@@ -283,8 +283,8 @@
 			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | '*'                      | '5 000,00'  |
 			| 'EUR'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | '*'                      | '8 000,00'  |
 			И Я закрыл все окна клиентского приложения
-	* Распроведение документа и проверка отмены движений
-		* Распроведение документа
+	* Clear postings документа и проверка отмены движений
+		* Clear postings документа
 			И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 			И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -313,14 +313,14 @@
 			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | '*'                      | '5 000,00'  |
 			| 'EUR'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | '*'                      | '8 000,00'  |
 			И Я закрыл все окна клиентского приложения
-	* Проведение документа обратно и проверка движений
-		* Проведение документа
+	* Posting the documentобратно и проверка движений
+		* Post document
 			И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 			И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '1'      |
 			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		* Проверка движений
+		* Check movements
 			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.AccountBalance'
 			Тогда таблица "List" содержит строки:
 			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Currency movement type' | 'Amount'    |
@@ -348,7 +348,7 @@
 
 
 Сценарий: _400002 ввод начального остатка по товарам
-	* Открытие формы документа для ввода начального остатка
+	* Opening a document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании
@@ -363,7 +363,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '2'
-	* Заполнение табличной части по остаткам товара
+	* Filling in the tabular part по остаткам товара
 		И я перехожу к закладке "Inventory"
 		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
 		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
@@ -609,9 +609,9 @@
 		# И в таблице "Inventory" я активизирую поле с именем "InventoryAmount"
 		# И в таблице "Inventory" в поле 'Amount' я ввожу текст '40 000,00'
 		И в таблице "Inventory" я завершаю редактирование строки
-	* Проведение документа
+	* Post document
 		И я нажимаю на кнопку 'Post'
-	* Проверка движений документа
+	* Check movements документа
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
 		Тогда таблица "List" содержит строки:
 		| 'Quantity' | 'Recorder'         | 'Company'      | 'Item key'  |
@@ -659,7 +659,7 @@
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _400003 проверка ввода начального остатка по авансам поставщикам/клиентам
-	* Открытие формы документа для ввода начального остатка
+	* Opening a document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании
@@ -715,9 +715,9 @@
 		И в таблице "AdvanceToSuppliers" я активизирую поле с именем "AdvanceToSuppliersAmount"
 		И в таблице "AdvanceToSuppliers" в поле с именем 'AdvanceToSuppliersAmount' я ввожу текст '100,00'
 		И в таблице "AdvanceToSuppliers" я завершаю редактирование строки
-	* Проведение документа
+	* Post document
 		И я нажимаю на кнопку 'Post'
-	* Проверка проводок документа
+	* Check movements документа
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Opening entry 3*'                     | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
@@ -751,7 +751,7 @@
 
 
 Сценарий: _400004 проверка ввода начального остатка по задолженности поставщику по соглашению
-	* Открытие формы документа для ввода начального остатка
+	* Opening a document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании
@@ -775,7 +775,7 @@
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
-		* Проверка заполнения Legal name
+		* Check filling inLegal name
 				И     таблица "AccountPayableByAgreements" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
@@ -825,10 +825,10 @@
 			И     таблица "CurrenciesAccountPayableByDocuments" содержит строки:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
-	* Проведение документа
+	* Post document
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 5
-		* Проверка движений документа
+		* Check movements документа
 			И я нажимаю на кнопку 'Registrations report'
 			Тогда табличный документ "ResultTable" равен по шаблону:
 			| 'Opening entry 4*'                     | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                         | ''         | ''                         | ''                     |
@@ -854,7 +854,7 @@
 
 	
 Сценарий: _400005 проверка ввода начального остатка по задолженности клиента по соглашению
-	* Открытие формы документа для ввода начального остатка
+	* Opening a document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании
@@ -878,7 +878,7 @@
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
-		* Проверка заполнения Legal name
+		* Check filling inLegal name
 				И     таблица "AccountReceivableByAgreements" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
@@ -928,10 +928,10 @@
 			И     таблица "CurrenciesAccountReceivableByDocuments" содержит строки:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
-	* Проведение документа
+	* Post document
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 5
-	* Проверка движений документа
+	* Check movements документа
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
 			| 'Opening entry 5*'                     | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                           | ''         | ''                         | ''                     |
@@ -957,7 +957,7 @@
 
 
 Сценарий: _400008 проверка ввода начального остатка по остаткам ДС/остаткам товара/дебиторке/кредиторке/авансам в одном документе
-	* Открытие формы документа для ввода начального остатка
+	* Opening a document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании
@@ -971,7 +971,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '8'
-	* Заполнение табличной части по остаткам ДС в кассе
+	* Filling in the tabular part по остаткам ДС в кассе
 		И в таблице "AccountBalance" я нажимаю на кнопку с именем 'AccountBalanceAdd'
 		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Account"
 		И в таблице "List" я перехожу к строке:
@@ -997,7 +997,7 @@
 		И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceMultiplicity' я ввожу текст '1'
 		И в таблице "CurrenciesAccountBalance" я активизирую поле "Amount"
 		И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
-	* Заполнение табличной части по остаткам товара
+	* Filling in the tabular part по остаткам товара
 		И я перехожу к закладке "Inventory"
 		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
 		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
@@ -1070,7 +1070,7 @@
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
-		* Проверка заполнения Legal name
+		* Check filling inLegal name
 				И     таблица "AccountPayableByAgreements" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
@@ -1110,7 +1110,7 @@
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
-		* Проверка заполнения Legal name
+		* Check filling inLegal name
 				И     таблица "AccountReceivableByAgreements" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
@@ -1145,7 +1145,7 @@
 
 
 Сценарий: _400009 проверка ввода начального остатка по остаткам AP и AR по документам
-	* Открытие формы документа для ввода начального остатка
+	* Opening a document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании

@@ -31,10 +31,10 @@
 			| Description       |
 			| Company Foxred |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| Description        |
-			| Basic Agreements, TRY |
+			| Basic Partner terms, TRY |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Store"
 		И в таблице "List" я перехожу к строке:
@@ -91,10 +91,10 @@
 			| Description       |
 			| Company Foxred |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| Description        |
-			| Basic Agreements, TRY |
+			| Basic Partner terms, TRY |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Store"
 		И в таблице "List" я перехожу к строке:

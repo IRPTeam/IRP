@@ -38,7 +38,7 @@
 			| 'Catalog_Items'             |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Attributes" я перехожу к строке:
-			| 'Attribute'  | 'Interface group'           |
+			| 'Attribute'  | 'UI group'           |
 			| 'Article TR' | 'Accounting information TR' |
 		И в таблице "Attributes" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
@@ -113,11 +113,11 @@
 		И из выпадающего списка "Partner" я выбираю по строке 'Kalipso TR'
 		И в поле "Legal name" я ввожу текст "tr"
 		И из выпадающего списка "Legal name" я выбираю по строке 'Company Kalipso TR'
-		И я нажимаю кнопку выбора у поля "Agreement"
-		Тогда открылось окно 'Agreements'
+		И я нажимаю кнопку выбора у поля "Partner term"
+		Тогда открылось окно 'Partner terms'
 		И в таблице "List" я перехожу к строке:
 			| Description           |
-			| Basic Agreements, TRY |
+			| Basic Partner terms, TRY |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Partner" стал равен 'Kalipso TR'
 		И     элемент формы с именем "LegalName" стал равен 'Company Kalipso TR'

@@ -18,17 +18,17 @@ So that the manager can immediately see the interest and discount amount on the 
 # The sales rep can set a discount from the specified range in the order himself
 
 Сценарий: _033901 check the discount window in the order (displaying discounts accrued on the order)
-	* Inactive Discount on Basic Agreements
+	* Inactive Discount on Basic Partner terms
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 		И я нажимаю на кнопку 'List'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'              |
-			| '3+1 Product 1 and Product 2 (not multiplicity), Discount on Basic Agreements' |
+			| '3+1 Product 1 and Product 2 (not multiplicity), Discount on Basic Partner terms' |
 		И в таблице "List" я выбираю текущую строку
 		И я изменяю флаг 'Launch'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	Когда создаю заказ на Partner A Basic Agreements, TRY (Product 1 -10 и Product 3 - 5)
+	Когда создаю заказ на Partner A Basic Partner terms, TRY (Product 1 -10 и Product 3 - 5)
 	* Check display of valid discounts in % Offers window
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И     таблица "Offers" стала равной:
@@ -43,12 +43,12 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'Discount Price 1'                                                             | ' '         | ''  | ''  |
 			| 'Discount Price 2'                                                             | ' '         | ''  | ''  |
 			| 'Discount 2 without Vat'                                                       | ' '         | ''  | ''  |
-			| 'All items 5+1, Discount on Basic Agreements'                                  | ' '         | ''  | ''  |
-			| '4+1 Product 1 and Product 2, Discount on Basic Agreements'                    | ' '         | ''  | ''  |
+			| 'All items 5+1, Discount on Basic Partner terms'                                  | ' '         | ''  | ''  |
+			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms'                    | ' '         | ''  | ''  |
 	* Check display of selected discount, its amount and percentage
 		И в таблице "Offers" я перехожу к строке:
 			| 'Presentation'                  |
-			| 'All items 5+1, Discount on Basic Agreements' |
+			| 'All items 5+1, Discount on Basic Partner terms' |
 		И в таблице "Offers" я активизирую поле "Is select"
 		И в таблице "Offers" я выбираю текущую строку
 		И     таблица "Offers" стала равной:
@@ -63,8 +63,8 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'Discount Price 1'                                                             | ' '         | ''  | ''  |
 			| 'Discount Price 2'                                                             | ' '         | ''  | ''  |
 			| 'Discount 2 without Vat'                                                       | ' '         | ''  | ''  |
-			| 'All items 5+1, Discount on Basic Agreements'                                  | '✔'         | ''  | ''  |
-			| '4+1 Product 1 and Product 2, Discount on Basic Agreements'                    | ' '         | ''  | ''  |
+			| 'All items 5+1, Discount on Basic Partner terms'                                  | '✔'         | ''  | ''  |
+			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms'                    | ' '         | ''  | ''  |
 		И я нажимаю на кнопку 'OK'
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И     таблица "Offers" стала равной:
@@ -79,12 +79,12 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'Discount Price 1'                                                             | ' '         | ''      | ''         |
 			| 'Discount Price 2'                                                             | ' '         | ''      | ''         |
 			| 'Discount 2 without Vat'                                                       | ' '         | ''      | ''         |
-			| 'All items 5+1, Discount on Basic Agreements'                                  | '✔'         | '15,00' | '1 650,00' |
-			| '4+1 Product 1 and Product 2, Discount on Basic Agreements'                    | ' '         | ''      | ''         |
+			| 'All items 5+1, Discount on Basic Partner terms'                                  | '✔'         | '15,00' | '1 650,00' |
+			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms'                    | ' '         | ''      | ''         |
 	* Check that the discount is not displayed after cancellation in the order.
 		И в таблице "Offers" я перехожу к строке:
 			| 'Presentation'                  |
-			| 'All items 5+1, Discount on Basic Agreements' |
+			| 'All items 5+1, Discount on Basic Partner terms' |
 		И в таблице "Offers" я активизирую поле "Is select"
 		И в таблице "Offers" я выбираю текущую строку
 		И     таблица "Offers" стала равной:
@@ -99,11 +99,11 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'Discount Price 1'                                          | ' '         | ''  | ''  |
 			| 'Discount Price 2'                                          | ' '         | ''  | ''  |
 			| 'Discount 2 without Vat'                                    | ' '         | ''  | ''  |
-			| 'All items 5+1, Discount on Basic Agreements'               | ' '         | ''  | ''  |
-			| '4+1 Product 1 and Product 2, Discount on Basic Agreements' | ' '         | ''  | ''  |
+			| 'All items 5+1, Discount on Basic Partner terms'               | ' '         | ''  | ''  |
+			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms' | ' '         | ''  | ''  |
 		И в таблице "Offers" я перехожу к строке:
 			| 'Presentation'                  |
-			| 'All items 5+1, Discount on Basic Agreements' |
+			| 'All items 5+1, Discount on Basic Partner terms' |
 		И в таблице "Offers" я активизирую поле "Is select"
 		И в таблице "Offers" я выбираю текущую строку
 		И я нажимаю на кнопку 'OK'
@@ -134,8 +134,8 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'Discount Price 1'                                                             | ' '         | ''      | ''         |
 			| 'Discount Price 2'                                                             | ' '         | ''      | ''         |
 			| 'Discount 2 without Vat'                                                       | ' '         | ''      | ''         |
-			| 'All items 5+1, Discount on Basic Agreements'                                  | '✔'         | '16,67' | '2 750,00' |
-			| '4+1 Product 1 and Product 2, Discount on Basic Agreements'                    | ' '         | ''      | ''         |
+			| 'All items 5+1, Discount on Basic Partner terms'                                  | '✔'         | '16,67' | '2 750,00' |
+			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms'                    | ' '         | ''      | ''         |
 		И я нажимаю на кнопку 'OK'
 	* The discount window shows several valid discounts on order
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
@@ -158,8 +158,8 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'Discount Price 1'                                                             | '✔'         | '25,00' | '500,00'   |
 			| 'Discount Price 2'                                                             | ' '         | ''      | ''         |
 			| 'Discount 2 without Vat'                                                       | ' '         | ''      | ''         |
-			| 'All items 5+1, Discount on Basic Agreements'                                  | '✔'         | '16,67' | '2 750,00' |
-			| '4+1 Product 1 and Product 2, Discount on Basic Agreements'                    | ' '         | ''      | ''         |
+			| 'All items 5+1, Discount on Basic Partner terms'                                  | '✔'         | '16,67' | '2 750,00' |
+			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms'                    | ' '         | ''      | ''         |
 		И я нажимаю на кнопку 'OK'
 	* Checking the range discount display (not displayed in this window)
 		И я по Product 1 ставлю диапазонную скидку 8%
@@ -190,8 +190,8 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'Discount Price 1'                                                             | '✔'         | '25,00' | '500,00'   |
 			| 'Discount Price 2'                                                             | ' '         | ''      | ''         |
 			| 'Discount 2 without Vat'                                                       | ' '         | ''      | ''         |
-			| 'All items 5+1, Discount on Basic Agreements'                                  | '✔'         | '16,67' | '2 750,00' |
-			| '4+1 Product 1 and Product 2, Discount on Basic Agreements'                    | ' '         | ''      | ''         |
+			| 'All items 5+1, Discount on Basic Partner terms'                                  | '✔'         | '16,67' | '2 750,00' |
+			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms'                    | ' '         | ''      | ''         |
 		И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку "Post and close"
 

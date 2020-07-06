@@ -43,7 +43,7 @@
 	* Check filling inформы Sales order
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Status" стал равен 'Approved'
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 		И     таблица "ItemList" содержит строки:
@@ -71,7 +71,7 @@
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 	* Выбор соглашения с пустым складом и проверка что склад остался тот который ранее указал пользователь
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Ferron, USD' |
@@ -113,7 +113,7 @@
 	* Check filling inформы Sales order
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
@@ -140,7 +140,7 @@
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 	* Выбор соглашения с пустым складом и проверка того что склад не очистился
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Ferron, USD' |
@@ -169,7 +169,7 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
@@ -219,7 +219,7 @@
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
 	* Перевыбор соглашения с пустым складом и Check filling inсклада из пользовательских настроек
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Vendor Ferron, TRY' |
@@ -247,7 +247,7 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
@@ -297,7 +297,7 @@
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 02' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 02' |
 	* Перевыбор соглашения с пустым складом и Check filling inсклада из пользовательских настроек
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Vendor Ferron, TRY' |

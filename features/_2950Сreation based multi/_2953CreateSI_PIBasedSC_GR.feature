@@ -21,10 +21,10 @@
 			| 'Description' |
 			| 'Kalipso'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -77,7 +77,7 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
@@ -129,10 +129,10 @@
 			| 'Description' |
 			| 'Kalipso'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -175,10 +175,10 @@
 			| 'Description' |
 			| 'Kalipso'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -226,10 +226,10 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -274,7 +274,7 @@
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     таблица "ItemList" содержит строки:
@@ -285,7 +285,7 @@
 		И Пауза 2
 		И     элемент формы с именем "Partner" стал равен 'Kalipso'
 		И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
@@ -311,7 +311,7 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
@@ -369,7 +369,7 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
@@ -427,7 +427,7 @@
 			| 'Description'       |
 			| 'Second Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
@@ -522,10 +522,10 @@
 			| 'Description' |
 			| 'Kalipso'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Personal Agreements, $' |
+			| 'Personal Partner terms, $' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -561,10 +561,10 @@
 			| 'Description' |
 			| 'Kalipso'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -608,7 +608,7 @@
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
 		И     элемент формы с именем "Partner" стал равен 'Kalipso'
 		И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-		И     элемент формы с именем "Agreement" стал равен 'Personal Agreements, $'
+		И     элемент формы с именем "Agreement" стал равен 'Personal Partner terms, $'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     таблица "ItemList" содержит строки:
@@ -619,7 +619,7 @@
 		И Пауза 2
 		И     элемент формы с именем "Partner" стал равен 'Kalipso'
 		И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     таблица "ItemList" содержит строки:
@@ -643,7 +643,7 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
@@ -696,7 +696,7 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'Vendor Ferron, USD' |
@@ -747,11 +747,11 @@
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-		Если поле с именем "Agreement" имеет значение "Vendor Ferron, USD" тогда
+		Если поле с именем "Partner term" имеет значение "Vendor Ferron, USD" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      | 'Sales order' |
 				| '677,97'     | 'Trousers' | '400,00' | '38/Yellow' | '2,000'  | ''              | '122,03'     | 'pcs'  | '800,00'       | 'Store 02' | '*'             | ''             | ''              | '*'                    | 'Goods receipt 466*' | ''            |
-		Если поле с именем "Agreement" имеет значение "Vendor Ferron, TRY" тогда
+		Если поле с именем "Partner term" имеет значение "Vendor Ferron, TRY" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      | 'Sales order' |
 				| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | ''              | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | 'Goods receipt 465*' | ''            |
@@ -761,11 +761,11 @@
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-		Если поле с именем "Agreement" имеет значение "Vendor Ferron, USD" тогда
+		Если поле с именем "Partner term" имеет значение "Vendor Ferron, USD" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      | 'Sales order' |
 				| '677,97'     | 'Trousers' | '400,00' | '38/Yellow' | '2,000'  | ''              | '122,03'     | 'pcs'  | '800,00'       | 'Store 02' | '*'             | ''             | ''              | '*'                    | 'Goods receipt 466*' | ''            |
-		Если поле с именем "Agreement" имеет значение "Vendor Ferron, TRY" тогда
+		Если поле с именем "Partner term" имеет значение "Vendor Ferron, TRY" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      | 'Sales order' |
 				| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | ''              | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | 'Goods receipt 465*' | ''            |

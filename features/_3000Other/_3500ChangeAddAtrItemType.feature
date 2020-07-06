@@ -86,7 +86,7 @@
             | 'Description' |
             | 'Socks TR'    |
         И в таблице "List" я выбираю текущую строку
-    * Открытие Add attribute and property sets для item key
+    * Открытие Additional attribute sets для item key
         И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
         И в таблице "List" я перехожу к строке:
             | 'Predefined data item name' |
@@ -111,21 +111,21 @@
             И в таблице "List" я выбираю текущую строку
             И в таблице "AvailableAttributes" я завершаю редактирование строки
             И я нажимаю на кнопку 'Save'
-        * Проверка их добавления в Add attribute and property sets по item key
-            И В панели открытых я выбираю 'Add attribute and property sets'
+        * Проверка их добавления в Additional attribute sets по item key
+            И В панели открытых я выбираю 'Additional attribute sets'
             И     таблица "AttributesTree" содержит строки:
                 | 'Presentation'    |
                 | 'Socks TR'        |
                 | 'Brand Socks TR'       |
                 | 'Color Socks TR'        |
-        * Удаление доп реквизита из item type и проверка его удаления из Add attribute and property sets по item key
+        * Удаление доп реквизита из item type и проверка его удаления из Additional attribute sets по item key
             Когда В панели открытых я выбираю 'Item types'
             И в таблице "AvailableAttributes" я перехожу к строке:
                 | 'Attribute' |
                 | 'Brand Socks TR'  |
             И в таблице 'AvailableAttributes' я удаляю строку
             И я нажимаю на кнопку 'Save'
-            И В панели открытых я выбираю 'Add attribute and property sets'
+            И В панели открытых я выбираю 'Additional attribute sets'
             И     таблица "AttributesTree" не содержит строки:
                 | 'Presentation'    |
                 |  'Brand Socks TR' |
@@ -138,12 +138,12 @@
                 | 'Brand Socks TR'    |
             И в таблице "List" я выбираю текущую строку
             И я нажимаю на кнопку 'Save'
-            И В панели открытых я выбираю 'Add attribute and property sets'
+            И В панели открытых я выбираю 'Additional attribute sets'
             И     таблица "AttributesTree" содержит строки:
                 | 'Presentation'    |
                 | 'Brand Socks TR'  |
         И я закрыл все окна клиентского приложения
-        * Удаление доп реквизита из Add attribute and property sets по item key и проверка связки с item type
+        * Удаление доп реквизита из Additional attribute sets по item key и проверка связки с item type
             * Удаление реквизита из AddAttributeAndPropertySets по item key
                 И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
                 И в таблице "List" я перехожу к строке:
@@ -174,7 +174,7 @@
         И я закрыл все окна клиентского приложения
 
 Сценарий: _350002 проверка связки между установкой по доп реквизиту признака влияния на цену и Add atribute and property sets по Price key
-          * Открытие Add attribute and property sets для price key
+          * Открытие Additional attribute sets для price key
             И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
             И в таблице "List" я перехожу к строке:
             | 'Predefined data item name' |
@@ -200,8 +200,8 @@
             И в таблице "AvailableAttributes" я устанавливаю флаг 'Affect pricing'
             И в таблице "AvailableAttributes" я завершаю редактирование строки
             И я нажимаю на кнопку 'Save'
-        * Проверка связки с Add attribute and property sets по price key
-            И В панели открытых я выбираю 'Add attribute and property sets'
+        * Проверка связки с Additional attribute sets по price key
+            И В панели открытых я выбираю 'Additional attribute sets'
             И     таблица "AttributesTree" содержит строки:
                 | 'Presentation'   |
                 | 'Socks TR'       |
@@ -216,8 +216,8 @@
             И в таблице "AvailableAttributes" я снимаю флаг 'Affect pricing'
             И в таблице "AvailableAttributes" я завершаю редактирование строки
             И я нажимаю на кнопку 'Save'
-        * Проверка связки с Add attribute and property sets по price key
-            И В панели открытых я выбираю 'Add attribute and property sets'
+        * Проверка связки с Additional attribute sets по price key
+            И В панели открытых я выбираю 'Additional attribute sets'
             И     таблица "AttributesTree" не содержит строки:
                 | 'Presentation'   |
                 | 'Color Socks TR' |
@@ -231,8 +231,8 @@
             И в таблице "AvailableAttributes" я устанавливаю флаг 'Affect pricing'
             И в таблице "AvailableAttributes" я завершаю редактирование строки
             И я нажимаю на кнопку 'Save'
-         * Проверка связки с Add attribute and property sets по price key
-            И В панели открытых я выбираю 'Add attribute and property sets'
+         * Проверка связки с Additional attribute sets по price key
+            И В панели открытых я выбираю 'Additional attribute sets'
             И     таблица "AttributesTree" содержит строки:
                 | 'Presentation'   |
                 | 'Socks TR'       |
@@ -304,7 +304,7 @@
         И я закрыл все окна клиентского приложения
 
 Сценарий: _350004 редактирование Item type и проверка изменений в Add atribute and property sets по item key
-     * Открытие Add attribute and property sets для item key
+     * Открытие Additional attribute sets для item key
         И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
         И в таблице "List" я перехожу к строке:
             | 'Predefined data item name' |
@@ -319,7 +319,7 @@
         И в поле 'TR' я ввожу текст 'Warm Socks TR'
         И я нажимаю на кнопку 'Save and close'
     * Проверка замены item type в Add atribute and property sets по item key
-        И В панели открытых я выбираю 'Add attribute and property sets'
+        И В панели открытых я выбираю 'Additional attribute sets'
         И     таблица "AttributesTree" содержит строки:
             | 'Presentation'    |
             | 'Warm Socks TR'   |
@@ -329,7 +329,7 @@
 
 
 Сценарий: _350005 проверка условий отбора при добавлении доп реквизитов по item
-    * Открытие Add attribute and property sets для item
+    * Открытие Additional attribute sets для item
         И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
         И в таблице "List" я перехожу к строке:
             | 'Predefined data item name' |
@@ -342,7 +342,7 @@
             | 'Description'      |
             | 'Article Socks TR' |
         И в таблице "List" я выбираю текущую строку
-        И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Interface group"
+        И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
         И в таблице "List" я перехожу к строке:
             | 'Description'               |
             | 'Accounting information TR' |
@@ -398,7 +398,7 @@
 
 
 Сценарий: _350006 проверка ошибки при задваивании доп реквизита по item 
-    * Открытие Add attribute and property sets для Items
+    * Открытие Additional attribute sets для Items
         И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
         И в таблице "List" я перехожу к строке:
             | 'Predefined data item name' |

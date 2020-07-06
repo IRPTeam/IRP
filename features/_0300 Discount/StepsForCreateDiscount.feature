@@ -10,7 +10,7 @@
 Сценарий: выбираю обработку для создания типа (вида) скидки 
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferTypes'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "External data proc"
+	И я нажимаю кнопку выбора у поля "Plugins"
 	И в таблице "List" я перехожу к строке:
 		| 'Description'                 |
 		| 'ExternalSpecialOfferRules' |
@@ -20,7 +20,7 @@
 Сценарий: выбираю обработку для создания правила скидки 
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferRules'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "External data proc"
+	И я нажимаю кнопку выбора у поля "Plugins"
 	И в таблице "List" я перехожу к строке:
 		| 'Description'                 |
 		| 'ExternalSpecialOfferRules' |
@@ -41,7 +41,7 @@
 Сценарий: выбираю обработку для создания типа скидки (сообщение)
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferTypes'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "External data proc"
+	И я нажимаю кнопку выбора у поля "Plugins"
 	И в таблице "List" я перехожу к строке:
 		| 'Description'           | 
 		| 'ExternalSpecialMessage' | 
@@ -54,7 +54,7 @@
 	И я нажимаю на кнопку с именем 'FormCreateFolder'
 	И я нажимаю кнопку выбора у поля "Special offer type"
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "External data proc"
+	И я нажимаю кнопку выбора у поля "Plugins"
 	И в таблице "List" я перехожу к строке:
 		| 'Description'                 |
 		| 'ExternalSpecialOfferRules' |
@@ -457,12 +457,12 @@
 	И в таблице  "List" я перехожу на один уровень вниз
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: меняю автоматическое проведение скидки 3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements
+Сценарий: меняю автоматическое проведение скидки 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements' |
+		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
 	И в таблице "List" я выбираю текущую строку
 	И я снимаю флаг 'Manually'
 	И я нажимаю на кнопку 'Save'
@@ -471,12 +471,12 @@
 	И я нажимаю на кнопку "Save and close"
 	И Я закрываю окно 'Special offers'
 
-Сценарий: меняю автоматическое проведение 4+1 Dress and Trousers, Discount on Basic Agreements
+Сценарий: меняю автоматическое проведение 4+1 Dress and Trousers, Discount on Basic Partner terms
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| '4+1 Dress and Trousers, Discount on Basic Agreements' |
+		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
 	И в таблице "List" я выбираю текущую строку
 	И я снимаю флаг 'Manually'
 	И я нажимаю на кнопку 'Save'
@@ -485,12 +485,12 @@
 	И я нажимаю на кнопку "Save and close"
 	И Я закрываю окно 'Special offers'
 
-Сценарий: меняю автоматическое проведение скидки All items 5+1, Discount on Basic Agreements
+Сценарий: меняю автоматическое проведение скидки All items 5+1, Discount on Basic Partner terms
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| 'All items 5+1, Discount on Basic Agreements' |
+		| 'All items 5+1, Discount on Basic Partner terms' |
 	И в таблице "List" я выбираю текущую строку
 	И я снимаю флаг 'Manually'
 	И я нажимаю на кнопку 'Save'
@@ -499,12 +499,12 @@
 	И я нажимаю на кнопку "Save and close"
 	И Я закрываю окно 'Special offers'
 
-Сценарий: меняю ручное проведение 4+1 Dress and Trousers, Discount on Basic Agreements
+Сценарий: меняю ручное проведение 4+1 Dress and Trousers, Discount on Basic Partner terms
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| '4+1 Dress and Trousers, Discount on Basic Agreements' |
+		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
 	И в таблице "List" я выбираю текущую строку
 	И я устанавливаю флаг 'Manually'
 	И я нажимаю на кнопку 'Save'
@@ -513,12 +513,12 @@
 	И я нажимаю на кнопку "Save and close"
 	И Я закрываю окно 'Special offers'
 
-Сценарий: меняю ручное проведение скидки 3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements
+Сценарий: меняю ручное проведение скидки 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements' |
+		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
 	И в таблице "List" я выбираю текущую строку
 	И я устанавливаю флаг 'Manually'
 	И я нажимаю на кнопку 'Save'
@@ -527,12 +527,12 @@
 	И я нажимаю на кнопку "Save and close"
 	И Я закрываю окно 'Special offers'
 
-Сценарий: меняю ручное проведение скидки All items 5+1, Discount on Basic Agreements
+Сценарий: меняю ручное проведение скидки All items 5+1, Discount on Basic Partner terms
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| 'All items 5+1, Discount on Basic Agreements' |
+		| 'All items 5+1, Discount on Basic Partner terms' |
 	И в таблице "List" я выбираю текущую строку
 	И я устанавливаю флаг 'Manually'
 	И я нажимаю на кнопку 'Save'
@@ -541,12 +541,12 @@
 	И я нажимаю на кнопку "Save and close"
 	И Я закрываю окно 'Special offers'
 
-Сценарий: переношу скидку All items 5+1, Discount on Basic Agreements в группу Minimum
+Сценарий: переношу скидку All items 5+1, Discount on Basic Partner terms в группу Minimum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| 'All items 5+1, Discount on Basic Agreements' |
+		| 'All items 5+1, Discount on Basic Partner terms' |
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	Тогда открылось окно 'Special offers'
 	И в таблице  "List" я перехожу на один уровень вниз
@@ -556,12 +556,12 @@
 		| 'Minimum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: переношу скидку 3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements в группу Minimum
+Сценарий: переношу скидку 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms в группу Minimum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements' |
+		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	Тогда открылось окно 'Special offers'
 	И в таблице  "List" я перехожу на один уровень вниз
@@ -571,12 +571,12 @@
 		| 'Minimum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: переношу скидку 4+1 Dress and Trousers, Discount on Basic Agreements в группу Minimum
+Сценарий: переношу скидку 4+1 Dress and Trousers, Discount on Basic Partner terms в группу Minimum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| '4+1 Dress and Trousers, Discount on Basic Agreements' |
+		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	Тогда открылось окно 'Special offers'
 	И в таблице  "List" я перехожу на один уровень вниз
@@ -586,12 +586,12 @@
 		| 'Minimum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: переношу скидку All items 5+1, Discount on Basic Agreements в группу Sum
+Сценарий: переношу скидку All items 5+1, Discount on Basic Partner terms в группу Sum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| 'All items 5+1, Discount on Basic Agreements' |
+		| 'All items 5+1, Discount on Basic Partner terms' |
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	Тогда открылось окно 'Special offers'
 	И в таблице  "List" я перехожу на один уровень вниз
@@ -601,12 +601,12 @@
 		| 'Sum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: переношу скидку 3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements в группу Sum
+Сценарий: переношу скидку 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms в группу Sum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements' |
+		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	Тогда открылось окно 'Special offers'
 	И в таблице  "List" я перехожу на один уровень вниз
@@ -616,12 +616,12 @@
 		| 'Sum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: переношу скидку 4+1 Dress and Trousers, Discount on Basic Agreements в группу Sum
+Сценарий: переношу скидку 4+1 Dress and Trousers, Discount on Basic Partner terms в группу Sum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| '4+1 Dress and Trousers, Discount on Basic Agreements' |
+		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	Тогда открылось окно 'Special offers'
 	И в таблице  "List" я перехожу на один уровень вниз
@@ -665,12 +665,12 @@
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
 
-Сценарий: переношу скидку All items 5+1, Discount on Basic Agreements в группу Special Offers
+Сценарий: переношу скидку All items 5+1, Discount on Basic Partner terms в группу Special Offers
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| 'All items 5+1, Discount on Basic Agreements' |
+		| 'All items 5+1, Discount on Basic Partner terms' |
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	Тогда открылось окно 'Special offers'
 	И в таблице  "List" я перехожу на один уровень вниз
@@ -679,12 +679,12 @@
         | 'Special Offers'     | '1'        |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: переношу скидку 3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements в группу Special Offers
+Сценарий: переношу скидку 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms в группу Special Offers
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements' |
+		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	Тогда открылось окно 'Special offers'
 	И в таблице  "List" я перехожу на один уровень вниз
@@ -693,12 +693,12 @@
         | 'Special Offers'     | '1'        |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: переношу скидку 4+1 Dress and Trousers, Discount on Basic Agreements в группу Special Offers
+Сценарий: переношу скидку 4+1 Dress and Trousers, Discount on Basic Partner terms в группу Special Offers
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| '4+1 Dress and Trousers, Discount on Basic Agreements' |
+		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	Тогда открылось окно 'Special offers'
 	И в таблице  "List" я перехожу на один уровень вниз
@@ -735,12 +735,12 @@
         | 'Special Offers'     | '1'        |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: переношу скидку All items 5+1, Discount on Basic Agreements в группу Maximum
+Сценарий: переношу скидку All items 5+1, Discount on Basic Partner terms в группу Maximum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| 'All items 5+1, Discount on Basic Agreements' |
+		| 'All items 5+1, Discount on Basic Partner terms' |
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	Тогда открылось окно 'Special offers'
 	И я нажимаю на кнопку 'List'
@@ -750,12 +750,12 @@
 		| 'Maximum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: переношу скидку 3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements в группу Maximum
+Сценарий: переношу скидку 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms в группу Maximum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Agreements' |
+		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	Тогда открылось окно 'Special offers'
 	И я нажимаю на кнопку 'List'
@@ -765,12 +765,12 @@
 		| 'Maximum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: переношу скидку 4+1 Dress and Trousers, Discount on Basic Agreements в группу Maximum
+Сценарий: переношу скидку 4+1 Dress and Trousers, Discount on Basic Partner terms в группу Maximum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
 		| 'Description'              |
-		| '4+1 Dress and Trousers, Discount on Basic Agreements' |
+		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	Тогда открылось окно 'Special offers'
 	И я нажимаю на кнопку 'List'

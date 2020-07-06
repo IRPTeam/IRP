@@ -85,10 +85,10 @@ To track the items ordered by the customer
 				| 'Description' |
 				| 'Ferron BP'  |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 				| 'Description'       |
-				| 'Basic Agreements, without VAT' |
+				| 'Basic Partner terms, without VAT' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Legal name"
 		И в таблице "List" я перехожу к строке:

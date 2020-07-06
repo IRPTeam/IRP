@@ -22,7 +22,7 @@ To track a product that returned from customer
 	* Checking the details
 		И     элемент формы с именем "Partner" стал равен 'Kalipso'
 		И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-		И     элемент формы с именем "Agreement" стал равен 'Personal Agreements, $'
+		И     элемент формы с именем "Agreement" стал равен 'Personal Partner terms, $'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 	И я нажимаю кнопку выбора у поля "Store"
@@ -106,7 +106,7 @@ To track a product that returned from customer
 	* Checking the details
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, without VAT'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, without VAT'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 	* Select store
@@ -191,7 +191,7 @@ To track a product that returned from customer
 	* Checking the details
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, without VAT'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, without VAT'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	И в таблице "ItemList" в поле 'Price' я ввожу текст '466,10'
@@ -258,7 +258,7 @@ To track a product that returned from customer
 	* Checking the details
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	* Filling in the document number 4

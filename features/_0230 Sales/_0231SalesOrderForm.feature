@@ -14,7 +14,7 @@ For fast data entry
 
 
 
-Сценарий: _023101 displaying in the Sales order only available valid agreements for the selected customer
+Сценарий: _023101 displaying in the Sales order only available valid Partner terms for the selected customer
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -22,30 +22,30 @@ For fast data entry
 			| 'Description' |
 			| 'Ferron BP'  |
 	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	Тогда таблица "List" стала равной:
 		| 'Description'                   |
-		| 'Basic Agreements, TRY'         |
-		| 'Basic Agreements, $'           |
-		| 'Basic Agreements, without VAT' |
+		| 'Basic Partner terms, TRY'         |
+		| 'Basic Partner terms, $'           |
+		| 'Basic Partner terms, without VAT' |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю кнопку выбора у поля "Partner"
 	И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Kalipso'  |
 	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	Тогда таблица "List" стала равной:
 		| 'Description'            |
-		| 'Personal Agreements, $' |
+		| 'Personal Partner terms, $' |
 	И я закрываю текущее окно
 	И Я закрываю текущее окно
 	И я нажимаю на кнопку 'No'
-	* Checking that expired agreements are not displayed in the selection list
+	* Checking that expired Partner terms are not displayed in the selection list
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И в таблице "List" я перехожу к строке:
 		| 'Description'           |
-		| 'Basic Agreements, $' |
+		| 'Basic Partner terms, $' |
 		И в таблице "List" я выбираю текущую строку
 		И в поле 'End of use' я ввожу текст '02.11.2018'
 		И я нажимаю на кнопку 'Save and close'
@@ -57,18 +57,18 @@ For fast data entry
 			| 'Description' |
 			| 'Ferron BP'  |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		Тогда таблица "List" стала равной:
 			| 'Description'                   |
-			| 'Basic Agreements, TRY'         |
-			| 'Basic Agreements, without VAT' |
+			| 'Basic Partner terms, TRY'         |
+			| 'Basic Partner terms, without VAT' |
 		И Я закрываю текущее окно
 		И Я закрываю текущее окно
 		И я нажимаю на кнопку 'No'
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, $' |
+			| 'Basic Partner terms, $' |
 		И в таблице "List" я выбираю текущую строку
 		И в поле 'End of use' я ввожу текст '02.11.2019'
 		И я нажимаю на кнопку 'Save and close'
@@ -82,10 +82,10 @@ For fast data entry
 		| 'Description' |
 		| 'Ferron BP'  |
 	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
 		| 'Description'           |
-		| 'Basic Agreements, TRY' |
+		| 'Basic Partner terms, TRY' |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю кнопку выбора у поля "Company"
 	Тогда таблица "List" стала равной:
@@ -95,7 +95,7 @@ For fast data entry
 	И Я закрываю текущее окно
 	И я нажимаю на кнопку 'No'
 
-Сценарий: _023103 filling in Company field from the agreement
+Сценарий: _023103 filling in Company field from the Partner term
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -103,17 +103,17 @@ For fast data entry
 			| 'Description' |
 			| 'Ferron BP'  |
 	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
 		| 'Description'           |
-		| 'Basic Agreements, TRY' |
+		| 'Basic Partner terms, TRY' |
 	И в таблице "List" я выбираю текущую строку
 	И элемент формы с именем "Company" стал равен 'Main Company'
 	И Я закрываю текущее окно
 	И я нажимаю на кнопку 'No'
 
 
-Сценарий: _023104 filling in Store field from the agreement
+Сценарий: _023104 filling in Store field from the Partner term
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -121,16 +121,16 @@ For fast data entry
 			| 'Description' |
 			| 'Ferron BP'  |
 	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
 		| 'Description'       |
-		| 'Basic Agreements, without VAT' |
+		| 'Basic Partner terms, without VAT' |
 	И в таблице "List" я выбираю текущую строку
 	И     элемент формы с именем "Store" стал равен 'Store 02'
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
 		| 'Description'       |
-		| 'Basic Agreements, TRY' |
+		| 'Basic Partner terms, TRY' |
 	И в таблице "List" я выбираю текущую строку
 	И     элемент формы с именем "Store" стал равен 'Store 01'
 	И Я закрываю текущее окно
@@ -151,10 +151,10 @@ For fast data entry
 			| 'Description' |
 			| 'Ferron BP'  |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 				| 'Description'       |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Legal name"
 		И в таблице "List" я перехожу к строке:

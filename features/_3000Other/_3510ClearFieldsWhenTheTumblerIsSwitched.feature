@@ -9,7 +9,7 @@
     Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
 
-Сценарий: проверка очистки значений при изменении типа счета в справочнике Cash account
+Сценарий: проверка очистки значений при изменении типа счета в справочнике Cash/Bank accounts
     * Открытие формы элемента справочника
         И я открываю навигационную ссылку "e1cib/list/Catalog.CashAccounts"
         И я нажимаю на кнопку с именем 'FormCreate'
@@ -69,19 +69,19 @@
         И я закрыл все окна клиентского приложения
 
 
-Сценарий: проверка очистки значений при изменении переключателя Ap-ar posting/Standard в Agreement
+Сценарий: проверка очистки значений при изменении переключателя Ap-ar posting/Standard в Partner term
     * Открытие формы элемента справочника
         И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
         И я нажимаю на кнопку с именем 'FormCreate'
     * Filling in the details of the documentдля соглашения с видом расчета по стандартным договорам
         И я меняю значение переключателя 'Kind' на 'Regular'
-        И я нажимаю кнопку выбора у поля "Currency movement type"
+        И я нажимаю кнопку выбора у поля "Multi currency movement type"
         И в таблице "List" я перехожу к строке:
             | 'Description' |
             | 'EUR'         |
         И в таблице "List" я выбираю текущую строку
-        И я меняю значение переключателя 'AP-AR posting detail' на 'By standard agreement'
-        И я нажимаю кнопку выбора у поля "Standard agreement"
+        И я меняю значение переключателя 'AP/AR posting detail' на 'By standard Partner term'
+        И я нажимаю кнопку выбора у поля "Standard Partner term"
         * Создание стандартного соглашения в евро
             И я нажимаю на кнопку с именем 'FormCreate'
             И в поле 'TR' я ввожу текст 'Standard, EUR'
@@ -94,11 +94,11 @@
         И в таблице "List" я выбираю текущую строку
     * Check filling inреквизитов
         И     элемент формы с именем "CurrencyMovementType" стал равен 'EUR'
-        И     элемент формы с именем "StandardAgreement" стал равен 'Standard, EUR'
+        И     элемент формы с именем "StandardPartner term" стал равен 'Standard, EUR'
         И     элемент формы с именем "PriceType" стал равен 'Basic Price Types TR'
-    * Переключение переключателя Ap-ar posting на значение By agreements и проверка очистки поля StandardAgreement
-        И я меняю значение переключателя 'AP-AR posting detail' на 'By agreements'
-        И     элемент формы с именем "StandardAgreement" стал равен ''
+    * Переключение переключателя Ap-ar posting на значение By Partner terms и проверка очистки поля StandardPartner term
+        И я меняю значение переключателя 'AP/AR posting detail' на 'By Partner terms'
+        И     элемент формы с именем "StandardPartner term" стал равен ''
     * Проверка очистки полей при изменении переключателя на Standard
         И я меняю значение переключателя 'Kind' на 'Standard'
         И     элемент формы с именем "CurrencyMovementType" стал равен ''
@@ -106,14 +106,14 @@
         И я закрыл все окна клиентского приложения
 
 
-Сценарий: проверка очистки значений Taxes и Currency movement type при изменении галочки Our в Company
+Сценарий: проверка очистки значений Tax types и Multi currency movement type при изменении галочки Our в Company
     * Открытие формы элемента справочника
         И я открываю навигационную ссылку "e1cib/list/Catalog.Companies"
         И я нажимаю на кнопку с именем 'FormCreate'
-    * Установка галочки Our и заполнение Taxes и Currency movement type
+    * Установка галочки Our и заполнение Tax types и Multi currency movement type
         И в поле 'TR' я ввожу текст 'Test'
         И я устанавливаю флаг 'Our'
-        * Заполнение Currency movement type
+        * Заполнение Multi currency movement type
             И в таблице "Currencies" я нажимаю на кнопку с именем 'CurrenciesAdd'
             И в таблице "Currencies" я нажимаю кнопку выбора у реквизита "Movement type"
             И в таблице "List" я перехожу к строке:
@@ -125,20 +125,20 @@
             И таблица "Currencies" содержит строки:
                 | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
                 | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
-        * Заполнение Taxes
-            И я перехожу к закладке "Taxes"
-            И в таблице "CompanyTaxes" я нажимаю на кнопку с именем 'CompanyTaxesAdd'
+        * Заполнение Tax types
+            И я перехожу к закладке "Tax types"
+            И в таблице "CompanyTaxes" я нажимаю на кнопку с именем 'CompanyTax typesAdd'
             И в поле 'Period' я ввожу текст '01.10.2019'
-            И в таблице "CompanyTaxes" я активизирую поле "Tax"
-            И в таблице "CompanyTaxes" я нажимаю кнопку выбора у реквизита "Tax"
+            И в таблице "CompanyTax types" я активизирую поле "Tax"
+            И в таблице "CompanyTax types" я нажимаю кнопку выбора у реквизита "Tax"
             И в таблице "List" я перехожу к строке:
                 | 'Description' | 'Reference' |
                 | 'VAT'         | 'VAT'       |
             И в таблице "List" я выбираю текущую строку
-            И в таблице "CompanyTaxes" я активизирую поле "Priority"
-            И в таблице "CompanyTaxes" в поле 'Priority' я ввожу текст '2'
-            И в таблице "CompanyTaxes" я завершаю редактирование строки
-            И     таблица "CompanyTaxes" содержит строки:
+            И в таблице "CompanyTax types" я активизирую поле "Priority"
+            И в таблице "CompanyTax types" в поле 'Priority' я ввожу текст '2'
+            И в таблице "CompanyTax types" я завершаю редактирование строки
+            И     таблица "CompanyTax types" содержит строки:
                 | 'Use' | 'Tax' | 'Priority' |
                 | 'Yes' | 'VAT' | '2'        |
         * Проверка очистки заполненных данных при снятии галочки Our
@@ -149,7 +149,7 @@
             И таблица "Currencies" не содержит строки:
                 | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
                 | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
-            И     таблица "CompanyTaxes" не содержит строки:
+            И     таблица "CompanyTax types" не содержит строки:
                 | 'Use' | 'Tax' | 'Priority' |
                 | 'Yes' | 'VAT' | '2'        |
             И я закрыл все окна клиентского приложения

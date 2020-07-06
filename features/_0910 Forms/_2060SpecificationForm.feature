@@ -35,7 +35,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Color"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Add attribute' | 'Description' |
 			| 'Color'         | 'Blue'        |
@@ -174,7 +174,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Color"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Blue'        |
@@ -184,14 +184,14 @@
 		И в таблице "FormTable*" я завершаю редактирование строки
 		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'M'           |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Color"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Brown'       |
@@ -201,14 +201,14 @@
 		И в таблице "FormTable*" я завершаю редактирование строки
 		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'L'           |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Color"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Green'       |

@@ -48,7 +48,7 @@
 					| 'Description'  |
 					| 'Main Company' |
 				И в таблице "List" я выбираю текущую строку
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'  |
 					| 'Vendor Ferron, TRY' |
@@ -142,8 +142,8 @@
 				| 'Description' |
 				| 'SalesReturn'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -154,7 +154,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'  | 'External data proc' |
+		| 'Configuration metadata'  | 'Plugins' |
 		| 'SalesReturn'             | 'Test command'       |
 	* Проверка вызова команды из списка документов Sales Return
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
@@ -178,7 +178,7 @@
 				| 'Description'       |
 				| 'SalesReturn' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -203,7 +203,7 @@
 				| 'Description'       |
 				| 'SalesReturn' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -235,8 +235,8 @@
 				| 'Description' |
 				| 'SalesInvoice'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -247,7 +247,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'  | 'External data proc' |
+		| 'Configuration metadata'  | 'Plugins' |
 		| 'SalesInvoice'             | 'Test command'       |
 	* Проверка вызова команды из списка документов SalesInvoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
@@ -271,7 +271,7 @@
 				| 'Description'       |
 				| 'SalesInvoice' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -295,7 +295,7 @@
 				| 'Description'       |
 				| 'SalesInvoice' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -327,8 +327,8 @@
 				| 'Description' |
 				| 'PurchaseOrder'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -339,7 +339,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'  | 'External data proc' |
+		| 'Configuration metadata'  | 'Plugins' |
 		| 'PurchaseOrder'             | 'Test command'       |
 	* Проверка вызова команды из списка документов PurchaseOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
@@ -363,7 +363,7 @@
 				| 'Description'       |
 				| 'PurchaseOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -387,7 +387,7 @@
 				| 'Description'       |
 				| 'PurchaseOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -419,8 +419,8 @@
 				| 'Description' |
 				| 'SalesOrder'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -431,7 +431,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'  | 'External data proc' |
+		| 'Configuration metadata'  | 'Plugins' |
 		| 'SalesOrder'             | 'Test command'       |
 	* Проверка вызова команды из списка документов SalesOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -455,7 +455,7 @@
 				| 'Description'       |
 				| 'SalesOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -480,7 +480,7 @@
 				| 'Description'       |
 				| 'SalesOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -512,8 +512,8 @@
 				| 'Description' |
 				| 'PurchaseInvoice'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -524,7 +524,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'  | 'External data proc' |
+		| 'Configuration metadata'  | 'Plugins' |
 		| 'PurchaseInvoice'             | 'Test command'       |
 	* Проверка вызова команды из списка документов PurchaseInvoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
@@ -548,7 +548,7 @@
 				| 'Description'       |
 				| 'PurchaseInvoice' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -573,7 +573,7 @@
 				| 'Description'       |
 				| 'PurchaseInvoice' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -606,8 +606,8 @@
 				| 'Description' |
 				| 'CashTransferOrder'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -618,7 +618,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'  | 'External data proc' |
+		| 'Configuration metadata'  | 'Plugins' |
 		| 'CashTransferOrder'             | 'Test command'       |
 	* Проверка вызова команды из списка документов CashTransferOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
@@ -642,7 +642,7 @@
 				| 'Description'       |
 				| 'CashTransferOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -667,7 +667,7 @@
 				| 'Description'       |
 				| 'CashTransferOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -700,8 +700,8 @@
 				| 'Description' |
 				| 'ShipmentConfirmation'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -712,7 +712,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'           | 'External data proc' |
+		| 'Configuration metadata'           | 'Plugins' |
 		| 'ShipmentConfirmation'             | 'Test command'       |
 	* Проверка вызова команды из списка документов CashTransferOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
@@ -736,7 +736,7 @@
 				| 'Description'       |
 				| 'ShipmentConfirmation' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -761,7 +761,7 @@
 				| 'Description'       |
 				| 'ShipmentConfirmation' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -794,8 +794,8 @@
 				| 'Description' |
 				| 'GoodsReceipt'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -806,7 +806,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'           | 'External data proc' |
+		| 'Configuration metadata'           | 'Plugins' |
 		| 'GoodsReceipt'             | 'Test command'       |
 	* Проверка вызова команды из списка документов GoodsReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
@@ -830,7 +830,7 @@
 				| 'Description'       |
 				| 'GoodsReceipt' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -854,7 +854,7 @@
 				| 'Description'       |
 				| 'GoodsReceipt' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -886,8 +886,8 @@
 				| 'Description' |
 				| 'SalesReturnOrder'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -898,7 +898,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'SalesReturnOrder'             | 'Test command'       |
 	* Проверка вызова команды из списка документов SalesReturnOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
@@ -922,7 +922,7 @@
 				| 'Description'       |
 				| 'SalesReturnOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -947,7 +947,7 @@
 				| 'Description'       |
 				| 'SalesReturnOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -980,8 +980,8 @@
 				| 'Description' |
 				| 'PurchaseReturnOrder'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -992,7 +992,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'PurchaseReturnOrder'             | 'Test command'       |
 	* Проверка вызова команды из списка документов PurchaseReturnOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
@@ -1016,7 +1016,7 @@
 				| 'Description'       |
 				| 'PurchaseReturnOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1041,7 +1041,7 @@
 				| 'Description'       |
 				| 'PurchaseReturnOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1073,8 +1073,8 @@
 				| 'Description' |
 				| 'ReconciliationStatement'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -1085,7 +1085,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'ReconciliationStatement'                | 'Test command'       |
 	* Проверка вызова команды из списка документов ReconciliationStatement
 		И я открываю навигационную ссылку 'e1cib/list/Document.ReconciliationStatement'
@@ -1109,7 +1109,7 @@
 				| 'Description'       |
 				| 'ReconciliationStatement' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1134,7 +1134,7 @@
 				| 'Description'       |
 				| 'ReconciliationStatement' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1167,8 +1167,8 @@
 				| 'Description' |
 				| 'BankPayment'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -1179,7 +1179,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'BankPayment'                | 'Test command'       |
 	* Проверка вызова команды из списка документов BankPayment
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
@@ -1203,7 +1203,7 @@
 				| 'Description'       |
 				| 'BankPayment' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1228,7 +1228,7 @@
 				| 'Description'       |
 				| 'BankPayment' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1260,8 +1260,8 @@
 				| 'Description' |
 				| 'BankReceipt'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -1272,7 +1272,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'BankReceipt'                | 'Test command'       |
 	* Проверка вызова команды из списка документов BankReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
@@ -1296,7 +1296,7 @@
 				| 'Description'       |
 				| 'BankReceipt' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1321,7 +1321,7 @@
 				| 'Description'       |
 				| 'BankReceipt' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1354,8 +1354,8 @@
 				| 'Description' |
 				| 'Bundling'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -1366,7 +1366,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'Bundling'                | 'Test command'       |
 	* Проверка вызова команды из списка документов Bundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
@@ -1390,7 +1390,7 @@
 				| 'Description'       |
 				| 'Bundling' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1415,7 +1415,7 @@
 				| 'Description'       |
 				| 'Bundling' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1447,8 +1447,8 @@
 				| 'Description' |
 				| 'CashExpense'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -1459,7 +1459,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'CashExpense'                | 'Test command'       |
 	* Проверка вызова команды из списка документов CashExpense
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashExpense'
@@ -1483,7 +1483,7 @@
 				| 'Description'       |
 				| 'CashExpense' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1508,7 +1508,7 @@
 				| 'Description'       |
 				| 'CashExpense' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1541,8 +1541,8 @@
 				| 'Description' |
 				| 'CashPayment'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -1553,7 +1553,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'CashPayment'                | 'Test command'       |
 	* Проверка вызова команды из списка документов CashPayment
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
@@ -1577,7 +1577,7 @@
 				| 'Description'       |
 				| 'CashPayment' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1602,7 +1602,7 @@
 				| 'Description'       |
 				| 'CashPayment' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1634,8 +1634,8 @@
 				| 'Description' |
 				| 'CashReceipt'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -1646,7 +1646,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'CashReceipt'                | 'Test command'       |
 	* Проверка вызова команды из списка документов CashReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
@@ -1670,7 +1670,7 @@
 				| 'Description'       |
 				| 'CashReceipt' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1695,7 +1695,7 @@
 				| 'Description'       |
 				| 'CashReceipt' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1727,8 +1727,8 @@
 				| 'Description' |
 				| 'CashRevenue'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -1739,7 +1739,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'CashRevenue'                | 'Test command'       |
 	* Проверка вызова команды из списка документов CashRevenue
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashRevenue'
@@ -1763,7 +1763,7 @@
 				| 'Description'       |
 				| 'CashRevenue' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1788,7 +1788,7 @@
 				| 'Description'       |
 				| 'CashRevenue' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1820,8 +1820,8 @@
 				| 'Description' |
 				| 'CashTransferOrder'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -1832,7 +1832,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'CashTransferOrder'                | 'Test command'       |
 	* Проверка вызова команды из списка документов CashTransferOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
@@ -1856,7 +1856,7 @@
 				| 'Description'       |
 				| 'CashTransferOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1881,7 +1881,7 @@
 				| 'Description'       |
 				| 'CashTransferOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1914,8 +1914,8 @@
 				| 'Description' |
 				| 'ChequeBondTransaction'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -1926,7 +1926,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'ChequeBondTransaction'                | 'Test command'       |
 	* Проверка вызова команды из списка документов ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
@@ -1950,7 +1950,7 @@
 				| 'Description'       |
 				| 'ChequeBondTransaction' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -1975,7 +1975,7 @@
 				| 'Description'       |
 				| 'ChequeBondTransaction' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2009,8 +2009,8 @@
 				| 'Description' |
 				| 'CreditDebitNote'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -2021,7 +2021,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'CreditDebitNote'                | 'Test command'       |
 	* Проверка вызова команды из списка документов CreditDebitNote
 		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
@@ -2045,7 +2045,7 @@
 				| 'Description'       |
 				| 'CreditDebitNote' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2070,7 +2070,7 @@
 				| 'Description'       |
 				| 'CreditDebitNote' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2103,8 +2103,8 @@
 				| 'Description' |
 				| 'IncomingPaymentOrder'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -2115,7 +2115,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'IncomingPaymentOrder'                | 'Test command'       |
 	* Проверка вызова команды из списка документов IncomingPaymentOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.IncomingPaymentOrder'
@@ -2139,7 +2139,7 @@
 				| 'Description'       |
 				| 'IncomingPaymentOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2164,7 +2164,7 @@
 				| 'Description'       |
 				| 'IncomingPaymentOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2196,8 +2196,8 @@
 				| 'Description' |
 				| 'InternalSupplyRequest'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -2208,7 +2208,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'InternalSupplyRequest'                | 'Test command'       |
 	* Проверка вызова команды из списка документов InternalSupplyRequest
 		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
@@ -2232,7 +2232,7 @@
 				| 'Description'       |
 				| 'InternalSupplyRequest' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2257,7 +2257,7 @@
 				| 'Description'       |
 				| 'InternalSupplyRequest' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2289,8 +2289,8 @@
 				| 'Description' |
 				| 'InventoryTransfer'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -2301,7 +2301,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'InventoryTransfer'                | 'Test command'       |
 	* Проверка вызова команды из списка документов InventoryTransfer
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
@@ -2325,7 +2325,7 @@
 				| 'Description'       |
 				| 'InventoryTransfer' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2350,7 +2350,7 @@
 				| 'Description'       |
 				| 'InventoryTransfer' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2382,8 +2382,8 @@
 				| 'Description' |
 				| 'InventoryTransferOrder'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -2394,7 +2394,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'InventoryTransferOrder'                | 'Test command'       |
 	* Проверка вызова команды из списка документов InventoryTransferOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
@@ -2418,7 +2418,7 @@
 				| 'Description'       |
 				| 'InventoryTransferOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2443,7 +2443,7 @@
 				| 'Description'       |
 				| 'InventoryTransferOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2475,8 +2475,8 @@
 				| 'Description' |
 				| 'InvoiceMatch'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -2487,7 +2487,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'InvoiceMatch'                | 'Test command'       |
 	* Проверка вызова команды из списка документов InvoiceMatch
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
@@ -2511,7 +2511,7 @@
 				| 'Description'       |
 				| 'InvoiceMatch' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2536,7 +2536,7 @@
 				| 'Description'       |
 				| 'InvoiceMatch' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2568,8 +2568,8 @@
 				| 'Description' |
 				| 'Labeling'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -2580,7 +2580,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'Labeling'                | 'Test command'       |
 	* Проверка вызова команды из списка документов Labeling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Labeling'
@@ -2604,7 +2604,7 @@
 				| 'Description'       |
 				| 'Labeling' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2629,7 +2629,7 @@
 				| 'Description'       |
 				| 'Labeling' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2661,8 +2661,8 @@
 				| 'Description' |
 				| 'OpeningEntry'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -2673,7 +2673,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'OpeningEntry'                | 'Test command'       |
 	* Проверка вызова команды из списка документов OpeningEntry
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
@@ -2697,7 +2697,7 @@
 				| 'Description'       |
 				| 'OpeningEntry' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2722,7 +2722,7 @@
 				| 'Description'       |
 				| 'OpeningEntry' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2755,8 +2755,8 @@
 				| 'Description' |
 				| 'OutgoingPaymentOrder'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -2767,7 +2767,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'OutgoingPaymentOrder'                | 'Test command'       |
 	* Проверка вызова команды из списка документов OutgoingPaymentOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.OutgoingPaymentOrder'
@@ -2791,7 +2791,7 @@
 				| 'Description'       |
 				| 'OutgoingPaymentOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2816,7 +2816,7 @@
 				| 'Description'       |
 				| 'OutgoingPaymentOrder' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2848,8 +2848,8 @@
 				| 'Description' |
 				| 'PhysicalCountByLocation'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -2860,7 +2860,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'PhysicalCountByLocation'                | 'Test command'       |
 	* Проверка вызова команды из списка документов PhysicalCountByLocation
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalCountByLocation'
@@ -2884,7 +2884,7 @@
 				| 'Description'       |
 				| 'PhysicalCountByLocation' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2909,7 +2909,7 @@
 				| 'Description'       |
 				| 'PhysicalCountByLocation' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -2941,8 +2941,8 @@
 				| 'Description' |
 				| 'PriceList'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -2953,7 +2953,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'PriceList'                | 'Test command'       |
 	* Проверка вызова команды из списка документов PriceList
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
@@ -2977,7 +2977,7 @@
 				| 'Description'       |
 				| 'PriceList' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -3002,7 +3002,7 @@
 				| 'Description'       |
 				| 'PriceList' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -3036,8 +3036,8 @@
 				| 'Description' |
 				| 'PurchaseReturn'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -3048,7 +3048,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'PurchaseReturn'                | 'Test command'       |
 	* Проверка вызова команды из списка документов PurchaseReturn
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
@@ -3072,7 +3072,7 @@
 				| 'Description'       |
 				| 'PurchaseReturn' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -3097,7 +3097,7 @@
 				| 'Description'       |
 				| 'PurchaseReturn' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -3131,8 +3131,8 @@
 				| 'Description' |
 				| 'Unbundling'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -3143,7 +3143,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'Unbundling'                | 'Test command'       |
 	* Проверка вызова команды из списка документов Unbundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
@@ -3167,7 +3167,7 @@
 				| 'Description'       |
 				| 'Unbundling' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -3192,7 +3192,7 @@
 				| 'Description'       |
 				| 'Unbundling' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -3224,8 +3224,8 @@
 				| 'Description' |
 				| 'StockAdjustmentAsWriteOff'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -3236,7 +3236,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'StockAdjustmentAsWriteOff'                | 'Test command'       |
 	* Проверка вызова команды из списка документов StockAdjustmentAsWriteOff
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
@@ -3260,7 +3260,7 @@
 				| 'Description'       |
 				| 'StockAdjustmentAsWriteOff' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -3285,7 +3285,7 @@
 				| 'Description'       |
 				| 'StockAdjustmentAsWriteOff' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -3317,8 +3317,8 @@
 				| 'Description' |
 				| 'StockAdjustmentAsSurplus'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -3329,7 +3329,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'StockAdjustmentAsSurplus'                | 'Test command'       |
 	* Проверка вызова команды из списка документов StockAdjustmentAsSurplus
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
@@ -3353,7 +3353,7 @@
 				| 'Description'       |
 				| 'StockAdjustmentAsSurplus' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -3378,7 +3378,7 @@
 				| 'Description'       |
 				| 'StockAdjustmentAsSurplus' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -3410,8 +3410,8 @@
 				| 'Description' |
 				| 'PhysicalInventory'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Test command' |
@@ -3422,7 +3422,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata'       | 'External data proc' |
+		| 'Configuration metadata'       | 'Plugins' |
 		| 'PhysicalInventory'                | 'Test command'       |
 	* Проверка вызова команды из списка документов PhysicalInventory
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
@@ -3446,7 +3446,7 @@
 				| 'Description'       |
 				| 'PhysicalInventory' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -3471,7 +3471,7 @@
 				| 'Description'       |
 				| 'PhysicalInventory' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
+			И я нажимаю кнопку выбора у поля "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Test command' |
@@ -3487,7 +3487,7 @@
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Kalipso' |
-		И я нажимаю на кнопку 'ID Info'
+		И я нажимаю на кнопку 'Contact info'
 	* Проверка отображения контактной информации
 		Тогда таблица "IDInfo" содержит строки:
 			| 'Type'                       |
@@ -3503,7 +3503,7 @@
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Kalipso' |
-		И я нажимаю на кнопку 'ID Info'
+		И я нажимаю на кнопку 'Contact info'
 	* Редактирование контактной информации
 		И в таблице "IDInfo" в поле 'Value' я ввожу текст 'Odessa, Bunina, 2, №33'
 		И в таблице "IDInfo" я завершаю редактирование строки

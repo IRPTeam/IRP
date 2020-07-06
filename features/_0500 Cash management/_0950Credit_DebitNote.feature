@@ -19,7 +19,7 @@ For write-off of accounts receivable and payable
 		И я изменяю флаг 'Vendor'
 		И я изменяю флаг 'Customer'
 		И я нажимаю на кнопку 'Save'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Segment"
 		И в таблице "List" я перехожу к строке:
@@ -27,7 +27,7 @@ For write-off of accounts receivable and payable
 			| 'Retail'      |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Partner segments (create) *' в течение 20 секунд
+		И я жду закрытия окна 'Partner segments content (create) *' в течение 20 секунд
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Company'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'Company Lunch'
@@ -44,10 +44,10 @@ For write-off of accounts receivable and payable
 		И я изменяю флаг 'Customer'
 		И я изменяю флаг 'Vendor'
 		И я нажимаю на кнопку 'Save'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Segment"
-		Тогда открылось окно 'Partner segments'
+		Тогда открылось окно 'Partner segments content'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Retail'      |
@@ -72,13 +72,13 @@ For write-off of accounts receivable and payable
 		И я нажимаю на кнопку 'Save and close'
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 		И я нажимаю на кнопку 'Save and close'
-	* Create vendor agreement for Maxim, Ap-Ar - posting details (by agreements)
+	* Create vendor Partner term for Maxim, Ap-Ar - posting details (by Partner terms)
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Agreement Maxim'
+		И в поле 'ENG' я ввожу текст 'Partner term Maxim'
 		И я меняю значение переключателя 'Type' на 'Vendor'
 		И в поле 'Date' я ввожу текст '01.12.2019'
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' |
 			| 'TRY'      |
@@ -116,7 +116,7 @@ For write-off of accounts receivable and payable
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -309,7 +309,7 @@ For write-off of accounts receivable and payable
 		| 'Document registrations records'       | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| 'Register  "Accounts statement"'       | ''            | ''                    | ''                    | ''                        | ''                       | ''               | ''              | ''                    | ''                         | ''                         | ''                     |
 		| ''                                     | 'Record type' | 'Period'              | 'Resources'           | ''                        | ''                       | ''               | 'Dimensions'    | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | ''            | ''                    | 'Advance to supliers' | 'Transaction AP'          | 'Advance from customers' | 'Transaction AR' | 'Company'       | 'Partner'             | 'Legal name'               | 'Basis document'           | 'Currency'             |
+		| ''                                     | ''            | ''                    | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers' | 'Transaction AR' | 'Company'       | 'Partner'             | 'Legal name'               | 'Basis document'           | 'Currency'             |
 		| ''                                     | 'Expense'     | '*'                   | ''                    | '1 000'                   | ''                       | ''               | 'Main Company'  | 'Maxim'               | 'Company Maxim'            | ''                         | 'TRY'                  |
 		| ''                                     | ''            | ''                    | ''                    | ''                        | ''                       | ''               | ''              | ''                    | ''                         | ''                         | ''                     |
 		| 'Register  "Reconciliation statement"' | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
@@ -319,7 +319,7 @@ For write-off of accounts receivable and payable
 		| ''                                     | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| 'Register  "Revenues turnovers"'       | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| ''                                     | 'Period'      | 'Resources' | 'Dimensions'   | ''                        | ''               | ''         | ''              | ''                    | ''                         | 'Attributes'               | ''                     |
-		| ''                                     | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type'   | 'Item key' | 'Currency'      | 'Additional analytic' | 'Currency movement type'   | 'Deferred calculation'     | ''                     |
+		| ''                                     | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type'   | 'Item key' | 'Currency'      | 'Additional analytic' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                     | '*'           | '171,23'    | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'USD'           | ''                    | 'Reporting currency'       | 'No'                       | ''                     |
 		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'en descriptions is empty' | 'No'                       | ''                     |
 		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'Local currency'           | 'No'                       | ''                     |
@@ -327,11 +327,11 @@ For write-off of accounts receivable and payable
 		| ''                                     | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AP transactions"'  | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''               | ''         | ''              | ''                    | ''                         | ''                         | 'Attributes'           |
-		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Basis document' | 'Partner'  | 'Legal name'    | 'Agreement'           | 'Currency'                 | 'Currency movement type'   | 'Deferred calculation' |
-		| ''                                     | 'Expense'     | '*'         | '171,23'       | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Agreement Maxim'     | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Agreement Maxim'     | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Agreement Maxim'     | 'TRY'                      | 'Local currency'           | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Agreement Maxim'     | 'TRY'                      | 'TRY'                      | 'No'                   |
+		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Basis document' | 'Partner'  | 'Legal name'    | 'Partner term'           | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
+		| ''                                     | 'Expense'     | '*'         | '171,23'       | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'USD'                      | 'Reporting currency'       | 'No'                   |
+		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
+		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'Local currency'           | 'No'                   |
+		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'TRY'                      | 'No'                   |
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _095003 change of the basis document and the amount in the already performed Credit debit note and movement check
@@ -364,7 +364,7 @@ For write-off of accounts receivable and payable
 		| 'Document registrations records'       | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| 'Register  "Accounts statement"'       | ''            | ''                    | ''                    | ''                        | ''                       | ''               | ''              | ''                    | ''                         | ''                         | ''                     |
 		| ''                                     | 'Record type' | 'Period'              | 'Resources'           | ''                        | ''                       | ''               | 'Dimensions'    | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | ''            | ''                    | 'Advance to supliers' | 'Transaction AP'          | 'Advance from customers' | 'Transaction AR' | 'Company'       | 'Partner'             | 'Legal name'               | 'Basis document'           | 'Currency'             |
+		| ''                                     | ''            | ''                    | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers' | 'Transaction AR' | 'Company'       | 'Partner'             | 'Legal name'               | 'Basis document'           | 'Currency'             |
 		| ''                                     | 'Expense'     | '*'                   | ''                    | '2 000'                   | ''                       | ''               | 'Main Company'  | 'Maxim'               | 'Company Maxim'            | ''                         | 'TRY'                  |
 		| ''                                     | ''            | ''                    | ''                    | ''                        | ''                       | ''               | ''              | ''                    | ''                         | ''                         | ''                     |
 		| 'Register  "Reconciliation statement"' | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
@@ -374,7 +374,7 @@ For write-off of accounts receivable and payable
 		| ''                                     | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| 'Register  "Revenues turnovers"'       | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| ''                                     | 'Period'      | 'Resources' | 'Dimensions'   | ''                        | ''               | ''         | ''              | ''                    | ''                         | 'Attributes'               | ''                     |
-		| ''                                     | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type'   | 'Item key' | 'Currency'      | 'Additional analytic' | 'Currency movement type'   | 'Deferred calculation'     | ''                     |
+		| ''                                     | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type'   | 'Item key' | 'Currency'      | 'Additional analytic' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                     | '*'           | '342,47'    | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'USD'           | ''                    | 'Reporting currency'       | 'No'                       | ''                     |
 		| ''                                     | '*'           | '2 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'en descriptions is empty' | 'No'                       | ''                     |
 		| ''                                     | '*'           | '2 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'Local currency'           | 'No'                       | ''                     |
@@ -382,11 +382,11 @@ For write-off of accounts receivable and payable
 		| ''                                     | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AP transactions"'  | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''               | ''         | ''              | ''                    | ''                         | ''                         | 'Attributes'           |
-		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Basis document' | 'Partner'  | 'Legal name'    | 'Agreement'           | 'Currency'                 | 'Currency movement type'   | 'Deferred calculation' |
-		| ''                                     | 'Expense'     | '*'         | '342,47'       | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Agreement Maxim'     | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Agreement Maxim'     | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Agreement Maxim'     | 'TRY'                      | 'Local currency'           | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Agreement Maxim'     | 'TRY'                      | 'TRY'                      | 'No'                   |
+		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Basis document' | 'Partner'  | 'Legal name'    | 'Partner term'           | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
+		| ''                                     | 'Expense'     | '*'         | '342,47'       | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'USD'                      | 'Reporting currency'       | 'No'                   |
+		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
+		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'Local currency'           | 'No'                   |
+		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'TRY'                      | 'No'                   |
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _095004 check movements of the document Credit_DebitNote by operation type Receivable
@@ -458,15 +458,15 @@ For write-off of accounts receivable and payable
 		| 'Document registrations records'       | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AR transactions"'  | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
 		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | 'Attributes'           |
-		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Basis document'                                | 'Partner'  | 'Legal name'    | 'Agreement'             | 'Currency'                 | 'Currency movement type'   | 'Deferred calculation' |
-		| ''                                     | 'Expense'     | '*'         | '171,23'       | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Agreements, TRY' | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Agreements, TRY' | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Agreements, TRY' | 'TRY'                      | 'Local currency'           | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Agreements, TRY' | 'TRY'                      | 'TRY'                      | 'No'                   |
+		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Basis document'                                | 'Partner'  | 'Legal name'    | 'Partner term'             | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
+		| ''                                     | 'Expense'     | '*'         | '171,23'       | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'USD'                      | 'Reporting currency'       | 'No'                   |
+		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
+		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                      | 'Local currency'           | 'No'                   |
+		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                      | 'TRY'                      | 'No'                   |
 		| ''                                     | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
 		| 'Register  "Expenses turnovers"'       | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
 		| ''                                     | 'Period'      | 'Resources' | 'Dimensions'   | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | 'Attributes'               | ''                     |
-		| ''                                     | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Expense type'                                  | 'Item key' | 'Currency'      | 'Additional analytic'   | 'Currency movement type'   | 'Deferred calculation'     | ''                     |
+		| ''                                     | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Expense type'                                  | 'Item key' | 'Currency'      | 'Additional analytic'   | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                     | '*'           | '171,23'    | 'Main Company' | 'Distribution department' | 'Software'                                      | ''         | 'USD'           | ''                      | 'Reporting currency'       | 'No'                       | ''                     |
 		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'                                      | ''         | 'TRY'           | ''                      | 'en descriptions is empty' | 'No'                       | ''                     |
 		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'                                      | ''         | 'TRY'           | ''                      | 'Local currency'           | 'No'                       | ''                     |
@@ -474,7 +474,7 @@ For write-off of accounts receivable and payable
 		| ''                                     | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
 		| 'Register  "Accounts statement"'                | ''                    | ''                    | ''                    | ''                        | ''                                              | ''               | ''              | ''                      | ''                         | ''                         | ''                     |
 		| ''                                              | 'Record type'         | 'Period'              | 'Resources'           | ''                        | ''                                              | ''               | 'Dimensions'    | ''                      | ''                         | ''                         | ''                     |
-		| ''                                              | ''                    | ''                    | 'Advance to supliers' | 'Transaction AP'          | 'Advance from customers'                        | 'Transaction AR' | 'Company'       | 'Partner'               | 'Legal name'               | 'Basis document'           | 'Currency'             |
+		| ''                                              | ''                    | ''                    | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers'                        | 'Transaction AR' | 'Company'       | 'Partner'               | 'Legal name'               | 'Basis document'           | 'Currency'             |
 		| ''                                              | 'Expense'             | '*'                   | ''                    | ''                        | ''                                              | '1 000'          | 'Main Company'  | 'Lunch'                 | 'Company Lunch'            | 'Sales invoice 2 900*'     | 'TRY'                  |
 		| ''                                              | ''                    | ''                    | ''                    | ''                        | ''                                              | ''               | ''              | ''                      | ''                         | ''                         | ''                     |
 		| 'Register  "Reconciliation statement"' | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
@@ -581,14 +581,14 @@ For write-off of accounts receivable and payable
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'No'
 		И     таблица "Transactions" содержит строки:
-		| 'Partner AR transactions basis document'        | 'Partner' | 'Agreement'             | 'Amount'   | 'Business unit'           | 'Currency' | 'Expense type' |
-		| 'Sales invoice 2 900*'                          | 'Lunch'   | 'Basic Agreements, TRY' | '1 000,00' | 'Distribution department' | 'TRY'      | 'Software'     |
+		| 'Partner AR transactions basis document'        | 'Partner' | 'Partner term'             | 'Amount'   | 'Business unit'           | 'Currency' | 'Expense type' |
+		| 'Sales invoice 2 900*'                          | 'Lunch'   | 'Basic Partner terms, TRY' | '1 000,00' | 'Distribution department' | 'TRY'      | 'Software'     |
 		И из выпадающего списка "Operation type" я выбираю точное значение 'Payable'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Cancel'
 		И     таблица "Transactions" содержит строки:
-		| 'Partner AR transactions basis document'        | 'Partner' | 'Agreement'             | 'Amount'   | 'Business unit'           | 'Currency' | 'Expense type' |
-		| 'Sales invoice 2 900*'                          | 'Lunch'   | 'Basic Agreements, TRY' | '1 000,00' | 'Distribution department' | 'TRY'      | 'Software'     |
+		| 'Partner AR transactions basis document'        | 'Partner' | 'Partner term'             | 'Amount'   | 'Business unit'           | 'Currency' | 'Expense type' |
+		| 'Sales invoice 2 900*'                          | 'Lunch'   | 'Basic Partner terms, TRY' | '1 000,00' | 'Distribution department' | 'TRY'      | 'Software'     |
 	
 
 Сценарий: _095007 check filling and refilling of the tabular part using the Fill button

@@ -109,14 +109,14 @@ To work with the products
 			| Description |
 			| Dress       |
 		И в таблице "List" я выбираю текущую строку
-	* Checking barcodes by Item
+	* CheckingItem barcodes by Item
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Barcodes'
 		Тогда таблица "List" содержит строки:
 		| 'Barcode'    | 'Unit' | 'Item key' |
 		| '2202283705' | 'pcs'  | 'XS/Blue'  |
 		| '2202283713' | 'pcs'  | 'S/Yellow' |
 		| '2202283739' | 'pcs'  | 'L/Green'  |
-	* Checking barcodes by Item key
+	* CheckingItem barcodes by Item key
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
 		И в таблице "List" я перехожу к строке:
 		| 'Item key' |

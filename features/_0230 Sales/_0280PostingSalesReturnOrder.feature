@@ -23,7 +23,7 @@ To track a product that needs to be returned from customer
 	* Checking the details
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, without VAT'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, without VAT'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 	* Select store
 		И я нажимаю кнопку выбора у поля "Store"
@@ -111,7 +111,7 @@ To track a product that needs to be returned from customer
 	* Checking the details
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 	И я нажимаю кнопку выбора у поля "Store"

@@ -157,7 +157,7 @@ For ordering items to the planning department (purchasing or transfer from the s
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| Description        |
 			| Vendor Ferron, TRY |

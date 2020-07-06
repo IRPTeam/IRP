@@ -42,7 +42,7 @@ So you can display the amount of the vendor's discount
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron, TRY |
@@ -154,7 +154,7 @@ So you can display the amount of the vendor's discount
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron, TRY |

@@ -25,13 +25,13 @@ I want to pay cash
 		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
 		И     элемент формы с именем "Currency" стал равен 'TRY'
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Payee'             | 'Agreement'          | 'Amount'     | 'Basis document'      |
+			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '137 000,00' | 'Purchase invoice 1*' |
 		И     таблица "PaymentListCurrencies" содержит строки:
 			| 'Movement type'      | 'Amount'    | 'Multiplicity' |
 			| 'Reporting currency' | '23 458,90' | '1'            |
 	* Data overflow check
-		И я нажимаю кнопку выбора у поля "Cash Account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
 			| 'Cash desk №2' |
@@ -40,7 +40,7 @@ I want to pay cash
 		И     элемент формы с именем "CashAccount" стал равен 'Cash desk №2'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Payee'             | 'Agreement'          | 'Amount'     | 'Basis document'      |
+			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '137 000,00' | 'Purchase invoice 1*' |
 		И     таблица "PaymentListCurrencies" содержит строки:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'    | 'Multiplicity' |
@@ -61,7 +61,7 @@ I want to pay cash
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '20 000,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Payee'             | 'Agreement'          | 'Amount'     | 'Basis document'      |
+			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '20 000,00' | 'Purchase invoice 6*' |
 	И Я закрыл все окна клиентского приложения
 
@@ -79,7 +79,7 @@ I want to pay cash
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash account"
+			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №1 |
@@ -107,8 +107,8 @@ I want to pay cash
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-		* Filling in an Agreement
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		* Filling in an Partner term
+			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'           |
 					| 'Vendor Ferron, TRY' |
@@ -143,7 +143,7 @@ I want to pay cash
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash account"
+			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №1 |
@@ -171,8 +171,8 @@ I want to pay cash
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-		* Filling in an Agreement
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		* Filling in an Partner term
+			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'           |
 					| 'Vendor Ferron, TRY' |
@@ -197,7 +197,7 @@ I want to pay cash
 			Тогда таблица "List" содержит строки:
 			| Number |
 			|   2    |
-	* Create Cash payment in Euro for Ferron BP (Agreement in USD)
+	* Create Cash payment in Euro for Ferron BP (Partner term in USD)
 		И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		* Filling in the details of the document
@@ -207,7 +207,7 @@ I want to pay cash
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash account"
+			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №2 |
@@ -235,8 +235,8 @@ I want to pay cash
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-		* Filling in an Agreement
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		* Filling in an Partner term
+			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'           |
 					| 'Vendor Ferron, USD' |
@@ -254,7 +254,7 @@ I want to pay cash
 	Сценарий: check Cash payment movements by register PartnerApTransactions
 		И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.PartnerApTransactions"
 		Тогда таблица "List" содержит строки:
-		| 'Currency' | 'Recorder'        | 'Legal name'        | 'Basis document'      | 'Company'      | 'Amount'   | 'Agreement'           | 'Partner'   |
+		| 'Currency' | 'Recorder'        | 'Legal name'        | 'Basis document'      | 'Company'      | 'Amount'   | 'Partner term'           | 'Partner'   |
 		| 'TRY'      | 'Cash payment 1*' | 'Company Ferron BP' | 'Purchase invoice 1*' | 'Main Company' | '1 000,00' | 'Vendor Ferron, TRY'  | 'Ferron BP' |
 		| 'USD'      | 'Cash payment 2*' | 'Company Ferron BP' | 'Purchase invoice 1*' | 'Main Company' | '20,00'    | 'Vendor Ferron, TRY'  | 'Ferron BP' |
 		| 'EUR'      | 'Cash payment 3*' | 'Company Ferron BP' | ''                    | 'Main Company' | '150,00'   | 'Vendor Ferron, USD'  | 'Ferron BP' |
@@ -273,7 +273,7 @@ I want to pay cash
 		| 'Document registrations records'       | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 		| 'Register  "Accounts statement"'           | ''            | ''                    | ''                    | ''               | ''                                             | ''               | ''                         | ''                     | ''                  | ''                         | ''                     |
 		| ''                                         | 'Record type' | 'Period'              | 'Resources'           | ''               | ''                                             | ''               | 'Dimensions'               | ''                     | ''                  | ''                         | ''                     |
-		| ''                                         | ''            | ''                    | 'Advance to supliers' | 'Transaction AP' | 'Advance from customers'                       | 'Transaction AR' | 'Company'                  | 'Partner'              | 'Legal name'        | 'Basis document'           | 'Currency'             |
+		| ''                                         | ''            | ''                    | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers'                       | 'Transaction AR' | 'Company'                  | 'Partner'              | 'Legal name'        | 'Basis document'           | 'Currency'             |
 		| ''                                         | 'Expense'     | '*'                   | ''                    | '1 000'          | ''                                             | ''               | 'Main Company'             | 'Ferron BP'            | 'Company Ferron BP' | 'Purchase invoice 1*'      | 'TRY'                  |
 		| ''                                         | ''            | ''                    | ''                    | ''               | ''                                             | ''               | ''                         | ''                     | ''                  | ''                         | ''                     |
 		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
@@ -283,7 +283,7 @@ I want to pay cash
 		| ''                                     | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 		| 'Register  "Partner AP transactions"'  | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | ''                      | ''         | ''                         | 'Attributes'           |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Basis document'       | 'Partner'      | 'Legal name'               | 'Agreement'             | 'Currency' | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Basis document'       | 'Partner'      | 'Legal name'               | 'Partner term'             | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                     | 'Expense'     | '*'      | '171,23'    | 'Main Company'    | 'Purchase invoice 1*'  | 'Ferron BP' | 'Company Ferron BP'     | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
 		| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Purchase invoice 1*'  | 'Ferron BP' | 'Company Ferron BP'     | 'Vendor Ferron, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
 		| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Purchase invoice 1*'  | 'Ferron BP' | 'Company Ferron BP'     | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
@@ -291,7 +291,7 @@ I want to pay cash
 		| ''                                     | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 		| 'Register  "Account balance"'          | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | 'Attributes'            | ''         | ''                         | ''                     |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Account'              | 'Currency'     | 'Currency movement type'   | 'Deferred calculation'  | ''         | ''                         | ''                     |
+		| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Account'              | 'Currency'     | 'Multi currency movement type'   | 'Deferred calculation'  | ''         | ''                         | ''                     |
 		| ''                                     | 'Expense'     | '*'      | '171,23'    | 'Main Company'    | 'Cash desk №1'      | 'USD'          | 'Reporting currency'       | 'No'                    | ''         | ''                         | ''                     |
 		| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Cash desk №1'      | 'TRY'          | 'en descriptions is empty' | 'No'                    | ''         | ''                         | ''                     |
 		| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Cash desk №1'      | 'TRY'          | 'Local currency'           | 'No'                    | ''         | ''                         | ''                     |
@@ -331,7 +331,7 @@ I want to pay cash
 			| 'Document registrations records'       | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| 'Register  "Accounts statement"'           | ''            | ''                    | ''                    | ''               | ''                                             | ''               | ''                         | ''                     | ''                  | ''                         | ''                     |
 			| ''                                         | 'Record type' | 'Period'              | 'Resources'           | ''               | ''                                             | ''               | 'Dimensions'               | ''                     | ''                  | ''                         | ''                     |
-			| ''                                         | ''            | ''                    | 'Advance to supliers' | 'Transaction AP' | 'Advance from customers'                       | 'Transaction AR' | 'Company'                  | 'Partner'              | 'Legal name'        | 'Basis document'           | 'Currency'             |
+			| ''                                         | ''            | ''                    | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers'                       | 'Transaction AR' | 'Company'                  | 'Partner'              | 'Legal name'        | 'Basis document'           | 'Currency'             |
 			| ''                                         | 'Expense'     | '*'                   | ''                    | '1 000'          | ''                                             | ''               | 'Main Company'             | 'Ferron BP'            | 'Company Ferron BP' | 'Purchase invoice 1*'      | 'TRY'                  |
 			| ''                                         | ''            | ''                    | ''                    | ''               | ''                                             | ''               | ''                         | ''                     | ''                  | ''                         | ''                     |
 			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
@@ -341,7 +341,7 @@ I want to pay cash
 			| ''                                     | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| 'Register  "Partner AP transactions"'  | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | ''                      | ''         | ''                         | 'Attributes'           |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Basis document'       | 'Partner'      | 'Legal name'               | 'Agreement'             | 'Currency' | 'Currency movement type'   | 'Deferred calculation' |
+			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Basis document'       | 'Partner'      | 'Legal name'               | 'Partner term'             | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                     | 'Expense'     | '*'      | '171,23'    | 'Main Company'    | 'Purchase invoice 1*'  | 'Ferron BP' | 'Company Ferron BP'     | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Purchase invoice 1*'  | 'Ferron BP' | 'Company Ferron BP'     | 'Vendor Ferron, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Purchase invoice 1*'  | 'Ferron BP' | 'Company Ferron BP'     | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
@@ -349,7 +349,7 @@ I want to pay cash
 			| ''                                     | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| 'Register  "Account balance"'          | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | 'Attributes'            | ''         | ''                         | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Account'              | 'Currency'     | 'Currency movement type'   | 'Deferred calculation'  | ''         | ''                         | ''                     |
+			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Account'              | 'Currency'     | 'Multi currency movement type'   | 'Deferred calculation'  | ''         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '171,23'    | 'Main Company'    | 'Cash desk №1'      | 'USD'          | 'Reporting currency'       | 'No'                    | ''         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Cash desk №1'      | 'TRY'          | 'en descriptions is empty' | 'No'                    | ''         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Cash desk №1'      | 'TRY'          | 'Local currency'           | 'No'                    | ''         | ''                         | ''                     |
@@ -397,7 +397,7 @@ I want to pay cash
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
 		И я нажимаю кнопку выбора у поля "Company"
 		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №1 |

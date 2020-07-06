@@ -27,7 +27,7 @@ To sell a product when customer first receives items and then the documents arri
 
 Сценарий: _029002 creating document Sales order and Shipment confirmation (partner Kalipso, Store use Shipment confirmation)
 	И Я закрыл все окна клиентского приложения
-	Когда создаю заказ на Kalipso Basic Agreements, without VAT, TRY (Dress и Shirt)
+	Когда создаю заказ на Kalipso Basic Partner terms, without VAT, TRY (Dress и Shirt)
 	* Change of document number 
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
@@ -122,7 +122,7 @@ To sell a product when customer first receives items and then the documents arri
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: _029012 creating document Sales order and Shipment confirmation (partner Kalipso, one Store use Shipment confirmation and Second not)
-	Когда создаю заказ на Kalipso Basic Agreements, without VAT, TRY (Dress и Shirt)
+	Когда создаю заказ на Kalipso Basic Partner terms, without VAT, TRY (Dress и Shirt)
 	* Change of quantity and store on the second line
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '5,000'
@@ -230,7 +230,7 @@ To sell a product when customer first receives items and then the documents arri
 	И я нажимаю на кнопку 'Ok'
 	И     элемент формы с именем "Partner" стал равен 'Kalipso'
 	И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-	И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, without VAT'
+	И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, without VAT'
 	И     элемент формы с именем "Company" стал равен 'Main Company'
 	И в таблице "ItemList" я перехожу к строке:
     	| 'Item'     | 'Item key'  | 'Store'    | 'Unit' | 'Q'      |
@@ -321,7 +321,7 @@ To sell a product when customer first receives items and then the documents arri
 	* Filling check
 		И     элемент формы с именем "Partner" стал равен 'Kalipso'
 		И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, without VAT'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, without VAT'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 	* Checking the filling of the tabular part
 		И я запоминаю количество строк таблицы "ItemList" как "Q"

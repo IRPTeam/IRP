@@ -686,7 +686,7 @@ For joint sale of products
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Bundling 7*'                           | ''            | ''          | ''                                    | ''           | ''              | ''                                    | ''        |
 		| 'Document registrations records'        | ''            | ''          | ''                                    | ''           | ''              | ''                                    | ''        |
-		| 'Register  "Bundle contents"'           | ''            | ''          | ''                                    | ''           | ''              | ''                                    | ''        |
+		| 'Register  "Bundles content"'           | ''            | ''          | ''                                    | ''           | ''              | ''                                    | ''        |
 		| ''                                      | 'Period'      | 'Resources' | 'Dimensions'                          | ''           | ''              | ''                                    | ''        |
 		| ''                                      | ''            | 'Quantity'  | 'Item key bundle'                     | 'Item key'   | ''              | ''                                    | ''        |
 		| ''                                      | '*'           | '2'         | 'Bound Dress+Trousers/Dress+Trousers' | 'XS/Blue'    | ''              | ''                                    | ''        |
@@ -775,7 +775,7 @@ For joint sale of products
 		Тогда табличный документ "ResultTable" равен по шаблону:
 			| 'Bundling 8*'                           | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
 			| 'Document registrations records'        | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
-			| 'Register  "Bundle contents"'           | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
+			| 'Register  "Bundles content"'           | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
 			| ''                                      | 'Period'      | 'Resources' | 'Dimensions'                          | ''           | ''                                    | ''          | ''        |
 			| ''                                      | ''            | 'Quantity'  | 'Item key bundle'                     | 'Item key'   | ''                                    | ''          | ''        |
 			| ''                                      | '*'           | '2'         | 'Bound Dress+Trousers/Dress+Trousers' | 'XS/Blue'    | ''                                    | ''          | ''        |

@@ -5,14 +5,14 @@
 
 As an accountant
 I want to transfer money from one account to another.
-For actual cash accounting
+For actual Cash/Bank accountsing
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 # The currency of reports is lira
 
 
-Сценарий: _054001 create Cash transfer order (from cash account to cash account in the same currency)
+Сценарий: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Bank accounts in the same currency)
 	И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Company"
@@ -162,7 +162,7 @@ For actual cash accounting
 	
 
 
-Сценарий: _054004 create Cash transfer order (from cash account to cash account in the different currency)
+Сценарий: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Bank accounts in the different currency)
 	И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Company"
@@ -282,7 +282,7 @@ For actual cash accounting
 		И Я закрыл все окна клиентского приложения
 
 	
-Сценарий: _054006 create Cash transfer order (from cash account to bank account in the same currency)
+Сценарий: _054006 create Cash transfer order (from Cash/Bank accounts to bank account in the same currency)
 	И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Company"
@@ -370,7 +370,7 @@ For actual cash accounting
 		| 'USD'     | 'Bank receipt 4*'        | 'Cash transfer order 3*' | 'Main Company' | 'Bank account, USD' | 'Incoming'              | '-500,00'   |
 		И Я закрыл все окна клиентского приложения 
 
-Сценарий: _054007 create Cash transfer order from bank account to cash account (in the same currency)
+Сценарий: _054007 create Cash transfer order from bank account to Cash/Bank accounts (in the same currency)
 	И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Company"
@@ -458,7 +458,7 @@ For actual cash accounting
 		| 'USD'      | 'Bank payment 4*'           | 'Cash transfer order 4*' | 'Main Company' | 'Bank account, USD' | 'Outgoing'            | '-100,00'   |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _054008 currency exchange within one cash account with exchange in parts (exchange rate has increased)
+Сценарий: _054008 currency exchange within one Cash/Bank accounts with exchange in parts (exchange rate has increased)
 	И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Company"
@@ -601,7 +601,7 @@ For actual cash accounting
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _054009 currency exchange within one cash account with exchange in parts (exchange rate has decreased)
+Сценарий: _054009 currency exchange within one Cash/Bank accounts with exchange in parts (exchange rate has decreased)
 	И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Company"
@@ -821,8 +821,8 @@ For actual cash accounting
 		|  'Cash transfer order 7*' |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _054014 check message output in case money is transferred from cash account to bank account and vice versa in different currencies
-	* Checking when moving money from bank account to cash account in different currencies
+Сценарий: _054014 check message output in case money is transferred from Cash/Bank accounts to bank account and vice versa in different currencies
+	* Checking when moving money from bank account to Cash/Bank accounts in different currencies
 		* Open a creation form
 			И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 			И я нажимаю на кнопку с именем 'FormCreate'
@@ -858,13 +858,13 @@ For actual cash accounting
 			И Пауза 5
 			И я нажимаю на кнопку 'Post and close'
 			И Пауза 5
-			Затем я жду, что в сообщениях пользователю будет подстрока "Currency exchange is possible only through accounts with the same type (cash account or bank account)." в течение 30 секунд
+			Затем я жду, что в сообщениях пользователю будет подстрока "Currency exchange is possible only through accounts with the same type (Cash/Bank accounts or bank account)." в течение 30 секунд
 			И Я закрыл все окна клиентского приложения
 			И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 			Тогда таблица "List" не содержит строки:
 			| 'Number'   | 'Sender'                 | 'Receiver'          |
 			| '101'      | 'Bank account, TRY'      | 'Cash desk №2'      |
-	* Checking when moving money from cash account to bank account in different currencies
+	* Checking when moving money from Cash/Bank accounts to bank account in different currencies
 		* Open a creation form
 			И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 			И я нажимаю на кнопку с именем 'FormCreate'
@@ -900,7 +900,7 @@ For actual cash accounting
 			И Пауза 5
 			И я нажимаю на кнопку 'Post and close'
 			И Пауза 5
-			Затем я жду, что в сообщениях пользователю будет подстрока "Currency exchange is possible only through accounts with the same type (cash account or bank account)." в течение 30 секунд
+			Затем я жду, что в сообщениях пользователю будет подстрока "Currency exchange is possible only through accounts with the same type (Cash/Bank accounts or bank account)." в течение 30 секунд
 			И Я закрыл все окна клиентского приложения
 			И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 			Тогда таблица "List" не содержит строки:

@@ -59,7 +59,7 @@
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Second Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     таблица "ItemList" содержит строки:
@@ -82,7 +82,7 @@
 		И Пауза 2
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
@@ -157,7 +157,7 @@
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     таблица "ItemList" содержит строки:
@@ -228,10 +228,10 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
-				| Basic Agreements, TRY |
+				| Basic Partner terms, TRY |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю кнопку выбора у поля "Store"
@@ -266,10 +266,10 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
-				| Basic Agreements, TRY |
+				| Basic Partner terms, TRY |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю кнопку выбора у поля "Store"
@@ -293,7 +293,7 @@
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
 		И     элемент формы с именем "Partner" стал равен 'Partner Ferron 2'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     таблица "ItemList" содержит строки:
@@ -316,7 +316,7 @@
 		И Пауза 2
 		И     элемент формы с именем "Partner" стал равен 'Partner Ferron 1'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
@@ -363,10 +363,10 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
-				| Basic Agreements, TRY |
+				| Basic Partner terms, TRY |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю кнопку выбора у поля "Store"
@@ -401,10 +401,10 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
-				| Basic Agreements, without VAT |
+				| Basic Partner terms, without VAT |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю кнопку выбора у поля "Store"
@@ -427,7 +427,7 @@
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
 		И     элемент формы с именем "Partner" стал равен 'Partner Ferron 1'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, without VAT'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, without VAT'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     таблица "ItemList" содержит строки:
@@ -445,7 +445,7 @@
 		И Пауза 2
 		И     элемент формы с именем "Partner" стал равен 'Partner Ferron 1'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
@@ -487,10 +487,10 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
-				| Basic Agreements, TRY |
+				| Basic Partner terms, TRY |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю кнопку выбора у поля "Store"
@@ -525,10 +525,10 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
-				| Basic Agreements, TRY |
+				| Basic Partner terms, TRY |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю кнопку выбора у поля "Store"
@@ -552,7 +552,7 @@
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
 		И     элемент формы с именем "Partner" стал равен 'Partner Ferron 1'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Delivery date'| 'Sales order'      |
@@ -591,10 +591,10 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
-				| Basic Agreements, TRY |
+				| Basic Partner terms, TRY |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю кнопку выбора у поля "Store"
@@ -630,10 +630,10 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
-				| Basic Agreements, TRY |
+				| Basic Partner terms, TRY |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю кнопку выбора у поля "Store"
@@ -652,7 +652,7 @@
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
 		И     элемент формы с именем "Partner" стал равен 'Partner Ferron 1'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     таблица "ItemList" содержит строки:
@@ -670,7 +670,7 @@
 		И Пауза 2
 		И     элемент формы с именем "Partner" стал равен 'Partner Ferron 1'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 		И     элемент формы с именем "Company" стал равен 'Second Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
@@ -705,10 +705,10 @@
 				| 'Description'       |
 				| 'Company Ferron BP' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -815,10 +815,10 @@
 				| 'Description'       |
 				| 'Company Ferron BP' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -997,7 +997,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 		| 'Item'     | 'Quantity' | 'Item key'  | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'        |
+# 		| 'Item'     | 'Quantity' | 'Item key'  | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'        |
 # 		| 'Dress'    | '10,000'   | 'M/White'   | ''                | 'pcs'  | 'Store 02' | 'Sales invoice 129*' |
 # 		| 'Dress'    | '20,000'   | 'M/White'   | ''                | 'pcs'  | 'Store 02' | 'Sales invoice 128*' |
 # 		| 'Dress'    | '20,000'   | 'L/Green'   | ''                | 'pcs'  | 'Store 02' | 'Sales invoice 128*' |
@@ -1028,7 +1028,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 		| 'Item'     | 'Quantity' | 'Item key'  | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'        |
+# 		| 'Item'     | 'Quantity' | 'Item key'  | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'        |
 # 		| 'Dress'    | '10,000'   | 'M/White'   | ''                | 'pcs'  | 'Store 02' | 'Sales invoice 131*' |
 # 		| 'Dress'    | '20,000'   | 'M/White'   | ''                | 'pcs'  | 'Store 02' | 'Sales invoice 130*' |
 # 		| 'Dress'    | '20,000'   | 'L/Green'   | ''                | 'pcs'  | 'Store 02' | 'Sales invoice 130*' |
@@ -1059,7 +1059,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 		| 'Item'     | 'Quantity' | 'Item key'  | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'        |
+# 		| 'Item'     | 'Quantity' | 'Item key'  | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'        |
 # 		| 'Dress'    | '10,000'   | 'M/White'   | ''                | 'pcs'  | 'Store 02' | 'Sales invoice 135*' |
 # 		И в поле 'Number' я ввожу текст '135'
 # 		Тогда открылось окно '1C:Enterprise'
@@ -1087,7 +1087,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 		| 'Item'     | 'Quantity' | 'Item key'  | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'        |
+# 		| 'Item'     | 'Quantity' | 'Item key'  | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'        |
 # 		| 'Dress'    | '20,000'   | 'M/White'   | ''                | 'pcs'  | 'Store 02' | 'Sales invoice 136*' |
 # 		| 'Dress'    | '20,000'   | 'L/Green'   | ''                | 'pcs'  | 'Store 02' | 'Sales invoice 136*' |
 # 		| 'Trousers' | '30,000'   | '36/Yellow' | ''                | 'pcs'  | 'Store 02' | 'Sales invoice 136*' |
@@ -1102,7 +1102,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 		| 'Item'     | 'Quantity' | 'Item key'  | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'        |
+# 		| 'Item'     | 'Quantity' | 'Item key'  | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'        |
 # 		| 'Dress'    | '10,000'   | 'M/White'   | ''                | 'pcs'  | 'Store 02' | 'Sales invoice 137*' |
 # 		И в поле 'Number' я ввожу текст '137'
 # 		Тогда открылось окно '1C:Enterprise'
@@ -1155,7 +1155,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 			| 'Item'  | 'Quantity' | 'Item key' | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'       |
+# 			| 'Item'  | 'Quantity' | 'Item key' | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'       |
 # 			| 'Dress' | '10,000'   | 'M/White'  | ''                  | 'pcs'  | 'Store 02' | 'Sales order 141*' |
 # 		И в поле 'Number' я ввожу текст '141'
 # 		Тогда открылось окно '1C:Enterprise'
@@ -1168,7 +1168,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 			| 'Item'     | 'Quantity' | 'Item key'  | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'      |
+# 			| 'Item'     | 'Quantity' | 'Item key'  | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'      |
 # 			| 'Dress'    | '20,000'   | 'M/White'   | ''                  | 'pcs'  | 'Store 02' | 'Sales order 140*' |
 # 			| 'Dress'    | '20,000'   | 'L/Green'   | ''                  | 'pcs'  | 'Store 02' | 'Sales order 140*' |
 # 			| 'Trousers' | '30,000'   | '36/Yellow' | ''                  | 'pcs'  | 'Store 02' | 'Sales order 140*' |
@@ -1202,7 +1202,7 @@
 # 				| Description       |
 # 				| Company Ferron BP |
 # 			И в таблице "List" я выбираю текущую строку
-# 			И я нажимаю кнопку выбора у поля "Agreement"
+# 			И я нажимаю кнопку выбора у поля "Partner term"
 # 			И в таблице "List" я перехожу к строке:
 # 				| Description        |
 # 				| Vendor Ferron 1 |
@@ -1236,7 +1236,7 @@
 # 				| Description       |
 # 				| Company Ferron BP |
 # 			И в таблице "List" я выбираю текущую строку
-# 			И я нажимаю кнопку выбора у поля "Agreement"
+# 			И я нажимаю кнопку выбора у поля "Partner term"
 # 			И в таблице "List" я перехожу к строке:
 # 				| Description        |
 # 				| Vendor Ferron Partner 2 |
@@ -1262,7 +1262,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 			| 'Item'  | 'Quantity' | 'Item key' | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'       |
+# 			| 'Item'  | 'Quantity' | 'Item key' | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'       |
 # 			| 'Dress' | '10,000'   | 'M/White'  | ''                  | 'pcs'  | 'Store 02' | 'Sales order 143*' |
 # 		И в поле 'Number' я ввожу текст '143'
 # 		Тогда открылось окно '1C:Enterprise'
@@ -1275,7 +1275,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 			| 'Item'     | 'Quantity' | 'Item key'  | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'      |
+# 			| 'Item'     | 'Quantity' | 'Item key'  | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'      |
 # 			| 'Dress'    | '20,000'   | 'M/White'   | ''                  | 'pcs'  | 'Store 02' | 'Sales order 142*' |
 # 			| 'Dress'    | '20,000'   | 'L/Green'   | ''                  | 'pcs'  | 'Store 02' | 'Sales order 142*' |
 # 			| 'Trousers' | '30,000'   | '36/Yellow' | ''                  | 'pcs'  | 'Store 02' | 'Sales order 142*' |
@@ -1307,7 +1307,7 @@
 # 				| Description       |
 # 				| Company Ferron BP |
 # 			И в таблице "List" я выбираю текущую строку
-# 			И я нажимаю кнопку выбора у поля "Agreement"
+# 			И я нажимаю кнопку выбора у поля "Partner term"
 # 			И в таблице "List" я перехожу к строке:
 # 				| Description        |
 # 				| Vendor Ferron 1 |
@@ -1341,7 +1341,7 @@
 # 				| Description       |
 # 				| Company Ferron BP |
 # 			И в таблице "List" я выбираю текущую строку
-# 			И я нажимаю кнопку выбора у поля "Agreement"
+# 			И я нажимаю кнопку выбора у поля "Partner term"
 # 			И в таблице "List" я перехожу к строке:
 # 				| Description        |
 # 				| Vendor Ferron Discount |
@@ -1367,7 +1367,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 			| 'Item'  | 'Quantity' | 'Item key' | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'       |
+# 			| 'Item'  | 'Quantity' | 'Item key' | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'       |
 # 			| 'Dress' | '10,000'   | 'M/White'  | ''                  | 'pcs'  | 'Store 02' | 'Sales order 145*' |
 # 		И в поле 'Number' я ввожу текст '145'
 # 		Тогда открылось окно '1C:Enterprise'
@@ -1380,7 +1380,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 			| 'Item'     | 'Quantity' | 'Item key'  | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'      |
+# 			| 'Item'     | 'Quantity' | 'Item key'  | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'      |
 # 			| 'Dress'    | '20,000'   | 'M/White'   | ''                  | 'pcs'  | 'Store 02' | 'Sales order 144*' |
 # 			| 'Dress'    | '20,000'   | 'L/Green'   | ''                  | 'pcs'  | 'Store 02' | 'Sales order 144*' |
 # 			| 'Trousers' | '30,000'   | '36/Yellow' | ''                  | 'pcs'  | 'Store 02' | 'Sales order 144*' |
@@ -1414,7 +1414,7 @@
 # 				| Description       |
 # 				| Company Ferron BP |
 # 			И в таблице "List" я выбираю текущую строку
-# 			И я нажимаю кнопку выбора у поля "Agreement"
+# 			И я нажимаю кнопку выбора у поля "Partner term"
 # 			И в таблице "List" я перехожу к строке:
 # 				| Description        |
 # 				| Vendor Ferron Discount |
@@ -1448,7 +1448,7 @@
 # 				| Description       |
 # 				| Company Ferron BP |
 # 			И в таблице "List" я выбираю текущую строку
-# 			И я нажимаю кнопку выбора у поля "Agreement"
+# 			И я нажимаю кнопку выбора у поля "Partner term"
 # 			И в таблице "List" я перехожу к строке:
 # 				| Description        |
 # 				| Vendor Ferron Discount |
@@ -1474,7 +1474,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 			| 'Item'  | 'Quantity' | 'Item key' | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'       |
+# 			| 'Item'  | 'Quantity' | 'Item key' | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'       |
 # 			| 'Dress' | '10,000'   | 'M/White'  | ''                  | 'pcs'  | 'Store 02' | 'Sales order 147*' |
 # 		И в поле 'Number' я ввожу текст '147'
 # 		Тогда открылось окно '1C:Enterprise'
@@ -1487,7 +1487,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 03'
 # 		И     таблица "ItemList" содержит строки:
-# 			| 'Item'     | 'Quantity' | 'Item key'  | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'      |
+# 			| 'Item'     | 'Quantity' | 'Item key'  | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'      |
 # 			| 'Dress'    | '20,000'   | 'M/White'   | ''                  | 'pcs'  | 'Store 03' | 'Sales order 146*' |
 # 			| 'Dress'    | '20,000'   | 'L/Green'   | ''                  | 'pcs'  | 'Store 03' | 'Sales order 146*' |
 # 			| 'Trousers' | '30,000'   | '36/Yellow' | ''                  | 'pcs'  | 'Store 03' | 'Sales order 146*' |
@@ -1519,7 +1519,7 @@
 # 				| Description       |
 # 				| Company Ferron BP |
 # 			И в таблице "List" я выбираю текущую строку
-# 			И я нажимаю кнопку выбора у поля "Agreement"
+# 			И я нажимаю кнопку выбора у поля "Partner term"
 # 			И в таблице "List" я перехожу к строке:
 # 				| Description        |
 # 				| Vendor Ferron Discount |
@@ -1559,7 +1559,7 @@
 # 				| Description       |
 # 				| Company Ferron BP |
 # 			И в таблице "List" я выбираю текущую строку
-# 			И я нажимаю кнопку выбора у поля "Agreement"
+# 			И я нажимаю кнопку выбора у поля "Partner term"
 # 			И в таблице "List" я перехожу к строке:
 # 				| Description        |
 # 				| Vendor Ferron Discount |
@@ -1584,7 +1584,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 			| 'Item'  | 'Quantity' | 'Item key' | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'       |
+# 			| 'Item'  | 'Quantity' | 'Item key' | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'       |
 # 			| 'Dress' | '10,000'   | 'M/White'  | ''                  | 'pcs'  | 'Store 02' | 'Sales order 149*' |
 # 		И в поле 'Number' я ввожу текст '149'
 # 		Тогда открылось окно '1C:Enterprise'
@@ -1597,7 +1597,7 @@
 # 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 # 		И     элемент формы с именем "Store" стал равен 'Store 02'
 # 		И     таблица "ItemList" содержит строки:
-# 			| 'Item'     | 'Quantity' | 'Item key'  | 'Serial lot number' | 'Unit' | 'Store'    | 'Receipt basis'      |
+# 			| 'Item'     | 'Quantity' | 'Item key'  | 'Item serial/lot number' | 'Unit' | 'Store'    | 'Receipt basis'      |
 # 			| 'Dress'    | '20,000'   | 'M/White'   | ''                  | 'pcs'  | 'Store 02' | 'Sales order 148*' |
 # 			| 'Dress'    | '20,000'   | 'L/Green'   | ''                  | 'pcs'  | 'Store 02' | 'Sales order 148*' |
 # 			| 'Trousers' | '30,000'   | '36/Yellow' | ''                  | 'pcs'  | 'Store 02' | 'Sales order 148*' |

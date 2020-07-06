@@ -30,11 +30,11 @@
 			| 'Description' |
 			| 'Ferron BP'  |
 	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Agreement"
-	Тогда открылось окно 'Agreements'
+	И я нажимаю кнопку выбора у поля "Partner term"
+	Тогда открылось окно 'Partner terms'
 	И в таблице "List" я перехожу к строке:
 			| 'Description'       |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю кнопку выбора у поля "Legal name"
 	И в таблице "List" я перехожу к строке:
@@ -56,7 +56,7 @@
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Special offer type"
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "External data proc"
+	И я нажимаю кнопку выбора у поля "Plugins"
 	И в таблице "List" я перехожу к строке:
 			| 'Description'                   |
 			| 'ExternalSpecialMessage' |
@@ -86,7 +86,7 @@
 	И в таблице "Rules" я нажимаю кнопку выбора у реквизита "Rule"
 	И в таблице "List" я перехожу к строке:
 			| 'Description'                                |
-			| 'Discount on Basic Agreements without Vat' |
+			| 'Discount on Basic Partner terms without Vat' |
 	И в таблице "List" я выбираю текущую строку
 	И в таблице "Rules" я завершаю редактирование строки
 	И я нажимаю на кнопку 'Save and close'
@@ -173,7 +173,7 @@
 	И Я закрываю окно 'Special offers'
 
 
-Сценарий: создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+Сценарий: создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -181,10 +181,10 @@
 			| 'Description'             |
 			| 'Lomaniti' |
 	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
 			| 'Description'                     |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю кнопку выбора у поля "Legal name"
 	И в таблице "List" я перехожу к строке:
@@ -231,7 +231,7 @@
 	И я нажимаю на кнопку 'Post'
 
 
-	Сценарий: создаю заказ на MIO Basic Agreements, without VAT (High shoes и Boots)
+	Сценарий: создаю заказ на MIO Basic Partner terms, without VAT (High shoes и Boots)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -239,10 +239,10 @@
 			| 'Description'             |
 			| 'MIO' |
 	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
 			| 'Description'                     |
-			| 'Basic Agreements, without VAT' |
+			| 'Basic Partner terms, without VAT' |
 	И в таблице "List" я выбираю текущую строку
 	* Adding items to sales order
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -283,7 +283,7 @@
 		И в таблице "ItemList" я завершаю редактирование строки
 	И я нажимаю на кнопку 'Post'
 
-	Сценарий: создаю заказ на MIO Basic Agreements, without VAT (Trousers и Shirt)
+	Сценарий: создаю заказ на MIO Basic Partner terms, without VAT (Trousers и Shirt)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -291,10 +291,10 @@
 			| 'Description'             |
 			| 'MIO' |
 	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
 			| 'Description'                     |
-			| 'Basic Agreements, without VAT' |
+			| 'Basic Partner terms, without VAT' |
 	И в таблице "List" я выбираю текущую строку
 	* Adding items to sales order
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -333,12 +333,12 @@
 		И в таблице "ItemList" я завершаю редактирование строки
 	И я нажимаю на кнопку 'Post'
 
-Сценарий: создаю заказ на Kalipso Basic Agreements, without VAT, TRY (Dress и Shirt)
+Сценарий: создаю заказ на Kalipso Basic Partner terms, without VAT, TRY (Dress и Shirt)
 	И я включаю Kalipso в сегмент Retail
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Segment"
-		Тогда открылось окно 'Partner segments'
+		Тогда открылось окно 'Partner segments content'
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Retail      |
@@ -358,10 +358,10 @@
 		| 'Description'             |
 		| 'Kalipso' |
 	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
 		| 'Description'                     |
-		| 'Basic Agreements, without VAT' |
+		| 'Basic Partner terms, without VAT' |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю кнопку выбора у поля "Legal name"
 	И в таблице "List" я перехожу к строке:

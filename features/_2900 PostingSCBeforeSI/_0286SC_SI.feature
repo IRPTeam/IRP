@@ -381,11 +381,11 @@
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
-				* Filling in an Agreement
-					И я нажимаю кнопку выбора у поля "Agreement"
+				* Filling in an Partner term
+					И я нажимаю кнопку выбора у поля "Partner term"
 					И в таблице "List" я перехожу к строке:
 						| 'Description'                   |
-						| 'Basic Agreements, without VAT' |
+						| 'Basic Partner terms, without VAT' |
 					И в таблице "List" я выбираю текущую строку
 					И я изменяю флаг 'Update filled stores on Store 02'
 					И я нажимаю на кнопку 'OK'
@@ -405,10 +405,10 @@
 				И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 				| 'Trousers' | '38/Yellow' | '18,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 603*' |
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 02'
 				И я нажимаю на кнопку 'OK'
@@ -427,10 +427,10 @@
 					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
 					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
 					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Posting by Standard agreement Customer' |
+					| 'Posting by Standard Partner term Customer' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 01'
 				И я нажимаю на кнопку 'OK'
@@ -446,10 +446,10 @@
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 02'
 				И я нажимаю на кнопку 'OK'
@@ -468,11 +468,11 @@
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
-				* Filling in an Agreement
-					И я нажимаю кнопку выбора у поля "Agreement"
+				* Filling in an Partner term
+					И я нажимаю кнопку выбора у поля "Partner term"
 					И в таблице "List" я перехожу к строке:
 						| 'Description'                   |
-						| 'Basic Agreements, without VAT' |
+						| 'Basic Partner terms, without VAT' |
 					И в таблице "List" я выбираю текущую строку
 					И я изменяю флаг 'Update filled stores on Store 02'
 					И я нажимаю на кнопку 'OK'
@@ -492,10 +492,10 @@
 				И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 				| 'Trousers' | '38/Yellow' | '18,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 603*' |
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 02'
 				И я нажимаю на кнопку 'OK'
@@ -514,10 +514,10 @@
 					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
 					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
 					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Posting by Standard agreement Customer' |
+					| 'Posting by Standard Partner term Customer' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 01'
 				И я нажимаю на кнопку 'OK'
@@ -533,10 +533,10 @@
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 02'
 				И я нажимаю на кнопку 'OK'
@@ -555,11 +555,11 @@
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
-				* Filling in an Agreement
-					И я нажимаю кнопку выбора у поля "Agreement"
+				* Filling in an Partner term
+					И я нажимаю кнопку выбора у поля "Partner term"
 					И в таблице "List" я перехожу к строке:
 						| 'Description'                   |
-						| 'Basic Agreements, without VAT' |
+						| 'Basic Partner terms, without VAT' |
 					И в таблице "List" я выбираю текущую строку
 					И я изменяю флаг 'Update filled stores on Store 02'
 					И я нажимаю на кнопку 'OK'
@@ -579,10 +579,10 @@
 				И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 				| 'Trousers' | '38/Yellow' | '18,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 603*' |
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 02'
 				И я нажимаю на кнопку 'OK'
@@ -601,10 +601,10 @@
 					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
 					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
 					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Posting by Standard agreement Customer' |
+					| 'Posting by Standard Partner term Customer' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 01'
 				И я нажимаю на кнопку 'OK'
@@ -620,10 +620,10 @@
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 02'
 				И я нажимаю на кнопку 'OK'
@@ -642,11 +642,11 @@
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
-				* Filling in an Agreement
-					И я нажимаю кнопку выбора у поля "Agreement"
+				* Filling in an Partner term
+					И я нажимаю кнопку выбора у поля "Partner term"
 					И в таблице "List" я перехожу к строке:
 						| 'Description'                   |
-						| 'Basic Agreements, without VAT' |
+						| 'Basic Partner terms, without VAT' |
 					И в таблице "List" я выбираю текущую строку
 					И я изменяю флаг 'Update filled stores on Store 02'
 					И я нажимаю на кнопку 'OK'
@@ -666,10 +666,10 @@
 				И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 				| 'Trousers' | '38/Yellow' | '18,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 603*' |
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 02'
 				И я нажимаю на кнопку 'OK'
@@ -688,10 +688,10 @@
 					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
 					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
 					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Posting by Standard agreement Customer' |
+					| 'Posting by Standard Partner term Customer' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 01'
 				И я нажимаю на кнопку 'OK'
@@ -707,10 +707,10 @@
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
-				И я нажимаю кнопку выбора у поля "Agreement"
+				И я нажимаю кнопку выбора у поля "Partner term"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'                   |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 				И в таблице "List" я выбираю текущую строку
 				И я изменяю флаг 'Update filled stores on Store 02'
 				И я нажимаю на кнопку 'OK'

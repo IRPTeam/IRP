@@ -12,7 +12,7 @@
 # Pick up
 
 Сценарий: проверяю форму подбора товара с информацией по ценам в Sales order
-# sale order и sales invoice, Basic Agreements, TRY, Ferron
+# sale order и sales invoice, Basic Partner terms, TRY, Ferron
 	И я нажимаю на кнопку с именем "ItemListOpenPickupItems"
 	# temporarily
 	Затем Если появилось окно диалога я нажимаю на кнопку 'OK'
@@ -155,7 +155,7 @@
 
 
 Сценарий: проверяю форму подбора товара с информацией по ценам в Sales invoice
-# sale order и sales invoice, Basic Agreements, TRY, Ferron
+# sale order и sales invoice, Basic Partner terms, TRY, Ferron
 	И я нажимаю на кнопку с именем "ItemListOpenPickupItems"
 	# temporarily
 	Затем Если появилось окно диалога я нажимаю на кнопку 'OK'
@@ -290,7 +290,7 @@
 			| 'Dress'    | '350,00' | 'L/Green'   | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '350,00'       |
 
 Сценарий: проверяю форму подбора товара с информацией по ценам в Purchase invoice
-	# purchase order и purchase invoice, Basic Agreements, TRY, Ferron
+	# purchase order и purchase invoice, Basic Partner terms, TRY, Ferron
 	И я нажимаю на кнопку с именем "OpenPickupItems"
 	# temporarily
 	Затем Если появилось окно диалога я нажимаю на кнопку 'OK'
@@ -425,7 +425,7 @@
 			| 'Dress'    | '350,00'      | 'L/Green'   | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '*'          | '*'            |
 
 Сценарий: проверяю форму подбора товара с информацией по ценам в Purchase order
-	# purchase order и purchase invoice, Basic Agreements, TRY, Ferron
+	# purchase order и purchase invoice, Basic Partner terms, TRY, Ferron
 	И я нажимаю на кнопку с именем "ItemListOpenPickupItems"
 	# temporarily
 	Затем Если появилось окно диалога я нажимаю на кнопку 'OK'
@@ -1135,7 +1135,7 @@
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по Agreement (по сегментам + сроку действия)
+Сценарий: проверяю работу фильтра по Partner term (по сегментам + сроку действия)
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -1150,21 +1150,21 @@
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		Тогда таблица "List" стала равной:
 			| 'Description'                   |
-			| 'Basic Agreements, TRY'         |
-			| 'Basic Agreements, without VAT' |
-			| 'Personal Agreements, $'        |
+			| 'Basic Partner terms, TRY'         |
+			| 'Basic Partner terms, without VAT' |
+			| 'Personal Partner terms, $'        |
 		И в таблице "List" я активизирую поле "Description"
 		И в таблице "List" я перехожу к строке:
 			| Description            |
-			| Personal Agreements, $ |
+			| Personal Partner terms, $ |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Personal Agreements, $'
+		И     элемент формы с именем "Agreement" стал равен 'Personal Partner terms, $'
 	И я проверяю фильтр при вводе по строке
 		И Пауза 2
-		И в поле 'Agreement' я ввожу текст 'Sale autum, TRY'
+		И в поле 'Partner term' я ввожу текст 'Sale autum, TRY'
 		И Пауза 2
 		И я нажимаю кнопку выбора у поля "Partner"
 		Тогда таблица "List" не содержит строки:
@@ -1172,7 +1172,7 @@
 			| Sale autum, TRY |
 		И в таблице "List" я перехожу к строке:
 			| Description            |
-			| Personal Agreements, $ |
+			| Personal Partner terms, $ |
 		И в таблице "List" я выбираю текущую строку
 		Когда Проверяю шаги на Исключение:
 			|'И     элемент формы с именем "Agreement" стал равен 'Sale autum, TRY''|
@@ -1200,7 +1200,7 @@
 	И Пауза 2
 	И в поле 'Partner' я ввожу текст 'Alexander Orlov'
 	И Пауза 2
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	Тогда таблица "List" не содержит строки:
 			| Description  |
 			| Alexander Orlov |
@@ -1227,7 +1227,7 @@
 	И Пауза 2
 	И в поле 'Partner' я ввожу текст 'Kalipso'
 	И Пауза 2
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	Тогда таблица "List" не содержит строки:
 			| Description  |
 			| Kalipso |
@@ -1254,7 +1254,7 @@
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И таблица  "List" не содержит строки:
 			| Description        |
 			| Vendor Ferron, TRY |
@@ -1263,7 +1263,7 @@
 	И в таблице "List" я выбираю текущую строку
 	И я проверяю фильтр при вводе по строке
 		И Пауза 2
-		И в поле 'Agreement' я ввожу текст 'Vendor Ferron, TRY'
+		И в поле 'Partner term' я ввожу текст 'Vendor Ferron, TRY'
 		И Пауза 2
 		И я нажимаю кнопку выбора у поля "Partner"
 		Тогда таблица "List" не содержит строки:
@@ -1292,7 +1292,7 @@
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И таблица  "List" содержит строки:
 			| Description        |
 			| Vendor Ferron, TRY |
@@ -1303,15 +1303,15 @@
 	И в таблице "List" я выбираю текущую строку
 	И я проверяю фильтр при вводе по строке
 		И Пауза 2
-		И в поле 'Agreement' я ввожу текст 'Basic Agreements, TRY'
+		И в поле 'Partner term' я ввожу текст 'Basic Partner terms, TRY'
 		И Пауза 2
 		И я нажимаю кнопку выбора у поля "Partner"
 		Тогда таблица "List" не содержит строки:
 			| Description  |
-			| Basic Agreements, TRY |
+			| Basic Partner terms, TRY |
 		И в таблице "List" я выбираю текущую строку
 		Когда Проверяю шаги на Исключение:
-		|'И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY''|
+		|'И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY''|
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: проверяю работу Description
@@ -1463,7 +1463,7 @@
 			| Code | Description     |
 			| USD  | American dollar |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Cash desk №2 |
@@ -1484,7 +1484,7 @@
 			| Code | Description     |
 			| USD  | American dollar |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Cash desk №2 |
@@ -1548,7 +1548,7 @@
 		И я устанавливаю флаг 'Vendor'
 		И я нажимаю на кнопку 'Save'
 	И я добавляю соглашение с клиентом
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Agreements'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner terms'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'Partner Kalipso Customer'
 		И я меняю значение переключателя 'Type' на 'Customer'
@@ -1559,10 +1559,10 @@
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'TRY'      | 'Agreement' |
+			| 'TRY'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		И в таблице "List" я перехожу к строке:
@@ -1577,9 +1577,9 @@
 			| Store 02    |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Agreement (create) *' в течение 20 секунд
+		И я жду закрытия окна 'Partner term (create) *' в течение 20 секунд
 	И я добавляю соглашение с поставщиком
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Agreements'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner terms'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'Partner Kalipso Vendor'
 		И я меняю значение переключателя 'Type' на 'Vendor'
@@ -1590,10 +1590,10 @@
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'TRY'      | 'Agreement' |
+			| 'TRY'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		И в таблице "List" я перехожу к строке:
@@ -1608,7 +1608,7 @@
 			| Store 02    |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Agreement (create) *' в течение 20 секунд
+		И я жду закрытия окна 'Partner term (create) *' в течение 20 секунд
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик

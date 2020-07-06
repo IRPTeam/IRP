@@ -41,12 +41,12 @@
 		И в таблице "MetadataTree" я завершаю редактирование строки
 		И в таблице "MetadataTree" я перехожу к строке:
 			| 'Group name' | 'Use' |
-			| 'Agreement'  | 'No'  |
+			| 'Partner term'  | 'No'  |
 		И в таблице "MetadataTree" я выбираю текущую строку
 		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "MetadataTree" я завершаю редактирование строки
 		И в таблице "MetadataTree" я перехожу к строке:
@@ -81,12 +81,12 @@
 		И в таблице "MetadataTree" я завершаю редактирование строки
 		И в таблице "MetadataTree" я перехожу к строке:
 			| 'Group name' | 'Use' |
-			| 'Agreement'  | 'No'  |
+			| 'Partner term'  | 'No'  |
 		И в таблице "MetadataTree" я выбираю текущую строку
 		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "MetadataTree" я завершаю редактирование строки
 		И в таблице "MetadataTree" я перехожу к строке:
@@ -252,7 +252,7 @@
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-		Тогда открылось окно 'Edit user settings'
+		Тогда открылось окно 'Edit user defaults settings'
 		И в таблице "MetadataTree" я завершаю редактирование строки
 		И в таблице "MetadataTree" я перехожу к строке:
 			| 'Group name' | 'Use' |
@@ -418,7 +418,7 @@
 		И в таблице "MetadataTree" я активизирую поле "Group name"
 		И в таблице "MetadataTree" я перехожу к строке:
 			| 'Group name'   | 'Use' |
-			| 'Cash account' | 'No'  |
+			| 'Cash/Bank accounts' | 'No'  |
 		И в таблице "MetadataTree" я активизирую поле "Value"
 		И в таблице "MetadataTree" я выбираю текущую строку
 		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
@@ -458,7 +458,7 @@
 			| 'Cash receipt' |
 		И в таблице "MetadataTree" я перехожу к строке:
 			| 'Group name'   | 'Use' |
-			| 'Cash account' | 'No'  |
+			| 'Cash/Bank accounts' | 'No'  |
 		И в таблице "MetadataTree" я активизирую поле "Value"
 		И в таблице "MetadataTree" я выбираю текущую строку
 		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
@@ -798,11 +798,11 @@
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Тогда я проверяю заполнение полей из пользовательских настроек
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Status" стал равен 'Approved'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 01'
-	Тогда я проверяю заполнение полей при выборе партнера у которого есть соглашение 'Basic Agreements, TRY'
+	Тогда я проверяю заполнение полей при выборе партнера у которого есть соглашение 'Basic Partner terms, TRY'
 	# заполненные поля очиститься не должны
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -816,7 +816,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Status" стал равен 'Approved'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 01'
@@ -827,11 +827,11 @@
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Тогда я проверяю заполнение полей из пользовательских настроек
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Status" стал равен 'Approved'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 01'
-	Тогда я проверяю заполнение полей при выборе партнера у которого есть соглашение 'Basic Agreements, TRY'
+	Тогда я проверяю заполнение полей при выборе партнера у которого есть соглашение 'Basic Partner terms, TRY'
 	# заполненные поля очиститься не должны
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -996,7 +996,7 @@
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Тогда я проверяю заполнение полей из пользовательских настроек
 		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Store" стал равен 'Store 01'
 	И я закрыл все окна клиентского приложения
 
@@ -1045,7 +1045,7 @@
 		И в таблице "MetadataObjectsTable" я завершаю редактирование строки
 		И в таблице "MetadataObjectsTable" я перехожу к строке:
 			| 'Synonym'                           | 'Use' |
-			| 'Add attribute and property values' | 'No'  |
+			| 'Additional attribute values' | 'No'  |
 		И в таблице "MetadataObjectsTable" я изменяю флаг 'Use'
 		И в таблице "MetadataObjectsTable" я завершаю редактирование строки
 		И в таблице "MetadataObjectsTable" я перехожу к строке:
@@ -1070,10 +1070,10 @@
 		И в поле 'ENG' я ввожу текст 'Admin'
 		И я нажимаю на кнопку 'Save'
 		И я нажимаю на кнопку 'Settings'
-	* Заполнение настройки по отображению помеченных на удаление Add attribute and property values при вводе по строке
+	* Заполнение настройки по отображению помеченных на удаление Additional attribute values при вводе по строке
 		И в таблице "MetadataTree" я перехожу к строке:
 			| 'Group name'                        |
-			| 'Add attribute and property values' |
+			| 'Additional attribute values' |
 		И в таблице "MetadataTree" я активизирую поле "Group name"
 		И в таблице "MetadataTree" я перехожу к строке:
 			| 'Group name'                    | 'Use' |
@@ -1203,7 +1203,7 @@
 		| 'Description'                          |
 		| 'Alexander Orlov (Commercial Agent 2)' |
 		И я нажимаю на кнопку 'Settings'
-		Тогда открылось окно 'Edit user settings'
+		Тогда открылось окно 'Edit user defaults settings'
 	И я закрыл все окна клиентского приложения
 
 

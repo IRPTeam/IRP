@@ -33,7 +33,7 @@ For expense and income planning
 		| Code | Description     |
 		| USD  | American dollar |
 	И в таблице "List" я выбираю текущую строку
-	И в поле "Planing date" я ввожу начало следующего месяца
+	И в поле "Planning date" я ввожу начало следующего месяца
 	* Change the document number
 		И в поле 'Number' я ввожу текст '1'
 		Тогда открылось окно '1C:Enterprise'
@@ -105,7 +105,7 @@ For expense and income planning
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
 		| ''                                      | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | 'Attributes'           |
-		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                      | '*'      | '1 000'     | 'Main Company' | 'Incoming payment order 1*' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'en descriptions is empty' | 'No'                   |
 		| ''                                      | '*'      | '1 000'     | 'Main Company' | 'Incoming payment order 1*' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'Reporting currency'       | 'No'                   |
 		| ''                                      | '*'      | '5 649,72'  | 'Main Company' | 'Incoming payment order 1*' | 'Bank account, USD' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'Local currency'           | 'No'                   |
@@ -123,7 +123,7 @@ For expense and income planning
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
 		| ''                                      | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | 'Attributes'           |
-		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                      | '*'      | '1 000'     | 'Main Company' | 'Incoming payment order 1*' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'en descriptions is empty' | 'No'                   |
 		| ''                                      | '*'      | '1 000'     | 'Main Company' | 'Incoming payment order 1*' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'Reporting currency'       | 'No'                   |
 		| ''                                      | '*'      | '5 649,72'  | 'Main Company' | 'Incoming payment order 1*' | 'Bank account, USD' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'Local currency'           | 'No'                   |
@@ -196,7 +196,7 @@ For expense and income planning
 		| Code |
 		| TRY  |
 	И в таблице "List" я выбираю текущую строку
-	И в поле "Planing date" я ввожу начало следующего месяца
+	И в поле "Planning date" я ввожу начало следующего месяца
 	* Change the document number
 		И в поле 'Number' я ввожу текст '1'
 		Тогда открылось окно '1C:Enterprise'
@@ -270,7 +270,7 @@ For expense and income planning
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''          | ''                  | ''                         | ''                     |
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''          | ''                  | ''                         | ''                     |
 		| ''                                      | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''                  | ''         | ''                    | ''          | ''                  | ''                         | 'Attributes'           |
-		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                      | '*'      | '513,7'     | 'Main Company' | 'Outgoing payment order 1*' | 'Bank account, TRY' | 'USD'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Reporting currency'       | 'No'                   |
 		| ''                                      | '*'      | '3 000'     | 'Main Company' | 'Outgoing payment order 1*' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'en descriptions is empty' | 'No'                   |
 		| ''                                      | '*'      | '3 000'     | 'Main Company' | 'Outgoing payment order 1*' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Local currency'           | 'No'                   |
@@ -288,7 +288,7 @@ For expense and income planning
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''          | ''                  | ''                         | ''                     |
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''          | ''                  | ''                         | ''                     |
 		| ''                                      | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''                  | ''         | ''                    | ''          | ''                  | ''                         | 'Attributes'           |
-		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                      | '*'      | '513,7'     | 'Main Company' | 'Outgoing payment order 1*' | 'Bank account, TRY' | 'USD'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Reporting currency'       | 'No'                   |
 		| ''                                      | '*'      | '3 000'     | 'Main Company' | 'Outgoing payment order 1*' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'en descriptions is empty' | 'No'                   |
 		| ''                                      | '*'      | '3 000'     | 'Main Company' | 'Outgoing payment order 1*' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Local currency'           | 'No'                   |
@@ -375,7 +375,7 @@ For expense and income planning
 	Когда check the display of the header of the collapsible group in planned incoming/outgoing documents
 	И в поле с именем "PlaningDate" я ввожу текущую дату
 	И     я перехожу к следующему реквизиту
-	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planing date:"
+	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planning date:"
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: _080016 check the display of the header of the collapsible group in Outgoing payment order
@@ -383,6 +383,6 @@ For expense and income planning
 	Когда check the display of the header of the collapsible group in planned incoming/outgoing documents
 	И в поле с именем "PlaningDate" я ввожу текущую дату
 	И     я перехожу к следующему реквизиту
-	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planing date:"
+	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planning date:"
 	И Я закрыл все окна клиентского приложения
 

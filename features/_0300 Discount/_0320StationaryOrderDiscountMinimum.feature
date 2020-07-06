@@ -25,7 +25,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	Когда переношу группу Sum in Minimum в Minimum
 	Когда переношу скидку Discount 2 without Vat в группу Sum in Minimum
 	Когда переношу скидку Discount 1 without Vat в Minimum
-	Когда создаю заказ на MIO Basic Agreements, without VAT (Trousers и Shirt)
+	Когда создаю заказ на MIO Basic Partner terms, without VAT (Trousers и Shirt)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |
@@ -53,7 +53,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	# Discounted Discount 1 without Vat
 	Когда меняю auto проведение скидки по Discount 1 without Vat
 	Когда меняю auto проведение скидки Discount 2 without Vat
-	Когда создаю заказ на MIO Basic Agreements, without VAT (Trousers и Shirt)
+	Когда создаю заказ на MIO Basic Partner terms, without VAT (Trousers и Shirt)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку 'Save'
@@ -73,7 +73,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 Сценарий: _032003 discount calculation Discount 2 without Vat in the main group Special Offers, Discount 1 without Vat in the group Sum in Minimum (auto)
 	# Discounted Discount 2 without Vat
 	Когда переношу скидку Discount 2 without Vat в Special Offers
-	Когда создаю заказ на MIO Basic Agreements, without VAT (Trousers и Shirt)
+	Когда создаю заказ на MIO Basic Partner terms, without VAT (Trousers и Shirt)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'            |
@@ -98,7 +98,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	# Discounted Discount 2 without Vat
 	Когда переношу скидку Discount 2 without Vat в группу Sum in Minimum
 	Когда переношу Discount 1 without Vat в Special Offers
-	Когда создаю заказ на MIO Basic Agreements, without VAT (Trousers и Shirt)
+	Когда создаю заказ на MIO Basic Partner terms, without VAT (Trousers и Shirt)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'            |
@@ -148,7 +148,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	Когда меняю priority Discount Price 1 с 1 на 3
 	Когда меняю priority Discount Price 2 с 4 на 2
 	Когда меняю auto проведение скидки Discount Price 1
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
 	Затем я жду, что в сообщениях пользователю будет подстрока "Message Notification" в течение 10 секунд
@@ -166,7 +166,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 Сценарий: _032007 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Minimum (auto), priority Discount Price 1 lower than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю priority Discount Price 1 на 1 
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
 	Затем я жду, что в сообщениях пользователю будет подстрока "Message Notification" в течение 10 секунд
@@ -186,7 +186,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю priority Discount Price 1 с 1 на 3
 	Когда меняю ручное проведение скидки Discount Price 1
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |
@@ -213,7 +213,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 		Когда меняю priority Discount Price 1 на 1
 		Когда меняю ручное проведение Discount Price 2
 		Когда меняю auto проведение скидки Discount Price 1
-		Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+		Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я перехожу к строке:
 			| 'Presentation'                  |
@@ -241,7 +241,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 		Когда меняю auto проведение Discount Price 2
 		Когда меняю auto проведение Discount Price 1
 		Когда меняю priority Discount Price 1 с 1 на 3
-		Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+		Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И я нажимаю на кнопку 'OK'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Message Notification" в течение 10 секунд
@@ -263,7 +263,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 Сценарий: _032011 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (auto), priority Discount Price 1 lower than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 		Когда меняю priority Discount Price 1 на 1
-		Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+		Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И я нажимаю на кнопку 'OK'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Message Notification" в течение 10 секунд
@@ -287,7 +287,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю ручное проведение скидки Discount Price 1
 	Когда меняю priority Discount Price 1 с 1 на 3
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |
@@ -317,7 +317,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	Когда меняю priority Discount Price 1 на 1
 	Когда меняю auto проведение скидки Discount Price 1
 	Когда меняю ручное проведение Discount Price 2
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |
@@ -348,7 +348,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	Когда меняю priority Discount Price 1 с 1 на 3
 	Когда меняю ручное проведение скидки Discount Price 1
 	Когда меняю ручное проведение Discount Price 2
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |
@@ -383,7 +383,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 Сценарий: _032015 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Maximum (manual), priority Discount Price 1 lower than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю priority Discount Price 1 на 1
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |
@@ -423,7 +423,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	Когда меняю priority Discount Price 1 с 1 на 3
 	Когда переношу скидку Discount Price 2 в группу Sum
 	Когда меняю auto проведение Discount Price 2
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
 	Затем я жду, что в сообщениях пользователю будет подстрока "Message Notification" в течение 10 секунд
@@ -449,7 +449,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 Сценарий: _032017 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Sum (auto), priority Discount Price 1 lower than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю priority Discount Price 1 на 1
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
 	Затем я жду, что в сообщениях пользователю будет подстрока "Message Notification" в течение 10 секунд
@@ -478,7 +478,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю ручное проведение скидки Discount Price 1
 	Когда меняю priority Discount Price 1 с 1 на 3
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |
@@ -512,7 +512,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 Сценарий: _032019 check the discount order (same application rule), Discount Price 1 in the group Maximum, Discount Price 2 in the group Sum (manual), priority Discount Price 1 higher than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю ручное проведение Discount Price 2
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |
@@ -554,7 +554,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	Когда переношу скидку Discount Price 1 в Minimum
 	Когда меняю auto проведение скидки Discount Price 1
 	Когда меняю auto проведение Discount Price 2
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
 	Затем я жду, что в сообщениях пользователю будет подстрока "Message Notification" в течение 10 секунд
@@ -586,7 +586,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 Сценарий: _032021 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (auto), priority Discount Price 1 lower than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю priority Discount Price 1 на 1
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
 	Затем я жду, что в сообщениях пользователю будет подстрока "Message Notification" в течение 10 секунд
@@ -619,7 +619,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю priority Discount Price 1 с 1 на 3
 	Когда меняю ручное проведение скидки Discount Price 1
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |
@@ -658,7 +658,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	Когда меняю ручное проведение Discount Price 2
 	Когда меняю auto проведение скидки Discount Price 1
 	Когда меняю priority Discount Price 1 на 1
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |
@@ -697,7 +697,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю ручное проведение скидки Discount Price 1
 	Когда меняю priority Discount Price 1 с 1 на 3
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |
@@ -742,7 +742,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 Сценарий: _032025 check the discount order (same application rule), Discount Price 1 in the group Minimum, Discount Price 2 in the group Sum (manual), priority Discount Price 1 lower than Discount Price 2
 	# Discounted Discount Price 1, and also discounted special offer from group Maximum Special Message Notification
 	Когда меняю priority Discount Price 1 на 1
-	Когда создаю заказ на Lomaniti Basic Agreements, TRY (Dress и Boots)
+	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |

@@ -119,7 +119,7 @@ To further use it when reflecting in the program of business processes
 		Тогда я проверяю наличие элемента справочника "Currencies" со значением поля "Description_en" "Ukraine Hryvnia"
 
 
-Сценарий: _005012 create integration settings to load the currency rate (without external data processing connected)
+Сценарий: _005012 create integration settings to load the currency rate (without Pluginsessing connected)
 	* Creating a setting to download the Forex Seling course (tcmb.gov.tr)
 		И я открываю навигационную ссылку "e1cib/list/Catalog.IntegrationSettings"
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -127,7 +127,7 @@ To further use it when reflecting in the program of business processes
 		И в поле 'Unique ID' я ввожу текст 'ForexSeling'
 		И я нажимаю на кнопку 'Save'
 		И из выпадающего списка "Integration type" я выбираю точное значение 'Currency rates'
-		И я нажимаю кнопку выбора у поля "External data proc"
+		И я нажимаю кнопку выбора у поля "Plugins"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'    |
 			| 'ExternalTCMBGovTr' |
@@ -141,7 +141,7 @@ To further use it when reflecting in the program of business processes
 		И в поле 'Unique ID' я ввожу текст 'ForexBuying'
 		И я нажимаю на кнопку 'Save'
 		И из выпадающего списка "Integration type" я выбираю точное значение 'Currency rates'
-		И я нажимаю кнопку выбора у поля "External data proc"
+		И я нажимаю кнопку выбора у поля "Plugins"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'    |
 			| 'ExternalTCMBGovTr' |
@@ -155,7 +155,7 @@ To further use it when reflecting in the program of business processes
 		И в поле 'Unique ID' я ввожу текст 'BankUA'
 		И я нажимаю на кнопку 'Save'
 		И из выпадающего списка "Integration type" я выбираю точное значение 'Currency rates'
-		И я нажимаю кнопку выбора у поля "External data proc"
+		И я нажимаю кнопку выбора у поля "Plugins"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'    |
 			| 'ExternalBankUa' |
@@ -233,10 +233,10 @@ To further use it when reflecting in the program of business processes
 		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_tr" "Main Company TR"
 
 
-Сценарий: _005017 creation Movement Type for agreement currencies
+Сценарий: _005017 creation Movement Type for Partner term currencies
 	* Opening charts of characteristic types - Currency movement
 		И я открываю навигационную ссылку "e1cib/list/ChartOfCharacteristicTypes.CurrencyMovementType"
-	* Create currency for agreements - TRY
+	* Create currency for Partner terms - TRY
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'TRY'
 		И я нажимаю кнопку выбора у поля "Currency"
@@ -249,9 +249,9 @@ To further use it when reflecting in the program of business processes
 			| 'Description'  |
 			| 'Forex Seling' |
 		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Type" я выбираю точное значение 'Agreement'
+		И из выпадающего списка "Type" я выбираю точное значение 'Partner term'
 		И я нажимаю на кнопку 'Save and close'
-	* Create currency for agreements - EUR
+	* Create currency for Partner terms - EUR
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'EUR'
 		И я нажимаю кнопку выбора у поля "Currency"
@@ -265,9 +265,9 @@ To further use it when reflecting in the program of business processes
 			| 'Description'  |
 			| 'Forex Seling' |
 		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Type" я выбираю точное значение 'Agreement'
+		И из выпадающего списка "Type" я выбираю точное значение 'Partner term'
 		И я нажимаю на кнопку 'Save and close'
-	* Create currency for agreements - USD
+	* Create currency for Partner terms - USD
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'USD'
 		И я нажимаю кнопку выбора у поля "Currency"
@@ -281,13 +281,13 @@ To further use it when reflecting in the program of business processes
 			| 'Description'  |
 			| 'Forex Seling' |
 		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Type" я выбираю точное значение 'Agreement'
+		И из выпадающего списка "Type" я выбираю точное значение 'Partner term'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 
 
 Сценарий: _005014 filling in the "Units" catalog
-	* Clearing the Units catalog
+	* Clearing theItem units catalog
 		И я удаляю все элементы Справочника "Units"
 		И в базе нет элементов Справочника "Units"
 	* Opening the form for filling in "Units"
@@ -344,7 +344,7 @@ To further use it when reflecting in the program of business processes
 
 
 Сценарий: _005015 filling in the "AccessGroups" catalog
-	* Clearing the Access groups catalog
+	* Clearing the User access groups catalog
 		И я удаляю все элементы Справочника "AccessGroups"
 		И в базе нет элементов Справочника "AccessGroups"
 	* Opening the form for filling in AccessGroups
@@ -364,7 +364,7 @@ To further use it when reflecting in the program of business processes
 		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_tr" "Admin TR"
 
 Сценарий: _005016 filling in the "AccessProfiles" catalog
-	* Clearing the Access profile catalog
+	* Clearing the User access profile catalog
 		И я удаляю все элементы Справочника "AccessProfiles"
 		И в базе нет элементов Справочника "AccessProfiles"
 	* Opening the form for filling in AccessProfiles
@@ -380,7 +380,7 @@ To further use it when reflecting in the program of business processes
 		И В открытой форме я нажимаю на кнопку с именем 'RolesUpdateRoles'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
-	* Checking for created Access profiles
+	* Checking for created User access profiles
 		Тогда В базе появился хотя бы один элемент справочника "AccessProfiles"
 		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_en" "Admin"  
 		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_tr" "Admin TR"
@@ -388,15 +388,15 @@ To further use it when reflecting in the program of business processes
 
 
 
-Сценарий: _005018 filling in the "Cash accounts" catalog
-	* Clearing the Cash accounts catalog
+Сценарий: _005018 filling in the "Cash/Bank accountss" catalog
+	* Clearing the Cash/Bank accountss catalog
 		И я удаляю все элементы Справочника "CashAccounts"
 		И в базе нет элементов Справочника "CashAccounts"
 	* Opening the form for filling in Accounts
 		И я открываю навигационную ссылку "e1cib/list/Catalog.CashAccounts"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Create and check the creation of cash account: Cash desk №1, Cash desk №2, Cash desk №3
+	* Create and check the creation of Cash/Bank accounts: Cash desk №1, Cash desk №2, Cash desk №3
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Cash desk №1'
 		И в поле с именем 'Description_tr' я ввожу текст 'Cash desk №1 TR'
@@ -616,11 +616,11 @@ To further use it when reflecting in the program of business processes
 		И Пауза 2
 		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Lomaniti"
 
-Сценарий: _005023 filling in the "Partner segments" catalog
+Сценарий: _005023 filling in the "Partner segments content" catalog
 	* Clearing the PartnerSegments catalog
 		И я удаляю все элементы Справочника "PartnerSegments"
 		И в базе нет элементов Справочника "PartnerSegments"
-	* Opening the form for filling in Partner segments
+	* Opening the form for filling in Partner segments content
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PartnerSegments"
 		И Пауза 2
 	* Сreate segments: Retail, Dealer
@@ -641,20 +641,20 @@ To further use it when reflecting in the program of business processes
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 2
-	* Checking for created Partner Segments
+	* Checking for created Partner segments content
 		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_en" "Dealer"  
 		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_tr" "Dealer TR"
 		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_tr" "Retail TR"
 		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_en" "Retail" 
 
-Сценарий: _005024 filling in the "Payment schedules" catalog 
-	* Clearing the Payment schedules catalog
+Сценарий: _005024 filling in the "Payment terms" catalog 
+	* Clearing the Payment terms catalog
 		И я удаляю все элементы Справочника "PaymentSchedules"
 		И в базе нет элементов Справочника "PaymentSchedules"
-	* Opening a form and creating Payment schedules
+	* Opening a form and creating Payment terms
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PaymentSchedules"
 		Когда создаю элемент справочника с наименованием Test
-	* Checking for created Payment schedules
+	* Checking for created Payment terms
 		Тогда В базе появился хотя бы один элемент справочника "PaymentSchedules"
 		Тогда я проверяю наличие элемента справочника "PaymentSchedules" со значением поля "Description_en" "Test ENG"  
 		Тогда я проверяю наличие элемента справочника "PaymentSchedules" со значением поля "Description_tr" "Test TR"
@@ -662,8 +662,8 @@ To further use it when reflecting in the program of business processes
 		И я удаляю все элементы Справочника "PaymentSchedules"
 
 
-Сценарий: _005026 filling in the "Item segments" catalog 
-	* Opening a form and creating Item segments
+Сценарий: _005026 filling in the "Item segments content" catalog 
+	* Opening a form and creating Item segments content
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ItemSegments"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -672,7 +672,7 @@ To further use it when reflecting in the program of business processes
 		И я нажимаю на кнопку 'Ok'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 2
-	* Checking creation Item segments
+	* Checking creation Item segments content
 		Тогда я проверяю наличие элемента справочника "ItemSegments" со значением поля "Description_en" "Sale autum"
 		Тогда я проверяю наличие элемента справочника "ItemSegments" со значением поля "Description_tr" "Sale autum TR"
 
@@ -860,7 +860,7 @@ To further use it when reflecting in the program of business processes
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю кнопку выбора у поля "Special offer type"
 		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "External data proc"
+		И я нажимаю кнопку выбора у поля "Plugins"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Special Price'
@@ -868,7 +868,7 @@ To further use it when reflecting in the program of business processes
 		И я нажимаю на кнопку 'Ok'
 		И в поле с именем 'Name' я ввожу текст 'Special Price'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я жду закрытия окна 'External data proc (create)' в течение 20 секунд
+		И я жду закрытия окна 'Plugins (create)' в течение 20 секунд
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Special Price'
@@ -1045,12 +1045,12 @@ To further use it when reflecting in the program of business processes
 		Тогда я проверяю наличие элемента справочника "CompanyTypes" со значением поля "Description_en" "Private individual" 
 
 Сценарий: _005039 filling in the status catalog for Inventory transfer order
-	* Opening a form for creating Object statuses
+	* Opening a form for creating Objects status historyes
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element InventoryTransferOrder
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
-			| 'Object statuses' |
+			| 'Objects status history' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| InventoryTransferOrder                |
@@ -1107,12 +1107,12 @@ To further use it when reflecting in the program of business processes
 		И Я закрываю текущее окно
 
 Сценарий: _005040 filling in the status catalog for Outgoing Payment Order
-	* Opening a form for creating Object statuses
+	* Opening a form for creating Objects status historyes
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element OutgoingPaymentOrder
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
-			| 'Object statuses' |
+			| 'Objects status history' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| OutgoingPaymentOrder                |
@@ -1146,12 +1146,12 @@ To further use it when reflecting in the program of business processes
 		И я нажимаю на кнопку 'Save and close'
 
 Сценарий: _005041 filling in the status catalog for Purchase return order
-	* Opening a form for creating Object statuses
+	* Opening a form for creating Objects status historyes
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element  PurchaseReturnOrder
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
-			| 'Object statuses' |
+			| 'Objects status history' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| PurchaseReturnOrder                |
@@ -1186,12 +1186,12 @@ To further use it when reflecting in the program of business processes
 
 
 Сценарий: _005042 filling in the status catalog for Purchase order
-	* Opening a form for creating Object statuses
+	* Opening a form for creating Objects status historyes
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element PurchaseOrder
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
-			| 'Object statuses' |
+			| 'Objects status history' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| PurchaseOrder                |
@@ -1225,12 +1225,12 @@ To further use it when reflecting in the program of business processes
 		И я нажимаю на кнопку 'Save and close'
 
 Сценарий: _005043 filling in the status catalog for Sales return order
-	* Opening a form for creating Object statuses
+	* Opening a form for creating Objects status historyes
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element  SalesReturnOrder
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
-			| 'Object statuses' |
+			| 'Objects status history' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| SalesReturnOrder                |
@@ -1264,12 +1264,12 @@ To further use it when reflecting in the program of business processes
 		И я нажимаю на кнопку 'Save and close'
 
 Сценарий: _005044 filling in the status catalog for Sales order
-	* Opening a form for creating Object statuses
+	* Opening a form for creating Objects status historyes
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element  SalesOrder
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
-			| 'Object statuses' |
+			| 'Objects status history' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| SalesOrder                |
@@ -1315,11 +1315,11 @@ To further use it when reflecting in the program of business processes
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: _005045 check for clearing the UniqueID field when copying the status
-	* Opening a form for creating Object statuses
+	* Opening a form for creating Objects status historyes
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
-			| 'Object statuses' |
+			| 'Objects status history' |
 	* Copy status
 		И в таблице "List" я разворачиваю строку:
 			| 'Description' | 'Predefined data item name' |
@@ -1366,7 +1366,7 @@ To further use it when reflecting in the program of business processes
 		И в поле 'TR' я ввожу текст 'Logistics department TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-	* Checking creation Business units
+	* Checking creation BusinessItem units
 		Тогда я проверяю наличие элемента справочника "BusinessUnits" со значением поля "Description_en" "Front office"
 		Тогда я проверяю наличие элемента справочника "BusinessUnits" со значением поля "Description_en" "Accountants office"
 		И Пауза 2
@@ -1421,8 +1421,8 @@ To further use it when reflecting in the program of business processes
 		И Пауза 2
 		Тогда я проверяю наличие элемента справочника "ExpenseAndRevenueTypes" со значением поля "Description_en" "Delivery"
 
-Сценарий: _005048 filling in the "Item segments" catalog  "Tax analytics"
-	* Открытие и заполнение формы Tax analytics
+Сценарий: _005048 filling in the "Item segments content" catalog  "Tax additional analytics"
+	* Открытие и заполнение формы Tax additional analytics
 		И я открываю навигационную ссылку "e1cib/list/Catalog.TaxAnalytics"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -1432,7 +1432,7 @@ To further use it when reflecting in the program of business processes
 		И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 		И Пауза 2
-	* Checking for created  Tax analytics
+	* Checking for created  Tax additional analytics
 		Тогда я проверяю наличие элемента справочника "TaxAnalytics" со значением поля "Description_en" "Analytics 01"  
 		Тогда я проверяю наличие элемента справочника "TaxAnalytics" со значением поля "Description_tr" "Analytics 01 TR"
 

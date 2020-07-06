@@ -7,7 +7,7 @@
 Функционал: terms of cooperation with partners
 
 As an accountant
-I want to add a mechanism for partner agreements
+I want to add a mechanism for partner Partner terms
 To specify the commercial terms of cooperation
 
 
@@ -16,7 +16,7 @@ To specify the commercial terms of cooperation
 
 
 Сценарий: _012001 adding partners (customers) to a segment (register)
-	* Opening a register for partner segments
+	* Opening a register for Partner segments content
 		И Я закрыл все окна клиентского приложения 
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
 	* Adding partner Ferron BP to the Retail Segment
@@ -121,7 +121,7 @@ To specify the commercial terms of cooperation
 
 Сценарий: _012002 adding partners (customers) to 2 segments at the same time (register)
 # Ferron BP client is included in the retail and dealership segment
-	* Opening a register for partner segments
+	* Opening a register for Partner segments content
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
 	* Adding partner Ferron BP to the Dealer Segment
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -209,13 +209,13 @@ To specify the commercial terms of cooperation
 		И я нажимаю на кнопку 'Save and close'
 
 
-Сценарий: _012004 creating common agreement
-	* Opening an agreement catalog
+Сценарий: _012004 creating common Partner term
+	* Opening an Partner term catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-	* Creating and checking customer agreement Basic Agreements, TRY
+	* Creating and checking customer Partner term Basic Partner terms, TRY
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
-		И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
+		И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
 		И в поле 'Number' я ввожу текст '20'
 		И в поле 'Date' я ввожу текст '01.11.2018'
 		И я нажимаю кнопку выбора у поля "Company"
@@ -223,10 +223,10 @@ To specify the commercial terms of cooperation
 				| 'Description' |
 				| 'Main Company'       |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'TRY'      | 'Agreement' |
+			| 'TRY'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		И в таблице "List" я перехожу к строке:
@@ -248,16 +248,16 @@ To specify the commercial terms of cooperation
 				| 'Store 01'  |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Basic Agreements, TRY'
-		И в поле 'TR' я ввожу текст 'Basic Agreements, TRY'
+		И в поле 'ENG' я ввожу текст 'Basic Partner terms, TRY'
+		И в поле 'TR' я ввожу текст 'Basic Partner terms, TRY'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Basic Agreements, TRY'
-	* Creating and checking customer agreement Basic Agreements, $
+		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Basic Partner terms, TRY'
+	* Creating and checking customer Partner term Basic Partner terms, $
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
-		И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
+		И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
 		И в поле 'Number' я ввожу текст '21'
 		И в поле 'Date' я ввожу текст '01.11.2018'
 		И я нажимаю кнопку выбора у поля "Company"
@@ -265,10 +265,10 @@ To specify the commercial terms of cooperation
 				| 'Description' |
 				| 'Main Company'       |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'USD'      | 'Agreement' |
+			| 'USD'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		И в таблице "List" я перехожу к строке:
@@ -289,17 +289,17 @@ To specify the commercial terms of cooperation
 				| 'Store 02'  |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Basic Agreements, $'
-		И в поле 'TR' я ввожу текст 'Basic Agreements, $'
+		И в поле 'ENG' я ввожу текст 'Basic Partner terms, $'
+		И в поле 'TR' я ввожу текст 'Basic Partner terms, $'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Basic Agreements, $'
-	* Creating and checking customer agreement Basic Agreements, without VAT
+		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Basic Partner terms, $'
+	* Creating and checking customer Partner term Basic Partner terms, without VAT
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
-		И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
+		И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
 		И в поле 'Number' я ввожу текст '22'
 		И в поле 'Date' я ввожу текст '01.11.2018'
 		И я нажимаю кнопку выбора у поля "Company"
@@ -307,10 +307,10 @@ To specify the commercial terms of cooperation
 				| 'Description' |
 				| 'Main Company'       |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'TRY'      | 'Agreement' |
+			| 'TRY'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		Тогда открылось окно 'Price types'
@@ -332,20 +332,20 @@ To specify the commercial terms of cooperation
 				| 'Store 02'  |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Basic Agreements, without VAT'
-		И в поле 'TR' я ввожу текст 'Basic Agreements, without VAT'
+		И в поле 'ENG' я ввожу текст 'Basic Partner terms, without VAT'
+		И в поле 'TR' я ввожу текст 'Basic Partner terms, without VAT'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Basic Agreements, without VAT'
+		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Basic Partner terms, without VAT'
 
-Сценарий: _012005 creation of an individual agreement in USD 
-	* Opening an agreement catalog
+Сценарий: _012005 creation of an individual Partner term in USD 
+	* Opening an Partner term catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-	* Creating and checking customer agreement Personal Agreements, $
+	* Creating and checking customer Partner term Personal Partner terms, $
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
-		И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
+		И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
 		И в поле 'Number' я ввожу текст '31'
 		И в поле 'Date' я ввожу текст '01.11.2018'
 		И я нажимаю кнопку выбора у поля "Company"
@@ -353,10 +353,10 @@ To specify the commercial terms of cooperation
 				| 'Description' |
 				| 'Main Company'       |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'USD'      | 'Agreement' |
+			| 'USD'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		Тогда открылось окно 'Price types'
@@ -379,17 +379,17 @@ To specify the commercial terms of cooperation
 				| 'Store 02'  |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Personal Agreements, $'
-		И в поле 'TR' я ввожу текст 'Personal Agreements, $'
+		И в поле 'ENG' я ввожу текст 'Personal Partner terms, $'
+		И в поле 'TR' я ввожу текст 'Personal Partner terms, $'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Personal Agreements, $'
-	* Creating and checking vendor agreement Vendor Ferron, TRY
+		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Personal Partner terms, $'
+	* Creating and checking vendor Partner term Vendor Ferron, TRY
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Vendor'
-		И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
+		И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
 		И в поле 'Number' я ввожу текст '31'
 		И в поле 'Date' я ввожу текст '01.11.2018'
 		И я нажимаю кнопку выбора у поля "Company"
@@ -397,10 +397,10 @@ To specify the commercial terms of cooperation
 				| 'Description' |
 				| 'Main Company'       |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'TRY'      | 'Agreement' |
+			| 'TRY'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		И в таблице "List" я перехожу к строке:
@@ -421,7 +421,7 @@ To specify the commercial terms of cooperation
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Vendor Ferron, TRY'
-	* Creating and checking vendor agreement Vendor Ferron, USD
+	* Creating and checking vendor Partner term Vendor Ferron, USD
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Vendor'
@@ -432,10 +432,10 @@ To specify the commercial terms of cooperation
 			| 'Description' |
 			| 'Main Company'       |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'USD'      | 'Agreement' |
+			| 'USD'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		И в таблице "List" я перехожу к строке:
@@ -456,7 +456,7 @@ To specify the commercial terms of cooperation
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Vendor Ferron, USD'
-	* Creating and checking vendor agreement Vendor Ferron, EUR
+	* Creating and checking vendor Partner term Vendor Ferron, EUR
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Vendor'
@@ -467,10 +467,10 @@ To specify the commercial terms of cooperation
 			| 'Description' |
 			| 'Main Company'       |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'EUR'      | 'Agreement' |
+			| 'EUR'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		И в таблице "List" я перехожу к строке:
@@ -494,13 +494,13 @@ To specify the commercial terms of cooperation
 
 	
 
-Сценарий: _012007 creating common agreement with Item Segment
-	* Opening an agreement catalog
+Сценарий: _012007 creating common Partner term with Item Segment
+	* Opening an Partner term catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-	* Creating common agreement with Item Segment
+	* Creating common Partner term with Item Segment
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
-		И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
+		И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
 		И в поле 'Number' я ввожу текст '23'
 		И в поле 'Date' я ввожу текст '01.11.2018'
 		И я нажимаю кнопку выбора у поля "Company"
@@ -508,10 +508,10 @@ To specify the commercial terms of cooperation
 				| 'Description' |
 				| 'Main Company'       |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'EUR'      | 'Agreement' |
+			| 'EUR'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		И в таблице "List" я перехожу к строке:
@@ -536,15 +536,15 @@ To specify the commercial terms of cooperation
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Checking the creation of the agreement
+	* Checking the creation of the Partner term
 		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Sale autum, TRY'
 
 
 
-Сценарий: _012010 creating agreement without currency (negative test)
-	* Opening an agreement catalog
+Сценарий: _012010 creating Partner term without currency (negative test)
+	* Opening an Partner term catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-	* Сreating agreement without currency
+	* Сreating Partner term without currency
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
 		И в поле 'Number' я ввожу текст '302'
@@ -577,16 +577,16 @@ To specify the commercial terms of cooperation
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	* Checking that the agreement without currency is not created
+	* Checking that the Partner term without currency is not created
 		Если в текущем окне есть сообщения пользователю Тогда
 		И Я закрыл все окна клиентского приложения
 		Когда Проверяю шаги на Исключение:
 			|'Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Currency, TRY''|
 
-Сценарий: _012011 creating agreement without price type (negative test)
-	* Opening an agreement catalog
+Сценарий: _012011 creating Partner term without price type (negative test)
+	* Opening an Partner term catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-	* Creating agreement without price type
+	* Creating Partner term without price type
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя с именем "Type" на 'Customer'
 		И в поле 'Number' я ввожу текст '301'
@@ -596,10 +596,10 @@ To specify the commercial terms of cooperation
 				| 'Description' |
 				| 'Main Company'       |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'TRY'      | 'Agreement' |
+			| 'TRY'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Partner segment"
 		И в таблице "List" я перехожу к строке:
@@ -618,7 +618,7 @@ To specify the commercial terms of cooperation
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	*  Checking that the agreement without price type is not created
+	*  Checking that the Partner term without price type is not created
 		Если в текущем окне есть сообщения пользователю Тогда
 		И Я закрыл все окна клиентского приложения
 		Когда Проверяю шаги на Исключение:

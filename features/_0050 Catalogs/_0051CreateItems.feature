@@ -15,23 +15,23 @@ To further use it when reflecting in the program of business processes
 
 # All indivisible packages of the same product are wound up using Specifiсation with type Set. Then a separate Item key is created for the product, in which the necessary set is specified.
 # and a price is set on it. It's the Set that's stored on the remains. In order to break it up you need to run the Unbandling document
-# For the simple accounting of goods in the packages of documents (the remnants are stored pieces) used units of measurement pcs. For each product, a different Unit is specified
+# For the simple accounting of goods in the packages of documents (the remnants are stored pieces) usedItem units of measurement pcs. For each product, a different Unit is specified
 # like pcs consisting of 6 pieces, 10 pieces, etc. # In this case, the price of the order gets as the price of a piece. There's pcs going through the registers, too. 
 
 
 
-Сценарий: _005110 filling in the "Interface groups" catalog 
-# Catalog "Interface group" is designed to create groups of additional attributes for the items. Also provides for the location of the group on the item's form (right or left)
-	* Opening the Interface Groups creation form 
+Сценарий: _005110 filling in the "UI groups" catalog 
+# Catalog "UI group" is designed to create groups of additional attributes for the items. Also provides for the location of the group on the item's form (right or left)
+	* Opening the UI groups creation form 
 		И я открываю навигационную ссылку "e1cib/list/Catalog.InterfaceGroups"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Creating interface groups: Product information, Accounting information, Purchase and production 
+	* Creating UI groups: Product information, Accounting information, Purchase and production 
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Product information'
 		И в поле 'TR' я ввожу текст 'Product information TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Interface groups (create)' в течение 5 секунд
+		И я жду закрытия окна 'UI groups (create)' в течение 5 секунд
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Accounting information'
@@ -39,15 +39,15 @@ To further use it when reflecting in the program of business processes
 		И я нажимаю на кнопку 'Ok'
 		И я меняю значение переключателя с именем 'FormPosition' на 'Right'
 		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Interface groups (create)' в течение 5 секунд
+		И я жду закрытия окна 'UI groups (create)' в течение 5 секунд
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Purchase and production'
 		И в поле 'TR' я ввожу текст 'Purchase and production TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Interface groups (create)' в течение 5 секунд
-	* Checking for added Interface groups in the catalog 
+		И я жду закрытия окна 'UI groups (create)' в течение 5 секунд
+	* Checking for added UI groups in the catalog 
 		Тогда В базе появился хотя бы один элемент справочника "InterfaceGroups"
 		Тогда я проверяю наличие элемента справочника "InterfaceGroups" со значением поля "Description_en" "Product information"  
 		Тогда я проверяю наличие элемента справочника "InterfaceGroups" со значением поля "Description_tr" "Product information TR"
@@ -83,7 +83,7 @@ To further use it when reflecting in the program of business processes
 		И Пауза 2
 		И в таблице "" я перехожу к строке:
 				| ''       |
-				| 'Add attribute and property value' |
+				| 'Additional attribute value' |
 		И я нажимаю на кнопку с именем 'OK'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Brand'
@@ -99,7 +99,7 @@ To further use it when reflecting in the program of business processes
 		И Пауза 2
 		И в таблице "" я перехожу к строке:
 				| ''       |
-				| 'Add attribute and property value' |
+				| 'Additional attribute value' |
 		И я нажимаю на кнопку с именем 'OK'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Producer'
@@ -115,7 +115,7 @@ To further use it when reflecting in the program of business processes
 		И Пауза 2
 		И в таблице "" я перехожу к строке:
 				| ''       |
-				| 'Add attribute and property value' |
+				| 'Additional attribute value' |
 		И я нажимаю на кнопку с именем 'OK'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Size'
@@ -131,7 +131,7 @@ To further use it when reflecting in the program of business processes
 		И Пауза 2
 		И в таблице "" я перехожу к строке:
 				| ''       |
-				| 'Add attribute and property value' |
+				| 'Additional attribute value' |
 		И я нажимаю на кнопку с именем 'OK'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Color'
@@ -164,7 +164,7 @@ To further use it when reflecting in the program of business processes
 		И Пауза 2
 		И в таблице "" я перехожу к строке:
 				| ''       |
-				| 'Add attribute and property value' |
+				| 'Additional attribute value' |
 		И я нажимаю на кнопку с именем 'OK'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Country of consignment'
@@ -180,7 +180,7 @@ To further use it when reflecting in the program of business processes
 		И Пауза 2
 		И в таблице "" я перехожу к строке:
 				| ''       |
-				| 'Add attribute and property value' |
+				| 'Additional attribute value' |
 		И я нажимаю на кнопку с именем 'OK'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле с именем 'Description_en' я ввожу текст 'Season'
@@ -191,7 +191,7 @@ To further use it when reflecting in the program of business processes
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И я жду закрытия окна 'Add attribute and property (create) *' в течение 20 секунд	
 
-Сценарий: _005112 filling in Add attribute and property values with type Add attribute and property values
+Сценарий: _005112 filling in Additional attribute values with type Additional attribute values
 # the value of additional attributes (Producer, Color, Size,Season, Country of consignment)
 	* Opening the Add attribute and property form
 		И я открываю навигационную ссылку "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
@@ -200,7 +200,7 @@ To further use it when reflecting in the program of business processes
 		| 'Description' |
 		| 'Size'      |
 		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Add attribute and property values'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Additional attribute values'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'S'
@@ -278,7 +278,7 @@ To further use it when reflecting in the program of business processes
 		| 'Description' |
 		| 'Color'      |
 		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Add attribute and property values'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Additional attribute values'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Yellow'
@@ -335,7 +335,7 @@ To further use it when reflecting in the program of business processes
 		| 'Description' |
 		| 'Season'      |
 		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Add attribute and property values'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Additional attribute values'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст '18SD'
@@ -364,7 +364,7 @@ To further use it when reflecting in the program of business processes
 		| 'Description' |
 		| 'Country of consignment'      |
 		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Add attribute and property values'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Additional attribute values'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Turkey'
@@ -400,7 +400,7 @@ To further use it when reflecting in the program of business processes
 		| 'Description' |
 		| 'Producer'      |
 		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Add attribute and property values'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Additional attribute values'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'UNIQ'
@@ -429,7 +429,7 @@ To further use it when reflecting in the program of business processes
 		| 'Description' |
 		| 'Brand'      |
 		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Add attribute and property values'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Additional attribute values'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'York'
@@ -544,10 +544,10 @@ To further use it when reflecting in the program of business processes
 		И в таблице "Attributes" я перехожу к строке:
 			| 'Attribute' |
 			| 'Producer'  |
-	* Distribution of added additional attributes by interface groups
-		И в таблице "Attributes" я активизирую поле "Interface group"
+	* Distribution of added additional attributes by UI groups
+		И в таблице "Attributes" я активизирую поле "UI group"
 		И в таблице "Attributes" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Interface group"
+		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'      |
 			| 'Purchase and production' |
@@ -557,7 +557,7 @@ To further use it when reflecting in the program of business processes
 			| 'Attribute' |
 			| 'Article'   |
 		И в таблице "Attributes" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Interface group"
+		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'      |
 			| 'Accounting information' |
@@ -567,7 +567,7 @@ To further use it when reflecting in the program of business processes
 			| 'Attribute' |
 			| 'Brand'     |
 		И в таблице "Attributes" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Interface group"
+		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'      |
 			| 'Product information' |
@@ -577,7 +577,7 @@ To further use it when reflecting in the program of business processes
 			| 'Attribute'              |
 			| 'Country of consignment' |
 		И в таблице "Attributes" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Interface group"
+		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'      |
 			| 'Product information' |
@@ -1106,7 +1106,7 @@ To further use it when reflecting in the program of business processes
 		
 
 Сценарий: _005119 packaging for High shoes
-	* Opening the form for creating Units
+	* Opening the form for creatingItem units
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Units"
 	* Create packaging High shoes box (8 pcs)
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -1174,7 +1174,7 @@ To further use it when reflecting in the program of business processes
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Color"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Blue'        |
@@ -1184,14 +1184,14 @@ To further use it when reflecting in the program of business processes
 		И в таблице "FormTable*" я завершаю редактирование строки
 		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'M'           |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Color"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Brown'       |
@@ -1201,14 +1201,14 @@ To further use it when reflecting in the program of business processes
 		И в таблице "FormTable*" я завершаю редактирование строки
 		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'L'           |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Color"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Green'       |
@@ -1254,7 +1254,7 @@ To further use it when reflecting in the program of business processes
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Season"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Season"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| '18SD'        |
@@ -1270,7 +1270,7 @@ To further use it when reflecting in the program of business processes
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Season"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Season"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| '18SD'        |
@@ -1286,7 +1286,7 @@ To further use it when reflecting in the program of business processes
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Season"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Season"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| '18SD'        |

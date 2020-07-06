@@ -151,7 +151,7 @@
 	* Присвоение предопределенному элементу PhysicalInventory наименования 
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'     |
-			| 'Object statuses' |
+			| 'Objects status historyes' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| PhysicalInventory         |
@@ -200,7 +200,7 @@
 	* Присвоение предопределенному элементу PhysicalCountByLocation наименования 
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'     |
-			| 'Object statuses' |
+			| 'Objects status historyes' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| PhysicalCountByLocation         |
@@ -317,7 +317,7 @@
 		| ''                               | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Revenues turnovers"' | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| ''                               | 'Period'      | 'Resources' | 'Dimensions'   | ''                        | ''             | ''         | ''         | ''                    | ''                       | 'Attributes'           |
-		| ''                               | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Currency movement type' | 'Deferred calculation' |
+		| ''                               | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                               | '*'           | ''          | 'Main Company' | 'Distribution department' | 'Delivery'     | 'M/White'  | ''         | ''                    | ''                       | 'No'                   |
 		| ''                               | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Stock balance"'      | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
@@ -356,7 +356,7 @@
 		| ''                               | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Revenues turnovers"' | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| ''                               | 'Period'      | 'Resources' | 'Dimensions'     | ''                        | ''             | ''         | ''         | ''                    | ''                       | 'Attributes'           |
-		| ''                               | ''            | 'Amount'    | 'Company'        | 'Business unit'           | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Currency movement type' | 'Deferred calculation' |
+		| ''                               | ''            | 'Amount'    | 'Company'        | 'Business unit'           | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                               | '*'           | ''          | 'Second Company' | 'Distribution department' | 'Delivery'     | 'M/White'  | ''         | ''                    | ''                       | 'No'                   |
 		| ''                               | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Stock balance"'      | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
@@ -428,7 +428,7 @@
 		| ''                                 | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Expenses turnovers"'   | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| ''                                 | 'Period'      | 'Resources' | 'Dimensions'   | ''                        | ''             | ''         | ''         | ''                    | ''                       | 'Attributes'           |
-		| ''                                 | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Currency movement type' | 'Deferred calculation' |
+		| ''                                 | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                                 | '*'           | ''          | 'Main Company' | 'Distribution department' | 'Delivery'     | 'M/White'  | ''         | ''                    | ''                       | 'No'                   |
 		| ''                                 | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Stock reservation"'    | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
@@ -467,7 +467,7 @@
 		| ''                                 | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Expenses turnovers"'   | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| ''                                 | 'Period'      | 'Resources' | 'Dimensions'     | ''                        | ''             | ''         | ''         | ''                    | ''                       | 'Attributes'           |
-		| ''                                 | ''            | 'Amount'    | 'Company'        | 'Business unit'           | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Currency movement type' | 'Deferred calculation' |
+		| ''                                 | ''            | 'Amount'    | 'Company'        | 'Business unit'           | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                                 | '*'           | ''          | 'Second Company' | 'Distribution department' | 'Delivery'     | 'M/White'  | ''         | ''                    | ''                       | 'No'                   |
 		| ''                                 | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Stock reservation"'    | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
@@ -711,7 +711,7 @@
 		| ''                                        | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Revenues turnovers"'          | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| ''                                        | 'Period'      | 'Resources' | 'Dimensions'   | ''                     | ''                      | ''         | ''         | ''                    | ''                       | 'Attributes'           |
-		| ''                                        | ''            | 'Amount'    | 'Company'      | 'Business unit'        | 'Revenue type'          | 'Item key' | 'Currency' | 'Additional analytic' | 'Currency movement type' | 'Deferred calculation' |
+		| ''                                        | ''            | 'Amount'    | 'Company'      | 'Business unit'        | 'Revenue type'          | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                                        | '*'           | ''          | 'Main Company' | 'Logistics department' | 'Delivery'              | 'S/Yellow' | ''         | ''                    | ''                       | 'No'                   |
 		И Я закрыл все окна клиентского приложения
 	* Clear postings документа оприходования излишков и проверка отмены проводок
@@ -747,7 +747,7 @@
 		| ''                                        | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Revenues turnovers"'          | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| ''                                        | 'Period'      | 'Resources' | 'Dimensions'   | ''                     | ''                      | ''         | ''         | ''                    | ''                       | 'Attributes'           |
-		| ''                                        | ''            | 'Amount'    | 'Company'      | 'Business unit'        | 'Revenue type'          | 'Item key' | 'Currency' | 'Additional analytic' | 'Currency movement type' | 'Deferred calculation' |
+		| ''                                        | ''            | 'Amount'    | 'Company'      | 'Business unit'        | 'Revenue type'          | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                                        | '*'           | ''          | 'Main Company' | 'Logistics department' | 'Delivery'              | 'S/Yellow' | ''         | ''                    | ''                       | 'No'                   |
 		И Я закрыл все окна клиентского приложения
 	
@@ -800,7 +800,7 @@
 		| ''                                          | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Expenses turnovers"'            | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| ''                                          | 'Period'      | 'Resources' | 'Dimensions'   | ''                     | ''                      | ''         | ''         | ''                    | ''                       | 'Attributes'           |
-		| ''                                          | ''            | 'Amount'    | 'Company'      | 'Business unit'        | 'Expense type'          | 'Item key' | 'Currency' | 'Additional analytic' | 'Currency movement type' | 'Deferred calculation' |
+		| ''                                          | ''            | 'Amount'    | 'Company'      | 'Business unit'        | 'Expense type'          | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                                          | '*'           | ''          | 'Main Company' | 'Logistics department' | 'Delivery'              | 'XS/Blue'  | ''         | ''                    | ''                       | 'No'                   |
 		| ''                                          | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Stock adjustment as write-off"' | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
@@ -836,7 +836,7 @@
 		| ''                                          | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Expenses turnovers"'            | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| ''                                          | 'Period'      | 'Resources' | 'Dimensions'   | ''                     | ''                      | ''         | ''         | ''                    | ''                       | 'Attributes'           |
-		| ''                                          | ''            | 'Amount'    | 'Company'      | 'Business unit'        | 'Expense type'          | 'Item key' | 'Currency' | 'Additional analytic' | 'Currency movement type' | 'Deferred calculation' |
+		| ''                                          | ''            | 'Amount'    | 'Company'      | 'Business unit'        | 'Expense type'          | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                                          | '*'           | ''          | 'Main Company' | 'Logistics department' | 'Delivery'              | 'XS/Blue'  | ''         | ''                    | ''                       | 'No'                   |
 		| ''                                          | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Stock adjustment as write-off"' | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |

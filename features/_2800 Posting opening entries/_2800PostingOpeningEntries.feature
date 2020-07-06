@@ -23,10 +23,10 @@
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
-			| 'Agreement DFC' |
+			| 'Partner term DFC' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -60,10 +60,10 @@
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
-			| 'Agreement vendor DFC' |
+			| 'Partner term vendor DFC' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -263,7 +263,7 @@
 		* Check movements документа
 			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.AccountBalance'
 			Тогда таблица "List" содержит строки:
-			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Currency movement type' | 'Amount'    |
+			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
 			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Local currency'         | '1 000,00'  |
 			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'     | '171,23'    |
 			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | 'Local currency'         | '5 694,76'  |
@@ -293,7 +293,7 @@
 		* Проверка отмены движений
 			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.AccountBalance'
 			Тогда таблица "List" не содержит строки:
-			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Currency movement type' | 'Amount'    |
+			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
 			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Local currency'         | '1 000,00'  |
 			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'     | '171,23'    |
 			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | 'Local currency'         | '5 694,76'  |
@@ -323,7 +323,7 @@
 		* Check movements
 			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.AccountBalance'
 			Тогда таблица "List" содержит строки:
-			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Currency movement type' | 'Amount'    |
+			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
 			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Local currency'         | '1 000,00'  |
 			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'     | '171,23'    |
 			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | 'Local currency'         | '5 694,76'  |
@@ -724,7 +724,7 @@
 		| 'Document registrations records'       | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
 		| 'Register  "Accounts statement"'       | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
 		| ''                                     | 'Record type' | 'Period' | 'Resources'           | ''               | ''                       | ''                  | 'Dimensions'   | ''                 | ''                         | ''                     | ''         |
-		| ''                                     | ''            | ''       | 'Advance to supliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR'    | 'Company'      | 'Partner'          | 'Legal name'               | 'Basis document'       | 'Currency' |
+		| ''                                     | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR'    | 'Company'      | 'Partner'          | 'Legal name'               | 'Basis document'       | 'Currency' |
 		| ''                                     | 'Receipt'     | '*'      | ''                    | ''               | '100'                    | ''                  | 'Main Company' | 'Kalipso'          | 'Company Kalipso'          | ''                     | 'TRY'      |
 		| ''                                     | 'Receipt'     | '*'      | '100'                 | ''               | ''                       | ''                  | 'Main Company' | 'Ferron BP'        | 'Company Ferron BP'        | ''                     | 'TRY'      |
 		| ''                                     | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
@@ -736,14 +736,14 @@
 		| ''                                     | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
 		| 'Register  "Advance from customers"'   | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
 		| ''                                     | 'Record type' | 'Period' | 'Resources'           | 'Dimensions'     | ''                       | ''                  | ''             | ''                 | ''                         | 'Attributes'           | ''         |
-		| ''                                     | ''            | ''       | 'Amount'              | 'Company'        | 'Partner'                | 'Legal name'        | 'Currency'     | 'Receipt document' | 'Currency movement type'   | 'Deferred calculation' | ''         |
+		| ''                                     | ''            | ''       | 'Amount'              | 'Company'        | 'Partner'                | 'Legal name'        | 'Currency'     | 'Receipt document' | 'Multi currency movement type'   | 'Deferred calculation' | ''         |
 		| ''                                     | 'Receipt'     | '*'      | '17,12'               | 'Main Company'   | 'Kalipso'                | 'Company Kalipso'   | 'USD'          | 'Opening entry 3*' | 'Reporting currency'       | 'No'                   | ''         |
 		| ''                                     | 'Receipt'     | '*'      | '100'                 | 'Main Company'   | 'Kalipso'                | 'Company Kalipso'   | 'TRY'          | 'Opening entry 3*' | 'en descriptions is empty' | 'No'                   | ''         |
 		| ''                                     | 'Receipt'     | '*'      | '100'                 | 'Main Company'   | 'Kalipso'                | 'Company Kalipso'   | 'TRY'          | 'Opening entry 3*' | 'Local currency'           | 'No'                   | ''         |
 		| ''                                     | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
 		| 'Register  "Advance to suppliers"'     | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
 		| ''                                     | 'Record type' | 'Period' | 'Resources'           | 'Dimensions'     | ''                       | ''                  | ''             | ''                 | ''                         | 'Attributes'           | ''         |
-		| ''                                     | ''            | ''       | 'Amount'              | 'Company'        | 'Partner'                | 'Legal name'        | 'Currency'     | 'Payment document' | 'Currency movement type'   | 'Deferred calculation' | ''         |
+		| ''                                     | ''            | ''       | 'Amount'              | 'Company'        | 'Partner'                | 'Legal name'        | 'Currency'     | 'Payment document' | 'Multi currency movement type'   | 'Deferred calculation' | ''         |
 		| ''                                     | 'Receipt'     | '*'      | '17,12'               | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'USD'          | 'Opening entry 3*' | 'Reporting currency'       | 'No'                   | ''         |
 		| ''                                     | 'Receipt'     | '*'      | '100'                 | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'TRY'          | 'Opening entry 3*' | 'en descriptions is empty' | 'No'                   | ''         |
 		| ''                                     | 'Receipt'     | '*'      | '100'                 | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'TRY'          | 'Opening entry 3*' | 'Local currency'           | 'No'                   | ''         |
@@ -768,28 +768,28 @@
 	* Заполнение ввода начального остатка по задолженности поставщику
 		* Заполнение партнера и Legal name
 			И я перехожу к закладке "Account payable"
-			И в таблице "AccountPayableByAgreements" я нажимаю на кнопку 'Add'
-			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Partner"
+			И в таблице "AccountPayableByPartner terms" я нажимаю на кнопку 'Add'
+			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
+			И в таблице "AccountPayableByPartner terms" я завершаю редактирование строки
 		* Check filling inLegal name
-				И     таблица "AccountPayableByAgreements" содержит строки:
+				И     таблица "AccountPayableByPartner terms" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
 		* Создание тестового соглашения с взаиморасчетами по соглашениям
-			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Agreement"
+			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner term"
 			И я нажимаю на кнопку с именем 'FormCreate'
-			И я меняю значение переключателя 'AP-AR posting detail' на 'By agreements'
+			И я меняю значение переключателя 'AP/AR posting detail' на 'By Partner terms'
 			И я меняю значение переключателя 'Type' на 'Vendor'
-			И в поле 'ENG' я ввожу текст 'DFC Vendor by agreements'
+			И в поле 'ENG' я ввожу текст 'DFC Vendor by Partner terms'
 			И в поле 'Date' я ввожу текст '01.12.2019'
-			И я нажимаю кнопку выбора у поля "Currency movement type"
+			И я нажимаю кнопку выбора у поля "Multi currency movement type"
 			И в таблице "List" я перехожу к строке:
 				| 'Currency' | 'Description' | 'Source'       | 'Type'      |
-				| 'TRY'      | 'TRY'         | 'Forex Seling' | 'Agreement' |
+				| 'TRY'      | 'TRY'         | 'Forex Seling' | 'Partner term' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Price type"
 			И в таблице "List" я перехожу к строке:
@@ -800,28 +800,28 @@
 			И я нажимаю на кнопку 'Save and close'
 			И в таблице "List" я перехожу к строке:
 			| 'Description'              |
-			| 'DFC Vendor by agreements' |
+			| 'DFC Vendor by Partner terms' |
 			И я нажимаю на кнопку с именем 'FormChoose'
 		* Заполнение суммы и валюты
-			И в таблице "AccountPayableByAgreements" я активизирую поле "Currency"
-			И в таблице "AccountPayableByAgreements" я выбираю текущую строку
-			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Currency"
+			И в таблице "AccountPayableByPartner terms" я активизирую поле "Currency"
+			И в таблице "AccountPayableByPartner terms" я выбираю текущую строку
+			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Currency"
 			И в таблице "List" я активизирую поле "Description"
 			И в таблице "List" я перехожу к строке:
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountPayableByAgreements" я активизирую поле "Amount"
-			И в таблице "AccountPayableByAgreements" в поле 'Amount' я ввожу текст '100,00'
-			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
+			И в таблице "AccountPayableByPartner terms" я активизирую поле "Amount"
+			И в таблице "AccountPayableByPartner terms" в поле 'Amount' я ввожу текст '100,00'
+			И в таблице "AccountPayableByPartner terms" я завершаю редактирование строки
 		* Проверка расчета Reporting currency
-			И в таблице "CurrenciesAccountPayableByAgreements" я перехожу к строке:
+			И в таблице "CurrenciesAccountPayableByPartner terms" я перехожу к строке:
 			| 'Movement type'      | 'Type'      |
 			| 'Reporting currency' | 'Reporting' |
-			И в таблице "CurrenciesAccountPayableByAgreements" я выбираю текущую строку
-			И в таблице "CurrenciesAccountPayableByAgreements" в поле с именем "CurrenciesAccountPayableByAgreementsRatePresentation" я ввожу текст '5,8400'
-			И в таблице "CurrenciesAccountPayableByAgreements" в поле с именем "CurrenciesAccountPayableByAgreementsMultiplicity" я ввожу текст '1'
-			И в таблице "CurrenciesAccountPayableByAgreements" я завершаю редактирование строки
+			И в таблице "CurrenciesAccountPayableByPartner terms" я выбираю текущую строку
+			И в таблице "CurrenciesAccountPayableByPartner terms" в поле с именем "CurrenciesAccountPayableByPartner termsRatePresentation" я ввожу текст '5,8400'
+			И в таблице "CurrenciesAccountPayableByPartner terms" в поле с именем "CurrenciesAccountPayableByPartner termsMultiplicity" я ввожу текст '1'
+			И в таблице "CurrenciesAccountPayableByPartner terms" я завершаю редактирование строки
 			И     таблица "CurrenciesAccountPayableByDocuments" содержит строки:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
@@ -835,7 +835,7 @@
 			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                         | ''         | ''                         | ''                     |
 			| 'Register  "Accounts statement"'           | ''            | ''                   | ''                    | ''               | ''                       | ''               | ''             | ''                         | ''           | ''                         | ''                     |
 			| ''                                         | 'Record type' | 'Period'             | 'Resources'           | ''               | ''                       | ''               | 'Dimensions'   | ''                         | ''           | ''                         | ''                     |
-			| ''                                         | ''            | ''                   | 'Advance to supliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'                  | 'Legal name' | 'Basis document'           | 'Currency'             |
+			| ''                                         | ''            | ''                   | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'                  | 'Legal name' | 'Basis document'           | 'Currency'             |
 			| ''                                         | 'Receipt'     | '*'                  | ''                    | '100'            | ''                       | ''               | 'Main Company' | 'DFC'                      | 'DFC'        | ''                         | 'TRY'                  |
 			| ''                                         | ''            | ''                   | ''                    | ''               | ''                       | ''               | ''             | ''                         | ''           | ''                         | ''                     |
 			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                         | ''         | ''                         | ''                     |
@@ -845,11 +845,11 @@
 			| ''                                     | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                         | ''         | ''                         | ''                     |
 			| 'Register  "Partner AP transactions"'  | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                         | ''         | ''                         | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''         | ''           | ''                         | ''         | ''                         | 'Attributes'           |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner'  | 'Legal name' | 'Agreement'                | 'Currency' | 'Currency movement type'   | 'Deferred calculation' |
-			| ''                                     | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by agreements' | 'USD'      | 'Reporting currency'       | 'No'                   |
-			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by agreements' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
-			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by agreements' | 'TRY'      | 'Local currency'           | 'No'                   |
-			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by agreements' | 'TRY'      | 'TRY'                      | 'No'                   |
+			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner'  | 'Legal name' | 'Partner term'                | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
+			| ''                                     | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by Partner terms' | 'USD'      | 'Reporting currency'       | 'No'                   |
+			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by Partner terms' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
+			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by Partner terms' | 'TRY'      | 'Local currency'           | 'No'                   |
+			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by Partner terms' | 'TRY'      | 'TRY'                      | 'No'                   |
 
 
 	
@@ -871,28 +871,28 @@
 	* Заполнение ввода начального остатка по задолженности клиента
 		* Заполнение партнера и Legal name
 			И я перехожу к закладке "Account receivable"
-			И в таблице "AccountReceivableByAgreements" я нажимаю на кнопку 'Add'
-			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Partner"
+			И в таблице "AccountReceivableByPartner terms" я нажимаю на кнопку 'Add'
+			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
+			И в таблице "AccountReceivableByPartner terms" я завершаю редактирование строки
 		* Check filling inLegal name
-				И     таблица "AccountReceivableByAgreements" содержит строки:
+				И     таблица "AccountReceivableByPartner terms" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
 		* Создание тестового соглашения с взаиморасчетами по соглашениям
-			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Agreement"
+			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner term"
 			И я нажимаю на кнопку с именем 'FormCreate'
-			И я меняю значение переключателя 'AP-AR posting detail' на 'By agreements'
+			И я меняю значение переключателя 'AP/AR posting detail' на 'By Partner terms'
 			И я меняю значение переключателя 'Type' на 'Customer'
-			И в поле 'ENG' я ввожу текст 'DFC Customer by agreements'
+			И в поле 'ENG' я ввожу текст 'DFC Customer by Partner terms'
 			И в поле 'Date' я ввожу текст '01.12.2019'
-			И я нажимаю кнопку выбора у поля "Currency movement type"
+			И я нажимаю кнопку выбора у поля "Multi currency movement type"
 			И в таблице "List" я перехожу к строке:
 				| 'Currency' | 'Description' | 'Source'       | 'Type'      |
-				| 'TRY'      | 'TRY'         | 'Forex Seling' | 'Agreement' |
+				| 'TRY'      | 'TRY'         | 'Forex Seling' | 'Partner term' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Price type"
 			И в таблице "List" я перехожу к строке:
@@ -903,28 +903,28 @@
 			И я нажимаю на кнопку 'Save and close'
 			И в таблице "List" я перехожу к строке:
 				| 'Description'              |
-				| 'DFC Customer by agreements' |
+				| 'DFC Customer by Partner terms' |
 			И я нажимаю на кнопку с именем 'FormChoose'
 		* Заполнение суммы и валюты
-			И в таблице "AccountReceivableByAgreements" я активизирую поле "Currency"
-			И в таблице "AccountReceivableByAgreements" я выбираю текущую строку
-			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Currency"
+			И в таблице "AccountReceivableByPartner terms" я активизирую поле "Currency"
+			И в таблице "AccountReceivableByPartner terms" я выбираю текущую строку
+			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Currency"
 			И в таблице "List" я активизирую поле "Description"
 			И в таблице "List" я перехожу к строке:
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountReceivableByAgreements" я активизирую поле "Amount"
-			И в таблице "AccountReceivableByAgreements" в поле 'Amount' я ввожу текст '100,00'
-			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
+			И в таблице "AccountReceivableByPartner terms" я активизирую поле "Amount"
+			И в таблице "AccountReceivableByPartner terms" в поле 'Amount' я ввожу текст '100,00'
+			И в таблице "AccountReceivableByPartner terms" я завершаю редактирование строки
 		* Проверка расчета Reporting currency
-			И в таблице "CurrenciesAccountReceivableByAgreements" я перехожу к строке:
+			И в таблице "CurrenciesAccountReceivableByPartner terms" я перехожу к строке:
 				| 'Movement type'      | 'Type'      |
 				| 'Reporting currency' | 'Reporting' |
-			И в таблице "CurrenciesAccountReceivableByAgreements" я выбираю текущую строку
-			И в таблице "CurrenciesAccountReceivableByAgreements" в поле с именем "CurrenciesAccountReceivableByAgreementsRatePresentation" я ввожу текст '5,8400'
-			И в таблице "CurrenciesAccountReceivableByAgreements" в поле с именем "CurrenciesAccountReceivableByAgreementsMultiplicity" я ввожу текст '1'
-			И в таблице "CurrenciesAccountReceivableByAgreements" я завершаю редактирование строки
+			И в таблице "CurrenciesAccountReceivableByPartner terms" я выбираю текущую строку
+			И в таблице "CurrenciesAccountReceivableByPartner terms" в поле с именем "CurrenciesAccountReceivableByPartner termsRatePresentation" я ввожу текст '5,8400'
+			И в таблице "CurrenciesAccountReceivableByPartner terms" в поле с именем "CurrenciesAccountReceivableByPartner termsMultiplicity" я ввожу текст '1'
+			И в таблице "CurrenciesAccountReceivableByPartner terms" я завершаю редактирование строки
 			И     таблица "CurrenciesAccountReceivableByDocuments" содержит строки:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
@@ -938,15 +938,15 @@
 			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                           | ''         | ''                         | ''                     |
 			| 'Register  "Partner AR transactions"'  | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                           | ''         | ''                         | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''         | ''           | ''                           | ''         | ''                         | 'Attributes'           |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner'  | 'Legal name' | 'Agreement'                  | 'Currency' | 'Currency movement type'   | 'Deferred calculation' |
-			| ''                                     | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by agreements' | 'USD'      | 'Reporting currency'       | 'No'                   |
-			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by agreements' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
-			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by agreements' | 'TRY'      | 'Local currency'           | 'No'                   |
-			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by agreements' | 'TRY'      | 'TRY'                      | 'No'                   |
+			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner'  | 'Legal name' | 'Partner term'                  | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
+			| ''                                     | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by Partner terms' | 'USD'      | 'Reporting currency'       | 'No'                   |
+			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by Partner terms' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
+			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by Partner terms' | 'TRY'      | 'Local currency'           | 'No'                   |
+			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by Partner terms' | 'TRY'      | 'TRY'                      | 'No'                   |
 			| ''                                     | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                           | ''         | ''                         | ''                     |
 			| 'Register  "Accounts statement"'           | ''            | ''                   | ''                    | ''               | ''                       | ''               | ''             | ''                           | ''           | ''                         | ''                     |
 			| ''                                         | 'Record type' | 'Period'             | 'Resources'           | ''               | ''                       | ''               | 'Dimensions'   | ''                           | ''           | ''                         | ''                     |
-			| ''                                         | ''            | ''                   | 'Advance to supliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'                    | 'Legal name' | 'Basis document'           | 'Currency'             |
+			| ''                                         | ''            | ''                   | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'                    | 'Legal name' | 'Basis document'           | 'Currency'             |
 			| ''                                         | 'Receipt'     | '*'                  | ''                    | ''               | ''                       | '100'            | 'Main Company' | 'DFC'                        | 'DFC'        | ''                         | 'TRY'                  |
 			| ''                                         | ''            | ''                   | ''                    | ''               | ''                       | ''               | ''             | ''                           | ''           | ''                         | ''                     |
 			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                           | ''         | ''                         | ''                     |
@@ -1063,83 +1063,83 @@
 	* Заполнение ввода начального остатка по задолженности поставщику по соглашениям
 		* Заполнение партнера и Legal name
 			И я перехожу к закладке "Account payable"
-			И в таблице "AccountPayableByAgreements" я нажимаю на кнопку 'Add'
-			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Partner"
+			И в таблице "AccountPayableByPartner terms" я нажимаю на кнопку 'Add'
+			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
+			И в таблице "AccountPayableByPartner terms" я завершаю редактирование строки
 		* Check filling inLegal name
-				И     таблица "AccountPayableByAgreements" содержит строки:
+				И     таблица "AccountPayableByPartner terms" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
 		* Выбор тестового соглашения с взаиморасчетами по соглашениям
-			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Agreement"
+			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 			| 'Description'              |
-			| 'DFC Vendor by agreements' |
+			| 'DFC Vendor by Partner terms' |
 			И я нажимаю на кнопку с именем 'FormChoose'
 		* Заполнение суммы и валюты
-			И в таблице "AccountPayableByAgreements" я активизирую поле "Currency"
-			И в таблице "AccountPayableByAgreements" я выбираю текущую строку
-			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Currency"
+			И в таблице "AccountPayableByPartner terms" я активизирую поле "Currency"
+			И в таблице "AccountPayableByPartner terms" я выбираю текущую строку
+			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Currency"
 			И в таблице "List" я активизирую поле "Description"
 			И в таблице "List" я перехожу к строке:
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountPayableByAgreements" я активизирую поле "Amount"
-			И в таблице "AccountPayableByAgreements" в поле 'Amount' я ввожу текст '111,00'
-			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
+			И в таблице "AccountPayableByPartner terms" я активизирую поле "Amount"
+			И в таблице "AccountPayableByPartner terms" в поле 'Amount' я ввожу текст '111,00'
+			И в таблице "AccountPayableByPartner terms" я завершаю редактирование строки
 		* Проверка расчета Reporting currency
-			И в таблице "CurrenciesAccountPayableByAgreements" я перехожу к строке:
+			И в таблице "CurrenciesAccountPayableByPartner terms" я перехожу к строке:
 			| 'Movement type'      | 'Type'      |
 			| 'Reporting currency' | 'Reporting' |
-			И в таблице "CurrenciesAccountPayableByAgreements" я выбираю текущую строку
-			И в таблице "CurrenciesAccountPayableByAgreements" в поле с именем "CurrenciesAccountPayableByAgreementsRatePresentation" я ввожу текст '5,8400'
-			И в таблице "CurrenciesAccountPayableByAgreements" в поле с именем "CurrenciesAccountPayableByAgreementsMultiplicity" я ввожу текст '1'
-			И в таблице "CurrenciesAccountPayableByAgreements" я завершаю редактирование строки
+			И в таблице "CurrenciesAccountPayableByPartner terms" я выбираю текущую строку
+			И в таблице "CurrenciesAccountPayableByPartner terms" в поле с именем "CurrenciesAccountPayableByPartner termsRatePresentation" я ввожу текст '5,8400'
+			И в таблице "CurrenciesAccountPayableByPartner terms" в поле с именем "CurrenciesAccountPayableByPartner termsMultiplicity" я ввожу текст '1'
+			И в таблице "CurrenciesAccountPayableByPartner terms" я завершаю редактирование строки
 	* Заполнение ввода начального остатка по задолженности клиента  по соглашениям
 		* Заполнение партнера и Legal name
 			И я перехожу к закладке "Account receivable"
-			И в таблице "AccountReceivableByAgreements" я нажимаю на кнопку 'Add'
-			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Partner"
+			И в таблице "AccountReceivableByPartner terms" я нажимаю на кнопку 'Add'
+			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
+			И в таблице "AccountReceivableByPartner terms" я завершаю редактирование строки
 		* Check filling inLegal name
-				И     таблица "AccountReceivableByAgreements" содержит строки:
+				И     таблица "AccountReceivableByPartner terms" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
 		* Выбор тестового соглашения с взаиморасчетами по соглашениям
-			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Agreement"
+			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'              |
-				| 'DFC Customer by agreements' |
+				| 'DFC Customer by Partner terms' |
 			И я нажимаю на кнопку с именем 'FormChoose'
 		* Заполнение суммы и валюты
-			И в таблице "AccountReceivableByAgreements" я активизирую поле "Currency"
-			И в таблице "AccountReceivableByAgreements" я выбираю текущую строку
-			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Currency"
+			И в таблице "AccountReceivableByPartner terms" я активизирую поле "Currency"
+			И в таблице "AccountReceivableByPartner terms" я выбираю текущую строку
+			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Currency"
 			И в таблице "List" я активизирую поле "Description"
 			И в таблице "List" я перехожу к строке:
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountReceivableByAgreements" я активизирую поле "Amount"
-			И в таблице "AccountReceivableByAgreements" в поле 'Amount' я ввожу текст '151,00'
-			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
+			И в таблице "AccountReceivableByPartner terms" я активизирую поле "Amount"
+			И в таблице "AccountReceivableByPartner terms" в поле 'Amount' я ввожу текст '151,00'
+			И в таблице "AccountReceivableByPartner terms" я завершаю редактирование строки
 		* Проверка расчета Reporting currency
-			И в таблице "CurrenciesAccountReceivableByAgreements" я перехожу к строке:
+			И в таблице "CurrenciesAccountReceivableByPartner terms" я перехожу к строке:
 				| 'Movement type'      | 'Type'      |
 				| 'Reporting currency' | 'Reporting' |
-			И в таблице "CurrenciesAccountReceivableByAgreements" я выбираю текущую строку
-			И в таблице "CurrenciesAccountReceivableByAgreements" в поле с именем "CurrenciesAccountReceivableByAgreementsRatePresentation" я ввожу текст '5,8400'
-			И в таблице "CurrenciesAccountReceivableByAgreements" в поле с именем "CurrenciesAccountReceivableByAgreementsMultiplicity" я ввожу текст '1'
-			И в таблице "CurrenciesAccountReceivableByAgreements" я завершаю редактирование строки
+			И в таблице "CurrenciesAccountReceivableByPartner terms" я выбираю текущую строку
+			И в таблице "CurrenciesAccountReceivableByPartner terms" в поле с именем "CurrenciesAccountReceivableByPartner termsRatePresentation" я ввожу текст '5,8400'
+			И в таблице "CurrenciesAccountReceivableByPartner terms" в поле с именем "CurrenciesAccountReceivableByPartner termsMultiplicity" я ввожу текст '1'
+			И в таблице "CurrenciesAccountReceivableByPartner terms" я завершаю редактирование строки
 	# * Заполнение ввода начального остатка по задолженности клиента  по документам
 	# * Заполнение ввода начального остатка по задолженности поставщика  по документам
 
@@ -1170,11 +1170,11 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "AccountPayableByDocuments" я завершаю редактирование строки
 		И я перехожу к следующему реквизиту
-		И в таблице "AccountPayableByDocuments" я активизирую поле с именем "AccountPayableByDocumentsAgreement"
-		И в таблице "AccountPayableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountPayableByDocumentsAgreement"
+		И в таблице "AccountPayableByDocuments" я активизирую поле с именем "AccountPayableByDocumentsPartner term"
+		И в таблице "AccountPayableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountPayableByDocumentsPartner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
-			| 'Agreement vendor DFC'         |
+			| 'Partner term vendor DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "AccountPayableByDocuments" я выбираю текущую строку
 		И в таблице "AccountPayableByDocuments" я активизирую поле с именем "AccountPayableByDocumentsCurrency"
@@ -1207,11 +1207,11 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И я перехожу к следующему реквизиту
-		И в таблице "AccountReceivableByDocuments" я активизирую поле с именем "AccountReceivableByDocumentsAgreement"
-		И в таблице "AccountReceivableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountReceivableByDocumentsAgreement"
+		И в таблице "AccountReceivableByDocuments" я активизирую поле с именем "AccountReceivableByDocumentsPartner term"
+		И в таблице "AccountReceivableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountReceivableByDocumentsPartner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
-			| 'Agreement DFC'         |
+			| 'Partner term DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "AccountReceivableByDocuments" я активизирую поле с именем "AccountReceivableByDocumentsCurrency"
 		И в таблице "AccountReceivableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountReceivableByDocumentsCurrency"
@@ -1240,8 +1240,8 @@
 	# AccountPayableByDocumentsPartnerOnChange
 	# AccountReceivableByDocumentsPartnerOnChange
 	# MainTableLegalNameEditTextChange
-	# AccountReceivableByDocumentsAgreementStartChoice
-	# AccountPayableByDocumentsAgreementStartChoice
-	# AccountReceivableByAgreementsAgreementEditTextChange
-	# AccountReceivableByDocumentsAgreementEditTextChange
-	# AgreementEditTextChange
+	# AccountReceivableByDocumentsPartner termStartChoice
+	# AccountPayableByDocumentsPartner termStartChoice
+	# AccountReceivableByPartner termsPartner termEditTextChange
+	# AccountReceivableByDocumentsPartner termEditTextChange
+	# Partner termEditTextChange

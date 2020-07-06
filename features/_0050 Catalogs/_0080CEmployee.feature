@@ -6,7 +6,7 @@
 Функционал: access rights
 
 As an owner
-I want to create groups, access profiles and users
+I want to create groups, User access profiles and users
 To restrict user access rights
 
 Контекст:
@@ -61,8 +61,8 @@ To restrict user access rights
 
 
 
-Сценарий: _008002 access groups creation
-	* Opening the form for filling in Access Groups
+Сценарий: _008002 User access groups creation
+	* Opening the form for filling in User access groups
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AccessGroups"
 	* Access group creation Commercial Agent
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -108,11 +108,11 @@ To restrict user access rights
 		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_en" "Administrators"  
 		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_en" "Financier" 
 
-Сценарий: _008003 access profiles creation
+Сценарий: _008003 User access profiles creation
 	* Opening the form for filling in profiles
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AccessProfiles"
 		И Пауза 2
-	* Access profiles creation Commercial Agent
+	* User access profiles creation Commercial Agent
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -141,9 +141,9 @@ To restrict user access rights
 				| 'IRP'           | 'Basic role'   | 'No'  |
 			И в таблице "Roles" я изменяю флаг 'Use'
 			И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-			И я жду закрытия окна 'Access profiles (create)' в течение 20 секунд
+			И я жду закрытия окна 'User access profiles (create)' в течение 20 секунд
 			И Пауза 5
-	* Access profiles creation Manager
+	* User access profiles creation Manager
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -170,8 +170,8 @@ To restrict user access rights
 			И в таблице "Roles" я изменяю флаг 'Use'
 			И в таблице "Roles" я завершаю редактирование строки
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я жду закрытия окна 'Access profiles (create)' в течение 20 секунд
-	* Access profiles creation Financier
+		И я жду закрытия окна 'User access profiles (create)' в течение 20 секунд
+	* User access profiles creation Financier
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -190,8 +190,8 @@ To restrict user access rights
 				| 'IRP'           | 'Run web client' | 'No'  |
 			И в таблице "Roles" я изменяю флаг 'Use'
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я жду закрытия окна 'Access profiles (create)' в течение 20 секунд
-	* Access profiles creation Administrators
+		И я жду закрытия окна 'User access profiles (create)' в течение 20 секунд
+	* User access profiles creation Administrators
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -232,7 +232,7 @@ To restrict user access rights
 			И в таблице "Roles" я изменяю флаг 'Use'
 			И в таблице "Roles" я завершаю редактирование строки
 			И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-			И я жду закрытия окна 'Access profiles (create)' в течение 20 секунд
+			И я жду закрытия окна 'User access profiles (create)' в течение 20 секунд
 	* Checking for created elements
 		Тогда В базе появился хотя бы один элемент справочника "AccessProfiles"
 		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_en" "Commercial Agent"  
@@ -397,7 +397,7 @@ To restrict user access rights
 
 
 Сценарий: _008005 assignment of access rights to users
-	* Opening the Access Groups catalog
+	* Opening the User access groups catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AccessGroups'
 	* Assignment of access rights to sales rep
 		И в таблице "List" я перехожу к строке:
@@ -545,8 +545,8 @@ To restrict user access rights
 		И Пауза 5
 
 
-Сценарий: _008006 creating Partner segments (employee)
-	* Opening the form for filling Partner segments
+Сценарий: _008006 creating Partner segments content (employee)
+	* Opening the form for filling Partner segments content
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.PartnerSegments'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2
@@ -656,7 +656,7 @@ To restrict user access rights
 
 
 Сценарий: _008010 addition of employees to the segment Region 2 (C) in register
-	* Opening register Partner segments
+	* Opening register Partner segments content
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
 	* Adding David Romanov to the segment Region 1
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -667,7 +667,7 @@ To restrict user access rights
 			| 'Description' |
 			| 'Region 1'  |
 		И в таблице "List" я выбираю текущую строку
-		Тогда открылось окно 'Partner segments (create) *'
+		Тогда открылось окно 'Partner segments content (create) *'
 		И я нажимаю кнопку выбора у поля "Partner"
 		И Пауза 5
 		И в таблице "List" я перехожу к строке:

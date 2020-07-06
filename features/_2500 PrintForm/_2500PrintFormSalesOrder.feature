@@ -46,14 +46,14 @@
 				| 'Description' |
 				| 'SalesOrder'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "External data proc"
-			Тогда открылось окно 'External data proc'
+			И я нажимаю кнопку выбора у поля "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Sales Order' |
 			И в таблице "List" я выбираю текущую строку
 		* Указание интерфейсной группы для размещения команды
-			И я нажимаю кнопку выбора у поля "Interface group"
+			И я нажимаю кнопку выбора у поля "UI group"
 			* Создание интерфейсной группы Print
 				И я нажимаю на кнопку с именем 'FormCreate'
 				И в поле 'ENG' я ввожу текст 'Print'
@@ -68,7 +68,7 @@
 	* Save verification команды
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
-		| 'Configuration metadata' | 'External data proc' | 'Interface group' |
+		| 'Configuration metadata' | 'Plugins' | 'UI group' |
 		| 'SalesOrder'             | 'Sales Order'        | 'Print'           |
 
 Сценарий: _25003 проверка вывода на печать Sales order
@@ -82,10 +82,10 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Legal name"
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                   |
-			| 'Basic Agreements, without VAT' |
+			| 'Basic Partner terms, without VAT' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"

@@ -5,7 +5,7 @@
 Функционал: tax calculation check
 
 
-# individually applying taxes
+# individually applying Tax types
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
@@ -135,7 +135,7 @@
 
 
 Сценарий: _090200 activating Sales Tax calculation in Sales order and Sales invoice documents
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.Taxes'
+	И я открываю навигационную ссылку 'e1cib/list/Catalog.Tax types'
 	И в таблице "List" я перехожу к строке:
 		| 'Description' | 'Reference' |
 		| 'SalesTax'    | 'SalesTax'  |
@@ -164,10 +164,10 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 	* Adding items to Sales order
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -256,10 +256,10 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
@@ -351,10 +351,10 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
@@ -487,10 +487,10 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
@@ -553,7 +553,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '3 000'
 		И я нажимаю на кнопку 'Post'
-	* Create Sales invoice based on Sales order and check filling taxes
+	* Create Sales invoice based on Sales order and check filling Tax types
 		И я нажимаю на кнопку 'Sales invoice'
 		И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'SalesTax' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -579,10 +579,10 @@
 			| 'Description' |
 			| 'Kalipso'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:

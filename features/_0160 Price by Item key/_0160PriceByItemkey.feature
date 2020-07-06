@@ -1243,7 +1243,7 @@ To sell and purchase goods and services
 		| '102'    | 'Price by item keys'  | 'Discount Price TRY 2'       | 'Price list 102*' |
 
 Сценарий: _016010 check dependent prices calculation
-	* Adding external data processing
+	* Adding Pluginsessing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\SalesPriceCalculation.epf"
@@ -1255,7 +1255,7 @@ To sell and purchase goods and services
 		И в поле 'TR' я ввожу текст 'SalesPriceCalculation'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'External data proc (create)' в течение 10 секунд
+		И я жду закрытия окна 'Plugins (create)' в течение 10 секунд
 	* Creating price type that will use external processing
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PriceTypes"
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -1269,7 +1269,7 @@ To sell and purchase goods and services
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
 	* Adding external processing to the price type and filling in the settings
-		И я нажимаю кнопку выбора у поля "External data proc"
+		И я нажимаю кнопку выбора у поля "Plugins"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'         |
 			| 'SalesPriceCalculation' |

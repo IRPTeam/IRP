@@ -26,7 +26,7 @@ To close debts to partners
 		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
 		И     элемент формы с именем "Currency" стал равен 'TRY'
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Payee'             | 'Agreement'          | 'Amount'     | 'Basis document'      |
+			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '136 000,00' | 'Purchase invoice 1*' |
 		И     таблица "PaymentListCurrencies" содержит строки:
 			| 'Movement type'      | 'Amount'    | 'Multiplicity' |
@@ -41,11 +41,11 @@ To close debts to partners
 		И     элемент формы с именем "Account" стал равен 'Bank account, USD'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Payee'             | 'Agreement'          | 'Amount'     | 'Basis document'      |
+			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '136 000,00' | 'Purchase invoice 1*' |
 		И     таблица "PaymentListCurrencies" содержит строки:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Agreement' | 'USD'           | 'TRY'      | '0,1770'            | '768 361,58' | '1'            |
+			| 'TRY'                | 'Partner term' | 'USD'           | 'TRY'      | '0,1770'            | '768 361,58' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'            | '768 361,58' | '1'            |
 	* Check calculation Document amount
 		И     элемент формы с именем "DocumentAmount" стал равен '136 000,00'
@@ -63,7 +63,7 @@ To close debts to partners
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '20 000,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Payee'             | 'Agreement'          | 'Amount'     | 'Basis document'      |
+			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '20 000,00' | 'Purchase invoice 6*' |
 	И Я закрыл все окна клиентского приложения
 
@@ -110,8 +110,8 @@ To close debts to partners
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-		* Filling in an Agreement
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		* Filling in an Partner term
+			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'           |
 					| 'Vendor Ferron, TRY' |
@@ -175,8 +175,8 @@ To close debts to partners
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-		* Filling in an Agreement
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		* Filling in an Partner term
+			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'           |
 					| 'Vendor Ferron, TRY' |
@@ -240,8 +240,8 @@ To close debts to partners
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-		* Filling in an Agreement
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		* Filling in an Partner term
+			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
 				| 'Vendor Ferron, USD' |
@@ -259,7 +259,7 @@ To close debts to partners
 Сценарий: _053002 check Bank payment movements by register PartnerApTransactions
 		И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.PartnerApTransactions"
 		Тогда таблица "List" содержит строки:
-			| 'Currency'   | 'Recorder'            | 'Legal name'        | 'Basis document'     | 'Company'      | 'Amount'     | 'Agreement'            | 'Partner'   |
+			| 'Currency'   | 'Recorder'            | 'Legal name'        | 'Basis document'     | 'Company'      | 'Amount'     | 'Partner term'            | 'Partner'   |
 			| 'TRY'        | 'Bank payment 1*'     | 'Company Ferron BP' |'Purchase invoice 1*' | 'Main Company' | '1 000,00'   | 'Vendor Ferron, TRY'   | 'Ferron BP' |
 			| 'USD'        | 'Bank payment 2*'     | 'Company Ferron BP' |'Purchase invoice 1*' | 'Main Company' | '20,00'      | 'Vendor Ferron, TRY'   | 'Ferron BP' |
 			| 'EUR'        | 'Bank payment 3*'     | 'Company Ferron BP' |'*'                   | 'Main Company' | '150,00'     | 'Vendor Ferron, USD'   | 'Ferron BP' |
@@ -279,7 +279,7 @@ To close debts to partners
 			| 'Document registrations records'       | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| 'Register  "Accounts statement"'           | ''            | ''                    | ''                    | ''               | ''                                             | ''               | ''                         | ''                     | ''                  | ''                         | ''                     |
 			| ''                                         | 'Record type' | 'Period'              | 'Resources'           | ''               | ''                                             | ''               | 'Dimensions'               | ''                     | ''                  | ''                         | ''                     |
-			| ''                                         | ''            | ''                    | 'Advance to supliers' | 'Transaction AP' | 'Advance from customers'                       | 'Transaction AR' | 'Company'                  | 'Partner'              | 'Legal name'        | 'Basis document'           | 'Currency'             |
+			| ''                                         | ''            | ''                    | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers'                       | 'Transaction AR' | 'Company'                  | 'Partner'              | 'Legal name'        | 'Basis document'           | 'Currency'             |
 			| ''                                         | 'Expense'     | '*'                   | ''                    | '1 000'          | ''                                             | ''               | 'Main Company'             | 'Ferron BP'            | 'Company Ferron BP' | 'Purchase invoice 1*'      | 'TRY'                  |
 			| ''                                         | ''            | ''                    | ''                    | ''               | ''                                             | ''               | ''                         | ''                     | ''                  | ''                         | ''                     |
 			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
@@ -289,7 +289,7 @@ To close debts to partners
 			| ''                                     | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| 'Register  "Partner AP transactions"'  | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | ''                      | ''         | ''                         | 'Attributes'           |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Basis document'       | 'Partner'      | 'Legal name'               | 'Agreement'             | 'Currency' | 'Currency movement type'   | 'Deferred calculation' |
+			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Basis document'       | 'Partner'      | 'Legal name'               | 'Partner term'             | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                     | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Purchase invoice 1*'  | 'Ferron BP' | 'Company Ferron BP'     | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Purchase invoice 1*'  | 'Ferron BP' | 'Company Ferron BP'     | 'Vendor Ferron, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Purchase invoice 1*'  | 'Ferron BP' | 'Company Ferron BP'     | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
@@ -297,7 +297,7 @@ To close debts to partners
 			| ''                                     | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| 'Register  "Account balance"'          | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | 'Attributes'            | ''         | ''                         | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Account'              | 'Currency'     | 'Currency movement type'   | 'Deferred calculation'  | ''         | ''                         | ''                     |
+			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Account'              | 'Currency'     | 'Multi currency movement type'   | 'Deferred calculation'  | ''         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Bank account, TRY' | 'USD'          | 'Reporting currency'       | 'No'                    | ''         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Bank account, TRY' | 'TRY'          | 'en descriptions is empty' | 'No'                    | ''         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Bank account, TRY' | 'TRY'          | 'Local currency'           | 'No'                    | ''         | ''                         | ''                     |
@@ -337,7 +337,7 @@ To close debts to partners
 			| 'Document registrations records'       | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| 'Register  "Accounts statement"'           | ''            | ''                    | ''                    | ''               | ''                                             | ''               | ''                         | ''                     | ''                  | ''                         | ''                     |
 			| ''                                         | 'Record type' | 'Period'              | 'Resources'           | ''               | ''                                             | ''               | 'Dimensions'               | ''                     | ''                  | ''                         | ''                     |
-			| ''                                         | ''            | ''                    | 'Advance to supliers' | 'Transaction AP' | 'Advance from customers'                       | 'Transaction AR' | 'Company'                  | 'Partner'              | 'Legal name'        | 'Basis document'           | 'Currency'             |
+			| ''                                         | ''            | ''                    | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers'                       | 'Transaction AR' | 'Company'                  | 'Partner'              | 'Legal name'        | 'Basis document'           | 'Currency'             |
 			| ''                                         | 'Expense'     | '*'                   | ''                    | '1 000'          | ''                                             | ''               | 'Main Company'             | 'Ferron BP'            | 'Company Ferron BP' | 'Purchase invoice 1*'      | 'TRY'                  |
 			| ''                                         | ''            | ''                    | ''                    | ''               | ''                                             | ''               | ''                         | ''                     | ''                  | ''                         | ''                     |
 			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
@@ -347,7 +347,7 @@ To close debts to partners
 			| ''                                     | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| 'Register  "Partner AP transactions"'  | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | ''                      | ''         | ''                         | 'Attributes'           |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Basis document'       | 'Partner'      | 'Legal name'               | 'Agreement'             | 'Currency' | 'Currency movement type'   | 'Deferred calculation' |
+			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Basis document'       | 'Partner'      | 'Legal name'               | 'Partner term'             | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                     | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Purchase invoice 1*'  | 'Ferron BP' | 'Company Ferron BP'     | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Purchase invoice 1*'  | 'Ferron BP' | 'Company Ferron BP'     | 'Vendor Ferron, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Purchase invoice 1*'  | 'Ferron BP' | 'Company Ferron BP'     | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
@@ -355,7 +355,7 @@ To close debts to partners
 			| ''                                     | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| 'Register  "Account balance"'          | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | 'Attributes'            | ''         | ''                         | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Account'              | 'Currency'     | 'Currency movement type'   | 'Deferred calculation'  | ''         | ''                         | ''                     |
+			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Account'              | 'Currency'     | 'Multi currency movement type'   | 'Deferred calculation'  | ''         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Bank account, TRY' | 'USD'          | 'Reporting currency'       | 'No'                    | ''         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Bank account, TRY' | 'TRY'          | 'en descriptions is empty' | 'No'                    | ''         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Bank account, TRY' | 'TRY'          | 'Local currency'           | 'No'                    | ''         | ''                         | ''                     |
@@ -370,7 +370,7 @@ To close debts to partners
 
 	
 
-Сценарий: _053004 check the filter by bank accounts (the choice of cash account is not available) + filling in currency from the bank account in Bank payment document
+Сценарий: _053004 check the filter by bank accounts (the choice of Cash/Bank accounts is not available) + filling in currency from the bank account in Bank payment document
 	И я закрыл все окна клиентского приложения
 	И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 	Когда проверяю фильтр по банковским счетам (выбор кассы недоступен) + заполнение валюты из банковского счета
@@ -459,7 +459,7 @@ To close debts to partners
 		Если в таблице "PaymentList" нет колонки с именем "Payee" Тогда
 		Если в таблице "PaymentList" нет колонки с именем "Partner" Тогда
 		И     таблица "PaymentList" стала равной:
-			| '#' | 'Amount' | 'Planing transaction basis' |
+			| '#' | 'Amount' | 'Planning transaction basis' |
 			| '1' | '100,00' | ''                          |
 
 	

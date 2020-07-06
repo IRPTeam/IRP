@@ -13,10 +13,10 @@ For tax accounting
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 
-Сценарий: _017901 connection of tax calculation external data processing TaxCalculateVAT_TR
-	* Opening a form to add external data processing
+Сценарий: _017901 connection of tax calculation Pluginsessing TaxCalculateVAT_TR
+	* Opening a form to add Pluginsessing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-	* Addition of external data processing for calculating taxes for Turkey (VAT)
+	* Addition of Pluginsessing for calculating Tax types for Turkey (VAT)
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\TaxCalculateVAT_TR.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
@@ -27,18 +27,18 @@ For tax accounting
 		И в поле 'TR' я ввожу текст 'TaxCalculateVAT_TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'External data proc (create)' в течение 10 секунд
+		И я жду закрытия окна 'Plugins (create)' в течение 10 секунд
 	* Checking added processing
 		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "TaxCalculateVAT_TR"	
 
 
-Сценарий: _017902 filling in catalog 'Taxes'
+Сценарий: _017902 filling in catalog 'Tax types'
 	* Opening a tax creation form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Taxes'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling VAT settings
 		И в поле 'ENG' я ввожу текст 'VAT'
-		И я нажимаю кнопку выбора у поля "External data proc"
+		И я нажимаю кнопку выбора у поля "Plugins"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'TaxCalculateVAT_TR' |
@@ -103,12 +103,12 @@ For tax accounting
 		И в таблице "UseDocuments" из выпадающего списка "Document name" я выбираю точное значение 'Sales return order'
 		И в таблице "UseDocuments" я завершаю редактирование строки
 		И в таблице "UseDocuments" я нажимаю на кнопку с именем 'UseDocumentsAdd'
-		И в таблице "UseDocuments" из выпадающего списка "Document name" я выбираю точное значение 'Saler return'
+		И в таблице "UseDocuments" из выпадающего списка "Document name" я выбираю точное значение 'Sales return'
 		И в таблице "UseDocuments" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save'
 		И я нажимаю на кнопку 'Settings'
 		И я нажимаю на кнопку 'Ok'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Tax settings'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Tax rate settings'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -122,9 +122,9 @@ For tax accounting
 	* Opening a tax creation form
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Taxes'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling in Sales Tax settings
+	* Filling in Sales Tax rate settings
 		И в поле 'ENG' я ввожу текст 'SalesTax'
-		И я нажимаю кнопку выбора у поля "External data proc"
+		И я нажимаю кнопку выбора у поля "Plugins"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'TaxCalculateVAT_TR' |
@@ -139,7 +139,7 @@ For tax accounting
 		И я нажимаю на кнопку 'Save'
 		И я нажимаю на кнопку 'Settings'
 		И я нажимаю на кнопку 'Ok'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Tax settings'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Tax rate settings'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'Period' я ввожу текст '01.10.2019'
 		И я нажимаю кнопку выбора у поля "Company"
@@ -163,8 +163,8 @@ For tax accounting
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-	* Filling in Sales tax settings
-		И я перехожу к закладке "Taxes"
+	* Filling in Sales Tax rate settings
+		И я перехожу к закладке "Tax types"
 		И в таблице "CompanyTaxes" я нажимаю на кнопку с именем 'CompanyTaxesAdd'
 		И я нажимаю кнопку выбора у поля "Tax"
 		И в таблице "List" я выбираю текущую строку

@@ -198,7 +198,7 @@
 Сценарий: _050012 check the display of the header of the collapsible group in Cash reciept
 	И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 	Когда check the display of the header of the collapsible group in cash receipt document
-	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Cash account: Cash desk №2   Currency: USD   Transaction type: Payment from customer   "
+	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Cash/Bank accounts: Cash desk №2   Currency: USD   Transaction type: Payment from customer   "
 	И я нажимаю на гиперссылку с именем "DecorationGroupTitleUncollapsedLabel"
 	Когда Проверяю шаги на Исключение:
         |'И     я нажимаю кнопку выбора у поля "Company"'|
@@ -209,7 +209,7 @@
 Сценарий: _051011 check the display of the header of the collapsible group in Cash payment
 	И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
 	Когда check the display of the header of the collapsible group in cash payment document
-	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Cash account: Cash desk №2   Currency: USD   Transaction type: Payment to the vendor   "
+	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Company: Main Company   Cash/Bank accounts: Cash desk №2   Currency: USD   Transaction type: Payment to the vendor   "
 	И я нажимаю на гиперссылку с именем "DecorationGroupTitleUncollapsedLabel"
 	Когда Проверяю шаги на Исключение:
         |'И     я нажимаю кнопку выбора у поля "Company"'|
@@ -245,7 +245,7 @@
 Сценарий: _056006 check the display of the header of the collapsible group in Invoice Match
 	И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 	Когда check the display of the header of the collapsible group in invoice match
-	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Operation type: With customer   Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP   Agreement: Basic Agreements, TRY"
+	Тогда значение поля с именем "DecorationGroupTitleUncollapsedLabel" содержит текст "Operation type: With customer   Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP   Partner term: Basic Partner terms, TRY"
 	И я нажимаю на гиперссылку с именем "DecorationGroupTitleUncollapsedLabel"
 	Когда Проверяю шаги на Исключение:
         |'И     я нажимаю кнопку выбора у поля "Company"'|

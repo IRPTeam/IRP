@@ -14,31 +14,31 @@
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 		Тогда таблица "List" содержит строки:
 		| 'Description'                             |
-		| 'Basic Agreements, TRY'                   |
+		| 'Basic Partner terms, TRY'                   |
 		| 'Vendor Ferron, TRY'                      |
 		И я закрыл все окна клиентского приложения
 	* Проверка фильтра по соглашениям с клиентами в разделе продаж
 		* Открытие списка
 			И В панели разделов я выбираю 'Sales - A/R'
-			И В панели функций я выбираю 'Customer agreements'
+			И В панели функций я выбираю 'Customer Partner terms'
 		* Проверка фильтра
 			Тогда таблица "List" не содержит строки:
 			| 'Description'                             |
 			| 'Vendor Ferron, TRY'                      |
 			Тогда таблица "List" содержит строки:
 			| 'Description'                             |
-			| 'Basic Agreements, TRY'                   |
+			| 'Basic Partner terms, TRY'                   |
 	* Проверка фильтра по соглашениям с клиентами в разделе закупок
 		* Открытие списка
 			Когда В панели разделов я выбираю 'Purchase  - A/P'
-			И В панели функций я выбираю 'Vendor agreements'
+			И В панели функций я выбираю 'Vendor Partner terms'
 		* Проверка фильтра
 			Тогда таблица "List" содержит строки:
 			| 'Description'                             |
 			| 'Vendor Ferron, TRY'                      |
 			Тогда таблица "List" не содержит строки:
 			| 'Description'                             |
-			| 'Basic Agreements, TRY'                   |
+			| 'Basic Partner terms, TRY'                   |
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0203002 проверка фильтров в справочнике партнеров
@@ -138,7 +138,7 @@
 
 
 
-Сценарий: _0203003 проверка фильтров в справочнике Cash account
+Сценарий: _0203003 проверка фильтров в справочнике Cash/Bank accounts
 	* Проверка наличия данных
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.CashAccounts'
 		Тогда таблица "List" содержит строки:

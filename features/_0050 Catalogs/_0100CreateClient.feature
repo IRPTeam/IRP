@@ -15,11 +15,11 @@ To specify: address, phone, e-mail, gps coordinate on the map
    
 
 
-Сценарий: _010001 add external data processing for entering addresses
-	* Opening a form to add external data processing
+Сценарий: _010001 add Pluginsessing for entering addresses
+	* Opening a form to add Pluginsessing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Adding external data processing 
+	* Adding Pluginsessing 
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\InputAddress.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
 		И в поле 'Path to ext data proc for test' я ввожу текст ''
@@ -30,14 +30,14 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Check adding external data processing
+	* Check adding Pluginsessing
 		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalInputAddress"
 
-Сценарий: _010002 add external data processing for GPS
-	* Opening a form to add external data processing
+Сценарий: _010002 add Pluginsessing for GPS
+	* Opening a form to add Pluginsessing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Adding external data processing 
+	* Adding Pluginsessing 
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\Coordinates.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
 		И в поле 'Path to ext data proc for test' я ввожу текст ''
@@ -48,11 +48,11 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Check adding external data processing
+	* Check adding Pluginsessing
 		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalCoordinates"
 
-Сценарий: _010003 add external data processing for phone
-	* Opening a form to add external data processing
+Сценарий: _010003 add Pluginsessing for phone
+	* Opening a form to add Pluginsessing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in the 'External Input Phone Ukraine' and adding it to the database
@@ -82,8 +82,8 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И Пауза 5
 	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "Phone TR"
 
-Сценарий: _010004 creating ID Info Type - Addresses
-	* Opening a form to add external data processing
+Сценарий: _010004 creating Contact info Type - Addresses
+	* Opening a form to add Pluginsessing
 		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -94,15 +94,15 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в поле 'Unique ID' я ввожу текст 'Adr_10'
 		И я изменяю флаг 'Show on form'
 		И я изменяю флаг 'Read only'
-	* Adding external data processing for addresses
+	* Adding Pluginsessing for addresses
 		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
 			| 'Ukraine'    |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProcess" я активизирую поле "External data proc"
-		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
-		Тогда открылось окно 'External data proc'
+		И в таблице "ExternalDataProcess" я активизирую поле "Plugins"
+		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
+		Тогда открылось окно 'Plugins'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                |
 			| 'ExternalInputAddress' |
@@ -275,9 +275,9 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 		И я нажимаю на кнопку с именем 'FormChoose'
-	* Create an interface group for additional attribute
-		И в таблице "Attributes" я активизирую поле "Interface group"
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Interface group"
+	* Create an UI group for additional attribute
+		И в таблице "Attributes" я активизирую поле "UI group"
+		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Main information'
@@ -397,8 +397,8 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			| 'Alians' |
 			| 'MIO' |
 
-Сценарий: _010009 adding phones to ID info type
-	* Opening the form for filling in ID Info Types
+Сценарий: _010009 adding phones to Contact info type
+	* Opening the form for filling in Contact info type
 		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
 	* Creation Company phone
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -415,7 +415,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			И я нажимаю на кнопку 'Ok'
 			И я изменяю флаг 'Show on form'
 			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                      |
 				| 'ExternalInputPhoneUkraine' |
@@ -439,7 +439,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 	* Creation Partner phone
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я заполняю наименование и тип данных
-			Тогда открылось окно 'ID Info types (create)'
+			Тогда открылось окно 'Contact info type (create)'
 			И я нажимаю кнопку выбора у поля "Value type"
 			Тогда открылось окно 'Edit data type'
 			И в таблице "" я перехожу к строке:
@@ -454,7 +454,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			И я нажимаю на кнопку 'Ok'
 			И я изменяю флаг 'Show on form'
 			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                      |
 				| 'ExternalInputPhoneUkraine' |
@@ -475,8 +475,8 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			| 'Description'     |
 			| 'Partner phone' |
 
-Сценарий: _010010 adding addresses to an ID info type
-	* Opening the form for filling in ID Info Types
+Сценарий: _010010 adding addresses to an Contact info type
+	* Opening the form for filling in Contact info type
 		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
 	* Adding an actual address for partners
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -485,7 +485,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			Тогда открылось окно 'Edit data type'
 			И в таблице "" я перехожу к строке:
 				| ''                |
-				| 'ID Info address' |
+				| 'Addresses hierarchy' |
 			И я нажимаю на кнопку 'OK'
 			И в поле 'Unique ID' я ввожу текст 'Adr_1'
 			И я изменяю флаг 'Show on form'
@@ -503,7 +503,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			Тогда открылось окно 'Edit data type'
 			И в таблице "" я перехожу к строке:
 				| ''                |
-				| 'ID Info address' |
+				| 'Addresses hierarchy' |
 			И я нажимаю на кнопку 'OK'
 			И в поле 'Unique ID' я ввожу текст 'Adr_2'
 			И я изменяю флаг 'Show on form'
@@ -514,21 +514,21 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			И в поле 'TR' я ввожу текст 'Billing address (Company) TR'
 			И я нажимаю на кнопку 'Ok'
 			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-		* Adding external data processing to specify the address for Ukraine
+		* Adding Pluginsessing to specify the address for Ukraine
 			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
 				| Description |
 				| Ukraine     |
 			И в таблице "List" я выбираю текущую строку
 			И я перехожу к следующему реквизиту
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
-			Тогда открылось окно 'External data proc'
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                |
 				| 'ExternalInputAddress' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ExternalDataProcess" я завершаю редактирование строки
-		* Adding external data processing to specify the address for Turkey
+		* Adding Pluginsessing to specify the address for Turkey
 			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
 			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
@@ -536,8 +536,8 @@ To specify: address, phone, e-mail, gps coordinate on the map
 				| Turkey     |
 			И в таблице "List" я выбираю текущую строку
 			И я перехожу к следующему реквизиту
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
-			Тогда открылось окно 'External data proc'
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                |
 				| 'ExternalInputAddress' |
@@ -552,7 +552,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			Тогда открылось окно 'Edit data type'
 			И в таблице "" я перехожу к строке:
 				| ''                |
-				| 'ID Info address' |
+				| 'Addresses hierarchy' |
 			И я нажимаю на кнопку 'OK'
 			И в поле 'Unique ID' я ввожу текст 'Adr_3'
 			И я изменяю флаг 'Show on form'
@@ -563,21 +563,21 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			И в поле 'TR' я ввожу текст 'Registered address (Company) TR'
 			И я нажимаю на кнопку 'Ok'
 			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-		* Adding external data processing to specify the address for Ukraine
+		* Adding Pluginsessing to specify the address for Ukraine
 			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
 				| Description |
 				| Ukraine     |
 			И в таблице "List" я выбираю текущую строку
 			И я перехожу к следующему реквизиту
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
-			Тогда открылось окно 'External data proc'
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                |
 				| 'ExternalInputAddress' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ExternalDataProcess" я завершаю редактирование строки
-		* Adding external data processing to specify the address for Turkey
+		* Adding Pluginsessing to specify the address for Turkey
 			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
 			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
@@ -585,8 +585,8 @@ To specify: address, phone, e-mail, gps coordinate on the map
 				| Turkey     |
 			И в таблице "List" я выбираю текущую строку
 			И я перехожу к следующему реквизиту
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
-			Тогда открылось окно 'External data proc'
+			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
+			Тогда открылось окно 'Plugins'
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                |
 				| 'ExternalInputAddress' |
@@ -604,12 +604,12 @@ To specify: address, phone, e-mail, gps coordinate on the map
 				| 'Registered address  (Company)' |
 
 
-Сценарий: _010011 adding gps to an ID info type
-	* Opening the form for filling in ID Info Types
+Сценарий: _010011 adding gps to an Contact info type
+	* Opening the form for filling in Contact info type
 		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
-	* Adding ID info gps coordinates for partners in Ukraine
+	* Adding Contact info gps coordinates for partners in Ukraine
 		И я нажимаю на кнопку с именем 'FormCreate'
-		Тогда открылось окно 'ID Info types (create)'
+		Тогда открылось окно 'Contact info type (create)'
 		И я нажимаю кнопку выбора у поля "Value type"
 		Тогда открылось окно 'Edit data type'
 		И в таблице "" я перехожу к строке:
@@ -625,8 +625,8 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в поле 'TR' я ввожу текст 'GPS Ukraine TR'
 		И я нажимаю на кнопку 'Ok'
 		И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-		И в таблице "ExternalDataProcess" я активизирую поле "External data proc"
-		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
+		И в таблице "ExternalDataProcess" я активизирую поле "Plugins"
+		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                 |
 			| 'ExternalCoordinates'  |
@@ -643,7 +643,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		Тогда открылось окно 'Coordinates'
 		И я указываю адрес который будет перезаполнятся при выборе gps
 			И я нажимаю кнопку выбора у поля "Structured address"
-			Тогда открылось окно 'ID Info types'
+			Тогда открылось окно 'Contact info type'
 			И в таблице "List" я перехожу к строке:
 				| Description       |
 				| Google Addreses |
@@ -692,8 +692,8 @@ To specify: address, phone, e-mail, gps coordinate on the map
 	* Filling in settings for gps coordinates
 		И я перехожу к закладке "Related values"
 		И в таблице "RelatedValues" я нажимаю на кнопку с именем 'RelatedValuesAdd'
-		И в таблице "RelatedValues" я нажимаю кнопку выбора у реквизита "ID Info type"
-		Тогда открылось окно 'ID Info types'
+		И в таблице "RelatedValues" я нажимаю кнопку выбора у реквизита "Contact info type"
+		Тогда открылось окно 'Contact info type'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                  |
 			| 'Location address (Partner)' |
@@ -707,7 +707,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		Тогда таблица "List" содержит строки
 		| 'Description'                     |
 		| 'GPS Ukraine'    |
-	* Adding ID info gps coordinates for partners in Turkey
+	* Adding Contact info gps coordinates for partners in Turkey
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Value type"
 		И в таблице "" я перехожу к строке:
@@ -723,8 +723,8 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в поле 'TR' я ввожу текст 'GPS Turkey TR'
 		И я нажимаю на кнопку 'Ok'
 		И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-		И в таблице "ExternalDataProcess" я активизирую поле "External data proc"
-		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "External data proc"
+		И в таблице "ExternalDataProcess" я активизирую поле "Plugins"
+		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                 |
 			| 'ExternalCoordinates'  |
@@ -740,7 +740,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в таблице "ExternalDataProcess" я нажимаю на кнопку 'Set settings'
 		И я указываю адрес который будет перезаполнятся при выборе gps
 			И я нажимаю кнопку выбора у поля "Structured address"
-			Тогда открылось окно 'ID Info types'
+			Тогда открылось окно 'Contact info type'
 			И в таблице "List" я перехожу к строке:
 				| Description       |
 				| Google Addreses |
@@ -787,8 +787,8 @@ To specify: address, phone, e-mail, gps coordinate on the map
 	* Filling in gps coordinates settings
 		И я перехожу к закладке "Related values"
 		И в таблице "RelatedValues" я нажимаю на кнопку с именем 'RelatedValuesAdd'
-		И в таблице "RelatedValues" я нажимаю кнопку выбора у реквизита "ID Info type"
-		Тогда открылось окно 'ID Info types'
+		И в таблице "RelatedValues" я нажимаю кнопку выбора у реквизита "Contact info type"
+		Тогда открылось окно 'Contact info type'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                  |
 			| 'Location address (Partner)' |
@@ -817,21 +817,21 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в поле 'TR' я ввожу текст 'Partners TR'
 		И я нажимаю на кнопку 'OK'
 		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "ID Info type"
+		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
 		И в таблице "List" я перехожу к строке:
 			| Description                  |
 			| Location address (Partner) |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "IDInfoTypes" я завершаю редактирование строки
 		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "ID Info type"
+		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
 		И в таблице "List" я перехожу к строке:
 			| Description                  |
 			| Google Addreses |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "IDInfoTypes" я завершаю редактирование строки
 		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "ID Info type"
+		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
 		И в таблице "List" я перехожу к строке:
 			| Description   |
 			| GPS Ukraine |
@@ -858,8 +858,8 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в таблице "SettingsFilter" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Ok'
 		И в таблице "IDInfoTypes" я нажимаю на кнопку 'Add'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "ID Info type"
-		Тогда открылось окно 'ID Info types'
+		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
+		Тогда открылось окно 'Contact info type'
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| GPS Turkey |
@@ -880,7 +880,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в таблице "Source" я выбираю текущую строку
 		И в таблице "SettingsFilter" я активизирую поле "Value"
 		И в таблице "SettingsFilter" я нажимаю кнопку выбора у реквизита "Value"
-		Тогда открылось окно 'Add attribute and property values'
+		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Region Turkey      |
@@ -888,14 +888,14 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в таблице "SettingsFilter" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Ok'
 		И в таблице "IDInfoTypes" я нажимаю на кнопку 'Add'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "ID Info type"
+		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
 		И в таблице "List" я перехожу к строке:
 			| Description     |
 			| Partner phone |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "IDInfoTypes" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Partners (ID Info sets) *' в течение 20 секунд
+		И я жду закрытия окна 'Partners (Contact info sets) *' в течение 20 секунд
 	* Fill in the settings for displaying Company contact information
 		И в таблице "List" я перехожу к строке:
 			| 'Predefined data item name' |
@@ -907,21 +907,21 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в поле 'TR' я ввожу текст 'Company TR'
 		И я нажимаю на кнопку 'OK'
 		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "ID Info type"
-		Тогда открылось окно 'ID Info types'
+		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
+		Тогда открылось окно 'Contact info type'
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "IDInfoTypes" я завершаю редактирование строки
 		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "ID Info type"
-		Тогда открылось окно 'ID Info types'
+		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
+		Тогда открылось окно 'Contact info type'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                  |
 			| 'Billing address (Company)' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "IDInfoTypes" я завершаю редактирование строки
 		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "ID Info type"
-		Тогда открылось окно 'ID Info types'
+		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
+		Тогда открылось окно 'Contact info type'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                     |
 			| 'Registered address  (Company)' |
@@ -940,15 +940,15 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в поле 'TR' я ввожу текст 'Stores TR'
 		И я нажимаю на кнопку 'OK'
 		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "ID Info type"
-		Тогда открылось окно 'ID Info types'
+		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
+		Тогда открылось окно 'Contact info type'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                  |
 			| 'Location address (Partner)' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "IDInfoTypes" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'en descriptions is empty (ID Info sets) *' в течение 20 секунд
+		И я жду закрытия окна 'en descriptions is empty (Contact info sets) *' в течение 20 секунд
 		
 
 Сценарий: _010013 filling phones for partners
@@ -1047,7 +1047,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Сontact information"
+		И я перехожу к закладке "Contact information"
 		И я нажимаю на кнопку открытия поля "Billing address (Company)"
 		И в таблице "CountryTable" я перехожу к строке:
 		| Country |
@@ -1072,7 +1072,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		| Description     |
 		| Company Kalipso |
 		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Сontact information"
+		И я перехожу к закладке "Contact information"
 		И я нажимаю на кнопку открытия поля "Billing address (Company)"
 		И в таблице "CountryTable" я перехожу к строке:
 		| Country |

@@ -108,7 +108,7 @@
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash account"
+			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №3 |
@@ -127,11 +127,11 @@
 				| Description |
 				| Crystal   |
 			И в таблице "List" я выбираю текущую строку
-		* Filling in an Agreement
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		* Filling in an Partner term
+			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 		* Filling in basis documents in a tabular part
 			# temporarily
@@ -165,7 +165,7 @@
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash account"
+			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №3 |
@@ -375,14 +375,14 @@
 		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                        | ''             | ''             | ''                  | ''                         | ''                         | ''                     |
 		| 'Register  "Advance to suppliers"'    | ''            | ''       | ''          | ''             | ''                        | ''             | ''             | ''                  | ''                         | ''                         | ''                     |
 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''             | ''             | ''                  | ''                         | 'Attributes'               | ''                     |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'                 | 'Legal name'   | 'Currency'     | 'Payment document'  | 'Currency movement type'   | 'Deferred calculation'     | ''                     |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'                 | 'Legal name'   | 'Currency'     | 'Payment document'  | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Crystal'                 | 'Company Adel' | 'USD'          | 'Bank payment 700*' | 'Reporting currency'       | 'No'                       | ''                     |
 		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                 | 'Company Adel' | 'TRY'          | 'Bank payment 700*' | 'en descriptions is empty' | 'No'                       | ''                     |
 		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                 | 'Company Adel' | 'TRY'          | 'Bank payment 700*' | 'Local currency'           | 'No'                       | ''                     |
 		| ''                                    | ''            | ''       | ''          | ''             | ''                        | ''             | ''             | ''                  | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                        | ''             | ''             | ''                  | ''                         | ''                         | ''                     |
 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''             | ''             | ''                  | ''                         | ''                         | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'          | 'Partner'      | 'Legal name'   | 'Agreement'         | 'Currency'                 | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'          | 'Partner'      | 'Legal name'   | 'Partner term'         | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Purchase invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'       | 'USD'                      | 'Reporting currency'       | 'No'                   |
 		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Purchase invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'       | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
 		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Purchase invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'       | 'TRY'                      | 'Local currency'           | 'No'                   |
@@ -462,14 +462,14 @@
 		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                     | ''             | ''             | ''                      | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                     | ''             | ''             | ''                      | ''                         | ''                         | ''                     |
 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                     | ''             | ''             | ''                      | ''                         | ''                         | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'       | 'Partner'      | 'Legal name'   | 'Agreement'             | 'Currency'                 | 'Currency movement type'   | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Basic Agreements, TRY' | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'                      | 'Local currency'           | 'No'                   |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'       | 'Partner'      | 'Legal name'   | 'Partner term'             | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
+		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'                      | 'Reporting currency'       | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'                      | 'Local currency'           | 'No'                   |
 		| ''                                    | ''            | ''       | ''          | ''             | ''                     | ''             | ''             | ''                      | ''                         | ''                         | ''                     |
 		| 'Register  "Advance from customers"'  | ''            | ''       | ''          | ''             | ''                     | ''             | ''             | ''                      | ''                         | ''                         | ''                     |
 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                     | ''             | ''             | ''                      | ''                         | 'Attributes'               | ''                     |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'              | 'Legal name'   | 'Currency'     | 'Receipt document'      | 'Currency movement type'   | 'Deferred calculation'     | ''                     |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'              | 'Legal name'   | 'Currency'     | 'Receipt document'      | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Crystal'              | 'Company Adel' | 'USD'          | 'Bank receipt 700*'     | 'Reporting currency'       | 'No'                       | ''                     |
 		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'              | 'Company Adel' | 'TRY'          | 'Bank receipt 700*'     | 'en descriptions is empty' | 'No'                       | ''                     |
 		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'              | 'Company Adel' | 'TRY'          | 'Bank receipt 700*'     | 'Local currency'           | 'No'                       | ''                     |
@@ -517,11 +517,11 @@
 		И в таблице "Transactions" я активизирую поле с именем "TransactionsLegalName"
 		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита с именем "TransactionsLegalName"
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я активизирую поле с именем "TransactionsAgreement"
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита с именем "TransactionsAgreement"
+		И в таблице "Transactions" я активизирую поле с именем "TransactionsPartner term"
+		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита с именем "TransactionsPartner term"
 		И в таблице "List" я перехожу к строке:
-			| 'AP-AR posting detail' | 'Description'           | 'Kind'    |
-			| 'By documents'         | 'Basic Agreements, TRY' | 'Regular' |
+			| 'AP/AR posting detail' | 'Description'           | 'Kind'    |
+			| 'By documents'         | 'Basic Partner terms, TRY' | 'Regular' |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Transactions" я активизирую поле с именем "TransactionsCurrency"
 		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита с именем "TransactionsCurrency"
@@ -550,15 +550,15 @@
 		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                     | ''        | ''             | ''                      | ''         | ''                         | ''                     |
 		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                     | ''        | ''             | ''                      | ''         | ''                         | ''                     |
 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                     | ''        | ''             | ''                      | ''         | ''                         | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'       | 'Partner' | 'Legal name'   | 'Agreement'             | 'Currency' | 'Currency movement type'   | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-342,47'   | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '342,47'    | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'       | 'Partner' | 'Legal name'   | 'Partner term'             | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
+		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '-342,47'   | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '342,47'    | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _2050007 отмена проведения и повторное проведение Invoice match №3 и проверка движений
@@ -585,15 +585,15 @@
 		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                     | ''        | ''             | ''                      | ''         | ''                         | ''                     |
 		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                     | ''        | ''             | ''                      | ''         | ''                         | ''                     |
 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                     | ''        | ''             | ''                      | ''         | ''                         | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'       | 'Partner' | 'Legal name'   | 'Agreement'             | 'Currency' | 'Currency movement type'   | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-342,47'   | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '342,47'    | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Agreements, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'       | 'Partner' | 'Legal name'   | 'Partner term'             | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
+		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '-342,47'   | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '342,47'    | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _2050008 проверка доступности выбора Purchase return и Sales return в документе Invoice match

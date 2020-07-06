@@ -36,7 +36,7 @@
 	И в поле 'TR' я ввожу текст 'GenerateBarcodeTR'
 	И я нажимаю на кнопку 'Ok'
 	И я нажимаю на кнопку 'Save and close'
-	И я жду закрытия окна 'External data proc (create)' в течение 10 секунд
+	И я жду закрытия окна 'Plugins (create)' в течение 10 секунд
 	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "GenerateBarcode"
 
 Сценарий: _300202 настройка отображения кнопки генерации баркода в документе Purchase order
@@ -64,7 +64,7 @@
 			| Description         |
 			| Labeling |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "External data proc"
+		И я нажимаю кнопку выбора у поля "Plugins"
 		И в таблице "List" я перехожу к строке:
 			| Description       |
 			| GenerateBarcodeTR |
@@ -86,7 +86,7 @@
 	И я нажимаю на кнопку 'GenerateBarcodeTR'
 	И я проверяю заполнение документа
 		Тогда таблица "Items" содержит строки:
-			| '#'  | 'Item'        | 'Item key'     | 'Serial lot number' | 'Barcode' |
+			| '#'  | 'Item'        | 'Item key'     | 'Item serial/lot number' | 'Barcode' |
 			| '1'  | 'Dress TR'    | 'M/White TR'   | '*'                 | '*'       |
 			| '2'  | 'Dress TR'    | 'M/White TR'   | '*'                 | '*'       |
 			| '3'  | 'Dress TR'    | 'M/White TR'   | '*'                 | '*'       |

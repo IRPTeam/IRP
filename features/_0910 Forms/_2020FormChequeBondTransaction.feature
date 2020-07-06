@@ -93,11 +93,11 @@
 				| 'Description'      |
 				| 'DFC' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "ChequeBonds" я активизирую поле "Agreement"
-			И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Agreement"
+			И в таблице "ChequeBonds" я активизирую поле "Partner term"
+			И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ChequeBonds" я завершаю редактирование строки
 		* Изменение номера
@@ -171,7 +171,7 @@
 		| 'DFC'        | 'DFC'     |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _2020004 проверка автоматического заполнения Agreement (у партнера только одно соглашение) в документе Cheque bond transaction
+Сценарий: _2020004 проверка автоматического заполнения Partner term (у партнера только одно соглашение) в документе Cheque bond transaction
 	* preparation
 		# Удаление партнера DFC из всех сегментов и создание индивидуального соглашения
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
@@ -179,20 +179,20 @@
 				| 'Description' |
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
-			И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments'
+			И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
 			И в таблице 'List' я удаляю строку
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
-			И В текущем окне я нажимаю кнопку командного интерфейса 'Agreements'
+			И В текущем окне я нажимаю кнопку командного интерфейса 'Partner terms'
 			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст 'Agreement DFC'
+			И в поле 'ENG' я ввожу текст 'Partner term DFC'
 			И я меняю значение переключателя 'Type' на 'Customer'
-			И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
+			И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
 			И в поле 'Number' я ввожу текст '121'
-			И я нажимаю кнопку выбора у поля "Currency movement type"
+			И я нажимаю кнопку выбора у поля "Multi currency movement type"
 			И в таблице "List" я перехожу к строке:
 				| 'Currency' | 'Type'      |
-				| 'TRY'      | 'Agreement' |
+				| 'TRY'      | 'Partner term' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Price type"
 			И в таблице "List" я перехожу к строке:
@@ -218,8 +218,8 @@
 			И в таблице "List" я выбираю текущую строку
 	* Check filling inсоглашения
 			И     таблица "ChequeBonds" содержит строки:
-				| 'Partner' | 'Agreement'     |
-				| 'DFC'     | 'Agreement DFC' |
+				| 'Partner' | 'Partner term'     |
+				| 'DFC'     | 'Partner term DFC' |
 			И я закрыл все окна клиентского приложения
 
 Сценарий: _2020005 проверка отбора только доступных для партнера соглашений в документе Cheque bond transaction
@@ -234,10 +234,10 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 	* Проверка доступности для выбора только одного соглашения
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner term"
 		Тогда таблица "List" стала равной:
 			| 'Description'   |
-			| 'Agreement DFC' |
+			| 'Partner term DFC' |
 		И я закрыл все окна клиентского приложения
 
 Сценарий: _2020006 проверка на очистку поля соглашения после перевыбора партнера (выбранного соглашения у нового партнера нет)
@@ -252,10 +252,10 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 	* Заполнение соглашения
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'   |
-			| 'Agreement DFC' |
+			| 'Partner term DFC' |
 		И в таблице "List" я выбираю текущую строку
 	* Перевыбор партнера 
 		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner"
@@ -263,9 +263,9 @@
 			| 'Description' |
 			| 'Big foot'         |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка очистки поля Agreement
+	* Проверка очистки поля Partner term
 		И     таблица "ChequeBonds" содержит строки:
-			| 'Partner'  | 'Agreement' |
+			| 'Partner'  | 'Partner term' |
 			| 'Big foot' | ''          |
 		И я закрыл все окна клиентского приложения
 		
@@ -455,11 +455,11 @@
 				| 'Description'      |
 				| 'DFC' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "ChequeBonds" я активизирую поле "Agreement"
-			И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Agreement"
+			И в таблице "ChequeBonds" я активизирую поле "Partner term"
+			И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Agreement DFC' |
+				| 'Partner term DFC' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ChequeBonds" я завершаю редактирование строки
 		* Проверка доступных соглашений при перевыборе даты
@@ -467,9 +467,9 @@
 			И в поле 'Date' я ввожу текст '17.01.2016  0:00:00'
 			И я перехожу к закладке "Cheques"
 			И в таблице "ChequeBonds" я активизирую поле "Legal name"
-			И в таблице "ChequeBonds" я активизирую поле "Agreement"
+			И в таблице "ChequeBonds" я активизирую поле "Partner term"
 			И в таблице "ChequeBonds" я выбираю текущую строку
-			И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Agreement"
+			И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner term"
 			Тогда в таблице "List" количество строк "равно" 0
 		И я закрыл все окна клиентского приложения
 
@@ -553,8 +553,8 @@
 			| 'Description' |
 			| 'Ferron BP'   |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я активизирую поле "Agreement"
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "ChequeBonds" я активизирую поле "Partner term"
+		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
@@ -575,9 +575,9 @@
 		И в таблице "PickedDocuments" в поле 'Amount balance' я ввожу текст '9 000,00'
 		И в таблице "PickedDocuments" я завершаю редактирование строки
 		И в таблице "DocumentsList" я нажимаю на кнопку 'Transfer to document'
-	* Заполнение Cash account
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Cash account"
-		Тогда открылось окно 'Cash accounts'
+	* Заполнение Cash/Bank accounts
+		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Cash/Bank accounts"
+		Тогда открылось окно 'Cash/Bank accountss'
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
@@ -596,7 +596,7 @@
 		| 'Own cheque 2'                          | ''            | ''                   | ''             | ''               | ''                    | ''                  | ''                    | ''                   | ''                         | ''                         | ''                     |
 		| 'Register  "Planing cash transactions"' | ''            | ''                   | ''             | ''               | ''                    | ''                  | ''                    | ''                   | ''                         | ''                         | ''                     |
 		| ''                                      | 'Period'      | 'Resources'          | 'Dimensions'   | ''               | ''                    | ''                  | ''                    | ''                   | ''                         | ''                         | 'Attributes'           |
-		| ''                                      | ''            | 'Amount'             | 'Company'      | 'Basis document' | 'Account'             | 'Currency'          | 'Cash flow direction' | 'Partner'            | 'Legal name'               | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                      | ''            | 'Amount'             | 'Company'      | 'Basis document' | 'Account'             | 'Currency'          | 'Cash flow direction' | 'Partner'            | 'Legal name'               | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                      | '*'           | '1 712,33'           | 'Main Company' | 'Own cheque 2'   | 'Bank account, TRY'   | 'USD'               | 'Outgoing'            | 'Ferron BP'          | 'Company Ferron BP'        | 'Reporting currency'       | 'No'                   |
 		| ''                                      | '*'           | '10 000'             | 'Main Company' | 'Own cheque 2'   | 'Bank account, TRY'   | 'TRY'               | 'Outgoing'            | 'Ferron BP'          | 'Company Ferron BP'        | 'en descriptions is empty' | 'No'                   |
 		| ''                                      | '*'           | '10 000'             | 'Main Company' | 'Own cheque 2'   | 'Bank account, TRY'   | 'TRY'               | 'Outgoing'            | 'Ferron BP'          | 'Company Ferron BP'        | 'Local currency'           | 'No'                   |
@@ -604,14 +604,14 @@
 		| ''                                      | ''            | ''                   | ''             | ''               | ''                    | ''                  | ''                    | ''                   | ''                         | ''                         | ''                     |
 		| 'Register  "Accounts statement"'                       | ''                    | ''                    | ''                    | ''               | ''                                             | ''                  | ''                    | ''                   | ''                         | ''                         | ''                     |
 		| ''                                                     | 'Record type'         | 'Period'              | 'Resources'           | ''               | ''                                             | ''                  | 'Dimensions'          | ''                   | ''                         | ''                         | ''                     |
-		| ''                                                     | ''                    | ''                    | 'Advance to supliers' | 'Transaction AP' | 'Advance from customers'                       | 'Transaction AR'    | 'Company'             | 'Partner'            | 'Legal name'               | 'Basis document'           | 'Currency'             |
+		| ''                                                     | ''                    | ''                    | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers'                       | 'Transaction AR'    | 'Company'             | 'Partner'            | 'Legal name'               | 'Basis document'           | 'Currency'             |
 		| ''                                                     | 'Receipt'             | '*'                   | ''                    | ''               | '-1 000'                                       | ''                  | 'Main Company'        | 'Ferron BP'          | 'Company Ferron BP'        | ''                         | 'TRY'                  |
 		| ''                                                     | 'Receipt'             | '*'                   | '1 000'               | ''               | ''                                             | ''                  | 'Main Company'        | 'Ferron BP'          | 'Company Ferron BP'        | ''                         | 'TRY'                  |
 		| ''                                                     | 'Expense'             | '*'                   | ''                    | '9 000'          | ''                                             | ''                  | 'Main Company'        | 'Ferron BP'          | 'Company Ferron BP'        | 'Purchase invoice 1*'      | 'TRY'                  |
 		| ''                                                     | ''                    | ''                    | ''                    | ''               | ''                                             | ''                  | ''                    | ''                   | ''                         | ''                         | ''                     |
 		| 'Register  "Cheque bond balance"'       | ''            | ''                   | ''             | ''               | ''                    | ''                  | ''                    | ''                   | ''                         | ''                         | ''                     |
 		| ''                                      | 'Record type' | 'Period'             | 'Resources'    | 'Dimensions'     | ''                    | ''                  | ''                    | ''                   | ''                         | 'Attributes'               | ''                     |
-		| ''                                      | ''            | ''                   | 'Amount'       | 'Company'        | 'Cheque'              | 'Partner'           | 'Legal name'          | 'Currency'           | 'Currency movement type'   | 'Deferred calculation'     | ''                     |
+		| ''                                      | ''            | ''                   | 'Amount'       | 'Company'        | 'Cheque'              | 'Partner'           | 'Legal name'          | 'Currency'           | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                      | 'Receipt'     | '*'                  | '1 712,33'     | 'Main Company'   | 'Own cheque 2'        | 'Ferron BP'         | 'Company Ferron BP'   | 'USD'                | 'Reporting currency'       | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                  | '10 000'       | 'Main Company'   | 'Own cheque 2'        | 'Ferron BP'         | 'Company Ferron BP'   | 'TRY'                | 'en descriptions is empty' | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                  | '10 000'       | 'Main Company'   | 'Own cheque 2'        | 'Ferron BP'         | 'Company Ferron BP'   | 'TRY'                | 'Local currency'           | 'No'                       | ''                     |
@@ -624,14 +624,14 @@
 		| ''                                      | ''            | ''                   | ''             | ''               | ''                    | ''                  | ''                    | ''                   | ''                         | ''                         | ''                     |
 		| 'Register  "Advance to suppliers"'      | ''            | ''                   | ''             | ''               | ''                    | ''                  | ''                    | ''                   | ''                         | ''                         | ''                     |
 		| ''                                      | 'Record type' | 'Period'             | 'Resources'    | 'Dimensions'     | ''                    | ''                  | ''                    | ''                   | ''                         | 'Attributes'               | ''                     |
-		| ''                                      | ''            | ''                   | 'Amount'       | 'Company'        | 'Partner'             | 'Legal name'        | 'Currency'            | 'Payment document'   | 'Currency movement type'   | 'Deferred calculation'     | ''                     |
+		| ''                                      | ''            | ''                   | 'Amount'       | 'Company'        | 'Partner'             | 'Legal name'        | 'Currency'            | 'Payment document'   | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                      | 'Receipt'     | '*'                  | '171,23'       | 'Main Company'   | 'Ferron BP'           | 'Company Ferron BP' | 'USD'                 | 'Own cheque 2'       | 'Reporting currency'       | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                  | '1 000'        | 'Main Company'   | 'Ferron BP'           | 'Company Ferron BP' | 'TRY'                 | 'Own cheque 2'       | 'en descriptions is empty' | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                  | '1 000'        | 'Main Company'   | 'Ferron BP'           | 'Company Ferron BP' | 'TRY'                 | 'Own cheque 2'       | 'Local currency'           | 'No'                       | ''                     |
 		| ''                                      | ''            | ''                   | ''             | ''               | ''                    | ''                  | ''                    | ''                   | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AP transactions"'   | ''            | ''                   | ''             | ''               | ''                    | ''                  | ''                    | ''                   | ''                         | ''                         | ''                     |
 		| ''                                      | 'Record type' | 'Period'             | 'Resources'    | 'Dimensions'     | ''                    | ''                  | ''                    | ''                   | ''                         | ''                         | 'Attributes'           |
-		| ''                                      | ''            | ''                   | 'Amount'       | 'Company'        | 'Basis document'      | 'Partner'           | 'Legal name'          | 'Agreement'          | 'Currency'                 | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                      | ''            | ''                   | 'Amount'       | 'Company'        | 'Basis document'      | 'Partner'           | 'Legal name'          | 'Partner term'          | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                      | 'Expense'     | '*'                  | '1 541,1'      | 'Main Company'   | 'Purchase invoice 1*' | 'Ferron BP'         | 'Company Ferron BP'   | 'Vendor Ferron, TRY' | 'USD'                      | 'Reporting currency'       | 'No'                   |
 		| ''                                      | 'Expense'     | '*'                  | '9 000'        | 'Main Company'   | 'Purchase invoice 1*' | 'Ferron BP'         | 'Company Ferron BP'   | 'Vendor Ferron, TRY' | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
 		| ''                                      | 'Expense'     | '*'                  | '9 000'        | 'Main Company'   | 'Purchase invoice 1*' | 'Ferron BP'         | 'Company Ferron BP'   | 'Vendor Ferron, TRY' | 'TRY'                      | 'Local currency'           | 'No'                   |
@@ -664,8 +664,8 @@
 			| 'Description' |
 			| 'Ferron BP'   |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я активизирую поле "Agreement"
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "ChequeBonds" я активизирую поле "Partner term"
+		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
@@ -792,8 +792,8 @@
 			| 'Description' |
 			| 'Ferron BP'   |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я активизирую поле "Agreement"
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "ChequeBonds" я активизирую поле "Partner term"
+		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |

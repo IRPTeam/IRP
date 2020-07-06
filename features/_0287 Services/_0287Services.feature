@@ -103,7 +103,7 @@ For cost analysis
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| Description        |
 			| Vendor Ferron, TRY |
@@ -176,7 +176,7 @@ For cost analysis
 		И Я закрыл все окна клиентского приложения
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PartnerApTransactions'
 		Тогда таблица "List" содержит строки:
-		| 'Currency' | 'Recorder'              | 'Legal name'        | 'Basis document'        | 'Company'      | 'Amount' | 'Agreement'          | 'Partner'   |
+		| 'Currency' | 'Recorder'              | 'Legal name'        | 'Basis document'        | 'Company'      | 'Amount' | 'Partner term'          | 'Partner'   |
 		| 'TRY'      | 'Purchase invoice 123*' | 'Company Ferron BP' | 'Purchase invoice 123*' | 'Main Company' | '1 000,00' | 'Vendor Ferron, TRY' | 'Ferron BP' |
 		И Я закрыл все окна клиентского приложения
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
@@ -222,7 +222,7 @@ For cost analysis
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron, TRY |
@@ -305,7 +305,7 @@ For cost analysis
 			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
 			| 'Register  "Purchase turnovers"'        | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
 			| ''                                      | 'Period'      | 'Resources' | ''              | ''              | 'Dimensions'               | ''                      | ''                  | ''                    | ''                         | ''                         | 'Attributes'           | ''                         | ''                     |
-			| ''                                      | ''            | 'Quantity'  | 'Amount'        | 'Net amount'    | 'Company'                  | 'Purchase invoice'      | 'Currency'          | 'Item key'            | 'Row key'                  | 'Currency movement type'   | 'Deferred calculation' | ''                         | ''                     |
+			| ''                                      | ''            | 'Quantity'  | 'Amount'        | 'Net amount'    | 'Company'                  | 'Purchase invoice'      | 'Currency'          | 'Item key'            | 'Row key'                  | 'Multi currency movement type'   | 'Deferred calculation' | ''                         | ''                     |
 			| ''                                      | '*'           | '1'         | '17,12'         | '14,51'         | 'Main Company'             | 'Purchase invoice 124*' | 'USD'               | 'Interner'            | '*'                        | 'Reporting currency'       | 'No'                   | ''                         | ''                     |
 			| ''                                      | '*'           | '1'         | '34,25'         | '29,02'         | 'Main Company'             | 'Purchase invoice 124*' | 'USD'               | 'Router'              | '*'                        | 'Reporting currency'       | 'No'                   | ''                         | ''                     |
 			| ''                                      | '*'           | '1'         | '100'           | '84,75'         | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Interner'            | '*'                        | 'en descriptions is empty' | 'No'                   | ''                         | ''                     |
@@ -317,15 +317,15 @@ For cost analysis
 			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
 			| 'Register  "Expenses turnovers"'        | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
 			| ''                                      | 'Period'      | 'Resources' | 'Dimensions'    | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | 'Attributes'               | ''                     | ''                         | ''                     |
-			| ''                                      | ''            | 'Amount'    | 'Company'       | 'Business unit' | 'Expense type'             | 'Item key'              | 'Currency'          | 'Additional analytic' | 'Currency movement type'   | 'Deferred calculation'     | ''                     | ''                         | ''                     |
+			| ''                                      | ''            | 'Amount'    | 'Company'       | 'Business unit' | 'Expense type'             | 'Item key'              | 'Currency'          | 'Additional analytic' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     | ''                         | ''                     |
 			| ''                                      | '*'           | '17,12'     | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'USD'               | ''                    | 'Reporting currency'       | 'No'                       | ''                     | ''                         | ''                     |
 			| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'en descriptions is empty' | 'No'                       | ''                     | ''                         | ''                     |
 			| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'Local currency'           | 'No'                       | ''                     | ''                         | ''                     |
 			| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'TRY'                      | 'No'                       | ''                     | ''                         | ''                     |
 			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
-			| 'Register  "Taxes turnovers"'           | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
+			| 'Register  "Tax types turnovers"'           | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
 			| ''                                      | 'Period'      | 'Resources' | ''              | ''              | 'Dimensions'               | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | 'Attributes'           |
-			| ''                                      | ''            | 'Amount'    | 'Manual amount' | 'Net amount'    | 'Document'                 | 'Tax'                   | 'Analytics'         | 'Tax rate'            | 'Include to total amount'  | 'Row key'                  | 'Currency'             | 'Currency movement type'   | 'Deferred calculation' |
+			| ''                                      | ''            | 'Amount'    | 'Manual amount' | 'Net amount'    | 'Document'                 | 'Tax'                   | 'Analytics'         | 'Tax rate'            | 'Include to total amount'  | 'Row key'                  | 'Currency'             | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                      | '*'           | '2,61'      | '2,61'          | '14,51'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'USD'                  | 'Reporting currency'       | 'No'                   |
 			| ''                                      | '*'           | '5,22'      | '5,22'          | '29,02'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'USD'                  | 'Reporting currency'       | 'No'                   |
 			| ''                                      | '*'           | '15,25'     | '15,25'         | '84,75'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'en descriptions is empty' | 'No'                   |
@@ -342,7 +342,7 @@ For cost analysis
 			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
 			| 'Register  "Accounts statement"'        | ''            | ''          | ''                    | ''               | ''                                               | ''                                               | ''                                     | ''                                     | ''                                     | ''                                               | ''                     | ''                         | ''                     |
 			| ''                                      | 'Record type' | 'Period'    | 'Resources'           | ''               | ''                                               | ''                                               | 'Dimensions'                           | ''                                     | ''                                     | ''                                               | ''                     | ''                         | ''                     |
-			| ''                                      | ''            | ''          | 'Advance to supliers' | 'Transaction AP' | 'Advance from customers'                         | 'Transaction AR'                                 | 'Company'                              | 'Partner'                              | 'Legal name'                           | 'Basis document'                                 | 'Currency'             | ''                         | ''                     |
+			| ''                                      | ''            | ''          | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers'                         | 'Transaction AR'                                 | 'Company'                              | 'Partner'                              | 'Legal name'                           | 'Basis document'                                 | 'Currency'             | ''                         | ''                     |
 			| ''                                      | 'Receipt'     | '*'         | ''                    | '300'            | ''                                               | ''                                               | 'Main Company'                         | 'Ferron BP'                            | 'Company Ferron BP'                    | 'Purchase invoice 124*' | 'TRY'                  | ''                         | ''                     |
 			| ''                                      | ''            | ''          | ''                    | ''               | ''                                               | ''                                               | ''                                     | ''                                     | ''                                     | ''                                               | ''                     | ''                         | ''                     |
 			| 'Register  "Reconciliation statement"'  | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
@@ -359,7 +359,7 @@ For cost analysis
 			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
 			| 'Register  "Partner AP transactions"'   | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
 			| ''                                      | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | 'Attributes'           | ''                         | ''                     |
-			| ''                                      | ''            | ''          | 'Amount'        | 'Company'       | 'Basis document'           | 'Partner'               | 'Legal name'        | 'Agreement'           | 'Currency'                 | 'Currency movement type'   | 'Deferred calculation' | ''                         | ''                     |
+			| ''                                      | ''            | ''          | 'Amount'        | 'Company'       | 'Basis document'           | 'Partner'               | 'Legal name'        | 'Partner term'           | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' | ''                         | ''                     |
 			| ''                                      | 'Receipt'     | '*'         | '51,37'         | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'USD'                      | 'Reporting currency'       | 'No'                   | ''                         | ''                     |
 			| ''                                      | 'Receipt'     | '*'         | '300'           | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                      | 'en descriptions is empty' | 'No'                   | ''                         | ''                     |
 			| ''                                      | 'Receipt'     | '*'         | '300'           | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                      | 'Local currency'           | 'No'                   | ''                         | ''                     |
@@ -438,7 +438,7 @@ For cost analysis
 		| ''                                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Sales order turnovers"'          | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''                 | ''         | ''         | ''        | ''                         | 'Attributes'           |
-		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'      | 'Currency' | 'Item key' | 'Row key' | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'      | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                           | '*'           | '1'         | '17,12'     | 'Main Company' | 'Sales order 700*' | 'USD'      | 'Rent'     | '*'       | 'Reporting currency'       | 'No'                   |
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company' | 'Sales order 700*' | 'TRY'      | 'Rent'     | '*'       | 'en descriptions is empty' | 'No'                   |
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company' | 'Sales order 700*' | 'TRY'      | 'Rent'     | '*'       | 'Local currency'           | 'No'                   |
@@ -471,10 +471,10 @@ For cost analysis
 				| 'Description' |
 				| 'Ferron BP'  |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 				| 'Description'       |
-				| 'Basic Agreements, without VAT' |
+				| 'Basic Partner terms, without VAT' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Legal name"
 		И в таблице "List" я перехожу к строке:
@@ -551,7 +551,7 @@ For cost analysis
 		| ''                                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Sales order turnovers"'          | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''                 | ''         | ''         | ''        | ''                         | 'Attributes'           |
-		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'      | 'Currency' | 'Item key' | 'Row key' | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'      | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                           | '*'           | '1'         | '20,21'     | 'Main Company' | 'Sales order 701*' | 'USD'      | 'Rent'     | '*'       | 'Reporting currency'       | 'No'                   |
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | 'Sales order 701*' | 'TRY'      | 'Rent'     | '*'       | 'en descriptions is empty' | 'No'                   |
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | 'Sales order 701*' | 'TRY'      | 'Rent'     | '*'       | 'Local currency'           | 'No'                   |
@@ -661,7 +661,7 @@ For cost analysis
 		| ''                                           | ''            | ''          | ''          | ''                 | ''                      | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Sales order turnovers"'          | ''            | ''          | ''          | ''                 | ''                      | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'       | ''                      | ''         | ''         | ''        | ''                         | 'Attributes'           |
-		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'          | 'Sales order'           | 'Currency' | 'Item key' | 'Row key' | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'          | 'Sales order'           | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                           | '*'           | '1'         | '17,12'     | 'Main Company'     | 'Sales order 702*'      | 'USD'      | 'Rent'     | '*'       | 'Reporting currency'       | 'No'                   |
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company'     | 'Sales order 702*'      | 'TRY'      | 'Rent'     | '*'       | 'en descriptions is empty' | 'No'                   |
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company'     | 'Sales order 702*'      | 'TRY'      | 'Rent'     | '*'       | 'Local currency'           | 'No'                   |
@@ -702,10 +702,10 @@ For cost analysis
 				| 'Description' |
 				| 'Ferron BP'  |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 				| 'Description'       |
-				| 'Basic Agreements, without VAT' |
+				| 'Basic Partner terms, without VAT' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Legal name"
 		И в таблице "List" я перехожу к строке:
@@ -784,7 +784,7 @@ For cost analysis
 		| ''                                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Sales order turnovers"'          | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''                 | ''         | ''         | ''        | ''                         | 'Attributes'           |
-		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'      | 'Currency' | 'Item key' | 'Row key' | 'Currency movement type'   | 'Deferred calculation' |
+		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'      | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                           | '*'           | '1'         | '20,21'     | 'Main Company' | 'Sales order 703*' | 'USD'      | 'Rent'     | '*'       | 'Reporting currency'       | 'No'                   |
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | 'Sales order 703*' | 'TRY'      | 'Rent'     | '*'       | 'en descriptions is empty' | 'No'                   |
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | 'Sales order 703*' | 'TRY'      | 'Rent'     | '*'       | 'Local currency'           | 'No'                   |

@@ -197,7 +197,7 @@
 			| Region 2    |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Agreements'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner terms'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'Vendor Ferron 1'
 		И я меняю значение переключателя 'Type' на 'Vendor'
@@ -208,10 +208,10 @@
 			| Description      |
 			| Partner Ferron 1 |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'TRY'      | 'Agreement' |
+			| 'TRY'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		И в таблице "List" я перехожу к строке:
@@ -231,10 +231,10 @@
 			| Description      |
 			| Partner Ferron 1 |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'TRY'      | 'Agreement' |
+			| 'TRY'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		И в таблице "List" я перехожу к строке:
@@ -262,7 +262,7 @@
 			| Region 2    |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Agreements'
+		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner terms'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст 'Vendor Ferron Partner 2'
 		И я меняю значение переключателя 'Type' на 'Vendor'
@@ -273,10 +273,10 @@
 			| Description      |
 			| Partner Ferron 2 |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency movement type"
+		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Type'      |
-			| 'TRY'      | 'Agreement' |
+			| 'TRY'      | 'Partner term' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Price type"
 		И в таблице "List" я перехожу к строке:
@@ -307,7 +307,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron 1 |
@@ -356,7 +356,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron Partner 2 |
@@ -437,7 +437,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron 1 |
@@ -483,7 +483,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron Discount |
@@ -512,7 +512,7 @@
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-		Если поле с именем "Agreement" имеет значение "Vendor Ferron 1" тогда
+		Если поле с именем "Partner term" имеет значение "Vendor Ferron 1" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '720,00'     | '4 000,00'   | '4 720,00'     | 'Store 02' | 'Purchase order 130*' |
@@ -523,7 +523,7 @@
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '141'
-		Если поле с именем "Agreement" имеет значение "Vendor Ferron Discount" тогда
+		Если поле с именем "Partner term" имеет значение "Vendor Ferron Discount" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | 'Purchase order 131*' |
@@ -539,7 +539,7 @@
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-		Если поле с именем "Agreement" имеет значение "Vendor Ferron 1" тогда
+		Если поле с именем "Partner term" имеет значение "Vendor Ferron 1" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '720,00'     | '4 000,00'   | '4 720,00'     | 'Store 02' | 'Purchase order 130*' |
@@ -550,7 +550,7 @@
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '141'
-		Если поле с именем "Agreement" имеет значение "Vendor Ferron Discount" тогда
+		Если поле с именем "Partner term" имеет значение "Vendor Ferron Discount" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | 'Purchase order 131*' |
@@ -600,7 +600,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron Discount |
@@ -647,7 +647,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron Discount |
@@ -719,7 +719,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron Discount |
@@ -770,7 +770,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron Discount |
@@ -1264,7 +1264,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron 1 |
@@ -1316,7 +1316,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron Partner 2 |
@@ -1418,7 +1418,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron 1 |
@@ -1467,7 +1467,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron Discount |
@@ -1574,7 +1574,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron Discount |
@@ -1624,7 +1624,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron Discount |
@@ -1732,7 +1732,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron Discount |
@@ -1786,7 +1786,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron Discount |

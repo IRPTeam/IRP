@@ -21,7 +21,7 @@ To sell a product to a customer
 	* Checking that information is filled in when creating based on
 		Тогда элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, TRY'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 	* Check adding Store
 		И я перехожу к закладке "Item list"
@@ -104,7 +104,7 @@ To sell a product to a customer
 	* Checking the details
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Agreements, without VAT'
+		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, without VAT'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Check filling prices and type of prices
@@ -189,7 +189,7 @@ To sell a product to a customer
 			| 'Description' |
 			| 'Kalipso'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я выбираю текущую строку
 	* Select store 
 		И я нажимаю кнопку выбора у поля "Store"
@@ -292,7 +292,7 @@ To sell a product to a customer
 			| 'Description' |
 			| 'Kalipso'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Legal name"
 		И в таблице "List" я активизирую поле "Description"
@@ -393,10 +393,10 @@ To sell a product to a customer
 			| 'Description' |
 			| 'Kalipso'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'       |
-			| 'Personal Agreements, $' |
+			| 'Personal Partner terms, $' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Legal name"
 		И в таблице "List" я перехожу к строке:
@@ -486,10 +486,10 @@ To sell a product to a customer
 			| 'Description' |
 			| 'Ferron BP'  |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'       |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Legal name"
 		И в таблице "List" я перехожу к строке:

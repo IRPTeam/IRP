@@ -23,14 +23,14 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Check filling inAgreement если оно у партнера одно
+	* Check filling inPartner term если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Nicoletta'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard agreement Customer'
-	* Check filling inCompany из Agreement
+		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard Partner term Customer'
+	* Check filling inCompany из Partner term
 		* Изменение компании в Sales return order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -38,13 +38,13 @@
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Проверка перезаполнения при выборе соглашения
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Check filling inStore из Agreement
+	* Check filling inStore из Partner term
 		И     элемент формы с именем "Store" стал равен 'Store 01'
-	* Проверка очистки legal name, agreement при перевыборе партнера
+	* Проверка очистки legal name, Partner term при перевыборе партнера
 		* Перевыбор партнера
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -56,12 +56,12 @@
 		* Check filling inLegal name после перевыбора партнера
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		* Выбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
-				| 'Basic Agreements, without VAT' |
+				| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
-	* Check filling inсклада и компании из Agreement при перевыборе партнера
+	* Check filling inсклада и компании из Partner term при перевыборе партнера
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
@@ -144,14 +144,14 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Check filling inAgreement если оно у партнера одно
+	* Check filling inPartner term если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Nicoletta'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard agreement Customer'
-	* Check filling inCompany из Agreement
+		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard Partner term Customer'
+	* Check filling inCompany из Partner term
 		* Изменение компании в Sales return order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -159,13 +159,13 @@
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Проверка перезаполнения при выборе соглашения
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Check filling inStore из Agreement
+	* Check filling inStore из Partner term
 		И     элемент формы с именем "Store" стал равен 'Store 01'
-	* Проверка очистки legal name, agreement при перевыборе партнера
+	* Проверка очистки legal name, Partner term при перевыборе партнера
 		* Перевыбор партнера
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -177,12 +177,12 @@
 		* Check filling inLegal name после перевыбора партнера
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		* Выбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
-				| 'Basic Agreements, without VAT' |
+				| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
-	* Check filling inсклада и компании из Agreement при перевыборе партнера
+	* Check filling inсклада и компании из Partner term при перевыборе партнера
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
@@ -214,10 +214,10 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '500,00'
 	* Проверка перезаполнения склада при перевыборе соглашения
 		* Перевыбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
@@ -272,14 +272,14 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Check filling inAgreement если оно у партнера одно
+	* Check filling inPartner term если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Veritas'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Posting by standart agreement (Veritas)'
-	* Check filling inCompany из Agreement
+		И     элемент формы с именем "Agreement" стал равен 'Posting by standart Partner term (Veritas)'
+	* Check filling inCompany из Partner term
 		* Изменение компании в Purchase return order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -287,13 +287,13 @@
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Проверка перезаполнения при выборе соглашения
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Check filling inStore из Agreement
+	* Check filling inStore из Partner term
 		И     элемент формы с именем "Store" стал равен 'Store 01'
-	* Проверка очистки legal name, agreement при перевыборе партнера
+	* Проверка очистки legal name, Partner term при перевыборе партнера
 		* Перевыбор партнера
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -305,12 +305,12 @@
 		* Check filling inLegal name после перевыбора партнера
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		* Выбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
 				| 'Partner Kalipso Vendor' |
 			И в таблице "List" я выбираю текущую строку
-	* Check filling inсклада и компании из Agreement при перевыборе партнера
+	* Check filling inсклада и компании из Partner term при перевыборе партнера
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
@@ -342,10 +342,10 @@
 		И в таблице "ItemList" в поле 'Price' я ввожу текст '500,00'
 	* Проверка перезаполнения склада при перевыборе соглашения
 		* Перевыбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Agreement vendor Partner Kalipso' |
+				| 'Partner term vendor Partner Kalipso' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
@@ -400,14 +400,14 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Check filling inAgreement если оно у партнера одно
+	* Check filling inPartner term если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Veritas'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard agreement (Veritas)'
-	* Check filling inCompany из Agreement
+		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard Partner term (Veritas)'
+	* Check filling inCompany из Partner term
 		* Изменение компании в Purchase return
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -415,13 +415,13 @@
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Проверка перезаполнения при выборе соглашения
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Check filling inStore из Agreement
+	* Check filling inStore из Partner term
 		И     элемент формы с именем "Store" стал равен 'Store 01'
-	* Проверка очистки legal name, agreement при перевыборе партнера
+	* Проверка очистки legal name, Partner term при перевыборе партнера
 		* Перевыбор партнера
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -430,15 +430,15 @@
 			И в таблице "List" я выбираю текущую строку
 		* Проверка очистки полей
 			И     элемент формы с именем "Agreement" стал равен ''
-		* Check filling inLegal name после перевыбора партнера
+		* Check filling in Legal name после перевыбора партнера
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		* Выбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
 				| 'Partner Kalipso Vendor' |
 			И в таблице "List" я выбираю текущую строку
-	* Check filling inсклада и компании из Agreement при перевыборе партнера
+	* Check filling inсклада и компании из Partner term при перевыборе партнера
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
@@ -470,10 +470,10 @@
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '500,00'
 	* Проверка перезаполнения склада при перевыборе соглашения
 		* Перевыбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Agreement vendor Partner Kalipso' |
+				| 'Partner term vendor Partner Kalipso' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'

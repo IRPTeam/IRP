@@ -29,10 +29,10 @@
 					| 'Vendor'      |
 				И я нажимаю на кнопку с именем 'FormChoose'
 				И из выпадающего списка "Company" я выбираю по строке 'main'
-				И я нажимаю кнопку выбора у поля "Currency movement type"
+				И я нажимаю кнопку выбора у поля "Multi currency movement type"
 				И в таблице "List" я перехожу к строке:
 					| 'Currency' | 'Deferred calculation' | 'Description' | 'Reference' | 'Source'       | 'Type'      |
-					| 'USD'      | 'No'                   | 'USD'         | 'USD'       | 'Forex Seling' | 'Agreement' |
+					| 'USD'      | 'No'                   | 'USD'         | 'USD'       | 'Forex Seling' | 'Partner term' |
 				И в таблице "List" я выбираю текущую строку
 				И я нажимаю кнопку выбора у поля "Price type"
 				И в таблице "List" я перехожу к строке:
@@ -46,7 +46,7 @@
 					| 'Store 02'    |
 				И в таблице "List" я выбираю текущую строку
 				И я нажимаю на кнопку 'Save and close'
-				И я жду закрытия окна 'Agreement (create) *' в течение 20 секунд
+				И я жду закрытия окна 'Partner term (create) *' в течение 20 секунд
 			* В лирах
 				И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 				И я нажимаю на кнопку с именем 'FormCreate'
@@ -60,10 +60,10 @@
 					| 'Vendor'      |
 				И я нажимаю на кнопку с именем 'FormChoose'
 				И из выпадающего списка "Company" я выбираю по строке 'main'
-				И я нажимаю кнопку выбора у поля "Currency movement type"
+				И я нажимаю кнопку выбора у поля "Multi currency movement type"
 				И в таблице "List" я перехожу к строке:
 					| 'Currency' | 'Deferred calculation' | 'Description' | 'Reference' | 'Source'       | 'Type'      |
-					| 'TRY'      | 'No'                   | 'TRY'         | 'TRY'       | 'Forex Seling' | 'Agreement' |
+					| 'TRY'      | 'No'                   | 'TRY'         | 'TRY'       | 'Forex Seling' | 'Partner term' |
 				И в таблице "List" я выбираю текущую строку
 				И я нажимаю кнопку выбора у поля "Price type"
 				И в таблице "List" я перехожу к строке:
@@ -92,7 +92,7 @@
 				| 'Region 2'    |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save'
-			И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments'
+			И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Segment"
 			И в таблице "List" я перехожу к строке:
@@ -137,7 +137,7 @@
 				| 'Region 2'    |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save'
-			И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments'
+			И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Segment"
 			И в таблице "List" я перехожу к строке:
@@ -182,7 +182,7 @@
 				| 'Region 2'    |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save'
-			И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments'
+			И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Segment"
 			И в таблице "List" я перехожу к строке:
@@ -199,7 +199,7 @@
 			И я нажимаю на кнопку 'Save and close'
 			И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 			И я нажимаю на кнопку 'Save and close'
-	* Создание Sales order по прямой схеме отгрузки на Crystal по Basic Agreements, TRY
+	* Создание Sales order по прямой схеме отгрузки на Crystal по Basic Partner terms, TRY
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение шапки
@@ -210,10 +210,10 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
@@ -275,7 +275,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 000'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Sales order по непрямой схеме отгрузки на Crystal по соглашению Basic Agreements, TRY
+	* Создание Sales order по непрямой схеме отгрузки на Crystal по соглашению Basic Partner terms, TRY
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение шапки
@@ -286,10 +286,10 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
@@ -351,7 +351,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 001'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Sales order по прямой схеме отгрузки на Crystal по Basic Agreements, TRY
+	* Создание Sales order по прямой схеме отгрузки на Crystal по Basic Partner terms, TRY
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение шапки
@@ -362,10 +362,10 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
@@ -427,7 +427,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 002'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Sales order по прямой схеме отгрузки на Crystal по Basic Agreements, without VAT
+	* Создание Sales order по прямой схеме отгрузки на Crystal по Basic Partner terms, without VAT
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение шапки
@@ -438,10 +438,10 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, without VAT' |
+				| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
@@ -503,7 +503,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 004'
 			И я нажимаю на кнопку 'Post and close'
-		* Создание Sales order по непрямой схеме отгрузки на Crystal по соглашению Basic Agreements, without VAT
+		* Создание Sales order по непрямой схеме отгрузки на Crystal по соглашению Basic Partner terms, without VAT
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение шапки
@@ -514,10 +514,10 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, without VAT' |
+				| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
@@ -677,7 +677,7 @@
 				| Description |
 				| Crystal   |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor, TRY |
@@ -731,7 +731,7 @@
 				| Description |
 				| Crystal   |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor, TRY |
@@ -784,7 +784,7 @@
 				| Description |
 				| Crystal   |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor, USD |
@@ -857,7 +857,7 @@
 				| Description |
 				| Crystal   |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor, TRY |
@@ -946,7 +946,7 @@
 				| Description |
 				| Astar   |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor, TRY |
@@ -1035,7 +1035,7 @@
 				| Description |
 				| Astar   |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor, TRY |
@@ -1134,7 +1134,7 @@
 				| Description |
 				| Astar   |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor, TRY |
@@ -1195,10 +1195,10 @@
 			| 'Description' |
 			| 'Crystal'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 	* Выбор Sales order
 		И в таблице "ItemList" я нажимаю на кнопку 'Select sales orders'
@@ -1257,10 +1257,10 @@
 				| 'Description' |
 				| 'Crystal'     |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 		* Выбор Sales order
 			И в таблице "ItemList" я нажимаю на кнопку 'Select sales orders'
@@ -1278,7 +1278,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 002'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Sales invoice по соглашению Basic Agreements, without VAT
+	* Создание Sales invoice по соглашению Basic Partner terms, without VAT
 		* Open a creation form SI 
 			И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 			И я нажимаю на кнопку с именем 'FormCreate'
@@ -1288,10 +1288,10 @@
 				| 'Description' |
 				| 'Crystal'     |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, without VAT' |
+				| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
 		* Выбор Sales order
 			И в таблице "ItemList" я нажимаю на кнопку 'Select sales orders'
@@ -1327,10 +1327,10 @@
 			| 'Description' |
 			| 'Crystal'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, without VAT' |
+			| 'Basic Partner terms, without VAT' |
 		И в таблице "List" я выбираю текущую строку
 	* Проверка отбора Shipment confirmation по соглашениям
 		И в таблице "ItemList" я нажимаю на кнопку 'Select shipment confirmations'
@@ -1345,10 +1345,10 @@
 		И я нажимаю на кнопку 'Ok'
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 2
 		* Изменение соглашения и проверка отбора
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           | 'Kind'    |
-				| 'Basic Agreements, TRY' | 'Regular' |
+				| 'Basic Partner terms, TRY' | 'Regular' |
 			И в таблице "List" я выбираю текущую строку
 			И я изменяю флаг 'Update filled stores on Store 01'
 			И я изменяю флаг 'Update filled price types on Basic Price Types'
@@ -1465,7 +1465,7 @@
 			| 'Description' |
 			| 'Crystal'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
 			| 'Vendor, TRY' |
@@ -1528,7 +1528,7 @@
 				| 'Description' |
 				| 'Crystal'     |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
 				| 'Vendor, TRY' |
@@ -1559,7 +1559,7 @@
 				| 'Description' |
 				| 'Astar'     |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
 				| 'Vendor, TRY' |
@@ -1818,7 +1818,7 @@
 			| 'Description' |
 			| 'Crystal'     |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
 			| 'Vendor, TRY' |

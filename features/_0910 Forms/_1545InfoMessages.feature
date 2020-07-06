@@ -20,10 +20,10 @@
 					| 'Description' |
 					| 'Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'       |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я перехожу к строке:
@@ -65,7 +65,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron, USD |
@@ -116,7 +116,7 @@
 				| 'Description' |
 				| 'Kalipso'     |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Select Store
 			И я нажимаю кнопку выбора у поля "Store"
@@ -183,7 +183,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron, USD |
@@ -243,10 +243,10 @@
 					| 'Description' |
 					| 'Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'       |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я перехожу к строке:
@@ -297,7 +297,7 @@
 				| 'Description' |
 				| 'Kalipso'     |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Select Store
 			И я нажимаю кнопку выбора у поля "Store"
@@ -352,7 +352,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron, USD |
@@ -436,7 +436,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron, USD |
@@ -508,7 +508,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron, USD |
@@ -570,10 +570,10 @@
 					| 'Description' |
 					| 'Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'       |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я перехожу к строке:
@@ -615,10 +615,10 @@
 					| 'Description' |
 					| 'Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'       |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я перехожу к строке:
@@ -660,7 +660,7 @@
 				| 'Description' |
 				| 'Kalipso'     |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Select Store
 			И я нажимаю кнопку выбора у поля "Store"
@@ -714,7 +714,7 @@
 				| 'Description' |
 				| 'Kalipso'     |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Select Store
 			И я нажимаю кнопку выбора у поля "Store"
@@ -760,7 +760,7 @@
 				| 'Description' |
 				| 'Kalipso'     |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Select Store
 			И я нажимаю кнопку выбора у поля "Store"
@@ -810,7 +810,7 @@
 				| 'Description' |
 				| 'Ferron BP'     |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Select Store
 			И я нажимаю кнопку выбора у поля "Store"
@@ -859,10 +859,10 @@
 					| 'Description' |
 					| 'Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'       |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я перехожу к строке:
@@ -978,7 +978,7 @@
 			| 'Description'       |
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я активизирую поле "Price"
 		И в таблице "ItemList" я выбираю текущую строку
@@ -1006,10 +1006,10 @@
 					| 'Description' |
 					| 'Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'       |
-					| 'Basic Agreements, without VAT' |
+					| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я перехожу к строке:
@@ -1058,7 +1058,7 @@
 					| 'Description' |
 					| 'Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'       |
 					| 'Vendor Ferron, TRY' |
@@ -1116,10 +1116,10 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 				| 'Description'       |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Store"
 		И в таблице "List" я перехожу к строке:
@@ -1226,7 +1226,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
 			И в таблице "ItemList" я активизирую поле "Price"
@@ -1300,7 +1300,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'        |
 				| 'Vendor Ferron, TRY' |
@@ -1330,10 +1330,10 @@
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "LegalName" стал равен 'DFC'
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'       |
-					| 'Basic Agreements, TRY' |
+					| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			* Add a row of items
 				И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -1377,10 +1377,10 @@
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "LegalName" стал равен 'DFC'
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'       |
-					| 'Agreement DFC' |
+					| 'Partner term DFC' |
 			И в таблице "List" я выбираю текущую строку
 			* Add a row of items
 				И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -1439,7 +1439,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Legal name"
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'OK'
 			И в таблице "ItemList" я активизирую поле "Price"
@@ -1516,10 +1516,10 @@
 				| 'Description'       |
 				| 'Company Ferron BP' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:

@@ -92,9 +92,9 @@
 		* Подготовка: создание соглашения с поставщиком для DFC
 			И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
 			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст 'Agreement vendor DFC'
+			И в поле 'ENG' я ввожу текст 'Partner term vendor DFC'
 			И я меняю значение переключателя 'Type' на 'Vendor'
-			И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
+			И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -107,10 +107,10 @@
 				| 'Description'  |
 				| 'Main Company' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Currency movement type"
+			И я нажимаю кнопку выбора у поля "Multi currency movement type"
 			И в таблице "List" я перехожу к строке:
 				| 'Currency' |  'Source'       | 'Type'      |
-				| 'TRY'      |  'Forex Seling' | 'Agreement' |
+				| 'TRY'      |  'Forex Seling' | 'Partner term' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Price type"
 			И в таблице "List" я перехожу к строке:
@@ -128,9 +128,9 @@
 		* Подготовка: создание соглашения с поставщиком для Partner Kalipso Vendor
 			И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
 			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст 'Agreement vendor Partner Kalipso'
+			И в поле 'ENG' я ввожу текст 'Partner term vendor Partner Kalipso'
 			И я меняю значение переключателя 'Type' на 'Vendor'
-			И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
+			И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -143,10 +143,10 @@
 				| 'Description'  |
 				| 'Main Company' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Currency movement type"
+			И я нажимаю кнопку выбора у поля "Multi currency movement type"
 			И в таблице "List" я перехожу к строке:
 				| 'Currency' |  'Source'       | 'Type'      |
-				| 'TRY'      |  'Forex Seling' | 'Agreement' |
+				| 'TRY'      |  'Forex Seling' | 'Partner term' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Price type"
 			И в таблице "List" я перехожу к строке:
@@ -370,14 +370,14 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Check filling inAgreement если оно у партнера одно
+	* Check filling inPartner term если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Agreement DFC'
-	* Check filling inCompany из Agreement
+		И     элемент формы с именем "Agreement" стал равен 'Partner term DFC'
+	* Check filling inCompany из Partner term
 		* Изменение компании в Sales order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -385,13 +385,13 @@
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Проверка перезаполнения при выборе соглашения
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Check filling inStore из Agreement
+	* Check filling inStore из Partner term
 		* В выбранном соглашении изменение склада
-			И я нажимаю на кнопку открытия поля "Agreement"
+			И я нажимаю на кнопку открытия поля "Partner term"
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -399,9 +399,9 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
 		* Перевыбор соглашения и проверка перезаполнения склада (товар не добавлен)
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
-	* Проверка очистки legal name, agreement при перевыборе партнера
+	* Проверка очистки legal name, Partner term при перевыборе партнера
 		* Перевыбор партнера
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -413,12 +413,12 @@
 		* Check filling inLegal name после перевыбора партнера
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		* Выбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
-				| 'Basic Agreements, without VAT' |
+				| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
-	* Check filling inсклада и компании из Agreement при перевыборе партнера
+	* Check filling inсклада и компании из Partner term при перевыборе партнера
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
@@ -456,10 +456,10 @@
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
 	* Проверка перезаполнения цены при перевыборе соглашения
 		* Перевыбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
@@ -503,10 +503,10 @@
 			Если в таблице "ItemList" нет колонки "VAT" Тогда
 	* Tax calculation check при заполнении компании при перевыборе соглашения
 		* Перевыбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 		* Tax calculation check
 			И     таблица "ItemList" содержит строки:
@@ -579,10 +579,10 @@
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 	* Check filling inгалочки Price include Tax при перевыборе соглашения и проверка пересчета налогов
 		* Перевыбор соглашения на то у которого галочка Price include Tax не установлена
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
-				| 'Basic Agreements, without VAT' |
+				| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
@@ -595,10 +595,10 @@
 			| '466,10' | 'Dress' | '18%' | 'L/Green'  | '88,56'      | '1%'       | '1,000' | 'pcs'  | '466,10'     | '554,66'       | 'Store 02' |
 			| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '83,73'      | '1%'       | '1,000' | 'pcs'  | '440,68'     | '524,41'       | 'Store 02' |
 		* Изменение соглашения на то которое было раньше
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
@@ -614,7 +614,7 @@
 			И я перехожу к закладке с именем "GroupCurrency"
 			И     таблица "ObjectCurrencies" стала равной:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Agreement' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
+			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '303,08' | '1'            |
 
@@ -629,14 +629,14 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Check filling inAgreement если оно у партнера одно
+	* Check filling inPartner term если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Agreement DFC'
-	* Check filling inCompany из Agreement
+		И     элемент формы с именем "Agreement" стал равен 'Partner term DFC'
+	* Check filling inCompany из Partner term
 		* Изменение компании в Sales order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -644,13 +644,13 @@
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Проверка перезаполнения при выборе соглашения
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Check filling inStore из Agreement
+	* Check filling inStore из Partner term
 		* В выбранном соглашении изменение склада
-			И я нажимаю на кнопку открытия поля "Agreement"
+			И я нажимаю на кнопку открытия поля "Partner term"
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -658,9 +658,9 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
 		* Перевыбор соглашения и проверка перезаполнения склада (товар не добавлен)
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
-	* Проверка очистки legal name, agreement при перевыборе партнера
+	* Проверка очистки legal name, Partner term при перевыборе партнера
 		* Перевыбор партнера
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -672,12 +672,12 @@
 		* Check filling inLegal name после перевыбора партнера
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		* Выбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
-				| 'Basic Agreements, without VAT' |
+				| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
-	* Check filling inсклада и компании из Agreement при перевыборе партнера
+	* Check filling inсклада и компании из Partner term при перевыборе партнера
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
@@ -713,10 +713,10 @@
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
 	* Проверка перезаполнения цены при перевыборе соглашения
 		* Перевыбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
@@ -758,10 +758,10 @@
 			Если в таблице "ItemList" нет колонки "VAT" Тогда
 	* Tax calculation check при заполнении компании при перевыборе соглашения
 		* Перевыбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 		* Tax calculation check
 			И     таблица "ItemList" содержит строки:
@@ -834,10 +834,10 @@
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 	* Check filling inгалочки Price include Tax при перевыборе соглашения и проверка пересчета налогов
 		* Перевыбор соглашения на то у которого галочка Price include Tax не установлена
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
-				| 'Basic Agreements, without VAT' |
+				| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
@@ -850,10 +850,10 @@
 			| '466,10' | 'Dress' | '18%' | 'L/Green'  | '88,56'      | '1%'       | '1,000' | 'pcs'  | '466,10'     | '554,66'       | 'Store 02' |
 			| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '83,73'      | '1%'       | '1,000' | 'pcs'  | '440,68'     | '524,41'       | 'Store 02' |
 		* Изменение соглашения на то которое было раньше
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Basic Agreements, TRY' |
+				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
@@ -868,7 +868,7 @@
 			И я перехожу к закладке с именем "GroupCurrency"
 			И     таблица "ObjectCurrencies" стала равной:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Agreement' | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
+			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'         | '5,8400'            | '303,08' | '1'            |
 		* Проверка пересчета налогов при выборе налоговой ставки вручную
@@ -903,12 +903,12 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Legal name"
 		И в таблице "List" я выбираю текущую строку
-	* Filling in an Agreement
-		И я нажимаю кнопку выбора у поля "Agreement"
+	* Filling in an Partner term
+		И я нажимаю кнопку выбора у поля "Partner term"
 		Тогда в таблице "List" количество строк "меньше или равно" 3
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                   |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 	* Добавление товара и проверка цен на текущую дату
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -941,20 +941,20 @@
 			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | ''           | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
 	* Проверка отображения списка соглашений
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И     таблица "List" содержит строки:
 			| 'Description'                   |
-			| 'Basic Agreements, TRY'         |
-			| 'Basic Agreements, $'           |
-			| 'Basic Agreements, without VAT' |
-			| 'Personal Agreements, $'        |
+			| 'Basic Partner terms, TRY'         |
+			| 'Basic Partner terms, $'           |
+			| 'Basic Partner terms, without VAT' |
+			| 'Personal Partner terms, $'        |
 			| 'Sale autum, TRY'               |
-		И Я закрываю окно 'Agreements'
+		И Я закрываю окно 'Partner terms'
 	* Проверка пересчета таблицы валют при изменении даты
 		И я перехожу к закладке с именем "GroupCurrency"
 		И     таблица "ObjectCurrencies" стала равной:
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'TRY'                | 'Agreement' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
+		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,0000'            | '200,00' | '1'            |
 
@@ -970,12 +970,12 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Legal name"
 		И в таблице "List" я выбираю текущую строку
-	* Filling in an Agreement
-		И я нажимаю кнопку выбора у поля "Agreement"
+	* Filling in an Partner term
+		И я нажимаю кнопку выбора у поля "Partner term"
 		Тогда в таблице "List" количество строк "меньше или равно" 3
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                   |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 	* Добавление товара и проверка цен на текущую дату
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -1007,20 +1007,20 @@
 			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | ''           | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
 	* Проверка отображения списка соглашений
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И     таблица "List" содержит строки:
 		| 'Description'                   |
-		| 'Basic Agreements, TRY'         |
-		| 'Basic Agreements, $'           |
-		| 'Basic Agreements, without VAT' |
-		| 'Personal Agreements, $'        |
+		| 'Basic Partner terms, TRY'         |
+		| 'Basic Partner terms, $'           |
+		| 'Basic Partner terms, without VAT' |
+		| 'Personal Partner terms, $'        |
 		| 'Sale autum, TRY'               |
-		И Я закрываю окно 'Agreements'
+		И Я закрываю окно 'Partner terms'
 	* Проверка пересчета таблицы валют при изменении даты
 		И я перехожу к закладке с именем "GroupCurrency"
 		И     таблица "ObjectCurrencies" стала равной:
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'TRY'                | 'Agreement' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
+		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,0000'            | '200,00' | '1'            |
 
@@ -1035,14 +1035,14 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Check filling inAgreement если оно у партнера одно
+	* Check filling inPartner term если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Agreement vendor DFC'
-	* Check filling inCompany из Agreement
+		И     элемент формы с именем "Agreement" стал равен 'Partner term vendor DFC'
+	* Check filling inCompany из Partner term
 		* Изменение компании в Sales order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -1050,13 +1050,13 @@
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Проверка перезаполнения при выборе соглашения
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Check filling inStore из Agreement
+	* Check filling inStore из Partner term
 		* В выбранном соглашении изменение склада
-			И я нажимаю на кнопку открытия поля "Agreement"
+			И я нажимаю на кнопку открытия поля "Partner term"
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -1064,9 +1064,9 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
 		* Перевыбор соглашения и проверка перезаполнения склада (товар не добавлен)
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
-	* Проверка очистки legal name, agreement при перевыборе партнера
+	* Проверка очистки legal name, Partner term при перевыборе партнера
 		* Перевыбор партнера
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -1078,19 +1078,19 @@
 		* Check filling inLegal name после перевыбора партнера
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		* Выбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'            |
 				| 'Partner Kalipso Vendor' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку открытия поля "Agreement"
+			И я нажимаю на кнопку открытия поля "Partner term"
 			И я нажимаю кнопку выбора у поля "Price type"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'             |
 				| 'Basic Price without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
-	* Check filling inсклада и компании из Agreement при перевыборе партнера
+	* Check filling inсклада и компании из Partner term при перевыборе партнера
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
@@ -1128,10 +1128,10 @@
 			И Пауза 2
 	* Проверка перезаполнения цены при перевыборе соглашения
 		* Перевыбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Agreement vendor Partner Kalipso' |
+				| 'Partner term vendor Partner Kalipso' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
@@ -1173,7 +1173,7 @@
 			Если в таблице "ItemList" нет колонки "VAT" Тогда
 	* Tax calculation check при заполнении компании при перевыборе соглашения
 		* Перевыбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
 				| 'Partner Kalipso Vendor' |
@@ -1251,7 +1251,7 @@
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 03' |
 	* Check filling inгалочки Price include Tax при перевыборе соглашения и проверка пересчета налогов
 		* Перевыбор соглашения на то у которого галочка Price include Tax установлена
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
 				| 'Partner Kalipso Vendor' |
@@ -1267,10 +1267,10 @@
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 02' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 02' |
 		* Изменение соглашения на то которое было раньше
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Agreement vendor Partner Kalipso' |
+				| 'Partner term vendor Partner Kalipso' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
@@ -1285,7 +1285,7 @@
 			И я перехожу к закладке с именем "GroupCurrency"
 			И     таблица "ObjectCurrencies" стала равной:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
-			| 'TRY'                | 'Agreement' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
+			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '357,64'  | '1'            |
 		* Проверка пересчета налогов при выборе налоговой ставки вручную
@@ -1315,14 +1315,14 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Check filling inAgreement если оно у партнера одно
+	* Check filling inPartner term если оно у партнера одно
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Agreement vendor DFC'
-	* Check filling inCompany из Agreement
+		И     элемент формы с именем "Agreement" стал равен 'Partner term vendor DFC'
+	* Check filling inCompany из Partner term
 		* Изменение компании в Sales order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -1330,13 +1330,13 @@
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
 		* Проверка перезаполнения при выборе соглашения
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Check filling inStore из Agreement
+	* Check filling inStore из Partner term
 		* В выбранном соглашении изменение склада
-			И я нажимаю на кнопку открытия поля "Agreement"
+			И я нажимаю на кнопку открытия поля "Partner term"
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -1344,9 +1344,9 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
 		* Перевыбор соглашения и проверка перезаполнения склада (товар не добавлен)
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
-	* Проверка очистки legal name, agreement при перевыборе партнера
+	* Проверка очистки legal name, Partner term при перевыборе партнера
 		* Перевыбор партнера
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -1358,19 +1358,19 @@
 		* Check filling inLegal name после перевыбора партнера
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		* Выбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'            |
 				| 'Partner Kalipso Vendor' |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку открытия поля "Agreement"
+			И я нажимаю на кнопку открытия поля "Partner term"
 			И я нажимаю кнопку выбора у поля "Price type"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'             |
 				| 'Basic Price without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
-	* Check filling inсклада и компании из Agreement при перевыборе партнера
+	* Check filling inсклада и компании из Partner term при перевыборе партнера
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
@@ -1406,10 +1406,10 @@
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
 	* Проверка перезаполнения цены при перевыборе соглашения
 		* Перевыбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Agreement vendor Partner Kalipso' |
+				| 'Partner term vendor Partner Kalipso' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
@@ -1451,7 +1451,7 @@
 			Если в таблице "ItemList" нет колонки "VAT" Тогда
 	* Tax calculation check при заполнении компании при перевыборе соглашения
 		* Перевыбор соглашения
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
 				| 'Partner Kalipso Vendor' |
@@ -1527,7 +1527,7 @@
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 03' |
 	* Check filling inгалочки Price include Tax при перевыборе соглашения и проверка пересчета налогов
 		* Перевыбор соглашения на то у которого галочка Price include Tax установлена
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
 				| 'Partner Kalipso Vendor' |
@@ -1543,10 +1543,10 @@
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 02' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 02' |
 		* Изменение соглашения на то которое было раньше
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
-				| 'Agreement vendor Partner Kalipso' |
+				| 'Partner term vendor Partner Kalipso' |
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
@@ -1561,7 +1561,7 @@
 			И я перехожу к закладке с именем "GroupCurrency"
 			И     таблица "ObjectCurrencies" стала равной:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
-			| 'TRY'                | 'Agreement' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
+			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '357,64'  | '1'            |
 		* Проверка пересчета налогов при выборе налоговой ставки вручную
@@ -1598,19 +1598,19 @@
 			| USD  |
 		И в таблице "List" я выбираю текущую строку
 	* Check filling inкассы (мультивалютная)
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №1 |
 		И в таблице "List" я выбираю текущую строку
 	* Перевыбор кассы с фиксированной валютой и проверка перезаполнения поля Currency
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №4 |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Currency" стал равен 'TRY'
-	* Проверка перевыбора валюты и очистка поля "Cash account" в случае если валюта зафиксированна по кассе
+	* Проверка перевыбора валюты и очистка поля "Cash/Bank accounts" в случае если валюта зафиксированна по кассе
 		И я нажимаю кнопку выбора у поля "Currency"
 		И в таблице "List" я перехожу к строке:
 			| Code |
@@ -1618,7 +1618,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "CashAccount" стал равен ''
 	* Выбор мультивалютной кассы и проверка что поле Currency не очистится
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Cash desk №1 |
@@ -1640,7 +1640,7 @@
 			| 'Partner'   | 'Payer'|
 			| 'DFC'       | 'DFC'  |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-	* Check filling inAgreement при добавлении партнера если оно у партнера одно
+	* Check filling inPartner term при добавлении партнера если оно у партнера одно
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1649,8 +1649,8 @@
 			| 'Nicoletta'         |
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Agreement'                              | 'Payer'             |
-			| 'Nicoletta' | 'Posting by Standard agreement Customer' | 'Company Nicoletta' |
+			| 'Partner'   | 'Partner term'                              | 'Payer'             |
+			| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 	* Проверка отображения для выбора только доступных соглашений по партнеру
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -1665,20 +1665,20 @@
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 		Тогда таблица "List" содержит строки:
 			| 'Description'                   |
-			| 'Basic Agreements, TRY'         |
-			| 'Basic Agreements, without VAT' |
+			| 'Basic Partner terms, TRY'         |
+			| 'Basic Partner terms, without VAT' |
 			| 'Vendor Ferron, TRY'            |
 			| 'Vendor Ferron, USD'            |
 			| 'Vendor Ferron, EUR'            |
 			| 'Ferron, USD'                   |
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка фильтра по документам-основаниям в зависимости от Agreement
+	* Проверка фильтра по документам-основаниям в зависимости от Partner term
 		# temporarily
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
@@ -1693,17 +1693,17 @@
 		И я нажимаю на кнопку 'Select'
 	* Проверка очистки basis document при очистке соглашения
 		И в таблице "PaymentList" я выбираю текущую строку
-		И я нажимаю кнопку очистить у поля "Agreement"
+		И я нажимаю кнопку очистить у поля "Partner term"
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Agreement' | 'Amount' | 'Payer'             | 'Basis document' |
+			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
 			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
 	* Проверка добавления basis document без выбора документа основания
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка недоступности выбора документа-основания при выборе Agreement с расчетом by Standard agreement
+	* Проверка недоступности выбора документа-основания при выборе Partner term с расчетом by Standard Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1716,10 +1716,10 @@
 			| Description       |
 			| Company Nicoletta |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Posting by Standard agreement Customer' |
+			| 'Posting by Standard Partner term Customer' |
 		И в таблице "List" я выбираю текущую строку
 	* Проверка добавления basis document без выбора документа основания
 		Когда Проверяю шаги на Исключение:
@@ -1751,7 +1751,7 @@
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '20*'    | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '100'    | '1'            |
-		| 'TRY'                | 'Agreement' | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
+		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '*'                 | '40*'     | '1'            |
 		И Пауза 5
@@ -1760,10 +1760,10 @@
 			| 'Partner'   | 'Payer'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Post'
 		Если в сообщениях пользователю есть строка "Basis document is required on line 1" Тогда
@@ -1848,7 +1848,7 @@
 			| 'Partner'   | 'Payer'|
 			| 'DFC'       | 'DFC'  |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-	* Check filling inAgreement при добавлении партнера если оно у партнера одно
+	* Check filling inPartner term при добавлении партнера если оно у партнера одно
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1857,8 +1857,8 @@
 			| 'Nicoletta'         |
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Agreement'                              | 'Payer'             |
-			| 'Nicoletta' | 'Posting by Standard agreement Customer' | 'Company Nicoletta' |
+			| 'Partner'   | 'Partner term'                              | 'Payer'             |
+			| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 	* Проверка отображения для выбора только доступных соглашений по партнеру
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -1873,20 +1873,20 @@
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 		Тогда таблица "List" содержит строки:
 			| 'Description'                   |
-			| 'Basic Agreements, TRY'         |
-			| 'Basic Agreements, without VAT' |
+			| 'Basic Partner terms, TRY'         |
+			| 'Basic Partner terms, without VAT' |
 			| 'Vendor Ferron, TRY'            |
 			| 'Vendor Ferron, USD'            |
 			| 'Vendor Ferron, EUR'            |
 			| 'Ferron, USD'                   |
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка фильтра по документам-основаниям в зависимости от Agreement
+	* Проверка фильтра по документам-основаниям в зависимости от Partner term
 		# temporarily
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
@@ -1901,17 +1901,17 @@
 		И я нажимаю на кнопку 'Select'
 	* Проверка очистки basis document при очистке соглашения
 		И в таблице "PaymentList" я выбираю текущую строку
-		И я нажимаю кнопку очистить у поля "Agreement"
+		И я нажимаю кнопку очистить у поля "Partner term"
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Agreement' | 'Amount' | 'Payer'             | 'Basis document' |
+			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
 			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
 	* Проверка добавления basis document без выбора документа основания
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка недоступности выбора документа-основания при выборе Agreement с расчетом by Standard agreement
+	* Проверка недоступности выбора документа-основания при выборе Partner term с расчетом by Standard Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1924,10 +1924,10 @@
 			| Description       |
 			| Company Nicoletta |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Posting by Standard agreement Customer' |
+			| 'Posting by Standard Partner term Customer' |
 		И в таблице "List" я выбираю текущую строку
 	* Проверка добавления basis document без выбора документа основания
 		Когда Проверяю шаги на Исключение:
@@ -1972,10 +1972,10 @@
 			| 'Partner'   | 'Payer'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Basic Agreements, TRY' |
+			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Post'
 		Если в сообщениях пользователю есть строка "Basis document is required on line 1" Тогда
@@ -2033,19 +2033,19 @@
 			| USD  |
 		И в таблице "List" я выбираю текущую строку
 	* Check filling inкассы (мультивалютная)
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №1 |
 		И в таблице "List" я выбираю текущую строку
 	* Перевыбор кассы с фиксированной валютой и проверка перезаполнения поля Currency
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №4 |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Currency" стал равен 'TRY'
-	* Проверка перевыбора валюты и очистка поля "Cash account" в случае если валюта зафиксированна по кассе
+	* Проверка перевыбора валюты и очистка поля "Cash/Bank accounts" в случае если валюта зафиксированна по кассе
 		И я нажимаю кнопку выбора у поля "Currency"
 		И в таблице "List" я перехожу к строке:
 			| Code |
@@ -2053,7 +2053,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "CashAccount" стал равен ''
 	* Выбор мультивалютной кассы и проверка что поле Currency не очистится
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Cash desk №1 |
@@ -2075,7 +2075,7 @@
 			| 'Partner'   | 'Payee'|
 			| 'DFC'       | 'DFC'  |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-	* Check filling inAgreement при добавлении партнера если оно у партнера одно
+	* Check filling inPartner term при добавлении партнера если оно у партнера одно
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2084,8 +2084,8 @@
 			| 'Veritas'         |
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Agreement'                               | 'Payee'             |
-			| 'Veritas'   | 'Posting by Standard agreement (Veritas)' | 'Company Veritas' |
+			| 'Partner'   | 'Partner term'                               | 'Payee'             |
+			| 'Veritas'   | 'Posting by Standard Partner term (Veritas)' | 'Company Veritas' |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 	* Проверка отображения для выбора только доступных соглашений по партнеру
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -2100,11 +2100,11 @@
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 		Тогда таблица "List" содержит строки:
 			| 'Description'                   |
-			| 'Basic Agreements, TRY'         |
-			| 'Basic Agreements, without VAT' |
+			| 'Basic Partner terms, TRY'         |
+			| 'Basic Partner terms, without VAT' |
 			| 'Vendor Ferron, TRY'            |
 			| 'Vendor Ferron, USD'            |
 			| 'Vendor Ferron, EUR'            |
@@ -2113,7 +2113,7 @@
 			| 'Description'           |
 			| 'Vendor Ferron, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка фильтра по документам-основаниям в зависимости от Agreement
+	* Проверка фильтра по документам-основаниям в зависимости от Partner term
 		# temporarily
 		Когда Проверяю шаги на Исключение:
 		|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
@@ -2127,17 +2127,17 @@
 		И я нажимаю на кнопку 'Select'
 	* Проверка очистки basis document при очистке соглашения
 		И в таблице "PaymentList" я выбираю текущую строку
-		И я нажимаю кнопку очистить у поля "Agreement"
+		И я нажимаю кнопку очистить у поля "Partner term"
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Agreement' | 'Amount' | 'Payee'             | 'Basis document' |
+			| 'Partner'   | 'Partner term' | 'Amount' | 'Payee'             | 'Basis document' |
 			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
 	* Проверка добавления basis document без выбора документа основания
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка недоступности выбора документа-основания при выборе Agreement с расчетом by Standard agreement
+	* Проверка недоступности выбора документа-основания при выборе Partner term с расчетом by Standard Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2150,10 +2150,10 @@
 			| 'Description'      |
 			| 'Company Veritas ' |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Posting by Standard agreement (Veritas)' |
+			| 'Posting by Standard Partner term (Veritas)' |
 		И в таблице "List" я выбираю текущую строку
 	* Проверка добавления basis document без выбора документа основания
 		Когда Проверяю шаги на Исключение:
@@ -2206,7 +2206,7 @@
 			| 'Partner'   | 'Payee'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -2296,7 +2296,7 @@
 			| 'Partner'   | 'Payee'|
 			| 'DFC'       | 'DFC'  |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-	* Check filling inAgreement при добавлении партнера если оно у партнера одно
+	* Check filling inPartner term при добавлении партнера если оно у партнера одно
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2305,8 +2305,8 @@
 			| 'Veritas'         |
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Agreement'                               | 'Payee'             |
-			| 'Veritas'   | 'Posting by Standard agreement (Veritas)' | 'Company Veritas' |
+			| 'Partner'   | 'Partner term'                               | 'Payee'             |
+			| 'Veritas'   | 'Posting by Standard Partner term (Veritas)' | 'Company Veritas' |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 	* Проверка отображения для выбора только доступных соглашений по партнеру
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -2321,11 +2321,11 @@
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 		Тогда таблица "List" содержит строки:
 			| 'Description'                   |
-			| 'Basic Agreements, TRY'         |
-			| 'Basic Agreements, without VAT' |
+			| 'Basic Partner terms, TRY'         |
+			| 'Basic Partner terms, without VAT' |
 			| 'Vendor Ferron, TRY'            |
 			| 'Vendor Ferron, USD'            |
 			| 'Vendor Ferron, EUR'            |
@@ -2334,7 +2334,7 @@
 			| 'Description'           |
 			| 'Vendor Ferron, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка фильтра по документам-основаниям в зависимости от Agreement
+	* Проверка фильтра по документам-основаниям в зависимости от Partner term
 		# temporarily
 		Когда Проверяю шаги на Исключение:
 		|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
@@ -2348,17 +2348,17 @@
 		И я нажимаю на кнопку 'Select'
 	* Проверка очистки basis document при очистке соглашения
 		И в таблице "PaymentList" я выбираю текущую строку
-		И я нажимаю кнопку очистить у поля "Agreement"
+		И я нажимаю кнопку очистить у поля "Partner term"
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'   | 'Agreement' | 'Amount' | 'Payee'             | 'Basis document' |
+			| 'Partner'   | 'Partner term' | 'Amount' | 'Payee'             | 'Basis document' |
 			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
 	* Проверка добавления basis document без выбора документа основания
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка недоступности выбора документа-основания при выборе Agreement с расчетом by Standard agreement
+	* Проверка недоступности выбора документа-основания при выборе Partner term с расчетом by Standard Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2371,10 +2371,10 @@
 			| 'Description'      |
 			| 'Company Veritas ' |
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
-			| 'Posting by Standard agreement (Veritas)' |
+			| 'Posting by Standard Partner term (Veritas)' |
 		И в таблице "List" я выбираю текущую строку
 	* Проверка добавления basis document без выбора документа основания
 		Когда Проверяю шаги на Исключение:
@@ -2427,7 +2427,7 @@
 			| 'Partner'   | 'Payee'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Agreement"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -2771,7 +2771,7 @@
 			| 'Description'       | 'Currency' |
 			| 'Cash desk №1'      | ''         |
 			| 'Cash desk №2'      | ''         |
-		И Я закрываю окно 'Cash accounts'
+		И Я закрываю окно 'Cash/Bank accountss'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -3010,7 +3010,7 @@
 			| 'Description'       | 'Currency' |
 			| 'Cash desk №1'      | ''         |
 			| 'Cash desk №2'      | ''         |
-		И Я закрываю окно 'Cash accounts'
+		И Я закрываю окно 'Cash/Bank accountss'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -3177,7 +3177,7 @@
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №2 |
@@ -3187,7 +3187,7 @@
 			| Code |
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение информации по Partner, Payer и Agreement
+	* Заполнение информации по Partner, Payer и Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле "Partner"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -3196,20 +3196,20 @@
 			| Nicoletta   |
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
-		| 'Partner'   | 'Agreement'                              | 'Payer'             |
-		| 'Nicoletta' | 'Posting by Standard agreement Customer' | 'Company Nicoletta' |
-	* Проверка очистки полей 'Agreement' и 'Payer' при перевыборе вида операции на Currency exchange
+		| 'Partner'   | 'Partner term'                              | 'Payer'             |
+		| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
+	* Проверка очистки полей 'Partner term' и 'Payer' при перевыборе вида операции на Currency exchange
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И     таблица "PaymentList" стала равной:
-		| '#' | 'Partner'   | 'Amount' | 'Amount exchange' | 'Planing transaction basis' |
+		| '#' | 'Partner'   | 'Amount' | 'Amount exchange' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''       | ''                | ''                          |
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И     таблица "PaymentList" стала равной:
-		| '#' | 'Partner'   | 'Agreement' | 'Amount' | 'Payer' | 'Basis document' | 'Planing transaction basis' |
+		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''          | ''       | ''      | ''               | ''                          |
 	* Проверка очистки полей 'Partner' при перевыборе вида операции на Cash transfer order
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
@@ -3219,7 +3219,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И     таблица "PaymentList" стала равной:
-		| '#' | 'Partner' | 'Agreement' | 'Amount' | 'Payer' | 'Basis document' | 'Planing transaction basis' |
+		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
 		И Я закрыл все окна клиентского приложения
 
@@ -3234,7 +3234,7 @@
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №2 |
@@ -3244,7 +3244,7 @@
 			| Code |
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение информации по Partner, Payee и Agreement
+	* Заполнение информации по Partner, Payee и Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле "Partner"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -3253,20 +3253,20 @@
 			| Nicoletta   |
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
-		| 'Partner'   | 'Agreement'                              | 'Payee'             |
-		| 'Nicoletta' | 'Posting by Standard agreement Customer' | 'Company Nicoletta' |
-	* Проверка очистки полей 'Agreement' и 'Payee' при перевыборе вида операции на Currency exchange
+		| 'Partner'   | 'Partner term'                              | 'Payee'             |
+		| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
+	* Проверка очистки полей 'Partner term' и 'Payee' при перевыборе вида операции на Currency exchange
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И     таблица "PaymentList" стала равной:
-		| '#' | 'Partner'   | 'Amount' | 'Planing transaction basis' |
+		| '#' | 'Partner'   | 'Amount' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''       | ''                          |
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И     таблица "PaymentList" стала равной:
-		| '#' | 'Partner'   | 'Agreement' | 'Amount' | 'Payee' | 'Basis document' | 'Planing transaction basis' |
+		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''          | ''       | ''      | ''               | ''                          |
 	* Проверка очистки полей 'Partner' при перевыборе вида операции на Cash transfer order
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
@@ -3276,7 +3276,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И     таблица "PaymentList" стала равной:
-		| '#' | 'Partner' | 'Agreement' | 'Amount' | 'Payee' | 'Basis document' | 'Planing transaction basis' |
+		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
 		И Я закрыл все окна клиентского приложения
 
@@ -3300,7 +3300,7 @@
 			| Code |
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение информации по Partner, Payer и Agreement
+	* Заполнение информации по Partner, Payer и Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле "Partner"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -3309,14 +3309,14 @@
 			| Nicoletta   |
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
-		| 'Partner'   | 'Agreement'                              | 'Payer'             |
-		| 'Nicoletta' | 'Posting by Standard agreement Customer' | 'Company Nicoletta' |
-	* Проверка очистки полей 'Agreement' и 'Payer' при перевыборе вида операции на Currency exchange
+		| 'Partner'   | 'Partner term'                              | 'Payer'             |
+		| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
+	* Проверка очистки полей 'Partner term' и 'Payer' при перевыборе вида операции на Currency exchange
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И     таблица "PaymentList" стала равной:
-		| '#' | 'Amount' | 'Amount exchange' | 'Planing transaction basis' |
+		| '#' | 'Amount' | 'Amount exchange' | 'Planning transaction basis' |
 		| '1' | ''       | ''                | ''                          |
 		* Check filling inTransit account из Accountant
 			И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
@@ -3324,7 +3324,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И     таблица "PaymentList" стала равной:
-		| '#' | 'Partner'   | 'Agreement' | 'Amount' | 'Payer' | 'Basis document' | 'Planing transaction basis' |
+		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''          | ''          | ''       | ''      | ''               | ''                          |
 		И     элемент формы с именем "TransitAccount" стал равен ''
 	* Проверка очистки полей 'Partner' при перевыборе вида операции на Cash transfer order
@@ -3335,7 +3335,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И     таблица "PaymentList" стала равной:
-		| '#' | 'Partner' | 'Agreement' | 'Amount' | 'Payer' | 'Basis document' | 'Planing transaction basis' |
+		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
 		И Я закрыл все окна клиентского приложения
 
@@ -3360,7 +3360,7 @@
 			| Code |
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение информации по Partner, Payee и Agreement
+	* Заполнение информации по Partner, Payee и Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле "Partner"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -3369,14 +3369,14 @@
 			| Nicoletta   |
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
-		| 'Partner'   | 'Agreement'                              | 'Payee'             |
-		| 'Nicoletta' | 'Posting by Standard agreement Customer' | 'Company Nicoletta' |
-	* Проверка очистки полей 'Agreement' и 'Payee' при перевыборе вида операции на Currency exchange
+		| 'Partner'   | 'Partner term'                              | 'Payee'             |
+		| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
+	* Проверка очистки полей 'Partner term' и 'Payee' при перевыборе вида операции на Currency exchange
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И     таблица "PaymentList" стала равной:
-		| '#' | 'Amount' | 'Planing transaction basis' |
+		| '#' | 'Amount' | 'Planning transaction basis' |
 		| '1' | ''       | ''                          |
 		* Check filling inTransit account из Accountant
 			И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
@@ -3384,7 +3384,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И     таблица "PaymentList" стала равной:
-		| '#' | 'Partner'   | 'Agreement' | 'Amount' | 'Payee' | 'Basis document' | 'Planing transaction basis' |
+		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''          | ''          | ''       | ''      | ''               | ''                          |
 		И     элемент формы с именем "TransitAccount" стал равен ''
 	* Проверка очистки полей 'Partner' при перевыборе вида операции на Cash transfer order
@@ -3395,7 +3395,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И     таблица "PaymentList" стала равной:
-		| '#' | 'Partner' | 'Agreement' | 'Amount' | 'Payee' | 'Basis document' | 'Planing transaction basis' |
+		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
 		И Я закрыл все окна клиентского приложения
 
@@ -3580,7 +3580,7 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
 	* Проверка того, что выбранный документ попал в BankPayment
 		Тогда таблица "PaymentList" содержит строки:
-		| 'Amount' | 'Planing transaction basis' |
+		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 13*'   |
 	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран
 		И в таблице "PaymentList" я выбираю текущую строку
@@ -3627,7 +3627,7 @@
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		Тогда таблица "PaymentList" содержит строки:
-		| 'Amount' | 'Planing transaction basis' |
+		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
 	И я закрыл все окна клиентского приложения
 	# * Переоткрытие созданного BankPayment
@@ -3673,7 +3673,7 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
 	* Проверка того, что выбранный документ попал в BankPayment
 		Тогда таблица "PaymentList" содержит строки:
-		| 'Amount' | 'Planing transaction basis' |
+		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 13*'   |
 	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран
 		И в таблице "PaymentList" я выбираю текущую строку
@@ -3718,7 +3718,7 @@
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		Тогда таблица "PaymentList" содержит строки:
-		| 'Amount' | 'Planing transaction basis' |
+		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
 	И я закрыл все окна клиентского приложения
 
@@ -3734,7 +3734,7 @@
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'         |
 			| 'Cash desk №2' |
@@ -3756,7 +3756,7 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
 	* Проверка того, что выбранный документ попал в CashPayment
 		Тогда таблица "PaymentList" содержит строки:
-		| 'Amount' | 'Planing transaction basis' |
+		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 11*'   |
 	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран
 		И в таблице "PaymentList" я выбираю текущую строку
@@ -3799,7 +3799,7 @@
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		Тогда таблица "PaymentList" содержит строки:
-		| 'Amount' | 'Planing transaction basis' |
+		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
 	И я закрыл все окна клиентского приложения
 
@@ -3815,7 +3815,7 @@
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash account"
+		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'         |
 			| 'Cash desk №1' |
@@ -3837,7 +3837,7 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
 	* Проверка того, что выбранный документ попал в CashReceipt
 		Тогда таблица "PaymentList" содержит строки:
-			| 'Amount' | 'Planing transaction basis' |
+			| 'Amount' | 'Planning transaction basis' |
 			| '100,00' | 'Cash transfer order 11*'   |
 	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран
 		И в таблице "PaymentList" я выбираю текущую строку
@@ -3880,7 +3880,7 @@
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		Тогда таблица "PaymentList" содержит строки:
-		| 'Amount' | 'Planing transaction basis' |
+		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
 	И я закрыл все окна клиентского приложения
 
@@ -3912,7 +3912,7 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
 	* Проверка того, что выбранный документ попал в BankPayment
 		Тогда таблица "PaymentList" содержит строки:
-		| 'Amount' | 'Planing transaction basis' |
+		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 14*'   |
 	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран
 		И в таблице "PaymentList" я выбираю текущую строку
@@ -3955,7 +3955,7 @@
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		Тогда таблица "PaymentList" содержит строки:
-		| 'Amount' | 'Planing transaction basis' |
+		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
 	И я закрыл все окна клиентского приложения
 
@@ -3987,7 +3987,7 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
 	* Проверка того, что выбранный документ попал в BankReceipt
 		Тогда таблица "PaymentList" содержит строки:
-		| 'Amount' | 'Planing transaction basis' |
+		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 14*'   |
 	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран
 		И в таблице "PaymentList" я выбираю текущую строку
@@ -4030,7 +4030,7 @@
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		Тогда таблица "PaymentList" содержит строки:
-		| 'Amount' | 'Planing transaction basis' |
+		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
 	И я закрыл все окна клиентского приложения
 
@@ -4057,7 +4057,7 @@
 		И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И     таблица "PaymentList" стала равной:
-			| '#' | 'Amount' | 'Planing transaction basis' |
+			| '#' | 'Amount' | 'Planning transaction basis' |
 			| '1' | ''       | ''                          |
 
 
@@ -4252,16 +4252,16 @@
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "CurrenciesPaymentList" я перехожу к строке:
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'TRY'            | 'Agreement' | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
+				| 'TRY'            | 'Partner term' | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
 			И в таблице "CurrenciesPaymentList" я перехожу к строке:
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'TRY'            | 'Agreement' | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
+				| 'TRY'            | 'Partner term' | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
 		* Проверка отображения обратного курса
 			Дано двойной клик на картинку "reverse"
 			И в таблице "PaymentList" я перехожу к строке:
-				| 'Agreement'                               | 'Amount' | 'Partner' | 'Payer'            |
-				| 'Posting by Standard agreement (Veritas)' | '200,00' | 'Veritas' | 'Company Veritas ' |
-			И в таблице "PaymentList" я активизирую поле "Agreement"
+				| 'Partner term'                               | 'Amount' | 'Partner' | 'Payer'            |
+				| 'Posting by Standard Partner term (Veritas)' | '200,00' | 'Veritas' | 'Company Veritas ' |
+			И в таблице "PaymentList" я активизирую поле "Partner term"
 			Тогда таблица "CurrenciesPaymentList" содержит строки:
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |

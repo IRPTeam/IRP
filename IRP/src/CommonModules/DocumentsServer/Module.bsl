@@ -1,6 +1,5 @@
 #Region FormEvents
 
-&AtServer
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export	
 	If Not Object.Ref.Metadata().TabularSections.Find("AddAttributes") = Undefined Then
 		AddAttributesAndPropertiesServer.OnCreateAtServer(Form, "GroupOther");
@@ -12,7 +11,6 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	ExternalCommandsServer.CreateCommands(Form, Object.Ref.Metadata().Name, Catalogs.ConfigurationMetadata.Documents, Enums.FormTypes.ObjectForm);	
 EndProcedure
 
-&AtServer
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	Return;
 EndProcedure

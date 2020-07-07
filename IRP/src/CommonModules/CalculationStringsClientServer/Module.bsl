@@ -14,8 +14,8 @@ EndFunction
 
 // TODO: Test
 Procedure ClearDependentData(Object, AddInfo = Undefined) Export
-	If AddInfo = Undefined Or not AddInfo.Property("TableParent") Then
-		TableName = "ItemList"
+	If AddInfo = Undefined OR Not AddInfo.Property("TableParent") Then
+		TableName = "ItemList";
 	Else
 		TableName = AddInfo.TableParent;
 	EndIf;

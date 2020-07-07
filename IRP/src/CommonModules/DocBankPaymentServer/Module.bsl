@@ -142,7 +142,7 @@ EndFunction
 Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, ObjectRef = Undefined) Export
 	EndOfDate = Undefined;
 	If ValueIsFilled(ObjectRef) Then
-		EndOfDate = New Boundary(ObjectRef.PointInTime(), BoundaryType.Excluding)
+		EndOfDate = New Boundary(ObjectRef.PointInTime(), BoundaryType.Excluding);
 	EndIf;
 	ArrayOfResults = New Array();
 	ValueTable = GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate);

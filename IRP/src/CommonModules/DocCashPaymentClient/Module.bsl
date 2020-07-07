@@ -247,7 +247,6 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 	EndIf;
 EndProcedure
 
-&AtClient
 Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	
@@ -381,7 +380,7 @@ Procedure PaymentListPartnerOnChange(Object, Form, Item) Export
 		NewAgreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 		If Not CurrentData.Agreement = NewAgreement Then
 			CurrentData.Agreement = NewAgreement;
-			PaymentListAgreementOnChange(Object, Form)
+			PaymentListAgreementOnChange(Object, Form);
 		EndIf;
 	EndIf;
 EndProcedure

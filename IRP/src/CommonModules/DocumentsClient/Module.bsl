@@ -1232,7 +1232,6 @@ EndProcedure
 
 #Region Commands
 
-&AtClient
 Procedure SearchByBarcode(Command, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined) Export
   TransferParameters = New Structure;
   If DocumentClientModule = Undefined Then

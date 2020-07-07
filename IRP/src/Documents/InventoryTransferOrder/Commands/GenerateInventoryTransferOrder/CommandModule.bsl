@@ -41,8 +41,8 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 		ShowMessageBox( , R()[ErrorMessageKey]);
 		Return;
 	EndIf;
-	
-	OpenForm("Document.InventoryTransferOrder.ObjectForm", New Structure("FillingValues", New Structure("Basis", ArrayOfBasisDocuments)), , New UUID());
+	Settings = New Structure("FillingValues", New Structure("Basis", ArrayOfBasisDocuments));
+	OpenForm("Document.InventoryTransferOrder.ObjectForm", Settings, , New UUID());
 	
 EndProcedure
 

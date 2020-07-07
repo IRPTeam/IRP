@@ -45,7 +45,6 @@ Function GetBarcodesByItemKey(ItemKey) Export
 	Return BarcodeServer.GetBarcodesByItemKey(ItemKey);
 EndFunction
 
-&AtClient
 Procedure SearchByBarcode(Command, Object, Form, ClientModule, AddInfo = Undefined) Export
 	NotifyParameters = New Structure;
 	NotifyParameters.Insert("Form", Form);

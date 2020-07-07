@@ -8,7 +8,7 @@
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _017006 check the filter for Legal name in the document Purchase Order
@@ -402,13 +402,13 @@
 
 
 Сценарий: check filter by own companies in the document Cash expense
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
 	* Check the filter for Own Company
 		Когда проверяю работу фильтра по собственной Company в Cash expence/Cash revenue
 
 Сценарий: check filter by own companies in the document Cash revenue
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
 	* Check the filter for Own Company
 		Когда проверяю работу фильтра по собственной Company в Cash expence/Cash revenue
@@ -455,7 +455,7 @@
 
 
 Сценарий: check filter by own companies in the document  Opening entry
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку "e1cib/list/Document.OpeningEntry"
 	* Check the filter for Own Company
 		Когда проверяю работу фильтра по собственной Company в Opening entry

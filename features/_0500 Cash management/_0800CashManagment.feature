@@ -12,7 +12,7 @@ For expense and income planning
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _080001 create Incoming payment order

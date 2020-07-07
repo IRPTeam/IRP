@@ -11,7 +11,7 @@ I want to add discount functionality to the purchase documents.
 So you can display the amount of the vendor's discount
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 # discount for document
 
 Сценарий: check the Document discount in Purchase order

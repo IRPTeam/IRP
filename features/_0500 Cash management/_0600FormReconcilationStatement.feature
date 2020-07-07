@@ -8,7 +8,7 @@ I want to create a Reconcilation statement
 For reconciliation of settlements
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 

@@ -1,21 +1,19 @@
-#language: ru
+﻿#language: ru
 @tree
 @Positive
 
-Функционал: Check filling inи перезаполнения форм документов + подключение формы по валютам
+Функционал: check filling in and re-filling in documents forms + currency form connection
 
-Как тестировщик
-Я хочу проверить заполнение и перезаполнение форм документов
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-Сценарий: _0154100 preparation для тестирования заполнения и перезаполнения документов
-	* Для теста по изменению цен и курсов в зависимости от даты
-	#  проверка перезаполнения Sales order при изменении даты, проверка перезаполнения Sales invoice при изменении даты
-		* Внесение курса валют лира к доллару 01.11.2018
+Сценарий: _0154100 preparation
+	* For a test of price and rate changes depending on the date
+	# check the Sales order reset when the date changes, check the Sales invoice reset when the date changes
+		* Input lira exchange rate to dollar 01.11.2018
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.CurrencyRates'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Currency from"
@@ -39,7 +37,7 @@
 			И в поле 'Rate' я ввожу текст '5,0000'
 			И я нажимаю на кнопку 'Save and close'
 			И я закрыл все окна клиентского приложения
-		* Создание прайс листа прошлым периодом
+		* Create price list of the previous period
 			И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я меняю значение переключателя 'Set price' на 'By Item keys'
@@ -66,7 +64,7 @@
 			И я перехожу к закладке "Other"
 			И в поле 'Date' я ввожу текст '18.11.2017  0:00:00'
 			И я нажимаю на кнопку 'Post and close'
-		* Добавление Dress M/Brown в прайс-лист №100
+		* Add Dress M/Brown to price list 100
 			И в таблице "List" я перехожу к строке:
 				| 'Description' | 'Number' |
 				| 'Basic price' | '100'    |
@@ -87,9 +85,8 @@
 			И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '500,00'
 			И в таблице "ItemKeyList" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Post and close'
-	* Для теста по заполнению документов закупки
-	#  проверка перезаполнения Sales order при изменении даты, проверка перезаполнения Sales invoice при изменении даты
-		* Подготовка: создание соглашения с поставщиком для DFC
+	* For the test of completing the purchase documents
+		* Preparation: creating a vendor partner term for DFC
 			И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'ENG' я ввожу текст 'Partner term vendor DFC'
@@ -125,7 +122,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
 			И я закрыл все окна клиентского приложения
-		* Подготовка: создание соглашения с поставщиком для Partner Kalipso Vendor
+		* Preparation: creating a vendor partner term for Partner Kalipso Vendor
 			И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'ENG' я ввожу текст 'Partner term vendor Partner Kalipso'
@@ -162,8 +159,8 @@
 			И я нажимаю на кнопку 'Save and close'
 			И я закрыл все окна клиентского приложения
 	И Пауза 5
-	* Для теста по выбору Planing transaction basis в банковских/кассовых документах
-		* Создание Cashtransfer order на перемещение ДС между кассами
+	* For the test of choice Planing transaction basis in bank/cash documents
+		* Creating a Cashtransfer order to move money between cash accounts
 			И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Company"
@@ -210,7 +207,7 @@
 				| 10      | Cash desk №1 | Cash desk №2 | Main Company |
 			И Я закрыл все окна клиентского приложения
 		И Пауза 5
-		* Создание Cashtransfer order на обмен валюты между кассами
+		* Create Cashtransfer order for currency exchange (cash accounts)
 			И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Company"
@@ -262,7 +259,7 @@
 				| 11      | Cash desk №2 | Cash desk №1 | Main Company |
 			И Я закрыл все окна клиентского приложения
 		И Пауза 5
-		* Создание Cashtransfer order на обмен валюты между банковскими счетами
+		* Create Cashtransfer order for currency exchange (bank accounts)
 			И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Company"
@@ -298,8 +295,8 @@
 				| 13      | Bank account, TRY | Bank account, EUR | Main Company |
 			И Я закрыл все окна клиентского приложения
 		И Пауза 5
-		* Создание Cashtransfer order на перемещение между банковскими счетами в одной валюте
-			* Создание еще одного банковского счета в EUR
+		* Create Cash transfer order for cash transfer between bank accounts in one currency
+			* Create one more bank account in EUR
 				И я открываю навигационную ссылку "e1cib/list/Catalog.CashAccounts"
 				И Пауза 2
 				И я нажимаю на кнопку с именем 'FormCreate'
@@ -321,7 +318,7 @@
 					| EUR  |
 				И в таблице "List" я выбираю текущую строку
 				И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-			* Создание Cashtransfer order на перемещение между банковскими счетами в одной валюте
+			* Create Cash transfer order for cash transfer between bank accounts in one currency
 				И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 				И я нажимаю на кнопку с именем 'FormCreate'
 				И я нажимаю кнопку выбора у поля "Company"
@@ -358,26 +355,26 @@
 				И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154101 Check filling inи перезаполнения Sales order
+Сценарий: _0154101 check filling in and re-filling Sales order
 	И Я закрыл все окна клиентского приложения
 	* Open the Sales order creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Check filling inlegal name если оно у партнера одно
+	* Check filling in legal name if the partner has only one
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Check filling inPartner term если оно у партнера одно
+	* Check filling in Partner term if the partner has only one
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Agreement" стал равен 'Partner term DFC'
-	* Check filling inCompany из Partner term
+	* Check filling in Company from Partner term
 		* Изменение компании в Sales order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -387,10 +384,10 @@
 			И     элемент формы с именем "Company" стал равен 'Second Company'
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
-		* Проверка перезаполнения при выборе соглашения
+		* Check the refill when selecting a partner term
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Check filling inStore из Partner term
-		* В выбранном соглашении изменение склада
+	* Check filling in Store from Partner term
+		* Change of store in the selected partner term
 			И я нажимаю на кнопку открытия поля "Partner term"
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
@@ -398,30 +395,30 @@
 				| 'Store 03'    |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
-		* Перевыбор соглашения и проверка перезаполнения склада (товар не добавлен)
+		* Re-selection of the agreement and check of the store refill (items not added)
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
-	* Проверка очистки legal name, Partner term при перевыборе партнера
-		* Перевыбор партнера
+	* Check clearing legal name, Partner term when re-selecting a partner
+		* Re-select partner
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Kalipso'     |
 			И в таблице "List" я выбираю текущую строку
-		* Проверка очистки полей
+		* Check clearing fields
 			И     элемент формы с именем "Agreement" стал равен ''
-		* Check filling inLegal name после перевыбора партнера
+		* Check filling in legal name after re-selection partner
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-		* Выбор соглашения
+		* Select partner term
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
 				| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
-	* Check filling inсклада и компании из Partner term при перевыборе партнера
+	* Check filling in Store and Compane from Partner term when re-selection partner
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
+	* Check the item key autofill when adding Item (Item has one item key)
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -431,8 +428,8 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
-	* Check filling inцены при добавлении Item и выборе item key
-		* Заполнение item и Item key
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
 			И в таблице 'ItemList' я удаляю строку
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
@@ -450,12 +447,12 @@
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Check filling inцены
+		* Check filling in prices
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
-	* Проверка перезаполнения цены при перевыборе соглашения
-		* Перевыбор соглашения
+	* Check re-filling  price when reselection partner term
+		* Re-select partner term
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
@@ -463,12 +460,12 @@
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
-		* Проверка перезаполнения склада в добавленной строке и цены
+		* Check store and price re-filling in the added line
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
-	* Check filling inцены по новым строкам при перевыборе соглашения
-		* Добавление строки
+	* Check filling in prices on new lines at agreement reselection
+		* Add line
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -485,12 +482,12 @@
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Check filling inцены
+		* Check filling in prices
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Price'  | 'Item key'  | 'Procurement method' | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | 'Stock'              | '1,000' | 'pcs'  | 'Store 01' |
 				| 'Shirt'    | '350,00' | '38/Black'  | 'Stock'              | '2,000' | 'pcs'  | 'Store 01' |
-	* Проверка перерисовки формы по налогам при перевыборе компании
+	* Check the re-drawing of the form for taxes at company re-selection.
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Procurement method' | 'Tax amount'  | 'SalesTax'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '*'    | '38/Yellow' | 'Stock'              | '*'           | '*'         | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
@@ -501,8 +498,8 @@
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
 			Если в таблице "ItemList" нет колонки "VAT" Тогда
-	* Tax calculation check при заполнении компании при перевыборе соглашения
-		* Перевыбор соглашения
+	* Tax calculation check when filling in the company at reselection of the partner term
+		* Re-select partner term
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
@@ -513,22 +510,22 @@
 				| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | ''       | 'Trousers' | '18%' | '38/Yellow' | 'Stock'              | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
 				| '350,00' | ''       | 'Shirt'    | '18%' | '38/Black'  | 'Stock'              | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
-	* Check filling inцены и расчет налогов при добавлении товара через поиск штрих-кодов
-		* Добавление товара через штрих-кодов
+	* Check filling in prices and calculate taxes when adding items via barcode search
+		* Add item via barcodes
 			И в таблице "ItemList" я нажимаю на кнопку 'SearchByBarcode'
 			И в поле 'InputFld' я ввожу текст '2202283739'
 			И Пауза 4
 			И я нажимаю на кнопку 'OK'
 			И Пауза 4
-		* Check filling inцены и расчета налогов
+		* Check filling in prices and tax calculation
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | 'Stock'              | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
 				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | 'Stock'              | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | 'Stock'              | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 			И Пауза 4
-	* Check filling inцены и расчет налогов при добавлении товара через форму подбора товаров
-		* Добавление товара через форму Pickup
+	* Check filling in prices and calculation of taxes when adding items through the goods selection form
+		* Add items via Pickup form
 			И в таблице "ItemList" я нажимаю на кнопку 'Pickup'
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Title' |
@@ -539,14 +536,14 @@
 				| '520,00' | 'XS/Blue' | 'pcs'  |
 			И в таблице "ItemKeyList" я выбираю текущую строку
 			И я нажимаю на кнопку 'Transfer to document'
-		* Check filling inцены и расчета налогов
+		* Check filling in prices and tax calculation
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '38/Yellow' | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
 				| '350,00' | 'Shirt'    | '38/Black'  | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | 'L/Green'   | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress'    | 'XS/Blue'   | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
-	* Проверка очистки строки в дереве налогов при удалении строки из заказа
+	* Check the line clearing in the tax tree when deleting a line from an order
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
@@ -555,19 +552,19 @@
 		Тогда таблица "ItemList" не содержит строки:
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
-	* Проверка перерачета налогов при снятии/повторной установке галочки Price include Tax
-		* Снятие галочки Price include Tax
+	* Check tax recalculation when uncheck/re-check Price include Tax
+		* Unchecking box Price include Tax
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И я снимаю флаг 'Price include tax'
-		* Проверка перерасчета налогов
+		* Tax recalculation check
 			И я перехожу к закладке "Item list"
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '38/Black' | '133,00'     | '2,000' | 'pcs'  | '700,00'     | '833,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | 'L/Green'  | '104,50'     | '1,000' | 'pcs'  | '550,00'     | '654,50'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '98,80'      | '1,000' | 'pcs'  | '520,00'     | '618,80'       | 'Store 01' |
-		* Установка галочки Price include Tax и проверка расчета
+		* Tick Price include Tax and check the calculation
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И я устанавливаю флаг 'Price include tax'
@@ -577,8 +574,8 @@
 				| '350,00' | 'Shirt' | '38/Black' | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
-	* Check filling inгалочки Price include Tax при перевыборе соглашения и проверка пересчета налогов
-		* Перевыбор соглашения на то у которого галочка Price include Tax не установлена
+	* Check filling in the Price include Tax check boxes when re-selecting an agreement and check tax recalculation
+		* Re-select partner term for which Price include Tax is not ticked 
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
@@ -586,15 +583,15 @@
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
-		* Проверка того, что значение галочки Price include Tax заполнилось из соглашения
+		* Check that the Price include Tax checkbox value has been filled out from the partner term
 			И     элемент формы с именем "PriceIncludeTax" стал равен 'No'
-		* Проверка перасчета налогов
+		* Check tax recalculation 
 			И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '296,61' | 'Shirt' | '18%' | '38/Black' | '112,71'     | '1%'       | '2,000' | 'pcs'  | '593,22'     | '705,93'       | 'Store 02' |
 			| '466,10' | 'Dress' | '18%' | 'L/Green'  | '88,56'      | '1%'       | '1,000' | 'pcs'  | '466,10'     | '554,66'       | 'Store 02' |
 			| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '83,73'      | '1%'       | '1,000' | 'pcs'  | '440,68'     | '524,41'       | 'Store 02' |
-		* Изменение соглашения на то которое было раньше
+		* Change of partner term to what was earlier
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
@@ -603,13 +600,13 @@
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
 			И     элемент формы с именем "PriceIncludeTax" стал равен 'Yes'
-		* Проверка перерасчета налогов
+		* Tax recalculation check
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '38/Black' | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
-		* Check filling inтаблицы валют
+		* Check filling in currency tab
 			И я нажимаю на кнопку 'Save'
 			И я перехожу к закладке с именем "GroupCurrency"
 			И     таблица "ObjectCurrencies" стала равной:
@@ -618,25 +615,25 @@
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '303,08' | '1'            |
 
-Сценарий: _0154102 Check filling inи перезаполнения Sales invoice
-	* Открытие формы Sales invoice
+Сценарий: _0154102 check filling in and re-filling Sales invoice
+	* Open the Sales invoice creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Check filling inlegal name если оно у партнера одно
+	* Check filling in legal name if the partner has only one
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Check filling inPartner term если оно у партнера одно
+	* Check filling in Partner term if the partner has only one
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Agreement" стал равен 'Partner term DFC'
-	* Check filling inCompany из Partner term
+	* Check filling in Company from Partner term
 		* Изменение компании в Sales order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -646,10 +643,10 @@
 			И     элемент формы с именем "Company" стал равен 'Second Company'
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
-		* Проверка перезаполнения при выборе соглашения
+		* Check the refill when selecting a partner term
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Check filling inStore из Partner term
-		* В выбранном соглашении изменение склада
+	* Check filling in Store from Partner term
+		* Change of store in the selected partner term
 			И я нажимаю на кнопку открытия поля "Partner term"
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
@@ -657,30 +654,30 @@
 				| 'Store 03'    |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
-		* Перевыбор соглашения и проверка перезаполнения склада (товар не добавлен)
+		* Re-selection of the agreement and check of the store refill (items not added)
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
-	* Проверка очистки legal name, Partner term при перевыборе партнера
-		* Перевыбор партнера
+	* Check clearing legal name, Partner term when re-selecting a partner
+		* Re-select partner
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Kalipso'     |
 			И в таблице "List" я выбираю текущую строку
-		* Проверка очистки полей
+		* Check clearing fields
 			И     элемент формы с именем "Agreement" стал равен ''
-		* Check filling inLegal name после перевыбора партнера
+		* Check filling in legal name after re-selecting a partner
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-		* Выбор соглашения
+		* Select partner term
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
 				| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
-	* Check filling inсклада и компании из Partner term при перевыборе партнера
+	* Check filling in Store and Compane from Partner term when re-selection partner
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
+	* Check the item key autofill when adding Item (Item has one item key)
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -690,8 +687,8 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
-	* Check filling inцены при добавлении Item и выборе item key
-		* Заполнение item и Item key
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
 			И в таблице 'ItemList' я удаляю строку
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
@@ -707,12 +704,12 @@
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Check filling inцены
+		* Check filling in prices
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
-	* Проверка перезаполнения цены при перевыборе соглашения
-		* Перевыбор соглашения
+	* Check re-filling  price when reselection partner term
+		* Re-select partner term
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
@@ -720,12 +717,12 @@
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
-		* Проверка перезаполнения склада в добавленной строке и цены
+		* Check store and price re-filling in the added line
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
-	* Check filling inцены по новым строкам при перевыборе соглашения
-		* Добавление строки
+	* Check filling in prices on new lines at agreement reselection
+		* Add line
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -740,12 +737,12 @@
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Check filling inцены
+		* Check filling in prices
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 				| 'Shirt'    | '350,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 01' |
-	* Проверка перерисовки формы по налогам при перевыборе компании
+	* Check the re-drawing of the form for taxes at company re-selection.
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'SalesTax'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '*'         | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
@@ -756,8 +753,8 @@
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
 			Если в таблице "ItemList" нет колонки "VAT" Тогда
-	* Tax calculation check при заполнении компании при перевыборе соглашения
-		* Перевыбор соглашения
+	* Tax calculation check when filling in the company at reselection of the partner term
+		* Re-select partner term
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
@@ -768,22 +765,22 @@
 				| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | ''       | 'Trousers' | '18%' | '38/Yellow' | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
 				| '350,00' | ''       | 'Shirt'    | '18%' | '38/Black'  | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
-	* Check filling inцены и расчет налогов при добавлении товара через поиск штрих-кодов
-		* Добавление товара через штрих-кодов
+	* Check filling in prices and calculate taxes when adding items via barcode search
+		* Add item via barcodes
 			И в таблице "ItemList" я нажимаю на кнопку 'SearchByBarcode'
 			И в поле 'InputFld' я ввожу текст '2202283739'
 			И Пауза 2
 			И я нажимаю на кнопку 'OK'
 			И Пауза 4
-		* Check filling inцены и расчета налогов
+		* Check filling in prices and tax calculation
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
 				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 			И Пауза 4
-	* Check filling inцены и расчет налогов при добавлении товара через форму подбора товаров
-		* Добавление товара через форму Pickup
+	* Check filling in prices and calculation of taxes when adding items through the goods selection form
+		* Add items via Pickup form
 			И в таблице "ItemList" я нажимаю на кнопку 'Pickup'
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Title' |
@@ -794,14 +791,14 @@
 				| '520,00' | 'XS/Blue' | 'pcs'  |
 			И в таблице "ItemKeyList" я выбираю текущую строку
 			И я нажимаю на кнопку 'Transfer to document'
-		* Check filling inцены и расчета налогов
+		* Check filling in prices and tax calculation
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '38/Yellow' | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
 				| '350,00' | 'Shirt'    | '38/Black'  | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | 'L/Green'   | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress'    | 'XS/Blue'   | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
-	* Проверка очистки строки в дереве налогов при удалении строки из заказа
+	* Check the line clearing in the tax tree when deleting a line from an order
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
@@ -810,19 +807,19 @@
 		Тогда таблица "ItemList" не содержит строки:
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
-	* Проверка перерачета налогов при снятии/повторной установке галочки Price include Tax
-		* Снятие галочки Price include Tax
+	* Check tax recalculation when uncheck/re-check Price include Tax
+		* Unchecking box Price include Tax
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И я снимаю флаг 'Price include tax'
-		* Проверка перерасчета налогов
+		* Tax recalculation check
 			И я перехожу к закладке "Item list"
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '38/Black' | '133,00'     | '2,000' | 'pcs'  | '700,00'     | '833,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | 'L/Green'  | '104,50'     | '1,000' | 'pcs'  | '550,00'     | '654,50'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '98,80'      | '1,000' | 'pcs'  | '520,00'     | '618,80'       | 'Store 01' |
-		* Установка галочки Price include Tax и проверка расчета
+		* Tick Price include Tax and check the calculation
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И я устанавливаю флаг 'Price include tax'
@@ -832,8 +829,8 @@
 				| '350,00' | 'Shirt' | '38/Black' | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
-	* Check filling inгалочки Price include Tax при перевыборе соглашения и проверка пересчета налогов
-		* Перевыбор соглашения на то у которого галочка Price include Tax не установлена
+	* Check filling in the Price include Tax check boxes when re-selecting an agreement and check tax recalculation
+		* Re-select partner term for which Price include Tax is not ticked 
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
@@ -841,15 +838,15 @@
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
-		* Проверка того, что значение галочки Price include Tax заполнилось из соглашения
+		* Check that the Price include Tax checkbox value has been filled out from the partner term
 			И     элемент формы с именем "PriceIncludeTax" стал равен 'No'
-		* Проверка перасчета налогов
+		* Check tax recalculation 
 			И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '296,61' | 'Shirt' | '18%' | '38/Black' | '112,71'     | '1%'       | '2,000' | 'pcs'  | '593,22'     | '705,93'       | 'Store 02' |
 			| '466,10' | 'Dress' | '18%' | 'L/Green'  | '88,56'      | '1%'       | '1,000' | 'pcs'  | '466,10'     | '554,66'       | 'Store 02' |
 			| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '83,73'      | '1%'       | '1,000' | 'pcs'  | '440,68'     | '524,41'       | 'Store 02' |
-		* Изменение соглашения на то которое было раньше
+		* Change of partner term to what was earlier
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
@@ -858,20 +855,20 @@
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
 			И     элемент формы с именем "PriceIncludeTax" стал равен 'Yes'
-		* Проверка перерасчета налогов
+		* Tax recalculation check
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '38/Black' | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
-		* Check filling inтаблицы валют
+		* Check filling in currency tab
 			И я перехожу к закладке с именем "GroupCurrency"
 			И     таблица "ObjectCurrencies" стала равной:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'         | '5,8400'            | '303,08' | '1'            |
-		* Проверка пересчета налогов при выборе налоговой ставки вручную
+		* Check tax recalculation when choosing a tax rate manually
 			И  в таблице "ItemList" я перехожу к строке:
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
@@ -891,11 +888,11 @@
 
 
 
-Сценарий: _0154103 проверка перезаполнения Sales order при изменении даты
+Сценарий: _0154103 check Sales order when changing date
 	* Open the Sales order creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение партнера и Legal name
+	* Filling in partner and Legal name
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -910,7 +907,7 @@
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Добавление товара и проверка цен на текущую дату
+	* Add items and check prices on the current date
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -929,7 +926,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '500,00' | 'Dress' | '18%' | 'M/Brown'  | '81,22'      | '1%'       | '1,000' | 'pcs'  | '418,78'     | '500,00'       | 'Store 01' |
-	* Изменение даты и проверка перерасчета цен и налогов
+	* Change of date and check of price and tax recalculation
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Date' я ввожу текст '01.11.2018 10:00:00'
@@ -940,7 +937,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | ''           | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
-	* Проверка отображения списка соглашений
+	* Check the list of partner terms
 		И я нажимаю кнопку выбора у поля "Partner term"
 		И     таблица "List" содержит строки:
 			| 'Description'                   |
@@ -950,7 +947,7 @@
 			| 'Personal Partner terms, $'        |
 			| 'Sale autum, TRY'               |
 		И Я закрываю окно 'Partner terms'
-	* Проверка пересчета таблицы валют при изменении даты
+	* Check the recount of the currency table when the date is changed
 		И я перехожу к закладке с именем "GroupCurrency"
 		И     таблица "ObjectCurrencies" стала равной:
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
@@ -958,11 +955,11 @@
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,0000'            | '200,00' | '1'            |
 
-Сценарий: _0154104 проверка перезаполнения Sales invoice при изменении даты
-	* Открытие формы Sales invoice
+Сценарий: _0154104 check Sales invoice when changing date
+	* Open the Sales invoice creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение партнера и Legal name
+	* Filling in partner and Legal name
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -977,7 +974,7 @@
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Добавление товара и проверка цен на текущую дату
+	* Add items and check prices on the current date
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -996,7 +993,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '500,00' | 'Dress' | '18%' | 'M/Brown'  | '81,22'      | '1%'       | '1,000' | 'pcs'  | '418,78'     | '500,00'       | 'Store 01' |
-	* Изменение даты и проверка перерасчета цен и налогов
+	* Change of date and check of price and tax recalculation
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И в поле 'Date' я ввожу текст '01.11.2018 10:00:00'
@@ -1006,7 +1003,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | ''           | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
-	* Проверка отображения списка соглашений
+	* Check the list of partner terms
 		И я нажимаю кнопку выбора у поля "Partner term"
 		И     таблица "List" содержит строки:
 		| 'Description'                   |
@@ -1016,7 +1013,7 @@
 		| 'Personal Partner terms, $'        |
 		| 'Sale autum, TRY'               |
 		И Я закрываю окно 'Partner terms'
-	* Проверка пересчета таблицы валют при изменении даты
+	* Check the recount of the currency table when the date is changed
 		И я перехожу к закладке с именем "GroupCurrency"
 		И     таблица "ObjectCurrencies" стала равной:
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
@@ -1024,26 +1021,26 @@
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,0000'            | '200,00' | '1'            |
 
-Сценарий: _0154105 Check filling inи перезаполнения Purchase order
-	* Открытие формы Purchase order
+Сценарий: _0154105 check filling in and re-filling Purchase order
+	* Open the Purchase order creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Check filling inlegal name если оно у партнера одно
+	* Check filling in legal name if the partner has only one
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Check filling inPartner term если оно у партнера одно
+	* Check filling in Partner term if the partner has only one
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Agreement" стал равен 'Partner term vendor DFC'
-	* Check filling inCompany из Partner term
-		* Изменение компании в Sales order
+	* Check filling in Company from Partner term
+		* Change company in the Purchase order
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'    |
@@ -1052,10 +1049,10 @@
 			И     элемент формы с именем "Company" стал равен 'Second Company'
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
-		* Проверка перезаполнения при выборе соглашения
+		* Check the refill when selecting a partner term
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Check filling inStore из Partner term
-		* В выбранном соглашении изменение склада
+	* Check filling in Store from Partner term
+		* Change of store in the selected partner term
 			И я нажимаю на кнопку открытия поля "Partner term"
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
@@ -1063,21 +1060,21 @@
 				| 'Store 03'    |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
-		* Перевыбор соглашения и проверка перезаполнения склада (товар не добавлен)
+		* Re-selection of the agreement and check of the store refill (items not added)
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
-	* Проверка очистки legal name, Partner term при перевыборе партнера
-		* Перевыбор партнера
+	* Check clearing legal name, Partner term when re-selecting a partner
+		* Re-select partner
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Partner Kalipso'     |
 			И в таблице "List" я выбираю текущую строку
-		* Проверка очистки полей
+		* Check clearing fields
 			И     элемент формы с именем "Agreement" стал равен ''
-		* Check filling inLegal name после перевыбора партнера
+		* Check filling in legal name after re-selecting a partner
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-		* Выбор соглашения
+		* Select partner term
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'            |
@@ -1090,10 +1087,10 @@
 				| 'Basic Price without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
-	* Check filling inсклада и компании из Partner term при перевыборе партнера
+	* Check filling in Store and Compane from Partner term when re-selection partner
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
+	* Check the item key autofill when adding Item (Item has one item key)
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -1103,8 +1100,8 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
-	* Check filling inцены при добавлении Item и выборе item key
-		* Заполнение item и Item key
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
 			И в таблице 'ItemList' я удаляю строку
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
@@ -1121,13 +1118,13 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 			И в таблице "ItemList" я завершаю редактирование строки
 			И Пауза 2
-		* Check filling inцены
+		* Check filling in prices
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     |
 				| 'Trousers' | '*'      | '38/Yellow' | '1,000' |
 			И Пауза 2
-	* Проверка перезаполнения цены при перевыборе соглашения
-		* Перевыбор соглашения
+	* Check re-filling  price when reselection partner term
+		* Re-select partner term
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
@@ -1135,12 +1132,12 @@
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
-		* Проверка перезаполнения склада в добавленной строке и цены
+		* Check store and price re-filling in the added line
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
-	* Check filling inцены по новым строкам при перевыборе соглашения
-		* Добавление строки
+	* Check filling in prices on new lines at agreement reselection
+		* Add line
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -1155,12 +1152,12 @@
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Check filling inцены
+		* Check filling in prices
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 				| 'Shirt'    | '350,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 03' |
-	* Проверка перерисовки формы по налогам при перевыборе компании
+	* Check the re-drawing of the form for taxes at company re-selection.
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
@@ -1171,8 +1168,8 @@
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
 			Если в таблице "ItemList" нет колонки "VAT" Тогда
-	* Tax calculation check при заполнении компании при перевыборе соглашения
-		* Перевыбор соглашения
+	* Tax calculation check when filling in the company at reselection of the partner term
+		* Re-select partner term
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
@@ -1186,21 +1183,21 @@
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '51,71'      | 'pcs'  | '287,27'     | '338,98'       | 'Store 03' |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
-	* Check filling inцены и расчет налогов при добавлении товара через поиск штрих-кодов
-		* Добавление товара через штрих-кодов
+	* Check filling in prices and calculate taxes when adding items via barcode search
+		* Add item via barcodes
 			И я нажимаю на кнопку 'ItemListSearchByBarcode'
 			И в поле 'InputFld' я ввожу текст '2202283739'
 			И Пауза 2
 			И я нажимаю на кнопку 'OK'
 			И Пауза 4
-		* Check filling inцены и расчета налогов
+		* Check filling in prices and tax calculation
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '51,71'      | 'pcs'  | '287,27'     | '338,98'       | 'Store 03' |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
-	* Check filling inцены и расчет налогов при добавлении товара через форму подбора товаров
-		* Добавление товара через форму Pickup
+	* Check filling in prices and calculation of taxes when adding items through the goods selection form
+		* Add items via Pickup form
 			И я нажимаю на кнопку 'Pickup'
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Title' |
@@ -1211,14 +1208,14 @@
 				| '440,68' | 'XS/Blue' | 'pcs'  |
 			И в таблице "ItemKeyList" я выбираю текущую строку
 			И я нажимаю на кнопку 'Transfer to document'
-		* Check filling inцены и расчета налогов
+		* Check filling in prices and tax calculation
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '51,71'      | 'pcs'  | '287,27'     | '338,98'       | 'Store 03' |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 03' |
-	* Проверка очистки строки в дереве налогов при удалении строки из заказа
+	* Check the line clearing in the tax tree when deleting a line from an order
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
@@ -1227,19 +1224,19 @@
 		Тогда таблица "ItemList" не содержит строки:
 			| 'Item'     | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
-	* Проверка перерачета налогов при снятии/повторной установке галочки Price include Tax
-		* Снятие галочки Price include Tax
+	* Check tax recalculation when uncheck/re-check Price include Tax
+		* Unchecking box Price include Tax
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И я снимаю флаг 'Price include tax'
-		* Проверка перерасчета налогов
+		* Tax recalculation check
 			И я перехожу к закладке "Item list"
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '296,61' | 'Shirt' | '18%' | '38/Black' | '2,000' | '106,78'     | 'pcs'  | '593,22'     | '700,00'       | 'Store 03' |
 				| '466,10' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '83,90'      | 'pcs'  | '466,10'     | '550,00'       | 'Store 03' |
 				| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '79,32'      | 'pcs'  | '440,68'     | '520,00'       | 'Store 03' |
-		* Установка галочки Price include Tax и проверка расчета
+		* Tick Price include Tax and check the calculation
 			И я перехожу к закладке "Other"
 			И я разворачиваю группу "More"
 			И я устанавливаю флаг 'Price include tax'
@@ -1249,8 +1246,8 @@
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 03' |
-	* Check filling inгалочки Price include Tax при перевыборе соглашения и проверка пересчета налогов
-		* Перевыбор соглашения на то у которого галочка Price include Tax установлена
+	* Check filling in the Price include Tax check boxes when re-selecting an agreement and check tax recalculation
+		* Re-select partner term на то у которого галочка Price include Tax установлена
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
@@ -1258,15 +1255,15 @@
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
-		* Проверка того, что значение галочки Price include Tax заполнилось из соглашения
+		* Check that the Price include Tax checkbox value has been filled out from the partner term
 			И     элемент формы с именем "PriceIncludeTax" стал равен 'Yes'
-		* Проверка перасчета налогов
+		* Check tax recalculation 
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 02' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 02' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 02' |
-		* Изменение соглашения на то которое было раньше
+		* Change of partner term to what was earlier
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
@@ -1275,20 +1272,20 @@
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
 			И     элемент формы с именем "PriceIncludeTax" стал равен 'No'
-		* Проверка перерасчета налогов
+		* Tax recalculation check
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | '126,00'     | 'pcs'  | '700,00'     | '826,00'       | 'Store 03' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '99,00'      | 'pcs'  | '550,00'     | '649,00'       | 'Store 03' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
-		* Check filling inтаблицы валют
+		* Check filling in currency tab
 			И я перехожу к закладке с именем "GroupCurrency"
 			И     таблица "ObjectCurrencies" стала равной:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '357,64'  | '1'            |
-		* Проверка пересчета налогов при выборе налоговой ставки вручную
+		* Check tax recalculation when choosing a tax rate manually
 			И  в таблице "ItemList" я перехожу к строке:
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
@@ -1304,26 +1301,26 @@
 
 
 
-Сценарий: _0154106 Check filling inи перезаполнения Purchase invoice
-	* Открытие формы Purchase invoice
+Сценарий: _0154106 check filling in and re-filling Purchase invoice
+	* Open the Purchase invoice creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Check filling inlegal name если оно у партнера одно
+	* Check filling in legal name if the partner has only one
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
-	* Check filling inPartner term если оно у партнера одно
+	* Check filling in Partner term if the partner has only one
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Agreement" стал равен 'Partner term vendor DFC'
-	* Check filling inCompany из Partner term
-		* Изменение компании в Sales order
+	* Check filling in Company from Partner term
+		* Change company in the Purchase invoice
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'    |
@@ -1332,10 +1329,10 @@
 			И     элемент формы с именем "Company" стал равен 'Second Company'
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
-		* Проверка перезаполнения при выборе соглашения
+		* Check the refill when selecting a partner term
 			И     элемент формы с именем "Company" стал равен 'Main Company'
-	* Check filling inStore из Partner term
-		* В выбранном соглашении изменение склада
+	* Check filling in Store from Partner term
+		* Change of store in the selected partner term
 			И я нажимаю на кнопку открытия поля "Partner term"
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
@@ -1343,21 +1340,21 @@
 				| 'Store 03'    |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
-		* Перевыбор соглашения и проверка перезаполнения склада (товар не добавлен)
+		* Re-selection of the agreement and check of the store refill (items not added)
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я выбираю текущую строку
-	* Проверка очистки legal name, Partner term при перевыборе партнера
-		* Перевыбор партнера
+	* Check clearing legal name, Partner term when re-selecting a partner
+		* Re-select partner
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Partner Kalipso'     |
 			И в таблице "List" я выбираю текущую строку
-		* Проверка очистки полей
+		* Check clearing fields
 			И     элемент формы с именем "Agreement" стал равен ''
-		* Check filling inLegal name после перевыбора партнера
+		* Check filling in legal name after re-selecting a partner
 			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-		* Выбор соглашения
+		* Select partner term
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'            |
@@ -1370,10 +1367,10 @@
 				| 'Basic Price without VAT' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Save and close'
-	* Check filling inсклада и компании из Partner term при перевыборе партнера
+	* Check filling in Store and Compane from Partner term when re-selection partner
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-	* Проверка авто заполнения item key при добавлении Item (у Item один item key)
+	* Check the item key autofill when adding Item (Item has one item key)
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -1383,8 +1380,8 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
-	* Check filling inцены при добавлении Item и выборе item key
-		* Заполнение item и Item key
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
 			И в таблице 'ItemList' я удаляю строку
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
@@ -1400,12 +1397,12 @@
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Check filling inцены
+		* Check filling in prices
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
-	* Проверка перезаполнения цены при перевыборе соглашения
-		* Перевыбор соглашения
+	* Check re-filling  price when reselection partner term
+		* Re-select partner term
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
@@ -1413,12 +1410,12 @@
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
-		* Проверка перезаполнения склада в добавленной строке и цены
+		* Check store and price re-filling in the added line
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
-	* Check filling inцены по новым строкам при перевыборе соглашения
-		* Добавление строки
+	* Check filling in prices on new lines at agreement reselection
+		* Add line
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -1433,12 +1430,12 @@
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Check filling inцены
+		* Check filling in prices
 			И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 				| 'Shirt'    | '350,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 03' |
-	* Проверка перерисовки формы по налогам при перевыборе компании
+	* Check the re-drawing of the form for taxes at company re-selection.
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
@@ -1449,8 +1446,8 @@
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
 			Если в таблице "ItemList" нет колонки "VAT" Тогда
-	* Tax calculation check при заполнении компании при перевыборе соглашения
-		* Перевыбор соглашения
+	* Tax calculation check when filling in the company at reselection of the partner term
+		* Re-select partner term
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
@@ -1464,21 +1461,21 @@
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '51,71'      | 'pcs'  | '287,27'     | '338,98'       | 'Store 03' |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
-	* Check filling inцены и расчет налогов при добавлении товара через поиск штрих-кодов
-		* Добавление товара через штрих-кодов
+	* Check filling in prices and calculate taxes when adding items via barcode search
+		* Add item via barcodes
 			И я нажимаю на кнопку 'SearchByBarcode'
 			И в поле 'InputFld' я ввожу текст '2202283739'
 			И Пауза 2
 			И я нажимаю на кнопку 'OK'
 			И Пауза 4
-		* Check filling inцены и расчета налогов
+		* Check filling in prices and tax calculation
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '51,71'      | 'pcs'  | '287,27'     | '338,98'       | 'Store 03' |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
-	* Check filling inцены и расчет налогов при добавлении товара через форму подбора товаров
-		* Добавление товара через форму Pickup
+	* Check filling in prices and calculation of taxes when adding items through the goods selection form
+		* Add items via Pickup form
 			И я нажимаю на кнопку 'Pickup'
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Title' |
@@ -1489,14 +1486,14 @@
 				| '440,68' | 'XS/Blue' | 'pcs'  |
 			И в таблице "ItemKeyList" я выбираю текущую строку
 			И я нажимаю на кнопку 'Transfer to document'
-		* Check filling inцены и расчета налогов
+		* Check filling in prices and tax calculation
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '51,71'      | 'pcs'  | '287,27'     | '338,98'       | 'Store 03' |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 03' |
-	* Проверка очистки строки в дереве налогов при удалении строки из заказа
+	* Check the line clearing in the tax tree when deleting a line from an order
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
@@ -1505,18 +1502,18 @@
 		Тогда таблица "ItemList" не содержит строки:
 			| 'Item'     | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
-	* Проверка перерачета налогов при снятии/повторной установке галочки Price include Tax
-		* Снятие галочки Price include Tax
+	* Check tax recalculation when uncheck/re-check Price include Tax
+		* Unchecking box Price include Tax
 			И я перехожу к закладке "Other"
 			И я снимаю флаг 'Price include tax'
-		* Проверка перерасчета налогов
+		* Tax recalculation check
 			И я перехожу к закладке "Item list"
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '296,61' | 'Shirt' | '18%' | '38/Black' | '2,000' | '106,78'     | 'pcs'  | '593,22'     | '700,00'       | 'Store 03' |
 				| '466,10' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '83,90'      | 'pcs'  | '466,10'     | '550,00'       | 'Store 03' |
 				| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '79,32'      | 'pcs'  | '440,68'     | '520,00'       | 'Store 03' |
-		* Установка галочки Price include Tax и проверка расчета
+		* Tick Price include Tax and check the calculation
 			И я перехожу к закладке "Other"
 			И я устанавливаю флаг 'Price include tax'
 			И я перехожу к закладке "Item list"
@@ -1525,8 +1522,8 @@
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 03' |
-	* Check filling inгалочки Price include Tax при перевыборе соглашения и проверка пересчета налогов
-		* Перевыбор соглашения на то у которого галочка Price include Tax установлена
+	* Check filling in the Price include Tax check boxes when re-selecting an agreement and check tax recalculation
+		* Re-select partner term на то у которого галочка Price include Tax установлена
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                   |
@@ -1534,15 +1531,15 @@
 			И в таблице "List" я выбираю текущую строку
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
-		* Проверка того, что значение галочки Price include Tax заполнилось из соглашения
+		* Check that the Price include Tax checkbox value has been filled out from the partner term
 			И     элемент формы с именем "PriceIncludeTax" стал равен 'Yes'
-		* Проверка перасчета налогов
+		* Check tax recalculation 
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 02' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 02' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 02' |
-		* Изменение соглашения на то которое было раньше
+		* Change of partner term to what was earlier
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           |
@@ -1551,20 +1548,20 @@
 			Когда открылось окно 'Update item list info'
 			И я нажимаю на кнопку 'OK'
 			И     элемент формы с именем "PriceIncludeTax" стал равен 'No'
-		* Проверка перерасчета налогов
+		* Tax recalculation check
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | '126,00'     | 'pcs'  | '700,00'     | '826,00'       | 'Store 03' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '99,00'      | 'pcs'  | '550,00'     | '649,00'       | 'Store 03' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
-		* Check filling inтаблицы валют
+		* Check filling in currency tab
 			И я перехожу к закладке с именем "GroupCurrency"
 			И     таблица "ObjectCurrencies" стала равной:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '357,64'  | '1'            |
-		* Проверка пересчета налогов при выборе налоговой ставки вручную
+		* Check tax recalculation when choosing a tax rate manually
 			И  в таблице "ItemList" я перехожу к строке:
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
@@ -1578,46 +1575,46 @@
 				| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
 			И я закрыл все окна клиентского приложения
 
-Сценарий: _0154107 Check filling inи перезаполнения Cash reciept (вид операции Payment from customer)
-	* Открытие формы Cash reciept
+Сценарий: _0154107 check filling in and re-filling Cash reciept (transaction type Payment from customer)
+	* Open the Cash reciept creation form
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка установки вида операции 'Payment from customer' по умолчанию
+	* Check the default transaction type 'Payment from customer'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
-	* Check filling inкомпании
+	* Check filling in company
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
-	* Check filling inвалюты до выбора кассы
+	* Check filling in currency before select cash account
 		И я нажимаю кнопку выбора у поля "Currency"
 		И в таблице "List" я перехожу к строке:
 			| Code |
 			| USD  |
 		И в таблице "List" я выбираю текущую строку
-	* Check filling inкассы (мультивалютная)
+	* Check filling in cash account (multicurrency)
 		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №1 |
 		И в таблице "List" я выбираю текущую строку
-	* Перевыбор кассы с фиксированной валютой и проверка перезаполнения поля Currency
+	* Re-selection of cash registers with a fixed currency and verification of overfilling of the Currency field
 		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №4 |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Currency" стал равен 'TRY'
-	* Проверка перевыбора валюты и очистка поля "Cash/Bank accounts" в случае если валюта зафиксированна по кассе
+	* Check currency re-selection and clearing the "Cash / Bank accounts" field if the currency is fixed at the cash account
 		И я нажимаю кнопку выбора у поля "Currency"
 		И в таблице "List" я перехожу к строке:
 			| Code |
 			| USD  |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "CashAccount" стал равен ''
-	* Выбор мультивалютной кассы и проверка что поле Currency не очистится
+	* Select a multi-currency cash account and checking that the Currency field will not be cleared
 		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
@@ -1629,7 +1626,7 @@
 			| Code |
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка выбора партнера в табличной части и заполнения по нему контрагента если он один
+	* Check the choice of a partner in the tabular section and filling in the legal name if one
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -1640,7 +1637,7 @@
 			| 'Partner'   | 'Payer'|
 			| 'DFC'       | 'DFC'  |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-	* Check filling inPartner term при добавлении партнера если оно у партнера одно
+	* Check filling in partner term when adding a partner if the partner has only one
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1652,7 +1649,7 @@
 			| 'Partner'   | 'Partner term'                              | 'Payer'             |
 			| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-	* Проверка отображения для выбора только доступных соглашений по партнеру
+	* Check the display to select only available partner terms
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1678,7 +1675,7 @@
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка фильтра по документам-основаниям в зависимости от Partner term
+	* Filter check on the basis documents depending on Partner term
 		# temporarily
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
@@ -1691,19 +1688,19 @@
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '4 350,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		И я нажимаю на кнопку 'Select'
-	* Проверка очистки basis document при очистке соглашения
+	* Check clearing basis document when clearing partner term
 		И в таблице "PaymentList" я выбираю текущую строку
 		И я нажимаю кнопку очистить у поля "Partner term"
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
 			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
-	* Проверка добавления basis document без выбора документа основания
+	* Check the addition of a base document without selecting a base document
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка недоступности выбора документа-основания при выборе Partner term с расчетом by Standard Partner term
+	* Checking the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1721,12 +1718,12 @@
 			| 'Description'           |
 			| 'Posting by Standard Partner term Customer' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка добавления basis document без выбора документа основания
+	* Check the addition of a base document without selecting a base document
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка подключения формы по валютам
+	* Check the currency form connection
 		И в таблице "PaymentList" я перехожу к строке:
 			| 'Partner'   | 'Payer'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
@@ -1743,7 +1740,7 @@
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '17,12'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '34,25'  | '1'            |
-	* Проверка перерасчета по курсу в случае изменения даты
+	* Check the recalculation at the rate in case of date change
 		И я перехожу к закладке "Other"
 		И в поле 'Date' я ввожу текст '01.11.2018  0:00:00'
 		И я перехожу к закладке "Payments"
@@ -1755,7 +1752,7 @@
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '*'                 | '40*'     | '1'            |
 		И Пауза 5
-	* Проверка невозможности провести документ без заполненного документа-основания при выборе соглашения с учетом по документам
+	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		И в таблице "PaymentList" я перехожу к строке:
 			| 'Partner'   | 'Payer'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
@@ -1768,11 +1765,11 @@
 		И я нажимаю на кнопку 'Post'
 		Если в сообщениях пользователю есть строка "Basis document is required on line 1" Тогда
 
-Сценарий: _0154108 проверка расчета Total amount в Cash reciept
-	* Открытие формы Cash reciept
+Сценарий: _0154108 total amount calculation in Cash reciept
+	* Open form Cash reciept
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка пересчета Total amount при добавлении строк
+	* Check the Total amount calculation when adding rows
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
@@ -1786,46 +1783,46 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '180,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '430,00'
-	* Проверка пересчета Total amount при удалении строки
+	* Check the Total amount re-calculation when deleting rows
 		И в таблице "PaymentList" я перехожу к строке:
 		| 'Amount' |
 		| '50,00'  |
 		И в таблице 'PaymentList' я удаляю строку
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '380,00'
-	* Проверка пересчета Total amount при добавлении строки
+	* Check the Total amount calculation when adding rows
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '80,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '460,00'
 		
-Сценарий: _0154109 Check filling inи перезаполнения Bank reciept (вид операции Payment from customer)
-	* Открытие формы Bank reciept
+Сценарий: _0154109 check filling in and re-filling Bank reciept (transaction type Payment from customer)
+	* Open form Bank reciept
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка установки вида операции 'Payment from customer' по умолчанию
+	* Check the default transaction type 'Payment from customer'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
-	* Check filling inкомпании
+	* Check filling in company
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
-	* Check filling inвалюты до выбора счета
+	* Check filling in currencies before select an account
 		И я нажимаю кнопку выбора у поля "Currency"
 		И в таблице "List" я перехожу к строке:
 			| Code |
 			| USD  |
 		И в таблице "List" я выбираю текущую строку
-	* Выбор банковского счета и проверка перезаполнения поля Currency
+	* Bank account selection and check of Currency field refilling
 		И я нажимаю кнопку выбора у поля "Account"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Bank account, TRY |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Currency" стал равен 'TRY'
-	* Проверка перевыбора валюты и очистка поля "Account"
+	* Check currency re-selection and clearing the "Account" field
 		И я нажимаю кнопку выбора у поля "Currency"
 		И в таблице "List" я перехожу к строке:
 			| Code |
@@ -1837,7 +1834,7 @@
 			| Description    |
 			| Bank account, TRY |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка выбора партнера в табличной части и заполнения по нему контрагента если он один
+	* Check the choice of a partner in the tabular section and filling in the legal name if one
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -1848,7 +1845,7 @@
 			| 'Partner'   | 'Payer'|
 			| 'DFC'       | 'DFC'  |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-	* Check filling inPartner term при добавлении партнера если оно у партнера одно
+	* Check filling in partner term when adding a partner if the partner has only one
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1860,7 +1857,7 @@
 			| 'Partner'   | 'Partner term'                              | 'Payer'             |
 			| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-	* Проверка отображения для выбора только доступных соглашений по партнеру
+	* Check the display to select only available partner terms
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1886,7 +1883,7 @@
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка фильтра по документам-основаниям в зависимости от Partner term
+	* Filter check on the basis documents depending on Partner term
 		# temporarily
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
@@ -1899,19 +1896,19 @@
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '4 350,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		И я нажимаю на кнопку 'Select'
-	* Проверка очистки basis document при очистке соглашения
+	* Check clearing basis document when clearing partner term
 		И в таблице "PaymentList" я выбираю текущую строку
 		И я нажимаю кнопку очистить у поля "Partner term"
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
 			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
-	* Проверка добавления basis document без выбора документа основания
+	* Check the addition of a base document without selecting a base document
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка недоступности выбора документа-основания при выборе Partner term с расчетом by Standard Partner term
+	* Checking the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1929,12 +1926,12 @@
 			| 'Description'           |
 			| 'Posting by Standard Partner term Customer' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка добавления basis document без выбора документа основания
+	* Check the addition of a base document without selecting a base document
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка подключения формы по валютам
+	* Check the currency form connection
 		И в таблице "PaymentList" я перехожу к строке:
 			| 'Partner'   | 'Payer'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
@@ -1951,7 +1948,7 @@
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '17,12'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '34,25'  | '1'            |
-	* Проверка перерасчета по курсу в случае изменения даты
+	* Check the recalculation at the rate in case of date change
 		И я перехожу к закладке "Other"
 		И в поле 'Date' я ввожу текст '01.11.2018  0:00:00'
 		И я перехожу к закладке "Payments"
@@ -1967,7 +1964,7 @@
 		И     таблица "CurrenciesPaymentList" содержит строки:
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '20,00'  | '1'            |
-	* Проверка невозможности провести документ без заполненного документа-основания при выборе соглашения с учетом по документам
+	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		И в таблице "PaymentList" я перехожу к строке:
 			| 'Partner'   | 'Payer'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
@@ -1980,11 +1977,11 @@
 		И я нажимаю на кнопку 'Post'
 		Если в сообщениях пользователю есть строка "Basis document is required on line 1" Тогда
 
-Сценарий: _0154110 проверка расчета Total amount в Bank reciept
-	* Открытие формы Bank reciept
+Сценарий: _0154110 total amount calculation in в Bank reciept
+	* Open form Bank reciept
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка пересчета Total amount при добавлении строк
+	* Check the Total amount calculation when adding rows
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
@@ -1998,13 +1995,13 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '180,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '430,00'
-	* Проверка пересчета Total amount при удалении строки
+	* Check the Total amount re-calculation when deleting rows
 		И в таблице "PaymentList" я перехожу к строке:
 		| 'Amount' |
 		| '50,00'  |
 		И в таблице 'PaymentList' я удаляю строку
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '380,00'
-	* Проверка пересчета Total amount при добавлении строки
+	* Check the Total amount calculation when adding rows
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '80,00'
@@ -2013,46 +2010,46 @@
 
 
 
-Сценарий: _0154111 Check filling inи перезаполнения Cash payment (вид операции Payment to the vendor)
-	* Открытие формы Cash payment
+Сценарий: _0154111 check filling in and re-filling Cash payment (transaction type Payment to the vendor)
+	* Open form Cash payment
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка установки вида операции 'Payment from customer' по умолчанию
+	* Check the default transaction type 'Payment from customer'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-	* Check filling inкомпании
+	* Check filling in company
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
-	* Check filling inвалюты до выбора кассы
+	* Check filling in currency before select cash account
 		И я нажимаю кнопку выбора у поля "Currency"
 		И в таблице "List" я перехожу к строке:
 			| Code |
 			| USD  |
 		И в таблице "List" я выбираю текущую строку
-	* Check filling inкассы (мультивалютная)
+	* Check filling in cash account (multicurrency)
 		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №1 |
 		И в таблице "List" я выбираю текущую строку
-	* Перевыбор кассы с фиксированной валютой и проверка перезаполнения поля Currency
+	* Re-selection of cash registers with a fixed currency and verification of overfilling of the Currency field
 		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №4 |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Currency" стал равен 'TRY'
-	* Проверка перевыбора валюты и очистка поля "Cash/Bank accounts" в случае если валюта зафиксированна по кассе
+	* Check currency re-selection and clearing the "Cash / Bank accounts" field if the currency is fixed at the cash account
 		И я нажимаю кнопку выбора у поля "Currency"
 		И в таблице "List" я перехожу к строке:
 			| Code |
 			| USD  |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "CashAccount" стал равен ''
-	* Выбор мультивалютной кассы и проверка что поле Currency не очистится
+	* Select a multi-currency cash account and checking that the Currency field will not be cleared
 		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
@@ -2064,7 +2061,7 @@
 			| Code |
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка выбора партнера в табличной части и заполнения по нему контрагента если он один
+	* Check the choice of a partner in the tabular section and filling in the legal name if one
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -2075,7 +2072,7 @@
 			| 'Partner'   | 'Payee'|
 			| 'DFC'       | 'DFC'  |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-	* Check filling inPartner term при добавлении партнера если оно у партнера одно
+	* Check filling in partner term when adding a partner if the partner has only one
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2087,7 +2084,7 @@
 			| 'Partner'   | 'Partner term'                               | 'Payee'             |
 			| 'Veritas'   | 'Posting by Standard Partner term (Veritas)' | 'Company Veritas' |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-	* Проверка отображения для выбора только доступных соглашений по партнеру
+	* Check the display to select only available partner terms
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2113,7 +2110,7 @@
 			| 'Description'           |
 			| 'Vendor Ferron, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка фильтра по документам-основаниям в зависимости от Partner term
+	* Filter check on the basis documents depending on Partner term
 		# temporarily
 		Когда Проверяю шаги на Исключение:
 		|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
@@ -2125,19 +2122,19 @@
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		И я нажимаю на кнопку 'Select'
-	* Проверка очистки basis document при очистке соглашения
+	* Check clearing basis document when clearing partner term
 		И в таблице "PaymentList" я выбираю текущую строку
 		И я нажимаю кнопку очистить у поля "Partner term"
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payee'             | 'Basis document' |
 			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
-	* Проверка добавления basis document без выбора документа основания
+	* Check the addition of a base document without selecting a base document
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка недоступности выбора документа-основания при выборе Partner term с расчетом by Standard Partner term
+	* Checking the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2155,12 +2152,12 @@
 			| 'Description'           |
 			| 'Posting by Standard Partner term (Veritas)' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка добавления basis document без выбора документа основания
+	* Check the addition of a base document without selecting a base document
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка подключения формы по валютам
+	* Check the currency form connection
 		И в таблице "PaymentList" я перехожу к строке:
 			| 'Partner'   | 'Payee'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
@@ -2185,7 +2182,7 @@
 		И     таблица "PaymentListCurrencies" содержит строки:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '34,25'  | '1'            |
-	* Проверка перерасчета по курсу в случае изменения даты
+	* Check the recalculation at the rate in case of date change
 		И я перехожу к закладке "Other"
 		И в поле 'Date' я ввожу текст '01.11.2018  0:00:00'
 		И я перехожу к закладке "Payments"
@@ -2201,7 +2198,7 @@
 		И     таблица "PaymentListCurrencies" содержит строки:	
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '40*'     | '1'            |
-	* Проверка невозможности провести документ без заполненного документа-основания при выборе соглашения с учетом по документам
+	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		И в таблице "PaymentList" я перехожу к строке:
 			| 'Partner'   | 'Payee'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
@@ -2214,11 +2211,11 @@
 		И я нажимаю на кнопку 'Post'
 		Если в сообщениях пользователю есть строка "Basis document is required on line 1" Тогда
 
-Сценарий: _0154112 проверка расчета Total amount в Cash payment
-	* Открытие формы Cash payment
+Сценарий: _0154112 total amount calculation in в Cash payment
+	* Open form Cash payment
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка пересчета Total amount при добавлении строк
+	* Check the Total amount calculation when adding rows
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
@@ -2232,13 +2229,13 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '180,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '430,00'
-	* Проверка пересчета Total amount при удалении строки
+	* Check the Total amount re-calculation when deleting rows
 		И в таблице "PaymentList" я перехожу к строке:
 		| 'Amount' |
 		| '50,00'  |
 		И в таблице 'PaymentList' я удаляю строку
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '380,00'
-	* Проверка пересчета Total amount при добавлении строки
+	* Check the Total amount calculation when adding rows
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '80,00'
@@ -2246,14 +2243,14 @@
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '460,00'
 
 
-Сценарий: _0154113 Check filling inи перезаполнения Bank payment (вид операции Payment to the vendor)
-	* Открытие формы Bank payment
+Сценарий: _0154113 check filling in and re-filling Bank payment (transaction type Payment to the vendor)
+	* Open form Bank payment
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка установки вида операции 'Payment from customer' по умолчанию
+	* Check the default transaction type 'Payment from customer'
 		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-	* Check filling inкомпании
+	* Check filling in company
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
@@ -2265,14 +2262,14 @@
 			| Code |
 			| USD  |
 		И в таблице "List" я выбираю текущую строку
-	* Выбор банковского счета и проверка перезаполнения поля Currency
+	* Bank account selection and check of Currency field refilling
 		И я нажимаю кнопку выбора у поля "Account"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Bank account, TRY |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "Currency" стал равен 'TRY'
-	* Проверка перевыбора валюты и очистка поля "Account" в случае если валюта зафиксированна по кассе
+	* Check currency re-selection and clearing the "Account" field в случае если валюта зафиксированна по кассе
 		И я нажимаю кнопку выбора у поля "Currency"
 		И в таблице "List" я перехожу к строке:
 			| Code |
@@ -2284,7 +2281,7 @@
 			| Description    |
 			| Bank account, TRY |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка выбора партнера в табличной части и заполнения по нему контрагента если он один
+	* Check the choice of a partner in the tabular section and filling in the legal name if one
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2296,7 +2293,7 @@
 			| 'Partner'   | 'Payee'|
 			| 'DFC'       | 'DFC'  |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-	* Check filling inPartner term при добавлении партнера если оно у партнера одно
+	* Check filling in partner term when adding a partner if the partner has only one
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2308,7 +2305,7 @@
 			| 'Partner'   | 'Partner term'                               | 'Payee'             |
 			| 'Veritas'   | 'Posting by Standard Partner term (Veritas)' | 'Company Veritas' |
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-	* Проверка отображения для выбора только доступных соглашений по партнеру
+	* Check the display to select only available partner terms
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2334,7 +2331,7 @@
 			| 'Description'           |
 			| 'Vendor Ferron, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка фильтра по документам-основаниям в зависимости от Partner term
+	* Filter check on the basis documents depending on Partner term
 		# temporarily
 		Когда Проверяю шаги на Исключение:
 		|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
@@ -2346,19 +2343,19 @@
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		И я нажимаю на кнопку 'Select'
-	* Проверка очистки basis document при очистке соглашения
+	* Check clearing basis document when clearing partner term
 		И в таблице "PaymentList" я выбираю текущую строку
 		И я нажимаю кнопку очистить у поля "Partner term"
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     таблица "PaymentList" содержит строки:
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payee'             | 'Basis document' |
 			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
-	* Проверка добавления basis document без выбора документа основания
+	* Check the addition of a base document without selecting a base document
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка недоступности выбора документа-основания при выборе Partner term с расчетом by Standard Partner term
+	* Checking the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -2376,12 +2373,12 @@
 			| 'Description'           |
 			| 'Posting by Standard Partner term (Veritas)' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка добавления basis document без выбора документа основания
+	* Check the addition of a base document without selecting a base document
 		Когда Проверяю шаги на Исключение:
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
 		Когда Проверяю шаги на Исключение:
 			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Проверка подключения формы по валютам
+	* Check the currency form connection
 		И в таблице "PaymentList" я перехожу к строке:
 			| 'Partner'   | 'Payee'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
@@ -2406,7 +2403,7 @@
 		И     таблица "PaymentListCurrencies" содержит строки:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '34,25'  | '1'            |
-	* Проверка перерасчета по курсу в случае изменения даты
+	* Check the recalculation at the rate in case of date change
 		И я перехожу к закладке "Other"
 		И в поле 'Date' я ввожу текст '01.11.2018  0:00:00'
 		И я перехожу к закладке "Payments"
@@ -2422,7 +2419,7 @@
 		И     таблица "PaymentListCurrencies" содержит строки:	
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '40*'     | '1'            |
-	* Проверка невозможности провести документ без заполненного документа-основания при выборе соглашения с учетом по документам
+	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		И в таблице "PaymentList" я перехожу к строке:
 			| 'Partner'   | 'Payee'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
@@ -2435,11 +2432,11 @@
 		И я нажимаю на кнопку 'Post'
 		Если в сообщениях пользователю есть строка "Basis document is required on line 1" Тогда
 
-Сценарий: _0154114 проверка расчета Total amount в Bank payment
-	* Открытие формы Bank payment
+Сценарий: _0154114 total amount calculation in в Bank payment
+	* Open form Bank payment
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка пересчета Total amount при добавлении строк
+	* Check the Total amount calculation when adding rows
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
@@ -2453,24 +2450,24 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '180,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '430,00'
-	* Проверка пересчета Total amount при удалении строки
+	* Check the Total amount re-calculation when deleting rows
 		И в таблице "PaymentList" я перехожу к строке:
 		| 'Amount' |
 		| '50,00'  |
 		И в таблице 'PaymentList' я удаляю строку
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '380,00'
-	* Проверка пересчета Total amount при добавлении строки
+	* Check the Total amount calculation when adding rows
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '80,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '460,00'
 
-Сценарий: _01541140 проверка расчета Total amount в Incoming payment order
-	* Открытие формы Bank payment
+Сценарий: _01541140 total amount calculation in в Incoming payment order
+	* Open form Bank payment
 		И я открываю навигационную ссылку 'e1cib/list/Document.IncomingPaymentOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка пересчета Total amount при добавлении строк
+	* Check the Total amount calculation when adding rows
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
@@ -2484,24 +2481,24 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '180,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '430,00'
-	* Проверка пересчета Total amount при удалении строки
+	* Check the Total amount re-calculation when deleting rows
 		И в таблице "PaymentList" я перехожу к строке:
 		| 'Amount' |
 		| '50,00'  |
 		И в таблице 'PaymentList' я удаляю строку
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '380,00'
-	* Проверка пересчета Total amount при добавлении строки
+	* Check the Total amount calculation when adding rows
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '80,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '460,00'
 
-Сценарий: _01541141 проверка расчета Total amount в Outgoing payment order
-	* Открытие формы Bank payment
+Сценарий: _01541141 total amount calculation in в Outgoing payment order
+	* Open form Bank payment
 		И я открываю навигационную ссылку 'e1cib/list/Document.OutgoingPaymentOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка пересчета Total amount при добавлении строк
+	* Check the Total amount calculation when adding rows
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
@@ -2515,21 +2512,21 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '180,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '430,00'
-	* Проверка пересчета Total amount при удалении строки
+	* Check the Total amount re-calculation when deleting rows
 		И в таблице "PaymentList" я перехожу к строке:
 		| 'Amount' |
 		| '50,00'  |
 		И в таблице 'PaymentList' я удаляю строку
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '380,00'
-	* Проверка пересчета Total amount при добавлении строки
+	* Check the Total amount calculation when adding rows
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '80,00'
 		И в таблице "PaymentList" я завершаю редактирование строки
 		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '460,00'
 
-Сценарий: _0154115 Check filling inи перезаполнения Cash transfer order
-	* Открытие формы Cash transfer order
+Сценарий: _0154115 check filling in and re-filling Cash transfer order
+	* Open form Cash transfer order
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Company"
@@ -2537,7 +2534,7 @@
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-	* Check filling inвалюты пи выборе банка/кассы если она зафиксированна
+	* Check filling in currency when selecting a bank/cash account with fixed currency
 		И я нажимаю кнопку выбора у поля "Sender"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Description'       |
@@ -2550,7 +2547,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "ReceiveCurrency" стал равен 'USD'
 		И     элемент формы с именем "SendCurrency" стал равен 'TRY'
-	* Проверка перезаполнения валюты при перевыборе "Sender" и "Receiver"
+	* Check filling in currency when re-select "Sender" and "Receiver"
 		И я нажимаю кнопку выбора у поля "Sender"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Description'       |
@@ -2563,7 +2560,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "ReceiveCurrency" стал равен 'TRY'
 		И     элемент формы с именем "SendCurrency" стал равен 'EUR'
-	* Check filling inсуммы в Receive amount из Send amount в случае совпадения валют
+	* Check filling in ammount in Receive amount from Send amount in the case of the same currencies
 		И я нажимаю кнопку выбора у поля "Sender"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -2578,7 +2575,7 @@
 		И я перехожу к следующему реквизиту
 		И     у элемента формы с именем "ReceiveAmount" текст редактирования стал равен '100,00'
 		И     у элемента формы с именем "SendAmount" текст редактирования стал равен '100,00'
-	* Check filling inSend date и Receive date
+	* Check filling in Send date and Receive date
 		И в поле 'Date' я ввожу текст '01.01.2020  0:00:00'
 		И я перехожу к следующему реквизиту
 		И я запоминаю значение поля "Send date" как "Senddate"
@@ -2591,7 +2588,7 @@
 		Тогда переменная "Senddate" имеет значение "01.03.2020"
 		И я запоминаю значение поля "Receive date" как "Receivedate"
 		Тогда переменная "Receivedate" имеет значение "01.03.2020"
-	* Проверка прорисовки поля Cash advance holder в случае обмена валюты через кассы
+	* Checking the drawing of Cash advance holder field in case of currency exchange through cash accounts
 		И я нажимаю кнопку выбора у поля "Sender"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'       |
@@ -2618,7 +2615,7 @@
 			| 'Description' |
 			| 'Arina Brown' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка формы по валютам
+	* Check form by currency
 			И в поле 'Receive amount' я ввожу текст '584,00'
 			И я перехожу к следующему реквизиту
 			И     таблица "ObjectCurrencies" содержит строки:
@@ -2628,9 +2625,9 @@
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '584'    | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '100,00' | '1'            |
 
-Сценарий: _01541151 проверка на совпадение суммы отправки и получения в Cash transfer order
-	* Проверка при перемещении ДС между двумя кассами
-		* Открытие формы Cash transfer order
+Сценарий: _01541151 check that the amount sent and received in Cash transfer order is the same
+	* Check cash transfer between two cash account
+		* Open form Cash transfer order
 			И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Company"
@@ -2638,7 +2635,7 @@
 				| 'Description'  |
 				| 'Main Company' |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение данных
+		* Filling data
 			И я нажимаю кнопку выбора у поля "Sender"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
@@ -2661,12 +2658,12 @@
 				| 'TRY'  | 'Turkish lira' |
 			И в таблице "List" я выбираю текущую строку
 			И в поле 'Receive amount' я ввожу текст '120,00'
-		* Проверка сообщения при проведении
+		* Check message when post document
 			И я нажимаю на кнопку 'Post'
 			Затем я жду, что в сообщениях пользователю будет подстрока "Currency transfer is possible only when amounts is equal." в течение 10 секунд
 			И я закрыл все окна клиентского приложения
-	* Проверка при перемещении ДС между кассой и банком
-		* Открытие формы Cash transfer order
+	* Check cash transfer from cash account to bank account
+		* Open form Cash transfer order
 			И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Company"
@@ -2674,7 +2671,7 @@
 				| 'Description'  |
 				| 'Main Company' |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение данных
+		* Filling data
 			И я нажимаю кнопку выбора у поля "Sender"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
@@ -2692,12 +2689,12 @@
 				| 'Bank account, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			И в поле 'Receive amount' я ввожу текст '120,00'
-		* Проверка сообщения при проведении
+		* Check message when post document
 			И я нажимаю на кнопку 'Post'
 			Затем я жду, что в сообщениях пользователю будет подстрока "Currency transfer is possible only when amounts is equal." в течение 10 секунд
 			И я закрыл все окна клиентского приложения
-	* Проверка при перемещении ДС между банком и кассой
-		* Открытие формы Cash transfer order
+	* Check cash transfer from bank account to cash account
+		* Open form Cash transfer order
 			И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Company"
@@ -2705,7 +2702,7 @@
 				| 'Description'  |
 				| 'Main Company' |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение данных
+		* Filling data
 			И я нажимаю кнопку выбора у поля "Receiver"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
@@ -2723,12 +2720,12 @@
 				| 'Bank account, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			И в поле 'Receive amount' я ввожу текст '120,00'
-		* Проверка сообщения при проведении
+		* Check message when post document
 			И я нажимаю на кнопку 'Post'
 			Затем я жду, что в сообщениях пользователю будет подстрока "Currency transfer is possible only when amounts is equal." в течение 10 секунд
 			И я закрыл все окна клиентского приложения
-	* Проверка при перемещении ДС между двумя банковскими счетами
-		* Открытие формы Cash transfer order
+	* Check cash transfer between two bank account
+		* Open form Cash transfer order
 			И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Company"
@@ -2736,7 +2733,7 @@
 				| 'Description'  |
 				| 'Main Company' |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение данных
+		* Filling data
 			И я нажимаю кнопку выбора у поля "Receiver"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
@@ -2749,18 +2746,18 @@
 				| 'Bank account, EUR' |
 			И в таблице "List" я выбираю текущую строку
 			И в поле 'Receive amount' я ввожу текст '120,00'
-		* Проверка сообщения при проведении
+		* Check message when post document
 			И я нажимаю на кнопку 'Post'
 			Затем я жду, что в сообщениях пользователю будет подстрока "Currency transfer is possible only when amounts is equal." в течение 10 секунд
 			И я закрыл все окна клиентского приложения
 
 
 
-Сценарий: _0154116 Check filling inи перезаполнения Cash expence
-	* Открытие формы Cash expence
+Сценарий: _0154116 check filling in and re-filling Cash expence
+	* Open form Cash expence
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashExpense'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка фильтра по Account в зависимости от компании
+	* Filter check by Account depending on the company
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'    |
@@ -2791,7 +2788,7 @@
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка расчета Net amount и VAT при заполнении Total amount
+	* Check the Net amount and VAT calculation when filling in the Total amount
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
 		И в таблице "List" я перехожу к строке:
@@ -2809,7 +2806,7 @@
 		Тогда таблица "PaymentList" содержит строки:
 			| 'Net amount' | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,44'     | 'Telephone communications' | 'TRY'      | '18%' | '33,56'      | '220,00'       |
-	* Проверка перерасчета Total amount при изменении Tax
+	* Check the recalculation of Total amount when Tax changes
 		И я перехожу к закладке "Tax list"
 		И в таблице "TaxTree" я активизирую поле "Manual amount"
 		И в таблице "TaxTree" я перехожу к строке:
@@ -2822,21 +2819,21 @@
 		Тогда таблица "PaymentList" содержит строки:
 			| 'Net amount' | 'Expense type'               | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,44'     | 'Telephone communications'   | 'TRY'      | '18%' | '33,55'      | '219,99'       |
-	* Проверка перерасчета Net amount при изменении Total amount с изменениями по налогам
+	* Check the Net amount recalculation when Total amount changes and with changes in taxes
 		И в таблице "PaymentList" в поле с именем 'PaymentListTotalAmount' я ввожу текст '220,00'
 		Тогда таблица "PaymentList" содержит строки:
 			| 'Net amount' | 'Business unit'      | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,45'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,00'       |
-	* Проверка перерасчета Total amount при изменении Net amount с изменениями по налогам
+	* Check the Total amount recalculation when Net amount changes and with changes in taxes
 		И в таблице "PaymentList" в поле с именем 'PaymentListNetAmount' я ввожу текст '187,00'
 		Тогда таблица "PaymentList" содержит строки:
 			| 'Net amount' | 'Expense type'                     | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '187,00'     | 'Telephone communications'         | 'TRY'      | '18%' | '33,55'      | '220,55'       |
-	* Проверка подключения формы по валютам
+	* Check the currency form connection
 		И     таблица "PaymentListCurrencies" содержит строки:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '37,77'  | '1'            |
-	* Добавление ещё одной строки
+	* Add one more line
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
 		И в таблице "List" я перехожу к строке:
@@ -2856,7 +2853,7 @@
 			| 'Amount' | 'Currency' | 'Manual amount' | 'Tax' |
 			| '69,66'  | 'TRY'      | '69,55'         | 'VAT' |
 		И в таблице "PaymentList" я завершаю редактирование строки
-	* Ручная корректировка налога по строке
+	* Manual tax correction by line
 		И я перехожу к закладке "Tax list"
 		И в таблице "TaxTree" я перехожу к строке:
 			| 'Amount' | 'Business unit' | 'Currency' |
@@ -2869,7 +2866,7 @@
 			| 'Net amount' | 'Business unit'      | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '187,00'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,55'       |
 			| '200,00'     | 'Front office'       | 'Software'                 | 'TRY'      | '18%' | '38,00'      | '238,00'       |
-	* Удаление строки и проверка пересчета общей суммы
+	* Delete a line and check the total amount conversion
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListCurrency"
 		И в таблице "PaymentList" я перехожу к строке:
 			| 'Business unit'      | 'Currency' | 'Expense type'             | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
@@ -2878,7 +2875,7 @@
 		И     у элемента формы с именем "PaymentListTotalNetAmount" текст редактирования стал равен '200,00'
 		И     у элемента формы с именем "PaymentListTotalTaxAmount" текст редактирования стал равен '38,00'
 		И     у элемента формы с именем "PaymentListTotalTotalAmount" текст редактирования стал равен '238,00'
-	* Изменение счета
+	* Change Account
 		И я нажимаю кнопку выбора у поля "Account"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Description'       |
@@ -2889,7 +2886,7 @@
 		И     таблица "PaymentList" содержит строки:
 			| 'Net amount' | 'Business unit' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
-	* Проверка неизменения счета при нажатии в окне-сообщении No
+	* Check that the Account does not change when you click No in the message window
 		И я нажимаю кнопку выбора у поля "Account"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Description'       |
@@ -2900,7 +2897,7 @@
 		И     таблица "PaymentList" не содержит строки:
 			| 'Net amount' | 'Business unit' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
-	* Изменение компании (без налогов) и проверка удаления колонки VAT
+	* Change the company (without taxes) and check to delete the VAT column
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'    |
@@ -2909,7 +2906,7 @@
 		И я жду, что таблица "PaymentList" не станет содержать строки в течение 20 секунд:
 		| 'VAT' | 'Tax amount' |
 		| '18%' | '38,00'      |
-	* Изменение компании на ту у которой есть налоги и проверка формы по валютам
+	* Change the company to the one with taxes and check the form by currency
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -2925,7 +2922,7 @@
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 			| 'Amount' | 'Currency' | 'Currency from' | 'Movement type'      | 'Multiplicity' | 'Rate presentation' | 'Type'      |
 			| '50,00'  | 'USD'      | 'TRY'           | 'Reporting currency' | '1'            | '4,7200'            | 'Reporting' |
-	* Добавление ещё одной строки с другой валютой
+	* Add one more line with different cureency
 		И я нажимаю кнопку выбора у поля "Account"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -2957,11 +2954,11 @@
 		И   в таблице "PaymentList" я перехожу к строке:
 			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '100,00'     | 'Accountants office' | 'Software'     | 'USD'      | '0%'  | ''           | '100,00'       |
-	* Проверка добавления строки в форму по валютам
+	* Check the addition of a line to the form by currency
 		И  в таблице "PaymentListCurrencies" я перехожу к строке:
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '564,97' | '1'            |
-	* Изменение валюты по первой строке и проверка формы по валютам
+	* Change of currency on the first line and check of form on currencies
 		И   в таблице "PaymentList" я перехожу к строке:
 			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'       | 'Software'     | 'TRY'      | '18%' | '36,00'      | '236,00'       |
@@ -2976,7 +2973,7 @@
 		И   в таблице "PaymentListCurrencies" я перехожу к строке:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'            | '1 333,33' | '1'            |
-	* Ручная корректировка налоговой ставки и проверка расчетов налога
+	* Manual correction of tax rate and check of tax calculations
 		И в таблице "PaymentList" я перехожу к строке:
 			| 'Business unit' | 'Currency' | 'Expense type' | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
 			| 'Front office'  | 'USD'      | 'Software'     | '200,00'     | '36,00'      | '236,00'       | '18%' |
@@ -2995,11 +2992,11 @@
 
 
 
-Сценарий: _0154117 Check filling inи перезаполнения Cash revenue
-	* Открытие формы Cash revenue
+Сценарий: _0154117 check filling in and re-filling Cash revenue
+	* Open form Cash revenue
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashRevenue'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Проверка фильтра по Account в зависимости от компании
+	* Filter check by Account depending on the company
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'    |
@@ -3030,7 +3027,7 @@
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка расчета Net amount и VAT при заполнении Total amount
+	* Check the Net amount and VAT calculation when filling in the Total amount
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
 		И в таблице "List" я перехожу к строке:
@@ -3048,7 +3045,7 @@
 		Тогда таблица "PaymentList" содержит строки:
 			| 'Net amount' | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,44'     | 'Telephone communications' | 'TRY'      | '18%' | '33,56'      | '220,00'       |
-	* Проверка перерасчета Total amount при изменении Tax
+	* Check the recalculation of Total amount when Tax changes
 		И я перехожу к закладке "Tax list"
 		И в таблице "TaxTree" я активизирую поле "Manual amount"
 		И в таблице "TaxTree" я перехожу к строке:
@@ -3061,21 +3058,21 @@
 		Тогда таблица "PaymentList" содержит строки:
 		| 'Net amount' | 'Revenue type'               | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 		| '186,44'     | 'Telephone communications'   | 'TRY'      | '18%' | '33,55'      | '219,99'       |
-	* Проверка перерасчета Net amount при изменении Total amount с изменениями по налогам
+	* Check the Net amount recalculation when Total amount changes and with changes in taxes
 		И в таблице "PaymentList" в поле с именем 'PaymentListTotalAmount' я ввожу текст '220,00'
 		Тогда таблица "PaymentList" содержит строки:
 		| 'Net amount' | 'Business unit'      | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 		| '186,45'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,00'       |
-	* Проверка перерасчета Total amount при изменении Net amount с изменениями по налогам
+	* Check the Total amount recalculation when Net amount changes and with changes in taxes
 		И в таблице "PaymentList" в поле с именем 'PaymentListNetAmount' я ввожу текст '187,00'
 		Тогда таблица "PaymentList" содержит строки:
 		| 'Net amount' | 'Revenue type'                     | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 		| '187,00'     | 'Telephone communications'         | 'TRY'      | '18%' | '33,55'      | '220,55'       |
-	* Проверка подключения формы по валютам
+	* Check the currency form connection
 		И     таблица "PaymentListCurrencies" содержит строки:
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '37,77'  | '1'            |
-	* Добавление ещё одной строки
+	* Add one more line
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
 		И в таблице "List" я перехожу к строке:
@@ -3095,7 +3092,7 @@
 			| 'Amount' | 'Currency' | 'Manual amount' | 'Tax' |
 			| '69,66'  | 'TRY'      | '69,55'         | 'VAT' |
 		И в таблице "PaymentList" я завершаю редактирование строки
-	* Ручная корректировка налога по строке
+	* Manual tax correction by line
 		И я перехожу к закладке "Tax list"
 		И в таблице "TaxTree" я перехожу к строке:
 			| 'Amount' | 'Business unit' | 'Currency' |
@@ -3108,7 +3105,7 @@
 			| 'Net amount' | 'Business unit'      | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '187,00'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,55'       |
 			| '200,00'     | 'Front office'       | 'Software'                 | 'TRY'      | '18%' | '38,00'      | '238,00'       |
-	* Удаление строки и проверка пересчета общей суммы
+	* Delete a line and check the total amount conversion
 		И в таблице "PaymentList" я активизирую поле с именем "PaymentListCurrency"
 		И в таблице "PaymentList" я перехожу к строке:
 			| 'Business unit'      | 'Currency' | 'Revenue type'             | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
@@ -3117,7 +3114,7 @@
 		И     у элемента формы с именем "PaymentListTotalNetAmount" текст редактирования стал равен '200,00'
 		И     у элемента формы с именем "PaymentListTotalTaxAmount" текст редактирования стал равен '38,00'
 		И     у элемента формы с именем "PaymentListTotalTotalAmount" текст редактирования стал равен '238,00'
-	* Изменение счета
+	* Change Account
 		И я нажимаю кнопку выбора у поля "Account"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Description'       |
@@ -3128,7 +3125,7 @@
 		И     таблица "PaymentList" содержит строки:
 			| 'Net amount' | 'Business unit' | 'Revenue type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
-	* Проверка неизменения счета при нажатии в окне-сообщении No
+	* Check that the Account does not change when you click in the No message window
 		И я нажимаю кнопку выбора у поля "Account"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Description'       |
@@ -3139,7 +3136,7 @@
 		И     таблица "PaymentList" не содержит строки:
 			| 'Net amount' | 'Business unit' | 'Revenue type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
-	* Изменение компании (без налогов) и проверка удаления колонки VAT
+	* Change the company (without taxes) and check to delete the VAT column
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'    |
@@ -3148,7 +3145,7 @@
 		И я жду, что таблица "PaymentList" не станет содержать строки в течение 20 секунд:
 		| 'VAT' | 'Tax amount' |
 		| '18%' | '38,00'      |
-	* Проверка корректировки налоговой ставки вручную
+	* Check the manually tax rate correction
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -3167,8 +3164,8 @@
 			| 'VAT' | '8%'       | 'TRY'      | '16,00'  | '16,00'         |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154118 проверка очистки реквизитов на форме Cash reciept при перевыборе вида операции
-	* Открытие формы CashReceipt
+Сценарий: _0154118 check the details cleaning on the form Cash reciept 
+	* Open form CashReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in the details of the document CashReceipt
@@ -3187,7 +3184,7 @@
 			| Code |
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение информации по Partner, Payer и Partner term
+	* Fillin in Partner, Payer and Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле "Partner"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -3198,7 +3195,7 @@
 		И     таблица "PaymentList" содержит строки:
 		| 'Partner'   | 'Partner term'                              | 'Payer'             |
 		| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
-	* Проверка очистки полей 'Partner term' и 'Payer' при перевыборе вида операции на Currency exchange
+	* Check clearing fields 'Partner term' and 'Payer' when re-selecting the type of operation to Currency exchange
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3211,7 +3208,7 @@
 		И     таблица "PaymentList" стала равной:
 		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''          | ''       | ''      | ''               | ''                          |
-	* Проверка очистки полей 'Partner' при перевыборе вида операции на Cash transfer order
+	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3224,8 +3221,8 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154119 проверка очистки реквизитов на форме Cash payment при перевыборе вида операции
-	* Открытие формы CashPayment
+Сценарий: _0154119 check the details cleaning on the form Cash payment when re-selecting the type of operation
+	* Open form CashPayment
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in the details of the document CashPayment
@@ -3244,7 +3241,7 @@
 			| Code |
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение информации по Partner, Payee и Partner term
+	* Fillin in Partner, Payer and Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле "Partner"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -3255,7 +3252,7 @@
 		И     таблица "PaymentList" содержит строки:
 		| 'Partner'   | 'Partner term'                              | 'Payee'             |
 		| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
-	* Проверка очистки полей 'Partner term' и 'Payee' при перевыборе вида операции на Currency exchange
+	* Check clearing fields 'Partner term' and 'Payee' when re-selecting the type of operation to Currency exchange
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3268,7 +3265,7 @@
 		И     таблица "PaymentList" стала равной:
 		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''          | ''       | ''      | ''               | ''                          |
-	* Проверка очистки полей 'Partner' при перевыборе вида операции на Cash transfer order
+	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3280,8 +3277,8 @@
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0154120 проверка очистки реквизитов на форме Bank reciept при перевыборе вида операции
-	* Открытие формы BankReceipt
+Сценарий: _0154120 check the details cleaning on the form Bank reciept when re-selecting the type of operation
+	* Open form BankReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in the details of the document CashReceipt
@@ -3300,7 +3297,7 @@
 			| Code |
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение информации по Partner, Payer и Partner term
+	* Fillin in Partner, Payer and Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле "Partner"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -3311,7 +3308,7 @@
 		И     таблица "PaymentList" содержит строки:
 		| 'Partner'   | 'Partner term'                              | 'Payer'             |
 		| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
-	* Проверка очистки полей 'Partner term' и 'Payer' при перевыборе вида операции на Currency exchange
+	* Check clearing fields 'Partner term' and 'Payer' when re-selecting the type of operation to Currency exchange
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3327,7 +3324,7 @@
 		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''          | ''          | ''       | ''      | ''               | ''                          |
 		И     элемент формы с именем "TransitAccount" стал равен ''
-	* Проверка очистки полей 'Partner' при перевыборе вида операции на Cash transfer order
+	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3340,8 +3337,8 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154121 проверка очистки реквизитов на форме Bank payment при перевыборе вида операции
-	* Открытие формы BankPayment
+Сценарий: _0154121 check the details cleaning on the form Bank payment when re-selecting the type of operation
+	* Open form BankPayment
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in the details of the document BankPayment
@@ -3360,7 +3357,7 @@
 			| Code |
 			| TRY  |
 		И в таблице "List" я выбираю текущую строку
-	* Заполнение информации по Partner, Payee и Partner term
+	* Fillin in Partner, Payer and Partner term
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я активизирую поле "Partner"
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -3371,7 +3368,7 @@
 		И     таблица "PaymentList" содержит строки:
 		| 'Partner'   | 'Partner term'                              | 'Payee'             |
 		| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
-	* Проверка очистки полей 'Partner term' и 'Payee' при перевыборе вида операции на Currency exchange
+	* Check clearing fields 'Partner term' and 'Payee' when re-selecting the type of operation to Currency exchange
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3387,7 +3384,7 @@
 		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''          | ''          | ''       | ''      | ''               | ''                          |
 		И     элемент формы с именем "TransitAccount" стал равен ''
-	* Проверка очистки полей 'Partner' при перевыборе вида операции на Cash transfer order
+	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3400,8 +3397,8 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154122 Check filling inи перезаполнения Reconcilation statement
-	* Opening a document form
+Сценарий: _0154122 check filling in and re-filling Reconcilation statement
+	* Open document form
 		И я открываю навигационную ссылку "e1cib/list/Document.ReconciliationStatement"
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in basic details
@@ -3429,7 +3426,7 @@
 			| 'Company Kalipso'     |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Transactions" я нажимаю на кнопку 'Fill'
-	* Проверка что таблица транзакций заполнилась
+	* Check that the transaction table is filled out
 		И Пока в таблице "Transactions" количество строк ">" 0 Тогда
 		И я нажимаю на кнопку 'Post'
 		И     таблица "Transactions" не содержит строки:
@@ -3437,7 +3434,7 @@
 			| 'Purchase invoice 1*' | '137 000,00' | ''          |
 			| 'Sales invoice 1*'    | ''           | '4 350,00'  |
 			| 'Sales invoice 2*'    | ''           | '11 099,93' |
-	* Проверка перезаполнения при перевыборе партнера
+	* Check re-filling when re-selecting a partner
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -3455,7 +3452,7 @@
 			| 'Sales invoice 1*'    | ''           | '4 350,00'  |
 			| 'Sales invoice 2*'    | ''           | '11 099,93' |
 		И я нажимаю на кнопку 'Post'
-	* Проверка перезаполнения при перевыборе валюты
+	* Check re-filling when re-selecting a currency
 		И я нажимаю кнопку выбора у поля "Currency"
 		И в таблице "List" я перехожу к строке:
 			| 'Code' |
@@ -3475,15 +3472,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Transactions" я нажимаю на кнопку 'Fill'
 		Тогда в таблице "Transactions" количество строк "равно" 0
-	* Проверка перезаполнения при перевыборе компании
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
-			| 'Description'  |
-			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я нажимаю на кнопку 'Fill'
-		Тогда в таблице "Transactions" количество строк "равно" 0
-	* Проверка перезаполнения при перевыборе контрагента (партнер прежний)
+	* Check re-filling when re-selecting a legal name (partner previous)
 		И я нажимаю кнопку выбора у поля "Currency"
 		И в таблице "List" я перехожу к строке:
 			| 'Code' | 'Description'  |
@@ -3506,7 +3495,7 @@
 
 Сценарий: _0154123 заполнение Transit account из Account при обмене валюты в BankReceipt
 	И Я закрыл все окна клиентского приложения
-	* Открытие формы BankReceipt и выбор типа операции Currency exchange
+	* Open form BankReceipt и выбор типа операции Currency exchange
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
@@ -3528,7 +3517,7 @@
 
 Сценарий: _0154124 заполнение Transit account из Account при обмене валюты в BankPayment
 	И Я закрыл все окна клиентского приложения
-	* Открытие формы BankPayment и выбор типа операции Currency exchange
+	* Open form BankPayment и выбор типа операции Currency exchange
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
@@ -3550,7 +3539,7 @@
 	* Проверка выбора Transit account
 
 Сценарий: _0154125 проверка отбора по Planing transaction basis в документе BankPayment в случае обмена валюты
-	* Открытие формы BankPayment и выбор типа операции Currency exchange
+	* Open form BankPayment и выбор типа операции Currency exchange
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
@@ -3645,7 +3634,7 @@
 
 
 Сценарий: _0154126 проверка отбора по Planing transaction basis в документе BankReceipt в случае обмена валюты
-	* Открытие формы BankPayment и выбор типа операции Currency exchange
+	* Open form BankPayment и выбор типа операции Currency exchange
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
@@ -3724,7 +3713,7 @@
 
 
 Сценарий: _0154127 проверка отбора по Planing transaction basis в документе CashPayment в случае обмена валюты
-	* Открытие формы CashPayment и выбор типа операции Currency exchange
+	* Open form CashPayment и выбор типа операции Currency exchange
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
@@ -3805,7 +3794,7 @@
 
 
 Сценарий: _0154128 проверка отбора по Planing transaction basis в документе CashReceipt в случае обмена валюты
-	* Открытие формы CashReceipt и выбор типа операции Currency exchange
+	* Open form CashReceipt и выбор типа операции Currency exchange
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
@@ -3885,7 +3874,7 @@
 	И я закрыл все окна клиентского приложения
 
 Сценарий:  _0154129 проверка отбора по Planing transaction basis в документе BankPayment в случае перемещения ДС
-	* Открытие формы BankPayment и выбор типа операции Cash transfer order
+	* Open form BankPayment и выбор типа операции Cash transfer order
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
@@ -3960,7 +3949,7 @@
 	И я закрыл все окна клиентского приложения
 
 Сценарий:  _0154130 проверка отбора по Planing transaction basis в документе BankReceipt в случае перемещения ДС
-	* Открытие формы BankReceipt и выбор типа операции Cash transfer order
+	* Open form BankReceipt и выбор типа операции Cash transfer order
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
@@ -4039,7 +4028,7 @@
 	И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-	Then I check the display on the form of available fields
+	* Then I check the display on the form of available fields
 		И     элемент формы с именем "Company" доступен
 		И     элемент формы с именем "Account" доступен
 		И     элемент формы с именем "Description" доступен
@@ -4052,7 +4041,7 @@
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	And I check the display of the tabular part
+	* And I check the display of the tabular part
 		И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И     таблица "PaymentList" стала равной:
@@ -4061,7 +4050,7 @@
 
 
 
-Сценарий: Check filling inи перезаполнения документа CreditDebitNote
+Сценарий: check filling in and re-filling документа CreditDebitNote
 	* Create a document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -4090,7 +4079,7 @@
 			| ''                 |
 			| 'Sales invoice' |
 		И в таблице "" я выбираю текущую строку
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '2 900'  |
 		И в таблице "List" я выбираю текущую строку
@@ -4118,7 +4107,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '14'
 		И я нажимаю на кнопку 'Post'
-	* Перевыбор партнера и проверка очистки данных в табличной части
+	* Re-select partner и проверка очистки данных в табличной части
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -4132,7 +4121,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		Тогда в таблице "Transactions" количество строк "равно" 0
-	* Проверка фильтра документов-оснований по компании
+	* Filter check документов-оснований по компании
 		И из выпадающего списка "Operation type" я выбираю точное значение 'Payable'
 	* Перевыбор компании
 		И я нажимаю кнопку выбора у поля "Company"
@@ -4163,7 +4152,9 @@
 			| ''                 |
 			| 'Purchase invoice' |
 		И в таблице "" я выбираю текущую строку
-		Тогда таблица "List" содержит строки:
+		И таблица "ИмяТаблицы" содержит стро:	| ИмяКолонки1 | ИмяКолонки2 |
+	| Значение1 | Значение2 |
+
 			| 'Number' | 'Legal name'    | 'Partner' | 'Amount'    | 'Currency' |
 			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00' | 'TRY'      |
 			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00' | 'TRY'      |
@@ -4180,14 +4171,14 @@
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-		* Выбор банковского счета и проверка перезаполнения поля Currency
+		* Bank account selection and check of Currency field refilling
 			И я нажимаю кнопку выбора у поля "Account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Bank account, TRY |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "Currency" стал равен 'TRY'
-		* Проверка выбора партнера в табличной части и заполнения по нему контрагента если он один
+		* Check the choice of a partner in the tabular section and filling in the legal name if one
 			И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 			И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -4197,7 +4188,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
-	* Проверка формы по валютам
+	* Check form by currency
 		* Базовый пересчет по курсу
 			И в таблице "CurrenciesPaymentList" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
@@ -4276,14 +4267,14 @@
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-		* Выбор банковского счета и проверка перезаполнения поля Currency
+		* Bank account selection and check of Currency field refilling
 			И я нажимаю кнопку выбора у поля "Account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Bank account, TRY |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "Currency" стал равен 'TRY'
-		* Проверка выбора партнера в табличной части и заполнения по нему контрагента если он один
+		* Check the choice of a partner in the tabular section and filling in the legal name if one
 			И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -4292,7 +4283,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
-	* Проверка формы по валютам
+	* Check form by currency
 		* Базовый пересчет по курсу
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
@@ -4370,14 +4361,14 @@
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-		* Выбор банковского счета и проверка перезаполнения поля Currency
+		* Bank account selection and check of Currency field refilling
 			И я нажимаю кнопку выбора у поля "Account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Bank account, TRY |
 			И в таблице "List" я выбираю текущую строку
 			И     элемент формы с именем "Currency" стал равен 'TRY'
-		* Проверка выбора партнера в табличной части и заполнения по нему контрагента если он один
+		* Check the choice of a partner in the tabular section and filling in the legal name if one
 			И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -4386,7 +4377,7 @@
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
-	* Проверка формы по валютам
+	* Check form by currency
 		* Базовый пересчет по курсу
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |

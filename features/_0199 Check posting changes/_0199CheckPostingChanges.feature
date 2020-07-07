@@ -10,7 +10,7 @@ I want to develop a system to check if the postings need to be changed when docu
 In order not to double entries in the registers
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 

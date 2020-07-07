@@ -9,7 +9,7 @@ To sell a product when customer first receives items and then the documents arri
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 

@@ -11,7 +11,7 @@ For tax accounting
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 Сценарий: _017901 connection of tax calculation Pluginsessing TaxCalculateVAT_TR
 	* Opening a form to add Pluginsessing

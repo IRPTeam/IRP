@@ -11,7 +11,7 @@
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий:_2990000 preparation
@@ -42,7 +42,7 @@
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
 	* Добавление остатков по созданным складам (Opening entry)
-		* Opening a document form для ввода начального остатка
+		* Open document form для ввода начального остатка
 			И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение информации о компании
@@ -250,7 +250,7 @@
 
 
 Сценарий: _2990002 создание документа оприходования излишков товаров и проверка его проводок
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа
@@ -366,7 +366,7 @@
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _2990003 создание документа списания недостач товаров и проверка его проводок
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа
@@ -482,7 +482,7 @@
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _2990004 создание документа инвентаризации и проверка его проводок (склад ордерный)
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Status" я выбираю точное значение 'Done'
@@ -592,7 +592,7 @@
 
 
 Сценарий: _2990004 создание документа инвентаризации и проверка его проводок (склад неордерный)
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Status" я выбираю точное значение 'Done'
@@ -658,7 +658,7 @@
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _2990005 создание документа StockAdjustmentAsSurplus based on инвентаризации и проверка его проводок
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -753,7 +753,7 @@
 	
 
 Сценарий: _2990007 создание документа StockAdjustmentAsWriteOff based on инвентаризации и проверка его проводок
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -846,7 +846,7 @@
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _2990008 create документов StockAdjustmentAsSurplus и StockAdjustmentAsWriteOff based on инвентаризации на частичное количество
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -947,7 +947,7 @@
 		И я нажимаю на кнопку 'Post and close'
 
 Сценарий: _2990009 проверка обновления Update Exp Count
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Check filling inдокумента остатками по складу
@@ -969,7 +969,7 @@
 			| '-405,000'   | '405,000'    | 'Trousers' | '36/Yellow' | 'pcs'  |
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListContextMenuDelete'
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 1
-	* Добавление ещё одной строки по которой нет остатка по складу
+	* Add one more line по которой нет остатка по складу
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -998,7 +998,7 @@
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: _2990010 создание документа инвентаризации и пересчета к нему с распределением на ответсвенных
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнения документа остатками по складу
@@ -1046,7 +1046,7 @@
 			| 'Arina Brown'        | 'Prepared' |
 			| 'Anna Petrova'       | 'Prepared' |
 	* Проведение оприходования излишков товара задним числом
-		* Opening a document form
+		* Open document form
 			И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение шапки документа
@@ -1461,7 +1461,7 @@
 			И Я закрыл все окна клиентского приложения
 	
 Сценарий: _2990013 проверка вопроса о сохранении Physical inventory перед созданием Physical count by location
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнения документа остатками по складу

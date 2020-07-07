@@ -11,7 +11,7 @@ For ordering items to the planning department (purchasing or transfer from the s
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _016501 creating document Internal Supply Request

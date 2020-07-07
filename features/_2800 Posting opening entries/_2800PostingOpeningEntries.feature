@@ -9,7 +9,7 @@
 Чтобы перенести остатки клиента при начале работы с базой
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 # необходимо дописать тесты на ввод нач остатка по документам
@@ -91,7 +91,7 @@
 
 
 Сценарий: _400001 ввод начального остатка по кассовым и банковким счетам
-	* Opening a document form для ввода начального остатка
+	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании
@@ -283,7 +283,7 @@
 			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | '*'                      | '5 000,00'  |
 			| 'EUR'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | '*'                      | '8 000,00'  |
 			И Я закрыл все окна клиентского приложения
-	* Clear postings документа и проверка отмены движений
+	* Clear postings документа and  check movement reversal
 		* Clear postings документа
 			И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 			И в таблице "List" я перехожу к строке:
@@ -348,7 +348,7 @@
 
 
 Сценарий: _400002 ввод начального остатка по товарам
-	* Opening a document form для ввода начального остатка
+	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании
@@ -659,7 +659,7 @@
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _400003 проверка ввода начального остатка по авансам поставщикам/клиентам
-	* Opening a document form для ввода начального остатка
+	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании
@@ -751,7 +751,7 @@
 
 
 Сценарий: _400004 проверка ввода начального остатка по задолженности поставщику по соглашению
-	* Opening a document form для ввода начального остатка
+	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании
@@ -766,7 +766,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '4'
 	* Заполнение ввода начального остатка по задолженности поставщику
-		* Заполнение партнера и Legal name
+		* Filling in partner and Legal name
 			И я перехожу к закладке "Account payable"
 			И в таблице "AccountPayableByPartner terms" я нажимаю на кнопку 'Add'
 			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner"
@@ -775,7 +775,7 @@
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "AccountPayableByPartner terms" я завершаю редактирование строки
-		* Check filling inLegal name
+		* Check filling in legal name
 				И     таблица "AccountPayableByPartner terms" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
@@ -854,7 +854,7 @@
 
 	
 Сценарий: _400005 проверка ввода начального остатка по задолженности клиента по соглашению
-	* Opening a document form для ввода начального остатка
+	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании
@@ -869,7 +869,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '5'
 	* Заполнение ввода начального остатка по задолженности клиента
-		* Заполнение партнера и Legal name
+		* Filling in partner and Legal name
 			И я перехожу к закладке "Account receivable"
 			И в таблице "AccountReceivableByPartner terms" я нажимаю на кнопку 'Add'
 			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner"
@@ -878,7 +878,7 @@
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "AccountReceivableByPartner terms" я завершаю редактирование строки
-		* Check filling inLegal name
+		* Check filling in legal name
 				И     таблица "AccountReceivableByPartner terms" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
@@ -957,7 +957,7 @@
 
 
 Сценарий: _400008 проверка ввода начального остатка по остаткам ДС/остаткам товара/дебиторке/кредиторке/авансам в одном документе
-	* Opening a document form для ввода начального остатка
+	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании
@@ -1061,7 +1061,7 @@
 		И в таблице "AdvanceToSuppliers" в поле с именем 'AdvanceToSuppliersAmount' я ввожу текст '811,00'
 		И в таблице "AdvanceToSuppliers" я завершаю редактирование строки
 	* Заполнение ввода начального остатка по задолженности поставщику по соглашениям
-		* Заполнение партнера и Legal name
+		* Filling in partner and Legal name
 			И я перехожу к закладке "Account payable"
 			И в таблице "AccountPayableByPartner terms" я нажимаю на кнопку 'Add'
 			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1070,7 +1070,7 @@
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "AccountPayableByPartner terms" я завершаю редактирование строки
-		* Check filling inLegal name
+		* Check filling in legal name
 				И     таблица "AccountPayableByPartner terms" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
@@ -1101,7 +1101,7 @@
 			И в таблице "CurrenciesAccountPayableByPartner terms" в поле с именем "CurrenciesAccountPayableByPartner termsMultiplicity" я ввожу текст '1'
 			И в таблице "CurrenciesAccountPayableByPartner terms" я завершаю редактирование строки
 	* Заполнение ввода начального остатка по задолженности клиента  по соглашениям
-		* Заполнение партнера и Legal name
+		* Filling in partner and Legal name
 			И я перехожу к закладке "Account receivable"
 			И в таблице "AccountReceivableByPartner terms" я нажимаю на кнопку 'Add'
 			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner"
@@ -1110,7 +1110,7 @@
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "AccountReceivableByPartner terms" я завершаю редактирование строки
-		* Check filling inLegal name
+		* Check filling in legal name
 				И     таблица "AccountReceivableByPartner terms" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
@@ -1145,7 +1145,7 @@
 
 
 Сценарий: _400009 проверка ввода начального остатка по остаткам AP и AR по документам
-	* Opening a document form для ввода начального остатка
+	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение информации о компании

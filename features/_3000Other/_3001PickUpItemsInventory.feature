@@ -6,10 +6,10 @@
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 Сценарий: _3001001 проверка формы подбора товара в документе StockAdjustmentAsWriteOff
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа
@@ -29,7 +29,7 @@
 
 
 Сценарий: _3001002 проверка формы подбора товара в документе StockAdjustmentAsSurplus
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа
@@ -48,7 +48,7 @@
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: 3001003 проверка формы подбора товара в документе PhysicalInventory
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа
@@ -62,7 +62,7 @@
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: 3001004 проверка формы подбора товара в документе PhysicalCountByLocation
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalCountByLocation'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнение шапки документа

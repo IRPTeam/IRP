@@ -11,7 +11,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
    
 
 

@@ -11,7 +11,7 @@
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 # Internal supply request - Purchase order - Purchase invoice - Goods reciept - Bank payment/Cash payment
 # Прямая схема поставки вначале инвойс, потом ордер

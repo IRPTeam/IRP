@@ -8,7 +8,7 @@ I want to fill out the information on the services I received and which I provid
 For cost analysis
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _029101 create item type for services

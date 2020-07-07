@@ -13,7 +13,7 @@ So that the range discount is calculated correctly
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 # For each product, a discount is given in the form of a percentage (e.g. Product A from 2 to 5%, Product B from 3 to 7%). 
 # A sales rep can set a discount from the specified range in a sales order himself
 

@@ -10,7 +10,7 @@ For Cash/Bank accountsing
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 # The currency of reports is lira
 # CashBankDocFilters export scenarios
 

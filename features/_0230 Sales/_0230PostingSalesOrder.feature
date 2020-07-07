@@ -8,7 +8,7 @@ I want to create a Sales order document
 To track the items ordered by the customer
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _023001 creating document Sales order - Shipment confirmation is not used

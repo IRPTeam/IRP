@@ -8,7 +8,7 @@ I want to display the incoming bank payments
 To close partners debts
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 # The currency of reports is lira
 # CashBankDocFilters export scenarios
 

@@ -13,7 +13,7 @@ So that the manager can immediately see the interest and discount amount on the 
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 # For each product, a percentage discount is given (e.g. Product A from 2 to 5%, Product B from 3 to 7%). 
 # The sales rep can set a discount from the specified range in the order himself
 

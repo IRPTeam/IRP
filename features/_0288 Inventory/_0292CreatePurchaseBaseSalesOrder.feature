@@ -9,7 +9,7 @@ To implement a sales-for-purchase scheme
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _029200 test data creation

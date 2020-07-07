@@ -15,7 +15,7 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 # When Type joins MaxInRow in Maximum, the orders in this group with discounts will work out the discounts that are most beneficial to the client. 
 # Checking the most advantageous discounts by lines.

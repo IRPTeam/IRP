@@ -7,7 +7,7 @@
 
 
 Контекст: 
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 	
 Сценарий: _0203001 check filters in the partner term catalog
 	* Check for data availability

@@ -8,7 +8,7 @@ I want to pay cash
 Для того чтобы фиксировать факт оплаты
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 # The currency of reports is lira
 # CashBankDocFilters export scenarios
 

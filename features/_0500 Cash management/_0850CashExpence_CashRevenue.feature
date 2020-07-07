@@ -8,12 +8,12 @@ I want to create Cash revenue and Cash expence documents
 For write off expenses and record income directly to/from the account
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 # Cash revenue
 
 Сценарий: check tax calculation in the document Cash revenue
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in company and account
@@ -55,7 +55,7 @@ For write off expenses and record income directly to/from the account
 		И я закрыл все окна клиентского приложения
 
 Сценарий: check movements of the document Cash revenue
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in company and account
@@ -179,7 +179,7 @@ For write off expenses and record income directly to/from the account
 
 
 Сценарий: check the unavailability of currency selection in Cash revenue when it is strongly fixed in the Account
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in the details of the document
@@ -199,7 +199,7 @@ For write off expenses and record income directly to/from the account
 			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListCurrency"'|
 
 Сценарий: check the availability of currency selection in Cash revenue (not fixed in the Account)
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in the details of the document
@@ -221,7 +221,7 @@ For write off expenses and record income directly to/from the account
 # Cash expence
 
 Сценарий: check tax calculation in the document Cash expense
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in company and account
@@ -263,7 +263,7 @@ For write off expenses and record income directly to/from the account
 		И я закрыл все окна клиентского приложения
 
 Сценарий: check movements of the document Cash expense
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in company and account
@@ -385,7 +385,7 @@ For write off expenses and record income directly to/from the account
 
 
 Сценарий: check the unavailability of currency selection in Cash expense when it is strongly fixed in the Account
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in the details of the document
@@ -406,7 +406,7 @@ For write off expenses and record income directly to/from the account
 
 
 Сценарий: check the availability of currency selection in Cash revenue (not fixed in the Account)
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in the details of the document

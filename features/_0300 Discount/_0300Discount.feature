@@ -11,7 +11,7 @@ I want to create a basic system of discounts: price type discount, 5+1 type disc
 For calculating special offers in documents
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _030001 add Pluginsessor SpecialMessage

@@ -8,7 +8,7 @@ I want to settle general Partner terms for all partners.
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 Сценарий: _060001 preparation
 	* Create a test segment of Standard clients

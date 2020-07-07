@@ -12,7 +12,7 @@ To sell and purchase goods and services
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _016001 base price fill (incl. VAT)

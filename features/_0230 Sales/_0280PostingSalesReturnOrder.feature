@@ -9,7 +9,7 @@ To track a product that needs to be returned from customer
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _028001 creating document Sales return order, store use Goods receipt, based on Sales invoice + checking status

@@ -8,7 +8,7 @@ I want to transfer money from one account to another.
 For actual Cash/Bank accountsing
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 # The currency of reports is lira
 
 

@@ -8,7 +8,7 @@
 Чтобы упростить ввод документов
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 # Непрямая схема отгрузки Sales order - Purchase order - Goods reciept - Purchase invoice - Shipment confirmation - Sales invoice

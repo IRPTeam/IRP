@@ -8,7 +8,7 @@
 
 
 Контекст: 
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 	
 Сценарий: _0205001 preparation
@@ -16,7 +16,7 @@
 		* Открытие формы для добавления обработки
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение данных по обработке и добавление её в базу
+		* Filling data по обработке и добавление её в базу
 			И я буду выбирать внешний файл "#workingDir#\DataProcessor\CheckExternalCommands.epf"
 			И я нажимаю на кнопку с именем "FormAddExtDataProc"
 			И в поле 'Path to ext data proc for test' я ввожу текст ''
@@ -123,7 +123,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для команды печати Sales return
+	* Filling data для команды печати Sales return
 		* Создание метаданного для Sales return и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -216,7 +216,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для команды печати Sales invoice
+	* Filling data для команды печати Sales invoice
 		* Создание метаданного для Sales invoice и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -308,7 +308,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для команды печати Purchase order
+	* Filling data для команды печати Purchase order
 		* Создание метаданного для Purchase order и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -400,7 +400,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для команды печати Sales order
+	* Filling data для команды печати Sales order
 		* Создание метаданного для sales order и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -493,7 +493,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для команды печати Purchase invoice
+	* Filling data для команды печати Purchase invoice
 		* Создание метаданного для Purchase invoice и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -587,7 +587,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для команды печати Cash transfer order
+	* Filling data для команды печати Cash transfer order
 		* Создание метаданного для Cash transfer order и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -681,7 +681,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для Shipment confirmation
+	* Filling data для тестовой команды для Shipment confirmation
 		* Создание метаданного для Shipment confirmation и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -775,7 +775,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для Goods receipt
+	* Filling data для тестовой команды для Goods receipt
 		* Создание метаданного для Goods receipt и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -867,7 +867,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для Sales return order
+	* Filling data для тестовой команды для Sales return order
 		* Создание метаданного для Sales return order и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -961,7 +961,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для Purchase return order
+	* Filling data для тестовой команды для Purchase return order
 		* Создание метаданного для Purchase return order и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -1054,7 +1054,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для ReconciliationStatement
+	* Filling data для тестовой команды для ReconciliationStatement
 		* Создание метаданного для ReconciliationStatement и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -1148,7 +1148,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для BankPayment
+	* Filling data для тестовой команды для BankPayment
 		* Создание метаданного для BankPayment и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -1241,7 +1241,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для BankReceipt
+	* Filling data для тестовой команды для BankReceipt
 		* Создание метаданного для BankReceipt и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -1335,7 +1335,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для Bundling
+	* Filling data для тестовой команды для Bundling
 		* Создание метаданного для Bundling и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -1428,7 +1428,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для CashExpense
+	* Filling data для тестовой команды для CashExpense
 		* Создание метаданного для CashExpense и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -1522,7 +1522,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для CashPayment
+	* Filling data для тестовой команды для CashPayment
 		* Создание метаданного для CashPayment и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -1615,7 +1615,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для CashReceipt
+	* Filling data для тестовой команды для CashReceipt
 		* Создание метаданного для CashReceipt и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -1708,7 +1708,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для CashRevenue
+	* Filling data для тестовой команды для CashRevenue
 		* Создание метаданного для CashRevenue и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -1801,7 +1801,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для CashTransferOrder
+	* Filling data для тестовой команды для CashTransferOrder
 		* Создание метаданного для CashTransferOrder и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -1895,7 +1895,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для ChequeBondTransaction
+	* Filling data для тестовой команды для ChequeBondTransaction
 		* Создание метаданного для ChequeBondTransaction и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -1990,7 +1990,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для CreditDebitNote
+	* Filling data для тестовой команды для CreditDebitNote
 		* Создание метаданного для CreditDebitNote и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -2084,7 +2084,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для IncomingPaymentOrder
+	* Filling data для тестовой команды для IncomingPaymentOrder
 		* Создание метаданного для IncomingPaymentOrder и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -2177,7 +2177,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для InternalSupplyRequest
+	* Filling data для тестовой команды для InternalSupplyRequest
 		* Создание метаданного для InternalSupplyRequest и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -2270,7 +2270,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для InventoryTransfer
+	* Filling data для тестовой команды для InventoryTransfer
 		* Создание метаданного для InventoryTransfer и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -2363,7 +2363,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для InventoryTransferOrder
+	* Filling data для тестовой команды для InventoryTransferOrder
 		* Создание метаданного для InventoryTransferOrder и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -2456,7 +2456,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для InvoiceMatch
+	* Filling data для тестовой команды для InvoiceMatch
 		* Создание метаданного для InvoiceMatch и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -2549,7 +2549,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для Labeling
+	* Filling data для тестовой команды для Labeling
 		* Создание метаданного для Labeling и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -2642,7 +2642,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для OpeningEntry
+	* Filling data для тестовой команды для OpeningEntry
 		* Создание метаданного для OpeningEntry и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -2736,7 +2736,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для OutgoingPaymentOrder
+	* Filling data для тестовой команды для OutgoingPaymentOrder
 		* Создание метаданного для OutgoingPaymentOrder и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -2829,7 +2829,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для PhysicalCountByLocation
+	* Filling data для тестовой команды для PhysicalCountByLocation
 		* Создание метаданного для PhysicalCountByLocation и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -2922,7 +2922,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для PriceList
+	* Filling data для тестовой команды для PriceList
 		* Создание метаданного для PriceList и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -3017,7 +3017,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для PurchaseReturn
+	* Filling data для тестовой команды для PurchaseReturn
 		* Создание метаданного для PurchaseReturn и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -3112,7 +3112,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для Unbundling
+	* Filling data для тестовой команды для Unbundling
 		* Создание метаданного для Unbundling и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -3205,7 +3205,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для StockAdjustmentAsWriteOff
+	* Filling data для тестовой команды для StockAdjustmentAsWriteOff
 		* Создание метаданного для StockAdjustmentAsWriteOff и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -3298,7 +3298,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для StockAdjustmentAsSurplus
+	* Filling data для тестовой команды для StockAdjustmentAsSurplus
 		* Создание метаданного для StockAdjustmentAsSurplus и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -3391,7 +3391,7 @@
 	* Открытие регистра команд
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для тестовой команды для PhysicalInventory
+	* Filling data для тестовой команды для PhysicalInventory
 		* Создание метаданного для PhysicalInventory и его выбор для команды
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
@@ -3527,7 +3527,7 @@
 			| 'Shoes' |
 		И в таблице "List" я выбираю текущую строку
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Items'
-	* Проверка фильтра по товарам
+	* Filter check по товарам
 		Тогда таблица "List" содержит строки:
 		| 'Description'| 'Item type' |
 		| 'Boots'      | 'Shoes'     |

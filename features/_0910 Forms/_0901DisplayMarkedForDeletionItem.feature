@@ -12,7 +12,7 @@ So the user can't select it in the sales and purchase documents
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _090201 check that the items marked for deletion is not displayed in the PurchaseOrder

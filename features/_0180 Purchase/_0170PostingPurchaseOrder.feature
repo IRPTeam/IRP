@@ -10,7 +10,7 @@ I want to create a Purchase order document
 For tracking an item that has been ordered from a vendor
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _017001 creating document Purchase order - Goods receipt is not used

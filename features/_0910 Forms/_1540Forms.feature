@@ -8,7 +8,7 @@ I want to check the form display and autofill documents
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _0154000 preparation
@@ -3564,7 +3564,7 @@ I want to check the form display and autofill documents
 
 Сценарий: _0154099 check partner и legal name (in english) input by search in line in Invoice Match
 	И я закрыл все окна клиентского приложения
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Checking the filter when typing by Partner/Legal name

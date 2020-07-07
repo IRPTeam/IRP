@@ -10,7 +10,7 @@ I want to create a Purchase invoice document
 To track a product that has been received from a vendor
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _018001 creating document Purchase Invoice based on order - Goods receipt is not used

@@ -9,13 +9,13 @@ I want to check that Item (without item key) is not cleared when saving a docume
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 
 
 Сценарий: saving information about an Item without a completed item key in a document Sales order
-	* Opening a document form Sales order
+	* Open document form Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -76,7 +76,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 		И я закрыл все окна клиентского приложения
 
 Сценарий: saving information about an Item without a completed item key in a document Sales invoice
-	* Opening a document form Sales invoice
+	* Open document form Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -134,7 +134,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 		И я закрыл все окна клиентского приложения
 
 Сценарий: saving information about an Item without a completed item key in a document SalesReturn
-	* Opening a document form SalesReturn
+	* Open document form SalesReturn
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -191,7 +191,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 		И я закрыл все окна клиентского приложения
 
 Сценарий: saving information about an Item without a completed item key in a document SalesReturnOrder
-	* Opening a document form SalesReturnOrder
+	* Open document form SalesReturnOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -248,7 +248,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 		И я закрыл все окна клиентского приложения
 	
 Сценарий: saving information about an Item without a completed item key in a document PurchaseOrder
-	* Opening a document form PurchaseOrder
+	* Open document form PurchaseOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -317,7 +317,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 		И я закрыл все окна клиентского приложения
 
 Сценарий: saving information about an Item without a completed item key in a document PurchaseInvoice
-	* Opening a document form PurchaseInvoice
+	* Open document form PurchaseInvoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -385,7 +385,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 		И я закрыл все окна клиентского приложения
 
 Сценарий: saving information about an Item without a completed item key in a document PurchaseReturn
-	* Opening a document form PurchaseReturn
+	* Open document form PurchaseReturn
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -453,7 +453,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 		И я закрыл все окна клиентского приложения
 
 Сценарий: saving information about an Item without a completed item key in a document PurchaseReturnOrder
-	* Opening a document form PurchaseReturnOrder
+	* Open document form PurchaseReturnOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -523,7 +523,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 
 
 Сценарий: saving information about an Item without a completed item key in a document Bundling
-	* Opening a document form Bundling
+	* Open document form Bundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -587,7 +587,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 		И я закрыл все окна клиентского приложения
 
 Сценарий: saving information about an Item without a completed item key in a document Unbundling
-	* Opening a document form Unbundling
+	* Open document form Unbundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -665,7 +665,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 
 
 Сценарий: saving information about an Item without a completed item key in a document GoodsReceipt
-	* Opening a document form GoodsReceipt
+	* Open document form GoodsReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -721,7 +721,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 		И я закрыл все окна клиентского приложения
 
 Сценарий: saving information about an Item without a completed item key in a document ShipmentConfirmation
-	* Opening a document form ShipmentConfirmation
+	* Open document form ShipmentConfirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -777,7 +777,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 		И я закрыл все окна клиентского приложения
 
 Сценарий: saving information about an Item without a completed item key in a document InternalSupplyRequest
-	* Opening a document form InternalSupplyRequest
+	* Open document form InternalSupplyRequest
 		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -833,7 +833,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 		И я закрыл все окна клиентского приложения
 
 Сценарий: saving information about an Item without a completed item key in a document InventoryTransfer
-	* Opening a document form InventoryTransfer
+	* Open document form InventoryTransfer
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key
@@ -895,7 +895,7 @@ I want to check that Item (without item key) is not cleared when saving a docume
 
 
 Сценарий: saving information about an Item without a completed item key in a document InventoryTransferOrder
-	* Opening a document form InventoryTransferOrder
+	* Open document form InventoryTransferOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Add Item item key

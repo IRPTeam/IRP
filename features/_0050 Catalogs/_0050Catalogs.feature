@@ -11,7 +11,7 @@ I want to fill out information on the company
 To further use it when reflecting in the program of business processes
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 	И Я устанавливаю в константу "ShowBetaTesting" значение "True"
 	И Я устанавливаю в константу "ShowAlphaTestingSaas" значение "True"
 	И Я устанавливаю в константу "UseItemKey" значение "True"

@@ -12,7 +12,7 @@ To specify the commercial terms of cooperation
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _012001 adding partners (customers) to a segment (register)

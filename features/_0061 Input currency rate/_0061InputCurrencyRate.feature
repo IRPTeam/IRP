@@ -10,7 +10,7 @@ I want to fill out the exchange rate
 To use multi-currency accounting
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _006101 filling in exchange rates in registers

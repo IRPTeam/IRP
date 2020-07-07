@@ -8,7 +8,7 @@ I want to create a Credit_DebitNote document.
 For write-off of accounts receivable and payable
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _095001 preparation
@@ -148,7 +148,7 @@ For write-off of accounts receivable and payable
 	* Create Purchase invoice for creating vendor
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение данных о поставщике
+		* Filling data о поставщике
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -194,7 +194,7 @@ For write-off of accounts receivable and payable
 	* Create one more Purchase invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение данных о поставщике
+		* Filling data о поставщике
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -274,7 +274,7 @@ For write-off of accounts receivable and payable
 			| 'Number' | 'Legal name'    | 'Partner' | 'Amount'    | 'Currency' |
 			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00' | 'TRY'      |
 			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00' | 'TRY'      |
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '2 900'  |
 		И в таблице "List" я выбираю текущую строку
@@ -423,7 +423,7 @@ For write-off of accounts receivable and payable
 			Тогда таблица "List" содержит строки:
 			| 'Number' |
 			| '2 900'  |
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '2 900'  |
 		И в таблице "List" я выбираю текущую строку
@@ -536,7 +536,7 @@ For write-off of accounts receivable and payable
 			Тогда таблица "List" содержит строки:
 			| 'Number' |
 			| '2 900'  |
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '2 900'  |
 		И в таблице "List" я выбираю текущую строку

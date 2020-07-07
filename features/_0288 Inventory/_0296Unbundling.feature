@@ -9,7 +9,7 @@ I want to create Unbundling
 For sale of products from a Bundle separately
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 

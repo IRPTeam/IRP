@@ -252,7 +252,6 @@ For ease of filling in documents
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-		Тогда открылось окно 'Edit user defaults settings'
 		И в таблице "MetadataTree" я завершаю редактирование строки
 		И в таблице "MetadataTree" я перехожу к строке:
 			| 'Group name' | 'Use' |
@@ -1149,14 +1148,14 @@ For ease of filling in documents
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertyValues'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст '100'
-		И я нажимаю кнопку выбора у поля "Add attribute"
+		И я нажимаю кнопку выбора у поля "Additionsl attribute"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Size'        |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
 		И в таблице "List" я перехожу к строке:
-			| 'Add attribute' | 'Description' |
+			| 'Additional attribute' | 'Description' |
 			| 'Size'          | '100'         |
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuSetDeletionMark'
 		Тогда открылось окно '1C:Enterprise'

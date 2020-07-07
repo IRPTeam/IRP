@@ -576,7 +576,7 @@ For ease of filling
 		И в таблице "DocumentsList" я нажимаю на кнопку 'Transfer to document'
 	* Заполнение Cash/Bank accounts
 		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Cash/Bank accounts"
-		Тогда открылось окно 'Cash/Bank accountss'
+		Тогда открылось окно 'Cash/Bank accounts'
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |

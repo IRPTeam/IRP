@@ -782,7 +782,7 @@
 		* Создание тестового соглашения с взаиморасчетами по соглашениям
 			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner term"
 			И я нажимаю на кнопку с именем 'FormCreate'
-			И я меняю значение переключателя 'AP/AR posting detail' на 'By Partner terms'
+			И я меняю значение переключателя 'AP/AR posting detail' на 'By partner terms'
 			И я меняю значение переключателя 'Type' на 'Vendor'
 			И в поле 'ENG' я ввожу текст 'DFC Vendor by Partner terms'
 			И в поле 'Date' я ввожу текст '01.12.2019'
@@ -885,7 +885,7 @@
 		* Создание тестового соглашения с взаиморасчетами по соглашениям
 			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner term"
 			И я нажимаю на кнопку с именем 'FormCreate'
-			И я меняю значение переключателя 'AP/AR posting detail' на 'By Partner terms'
+			И я меняю значение переключателя 'AP/AR posting detail' на 'By partner terms'
 			И я меняю значение переключателя 'Type' на 'Customer'
 			И в поле 'ENG' я ввожу текст 'DFC Customer by Partner terms'
 			И в поле 'Date' я ввожу текст '01.12.2019'

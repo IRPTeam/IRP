@@ -55,7 +55,7 @@
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'TR' я ввожу текст 'Cherry'
-		И я нажимаю кнопку выбора у поля "Add attribute"
+		И я нажимаю кнопку выбора у поля "Additionsl attribute"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Сhewing gum taste' |
@@ -64,7 +64,7 @@
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'TR' я ввожу текст 'Mango'
-		И я нажимаю кнопку выбора у поля "Add attribute"
+		И я нажимаю кнопку выбора у поля "Additionsl attribute"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Сhewing gum taste' |
@@ -73,7 +73,7 @@
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'TR' я ввожу текст 'Mint'
-		И я нажимаю кнопку выбора у поля "Add attribute"
+		И я нажимаю кнопку выбора у поля "Additionsl attribute"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Сhewing gum brand' |

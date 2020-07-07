@@ -411,10 +411,10 @@ I want to check the form display and autofill documents
 			| Test        |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'BusinessItem units'
+		И в поле 'ENG' я ввожу текст 'Business units'
 		И я нажимаю на кнопку 'Save and close'
 	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'BusinessItem units'
+		И В панели открытых я выбираю 'Business units'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
@@ -471,7 +471,7 @@ I want to check the form display and autofill documents
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _015400640 check that additional attributes are displayed on the form without re-opening (Catalog_Partner terms)
+Сценарий:  _015400640 check that additional attributes are displayed on the form without re-opening (Catalog_Agreements)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
 	* Open a form to create Partner terms
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
@@ -481,7 +481,7 @@ I want to check the form display and autofill documents
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
-			| Catalog_Partner terms     |
+			| Catalog_Agreements     |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
 		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
@@ -499,7 +499,7 @@ I want to check the form display and autofill documents
 
 
 
-Сценарий:  _015400641 check that additional attributes are displayed on the form without re-opening (Catalog_Cash/Bank accountss)
+Сценарий:  _015400641 check that additional attributes are displayed on the form without re-opening (Catalog_Cash/Bank accounts)
 Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
 	* Open a form to create CashAccounts
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.CashAccounts'
@@ -518,10 +518,10 @@ I want to check the form display and autofill documents
 			| Test        |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Cash/Bank accountss'
+		И в поле 'ENG' я ввожу текст 'Cash/Bank accounts'
 		И я нажимаю на кнопку 'Save and close'
 	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Cash/Bank accountss'
+		И В панели открытых я выбираю 'Cash/Bank accounts'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
@@ -682,7 +682,7 @@ I want to check the form display and autofill documents
 		И в поле 'ENG' я ввожу текст 'Item serial/lot number'
 		И я нажимаю на кнопку 'Save and close'
 	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Item serial/lot number'
+		И В панели открытых я выбираю 'Item serial/lot numbers'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 
@@ -716,7 +716,7 @@ I want to check the form display and autofill documents
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий:  _015400649 check that additional attributes are displayed on the form without re-opening (Catalog_Tax types)
+Сценарий:  _015400649 check that additional attributes are displayed on the form without re-opening (Catalog_Taxes)
 	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
 	* Open a form to create Tax types
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Taxes'
@@ -726,7 +726,7 @@ I want to check the form display and autofill documents
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name          |
-			| Catalog_Tax types     |
+			| Catalog_Taxes     |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
 		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
@@ -764,7 +764,7 @@ I want to check the form display and autofill documents
 		И в поле 'ENG' я ввожу текст 'Units'
 		И я нажимаю на кнопку 'Save and close'
 	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Units'
+		И В панели открытых я выбираю 'Item units'
 		И элемент формы "Test" присутствует на форме
 	И я закрыл все окна клиентского приложения
 

@@ -30,14 +30,14 @@
 		И я нажимаю на кнопку 'Add'
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
 		И в таблице "List" я перехожу к строке:
-			| 'Add attribute' | 'Description' |
+			| 'Additional attribute' | 'Description' |
 			| 'Size'          | 'M'           |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Color"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
 		Тогда открылось окно 'Additional attribute values'
 		И в таблице "List" я перехожу к строке:
-			| 'Add attribute' | 'Description' |
+			| 'Additional attribute' | 'Description' |
 			| 'Color'         | 'Blue'        |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я завершаю редактирование строки
@@ -69,13 +69,13 @@
 		И в таблице "FormTable*" я выбираю текущую строку
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
 		И в таблице "List" я перехожу к строке:
-			| 'Add attribute' | 'Description' |
+			| 'Additional attribute' | 'Description' |
 			| 'Size'          | 'M'           |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Color"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
 		И в таблице "List" я перехожу к строке:
-			| 'Add attribute' | 'Description' |
+			| 'Additional attribute' | 'Description' |
 			| 'Color'         | 'White'       |
 		И в таблице "List" я активизирую поле "Description"
 		И в таблице "List" я выбираю текущую строку
@@ -103,21 +103,21 @@
 		И в таблице "FormTable*" я выбираю текущую строку
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
 		И в таблице "List" я перехожу к строке:
-			| 'Add attribute' | 'Description' |
+			| 'Additional attribute' | 'Description' |
 			| 'Color'         | 'Yellow'      |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Add'
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
 		И в таблице "List" я перехожу к строке:
-			| 'Add attribute' | 'Description' |
+			| 'Additional attribute' | 'Description' |
 			| 'Size'          | 'M'           |
 		И в таблице "List" я активизирую поле "Description"
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я активизирую поле "Color"
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
 		И в таблице "List" я перехожу к строке:
-			| 'Add attribute' | 'Description' |
+			| 'Additional attribute' | 'Description' |
 			| 'Color'         | 'Yellow'      |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я завершаю редактирование строки

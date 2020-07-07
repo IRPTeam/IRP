@@ -86,7 +86,7 @@ I want to settle general Partner terms for all partners.
 		И в поле 'ENG' я ввожу текст 'Posting by Standard Partner term (Veritas)'
 		И я меняю значение переключателя 'Type' на 'Vendor'
 		И в поле 'Date' я ввожу текст '01.12.2019'
-		И я меняю значение переключателя 'AP/AR posting detail' на 'By standard Partner term'
+		И я меняю значение переключателя 'AP/AR posting detail' на 'By standard partner term'
 		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' |
@@ -126,7 +126,7 @@ I want to settle general Partner terms for all partners.
 		И в поле 'ENG' я ввожу текст 'Posting by Standard Partner term Customer'
 		И я меняю значение переключателя 'Type' на 'Customer'
 		И в поле 'Date' я ввожу текст '01.12.2019'
-		И я меняю значение переключателя 'AP/AR posting detail' на 'By standard Partner term'
+		И я меняю значение переключателя 'AP/AR posting detail' на 'By standard partner term'
 		И я нажимаю кнопку выбора у поля "Multi currency movement type"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' |

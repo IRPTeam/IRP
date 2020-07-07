@@ -80,7 +80,7 @@
             | 'Description' |
             | 'EUR'         |
         И в таблице "List" я выбираю текущую строку
-        И я меняю значение переключателя 'AP/AR posting detail' на 'By standard Partner term'
+        И я меняю значение переключателя 'AP/AR posting detail' на 'By standard partner term'
         И я нажимаю кнопку выбора у поля "Standard Partner term"
         * Создание стандартного соглашения в евро
             И я нажимаю на кнопку с именем 'FormCreate'
@@ -97,7 +97,7 @@
         И     элемент формы с именем "StandardPartner term" стал равен 'Standard, EUR'
         И     элемент формы с именем "PriceType" стал равен 'Basic Price Types TR'
     * Переключение переключателя Ap-ar posting на значение By Partner terms и проверка очистки поля StandardPartner term
-        И я меняю значение переключателя 'AP/AR posting detail' на 'By Partner terms'
+        И я меняю значение переключателя 'AP/AR posting detail' на 'By partner terms'
         И     элемент формы с именем "StandardPartner term" стал равен ''
     * Проверка очистки полей при изменении переключателя на Standard
         И я меняю значение переключателя 'Kind' на 'Standard'

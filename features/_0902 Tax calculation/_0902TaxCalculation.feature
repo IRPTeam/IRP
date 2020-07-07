@@ -53,14 +53,14 @@
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Producer"
 		И в таблице "List" я перехожу к строке:
-			| 'Add attribute' | 'Description' |
+			| 'Additional attribute' | 'Description' |
 			| 'Producer'      | 'ODS'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Producer"
 		И в таблице "List" я перехожу к строке:
-			| 'Add attribute' | 'Description' |
+			| 'Additional attribute' | 'Description' |
 			| 'Producer'      | 'PZU'         |
 		И в таблице "List" я активизирую поле "Add attribute"
 		И в таблице "List" я выбираю текущую строку

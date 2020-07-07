@@ -388,8 +388,8 @@ To further use it when reflecting in the program of business processes
 
 
 
-Сценарий: _005018 filling in the "Cash/Bank accountss" catalog
-	* Clearing the Cash/Bank accountss catalog
+Сценарий: _005018 filling in the "Cash/Bank accounts" catalog
+	* Clearing the Cash/Bank accounts catalog
 		И я удаляю все элементы Справочника "CashAccounts"
 		И в базе нет элементов Справочника "CashAccounts"
 	* Opening the form for filling in Accounts
@@ -1366,7 +1366,7 @@ To further use it when reflecting in the program of business processes
 		И в поле 'TR' я ввожу текст 'Logistics department TR'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-	* Checking creation BusinessItem units
+	* Checking creation Business units
 		Тогда я проверяю наличие элемента справочника "BusinessUnits" со значением поля "Description_en" "Front office"
 		Тогда я проверяю наличие элемента справочника "BusinessUnits" со значением поля "Description_en" "Accountants office"
 		И Пауза 2

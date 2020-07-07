@@ -17,7 +17,7 @@
 			| 'Description'             |
 			| 'Lomaniti' |
 	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
 			| 'Description'                     |
 			| 'Basic Agreements, TRY' |
@@ -74,7 +74,7 @@
 			| 'Description'             |
 			| 'Ferron BP' |
 	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Agreement"
+	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
 			| 'Description'                     |
 			| 'Basic Agreements, TRY' |
@@ -146,7 +146,7 @@
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| Description        |
 			| Vendor Ferron, TRY |
@@ -497,7 +497,7 @@
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| Description        |
 			| Vendor Ferron, TRY |
@@ -563,7 +563,7 @@
 			| Description       |
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я создаю соглашение в долларах
 			И в поле 'ENG' я ввожу текст 'Ferron, USD'
@@ -594,7 +594,7 @@
 			И я изменяю флаг 'Price include tax'
 			И я нажимаю на кнопку 'Save and close'
 		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю кнопку выбора у поля "Agreement"
+		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Ferron, USD |
@@ -687,7 +687,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron, TRY |
@@ -776,7 +776,7 @@
 				| Description       |
 				| Second Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Vendor Ferron, TRY |
@@ -832,7 +832,7 @@
 				| Description       |
 				| Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Basic Agreements, TRY |
@@ -920,7 +920,7 @@
 				| Description       |
 				| Second Company Ferron BP |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Agreement"
+			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
 				| Basic Agreements, TRY |
@@ -951,3 +951,60 @@
 			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 			И в таблице "ItemList" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Post'
+
+Сценарий: создаю заказ на Ferron BP Basic Partner term, TRY (Dress -10 и Trousers - 5)
+	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
+	И я нажимаю на кнопку с именем 'FormCreate'
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'             |
+			| 'Ferron BP' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Basic Partner term, TRY' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Legal name"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Company Ferron BP'  |
+	И в таблице "List" я выбираю текущую строку
+	И я добавляю в заказ клиента товар
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Dress' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| 'XS/Blue'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Trousers' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Yellow'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '5,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+	И я нажимаю на кнопку 'Post'

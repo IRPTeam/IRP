@@ -3,17 +3,17 @@
 @Positive
 @NotCritical
 
-Функционал: проверка обязательных для заполнения полей
+Функционал: check required fields
 
 
 
 Контекст: 
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 	
-Сценарий: проставление у доп реквизитов признака обязательного заполнения и проверка на заполнение
-	* Открытие настроек доп реквизитов
+Сценарий: check of the sign of required filling at the additional attribute and check for filling
+	* Opening of additional details settings
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-	* Проставление признака обязательного заполнения для реквизитов Item
+	* Check of the sign of required filling at the additional attribute for Item
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Items'       |
@@ -25,7 +25,7 @@
 		И в таблице "Attributes" я устанавливаю флаг 'Required'
 		И в таблице "Attributes" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
-	* Проставление признака обязательного заполнения для реквизитов item key (обувь)
+	* Check of the sign of required filling at the additional attribute for item key (shoes)
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -38,7 +38,7 @@
 		И в таблице "AvailableAttributes" я устанавливаю флаг 'Required'
 		И в таблице "AvailableAttributes" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
-	* Проверка обязательного заполнения реквизита Article в Item
+	* Check that the Article in Item is required to be filled in
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -48,7 +48,7 @@
 		И я нажимаю на кнопку 'Save'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Field: [Article] is empty" в течение 30 секунд
 		И Я закрыл все окна клиентского приложения
-	* Проверка обязательного заполнения реквизита Season в Item key по Shoes
+	* Check that the Season account in the Item key is required by Shoes
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ItemKeys"
 		И в таблице "List" я перехожу к строке:
 			| 'Item key' |
@@ -58,10 +58,10 @@
 		И я нажимаю на кнопку 'Save'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Field: [Season] is empty" в течение 30 секунд
 		И Я закрыл все окна клиентского приложения
-	* И я проставляю необязательное заполнение реквизитов
+	* Putt in an optional filling in the details
 		* Открытие настроек доп реквизитов
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-	* Проставление признака обязательного заполнения для реквизитов Item
+	* Check of the sign of required filling at the additional attribute for Item
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Items'       |
@@ -73,7 +73,7 @@
 		И в таблице "Attributes" я снимаю флаг 'Required'
 		И в таблице "Attributes" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
-	* Проставление признака обязательного заполнения для реквизитов item key (обувь)
+	* Check of the sign of required filling at the additional attribute for item key (обувь)
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |

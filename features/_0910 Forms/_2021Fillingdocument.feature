@@ -2771,7 +2771,7 @@
 			| 'Description'       | 'Currency' |
 			| 'Cash desk №1'      | ''         |
 			| 'Cash desk №2'      | ''         |
-		И Я закрываю окно 'Cash/Bank accountss'
+		И Я закрываю окно 'Cash/Bank accounts'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -3010,7 +3010,7 @@
 			| 'Description'       | 'Currency' |
 			| 'Cash desk №1'      | ''         |
 			| 'Cash desk №2'      | ''         |
-		И Я закрываю окно 'Cash/Bank accountss'
+		И Я закрываю окно 'Cash/Bank accounts'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -4045,7 +4045,6 @@
 		И     элемент формы с именем "Description" доступен
 		И     элемент формы с именем "TransactionType" стал равен 'Currency exchange'
 		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Payee" не доступен
 		И     элемент формы с именем "Date" доступен
 		И     элемент формы с именем "TransitAccount" доступен
 		И я нажимаю кнопку выбора у поля "Account"

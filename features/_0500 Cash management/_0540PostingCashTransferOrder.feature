@@ -858,7 +858,7 @@ For actual Cash/Bank accountsing
 			И Пауза 5
 			И я нажимаю на кнопку 'Post and close'
 			И Пауза 5
-			Затем я жду, что в сообщениях пользователю будет подстрока "Currency exchange is possible only through accounts with the same type (Cash/Bank accounts or bank account)." в течение 30 секунд
+			Затем я жду, что в сообщениях пользователю будет подстрока "Currency exchange is possible only through accounts with the same type (cash account or bank account)." в течение 30 секунд
 			И Я закрыл все окна клиентского приложения
 			И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 			Тогда таблица "List" не содержит строки:

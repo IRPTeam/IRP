@@ -31,7 +31,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>Tax types</value>
+    <value>Tax type</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>

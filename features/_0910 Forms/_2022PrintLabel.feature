@@ -2,17 +2,17 @@
 @tree
 @Positive
 
-Функционал: обработка по печати этикеток
+Функционал: label processing
 
 
 
 Контекст: 
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
 	
-Сценарий: создание макета печати обработки
-	* Открытие конструктора
+Сценарий: create print layout
+	* Opening the constructor
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.PrintTemplates'
-	* Создание Label 1
+	* Create Label 1
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку 'Get default'
 		И в поле 'ENG' я ввожу текст 'Label 1'
@@ -42,7 +42,7 @@
 			| 'Price'            |
 		И в таблице "OrderOrderAvailableFields" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
-	* Создание Label 2
+	* Create Label 2
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку 'Get default'
 		И в поле 'ENG' я ввожу текст 'Label 2'
@@ -70,10 +70,10 @@
 
 
 
-Сценарий: Adding items to обработку по печати этикеток
-	* Открытие формы обработки
+Сценарий: adding items to label printing processing
+	* Open the processing form
 		И я открываю навигационную ссылку 'e1cib/app/DataProcessor.PrintLabels'
-	* Добавление товара и выбор этикеток по строкам
+	* Add items and selecting labels by lines
 		И из выпадающего списка с именем "BarcodeType" я выбираю точное значение 'Auto'
 		И я нажимаю кнопку выбора у поля с именем "PriceType"
 		И в таблице "List" я перехожу к строке:
@@ -127,13 +127,13 @@
 		| 'Item'     | 'Template' |
 		| 'Dress'    | 'Label 1'  |
 		| 'Trousers' | 'Label 2'  |
-	* Перевыбор этикетки для всех строк в шапке обработки
+	* Reselect the label for all lines in the processing header
 		И из выпадающего списка "Label template" я выбираю точное значение 'Label 1'
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Template' |
 		| 'Dress'    | 'Label 1'  |
 		| 'Trousers' | 'Label 1'  |
-	* Выбор строки для печати
+	* Print line selection
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Barcode'    | 'Barcode type' | 'Item'  | 'Item key' | 'Price'  | 'Price type'        | 'Print' | 'Quantity' | 'Template' | 'Unit' |
 			| '2202283713' | 'Auto'         | 'Dress' | 'S/Yellow' | '550,00' | 'Basic Price Types' | 'No'    | '2'        | 'Label 1'  | 'pcs'  |
@@ -147,7 +147,7 @@
 			| 'Print' | 'Price type'        | 'Item'     | 'Quantity' | 'Price'  | 'Item key'  | 'Unit' | 'Barcode'    | 'Barcode type' | 'Template' |
 			| 'No'   | 'Basic Price Types' | 'Dress'    | '2'        |  '550,00' | 'S/Yellow'  | 'pcs'  | '2202283713' | 'Auto'         | 'Label 1'  |
 		И в таблице "ItemList" я нажимаю на кнопку 'Check print for selected rows'
-	* Проверка вывода на печать
+	* Print output check
 		И я нажимаю на кнопку 'Print'
 		Тогда табличный документ "" равен:
 			| ''           | '' | '' | '' | '' | '' | '2202283713' |

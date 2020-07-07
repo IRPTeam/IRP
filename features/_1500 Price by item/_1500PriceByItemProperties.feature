@@ -451,13 +451,13 @@
 		И в таблице "PriceKeyList" я активизирую поле "Size"
 		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Size"
 		И в таблице "List" я перехожу к строке:
-			| 'Add attribute' | 'Description' |
+			| 'Additional attribute' | 'Description' |
 			| 'Size'          | 'M'           |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "PriceKeyList" я активизирую поле "Color"
 		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Color"
 		И в таблице "List" я перехожу к строке:
-			| 'Add attribute' | 'Description' |
+			| 'Additional attribute' | 'Description' |
 			| 'Color'         | 'Brown'       |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "PriceKeyList" в поле 'Price' я ввожу текст '200,00'

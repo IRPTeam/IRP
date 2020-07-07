@@ -18,10 +18,10 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
-  <listPresentation>
+  <objectPresentation>
     <key>en</key>
-    <value>Additional attributes and properties</value>
-  </listPresentation>
+    <value>Additional attributes type</value>
+  </objectPresentation>
   <characteristicExtValues>Catalog.AddAttributeAndPropertyValues</characteristicExtValues>
   <type>
     <types>Boolean</types>

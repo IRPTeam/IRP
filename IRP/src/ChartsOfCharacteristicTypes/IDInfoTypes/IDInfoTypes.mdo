@@ -18,6 +18,10 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Contact info type</value>
+  </objectPresentation>
   <characteristicExtValues>Catalog.IDInfoAddresses</characteristicExtValues>
   <type>
     <types>CatalogRef.IDInfoAddresses</types>

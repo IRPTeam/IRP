@@ -30,7 +30,7 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
     <key>en</key>
-    <value>Unit</value>
+    <value>Item unit</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>

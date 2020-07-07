@@ -11,13 +11,17 @@
   <name>CurrencyMovementType</name>
   <synonym>
     <key>en</key>
-    <value>Multi currency movement type</value>
+    <value>Multi currency movement types</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Multi currency movement type</value>
+  </objectPresentation>
   <type>
     <types>EnumRef.CurrencyType</types>
   </type>

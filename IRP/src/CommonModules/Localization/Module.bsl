@@ -69,10 +69,10 @@ Function Strings(CodeLanguage) Export
 	Strings.Insert("Form_001", NStr("en = 'New page'", CodeLanguage));
 	Strings.Insert("Form_002", NStr("en = 'Delete'", CodeLanguage));
 	Strings.Insert("Form_003", NStr("en = 'Quantity'", CodeLanguage));
-	Strings.Insert("Form_004", NStr("en = 'Customer agreements'", CodeLanguage));
+	Strings.Insert("Form_004", NStr("en = 'Customers partner terms'", CodeLanguage));
 	Strings.Insert("Form_005", NStr("en = 'Customers'", CodeLanguage));
 	Strings.Insert("Form_006", NStr("en = 'Vendors'", CodeLanguage));
-	Strings.Insert("Form_007", NStr("en = 'Vendor agreements'", CodeLanguage));
+	Strings.Insert("Form_007", NStr("en = 'Vendors partner terms'", CodeLanguage));
 	Strings.Insert("Form_008", NStr("en = 'User'", CodeLanguage));
 	Strings.Insert("Form_009", NStr("en = 'User group'", CodeLanguage));
 	Strings.Insert("Form_010", NStr("en = 'Show all'", CodeLanguage));

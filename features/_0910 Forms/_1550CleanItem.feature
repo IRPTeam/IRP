@@ -2,10 +2,10 @@
 @tree
 @Positive
 
-Функционал: проверка того, что Item при сохранении документа не очищается
+Функционал: check that the item is not cleared when saving the document
 
-Как тестировщик
-Я хочу проверить, что Item (без item key) при сохранении документа не очищается
+As a QA
+I want to check that Item (without item key) is not cleared when saving a document
 
 
 Контекст:
@@ -14,11 +14,11 @@
 
 
 
-Сценарий: сохранении информации по Item без заполненного item key в документе Sales order
+Сценарий: saving information about an Item without a completed item key in a document Sales order
 	* Opening a document form Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -26,7 +26,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -42,7 +42,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -67,7 +67,6 @@
 			| 'Description'         |
 			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
-		# Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post and close'
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
@@ -76,11 +75,11 @@
 			| 'Sales order*'  | 'Dress' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сохранении информации по Item без заполненного item key в документе Sales invoice
+Сценарий: saving information about an Item without a completed item key in a document Sales invoice
 	* Opening a document form Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -88,7 +87,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -104,7 +103,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -126,7 +125,6 @@
 			| 'Description'         |
 			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
-		# Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post and close'
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
@@ -135,11 +133,11 @@
 			| 'Sales invoice*'  | 'Dress' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сохранении информации по Item без заполненного item key в документе SalesReturn
+Сценарий: saving information about an Item without a completed item key in a document SalesReturn
 	* Opening a document form SalesReturn
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -147,7 +145,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -162,7 +160,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -184,7 +182,6 @@
 			| 'Description'         |
 			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
-		# Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post and close'
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
@@ -193,11 +190,11 @@
 			| 'Sales return*'  | 'Dress' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сохранении информации по Item без заполненного item key в документе SalesReturnOrder
+Сценарий: saving information about an Item without a completed item key in a document SalesReturnOrder
 	* Opening a document form SalesReturnOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -205,7 +202,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -220,7 +217,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -242,7 +239,6 @@
 			| 'Description'         |
 			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
-		# Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		И я нажимаю на кнопку 'Post and close'
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
@@ -251,11 +247,11 @@
 			| 'Sales return order*'  | 'Dress' |
 		И я закрыл все окна клиентского приложения
 	
-Сценарий: сохранении информации по Item без заполненного item key в документе PurchaseOrder
+Сценарий: saving information about an Item without a completed item key in a document PurchaseOrder
 	* Opening a document form PurchaseOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -263,7 +259,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -279,7 +275,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -320,11 +316,11 @@
 			| 'Purchase order*'  | 'Dress' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сохранении информации по Item без заполненного item key в документе PurchaseInvoice
+Сценарий: saving information about an Item without a completed item key in a document PurchaseInvoice
 	* Opening a document form PurchaseInvoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -332,7 +328,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -347,7 +343,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -388,11 +384,11 @@
 			| 'Purchase invoice*'  | 'Dress' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сохранении информации по Item без заполненного item key в документе PurchaseReturn
+Сценарий: saving information about an Item without a completed item key in a document PurchaseReturn
 	* Opening a document form PurchaseReturn
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -400,7 +396,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -415,7 +411,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -456,11 +452,11 @@
 			| 'Purchase return*'  | 'Dress' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сохранении информации по Item без заполненного item key в документе PurchaseReturnOrder
+Сценарий: saving information about an Item without a completed item key in a document PurchaseReturnOrder
 	* Opening a document form PurchaseReturnOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -468,7 +464,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -483,7 +479,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -526,11 +522,11 @@
 
 
 
-Сценарий: сохранении информации по Item без заполненного item key в документе Bundling
+Сценарий: saving information about an Item without a completed item key in a document Bundling
 	* Opening a document form Bundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И я заполняю основные реквизиты документа
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -557,7 +553,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -572,7 +568,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -590,11 +586,11 @@
 			| 'Bundling*'    | 'Dress' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сохранении информации по Item без заполненного item key в документе Unbundling
+Сценарий: saving information about an Item without a completed item key in a document Unbundling
 	* Opening a document form Unbundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И я заполняю основные реквизиты документа
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -621,7 +617,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -636,7 +632,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedLabel"
 		И я нажимаю кнопку выбора у поля "Item bundle"
 		И в таблице "List" я перехожу к строке:
@@ -668,11 +664,11 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: сохранении информации по Item без заполненного item key в документе GoodsReceipt
+Сценарий: saving information about an Item without a completed item key in a document GoodsReceipt
 	* Opening a document form GoodsReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И я заполняю основные реквизиты документа
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -691,7 +687,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -706,7 +702,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -724,11 +720,11 @@
 			| 'GoodsReceipt*'  | 'Dress' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сохранении информации по Item без заполненного item key в документе ShipmentConfirmation
+Сценарий: saving information about an Item without a completed item key in a document ShipmentConfirmation
 	* Opening a document form ShipmentConfirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И я заполняю основные реквизиты документа
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -747,7 +743,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -762,7 +758,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -780,11 +776,11 @@
 			| 'ShipmentConfirmation*'  | 'Dress' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сохранении информации по Item без заполненного item key в документе InternalSupplyRequest
+Сценарий: saving information about an Item without a completed item key in a document InternalSupplyRequest
 	* Opening a document form InternalSupplyRequest
 		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И я заполняю основные реквизиты документа
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -803,7 +799,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -818,7 +814,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -836,11 +832,11 @@
 			| 'InternalSupplyRequest*'  | 'Dress' |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: сохранении информации по Item без заполненного item key в документе InventoryTransfer
+Сценарий: saving information about an Item without a completed item key in a document InventoryTransfer
 	* Opening a document form InventoryTransfer
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И я заполняю основные реквизиты документа
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -864,7 +860,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -879,7 +875,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
@@ -898,11 +894,11 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: сохранении информации по Item без заполненного item key в документе InventoryTransferOrder
+Сценарий: saving information about an Item without a completed item key in a document InventoryTransferOrder
 	* Opening a document form InventoryTransferOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Добавление Item без item key
+	* Add Item item key
 		И я заполняю основные реквизиты документа
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -926,7 +922,7 @@
 			| 'Dress'         |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save'
-	* Save verification Item
+	* Check saving Item
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
@@ -941,7 +937,7 @@
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  |
 			| 'Dress' |
-	* Проверка очистки регистра Saved Item
+	* Check the Saved Item register cleaning
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"

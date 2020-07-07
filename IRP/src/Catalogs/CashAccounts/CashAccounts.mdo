@@ -10,7 +10,7 @@
   <name>CashAccounts</name>
   <synonym>
     <key>en</key>
-    <value>Cash accounts</value>
+    <value>Cash/Bank accounts</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -30,7 +30,7 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
     <key>en</key>
-    <value>Cash/Bank accounts</value>
+    <value>Cash/Bank account</value>
   </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>

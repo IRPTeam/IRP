@@ -1,4 +1,4 @@
-#language: ru
+﻿#language: ru
 @tree
 @Positive
 
@@ -433,7 +433,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			И Пауза 5
 			И я ввожу значение поля UniqueID для телефона String
 	* Checking for created "Company phone"
-		И таблица "List" содержит строки
+		И таблица "List" содержит строки:
 		| 'Description'     |
 		| 'Company phone' |
 	* Creation Partner phone
@@ -471,7 +471,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			И Пауза 5
 			И я ввожу значение поля UniqueID для телефона партнера String
 	* Checking for created Partner phone
-		И таблица "List" содержит строки
+		И таблица "List" содержит строки:
 			| 'Description'     |
 			| 'Partner phone' |
 
@@ -597,7 +597,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		* Specify an arbitrary structure at Location address (Partner)
 			И я ввожу значение поля UniqueID для адреса партнера String
 		* Checking for created
-			Тогда таблица "List" содержит строки
+			Тогда таблица "List" содержит строки:
 				| 'Description'                     |
 				| 'Location address (Partner)'    |
 				| 'Billing address (Company)'    |
@@ -704,7 +704,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И Пауза 5
 		И я ввожу значение поля UniqueID String
 	* Checking for created items
-		Тогда таблица "List" содержит строки
+		И таблица "List" содержит строки:
 		| 'Description'                     |
 		| 'GPS Ukraine'    |
 	* Adding Contact info gps coordinates for partners in Turkey
@@ -799,7 +799,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И Пауза 5
 		И я ввожу значение поля UniqueID для GPS Turkey String
 	* Checking for created items
-		Тогда таблица "List" содержит строки
+		И таблица "List" содержит строки:
 		| 'Description'                     |
 		| 'GPS Turkey'    |
 

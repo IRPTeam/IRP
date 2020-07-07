@@ -17,7 +17,7 @@ For reconciliation of settlements
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'    |
-			| 'Objects status historyes' |
+			| 'Objects status history' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| ReconciliationStatement                |

@@ -17,6 +17,10 @@
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Plugin</value>
+  </objectPresentation>
   <hierarchical>true</hierarchical>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
@@ -47,7 +51,7 @@
     <name>PathToExtDataProcForTest</name>
     <synonym>
       <key>en</key>
-      <value>Path to ext data proc for test</value>
+      <value>Path to plugin for test</value>
     </synonym>
     <type>
       <types>String</types>

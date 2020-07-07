@@ -142,7 +142,7 @@ EndProcedure
 
 &AtClient
 Procedure PartnerOnChange(Item, AddInfo = Undefined) Export
-	DocSalesOrderClient.PartnerOnChange(Object, ThisObject, Item,);
+	DocSalesOrderClient.PartnerOnChange(Object, ThisObject, Item);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -331,6 +331,7 @@ Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Expo
 	SpecialOffersEditFinishAtServer_ForDocument(Result, AdditionalParameters);
 EndProcedure
 
+&AtServer
 Procedure SpecialOffersEditFinishAtServer_ForDocument(Result, AdditionalParameters) Export
 	DocumentsServer.FillItemList(Object);
 EndProcedure

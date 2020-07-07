@@ -41,11 +41,12 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 		ShowMessageBox( , R()[ErrorMessageKey]);
 		Return;
 	EndIf;
-	
-	OpenForm("Document.InventoryTransferOrder.ObjectForm", New Structure("FillingValues", New Structure("Basis", ArrayOfBasisDocuments)), , New UUID());
+	Settings = New Structure("FillingValues", New Structure("Basis", ArrayOfBasisDocuments));
+	OpenForm("Document.InventoryTransferOrder.ObjectForm", Settings, , New UUID());
 	
 EndProcedure
 
+&AtServer
 Function SeparateInternalSupplyRequestsByStores(ArrayOfInternalSupplyRequests)
 	Query = New Query();
 	Query.Text =
@@ -79,7 +80,7 @@ Function SeparateInternalSupplyRequestsByStores(ArrayOfInternalSupplyRequests)
 	Return ResultMap;
 EndFunction
 
-
+&AtServer
 Function GetErrorMessageKey(BasisDocument)
 	ErrorMessageKey = Undefined;
 	
@@ -95,6 +96,7 @@ Function GetErrorMessageKey(BasisDocument)
 	Return ErrorMessageKey;
 EndFunction
 
+&AtServer
 Function OrdersExist(ArrayOfBasises)
 	
 	Query = New Query();

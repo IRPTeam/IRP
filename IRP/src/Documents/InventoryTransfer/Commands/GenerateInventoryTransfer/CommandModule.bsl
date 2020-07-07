@@ -12,6 +12,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_InventoryTransferOrder = New Array();
 	
@@ -27,6 +28,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables)
 	
 	ValueTable = New ValueTable();
@@ -84,6 +86,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function ExtractInfoFromOrderRows(QueryTable)
 	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
 	For Each Row In QueryTable Do
@@ -130,6 +133,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 	Return QueryTable;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_InventoryTransferOrder(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =

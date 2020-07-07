@@ -47,6 +47,7 @@ EndProcedure
 #EndRegion
 #Region Private
 
+&AtServer
 Function ReportName()
 	SplittedFormName = StrSplit(ThisObject.FormName, ".");
 	SplittedFormName.Delete(SplittedFormName.UBound());

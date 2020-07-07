@@ -1,7 +1,9 @@
 {
   "$schema": "https://1c-syntax.github.io/bsl-language-server/configuration/schema.json",
-  "diagnosticLanguage": "en",
+  "language": "en",
   "diagnostics": {
+    "computeTrigger": "onType",
+    "parameters": {
       "NestedStatements": false,
       "CognitiveComplexity": false,
       "MethodSize": false,
@@ -20,6 +22,7 @@
         "minWordLength": 3
       }
     }
+  }
 }
 
 

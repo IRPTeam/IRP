@@ -3,7 +3,7 @@ Function Settings() Export
 	Str.Insert("client_id", "");
 	Str.Insert("client_secret", "");
 	Str.Insert("key", "");
-	oauth2 ="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=%1&access_type=offline&scope=%2&redirect_uri=http://localhost";
+	oauth2 = "https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=%1&access_type=offline&scope=%2&redirect_uri=http://localhost";
 	
 	ScopesArray = New Array;
 	ScopesArray.Add("https://www.googleapis.com/auth/drive");
@@ -134,7 +134,7 @@ Function SendToDrive(IntegrationSettingsRef, Name, RequestBody) Export
 	Headers = New Map();
 	Headers.Insert("POST /upload/drive/v2/files?uploadType=multipart HTTP/1.1");
 	Headers.Insert("Host", "www.googleapis.com");
-	Headers.Insert("Content-Type", "multipart/related; boundary="+boundary);
+	Headers.Insert("Content-Type", "multipart/related; boundary=" + boundary);
 	Headers.Insert("Authorization", "OAuth " + access_token);
 
 

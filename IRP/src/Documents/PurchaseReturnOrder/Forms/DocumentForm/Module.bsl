@@ -79,10 +79,6 @@ EndProcedure
 
 #EndRegion
 
-#Region AddAttributes
-
-#EndRegion
-
 #Region FormItemsEvents
 
 &AtClient

@@ -54,6 +54,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_SalesOrder = New Array();
 	ArrayOf_ShipmentConfirmation = New Array();
@@ -85,6 +86,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables)
 	
 	ItemList = New ValueTable();
@@ -252,6 +254,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function ExtractInfoFromOrderRows(QueryTable)
 	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
 	For Each Row In QueryTable Do
@@ -394,6 +397,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 	Return New Structure("ItemList, TaxList", QueryTable_ItemList, QueryTable_TaxList);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_Service(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -419,6 +423,7 @@ Function GetDocumentTable_Service(ArrayOfBasisDocuments)
 	Return ExtractInfoFromOrderRows(QueryTable);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -446,6 +451,7 @@ Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
 	Return ExtractInfoFromOrderRows(QueryTable);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_ShipmentConfirmation(ArrayOfBasisDocuments)
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.SalesOrder"));
@@ -648,6 +654,7 @@ EndFunction
 
 #Region Errors
 
+&AtServer
 Function GetErrorMessage(BasisDocument)
 	ErrorMessage = Undefined;
 	
@@ -679,6 +686,7 @@ Function GetErrorMessage(BasisDocument)
 	
 EndFunction
 
+&AtServer
 Function GetInfoMessage(FillingData)
 	InfoMessage = "";
 	BasisDocument = New Array();
@@ -693,6 +701,7 @@ Function GetInfoMessage(FillingData)
 	Return InfoMessage;	
 EndFunction
 
+&AtServer
 Function ShipmentConfirmationExist(BasisDocument)
 	Query = New Query(
 	"SELECT ALLOWED
@@ -707,6 +716,7 @@ Function ShipmentConfirmationExist(BasisDocument)
 	Return Query.Execute().IsEmpty();
 EndFunction
 
+&AtServer
 Function SalesInvoiceExist(BasisDocument)
 	Query = New Query(
 	"SELECT TOP 1

@@ -295,7 +295,7 @@ Procedure AgreementOnChange(Object, Form, Module, Item = Undefined, Settings  = 
 	
 EndProcedure
 
-//TODO: Start choice functions are similar.
+// TODO: Start choice functions are similar.
 Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
 	If  OpenSettings = Undefined Then
 		OpenSettings = GetOpenSettingsStructure();
@@ -329,7 +329,7 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
-//TODO: Edit text change functions are similar.
+// TODO: Edit text change functions are similar.
 Procedure AgreementEditTextChange(Object, Form, Item, Text,
 		StandardProcessing, ArrayOfFilters = Undefined,
 		AdditionalParameters = Undefined) Export
@@ -742,22 +742,22 @@ EndProcedure
 
 #Region GroupTitleDecorationsEvents
 
-//TODO: Delete parameter Object
+// TODO: Delete parameter Object
 Procedure DecorationGroupTitleCollapsedPictureClick(Object = Undefined, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(, Form, True);
 EndProcedure
 
-//TODO: Delete parameter Object
+// TODO: Delete parameter Object
 Procedure DecorationGroupTitleCollapsedLabelClick(Object = Undefined, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(, Form, True);
 EndProcedure
 
-//TODO: Delete parameter Object
+// TODO: Delete parameter Object
 Procedure DecorationGroupTitleUncollapsedPictureClick(Object = Undefined, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(, Form, False);
 EndProcedure
 
-//TODO: Delete parameter Object
+// TODO: Delete parameter Object
 Procedure DecorationGroupTitleUncollapsedLabelClick(Object = Undefined, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(, Form, False);
 EndProcedure
@@ -803,7 +803,7 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 	EndIf;
 	#EndRegion
 	
-	//TODO: Refact	
+	// TODO: Refact	
 	For Each AfterActionsCalculateSettingsItem In DateSettings.AfterActionsCalculateSettings Do
 		Settings.CalculateSettings.Insert(AfterActionsCalculateSettingsItem.Key, AfterActionsCalculateSettingsItem.Value);
 	EndDo;
@@ -842,7 +842,7 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 	EndIf;
 	
 	If Settings.CalculateSettings.Property("UpdatePrice")
-		//TODO: Refact
+		// TODO: Refact
 		And CalculationStringsClientServer.PricesChanged(Object, Form, Settings) Then
 		QuestionStructure = New Structure;
 		QuestionStructure.Insert("ProcedureName", "PricesChangedContinue");
@@ -1045,7 +1045,7 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 	OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
 EndProcedure
 
-//TODO: Some parameters do not exist. Fix
+// TODO: Some parameters do not exist. Fix
 Function PickupItemsParameters(Object, Form)
 	ReturnValue = New Structure();
 	
@@ -1232,7 +1232,6 @@ EndProcedure
 
 #Region Commands
 
-&AtClient
 Procedure SearchByBarcode(Command, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined) Export
   TransferParameters = New Structure;
   If DocumentClientModule = Undefined Then
@@ -1804,7 +1803,7 @@ Procedure ItemListPriceTypeOnChange(Object, Form, Module, Item = Undefined, Sett
 		Settings = GetSettingsStructure(Module);
 	EndIf;
 	
-	//TODO: Unit?
+	// TODO: Unit?
 	ItemListUnitSettings = Module.ItemListUnitSettings();
 	
 	Settings.Insert("ObjectAttributes", ItemListUnitSettings.ObjectAttributes);

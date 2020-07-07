@@ -67,13 +67,13 @@ EndProcedure
 &AtServer
 Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	If Object.Our Then
-		For Index = 0 To CompanyTaxes.Count()-1 Do
+		For Index = 0 To CompanyTaxes.Count() - 1 Do
 			Row = CompanyTaxes[Index];
 			If Not ValueIsFilled(Row.Period) Then
 				Cancel = True;
 				MessageText = StrTemplate(R()["Error_010"], "Period");
 				CommonFunctionsClientServer.ShowUsersMessage(MessageText,
-						"CompanyTaxes[" + Format(Index, "NG=0;") + "].Period",);
+						"CompanyTaxes[" + Format(Index, "NG=0;") + "].Period");
 			EndIf;
 		EndDo;
 	EndIf;

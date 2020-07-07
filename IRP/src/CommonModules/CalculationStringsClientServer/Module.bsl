@@ -14,8 +14,8 @@ EndFunction
 
 // TODO: Test
 Procedure ClearDependentData(Object, AddInfo = Undefined) Export
-	If AddInfo = Undefined Or not AddInfo.Property("TableParent") Then
-		TableName = "ItemList"
+	If AddInfo = Undefined OR Not AddInfo.Property("TableParent") Then
+		TableName = "ItemList";
 	Else
 		TableName = AddInfo.TableParent;
 	EndIf;
@@ -755,7 +755,7 @@ Procedure UpdateItemType(Object, Form, Settings) Export
 	
 	CurrentRow = Settings.Rows[0];
 	
-	//TODO: SalesOrder???
+	// TODO: SalesOrder???
 	CurrentRow.ItemType = DocSalesOrderServer.GetItemRowType(CurrentRow.Item);
 	If CurrentRow.ItemType = PredefinedValue("Enum.ItemTypes.Service") Then
 		CurrentRow.ProcurementMethod = Undefined;

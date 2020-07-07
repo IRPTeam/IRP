@@ -121,7 +121,6 @@ EndProcedure
 
 #EndRegion
 
-&AtClient
 Procedure SetVisible(Object, Form)
 	IsStandard = Object.Kind = PredefinedValue("Enum.AgreementKinds.Standard");
 	IsRegular = Object.Kind = PredefinedValue("Enum.AgreementKinds.Regular");

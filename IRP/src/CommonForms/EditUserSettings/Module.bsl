@@ -315,6 +315,7 @@ Function GetExistPredefinedDataNames()
 	Return QueryResult.Unload().UnloadColumn("PredefinedDataName");
 EndFunction
 
+&AtServer
 Procedure AddRowToTableOfSettings(TableOfSettings, MetadataObject, AttributeName, SettingID)
 	NewRow = TableOfSettings.Add();
 	NewRow.MetadataObject = MetadataObject;
@@ -322,6 +323,7 @@ Procedure AddRowToTableOfSettings(TableOfSettings, MetadataObject, AttributeName
 	NewRow.SettingID = SettingID;
 EndProcedure
 
+&AtServer
 Function FilterIsOk(AttributeInfo)
 	If AttributeInfo.KindOfAttribute = Enums.KindsOfAttributes.Regular
 		Or AttributeInfo.KindOfAttribute = Enums.KindsOfAttributes.Common
@@ -334,6 +336,7 @@ Function FilterIsOk(AttributeInfo)
 	Return True;
 EndFunction
 
+&AtServer
 Function GetStandardAttributes(MetadataObject, RowOwner, TableOfSettings)
 	// Standard attributes
 	For Each Attribute In MetadataObject.StandardAttributes Do
@@ -357,6 +360,7 @@ Function GetStandardAttributes(MetadataObject, RowOwner, TableOfSettings)
 	Return RowOwner.Rows.Count() > 0;
 EndFunction
 
+&AtServer
 Function GetRegularAttributes(MetadataObject, RowOwner, TableOfSettings)
 	// Attributes
 	For Each Attribute In MetadataObject.Attributes Do
@@ -379,6 +383,7 @@ Function GetRegularAttributes(MetadataObject, RowOwner, TableOfSettings)
 	Return RowOwner.Rows.Count() > 0;
 EndFunction
 
+&AtServer
 Function GetCommonAttributes(MetadataObject, RowOwner, TableOfSettings)
 	// Common attributes
 	For Each CommonAttribute In Metadata.CommonAttributes Do
@@ -409,6 +414,7 @@ Function GetCommonAttributes(MetadataObject, RowOwner, TableOfSettings)
 	Return RowOwner.Rows.Count() > 0;
 EndFunction
 
+&AtServer
 Function GetAdditionalAttributes(MetadataObject, RowOwner, TableOfSettings, ExistPredefinedDataNames)
 	PredefinedDataName = StrReplace(MetadataObject.FullName(), ".", "_");
 	If ExistPredefinedDataNames.Find(PredefinedDataName) = Undefined Then
@@ -452,6 +458,7 @@ Function GetAdditionalAttributes(MetadataObject, RowOwner, TableOfSettings, Exis
 	Return RowOwner.Rows.Count() > 0;
 EndFunction
 
+&AtServer
 Function GetTabularSections(MetadataObject, RowOwner, TableOfSettings)
 	// Tabular sections
 	ArrayOfTabularSections = New Array();
@@ -492,6 +499,7 @@ Function GetTabularSections(MetadataObject, RowOwner, TableOfSettings)
 	Return RowOwner.Rows.Count() > 0;
 EndFunction
 
+&AtServer
 Function GetCustomAttributes(MetadataObject, RowOwner, TableOfSettings)
 	Query = New Query();
 	Query.Text =
@@ -531,6 +539,7 @@ Function GetCustomAttributes(MetadataObject, RowOwner, TableOfSettings)
 	Return RowOwner.Rows.Count() > 0;
 EndFunction
 
+&AtServer
 Function GetCustomCommonSettings(RowOwner, TableOfSettings)
 	Query = New Query();
 	Query.Text =

@@ -1,5 +1,5 @@
 Function UniqueIDByName(ObjectMetadata, UniqueID) Export
-	Return UniqueIDReuse.UniqueIDByName(ObjectMetadata.FullName(), UniqueID)
+	Return UniqueIDReuse.UniqueIDByName(ObjectMetadata.FullName(), UniqueID);
 EndFunction
 
 Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export

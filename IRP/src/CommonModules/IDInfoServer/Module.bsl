@@ -31,7 +31,7 @@ EndProcedure
 
 Procedure CreateFormControls(Form, GroupNameForPlacement = "GroupContactInformation", AddInfo = Undefined) Export
 	
-	//Clear form
+	// Clear form
 	NotSavedAttrValues = New Structure();
 	If CommonFunctionsServer.FormHaveAttribute(Form, "ListOfIDInfoAttributes") Then
 		ArrayForDelete = New Array();
@@ -45,7 +45,7 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "GroupContactInformat
 			Form.Items.Delete(Form.Items[AttrName]);
 		EndDo;
 		If ArrayForDelete.Count() Then
-			Form.ChangeAttributes(,ArrayForDelete);
+			Form.ChangeAttributes( , ArrayForDelete);
 		EndIf;
 	EndIf;
 	

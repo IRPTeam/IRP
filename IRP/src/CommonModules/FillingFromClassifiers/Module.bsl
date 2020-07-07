@@ -127,7 +127,7 @@ Procedure DisassembleClassifierElement_TabularSection(NewObject, TabularSection)
 	EndDo;
 EndProcedure
 
-Function CheckExistingAndCreateCatalogItemFromClassifierElement(MetadataName, ClassifierElement, OwnClassifier=True) Export
+Function CheckExistingAndCreateCatalogItemFromClassifierElement(MetadataName, ClassifierElement, OwnClassifier = True) Export
 	If TypeOf(ClassifierElement) <> Type("Structure") OR Not ClassifierElement.Count() Then
 		CurrentManager = ServiceSystemServer.GetManagerByMetadataFullName(MetadataName);
 		If CurrentManager = Undefined Then
@@ -149,7 +149,7 @@ Function CheckExistingAndCreateCatalogItemFromClassifierElement(MetadataName, Cl
 	|	Catalog.%1 AS Table
 	|WHERE
 	|	Table.%2 = &%2");
-	Query.Text = StrTemplate(Query.Text, Mid(MetadataName,9), SearchingKeyAndValue.Key);
+	Query.Text = StrTemplate(Query.Text, Mid(MetadataName, 9), SearchingKeyAndValue.Key);
 	Query.SetParameter(SearchingKeyAndValue.Key, SearchingKeyAndValue.Value);
 	
 	Selection = Query.Execute().Select();

@@ -142,20 +142,20 @@ EndFunction
 Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, ObjectRef = Undefined) Export
 	EndOfDate = Undefined;
 	If ValueIsFilled(ObjectRef) Then
-		EndOfDate = New Boundary(ObjectRef.PointInTime(), BoundaryType.Excluding)
+		EndOfDate = New Boundary(ObjectRef.PointInTime(), BoundaryType.Excluding);
 	EndIf;
 	ArrayOfResults = New Array();
 	ValueTable = GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate);
 	For Each Row In ValueTable Do
 		NewRow = New Structure();
-		NewRow.Insert("BasedOn" ,Row.BasedOn);
-		NewRow.Insert("TransactionType" ,Row.TransactionType);
-		NewRow.Insert("Company" ,Row.Company);
-		NewRow.Insert("Account" ,Row.Account);
-		NewRow.Insert("TransitAccount" ,Row.TransitAccount);
-		NewRow.Insert("Currency" ,Row.Currency);
-		NewRow.Insert("Amount" ,Row.Amount);
-		NewRow.Insert("PlaningTransactionBasis" ,Row.PlaningTransactionBasis);
+		NewRow.Insert("BasedOn" 				, Row.BasedOn);
+		NewRow.Insert("TransactionType" 		, Row.TransactionType);
+		NewRow.Insert("Company" 				, Row.Company);
+		NewRow.Insert("Account" 				, Row.Account);
+		NewRow.Insert("TransitAccount" 			, Row.TransitAccount);
+		NewRow.Insert("Currency" 				, Row.Currency);
+		NewRow.Insert("Amount" 					, Row.Amount);
+		NewRow.Insert("PlaningTransactionBasis" , Row.PlaningTransactionBasis);
 		ArrayOfResults.Add(NewRow);
 	EndDo;
 	Return ArrayOfResults;

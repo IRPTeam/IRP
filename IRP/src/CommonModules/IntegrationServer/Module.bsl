@@ -26,7 +26,7 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefi
 EndFunction
 
 Function InfoRegSettingsStructure() Export
-	Return IntegrationServerReuse.InfoRegSettingsStructure()
+	Return IntegrationServerReuse.InfoRegSettingsStructure();
 EndFunction
 
 Procedure SaveFileToFileStorage(PathForSave, FileName, BinaryData) Export

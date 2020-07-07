@@ -72,7 +72,7 @@ EndProcedure
 
 &AtClient
 Procedure PictureViewHTMLOnClick(Item, EventData, StandardProcessing)
-	PictureViewerClient.PictureViewHTMLOnClick(ThisForm, Item, EventData, StandardProcessing)
+	PictureViewerClient.PictureViewHTMLOnClick(ThisForm, Item, EventData, StandardProcessing);
 EndProcedure
 
 &AtClient

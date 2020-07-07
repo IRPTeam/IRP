@@ -39,7 +39,7 @@ Procedure TransitAccountStartChoice(Item, ChoiceData, StandardProcessing)
 	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
 	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
 	Filter = DocumentsClientServer.CreateFilterItem("Type",	
-				PredefinedValue("Enum.CashAccountTypes.Transit"), , DataCompositionComparisonType.Equal)
+				PredefinedValue("Enum.CashAccountTypes.Transit"), , DataCompositionComparisonType.Equal);
 	StartChoiceParameters.CustomParameters.Filters.Add(Filter);
 	StartChoiceParameters.FillingData.Insert("Type", PredefinedValue("Enum.CashAccountTypes.Transit"));
 	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, ThisObject.UUID, , ThisObject.URL);

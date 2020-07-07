@@ -22,6 +22,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_Bundling = New Array();
 	ArrayOf_InventoryTransfer = New Array();
@@ -59,6 +60,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables)
 	
 	// *Filter {Header}:
@@ -135,14 +137,17 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_Bundling(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "Bundling");
 EndFunction
 
+&AtServer
 Function GetDocumentTable_InventoryTransfer(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "InventoryTransfer");
 EndFunction
 
+&AtServer
 Function GetDocumentTable_PurchaseReturn(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -171,6 +176,7 @@ Function GetDocumentTable_PurchaseReturn(ArrayOfBasisDocuments)
 	Return QueryResult.Unload();
 EndFunction
 
+&AtServer
 Function GetDocumentTable_SalesInvoice(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -202,6 +208,7 @@ Function GetDocumentTable_SalesInvoice(ArrayOfBasisDocuments)
 	Return QueryTable;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -230,10 +237,12 @@ Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
 	Return QueryResult.Unload();
 EndFunction
 
+&AtServer
 Function GetDocumentTable_Unbundling(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "Unbundling");
 EndFunction
 
+&AtServer
 Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 	Query = New Query();
 	Query.Text =
@@ -260,6 +269,7 @@ Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 	Return QueryResult.Unload();
 EndFunction
 
+&AtServer
 Function GetErrorMessage(BasisDocument)
 	ErrorMessage = Undefined;
 	
@@ -292,6 +302,7 @@ Function GetErrorMessage(BasisDocument)
 	Return ErrorMessage;
 EndFunction
 
+&AtServer
 Function SalesInvoiceExist(BasisDocument)
 	
 	Query = New Query(
@@ -308,6 +319,7 @@ Function SalesInvoiceExist(BasisDocument)
 	
 EndFunction
 
+&AtServer
 Function HasShipmentConfirmation(BasisDocument)
 	
 	Query = New Query;
@@ -324,6 +336,7 @@ Function HasShipmentConfirmation(BasisDocument)
 	Return Not Query.Execute().IsEmpty();
 EndFunction
 
+&AtServer
 Function WithoutBalance(BasisDocument)
 	Query = New Query();
 	Query.Text =

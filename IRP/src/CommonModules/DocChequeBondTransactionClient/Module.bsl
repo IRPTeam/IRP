@@ -138,7 +138,7 @@ Procedure CompanyOnChange(Object, Form, Item) Export
 		Parameters.Insert("Object", Object);
 		
 		QuestionToUserNotify = New NotifyDescription("CompanyOnChangeEnd", ThisObject, Parameters);
-		ShowQueryBox(QuestionToUserNotify,StrTemplate(R().QuestionToUser_003, Item.Title), QuestionDialogMode.YesNo);
+		ShowQueryBox(QuestionToUserNotify, StrTemplate(R().QuestionToUser_003, Item.Title), QuestionDialogMode.YesNo);
 		Return;
 	EndIf;
 	Form.CurrentCompany = Object.Company;
@@ -163,7 +163,7 @@ Procedure CompanyOnChangeEnd(Result, Parameters) Export
 	
 	For Each InvalidAgreement In InvalidAgreements Do
 		
-		InvalidRows = Object.ChequeBonds.FindRows(New Structure("Agreement",InvalidAgreement));
+		InvalidRows = Object.ChequeBonds.FindRows(New Structure("Agreement", InvalidAgreement));
 
 		For Each InvalidRow In InvalidRows Do
 			Object.ChequeBonds.Delete(InvalidRow);

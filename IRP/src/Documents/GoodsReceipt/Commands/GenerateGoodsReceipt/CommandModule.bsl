@@ -24,6 +24,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_Bundling = New Array();
 	ArrayOf_InventoryTransfer = New Array();
@@ -61,6 +62,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	Return JoinDocumentsStructure(ArrayOfTables, "BasedOn, Company, Partner, LegalName, Agreement, Store");
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	
 	ValueTable = New ValueTable();
@@ -113,6 +115,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function PutQueryTableToTempTable(QueryTable)
 	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
 	For Each Row In QueryTable Do
@@ -144,7 +147,7 @@ Function PutQueryTableToTempTable(QueryTable)
 	Return tempManager;
 EndFunction
 
-
+&AtServer
 Function ExtractInfoFrom_PurchaseOrder(QueryTable)
 	Query = New Query();
 	Query.TempTablesManager = PutQueryTableToTempTable(QueryTable);
@@ -180,6 +183,7 @@ Function ExtractInfoFrom_PurchaseOrder(QueryTable)
 	Return QueryTable;
 EndFunction
 
+&AtServer
 Function ExtractInfoFrom_PurchaseInvoice(QueryTable)
 	Query = New Query();
 	Query.TempTablesManager = PutQueryTableToTempTable(QueryTable);
@@ -211,14 +215,17 @@ Function ExtractInfoFrom_PurchaseInvoice(QueryTable)
 	Return QueryTable;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_Bundling(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "Bundling");
 EndFunction
 
+&AtServer
 Function GetDocumentTable_InventoryTransfer(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "InventoryTransfer");
 EndFunction
 
+&AtServer
 Function GetDocumentTable_PurchaseInvoice(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -248,6 +255,7 @@ Function GetDocumentTable_PurchaseInvoice(ArrayOfBasisDocuments)
 	Return ExtractInfoFrom_PurchaseInvoice(QueryTable);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_PurchaseOrder(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -277,6 +285,7 @@ Function GetDocumentTable_PurchaseOrder(ArrayOfBasisDocuments)
 	Return ExtractInfoFrom_PurchaseOrder(QueryTable);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_SalesReturn(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -305,10 +314,12 @@ Function GetDocumentTable_SalesReturn(ArrayOfBasisDocuments)
 	Return QueryResult.Unload();
 EndFunction
 
+&AtServer
 Function GetDocumentTable_Unbundling(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "Unbundling");
 EndFunction
 
+&AtServer
 Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 	Query = New Query();
 	Query.Text =
@@ -335,7 +346,7 @@ Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 	Return QueryResult.Unload();
 EndFunction
 
-
+&AtServer
 Function GetErrorMessage(BasisDocument)
 	
 	ErrorMessage = Undefined;
@@ -373,13 +384,14 @@ Function GetErrorMessage(BasisDocument)
 	
 EndFunction
 
+&AtServer
 Function PurchaseInvoiceExist(BasisDocument)
 	
 	Return False;
 	
 EndFunction
 
-
+&AtServer
 Function HasGoodReceipt(BasisDocument)
 	
 	Query = New Query;
@@ -396,6 +408,7 @@ Function HasGoodReceipt(BasisDocument)
 	Return Not Query.Execute().IsEmpty();
 EndFunction
 
+&AtServer
 Function WithoutBalance(BasisDocument)
 	Query = New Query();
 	Query.Text =

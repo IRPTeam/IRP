@@ -87,7 +87,7 @@ EndProcedure
 
 &AtClient
 Procedure CreateItemFromClassifierRow(ClassifierRow)
-	//TODO: check existing object
+	// TODO: check existing object
 	
 	NewItem = FillingFromClassifiers.CreateCatalogItemFromClassifier(MetadataName, 
 							AttributesList[0].Value, 

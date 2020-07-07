@@ -5,7 +5,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Not Object.Ref.Metadata().TabularSections.Find("AddAttributes") = Undefined Then
 		AddAttributesAndPropertiesServer.OnCreateAtServer(Form, "GroupOther");
 	EndIf;
-	//TODO: Cut If after fix all documents
+	// TODO: Cut If after fix all documents
 	If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then
 		DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
 	EndIf;	
@@ -245,7 +245,7 @@ Function CheckItemListStores(Object) Export
 	
 	While SelectionDetailRecords.Next() Do
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_072, SelectionDetailRecords.LineNumber), 
-							"ItemList["+ Format((SelectionDetailRecords.LineNumber - 1),"NZ=0; NG=0;") + "].Store", 
+							"ItemList[" + Format((SelectionDetailRecords.LineNumber - 1), "NZ=0; NG=0;") + "].Store", 
 							Object);
 	EndDo;	
 	
@@ -292,7 +292,7 @@ Procedure CheckPaymentList(Object, Cancel, CheckedAttributes) Export
 	Cancel = True;
 	While SelectionDetailRecords.Next() Do
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_020, SelectionDetailRecords.LineNumber), 
-							"PaymentList["+ Format((SelectionDetailRecords.LineNumber - 1),"NZ=0; NG=0;") + "].BasisDocument", 
+							"PaymentList[" + Format((SelectionDetailRecords.LineNumber - 1), "NZ=0; NG=0;") + "].BasisDocument", 
 							Object);
 	EndDo;
 EndProcedure
@@ -396,7 +396,6 @@ EndProcedure
 
 #Region ListFormEvents
 
-&AtServer
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export	
 	FormNamesArray = StrSplit(Form.FormName, ".");
 	DocumentName = FormNamesArray[1];
@@ -407,7 +406,6 @@ EndProcedure
 
 #Region ChoiceFormEvents
 
-&AtServer
 Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export	
 	FormNamesArray = StrSplit(Form.FormName, ".");
 	DocumentName = FormNamesArray[1];

@@ -149,6 +149,7 @@ Procedure GenerateForCurrent(Command)
 	EndIf;
 EndProcedure
 
+&AtServer
 Procedure OutputParentDocuments(DocumentRef, CurrentBranch)
 	DocumentMetadata = DocumentRef.Metadata();
 	ListOfAttributes = New ValueList();
@@ -241,6 +242,7 @@ Procedure OutputParentDocuments(DocumentRef, CurrentBranch)
 	CurrentBranch = NewRow;
 EndProcedure
 
+&AtServer
 Procedure OutputWithOutParents(ListOfDocuments, CurrentBranch)
 	NewRow = Undefined;
 	For Each Row In ListOfDocuments Do
@@ -275,6 +277,7 @@ Procedure OutputWithOutParents(ListOfDocuments, CurrentBranch)
 	EndIf;
 EndProcedure
 
+&AtServer
 Procedure OutputChildrenDocuments(TreeRow)
 	
 	CurrentDocument = TreeRow.Ref;
@@ -345,6 +348,7 @@ Procedure OutputChildrenDocuments(TreeRow)
 	EndDo;
 EndProcedure
 
+&AtServer
 Procedure SetDocumentStatus(Row)
 	If Row.Posted Then
 		Row.DocumentStatus = 0;
@@ -358,6 +362,7 @@ Procedure SetDocumentStatus(Row)
 	EndIf;
 EndProcedure
 
+&AtServer
 Procedure AddToMetadataCache(DocumentMetadata, DocumentName)
 	AttributesInfo = GetFromCache(DocumentName, "Attributes");
 	If AttributesInfo = Undefined Then
@@ -366,6 +371,7 @@ Procedure AddToMetadataCache(DocumentMetadata, DocumentName)
 	EndIf;
 EndProcedure
 
+&AtServer
 Function DocumentHaveAmount(DocumentMetadata)
 	CommonAttribute = Metadata.CommonAttributes.DocumentAmount;
 	CommonAttributeUsed = False;
@@ -380,6 +386,7 @@ Function DocumentHaveAmount(DocumentMetadata)
 	Return CommonAttributeUsed;
 EndFunction
 
+&AtServer
 Function GetQueryForDocumentProperties(DocumentRef)
 	DocumentMetadata = DocumentRef.Metadata();
 	Query = New Query(
@@ -396,6 +403,7 @@ Function GetQueryForDocumentProperties(DocumentRef)
 	Return Query;
 EndFunction
 
+&AtServer
 Function GetRelatedDocuments(DocumentRef)
 	Query = New Query();
 	Query.Text =
@@ -407,6 +415,7 @@ Function GetRelatedDocuments(DocumentRef)
 	Return Query.Execute().Unload();
 EndFunction
 
+&AtServer
 Function GetFromCache(Key, CacheType = "Main")
 	ArrayOfResults = ThisObject[GetCacheByType(CacheType)].FindRows(New Structure("Key", Key));
 	If ArrayOfResults.Count() Then
@@ -416,6 +425,7 @@ Function GetFromCache(Key, CacheType = "Main")
 	EndIf;
 EndFunction
 
+&AtServer
 Procedure PutToCache(Key, Value, CacheType = "Main")
 	ArrayOfResults = ThisObject[GetCacheByType(CacheType)].FindRows(New Structure("Key", Key));
 	If ArrayOfResults.Count() Then
@@ -427,6 +437,7 @@ Procedure PutToCache(Key, Value, CacheType = "Main")
 	EndIf;
 EndProcedure
 
+&AtServer
 Function GetCacheByType(CacheType)
 	CacheTypeMap = New Map();
 	CacheTypeMap.Insert("Main", "Cache");

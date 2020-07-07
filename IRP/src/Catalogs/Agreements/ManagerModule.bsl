@@ -136,9 +136,10 @@ Function GetChoiceDataTable(Parameters) Export
 
 	AdditionalParameters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.AdditionalParameters);
 	For Each QueryParameter In QueryParametersStr Do
-		Query.SetParameter(QueryParameter.Key, ?(AdditionalParameters.Property(QueryParameter.Key),
-				AdditionalParameters[QueryParameter.Key],
-				QueryParameter.Value));
+		KeyValue = ?(AdditionalParameters.Property(QueryParameter.Key),
+						AdditionalParameters[QueryParameter.Key],
+						QueryParameter.Value);
+		Query.SetParameter(QueryParameter.Key, KeyValue);
 	EndDo;
 	If Query.Parameters.IncludePartnerSegments Then
 		PartnersSegmentsArray = InformationRegisters.PartnerSegments.GetSegmentsRefArrayByPartner(Query.Parameters.Partner);

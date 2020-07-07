@@ -213,6 +213,7 @@ Procedure SaveTablePriceKeyList(Cancel, CurrentObject, WriteParameters)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function PriceKeyListHaveError()
 	SavedDataStructure = GetSavedData();
 	// Fill cheking
@@ -226,7 +227,7 @@ Function PriceKeyListHaveError()
 		// Fixed columns	
 		For Each Column In ArrayOfFixedColumns Do
 			If Items[Column.FormName].AutoMarkIncomplete = True And Not ValueIsFilled(Row[Column.Name]) Then
-				MessageText = StrTemplate(R()["Error_010"], Column.Name);
+				MessageText = StrTemplate(R().Error_010, Column.Name);
 				CommonFunctionsClientServer.ShowUsersMessage(MessageText
 					, "PriceKeyList[" + RowIndex + "]." + Column.Name
 					, ThisObject.PriceKeyList);
@@ -241,7 +242,7 @@ Function PriceKeyListHaveError()
 				If Column.Name = "Price" Then
 					Continue;
 				Else
-					MessageText = StrTemplate(R()["Error_010"], String(ThisObject[Column.OwnerName]));
+					MessageText = StrTemplate(R().Error_010, String(ThisObject[Column.OwnerName]));
 				EndIf;
 				CommonFunctionsClientServer.ShowUsersMessage(MessageText
 					, "PriceKeyList[" + RowIndex + "]." + Column.Name
@@ -474,6 +475,7 @@ Procedure OpenFormProcEnd(Result, AdditionalParameters) Export
 	LoadDataAtServer(Result);
 EndProcedure
 
+&AtServer
 Procedure LoadDataAtServer(DataForLoad)
 	If Not DataForLoad.Property("PriceListType") Then
 		Return;

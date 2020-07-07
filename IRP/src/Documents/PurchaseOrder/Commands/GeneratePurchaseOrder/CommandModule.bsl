@@ -22,6 +22,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_InternalSupplyRequest = New Array();
 	ArrayOf_SalesOrder = New Array();
@@ -43,6 +44,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	Return JoinDocumentsStructure(ArrayOfTables, "BasedOn, Company");
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	
 	ValueTable = New ValueTable();
@@ -91,6 +93,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_InternalSupplyRequest(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text = "SELECT ALLOWED
@@ -113,6 +116,7 @@ Function GetDocumentTable_InternalSupplyRequest(ArrayOfBasisDocuments)
 	Return QueryResult.Unload();
 EndFunction
 
+&AtServer
 Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text = "SELECT ALLOWED
@@ -135,6 +139,7 @@ Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
 	Return QueryResult.Unload();
 EndFunction
 
+&AtServer
 Function GetErrorMessageKey(BasisDocument)
 	
 	ErrorMessageKey = Undefined;

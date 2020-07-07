@@ -134,7 +134,7 @@ Procedure ChangeTitleGroupTitle(Object, Form) Export
 	
 EndProcedure
 
-//TODO: Delete parameter Object
+// TODO: Delete parameter Object
 Procedure ChangeTitleCollapse(Object = Undefined, Form, TitleVisible = True) Export
 	
 	#If Server Then
@@ -176,8 +176,8 @@ Procedure CleanDataByArray(Object, Val ArrayAll, Val ArrayVisible) Export
 			Continue;
 		EndIf;
 		
-		If StrFind(ArrayElement,".") Then
-			TableName = Left(ArrayElement, StrFind(ArrayElement,".") - 1);
+		If StrFind(ArrayElement, ".") Then
+			TableName = Left(ArrayElement, StrFind(ArrayElement, ".") - 1);
 			ItemName = StrReplace(ArrayElement, TableName + ".", "");
 			For Each Row In Object[TableName] Do
 				Row[ItemName] = Undefined;

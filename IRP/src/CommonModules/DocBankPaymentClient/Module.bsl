@@ -38,7 +38,6 @@ Procedure CurrencyOnChange(Object, Form, Item) Export
 	Form.CurrentCurrency = Object.Currency;
 	AccountCurrency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
 	If Object.Currency <> AccountCurrency AND ValueIsFilled(AccountCurrency) Then
-	//Object.Currency <> ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency") Then
 		Object.Account = Undefined;
 		Form.CurrentAccount = Object.Account;
 	EndIf;

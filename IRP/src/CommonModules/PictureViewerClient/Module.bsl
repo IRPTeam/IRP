@@ -169,7 +169,7 @@ EndFunction
 
 Function PicturesInfoForSlider(ItemRef, UUID, FileRef = Undefined) Export
 	
-	Pictures = PictureViewerServer.PicturesInfoForSlider(ItemRef, FileRef);;
+	Pictures = PictureViewerServer.PicturesInfoForSlider(ItemRef, FileRef);
 	
 	PicArray = New Array;
 	For Each Picture In Pictures Do

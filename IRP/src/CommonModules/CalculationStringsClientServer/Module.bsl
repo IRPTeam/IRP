@@ -755,7 +755,7 @@ Procedure UpdateItemType(Object, Form, Settings) Export
 	
 	CurrentRow = Settings.Rows[0];
 	
-	//TODO: SalesOrder???
+	// TODO: SalesOrder???
 	CurrentRow.ItemType = DocSalesOrderServer.GetItemRowType(CurrentRow.Item);
 	If CurrentRow.ItemType = PredefinedValue("Enum.ItemTypes.Service") Then
 		CurrentRow.ProcurementMethod = Undefined;

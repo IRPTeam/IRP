@@ -209,16 +209,16 @@ Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, Obj
 	ValueTable = GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate);
 	For Each Row In ValueTable Do
 		NewRow = New Structure();
-		NewRow.Insert("BasedOn", Row.BasedOn);
-		NewRow.Insert("TransactionType" ,Row.TransactionType);
-		NewRow.Insert("Company", Row.Company);
-		NewRow.Insert("Account", Row.Account);
-		NewRow.Insert("Currency", Row.Currency);
-		NewRow.Insert("CurrencyExchange", Row.CurrencyExchange);
-		NewRow.Insert("Amount", Row.Amount);
-		NewRow.Insert("PlaningTransactionBasis", Row.PlaningTransactionBasis);
-		NewRow.Insert("TransitAccount", Row.TransitAccount);
-		NewRow.Insert("AmountExchange", Row.AmountExchange);
+		NewRow.Insert("BasedOn"					, Row.BasedOn);
+		NewRow.Insert("TransactionType" 		, Row.TransactionType);
+		NewRow.Insert("Company"					, Row.Company);
+		NewRow.Insert("Account"					, Row.Account);
+		NewRow.Insert("Currency"				, Row.Currency);
+		NewRow.Insert("CurrencyExchange"		, Row.CurrencyExchange);
+		NewRow.Insert("Amount"					, Row.Amount);
+		NewRow.Insert("PlaningTransactionBasis"	, Row.PlaningTransactionBasis);
+		NewRow.Insert("TransitAccount"			, Row.TransitAccount);
+		NewRow.Insert("AmountExchange"			, Row.AmountExchange);
 		ArrayOfResults.Add(NewRow);
 	EndDo;
 	Return ArrayOfResults;

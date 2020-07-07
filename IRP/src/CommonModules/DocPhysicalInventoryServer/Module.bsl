@@ -28,7 +28,7 @@ EndProcedure
 #EndRegion
 
 Procedure UpdatePhysicalCountByLocations(Object, Form) Export
-	Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef" ,Object.Ref);
+	Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef", Object.Ref);
 	LinkedPhysicalCountByLocation = Documents.PhysicalCountByLocation.GetLinkedPhysicalCountByLocation(Object.Ref);
 	
 	For Each Row In Object.ItemList Do

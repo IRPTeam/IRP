@@ -27,6 +27,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	
 	ArrayOf_SalesInvoice = New Array();
@@ -50,6 +51,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	
 	ItemList = New ValueTable();
@@ -170,10 +172,12 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_SalesInvoice(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "SalesInvoice");
 EndFunction
 
+&AtServer
 Function GetDocumentTable_SalesReturnOrder(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -197,6 +201,7 @@ Function GetDocumentTable_SalesReturnOrder(ArrayOfBasisDocuments)
 	Return ExtractInfoFromOrderRows_SalesReturnOrder(QueryTable);
 EndFunction
 
+&AtServer
 Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 	Query = New Query();
 	Query.Text =
@@ -224,6 +229,7 @@ Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 	Return ExtractInfoFromOrderRows(QueryTable);
 EndFunction
 
+&AtServer
 Function ExtractInfoFromOrderRows(QueryTable)
 	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
 	For Each Row In QueryTable Do
@@ -319,6 +325,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 	Return New Structure("ItemList, TaxList, SpecialOffers", QueryTable_ItemList, QueryTable_TaxList, QueryTable_SpecialOffers);
 EndFunction
 
+&AtServer
 Function ExtractInfoFromOrderRows_SalesReturnOrder(QueryTable)
 	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
 	For Each Row In QueryTable Do
@@ -417,6 +424,7 @@ EndFunction
 
 #Region Errors
 
+&AtServer
 Function GetInfoMessage(FillingData)
 	InfoMessage = "";
 	If FillingData.BasedOn = "SalesReturnOrder" Then
@@ -433,6 +441,7 @@ Function GetInfoMessage(FillingData)
 	Return InfoMessage;	
 EndFunction
 
+&AtServer
 Function SalesReturnExist(BasisDocument)
 	Query = New Query(
 	"SELECT TOP 1
@@ -446,17 +455,18 @@ Function SalesReturnExist(BasisDocument)
 	Return Not Query.Execute().IsEmpty();
 EndFunction
 
+&AtServer
 Function GetErrorMessage(BasisDocument)
 	ErrorMessage = Undefined;
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.SalesReturnOrder") Then
 		If Not BasisDocument.Status.Posting Or Not BasisDocument.Posted Then
-			Return StrTemplate(R()["Error_067"], String(BasisDocument));		
+			Return StrTemplate(R().Error_067, String(BasisDocument));		
 		EndIf;
 	EndIf;
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.SalesInvoice") Then
-		ErrorMessage = R()["Error_021"];
+		ErrorMessage = R().Error_021;
 	EndIf;
 	
 	Return ErrorMessage;

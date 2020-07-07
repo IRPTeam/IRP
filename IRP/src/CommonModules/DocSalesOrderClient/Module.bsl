@@ -65,7 +65,7 @@ Procedure AfterWrite(Object, Form, WriteParameters) Export
 	MessageText = DocSalesOrderServer.CheckItemList(Object.Ref);
 	If Not MessageText = "" Then
 		#If Not MobileClient AND Not MobileAppClient Then
-		Status(Object.Ref,,MessageText);
+		Status(Object.Ref, , MessageText);
 		#EndIf
 	EndIf;
 	

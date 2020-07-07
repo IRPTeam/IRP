@@ -46,6 +46,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	
 EndProcedure
 
+&AtServer
 Function SeparateInternalSupplyRequestsByStores(ArrayOfInternalSupplyRequests)
 	Query = New Query();
 	Query.Text =
@@ -79,7 +80,7 @@ Function SeparateInternalSupplyRequestsByStores(ArrayOfInternalSupplyRequests)
 	Return ResultMap;
 EndFunction
 
-
+&AtServer
 Function GetErrorMessageKey(BasisDocument)
 	ErrorMessageKey = Undefined;
 	
@@ -95,6 +96,7 @@ Function GetErrorMessageKey(BasisDocument)
 	Return ErrorMessageKey;
 EndFunction
 
+&AtServer
 Function OrdersExist(ArrayOfBasises)
 	
 	Query = New Query();

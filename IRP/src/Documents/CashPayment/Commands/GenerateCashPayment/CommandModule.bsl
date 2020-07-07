@@ -12,6 +12,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function ErrorMessageStructure(BasisDocuments)
 	ErrorMessageStructure = New Structure();
 	
@@ -34,6 +35,7 @@ Function ErrorMessageStructure(BasisDocuments)
 	Return ErrorMessageText;
 EndFunction
 
+&AtServer
 Function ErrorMessageKey(BasisDocument)
 	ErrorMessageKey = Undefined;
 	
@@ -48,6 +50,7 @@ Function ErrorMessageKey(BasisDocument)
 	Return ErrorMessageKey;
 EndFunction
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_CashTransferOrder = New Array();
 	ArrayOf_OutgoingPaymentOrder = New Array();
@@ -75,6 +78,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables)
 	
 	ValueTable = New ValueTable();
@@ -136,6 +140,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments)
 	Result = DocCashPaymentServer.GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments);
 	
@@ -154,6 +159,7 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments)
 	Return Result;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_OutgoingPaymentOrder(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -180,6 +186,7 @@ Function GetDocumentTable_OutgoingPaymentOrder(ArrayOfBasisDocuments)
 	Return QueryResult.Unload();
 EndFunction
 
+&AtServer
 Function GetDocumentTable_PurchaseInvoice(ArrayOfBasisDocuments)
 	
 	Return DocumentsGenerationServer.GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments);

@@ -4,13 +4,13 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	BarcodeTypeChoiceList = New ValueList;
-	BarcodeTypeChoiceList.Add("Auto",	"Auto");
-	BarcodeTypeChoiceList.Add("EAN8",	"EAN-8");
-	BarcodeTypeChoiceList.Add("EAN13",	"EAN-13");
-	BarcodeTypeChoiceList.Add("EAN128",	"EAN-128");
-	BarcodeTypeChoiceList.Add("CODE39",	"Code 39");
-	BarcodeTypeChoiceList.Add("CODE128","Code 128");
-	BarcodeTypeChoiceList.Add("ITF14",	"ITF-14");
+	BarcodeTypeChoiceList.Add("Auto",	 "Auto");
+	BarcodeTypeChoiceList.Add("EAN8",	 "EAN-8");
+	BarcodeTypeChoiceList.Add("EAN13",	 "EAN-13");
+	BarcodeTypeChoiceList.Add("EAN128",	 "EAN-128");
+	BarcodeTypeChoiceList.Add("CODE39",	 "Code 39");
+	BarcodeTypeChoiceList.Add("CODE128", "Code 128");
+	BarcodeTypeChoiceList.Add("ITF14",	 "ITF-14");
 	
 	Items.BarcodeType.ChoiceList.Clear();
 	Items.ItemListBarcodeType.ChoiceList.Clear();

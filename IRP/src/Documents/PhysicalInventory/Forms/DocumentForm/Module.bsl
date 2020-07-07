@@ -199,7 +199,7 @@ Procedure SetResponsiblePerson(Command)
 	OnChoiceNotify = New NotifyDescription("OnChoiceResponsiblePerson", ThisObject, 
 	New Structure("SelectedRows", SelectedRows));
 	
-	OpenForm("Catalog.Partners.ChoiceForm", OpenFormParameters,ThisObject,,,,OnChoiceNotify);
+	OpenForm("Catalog.Partners.ChoiceForm", OpenFormParameters, ThisObject, , , , OnChoiceNotify);
 EndProcedure
 
 &AtClient

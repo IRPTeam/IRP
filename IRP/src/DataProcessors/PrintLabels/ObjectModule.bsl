@@ -317,7 +317,7 @@ Procedure FillDataTable(DataTable, AddDataProc)
 		DataTable.Columns.Add(Field.Name, Field.TypeDescription, Field.Title);
 	EndDo;
 	 	
-	For Each Row In DataTable Do;
+	For Each Row In DataTable Do
 		For Each Field In AvailableFields Do
 			If Not Field.SetByUser Then 
 				AddDataProc.FillFieldValue(Row, Field.Name);

@@ -244,6 +244,7 @@ Procedure FillAdvancesAtServer()
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetQueryTextByAdvanceToSuppliers()
 	Return
 	"SELECT
@@ -263,6 +264,7 @@ Function GetQueryTextByAdvanceToSuppliers()
 	|	AdvanceToSuppliersBalance.PaymentDocument.Date";
 EndFunction
 
+&AtServer
 Function GetQueryTextByAdvanceFromCustomers()
 	Return
 	"SELECT
@@ -412,6 +414,7 @@ EndProcedure
 
 #Region Currencies
 
+&AtServer
 Procedure CurrencyOnChangeAtServer()
 	Object.Currencies.Clear();
 	For Each Row In Object.Transactions Do

@@ -356,7 +356,6 @@ EndProcedure
 
 #Region QuantityCompare
 
-&AtServer
 Procedure LoadDataFromQuantityCompare(Object, Form, ItemListAddress) Export
 	Lists = GetFromTempStorage(ItemListAddress);
 	QuantityCompareExpItemList = Lists.ExpItemList;

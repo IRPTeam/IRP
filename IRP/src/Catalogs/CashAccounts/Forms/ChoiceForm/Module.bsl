@@ -13,7 +13,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 				FoundedItemList = Items.CashAccountTypeFilter.ChoiceList.FindByValue(FilterItem.RightValue);
 				If FoundedItemList <> Undefined Then
 					Items.CashAccountTypeFilter.ChoiceList.Delete(FoundedItemList);
-				EndIf
+				EndIf;
 			EndIf;
 		EndIf;
 	EndDo;

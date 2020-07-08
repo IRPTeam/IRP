@@ -441,7 +441,7 @@ Procedure PaymentListPartnerOnChange(Object, Form, Item) Export
 		NewAgreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 		If Not CurrentData.Agreement = NewAgreement Then
 			CurrentData.Agreement = NewAgreement;
-			PaymentListAgreementOnChange(Object, Form)
+			PaymentListAgreementOnChange(Object, Form);
 		EndIf;
 	EndIf;
 EndProcedure

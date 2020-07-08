@@ -45,6 +45,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_PurchaseOrder = New Array();
 	ArrayOf_GoodsReceipt = New Array();
@@ -83,6 +84,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	ItemList = New ValueTable();
 	ItemList.Columns.Add("BasedOn"			, New TypeDescription("String"));
@@ -209,6 +211,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function ExtractInfoFrom_PurchaseOrder(QueryTable)
 	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
 	For Each Row In QueryTable Do
@@ -315,6 +318,7 @@ Function ExtractInfoFrom_PurchaseOrder(QueryTable)
 	Return New Structure("ItemList, TaxList, SpecialOffers", QueryTable_ItemList, QueryTable_TaxList, QueryTable_SpecialOffers);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -341,6 +345,7 @@ Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
 							New ValueTable());
 EndFunction
 
+&AtServer
 Function GetDocumentTable_Service(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -366,6 +371,7 @@ Function GetDocumentTable_Service(ArrayOfBasisDocuments)
 	Return ExtractInfoFrom_PurchaseOrder(QueryTable);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_PurchaseOrder(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -393,6 +399,7 @@ Function GetDocumentTable_PurchaseOrder(ArrayOfBasisDocuments)
 	Return ExtractInfoFrom_PurchaseOrder(QueryTable);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.PurchaseOrder"));
@@ -479,6 +486,7 @@ Procedure SelectGoodsReceiptFinish(Result, AdditionalParameters) Export
 	GenerateDocument(ArrayOfBasisDocuments);
 EndProcedure
 
+&AtServer
 Function GetInfoGoodsReceiptBeforePurchaseInvoice(ArrayOfPurchaseOrders)
 	Query = New Query();
 	Query.Text =
@@ -592,31 +600,32 @@ EndFunction
 
 #Region Errors
 
+&AtServer
 Function GetErrorMessage(BasisDocument)
 	ErrorMessage = Undefined;
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.SalesOrder") Then
 		If Not BasisDocument.Status.Posting Or Not BasisDocument.Posted Then
-			Return StrTemplate(R()["Error_067"], String(BasisDocument));		
+			Return StrTemplate(R().Error_067, String(BasisDocument));		
 		EndIf;
-		ErrorMessage = R()["Error_016"];
+		ErrorMessage = R().Error_016;
 	ElsIf TypeOf(BasisDocument) = Type("DocumentRef.PurchaseOrder") Then
 		If Not BasisDocument.Status.Posting Or Not BasisDocument.Posted Then
-			Return StrTemplate(R()["Error_067"], String(BasisDocument));		
+			Return StrTemplate(R().Error_067, String(BasisDocument));		
 		EndIf;
 		If BasisDocument.GoodsReceiptBeforePurchaseInvoice Then
 			If GoodsReceiptExist(BasisDocument) Then
-				ErrorMessage = R()["Error_019"];
+				ErrorMessage = R().Error_019;
 				ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.PurchaseInvoice.Synonym, BasisDocument.Metadata().Synonym);
 			Else
-				ErrorMessage = R()["Error_017"];
+				ErrorMessage = R().Error_017;
 			EndIf;
 		Else
-			ErrorMessage = R()["Error_019"];
+			ErrorMessage = R().Error_019;
 			ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.PurchaseInvoice.Synonym, BasisDocument.Metadata().Synonym);
 		EndIf;
 	Else
-		ErrorMessage = R()["Error_019"];
+		ErrorMessage = R().Error_019;
 		ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.PurchaseInvoice.Synonym, BasisDocument.Metadata().Synonym);
 	EndIf;
 	
@@ -628,6 +637,7 @@ Function GetErrorMessage(BasisDocument)
 	
 EndFunction
 
+&AtServer
 Function GetInfoMessage(FillingData)
 	InfoMessage = "";
 	If FillingData.BasedOn = "PurchaseOrder" Then
@@ -644,6 +654,7 @@ Function GetInfoMessage(FillingData)
 	Return InfoMessage;	
 EndFunction
 
+&AtServer
 Function GoodsReceiptExist(BasisDocument)
 	Query = New Query(
 	"SELECT ALLOWED TOP 1
@@ -656,6 +667,7 @@ Function GoodsReceiptExist(BasisDocument)
 	Return Not Query.Execute().IsEmpty();
 EndFunction
 
+&AtServer
 Function PurchaseInvoiceExist(BasisDocument)
 	Query = New Query(
 	"SELECT TOP 1

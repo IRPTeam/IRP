@@ -12,6 +12,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_PhysicalInventory = New Array();
 	
@@ -29,6 +30,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	Return JoinDocumentsStructure(ArrayOfTables, "BasedOn, Store");
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("BasedOn", New TypeDescription("String"));
@@ -71,6 +73,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_PhysicalInventory(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =

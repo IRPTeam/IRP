@@ -63,7 +63,7 @@ Function SendRequestClientServer(ConnectionSetting,
 		ResourceAddress = ConnectionSetting.ResourceAddress;
 	Else
 		ResourceAddress = ConnectionSetting.ResourceAddress + 
-		?(StrStartsWith(EndPoint, "/"),EndPoint,"/"+EndPoint);
+		?(StrStartsWith(EndPoint, "/"), EndPoint, "/" + EndPoint);
 	EndIf;
 	
 	HTTPRequest = New HTTPRequest(ResourceAddress);
@@ -77,7 +77,7 @@ Function SendRequestClientServer(ConnectionSetting,
 		HTTPResponse = HTTPConnection.CallHTTPMethod(ConnectionSetting.QueryType, HTTPRequest);
 	Except
 		ServerResponse.Success = False;
-		ServerResponse.Message = StrTemplate(R()["S_002"],
+		ServerResponse.Message = StrTemplate(R().S_002,
 				ConnectionSetting.Ip,
 				ConnectionSetting.Port,
 				ErrorDescription());
@@ -85,7 +85,7 @@ Function SendRequestClientServer(ConnectionSetting,
 	EndTry;
 	
 	ServerResponse.Success = True;
-	ServerResponse.Message = StrTemplate(R()["S_003"],
+	ServerResponse.Message = StrTemplate(R().S_003,
 			ConnectionSetting.Ip,
 			ConnectionSetting.Port);
 	ServerResponse.StatusCode = HTTPResponse.StatusCode;

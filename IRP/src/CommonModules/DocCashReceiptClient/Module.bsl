@@ -274,7 +274,6 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 	DocumentsClient.PaymentListPlaningTransactionBasisOnChange(Object, Form, Item);
 EndProcedure
 
-&AtClient
 Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData = Undefined Then
@@ -406,7 +405,7 @@ Procedure PaymentListPartnerOnChange(Object, Form, Item) Export
 		NewAgreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 		If Not CurrentData.Agreement = NewAgreement Then
 			CurrentData.Agreement = NewAgreement;
-			PaymentListAgreementOnChange(Object, Form)
+			PaymentListAgreementOnChange(Object, Form);
 		EndIf;
 	EndIf;
 EndProcedure

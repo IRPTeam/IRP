@@ -125,7 +125,7 @@ Function CheckItemList(Object) Export
 	Stores = "";
 	While SelectionDetailRecords.Next() Do
 		If Not Stores = "" Then
-			Stores = Stores + ", "
+			Stores = Stores + ", ";
 		EndIf;
 		
 		Stores = Stores + String(SelectionDetailRecords.Store);

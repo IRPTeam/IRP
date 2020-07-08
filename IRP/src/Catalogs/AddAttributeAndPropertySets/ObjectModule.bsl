@@ -13,9 +13,9 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		FoundedRows = ThisObject.Attributes.FindRows(Filter);
 		If FoundedRows.Count() Then
 			LineNumber = FoundedRows[0].LineNumber;
-			
-			CommonFunctionsClientServer.ShowUsersMessage(R().Error_033 + ": " + String(Row.Attribute)
-				, "Attributes[" + (LineNumber - 1) + "].Attribute", ThisObject);
+			Text = R().Error_033 + ": " + String(Row.Attribute);
+			Path = "Attributes[" + (LineNumber - 1) + "].Attribute";			
+			CommonFunctionsClientServer.ShowUsersMessage(Text, Path, ThisObject);
 			Cancel = True;
 		EndIf;
 	EndDo;

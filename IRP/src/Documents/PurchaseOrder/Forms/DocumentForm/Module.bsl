@@ -303,6 +303,7 @@ Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Expo
 	SpecialOffersEditFinishAtServer_ForDocument(Result, AdditionalParameters);
 EndProcedure
 
+&AtServer
 Procedure SpecialOffersEditFinishAtServer_ForDocument(Result, AdditionalParameters) Export
 	DocumentsServer.FillItemList(Object);
 EndProcedure

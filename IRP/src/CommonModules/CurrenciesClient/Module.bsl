@@ -38,7 +38,6 @@ Procedure CurrenciesTable_RatePresentationOnChange(Object, Form, Item) Export
 	Form.Currencies_UpdateRatePresentation();
 EndProcedure
 
-&AtClient
 Procedure CurrenciesTable_MultiplicityOnChange(Object, Form, Item) Export
 	If Not ValueIsFilled(Find(Item.Name, "Multiplicity")) Then
 		Return;
@@ -53,7 +52,6 @@ Procedure CurrenciesTable_MultiplicityOnChange(Object, Form, Item) Export
 	Form.Currencies_UpdateRatePresentation();
 EndProcedure
 
-&AtClient
 Procedure CurrenciesTable_AmountOnChange(Object, Form, Item) Export
 	If Not ValueIsFilled(Find(Item.Name, "Amount")) Then
 		Return;

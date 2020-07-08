@@ -29,7 +29,6 @@ Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	DocChequeBondTransactionServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
-
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocChequeBondTransactionServer.OnReadAtServer(Object, ThisObject, CurrentObject);
@@ -256,8 +255,6 @@ Procedure ChequeBondsCashAccountEditTextChange(Item, Text, StandardProcessing)
 	DocChequeBondTransactionClient.AccountEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
-
-
 &AtClient
 Procedure ChequeBondsAgreementEditTextChange(Item, Text, StandardProcessing)
 	DocChequeBondTransactionClient.TableAgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
@@ -451,7 +448,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 
 #Region AddAttributes
 

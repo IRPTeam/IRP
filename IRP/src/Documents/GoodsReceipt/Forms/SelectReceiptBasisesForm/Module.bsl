@@ -378,7 +378,6 @@ Procedure DocumentsTreeSelection(Item, RowSelected, Field, StandardProcessing)
 	Command_Ok(Undefined);
 EndProcedure
 
-
 &AtServer
 Function GetSelectedData()
 	Result = New Array();

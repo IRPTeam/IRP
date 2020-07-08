@@ -16,8 +16,6 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 EndProcedure
 
 Function GetChoiceDataTable(Parameters) Export
-	
-	
 	Filter = "
 		|	AND CASE
 		|		WHEN &FilterByPartnerHierarchy
@@ -113,4 +111,3 @@ Function GetCurrenciesByType(CompanyRef, Type)
 	EndDo;
 	Return ArrayOfResults;
 EndFunction
-

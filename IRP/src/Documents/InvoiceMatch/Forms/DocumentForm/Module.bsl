@@ -64,7 +64,6 @@ Procedure OperationTypeOnChange(Item)
 	SetVisibility();
 EndProcedure
 
-
 &AtServer
 Procedure SetVisibility()
 	IsAp = False;
@@ -94,7 +93,6 @@ Procedure PartnerApTransactionsBasisDocumentStartChoice(Item, ChoiceData, Standa
 	DocInvoiceMatchClient.PartnerApTransactionsBasisDocumentStartChoice(
 				Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
-
 
 &AtClient
 Procedure PartnerArTransactionsBasisDocumentOnChange(Item)
@@ -331,7 +329,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemDescription
 
 &AtClient
@@ -340,7 +337,6 @@ Procedure DescriptionClick(Item, StandardProcessing)
 EndProcedure
 
 #EndRegion
-
 
 #Region GroupTitleDecorations
 
@@ -436,7 +432,6 @@ Procedure CurrencyOnChangeAtServer()
 EndProcedure
 
 #EndRegion
-
 
 #Region AddAttributes
 

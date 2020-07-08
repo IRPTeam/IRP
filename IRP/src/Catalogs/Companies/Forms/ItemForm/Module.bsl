@@ -81,7 +81,6 @@ EndProcedure
 
 #EndRegion
 
-
 &AtClient
 Procedure CurrenciesMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
@@ -165,7 +164,6 @@ Procedure ReadTaxes()
 EndProcedure
 
 #EndRegion
-
 
 #Region AddAttributes
 

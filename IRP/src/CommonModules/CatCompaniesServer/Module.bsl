@@ -36,7 +36,6 @@ Procedure SetChoiceFormParameters(Form, Parameters) Export
 	EndIf;
 EndProcedure
 
-
 Procedure ReadTaxesIntoFormTable(Form) Export
 	Set = InformationRegisters.Taxes.CreateRecordSet();
 	Set.Filter.Company.Set(Form.Parameters.Key);

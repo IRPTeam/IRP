@@ -454,4 +454,3 @@ EndProcedure
 Procedure DocumentsTreeBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
-

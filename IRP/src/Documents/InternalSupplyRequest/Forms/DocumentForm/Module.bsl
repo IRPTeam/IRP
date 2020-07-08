@@ -27,12 +27,10 @@ EndProcedure
 
 #EndRegion
 
-
 &AtClient
 Procedure OpenPickupItems(Command)
 	DocInternalSupplyRequestClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
-
 
 #Region ItemCompany
 

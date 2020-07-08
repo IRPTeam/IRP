@@ -85,4 +85,3 @@ Function GetQRPicture(BarcodeParameters) Export
 	Return New Picture;
 	
 EndFunction
-

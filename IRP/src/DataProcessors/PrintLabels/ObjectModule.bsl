@@ -85,7 +85,6 @@ Procedure FillAtServer(Object, Form) Export
 	
 EndProcedure
 
-
 Function PrintLabels(Object, Form) Export
 	
 	SpreadDocsArray = New Array;
@@ -326,6 +325,4 @@ Procedure FillDataTable(DataTable, AddDataProc)
 	EndDo;
 	
 EndProcedure
-
-
 

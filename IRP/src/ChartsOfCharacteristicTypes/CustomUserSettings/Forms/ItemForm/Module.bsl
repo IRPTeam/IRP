@@ -25,7 +25,6 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	SetVisible();
 EndProcedure
 
-
 &AtServer
 Procedure SetVisible()
 	Items.GroupRefersToObjects.Visible = Not Object.IsCommon;
@@ -67,4 +66,3 @@ Procedure AddRefersToObjectEnd(Result, AdditionalParameters) Export
 	EndDo;
 	SetVisible();
 EndProcedure
-

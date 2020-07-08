@@ -74,6 +74,3 @@ EndProcedure
 Procedure OnCopy(CopiedObject)
 	UniqueID = "";
 EndProcedure
-
-
-

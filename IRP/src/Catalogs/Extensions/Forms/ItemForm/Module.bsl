@@ -9,7 +9,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region CommandInterface
 
 &AtClient
@@ -32,7 +31,6 @@ Procedure SaveFile(Command)
 EndProcedure
 
 #EndRegion
-
 
 &AtClient
 Procedure AddFileEndCall(FileDescription, AddInfo) Export

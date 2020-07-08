@@ -47,7 +47,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region GroupTitleDecorationsEvents
 
 Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export

@@ -75,7 +75,6 @@ Procedure DecorationStatusHistoryClick(Item)
 	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
 EndProcedure
 
-
 #Region ItemCompany
 
 &AtClient
@@ -137,7 +136,6 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocInventoryTransferOrderClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
-
 #Region GroupTitleDecorations
 
 &AtClient
@@ -166,7 +164,6 @@ EndProcedure
 Procedure SearchByBarcode(Command)
 	DocInventoryTransferOrderClient.SearchByBarcode(Command, Object, ThisObject);
 EndProcedure
-
 
 #Region AddAttributes
 

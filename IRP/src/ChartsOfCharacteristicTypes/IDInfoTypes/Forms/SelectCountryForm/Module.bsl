@@ -17,4 +17,3 @@ Procedure CountryTableSelection(Item, RowSelected, Field, StandardProcessing)
 	Result.Insert("Settings", Item.CurrentData.Settings);
 	ThisObject.Close(Result);
 EndProcedure
-

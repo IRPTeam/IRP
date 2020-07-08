@@ -250,4 +250,3 @@ EndProcedure
 Procedure AfterWrite(WriteParameters)
 	Notify("UpdateAddAttributeAndPropertySets", New Structure(), ThisObject);
 EndProcedure
-

@@ -19,7 +19,6 @@ Procedure InputBarcodeCancel(Parameters) Export
 	Return;
 EndProcedure
 
-
 Function ProcessBarcode(Barcode, Parameters)
 	BarcodeArray = New Array;
 	BarcodeArray.Add(Barcode);

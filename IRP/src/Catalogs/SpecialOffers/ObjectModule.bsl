@@ -3,4 +3,3 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		ThisObject.Type = Enums.SpecialOfferTypes.ForDocument;
 	EndIf;
 EndProcedure
-

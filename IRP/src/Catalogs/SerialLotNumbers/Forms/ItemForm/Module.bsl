@@ -1,4 +1,3 @@
-
 #Region FormEvents
 
 &AtServer
@@ -19,7 +18,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 #EndRegion
-
 
 #Region AddAttributes
 

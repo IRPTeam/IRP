@@ -825,7 +825,6 @@ Function AdditionPropertyValueByRef(Ref, ArrayProperties) Export
 	Return PropertyArray;
 EndFunction
 
-
 #Region HTML
 
 Function HTMLAddAttributes() Export

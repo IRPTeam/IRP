@@ -409,4 +409,3 @@ Function GetCallHandlerParameters(Object, Form, HandlerID, AddInfo)
 	Parameters.AddInfo = AddInfo;
 	Return Parameters;
 EndFunction
-

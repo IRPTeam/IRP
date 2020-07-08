@@ -43,7 +43,6 @@ Procedure ExternalDataProcOnChange(Item)
 	SetAvailableFields(DataSourceScheme);
 EndProcedure
 
-
 &AtServer
 Function GenerateDataSourceScheme()
 		
@@ -96,7 +95,6 @@ EndFunction
 
 &AtServer
 Procedure SetAvailableFields(DataSourceScheme)
-	
 	SettingsComposer = New DataCompositionSettingsComposer();
 	SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(DataSourceScheme));
 	SettingsComposer.LoadSettings(DataSourceScheme.DefaultSettings);
@@ -109,7 +107,6 @@ EndProcedure
 
 &AtServer
 Function GetMainFieldsArray()
-	
 	ReturnValue = New Array;
 	
 	FieldStructure = New Structure;
@@ -293,7 +290,6 @@ Procedure PlaceTextToCellsArea(SpreadsheetDocument, AreaRange, TextName)
 		
 EndProcedure
 
-
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 		
@@ -338,7 +334,6 @@ EndProcedure
 
 &AtServer
 Function GetTemplateParameters()
-	
 	ReturnValue = New Map;
 	ReturnValueIterator = 0;
 	
@@ -493,11 +488,3 @@ Procedure GetDefaultAtServer()
 	SetAvailableFields(DataCompositionSchemaValue);
 	
 EndProcedure
-
-
-
-
-
-
-
-

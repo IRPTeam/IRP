@@ -103,7 +103,6 @@ Procedure ItemListStoreOnChange(Item)
 	DocSalesInvoiceClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
-
 &AtClient
 Procedure PartnerOnChange(Item, AddInfo = Undefined) Export
 	DocSalesInvoiceClient.PartnerOnChange(Object, ThisObject, Item);
@@ -221,7 +220,6 @@ EndProcedure
 Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocSalesInvoiceClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
-
 
 #EndRegion
 
@@ -719,7 +717,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 
 #Region AddAttributes
 

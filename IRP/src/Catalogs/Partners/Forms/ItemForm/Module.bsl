@@ -72,4 +72,3 @@ Procedure IDInfoCreateFormControl()
 EndProcedure
 
 #EndRegion
-

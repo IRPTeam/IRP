@@ -6,4 +6,3 @@ Procedure BeforeWrite(Cancel)
 				, ThisObject.AddAttributes.Unload());
 	EndIf;
 EndProcedure
-

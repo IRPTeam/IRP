@@ -354,4 +354,3 @@ Function WithoutBalance(BasisDocument)
 	
 EndFunction
 
-

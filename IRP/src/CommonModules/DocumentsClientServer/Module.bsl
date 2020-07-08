@@ -237,7 +237,6 @@ EndFunction
 
 #EndRegion
 
-
 #Region Common
 
 Function CreateFilterItem(FieldName, Value = Undefined, ComparisonTypeValue = Undefined, DataCompositionComparisonTypeValue = Undefined) Export

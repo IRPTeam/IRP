@@ -29,7 +29,6 @@ Procedure SettingsFilterSelection(Item, RowSelected, Field, StandardProcessing)
 	Return;
 EndProcedure
 
-
 &AtClient
 Procedure Cancel(Command)
 	Close(Undefined);

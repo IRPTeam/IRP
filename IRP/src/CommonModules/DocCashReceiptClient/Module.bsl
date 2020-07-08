@@ -126,7 +126,6 @@ Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
-
 Procedure OnActiveCell(Object, Form, Item, Cancel = Undefined) Export
 	
 	If Item.CurrentItem = Undefined Then

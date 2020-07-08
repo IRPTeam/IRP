@@ -19,4 +19,3 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 		CommonFunctionsClientServer.ShowUsersMessage(R()["Error_008"]);
 	EndIf;
 EndProcedure
-

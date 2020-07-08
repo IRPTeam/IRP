@@ -18,7 +18,6 @@ Function Settings() Export
 
 EndFunction
 
-
 Function AskGoogle(RequestBody)
 	HTTPSettings = IntegrationServer.ConnectionSettingTemplate();
 	HTTPSettings.Ip = "accounts.google.com";
@@ -136,7 +135,6 @@ Function SendToDrive(IntegrationSettingsRef, Name, RequestBody) Export
 	Headers.Insert("Host", "www.googleapis.com");
 	Headers.Insert("Content-Type", "multipart/related; boundary=" + boundary);
 	Headers.Insert("Authorization", "OAuth " + access_token);
-
 
 	HTTPConnection = New HTTPConnection("accounts.google.com", 443, , , , 5, New OpenSSLSecureConnection());
 	

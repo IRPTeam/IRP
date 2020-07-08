@@ -71,4 +71,3 @@ Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
 	EndDo;	
 EndProcedure
 
-

@@ -79,8 +79,6 @@ Procedure DeleteUnusedFiles(PathForSave, ArrayOfFilesID)
 	EndDo;
 EndProcedure
 
-
-
 Function CreateErrorResponse(HttpResponse, Message)
 	ErrorResponse = ErrorResponse();
 	ErrorResponse.Success = False;

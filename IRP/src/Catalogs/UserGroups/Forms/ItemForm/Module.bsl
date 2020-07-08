@@ -31,4 +31,3 @@ EndProcedure
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	ThisObject.Users.Parameters.SetParameterValue("UserGroup", Object.Ref);
 EndProcedure
-

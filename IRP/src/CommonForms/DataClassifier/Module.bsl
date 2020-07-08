@@ -65,7 +65,6 @@ EndProcedure
 
 #EndRegion
 
-
 &AtClient
 Procedure ClassifierTableSelection(Item, RowSelected, Field, StandardProcessing)
 	If Items.ClassifierTable.CurrentData = Undefined Then
@@ -74,7 +73,6 @@ Procedure ClassifierTableSelection(Item, RowSelected, Field, StandardProcessing)
 	
 	CreateItemFromClassifierRow(Items.ClassifierTable.CurrentData);
 EndProcedure
-
 
 &AtClient
 Procedure CreateItem(Command)

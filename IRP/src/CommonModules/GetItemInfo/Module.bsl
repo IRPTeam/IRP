@@ -150,8 +150,6 @@ Function SpecialOffersInfo_Query(Parameters, AddInfo)
 	Return Query;
 EndFunction
 
-
-
 // Description
 // 
 // Parameters:

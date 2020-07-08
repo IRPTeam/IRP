@@ -1,5 +1,3 @@
-
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
@@ -41,5 +39,3 @@ EndProcedure
 Procedure Cancel(Command)
 	Close(Undefined);
 EndProcedure
-
-

@@ -95,7 +95,6 @@ Procedure DescriptionClick(Item, StandardProcessing)
 	DocPhysicalInventoryClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
-
 #Region GroupTitleDecorations
 
 &AtClient
@@ -183,7 +182,6 @@ Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
 		EndIf;
 	EndIf;
 EndProcedure
-
 
 &AtClient
 Procedure SetResponsiblePerson(Command)

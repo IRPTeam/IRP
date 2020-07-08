@@ -7,7 +7,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region Commands
 
 &AtClient

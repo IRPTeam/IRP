@@ -266,7 +266,6 @@ Function Strings(CodeLanguage) Export
 	Return Strings;
 EndFunction
 
-
 Procedure PredefinedDescriptions(Strings, CodeLanguage)
 
 	Strings.Insert("Description_A001", NStr("en = 'Catalog Agreements'", CodeLanguage));

@@ -510,7 +510,6 @@ Procedure ClearCashTransferOrders(Val CashTransferOrderCurrency) Export
 	EndDo;
 EndProcedure
 
-
 &AtClient
 Function CashTransferOrdersInPaymentList(Val CashTransferOrderCurrency)
 	Answer = False;
@@ -526,7 +525,6 @@ Function CashTransferOrdersInPaymentList(Val CashTransferOrderCurrency)
 EndFunction
 
 #EndRegion
-
 
 #Region AddAttributes
 

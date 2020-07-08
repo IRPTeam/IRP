@@ -239,8 +239,6 @@ Procedure ItemListPriceTypeOnChange(Item)
 		CalculationSettings);
 EndProcedure
 
-
-
 &AtClient
 Procedure ItemListItemOnChange(Item)
 	CurrentRow = ThisObject.Items.ItemList.CurrentData;
@@ -283,7 +281,5 @@ Procedure ItemListItemOnChange(Item)
 	
 EndProcedure
 
-
 #EndRegion
-
 

@@ -19,9 +19,7 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
-
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
@@ -31,6 +29,4 @@ EndProcedure
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
-
 #EndRegion
-

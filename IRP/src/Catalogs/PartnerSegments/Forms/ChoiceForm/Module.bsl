@@ -12,5 +12,3 @@ Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	CommonFormActions.DynamicListBeforeAddRow(
 				ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter, "Catalog.PartnerSegments.ObjectForm");
 EndProcedure
-
-

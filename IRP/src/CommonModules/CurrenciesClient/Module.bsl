@@ -1,4 +1,3 @@
-
 Procedure CurrenciesTable_Selection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
 	If Not ValueIsFilled(Find(Field.Name, "ShowReverseRate")) Then
 		Return;
@@ -67,7 +66,7 @@ Procedure CurrenciesTable_AmountOnChange(Object, Form, Item) Export
 EndProcedure
 
 Function GetMainTableInfo(Object, Form, Item, ColumnName)
-	Result = New Structure();
+	Result = New Structure;
 	Result.Insert("Calculate", False);
 	Result.Insert("CurrentData", Undefined);
 	Result.Insert("Amount", 0);
@@ -123,4 +122,3 @@ Function GetMainTableInfo(Object, Form, Item, ColumnName)
 	
 	Return Result;
 EndFunction
-

@@ -1874,7 +1874,6 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 	EndIf;
 EndProcedure
 
-
 Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export 
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	

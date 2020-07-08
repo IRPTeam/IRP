@@ -227,7 +227,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region GroupTitleDecorations
 
 &AtClient

@@ -216,7 +216,6 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Return;
 EndProcedure
 
-
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
 	
@@ -466,5 +465,4 @@ Function GetQueryTextFillExpCount_ByItemList()
 	|ORDER BY
 	|	LineNumber";
 EndFunction
-
 

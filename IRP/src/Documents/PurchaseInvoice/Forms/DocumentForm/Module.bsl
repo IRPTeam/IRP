@@ -83,7 +83,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region FormItemsEvents
 
 &AtClient
@@ -710,7 +709,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 
 #Region AddAttributes
 

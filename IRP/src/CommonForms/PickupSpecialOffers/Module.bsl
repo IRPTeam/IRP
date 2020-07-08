@@ -250,4 +250,3 @@ Function PutOffersTreeToTempStorage()
 	EndIf;
 	Return Result;
 EndFunction
-

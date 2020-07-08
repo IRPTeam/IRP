@@ -101,4 +101,3 @@ Procedure SaveSettings(Element, Settings, AddAttributesMap, AddInfo = Undefined)
 	CatalogObject.Write();
 	ThisObject.Read();
 EndProcedure
-

@@ -8,7 +8,6 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	EndIf;
 EndProcedure
 
-
 Procedure Posting(Cancel, PostingMode)
 	
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
@@ -21,7 +20,6 @@ Procedure UndoPosting(Cancel)
 	
 EndProcedure
 
-
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	
 	If FillingData = Undefined Then
@@ -33,7 +31,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	Date = Undefined;
 EndProcedure
 
-
 Procedure OnCopy(CopiedObject)
 	
 	LinkedTables = New Array();
@@ -43,5 +40,4 @@ Procedure OnCopy(CopiedObject)
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
 	
 EndProcedure
-
 

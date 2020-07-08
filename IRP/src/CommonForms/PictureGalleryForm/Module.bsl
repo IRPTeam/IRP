@@ -3,7 +3,6 @@ Procedure OnOpen(Cancel)
 	HTMLGallery = PictureViewerServer.HTMLGallery();
 EndProcedure
 
-
 &AtServerNoContext
 Function GetPicturesRefs()
 	Query = New Query();
@@ -76,6 +75,3 @@ Procedure HTMLGalleryOnClick(Item, EventData, StandardProcessing)
 	EndIf;
 	Close(Array);
 EndProcedure
-
-
-

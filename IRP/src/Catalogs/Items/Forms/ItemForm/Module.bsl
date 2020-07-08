@@ -2,7 +2,6 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	If Parameters.Property("Item") And Not ValueIsFilled(Object.Ref) Then
 		Object.Item = Parameters.Item;
@@ -49,7 +48,6 @@ Procedure ItemTypeOnChange(Item)
 EndProcedure
 
 #EndRegion
-
 #Region AddAttributeViewer
 
 &AtClient
@@ -96,9 +94,3 @@ EndProcedure
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
-
-
-
-
-
-

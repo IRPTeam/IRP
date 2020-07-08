@@ -56,4 +56,3 @@ Procedure GetUnitFactorRecursion(FromUnit, ToUnit, Result)
 		GetUnitFactorRecursion(FromUnit.BasisUnit, ToUnit, Result);
 	EndIf;
 EndProcedure
-

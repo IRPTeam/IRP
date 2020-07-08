@@ -375,7 +375,6 @@ Procedure ItemKeyListOnStartEdit(Item, NewRow, Clone)
 		
 EndProcedure
 
-
 &AtServer
 Function GetSavedData()
 	If ValueIsFilled(ThisObject.DynamicDataForm) Then
@@ -525,7 +524,6 @@ EndProcedure
 Procedure OnReadAtServer(CurrentObject)
 	BuildForm();
 EndProcedure
-
 
 #Region AddAttributes
 

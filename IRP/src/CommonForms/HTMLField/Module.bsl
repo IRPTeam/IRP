@@ -1,5 +1,3 @@
-
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	HTML = Parameters.HTML;
@@ -13,4 +11,3 @@ Procedure HTMLDocumentComplete(Item)
 		GoogleDriveClient.OnHTMLComplete(Item.Document, SrcUUID);	
 	EndIf;
 EndProcedure
-

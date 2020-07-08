@@ -29,7 +29,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 EndProcedure
 
-
 &AtClient
 Procedure TestConnection(Command)
 	If Object.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
@@ -167,7 +166,4 @@ Procedure OpenFormProcSettingsEndServer(Result)
 	ValueToFormAttribute(Obj, "Object");
 EndProcedure
 
-
-
 #EndRegion
-

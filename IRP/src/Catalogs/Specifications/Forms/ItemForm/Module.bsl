@@ -291,7 +291,6 @@ Function CreatePage()
 	ArrayOfAttributes.Add(NewColumn);
 	ThisObject.ChangeAttributes(ArrayOfAttributes);
 	
-	
 	// FormTable
 	NewFormTable = Items.Add(GetUniqueName("FormTable")
 			, Type("FormTable")
@@ -505,7 +504,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient
@@ -526,4 +524,3 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 EndProcedure
 
 #EndRegion
-

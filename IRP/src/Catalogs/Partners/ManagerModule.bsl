@@ -97,8 +97,6 @@ Function GetChoiceDataTable(Parameters) Export
 	Settings.Insert("Filter", Filter);
 	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
-
-	
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
 	If TypeOf(Parameters) = Type("Structure")

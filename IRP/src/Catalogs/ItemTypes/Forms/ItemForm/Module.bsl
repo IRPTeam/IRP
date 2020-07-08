@@ -47,4 +47,3 @@ Procedure AddAttributesCreateFormControl()
 EndProcedure
 
 #EndRegion
-

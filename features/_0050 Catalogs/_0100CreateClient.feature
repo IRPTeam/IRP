@@ -15,14 +15,14 @@ To specify: address, phone, e-mail, gps coordinate on the map
    
 
 
-Сценарий: _010001 add Pluginsessing for entering addresses
-	* Opening a form to add Pluginsessing
+Сценарий: _010001 add Plugin sessing for entering addresses
+	* Opening a form to add Plugin sessing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Adding Pluginsessing 
+	* Adding Plugin sessing 
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\InputAddress.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to ext data proc for test' я ввожу текст ''
+		И в поле 'Path to plugin for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'ExternaInputAddress'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'ExternalInputAddress'
@@ -30,17 +30,17 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Check adding Pluginsessing
+	* Check adding Plugin sessing
 		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalInputAddress"
 
-Сценарий: _010002 add Pluginsessing for GPS
-	* Opening a form to add Pluginsessing
+Сценарий: _010002 add Plugin sessing for GPS
+	* Opening a form to add Plugin sessing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Adding Pluginsessing 
+	* Adding Plugin sessing 
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\Coordinates.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to ext data proc for test' я ввожу текст ''
+		И в поле 'Path to plugin for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'ExternalCoordinates'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'ExternalCoordinates'
@@ -48,17 +48,17 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Check adding Pluginsessing
+	* Check adding Plugin sessing
 		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalCoordinates"
 
-Сценарий: _010003 add Pluginsessing for phone
-	* Opening a form to add Pluginsessing
+Сценарий: _010003 add Plugin sessing for phone
+	* Opening a form to add Plugin sessing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in the 'External Input Phone Ukraine' and adding it to the database
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\InputPhoneUkraine.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to ext data proc for test' я ввожу текст ''
+		И в поле 'Path to plugin for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'ExternalInputPhoneUkraine'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'ExternalInputPhoneUkraine'
@@ -72,7 +72,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\InputPhoneUkraine.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to ext data proc for test' я ввожу текст ''
+		И в поле 'Path to plugin for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'PhoneTR'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Phone TR'
@@ -83,7 +83,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "Phone TR"
 
 Сценарий: _010004 creating Contact info Type - Addresses
-	* Opening a form to add Pluginsessing
+	* Opening a form to add Plugin sessing
 		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
@@ -94,7 +94,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в поле 'Unique ID' я ввожу текст 'Adr_10'
 		И я изменяю флаг 'Show on form'
 		И я изменяю флаг 'Read only'
-	* Adding Pluginsessing for addresses
+	* Adding Plugin sessing for addresses
 		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -514,7 +514,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			И в поле 'TR' я ввожу текст 'Billing address (Company) TR'
 			И я нажимаю на кнопку 'Ok'
 			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-		* Adding Pluginsessing to specify the address for Ukraine
+		* Adding Plugin sessing to specify the address for Ukraine
 			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -528,7 +528,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 				| 'ExternalInputAddress' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ExternalDataProcess" я завершаю редактирование строки
-		* Adding Pluginsessing to specify the address for Turkey
+		* Adding Plugin sessing to specify the address for Turkey
 			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
 			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
@@ -563,7 +563,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			И в поле 'TR' я ввожу текст 'Registered address (Company) TR'
 			И я нажимаю на кнопку 'Ok'
 			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-		* Adding Pluginsessing to specify the address for Ukraine
+		* Adding Plugin sessing to specify the address for Ukraine
 			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -577,7 +577,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 				| 'ExternalInputAddress' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ExternalDataProcess" я завершаю редактирование строки
-		* Adding Pluginsessing to specify the address for Turkey
+		* Adding Plugin sessing to specify the address for Turkey
 			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
 			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
 			И в таблице "List" я перехожу к строке:

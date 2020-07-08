@@ -29,7 +29,7 @@
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я буду выбирать внешний файл "#workingDir#\DataProcessor\GenerateBarcode.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to ext data proc for test' я ввожу текст ''
+	И в поле 'Path to plugin for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'GenerateBarcode'
 	И я нажимаю на кнопку открытия поля с именем "Description_tr"
 	И в поле 'ENG' я ввожу текст 'GenerateBarcode'

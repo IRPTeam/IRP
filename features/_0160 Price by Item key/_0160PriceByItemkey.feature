@@ -1243,12 +1243,12 @@ To sell and purchase goods and services
 		| '102'    | 'Price by item keys'  | 'Discount Price TRY 2'       | 'Price list 102*' |
 
 Сценарий: _016010 check dependent prices calculation
-	* Adding Pluginsessing
+	* Adding Plugin sessing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\SalesPriceCalculation.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to ext data proc for test' я ввожу текст ''
+		И в поле 'Path to plugin for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'SalesPriceCalculation'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'SalesPriceCalculation'

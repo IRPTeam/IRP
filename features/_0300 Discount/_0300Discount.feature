@@ -19,7 +19,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я буду выбирать внешний файл "#workingDir#\DataProcessor\SpecialOffer_Message.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to ext data proc for test' я ввожу текст ''
+	И в поле 'Path to plugin for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'ExternalSpecialMessage'
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'ExternalSpecialMessage'
@@ -34,7 +34,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я буду выбирать внешний файл "#workingDir#\DataProcessor\DocumentDiscount.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to ext data proc for test' я ввожу текст ''
+	И в поле 'Path to plugin for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'DocumentDiscount'
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'DocumentDiscount'
@@ -49,7 +49,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я буду выбирать внешний файл "#workingDir#\DataProcessor\SpecialOfferRules.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to ext data proc for test' я ввожу текст ''
+	И в поле 'Path to plugin for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'ExternalSpecialOfferRules'
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'ExternalSpecialOfferRules'
@@ -64,7 +64,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я буду выбирать внешний файл "#workingDir#\DataProcessor\RangeDiscount.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to ext data proc for test' я ввожу текст ''
+	И в поле 'Path to plugin for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'ExternalRangeDiscount'
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'ExternalRangeDiscount'
@@ -82,7 +82,7 @@ For calculating special offers in documents
 	* Add Pluginsessor FivePlusOneType
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\FivePlusOne.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to ext data proc for test' я ввожу текст ''
+		И в поле 'Path to plugin for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'ExternalFivePlusOne'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'ExternalFivePlusOne'

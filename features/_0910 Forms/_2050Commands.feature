@@ -19,7 +19,7 @@
 		* Filling data по обработке и добавление её в базу
 			И я буду выбирать внешний файл "#workingDir#\DataProcessor\CheckExternalCommands.epf"
 			И я нажимаю на кнопку с именем "FormAddExtDataProc"
-			И в поле 'Path to ext data proc for test' я ввожу текст ''
+			И в поле 'Path to plugin for test' я ввожу текст ''
 			И в поле 'Name' я ввожу текст 'PrintFormSalesOrder'
 			И я нажимаю на кнопку открытия поля с именем "Description_en"
 			И в поле 'ENG' я ввожу текст 'Test command'

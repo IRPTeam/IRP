@@ -18,7 +18,7 @@
         И в поле 'TR' я ввожу текст 'ExternalTest'
         И я буду выбирать внешний файл "#workingDir#\DataProcessor\TaxCalculateVAT_TR.epf"
         И я нажимаю на кнопку с именем "FormAddExtDataProc"
-        И в поле 'Path to ext data proc for test' я ввожу текст ''
+        И в поле 'Path to plugin for test' я ввожу текст ''
         И я нажимаю на кнопку 'Save'
 
 # нужно дописать на сохранение файла  на диске

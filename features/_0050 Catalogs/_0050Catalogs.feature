@@ -119,7 +119,7 @@ To further use it when reflecting in the program of business processes
 		Тогда я проверяю наличие элемента справочника "Currencies" со значением поля "Description_en" "Ukraine Hryvnia"
 
 
-Сценарий: _005012 create integration settings to load the currency rate (without Pluginsessing connected)
+Сценарий: _005012 create integration settings to load the currency rate (without Plugin sessing connected)
 	* Creating a setting to download the Forex Seling course (tcmb.gov.tr)
 		И я открываю навигационную ссылку "e1cib/list/Catalog.IntegrationSettings"
 		И я нажимаю на кнопку с именем 'FormCreate'

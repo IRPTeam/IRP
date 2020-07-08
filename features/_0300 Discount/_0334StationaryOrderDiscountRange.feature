@@ -31,7 +31,7 @@ So that the range discount is calculated correctly
 
 Сценарий: _033402 range discount calculation by line 
 	# Trousers - 5-7%, Dress XS/Blue - 3-10%, Dress S/Yellow - 4-8%
-	Когда создаю заказ на Ferron BP Basic Partner terms, TRY (Dress -10 и Trousers - 5)
+	Когда создаю заказ на Ferron BP Basic Partner term, TRY (Dress -10 и Trousers - 5)
 	* Calculate range discount for Trousers - 6%
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'      |
@@ -73,7 +73,7 @@ So that the range discount is calculated correctly
 
 Сценарий: _033403 check of the minimum percentage of the range discount by lines
 # Trousers - 5-7%, Dress XS/Blue - 3-10%, Dress S/Yellow - 4-8%
-		Когда создаю заказ на Ferron BP Basic Partner terms, TRY (Dress -10 и Trousers - 5)
+		Когда создаю заказ на Ferron BP Basic Partner term, TRY (Dress -10 и Trousers - 5)
 		* Calculate range discount for Trousers - 4%
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Item'      |
@@ -116,7 +116,7 @@ So that the range discount is calculated correctly
 
 Сценарий: _033404 check of the maximum percentage of the range discount by lines
 # Trousers - 5-7%, Dress XS/Blue - 3-10%, Dress S/Yellow - 4-8%
-		Когда создаю заказ на Ferron BP Basic Partner terms, TRY (Dress -10 и Trousers - 5)
+		Когда создаю заказ на Ferron BP Basic Partner term, TRY (Dress -10 и Trousers - 5)
 		* Calculate range discount for Trousers - 8%
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Item'      |
@@ -159,7 +159,7 @@ So that the range discount is calculated correctly
 
 Сценарий: _033405 Range discount and Special price discount calculation 
 	# Trousers - 5-7%, Dress XS/Blue - 3-10%, Dress S/Yellow - 4-8%
-	Когда создаю заказ на Ferron BP Basic Partner terms, TRY (Dress -10 и Trousers - 5)
+	Когда создаю заказ на Ferron BP Basic Partner term, TRY (Dress -10 и Trousers - 5)
 	* Calculate range discount for Trousers - 7%
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'      |
@@ -198,7 +198,7 @@ So that the range discount is calculated correctly
 Сценарий: _033406 check the discount order Range discount and crowding out 2 price special offers
 	# Trousers - 5-7%, Dress XS/Blue - 3-10%, Dress S/Yellow - 4-8%
 	Когда переношу скидку Discount Price 2 в группу Maximum
-	Когда создаю заказ на Ferron BP Basic Partner terms, TRY (Dress -10 и Trousers - 5)
+	Когда создаю заказ на Ferron BP Basic Partner term, TRY (Dress -10 и Trousers - 5)
 	* Calculate range discount for Trousers - 7%
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'      |
@@ -241,7 +241,7 @@ So that the range discount is calculated correctly
 
 Сценарий: _033407 range discount recalculation when the quantity of items in the order changes
 	# Trousers - 5-7%, Dress XS/Blue - 3-10%, Dress S/Yellow - 4-8%
-	Когда создаю заказ на Ferron BP Basic Partner terms, TRY (Dress -10 и Trousers - 5)
+	Когда создаю заказ на Ferron BP Basic Partner term, TRY (Dress -10 и Trousers - 5)
 	* Calculate range discount for Trousers - 7%
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Item'      |

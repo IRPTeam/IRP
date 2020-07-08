@@ -455,7 +455,7 @@ To implement a sales-for-purchase scheme
 		| ''                                           | 'Expense'     | '*'         | '1'         | 'Main Company'     | 'Sales order 455*'      | 'Store 01'  | '36/18SD'   | '*'       | '*'                        | ''                     |
 		И Я закрыл все окна клиентского приложения
 	* Create one more Sales order
-		Когда создаю заказ на Ferron BP Basic Partner terms, TRY (Dress -10 и Trousers - 5)
+		Когда создаю заказ на Ferron BP Basic Partner term, TRY (Dress -10 и Trousers - 5)
 		* Change of store to the one with Shipment confirmation
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
@@ -1425,7 +1425,7 @@ To implement a sales-for-purchase scheme
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | 'Sales order 460*' | 'Store 01'  | 'Rent'      | '*'       | '*'                        | ''                     |
 		И Я закрыл все окна клиентского приложения
 	* Create one more Sales order with procurement methot - purchase
-		Когда создаю заказ на Ferron BP Basic Partner terms, TRY (Dress -10 и Trousers - 5)
+		Когда создаю заказ на Ferron BP Basic Partner term, TRY (Dress -10 и Trousers - 5)
 		* Change of Store to Store that use Shipment confirmation
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:

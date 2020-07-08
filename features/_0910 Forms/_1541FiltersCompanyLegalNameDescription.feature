@@ -35,7 +35,7 @@
 	Когда проверяю работу фильтра по отбору поставщиков в документах закупки
 
 
-Сценарий: _017010 check the filter for Vendor Partner terms in the document Purchase Order
+Сценарий: _017010 check the filter for Vendors partner terms in the document Purchase Order
 	И я закрыл все окна клиентского приложения
 	* Open a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
@@ -68,7 +68,7 @@
 	Когда проверяю работу фильтра по отбору поставщиков в документах закупки
 
 
-Сценарий: _018017 check the filter for Vendor Partner terms in the document Purchase Invoice
+Сценарий: _018017 check the filter for Vendors partner terms in the document Purchase Invoice
 	И я закрыл все окна клиентского приложения
 	* Open a form to create Purchase Invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
@@ -99,7 +99,7 @@
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по отбору поставщиков в документах закупки
 
-Сценарий: _022015 check the filter for Vendor Partner terms in the document Purchase Return Order
+Сценарий: _022015 check the filter for Vendors partner terms in the document Purchase Return Order
 	И я закрыл все окна клиентского приложения
 	* Open a form to create Purchase Invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
@@ -130,7 +130,7 @@
 		И я нажимаю на кнопку с именем 'FormCreate'
 	Когда проверяю работу фильтра по отбору поставщиков в документах закупки
 
-Сценарий: _022334 check the filter for Vendor Partner terms in the document Purchase Return
+Сценарий: _022334 check the filter for Vendors partner terms in the document Purchase Return
 	И я закрыл все окна клиентского приложения
 	* Open a form to create Purchase Invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
@@ -182,7 +182,7 @@
 	Когда проверяю работу фильтра по отбору клиентов в документах продажи
 
 
-Сценарий: _023112 check the filter for Customer Partner terms in the document SalesOrder
+Сценарий: _023112 check the filter for Customers partner terms in the document SalesOrder
 	И я закрыл все окна клиентского приложения
 	* Open a form to create Sales Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -218,7 +218,7 @@
 	Когда проверяю работу фильтра по отбору клиентов в документах продажи
 
 
-Сценарий: _024041 check the filter for Customer Partner terms in the document SalesInvoice
+Сценарий: _024041 check the filter for Customers partner terms in the document SalesInvoice
 	И я закрыл все окна клиентского приложения
 	* Open a form to create SalesInvoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'

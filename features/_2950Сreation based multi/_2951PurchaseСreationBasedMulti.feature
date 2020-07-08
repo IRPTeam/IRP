@@ -3,7 +3,7 @@
 @Positive
 
 
-Функционал: создание based on по цепочке документов закупки
+Функционал: creation mechanism based on for purchase documents
 
 Как разработчик
 Я хочу создать систему создания based on
@@ -18,7 +18,7 @@
 
 
 
-Сценарий: _090302 create Purchase invoice по нескольким Purchase order с разными контрагентами
+Сценарий: _090302 create purchase invoice for several purchase orders with different legal name
 	# должно создаться 2 Purchase invoice
 	* Создание тестового Purchase order 124
 		Когда create the first test PO for a test on the creation mechanism based on
@@ -114,7 +114,7 @@
 
 		
 
-Сценарий: _090303 create Purchase invoice по нескольким Purchase order с одинаковым партнером, контрагентом, соглашением, валютой и складом
+Сценарий: _090303 create Purchase invoice for several Purchase order with the same partner, legal name, partner term, currency and store
 # Должен создаться 1 Purchase invoice
 	* Создание тестового Purchase order 126
 		Когда create the first test PO for a test on the creation mechanism based on
@@ -178,7 +178,7 @@
 			| '127'       |
 		И я закрыл все окна клиентского приложения
 	
-Сценарий: _090304 create Purchase invoice по нескольким Purchase order с разными партнерами одного контрагента (соглашения разные)
+Сценарий: _090304 create Purchase invoice for several Purchase order with different partners of the same legal name (partner terms are different)
 # Должно создаться 2 Purchase invoice
 	И я для Company Ferron BP добавляю нового партнера Partner Ferron 1
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
@@ -296,7 +296,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '128'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -342,7 +342,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '129'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -415,7 +415,7 @@
 
 
 
-Сценарий: _090305 create Purchase invoice по нескольким Purchase order с разными соглашениями
+Сценарий: _090305 create purchase invoice for several purchase order with different partner terms
 # Должно создаться 2 Purchase invoice
 	* Создание первого тестового PO 130
 		Когда create the first test PO for a test on the creation mechanism based on
@@ -426,7 +426,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '130'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -472,7 +472,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '131'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -578,7 +578,7 @@
 
 
 
-Сценарий: _090306 create Purchase invoice по нескольким Purchase order с разными складами (создается один)
+Сценарий: _090306 create Purchase invoice for several Purchase order with different stores (created one)
 # Создается один PI
 	* Создание первого тестового PO 134
 		Когда create the first test PO for a test on the creation mechanism based on
@@ -589,7 +589,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '134'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -636,7 +636,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '135'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -697,7 +697,7 @@
 		И я закрыл все окна клиентского приложения
 
 	
-Сценарий: _090307 create Purchase invoice по нескольким Purchase order с разными собственными компаниями
+Сценарий: _090307 create purchase invoice for several purchase order with different own companies
 	# Создается один PI
 	* Создание первого тестового PO 136
 		Когда create the first test PO for a test on the creation mechanism based on
@@ -708,7 +708,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '136'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -759,7 +759,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '137'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -860,7 +860,7 @@
 
 
 
-Сценарий: _090308 create Goods reciept по Purchase invoice с разными контрагентами по прямой схемой отгрузки 
+Сценарий: _090308 create Goods reciept for Purchase invoice with different legal names (Purchase invoice before Goods receipt)
 # Создается два GR
 	* Создание Goods reciept к PI 125, 126
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
@@ -933,7 +933,7 @@
 
 
 
-Сценарий: _090309 create Goods reciept по нескольким Purchase invoice с разными партнерами одного контрагента по прямой схемой отгрузки 
+Сценарий: _090309 create Goods reciept for several Purchase invoice with different partners of the same legal name (Purchase invoice before Goods receipt)
 # Создается 2 GR
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И в таблице "List" я перехожу к строке:
@@ -994,7 +994,7 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090310 create Goods reciept по нескольким Purchase invoice с разными соглашениями по прямой схемой отгрузки 
+Сценарий: _090310 create Goods reciept for several Purchase invoice with different partner terms, Purchase invoice before Goods receipt
 # Создается два GR так как соглашения разные
 	* Создание Goods reciept к PI 140, 141
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
@@ -1060,7 +1060,7 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090311 create Goods reciept по нескольким Purchase invoice с разными складами по прямой схемой отгрузки (только один склад ордерный)
+Сценарий: _090311 create Goods reciept for several Purchase invoice with different stores, Purchase invoice before Goods receipt (only one store use Goods receipt)
 # Создается один GR
 	* Создание Goods reciept к PI 135
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
@@ -1093,7 +1093,7 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090312 create Goods reciept по нескольким Purchase order с разными собственными компаниями по прямой схеме отгрузки 
+Сценарий: _090312 create Goods reciept for several Purchase order with different own companies, Purchase invoice before Goods receipt
 # Создается два GR
 	* Создание Goods reciept к PI 137, 136
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
@@ -1156,7 +1156,7 @@
 
 # Непрямая схема поставки вначале ордер потом инвойс
 
-Сценарий: _090313 create Goods reciept по Purchase order с разными контрагентами по непрямой схеме отгрузки 
+Сценарий: _090313 create Goods reciept for Purchase order with different legal names, Purchase invoice after Goods receipt
 # должно создаться 2 Goods reciept
 	* Создание тестового Purchase order 140
 		Когда create the first test PO for a test on the creation mechanism based on
@@ -1242,7 +1242,7 @@
 
 
 
-Сценарий: _090314 create Goods reciept по нескольким Purchase order с разными партнерами одного контрагента по непрямой схемой отгрузки 
+Сценарий: _090314 create Goods reciept for several Purchase order with different partners of the same legal name, Purchase invoice after Goods receipt
 # должно создаться 2 Goods reciept
 	* Создание первого тестового PO 142
 		Когда create the first test PO for a test on the creation mechanism based on
@@ -1253,7 +1253,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '142'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -1302,7 +1302,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '143'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -1396,7 +1396,7 @@
 			| '155'       |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090315 create Goods reciept по нескольким Purchase order с разными соглашениями по непрямой схемой отгрузки 
+Сценарий: _090315 create Goods reciept for several Purchase order with different partner terms, Purchase invoice after Goods receipt
 # должно создаться 2 Goods reciept
 	* Создание первого тестового PO 144
 		Когда create the first test PO for a test on the creation mechanism based on
@@ -1407,7 +1407,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '144'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -1456,7 +1456,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '145'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -1552,7 +1552,7 @@
 
 
 
-Сценарий: _090316 create Goods reciept по нескольким Purchase order с разными складами по непрямой схемой отгрузки
+Сценарий: _090316 create Goods reciept for several Purchase order with different stores, Purchase invoice after Goods receipt
 # должно создаться 2 Goods reciept
 	* Создание первого тестового PO 146
 		Когда create the first test PO for a test on the creation mechanism based on
@@ -1563,7 +1563,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '146'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -1613,7 +1613,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '147'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -1710,7 +1710,7 @@
 		И Пауза 5
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _090317 create Goods reciept по нескольким Purchase order с разными собственными компаниями по непрямой схемой отгрузки 
+Сценарий: _090317 create Goods reciept for several Purchase order with different own companies using an indirect shipping scheme
 # должно создаться 2 Goods reciept
 	* Создание первого тестового PO 148
 		Когда create the first test PO for a test on the creation mechanism based on
@@ -1721,7 +1721,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '148'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -1775,7 +1775,7 @@
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '149'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -1873,7 +1873,7 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090318 create Purchase invoice по нескольким Purchase order с разными контрагентами по непрямой схеме отгрузки
+Сценарий: _090318 create Purchase invoice for several Purchase order with different contractors according to an indirect shipping scheme
 # должно создаться 2 Purchase invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И в таблице "List" я перехожу к строке:
@@ -1950,7 +1950,7 @@
 
 
 
-Сценарий: _090319 create Purchase invoice по нескольким Purchase order с разными партнерами одного контрагента по непрямой схеме отгрузки
+Сценарий: _090319 create Purchase invoice for several Purchase order with different partners of the same legal name, Purchase invoice after Goods receipt
 	# должно создаться 2 Purchase invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И в таблице "List" я перехожу к строке:
@@ -2026,7 +2026,7 @@
 			| '154'       |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090320 create Purchase invoice по нескольким Purchase order с разными соглашениями по непрямой схеме отгрузки
+Сценарий: _090320 create Purchase invoice for several Purchase order with different partner terms, Purchase invoice after Goods receipt
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И в таблице "List" я перехожу к строке:
 			| Number |
@@ -2106,7 +2106,7 @@
 
 
 
-Сценарий: _090322 create Purchase invoice по нескольким Purchase order с разными компаниями по непрямой схеме отгрузки
+Сценарий: _090322 create Purchase invoice for several Purchase order with different companies, Purchase invoice after Goods receipt
 # должно создаться 2 Purchase invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И в таблице "List" я перехожу к строке:

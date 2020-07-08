@@ -1,17 +1,17 @@
 #language: ru
 @tree
 @Positive
-Функционал: проведение продажи по схеме Shipment confirmation - Sales invoice
+Функционал: sales Shipment confirmation - Sales invoice
 
-Как Разработчик
-Я хочу создать схему проведения Shipment confirmation - Sales invoice
-Для отгрузки товара клиенту до инвойса (нет цены)
+As a sales manager
+I want to create a Shipment confirmation -  Sales invoice
+For shipment of items to the customer before the invoice (no price)
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-Сценарий: _0290001 создание документа Shipment confirmation на отгрузку товара клиенту без заказа и инвойса
+Сценарий: _0290001 create Shipment confirmation document for the shipment of items to the customer without an order and an invoice
 	* Создание SC на отгрузку Nicoletta со склада Store 02 со своей компании Main company
 		* Открытие формы Shipment confirmation
 			И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
@@ -357,11 +357,11 @@
 		| '5 603'  | 'Main Company' |
 		| '5 604'  | 'Second Company' |
 
-Сценарий: _0290002 создание документа Sales invoice based on созданных Shipment confirmation
+Сценарий: _0290002 create Sales invoice based on Shipment confirmation
 	# based on нескольких Shipment confirmation создается несколько Sales invoice
 	* Открытие списка Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
-	* Выбор нужных SC для создания SI 
+	* Select нужных SC для создания SI 
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '5 600'  |

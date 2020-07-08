@@ -3,15 +3,15 @@
 @IgnoreOnCIMainBuild
 @tree
 
-Функционал: экспортные сценарии для проверки срабатывания системы проверок при проведении документов
+Функционал: export scenarios to verify that the document verification system has been triggered
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 
-Сценарий: создаю тестовый SO для VerificationPosting
-	* Открытие формы для создания Sales Order
+Сценарий: creating a test SO for VerificationPosting
+	* Open form to create Sales Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in the details of the document
@@ -43,7 +43,7 @@
 		И в таблице "List" я выбираю текущую строку
 	* Установка статуса заказа
 		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-	* Заполнение товарной части
+	* Filling in item tab
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я выбираю текущую строку
@@ -70,8 +70,8 @@
 		И в таблице "ItemList" я завершаю редактирование строки
 	И я нажимаю на кнопку 'Post'
 
-Сценарий: создаю тестовый SO для VerificationPosting по упаковкам
-	* Открытие формы для создания Sales Order
+Сценарий: creating a test SO for VerificationPosting by package
+	* Open form to create Sales Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in the details of the document
@@ -103,7 +103,7 @@
 		И в таблице "List" я выбираю текущую строку
 	* Установка статуса заказа
 		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-	* Заполнение товарной части
+	* Filling in item tab
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я выбираю текущую строку

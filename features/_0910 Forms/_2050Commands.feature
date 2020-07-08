@@ -3,7 +3,7 @@
 @Positive
 
 
-Функционал: проверка добавления команд в документы и списки документов
+Функционал: check the addition of commands to documents and document lists
 
 
 
@@ -12,11 +12,11 @@
 
 	
 Сценарий: _0205001 preparation
-	* Добавление тестовой обработки
-		* Открытие формы для добавления обработки
+	* Add test plugin
+		* Open form to add plugin
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Filling data по обработке и добавление её в базу
+		* Filling plugin data and adding it to the database
 			И я буду выбирать внешний файл "#workingDir#\DataProcessor\CheckExternalCommands.epf"
 			И я нажимаю на кнопку с именем "FormAddExtDataProc"
 			И в поле 'Path to plugin for test' я ввожу текст ''
@@ -27,12 +27,12 @@
 			И я нажимаю на кнопку 'Ok'
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 5
-		* Проверка добавления обработки
+		* Check the addition of plugin
 			Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "Test command"
-	* Добавление тестового Purchase invoice
+	* Add test Purchase invoice
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 			И я нажимаю на кнопку с именем 'FormCreate'
-			* Заполнение шапки документа
+			* Filling the document header
 				И я нажимаю кнопку выбора у поля "Partner"
 				И в таблице "List" я перехожу к строке:
 					| 'Description'  |
@@ -113,18 +113,18 @@
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '3 900'
-			* Проведение и create
+			* Post and check saving
 				И я нажимаю на кнопку 'Post and close'
 				И таблица "List" содержит строки:
 					| 'Number' |
 					| '3 900'       |
 
-Сценарий: _0205002 добавление тестовой команды в список документов Sales return
-	* Открытие регистра команд
+Сценарий: _0205002 add test command to the list of documents Sales return
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для команды печати Sales return
-		* Создание метаданного для Sales return и его выбор для команды
+	* Filling test command data for Sales return
+		* Create metadata for Sales return and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -149,29 +149,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'  | 'Plugins' |
 		| 'SalesReturn'             | 'Test command'       |
-	* Проверка вызова команды из списка документов Sales Return
+	* Check the command from the document list Sales Return
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -185,18 +185,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -212,17 +212,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205003 добавление тестовой команды в список документов Sales invoice
-	* Открытие регистра команд
+Сценарий: _0205003 add test command to the list of documents Sales invoice
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для команды печати Sales invoice
-		* Создание метаданного для Sales invoice и его выбор для команды
+	* Filling test command data for Sales invoice
+		* Create metadata for Sales invoice and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'SalesInvoice'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -242,29 +241,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'  | 'Plugins' |
 		| 'SalesInvoice'             | 'Test command'       |
-	* Проверка вызова команды из списка документов SalesInvoice
+	* Check the command from the document list Sales Invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -278,17 +277,17 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -304,17 +303,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205004 добавление тестовой команды в список документов Purchase order
-	* Открытие регистра команд
+Сценарий: _0205004 add test command to the list of documents Purchase order
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для команды печати Purchase order
-		* Создание метаданного для Purchase order и его выбор для команды
+	* Filling test command data for Purchase order
+		* Create metadata for Purchase order and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'PurchaseOrder'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -334,29 +332,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'  | 'Plugins' |
 		| 'PurchaseOrder'             | 'Test command'       |
-	* Проверка вызова команды из списка документов PurchaseOrder
+	* Check the command from the document list Purchase order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -370,17 +368,17 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -396,17 +394,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205005 добавление тестовой команды в список документов Sales order
-	* Открытие регистра команд
+Сценарий: _0205005 add test command to the list of documents Sales order
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для команды печати Sales order
-		* Создание метаданного для sales order и его выбор для команды
+	* Filling test command data for Sales order
+		* Create metadata for sales order and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'SalesOrder'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -426,29 +423,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'  | 'Plugins' |
 		| 'SalesOrder'             | 'Test command'       |
-	* Проверка вызова команды из списка документов SalesOrder
+	* Check the command from the document list SalesOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -462,18 +459,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -489,17 +486,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205006 добавление тестовой команды в список документов Purchase invoice
-	* Открытие регистра команд
+Сценарий: _0205006 add test command to the list of documents Purchase invoice
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для команды печати Purchase invoice
-		* Создание метаданного для Purchase invoice и его выбор для команды
+	* Filling test command data for Purchase invoice
+		* Create metadata for Purchase invoice and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'PurchaseInvoice'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -519,29 +515,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'  | 'Plugins' |
 		| 'PurchaseInvoice'             | 'Test command'       |
-	* Проверка вызова команды из списка документов PurchaseInvoice
+	* Check the command from the document list PurchaseInvoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -555,18 +551,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -583,17 +579,16 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0205007 добавление тестовой команды в список документов Cash transfer order
-	* Открытие регистра команд
+Сценарий: _0205007 add test command to the list of documents Cash transfer order
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для команды печати Cash transfer order
-		* Создание метаданного для Cash transfer order и его выбор для команды
+	* Filling test command data for Cash transfer order
+		* Create metadata for Cash transfer order and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'CashTransferOrder'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -613,29 +608,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'  | 'Plugins' |
 		| 'CashTransferOrder'             | 'Test command'       |
-	* Проверка вызова команды из списка документов CashTransferOrder
+	* Check the command from the document list CashTransferOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -649,18 +644,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -677,17 +672,16 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0205008 добавление тестовой команды в список документов Shipment confirmation
-	* Открытие регистра команд
+Сценарий: _0205008 add test command to the list of documents Shipment confirmation
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для Shipment confirmation
-		* Создание метаданного для Shipment confirmation и его выбор для команды
+	* Filling test command data for Shipment confirmation
+		* Create metadata for Shipment confirmation and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'ShipmentConfirmation'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -707,29 +701,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'           | 'Plugins' |
 		| 'ShipmentConfirmation'             | 'Test command'       |
-	* Проверка вызова команды из списка документов CashTransferOrder
+	* Check the command from the document list CashTransferOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -743,18 +737,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -771,17 +765,16 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0205009 добавление тестовой команды в список документов Goods receipt
-	* Открытие регистра команд
+Сценарий: _0205009 add test command to the list of documents Goods receipt
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для Goods receipt
-		* Создание метаданного для Goods receipt и его выбор для команды
+	* Filling test command data for Goods receipt
+		* Create metadata for Goods receipt and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'GoodsReceipt'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -801,29 +794,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'           | 'Plugins' |
 		| 'GoodsReceipt'             | 'Test command'       |
-	* Проверка вызова команды из списка документов GoodsReceipt
+	* Check the command from the document list GoodsReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -837,17 +830,17 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -863,17 +856,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205010 добавление тестовой команды в список документов Sales return order
-	* Открытие регистра команд
+Сценарий: _0205010 add test command to the list of documents Sales return order
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для Sales return order
-		* Создание метаданного для Sales return order и его выбор для команды
+	* Filling test command data for Sales return order
+		* Create metadata for Sales return order and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'SalesReturnOrder'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -893,29 +885,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'SalesReturnOrder'             | 'Test command'       |
-	* Проверка вызова команды из списка документов SalesReturnOrder
+	* Check the command from the document list SalesReturnOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -929,18 +921,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -957,17 +949,16 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0205011 добавление тестовой команды в список документов Purchase return order
-	* Открытие регистра команд
+Сценарий: _0205011 add test command to the list of documents Purchase return order
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для Purchase return order
-		* Создание метаданного для Purchase return order и его выбор для команды
+	* Filling test command data for Purchase return order
+		* Create metadata for Purchase return order and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'PurchaseReturnOrder'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -987,29 +978,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'PurchaseReturnOrder'             | 'Test command'       |
-	* Проверка вызова команды из списка документов PurchaseReturnOrder
+	* Check the command from the document list PurchaseReturnOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1023,18 +1014,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1050,17 +1041,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205012 добавление тестовой команды в список документов ReconciliationStatement
-	* Открытие регистра команд
+Сценарий: _0205012 add test command to the list of documents ReconciliationStatement
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для ReconciliationStatement
-		* Создание метаданного для ReconciliationStatement и его выбор для команды
+	* Filling test command data for Reconciliation statement
+		* Create metadata for ReconciliationStatement and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'ReconciliationStatement'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -1080,29 +1070,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'ReconciliationStatement'                | 'Test command'       |
-	* Проверка вызова команды из списка документов ReconciliationStatement
+	* Check the command from the document list ReconciliationStatement
 		И я открываю навигационную ссылку 'e1cib/list/Document.ReconciliationStatement'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1116,18 +1106,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.ReconciliationStatement'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1144,17 +1134,16 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0205013 добавление тестовой команды в список документов BankPayment
-	* Открытие регистра команд
+Сценарий: _0205013 add test command to the list of documents BankPayment
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для BankPayment
-		* Создание метаданного для BankPayment и его выбор для команды
+	* Filling test command data for Bank payment
+		* Create metadata for BankPayment and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'BankPayment'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -1174,29 +1163,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'BankPayment'                | 'Test command'       |
-	* Проверка вызова команды из списка документов BankPayment
+	* Check the command from the document list Bank payment
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1210,18 +1199,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1237,17 +1226,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205014 добавление тестовой команды в список документов BankReceipt
-	* Открытие регистра команд
+Сценарий: _0205014 add test command to the list of documents BankReceipt
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для BankReceipt
-		* Создание метаданного для BankReceipt и его выбор для команды
+	* Filling test command data for Bank receipt
+		* Create metadata for BankReceipt and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'BankReceipt'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -1267,29 +1255,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'BankReceipt'                | 'Test command'       |
-	* Проверка вызова команды из списка документов BankReceipt
+	* Check the command from the document list BankReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1303,18 +1291,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1331,17 +1319,16 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0205016 добавление тестовой команды в список документов Bundling
-	* Открытие регистра команд
+Сценарий: _0205016 add test command to the list of documents Bundling
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для Bundling
-		* Создание метаданного для Bundling и его выбор для команды
+	* Filling test command data for Bundling
+		* Create metadata for Bundling and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'Bundling'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -1361,29 +1348,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'Bundling'                | 'Test command'       |
-	* Проверка вызова команды из списка документов Bundling
+	* Check the command from the document list Bundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1397,18 +1384,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1424,17 +1411,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205017 добавление тестовой команды в список документов CashExpense
-	* Открытие регистра команд
+Сценарий: _0205017 add test command to the list of documents CashExpense
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для CashExpense
-		* Создание метаданного для CashExpense и его выбор для команды
+	* Filling test command data for CashExpense
+		* Create metadata for CashExpense and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'CashExpense'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -1454,29 +1440,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'CashExpense'                | 'Test command'       |
-	* Проверка вызова команды из списка документов CashExpense
+	* Check the command from the document list CashExpense
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashExpense'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1490,18 +1476,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashExpense'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1518,17 +1504,16 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0205018 добавление тестовой команды в список документов CashPayment
-	* Открытие регистра команд
+Сценарий: _0205018 add test command to the list of documents CashPayment
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для CashPayment
-		* Создание метаданного для CashPayment и его выбор для команды
+	* Filling test command data for Cash payment
+		* Create metadata for CashPayment and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'CashPayment'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -1548,29 +1533,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'CashPayment'                | 'Test command'       |
-	* Проверка вызова команды из списка документов CashPayment
+	* Check the command from the document list CashPayment
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1584,18 +1569,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1611,17 +1596,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205019 добавление тестовой команды в список документов CashReceipt
-	* Открытие регистра команд
+Сценарий: _0205019 add test command to the list of documents Cash Receipt
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для CashReceipt
-		* Создание метаданного для CashReceipt и его выбор для команды
+	* Filling test command data for Cash Receipt
+		* Create metadata for CashReceipt and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'CashReceipt'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -1641,29 +1625,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'CashReceipt'                | 'Test command'       |
-	* Проверка вызова команды из списка документов CashReceipt
+	* Check the command from the document list CashReceipt
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1677,18 +1661,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1704,17 +1688,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205020 добавление тестовой команды в список документов CashRevenue
-	* Открытие регистра команд
+Сценарий: _0205020 add test command to the list of documents Cash Revenue
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для CashRevenue
-		* Создание метаданного для CashRevenue и его выбор для команды
+	* Filling test command data for CashRevenue
+		* Create metadata for CashRevenue and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'CashRevenue'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -1734,29 +1717,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'CashRevenue'                | 'Test command'       |
-	* Проверка вызова команды из списка документов CashRevenue
+	* Check the command from the document list CashRevenue
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashRevenue'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1770,18 +1753,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashRevenue'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1797,17 +1780,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205021 добавление тестовой команды в список документов CashTransferOrder
-	* Открытие регистра команд
+Сценарий: _0205021 add test command to the list of documents Cash transfer order
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для CashTransferOrder
-		* Создание метаданного для CashTransferOrder и его выбор для команды
+	* Filling test command data for Cash transfer order
+		* Create metadata for CashTransferOrder and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'CashTransferOrder'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -1827,29 +1809,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'CashTransferOrder'                | 'Test command'       |
-	* Проверка вызова команды из списка документов CashTransferOrder
+	* Check the command from the document list CashTransferOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1863,18 +1845,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1891,17 +1873,16 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0205022 добавление тестовой команды в список документов ChequeBondTransaction
-	* Открытие регистра команд
+Сценарий: _0205022 add test command to the list of documents Cheque bond transaction
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для ChequeBondTransaction
-		* Создание метаданного для ChequeBondTransaction и его выбор для команды
+	* Filling test command data for Cheque bond transaction
+		* Create metadata for Cheque bond transaction and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'ChequeBondTransaction'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -1921,29 +1902,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'ChequeBondTransaction'                | 'Test command'       |
-	* Проверка вызова команды из списка документов ChequeBondTransaction
+	* Check the command from the document list ChequeBondTransaction
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1957,18 +1938,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -1986,17 +1967,16 @@
 
 
 
-Сценарий: _0205023 добавление тестовой команды в список документов CreditDebitNote
-	* Открытие регистра команд
+Сценарий: _0205023 add test command to the list of documents Credit Debit Note
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для CreditDebitNote
-		* Создание метаданного для CreditDebitNote и его выбор для команды
+	* Filling test command data for Credit Debit Note
+		* Create metadata for CreditDebitNote and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'CreditDebitNote'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -2016,29 +1996,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'CreditDebitNote'                | 'Test command'       |
-	* Проверка вызова команды из списка документов CreditDebitNote
+	* Check the command from the document list CreditDebitNote
 		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2052,18 +2032,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2080,17 +2060,16 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0205024 добавление тестовой команды в список документов IncomingPaymentOrder
-	* Открытие регистра команд
+Сценарий: _0205024 add test command to the list of documents Incoming Payment Order
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для IncomingPaymentOrder
-		* Создание метаданного для IncomingPaymentOrder и его выбор для команды
+	* Filling test command data for IncomingPaymentOrder
+		* Create metadata for IncomingPaymentOrder and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'IncomingPaymentOrder'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -2110,29 +2089,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'IncomingPaymentOrder'                | 'Test command'       |
-	* Проверка вызова команды из списка документов IncomingPaymentOrder
+	* Check the command from the document list IncomingPaymentOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.IncomingPaymentOrder'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2146,18 +2125,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.IncomingPaymentOrder'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2173,17 +2152,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205025 добавление тестовой команды в список документов InternalSupplyRequest
-	* Открытие регистра команд
+Сценарий: _0205025 add test command to the list of documents Internal Supply Request
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для InternalSupplyRequest
-		* Создание метаданного для InternalSupplyRequest и его выбор для команды
+	* Filling test command data for InternalSupplyRequest
+		* Create metadata for InternalSupplyRequest and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'InternalSupplyRequest'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -2203,29 +2181,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'InternalSupplyRequest'                | 'Test command'       |
-	* Проверка вызова команды из списка документов InternalSupplyRequest
+	* Check the command from the document list InternalSupplyRequest
 		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2239,18 +2217,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2266,17 +2244,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205026 добавление тестовой команды в список документов InventoryTransfer
-	* Открытие регистра команд
+Сценарий: _0205026 add test command to the list of documents Inventory Transfer
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для InventoryTransfer
-		* Создание метаданного для InventoryTransfer и его выбор для команды
+	* Filling test command data for Inventory Transfer
+		* Create metadata for Inventory Transfer and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'InventoryTransfer'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -2296,29 +2273,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'InventoryTransfer'                | 'Test command'       |
-	* Проверка вызова команды из списка документов InventoryTransfer
+	* Check the command from the document list InventoryTransfer
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2332,18 +2309,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2359,17 +2336,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205027 добавление тестовой команды в список документов InventoryTransferOrder
-	* Открытие регистра команд
+Сценарий: _0205027 add test command to the list of documents Inventory Transfer Order
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для InventoryTransferOrder
-		* Создание метаданного для InventoryTransferOrder и его выбор для команды
+	* Filling test command data for InventoryTransferOrder
+		* Create metadata for InventoryTransferOrder and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'InventoryTransferOrder'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -2389,29 +2365,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'InventoryTransferOrder'                | 'Test command'       |
-	* Проверка вызова команды из списка документов InventoryTransferOrder
+	* Check the command from the document list InventoryTransferOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2425,18 +2401,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2452,17 +2428,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205028 добавление тестовой команды в список документов InvoiceMatch
-	* Открытие регистра команд
+Сценарий: _0205028 add test command to the list of documents Invoice Match
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для InvoiceMatch
-		* Создание метаданного для InvoiceMatch и его выбор для команды
+	* Filling test command data for Invoice Match
+		* Create metadata for InvoiceMatch and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'InvoiceMatch'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -2482,29 +2457,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'InvoiceMatch'                | 'Test command'       |
-	* Проверка вызова команды из списка документов InvoiceMatch
+	* Check the command from the document list InvoiceMatch
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2518,18 +2493,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2545,17 +2520,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205029 добавление тестовой команды в список документов Labeling
-	* Открытие регистра команд
+Сценарий: _0205029 add test command to the list of documents Labeling
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для Labeling
-		* Создание метаданного для Labeling и его выбор для команды
+	* Filling test command data for Labeling
+		* Create metadata for Labeling and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'Labeling'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -2575,29 +2549,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'Labeling'                | 'Test command'       |
-	* Проверка вызова команды из списка документов Labeling
+	* Check the command from the document list Labeling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Labeling'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2611,18 +2585,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.Labeling'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2638,17 +2612,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205030 добавление тестовой команды в список документов OpeningEntry
-	* Открытие регистра команд
+Сценарий: _0205030 add test command to the list of documents Opening Entry
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для OpeningEntry
-		* Создание метаданного для OpeningEntry и его выбор для команды
+	* Filling test command data for OpeningEntry
+		* Create metadata for OpeningEntry and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'OpeningEntry'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -2668,29 +2641,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'OpeningEntry'                | 'Test command'       |
-	* Проверка вызова команды из списка документов OpeningEntry
+	* Check the command from the document list OpeningEntry
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2704,18 +2677,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2732,17 +2705,16 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0205031 добавление тестовой команды в список документов OutgoingPaymentOrder
-	* Открытие регистра команд
+Сценарий: _0205031 add test command to the list of documents Outgoing Payment Order
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для OutgoingPaymentOrder
-		* Создание метаданного для OutgoingPaymentOrder и его выбор для команды
+	* Filling test command data for OutgoingPaymentOrder
+		* Create metadata for OutgoingPaymentOrder and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'OutgoingPaymentOrder'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -2762,29 +2734,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'OutgoingPaymentOrder'                | 'Test command'       |
-	* Проверка вызова команды из списка документов OutgoingPaymentOrder
+	* Check the command from the document list OutgoingPaymentOrder
 		И я открываю навигационную ссылку 'e1cib/list/Document.OutgoingPaymentOrder'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2798,18 +2770,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.OutgoingPaymentOrder'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2825,17 +2797,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205032 добавление тестовой команды в список документов PhysicalCountByLocation
-	* Открытие регистра команд
+Сценарий: _0205032 add test command to the list of documents Physical Count By Location
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для PhysicalCountByLocation
-		* Создание метаданного для PhysicalCountByLocation и его выбор для команды
+	* Filling test command data for Physical Count By Location
+		* Create metadata for Physical Count By Location and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'PhysicalCountByLocation'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -2855,29 +2826,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'PhysicalCountByLocation'                | 'Test command'       |
-	* Проверка вызова команды из списка документов PhysicalCountByLocation
+	* Check the command from the document list PhysicalCountByLocation
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalCountByLocation'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2891,18 +2862,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalCountByLocation'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2918,17 +2889,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205033 добавление тестовой команды в список документов PriceList
-	* Открытие регистра команд
+Сценарий: _0205033 add test command to the list of documents Price List
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для PriceList
-		* Создание метаданного для PriceList и его выбор для команды
+	* Filling test command data for Price List
+		* Create metadata for PriceList and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'PriceList'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -2948,29 +2918,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'PriceList'                | 'Test command'       |
-	* Проверка вызова команды из списка документов PriceList
+	* Check the command from the document list PriceList
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -2984,18 +2954,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -3013,17 +2983,16 @@
 
 
 
-Сценарий: _0205035 добавление тестовой команды в список документов PurchaseReturn
-	* Открытие регистра команд
+Сценарий: _0205035 add test command to the list of documents PurchaseReturn
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для PurchaseReturn
-		* Создание метаданного для PurchaseReturn и его выбор для команды
+	* Filling test command data for PurchaseReturn
+		* Create metadata for PurchaseReturn and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'PurchaseReturn'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -3043,29 +3012,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'PurchaseReturn'                | 'Test command'       |
-	* Проверка вызова команды из списка документов PurchaseReturn
+	* Check the command from the document list PurchaseReturn
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -3079,18 +3048,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -3108,17 +3077,16 @@
 
 
 
-Сценарий: _0205037 добавление тестовой команды в список документов Unbundling
-	* Открытие регистра команд
+Сценарий: _0205037 add test command to the list of documents Unbundling
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для Unbundling
-		* Создание метаданного для Unbundling и его выбор для команды
+	* Filling test command data for Unbundling
+		* Create metadata for Unbundling and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'Unbundling'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -3138,29 +3106,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'Unbundling'                | 'Test command'       |
-	* Проверка вызова команды из списка документов Unbundling
+	* Check the command from the document list Unbundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -3174,18 +3142,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -3201,17 +3169,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205038 добавление тестовой команды в список документов StockAdjustmentAsWriteOff
-	* Открытие регистра команд
+Сценарий: _0205038 add test command to the list of documents Stock Adjustment As Write Off
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для StockAdjustmentAsWriteOff
-		* Создание метаданного для StockAdjustmentAsWriteOff и его выбор для команды
+	* Filling test command data for StockAdjustmentAsWriteOff
+		* Create metadata for StockAdjustmentAsWriteOff and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'StockAdjustmentAsWriteOff'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -3231,29 +3198,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'StockAdjustmentAsWriteOff'                | 'Test command'       |
-	* Проверка вызова команды из списка документов StockAdjustmentAsWriteOff
+	* Check the command from the document list StockAdjustmentAsWriteOff
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -3267,18 +3234,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -3294,17 +3261,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205039 добавление тестовой команды в список документов StockAdjustmentAsSurplus
-	* Открытие регистра команд
+Сценарий: _0205039 add test command to the list of documents Stock Adjustment As Surplus
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для StockAdjustmentAsSurplus
-		* Создание метаданного для StockAdjustmentAsSurplus и его выбор для команды
+	* Filling test command data for Stock Adjustment As Surplus
+		* Create metadata for Stock Adjustment As Surplus and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'StockAdjustmentAsSurplus'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -3324,29 +3290,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'StockAdjustmentAsSurplus'                | 'Test command'       |
-	* Проверка вызова команды из списка документов StockAdjustmentAsSurplus
+	* Check the command from the document list StockAdjustmentAsSurplus
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -3360,18 +3326,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -3387,17 +3353,16 @@
 			И я нажимаю на кнопку 'Save and close'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0205040 добавление тестовой команды в список документов PhysicalInventory
-	* Открытие регистра команд
+Сценарий: _0205040 add test command to the list of documents Physical Inventory
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Filling data для тестовой команды для PhysicalInventory
-		* Создание метаданного для PhysicalInventory и его выбор для команды
+	* Filling test command data for Physical Inventory
+		* Create metadata for Physical Inventory and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			# И в таблице  "List" я перехожу на один уровень вниз
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'Description' я ввожу текст 'PhysicalInventory'
 			И я нажимаю кнопку выбора у поля "Parent"
@@ -3417,29 +3382,29 @@
 				| 'Test command' |
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'List form'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata'       | 'Plugins' |
 		| 'PhysicalInventory'                | 'Test command'       |
-	* Проверка вызова команды из списка документов PhysicalInventory
+	* Check the command from the document list PhysicalInventory
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к последней строке
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is not displayed in the document
 		И я нажимаю на кнопку 'Create'
 		Когда Проверяю шаги на Исключение:
 			|'И я нажимаю на кнопку "Test command"'|
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме документа
-		* Открытие регистра команд
+	* Connect a command to a document form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -3453,18 +3418,18 @@
 			И в таблице "List" я выбираю текущую строку
 			И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 			И я нажимаю на кнопку 'Save and close'
-	* Проверка того, что команда не отображается в самом документе
+	* Check that the command is displayed in the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку 'Create'
 		И я нажимаю на кнопку 'Test command'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success client" в течение 10 секунд
 		Затем я жду, что в сообщениях пользователю будет подстрока "Success server" в течение 10 секунд
 		И Я закрыл все окна клиентского приложения
-	* Подключение команды к форме выбора документа
-		* Открытие регистра команд
+	* Connect the command to the document selection form
+		* Open Command register
 			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение команды
+		* Filling in command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И я нажимаю на кнопку 'List'
 			И в таблице "List" я перехожу к строке:
@@ -3481,14 +3446,14 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _010017 проверка работы команды открытия контактной информации в списке клиентов
-	* Open catalog Partners и выбор нужного партнера
+Сценарий: _010017 command opening contact information in the partner list
+	* Open catalog Partners and select partner
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Kalipso' |
 		И я нажимаю на кнопку 'Contact info'
-	* Проверка отображения контактной информации
+	* Check the display of contact information
 		Тогда таблица "IDInfo" содержит строки:
 			| 'Type'                       |
 			| 'Location address (Partner)' |
@@ -3497,18 +3462,18 @@
 	И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _010018 проверка редактирования контактной информации из формы EditIDInfo
-	* Open catalog Partners и выбор нужного партнера
+Сценарий: _010018 check edit contact information from the Edit contact info form
+	* Open catalog Partners and select partner
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Kalipso' |
 		И я нажимаю на кнопку 'Contact info'
-	* Редактирование контактной информации
+	* Edit contact info
 		И в таблице "IDInfo" в поле 'Value' я ввожу текст 'Odessa, Bunina, 2, №33'
 		И в таблице "IDInfo" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification измененной контактной информации
+	* Check saving of changed contact information
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Kalipso' |
@@ -3519,15 +3484,15 @@
 
 
 
-Сценарий: _010019 проверка работы команды открытия списка номенклатуры из Item type
-	* Open catalog Item type и выбор нужного элемента
+Сценарий: _010019 check the operation of the command to open an item list from Item type
+	* Open catalog Item type
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemTypes'
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Shoes' |
 		И в таблице "List" я выбираю текущую строку
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Items'
-	* Filter check по товарам
+	* Filter check by items
 		Тогда таблица "List" содержит строки:
 		| 'Description'| 'Item type' |
 		| 'Boots'      | 'Shoes'     |
@@ -3539,22 +3504,22 @@
 
 
 
-Сценарий: _010020 проверка работы обработки QuantityCompare (сравнение плана/факта в Goods reciept)
-	* Создание Goods reciept based on PI 3900
+Сценарий: _010020 check the operation of Quantity Compare plugin (comparison of the plan / fact in Goods reciept)
+	* Create Goods reciept based on PI 3900
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '3 900' |
 		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-	* Check filling inGoodsReceipt
+	* Check filling in Goods Receipt
 		И     элемент формы с именем "Store" стал равен 'Store 02'
 		И     таблица "ItemList" содержит строки:
 			| 'Item'  | 'Quantity' | 'Currency' | 'Item key' | 'Store'    | 'Unit' | 'Receipt basis'           |
 			| 'Dress' | '8,000'    | 'TRY'      | 'L/Green'  | 'Store 02' | 'pcs'  | 'Purchase invoice 3 900*' |
 			| 'Boots' | '15,000'   | 'TRY'      | '37/18SD'  | 'Store 02' | 'pcs'  | 'Purchase invoice 3 900*' |
-	* Открытие формы сравнения
+	* Open Quantity Compare
 		И я нажимаю на кнопку 'Compare quantity'
-	* Проверка добавления товара по поиску штрих-кода 
+	* Check of adding goods by barcode search
 		И в таблице "PhysItemList" я нажимаю на кнопку с именем 'PhysItemListSearchByBarcode'
 		И в поле 'InputFld' я ввожу текст '978020137962'
 		И я нажимаю на кнопку 'OK'
@@ -3574,7 +3539,7 @@
 			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
 			| 'Dress' | 'L/Green'  | 'pcs'  | '3,000' |
-	* Adding items toручную через кнопку Add
+	* Add items manually via the Add button
 		И в таблице "PhysItemList" я нажимаю на кнопку с именем 'PhysItemListAdd'
 		И в таблице "PhysItemList" я нажимаю кнопку выбора у реквизита с именем "PhysItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -3600,7 +3565,7 @@
 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
 			| 'Dress' | 'L/Green'  | 'pcs'  | '3,000' |
 			| 'Boots' | '38/18SD'  | 'pcs'  | '1,000' |
-	* Добавление товара через кнопку Pick up
+	* Add items via the Pick up button
 		И в таблице "PhysItemList" я нажимаю на кнопку с именем 'PhysItemListOpenPickupItems'
 		И в таблице "ItemList" я перехожу к строке:
 			| Title |
@@ -3621,7 +3586,7 @@
 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
 			| 'Dress' | 'L/Green'  | 'pcs'  | '4,000' |
 			| 'Boots' | '38/18SD'  | 'pcs'  | '1,000' |
-	* Сверка разницы
+	* Difference reconciliation
 		И в таблице "PhysItemList" я нажимаю на кнопку с именем 'PhysItemListSwitchItemLists'
 		Тогда в таблице "CompareItemList" количество строк "меньше или равно" 3
 		Тогда таблица "CompareItemList" стала равной:
@@ -3629,7 +3594,7 @@
 			| 'Dress' | '8,000'    | '-4,000'     | 'L/Green'  | 'pcs'  | '4,000' |
 			| 'Boots' | '15,000'   | '-13,000'    | '37/18SD'  | 'pcs'  | '2,000' |
 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
-	* Проверка изменения количества вручную на вкладке сканирования
+	* Check quantity changes manually on the scan tab
 		И в таблице "CompareItemList" я нажимаю на кнопку с именем 'CompareItemListSwitchItemLists'
 		И в таблице "PhysItemList" я активизирую поле с именем "PhysItemListCount"
 		И в таблице "PhysItemList" я перехожу к строке:
@@ -3642,7 +3607,7 @@
 			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
 			| 'Dress' | 'L/Green'  | 'pcs'  | '5,000' |
-	* Проверка изменения количества вручную на вкладке сравнения
+	* Check quantity changes manually on the comparison tab
 		И в таблице "PhysItemList" я нажимаю на кнопку с именем 'PhysItemListSwitchItemLists'
 		Тогда таблица "CompareItemList" содержит строки:
 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
@@ -3660,14 +3625,14 @@
 			| 'Dress' | '8,000'    | '-3,000'     | 'L/Green'  | 'pcs'  | '5,000' |
 			| 'Boots' | '15,000'   | '-12,000'    | '37/18SD'  | 'pcs'  | '3,000' |
 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
-	* Удаление строк на вкладке сканирования
+	* Delete lines in scan tab
 		И в таблице "CompareItemList" я нажимаю на кнопку с именем 'CompareItemListSwitchItemLists'
 		И в таблице "PhysItemList" я перехожу к строке:
 			| 'Item'  | 'Item key' | 'Q'     | 'Unit' |
 			| 'Dress' | 'L/Green'  | '5,000' | 'pcs'  |
 		И в таблице "PhysItemList" я нажимаю на кнопку с именем 'PhysItemListDelete'
 		Тогда в таблице "PhysItemList" количество строк "меньше или равно" 2
-	* Добавление товаров путем сканирования на вкладке "CompareItemList"
+	* Add items by scanning on the tab "CompareItemList"
 		И в таблице "PhysItemList" я нажимаю на кнопку с именем 'PhysItemListSwitchItemLists'
 		И в таблице "CompareItemList" я нажимаю на кнопку с именем 'CompareItemListSearchByBarcode'
 		И в поле 'InputFld' я ввожу текст '978020137962'
@@ -3677,7 +3642,7 @@
 			| 'Boots' | '15,000'   | '-11,000'    | '37/18SD'  | 'pcs'  | '4,000' |
 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
 		Тогда в таблице "CompareItemList" количество строк "меньше или равно" 2
-	* Добавление товара на вкладке "CompareItemList" через кнопку Add
+	* Add items to the tab "CompareItemList" through the Add button
 		И в таблице "CompareItemList" я нажимаю на кнопку с именем 'CompareItemListAdd'
 		И в таблице "CompareItemList" я нажимаю кнопку выбора у реквизита с именем "CompareItemListItem"
 		И в таблице "List" я перехожу к строке:
@@ -3702,7 +3667,7 @@
 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
 			| 'Shirt' | ''         | '1,000'      | '38/Black' | 'pcs'  | '1,000' |
 		Тогда в таблице "CompareItemList" количество строк "меньше или равно" 3
-	* Добавление товара на вкладке "CompareItemList" через кнопку Pick up
+	* Add items to the tab "CompareItemList" through the Pick up button
 		И в таблице "CompareItemList" я нажимаю на кнопку с именем 'CompareItemListOpenPickupItems'
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Title' |
@@ -3720,22 +3685,22 @@
 			| 'Shirt' | ''         | '1,000'      | '38/Black' | 'pcs'  | '1,000' |
 			| 'Shirt' | ''         | '1,000'      | '36/Red'   | 'pcs'  | '1,000' |
 		Тогда в таблице "CompareItemList" количество строк "меньше или равно" 4
-	* Сворачивание табличной части с данными по документам-основаниям
+	* Collapse of the tabular part with data on documents-bases
 		И     таблица "ExpItemList" содержит строки:
 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |
 			| 'Dress' | 'L/Green'  | 'Purchase invoice 3 900*' | 'pcs'  | '8,000'  |
 			| 'Boots' | '37/18SD'  | 'Purchase invoice 3 900*' | 'pcs'  | '15,000' |
-		* Проверка сворачивания таблицы "ExpItemList"
+		* Check the ExpItemList table collapse 
 			И я нажимаю на кнопку 'Show hide exp. item list'
 			Когда Проверяю шаги на Исключение:
 			|'Тогда в таблице "ExpItemList" я выделяю все строки'|
-		* Проверка разворачивания таблицы "ExpItemList"
+		* Check the ExpItemList table uncolapse
 			И я нажимаю на кнопку 'Show hide exp. item list'
 			И     таблица "ExpItemList" содержит строки:
 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |
 			| 'Dress' | 'L/Green'  | 'Purchase invoice 3 900*' | 'pcs'  | '8,000'  |
 			| 'Boots' | '37/18SD'  | 'Purchase invoice 3 900*' | 'pcs'  | '15,000' |
-	* Проверка переноса заполненных товаров в Goods reciept
+	* Check the transfer of filled items to Goods reciept
 		И в таблице "PhysItemList" я нажимаю на кнопку с именем 'PhysItemListSwitchItemLists'
 		Тогда таблица "CompareItemList" содержит строки:
 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |

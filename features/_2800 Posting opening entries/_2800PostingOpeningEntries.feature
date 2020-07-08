@@ -2,7 +2,7 @@
 @tree
 @Positive
 
-Функционал: ввод начального остатка
+Функционал: check opening entry
 
 Как разработчик
 Я хочу создать документ для ввода начального остатка
@@ -90,7 +90,7 @@
 		И я нажимаю на кнопку 'Post and close'
 
 
-Сценарий: _400001 ввод начального остатка по кассовым и банковким счетам
+Сценарий: _400001 opening entry account balance
 	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -347,7 +347,7 @@
 
 
 
-Сценарий: _400002 ввод начального остатка по товарам
+Сценарий: _400002 opening entry inventory balance
 	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -658,7 +658,7 @@
 		| '100,000'  | 'Opening entry 2*' | 'Store 02' | 'L/Green'   |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _400003 проверка ввода начального остатка по авансам поставщикам/клиентам
+Сценарий: _400003 opening entry advance balance
 	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -750,7 +750,7 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _400004 проверка ввода начального остатка по задолженности поставщику по соглашению
+Сценарий: _400004 opening entry AP balance by partner terms (vendors)
 	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -853,7 +853,7 @@
 
 
 	
-Сценарий: _400005 проверка ввода начального остатка по задолженности клиента по соглашению
+Сценарий: _400005 opening entry AR balance by partner terms (customers)
 	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -956,7 +956,7 @@
 
 
 
-Сценарий: _400008 проверка ввода начального остатка по остаткам ДС/остаткам товара/дебиторке/кредиторке/авансам в одном документе
+Сценарий: _400008 check the entry of the account balance, inventory balance, Ap/Ar balance, advance in one document
 	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -1074,7 +1074,7 @@
 				И     таблица "AccountPayableByPartner terms" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
-		* Выбор тестового соглашения с взаиморасчетами по соглашениям
+		* Select тестового соглашения с взаиморасчетами по соглашениям
 			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 			| 'Description'              |
@@ -1114,7 +1114,7 @@
 				И     таблица "AccountReceivableByPartner terms" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
-		* Выбор тестового соглашения с взаиморасчетами по соглашениям
+		* Select тестового соглашения с взаиморасчетами по соглашениям
 			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'              |
@@ -1144,7 +1144,7 @@
 	# * Заполнение ввода начального остатка по задолженности поставщика  по документам
 
 
-Сценарий: _400009 проверка ввода начального остатка по остаткам AP и AR по документам
+Сценарий: _400009 check the entry of the Ap/Ar balance by documents
 	* Open document form для ввода начального остатка
 		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 		И я нажимаю на кнопку с именем 'FormCreate'

@@ -2,7 +2,7 @@
 @tree
 @Positive
 
-Функционал: загрузка валюты со внешних ресурсов
+Функционал: check loading currency from external resources
 
 Как разработчик
 Я хочу создать обработку для загрузки курсов валют со внешних ресурсов
@@ -12,7 +12,7 @@
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-Сценарий: загрузка курса валют
+Сценарий: check load currency rate
 	# Включая проверку загрузки только выбранных валют
 	И я включаю асинхронный режим выполнения шагов с интервалом "1"
 	Когда я вношу настройки для загрузки курса валют с Bank UA
@@ -103,18 +103,16 @@
 		И в таблице "Currencies" я нажимаю на кнопку 'Download'
 		И Пауза 40
 		И Я закрываю текущее окно
-		
-
-Сценарий: проверка загрузки курсов валют
-	И я открываю навигационную ссылку "e1cib/list/InformationRegister.CurrencyRates"
-	Тогда таблица "List" содержит строки:
-		| 'Currency from'  | 'Currency to'   | 'Source'        | 'Multiplicity' | 'Rate'  |
-		# | 'TRY'            | 'USD'           | 'Forex Buying'  | '1'            | '*'     |
-		# | 'TRY'            | 'EUR'           | 'Forex Buying'  | '1'            | '*'     |
-		# | 'TRY'            | 'USD'           | 'Forex Selling' | '1'            | '*'     |
-		| 'UAH'            | 'USD'           | 'Bank UA'       | '1'            | '*'     |
-		| 'UAH'            | 'EUR'           | 'Bank UA'       | '1'            | '*'     |
-		| 'UAH'            | 'TRY'           | 'Bank UA'       | '1'            | '*'     |
-	И Я закрыл все окна клиентского приложения
+	* Проверка загрузки курсов валют
+		И я открываю навигационную ссылку "e1cib/list/InformationRegister.CurrencyRates"
+		Тогда таблица "List" содержит строки:
+			| 'Currency from'  | 'Currency to'   | 'Source'        | 'Multiplicity' | 'Rate'  |
+			# | 'TRY'            | 'USD'           | 'Forex Buying'  | '1'            | '*'     |
+			# | 'TRY'            | 'EUR'           | 'Forex Buying'  | '1'            | '*'     |
+			# | 'TRY'            | 'USD'           | 'Forex Selling' | '1'            | '*'     |
+			| 'UAH'            | 'USD'           | 'Bank UA'       | '1'            | '*'     |
+			| 'UAH'            | 'EUR'           | 'Bank UA'       | '1'            | '*'     |
+			| 'UAH'            | 'TRY'           | 'Bank UA'       | '1'            | '*'     |
+		И Я закрыл все окна клиентского приложения
 
 

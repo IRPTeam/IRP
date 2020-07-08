@@ -38,7 +38,7 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	*Check filling in Sales order
+	* Check filling in Sales order
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'

@@ -3315,7 +3315,7 @@
 		И     таблица "PaymentList" стала равной:
 		| '#' | 'Amount' | 'Amount exchange' | 'Planning transaction basis' |
 		| '1' | ''       | ''                | ''                          |
-		* Check filling inTransit account из Accountant
+		* Check filling in Transit account из Accountant
 			И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
 		Тогда открылось окно '1C:Enterprise'
@@ -3375,7 +3375,7 @@
 		И     таблица "PaymentList" стала равной:
 		| '#' | 'Amount' | 'Planning transaction basis' |
 		| '1' | ''       | ''                          |
-		* Check filling inTransit account из Accountant
+		* Check filling in Transit account из Accountant
 			И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
 		Тогда открылось окно '1C:Enterprise'
@@ -3493,20 +3493,20 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154123 заполнение Transit account из Account при обмене валюты в BankReceipt
+Сценарий: _0154123 filling in Transit account from Account when exchanging currency (Bank Receipt)
 	И Я закрыл все окна клиентского приложения
-	* Open form BankReceipt и выбор типа операции Currency exchange
+	* Open form Bank Receipt and select transaction type Currency exchange
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-	* Check filling inTransit account 
+	* Check filling in Transit account 
 		И я нажимаю кнопку выбора у поля "Account"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'       |
 			| 'Bank account, USD' |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "TransitAccount" стал равен 'Transit Second'
-	* Check filling inTransit account при перевыборе Bank account
+	* Check filling in Transit account when re-select Bank account
 		И я нажимаю кнопку выбора у поля "Account"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Description'       |
@@ -3515,20 +3515,20 @@
 		И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _0154124 заполнение Transit account из Account при обмене валюты в BankPayment
+Сценарий: _0154124 filling in Transit account from Account when exchanging currency (Bank Payment)
 	И Я закрыл все окна клиентского приложения
-	* Open form BankPayment и выбор типа операции Currency exchange
+	* Open form Bank Payment and select transaction type Currency exchange
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-	* Check filling inTransit account 
+	* Check filling in Transit account 
 		И я нажимаю кнопку выбора у поля "Account"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Description'       |
 			| 'USD'      | 'Bank account, USD' |
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "TransitAccount" стал равен 'Transit Second'
-	* Check filling inTransit account при перевыборе Bank account
+	* Check filling in Transit account when re-select Bank account
 		И я нажимаю кнопку выбора у поля "Account"
 		И в таблице "List" я перехожу к строке:
 			| 'Currency' | 'Description'       |
@@ -3538,8 +3538,8 @@
 		И Я закрыл все окна клиентского приложения
 	* Проверка выбора Transit account
 
-Сценарий: _0154125 проверка отбора по Planing transaction basis в документе BankPayment в случае обмена валюты
-	* Open form BankPayment и выбор типа операции Currency exchange
+Сценарий: _0154125 check the selection by Planing transaction basis in Bank payment document in case of currency exchange
+	* Open form Bank Payment and select transaction type Currency exchange
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
@@ -3554,7 +3554,7 @@
 			| 'Currency' | 'Description'         |
 			| 'TRY'      | 'Bank account, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка отбора по Planing transaction basis
+	* Check the selection by Planing transaction basis
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
@@ -3567,11 +3567,11 @@
 		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-	* Проверка того, что выбранный документ попал в BankPayment
+	* Check that the selected document is in BankPayment
 		Тогда таблица "PaymentList" содержит строки:
 		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 13*'   |
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
@@ -3581,7 +3581,7 @@
 		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран при проведенном Bank Payment
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when post Bank Payment
 		И я нажимаю на кнопку 'Post'
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
@@ -3592,7 +3592,7 @@
 		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже был выбран ранее (строка удалена)
+	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -3607,11 +3607,11 @@
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
 		И я нажимаю на кнопку 'Post'
 		И я запоминаю значение поля "Number" как "Number"
-	* Проверка не очистки Planing transaction basis в случае отмены при изменении вида транзакции
+	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Cancel'
-	* Проверка очистки Planing transaction basis в случае изменения вида транзакции
+	* Check clearing Planing transaction basis in case of transaction type change
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3619,22 +3619,10 @@
 		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
 	И я закрыл все окна клиентского приложения
-	# * Переоткрытие созданного BankPayment
-	# 	И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
-	# 	И в таблице "List" я перехожу к строке:
-	# 		| 'Number' |
-	# 		| '$Number$' |
-	# 	И в таблице "List" я выбираю текущую строку
-	# * Проверка очистки Planing transaction basis в случае изменения валюты
-	# 	И я нажимаю кнопку выбора у поля "Account"
-	# 	И в таблице "List" я перехожу к строке:
-	# 		| 'Currency' | 'Description'         |
-	# 		| 'USD'      | 'Bank account, USD' |
-	# 	И в таблице "List" я выбираю текущую строку
+	
 
-
-Сценарий: _0154126 проверка отбора по Planing transaction basis в документе BankReceipt в случае обмена валюты
-	* Open form BankPayment и выбор типа операции Currency exchange
+Сценарий: _0154126 check the selection by Planing transaction basis in BankReceipt in case of currency exchange
+	* Open form Bank Payment and select transaction type Currency exchange
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
@@ -3649,7 +3637,7 @@
 			| 'Currency' | 'Description'         |
 			| 'EUR'      | 'Bank account, EUR' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка отбора по Planing transaction basis
+	* Check the selection by Planing transaction basis
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
@@ -3660,11 +3648,11 @@
 		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-	* Проверка того, что выбранный документ попал в BankPayment
+	* Check that the selected document is in BankPayment
 		Тогда таблица "PaymentList" содержит строки:
 		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 13*'   |
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
@@ -3674,7 +3662,7 @@
 		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран при проведенном Bank Receipt
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form при проведенном Bank Receipt
 		И я нажимаю на кнопку 'Post'
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
@@ -3685,7 +3673,7 @@
 		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже был выбран ранее (строка удалена)
+	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -3698,11 +3686,11 @@
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
 		И я нажимаю на кнопку 'Post'
-	* Проверка не очистки Planing transaction basis в случае отмены при изменении вида транзакции
+	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Cancel'
-	* Проверка очистки Planing transaction basis в случае изменения вида транзакции
+	* Check clearing Planing transaction basis in case of transaction type change
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3712,8 +3700,8 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154127 проверка отбора по Planing transaction basis в документе CashPayment в случае обмена валюты
-	* Open form CashPayment и выбор типа операции Currency exchange
+Сценарий: _0154127 check the selection by Planing transaction basis in Cash Payment in case of currency exchange
+	* Open form CashPayment and select transaction type Currency exchange
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
@@ -3733,7 +3721,7 @@
 		| 'Code' | 'Description'     |
 		| 'USD'  | 'American dollar' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка отбора по Planing transaction basis
+	* Check the selection by Planing transaction basis
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
@@ -3743,11 +3731,11 @@
 		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-	* Проверка того, что выбранный документ попал в CashPayment
+	* Check that the selected document is in Cash Payment
 		Тогда таблица "PaymentList" содержит строки:
 		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 11*'   |
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
@@ -3756,7 +3744,7 @@
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
 		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		И я нажимаю на кнопку с именем 'FormChoose'
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран при проведенном CashPayment
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Payment posted
 		И я нажимаю на кнопку 'Post'
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
@@ -3766,7 +3754,7 @@
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
 		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		И я нажимаю на кнопку с именем 'FormChoose'
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже был выбран ранее (строка удалена)
+	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -3779,11 +3767,11 @@
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
 		И я нажимаю на кнопку 'Post'
-	* Проверка не очистки Planing transaction basis в случае отмены при изменении вида транзакции
+	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Cancel'
-	* Проверка очистки Planing transaction basis в случае изменения вида транзакции
+	* Check clearing Planing transaction basis in case of transaction type change
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3793,8 +3781,8 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154128 проверка отбора по Planing transaction basis в документе CashReceipt в случае обмена валюты
-	* Open form CashReceipt и выбор типа операции Currency exchange
+Сценарий: _0154128 check the selection by Planing transaction basis in CashReceipt in case of currency exchange
+	* Open form CashReceipt and select transaction type Currency exchange
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
@@ -3814,7 +3802,7 @@
 			| 'Code' |
 			| 'TRY'  |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка отбора по Planing transaction basis
+	* Check the selection by Planing transaction basis
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
@@ -3824,11 +3812,11 @@
 			| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-	* Проверка того, что выбранный документ попал в CashReceipt
+	* Check that the selected document is in CashReceipt
 		Тогда таблица "PaymentList" содержит строки:
 			| 'Amount' | 'Planning transaction basis' |
 			| '100,00' | 'Cash transfer order 11*'   |
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
@@ -3837,7 +3825,7 @@
 			| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
 			| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		И я нажимаю на кнопку с именем 'FormChoose'
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран при проведенном CashReceipt
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Receipt posted 
 		И я нажимаю на кнопку 'Post'
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
@@ -3847,7 +3835,7 @@
 		| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
 		| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		И я нажимаю на кнопку с именем 'FormChoose'
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже был выбран ранее (строка удалена)
+	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -3860,11 +3848,11 @@
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
 		И я нажимаю на кнопку 'Post'
-	* Проверка не очистки Planing transaction basis в случае отмены при изменении вида транзакции
+	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Cancel'
-	* Проверка очистки Planing transaction basis в случае изменения вида транзакции
+	* Check clearing Planing transaction basis in case of transaction type change
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3873,8 +3861,8 @@
 		| '200,00' | ''                          |
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _0154129 проверка отбора по Planing transaction basis в документе BankPayment в случае перемещения ДС
-	* Open form BankPayment и выбор типа операции Cash transfer order
+Сценарий:  _0154129 check the selection by Planing transaction basis in BankPayment in case of cash transfer
+	* Open form Bank Payment and select transaction type Cash transfer order
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
@@ -3889,7 +3877,7 @@
 			| 'Currency' | 'Description'         |
 			| 'EUR'      | 'Bank account 2, EUR' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка отбора по Planing transaction basis
+	* Check the selection by Planing transaction basis
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
@@ -3899,11 +3887,11 @@
 		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-	* Проверка того, что выбранный документ попал в BankPayment
+	* Check that the selected document is in BankPayment
 		Тогда таблица "PaymentList" содержит строки:
 		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 14*'   |
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
@@ -3912,7 +3900,7 @@
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
 		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		И я нажимаю на кнопку с именем 'FormChoose'
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран при проведенном Bank Payment
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Payment posted
 		И я нажимаю на кнопку 'Post'
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
@@ -3922,7 +3910,7 @@
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
 		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		И я нажимаю на кнопку с именем 'FormChoose'
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже был выбран ранее (строка удалена)
+	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -3935,11 +3923,11 @@
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
 		И я нажимаю на кнопку 'Post'
-	* Проверка не очистки Planing transaction basis в случае отмены при изменении вида транзакции
+	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Cancel'
-	* Проверка очистки Planing transaction basis в случае изменения вида транзакции
+	* Check clearing Planing transaction basis in case of transaction type change
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -3948,8 +3936,8 @@
 		| '200,00' | ''                          |
 	И я закрыл все окна клиентского приложения
 
-Сценарий:  _0154130 проверка отбора по Planing transaction basis в документе BankReceipt в случае перемещения ДС
-	* Open form BankReceipt и выбор типа операции Cash transfer order
+Сценарий:  _0154130 check the selection by Planing transaction basis in Bank Receipt in case of cash transfer
+	* Open form Bank Receipt and select transaction type Cash transfer order
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
@@ -3964,7 +3952,7 @@
 			| 'Currency' | 'Description'         |
 			| 'EUR'      | 'Bank account, EUR' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка отбора по Planing transaction basis
+	* Check the selection by Planing transaction basis
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
@@ -3974,11 +3962,11 @@
 		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-	* Проверка того, что выбранный документ попал в BankReceipt
+	* Check that the selected document is in BankReceipt
 		Тогда таблица "PaymentList" содержит строки:
 		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 14*'   |
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
@@ -3987,7 +3975,7 @@
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
 		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		И я нажимаю на кнопку с именем 'FormChoose'
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже выбран при проведенном Bank Receipt
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Receipt posted
 		И я нажимаю на кнопку 'Post'
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
@@ -3997,7 +3985,7 @@
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
 		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		И я нажимаю на кнопку с именем 'FormChoose'
-	* Проверка того, что в форме подбора Planing transaction basis отображается документ который уже был выбран ранее (строка удалена)
+	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
@@ -4010,11 +3998,11 @@
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
 		И я нажимаю на кнопку 'Post'
-	* Проверка не очистки Planing transaction basis в случае отмены при изменении вида транзакции
+	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Cancel'
-	* Проверка очистки Planing transaction basis в случае изменения вида транзакции
+	* Check clearing Planing transaction basis in case of transaction type change
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
@@ -4050,7 +4038,7 @@
 
 
 
-Сценарий: check filling in and re-filling документа CreditDebitNote
+Сценарий: check filling in and re-filling Credit debit note
 	* Create a document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -4107,7 +4095,7 @@
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '14'
 		И я нажимаю на кнопку 'Post'
-	* Re-select partner и проверка очистки данных в табличной части
+	* Re-select partner and check of data cleansing in the tabular section
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -4121,9 +4109,9 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		Тогда в таблице "Transactions" количество строк "равно" 0
-	* Filter check документов-оснований по компании
+	* Filter check basis documents (depend of company)
 		И из выпадающего списка "Operation type" я выбираю точное значение 'Payable'
-	* Перевыбор компании
+	* Re-select company
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'    |
@@ -4152,17 +4140,15 @@
 			| ''                 |
 			| 'Purchase invoice' |
 		И в таблице "" я выбираю текущую строку
-		И таблица "ИмяТаблицы" содержит стро:	| ИмяКолонки1 | ИмяКолонки2 |
-	| Значение1 | Значение2 |
-
+		И таблица "ИмяТаблицы" содержит строки:	
 			| 'Number' | 'Legal name'    | 'Partner' | 'Amount'    | 'Currency' |
 			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00' | 'TRY'      |
 			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00' | 'TRY'      |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154131 проверка формы по валютам на примере Bank Receipt
-	* Заполнение Bank Receipt
-		* Заполнение шапки документа
+Сценарий: _0154131  check currency form in  Bank Receipt
+	* Filling in Bank Receipt
+		* Filling the document header
 			И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
@@ -4189,35 +4175,35 @@
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
 	* Check form by currency
-		* Базовый пересчет по курсу
+		* Basic recalculation at the rate
 			И в таблице "CurrenciesPaymentList" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
-		* Пересчет Rate presentation при изменении Amount
+		* Recalculation of Rate presentation when changing Amount
 			И в таблице "CurrenciesPaymentList" в поле с именем 'CurrenciesPaymentListAmount' я ввожу текст '35,00'
 			И в таблице "CurrenciesPaymentList" я завершаю редактирование строки
 			И в таблице "CurrenciesPaymentList" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '35,00'  | '1'            |
-		* Пересчет Amount при изменении Multiplicity
+		* Recount Amount when changing Multiplicity
 			И в таблице "CurrenciesPaymentList" в поле 'Multiplicity' я ввожу текст '2'
 			И в таблице "CurrenciesPaymentList" я завершаю редактирование строки
 			И в таблице "CurrenciesPaymentList" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '17,50'  | '2'            |
-		* Пересчет Amount при изменении Multiplicity Rate presentation
+		* Recount Amount when changing Multiplicity
 			И в таблице "CurrenciesPaymentList" в поле 'Rate presentation' я ввожу текст '6,0000'
 			И в таблице "CurrenciesPaymentList" я завершаю редактирование строки
 			И в таблице "CurrenciesPaymentList" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '16,67'  | '2'            |
-		* Пересчет Amount при изменении суммы платежа
+		* Recount Amount when changing payment amount
 			И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '250,00'
 			И в таблице "CurrenciesPaymentList" я завершаю редактирование строки
 			И в таблице "CurrenciesPaymentList" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '20,83'  | '2'            |
-		* Проверка стандартного курса при добавлении следующей строки
+		* Check the standard currency rate when adding the next line
 			И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 			И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -4234,7 +4220,7 @@
 			И в таблице "CurrenciesPaymentList" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
-		* Пересчет при изменении валюты
+		* Recount when currency changes
 			И я нажимаю кнопку выбора у поля "Account"
 			И в таблице "List" я перехожу к строке:
 				| 'Currency' | 'Description'       |
@@ -4246,7 +4232,7 @@
 			И в таблице "CurrenciesPaymentList" я перехожу к строке:
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'TRY'            | 'Partner term' | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
-		* Проверка отображения обратного курса
+		* Reverse rate display check
 			Дано двойной клик на картинку "reverse"
 			И в таблице "PaymentList" я перехожу к строке:
 				| 'Partner term'                               | 'Amount' | 'Partner' | 'Payer'            |
@@ -4257,9 +4243,9 @@
 				| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _0154132 проверка формы по валютам на примере Incoming payment order
-	* Заполнение Incoming payment order
-		* Заполнение шапки документа
+Сценарий: _0154132  check currency form in Incoming payment order
+	* Filling in Incoming payment order
+		* Filling the document header
 			И я открываю навигационную ссылку 'e1cib/list/Document.IncomingPaymentOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Company"
@@ -4284,35 +4270,35 @@
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
 	* Check form by currency
-		* Базовый пересчет по курсу
+		* Basic recalculation at the rate
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
-		* Пересчет Rate presentation при изменении Amount
+		* Recalculation of Rate presentation when changing Amount
 			И в таблице "PaymentListCurrencies" в поле с именем 'PaymentListCurrenciesAmount' я ввожу текст '35,00'
 			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '35,00'  | '1'            |
-		* Пересчет Amount при изменении Multiplicity
+		* Recount Amount when changing Multiplicity
 			И в таблице "PaymentListCurrencies" в поле 'Multiplicity' я ввожу текст '2'
 			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '17,50'  | '2'            |
-		* Пересчет Amount при изменении Multiplicity Rate presentation
+		* Recount Amount when changing Multiplicity Rate presentation
 			И в таблице "PaymentListCurrencies" в поле 'Rate presentation' я ввожу текст '6,0000'
 			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '16,67'  | '2'            |
-		* Пересчет Amount при изменении суммы платежа
+		* Recount Amount when changing payment amount
 			И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '250,00'
 			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '20,83'  | '2'            |
-		* Проверка стандартного курса при добавлении следующей строки
+		* Check the standard currency rate when adding the next line
 			И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -4328,7 +4314,7 @@
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
-		* Пересчет при изменении валюты
+		* Recount when currency changes
 			И я нажимаю кнопку выбора у поля "Account"
 			И в таблице "List" я перехожу к строке:
 				| 'Currency' | 'Description'       |
@@ -4340,7 +4326,7 @@
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
-		* Проверка отображения обратного курса 
+		* Reverse rate display check 
 			Дано двойной клик на картинку "reverse"
 			И в таблице "PaymentList" я перехожу к строке:
 				| 'Amount' | 'Partner' | 'Payer'            |
@@ -4351,9 +4337,9 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _0154133 проверка формы по валютам на примере  Outgoing payment order
-	* Заполнение Outgoing Payment Order
-		* Заполнение шапки документа
+Сценарий: _0154133  check currency form in Outgoing payment order
+	* Filling in Outgoing Payment Order
+		* Filling the document header
 			И я открываю навигационную ссылку 'e1cib/list/Document.OutgoingPaymentOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я нажимаю кнопку выбора у поля "Company"
@@ -4378,35 +4364,35 @@
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
 	* Check form by currency
-		* Базовый пересчет по курсу
+		* Basic recalculation at the rate
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
-		* Пересчет Rate presentation при изменении Amount
+		* Recalculation of Rate presentation when changing Amount
 			И в таблице "PaymentListCurrencies" в поле с именем 'PaymentListCurrenciesAmount' я ввожу текст '35,00'
 			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '35,00'  | '1'            |
-		* Пересчет Amount при изменении Multiplicity
+		* Recount Amount when changing Multiplicity
 			И в таблице "PaymentListCurrencies" в поле 'Multiplicity' я ввожу текст '2'
 			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '17,50'  | '2'            |
-		* Пересчет Amount при изменении Multiplicity Rate presentation
+		* Recount Amount when changing Multiplicity Rate presentation
 			И в таблице "PaymentListCurrencies" в поле 'Rate presentation' я ввожу текст '6,0000'
 			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '16,67'  | '2'            |
-		* Пересчет Amount при изменении суммы платежа
+		* Recount Amount when changing payment amount
 			И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '250,00'
 			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '20,83'  | '2'            |
-		* Проверка стандартного курса при добавлении следующей строки
+		* Check the standard currency rate when adding the next line
 			И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -4422,7 +4408,7 @@
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
-		* Пересчет при изменении валюты
+		* Recount when currency changes
 			И я нажимаю кнопку выбора у поля "Account"
 			И в таблице "List" я перехожу к строке:
 				| 'Currency' | 'Description'       |
@@ -4434,7 +4420,7 @@
 			И в таблице "PaymentListCurrencies" я перехожу к строке:
 				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
-		* Проверка отображения обратного курса 
+		* Reverse rate display check 
 			Дано двойной клик на картинку "reverse"
 			И в таблице "PaymentList" я перехожу к строке:
 				| 'Amount' | 'Partner' | 'Payee'            |
@@ -4443,10 +4429,3 @@
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
 		И я закрыл все окна клиентского приложения
-
-
-
-
-
-
-

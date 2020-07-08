@@ -3,18 +3,18 @@
 @Positive
 
 
-Функционал: проверка заполения спецификации
+Функционал: check specification filling 
 
 
 
 Контекст: 
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 	
-Сценарий: _206001 проверка вывода сообщения при создание Bundle с незаполненным Item
-	* Открытие списка спецификаций
+Сценарий: _206001 check message output when creating a Bundle with empty item
+	* Open the list of specifications
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение наименования Bundle и товаров (без количества)
+	* Filling in the Bundle name and items (without quantity)
 		И я меняю значение переключателя 'Type' на 'Bundle'
 		И в поле 'ENG' я ввожу текст 'Test'
 		И я нажимаю кнопку выбора у поля "Item bundle"
@@ -42,9 +42,9 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "FormTable*" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save'
-	* Проверка вывода сообщения о том, что количество не заполнено
+	* Check the output of the message that the quantity is not filled
 		Затем я жду, что в сообщениях пользователю будет подстрока "Field: [Quantity] is empty" в течение 10 секунд
-	* Заполнение количества и Save verification
+	* Filling in the quantity and check the saving
 		И в таблице "FormTable*" я выбираю текущую строку
 		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '1,000'
 		И в таблице "FormTable*" я завершаю редактирование строки
@@ -55,12 +55,12 @@
 			| 'Description' |
 			| 'Test'        |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка ошибки при сохранении без заполненно Item
+	* Checking for errors when saving without a filled item
 		И в поле 'Item' я ввожу текст ''
 		И я нажимаю на кнопку 'Save'
-		* Проверка вывода сообщения о том, что количество не заполнено
+		* Check the output of the message that the item is not filled
 			Затем я жду, что в сообщениях пользователю будет подстрока "Field: [Item] is empty" в течение 10 секунд
-	* Проверка ошибки при сохранении без заполненно Item bundle
+	* Checking for errors when saving without a filled item bundle
 		И я нажимаю кнопку выбора у поля "Item"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -84,9 +84,9 @@
 		И в таблице "FormTable*" я завершаю редактирование строки
 		И в поле 'Item bundle' я ввожу текст ''
 		И я нажимаю на кнопку 'Save'
-		* Проверка вывода сообщения о том, что количество не заполнено
+		* Check the output of the message that the item bundle is not filled
 			Затем я жду, что в сообщениях пользователю будет подстрока "Field: [Item Bundle] is empty" в течение 10 секунд
-	* Проверка ошибки при сохранении без заполненно свойства
+	* Checking for errors when saving without a filled property
 		И я нажимаю кнопку выбора у поля "Item bundle"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'          |
@@ -97,9 +97,9 @@
 		И В таблице "FormTable*" я нажимаю кнопку очистить у поля "Color"
 		И в таблице "FormTable*" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save'
-		* Проверка вывода сообщения о том, что количество не заполнено
+		* Check the output of the message that the quantity is not filled
 			Затем я жду, что в сообщениях пользователю будет подстрока "Field: [Color] is empty" в течение 10 секунд
-	* Проверка ошибки при сохранении с одинаковыми строками
+	* Check for errors when saving with the same lines
 		И в таблице "FormTable*" я выбираю текущую строку
 		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
 		И в таблице "List" я перехожу к строке:
@@ -126,15 +126,15 @@
 		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '1,000'
 		И в таблице "FormTable*" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Save'
-		* Проверка вывода сообщения о том, что количество не заполнено
+		* Check the output of the message that the quantity is not filled
 			Затем я жду, что в сообщениях пользователю будет подстрока "Value is not unique" в течение 10 секунд
-	* Удаление дубля и Save verification
+	* Delete double and check saving
 		И в таблице 'FormTable*' я удаляю строку
 		И я нажимаю на кнопку 'Save'
 		И я нажимаю на кнопку 'Save and close'
 		И я жду закрытия окна 'Test (Specification) *' в течение 10 секунд
 		Тогда я проверяю наличие элемента справочника "Specifications" со значением поля "Description_en" "Test"
-	* Пометка на удаление созданной спецификации
+	* Mark to delete the created specification
 		И в таблице "List" я перехожу к строке:
 			| 'Description' | 'Type'   |
 			| 'Test'        | 'Bundle' |
@@ -144,12 +144,12 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: create дубля спецификации
-	# дубль создается для спецификации А-8
-	* Открытие спправочника создания спецификаций
+Сценарий: create a specification double
+	# the double is created for the A-8 specification
+	* Open specification catalog
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
 		Тогда я проверяю наличие элемента справочника "Specifications" со значением поля "Description_en" "A-8"
-	* Создание копии набора спецификации А-8
+	* Create a copy of the A-8 specification set
 		И я нажимаю на кнопку с именем "FormCreate"
 		И я меняю значение переключателя 'Type' на 'Set'
 		И я нажимаю кнопку выбора у поля "Item type"
@@ -221,7 +221,7 @@
 		И в поле 'TR' я ввожу текст 'Duplicate A-8'
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save'
-	* Проверка вывода сообщения о том, что спецификацию нельзя сохранить	
+	* Check the output message that the specification cannot be saved
 		Когда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
 		Затем я жду, что в сообщениях пользователю будет подстрока "Specification is not unique" в течение 10 секунд

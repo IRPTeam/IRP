@@ -3,7 +3,7 @@
 @Positive
 
 
-Функционал: создание документов списания недостач и оприходования излишков товаров
+Функционал: product inventory
 
 Как разработчик
 Я хочу добавить функционал по списанию недостач и оприходованию излишков товаров
@@ -145,7 +145,7 @@
 			И я нажимаю на кнопку 'Post and close'
 
 
-Сценарий: _2990001 заполнение справочника статусов для PhysicalInventory и PhysicalCountByLocation
+Сценарий: _2990001 filling in the status guide for PhysicalInventory and PhysicalCountByLocation
 	* Open a creation form ObjectStatuses
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 	* Присвоение предопределенному элементу PhysicalInventory наименования 
@@ -249,11 +249,11 @@
 
 
 
-Сценарий: _2990002 создание документа оприходования излишков товаров и проверка его проводок
+Сценарий: _2990002 create Stock adjustment as surplus
 	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -369,7 +369,7 @@
 	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -1049,7 +1049,7 @@
 		* Open document form
 			И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки документа
+		* Filling the document header
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |

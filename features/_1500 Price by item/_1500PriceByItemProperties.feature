@@ -3,18 +3,18 @@
 @Positive
 
 
-Функционал: установка цен номенклатуры по Item
+Функционал: check setting item prices for Item
 
-Как разработчик
-Я хочу установить цену на Item и по properties
-Чтобы на все item key одного Item действовала единая цена, а также можно было установить цены по свойствам
+As a sales manager.
+I want to put a price on the Item and the properties
+In order to have the same price applied to all item key of one Item, and also to be able to set prices for the properties of
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _150000 preparation
-	* Выбор в Item type свойств которые будут влиять на цену
+	* Select в Item type свойств которые будут влиять на цену
 		* Для вида номенклатуры Сlothes
 			И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
 			И в таблице "List" я перехожу к строке:
@@ -49,7 +49,7 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _150001 внесение базовой цены с НДС по свойствам
+Сценарий: _150001 basic price entry by properties (including VAT)
 	И я создаю документ ценообразования по свойствам для вида номенклатуры Сlothes
 		И я открываю навигационную ссылку "e1cib/list/Document.PriceList"
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -171,7 +171,7 @@
 
 
 
-Сценарий: _150002 внесение базовой цены с НДС по Item
+Сценарий: _150002 basic price entry by items (including VAT)
 	И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я заполняю данные прайс листа по item key
@@ -265,7 +265,7 @@
 	И Пауза 10
 
 
-Сценарий: _150003 проверка отображения действующих цен в Item
+Сценарий: _150003 check that the current prices are displayed in the Item
 	* Открытие карточки товара Dress
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 		И в таблице "List" я перехожу к строке:
@@ -344,7 +344,7 @@
 
 
 
-Сценарий: _150004 проверка расчета цены по спецификации (исходя из цены Item и properties) в документе Sales order
+Сценарий: _150004 check the price calculation according to the specification (based on the Item and properties price) in Sales order document
 	И я распровожу Basic Price list по item key
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И в таблице "List" я перехожу к строке:
@@ -376,7 +376,7 @@
 		| 'Dress' | '3 100,00' | 'Dress/A-8' | 'Store 01' | '1,000' | 'pcs'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _150004 проверка расчета цены по бандл (исходя из цены properties) в документе Sales order
+Сценарий: _150004 check the price calculation for the bandle (based on the properties price) in the Sales order document
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
@@ -402,7 +402,7 @@
 		| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | 'Store 01' | '1,000' |  'pcs'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _150005 проверка цены по свойствам в документе Sales order
+Сценарий: _150005 price check by properties in Sales order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
@@ -428,7 +428,7 @@
 		| 'Dress' | '350,00' | 'L/Green' | 'Store 01' | '1,000' |  'pcs'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _150006 проверка перерисовки колонок в прайс листе по доп свойствам при перевыборе вида номенклатуры
+Сценарий: _150006 check the redrawing of columns in the price list for additional properties when re-selecting the type of items
 	* Открытие формы Price list с типом установки по доп свойствам
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -475,7 +475,7 @@
 	И Я закрыл все окна клиентского приложения
 
 
-Сценарий: проверка ввода по строке в прайс листе по доп свойствам
+Сценарий: check input by line in the price list for additional properties
 	И я закрыл все окна клиентского приложения
 	* Open a creation form Price List
 		И я открываю навигационную ссылку "e1cib/list/Document.PriceList"

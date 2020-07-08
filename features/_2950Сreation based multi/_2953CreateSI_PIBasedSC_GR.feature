@@ -1,7 +1,8 @@
 #language: ru
 @tree
 @Positive
-Функционал: создание инвойсов based on расходного и приходного ордера при непрямой схемы поставки
+Функционал: create Purchase invoices and Sales invoices based on Goods receipt and Shipment confirmation
+
 
 Как Разработчик
 Я хочу добавить возможность создавать инвойс based on расходного и приходного ордера 
@@ -12,7 +13,7 @@
 
 
 # Непрямая схема отгрузки Sales order - Purchase order - Goods reciept - Purchase invoice - Shipment confirmation - Sales invoice
-Сценарий: _090501 создание Sales invoice based on Shipment confirmation (один к одному)
+Сценарий: _090501 creation of Sales invoice based on Shipment confirmation (one to one)
 	И я тестово создаю Sales order и на его основании Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -63,7 +64,7 @@
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090502 создание Purchase invoice based on Goods reciept (один к одному)
+Сценарий: _090502 creating a purchase invoice based on Goods reciept (one to one)
 	И я тестово создаю Purchase order и на его основании Goods reciept
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -120,7 +121,7 @@
 		| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | '*'                  |
 		И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _090503 создание Sales invoice based on нескольких Shipment confirmation
+Сценарий: _090503 creating Sales invoice based on several Shipment confirmation
 	И я тестово создаю первый заказ и Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -297,7 +298,7 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090504 создание Purchase invoice based on нескольких Goods reciept
+Сценарий: _090504 creating Purchase invoice based on several Goods reciept
 	И я тестово создаю Purchase order и на его основании Goods reciept
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -512,7 +513,7 @@
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090505 создание Sales invoice based on нескольких Shipment confirmation (разная валюта)
+Сценарий: _090505 creation of Sales invoice based on several Shipment confirmation (different currency)
 # должно создаться 2 Sales invoice
 	И я тестово создаю первый заказ и Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -629,7 +630,7 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090506 создание Purchase invoice based on нескольких Goods reciept
+Сценарий: _090506 creating Purchase invoice based on several Goods reciept
 	И я тестово создаю Purchase order и на его основании Goods reciept
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'

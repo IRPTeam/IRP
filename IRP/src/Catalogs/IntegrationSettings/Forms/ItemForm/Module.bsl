@@ -59,7 +59,7 @@ EndProcedure
 &AtClient
 Procedure Login(Command)
 	If Object.IntegrationType = PredefinedValue("Enum.IntegrationType.GoogleDrive") Then
-		GoogleDriveClient.Auth(ThisForm);
+		GoogleDriveClient.Auth(ThisObject);
 	EndIf;
 EndProcedure
 

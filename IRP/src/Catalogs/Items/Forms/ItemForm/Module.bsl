@@ -70,12 +70,12 @@ EndProcedure
 
 &AtClient
 Procedure PictureViewHTMLOnClick(Item, EventData, StandardProcessing)
-	PictureViewerClient.PictureViewHTMLOnClick(ThisForm, Item, EventData, StandardProcessing);
+	PictureViewerClient.PictureViewHTMLOnClick(ThisObject, Item, EventData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure PictureViewerHTMLDocumentComplete(Item)
-	PictureViewerClient.UpdateHTMLPicture(Item, ThisForm);
+	PictureViewerClient.UpdateHTMLPicture(Item, ThisObject);
 EndProcedure
 
 #EndRegion

@@ -75,7 +75,7 @@ EndProcedure
 
 &AtClient
 Procedure Upload(Command)
-	PictureViewerClient.Upload(ThisForm, Object, Object.Volume);
+	PictureViewerClient.Upload(ThisObject, Object, Object.Volume);
 EndProcedure
 
 &AtClient

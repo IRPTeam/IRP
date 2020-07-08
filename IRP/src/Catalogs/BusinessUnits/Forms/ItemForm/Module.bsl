@@ -20,7 +20,6 @@ EndProcedure
 
 #EndRegion
 
-
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);

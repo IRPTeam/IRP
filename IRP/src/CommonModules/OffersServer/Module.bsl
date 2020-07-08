@@ -14,7 +14,7 @@ Function GetAllActiveOffers_ForDocument(Val Object, AddInfo = Undefined) Export
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.PurchasesAndSales);
 		Return GetAllActiveOffers_ForDocument_ByDocumentTypes(Object, OffersDocumentTypesArray, AddInfo);
 	Else
-		Raise StrTemplate(R()["S_013"], String(TypeOf(Object.Ref)));
+		Raise StrTemplate(R().S_013, String(TypeOf(Object.Ref)));
 	EndIf;
 EndFunction
 
@@ -62,7 +62,7 @@ Function GetAllActiveOffers_ForRow(Val Object, AddInfo = Undefined) Export
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.PurchasesAndSales);
 		Return GetAllActiveOffers_ForRow_ByDocumentTypes(Object, OffersDocumentTypesArray, AddInfo);
 	Else
-		Raise StrTemplate(R()["S_013"], String(TypeOf(Object.Ref)));
+		Raise StrTemplate(R().S_013, String(TypeOf(Object.Ref)));
 	EndIf;
 EndFunction
 
@@ -104,7 +104,7 @@ Function GetAllAppliedOffers(Val Object, AddInfo = Undefined) Export
 	If CanGetAllAppliedOffers Then
 		Return GetAllAppliedOffers_Documents(Object, AddInfo);
 	Else
-		Raise StrTemplate(R()["S_013"], String(TypeOf(Object.Ref)));
+		Raise StrTemplate(R().S_013, String(TypeOf(Object.Ref)));
 	EndIf;
 EndFunction
 
@@ -257,13 +257,14 @@ Function CalculateOffersTreeAndPutToTmpStorage_ForDocument(Val Object, OffersInf
 EndFunction
 
 Function CalculateOffersTree_ForDocument(Val Object, OffersInfo, AddInfo = Undefined) Export
-	If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
+	isTaxDocRef = TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
 		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
 		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
+		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice");
+	If isTaxDocRef Then
 			OffersTree = CalculateOffersTree_Documents(Object, OffersInfo, AddInfo);
 	Else
-		Raise StrTemplate(R()["S_013"], String(TypeOf(Object.Ref)));
+		Raise StrTemplate(R().S_013, String(TypeOf(Object.Ref)));
 	EndIf;
 	Return OffersTree;
 EndFunction
@@ -273,13 +274,14 @@ Function CalculateOffersTreeAndPutToTmpStorage_ForRow(Val Object, OffersInfo, Ad
 EndFunction
 
 Function CalculateOffersTree_ForRow(Val Object, OffersInfo, AddInfo = Undefined) Export
-	If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
+	isTaxDocRef = TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
 		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
 		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
+		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice");
+	If isTaxDocRef Then
 			OffersTree = CalculateOffersTree_Documents(Object, OffersInfo, AddInfo);
 	Else
-		Raise StrTemplate(R()["S_013"], String(TypeOf(Object.Ref)));
+		Raise StrTemplate(R().S_013, String(TypeOf(Object.Ref)));
 	EndIf;
 	Return OffersTree;
 EndFunction

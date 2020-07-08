@@ -1,4 +1,3 @@
-
 Function GetLockFields(Data) Export
 	Result = New Structure();
 	Result.Insert("RegisterName", "AccumulationRegister.OrderBalance");	

@@ -73,9 +73,6 @@ Function PushOwnerActionHandlers(Action)
 		PushedHandler = New Structure();
 		PushedHandler.Insert("ActionHandler", Owner.GetAction(Action.ActionName));
 		PushedHandler.Insert("ActionName", Action.ActionName);
-		// bugfix for web-client
-		//PushedHandler.Insert("OwnerType", TypeOf(Owner));
-		//If PushedHandler.OwnerType = Type("ClientApplicationForm") Then
 		If TypeOf(Owner) = Type("ClientApplicationForm") Then
 			PushedHandler.Insert("OwnerName", "_ClientApplicationForm_");
 		Else

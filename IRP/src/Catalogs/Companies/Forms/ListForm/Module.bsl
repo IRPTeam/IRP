@@ -12,4 +12,3 @@ Procedure OurCompanyFilterOnChange(Item)
 			DataCompositionComparisonType.Equal,
 			ValueIsFilled(OurCompanyFilter));
 EndProcedure
-

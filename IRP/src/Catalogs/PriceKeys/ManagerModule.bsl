@@ -136,4 +136,3 @@ Function CreateRefByProperties(TableOfProperties, Item, AddInfo = Undefined) Exp
 	NewObject.Write();
 	Return NewObject.Ref;
 EndFunction
-

@@ -114,7 +114,6 @@ Procedure DescriptionClick(Item, StandardProcessing)
 	DocInventoryTransferClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
-
 #Region GroupTitleDecorations
 
 &AtClient
@@ -153,7 +152,6 @@ EndProcedure
 Procedure SearchByBarcode(Command)
 	DocInventoryTransferClient.SearchByBarcode(Command, Object, ThisObject);
 EndProcedure
-
 
 #Region AddAttributes
 

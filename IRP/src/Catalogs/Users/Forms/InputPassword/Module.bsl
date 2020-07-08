@@ -6,7 +6,7 @@ EndProcedure
 &AtClient
 Procedure Ok(Command)
 	If ThisObject.Password <> ThisObject.ConfirmPassword Then
-		CommonFunctionsClientServer.ShowUsersMessage(R()["Error_014"], "ConfirmPassword");
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_014, "ConfirmPassword");
 		Return;
 	EndIf;
 	Close(New Structure("Password", ThisObject.Password));

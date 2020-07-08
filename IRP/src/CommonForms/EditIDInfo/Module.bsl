@@ -124,4 +124,3 @@ Procedure IDInfoOnStartEdit(Item, NewRow, Clone)
 		Item.ChildItems.IDInfoValue.TypeRestriction = Item.CurrentData.TypeDef;
 	EndIf;
 EndProcedure
-

@@ -185,7 +185,6 @@ Function PutStatusPostingToStructure(Status) Export
 	Return Posting;
 EndFunction
 
-
 Function StatusHasPostingType(Status, PostingType) Export
 	
 	Query = New Query();

@@ -24,7 +24,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region Common
 Function CheckRowChequeBond(Status, CashAccount) Export
 	If ValueIsFilled(Status) Then
@@ -36,7 +35,6 @@ Function CheckRowChequeBond(Status, CashAccount) Export
 		Return True;
 	EndIf;
 EndFunction
-
 
 Function GetChequeInfo(ChequeBondTransactionRef, ChequeRef) Export
 	InfoStructure = New Structure("Status, Amount, NewStatus, Currency");

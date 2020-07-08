@@ -8,7 +8,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export
@@ -158,7 +157,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemPartnerArTransactionsBasisDocument
 
 Procedure PartnerArTransactionsBasisDocumentOnChange(Object, Form, Item) Export
@@ -214,7 +212,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemDescription
 
 Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
@@ -223,7 +220,6 @@ Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
-
 
 #Region GroupTitle
 

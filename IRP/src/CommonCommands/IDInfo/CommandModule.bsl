@@ -13,4 +13,3 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		CommandExecuteParameters.Uniqueness,
 		CommandExecuteParameters.Window);
 EndProcedure
-

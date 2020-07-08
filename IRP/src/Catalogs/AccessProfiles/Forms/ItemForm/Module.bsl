@@ -50,4 +50,3 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	CurrentObject.Roles.Load(ThisObject.Roles.Unload(New Structure("Use", True)));
 EndProcedure
-

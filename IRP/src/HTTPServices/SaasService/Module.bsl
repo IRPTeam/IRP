@@ -48,7 +48,7 @@ Function SaasCreateArea(Request)
 	If Saas.AvailableCompanyLocalizations().Find(Lower(AreaParameters.CompanyLocalization)) = Undefined Then
 		HttpResponse = New HTTPServiceResponse(400);
 		Return CreateErrorResponse(HttpResponse, 
-					StrTemplate(R()["Saas_003"], AreaParameters.CompanyLocalization));
+					StrTemplate(R().Saas_003, AreaParameters.CompanyLocalization));
 	EndIf;
 	
 	NewArea = Catalogs.DataAreas.CreateItem();

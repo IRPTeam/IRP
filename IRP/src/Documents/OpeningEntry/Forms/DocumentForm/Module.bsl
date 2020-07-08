@@ -804,7 +804,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient
@@ -835,6 +834,5 @@ EndProcedure
 Procedure InventoryOnStartEdit(Item, NewRow, Clone)
 	UserSettingsClient.TableOnStartEdit(Object, ThisObject, "Object.Inventory", Item, NewRow, Clone);
 EndProcedure
-
 
 #EndRegion

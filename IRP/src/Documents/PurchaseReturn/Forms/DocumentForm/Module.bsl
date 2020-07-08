@@ -269,7 +269,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region GroupTitleDecorations
 
 &AtClient
@@ -557,7 +556,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 
 #Region AddAttributes
 

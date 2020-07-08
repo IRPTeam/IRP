@@ -45,7 +45,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region GroupTitleDecorations
 
 &AtClient
@@ -70,7 +69,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemDescription
 
 &AtClient
@@ -79,7 +77,6 @@ Procedure DescriptionClick(Item, StandardProcessing)
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemItemList
 
@@ -93,9 +90,7 @@ Procedure ItemsItemEditTextChange(Item, Text, StandardProcessing)
 	DocLabelingClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
-
 #EndRegion
-
 
 #Region AddAttributes
 

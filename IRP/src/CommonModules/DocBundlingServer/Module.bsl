@@ -24,8 +24,6 @@ EndProcedure
 
 #EndRegion
 
-
-
 #Region GroupTitle
 
 Procedure SetGroupItemsList(Object, Form)

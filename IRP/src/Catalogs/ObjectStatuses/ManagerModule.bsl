@@ -34,8 +34,6 @@ Function GetChoiceDataTable(Parameters) Export
 	Settings.Insert("Filter", Filter);
 	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
-
-	
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
 	If TypeOf(Parameters) = Type("Structure") And Parameters.Filter.Property("CustomSearchFilter") Then
@@ -60,4 +58,3 @@ Function GetChoiceDataTable(Parameters) Export
 	EndDo;
 	Return Query.Execute().Unload();
 EndFunction
-

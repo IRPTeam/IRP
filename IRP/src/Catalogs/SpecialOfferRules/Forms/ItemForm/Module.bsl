@@ -43,4 +43,3 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	CurrentObject.Settings = New ValueStorage(GetFromTempStorage(AddressResult), New Deflation(9));
 EndProcedure
-	

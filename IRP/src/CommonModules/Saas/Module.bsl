@@ -20,11 +20,11 @@ Function CurrentAreaStatus() Export
 		Area = Catalogs.DataAreas.FindByCode(SessionParameters.IDValue);
 		If Area.IsEmpty() Then
 			Answer.isError = True;
-			Answer.Status = StrTemplate(R()["Saas_001"], SessionParameters.IDValue);
+			Answer.Status = StrTemplate(R().Saas_001, SessionParameters.IDValue);
 		Else
 			If Not Area.DataAreaStatus = Enums.DataAreaStatus.Working Then
 				Answer.isError = True;
-				Answer.Status = StrTemplate(R()["Saas_002"], Area.DataAreaStatus);
+				Answer.Status = StrTemplate(R().Saas_002, Area.DataAreaStatus);
 			EndIf;
 		EndIf;
 	EndIf;

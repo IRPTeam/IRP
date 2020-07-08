@@ -428,11 +428,9 @@ Procedure Currencies_CalculateRate(Amount, MovementType, RowKey) Export
 	CurrenciesServer.CalculateRate(Object, Amount, MovementType, RowKey);
 EndProcedure
 
-
 #EndRegion
 
 #EndRegion
-
 
 #Region AddAttributes
 

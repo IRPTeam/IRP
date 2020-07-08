@@ -306,7 +306,6 @@ Procedure PaymentListAfterDeleteRow(Item)
 	DocCashExpenseRevenueClient.PaymentListAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
-
 &AtClient
 Procedure Currencies_NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	ArrayOfTableNames = New Array();
@@ -426,7 +425,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 
 #Region AddAttributes
 

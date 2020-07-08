@@ -3,4 +3,3 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		FillPropertyValues(ThisObject, FillingData);
 	EndIf;
 EndProcedure
-

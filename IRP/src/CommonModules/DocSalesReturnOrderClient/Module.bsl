@@ -158,7 +158,6 @@ Function ItemListPriceTypeSettings() Export
 	Return Settings;
 EndFunction
 
-
 Procedure ItemListUnitOnChange(Object, Form, Item = Undefined) Export
 	DocumentsClient.ItemListUnitOnChange(Object, Form, ThisObject, Item);
 EndProcedure

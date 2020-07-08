@@ -5,7 +5,7 @@ Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 	
 	If Not ValueIsFilled(IntegrationSettings.Ref) Then
 		Result.Success = False;
-		Result.Message = StrTemplate(R()["S_005"], IntegrationSettingName);
+		Result.Message = StrTemplate(R().S_005, IntegrationSettingName);
 		Return Result;
 	EndIf;
 	

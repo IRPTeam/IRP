@@ -151,7 +151,6 @@ EndProcedure
 
 #EndRegion
 
-
 &AtClient
 Procedure ItemKeyBundleOnChange(Item)
 	DocUnbundlingClient.ItemKeyBundleOnChange(Object, ThisObject, Item);
@@ -205,7 +204,6 @@ Procedure DateOnChange(Item)
 	DocUnbundlingClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
-
 &AtClient
 Procedure SearchByBarcode(Command)
 	DocUnbundlingClient.SearchByBarcode(Command, Object, ThisObject);
@@ -243,7 +241,6 @@ Procedure DescriptionClick(Item, StandardProcessing)
 EndProcedure
 
 #EndRegion
-
 
 #Region AddAttributes
 

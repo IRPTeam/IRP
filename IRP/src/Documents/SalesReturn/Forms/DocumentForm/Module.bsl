@@ -83,7 +83,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region FormItemsEvents
 
 &AtClient
@@ -264,7 +263,6 @@ Procedure DescriptionClick(Item, StandardProcessing)
 EndProcedure
 
 #EndRegion
-
 
 #Region GroupTitleDecorations
 
@@ -553,7 +551,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 
 #Region AddAttributes
 

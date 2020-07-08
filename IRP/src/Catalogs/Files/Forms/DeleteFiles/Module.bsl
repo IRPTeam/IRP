@@ -50,7 +50,6 @@ Procedure FindUnusedFilesAtClient()
 	EndDo;
 EndProcedure
 
-
 &AtClient
 Procedure FilesIDSelection(Item, RowSelected, Field, StandardProcessing)
 	CurrentData = Items.Files.CurrentData;
@@ -95,4 +94,3 @@ Function PrepareDeletionFilesID()
 	EndDo;
 	Return ArrayOfResults;
 EndFunction
-

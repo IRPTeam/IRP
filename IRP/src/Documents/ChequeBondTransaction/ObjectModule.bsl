@@ -54,7 +54,7 @@ Procedure Synchronize(Event, Cancel)
 		ElsIf Event = "UnsetDeletionMark" Then
 			Documents.ChequeBondTransactionItem.UnsetDeletionMarkForDocuments(DataLock, ArrayOfCheque, ThisObject.Ref);
 		Else
-			CommonFunctionsClientServer.ShowUsersMessage(R()["Error_032"]);
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_032);
 		EndIf;
 	Except
 		
@@ -65,7 +65,7 @@ EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	
-	Text = R()["Error_030"];
+	Text = R().Error_030;
 	
 	For Each RowChequeBond In ChequeBonds Do
 		

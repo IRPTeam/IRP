@@ -13,4 +13,3 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		List.Parameters.SetParameterValue("Unit", Catalogs.Units.EmptyRef());
 	EndIf;
 EndProcedure
-

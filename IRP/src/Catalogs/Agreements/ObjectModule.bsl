@@ -72,6 +72,3 @@ Procedure BeforeWrite(Cancel)
 		ThisObject.StandardAgreement = Catalogs.Agreements.EmptyRef();
 	EndIf;
 EndProcedure
-
-
-

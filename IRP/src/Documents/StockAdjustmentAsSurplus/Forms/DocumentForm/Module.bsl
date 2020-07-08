@@ -114,7 +114,6 @@ Procedure DescriptionClick(Item, StandardProcessing)
 	DocStockAdjustmentAsSurplusClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
-
 #Region GroupTitleDecorations
 
 &AtClient

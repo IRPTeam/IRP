@@ -14,7 +14,7 @@ EndProcedure
 Procedure Settings(Command)
 	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
 		Notify = New NotifyDescription("EditUserSettingsProceed", ThisObject);
-		ShowQueryBox(Notify, R()["QuestionToUser_001"], QuestionDialogMode.YesNo);
+		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
 		EditUserSettingsProceed(DialogReturnCode.Yes);
 	EndIf;
@@ -31,4 +31,3 @@ EndProcedure
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	ThisObject.Users.Parameters.SetParameterValue("UserGroup", Object.Ref);
 EndProcedure
-

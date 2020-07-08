@@ -87,7 +87,6 @@ Function CheckGoodsInTransitOutgoing()
 	Return Not Query.Execute().IsEmpty();
 EndFunction
 
-
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
@@ -111,7 +110,6 @@ Procedure EndEditIDInfo(Result, Parameters) Export
 EndProcedure
 
 #EndRegion
-
 
 #Region AddAttributes
 

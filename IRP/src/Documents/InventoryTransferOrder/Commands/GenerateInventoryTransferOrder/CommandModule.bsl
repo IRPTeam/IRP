@@ -32,7 +32,6 @@ Procedure SelectStoreFinish(Result, AdditionalParameters) Export
 	
 EndProcedure
 
-
 &AtClient
 Procedure GenerateDocument(ArrayOfBasisDocuments)
 	

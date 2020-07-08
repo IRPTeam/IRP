@@ -28,7 +28,7 @@ Procedure SetCondition(TableName, ColumnName, AddInfo = Undefined)
 	
 	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
 		QuestionToUserNotify = New NotifyDescription("SetConditionNotify", ThisObject, AddInfo);
-		ShowQueryBox(QuestionToUserNotify, R()["QuestionToUser_001"], QuestionDialogMode.YesNo);
+		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
 		SetConditionNotify(DialogReturnCode.Yes, AddInfo);
 	EndIf;
@@ -101,4 +101,3 @@ Procedure SaveSettings(Element, Settings, AddAttributesMap, AddInfo = Undefined)
 	CatalogObject.Write();
 	ThisObject.Read();
 EndProcedure
-

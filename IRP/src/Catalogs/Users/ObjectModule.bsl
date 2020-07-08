@@ -19,7 +19,6 @@ Procedure BeforeWrite(Cancel)
 	
 	User.ShowInList = ShowInList;
 	
-	
 	If Not InfoBaseUsers.GetUsers().Count() Then
 		
 		For Each Role In Metadata.DefaultRoles Do
@@ -39,10 +38,7 @@ Procedure BeforeWrite(Cancel)
 	Settings.ClientApplicationFormScaleVariant = ScaleVariant;
 	SystemSettingsStorage.Save("Common/ClientSettings", , Settings, , Description);
 			
-	
-	
 	User.Write();
 	
 	InfobaseUserID = User.UUID;
 EndProcedure
-

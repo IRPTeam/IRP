@@ -1,4 +1,3 @@
-
 #Region FormEvents
 
 &AtServer
@@ -68,14 +67,15 @@ EndFunction
 Procedure ShowPicture()
 	If Not Object.Volume.IsEmpty() And PictureViewerServer.IsPictureFile(Object.Volume) Then
 		PictureParameters = CreatePictureParameters();	
-		ThisObject.PictureViewHTML
-			= "<html><img src=""" + PictureViewerServer.GetPictureURL(PictureParameters).PictureURL + """ height=""100%""></html>";
+		ThisObject.PictureViewHTML = "<html><img src=""" + 
+				PictureViewerServer.GetPictureURL(PictureParameters).PictureURL + 
+				""" height=""100%""></html>";
 	EndIf;
 EndProcedure
 
 &AtClient
 Procedure Upload(Command)
-	PictureViewerClient.Upload(ThisForm, Object, Object.Volume);
+	PictureViewerClient.Upload(ThisObject, Object, Object.Volume);
 EndProcedure
 
 &AtClient

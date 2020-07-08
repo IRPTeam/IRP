@@ -11,7 +11,6 @@ Function GetCalculationSettings(Actions = Undefined, AddInfo = Undefined) Export
 	Return Actions;
 EndFunction
 
-
 // TODO: Test
 Procedure ClearDependentData(Object, AddInfo = Undefined) Export
 	If AddInfo = Undefined OR Not AddInfo.Property("TableParent") Then
@@ -74,7 +73,6 @@ Procedure CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = U
 	Notify("CallbackHandler", Undefined, Form);
 	#EndIf
 EndProcedure
-
 
 Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
 	
@@ -384,7 +382,6 @@ Procedure CalculateTax(Object, ItemRow, PriceIncludeTax, ArrayOfTaxInfo, Reverse
 	ItemRow.TaxAmount = GetTotalAmountByDependedTable(Object, "TaxList", ItemRow.Key);
 EndProcedure
 
-
 Procedure CalculateTaxManualPriority(Object, ItemRow, PriceIncludeTax, ArrayOfTaxInfo, Reverse, AddInfo = Undefined)
 	
 	// ArrayOfTaxInfo
@@ -641,13 +638,11 @@ EndFunction
 
 #Region NeewForms
 
-
 Procedure CalculateRow(Object, Form, Settings, Actions) Export
 	
 	DoTableActions(Object, Form, Settings, Actions);
 	
 EndProcedure
-
 
 Procedure DoTableActions(Object, Form, Settings, Actions) Export
 	
@@ -734,7 +729,6 @@ Procedure UpdateRowUnit(Object, Form, Settings)
 	CurrentRow.Unit = UnitInfo.Unit;
 	
 EndProcedure
-
 
 Procedure UpdateRowPriceType(Object, Form, Settings)
 	If Settings.Rows.Count() = 0 Then

@@ -287,11 +287,12 @@ Procedure DrawFormTablePriceKeyList()
 			ColumnName = Table.Name + i.Name;
 			ColumnOwnerName = Table.Name + i.Name_owner;
 			
-			Table.Columns.Add(New Structure("Name, DataPath, OwnerName, FormName"
+			ColumnStr = New Structure("Name, DataPath, OwnerName, FormName"
 					, ColumnName
 					, Table.Name + "." + ColumnName
 					, ColumnOwnerName
-					, ""));
+					, "");
+			Table.Columns.Add(ColumnStr);
 			
 			NewColumn = New FormAttribute(ColumnName, i.Type, Table.Name, i.Title);
 			ArrayOfAttributes.Add(NewColumn);
@@ -374,7 +375,6 @@ Procedure ItemKeyListOnStartEdit(Item, NewRow, Clone)
 		
 		
 EndProcedure
-
 
 &AtServer
 Function GetSavedData()
@@ -525,7 +525,6 @@ EndProcedure
 Procedure OnReadAtServer(CurrentObject)
 	BuildForm();
 EndProcedure
-
 
 #Region AddAttributes
 

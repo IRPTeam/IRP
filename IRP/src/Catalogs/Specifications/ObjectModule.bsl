@@ -44,5 +44,3 @@ Procedure BeforeWrite(Cancel)
 		CommonFunctionsClientServer.ShowUsersMessage(R().Error_066);
 	EndIf;
 EndProcedure
-
-

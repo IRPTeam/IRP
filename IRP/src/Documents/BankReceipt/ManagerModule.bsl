@@ -486,7 +486,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Return PostingDataTables;
 EndFunction
 
-
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Return;	
 EndProcedure

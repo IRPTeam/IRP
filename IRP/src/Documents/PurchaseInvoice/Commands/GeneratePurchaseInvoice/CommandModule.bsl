@@ -646,7 +646,7 @@ Function GetInfoMessage(FillingData)
 			BasisDocument.Add(Row.PurchaseOrder);
 		EndDo;
 		If PurchaseInvoiceExist(BasisDocument) Then
-			InfoMessage = StrTemplate(R()["InfoMessage_001"], 
+			InfoMessage = StrTemplate(R().InfoMessage_001, 
 										Metadata.Documents.PurchaseInvoice.Synonym,
 										Metadata.Documents.PurchaseOrder.Synonym);
 		EndIf;

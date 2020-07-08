@@ -409,7 +409,6 @@ Procedure ItemTableValueOnChange(Item)
 	RefillItemListPickedOut();
 EndProcedure
 
-
 &AtServer
 Procedure ItemKeyListSelectionAfter(ParametersStructure)
 	SearchStructure = New Structure;
@@ -508,4 +507,3 @@ Procedure RefillItemKeyListPickedOut()
 		EndDo;
 	EndDo;
 EndProcedure
-

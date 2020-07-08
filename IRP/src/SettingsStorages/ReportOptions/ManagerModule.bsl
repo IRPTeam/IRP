@@ -16,5 +16,3 @@ Procedure LoadProcessing(ObjectKey, SettingsKey, Settings, SettingsDescription, 
 	EndIf;
 EndProcedure
 
-
-

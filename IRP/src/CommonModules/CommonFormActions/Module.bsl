@@ -13,7 +13,6 @@ Procedure OnEditedMultilineTextEnd(Result, AdditionalParameters) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(AdditionalParameters.Form.Object, AdditionalParameters.Form);	
 EndProcedure
 
-
 // Procedure wich add string In table, or add quantity to exist one
 // 
 // Parameters SettingsInfo - structure:

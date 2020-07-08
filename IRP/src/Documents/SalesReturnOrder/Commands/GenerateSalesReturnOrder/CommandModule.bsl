@@ -323,7 +323,7 @@ Function GetInfoMessage(FillingData)
 			BasisDocument.Add(Row.SalesInvoice);
 		EndDo;
 		If SalesReturnOrderExist(BasisDocument) Then
-			InfoMessage = StrTemplate(R()["InfoMessage_001"], 
+			InfoMessage = StrTemplate(R().InfoMessage_001, 
 										Metadata.Documents.SalesReturnOrder.Synonym,
 										Metadata.Documents.SalesInvoice.Synonym);
 		EndIf;

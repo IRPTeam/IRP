@@ -75,8 +75,6 @@ EndProcedure
 
 #EndRegion
 
-
-
 Function InfoReceiptBasisesFilling(FilterValues, ExistingRows, Ref) Export
 	
 	TableItemList = New ValueTable();

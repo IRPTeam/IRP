@@ -2,7 +2,6 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	Return;
 EndProcedure
 
-
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export
@@ -58,7 +57,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 
 #Region PickUpItems
 

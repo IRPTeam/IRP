@@ -16,7 +16,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemDescription
 
 Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
@@ -25,7 +24,6 @@ Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
-
 
 #Region GroupTitle
 
@@ -68,7 +66,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 
 #Region ItemItemList
 

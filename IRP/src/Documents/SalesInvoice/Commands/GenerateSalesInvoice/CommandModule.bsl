@@ -660,25 +660,25 @@ Function GetErrorMessage(BasisDocument)
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.SalesOrder") Then
 		If Not BasisDocument.Status.Posting Or Not BasisDocument.Posted Then
-			Return StrTemplate(R()["Error_067"], String(BasisDocument));		
+			Return StrTemplate(R().Error_067, String(BasisDocument));		
 		EndIf;
 		
 		If BasisDocument.ShipmentConfirmationsBeforeSalesInvoice Then
 			If ShipmentConfirmationExist(BasisDocument) Then
-				ErrorMessage = R()["Error_019"];
+				ErrorMessage = R().Error_019;
 				ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.SalesInvoice.Synonym, BasisDocument.Metadata().Synonym);
 			Else
-				ErrorMessage = R()["Error_018"];
+				ErrorMessage = R().Error_018;
 			EndIf;
 		Else
 			If SalesInvoiceExist(BasisDocument) Then
-				ErrorMessage = R()["Error_019"];
+				ErrorMessage = R().Error_019;
 				ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.SalesInvoice.Synonym, BasisDocument.Metadata().Synonym);
 			EndIf;
 		EndIf;
 	EndIf;
 	If TypeOf(BasisDocument) = Type("DocumentRef.ShipmentConfirmation") Then
-		ErrorMessage = R()["Error_019"];
+		ErrorMessage = R().Error_019;
 		ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.SalesInvoice.Synonym, BasisDocument.Metadata().Synonym);
 	EndIf;
 	
@@ -694,7 +694,7 @@ Function GetInfoMessage(FillingData)
 		BasisDocument.Add(Row.SalesOrder);
 	EndDo;
 	If SalesInvoiceExist(BasisDocument) Then
-		InfoMessage = StrTemplate(R()["InfoMessage_001"], 
+		InfoMessage = StrTemplate(R().InfoMessage_001, 
 						Metadata.Documents.SalesInvoice.Synonym, 
 						Metadata.Documents.SalesOrder.Synonym);
 	EndIf;

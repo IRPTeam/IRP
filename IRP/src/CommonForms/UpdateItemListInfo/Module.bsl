@@ -14,7 +14,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If PriceTypes Then
 		Items.Prices.Enabled = True; 
 		Prices = True;
-		Items.Prices.Title = R()["QuestionToUser_013"];
+		Items.Prices.Title = R().QuestionToUser_013;
 	EndIf;
 	
 EndProcedure

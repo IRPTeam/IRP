@@ -475,7 +475,7 @@ Function GetDCSTemplate(PredefinedDataName, AddInfo = Undefined) Export
 		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Document");
 		Template.DataSets[0].Query = StrTemplate(Template.DataSets[0].Query, TableName);
 	Else
-		Raise R()["Error_004"];
+		Raise R().Error_004;
 	EndIf;
 	Return Template;
 EndFunction

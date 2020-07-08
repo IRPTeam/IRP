@@ -107,7 +107,7 @@ Procedure DisassembleClassifierElement_KeyAndValue(NewObject, KeyAndValue)
 					EndDo;
 					DisassembleClassifierElement_Structure(ValueStorage_Structure, KeyAndValue.Value);
 					NewObject[KeyAndValue.Key] = New ValueStorage(ValueStorage_Structure, New Deflation(9));	
-				Endif;
+				EndIf;
 				If StrFind(MetadataType, "ValueStorage_ExtData") <> 0 Then
 					NewObject[KeyAndValue.Key] = GetBinaryDataFromTemplate(KeyAndValue.Value);		
 				EndIf;

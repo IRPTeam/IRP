@@ -51,7 +51,7 @@ Function SendRequestClientServer(ConnectionSetting,
 	
 	If Not ValueIsFilled(ConnectionSetting.ResourceAddress) Then
 		ServerResponse.Success = False;
-		ServerResponse.Message = R()["S_004"];
+		ServerResponse.Message = R().S_004;
 		Return ServerResponse;
 	EndIf;
 	
@@ -119,7 +119,7 @@ Function SendRequest(Val ConnectionSetting,
 	
 	ServerResponse = ServerResponse(AddInfo);
 	ServerResponse.Success = False;
-	ServerResponse.Message = R()["S_006"];
+	ServerResponse.Message = R().S_006;
 	Return ServerResponse;
 	
 	#Else

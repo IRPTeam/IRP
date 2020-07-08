@@ -91,7 +91,7 @@ Procedure CreateItemFromClassifierRow(ClassifierRow)
 							AttributesList[0].Value, 
 							ClassifierRow[AttributesList[0].Value]);
 	If ValueIsFilled(NewItem) Then
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R()["InfoMessage_002"], NewItem)
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_002, NewItem)
 				, , ThisObject);
 	EndIf;
 EndProcedure

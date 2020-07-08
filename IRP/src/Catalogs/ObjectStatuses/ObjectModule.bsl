@@ -50,7 +50,7 @@ Procedure BeforeWrite(Cancel)
 					OtherObject.Write();
 				Except
 					Cancel = True;
-					Message = StrTemplate(R()["Error_009"], String(ErrorInfo()));
+					Message = StrTemplate(R().Error_009, String(ErrorInfo()));
 					CommonFunctionsClientServer.ShowUsersMessage(Message);
 					Return;
 				EndTry;

@@ -9,7 +9,7 @@ Procedure IDInfoOpening(Item, StandardProcessing, Object, Form) Export
 	
 	If Not ValueIsFilled(Object.Ref) Or Form.Modified Then
 		QuestionToUserNotify = New NotifyDescription("IDInfoOpeningNotify", ThisObject, AddInfo);
-		ShowQueryBox(QuestionToUserNotify, R()["QuestionToUser_001"], QuestionDialogMode.YesNo);
+		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
 		IDInfoOpeningNotify(DialogReturnCode.Yes, AddInfo);
 	EndIf;

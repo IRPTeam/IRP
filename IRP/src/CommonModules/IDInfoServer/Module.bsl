@@ -174,7 +174,7 @@ Function GetDCSTemplate(PredefinedDataName, AddInfo = Undefined) Export
 		TableName = StrReplace(PredefinedDataName, "_", ".");
 		Template = Catalogs.IDInfoSets.GetTemplate("DCS_Document");
 	Else
-		Raise R()["Error_004"];
+		Raise R().Error_004;
 	EndIf;
 	Template = Catalogs.IDInfoSets.GetTemplate("DCS_Catalog");
 	Template.DataSets[0].Query = StrTemplate(Template.DataSets[0].Query, TableName);

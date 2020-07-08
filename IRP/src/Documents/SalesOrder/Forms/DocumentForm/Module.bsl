@@ -78,7 +78,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	For RowIndex = 0 To (Object.ItemList.Count() - 1) Do
 		Row = Object.ItemList[RowIndex];
 		If Not ValueIsFilled(Row.ProcurementMethod) AND Row.ItemType = Enums.ItemTypes.Product Then
-			MessageText = StrTemplate(R()["Error_010"], R().S_023);
+			MessageText = StrTemplate(R().Error_010, R().S_023);
 			CommonFunctionsClientServer.ShowUsersMessage(MessageText
 				, "Object.ItemList[" + RowIndex + "].ProcurementMethod"
 				, "Object.ItemList");

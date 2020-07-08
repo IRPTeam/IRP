@@ -248,7 +248,7 @@ Function PrintLabels(Object, Form) Export
 								Drawing.Picture =  New Picture(ArrayOfFiles[0].Preview.Get());
 							EndIf;
 						EndIf;
-					Endif;
+					EndIf;
 				EndDo;
 			EndIf;
 			
@@ -282,7 +282,7 @@ Function PrintLabels(Object, Form) Export
 			SpreadDoc  = New SpreadsheetDocument();
 			SpreadDoc.PrintParametersKey = TemplateStructure.PrintParametersKey;
 			
-		Endif;
+		EndIf;
 		
 		SpreadDoc.PutHorizontalPageBreak();
 	
@@ -292,7 +292,7 @@ Function PrintLabels(Object, Form) Export
 		SpreadDoc.PutHorizontalPageBreak();
 		SpreadDoc.FitToPage = True;
 		SpreadDocsArray.Add(SpreadDoc);
-	Endif;
+	EndIf;
 	
 	Return SpreadDocsArray;	
 	

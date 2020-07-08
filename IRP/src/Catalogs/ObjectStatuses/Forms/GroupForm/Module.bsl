@@ -16,6 +16,6 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	If Not Object.Predefined Then
 		Cancel = True;
-		CommonFunctionsClientServer.ShowUsersMessage(R()["Error_008"]);
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_008);
 	EndIf;
 EndProcedure

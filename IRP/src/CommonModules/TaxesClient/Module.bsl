@@ -119,7 +119,7 @@ Procedure ChangeTaxRatesByAgreement(Object, Form) Export
 	If ArrayOfChangeTaxParameters.Count() Then
 		Notify = New NotifyDescription("ChangeTaxRates", ThisObject
 				, New Structure("Object, Form, ArrayOfChangeTaxParameters", Object, Form, ArrayOfChangeTaxParameters));
-		ShowQueryBox(Notify, R()["QuestionToUser_004"], QuestionDialogMode.YesNo);
+		ShowQueryBox(Notify, R().QuestionToUser_004, QuestionDialogMode.YesNo);
 	EndIf;
 EndProcedure
 

@@ -68,7 +68,7 @@ Procedure FillTransactions(Command)
 		Return;
 	EndIf;
 	If Not ValueIsFilled(Object.OperationType) Then
-		MessageText = StrTemplate(R()["Error_010"], "OperationType");
+		MessageText = StrTemplate(R().Error_010, "OperationType");
 		CommonFunctionsClientServer.ShowUsersMessage(MessageText
 			, "Object.OperationType"
 			, Object.OperationType);

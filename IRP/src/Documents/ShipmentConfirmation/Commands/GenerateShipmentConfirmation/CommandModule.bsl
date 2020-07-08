@@ -275,27 +275,27 @@ Function GetErrorMessage(BasisDocument)
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.SalesOrder") Then
 		If Not BasisDocument.Status.Posting Or Not BasisDocument.Posted Then
-			Return StrTemplate(R()["Error_067"], String(BasisDocument));		
+			Return StrTemplate(R().Error_067, String(BasisDocument));		
 		EndIf;
 		If BasisDocument.ShipmentConfirmationsBeforeSalesInvoice Then
 			If WithoutBalance(BasisDocument) And HasShipmentConfirmation(BasisDocument) Then
-				ErrorMessage = R()["Error_019"];
+				ErrorMessage = R().Error_019;
 				ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.ShipmentConfirmation.Synonym, BasisDocument.Metadata().Synonym);
 			Else
-				ErrorMessage = R()["Error_031"];
+				ErrorMessage = R().Error_031;
 			EndIf;
 		Else
 			If SalesInvoiceExist(BasisDocument) Then
-				ErrorMessage = R()["Error_019"];
+				ErrorMessage = R().Error_019;
 				ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.ShipmentConfirmation.Synonym, BasisDocument.Metadata().Synonym);
 			Else
-				ErrorMessage = R()["Error_024"];
+				ErrorMessage = R().Error_024;
 			EndIf;
 			
 		EndIf;
 		
 	Else
-		ErrorMessage = R()["Error_019"];
+		ErrorMessage = R().Error_019;
 		ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.ShipmentConfirmation.Synonym, BasisDocument.Metadata().Synonym);
 	EndIf;
 	

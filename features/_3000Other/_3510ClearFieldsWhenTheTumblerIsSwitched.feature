@@ -1,7 +1,7 @@
 #language: ru
 @tree
 @Positive
-Функционал: проверка очистки полей в формах справочников с переключателями (прорисовка формы зависит от переключателя)
+Функционал: check the cleaning of fields in forms of directories with switches (the drawing of the form depends on the switch)
 
 
 
@@ -9,7 +9,7 @@
     Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-Сценарий: проверка очистки значений при изменении типа счета в справочнике Cash/Bank accounts
+Сценарий: check the clearing of values ​​when changing the type of account in the Cash / Bank accounts catalog
     * Открытие формы элемента справочника
         И я открываю навигационную ссылку "e1cib/list/Catalog.CashAccounts"
         И я нажимаю на кнопку с именем 'FormCreate'
@@ -69,7 +69,7 @@
         И я закрыл все окна клиентского приложения
 
 
-Сценарий: проверка очистки значений при изменении переключателя Ap-ar posting/Standard в Partner term
+Сценарий: check clearing values ​​when changing the Ap-ar posting / Standard switch to Partner term
     * Открытие формы элемента справочника
         И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
         И я нажимаю на кнопку с именем 'FormCreate'
@@ -106,7 +106,7 @@
         И я закрыл все окна клиентского приложения
 
 
-Сценарий: проверка очистки значений Tax types и Multi currency movement type при изменении галочки Our в Company
+Сценарий: check clearing the values ​​of Tax types and Multi currency movement type when changing the Our checkmark in Company
     * Открытие формы элемента справочника
         И я открываю навигационную ссылку "e1cib/list/Catalog.Companies"
         И я нажимаю на кнопку с именем 'FormCreate'

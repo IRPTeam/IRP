@@ -24,7 +24,7 @@
 			| 'Store 05'      |
 		И в таблице "List" я выбираю текущую строку
 	* Check the form of selection items
-		Когда проверяю форму подбора товара в StockAdjustmentAsWriteOff/StockAdjustmentAsSurplus
+		Когда check the product selection form in StockAdjustmentAsWriteOff/StockAdjustmentAsSurplus
 	И Я закрыл все окна клиентского приложения
 
 
@@ -44,7 +44,7 @@
 			| 'Store 05'      |
 		И в таблице "List" я выбираю текущую строку
 	* Check the form of selection items
-		Когда проверяю форму подбора товара в StockAdjustmentAsWriteOff/StockAdjustmentAsSurplus
+		Когда check the product selection form in StockAdjustmentAsWriteOff/StockAdjustmentAsSurplus
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: 3001003 check the form of selection of items in the document PhysicalInventory
@@ -58,7 +58,7 @@
 			| 'Store 05'      |
 		И в таблице "List" я выбираю текущую строку
 	* Check the form of selection items
-		Когда проверяю форму подбора товара в PhysicalInventory
+		Когда check the product selection form in PhysicalInventory
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: 3001004 check the form of selection of items in the document PhysicalCountByLocation
@@ -72,12 +72,12 @@
 			| 'Store 05'      |
 		И в таблице "List" я выбираю текущую строку
 	* Check the form of selection items
-		Когда проверяю форму подбора товара в PhysicalInventory
+		Когда check the product selection form in PhysicalInventory
 	И Я закрыл все окна клиентского приложения
 
 
 
-Сценарий: 3001005 проверка формы подбора товара в Inventory Transfer Order
+Сценарий: 3001005 check the form Pick Up items Inventory Transfer Order
 	* Open form to create Inventory Transfer Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -98,11 +98,11 @@
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
 	* Check the form of selection items
-		Когда проверяю форму подбора товара в InventoryTransferOrder/InventoryTransfer
+		Когда check the product selection form in InventoryTransferOrder/InventoryTransfer
 	И Я закрыл все окна клиентского приложения
 
 
-Сценарий: 3001006 проверка формы подбора товара в Inventory Transfer
+Сценарий: 3001006 check the form Pick Up items Inventory Transfer
 	* Open form to create Inventory Transfer Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -123,10 +123,10 @@
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
 	* Check the form of selection items
-		Когда проверяю форму подбора товара в InventoryTransferOrder/InventoryTransfer
+		Когда check the product selection form in InventoryTransferOrder/InventoryTransfer
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: 3001007 проверка формы подбора товара в Internal supply request
+Сценарий: 3001007 check the form Pick Up items Internal supply request
 	* Open form to create Internal supply request
 		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -142,5 +142,5 @@
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
 	* Check the form of selection items
-		Когда проверяю форму подбора товара в StockAdjustmentAsWriteOff/StockAdjustmentAsSurplus
+		Когда check the product selection form in StockAdjustmentAsWriteOff/StockAdjustmentAsSurplus
 	И Я закрыл все окна клиентского приложения

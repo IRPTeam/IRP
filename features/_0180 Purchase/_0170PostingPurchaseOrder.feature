@@ -391,7 +391,7 @@ For tracking an item that has been ordered from a vendor
 		Тогда открылось окно 'Stores'
 		И в таблице "List" я выбираю текущую строку
 	* Checking the form Pick up items
-		Когда проверяю форму подбора товара с информацией по ценам в Purchase order
+		Когда check the product selection form with price information in Purchase order
 		И Я закрыл все окна клиентского приложения
 	
 

@@ -212,7 +212,7 @@ For Cash/Bank accountsing
 			| Number |
 			|   2    |
 	* Create Cash receipt in Euro for Ferron BP (Sales invoice in USD)
-		Когда создаю Sales invoice для Ferron BP в долларах
+		Когда creating Sales invoice for Ferron BP in USD
 		И Я закрыл все окна клиентского приложения
 		И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 		И я нажимаю на кнопку с именем 'FormCreate'

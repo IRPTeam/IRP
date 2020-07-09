@@ -336,7 +336,7 @@ To implement a sales-for-purchase scheme
 
 #  Sales order - Purchase order - Goods reciept - Purchase invoice - Shipment confirmation - Sales invoice
 Сценарий: _029201 create Purchase order based on Sales order (Shipment confirmation before Sales invoice)
-	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
+	Когда creating an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	* Change the procurement method by rows and add a new row
 		И в таблице "ItemList" я перехожу к строке:
 			| Item  |
@@ -455,7 +455,7 @@ To implement a sales-for-purchase scheme
 		| ''                                           | 'Expense'     | '*'         | '1'         | 'Main Company'     | 'Sales order 455*'      | 'Store 01'  | '36/18SD'   | '*'       | '*'                        | ''                     |
 		И Я закрыл все окна клиентского приложения
 	* Create one more Sales order
-		Когда создаю заказ на Ferron BP Basic Partner term, TRY (Dress -10 и Trousers - 5)
+		Когда creating an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 		* Change of store to the one with Shipment confirmation
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:
@@ -1302,7 +1302,7 @@ To implement a sales-for-purchase scheme
 # Sales order - Purchase order - Purchase invoice- Goods reciept - Sales invoice - Shipment confirmation 
 
 Сценарий: _029207 create Purchase order based on Sales order (Purchase invoice before Goods receipt, Sales order contains services and products)
-	Когда создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
+	Когда creating an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	* Change the procurement method by rows and add a new row
 		И в таблице "ItemList" я перехожу к строке:
 			| Item  |
@@ -1425,7 +1425,7 @@ To implement a sales-for-purchase scheme
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | 'Sales order 460*' | 'Store 01'  | 'Rent'      | '*'       | '*'                        | ''                     |
 		И Я закрыл все окна клиентского приложения
 	* Create one more Sales order with procurement methot - purchase
-		Когда создаю заказ на Ferron BP Basic Partner term, TRY (Dress -10 и Trousers - 5)
+		Когда creating an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 		* Change of Store to Store that use Shipment confirmation
 			И я нажимаю кнопку выбора у поля с именем "Store"
 			И в таблице "List" я перехожу к строке:

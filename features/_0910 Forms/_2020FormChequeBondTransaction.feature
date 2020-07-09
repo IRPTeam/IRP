@@ -132,7 +132,7 @@ For ease of filling
 		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filter check
-		Когда проверяю работу фильтра по собственной Company в Cheque bond transaction
+		Когда check the filter by my own company in Cheque bond transaction
 		И я закрыл все окна клиентского приложения
 
 Сценарий: _2020002 check automatic filling Legal name (the partner has only one Legal name) in the document Cheque bond transaction
@@ -171,7 +171,7 @@ For ease of filling
 		И я закрыл все окна клиентского приложения
 
 Сценарий: _2020004 check the automatic filling in of Partner term (partner has only one Partner term) in Cheque bond transaction document
-	* preparation
+	* Preparation
 		# Removing a DFC partner from all segments and creating an individual partner term
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 			И в таблице "List" я перехожу к строке:

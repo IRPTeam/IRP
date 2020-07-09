@@ -3,13 +3,13 @@
 @IgnoreOnCIMainBuild
 @tree
 
-Функционал: экспортные сценарии
+Функционал: export scenarios
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-Сценарий: создаю элемент справочника с наименованием Test
+Сценарий: creating a catalog element with the name Test.
 
 	И Пауза 2
 	И я нажимаю на кнопку с именем 'FormCreate'
@@ -24,7 +24,7 @@
 
 
 
-Сценарий: заполняю данные о клиенте в заказе (Ferron BP, склад 01)
+Сценарий: filling in customer data in the order (Ferron BP, store 01)
 	И я нажимаю кнопку выбора у поля "Partner"
 	И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -45,13 +45,13 @@
 
 
 
-Сценарий: очистка скидок
+Сценарий: cleaning discounts
 	И Я удаляю все элементы Справочника "ExternalDataProc"
 	И Я удаляю все элементы Справочника "SpecialOfferTypes"
 	И Я удаляю все элементы Справочника "SpecialOfferRules"
 	И Я удаляю все элементы Справочника "SpecialOffers"
 
-Сценарий: создаю скидку Message Dialog Box 2 (Message 3)
+Сценарий: create discount Message Dialog Box 2 (Message 3)
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Special offer type"
@@ -104,7 +104,7 @@
 			| '1'        | 'Sum'                |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: переношу скидку Discount 1 without Vat из группы Sum в группу Maximum
+Сценарий: transfer the discount Discount 1 without Vat from Sum to Maximum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
@@ -119,7 +119,7 @@
 		| 'No'     | 'No'       | '3'        | 'Maximum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: меняю ручное проведение скидки по Discount 1 without Vat
+Сценарий: changing the manual apply of Discount 1 without Vat
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
@@ -133,7 +133,7 @@
 	И Я закрываю окно 'Special offers'
 
 
-Сценарий: меняю ручное проведение скидки Discount 2 without Vat
+Сценарий: changing the manual apply of Discount 2 without Vat
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
@@ -146,7 +146,7 @@
 	И я нажимаю на кнопку "Save and close"
 	И Я закрываю окно 'Special offers'
 
-Сценарий: меняю auto проведение скидки по Discount 1 without Vat
+Сценарий: changing the auto apply of Discount 1 without Vat
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
@@ -159,7 +159,7 @@
 	И я нажимаю на кнопку "Save and close"
 	И Я закрываю окно 'Special offers'
 
-Сценарий: меняю auto проведение скидки Discount 2 without Vat
+Сценарий: changing the auto apply of Discount 2 without Vat
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
@@ -173,7 +173,7 @@
 	И Я закрываю окно 'Special offers'
 
 
-Сценарий: создаю заказ на Lomaniti Basic Partner terms, TRY (Dress и Boots)
+Сценарий: creating an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -231,7 +231,7 @@
 	И я нажимаю на кнопку 'Post'
 
 
-	Сценарий: создаю заказ на MIO Basic Partner terms, without VAT (High shoes и Boots)
+	Сценарий: creating an order for MIO Basic Partner terms, without VAT (High shoes and Boots)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -283,7 +283,7 @@
 		И в таблице "ItemList" я завершаю редактирование строки
 	И я нажимаю на кнопку 'Post'
 
-	Сценарий: создаю заказ на MIO Basic Partner terms, without VAT (Trousers и Shirt)
+	Сценарий: creating an order for MIO Basic Partner terms, without VAT (Trousers и Shirt)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -333,7 +333,7 @@
 		И в таблице "ItemList" я завершаю редактирование строки
 	И я нажимаю на кнопку 'Post'
 
-Сценарий: создаю заказ на Kalipso Basic Partner terms, without VAT, TRY (Dress и Shirt)
+Сценарий: creating an order for MIO Basic Partner terms, without VAT (Trousers и Shirt)
 	И я включаю Kalipso в сегмент Retail
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -407,24 +407,24 @@
 		И в таблице "ItemList" я завершаю редактирование строки
 
 
-Сценарий: завершаю добавление строки в прайс лист
+Сценарий: finishing adding a line to the price list
 	И в таблице "ItemList" я завершаю редактирование строки
 	И в таблице "ItemList" я нажимаю на кнопку 'Add'
 	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 
-Сценарий: изменяю номер прайс-листа
+Сценарий: changing the price list number
 	И в поле 'Number' я ввожу текст '0'
 	Тогда открылось окно '1C:Enterprise'
 	И я нажимаю на кнопку 'Yes'
 	Тогда открылось окно 'Price list (create) *'
 
-Сценарий: открываю форму создания прайс листа
+Сценарий: open the form to create a price list
 	И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 	И Пауза 2
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И Пауза 2
 
-Сценарий: переношу скидку Discount 1 without Vat из группы Maximum в группу Minimum
+Сценарий: transfer the Discount 1 without Vat discount from Maximum to Minimum.
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку "List"
 	И в таблице "List" я перехожу к строке:
@@ -443,26 +443,23 @@
 
 
 
-	Сценарий: временная заглушка по реализации
-		Затем Если появилось окно диалога я нажимаю на кнопку "OK"
-	
-	
 
-	Сценарий: выбираю единицу измерения pcs
+
+	Сценарий: choose the unit of measurement pcs
 		И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Unit"
 		И в таблице "List" я перехожу к строке:
 		| Description |
 		| pcs         |
 		И в таблице "List" я выбираю текущую строку
 	
-	Сценарий: выбираю в заказе item Dress
+	Сценарий: choose item Dress in the order
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Dress       |
 		И в таблице "List" я выбираю текущую строку
 	
-	Сценарий: выбираю в заказе item Trousers
+	Сценарий: choose item Trousers in the order
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
 			| Description |

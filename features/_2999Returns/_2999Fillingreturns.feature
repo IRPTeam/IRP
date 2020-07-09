@@ -2,7 +2,7 @@
 @tree
 @Positive
 
-Функционал: check filling in and re-filling возвратов
+Функционал: check filling in and re-filling returns
 
 Как тестировщик
 Я хочу проверить заполнение и перезаполнение возвратов

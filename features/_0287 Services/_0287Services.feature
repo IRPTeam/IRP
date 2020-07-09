@@ -371,7 +371,7 @@ For cost analysis
 Сценарий: _029107 create a Sales order for service and product (Store doesn't use Shipment confirmation, Sales invoice before Shipment confirmation)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
+	Когда filling in customer data in the order (Ferron BP, store 01)
 	* Filling in items table
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -579,7 +579,7 @@ For cost analysis
 Сценарий: _029109 create a Sales order for service and product (Store doesn't use Shipment confirmation, Shipment confirmation before Sales invoice)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
+	Когда filling in customer data in the order (Ferron BP, store 01)
 	* Filling in items table
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"

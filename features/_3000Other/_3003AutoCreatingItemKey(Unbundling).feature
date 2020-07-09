@@ -1,7 +1,7 @@
 #language: ru
 @tree
 @Positive
-Функционал: auto создание item key при Unbundling по спецификации
+Функционал: auto creation item key when Unbundling (by specification)
 
 
 Контекст:
@@ -134,7 +134,7 @@
 		И Пауза 10
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _300302 создание документа Unbundling и create item key
+Сценарий: _300302 create Unbundling and check creation item key
 	* Filling the document header Unbundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 		И я нажимаю на кнопку с именем 'FormCreate'

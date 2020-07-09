@@ -15,8 +15,8 @@ In order not to double entries in the registers
 
 
 Сценарий: _019901 Checking changes in postings on a Purchase Order document when quantity changes
-	Когда создаю документ Purchase Order
-	Когда устанавливаю номер Purchase order №103
+	Когда creating a Purchase Order document
+	Когда change purchase order number to 103
 	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:

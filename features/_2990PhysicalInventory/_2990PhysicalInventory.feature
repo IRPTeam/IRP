@@ -365,7 +365,7 @@
 		| ''                               | 'Receipt'     | '*'         | '8'              | 'Store 01'                | 'M/White'      | ''         | ''         | ''                    | ''                       | ''                     |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990003 создание документа списания недостач товаров и проверка его проводок
+Сценарий: _2990003 create Stock adjustment as write off
 	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -481,7 +481,7 @@
 		| ''                                 | 'Expense'     | '*'         | '8'              | 'Store 01'                | 'M/White'      | ''         | ''         | ''                    | ''                       | ''                     |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990004 создание документа инвентаризации и проверка его проводок (склад ордерный)
+Сценарий: _2990004 create Physical inventory (store use GR and SC)
 	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -591,7 +591,7 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _2990004 создание документа инвентаризации и проверка его проводок (склад неордерный)
+Сценарий: _2990004 create Physical inventory (store doesn't use GR and SC)
 	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -657,7 +657,7 @@
 		| ''                                          | 'Expense'     | '*'      | '2'         | 'Store 06'   | 'XS/Blue'               | ''          |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990005 создание документа StockAdjustmentAsSurplus based on инвентаризации и проверка его проводок
+Сценарий: _2990005 create Stock adjustment as surplus based on Physical inventory
 	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
@@ -752,7 +752,7 @@
 		И Я закрыл все окна клиентского приложения
 	
 
-Сценарий: _2990007 создание документа StockAdjustmentAsWriteOff based on инвентаризации и проверка его проводок
+Сценарий: _2990007 create Stock adjustment as write off based on Physical inventory
 	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
@@ -845,7 +845,7 @@
 		| ''                                          | 'Expense'     | '*'         | '2'            | 'Store 05'             | 'Physical inventory 1*' | 'XS/Blue'  | ''         | ''                    | ''                       | ''                     |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990008 create документов StockAdjustmentAsSurplus и StockAdjustmentAsWriteOff based on инвентаризации на частичное количество
+Сценарий: _2990008 create Stock adjustment as surplus and Stock adjustment as write off based on Physical inventory on a partial quantity
 	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
@@ -946,7 +946,7 @@
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 1
 		И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _2990009 проверка обновления Update Exp Count
+Сценарий: _2990009 check for updates Update Exp Count
 	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -997,7 +997,7 @@
 			| '2,000'       | 'Boots'    | '2,000'      | '37/18SD'   | ''           | 'pcs'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990010 создание документа инвентаризации и пересчета к нему с распределением на ответсвенных
+Сценарий: _2990010 create Physical inventory and Physical count by location with distribution to responsible employees
 	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -1427,7 +1427,7 @@
 		| ''                                          | 'Expense'     | '*'      | '5'         | 'Store 05'   | 'XS/Blue'               | ''         |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990012 проверка открытия истории статусов в Physical inventory и Physical count by location
+Сценарий: _2990012 check the opening of the status history in Physical inventory and Physical count by location
 	* Проверка открытия истории статусов в Physical inventory
 		* Открытие нужного документа
 			И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
@@ -1460,7 +1460,7 @@
 			| '*'      | 'Physical count by location 3*' | 'Done'          |
 			И Я закрыл все окна клиентского приложения
 	
-Сценарий: _2990013 проверка вопроса о сохранении Physical inventory перед созданием Physical count by location
+Сценарий: _2990013 checking the question of saving Physical inventory before creating Physical count by location
 	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'

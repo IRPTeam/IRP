@@ -653,7 +653,7 @@ To further use it when reflecting in the program of business processes
 		И в базе нет элементов Справочника "PaymentSchedules"
 	* Opening a form and creating Payment terms
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PaymentSchedules"
-		Когда создаю элемент справочника с наименованием Test
+		Когда creating a catalog element with the name Test.
 	* Checking for created Payment terms
 		Тогда В базе появился хотя бы один элемент справочника "PaymentSchedules"
 		Тогда я проверяю наличие элемента справочника "PaymentSchedules" со значением поля "Description_en" "Test ENG"  
@@ -684,7 +684,7 @@ To further use it when reflecting in the program of business processes
 		И в базе нет элементов Справочника "PaymentTypes"
 	* Opening a form and creating Payment types
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PaymentTypes"
-		Когда создаю элемент справочника с наименованием Test
+		Когда creating a catalog element with the name Test.
 		И Я закрываю текущее окно
 	* Checking for created Payment types
 		Тогда В базе появился хотя бы один элемент справочника "PaymentTypes"

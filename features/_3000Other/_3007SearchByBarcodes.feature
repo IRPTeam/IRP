@@ -3,7 +3,7 @@
 @Positive
 
 
-Функционал: Adding items to документы по штрих-коду
+Функционал: add items to documents by barcode
 
 Как разработчик
 Я хочу добавить функционал по добавлению товара в документы по штрих-коду
@@ -14,27 +14,27 @@
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-Сценарий: _300701 проверка поиска по штрих-коду в Sales order + заполнение цены и налогов
+Сценарий: _300701 barcode check in Sales order + price and tax filling
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	Когда проверяю поиск по штрих-коду в документах продажи + заполнение цены и налогов
+	Когда check the barcode search in the sales documents + price and tax filling in
 
-Сценарий: _300702 проверка поиска по штрих-коду в Sales invoice + заполнение цены и налогов
+Сценарий: _300702 barcode check in Sales invoice + price and tax filling
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-	Когда проверяю поиск по штрих-коду в документах продажи + заполнение цены и налогов
+	Когда check the barcode search in the sales documents + price and tax filling in
 
-Сценарий: _300703 проверка поиска по штрих-коду в Sales return + заполнение цены и налогов
+Сценарий: _300703 barcode check in Sales return + price and tax filling
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
-	Когда проверяю поиск по штрих-коду в документах возврата продажи
+	Когда check the barcode search on the return documents
 
-Сценарий: _300704 проверка поиска по штрих-коду в Sales return order + заполнение цены и налогов
+Сценарий: _300704 barcode check in Sales return order + price and tax filling
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
-	Когда проверяю поиск по штрих-коду в документах возврата продажи
+	Когда check the barcode search on the return documents
 
-Сценарий: _300705 проверка поиска по штрих-коду в Purchase order
+Сценарий: _300705 barcode check in Purchase order
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-	Когда проверяю поиск по штрих-коду в документах закупки/возвратов закупки
+	Когда check the barcode search in the purchase/purchase returns
 
-Сценарий: _300706 проверка поиска по штрих-коду в Purchase invoice
+Сценарий: _300706 barcode check in Purchase invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -51,56 +51,56 @@
 			| 'Dress TR' |'S/Yellow TR'  |'1,000' | 'adet'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _300707 проверка поиска по штрих-коду в Purchase return order
+Сценарий: _300707 barcode check in Purchase return order
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
-	Когда проверяю поиск по штрих-коду в документах закупки/возвратов закупки
+	Когда check the barcode search in the purchase/purchase returns
 
-Сценарий: _300708 проверка поиска по штрих-коду в Purchase return
+Сценарий: _300708 barcode check in Purchase return
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
-	Когда проверяю поиск по штрих-коду в документах закупки/возвратов закупки
+	Когда check the barcode search in the purchase/purchase returns
 
-Сценарий: _300709 проверка поиска по штрих-коду в Goods reciept
+Сценарий: _300709 barcode check in Goods reciept
 	И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
-	Когда проверяю поиск по штрих-коду в документах складских операций
+	Когда check the barcode search in storage operations documents
 
-Сценарий: _300710 проверка поиска по штрих-коду в Shipment confirmation
+Сценарий: _300710 barcode check in Shipment confirmation
 	И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
-	Когда проверяю поиск по штрих-коду в документах складских операций
+	Когда check the barcode search in storage operations documents
 
-Сценарий: _300711 проверка поиска по штрих-коду в Inventory transfer
+Сценарий: _300711 barcode check in Inventory transfer
 	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
-	Когда проверяю поиск по штрих-коду в документах складских операций
+	Когда check the barcode search in storage operations documents
 
-Сценарий: _300712 проверка поиска по штрих-коду в Inventory transfer order
+Сценарий: _300712 barcode check in Inventory transfer order
 	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
-	Когда проверяю поиск по штрих-коду в документах складских операций
+	Когда check the barcode search in storage operations documents
 
-Сценарий: _300713 проверка поиска по штрих-коду в Internal Supply Request
+Сценарий: _300713 barcode check in Internal Supply Request
 	И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
-	Когда проверяю поиск по штрих-коду в документах складских операций
+	Когда check the barcode search in storage operations documents
 
 
-Сценарий: _300716 проверка поиска по штрих-коду в Bundling
+Сценарий: _300716 barcode check in Bundling
 	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-	Когда проверяю поиск по штрих-коду в документах объединения товаров в наборы
+	Когда check the barcode search in the product bundling documents
 
-Сценарий: _300717 проверка поиска по штрих-коду в Unbundling
+Сценарий: _300717 barcode check in Unbundling
 	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-	Когда проверяю поиск по штрих-коду в документах объединения товаров в наборы
+	Когда check the barcode search in the product bundling documents
 
-Сценарий: _300718 проверка поиска по штрих-коду в StockAdjustmentAsSurplus
+Сценарий: _300718 barcode check in StockAdjustmentAsSurplus
 	И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
-	Когда проверяю поиск по штрих-коду в документах складских операций
+	Когда check the barcode search in storage operations documents
 
-Сценарий: _300719 проверка поиска по штрих-коду в StockAdjustmentAsWriteOff
+Сценарий: _300719 barcode check in StockAdjustmentAsWriteOff
 	И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
-	Когда проверяю поиск по штрих-коду в документах складских операций
+	Когда check the barcode search in storage operations documents
 
 
-Сценарий: _300720 проверка поиска по штрих-коду в PhysicalInventory
+Сценарий: _300720 barcode check in PhysicalInventory
 	И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
-	Когда проверяю поиск по штрих-коду в документе PhysicalInventory
+	Когда check the barcode search in the PhysicalInventory documents
 
-Сценарий: _300721 проверка поиска по штрих-коду в PhysicalCountByLocation
+Сценарий: _300721 barcode check in PhysicalCountByLocation
 	И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalCountByLocation'
-	Когда проверяю поиск по штрих-коду в документах складских операций
+	Когда check the barcode search in storage operations documents

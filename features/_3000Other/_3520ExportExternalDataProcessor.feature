@@ -2,7 +2,7 @@
 @tree
 @Positive
 @IgnoreOnCIMainBuild
-Функционал: Save verification внешней обработки в папку на компьютере
+Функционал: check saving of plugin to a folder on the computer
 
 
 
@@ -10,7 +10,7 @@
     Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-Сценарий: Save verification внешней обработки в папку на компьютере
+Сценарий: check saving of plugin to a folder on the computer
     * Добавление внешней обработки без указания пути отладки
         И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
         И я нажимаю на кнопку с именем 'FormCreate'

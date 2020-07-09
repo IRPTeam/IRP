@@ -61,7 +61,7 @@ In order to have the same price applied to all item key of one Item, and also to
 				| 'Description' |
 				| 'Basic Price Types'  |
 		И в таблице "List" я выбираю текущую строку
-		Когда изменяю номер прайс-листа
+		Когда changing the price list number
 		И в поле 'Number' я ввожу текст '107'
 		И в поле "Date" я ввожу начало текущего месяца
 	* Filling in tabular part ценами
@@ -149,7 +149,7 @@ In order to have the same price applied to all item key of one Item, and also to
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "PriceKeyList" в поле 'Price' я ввожу текст '415,00'
 		И в таблице "PriceKeyList" я завершаю редактирование строки
-		Когда изменяю номер прайс-листа
+		Когда changing the price list number
 		И в поле 'Number' я ввожу текст '107'
 		И в поле "Date" я ввожу начало текущего месяца
 		И я нажимаю на кнопку 'Post and close'
@@ -182,7 +182,7 @@ In order to have the same price applied to all item key of one Item, and also to
 			| 'Description' |
 			| 'Basic Price Types'  |
 		И в таблице "List" я выбираю текущую строку
-		Когда изменяю номер прайс-листа
+		Когда changing the price list number
 		И в поле 'Number' я ввожу текст '110'
 		И в поле "Date" я ввожу начало текущего месяца
 	И я перехожу к закладке "Item keys"
@@ -353,7 +353,7 @@ In order to have the same price applied to all item key of one Item, and also to
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
+	Когда filling in customer data in the order (Ferron BP, store 01)
 	И я добавляю товар
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -379,7 +379,7 @@ In order to have the same price applied to all item key of one Item, and also to
 Сценарий: _150004 check the price calculation for the bandle (based on the properties price) in the Sales order document
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
+	Когда filling in customer data in the order (Ferron BP, store 01)
 	И я добавляю товар
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -405,7 +405,7 @@ In order to have the same price applied to all item key of one Item, and also to
 Сценарий: _150005 price check by properties in Sales order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
+	Когда filling in customer data in the order (Ferron BP, store 01)
 	И я добавляю товар
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"

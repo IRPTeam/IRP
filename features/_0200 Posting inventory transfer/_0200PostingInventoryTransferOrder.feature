@@ -40,7 +40,7 @@ To coordinate the transfer of items from one store to another
 	* Filling in items table
 		И я перехожу к закладке "Item list"
 		И я нажимаю на кнопку с именем 'Add'
-		Когда выбираю в заказе item Dress
+		Когда choose item Dress in the order
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я перехожу к строке:
@@ -53,7 +53,7 @@ To coordinate the transfer of items from one store to another
 		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '50,000'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'Add'
-		Когда выбираю в заказе item Dress
+		Когда choose item Dress in the order
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я перехожу к строке:
@@ -116,7 +116,7 @@ checking Purchase Order N2 posting by register Order Balance (plus) - Goods rece
 	* Filling in items table
 		И я перехожу к закладке "Item list"
 		И я нажимаю на кнопку с именем 'Add'
-		Когда выбираю в заказе item Dress
+		Когда choose item Dress in the order
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я перехожу к строке:
@@ -173,7 +173,7 @@ checking Purchase Order N2 posting by register Order Balance (plus) - Goods rece
 	* Filling in items table
 		И я перехожу к закладке "Item list"
 		И я нажимаю на кнопку с именем 'Add'
-		Когда выбираю в заказе item Dress
+		Когда choose item Dress in the order
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я перехожу к строке:
@@ -234,7 +234,7 @@ checking Purchase Order N2 posting by register Order Balance (plus) - Goods rece
 	* Filling in items table
 		И я перехожу к закладке "Item list"
 		И я нажимаю на кнопку с именем 'Add'
-		Когда выбираю в заказе item Trousers
+		Когда choose item Trousers in the order
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я перехожу к строке:
@@ -295,7 +295,7 @@ checking Purchase Order N2 posting by register Order Balance (plus) - Goods rece
 		* Filling in items table
 			И я перехожу к закладке "Item list"
 			И я нажимаю на кнопку с именем 'Add'
-			Когда выбираю в заказе item Dress
+			Когда choose item Dress in the order
 			И я перехожу к следующему реквизиту
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 			И в таблице "List" я перехожу к строке:

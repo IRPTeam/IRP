@@ -1672,57 +1672,57 @@ I want to check the form display and autofill documents
 	И я удаляю элемент справочника "Partners" со значением поля Description_en "Test"
 
 Сценарий:  _0154008 check autofilling the Partner term field in Purchase order
-	Когда создание тестового партнера с одним соглашением поставщика и с одним соглашением клиента
+	Когда create a test partner with one vendor partner term and one customer partner term
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
+	Когда check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий:  _0154009 check autofilling the Partner term field in Purchase invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
+	Когда check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0154010 check autofilling the Partner term field in Purchase return
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
+	Когда check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0154011  check autofilling the Partner term field in Purchase return order
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
+	Когда check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
 	И я закрыл все окна клиентского приложения
 
 
 Сценарий: _0154012 check autofilling the Partner term field in Sales order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
+	Когда check the autocompletion of the partner term (by customer) in the documents of sales/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0154013 check autofilling the Partner term field in Sales invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
+	Когда check the autocompletion of the partner term (by customer) in the documents of sales/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0154014 check autofilling the Partner term field in Sales return order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
+	Когда check the autocompletion of the partner term (by customer) in the documents of sales/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0154015 check autofilling the Partner term field in Sales return
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
+	Когда check the autocompletion of the partner term (by customer) in the documents of sales/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0154016 check autofilling item key in Sales order by item only with one item key
-	Когда созданию тестовый Item с одним item key
+	Когда create test item with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда check item key autofilling in sales/returns documents for an item that has only one item key
@@ -3643,7 +3643,7 @@ I want to check the form display and autofill documents
 
 Сценарий: _005034 check filling in the required fields in the Items catalog
 	И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-	Когда создаю элемент справочника с наименованием Test
+	Когда creating a catalog element with the name Test.
 	Если в текущем окне есть сообщения пользователю Тогда
 	И     Я закрываю текущее окно
 	Тогда открылось окно '1C:Enterprise'
@@ -3652,7 +3652,7 @@ I want to check the form display and autofill documents
 
 Сценарий: _005035 check filling in the required fields in the AddAttributeAndPropertyValues catalog 
 	И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
-	Когда создаю элемент справочника с наименованием Test
+	Когда creating a catalog element with the name Test.
 	Если в текущем окне есть сообщения пользователю Тогда
 	И     Я закрываю текущее окно
 	Тогда открылось окно '1C:Enterprise'
@@ -3662,7 +3662,7 @@ I want to check the form display and autofill documents
 
 Сценарий: _005037 check filling in the required fields in the Users catalog 
 	И я открываю навигационную ссылку "e1cib/list/Catalog.Users"
-	Когда создаю элемент справочника с наименованием Test
+	Когда creating a catalog element with the name Test.
 	И Я закрываю текущее окно
 	Тогда открылось окно '1C:Enterprise'
 	И я нажимаю на кнопку 'No'

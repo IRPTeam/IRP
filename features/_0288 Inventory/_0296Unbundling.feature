@@ -81,7 +81,7 @@ For sale of products from a Bundle separately
 	И Я закрыл все окна клиентского приложения
 
 Сценарий: _029604 create Unbundling on a product with a specification (specification created in advance, Store use Shipment confirmation and Goods receipt)
-	Когда создаю Purchase invoice по закупке наборов и размерных сеток на склад Store 02
+	Когда creating a purchase invoice for the purchase of sets and dimensional grids at the tore 02
 	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 	* Create Unbundling for Boots/S-8, all item keys were created in advance
 		И я нажимаю на кнопку с именем 'FormCreate'

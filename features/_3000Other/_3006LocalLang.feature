@@ -3,7 +3,7 @@
 @Positive
 
 
-Функционал: мультиязычность данных
+Функционал: data multi-language
 
 Как Разработчик
 Я хочу разработать механизм
@@ -14,7 +14,7 @@
 
 
 
-Сценарий: _300601 проверка отображения Description tr
+Сценарий: _300601 display check Description tr
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 	Тогда таблица "List" содержит строки:
 		| Description             | Item type  |
@@ -30,7 +30,7 @@
 		| Router                  | Equipment  |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300602 Save verification элемента справочника только с английским наименованием и его отображение в списке
+Сценарий: _300602 check that the English name of the catalog element is saved and displayed in the list
 	* Подготовка
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
 		И в таблице "List" я перехожу к строке:
@@ -80,7 +80,7 @@
 		| Description             |
 		| Skittles                |
 
-Сценарий: _300603 поиск по Description_en и Description_tr в справочнике Items
+Сценарий: _300603 search by Description_en and Description_tr in the Items catalog
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 	И я нажимаю на кнопку с именем 'FormFind'
 	И из выпадающего списка "&Search in" я выбираю точное значение 'Description'
@@ -101,7 +101,7 @@
 
 
 
-Сценарий: _300604 ввод по строке наименований на турецком в Sales order
+Сценарий: _300604 Turkish description search in Sales order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я проверяю отображение списка
 		Тогда таблица "List" содержит строки:
@@ -154,7 +154,7 @@
 
 
 
-Сценарий: _300605 проверка отображения турецкого наименования в списке по элементу по которому изначально было только английское наименование
+Сценарий: _300605 check the display of the Turkish name in the list by the element for which initially there was only an English name
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 	И в таблице "List" я перехожу к строке:
 		| Description    |
@@ -168,7 +168,7 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _300606 проверка открытия элемента справочника по которому установлен фильтр доп реквизитов (английская локаль)
+Сценарий: _300606 check the opening of the catalog element for which the additional details filter is installed (English locale)
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 	И в таблице "List" я перехожу к строке:
 		| Description    |
@@ -178,7 +178,7 @@
 	Тогда открылось окно "Ferron BP TR (Partner)"
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300607 проверка отображения наименований на турецком в формах списка справочников
+Сценарий: _300607 checking the display of names in Turkish in the forms of the list of catalogs
 	И я проверяю форму списка Catalog.AccessGroups
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AccessGroups'
 		Тогда таблица "List" содержит строки:

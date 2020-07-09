@@ -22,7 +22,7 @@ So that the range discount is calculated correctly
 	Когда change the manual setting of the Discount Price 1 discount.
 	Когда move the discount 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms to the group Maximum
 	Когда move the discount 4+1 Dress and Trousers, Discount on Basic Partner terms to the group Maximum
-	Когда переношу скидку All items 5+1, Discount on Basic Partner terms в группу  Maximum
+	Когда move the discount All items 5+1, Discount on Basic Partner terms to the group Maximum
 	Когда change manually setting All items 5+1, Discount on Basic Partner terms
 	Когда  move the Discount Price 1 to Maximum 
 	Когда change manually setting 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms

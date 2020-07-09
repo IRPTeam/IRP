@@ -33,7 +33,7 @@ For Cash/Bank accountsing
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '744,86' | '1'            |
 	* Checking account selection and saving 
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 		| 'Description'  |
 		| 'Cash desk №2' |
@@ -96,7 +96,7 @@ For Cash/Bank accountsing
 				| Code | Description  |
 				| TRY  | Turkish lira |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+			И я нажимаю кнопку выбора у поля "Cash account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №1 |
@@ -161,7 +161,7 @@ For Cash/Bank accountsing
 				| Code |
 				| USD  |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+			И я нажимаю кнопку выбора у поля "Cash account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №1 |
@@ -223,7 +223,7 @@ For Cash/Bank accountsing
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+			И я нажимаю кнопку выбора у поля "Cash account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №2 |
@@ -456,8 +456,8 @@ For Cash/Bank accountsing
 			| Description  |
 			| Kalipso |
 		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" стала равной:
-		| # | Partner | Amount | Payer                | Basis document | Planing transaction basis |
+		И     таблица "PaymentList" содержит строки:
+		| # | Partner | Amount | Payer                | Basis document | Planning transaction basis |
 		| 1 | Kalipso | ''     | Company Kalipso    | ''             | ''                        |
 
 
@@ -479,7 +479,7 @@ For Cash/Bank accountsing
 		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '100,00'
 		И в таблице "PaymentList" я активизирую поле "Amount exchange"
 		И в таблице "PaymentList" в поле 'Amount exchange' я ввожу текст '2 000,00'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 			| '#' | 'Partner' | 'Amount' | 'Amount exchange' | 'Planning transaction basis' |
 			| '1' | ''        | '100,00' | '2 000,00'        | ''                          |
 

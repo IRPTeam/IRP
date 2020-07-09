@@ -445,7 +445,7 @@ For actual Cash/Bank accountsing
 			И в поле 'Number' я ввожу текст '7'
 		* Checking the filling of the tabular part
 			И     таблица "PaymentList" содержит строки:
-			| Planing transaction basis |  Amount |
+			| Planning transaction basis |  Amount |
 			| Cash transfer order 4*          | '100,00'    |
 		И я нажимаю на кнопку 'Post and close'
 	* Check movements by register PlaningCashTransactions

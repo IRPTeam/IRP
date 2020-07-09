@@ -336,7 +336,61 @@ To implement a sales-for-purchase scheme
 
 #  Sales order - Purchase order - Goods reciept - Purchase invoice - Shipment confirmation - Sales invoice
 Сценарий: _029201 create Purchase order based on Sales order (Shipment confirmation before Sales invoice)
-	Когда creating an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
+	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
+	И я нажимаю на кнопку с именем 'FormCreate'
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'             |
+			| 'Lomaniti' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Basic Partner terms, TRY' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Legal name"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Company Lomaniti'  |
+	И в таблице "List" я выбираю текущую строку
+	* Adding items to sales order
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Dress' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| 'XS/Blue'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '5,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Boots' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/18SD'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+	И я нажимаю на кнопку 'Post'
 	* Change the procurement method by rows and add a new row
 		И в таблице "ItemList" я перехожу к строке:
 			| Item  |
@@ -1049,7 +1103,7 @@ To implement a sales-for-purchase scheme
 		| ''                                     | '*'           | '50'        | '10 500'        | '8 898,31'            | 'Main Company'          | 'Purchase invoice 457*' | 'TRY'               | 'M/White'            | '*'                       | 'Local currency'           | 'No'                   | ''                         | ''                     |
 		| ''                                     | '*'           | '50'        | '10 500'        | '8 898,31'            | 'Main Company'          | 'Purchase invoice 457*' | 'TRY'               | 'M/White'            | '*'                       | 'TRY'                      | 'No'                   | ''                         | ''                     |
 		| ''                                     | ''            | ''          | ''              | ''                    | ''                      | ''                      | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
-		| 'Register  "Tax types turnovers"'          | ''            | ''          | ''              | ''                    | ''                      | ''                      | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
+		| 'Register  "Taxes turnovers"'          | ''            | ''          | ''              | ''                    | ''                      | ''                      | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| ''                                     | 'Period'      | 'Resources' | ''              | ''                    | 'Dimensions'            | ''                      | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | 'Attributes'           |
 		| ''                                     | ''            | 'Amount'    | 'Manual amount' | 'Net amount'          | 'Document'              | 'Tax'                   | 'Analytics'         | 'Tax rate'           | 'Include to total amount' | 'Row key'                  | 'Currency'             | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                     | '*'           | '23,51'     | '23,51'         | '130,6'               | 'Purchase invoice 457*' | 'VAT'                   | ''                  | '18%'                | 'Yes'                     | '*'                        | 'USD'                  | 'Reporting currency'       | 'No'                   |
@@ -1225,7 +1279,7 @@ To implement a sales-for-purchase scheme
 			| ''                                     | 'Expense'     | '*'         | '10'            | 'Store 02'         | 'XS/Blue'                    | ''             | ''                   | ''                    | ''                         | ''                         | ''                         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'         | '10'            | 'Store 02'         | '38/Yellow'                  | ''             | ''                   | ''                    | ''                         | ''                         | ''                         | ''                         | ''                     |
 			| ''                                     | ''            | ''          | ''              | ''                 | ''                           | ''             | ''                   | ''                    | ''                         | ''                         | ''                         | ''                         | ''                     |
-			| 'Register  "Tax types turnovers"'          | ''            | ''          | ''              | ''                 | ''                           | ''             | ''                   | ''                    | ''                         | ''                         | ''                         | ''                         | ''                     |
+			| 'Register  "Taxes turnovers"'          | ''            | ''          | ''              | ''                 | ''                           | ''             | ''                   | ''                    | ''                         | ''                         | ''                         | ''                         | ''                     |
 			| ''                                     | 'Period'      | 'Resources' | ''              | ''                 | 'Dimensions'                 | ''             | ''                   | ''                    | ''                         | ''                         | ''                         | ''                         | 'Attributes'           |
 			| ''                                     | ''            | 'Amount'    | 'Manual amount' | 'Net amount'       | 'Document'                   | 'Tax'          | 'Analytics'          | 'Tax rate'            | 'Include to total amount'  | 'Row key'                  | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                     | '*'           | '52,24'     | '52,24'         | '290,23'           | 'Sales invoice 456*'         | 'VAT'          | ''                   | '18%'                 | 'Yes'                      | '*'                        | 'USD'                      | 'Reporting currency'       | 'No'                   |
@@ -1302,7 +1356,61 @@ To implement a sales-for-purchase scheme
 # Sales order - Purchase order - Purchase invoice- Goods reciept - Sales invoice - Shipment confirmation 
 
 Сценарий: _029207 create Purchase order based on Sales order (Purchase invoice before Goods receipt, Sales order contains services and products)
-	Когда creating an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
+	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
+	И я нажимаю на кнопку с именем 'FormCreate'
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'             |
+			| 'Lomaniti' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Basic Partner terms, TRY' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Legal name"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Company Lomaniti'  |
+	И в таблице "List" я выбираю текущую строку
+	* Adding items to sales order
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Dress' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| 'XS/Blue'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '5,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Boots' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/18SD'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+	И я нажимаю на кнопку 'Post'
 	* Change the procurement method by rows and add a new row
 		И в таблице "ItemList" я перехожу к строке:
 			| Item  |
@@ -1729,7 +1837,7 @@ To implement a sales-for-purchase scheme
 		| ''                                      | '*'           | '10'        | '2 000'         | '1 694,92'     | 'Main Company'          | 'Purchase invoice 460*' | 'TRY'               | 'XS/Blue'            | '*'                       | 'Local currency'           | 'No'                   | ''                         | ''                     |
 		| ''                                      | '*'           | '10'        | '2 000'         | '1 694,92'     | 'Main Company'          | 'Purchase invoice 460*' | 'TRY'               | 'XS/Blue'            | '*'                       | 'TRY'                      | 'No'                   | ''                         | ''                     |
 		| ''                                      | ''            | ''          | ''              | ''             | ''                      | ''                      | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
-		| 'Register  "Tax types turnovers"'           | ''            | ''          | ''              | ''             | ''                      | ''                      | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
+		| 'Register  "Taxes turnovers"'           | ''            | ''          | ''              | ''             | ''                      | ''                      | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| ''                                      | 'Period'      | 'Resources' | ''              | ''             | 'Dimensions'            | ''                      | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | 'Attributes'           |
 		| ''                                      | ''            | 'Amount'    | 'Manual amount' | 'Net amount'   | 'Document'              | 'Tax'                   | 'Analytics'         | 'Tax rate'           | 'Include to total amount' | 'Row key'                  | 'Currency'             | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                      | '*'           | '23,51'     | '23,51'         | '130,6'        | 'Purchase invoice 460*' | 'VAT'                   | ''                  | '18%'                | 'Yes'                     | '*'                        | 'USD'                  | 'Reporting currency'       | 'No'                   |
@@ -1932,7 +2040,7 @@ To implement a sales-for-purchase scheme
 		| ''                                           | 'Expense'     | '*'         | '5'             | 'Store 01'      | 'XS/Blue'             | ''             | ''                    | ''                    | ''                         | ''                         | ''                         | ''                         | ''                     |
 		| ''                                           | 'Expense'     | '*'         | '10'            | 'Store 01'      | '38/Yellow'           | ''             | ''                    | ''                    | ''                         | ''                         | ''                         | ''                         | ''                     |
 		| ''                                           | ''            | ''          | ''              | ''              | ''                    | ''             | ''                    | ''                    | ''                         | ''                         | ''                         | ''                         | ''                     |
-		| 'Register  "Tax types turnovers"'                | ''            | ''          | ''              | ''              | ''                    | ''             | ''                    | ''                    | ''                         | ''                         | ''                         | ''                         | ''                     |
+		| 'Register  "Taxes turnovers"'                | ''            | ''          | ''              | ''              | ''                    | ''             | ''                    | ''                    | ''                         | ''                         | ''                         | ''                         | ''                     |
 		| ''                                           | 'Period'      | 'Resources' | ''              | ''              | 'Dimensions'          | ''             | ''                    | ''                    | ''                         | ''                         | ''                         | ''                         | 'Attributes'           |
 		| ''                                           | ''            | 'Amount'    | 'Manual amount' | 'Net amount'    | 'Document'            | 'Tax'          | 'Analytics'           | 'Tax rate'            | 'Include to total amount'  | 'Row key'                  | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                           | '*'           | '18,28'     | '18,28'         | '101,58'        | 'Sales invoice 460 *' | 'VAT'          | ''                    | '18%'                 | 'Yes'                      | '*'                        | 'USD'                      | 'Reporting currency'       | 'No'                   |
@@ -2091,7 +2199,7 @@ To implement a sales-for-purchase scheme
 			| ''                                           | 'Expense'     | '*'         | '10'            | 'Store 02'      | 'XS/Blue'            | ''             | ''                   | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
 			| ''                                           | 'Expense'     | '*'         | '10'            | 'Store 02'      | '38/Yellow'          | ''             | ''                   | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
 			| ''                                           | ''            | ''          | ''              | ''              | ''                   | ''             | ''                   | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
-			| 'Register  "Tax types turnovers"'                | ''            | ''          | ''              | ''              | ''                   | ''             | ''                   | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
+			| 'Register  "Taxes turnovers"'                | ''            | ''          | ''              | ''              | ''                   | ''             | ''                   | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
 			| ''                                           | 'Period'      | 'Resources' | ''              | ''              | 'Dimensions'         | ''             | ''                   | ''                      | ''                         | ''                         | ''                         | ''                         | 'Attributes'           |
 			| ''                                           | ''            | 'Amount'    | 'Manual amount' | 'Net amount'    | 'Document'           | 'Tax'          | 'Analytics'          | 'Tax rate'              | 'Include to total amount'  | 'Row key'                  | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                           | '*'           | '7,84'      | '7,84'          | '43,53'         | 'Sales invoice 461*' | 'VAT'          | ''                   | '18%'                   | 'Yes'                      | '*'                        | 'USD'                      | 'Reporting currency'       | 'No'                   |

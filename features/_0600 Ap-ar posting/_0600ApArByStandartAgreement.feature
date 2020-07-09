@@ -218,7 +218,7 @@ I want to settle general Partner terms for all partners.
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
 		* Filling in the details of the document
-			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+			И я нажимаю кнопку выбора у поля "Cash account"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Cash desk №2' |
@@ -405,7 +405,7 @@ I want to settle general Partner terms for all partners.
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
 		* Filling in the details of the document
-			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+			И я нажимаю кнопку выбора у поля "Cash account"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'  |
 				| 'Cash desk №2' |

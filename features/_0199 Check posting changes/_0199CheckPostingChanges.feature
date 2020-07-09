@@ -158,7 +158,6 @@ In order not to double entries in the registers
 			| '39/19SD'  |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Unit"
-		Тогда открылось окно 'Units'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'               |
 			| 'High shoes box (8 pcs)' |

@@ -242,7 +242,7 @@ For settlements with partners
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Segment"
-		Тогда открылось окно 'Partner segments content'
+		
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Retail'      |
@@ -273,7 +273,7 @@ For settlements with partners
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Segment"
-		Тогда открылось окно 'Partner segments content'
+		
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Retail'      |

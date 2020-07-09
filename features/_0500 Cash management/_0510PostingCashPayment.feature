@@ -31,7 +31,7 @@ I want to pay cash
 			| 'Movement type'      | 'Amount'    | 'Multiplicity' |
 			| 'Reporting currency' | '23 458,90' | '1'            |
 	* Data overflow check
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
 			| 'Cash desk №2' |
@@ -79,7 +79,7 @@ I want to pay cash
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+			И я нажимаю кнопку выбора у поля "Cash account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №1 |
@@ -143,7 +143,7 @@ I want to pay cash
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+			И я нажимаю кнопку выбора у поля "Cash account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №1 |
@@ -207,7 +207,7 @@ I want to pay cash
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+			И я нажимаю кнопку выбора у поля "Cash account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №2 |
@@ -397,7 +397,7 @@ I want to pay cash
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
 		И я нажимаю кнопку выбора у поля "Company"
 		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №1 |
@@ -455,8 +455,8 @@ I want to pay cash
 			| Description  |
 			| Kalipso |
 		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" стала равной:
-		| # | Partner | Amount | Payee              | Basis document | Planing transaction basis |
+		И     таблица "PaymentList" содержит строки:
+		| # | Partner | Amount | Payee              | Basis document | Planning transaction basis |
 		| 1 | Kalipso | ''     | Company Kalipso    | ''             | ''                        |
 
 
@@ -479,9 +479,9 @@ I want to pay cash
 			| Description  |
 			| Anna Petrova |
 		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" стала равной:
-		| # | Partner      | Amount | Payee | Planing transaction basis |
-		| 1 | Anna Petrova | ''     | ''    | ''                        |
+		И     таблица "PaymentList" содержит строки:
+		| # | Partner      | Amount| Planning transaction basis |
+		| 1 | Anna Petrova | ''    | ''                        |
 
 
 Сценарий: _051014 check the display of details on the form Cash payment with the type of operation Cash transfer order
@@ -501,6 +501,6 @@ I want to pay cash
 		И в таблице "PaymentList" я завершаю редактирование строки
 		Если в таблице "PaymentList" нет колонки с именем "Payee" Тогда
 		Если в таблице "PaymentList" нет колонки с именем "Partner" Тогда
-		И     таблица "PaymentList" стала равной:
-		| # | 'Amount'    | Planing transaction basis |
+		И     таблица "PaymentList" содержит строки:
+		| # | 'Amount'    | Planning transaction basis |
 		| 1 | '100,00'    | ''                        |

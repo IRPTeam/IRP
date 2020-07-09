@@ -221,11 +221,68 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 
 Сценарий: _033505 checking the application of discounts Discount Price 1 without Vat (price not include VAT) - manual in the group Minimum and Discount Price 2 without Vat
 	Когда move the Discount 2 without Vat special offer from Maximum to Minimum
-	Когда changing the manual apply of Discount 2 without Vat
+	Когда changing the manual apply of Discount 2 without Vat for test
 	Когда transfer the Discount 1 without Vat discount from Maximum to Minimum.
 	И Пауза 2
-	Когда changing the manual apply of Discount 1 without Vat
-	Когда creating an order for MIO Basic Partner terms, without VAT (Trousers и Shirt)
+	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
+	И я нажимаю на кнопку 'List'
+	И в таблице "List" я перехожу к строке:
+			| 'Description'              |
+			| 'Discount 1 without Vat' |
+	И в таблице "List" я выбираю текущую строку
+	И Пауза 2
+	И я устанавливаю флаг с именем 'Manually'
+	И  флаг "Manually" равен "Yes"
+	И я нажимаю на кнопку "Save and close"
+	И Я закрываю окно 'Special offers'
+	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
+	И я нажимаю на кнопку с именем 'FormCreate'
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'             |
+			| 'MIO' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Basic Partner terms, without VAT' |
+	И в таблице "List" я выбираю текущую строку
+	* Adding items to sales order
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Shirt' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Red'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Trousers' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Yellow'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '12,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+	И я нажимаю на кнопку 'Post'
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'            |
@@ -242,7 +299,53 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 
 
 Сценарий: _033506  checking the application of discounts Discount Price 2 without Vat (price not include VAT)- manual in the group Minimum and Discount Price 1 without Vat
-	Когда creating an order for MIO Basic Partner terms, without VAT (Trousers и Shirt)
+	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
+	И я нажимаю на кнопку с именем 'FormCreate'
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'             |
+			| 'MIO' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Basic Partner terms, without VAT' |
+	И в таблице "List" я выбираю текущую строку
+	* Adding items to sales order
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Shirt' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Red'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Trousers' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Yellow'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '12,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'            |
@@ -263,9 +366,65 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 
 Сценарий: _033507 check the discount order in group Minimum (auto)
 # Discounted Discount Price without Vat 1
-	Когда changing the auto apply of Discount 2 without Vat
+	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
+	И я нажимаю на кнопку 'List'
+	И в таблице "List" я перехожу к строке:
+			| 'Description'              |
+			| 'Discount 2 without Vat' |
+	И в таблице "List" я выбираю текущую строку
+	И я снимаю флаг "Manually"
+	И Пауза 2
+	И  флаг "Manually" равен "No"
+	И я нажимаю на кнопку "Save and close"
+	И Я закрываю окно 'Special offers'
 	Когда changing the auto apply of Discount 1 without Vat
-	Когда creating an order for MIO Basic Partner terms, without VAT (Trousers и Shirt)
+	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
+	И я нажимаю на кнопку с именем 'FormCreate'
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'             |
+			| 'MIO' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Basic Partner terms, without VAT' |
+	И в таблице "List" я выбираю текущую строку
+	* Adding items to sales order
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Shirt' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Red'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Trousers' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Yellow'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '12,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И Пауза 2
 	И я нажимаю на кнопку 'OK'
@@ -282,8 +441,64 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 Сценарий: _033508 check the discount order in group Maximum (auto)
 # Discounted Discount Price without Vat 2
 	Когда move Discount 2 without Vat and Discount 1 without Vat discounts from the group Minimum to the group Maximum 
-	Когда changing the auto apply of Discount 2 without Vat
-	Когда creating an order for MIO Basic Partner terms, without VAT (Trousers и Shirt)
+	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
+	И я нажимаю на кнопку 'List'
+	И в таблице "List" я перехожу к строке:
+			| 'Description'              |
+			| 'Discount 2 without Vat' |
+	И в таблице "List" я выбираю текущую строку
+	И я снимаю флаг "Manually"
+	И Пауза 2
+	И  флаг "Manually" равен "No"
+	И я нажимаю на кнопку "Save and close"
+	И Я закрываю окно 'Special offers'
+	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
+	И я нажимаю на кнопку с именем 'FormCreate'
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'             |
+			| 'MIO' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Basic Partner terms, without VAT' |
+	И в таблице "List" я выбираю текущую строку
+	* Adding items to sales order
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Shirt' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Red'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Trousers' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Yellow'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '12,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку 'Save'
@@ -316,7 +531,53 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 	И Пауза 2
 	И я фиксирую текущую форму
 	И я нажимаю на кнопку с именем 'FormChoose'
-	Когда creating an order for MIO Basic Partner terms, without VAT (Trousers и Shirt)
+	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
+	И я нажимаю на кнопку с именем 'FormCreate'
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'             |
+			| 'MIO' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Basic Partner terms, without VAT' |
+	И в таблице "List" я выбираю текущую строку
+	* Adding items to sales order
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Shirt' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Red'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Trousers' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Yellow'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '12,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
 	Затем я жду, что в сообщениях пользователю будет подстрока "Message 2" в течение 30 секунд
@@ -334,7 +595,53 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 	Когда create discount Message Dialog Box 2 (Message 3)
 	Когда changing the auto apply of Discount 1 without Vat
 	Когда move the Discount 1 without Vat discount to the Sum group
-	Когда creating an order for MIO Basic Partner terms, without VAT (Trousers и Shirt)
+	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
+	И я нажимаю на кнопку с именем 'FormCreate'
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'             |
+			| 'MIO' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Basic Partner terms, without VAT' |
+	И в таблице "List" я выбираю текущую строку
+	* Adding items to sales order
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Shirt' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Red'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Trousers' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Yellow'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '12,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
 	Затем я жду, что в сообщениях пользователю будет подстрока "Message 2" в течение 30 секунд
@@ -351,8 +658,18 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 		
 
 Сценарий: _033511 check the discount order in group Sum 2 auto message
-	Когда changing the manual apply of Discount 1 without Vat
-	Когда changing the manual apply of Discount 2 without Vat
+	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
+	И я нажимаю на кнопку 'List'
+	И в таблице "List" я перехожу к строке:
+			| 'Description'              |
+			| 'Discount 1 without Vat' |
+	И в таблице "List" я выбираю текущую строку
+	И Пауза 2
+	И я устанавливаю флаг с именем 'Manually'
+	И  флаг "Manually" равен "Yes"
+	И я нажимаю на кнопку "Save and close"
+	И Я закрываю окно 'Special offers'
+	Когда changing the manual apply of Discount 2 without Vat for test
 	Когда creating an order for MIO Basic Partner terms, without VAT (High shoes and Boots)
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
@@ -372,7 +689,53 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 Сценарий: _033512 check the discount order in group Minimum (manual)
     # Discounted Discount Price without Vat 1
 	Когда transfer Discount 2 without Vat and Discount 1 without Vat discounts from Maximum to Minimum
-	Когда creating an order for MIO Basic Partner terms, without VAT (Trousers и Shirt)
+	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
+	И я нажимаю на кнопку с именем 'FormCreate'
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'             |
+			| 'MIO' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Basic Partner terms, without VAT' |
+	И в таблице "List" я выбираю текущую строку
+	* Adding items to sales order
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Shirt' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Red'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Trousers' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/Yellow'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '12,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я перехожу к строке:
 		| 'Presentation'                  |
@@ -403,7 +766,7 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 	Когда  move the Discount Price 1 to Maximum
 	Когда transfer the Discount Price 2 discount to the Minimum group
 	Когда change the priority Discount Price 1 from 1 to 3
-	Когда меняю priority Discount Price 2 с 4 на 2
+	Когда change the priority special offer Discount Price 2 from 4 to 2
 	Когда change the auto setting of the special offer Discount Price 1
 	Когда change the auto setting of the Discount Price 2
 	Когда creating an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)

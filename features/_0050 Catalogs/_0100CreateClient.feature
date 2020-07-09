@@ -485,7 +485,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			Тогда открылось окно 'Edit data type'
 			И в таблице "" я перехожу к строке:
 				| ''                |
-				| 'Addresses hierarchy' |
+				| 'Address hierarchy' |
 			И я нажимаю на кнопку 'OK'
 			И в поле 'Unique ID' я ввожу текст 'Adr_1'
 			И я изменяю флаг 'Show on form'
@@ -503,7 +503,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			Тогда открылось окно 'Edit data type'
 			И в таблице "" я перехожу к строке:
 				| ''                |
-				| 'Addresses hierarchy' |
+				| 'Address hierarchy' |
 			И я нажимаю на кнопку 'OK'
 			И в поле 'Unique ID' я ввожу текст 'Adr_2'
 			И я изменяю флаг 'Show on form'
@@ -552,7 +552,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 			Тогда открылось окно 'Edit data type'
 			И в таблице "" я перехожу к строке:
 				| ''                |
-				| 'Addresses hierarchy' |
+				| 'Address hierarchy' |
 			И я нажимаю на кнопку 'OK'
 			И в поле 'Unique ID' я ввожу текст 'Adr_3'
 			И я изменяю флаг 'Show on form'
@@ -643,7 +643,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		Тогда открылось окно 'Coordinates'
 		И я указываю адрес который будет перезаполнятся при выборе gps
 			И я нажимаю кнопку выбора у поля "Structured address"
-			Тогда открылось окно 'Contact info type'
+			Тогда открылось окно 'Contact info types'
 			И в таблице "List" я перехожу к строке:
 				| Description       |
 				| Google Addreses |
@@ -693,7 +693,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И я перехожу к закладке "Related values"
 		И в таблице "RelatedValues" я нажимаю на кнопку с именем 'RelatedValuesAdd'
 		И в таблице "RelatedValues" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info type'
+		Тогда открылось окно 'Contact info types'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                  |
 			| 'Location address (Partner)' |
@@ -740,7 +740,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в таблице "ExternalDataProcess" я нажимаю на кнопку 'Set settings'
 		И я указываю адрес который будет перезаполнятся при выборе gps
 			И я нажимаю кнопку выбора у поля "Structured address"
-			Тогда открылось окно 'Contact info type'
+			Тогда открылось окно 'Contact info types'
 			И в таблице "List" я перехожу к строке:
 				| Description       |
 				| Google Addreses |
@@ -788,7 +788,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И я перехожу к закладке "Related values"
 		И в таблице "RelatedValues" я нажимаю на кнопку с именем 'RelatedValuesAdd'
 		И в таблице "RelatedValues" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info type'
+		Тогда открылось окно 'Contact info types'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                  |
 			| 'Location address (Partner)' |
@@ -859,7 +859,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И я нажимаю на кнопку 'Ok'
 		И в таблице "IDInfoTypes" я нажимаю на кнопку 'Add'
 		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info type'
+		Тогда открылось окно 'Contact info types'
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| GPS Turkey |
@@ -908,12 +908,12 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И я нажимаю на кнопку 'OK'
 		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
 		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info type'
+		Тогда открылось окно 'Contact info types'
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "IDInfoTypes" я завершаю редактирование строки
 		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
 		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info type'
+		Тогда открылось окно 'Contact info types'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                  |
 			| 'Billing address (Company)' |
@@ -921,7 +921,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И в таблице "IDInfoTypes" я завершаю редактирование строки
 		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
 		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info type'
+		Тогда открылось окно 'Contact info types'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                     |
 			| 'Registered address  (Company)' |
@@ -941,7 +941,7 @@ To specify: address, phone, e-mail, gps coordinate on the map
 		И я нажимаю на кнопку 'OK'
 		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
 		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info type'
+		Тогда открылось окно 'Contact info types'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                  |
 			| 'Location address (Partner)' |

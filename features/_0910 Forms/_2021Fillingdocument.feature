@@ -1595,13 +1595,13 @@
 			| USD  |
 		И в таблице "List" я выбираю текущую строку
 	* Check filling in cash account (multicurrency)
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №1 |
 		И в таблице "List" я выбираю текущую строку
 	* Re-selection of cash registers with a fixed currency and verification of overfilling of the Currency field
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №4 |
@@ -1615,7 +1615,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "CashAccount" стал равен ''
 	* Select a multi-currency cash account and checking that the Currency field will not be cleared
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Cash desk №1 |
@@ -2030,13 +2030,13 @@
 			| USD  |
 		И в таблице "List" я выбираю текущую строку
 	* Check filling in cash account (multicurrency)
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №1 |
 		И в таблице "List" я выбираю текущую строку
 	* Re-selection of cash registers with a fixed currency and verification of overfilling of the Currency field
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №4 |
@@ -2050,7 +2050,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И     элемент формы с именем "CashAccount" стал равен ''
 	* Select a multi-currency cash account and checking that the Currency field will not be cleared
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Cash desk №1 |
@@ -3174,7 +3174,7 @@
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №2 |
@@ -3199,13 +3199,13 @@
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Partner'   | 'Amount' | 'Amount exchange' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''       | ''                | ''                          |
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''          | ''       | ''      | ''               | ''                          |
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
@@ -3215,7 +3215,7 @@
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
 		И Я закрыл все окна клиентского приложения
@@ -3231,7 +3231,7 @@
 			| Description  |
 			| Main Company |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| Description    |
 			| Cash desk №2 |
@@ -3256,13 +3256,13 @@
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Partner'   | 'Amount' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''       | ''                          |
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''          | ''       | ''      | ''               | ''                          |
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
@@ -3272,7 +3272,7 @@
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
 		И Я закрыл все окна клиентского приложения
@@ -3312,7 +3312,7 @@
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Amount' | 'Amount exchange' | 'Planning transaction basis' |
 		| '1' | ''       | ''                | ''                          |
 		* Check filling in Transit account из Accountant
@@ -3320,7 +3320,7 @@
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''          | ''          | ''       | ''      | ''               | ''                          |
 		И     элемент формы с именем "TransitAccount" стал равен ''
@@ -3331,7 +3331,7 @@
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
 		И Я закрыл все окна клиентского приложения
@@ -3372,7 +3372,7 @@
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Amount' | 'Planning transaction basis' |
 		| '1' | ''       | ''                          |
 		* Check filling in Transit account из Accountant
@@ -3380,7 +3380,7 @@
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''          | ''          | ''       | ''      | ''               | ''                          |
 		И     элемент формы с именем "TransitAccount" стал равен ''
@@ -3391,7 +3391,7 @@
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
 		И Я закрыл все окна клиентского приложения
@@ -3711,7 +3711,7 @@
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'         |
 			| 'Cash desk №2' |
@@ -3792,7 +3792,7 @@
 			| 'Description'  |
 			| 'Main Company' |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'         |
 			| 'Cash desk №1' |
@@ -4032,7 +4032,7 @@
 	* And I check the display of the tabular part
 		И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 			| '#' | 'Amount' | 'Planning transaction basis' |
 			| '1' | ''       | ''                          |
 

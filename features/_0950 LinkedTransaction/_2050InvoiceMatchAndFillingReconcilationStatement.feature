@@ -108,7 +108,7 @@
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+			И я нажимаю кнопку выбора у поля "Cash account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №3 |
@@ -165,7 +165,7 @@
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+			И я нажимаю кнопку выбора у поля "Cash account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №3 |

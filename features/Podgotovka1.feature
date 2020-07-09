@@ -568,7 +568,7 @@
 		И я создаю соглашение в долларах
 			И в поле 'ENG' я ввожу текст 'Ferron, USD'
 			И я меняю значение переключателя 'Type' на 'Customer'
-			И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
+			И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
 			И в поле 'Number' я ввожу текст '234'
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -580,10 +580,10 @@
 				| Description |
 				| Ferron BP   |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Currency movement type"
+			И я нажимаю кнопку выбора у поля "Multi currency movement type"
 			И в таблице "List" я перехожу к строке:
 				| 'Currency' | 'Type'      |
-				| 'USD'      | 'Agreement' |
+				| 'USD'      | 'Partner term' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Price type"
 			И в таблице "List" я перехожу к строке:
@@ -963,7 +963,7 @@
 	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
 			| 'Description'                     |
-			| 'Basic Partner term, TRY' |
+			| 'Basic Partner terms, TRY' |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю кнопку выбора у поля "Legal name"
 	И в таблице "List" я перехожу к строке:

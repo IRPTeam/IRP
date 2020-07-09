@@ -1463,7 +1463,7 @@
 			| Code | Description     |
 			| USD  | American dollar |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Cash desk №2 |
@@ -1484,7 +1484,7 @@
 			| Code | Description     |
 			| USD  | American dollar |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Cash desk №2 |

@@ -267,7 +267,7 @@
 		| 'Maximum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
 
-Сценарий: move the Discount Price 2 to Minimum
+Сценарий: move the special offer Discount Price 2 to Minimum (for test)
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:
@@ -335,6 +335,16 @@
 	И я нажимаю на кнопку 'Save and close'
 	И Пауза 2
 
+Сценарий: change the priority special offer Discount Price 2 from 4 to 2
+	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
+	И я нажимаю на кнопку 'List'
+	И в таблице "List" я перехожу к строке:
+		| 'Description'              |
+		| 'Discount Price 2' |
+	И в таблице "List" я выбираю текущую строку
+	И в поле 'Priority' я ввожу текст '2'
+	И я нажимаю на кнопку 'Save and close'
+	И Пауза 2
 
 Сценарий: move the Discount 1 without Vat discount to Minimum
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
@@ -782,3 +792,76 @@
 
 
 	
+
+Сценарий: creating an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
+	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
+	И я нажимаю на кнопку с именем 'FormCreate'
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'             |
+			| 'Lomaniti' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Basic Partner terms, TRY' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Legal name"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Company Lomaniti'  |
+	И в таблице "List" я выбираю текущую строку
+	* Adding items to sales order
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Dress' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| 'XS/Blue'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '5,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		Тогда открылось окно 'Items'
+		И в таблице "List" я перехожу к строке:
+			| 'Description'                     |
+			| 'Boots' |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Item key"
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Тогда открылось окно 'Item keys'
+		И в таблице "List" я перехожу к строке:
+			| 'Item key' |
+			| '36/18SD'  |
+		И в таблице "List" я выбираю текущую строку
+		И в таблице "ItemList" я активизирую поле "Q"
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
+		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
+		И в таблице "ItemList" я завершаю редактирование строки
+	И я нажимаю на кнопку 'Post'
+
+
+
+
+Сценарий: changing the manual apply of Discount 2 without Vat for test
+	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
+	И я нажимаю на кнопку 'List'
+	И в таблице "List" я перехожу к строке:
+			| 'Description'              |
+			| 'Discount 2 without Vat' |
+	И в таблице "List" я выбираю текущую строку
+	И Пауза 2
+	И я устанавливаю флаг с именем 'Manually'
+	И  флаг "Manually" равен "Yes"
+	И я нажимаю на кнопку "Save and close"
+	И Я закрываю окно 'Special offers'

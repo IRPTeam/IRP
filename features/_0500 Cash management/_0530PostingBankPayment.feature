@@ -430,8 +430,8 @@ To close debts to partners
 			| Description  |
 			| Kalipso |
 		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" стала равной:
-			| '#' | Partner | Amount | Payee              | Basis document | Planing transaction basis |
+		И     таблица "PaymentList" содержит строки:
+			| '#' | Partner | Amount | Payee              | Basis document | Planning transaction basis |
 			| '1' | Kalipso | ''     | Company Kalipso    | ''             | ''                        |
 
 
@@ -458,7 +458,7 @@ To close debts to partners
 		И в таблице "PaymentList" я завершаю редактирование строки
 		Если в таблице "PaymentList" нет колонки с именем "Payee" Тогда
 		Если в таблице "PaymentList" нет колонки с именем "Partner" Тогда
-		И     таблица "PaymentList" стала равной:
+		И     таблица "PaymentList" содержит строки:
 			| '#' | 'Amount' | 'Planning transaction basis' |
 			| '1' | '100,00' | ''                          |
 

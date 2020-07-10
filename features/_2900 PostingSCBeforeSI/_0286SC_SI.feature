@@ -12,12 +12,12 @@ For shipment of items to the customer before the invoice (no price)
 
 
 Сценарий: _0290001 create Shipment confirmation document for the shipment of items to the customer without an order and an invoice
-	* Создание SC на отгрузку Nicoletta со склада Store 02 со своей компании Main company
-		* Открытие формы Shipment confirmation
+	* Create SC for Nicoletta from store Store 02 (Main company)
+		* Open form Shipment confirmation
 			И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
-		* Заполнение Partner
+		* Filling in Partner
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -28,7 +28,7 @@ For shipment of items to the customer before the invoice (no price)
 				| 'Description' |
 				| 'Store 02'    |
 			И в таблице "List" я выбираю текущую строку
-		* Добавление товара
+		* Add items
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -99,12 +99,12 @@ For shipment of items to the customer before the invoice (no price)
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '5 600'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание SC на отгрузку Nicoletta со склада Store 03 со своей компании Main company
-		* Открытие формы Shipment confirmation
+	* Create SC for Nicoletta from Store 03 (Main company)
+		* Open Shipment confirmation
 			И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
-		* Заполнение Partner
+		* Create Partner
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -115,7 +115,7 @@ For shipment of items to the customer before the invoice (no price)
 				| 'Description' |
 				| 'Store 03'    |
 			И в таблице "List" я выбираю текущую строку
-		* Добавление товара
+		* Add items
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -156,12 +156,12 @@ For shipment of items to the customer before the invoice (no price)
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '5 601'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание SC на отгрузку Ferron BP со склада Store 03 на компанию Company Ferron BP со своей компании Main company
-		* Открытие формы Shipment confirmation
+	* Create SC for Ferron BP from Store 03 (Company Ferron BP, Main company)
+		* OPen Shipment confirmation
 			И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
-		* Заполнение Partner
+		* Filling in Partner
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -177,7 +177,7 @@ For shipment of items to the customer before the invoice (no price)
 				| 'Description' |
 				| 'Store 03'    |
 			И в таблице "List" я выбираю текущую строку
-		* Добавление товара
+		* Add items
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -234,12 +234,12 @@ For shipment of items to the customer before the invoice (no price)
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '5 602'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание SC на отгрузку Ferron BP со склада Store 03 на компанию Second Company Ferron BP со своей компании Main company
-		* Открытие формы Shipment confirmation
+	* Create SC for Ferron BP from Store 03 for Second Company Ferron BP (Main company) 
+		* Open Shipment confirmation
 			И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
-		* Заполнение Partner
+		* Filling in Partner
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -255,7 +255,7 @@ For shipment of items to the customer before the invoice (no price)
 				| 'Description' |
 				| 'Store 03'    |
 			И в таблице "List" я выбираю текущую строку
-		* Добавление товара
+		* Add items
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -280,12 +280,12 @@ For shipment of items to the customer before the invoice (no price)
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '5 603'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание SC на отгрузку Ferron BP со склада Store 03 на компанию Company Ferron BP со своей компании Second company
-		* Открытие формы Shipment confirmation
+	* Create SC for Ferron BP from Store 03 for Company Ferron BP (Second company)
+		* Open Shipment confirmation
 			И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
-		* Заполнение Partner
+		* Filling in Partner
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -306,7 +306,7 @@ For shipment of items to the customer before the invoice (no price)
 				| 'Description'    |
 				| 'Second Company' |
 			И в таблице "List" я выбираю текущую строку
-		* Добавление товара
+		* Add items
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я перехожу к строке:
@@ -347,7 +347,7 @@ For shipment of items to the customer before the invoice (no price)
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '5 604'
 			И я нажимаю на кнопку 'Post and close'
-	* create Shipment confirmation
+	* Create Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		Тогда таблица "List" содержит строки:
 		| 'Number' | 'Company'      |
@@ -358,10 +358,10 @@ For shipment of items to the customer before the invoice (no price)
 		| '5 604'  | 'Second Company' |
 
 Сценарий: _0290002 create Sales invoice based on Shipment confirmation
-	# based on нескольких Shipment confirmation создается несколько Sales invoice
-	* Открытие списка Shipment confirmation
+	# based on several Shipment confirmation creates multiple Sales invoice
+	* Open Shipment confirmation list
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
-	* Select нужных SC для создания SI 
+	* Select SC for creating SI 
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '5 600'  |
@@ -369,9 +369,9 @@ For shipment of items to the customer before the invoice (no price)
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
-	* Создание SI based on выбранных SC
+	* Create SI based on SC
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
-		* create первого SI
+		* Create first SI
 			И я запоминаю количество строк таблицы "ItemList" как "M"
 			Если поле с именем "Company" имеет значение "Second Company" тогда
 				И     элемент формы с именем "Partner" стал равен 'Ferron BP'
@@ -458,7 +458,7 @@ For shipment of items to the customer before the invoice (no price)
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '5 602'
 			И я нажимаю на кнопку 'Post and close'
-		* create второго Si
+		* Create second SI
 			И я запоминаю количество строк таблицы "ItemList" как "M"
 			Если поле с именем "Company" имеет значение "Second Company" тогда
 				И     элемент формы с именем "Partner" стал равен 'Ferron BP'
@@ -545,7 +545,7 @@ For shipment of items to the customer before the invoice (no price)
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '5 602'
 			И я нажимаю на кнопку 'Post and close'
-		* create третьего Si
+		* Create third SI
 			И я запоминаю количество строк таблицы "ItemList" как "M"
 			Если поле с именем "Company" имеет значение "Second Company" тогда
 				И     элемент формы с именем "Partner" стал равен 'Ferron BP'
@@ -632,7 +632,7 @@ For shipment of items to the customer before the invoice (no price)
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '5 602'
 			И я нажимаю на кнопку 'Post and close'
-		* create четвертого Si
+		* Create fourth SI
 			И я запоминаю количество строк таблицы "ItemList" как "M"
 			Если поле с именем "Company" имеет значение "Second Company" тогда
 				И     элемент формы с именем "Partner" стал равен 'Ferron BP'
@@ -719,12 +719,3 @@ For shipment of items to the customer before the invoice (no price)
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '5 602'
 			И я нажимаю на кнопку 'Post and close'
-
-		
-
-
-
-
-
-
-

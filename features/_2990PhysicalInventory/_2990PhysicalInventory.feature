@@ -5,9 +5,9 @@
 
 Функционал: product inventory
 
-Как разработчик
-Я хочу добавить функционал по списанию недостач и оприходованию излишков товаров
-Для работы с товаром
+As a developer
+I'd like to add functionality to write off shortages and recover surplus goods.
+To work with the products
 
 
 Контекст:
@@ -151,7 +151,7 @@
 	* Присвоение предопределенному элементу PhysicalInventory наименования 
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'     |
-			| 'Objects status historyes' |
+			| 'Objects status history' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| PhysicalInventory         |
@@ -200,7 +200,7 @@
 	* Присвоение предопределенному элементу PhysicalCountByLocation наименования 
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'     |
-			| 'Objects status historyes' |
+			| 'Objects status history' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| PhysicalCountByLocation         |
@@ -1036,7 +1036,7 @@
 		И я нажимаю на кнопку 'Physical count by location'
 	* Проверка отображения в какие пересчеты попала строка
 		И     таблица "ItemList" содержит строки:
-			| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count'    |
+			| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count'    |
 			| 'Dress' | '-125,000'   | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date:*'      |
 			| 'Dress' | '-198,000'   | 'XS/Blue'  | '198,000'    | 'pcs'  | 'Arina Brown'        | '#2 date:*'      |
 	* Check filling inданных о пересчете в табличной части
@@ -1209,7 +1209,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Update exp. count'
 		И     таблица "ItemList" содержит строки:
-			| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count' |
+			| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
 			| 'Dress' | '-8,000'     | 'M/White'  | '8,000'      | 'pcs'  | ''                   | ''               |
 			| 'Shirt' | '-7,000'     | '36/Red'   | '7,000'      | 'pcs'  | ''                   | ''               |
 			| 'Boots' | '-4,000'     | '36/18SD'  | '4,000'      | 'pcs'  | ''                   | ''               |
@@ -1223,7 +1223,7 @@
 				И в таблице "ItemList" я активизирую поле "Item key"
 				И в таблице "ItemList" я удаляю строку
 				И     таблица "ItemList" содержит строки:
-				| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count' |
+				| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
 				| 'Dress' | '-125,000'   | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date*'       |
 			* Невозможность изменения количества по строке
 				И в таблице "ItemList" я перехожу к строке:
@@ -1269,7 +1269,7 @@
 			И я нажимаю на кнопку 'Physical count by location'
 		* create новых перерасчетов
 			И     таблица "ItemList" содержит строки:
-			| 'Item'  | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count' |
+			| 'Item'  | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
 			| 'Dress' | 'M/White'  | '8,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 			| 'Shirt' | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 			| 'Boots' | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
@@ -1349,7 +1349,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Update phys. count'
 		И     таблица "ItemList" содержит строки:
-		| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count' |
+		| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
 		| '10,000'      | 'Dress' | '2,000'      | 'M/White'  | '8,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date*'       |
 		| '7,000'       | 'Shirt' | ''           | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date*'       |
 		| '4,000'       | 'Boots' | ''           | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date*'       |
@@ -1387,7 +1387,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Update phys. count'
 		И     таблица "ItemList" содержит строки:
-		| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count' |
+		| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
 		| '10,000'      | 'Dress' | '2,000'      | 'M/White'  | '8,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 		| '7,000'       | 'Shirt' | ''           | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 		| '4,000'       | 'Boots' | ''           | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |

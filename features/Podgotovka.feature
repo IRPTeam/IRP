@@ -11,26 +11,6 @@
 
 
 
-Сценарий: filling in customer data in the order (Ferron BP, store 01)
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
-			| 'Description' |
-			| 'Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	Тогда открылось окно 'Partner terms'
-	И в таблице "List" я перехожу к строке:
-			| 'Description'       |
-			| 'Basic Partner terms, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Legal name"
-	И в таблице "List" я перехожу к строке:
-			| 'Description' |
-			| 'Company Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
-
-
-
 
 Сценарий: cleaning discounts
 	И Я удаляю все элементы Справочника "ExternalDataProc"

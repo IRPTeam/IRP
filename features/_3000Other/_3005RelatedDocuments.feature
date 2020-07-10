@@ -125,7 +125,7 @@
 	И я формирую отчет по структуре подчиненности
 		И в таблице "List" я перехожу к строке:
 		| Number |
-		| 170      |
+		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
 		И Пауза 1
 	Когда открылось окно 'Related documents'

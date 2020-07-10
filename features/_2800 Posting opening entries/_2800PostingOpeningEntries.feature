@@ -768,19 +768,19 @@
 	* Заполнение ввода начального остатка по задолженности поставщику
 		* Filling in partner and Legal name
 			И я перехожу к закладке "Account payable"
-			И в таблице "AccountPayableByPartner terms" я нажимаю на кнопку 'Add'
-			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner"
+			И в таблице "AccountPayableByAgreements" я нажимаю на кнопку 'Add'
+			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountPayableByPartner terms" я завершаю редактирование строки
+			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
 		* Check filling in legal name
-				И     таблица "AccountPayableByPartner terms" содержит строки:
+				И     таблица "AccountPayableByAgreements" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
 		* Создание тестового соглашения с взаиморасчетами по соглашениям
-			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner term"
+			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Partner term"
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я меняю значение переключателя 'AP/AR posting detail' на 'By partner terms'
 			И я меняю значение переключателя 'Type' на 'Vendor'
@@ -803,25 +803,25 @@
 			| 'DFC Vendor by Partner terms' |
 			И я нажимаю на кнопку с именем 'FormChoose'
 		* Заполнение суммы и валюты
-			И в таблице "AccountPayableByPartner terms" я активизирую поле "Currency"
-			И в таблице "AccountPayableByPartner terms" я выбираю текущую строку
-			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Currency"
+			И в таблице "AccountPayableByAgreements" я активизирую поле "Currency"
+			И в таблице "AccountPayableByAgreements" я выбираю текущую строку
+			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Currency"
 			И в таблице "List" я активизирую поле "Description"
 			И в таблице "List" я перехожу к строке:
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountPayableByPartner terms" я активизирую поле "Amount"
-			И в таблице "AccountPayableByPartner terms" в поле 'Amount' я ввожу текст '100,00'
-			И в таблице "AccountPayableByPartner terms" я завершаю редактирование строки
+			И в таблице "AccountPayableByAgreements" я активизирую поле "Amount"
+			И в таблице "AccountPayableByAgreements" в поле 'Amount' я ввожу текст '100,00'
+			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
 		* Проверка расчета Reporting currency
-			И в таблице "CurrenciesAccountPayableByPartner terms" я перехожу к строке:
+			И в таблице "CurrenciesAccountPayableByAgreements" я перехожу к строке:
 			| 'Movement type'      | 'Type'      |
 			| 'Reporting currency' | 'Reporting' |
-			И в таблице "CurrenciesAccountPayableByPartner terms" я выбираю текущую строку
-			И в таблице "CurrenciesAccountPayableByPartner terms" в поле с именем "CurrenciesAccountPayableByPartner termsRatePresentation" я ввожу текст '5,8400'
-			И в таблице "CurrenciesAccountPayableByPartner terms" в поле с именем "CurrenciesAccountPayableByPartner termsMultiplicity" я ввожу текст '1'
-			И в таблице "CurrenciesAccountPayableByPartner terms" я завершаю редактирование строки
+			И в таблице "CurrenciesAccountPayableByAgreements" я выбираю текущую строку
+			И в таблице "CurrenciesAccountPayableByAgreements" в поле с именем "CurrenciesAccountPayableByAgreementsRatePresentation" я ввожу текст '5,8400'
+			И в таблице "CurrenciesAccountPayableByAgreements" в поле с именем "CurrenciesAccountPayableByAgreementsMultiplicity" я ввожу текст '1'
+			И в таблице "CurrenciesAccountPayableByAgreements" я завершаю редактирование строки
 			И     таблица "CurrenciesAccountPayableByDocuments" содержит строки:
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
@@ -871,19 +871,19 @@
 	* Заполнение ввода начального остатка по задолженности клиента
 		* Filling in partner and Legal name
 			И я перехожу к закладке "Account receivable"
-			И в таблице "AccountReceivableByPartner terms" я нажимаю на кнопку 'Add'
-			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner"
+			И в таблице "AccountReceivableByAgreements" я нажимаю на кнопку 'Add'
+			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountReceivableByPartner terms" я завершаю редактирование строки
+			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
 		* Check filling in legal name
-				И     таблица "AccountReceivableByPartner terms" содержит строки:
+				И     таблица "AccountReceivableByAgreements" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
 		* Создание тестового соглашения с взаиморасчетами по соглашениям
-			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner term"
+			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Partner term"
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И я меняю значение переключателя 'AP/AR posting detail' на 'By partner terms'
 			И я меняю значение переключателя 'Type' на 'Customer'
@@ -906,25 +906,25 @@
 				| 'DFC Customer by Partner terms' |
 			И я нажимаю на кнопку с именем 'FormChoose'
 		* Заполнение суммы и валюты
-			И в таблице "AccountReceivableByPartner terms" я активизирую поле "Currency"
-			И в таблице "AccountReceivableByPartner terms" я выбираю текущую строку
-			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Currency"
+			И в таблице "AccountReceivableByAgreements" я активизирую поле "Currency"
+			И в таблице "AccountReceivableByAgreements" я выбираю текущую строку
+			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Currency"
 			И в таблице "List" я активизирую поле "Description"
 			И в таблице "List" я перехожу к строке:
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountReceivableByPartner terms" я активизирую поле "Amount"
-			И в таблице "AccountReceivableByPartner terms" в поле 'Amount' я ввожу текст '100,00'
-			И в таблице "AccountReceivableByPartner terms" я завершаю редактирование строки
+			И в таблице "AccountReceivableByAgreements" я активизирую поле "Amount"
+			И в таблице "AccountReceivableByAgreements" в поле 'Amount' я ввожу текст '100,00'
+			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
 		* Проверка расчета Reporting currency
-			И в таблице "CurrenciesAccountReceivableByPartner terms" я перехожу к строке:
+			И в таблице "CurrenciesAccountReceivableByAgreements" я перехожу к строке:
 				| 'Movement type'      | 'Type'      |
 				| 'Reporting currency' | 'Reporting' |
-			И в таблице "CurrenciesAccountReceivableByPartner terms" я выбираю текущую строку
-			И в таблице "CurrenciesAccountReceivableByPartner terms" в поле с именем "CurrenciesAccountReceivableByPartner termsRatePresentation" я ввожу текст '5,8400'
-			И в таблице "CurrenciesAccountReceivableByPartner terms" в поле с именем "CurrenciesAccountReceivableByPartner termsMultiplicity" я ввожу текст '1'
-			И в таблице "CurrenciesAccountReceivableByPartner terms" я завершаю редактирование строки
+			И в таблице "CurrenciesAccountReceivableByAgreements" я выбираю текущую строку
+			И в таблице "CurrenciesAccountReceivableByAgreements" в поле с именем "CurrenciesAccountReceivableByAgreementsRatePresentation" я ввожу текст '5,8400'
+			И в таблице "CurrenciesAccountReceivableByAgreements" в поле с именем "CurrenciesAccountReceivableByAgreementsMultiplicity" я ввожу текст '1'
+			И в таблице "CurrenciesAccountReceivableByAgreements" я завершаю редактирование строки
 			И     таблица "CurrenciesAccountReceivableByDocuments" содержит строки:
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
@@ -1063,83 +1063,83 @@
 	* Заполнение ввода начального остатка по задолженности поставщику по соглашениям
 		* Filling in partner and Legal name
 			И я перехожу к закладке "Account payable"
-			И в таблице "AccountPayableByPartner terms" я нажимаю на кнопку 'Add'
-			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner"
+			И в таблице "AccountPayableByAgreements" я нажимаю на кнопку 'Add'
+			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountPayableByPartner terms" я завершаю редактирование строки
+			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
 		* Check filling in legal name
-				И     таблица "AccountPayableByPartner terms" содержит строки:
+				И     таблица "AccountPayableByAgreements" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
 		* Select тестового соглашения с взаиморасчетами по соглашениям
-			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner term"
+			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 			| 'Description'              |
 			| 'DFC Vendor by Partner terms' |
 			И я нажимаю на кнопку с именем 'FormChoose'
 		* Заполнение суммы и валюты
-			И в таблице "AccountPayableByPartner terms" я активизирую поле "Currency"
-			И в таблице "AccountPayableByPartner terms" я выбираю текущую строку
-			И в таблице "AccountPayableByPartner terms" я нажимаю кнопку выбора у реквизита "Currency"
+			И в таблице "AccountPayableByAgreements" я активизирую поле "Currency"
+			И в таблице "AccountPayableByAgreements" я выбираю текущую строку
+			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Currency"
 			И в таблице "List" я активизирую поле "Description"
 			И в таблице "List" я перехожу к строке:
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountPayableByPartner terms" я активизирую поле "Amount"
-			И в таблице "AccountPayableByPartner terms" в поле 'Amount' я ввожу текст '111,00'
-			И в таблице "AccountPayableByPartner terms" я завершаю редактирование строки
+			И в таблице "AccountPayableByAgreements" я активизирую поле "Amount"
+			И в таблице "AccountPayableByAgreements" в поле 'Amount' я ввожу текст '111,00'
+			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
 		* Проверка расчета Reporting currency
-			И в таблице "CurrenciesAccountPayableByPartner terms" я перехожу к строке:
+			И в таблице "CurrenciesAccountPayableByAgreements" я перехожу к строке:
 			| 'Movement type'      | 'Type'      |
 			| 'Reporting currency' | 'Reporting' |
-			И в таблице "CurrenciesAccountPayableByPartner terms" я выбираю текущую строку
-			И в таблице "CurrenciesAccountPayableByPartner terms" в поле с именем "CurrenciesAccountPayableByPartner termsRatePresentation" я ввожу текст '5,8400'
-			И в таблице "CurrenciesAccountPayableByPartner terms" в поле с именем "CurrenciesAccountPayableByPartner termsMultiplicity" я ввожу текст '1'
-			И в таблице "CurrenciesAccountPayableByPartner terms" я завершаю редактирование строки
+			И в таблице "CurrenciesAccountPayableByAgreements" я выбираю текущую строку
+			И в таблице "CurrenciesAccountPayableByAgreements" в поле с именем "CurrenciesAccountPayableByAgreementsRatePresentation" я ввожу текст '5,8400'
+			И в таблице "CurrenciesAccountPayableByAgreements" в поле с именем "CurrenciesAccountPayableByAgreementsMultiplicity" я ввожу текст '1'
+			И в таблице "CurrenciesAccountPayableByAgreements" я завершаю редактирование строки
 	* Заполнение ввода начального остатка по задолженности клиента  по соглашениям
 		* Filling in partner and Legal name
 			И я перехожу к закладке "Account receivable"
-			И в таблице "AccountReceivableByPartner terms" я нажимаю на кнопку 'Add'
-			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner"
+			И в таблице "AccountReceivableByAgreements" я нажимаю на кнопку 'Add'
+			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'DFC'         |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountReceivableByPartner terms" я завершаю редактирование строки
+			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
 		* Check filling in legal name
-				И     таблица "AccountReceivableByPartner terms" содержит строки:
+				И     таблица "AccountReceivableByAgreements" содержит строки:
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
 		* Select тестового соглашения с взаиморасчетами по соглашениям
-			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Partner term"
+			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'              |
 				| 'DFC Customer by Partner terms' |
 			И я нажимаю на кнопку с именем 'FormChoose'
 		* Заполнение суммы и валюты
-			И в таблице "AccountReceivableByPartner terms" я активизирую поле "Currency"
-			И в таблице "AccountReceivableByPartner terms" я выбираю текущую строку
-			И в таблице "AccountReceivableByPartner terms" я нажимаю кнопку выбора у реквизита "Currency"
+			И в таблице "AccountReceivableByAgreements" я активизирую поле "Currency"
+			И в таблице "AccountReceivableByAgreements" я выбираю текущую строку
+			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Currency"
 			И в таблице "List" я активизирую поле "Description"
 			И в таблице "List" я перехожу к строке:
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
 			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountReceivableByPartner terms" я активизирую поле "Amount"
-			И в таблице "AccountReceivableByPartner terms" в поле 'Amount' я ввожу текст '151,00'
-			И в таблице "AccountReceivableByPartner terms" я завершаю редактирование строки
+			И в таблице "AccountReceivableByAgreements" я активизирую поле "Amount"
+			И в таблице "AccountReceivableByAgreements" в поле 'Amount' я ввожу текст '151,00'
+			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
 		* Проверка расчета Reporting currency
-			И в таблице "CurrenciesAccountReceivableByPartner terms" я перехожу к строке:
+			И в таблице "CurrenciesAccountReceivableByAgreements" я перехожу к строке:
 				| 'Movement type'      | 'Type'      |
 				| 'Reporting currency' | 'Reporting' |
-			И в таблице "CurrenciesAccountReceivableByPartner terms" я выбираю текущую строку
-			И в таблице "CurrenciesAccountReceivableByPartner terms" в поле с именем "CurrenciesAccountReceivableByPartner termsRatePresentation" я ввожу текст '5,8400'
-			И в таблице "CurrenciesAccountReceivableByPartner terms" в поле с именем "CurrenciesAccountReceivableByPartner termsMultiplicity" я ввожу текст '1'
-			И в таблице "CurrenciesAccountReceivableByPartner terms" я завершаю редактирование строки
+			И в таблице "CurrenciesAccountReceivableByAgreements" я выбираю текущую строку
+			И в таблице "CurrenciesAccountReceivableByAgreements" в поле с именем "CurrenciesAccountReceivableByAgreementsRatePresentation" я ввожу текст '5,8400'
+			И в таблице "CurrenciesAccountReceivableByAgreements" в поле с именем "CurrenciesAccountReceivableByAgreementsMultiplicity" я ввожу текст '1'
+			И в таблице "CurrenciesAccountReceivableByAgreements" я завершаю редактирование строки
 	# * Заполнение ввода начального остатка по задолженности клиента  по документам
 	# * Заполнение ввода начального остатка по задолженности поставщика  по документам
 
@@ -1170,8 +1170,8 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "AccountPayableByDocuments" я завершаю редактирование строки
 		И я перехожу к следующему реквизиту
-		И в таблице "AccountPayableByDocuments" я активизирую поле с именем "AccountPayableByDocumentsPartner term"
-		И в таблице "AccountPayableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountPayableByDocumentsPartner term"
+		И в таблице "AccountPayableByDocuments" я активизирую поле с именем "AccountPayableByDocumentsAgreement"
+		И в таблице "AccountPayableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountPayableByDocumentsAgreement"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Partner term vendor DFC'         |
@@ -1207,8 +1207,8 @@
 			| 'DFC'         |
 		И в таблице "List" я выбираю текущую строку
 		И я перехожу к следующему реквизиту
-		И в таблице "AccountReceivableByDocuments" я активизирую поле с именем "AccountReceivableByDocumentsPartner term"
-		И в таблице "AccountReceivableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountReceivableByDocumentsPartner term"
+		И в таблице "AccountReceivableByDocuments" я активизирую поле с именем "AccountReceivableByDocumentsAgreement"
+		И в таблице "AccountReceivableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountReceivableByDocumentsAgreement"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Partner term DFC'         |
@@ -1233,8 +1233,8 @@
 		И в таблице "AccountReceivableByDocuments" я выбираю текущую строку
 		И в таблице "AccountReceivableByDocuments" в поле с именем 'AccountReceivableByDocumentsAmount' я ввожу текст '200,00'
 		И в таблице "AccountReceivableByDocuments" я завершаю редактирование строки
-	# * Проведение и проверка движений
-	# 	И я нажимаю на кнопку 'Post'
+	* Проведение и проверка движений
+		И я нажимаю на кнопку 'Post'
 	# 	И я нажимаю на кнопку 'Registrations report'
 	# AccountByDocumentsMainTablePartnerOnChange
 	# AccountPayableByDocumentsPartnerOnChange
@@ -1242,6 +1242,6 @@
 	# MainTableLegalNameEditTextChange
 	# AccountReceivableByDocumentsPartner termStartChoice
 	# AccountPayableByDocumentsPartner termStartChoice
-	# AccountReceivableByPartner termsPartner termEditTextChange
+	# AccountReceivableByAgreementsPartner termEditTextChange
 	# AccountReceivableByDocumentsPartner termEditTextChange
 	# Partner termEditTextChange

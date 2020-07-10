@@ -4,9 +4,9 @@
 
 Функционал: check loading currency from external resources
 
-Как разработчик
-Я хочу создать обработку для загрузки курсов валют со внешних ресурсов
-Чтобы загружать курсы валют в базу
+As a developer
+I want to create a processing to download currency rates from external resources.
+To upload currency rates to the base
 
 Контекст:
 	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
@@ -15,7 +15,7 @@
 Сценарий: check load currency rate
 	# Включая проверку загрузки только выбранных валют
 	И я включаю асинхронный режим выполнения шагов с интервалом "1"
-	Когда я вношу настройки для загрузки курса валют с Bank UA
+	* Filling in the setting for currency rate loading from Bank UA
 		И я открываю навигационную ссылку "e1cib/list/Catalog.IntegrationSettings"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -29,9 +29,9 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
-	И я открываю справочник валют
+	* Open catalog currency
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Currencies"
-	И я загружаю курс валют Forex Buying (с сайта tcmb.gov.tr)
+	* Upload currency rate Forex Buying (from tcmb.gov.tr)
 		И я нажимаю на кнопку 'Integrations'
 		И в таблице "IntegrationTable" я перехожу к строке:
 			| Integration settings |
@@ -55,7 +55,7 @@
 		И в таблице "Currencies" я нажимаю на кнопку 'Download'
 		И Пауза 40
 		И Я закрываю текущее окно
-	И я загружаю курс валют Forex Selling (с сайта tcmb.gov.tr)
+	* Upload currency rate Forex Selling (from tcmb.gov.tr)
 		И я нажимаю на кнопку 'Integrations'
 		И в таблице "IntegrationTable" я перехожу к строке:
 			| Integration settings |
@@ -74,7 +74,7 @@
 		И в таблице "Currencies" я нажимаю на кнопку 'Download'
 		И Пауза 40
 		И Я закрываю текущее окно
-	И я загружаю курс валют Bank UA (с сайта bank.gov.ua)
+	* Upload currency rate Bank UA (from bank.gov.ua)
 		И я нажимаю на кнопку 'Integrations'
 		И в таблице "IntegrationTable" я перехожу к строке:
 			| Integration settings |
@@ -103,7 +103,7 @@
 		И в таблице "Currencies" я нажимаю на кнопку 'Download'
 		И Пауза 40
 		И Я закрываю текущее окно
-	* Проверка загрузки курсов валют
+	* Check currency downloads
 		И я открываю навигационную ссылку "e1cib/list/InformationRegister.CurrencyRates"
 		Тогда таблица "List" содержит строки:
 			| 'Currency from'  | 'Currency to'   | 'Source'        | 'Multiplicity' | 'Rate'  |

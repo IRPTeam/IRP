@@ -278,7 +278,7 @@
 			| 'Description' |
 			| 'Veritas'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Posting by standart Partner term (Veritas)'
+		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard Partner term (Veritas)'
 	* Check filling in Company from Partner term
 		* Изменение компании в Purchase return order
 			И я нажимаю кнопку выбора у поля "Company"

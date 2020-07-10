@@ -20,7 +20,7 @@
 
 Сценарий: _090302 create purchase invoice for several purchase orders with different legal name
 	# должно создаться 2 Purchase invoice
-	* Создание тестового Purchase order 124
+	Create rest Purchase order 124
 		Когда create the first test PO for a test on the creation mechanism based on
 		* * Change the document number to 124
 			И я перехожу к закладке "Other"
@@ -116,7 +116,7 @@
 
 Сценарий: _090303 create Purchase invoice for several Purchase order with the same partner, legal name, partner term, currency and store
 # Должен создаться 1 Purchase invoice
-	* Создание тестового Purchase order 126
+	Create rest Purchase order 126
 		Когда create the first test PO for a test on the creation mechanism based on
 		* * Change the document number to 126
 			И я перехожу к закладке "Other"
@@ -131,7 +131,7 @@
 			| Company Ferron BP |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Post and close'
-	* Создание тестового Purchase order 127
+	Create rest Purchase order 127
 		Когда create the second test PO for a test on the creation mechanism based on
 		* * Change the document number to 127
 			И я перехожу к закладке "Other"
@@ -512,7 +512,7 @@
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-		Если поле с именем "Partner term" имеет значение "Vendor Ferron 1" тогда
+		Если поле с именем "Agreement" имеет значение "Vendor Ferron 1" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '720,00'     | '4 000,00'   | '4 720,00'     | 'Store 02' | 'Purchase order 130*' |
@@ -523,7 +523,7 @@
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '141'
-		Если поле с именем "Partner term" имеет значение "Vendor Ferron Discount" тогда
+		Если поле с именем "Agreement" имеет значение "Vendor Ferron Discount" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | 'Purchase order 131*' |
@@ -539,7 +539,7 @@
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-		Если поле с именем "Partner term" имеет значение "Vendor Ferron 1" тогда
+		Если поле с именем "Agreement" имеет значение "Vendor Ferron 1" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '720,00'     | '4 000,00'   | '4 720,00'     | 'Store 02' | 'Purchase order 130*' |
@@ -550,7 +550,7 @@
 				Тогда открылось окно '1C:Enterprise'
 				И я нажимаю на кнопку 'Yes'
 				И в поле 'Number' я ввожу текст '141'
-		Если поле с именем "Partner term" имеет значение "Vendor Ferron Discount" тогда
+		Если поле с именем "Agreement" имеет значение "Vendor Ferron Discount" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | 'Purchase order 131*' |
@@ -1158,7 +1158,7 @@
 
 Сценарий: _090313 create Goods reciept for Purchase order with different legal names, Purchase invoice after Goods receipt
 # должно создаться 2 Goods reciept
-	* Создание тестового Purchase order 140
+	Create rest Purchase order 140
 		Когда create the first test PO for a test on the creation mechanism based on
 		* * Change the document number to 140
 			И я перехожу к закладке "Other"

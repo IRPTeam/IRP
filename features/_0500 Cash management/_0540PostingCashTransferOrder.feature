@@ -112,7 +112,7 @@ For actual Cash/Bank accountsing
 		И в поле 'Number' я ввожу текст '4'
 	* Checking the filling of the tabular part
 		И     таблица "PaymentList" содержит строки:
-		| 'Planing transaction basis'    | 'Amount' |
+		| 'Planning transaction basis'    | 'Amount' |
 		| 'Cash transfer order 1*'             | '500,00' |
 	И я нажимаю на кнопку 'Post and close'
 	И Пауза 5
@@ -147,7 +147,7 @@ For actual Cash/Bank accountsing
 	* Check that the tabular part shows the rest of the amount
 		И я перехожу к закладке "Payments"
 		И     таблица "PaymentList" содержит строки:
-		| 'Planing transaction basis'   | 'Amount' |
+		| 'Planning transaction basis'   | 'Amount' |
 		| 'Cash transfer order 1*'      | '100,00'    |
 	И я нажимаю на кнопку 'Post and close'
 	И Я закрыл все окна клиентского приложения
@@ -236,7 +236,7 @@ For actual Cash/Bank accountsing
 		И в поле 'Number' я ввожу текст '5'
 	* Checking the filling of the tabular part
 		И     таблица "PaymentList" содержит строки:
-		| 'Planing transaction basis'    | 'Amount' |
+		| 'Planning transaction basis'    | 'Amount' |
 		| 'Cash transfer order 2*'             | '200,00' |
 	* Filling in the employee responsible for curremcy exchange
 		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
@@ -261,7 +261,7 @@ For actual Cash/Bank accountsing
 		И я перехожу к закладке "Payments"
 		И Пауза 5
 		И     таблица "PaymentList" содержит строки:
-		| 'Planing transaction basis'         | 'Partner'            | 'Amount'      | 'Amount exchange' |
+		| 'Planning transaction basis'         | 'Partner'            | 'Amount'      | 'Amount exchange' |
 		| 'Cash transfer order 2*'            | 'Arina Brown'        | '1 150,00'    | '200,00'          |
 	И я нажимаю на кнопку 'Post and close'
 	И Я закрыл все окна клиентского приложения
@@ -333,7 +333,7 @@ For actual Cash/Bank accountsing
 		И я нажимаю на кнопку с именем 'FormDocumentCashPaymentGenerateCashPayment'
 		* Checking the filling of the tabular part
 			И     таблица "PaymentList" содержит строки:
-			| 'Planing transaction basis'    | 'Amount' |
+			| 'Planning transaction basis'    | 'Amount' |
 			| 'Cash transfer order 3*'             | '500,00' |
 		* Change the document number to 6
 			И в поле 'Number' я ввожу текст '6'
@@ -357,7 +357,7 @@ For actual Cash/Bank accountsing
 		* Checking the filling of the tabular part
 			И я перехожу к закладке "Payments"
 			И     таблица "PaymentList" содержит строки:
-			| 'Amount' | 'Planing transaction basis'  |
+			| 'Amount' | 'Planning transaction basis'  |
 			| '500,00'    |  'Cash transfer order 3*'          |
 		И я нажимаю на кнопку 'Post and close'
 	* Check movements by register Planing cash transactions
@@ -427,7 +427,7 @@ For actual Cash/Bank accountsing
 			И в поле 'Number' я ввожу текст '4'
 		* Checking the filling of the tabular part
 			И     таблица "PaymentList" содержит строки:
-			| 'Planing transaction basis'    | 'Amount' |
+			| 'Planning transaction basis'    | 'Amount' |
 			| 'Cash transfer order 4*'             |  '100,00' |
 		И я нажимаю на кнопку 'Post and close'
 		И Я закрыл все окна клиентского приложения
@@ -568,7 +568,7 @@ For actual Cash/Bank accountsing
 			| Arina Brown |
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "PaymentList" содержит строки:
-			| 'Partner'     | 'Amount'  | 'Planing transaction basis'    |
+			| 'Partner'     | 'Amount'  | 'Planning transaction basis'    |
 			| 'Arina Brown' | '500,00'  | 'Cash transfer order 5*'             |
 		* Change the document number to 8
 			И я перехожу к закладке "Other"
@@ -587,7 +587,7 @@ For actual Cash/Bank accountsing
 		И в таблице "PaymentList" в поле 'Amount exchange' я ввожу текст '560,00'
 		И Пауза 5
 		И     таблица "PaymentList" содержит строки:
-			|'Partner'      | 'Amount' | 'Planing transaction basis'    | 'Amount exchange' |
+			|'Partner'      | 'Amount' | 'Planning transaction basis'    | 'Amount exchange' |
 			| 'Arina Brown' | '75,00'     |  'Cash transfer order 5*'            | '560,00'          |
 		* Change the document number to 10
 			И я перехожу к закладке "Other"
@@ -900,7 +900,7 @@ For actual Cash/Bank accountsing
 			И Пауза 5
 			И я нажимаю на кнопку 'Post and close'
 			И Пауза 5
-			Затем я жду, что в сообщениях пользователю будет подстрока "Currency exchange is possible only through accounts with the same type (Cash/Bank accounts or bank account)." в течение 30 секунд
+			Затем я жду, что в сообщениях пользователю будет подстрока "Currency exchange is possible only through accounts with the same type (cash accounts or bank account)." в течение 30 секунд
 			И Я закрыл все окна клиентского приложения
 			И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 			Тогда таблица "List" не содержит строки:
@@ -941,7 +941,7 @@ For actual Cash/Bank accountsing
 		| 'Main Company' | '3'      | 'Bank account, USD' | 'Cash desk №1' |
 	* Trying to create Bank receipt and check message output
 		И я нажимаю на кнопку с именем 'FormDocumentBankReceiptGenarateBankReceipt'
-		Затем я жду, что в сообщениях пользователю будет подстрока "Whole amount in Cash transfer order(s) are already recieved by document Bank receipt(s)." в течение 30 секунд
+		Затем я жду, что в сообщениях пользователю будет подстрока "Whole amount in Cash transfer order(s) are already received by document Bank receipt(s)." в течение 30 секунд
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: _054018 check message output in case the user tries to create Cash payment again by Cash transfer order
@@ -1001,5 +1001,5 @@ For actual Cash/Bank accountsing
 		| 'Main Company' | '4'      | 'Bank account, USD' | 'Cash desk №1' |
 	* Trying to create Cash receipt and check message output
 		И я нажимаю на кнопку с именем 'FormDocumentCashReceiptGenarateCashReceipt'
-		Затем я жду, что в сообщениях пользователю будет подстрока "Whole amount in Cash transfer order(s) are already recieved by document Cash receipt(s)." в течение 30 секунд
+		Затем я жду, что в сообщениях пользователю будет подстрока "Whole amount in Cash transfer order(s) are already received by document Cash receipt(s)." в течение 30 секунд
 		И Я закрыл все окна клиентского приложения

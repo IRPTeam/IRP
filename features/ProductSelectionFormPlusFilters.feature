@@ -1657,12 +1657,12 @@
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Size"
 	И в таблице "List" я перехожу к строке:
-		| Add attribute | Description |
+		| Additional attribute | Description |
 		| Size          | XS          |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю кнопку выбора у поля "Color"
 	И в таблице "List" я перехожу к строке:
-		| Add attribute | Description |
+		| Additional attribute | Description |
 		| Color         | Red         |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю на кнопку 'Save and close'

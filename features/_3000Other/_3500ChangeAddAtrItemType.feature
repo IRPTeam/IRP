@@ -352,7 +352,7 @@
         Тогда открылось окно '1C:Enterprise'
         И я нажимаю на кнопку 'Yes'
         И в таблице "SettingsFilter" я нажимаю на кнопку с именем 'SettingsFilterAddFilterItem'
-        И в таблице "SettingsFilter" из выпадающего списка "Field" я выбираю точное значение 'ItemType'
+        И в таблице "SettingsFilter" из выпадающего списка "Field" я выбираю точное значение 'Item type'
         И я перехожу к следующему реквизиту
         И в таблице "SettingsFilter" я нажимаю кнопку выбора у реквизита "Comparison type"
         И в таблице "SettingsFilter" я активизирую поле "Value"

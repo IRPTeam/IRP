@@ -62,7 +62,7 @@
 		И в таблице "List" я перехожу к строке:
 			| 'Additional attribute' | 'Description' |
 			| 'Producer'      | 'PZU'         |
-		И в таблице "List" я активизирую поле "Add attribute"
+		И в таблице "List" я активизирую поле "Additional attribute"
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Save and close'
 	* Filling tax rates for Item key in the register
@@ -135,7 +135,7 @@
 
 
 Сценарий: _090200 activating Sales Tax calculation in Sales order and Sales invoice documents
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.Tax types'
+	И я открываю навигационную ссылку 'e1cib/list/Catalog.Taxes'
 	И в таблице "List" я перехожу к строке:
 		| 'Description' | 'Reference' |
 		| 'SalesTax'    | 'SalesTax'  |
@@ -427,6 +427,7 @@
 		И в таблице "ItemList" я активизирую поле "Price"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Price' я ввожу текст '510,00'
+		И в таблице "TaxTree" я завершаю редактирование строки
 		И     таблица "TaxTree" содержит строки:
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '183,60' | '183,60'        |

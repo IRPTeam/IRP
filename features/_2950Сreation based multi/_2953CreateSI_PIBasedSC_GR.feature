@@ -600,7 +600,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '466'
 		И я нажимаю на кнопку 'Post and close'
-	И based on созданных Shipment confirmation я создаю Sales invoice - должно создаться 2
+	* Create Sales invoice - должно создаться 2
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
@@ -748,11 +748,11 @@
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-		Если поле с именем "Partner term" имеет значение "Vendor Ferron, USD" тогда
+		Если поле с именем "Agreement" имеет значение "Vendor Ferron, USD" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      | 'Sales order' |
 				| '677,97'     | 'Trousers' | '400,00' | '38/Yellow' | '2,000'  | ''              | '122,03'     | 'pcs'  | '800,00'       | 'Store 02' | '*'             | ''             | ''              | '*'                    | 'Goods receipt 466*' | ''            |
-		Если поле с именем "Partner term" имеет значение "Vendor Ferron, TRY" тогда
+		Если поле с именем "Agreement" имеет значение "Vendor Ferron, TRY" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      | 'Sales order' |
 				| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | ''              | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | 'Goods receipt 465*' | ''            |
@@ -762,11 +762,11 @@
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-		Если поле с именем "Partner term" имеет значение "Vendor Ferron, USD" тогда
+		Если поле с именем "Agreement" имеет значение "Vendor Ferron, USD" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      | 'Sales order' |
 				| '677,97'     | 'Trousers' | '400,00' | '38/Yellow' | '2,000'  | ''              | '122,03'     | 'pcs'  | '800,00'       | 'Store 02' | '*'             | ''             | ''              | '*'                    | 'Goods receipt 466*' | ''            |
-		Если поле с именем "Partner term" имеет значение "Vendor Ferron, TRY" тогда
+		Если поле с именем "Agreement" имеет значение "Vendor Ferron, TRY" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      | 'Sales order' |
 				| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | ''              | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | 'Goods receipt 465*' | ''            |

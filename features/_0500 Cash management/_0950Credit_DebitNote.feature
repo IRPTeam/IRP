@@ -271,9 +271,9 @@ For write-off of accounts receivable and payable
 		* Checking the selection of basis documents for the specified partner
 			Тогда в таблице "List" количество строк "меньше или равно" 2
 			Тогда таблица "List" содержит строки:
-			| 'Number' | 'Legal name'    | 'Partner' | 'Amount'    | 'Currency' |
-			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00' | 'TRY'      |
-			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00' | 'TRY'      |
+			| 'Number' | 'Legal name'    | 'Partner' | 'Document amount'   | 'Currency' |
+			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00'         | 'TRY'      |
+			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00'         | 'TRY'      |
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '2 900'  |
@@ -350,7 +350,7 @@ For write-off of accounts receivable and payable
 			| 'Purchase invoice' |
 		И в таблице "" я выбираю текущую строку
 		И в таблице "List" я перехожу к строке:
-			| 'Amount'    | 'Currency' | 'Legal name'    | 'Number' | 'Partner' |
+			| 'Document amount'     | 'Currency' | 'Legal name'    | 'Number' | 'Partner' |
 			| '10 000,00' | 'TRY'      | 'Company Maxim' | '2 901'  | 'Maxim'   |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Transactions" я активизирую поле с именем "TransactionsAmount"

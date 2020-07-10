@@ -27,7 +27,7 @@
         И я нажимаю на кнопку 'Ok'
         И из выпадающего списка "Parent" я выбираю по строке 'Accessories'
         И В открытой форме я нажимаю на кнопку "Save and close"
-    * create вида номенклатуры Earrings
+    * Сreate item type Earrings
         И в таблице "List" я перехожу к строке:
             | 'Description' |
             | 'Accessories TR'            |
@@ -37,7 +37,7 @@
             | 'Accessories TR' |
             | 'Earrings TR'    |
         И я закрыл все окна клиентского приложения
-    * Проверка отображения группы видов номенклатуры в AddAttributeAndPropertySets по item key
+    * Checking the items group display in AddAttributeAndPropertySets by item key
         И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
         И в таблице "List" я перехожу к строке:
         | 'Predefined data item name' |

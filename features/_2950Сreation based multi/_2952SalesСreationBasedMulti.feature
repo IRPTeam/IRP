@@ -33,7 +33,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю Sales order 325
 		Когда create the second test SO for a test on the creation mechanism based on
@@ -48,9 +48,9 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
-	И я создаю based on Sales order 324 и 325 Sales invoice (должно создаться 2)
+	* Create Sales invoice based on Sales order 324 and 325 (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -76,7 +76,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 		И Я нажимаю кнопку командного интерфейса 'Sales invoice (create)'
 		И Пауза 2
@@ -102,7 +102,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я закрыл все окна клиентского приложения
 
@@ -126,7 +126,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю тестовый Sales order 327
 		Когда create the second test SO for a test on the creation mechanism based on
@@ -146,7 +146,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю based on Sales order 326 и 327 Sales invoice (должен создаться 1)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -176,7 +176,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
 	
@@ -244,7 +244,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю второй тестовый SO 329
 		Когда create the second test SO for a test on the creation mechanism based on
@@ -282,7 +282,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю based on Sales order 328 и 329 Sales invoice (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -310,7 +310,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 		И Я нажимаю кнопку командного интерфейса 'Sales invoice (create)'
 		И Пауза 2
@@ -336,7 +336,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я закрыл все окна клиентского приложения
 
@@ -379,7 +379,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю второй тестовый SO 331 Partner Ferron 1 и ставлю соглашение Vendor Ferron Discount
 		Когда create the second test SO for a test on the creation mechanism based on
@@ -416,7 +416,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю based on Sales order 330 и 331 Sales invoice (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -503,7 +503,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю второй тестовый SO 335
 		Когда create the second test SO for a test on the creation mechanism based on
@@ -541,7 +541,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю based on Sales order 335 и 334 Sales invoice (должен создаться 1)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'

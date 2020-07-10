@@ -59,7 +59,6 @@
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Documents   |
-		И в таблице  "List" я перехожу на один уровень вниз
 		И в таблице "List" я перехожу к строке:
 			| Description         |
 			| Labeling |
@@ -69,6 +68,7 @@
 			| Description       |
 			| GenerateBarcodeTR |
 		И в таблице "List" я выбираю текущую строку
+		И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 	И я проверяю отображение кнопки GenerateBarcode в документе Labeling

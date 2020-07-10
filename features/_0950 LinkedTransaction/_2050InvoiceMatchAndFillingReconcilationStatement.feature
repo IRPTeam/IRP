@@ -517,8 +517,8 @@
 		И в таблице "Transactions" я активизирую поле с именем "TransactionsLegalName"
 		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита с именем "TransactionsLegalName"
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я активизирую поле с именем "TransactionsPartner term"
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита с именем "TransactionsPartner term"
+		И в таблице "Transactions" я активизирую поле с именем "TransactionsAgreement"
+		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита с именем "TransactionsAgreement"
 		И в таблице "List" я перехожу к строке:
 			| 'AP/AR posting detail' | 'Description'           | 'Kind'    |
 			| 'By documents'         | 'Basic Partner terms, TRY' | 'Regular' |

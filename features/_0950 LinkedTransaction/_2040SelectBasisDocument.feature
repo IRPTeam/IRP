@@ -1654,7 +1654,7 @@
 		И в поле 'Number' я ввожу текст '9 000'
 	* Check the display of an error that GR documents with different currencies are selected in GR
 		И я нажимаю на кнопку 'Post'
-		Затем я жду, что в сообщениях пользователю будет подстрока "Multicurrency receipt basises" в течение 30 секунд
+		Затем я жду, что в сообщениях пользователю будет подстрока "Multi currency receipt basises" в течение 30 секунд
 	* Post with the same currency
 		И я перехожу к закладке "Items"
 		И в таблице "ItemList" я перехожу к строке:

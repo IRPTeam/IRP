@@ -94,11 +94,11 @@
         И в таблице "List" я выбираю текущую строку
     * Check filling inреквизитов
         И     элемент формы с именем "CurrencyMovementType" стал равен 'EUR'
-        И     элемент формы с именем "StandardPartner term" стал равен 'Standard, EUR'
+        И     элемент формы с именем "StandardAgreement" стал равен 'Standard, EUR'
         И     элемент формы с именем "PriceType" стал равен 'Basic Price Types TR'
     * Переключение переключателя Ap-ar posting на значение By Partner terms и проверка очистки поля StandardPartner term
         И я меняю значение переключателя 'AP/AR posting detail' на 'By partner terms'
-        И     элемент формы с именем "StandardPartner term" стал равен ''
+        И     элемент формы с именем "StandardAgreement" стал равен ''
     * Check clearing fields при изменении переключателя на Standard
         И я меняю значение переключателя 'Kind' на 'Standard'
         И     элемент формы с именем "CurrencyMovementType" стал равен ''
@@ -127,18 +127,18 @@
                 | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
         * Заполнение Tax types
             И я перехожу к закладке "Tax types"
-            И в таблице "CompanyTaxes" я нажимаю на кнопку с именем 'CompanyTax typesAdd'
+            И в таблице "CompanyTaxes" я нажимаю на кнопку с именем 'CompanyTaxesAdd'
             И в поле 'Period' я ввожу текст '01.10.2019'
-            И в таблице "CompanyTax types" я активизирую поле "Tax"
-            И в таблице "CompanyTax types" я нажимаю кнопку выбора у реквизита "Tax"
+            И в таблице "CompanyTaxes" я активизирую поле "Tax"
+            И в таблице "CompanyTaxes" я нажимаю кнопку выбора у реквизита "Tax"
             И в таблице "List" я перехожу к строке:
                 | 'Description' | 'Reference' |
                 | 'VAT'         | 'VAT'       |
             И в таблице "List" я выбираю текущую строку
-            И в таблице "CompanyTax types" я активизирую поле "Priority"
-            И в таблице "CompanyTax types" в поле 'Priority' я ввожу текст '2'
-            И в таблице "CompanyTax types" я завершаю редактирование строки
-            И     таблица "CompanyTax types" содержит строки:
+            И в таблице "CompanyTaxes" я активизирую поле "Priority"
+            И в таблице "CompanyTaxes" в поле 'Priority' я ввожу текст '2'
+            И в таблице "CompanyTaxes" я завершаю редактирование строки
+            И     таблица "CompanyTaxes" содержит строки:
                 | 'Use' | 'Tax' | 'Priority' |
                 | 'Yes' | 'VAT' | '2'        |
         * Проверка очистки заполненных данных при снятии галочки Our
@@ -149,7 +149,7 @@
             И таблица "Currencies" не содержит строки:
                 | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
                 | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
-            И     таблица "CompanyTax types" не содержит строки:
+            И     таблица "CompanyTaxes" не содержит строки:
                 | 'Use' | 'Tax' | 'Priority' |
                 | 'Yes' | 'VAT' | '2'        |
             И я закрыл все окна клиентского приложения

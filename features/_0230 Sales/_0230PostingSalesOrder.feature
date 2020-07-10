@@ -14,7 +14,22 @@ To track the items ordered by the customer
 Сценарий: _023001 creating document Sales order - Shipment confirmation is not used
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда filling in customer data in the order (Ferron BP, store 01)
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Ferron BP'  |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	Тогда открылось окно 'Partner terms'
+	И в таблице "List" я перехожу к строке:
+			| 'Description'       |
+			| 'Basic Partner terms, TRY' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Legal name"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Company Ferron BP'  |
+	И в таблице "List" я выбираю текущую строку
 	* Filling in items table
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"

@@ -2768,7 +2768,7 @@
 			| 'Description'       | 'Currency' |
 			| 'Cash desk №1'      | ''         |
 			| 'Cash desk №2'      | ''         |
-		И Я закрываю окно 'Cash/Bank accounts'
+		И я закрываю текущее окно
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -3007,7 +3007,7 @@
 			| 'Description'       | 'Currency' |
 			| 'Cash desk №1'      | ''         |
 			| 'Cash desk №2'      | ''         |
-		И Я закрываю окно 'Cash/Bank accounts'
+		И я закрываю текущее окно
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description'  |
@@ -3556,7 +3556,7 @@
 		И в таблице "List" я выбираю текущую строку
 	* Check the selection by Planing transaction basis
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3573,7 +3573,7 @@
 		| '100,00' | 'Cash transfer order 13*'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		И в таблице "List" я перехожу к строке:
@@ -3584,7 +3584,7 @@
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when post Bank Payment
 		И я нажимаю на кнопку 'Post'
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		И в таблице "List" я перехожу к строке:
@@ -3597,7 +3597,7 @@
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		И в таблице "List" я перехожу к строке:
@@ -3640,7 +3640,7 @@
 	* Check the selection by Planing transaction basis
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3654,7 +3654,7 @@
 		| '100,00' | 'Cash transfer order 13*'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3665,7 +3665,7 @@
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form при проведенном Bank Receipt
 		И я нажимаю на кнопку 'Post'
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3677,7 +3677,7 @@
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3723,7 +3723,7 @@
 		И в таблице "List" я выбираю текущую строку
 	* Check the selection by Planing transaction basis
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3737,7 +3737,7 @@
 		| '100,00' | 'Cash transfer order 11*'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3747,7 +3747,7 @@
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Payment posted
 		И я нажимаю на кнопку 'Post'
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3758,7 +3758,7 @@
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3804,7 +3804,7 @@
 		И в таблице "List" я выбираю текущую строку
 	* Check the selection by Planing transaction basis
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3818,7 +3818,7 @@
 			| '100,00' | 'Cash transfer order 11*'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3828,7 +3828,7 @@
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Receipt posted 
 		И я нажимаю на кнопку 'Post'
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3839,7 +3839,7 @@
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3879,7 +3879,7 @@
 		И в таблице "List" я выбираю текущую строку
 	* Check the selection by Planing transaction basis
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3893,7 +3893,7 @@
 		| '100,00' | 'Cash transfer order 14*'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3903,7 +3903,7 @@
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Payment posted
 		И я нажимаю на кнопку 'Post'
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3914,7 +3914,7 @@
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3954,7 +3954,7 @@
 		И в таблице "List" я выбираю текущую строку
 	* Check the selection by Planing transaction basis
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3968,7 +3968,7 @@
 		| '100,00' | 'Cash transfer order 14*'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3978,7 +3978,7 @@
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Receipt posted
 		И я нажимаю на кнопку 'Post'
 		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -3989,7 +3989,7 @@
 		И в таблице "PaymentList" я выбираю текущую строку
 		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planing transaction basis"
+		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
 		И я запоминаю количество строк таблицы "List" как "Q"
 		Тогда переменная "Q" имеет значение 1
 		Тогда таблица "List" содержит строки:
@@ -4140,8 +4140,8 @@
 			| ''                 |
 			| 'Purchase invoice' |
 		И в таблице "" я выбираю текущую строку
-		И таблица "ИмяТаблицы" содержит строки:	
-			| 'Number' | 'Legal name'    | 'Partner' | 'Amount'    | 'Currency' |
+		И таблица "List" содержит строки:	
+			| 'Number' | 'Legal name'    | 'Partner' | 'Document amount'    | 'Currency' |
 			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00' | 'TRY'      |
 			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00' | 'TRY'      |
 		И я закрыл все окна клиентского приложения

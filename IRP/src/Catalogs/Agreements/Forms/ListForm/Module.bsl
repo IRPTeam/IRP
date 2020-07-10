@@ -8,3 +8,4 @@ EndProcedure
 Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	CatAgreementsClient.ListBeforeAddRow(ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
+

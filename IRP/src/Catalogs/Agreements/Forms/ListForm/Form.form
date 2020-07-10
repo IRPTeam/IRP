@@ -272,6 +272,10 @@
       <event>BeforeAddRow</event>
       <name>ListBeforeAddRow</name>
     </handlers>
+    <handlers>
+      <event>RefreshRequestProcessing</event>
+      <name>ListRefreshRequestProcessing</name>
+    </handlers>
     <searchStringAddition>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -435,6 +439,14 @@
       <segments>List.DefaultPicture</segments>
     </rowPictureDataPath>
     <extInfo xsi:type="form:DynamicListTableExtInfo">
+      <handlers>
+        <event>OnGetDataAtServer</event>
+        <name>ListOnGetDataAtServer</name>
+      </handlers>
+      <handlers>
+        <event>OnLoadUserSettingsAtServer</event>
+        <name>ListOnLoadUserSettingsAtServer</name>
+      </handlers>
       <autoRefreshPeriod>60</autoRefreshPeriod>
       <period>
         <startDate>0001-01-01T00:00:00</startDate>
@@ -485,31 +497,30 @@
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
-      <queryText>SELECT
+      <queryText>SELECT DISTINCT
 	Table.Ref AS Ref,
 	Table.DeletionMark AS DeletionMark,
 	Table.Type AS Type,
 	Table.Partner AS Partner,
 	Table.Description_en AS Description,
-	Table.Kind,
-	Table.ApArPostingDetail
+	Table.Kind AS Kind,
+	Table.ApArPostingDetail AS ApArPostingDetail
 FROM
 	Catalog.Agreements AS Table
+		INNER JOIN InformationRegister.PartnerSegments AS PartnerSegments
+		ON ((Table.PartnerSegment = PartnerSegments.Segment
+				AND PartnerSegments.Partner = &amp;Partner)
+			OR NOT &amp;IncludePartnerSegments)
+		OR (Table.Partner = &amp;Partner
+			OR NOT &amp;IncludeFilterByPartner)
 WHERE
-	(CASE
-		WHEN &amp;IncludeFilterByPartner
-			THEN Table.Partner = &amp;Partner
-			OR &amp;IncludePartnerSegments
-			AND Table.PartnerSegment IN (&amp;PartnerSegments)
-		ELSE TRUE
-	END
-	AND CASE
+	CASE
 		WHEN &amp;IncludeFilterByEndOfUseDate
 			THEN Table.StartUsing &lt;= &amp;EndOfUseDate
 			AND Table.EndOfUse >= &amp;EndOfUseDate
 			OR Table.EndOfUse = DATETIME(1, 1, 1)
 		ELSE TRUE
-	END)</queryText>
+	END</queryText>
       <mainTable>Catalog.Agreements</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

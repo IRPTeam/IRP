@@ -3,13 +3,13 @@
 @IgnoreOnCIMainBuild
 @tree
 
-Функционал: экспортные сценарии
+Функционал: export scenarios
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-	Сценарий: создаю заказ на Lomaniti Basic Agreements (Dress и Boots)
+	Сценарий: creating an order for Lomaniti Basic Agreements (Dress and Boots)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -66,7 +66,7 @@
 
 	
 
-Сценарий: создаю заказ на Ferron BP Basic Agreements, TRY (Dress -10 и Trousers - 5)
+Сценарий: creating an order for Ferron BP Basic Agreements, TRY (Dress -10 and Trousers - 5)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -124,7 +124,7 @@
 	И я нажимаю на кнопку 'Post'
 
 
-Сценарий: создаю документ Purchase Order
+Сценарий: creating a Purchase Order document
 	* Open a form to create Purchase Order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -401,7 +401,7 @@
 		И в таблице "ItemList" я завершаю редактирование строки
 	И я нажимаю на кнопку 'Post and close'
 
-	Сценарий: устанавливаю номер Purchase order №103
+	Сценарий: change purchase order number to 103
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И в таблице "List" я перехожу к последней строке
 		И в таблице "List" я выбираю текущую строку
@@ -416,7 +416,7 @@
 
 
 
-	Сценарий: создаю номенклатуру на набор включая спецификацию
+	Сценарий: create an item for the set including the specification
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
 		И Пауза 2
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -438,7 +438,7 @@
 		И Пауза 5
 
 
-	Сценарий: закупаю номенклатуру на набор
+	Сценарий: purchase an item for a set
 	И я создаю документ Purchase Invoice без заказа	
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -475,7 +475,7 @@
 
 
 
-	Сценарий: создаю Purchase invoice по закупке наборов и размерных сеток на склад Store 02
+	Сценарий: creating a purchase invoice for the purchase of sets and dimensional grids at the tore 02
 	И я создаю документ Purchase Invoice без заказа	
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -550,7 +550,7 @@
 		И я жду закрытия окна 'Goods receipt (create)' в течение 20 секунд
 		И Я закрыл все окна клиентского приложения
 	
-	Сценарий: создаю Sales invoice для Ferron BP в долларах
+	Сценарий: creating Sales invoice for Ferron BP in USD
 		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -568,7 +568,7 @@
 		И я создаю соглашение в долларах
 			И в поле 'ENG' я ввожу текст 'Ferron, USD'
 			И я меняю значение переключателя 'Type' на 'Customer'
-			И я меняю значение переключателя 'AP-AR posting detail' на 'By documents'
+			И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
 			И в поле 'Number' я ввожу текст '234'
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
@@ -580,10 +580,10 @@
 				| Description |
 				| Ferron BP   |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Currency movement type"
+			И я нажимаю кнопку выбора у поля "Multi currency movement type"
 			И в таблице "List" я перехожу к строке:
 				| 'Currency' | 'Type'      |
-				| 'USD'      | 'Agreement' |
+				| 'USD'      | 'Partner term' |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Price type"
 			И в таблице "List" я перехожу к строке:
@@ -640,7 +640,7 @@
 
 
 
-Сценарий: добавляю товар в заказ клиента (Dress и Trousers)
+Сценарий: adding the items to the sales order (Dress and Trousers)
 	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 	Тогда открылось окно 'Items'
@@ -656,7 +656,7 @@
 	И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 	И в таблице "ItemList" я завершаю редактирование строки
 	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-	Когда выбираю в заказе item Trousers
+	Когда choose item Trousers in the order
 	И я перехожу к следующему реквизиту
 	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 	И в таблице "List" я выбираю текущую строку
@@ -835,7 +835,7 @@
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
-				| Basic Agreements, TRY |
+				| Basic Partner terms, TRY |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
@@ -923,7 +923,7 @@
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| Description        |
-				| Basic Agreements, TRY |
+				| Basic Partner terms, TRY |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю кнопку выбора у поля "Store"
 			И в таблице "List" я перехожу к строке:
@@ -952,7 +952,7 @@
 			И в таблице "ItemList" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Post'
 
-Сценарий: создаю заказ на Ferron BP Basic Partner term, TRY (Dress -10 и Trousers - 5)
+Сценарий: creating an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -963,7 +963,7 @@
 	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
 			| 'Description'                     |
-			| 'Basic Partner term, TRY' |
+			| 'Basic Partner terms, TRY' |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю кнопку выбора у поля "Legal name"
 	И в таблице "List" я перехожу к строке:

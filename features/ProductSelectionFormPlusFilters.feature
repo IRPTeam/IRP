@@ -3,15 +3,15 @@
 @IgnoreOnCIMainBuild
 @tree
 
-Функционал: экспортные сценарии
+Функционал: export scenarios
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 # Pick up
 
-Сценарий: проверяю форму подбора товара с информацией по ценам в Sales order
+Сценарий: check the product selection form with price information in Sales order
 # sale order и sales invoice, Basic Partner terms, TRY, Ferron
 	И я нажимаю на кнопку с именем "ItemListOpenPickupItems"
 	# temporarily
@@ -154,7 +154,7 @@
 		И я нажимаю на кнопку 'OK'
 
 
-Сценарий: проверяю форму подбора товара с информацией по ценам в Sales invoice
+Сценарий: check the product selection form with price information in Sales invoice
 # sale order и sales invoice, Basic Partner terms, TRY, Ferron
 	И я нажимаю на кнопку с именем "ItemListOpenPickupItems"
 	# temporarily
@@ -289,7 +289,7 @@
 			| 'Shirt'    | '350,00' | '36/Red'    | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '350,00'       |
 			| 'Dress'    | '350,00' | 'L/Green'   | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '350,00'       |
 
-Сценарий: проверяю форму подбора товара с информацией по ценам в Purchase invoice
+Сценарий: check the product selection form with price information in Purchase invoice
 	# purchase order и purchase invoice, Basic Partner terms, TRY, Ferron
 	И я нажимаю на кнопку с именем "OpenPickupItems"
 	# temporarily
@@ -424,7 +424,7 @@
 			| 'Shirt'    | '*'           | '36/Red'    | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '*'          | '*'            |
 			| 'Dress'    | '350,00'      | 'L/Green'   | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '*'          | '*'            |
 
-Сценарий: проверяю форму подбора товара с информацией по ценам в Purchase order
+Сценарий: check the product selection form with price information in Purchase order
 	# purchase order и purchase invoice, Basic Partner terms, TRY, Ferron
 	И я нажимаю на кнопку с именем "ItemListOpenPickupItems"
 	# temporarily
@@ -559,7 +559,7 @@
 			| 'Dress'    | '350,00'      | 'L/Green'   | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '*'          | '*'            |
 
 
-Сценарий: проверяю форму подбора товара в StockAdjustmentAsWriteOff/StockAdjustmentAsSurplus
+Сценарий: check the product selection form in StockAdjustmentAsWriteOff/StockAdjustmentAsSurplus
 	И я нажимаю на кнопку 'Pickup'
 	* Проверка вывода остатков по Item
 		И     таблица "ItemList" содержит строки:
@@ -609,7 +609,7 @@
 		| 'Dress'                | '398'      | 'pcs'  | ''           |
 		| 'Trousers'             | '405'      | 'pcs'  | ''           |
 
-Сценарий: проверяю форму подбора товара в PhysicalInventory
+Сценарий: check the product selection form in PhysicalInventory
 	И я нажимаю на кнопку 'Pickup'
 	* Проверка вывода остатков по Item
 		И     таблица "ItemList" содержит строки:
@@ -659,7 +659,7 @@
 		| 'Dress'                | '398'      | 'pcs'  | ''           |
 		| 'Trousers'             | '405'      | 'pcs'  | ''           |
 
-Сценарий: проверяю форму подбора товара в InventoryTransferOrder/InventoryTransfer
+Сценарий: check the product selection form in InventoryTransferOrder/InventoryTransfer
 	И я нажимаю на кнопку 'Pickup'
 	* Проверка вывода остатков по Item
 		И     таблица "ItemList" содержит строки:
@@ -837,7 +837,7 @@
 
 # Filters
 
-Сценарий: проверяю работу фильтра по Legal name
+Сценарий: check the filter by Legal name
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -865,7 +865,7 @@
 			|'И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP''|
 	И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по Legal name (Ferron)
+Сценарий: check the filter by Legal name (Ferron)
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -894,7 +894,7 @@
 			|'И     элемент формы с именем "LegalName" стал равен 'Company Kalipso''|
 	И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по Legal name (Ferron) в Goods receipt и Shipment confirmation
+Сценарий: check the filter by Legal name (Ferron) in Goods receipt and Shipment confirmation
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -920,7 +920,7 @@
 		И я нажимаю на кнопку с именем 'FormChoose'
 		Когда Проверяю шаги на Исключение:
 			|'И     элемент формы с именем "LegalName" стал равен 'Company Kalipso''|
-	И я проверяю автоматическое заполнение Legal name если оно у партнера одно
+	И я проверяю автоматическое заполнение Legal name if the partner has only one
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -929,7 +929,7 @@
 		И     элемент формы с именем "LegalName" стал равен 'DFC'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по Company
+Сценарий: check the filter by Company
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -957,7 +957,7 @@
 			|'И     элемент формы с именем "Company" стал равен 'Company Kalipso''|
 	И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по Company в документах перемещения товара
+Сценарий: check the filter by Company  in the inventory transfer
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Company"
@@ -980,7 +980,7 @@
 			|'И     элемент формы с именем "Company" стал равен 'Company Kalipso''|
 	И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по Company в ордерах по складу
+Сценарий: check the filter by Company  in the Shipment cinfirmation and Goods receipt
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Company"
@@ -1003,7 +1003,7 @@
 			|'И     элемент формы с именем "Company" стал равен 'Company Kalipso''|
 		И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по Company (Ferron)
+Сценарий: check the filter by Company (Ferron)
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -1032,7 +1032,7 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: проверяю работу фильтра по собственной Company
+Сценарий: check the filter by my own company
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Company"
@@ -1055,7 +1055,7 @@
 			|'И     элемент формы с именем "Company" стал равен 'Company Kalipso''|
 	И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по собственной Company в Cash expence/Cash revenue
+Сценарий: check the filter by my own company in Cash expence/Cash revenue
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Company"
@@ -1078,7 +1078,7 @@
 			|'И     элемент формы с именем "Company" стал равен 'Company Kalipso''|
 	И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по собственной Company в Reconcilation statement
+Сценарий: check the filter by my own company in Reconcilation statement
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Company"
@@ -1101,7 +1101,7 @@
 			|'И     элемент формы с именем "Company" стал равен 'Company Kalipso''|
 	И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по собственной Company в Cheque bond transaction
+Сценарий: check the filter by my own company in Cheque bond transaction
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Company"
 		Тогда таблица "List" стала равной:
@@ -1123,7 +1123,7 @@
 			|'И     элемент формы с именем "Company" стал равен 'Company Kalipso''|
 	И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по собственной Company в Opening entry
+Сценарий: check the filter by my own company in Opening entry
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Company"
@@ -1135,7 +1135,7 @@
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по Partner term (по сегментам + сроку действия)
+Сценарий: check the filter by Partner term (by segments + expiration date)
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -1179,7 +1179,7 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: проверяю работу фильтра по отбору клиентов в документах продажи
+Сценарий: check the filter by customers in the sales documents
 # должны отображаться только партнеры у которых проставлена галочка Customer
 И я проверяю визуальный фильтр
 	И я нажимаю кнопку выбора у поля "Partner"
@@ -1209,7 +1209,7 @@
 		|'И     элемент формы с именем "Partner" стал равен 'Alexander Orlov''|
 И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по отбору поставщиков в документах закупки
+Сценарий: check the filter by vendors in the purchase documents
 И я проверяю визуальный фильтр
 	И я нажимаю кнопку выбора у поля "Partner"
 	И я запоминаю количество строк таблицы "List" как "QS"
@@ -1236,7 +1236,7 @@
 		|'И     элемент формы с именем "Partner" стал равен 'Kalipso''|
 И я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу фильтра по соглашениям клиента в документах продажи
+Сценарий: check the filter by customer partner terms in the sales documents
 	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-349' с именем 'IRP-349'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -1274,7 +1274,7 @@
 		|'И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY''|
 	И Я закрыл все окна клиентского приложения
 	
-Сценарий: проверяю работу фильтра по соглашениям поставщика в документах закупки
+Сценарий: check the filter by vendor partner terms in the purchase documents
 	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-349' с именем 'IRP-349'
 	И я проверяю визуальный фильтр
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -1314,7 +1314,7 @@
 		|'И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY''|
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: проверяю работу Description
+Сценарий: check Description
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на гиперссылку "Description"
 	И в поле 'Text' я ввожу текст 'Test description'
@@ -1463,7 +1463,7 @@
 			| Code | Description     |
 			| USD  | American dollar |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Cash desk №2 |
@@ -1484,7 +1484,7 @@
 			| Code | Description     |
 			| USD  | American dollar |
 		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+		И я нажимаю кнопку выбора у поля "Cash account"
 		И в таблице "List" я перехожу к строке:
 			| Description  |
 			| Cash desk №2 |
@@ -1534,7 +1534,7 @@
 			| TRY  | Turkish lira |
 		И в таблице "List" я выбираю текущую строку
 
-Сценарий: создание тестового партнера с одним соглашением поставщика и с одним соглашением клиента
+Сценарий: create a test partner with one vendor partner term and one customer partner term
 	И я создаю Partner Kalipso
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -1611,7 +1611,7 @@
 		И я жду закрытия окна 'Partner term (create) *' в течение 20 секунд
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
+Сценарий: check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
 	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-495' с именем 'IRP-495'
 	И я проверяю автозаполнение соглашения, контрагента, компании
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -1625,7 +1625,7 @@
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 
 
-Сценарий: проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
+Сценарий: check the autocompletion of the partner term (by customer) in the documents of sales/returns 
 	# И Я устанавливаю ссылку 'https://bilist.atlassian.net/browse/IRP-495' с именем 'IRP-495'
 	И я проверяю автозаполнение соглашения, контрагента, компании
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -1638,7 +1638,7 @@
 		И     элемент формы с именем "Agreement" стал равен 'Partner Kalipso Customer'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 
-Сценарий: созданию тестовый Item с одним item key
+Сценарий: create test item with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И в поле 'ENG' я ввожу текст 'Scarf'
@@ -1657,12 +1657,12 @@
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Size"
 	И в таблице "List" я перехожу к строке:
-		| Add attribute | Description |
+		| Additional attribute | Description |
 		| Size          | XS          |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю кнопку выбора у поля "Color"
 	И в таблице "List" я перехожу к строке:
-		| Add attribute | Description |
+		| Additional attribute | Description |
 		| Color         | Red         |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю на кнопку 'Save and close'
@@ -1715,7 +1715,7 @@
 			| Scarf |XS/Red   | pcs  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: проверяю поиск по штрих-коду в документах продажи + заполнение цены и налогов
+Сценарий: check the barcode search in the sales documents + price and tax filling in
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
 	И в таблице "List" я перехожу к строке:
@@ -1731,7 +1731,7 @@
 			|'Dress TR' |'700,00' | 'XS/Blue TR'  |'1,000' | 'adet'  | '700,00'       |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: проверяю поиск по штрих-коду в документах возврата продажи
+Сценарий: check the barcode search on the return documents
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
 	И в таблице "List" я перехожу к строке:
@@ -1748,7 +1748,7 @@
 	И Я закрыл все окна клиентского приложения
 
 
-Сценарий: проверяю поиск по штрих-коду в документах закупки/возвратов закупки
+Сценарий: check the barcode search in the purchase/purchase returns
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю кнопку выбора у поля "Partner"
 	И в таблице "List" я перехожу к строке:
@@ -1764,7 +1764,7 @@
 			|'Dress TR' |'S/Yellow TR'  |'1,000' | 'adet'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: проверяю поиск по штрих-коду в документах складских операций	
+Сценарий: check the barcode search in storage operations documents	
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку 'SearchByBarcode'
 	И в поле 'InputFld' я ввожу текст '2202283713'
@@ -1776,7 +1776,7 @@
 	И Я закрыл все окна клиентского приложения
 
 
-Сценарий: проверяю поиск по штрих-коду в документах объединения товаров в наборы
+Сценарий: check the barcode search in the product bundling documents
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я перехожу к закладке "Item list"
 	И в таблице "ItemList" я нажимаю на кнопку 'SearchByBarcode'
@@ -1788,7 +1788,7 @@
 			|'Dress TR' |'S/Yellow TR'  |'1,000' | 'adet'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: проверяю поиск по штрих-коду в документе PhysicalInventory
+Сценарий: check the barcode search in the PhysicalInventory documents
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я нажимаю на кнопку 'SearchByBarcode'
 	И в поле 'InputFld' я ввожу текст '2202283713'

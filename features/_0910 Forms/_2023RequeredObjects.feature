@@ -8,7 +8,7 @@
 
 
 Контекст: 
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 	
 Сценарий: check of the sign of required filling at the additional attribute and check for filling
 	* Opening of additional details settings

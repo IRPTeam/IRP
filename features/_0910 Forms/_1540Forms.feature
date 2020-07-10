@@ -8,7 +8,7 @@ I want to check the form display and autofill documents
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _0154000 preparation
@@ -1672,57 +1672,57 @@ I want to check the form display and autofill documents
 	И я удаляю элемент справочника "Partners" со значением поля Description_en "Test"
 
 Сценарий:  _0154008 check autofilling the Partner term field in Purchase order
-	Когда создание тестового партнера с одним соглашением поставщика и с одним соглашением клиента
+	Когда create a test partner with one vendor partner term and one customer partner term
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
+	Когда check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий:  _0154009 check autofilling the Partner term field in Purchase invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
+	Когда check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0154010 check autofilling the Partner term field in Purchase return
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
+	Когда check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0154011  check autofilling the Partner term field in Purchase return order
 	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах закупки/возвратов по признаку поставщик
+	Когда check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
 	И я закрыл все окна клиентского приложения
 
 
 Сценарий: _0154012 check autofilling the Partner term field in Sales order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
+	Когда check the autocompletion of the partner term (by customer) in the documents of sales/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0154013 check autofilling the Partner term field in Sales invoice
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
+	Когда check the autocompletion of the partner term (by customer) in the documents of sales/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0154014 check autofilling the Partner term field in Sales return order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
+	Когда check the autocompletion of the partner term (by customer) in the documents of sales/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0154015 check autofilling the Partner term field in Sales return
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю автозаполнение соглашения в документах продажи/возвратов по признаку клиент
+	Когда check the autocompletion of the partner term (by customer) in the documents of sales/returns 
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _0154016 check autofilling item key in Sales order by item only with one item key
-	Когда созданию тестовый Item с одним item key
+	Когда create test item with one item key
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	Когда check item key autofilling in sales/returns documents for an item that has only one item key
@@ -1858,7 +1858,7 @@ I want to check the form display and autofill documents
 		И из выпадающего списка "Color" я выбираю по строке 'yellow'
 		И я нажимаю кнопку выбора у поля "Color"
 		И в таблице "List" я перехожу к строке:
-			| Add attribute | Description |
+			| Additional attribute | Description |
 			| Color         | Yellow      |
 		И в таблице "List" я выбираю текущую строку
 		И     таблица "List" стала равной:
@@ -2778,8 +2778,8 @@ I want to check the form display and autofill documents
 		И в таблице "ItemKeyList" из выпадающего списка "Item key" я выбираю по строке '36'
 	* Checking entered values
 		И     таблица "ItemKeyList" содержит строки:
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
+		| 'Item'        | 'Item key'  |
+		| 'Trousers'    | '36/Yellow' |
 
 	
 
@@ -3098,14 +3098,14 @@ I want to check the form display and autofill documents
 		И     элемент формы с именем "ItemBundle" стал равен 'Trousers'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154083 check company, Cash/Bank accounts, transaction type, currency, partner, payee, Partner term input by search in line in a Cash payment (in english)
+Сценарий: _0154083 check company, Cash accounts, transaction type, currency, partner, payee, Partner term input by search in line in a Cash payment (in english)
 	* Open a creation form Cash payment
 		И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Cash/Bank accounts input by search in line
-		И из выпадающего списка "Cash/Bank accounts" я выбираю по строке '3'
+	* Cash accounts input by search in line
+		И из выпадающего списка "Cash account" я выбираю по строке '3'
 	* Transaction type input by search in line
 		И из выпадающего списка "Transaction type" я выбираю по строке 'vendor'
 	* Currency input by search in line
@@ -3191,18 +3191,18 @@ I want to check the form display and autofill documents
 		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
 		И     элемент формы с именем "Currency" стал равен 'USD'
 		И     таблица "PaymentList" содержит строки:
-		| 'Partner'   | 'Payer'             | 'Partner term'             |
-		| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, USD' |
+		| 'Partner'   | 'Payer'              | 'Partner term' |
+		| 'Ferron BP' | 'Company Ferron BP' | 'Ferron, USD' |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _0154086 check company, Cash/Bank accounts, transaction type, currency, partner, payee, input by search in line in a Cash receipt (in english)
+Сценарий: _0154086 check company, Cash accounts, transaction type, currency, partner, payee, input by search in line in a Cash receipt (in english)
 	* Open a creation form Cash receipt
 		И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Company input by search in line
 		И из выпадающего списка "Company" я выбираю по строке 'main'
 	* Cash/Bank accounts input by search in line
-		И из выпадающего списка "Cash/Bank accounts" я выбираю по строке '3'
+		И из выпадающего списка "Cash account" я выбираю по строке '3'
 	* Transaction type input by search in line
 		И из выпадающего списка "Transaction type" я выбираю по строке 'customer'
 	* Currency input by search in line
@@ -3223,8 +3223,8 @@ I want to check the form display and autofill documents
 		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
 		И     элемент формы с именем "Currency" стал равен 'USD'
 		И     таблица "PaymentList" содержит строки:
-		| 'Partner'   | 'Payer'             | 'Partner term'             |
-		| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, USD' |
+		| 'Partner'   | 'Payer'              | 'Partner term' |
+		| 'Ferron BP' | 'Company Ferron BP' | 'Ferron, USD' |
 	И я закрыл все окна клиентского приложения
 
 
@@ -3302,7 +3302,7 @@ I want to check the form display and autofill documents
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
 		И в таблице "PaymentList" я активизирую поле "Payer"
-		И в таблице "PaymentList" из выпадающего списка "Payer" я выбираю по строке 'se'
+		И в таблице "PaymentList" из выпадающего списка "Payer" я выбираю по строке 'Second Company F'
 	* Filling check
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Account" стал равен 'Cash desk №2'
@@ -3326,7 +3326,7 @@ I want to check the form display and autofill documents
 		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
 		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
 		И в таблице "PaymentList" я активизирую поле "Payee"
-		И в таблице "PaymentList" из выпадающего списка "Payee" я выбираю по строке 'se'
+		И в таблице "PaymentList" из выпадающего списка "Payee" я выбираю по строке 'Second Company F'
 	* Filling check
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Account" стал равен 'Cash desk №2'
@@ -3473,31 +3473,31 @@ I want to check the form display and autofill documents
 	* Filling the tabular part by searching the value by line Account payable
 		* By Partner terms
 			И я перехожу к закладке "Account payable"
-			И в таблице "AccountPayableByPartner terms" я нажимаю на кнопку с именем 'AccountPayableByPartner termsAdd'
-			И в таблице "AccountPayableByPartner terms" из выпадающего списка с именем "AccountPayableByPartner termsPartner" я выбираю по строке 'fer'
+			И в таблице "AccountPayableByAgreements" я нажимаю на кнопку с именем 'AccountPayableByAgreementsAdd'
+			И в таблице "AccountPayableByAgreements" из выпадающего списка с именем "AccountPayableByAgreementsPartner" я выбираю по строке 'fer'
 			И я перехожу к следующему реквизиту
-			И в таблице "AccountPayableByPartner terms" из выпадающего списка с именем "AccountPayableByPartner termsLegalName" я выбираю по строке 'sec'
-			И в таблице "AccountPayableByPartner terms" из выпадающего списка с именем "AccountPayableByPartner termsPartner term" я выбираю по строке 'usd'
-			И в таблице "AccountPayableByPartner terms" из выпадающего списка с именем "AccountPayableByPartner termsCurrency" я выбираю по строке 't'
+			И в таблице "AccountPayableByAgreements" из выпадающего списка с именем "AccountPayableByAgreementsLegalName" я выбираю по строке 'sec'
+			И в таблице "AccountPayableByAgreements" из выпадающего списка с именем "AccountPayableByAgreementsAgreement" я выбираю по строке 'usd'
+			И в таблице "AccountPayableByAgreements" из выпадающего списка с именем "AccountPayableByAgreementsCurrency" я выбираю по строке 't'
 		* By documents
 			И я перехожу к закладке с именем "GroupAccountPayableByDocuments"
 			И в таблице "AccountPayableByDocuments" я нажимаю на кнопку с именем 'AccountPayableByDocumentsAdd'
 			И в таблице "AccountPayableByDocuments" из выпадающего списка с именем "AccountPayableByDocumentsPartner" я выбираю по строке 'fer'
 			И я перехожу к следующему реквизиту
 			И в таблице "AccountPayableByDocuments" из выпадающего списка с именем "AccountPayableByDocumentsLegalName" я выбираю по строке 's'
-			И в таблице "AccountPayableByDocuments" я активизирую поле с именем "AccountPayableByDocumentsPartner term"
-			И в таблице "AccountPayableByDocuments" из выпадающего списка с именем "AccountPayableByDocumentsPartner term" я выбираю по строке 've'
+			И в таблице "AccountPayableByDocuments" я активизирую поле с именем "AccountPayableByDocumentsAgreement"
+			И в таблице "AccountPayableByDocuments" из выпадающего списка с именем "AccountPayableByDocumentsAgreement" я выбираю по строке 've'
 			И в таблице "AccountPayableByDocuments" из выпадающего списка с именем "AccountPayableByDocumentsCurrency" я выбираю по строке 't'
 			И в таблице "AccountPayableByDocuments" я завершаю редактирование строки
 	* Filling the tabular part by searching the value by line Account receivable
 		* By Partner terms
 			И я перехожу к закладке "Account receivable"
-			И в таблице "AccountReceivableByPartner terms" я нажимаю на кнопку с именем 'AccountReceivableByPartner termsAdd'
-			И в таблице "AccountReceivableByPartner terms" из выпадающего списка с именем "AccountReceivableByPartner termsPartner" я выбираю по строке 'DF'
+			И в таблице "AccountReceivableByAgreements" я нажимаю на кнопку с именем 'AccountReceivableByAgreementsAdd'
+			И в таблице "AccountReceivableByAgreements" из выпадающего списка с именем "AccountReceivableByAgreementsPartner" я выбираю по строке 'DF'
 			И я перехожу к следующему реквизиту
-			И в таблице "AccountReceivableByPartner terms" из выпадающего списка с именем "AccountReceivableByPartner termsLegalName" я выбираю по строке 'DF'
-			# И в таблице "AccountReceivableByPartner terms" из выпадающего списка с именем "AccountReceivableByPartner termsPartner term" я выбираю по строке 'DF'
-			И в таблице "AccountReceivableByPartner terms" из выпадающего списка с именем "AccountReceivableByPartner termsCurrency" я выбираю по строке 't'
+			И в таблице "AccountReceivableByAgreements" из выпадающего списка с именем "AccountReceivableByAgreementsLegalName" я выбираю по строке 'DF'
+			# И в таблице "AccountReceivableByAgreements" из выпадающего списка с именем "AccountReceivableByAgreementsAgreement" я выбираю по строке 'DF'
+			И в таблице "AccountReceivableByAgreements" из выпадающего списка с именем "AccountReceivableByAgreementsCurrency" я выбираю по строке 't'
 		* By documents
 			И я перехожу к закладке с именем "GroupAccountReceivableByDocuments"
 			И в таблице "AccountReceivableByDocuments" я нажимаю на кнопку с именем 'AccountReceivableByDocumentsAdd'
@@ -3512,7 +3512,7 @@ I want to check the form display and autofill documents
 		И Пауза 2
 		И     таблица "Inventory" содержит строки:
 		| 'Item'  | 'Quantity' | 'Item key' | 'Store'    |
-		| 'Dress' | '2,000'    | 'S/Yellow' | 'Store 01' |
+		| 'Dress' | '2,000'    | 'L/Green' | 'Store 01' |
 		И     таблица "AccountBalance" содержит строки:
 			| 'Account'      | 'Currency' |
 			| 'Cash desk №1' | 'TRY'      |
@@ -3522,13 +3522,13 @@ I want to check the form display and autofill documents
 		И     таблица "AdvanceToSuppliers" содержит строки:
 			| 'Partner'   | 'Legal name'               |
 			| 'Ferron BP' | 'Second Company Ferron BP' |
-		И     таблица "AccountPayableByPartner terms" содержит строки:
+		И     таблица "AccountPayableByAgreements" содержит строки:
 			| 'Partner'   | 'Partner term'          | 'Legal name'               | 'Currency' |
 			| 'Ferron BP' | 'Vendor Ferron, USD' | 'Second Company Ferron BP' | 'TRY'      |
 		И     таблица "AccountPayableByDocuments"  содержит строки:
 			| 'Partner'   | 'Partner term'          | 'Legal name'               | 'Currency' |
 			| 'Ferron BP' | 'Vendor Ferron, TRY' | 'Second Company Ferron BP' | 'TRY'      |
-		И     таблица "AccountReceivableByPartner terms" содержит строки:
+		И     таблица "AccountReceivableByAgreements" содержит строки:
 			| 'Partner' | 'Legal name' | 'Currency' |
 			| 'DFC'     | 'DFC'        | 'TRY'      |
 		И     таблица "AccountReceivableByDocuments"  содержит строки:
@@ -3564,7 +3564,7 @@ I want to check the form display and autofill documents
 
 Сценарий: _0154099 check partner и legal name (in english) input by search in line in Invoice Match
 	И я закрыл все окна клиентского приложения
-	* Opening a document form
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Checking the filter when typing by Partner/Legal name
@@ -3643,7 +3643,7 @@ I want to check the form display and autofill documents
 
 Сценарий: _005034 check filling in the required fields in the Items catalog
 	И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-	Когда создаю элемент справочника с наименованием Test
+	Когда creating a catalog element with the name Test.
 	Если в текущем окне есть сообщения пользователю Тогда
 	И     Я закрываю текущее окно
 	Тогда открылось окно '1C:Enterprise'
@@ -3652,7 +3652,7 @@ I want to check the form display and autofill documents
 
 Сценарий: _005035 check filling in the required fields in the AddAttributeAndPropertyValues catalog 
 	И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
-	Когда создаю элемент справочника с наименованием Test
+	Когда creating a catalog element with the name Test.
 	Если в текущем окне есть сообщения пользователю Тогда
 	И     Я закрываю текущее окно
 	Тогда открылось окно '1C:Enterprise'
@@ -3662,7 +3662,7 @@ I want to check the form display and autofill documents
 
 Сценарий: _005037 check filling in the required fields in the Users catalog 
 	И я открываю навигационную ссылку "e1cib/list/Catalog.Users"
-	Когда создаю элемент справочника с наименованием Test
+	Когда creating a catalog element with the name Test.
 	И Я закрываю текущее окно
 	Тогда открылось окно '1C:Enterprise'
 	И я нажимаю на кнопку 'No'

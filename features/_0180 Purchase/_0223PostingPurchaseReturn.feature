@@ -10,7 +10,7 @@ I want to create a Purchase return document
 To track a product that returned to the vendor
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _022301 creating document Purchase return, store use Shipment confirmation, based on Purchase return order

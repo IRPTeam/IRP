@@ -8,13 +8,28 @@ I want to create a Sales order document
 To track the items ordered by the customer
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _023001 creating document Sales order - Shipment confirmation is not used
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Ferron BP'  |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	Тогда открылось окно 'Partner terms'
+	И в таблице "List" я перехожу к строке:
+			| 'Description'       |
+			| 'Basic Partner terms, TRY' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Legal name"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Company Ferron BP'  |
+	И в таблице "List" я выбираю текущую строку
 	* Filling in items table
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
@@ -30,7 +45,7 @@ To track the items ordered by the customer
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		Когда выбираю в заказе item Trousers
+		Когда choose item Trousers in the order
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я выбираю текущую строку
@@ -95,7 +110,7 @@ To track the items ordered by the customer
 				| 'Description' |
 				| 'Company Ferron BP'  |
 		И в таблице "List" я выбираю текущую строку
-	Когда добавляю товар в заказ клиента (Dress и Trousers)
+	Когда adding the items to the sales order (Dress and Trousers)
 	* Checking default sales order status
 		И я перехожу к закладке "Other"
 		И     элемент формы с именем "Status" стал равен 'Approved'

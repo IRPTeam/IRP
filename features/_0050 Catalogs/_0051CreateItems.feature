@@ -10,7 +10,7 @@ I want to fill out items information
 To further use it when reflecting in the program of business processes
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 # All indivisible packages of the same product are wound up using Specifiсation with type Set. Then a separate Item key is created for the product, in which the necessary set is specified.

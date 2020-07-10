@@ -1,15 +1,15 @@
 #language: ru
 @tree
 @Positive
-Функционал: проверка очистки полей в формах справочников с переключателями (прорисовка формы зависит от переключателя)
+Функционал: check the cleaning of fields in forms of directories with switches (the drawing of the form depends on the switch)
 
 
 
 Контекст:
-    Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+    Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-Сценарий: проверка очистки значений при изменении типа счета в справочнике Cash/Bank accounts
+Сценарий: check the clearing of values ​​when changing the type of account in the Cash / Bank accounts catalog
     * Открытие формы элемента справочника
         И я открываю навигационную ссылку "e1cib/list/Catalog.CashAccounts"
         И я нажимаю на кнопку с именем 'FormCreate'
@@ -69,7 +69,7 @@
         И я закрыл все окна клиентского приложения
 
 
-Сценарий: проверка очистки значений при изменении переключателя Ap-ar posting/Standard в Partner term
+Сценарий: check clearing values ​​when changing the Ap-ar posting / Standard switch to Partner term
     * Открытие формы элемента справочника
         И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
         И я нажимаю на кнопку с именем 'FormCreate'
@@ -94,19 +94,19 @@
         И в таблице "List" я выбираю текущую строку
     * Check filling inреквизитов
         И     элемент формы с именем "CurrencyMovementType" стал равен 'EUR'
-        И     элемент формы с именем "StandardPartner term" стал равен 'Standard, EUR'
+        И     элемент формы с именем "StandardAgreement" стал равен 'Standard, EUR'
         И     элемент формы с именем "PriceType" стал равен 'Basic Price Types TR'
     * Переключение переключателя Ap-ar posting на значение By Partner terms и проверка очистки поля StandardPartner term
         И я меняю значение переключателя 'AP/AR posting detail' на 'By partner terms'
-        И     элемент формы с именем "StandardPartner term" стал равен ''
-    * Проверка очистки полей при изменении переключателя на Standard
+        И     элемент формы с именем "StandardAgreement" стал равен ''
+    * Check clearing fields при изменении переключателя на Standard
         И я меняю значение переключателя 'Kind' на 'Standard'
         И     элемент формы с именем "CurrencyMovementType" стал равен ''
         И     элемент формы с именем "PriceType" стал равен ''
         И я закрыл все окна клиентского приложения
 
 
-Сценарий: проверка очистки значений Tax types и Multi currency movement type при изменении галочки Our в Company
+Сценарий: check clearing the values ​​of Tax types and Multi currency movement type when changing the Our checkmark in Company
     * Открытие формы элемента справочника
         И я открываю навигационную ссылку "e1cib/list/Catalog.Companies"
         И я нажимаю на кнопку с именем 'FormCreate'
@@ -127,18 +127,18 @@
                 | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
         * Заполнение Tax types
             И я перехожу к закладке "Tax types"
-            И в таблице "CompanyTaxes" я нажимаю на кнопку с именем 'CompanyTax typesAdd'
+            И в таблице "CompanyTaxes" я нажимаю на кнопку с именем 'CompanyTaxesAdd'
             И в поле 'Period' я ввожу текст '01.10.2019'
-            И в таблице "CompanyTax types" я активизирую поле "Tax"
-            И в таблице "CompanyTax types" я нажимаю кнопку выбора у реквизита "Tax"
+            И в таблице "CompanyTaxes" я активизирую поле "Tax"
+            И в таблице "CompanyTaxes" я нажимаю кнопку выбора у реквизита "Tax"
             И в таблице "List" я перехожу к строке:
                 | 'Description' | 'Reference' |
                 | 'VAT'         | 'VAT'       |
             И в таблице "List" я выбираю текущую строку
-            И в таблице "CompanyTax types" я активизирую поле "Priority"
-            И в таблице "CompanyTax types" в поле 'Priority' я ввожу текст '2'
-            И в таблице "CompanyTax types" я завершаю редактирование строки
-            И     таблица "CompanyTax types" содержит строки:
+            И в таблице "CompanyTaxes" я активизирую поле "Priority"
+            И в таблице "CompanyTaxes" в поле 'Priority' я ввожу текст '2'
+            И в таблице "CompanyTaxes" я завершаю редактирование строки
+            И     таблица "CompanyTaxes" содержит строки:
                 | 'Use' | 'Tax' | 'Priority' |
                 | 'Yes' | 'VAT' | '2'        |
         * Проверка очистки заполненных данных при снятии галочки Our
@@ -149,7 +149,7 @@
             И таблица "Currencies" не содержит строки:
                 | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
                 | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
-            И     таблица "CompanyTax types" не содержит строки:
+            И     таблица "CompanyTaxes" не содержит строки:
                 | 'Use' | 'Tax' | 'Priority' |
                 | 'Yes' | 'VAT' | '2'        |
             И я закрыл все окна клиентского приложения

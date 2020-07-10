@@ -1,15 +1,15 @@
 #language: ru
 @tree
 @Positive
-Функционал: создание группы видов номенклатуры
+Функционал: create a group of item types
 
 
 
 Контекст:
-    Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+    Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-Сценарий: _351501 создание группы видов номенклатуры
+Сценарий: _351501 create a group of item types
     * Open catalog вида номенклатуры
         И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemTypes'
     * Создание группы видов номенклатуры
@@ -27,7 +27,7 @@
         И я нажимаю на кнопку 'Ok'
         И из выпадающего списка "Parent" я выбираю по строке 'Accessories'
         И В открытой форме я нажимаю на кнопку "Save and close"
-    * create вида номенклатуры Earrings
+    * Сreate item type Earrings
         И в таблице "List" я перехожу к строке:
             | 'Description' |
             | 'Accessories TR'            |
@@ -37,7 +37,7 @@
             | 'Accessories TR' |
             | 'Earrings TR'    |
         И я закрыл все окна клиентского приложения
-    * Проверка отображения группы видов номенклатуры в AddAttributeAndPropertySets по item key
+    * Checking the items group display in AddAttributeAndPropertySets by item key
         И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
         И в таблице "List" я перехожу к строке:
         | 'Predefined data item name' |

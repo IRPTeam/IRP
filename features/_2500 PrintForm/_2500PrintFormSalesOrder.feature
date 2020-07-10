@@ -2,25 +2,23 @@
 @tree
 @Positive
 
-Функционал: проверка функционала печати sales order
+Функционал: check print functionality (Sales order)
 
-Как разработчик
-Я хочу создать механизм подключения печатных форм через внешние обработки
-Для печати документов
+
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 
-Сценарий: _25001 добавление обработки печати sales order
-	* Открытие формы для добавления обработки
+Сценарий: _25001 adding print plugin for sales order
+	* Open form to add plugin
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных по обработке и добавление её в базу
+	* Filling plugin data and adding it to the database
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\PrintFormSalesOrder.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to ext data proc for test' я ввожу текст ''
+		И в поле 'Path to plugin for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'PrintFormSalesOrder'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'Sales order'
@@ -28,20 +26,19 @@
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
-	* Проверка добавления обработки
+	* Check the addition of plugin
 		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "Sales order"
 
-Сценарий: _25002 создание команды печати Sales order
-	* Открытие регистра команд
+Сценарий: _25002 creating a print command for Sales order
+	* Open Command register
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение данных для команды печати Sales order
-		* Создание метаданного для sales order и его выбор для команды
+	* Filling test command data for Sales order
+		* Create metadata for sales order and select it for the command
 			И я нажимаю кнопку выбора у поля "Configuration metadata"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Documents'   |
-			И в таблице  "List" я перехожу на один уровень вниз
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'SalesOrder'  |
@@ -52,9 +49,9 @@
 				| 'Description' |
 				| 'Sales Order' |
 			И в таблице "List" я выбираю текущую строку
-		* Указание интерфейсной группы для размещения команды
+		* Set UI group for command
 			И я нажимаю кнопку выбора у поля "UI group"
-			* Создание интерфейсной группы Print
+			* Create UI group Print
 				И я нажимаю на кнопку с именем 'FormCreate'
 				И в поле 'ENG' я ввожу текст 'Print'
 				И я нажимаю на кнопку открытия поля "ENG"
@@ -63,16 +60,16 @@
 				И я нажимаю на кнопку 'Ok'
 				И я нажимаю на кнопку 'Save and close'
 			И я нажимаю на кнопку с именем 'FormChoose'
-	* Сохранение команды
+	* Save command
 		И я нажимаю на кнопку 'Save and close'
-	* Save verification команды
+	* Check command save
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
 		Тогда таблица "List" содержит строки:
 		| 'Configuration metadata' | 'Plugins' | 'UI group' |
 		| 'SalesOrder'             | 'Sales Order'        | 'Print'           |
 
-Сценарий: _25003 проверка вывода на печать Sales order
-	* Создание тестового Sales order
+Сценарий: _25003 check Sales order printing
+	* Create Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Partner"
@@ -112,7 +109,7 @@
 			| 'Boots' | '37/18SD'  |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Присвоение номера и даты документа
+	* Change document number and date
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '8 000'
 		Тогда открылось окно '1C:Enterprise'
@@ -128,9 +125,9 @@
 		| 'Number' |
 		| '8 000'  |
 		И в таблице "List" я выбираю текущую строку
-	* Вывод печатной формы из документа
+	* Printing out of a document
 		И я нажимаю на кнопку 'Sales Order'
-	* Проверка вывода печатной формы
+	* Check printing form
 		И я жду открытия окна "Table" в течение 20 секунд
 		Дано Табличный документ "" равен макету "SalesOrderPrintForm" по шаблону
 		И Пауза 30

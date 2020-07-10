@@ -8,7 +8,7 @@ I want to create a Cheque bond transaction document
 For settlements with partners
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _090001 check for metadata ( catalog and document) availability
@@ -242,7 +242,7 @@ For settlements with partners
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Segment"
-		Тогда открылось окно 'Partner segments content'
+		
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Retail'      |
@@ -273,7 +273,7 @@ For settlements with partners
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Segment"
-		Тогда открылось окно 'Partner segments content'
+		
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Retail'      |
@@ -515,7 +515,7 @@ For settlements with partners
 		| ''                                      | 'Receipt'     | '*'                    | '5 000'            | 'Main Company'     | 'Big foot'             | 'Big foot'   | 'TRY'                 | 'Own cheque 1'          | 'Local currency'           | 'No'                       | ''                     |
 		И я закрыл все окна клиентского приложения
 	* Checking the deleting of the added bases document
-		* Opening a document form Cheque bond transaction
+		* Open document form Cheque bond transaction
 			И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
 			Тогда открылось окно 'Cheque bond transactions'
 			И в таблице "List" я перехожу к строке:

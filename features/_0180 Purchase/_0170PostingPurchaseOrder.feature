@@ -10,7 +10,7 @@ I want to create a Purchase order document
 For tracking an item that has been ordered from a vendor
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _017001 creating document Purchase order - Goods receipt is not used
@@ -391,7 +391,7 @@ For tracking an item that has been ordered from a vendor
 		Тогда открылось окно 'Stores'
 		И в таблице "List" я выбираю текущую строку
 	* Checking the form Pick up items
-		Когда проверяю форму подбора товара с информацией по ценам в Purchase order
+		Когда check the product selection form with price information in Purchase order
 		И Я закрыл все окна клиентского приложения
 	
 

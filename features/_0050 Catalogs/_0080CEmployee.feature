@@ -10,7 +10,7 @@ I want to create groups, User access profiles and users
 To restrict user access rights
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _008001 adding employees to the Partners catalog

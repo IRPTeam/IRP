@@ -2,30 +2,30 @@
 @tree
 @Positive
 
-Функционал: кнопки выбора документов-оснований
+Функционал: buttons for selecting base documents
 
 
 
 Контекст: 
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 # партнеры Crystal
 
-Сценарий: _2050001 проверка наличия и preparation
-	* Проверка наличия Purchase invoice по Crystal
+Сценарий: _2050001 preparation
+	* Check for Purchase invoice by Crystal
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		Тогда таблица "List" содержит строки:
 		| 'Number' | 'Legal name'   | 'Partner' | 'Currency' | 'Company'      |
 		| '9 000'  | 'Company Adel' | 'Crystal' | 'TRY'      | 'Main Company' |
 		| '9 001'  | 'Company Adel' | 'Crystal' | 'TRY'      | 'Main Company' |
-	* Проверка наличия Sales invoice по Crystal
+	* Check for Purchase invoice by Crystal
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		Тогда таблица "List" содержит строки:
 		| 'Number' | 'Legal name'   | 'Partner' | 'Currency' |
 		| '9 000'  | 'Company Adel' | 'Crystal' | 'TRY'      |
 		| '9 002'  | 'Company Adel' | 'Crystal' | 'TRY'      |
 		| '9 003'  | 'Company Adel' | 'Crystal' | 'TRY'      |
-	* Создание Bank payment без привязки к соглашению и документу
+	* Create Bank payment without reference to the partner term and the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
@@ -59,7 +59,7 @@
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '1000,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-	* Создание Bank receipt без привязки к соглашению и документу
+	* Create Bank receipt without reference to the partner term and the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
@@ -93,7 +93,7 @@
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '20000,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-	* Создание Cash receipt c привязкой по документу
+	* Create Cash receipt linked by document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
@@ -108,7 +108,7 @@
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+			И я нажимаю кнопку выбора у поля "Cash account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №3 |
@@ -150,7 +150,7 @@
 			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '5000,00'
 			И в таблице "PaymentList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
-	* Создание Cash payment без привязки к соглашению и документу
+	* Create Cash payment without reference to the partner term and the document
 		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
@@ -165,7 +165,7 @@
 				| Description  |
 				| Main Company |
 			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash/Bank accounts"
+			И я нажимаю кнопку выбора у поля "Cash account"
 			И в таблице "List" я перехожу к строке:
 				| Description    |
 				| Cash desk №3 |
@@ -190,11 +190,11 @@
 			И в таблице "PaymentList" я завершаю редактирование строки
 		И я нажимаю на кнопку 'Post and close'
 
-Сценарий: 2050002 Check filling inReconcilation statement
+Сценарий: 2050002 check filling in Reconcilation statement
 	* Open a creation form Reconcilation statement
 		И я открываю навигационную ссылку "e1cib/list/Document.ReconciliationStatement"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнения шапки документа
+	* Fill in a document header
 		И я нажимаю кнопку выбора у поля "Currency"
 		И в таблице "List" я перехожу к строке:
 			| 'Code' | 'Description'  |
@@ -218,7 +218,7 @@
 			| 'Description'  |
 			| 'Company Adel' |
 		И в таблице "List" я выбираю текущую строку
-	* Check filling inтабличной части
+	* Check filling in tabular part
 		И в таблице "Transactions" я нажимаю на кнопку 'Fill'
 		И     таблица "Transactions" содержит строки:
 		| 'Date' | 'Document'                | 'Credit'    | 'Debit'     |
@@ -231,18 +231,18 @@
 		| '*'    | 'Sales invoice 9 003*'    | ''          | '28 686,30' |
 		| '*'    | 'Purchase invoice 9 000*' | '13 570,00' | ''          |
 		| '*'    | 'Purchase invoice 9 001*' | '4 212,60'  | ''          |
-	* Проверка документа
+	* Check document
 		И я нажимаю на кнопку 'Post'
-	* Clear postings документа
+	* Clear postings
 		И я нажимаю на кнопку 'Clear posting'
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _2050003 проверка автозаполнения документа Invoice match с клиентом по авансам
+Сценарий: _2050003 check the autocomplete document Invoice match with the customer in advance
 	* Open a creation form Invoice match
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И из выпадающего списка "Operation type" я выбираю точное значение 'With customer'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -259,7 +259,7 @@
 			| '9 000'  | 'Crystal' |
 		И в таблице "List" я активизирую поле "Partner"
 		И в таблице "List" я выбираю текущую строку
-	* Filling in the tabular part по нераспределенным авансам
+	* Filling in the tabular part
 		И я перехожу к закладке "Advances"
 		И в таблице "Advances" я нажимаю на кнопку 'Fill advances'
 	* Filling check
@@ -269,11 +269,11 @@
 		Тогда в таблице "Advances" количество строк "меньше или равно" 2
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _2050004 проверка автозаполнения документа Invoice match с поставщиком по авансам
+Сценарий: _2050004 check the autocomplete document Invoice match with the vendor in advance
 	* Open a creation form Invoice match
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И из выпадающего списка "Operation type" я выбираю точное значение 'With vendor'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -290,7 +290,7 @@
 			| '9 000'  | 'Crystal' |
 		И в таблице "List" я активизирую поле "Partner"
 		И в таблице "List" я выбираю текущую строку
-	* Filling in the tabular part по нераспределенным авансам
+	* Filling in the tabular part
 		И я перехожу к закладке "Advances"
 		И в таблице "Advances" я нажимаю на кнопку 'Fill advances'
 	* Filling check
@@ -301,11 +301,11 @@
 		Тогда в таблице "Advances" количество строк "меньше или равно" 2
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _2050005 проверка движений документа Invoice match с поставщиком по авансам (заполнение вручную)
+Сценарий: _2050005 check the movements of the Invoice match document with the vendor in advance (manual filling)
 	* Open a creation form Invoice match
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И из выпадающего списка "Operation type" я выбираю точное значение 'With vendor'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -361,14 +361,14 @@
 		И в таблице "Advances" я активизирую поле "Closing amount"
 		И в таблице "Advances" в поле 'Closing amount' я ввожу текст '1 000,00'
 		И в таблице "Advances" я завершаю редактирование строки
-	* Change the document number и его проведение
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '1'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '1'
 		И я нажимаю на кнопку 'Post'
-	* Check movements документа
+	* Check movements
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Invoice match 1*'                    | ''            | ''       | ''          | ''             | ''                        | ''             | ''             | ''                  | ''                         | ''                         | ''                     |
@@ -388,11 +388,11 @@
 		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Purchase invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'       | 'TRY'                      | 'Local currency'           | 'No'                   |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2050005 проверка движений документа Invoice match с клиентом по авансам (заполнение вручную)
+Сценарий: _2050005 check the movements of the Invoice match document with the customer in advance (manual filling)
 	* Open a creation form Invoice match
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И из выпадающего списка "Operation type" я выбираю точное значение 'With customer'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -448,14 +448,14 @@
 		И в таблице "Advances" я активизирую поле "Closing amount"
 		И в таблице "Advances" в поле 'Closing amount' я ввожу текст '1 000,00'
 		И в таблице "Advances" я завершаю редактирование строки
-	* Change the document number и его проведение
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '2'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '2'
 		И я нажимаю на кнопку 'Post'
-	* Check movements документа
+	* Check movements
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
 		| 'Invoice match 2*'                    | ''            | ''       | ''          | ''             | ''                     | ''             | ''             | ''                      | ''                         | ''                         | ''                     |
@@ -476,11 +476,11 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _2050006 проверка движений документа Invoice match с клиентом при перекидывании суммы с документа на документ
+Сценарий: _2050006 check the movements of the Invoice match document with the client when transferring the amount from document to document
 	* Open a creation form Invoice match
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И из выпадающего списка "Operation type" я выбираю точное значение 'With customer'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -517,8 +517,8 @@
 		И в таблице "Transactions" я активизирую поле с именем "TransactionsLegalName"
 		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита с именем "TransactionsLegalName"
 		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я активизирую поле с именем "TransactionsPartner term"
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита с именем "TransactionsPartner term"
+		И в таблице "Transactions" я активизирую поле с именем "TransactionsAgreement"
+		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита с именем "TransactionsAgreement"
 		И в таблице "List" я перехожу к строке:
 			| 'AP/AR posting detail' | 'Description'           | 'Kind'    |
 			| 'By documents'         | 'Basic Partner terms, TRY' | 'Regular' |
@@ -542,7 +542,7 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '3'
-	* Posting the documentи проверка движений
+	* Check movements
 		И я нажимаю на кнопку 'Post'
 		И я нажимаю на кнопку 'Registrations report'
 		Тогда табличный документ "ResultTable" равен по шаблону:
@@ -561,19 +561,19 @@
 		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2050007 отмена проведения и повторное проведение Invoice match №3 и проверка движений
-	* Открытие списка Invoice match и выбор нужного документа
+Сценарий: _2050007 check of movements in case of cancellation and re-post of Invoice match №3
+	* Select Invoice match
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '3'     |
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-	* Проверка отсутствия движений
+	* Check for no movement
 		И я нажимаю на кнопку 'Registrations report'
 		И табличный документ "ResultTable" не содержит значения:
 		| Register  "Partner AR transactions" |
 		И Я закрываю текущее окно
-	* Повторное проведение документа и проверка движений
+	* Re-post and check movements
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -596,11 +596,11 @@
 		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2050008 проверка доступности выбора Purchase return и Sales return в документе Invoice match
+Сценарий: _2050008 check the availability of Purchase return and Sales return choices in the Invoice match document
 	* Open a creation form Invoice match
 		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа для операции с клиентом
+	* Filling the document header (transaction type - with customer)
 		И из выпадающего списка "Operation type" я выбираю точное значение 'With customer'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
@@ -617,7 +617,7 @@
 			| '1'      | 'Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
 		Тогда элемент формы с именем "PartnerArTransactionsBasisDocument" стал равен шаблону "Purchase return 1*"
-	* Заполнение шапки документа для операции с поставщиком
+	* Filling the document header (transaction type - with vendor)
 		И из выпадающего списка "Operation type" я выбираю точное значение 'With vendor'
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:

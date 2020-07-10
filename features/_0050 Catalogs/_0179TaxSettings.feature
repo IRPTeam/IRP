@@ -11,16 +11,16 @@ For tax accounting
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
-Сценарий: _017901 connection of tax calculation Pluginsessing TaxCalculateVAT_TR
-	* Opening a form to add Pluginsessing
+Сценарий: _017901 connection of tax calculation Plugin sessing TaxCalculateVAT_TR
+	* Opening a form to add Plugin sessing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-	* Addition of Pluginsessing for calculating Tax types for Turkey (VAT)
+	* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\TaxCalculateVAT_TR.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to ext data proc for test' я ввожу текст ''
+		И в поле 'Path to plugin for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'TaxCalculateVAT_TR'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'TaxCalculateVAT_TR'

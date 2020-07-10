@@ -1,17 +1,17 @@
 #language: ru
 @tree
 @Positive
-Функционал: маркировка товара
+Функционал: product labeling
 
 Как Разработчик
 Я хочу создать документ маркировки товара
 Для присвоения товарам уникального штрих-кода (серии)
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-Сценарий: _300000 проверка установки пользователю турецкого языка данных
+Сценарий: _300000 user check for Turkish data
 	* Открытие спика пользователей
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Users'
 	* Изменение кода локализации для пользователя CI
@@ -24,12 +24,12 @@
 	И я закрываю сеанс TESTCLIENT
 
 
-Сценарий: _300201 добавление обработки для генерации уникальных баркодов
+Сценарий: _300201 add-on plugin to generate unique barcodes
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я буду выбирать внешний файл "#workingDir#\DataProcessor\GenerateBarcode.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to ext data proc for test' я ввожу текст ''
+	И в поле 'Path to plugin for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'GenerateBarcode'
 	И я нажимаю на кнопку открытия поля с именем "Description_tr"
 	И в поле 'ENG' я ввожу текст 'GenerateBarcode'
@@ -39,7 +39,7 @@
 	И я жду закрытия окна 'Plugins (create)' в течение 10 секунд
 	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "GenerateBarcode"
 
-Сценарий: _300202 настройка отображения кнопки генерации баркода в документе Purchase order
+Сценарий: _300202 setting up barcode generation button display in Purchase order document
 	И я вношу настройки в справочник ConfigurationMetadata
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ConfigurationMetadata"
 		И в таблице  "List" я перехожу на один уровень вниз
@@ -59,7 +59,6 @@
 		И в таблице "List" я перехожу к строке:
 			| Description |
 			| Documents   |
-		И в таблице  "List" я перехожу на один уровень вниз
 		И в таблице "List" я перехожу к строке:
 			| Description         |
 			| Labeling |
@@ -69,6 +68,7 @@
 			| Description       |
 			| GenerateBarcodeTR |
 		И в таблице "List" я выбираю текущую строку
+		И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 5
 	И я проверяю отображение кнопки GenerateBarcode в документе Labeling
@@ -76,7 +76,7 @@
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И элемент формы "GenerateBarcodeTR" присутствует на форме
 
-Сценарий: _300203 создание документа маркировки товара based on Purchase order
+Сценарий: _300203 create Labeling based on Purchase order
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 	И в таблице "List" я перехожу к строке:
 		| Number |

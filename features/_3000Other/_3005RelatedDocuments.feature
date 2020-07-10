@@ -1,20 +1,20 @@
 #language: ru
 @tree
 @Positive
-Функционал: структура подчиненности
+Функционал: related documents
 
 Как Разработчик
 Я хочу к документам подключить систему структуры подчиненности
 Для того чтобы видеть зависимости документов
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-Сценарий: _300501 check connection to Internal Supply Request системы структуры подчиненности
+Сценарий: _300501 check connection to Internal Supply Request report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -27,10 +27,10 @@
 		# | 'Purchase order 1*'             | '*'      |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300502 check connection to Purchase order системы структуры подчиненности
+Сценарий: _300502 check connection to Purchase order report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 2      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -44,10 +44,10 @@
 		# | 'Purchase return order 2*' | '708,00'  |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300503 check connection to Purchase invoice системы структуры подчиненности
+Сценарий: _300503 check connection to Purchase invoice report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 2      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -66,10 +66,10 @@
 		# | 'Purchase return order 1*' | '94,40'    |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300504 check connection to Sales order системы структуры подчиненности
+Сценарий: _300504 check connection to Sales order report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -83,10 +83,10 @@
 		# | 'Sales return 4*'       | '2 700,00' |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300505 check connection to Sales invoice системы структуры подчиненности
+Сценарий: _300505 check connection to Sales invoice report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -103,10 +103,10 @@
 		# | 'Bank receipt 1*'       | '100,00'   |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300506 check connection to Shipment Confirmation системы структуры подчиненности
+Сценарий: _300506 check connection to Shipment Confirmation report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 181      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -120,12 +120,12 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _300507 check connection to GoodsReceipt системы структуры подчиненности
+Сценарий: _300507 check connection to GoodsReceipt report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
-		| 170      |
+		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
 		И Пауза 1
 	Когда открылось окно 'Related documents'
@@ -135,10 +135,10 @@
 		# | 'Goods receipt 170'  | '*'     |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300508 check connection to PurchaseReturnOrder системы структуры подчиненности
+Сценарий: _300508 check connection to PurchaseReturnOrder report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -152,10 +152,10 @@
 		# | 'Purchase return 1*'       | '94,40'  |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300509 check connection to PurchaseReturn системы структуры подчиненности
+Сценарий: _300509 check connection to PurchaseReturn report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -168,10 +168,10 @@
 		# | 'Purchase return 1*'       | '94,40'  |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300510 check connection to SalesReturnOrder системы структуры подчиненности
+Сценарий: _300510 check connection to SalesReturnOrder report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -185,10 +185,10 @@
 		# | 'Sales return 3*'       | '550,00'    |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300511 check connection to SalesReturn системы структуры подчиненности
+Сценарий: _300511 check connection to SalesReturn report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.SalesReturn"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 2      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -201,10 +201,10 @@
 		# | 'Sales return 2*'  | '550,00'    |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300512 check connection to CashPayment системы структуры подчиненности
+Сценарий: _300512 check connection to CashPayment report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -217,10 +217,10 @@
 		# | 'Cash payment 1*'     | '1 000,00' |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300513 check connection to CashReciept системы структуры подчиненности
+Сценарий: _300513 check connection to CashReciept report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -233,10 +233,10 @@
 		# | 'Cash receipt 1*'  | '100,00'   |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300514 check connection to BankPayment системы структуры подчиненности
+Сценарий: _300514 check connection to BankPayment report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -249,10 +249,10 @@
 		# | 'Bank payment 1*'     | '1 000,00' |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300515 check connection to BankReciept системы структуры подчиненности
+Сценарий: _300515 check connection to BankReciept report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.BankReceipt"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -266,10 +266,10 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _300516 check connection to CashTransferOrder системы структуры подчиненности и формирования отчета для текущего элемента (Cash receipt)
+Сценарий: _300516 check connection to CashTransferOrder report "Related documents" и формирования отчета для текущего элемента (Cash receipt)
 	И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -294,10 +294,10 @@
 
 
 
-Сценарий: _300519 check connection to Bundling системы структуры подчиненности
+Сценарий: _300519 check connection to Bundling report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -308,10 +308,10 @@
 		# | 'Bundling 1*' | ''     |
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _300520 check connection to Unbundling системы структуры подчиненности
+Сценарий: _300520 check connection to Unbundling report "Related documents"
 	И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
 	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 		| Number |
 		| 1      |
 		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
@@ -323,8 +323,8 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _300521 проверка проведения/распроведения/ пометки на удаление документов из отчета RelatedDocuments
-	* preparation
+Сценарий: _300521 check post/unpost/mark for deletion from report "Related documents"
+	* Preparation
 		* Создание Sales order
 			И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
 			И я нажимаю на кнопку с именем 'FormCreate'

@@ -1,11 +1,11 @@
 #language: ru
 @tree
 @Positive
-Функционал: auto создание item key при Unbundling по спецификации
+Функционал: auto creation item key when Unbundling (by specification)
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _300301 preparation
@@ -43,7 +43,7 @@
 				И я нажимаю на кнопку 'Save and close'
 				И Пауза 5
 				И я нажимаю на кнопку с именем 'FormChoose'
-			* Выбор единицы измерения
+			* Select единицы измерения
 				И я нажимаю кнопку выбора у поля "Unit"
 				И в таблице "List" я перехожу к строке:
 					| 'Description' |
@@ -55,7 +55,7 @@
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'TR' я ввожу текст 'Cherry'
-		И я нажимаю кнопку выбора у поля "Additionsl attribute"
+		И я нажимаю кнопку выбора у поля "Additional attribute"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Сhewing gum taste' |
@@ -64,7 +64,7 @@
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'TR' я ввожу текст 'Mango'
-		И я нажимаю кнопку выбора у поля "Additionsl attribute"
+		И я нажимаю кнопку выбора у поля "Additional attribute"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Сhewing gum taste' |
@@ -73,7 +73,7 @@
 		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'TR' я ввожу текст 'Mint'
-		И я нажимаю кнопку выбора у поля "Additionsl attribute"
+		И я нажимаю кнопку выбора у поля "Additional attribute"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Сhewing gum brand' |
@@ -134,8 +134,8 @@
 		И Пауза 10
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _300302 создание документа Unbundling и create item key
-	* Заполнение шапки документа Unbundling
+Сценарий: _300302 create Unbundling and check creation item key
+	* Filling the document header Unbundling
 		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Company"

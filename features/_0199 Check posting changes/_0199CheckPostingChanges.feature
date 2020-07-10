@@ -10,13 +10,13 @@ I want to develop a system to check if the postings need to be changed when docu
 In order not to double entries in the registers
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 
 Сценарий: _019901 Checking changes in postings on a Purchase Order document when quantity changes
-	Когда создаю документ Purchase Order
-	Когда устанавливаю номер Purchase order №103
+	Когда creating a Purchase Order document
+	Когда change purchase order number to 103
 	* Checking registry entries (Order Balance)
 		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
 		Тогда таблица "List" содержит строки:
@@ -158,7 +158,6 @@ In order not to double entries in the registers
 			| '39/19SD'  |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Unit"
-		Тогда открылось окно 'Units'
 		И в таблице "List" я перехожу к строке:
 			| 'Description'               |
 			| 'High shoes box (8 pcs)' |

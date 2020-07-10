@@ -8,7 +8,7 @@ I want to create a Credit_DebitNote document.
 For write-off of accounts receivable and payable
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _095001 preparation
@@ -47,7 +47,7 @@ For write-off of accounts receivable and payable
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я нажимаю кнопку выбора у поля "Segment"
-		Тогда открылось окно 'Partner segments content'
+		
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Retail'      |
@@ -148,7 +148,7 @@ For write-off of accounts receivable and payable
 	* Create Purchase invoice for creating vendor
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение данных о поставщике
+		* Filling data о поставщике
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -194,7 +194,7 @@ For write-off of accounts receivable and payable
 	* Create one more Purchase invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение данных о поставщике
+		* Filling data о поставщике
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -271,10 +271,10 @@ For write-off of accounts receivable and payable
 		* Checking the selection of basis documents for the specified partner
 			Тогда в таблице "List" количество строк "меньше или равно" 2
 			Тогда таблица "List" содержит строки:
-			| 'Number' | 'Legal name'    | 'Partner' | 'Amount'    | 'Currency' |
-			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00' | 'TRY'      |
-			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00' | 'TRY'      |
-		И в таблице "List" я перехожу к строке
+			| 'Number' | 'Legal name'    | 'Partner' | 'Document amount'   | 'Currency' |
+			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00'         | 'TRY'      |
+			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00'         | 'TRY'      |
+		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '2 900'  |
 		И в таблице "List" я выбираю текущую строку
@@ -350,7 +350,7 @@ For write-off of accounts receivable and payable
 			| 'Purchase invoice' |
 		И в таблице "" я выбираю текущую строку
 		И в таблице "List" я перехожу к строке:
-			| 'Amount'    | 'Currency' | 'Legal name'    | 'Number' | 'Partner' |
+			| 'Document amount'     | 'Currency' | 'Legal name'    | 'Number' | 'Partner' |
 			| '10 000,00' | 'TRY'      | 'Company Maxim' | '2 901'  | 'Maxim'   |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "Transactions" я активизирую поле с именем "TransactionsAmount"
@@ -423,7 +423,7 @@ For write-off of accounts receivable and payable
 			Тогда таблица "List" содержит строки:
 			| 'Number' |
 			| '2 900'  |
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '2 900'  |
 		И в таблице "List" я выбираю текущую строку
@@ -536,7 +536,7 @@ For write-off of accounts receivable and payable
 			Тогда таблица "List" содержит строки:
 			| 'Number' |
 			| '2 900'  |
-		И в таблице "List" я перехожу к строке
+		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '2 900'  |
 		И в таблице "List" я выбираю текущую строку

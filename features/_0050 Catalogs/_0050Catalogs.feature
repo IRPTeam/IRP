@@ -11,7 +11,7 @@ I want to fill out information on the company
 To further use it when reflecting in the program of business processes
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 	И Я устанавливаю в константу "ShowBetaTesting" значение "True"
 	И Я устанавливаю в константу "ShowAlphaTestingSaas" значение "True"
 	И Я устанавливаю в константу "UseItemKey" значение "True"
@@ -119,7 +119,7 @@ To further use it when reflecting in the program of business processes
 		Тогда я проверяю наличие элемента справочника "Currencies" со значением поля "Description_en" "Ukraine Hryvnia"
 
 
-Сценарий: _005012 create integration settings to load the currency rate (without Pluginsessing connected)
+Сценарий: _005012 create integration settings to load the currency rate (without Plugin sessing connected)
 	* Creating a setting to download the Forex Seling course (tcmb.gov.tr)
 		И я открываю навигационную ссылку "e1cib/list/Catalog.IntegrationSettings"
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -653,7 +653,7 @@ To further use it when reflecting in the program of business processes
 		И в базе нет элементов Справочника "PaymentSchedules"
 	* Opening a form and creating Payment terms
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PaymentSchedules"
-		Когда создаю элемент справочника с наименованием Test
+		Когда creating a catalog element with the name Test.
 	* Checking for created Payment terms
 		Тогда В базе появился хотя бы один элемент справочника "PaymentSchedules"
 		Тогда я проверяю наличие элемента справочника "PaymentSchedules" со значением поля "Description_en" "Test ENG"  
@@ -684,7 +684,7 @@ To further use it when reflecting in the program of business processes
 		И в базе нет элементов Справочника "PaymentTypes"
 	* Opening a form and creating Payment types
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PaymentTypes"
-		Когда создаю элемент справочника с наименованием Test
+		Когда creating a catalog element with the name Test.
 		И Я закрываю текущее окно
 	* Checking for created Payment types
 		Тогда В базе появился хотя бы один элемент справочника "PaymentTypes"

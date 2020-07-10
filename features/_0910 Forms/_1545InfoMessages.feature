@@ -6,7 +6,7 @@
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 
@@ -30,7 +30,7 @@
 					| 'Description' |
 					| 'Company Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-		Когда добавляю товар в заказ клиента (Dress и Trousers)
+		Когда adding the items to the sales order (Dress and Trousers)
 	* Click Shipment confirmation before Sales invoice
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
@@ -253,7 +253,7 @@
 					| 'Description' |
 					| 'Company Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-		Когда добавляю товар в заказ клиента (Dress и Trousers)
+		Когда adding the items to the sales order (Dress and Trousers)
 		И я перехожу к закладке "Other"
 		И я разворачиваю группу "More"
 		И я устанавливаю флаг 'Shipment confirmations before sales invoice'
@@ -580,7 +580,7 @@
 					| 'Description' |
 					| 'Company Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-		Когда добавляю товар в заказ клиента (Dress и Trousers)
+		Когда adding the items to the sales order (Dress and Trousers)
 		И я нажимаю на кнопку 'Save'
 	* Change the document number
 		И я перехожу к закладке "Other"
@@ -625,7 +625,7 @@
 					| 'Description' |
 					| 'Company Ferron BP'  |
 			И в таблице "List" я выбираю текущую строку
-		Когда добавляю товар в заказ клиента (Dress и Trousers)
+		Когда adding the items to the sales order (Dress and Trousers)
 		И я нажимаю на кнопку 'Save'
 	* Change the document number
 		И я перехожу к закладке "Other"

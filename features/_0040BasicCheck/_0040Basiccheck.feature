@@ -10,7 +10,7 @@ As an QA
 I want to check opening and closing of documents and catalogs forms
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 	И Я устанавливаю в константу "ShowBetaTesting" значение "True"
 	И Я устанавливаю в константу "ShowAlphaTestingSaas" значение "True"
 	И Я устанавливаю в константу "UseItemKey" значение "True"

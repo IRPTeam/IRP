@@ -1,18 +1,19 @@
 #language: ru
 @tree
 @Positive
-Функционал: создание инвойсов based on расходного и приходного ордера при непрямой схемы поставки
+Функционал: create Purchase invoices and Sales invoices based on Goods receipt and Shipment confirmation
+
 
 Как Разработчик
 Я хочу добавить возможность создавать инвойс based on расходного и приходного ордера 
 Чтобы упростить ввод документов
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 # Непрямая схема отгрузки Sales order - Purchase order - Goods reciept - Purchase invoice - Shipment confirmation - Sales invoice
-Сценарий: _090501 создание Sales invoice based on Shipment confirmation (один к одному)
+Сценарий: _090501 creation of Sales invoice based on Shipment confirmation (one to one)
 	И я тестово создаю Sales order и на его основании Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -63,7 +64,7 @@
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090502 создание Purchase invoice based on Goods reciept (один к одному)
+Сценарий: _090502 creating a purchase invoice based on Goods reciept (one to one)
 	И я тестово создаю Purchase order и на его основании Goods reciept
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -120,7 +121,7 @@
 		| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | '*'                  |
 		И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _090503 создание Sales invoice based on нескольких Shipment confirmation
+Сценарий: _090503 creating Sales invoice based on several Shipment confirmation
 	И я тестово создаю первый заказ и Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -297,7 +298,7 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090504 создание Purchase invoice based on нескольких Goods reciept
+Сценарий: _090504 creating Purchase invoice based on several Goods reciept
 	И я тестово создаю Purchase order и на его основании Goods reciept
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -512,7 +513,7 @@
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
 
-Сценарий: _090505 создание Sales invoice based on нескольких Shipment confirmation (разная валюта)
+Сценарий: _090505 creation of Sales invoice based on several Shipment confirmation (different currency)
 # должно создаться 2 Sales invoice
 	И я тестово создаю первый заказ и Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -599,7 +600,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '466'
 		И я нажимаю на кнопку 'Post and close'
-	И based on созданных Shipment confirmation я создаю Sales invoice - должно создаться 2
+	* Create Sales invoice - должно создаться 2
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И в таблице "List" я перехожу к строке:
 		| 'Number' |
@@ -629,7 +630,7 @@
 		И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090506 создание Purchase invoice based on нескольких Goods reciept
+Сценарий: _090506 creating Purchase invoice based on several Goods reciept
 	И я тестово создаю Purchase order и на его основании Goods reciept
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -747,11 +748,11 @@
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-		Если поле с именем "Partner term" имеет значение "Vendor Ferron, USD" тогда
+		Если поле с именем "Agreement" имеет значение "Vendor Ferron, USD" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      | 'Sales order' |
 				| '677,97'     | 'Trousers' | '400,00' | '38/Yellow' | '2,000'  | ''              | '122,03'     | 'pcs'  | '800,00'       | 'Store 02' | '*'             | ''             | ''              | '*'                    | 'Goods receipt 466*' | ''            |
-		Если поле с именем "Partner term" имеет значение "Vendor Ferron, TRY" тогда
+		Если поле с именем "Agreement" имеет значение "Vendor Ferron, TRY" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      | 'Sales order' |
 				| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | ''              | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | 'Goods receipt 465*' | ''            |
@@ -761,11 +762,11 @@
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-		Если поле с именем "Partner term" имеет значение "Vendor Ferron, USD" тогда
+		Если поле с именем "Agreement" имеет значение "Vendor Ferron, USD" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      | 'Sales order' |
 				| '677,97'     | 'Trousers' | '400,00' | '38/Yellow' | '2,000'  | ''              | '122,03'     | 'pcs'  | '800,00'       | 'Store 02' | '*'             | ''             | ''              | '*'                    | 'Goods receipt 466*' | ''            |
-		Если поле с именем "Partner term" имеет значение "Vendor Ferron, TRY" тогда
+		Если поле с именем "Agreement" имеет значение "Vendor Ferron, TRY" тогда
 			И     таблица "ItemList" содержит строки:
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      | 'Sales order' |
 				| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | ''              | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | 'Goods receipt 465*' | ''            |

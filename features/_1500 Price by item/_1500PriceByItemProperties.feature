@@ -3,19 +3,19 @@
 @Positive
 
 
-Функционал: установка цен номенклатуры по Item
+Функционал: check setting item prices for Item
 
-Как разработчик
-Я хочу установить цену на Item и по properties
-Чтобы на все item key одного Item действовала единая цена, а также можно было установить цены по свойствам
+As a sales manager.
+I want to put a price on the Item and the properties
+In order to have the same price applied to all item key of one Item, and also to be able to set prices for the properties of
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _150000 preparation
-	* Выбор в Item type свойств которые будут влиять на цену
-		* Для вида номенклатуры Сlothes
+	* Select in Item type properties that will affect the price
+		* For item type Сlothes
 			И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -33,7 +33,7 @@
 			И в таблице "AvailableAttributes" я завершаю редактирование строки
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 5
-		* Для вида номенклатуры Shoes
+		* For item type Shoes
 			И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -49,11 +49,11 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _150001 внесение базовой цены с НДС по свойствам
-	И я создаю документ ценообразования по свойствам для вида номенклатуры Сlothes
+Сценарий: _150001 basic price entry by properties (including VAT)
+	* Create price list by property for item type Сlothes
 		И я открываю навигационную ссылку "e1cib/list/Document.PriceList"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю данные прайс листа по свойствам
+	* Filling in price list
 		И я перехожу к закладке "Other"
 		И в поле 'Description' я ввожу текст 'Basic price'
 		И я нажимаю кнопку выбора у поля "Price type"
@@ -61,10 +61,13 @@
 				| 'Description' |
 				| 'Basic Price Types'  |
 		И в таблице "List" я выбираю текущую строку
-		Когда изменяю номер прайс-листа
+		И в поле 'Number' я ввожу текст '0'
+		Тогда открылось окно '1C:Enterprise'
+		И я нажимаю на кнопку 'Yes'
+		Тогда открылось окно 'Price list (create) *'
 		И в поле 'Number' я ввожу текст '107'
 		И в поле "Date" я ввожу начало текущего месяца
-	* Filling in tabular part ценами
+	* Filling in tabular part
 		И я меняю значение переключателя 'Set price' на 'By Properties'
 		И я нажимаю кнопку выбора у поля "Item type"
 		И в таблице "List" я перехожу к строке:
@@ -86,13 +89,13 @@
 		И в таблице "PriceKeyList" я активизирую поле "Size"
 		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Size"
 		И в таблице "List" я перехожу к строке:
-			| Add attribute | Description |
+			| Additional attribute | Description |
 			| Size          | L           |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "PriceKeyList" я активизирую поле "Color"
 		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Color"
 		И в таблице "List" я перехожу к строке:
-			| Add attribute | Description |
+			| Additional attribute | Description |
 			| Color         | Green       |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "PriceKeyList" в поле 'Price' я ввожу текст '350,00'
@@ -112,13 +115,13 @@
 		И в таблице "PriceKeyList" я активизирую поле "Size"
 		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Size"
 		И в таблице "List" я перехожу к строке:
-			| Add attribute | Description |
+			| Additional attribute | Description |
 			| Size          | S           |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "PriceKeyList" я активизирую поле "Color"
 		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Color"
 		И в таблице "List" я перехожу к строке:
-			| Add attribute | Description |
+			| Additional attribute | Description |
 			| Color         | Yellow       |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "PriceKeyList" в поле 'Price' я ввожу текст '300,00'
@@ -138,30 +141,33 @@
 		И в таблице "PriceKeyList" я активизирую поле "Size"
 		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Size"
 		И в таблице "List" я перехожу к строке:
-			| Add attribute | Description |
+			| Additional attribute | Description |
 			| Size          | M           |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "PriceKeyList" я активизирую поле "Color"
 		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Color"
 		И в таблице "List" я перехожу к строке:
-			| Add attribute | Description |
+			| Additional attribute | Description |
 			| Color         | Yellow       |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "PriceKeyList" в поле 'Price' я ввожу текст '415,00'
 		И в таблице "PriceKeyList" я завершаю редактирование строки
-		Когда изменяю номер прайс-листа
+		И в поле 'Number' я ввожу текст '0'
+		Тогда открылось окно '1C:Enterprise'
+		И я нажимаю на кнопку 'Yes'
+		Тогда открылось окно 'Price list (create) *'
 		И в поле 'Number' я ввожу текст '107'
 		И в поле "Date" я ввожу начало текущего месяца
 		И я нажимаю на кнопку 'Post and close'
 		И Пауза 10
-	* create Price key по Dress
+	* Create Price key for Dress
 		И я открываю навигационную ссылку "e1cib/list/Catalog.PriceKeys"
 		Тогда таблица "List" содержит строки:
 			| 'Price key'|
 			| 'L/Green'  |
 			| 'S/Yellow' |
 			| 'M/Yellow' |
-		* Проверка на заполнение MD5 по PriceKeys
+		* PriceKeys MD5 completion check
 			И в таблице "List" я перехожу к строке:
 			| 'Price key'|
 			| 'S/Yellow' |
@@ -171,10 +177,10 @@
 
 
 
-Сценарий: _150002 внесение базовой цены с НДС по Item
+Сценарий: _150002 basic price entry by items (including VAT)
 	И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю данные прайс листа по item key
+	* Filling in price list by item key
 		И я перехожу к закладке "Other"
 		И в поле 'Description' я ввожу текст 'Basic price'
 		И я нажимаю кнопку выбора у поля "Price type"
@@ -182,7 +188,10 @@
 			| 'Description' |
 			| 'Basic Price Types'  |
 		И в таблице "List" я выбираю текущую строку
-		Когда изменяю номер прайс-листа
+		И в поле 'Number' я ввожу текст '0'
+		Тогда открылось окно '1C:Enterprise'
+		И я нажимаю на кнопку 'Yes'
+		Тогда открылось окно 'Price list (create) *'
 		И в поле 'Number' я ввожу текст '110'
 		И в поле "Date" я ввожу начало текущего месяца
 	И я перехожу к закладке "Item keys"
@@ -265,14 +274,14 @@
 	И Пауза 10
 
 
-Сценарий: _150003 проверка отображения действующих цен в Item
-	* Открытие карточки товара Dress
+Сценарий: _150003 check that the current prices are displayed in the Item
+	* OPen item Dress
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
 		И в таблице "List" я перехожу к строке:
 		| 'Description' |
 		| 'Dress'       |
 		И в таблице "List" я выбираю текущую строку
-	* Открытие отчета по ценам (вкладка Price info)
+	* Open price report (tab Price info)
 		И В текущем окне я нажимаю кнопку командного интерфейса 'Price info'
 		Тогда табличный документ "Result" равен по шаблону:
 			| 'Prices on*'           | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
@@ -288,21 +297,21 @@
 			| 'Dress'                | 'XXL/Red'   | '700'               | 'Item =  Dress'           | ''                     | ' '                    | ''                     | ' '                    | ''                        | ' '                    | ''                           | ' '                    | ''                           | ' '                    | ''                | ' '                       |
 			| 'Dress'                | 'M/Brown'   | '500'               | 'Item key =  M/Brown'     | ''                     | ' '                    | ''                     | ' '                    | ''                        | ' '                    | ''                           | ' '                    | ''                           | ' '                    | ''                | ' '                       |
 			| ''                     | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
-			| ' All prices'          | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
+			| 'All prices'          | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| ''                     | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| 'Item'                 | 'Item Key'   | 'Basic Price Types' | ''                        | 'Discount Price TRY 1' | ''                     | 'Discount Price TRY 2' | ''                     | 'Basic Price without VAT' | ''                     | 'Discount 1 TRY without VAT' | ''                     | 'Discount 2 TRY without VAT' | ''                     | 'Dependent Price' | ''                        |
 			| ''                     | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
-			| '1. By Item keys'      | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
+			| '1. By item keys'      | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| 'Dress'                | 'S/Yellow'  | '550'               | ''                        | '522,5'                | ''                     | '411'                  | ''                     | '466,1'                   | ''                     | '442,8'                      | ''                     | '349'                        | ''                     | '605'             | ''                        |
 			| 'Dress'                | 'XS/Blue'   | '520'               | ''                        | '494'                  | ''                     | '389'                  | ''                     | '440,68'                  | ''                     | '418,65'                     | ''                     | '330'                        | ''                     | '572'             | ''                        |
 			| 'Dress'                | 'M/White'   | '520'               | ''                        | '494'                  | ''                     | '389'                  | ''                     | '440,68'                  | ''                     | '418,65'                     | ''                     | '330'                        | ''                     | '572'             | ''                        |
 			| 'Dress'                | 'L/Green'   | '550'               | ''                        | '522,5'                | ''                     | '413'                  | ''                     | '466,1'                   | ''                     | '442,8'                      | ''                     | '350'                        | ''                     | '605'             | ''                        |
 			| 'Dress'                | 'XL/Green'  | '550'               | ''                        | '522,5'                | ''                     | '413'                  | ''                     | '466,1'                   | ''                     | '442,8'                      | ''                     | '350'                        | ''                     | '605'             | ''                        |
 			| 'Dress'                | 'M/Brown'   | '500'               | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
-			| '2. By Properties'     | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
+			| '2. By properties'     | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| 'Dress'                | 'S/Yellow'  | '300'               | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| 'Dress'                | 'L/Green'   | '350'               | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
-			| '3. By Items'          | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
+			| '3. By items'          | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| 'Dress'                | 'S/Yellow'  | '700'               | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| 'Dress'                | 'XS/Blue'   | '700'               | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| 'Dress'                | 'M/White'   | '700'               | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
@@ -310,7 +319,7 @@
 			| 'Dress'                | 'XL/Green'  | '700'               | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| 'Dress'                | 'XXL/Red'   | '700'               | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| 'Dress'                | 'M/Brown'   | '700'               | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
-		* Проверка отображения действующих цен на более раннюю дату
+		* Check to display the current prices at an earlier date
 			И в поле 'on date' я ввожу текст '12.12.2019'
 			И я нажимаю на кнопку 'Refresh'
 			Тогда табличный документ "Result" равен по шаблону:
@@ -326,26 +335,26 @@
 			| 'Dress'                | 'Dress/A-8' | '3 000'             | 'Specification Dress/A-8' | ''                     | ' '                    | ''                     | ' '                    | ''                        | ' '                    | ''                           | ' '                    | ''                           | ' '                    |
 			| 'Dress'                | 'M/Brown'   | '500'               | 'Item key =  M/Brown'     | ''                     | ' '                    | ''                     | ' '                    | ''                        | ' '                    | ''                           | ' '                    | ''                           | ' '                    |
 			| ''                     | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
-			| ' All prices'          | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
+			| 'All prices'          | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
 			| ''                     | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
 			| 'Item'                 | 'Item Key'   | 'Basic Price Types' | ''                        | 'Discount Price TRY 1' | ''                     | 'Discount Price TRY 2' | ''                     | 'Basic Price without VAT' | ''                     | 'Discount 1 TRY without VAT' | ''                     | 'Discount 2 TRY without VAT' | ''                     |
 			| ''                     | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
-			| '1. By Item keys'      | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
+			| '1. By item keys'      | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
 			| 'Dress'                | 'S/Yellow'  | '550'               | ''                        | '522,5'                | ''                     | '411'                  | ''                     | '466,1'                   | ''                     | '442,8'                      | ''                     | '349'                        | ''                     |
 			| 'Dress'                | 'XS/Blue'   | '520'               | ''                        | '494'                  | ''                     | '389'                  | ''                     | '440,68'                  | ''                     | '418,65'                     | ''                     | '330'                        | ''                     |
 			| 'Dress'                | 'M/White'   | '520'               | ''                        | '494'                  | ''                     | '389'                  | ''                     | '440,68'                  | ''                     | '418,65'                     | ''                     | '330'                        | ''                     |
 			| 'Dress'                | 'L/Green'   | '550'               | ''                        | '522,5'                | ''                     | '413'                  | ''                     | '466,1'                   | ''                     | '442,8'                      | ''                     | '350'                        | ''                     |
 			| 'Dress'                | 'XL/Green'  | '550'               | ''                        | '522,5'                | ''                     | '413'                  | ''                     | '466,1'                   | ''                     | '442,8'                      | ''                     | '350'                        | ''                     |
 			| 'Dress'                | 'M/Brown'   | '500'               | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
-			| '2. By Properties'     | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
-			| '3. By Items'          | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
+			| '2. By properties'    | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
+			| '3. By items'          | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
 
 
 
 
 
-Сценарий: _150004 проверка расчета цены по спецификации (исходя из цены Item и properties) в документе Sales order
-	И я распровожу Basic Price list по item key
+Сценарий: _150004 check the price calculation according to the specification (based on the Item and properties price) in Sales order document
+	* Unpost Basic Price list by item key
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И в таблице "List" я перехожу к строке:
 		| Description | Number | Price list type    |
@@ -353,8 +362,23 @@
 		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
-	И я добавляю товар
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Ferron BP'  |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	Тогда открылось окно 'Partner terms'
+	И в таблице "List" я перехожу к строке:
+			| 'Description'       |
+			| 'Basic Partner terms, TRY' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Legal name"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Company Ferron BP'  |
+	И в таблице "List" я выбираю текущую строку
+	* Add item
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -370,17 +394,32 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	И я проверяю расчет цены по спецификации
+	* Check price calculation
 		И     таблица "ItemList" содержит строки:
 		| 'Item'  | 'Price'    | 'Item key'  | 'Store'    | 'Q'     | 'Unit' |
 		| 'Dress' | '3 100,00' | 'Dress/A-8' | 'Store 01' | '1,000' | 'pcs'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _150004 проверка расчета цены по бандл (исходя из цены properties) в документе Sales order
+Сценарий: _150004 check the price calculation for the bandle (based on the properties price) in the Sales order document
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
-	И я добавляю товар
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Ferron BP'  |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	Тогда открылось окно 'Partner terms'
+	И в таблице "List" я перехожу к строке:
+			| 'Description'       |
+			| 'Basic Partner terms, TRY' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Legal name"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Company Ferron BP'  |
+	И в таблице "List" я выбираю текущую строку
+	* Add item
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -396,17 +435,32 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	И я проверяю расчет цены по спецификации
+	* Check price calculation
 		И     таблица "ItemList" содержит строки:
 		| 'Item'              | 'Price'    | 'Item key'                      | 'Store'    | 'Q'     | 'Unit'  |
 		| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | 'Store 01' | '1,000' |  'pcs'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _150005 проверка цены по свойствам в документе Sales order
+Сценарий: _150005 price check by properties in Sales order
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда заполняю данные о клиенте в заказе (Ferron BP, склад 01)
-	И я добавляю товар
+	И я нажимаю кнопку выбора у поля "Partner"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Ferron BP'  |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Partner term"
+	Тогда открылось окно 'Partner terms'
+	И в таблице "List" я перехожу к строке:
+			| 'Description'       |
+			| 'Basic Partner terms, TRY' |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю кнопку выбора у поля "Legal name"
+	И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Company Ferron BP'  |
+	И в таблице "List" я выбираю текущую строку
+	* Add item
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -422,18 +476,18 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	И я проверяю расчет цены по спецификации
+	* Check price calculation
 		И     таблица "ItemList" содержит строки:
 		| 'Item'  | 'Price'  | 'Item key'| 'Store'    | 'Q'     | 'Unit'  |
 		| 'Dress' | '350,00' | 'L/Green' | 'Store 01' | '1,000' |  'pcs'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _150006 проверка перерисовки колонок в прайс листе по доп свойствам при перевыборе вида номенклатуры
-	* Открытие формы Price list с типом установки по доп свойствам
+Сценарий: _150006 check the redrawing of columns in the price list for additional properties when re-selecting the type of items
+	* Open Price list with price variant by properties
 		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я меняю значение переключателя 'Set price' на 'By Properties'
-	* Проверка прорисовки доп свойств для вида номенклатуры Сlothes
+	* Checking the addition of properties for item type Clothes
 		И я нажимаю кнопку выбора у поля "Item type"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -462,7 +516,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "PriceKeyList" в поле 'Price' я ввожу текст '200,00'
 		И в таблице "PriceKeyList" я завершаю редактирование строки
-	* Проверка перерисовки доп свойств для вида номенклатуры Shoes
+	* Checking the addition of properties for item type Clothes
 		И я нажимаю кнопку выбора у поля "Item type"
 		И в таблице "List" я перехожу к строке:
 			| Description |
@@ -475,12 +529,12 @@
 	И Я закрыл все окна клиентского приложения
 
 
-Сценарий: проверка ввода по строке в прайс листе по доп свойствам
+Сценарий: check input by line in the price list for additional properties
 	И я закрыл все окна клиентского приложения
 	* Open a creation form Price List
 		И я открываю навигационную ссылку "e1cib/list/Document.PriceList"
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Ввод по строке доп свойств
+	* Input additionel properties by string 
 		И я меняю значение переключателя 'Set price' на 'By Properties'
 		И я нажимаю кнопку выбора у поля "Item type"
 		И в таблице "List" я перехожу к строке:
@@ -493,7 +547,7 @@
 		И в таблице "PriceKeyList" из выпадающего списка "Size" я выбираю по строке '36'
 		И в таблице "PriceKeyList" я активизирую поле "Color"
 		И в таблице "PriceKeyList" из выпадающего списка "Color" я выбираю по строке 'bla'
-	* Checking entered values
+	* Check entered values
 		И     таблица "PriceKeyList" содержит строки:
 		| 'Item'  | 'Size' | 'Color' |
 		| 'Dress' | '36'   | 'Black' |

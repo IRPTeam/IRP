@@ -10,7 +10,7 @@ For ease of filling in documents
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _200001 customize the CI user settings
@@ -417,7 +417,7 @@ For ease of filling in documents
 		И в таблице "MetadataTree" я активизирую поле "Group name"
 		И в таблице "MetadataTree" я перехожу к строке:
 			| 'Group name'   | 'Use' |
-			| 'Cash/Bank accounts' | 'No'  |
+			| 'Cash account' | 'No'  |
 		И в таблице "MetadataTree" я активизирую поле "Value"
 		И в таблице "MetadataTree" я выбираю текущую строку
 		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
@@ -457,7 +457,7 @@ For ease of filling in documents
 			| 'Cash receipt' |
 		И в таблице "MetadataTree" я перехожу к строке:
 			| 'Group name'   | 'Use' |
-			| 'Cash/Bank accounts' | 'No'  |
+			| 'Cash account' | 'No'  |
 		И в таблице "MetadataTree" я активизирую поле "Value"
 		И в таблице "MetadataTree" я выбираю текущую строку
 		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
@@ -953,7 +953,7 @@ For ease of filling in documents
 	И я открываю навигационную ссылку 'e1cib/list/Document.OutgoingPaymentOrder'
 	И я нажимаю на кнопку с именем 'FormCreate'
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Account" стал равен 'Cash desk №2'
+		И     элемент формы с именем "Account" стал равен 'Cash desk №3'
 		И     элемент формы с именем "Currency" стал равен 'USD'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 	И я закрыл все окна клиентского приложения
@@ -1148,7 +1148,7 @@ For ease of filling in documents
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertyValues'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И в поле 'ENG' я ввожу текст '100'
-		И я нажимаю кнопку выбора у поля "Additionsl attribute"
+		И я нажимаю кнопку выбора у поля "Additional attribute"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
 			| 'Size'        |
@@ -1201,7 +1201,7 @@ For ease of filling in documents
 		| 'Description'                          |
 		| 'Alexander Orlov (Commercial Agent 2)' |
 		И я нажимаю на кнопку 'Settings'
-		Тогда открылось окно 'Edit user defaults settings'
+		Тогда открылось окно 'Edit user default settings'
 	И я закрыл все окна клиентского приложения
 
 

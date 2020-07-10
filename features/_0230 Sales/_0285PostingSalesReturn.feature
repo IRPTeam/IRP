@@ -8,7 +8,7 @@ I want to create a Sales return document
 To track a product that returned from customer
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _028501 creating document Sales return, store use Goods receipt, without Sales return order

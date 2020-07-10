@@ -11,7 +11,7 @@ I want to create a basic system of discounts: price type discount, 5+1 type disc
 For calculating special offers in documents
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _030001 add Pluginsessor SpecialMessage
@@ -19,7 +19,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я буду выбирать внешний файл "#workingDir#\DataProcessor\SpecialOffer_Message.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to ext data proc for test' я ввожу текст ''
+	И в поле 'Path to plugin for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'ExternalSpecialMessage'
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'ExternalSpecialMessage'
@@ -34,7 +34,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я буду выбирать внешний файл "#workingDir#\DataProcessor\DocumentDiscount.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to ext data proc for test' я ввожу текст ''
+	И в поле 'Path to plugin for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'DocumentDiscount'
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'DocumentDiscount'
@@ -49,7 +49,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я буду выбирать внешний файл "#workingDir#\DataProcessor\SpecialOfferRules.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to ext data proc for test' я ввожу текст ''
+	И в поле 'Path to plugin for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'ExternalSpecialOfferRules'
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'ExternalSpecialOfferRules'
@@ -64,7 +64,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку с именем 'FormCreate'
 	И я буду выбирать внешний файл "#workingDir#\DataProcessor\RangeDiscount.epf"
 	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to ext data proc for test' я ввожу текст ''
+	И в поле 'Path to plugin for test' я ввожу текст ''
 	И в поле 'Name' я ввожу текст 'ExternalRangeDiscount'
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'ExternalRangeDiscount'
@@ -82,7 +82,7 @@ For calculating special offers in documents
 	* Add Pluginsessor FivePlusOneType
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\FivePlusOne.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to ext data proc for test' я ввожу текст ''
+		И в поле 'Path to plugin for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'ExternalFivePlusOne'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'ExternalFivePlusOne'
@@ -94,57 +94,57 @@ For calculating special offers in documents
 
 
 Сценарий: _030006 create Special Offer Types (price type)
-	Когда выбираю обработку для создания типа (вида) скидки
+	Когда select the plugin to create the type of special offer
 	И в поле 'ENG' я ввожу текст 'Discount Price 1'
 	И в поле 'TR' я ввожу текст 'Discount Price 1'
 	И я нажимаю на кнопку 'Ok'
 	И я нажимаю на кнопку 'Save'
-	Когда перехожу к настройкам Price Type
+	Когда move on to the Price Type settings
 	И в таблице "List" я перехожу к строке:
 		| 'Description'            |
 		| 'Discount Price TRY 1' |
 	И в таблице "List" я выбираю текущую строку
-	Когда сохраняю настройки скидки
+	Когда save the special offer setting
 	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Discount Price 1"
-	Когда выбираю обработку для создания типа (вида) скидки
+	Когда select the plugin to create the type of special offer
 	И в поле 'ENG' я ввожу текст 'Discount Price 2'
 	И в поле 'TR' я ввожу текст 'Discount Price 2'
 	И я нажимаю на кнопку 'Ok'
 	И я нажимаю на кнопку 'Save'
-	Когда перехожу к настройкам Price Type
+	Когда move on to the Price Type settings
 	И в таблице "List" я перехожу к строке:
 		| 'Description'            |
 		| 'Discount Price TRY 2' |
 	И в таблице "List" я выбираю текущую строку
-	Когда сохраняю настройки скидки
+	Когда save the special offer setting
 	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Discount Price 2"
-	Когда выбираю обработку для создания типа (вида) скидки
+	Когда select the plugin to create the type of special offer
 	И в поле 'ENG' я ввожу текст 'Discount 1 without Vat'
 	И в поле 'TR' я ввожу текст 'Discount 1 without Vat'
 	И я нажимаю на кнопку 'Ok'
 	И я нажимаю на кнопку 'Save'
-	Когда перехожу к настройкам Price Type
+	Когда move on to the Price Type settings
 	И в таблице "List" я перехожу к строке:
 		| 'Description'            |
 		| 'Discount 1 TRY without VAT' |
 	И в таблице "List" я выбираю текущую строку
-	Когда сохраняю настройки скидки
+	Когда save the special offer setting
 	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Discount 1 without Vat"
-	Когда выбираю обработку для создания типа (вида) скидки
+	Когда select the plugin to create the type of special offer
 	И в поле 'ENG' я ввожу текст 'Discount 2 TRY without VAT'
 	И в поле 'TR' я ввожу текст 'Discount 2 TRY without VAT'
 	И я нажимаю на кнопку 'Ok'
 	И я нажимаю на кнопку 'Save'
-	Когда перехожу к настройкам Price Type
+	Когда move on to the Price Type settings
 	И в таблице "List" я перехожу к строке:
 		| 'Description'            |
 		| 'Discount 2 TRY without VAT' |
 	И в таблице "List" я выбираю текущую строку
-	Когда сохраняю настройки скидки
+	Когда save the special offer setting
 	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Discount 2 TRY without VAT"
 
 Сценарий: _030007 create Special Offer Types special message (Notification)
-	Когда выбираю обработку для создания типа скидки (сообщение)
+	Когда choose the plugin to create a special offer type (message)
 	И в поле 'ENG' я ввожу текст 'Special Message Notification'
 	И в поле 'TR' я ввожу текст 'Special Message Notification'
 	И я нажимаю на кнопку 'Ok'
@@ -153,7 +153,7 @@ For calculating special offers in documents
 	И из выпадающего списка "Message type" я выбираю точное значение 'Notification'
 	И в поле 'Message Description_en' я ввожу текст 'Message Notification'
 	И в поле 'Message Description_tr' я ввожу текст 'Message Notification'
-	Когда сохраняю настройки скидки
+	Когда save the special offer setting
 	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Special Message Notification"
 
 
@@ -393,7 +393,7 @@ For calculating special offers in documents
 
 
 Сценарий: _030010 create Special Offer Types special message (DialogBox)
-	Когда выбираю обработку для создания типа скидки (сообщение)
+	Когда choose the plugin to create a special offer type (message)
 	И в поле 'ENG' я ввожу текст 'Special Message DialogBox'
 	И в поле 'TR' я ввожу текст 'Special Message DialogBox'
 	И я нажимаю на кнопку 'Ok'
@@ -402,7 +402,7 @@ For calculating special offers in documents
 	И из выпадающего списка "Message type" я выбираю точное значение 'DialogBox'
 	И в поле 'Message Description_en' я ввожу текст 'Message 2'
 	И в поле 'Message Description_tr' я ввожу текст 'Message 2'
-	Когда сохраняю настройки скидки
+	Когда save the special offer setting
 	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Special Message DialogBox"
 	И Я закрыл все окна клиентского приложения
 
@@ -638,7 +638,7 @@ For calculating special offers in documents
 
 
 Сценарий: _030013 create Special Offer Rules (Partner term)
-	Когда выбираю обработку для создания правила скидки
+	Когда select the plugin to create the rule of special offer
 	И в поле 'ENG' я ввожу текст 'Discount on Basic Partner terms'
 	И в поле 'TR' я ввожу текст 'Discount on Basic Partner terms'
 	И я нажимаю на кнопку 'Ok'
@@ -657,9 +657,9 @@ For calculating special offers in documents
 	И Пауза 1
 	И в таблице "ValueList" я завершаю редактирование строки
 	И я нажимаю на кнопку 'OK'
-	Когда сохраняю настройки скидки
+	Когда save the special offer setting
 	Тогда я проверяю наличие элемента справочника "SpecialOfferRules" со значением поля "Description_en" "Discount on Basic Partner terms"
-	Когда выбираю обработку для создания правила скидки
+	Когда select the plugin to create the rule of special offer
 	И в поле 'ENG' я ввожу текст 'Discount on Basic Partner terms without Vat'
 	И в поле 'TR' я ввожу текст 'Discount on Basic Partner terms without Vat'
 	И я нажимаю на кнопку 'Ok'
@@ -677,13 +677,13 @@ For calculating special offers in documents
 	И Пауза 1
 	И в таблице "ValueList" я завершаю редактирование строки
 	И я нажимаю на кнопку 'OK'
-	Когда сохраняю настройки скидки
+	Когда save the special offer setting
 	Тогда я проверяю наличие элемента справочника "SpecialOfferRules" со значением поля "Description_en" "Discount on Basic Partner terms"
 
 
 
 Сценарий: _030014 create Special Offer (group Maximum by row/Special Offers Maximum by row)
-	Когда выбираю обработку для создания скидки
+	Когда choose the plugin to create a special offer
 	И в поле 'ENG' я ввожу текст 'Special Offers'
 	И в поле 'TR' я ввожу текст 'Special Offers'
 	И я нажимаю на кнопку 'Ok'
@@ -692,7 +692,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку 'Set settings'
 	И Пауза 2
 	И из выпадающего списка "Type joining" я выбираю точное значение 'Maximum by row'
-	Когда сохраняю настройки скидки
+	Когда save the special offer setting
 	И я нажимаю на кнопку с именем 'FormChoose'
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'Special Offers'
@@ -702,7 +702,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку 'Save and close'
 	И Пауза 10
 	Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Special Offers"
-	Когда выбираю обработку для создания скидки
+	Когда choose the plugin to create a special offer
 	И в поле 'ENG' я ввожу текст 'Maximum'
 	И в поле 'TR' я ввожу текст 'Maximum'
 	И я нажимаю на кнопку 'Ok'
@@ -711,7 +711,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку 'Set settings'
 	И Пауза 2
 	И из выпадающего списка "Type joining" я выбираю точное значение 'Maximum by row'
-	Когда сохраняю настройки скидки
+	Когда save the special offer setting
 	И я нажимаю на кнопку с именем 'FormChoose'
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'Maximum'
@@ -741,7 +741,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку 'Set settings'
 	И Пауза 2
 	И из выпадающего списка "Type joining" я выбираю точное значение 'Sum'
-	Когда сохраняю настройки скидки
+	Когда save the special offer setting
 	И я нажимаю на кнопку с именем 'FormChoose'
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'Sum'
@@ -771,7 +771,7 @@ For calculating special offers in documents
 	И я нажимаю на кнопку 'Set settings'
 	И Пауза 2
 	И из выпадающего списка "Type joining" я выбираю точное значение 'Minimum'
-	Когда сохраняю настройки скидки
+	Когда save the special offer setting
 	И я нажимаю на кнопку с именем 'FormChoose'
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'Minimum'
@@ -783,7 +783,7 @@ For calculating special offers in documents
 	Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Minimum"
 
 Сценарий: _030017 create Special Offer (manual) Discount Price 1-2 (discount price, group maximum)
-	Когда открываю окно создания скидки
+	Когда open a special offer window
 	И в таблице "List" я перехожу к строке:
 		| 'Description'        |
 		| 'Discount Price 1' |
@@ -796,12 +796,12 @@ For calculating special offers in documents
 	И в поле 'TR' я ввожу текст 'Discount Price 1'
 	И я нажимаю на кнопку 'Ok'
 	И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-	Когда ввожу срок действия скидки текущий месяц
-	Когда добавляю правило скидки
+	Когда enter the discount period this month
+	Когда add a special offer rule
 	И в таблице "List" я перехожу к строке:
 		| 'Description'                    |
 		| 'Discount on Basic Partner terms' |
-	Когда сохраняю правило в скидке
+	Когда save the rule for a special offer
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	И Пауза 1
 	И в таблице  "List" я перехожу на один уровень вниз
@@ -810,7 +810,7 @@ For calculating special offers in documents
 		| 'Special offer type' |
 		| 'Maximum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
-	Когда открываю окно создания скидки
+	Когда open a special offer window
 	И в таблице "List" я перехожу к строке:
 		| 'Description'        |
 		| 'Discount Price 2' |
@@ -823,12 +823,12 @@ For calculating special offers in documents
 	И в поле 'TR' я ввожу текст 'Discount Price 2'
 	И я нажимаю на кнопку 'Ok'
 	И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-	Когда ввожу срок действия скидки текущий месяц
-	Когда добавляю правило скидки
+	Когда enter the discount period this month
+	Когда add a special offer rule
 	И в таблице "List" я перехожу к строке:
 		| 'Description'                    |
 		| 'Discount on Basic Partner terms' |
-	Когда сохраняю правило в скидке
+	Когда save the rule for a special offer
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
 	И Пауза 1
 	И в таблице "List" я перехожу к строке:
@@ -839,25 +839,25 @@ For calculating special offers in documents
 	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Discount Price 2"
 
 Сценарий: _030018 create Special Offer - Special Message (Notification)
-	Когда открываю окно создания скидки
+	Когда open a special offer window
 	И в таблице "List" я перехожу к строке:
 		| 'Description'        |
 		| 'Special Message Notification' |
 	И в таблице "List" я выбираю текущую строку
 	И Пауза 2
 	И в поле 'Priority' я ввожу текст '1'
-	Когда ввожу срок действия скидки текущий месяц
+	Когда enter the discount period this month
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'Special Message Notification'
 	И в поле 'TR' я ввожу текст 'Special Message Notification'
 	И я нажимаю на кнопку 'Ok'
 	И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
 	И я изменяю флаг 'Launch'
-	Когда добавляю правило скидки
+	Когда add a special offer rule
 	И в таблице "List" я перехожу к строке:
 		| 'Description'                    |
 		| 'Discount on Basic Partner terms' |
-	Когда сохраняю правило в скидке
+	Когда save the rule for a special offer
 	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Special Message Notification"
 	Тогда открылось окно 'Special offers'
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
@@ -870,25 +870,25 @@ For calculating special offers in documents
 	И я нажимаю на кнопку с именем 'FormChoose'
 
 Сценарий: _030019 create Special Offer - Special Message (DialogBox)
-	Когда открываю окно создания скидки
+	Когда open a special offer window
 	И в таблице "List" я перехожу к строке:
 		| 'Description'        |
 		| 'Special Message DialogBox' |
 	И в таблице "List" я выбираю текущую строку
 	И Пауза 2
 	И в поле 'Priority' я ввожу текст '2'
-	Когда ввожу срок действия скидки текущий месяц
+	Когда enter the discount period this month
 	И я нажимаю на кнопку открытия поля с именем "Description_en"
 	И в поле 'ENG' я ввожу текст 'Special Message DialogBox'
 	И в поле 'TR' я ввожу текст 'Special Message DialogBox'
 	И я нажимаю на кнопку 'Ok'
 	И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
 	И я изменяю флаг 'Launch'
-	Когда добавляю правило скидки
+	Когда add a special offer rule
 	И в таблице "List" я перехожу к строке:
 		| 'Description'                    |
 		| 'Discount on Basic Partner terms without Vat' |
-	Когда сохраняю правило в скидке
+	Когда save the rule for a special offer
 	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Special Message DialogBox"
 	Тогда открылось окно 'Special offers'
 	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
@@ -918,12 +918,12 @@ For calculating special offers in documents
 	И в поле 'TR' я ввожу текст 'Discount 1 without Vat'
 	И я нажимаю на кнопку 'Ok'
 	И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-	Когда ввожу срок действия скидки текущий месяц
-	Когда добавляю правило скидки
+	Когда enter the discount period this month
+	Когда add a special offer rule
 	И в таблице "List" я перехожу к строке:
 		| 'Description'                    |
 		| 'Discount on Basic Partner terms without Vat' |
-	Когда сохраняю правило в скидке
+	Когда save the rule for a special offer
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И я нажимаю на кнопку с именем 'FormCreate'
@@ -940,14 +940,14 @@ For calculating special offers in documents
 	И в поле 'ENG' я ввожу текст 'Discount 2 without Vat'
 	И в поле 'TR' я ввожу текст 'Discount 2 without Vat'
 	И я нажимаю на кнопку 'Ok'
-	Когда ввожу срок действия скидки текущий месяц
-	Когда добавляю правило скидки
+	Когда enter the discount period this month
+	Когда add a special offer rule
 	И в таблице "List" я перехожу к строке:
 		| 'Description'                    |
 		| 'Discount on Basic Partner terms without Vat' |
-	Когда сохраняю правило в скидке
-	Когда переношу скидку Discount 1 without Vat в Minimum
-	Когда переношу скидку Discount 2 without Vat в группу Minimum 
+	Когда save the rule for a special offer
+	Когда move the Discount 1 without Vat discount to Minimum
+	Когда move the Discount 2 without Vat discount to the Minimum group 
 	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Discount 2 without Vat"
 	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Discount 1 without Vat"
 
@@ -979,7 +979,7 @@ For calculating special offers in documents
 		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
 		| 'No'     | 'No'       | '3'        | 'Maximum'            |
 	И я нажимаю на кнопку с именем 'FormChoose'
-	Когда переношу скидку Discount Price 1 в Maximum
+	Когда  move the Discount Price 1 to Maximum
 
 Сценарий: _030022 creating special offer group within another special offer group
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
@@ -1053,14 +1053,14 @@ For calculating special offers in documents
 	И Я закрываю текущее окно
 
 Сценарий: _030024 create special offer Present Discount
-	Когда открываю окно создания скидки
+	Когда open a special offer window
 	* Filling in special offer 5+1 (manual)
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                                   |
 			| 'All items 5+1, Discount on Basic Partner terms' |
 		И в таблице "List" я выбираю текущую строку
 		И в поле 'Priority' я ввожу текст '4'
-		Когда ввожу срок действия скидки текущий месяц
+		Когда enter the discount period this month
 		И я изменяю флаг 'Manually'
 		И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
 		И я устанавливаю флаг 'Launch'
@@ -1078,14 +1078,14 @@ For calculating special offers in documents
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
 	* Create  special offer 4+1, multiple
-		Когда открываю окно создания скидки
+		Когда open a special offer window
 		* Filling in special offer 4+1 (manual)
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                                   |
 				| 'Dress,2 4+1, Discount on Basic Partner terms' |
 			И в таблице "List" я выбираю текущую строку
 			И в поле 'Priority' я ввожу текст '4'
-			Когда ввожу срок действия скидки текущий месяц
+			Когда enter the discount period this month
 			И я изменяю флаг 'Manually'
 			И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
 			И я устанавливаю флаг 'Launch'
@@ -1103,14 +1103,14 @@ For calculating special offers in documents
 			И я нажимаю на кнопку 'Save and close'
 			И Пауза 10
 	* Create special offer 3+1, not multiple
-		Когда открываю окно создания скидки
+		Когда open a special offer window
 		* Filling in special offer 3+1 (manual)
 			И в таблице "List" я перехожу к строке:
 				| 'Description'                                   |
 				| 'Dress,2 3+1, Discount on Basic Partner terms' |
 			И в таблице "List" я выбираю текущую строку
 			И в поле 'Priority' я ввожу текст '4'
-			Когда ввожу срок действия скидки текущий месяц
+			Когда enter the discount period this month
 			И я изменяю флаг 'Manually'
 			И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
 			И я устанавливаю флаг 'Launch'
@@ -1132,21 +1132,21 @@ For calculating special offers in documents
 		И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "4+1 Dress and Trousers, Discount on Basic Partner terms"
 		И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "All items 5+1, Discount on Basic Partner terms"
 	* Moving special offers to the group Maximum
-		Когда переношу скидку All items 5+1, Discount on Basic Partner terms в группу Maximum
-		Когда переношу скидку 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms в группу Maximum
-		Когда переношу скидку 4+1 Dress and Trousers, Discount on Basic Partner terms в группу Maximum
+		Когда move the discount All items 5+1, Discount on Basic Partner terms to the group Maximum
+		Когда move the discount 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms to the group Maximum
+		Когда move the discount 4+1 Dress and Trousers, Discount on Basic Partner terms to the group Maximum
 
 
 
 Сценарий: _030025 create Range Discount
-	Когда открываю окно создания скидки
+	Когда open a special offer window
 	* Filling in special offer Range Discount Basic (Trousers)
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                                   |
 			| 'Range Discount Basic (Trousers)' |
 		И в таблице "List" я выбираю текущую строку
 		И в поле 'Priority' я ввожу текст '4'
-		Когда ввожу срок действия скидки текущий месяц
+		Когда enter the discount period this month
 		И я изменяю флаг 'Manually'
 		И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
 		И я изменяю флаг 'Launch'
@@ -1165,14 +1165,14 @@ For calculating special offers in documents
 		И я нажимаю на кнопку 'Ok'
 		И я нажимаю на кнопку 'Save and close'
 		И Пауза 10
-	Когда открываю окно создания скидки
+	Когда open a special offer window
 	* Filling in special offer Range Discount Basic (Dress)
 		И в таблице "List" я перехожу к строке:
 			| 'Description'                                   |
 			| 'Range Discount Basic (Dress)' |
 		И в таблице "List" я выбираю текущую строку
 		И в поле 'Priority' я ввожу текст '4'
-		Когда ввожу срок действия скидки текущий месяц
+		Когда enter the discount period this month
 		И я изменяю флаг 'Manually'
 		И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
 		И я изменяю флаг 'Launch'

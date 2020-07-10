@@ -1,11 +1,11 @@
 #language: ru
 @tree
 @Positive
-Функционал: создание Inventory transfer order based on нескольких Internal supply request
+Функционал: creating Inventory transfer order based on several Internal supply request
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 
@@ -216,8 +216,8 @@
 		И я нажимаю на кнопку 'Post and close'
 
 
-Сценарий: _295401 Check filling inInventory transfer order при создании based on двух Internal supply request с одинаковым складом
-	* Выбор InternalSupplyRequest
+Сценарий: _295401 сheck filling in Inventory transfer order when creating based on two Internal supply requests with the same warehouse
+	* Select InternalSupplyRequest
 		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 		И в таблице "List" я перехожу к строке:
 			| 'Number'  |
@@ -235,8 +235,8 @@
 		| 'High shoes' | '2,000'    | 'Internal supply request 296*' | '37/19SD'   | 'pcs'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _295402 Check filling inInventory transfer order при создании based on двух Internal supply request с разными складами
-	* Выбор InternalSupplyRequest
+Сценарий: _295402 сheck filling in Inventory transfer order when creating based on two Internal supply requests with the different warehouse
+	* Select InternalSupplyRequest
 		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
 		И в таблице "List" я перехожу к строке:
 			| 'Number'  |

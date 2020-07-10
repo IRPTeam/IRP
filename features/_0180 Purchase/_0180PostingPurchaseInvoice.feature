@@ -10,7 +10,7 @@ I want to create a Purchase invoice document
 To track a product that has been received from a vendor
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _018001 creating document Purchase Invoice based on order - Goods receipt is not used
@@ -287,6 +287,6 @@ To track a product that has been received from a vendor
 		И я нажимаю кнопку выбора у поля "Store"
 		Тогда открылось окно 'Stores'
 		И в таблице "List" я выбираю текущую строку
-	Когда проверяю форму подбора товара с информацией по ценам в Purchase invoice
+	Когда check the product selection form with price information in Purchase invoice
 	И Я закрыл все окна клиентского приложения
 

@@ -10,7 +10,7 @@ I want to create an Item key for the items
 In order to form an order with a vendor
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _017101 checking input item key by line

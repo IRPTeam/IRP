@@ -7,7 +7,7 @@
 
 
 Контекст: 
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 	
 Сценарий: _0203001 check filters in the partner term catalog
 	* Check for data availability
@@ -20,7 +20,7 @@
 	* Filter check according to partner term with customers in the sales section
 		* Open list form
 			И В панели разделов я выбираю 'Sales - A/R'
-			И В панели функций я выбираю 'Customer Partner terms'
+			И В панели функций я выбираю 'Customers partner terms'
 		* Filter check
 			Тогда таблица "List" не содержит строки:
 			| 'Description'                             |
@@ -31,7 +31,7 @@
 	* Filter check according to partner term with vendors in the purchase section
 		* Open list form
 			Когда В панели разделов я выбираю 'Purchase  - A/P'
-			И В панели функций я выбираю 'Vendor Partner terms'
+			И В панели функций я выбираю 'Vendors partner terms'
 		* Filter check
 			Тогда таблица "List" содержит строки:
 			| 'Description'                             |

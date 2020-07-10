@@ -8,7 +8,7 @@ I want to create a Inventory transfer order
 To transfer items from one store to another
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 # 1
 Сценарий: _021001 creating document Inventory Transfer - Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt

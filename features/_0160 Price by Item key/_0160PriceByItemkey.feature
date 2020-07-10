@@ -12,7 +12,7 @@ To sell and purchase goods and services
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _016001 base price fill (incl. VAT)
@@ -28,7 +28,7 @@ To sell and purchase goods and services
 				| 'Description' |
 				| 'Basic Price Types'  |
 		И в таблице "List" я выбираю текущую строку
-		Когда изменяю номер прайс-листа
+		Когда changing the price list number
 		И в поле 'Number' я ввожу текст '100'
 		И в поле 'Date' я ввожу текст '01.11.2018  12:32:21'
 	* Filling in prices by item key by price type Basic Price Types
@@ -320,7 +320,7 @@ To sell and purchase goods and services
 				| 'Description' |
 				| 'Basic Price without VAT'  |
 		И в таблице "List" я выбираю текущую строку
-		Когда изменяю номер прайс-листа
+		Когда changing the price list number
 		И в поле 'Number' я ввожу текст '103'
 		И в поле 'Date' я ввожу текст '01.11.2018  12:32:21'
 		И я перехожу к закладке "Item keys"
@@ -540,7 +540,7 @@ To sell and purchase goods and services
 				| 'Description' |
 				| 'Discount 1 TRY without VAT'  |
 		И в таблице "List" я выбираю текущую строку
-		Когда изменяю номер прайс-листа
+		Когда changing the price list number
 		И в поле 'Number' я ввожу текст '104'
 		И в поле 'Date' я ввожу текст '01.11.2018  12:32:21'
 	* Filling in prices by item key by price type Discount 1 TRY without VAT
@@ -713,7 +713,7 @@ To sell and purchase goods and services
 				| 'Description' |
 				| 'Discount 2 TRY without VAT'  |
 		И в таблице "List" я выбираю текущую строку
-		Когда изменяю номер прайс-листа
+		Когда changing the price list number
 		И в поле 'Number' я ввожу текст '105'
 		И в поле 'Date' я ввожу текст '01.11.2018  12:32:21'
 	* Filling in prices by item key by price type Discount 2 TRY without VAT
@@ -898,7 +898,7 @@ To sell and purchase goods and services
 				| 'Description' |
 				| 'Discount Price TRY 1'  |
 		И в таблице "List" я выбираю текущую строку
-		Когда изменяю номер прайс-листа
+		Когда changing the price list number
 		И в поле 'Number' я ввожу текст '101'
 		И в поле 'Date' я ввожу текст '03.11.2018  10:24:21'
 	* Filling in prices by item key by price type Discount Price TRY 1
@@ -1072,7 +1072,7 @@ To sell and purchase goods and services
 					| 'Description' |
 					| 'Discount Price TRY 2'  |
 			И в таблице "List" я выбираю текущую строку
-			Когда изменяю номер прайс-листа
+			Когда changing the price list number
 			И в поле 'Number' я ввожу текст '102'
 			И в поле 'Date' я ввожу текст '05.11.2018  10:24:21'
 	* Filling in prices by item key by price type Discount Price TRY 2
@@ -1243,12 +1243,12 @@ To sell and purchase goods and services
 		| '102'    | 'Price by item keys'  | 'Discount Price TRY 2'       | 'Price list 102*' |
 
 Сценарий: _016010 check dependent prices calculation
-	* Adding Pluginsessing
+	* Adding Plugin sessing
 		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И я буду выбирать внешний файл "#workingDir#\DataProcessor\SalesPriceCalculation.epf"
 		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to ext data proc for test' я ввожу текст ''
+		И в поле 'Path to plugin for test' я ввожу текст ''
 		И в поле 'Name' я ввожу текст 'SalesPriceCalculation'
 		И я нажимаю на кнопку открытия поля с именем "Description_en"
 		И в поле 'ENG' я ввожу текст 'SalesPriceCalculation'
@@ -1312,7 +1312,7 @@ To sell and purchase goods and services
 			| 'Item'       | 'Price'    | 'Item key'  |
 			| 'Dress'      | '605,00'   | 'S/Yellow'  |
 			| 'Dress'      | '572,00'   | 'XS/Blue'   |
-			Когда изменяю номер прайс-листа
+			Когда changing the price list number
 			И в поле 'Number' я ввожу текст '200'
 		И я нажимаю на кнопку 'Post and close'
 		

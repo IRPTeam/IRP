@@ -1,17 +1,17 @@
 #language: ru
 @tree
 @Positive
-Функционал: проверка связки доп реквизитов в item type для состава item key
+Функционал: checking a bunch of additional details in the item type for the item key composition
 
 Как Разработчик
 Я хочу создать связку для передачи доп реквизитов из item type в состав item key
 Для присвоения их товарам
 
 Контекст:
-    Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+    Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
-Сценарий: _350000 preparation для проверки связки  доп реквизитов в item type и их отображении в наборе для item key/price key
+Сценарий: _350000 preparation for checking a bunch of additional details in item type and their display in the set for item key / price key
     * Открытие набора доп реквизитов для item key
         И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
         И в таблице "List" я перехожу к строке:
@@ -79,7 +79,7 @@
 
 
 
-Сценарий: _350001 проверка связки между добавлением доп реквизитов в item type и их отображении в наборе для item key
+Сценарий: _350001 check the connection between adding additional details to item type and displaying them in the set for item key
     * Открытие item type Socks
         И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
         И в таблице "List" я перехожу к строке:
@@ -173,7 +173,7 @@
                 И я нажимаю на кнопку 'Save'
         И я закрыл все окна клиентского приложения
 
-Сценарий: _350002 проверка связки между установкой по доп реквизиту признака влияния на цену и Add atribute and property sets по Price key
+Сценарий: _350002 checking the connection between the installation according to the additional attribute of the sign of influence on the price and Add atribute and property sets by Price key
           * Открытие Additional attribute sets для price key
             И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
             И в таблице "List" я перехожу к строке:
@@ -239,7 +239,7 @@
                 | 'Color Socks TR' |
         И я закрыл все окна клиентского приложения
 
-Сценарий: _350003 пометка на удаление Item type и проверка неотображения в Add atribute and property sets по Price key и по item key
+Сценарий: _350003 mark on removal of Item type and non-display in Add atribute and property sets by Price key and by item key
     * Открытие списка выбора item type и пометка на удаление нужного элемента
         И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
         И в таблице "List" я перехожу к строке:
@@ -303,7 +303,7 @@
             | 'Color Socks TR'        |
         И я закрыл все окна клиентского приложения
 
-Сценарий: _350004 редактирование Item type и проверка изменений в Add atribute and property sets по item key
+Сценарий: _350004 edit Item type and check changes in Add atribute and property sets by item key
      * Открытие Additional attribute sets для item key
         И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
         И в таблице "List" я перехожу к строке:
@@ -328,7 +328,7 @@
         И я закрыл все окна клиентского приложения
 
 
-Сценарий: _350005 проверка условий отбора при добавлении доп реквизитов по item
+Сценарий: _350005 check the selection conditions when adding additional details on item
     * Открытие Additional attribute sets для item
         И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
         И в таблице "List" я перехожу к строке:
@@ -352,7 +352,7 @@
         Тогда открылось окно '1C:Enterprise'
         И я нажимаю на кнопку 'Yes'
         И в таблице "SettingsFilter" я нажимаю на кнопку с именем 'SettingsFilterAddFilterItem'
-        И в таблице "SettingsFilter" из выпадающего списка "Field" я выбираю точное значение 'ItemType'
+        И в таблице "SettingsFilter" из выпадающего списка "Field" я выбираю точное значение 'Item type'
         И я перехожу к следующему реквизиту
         И в таблице "SettingsFilter" я нажимаю кнопку выбора у реквизита "Comparison type"
         И в таблице "SettingsFilter" я активизирую поле "Value"
@@ -397,7 +397,7 @@
             И я закрыл все окна клиентского приложения
 
 
-Сценарий: _350006 проверка ошибки при задваивании доп реквизита по item 
+Сценарий: _350006 check error when doubling additional details on item
     * Открытие Additional attribute sets для Items
         И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
         И в таблице "List" я перехожу к строке:
@@ -424,7 +424,7 @@
         Тогда я жду, что в сообщениях пользователю будет подстрока "Duplicated attribute: Brand TR" в течение 10 секунд
     И я закрыл все окна клиентского приложения
 
-Сценарий: _350007 проверка ошибки при задваивании доп реквизита составляющего item key
+Сценарий: _350007 check error when duplicating an additional attribute of an item key
     * Открытие Item type для Socks
         И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
         И в таблице "List" я перехожу к строке:

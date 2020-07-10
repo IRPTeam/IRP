@@ -11,7 +11,7 @@ For joint sale of products
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 Сценарий: _029500 test data creation
 	* Create store that use Goods receipt and doesn't use Shipment confirmation

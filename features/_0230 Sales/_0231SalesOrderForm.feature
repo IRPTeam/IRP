@@ -10,7 +10,7 @@ For fast data entry
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 
@@ -161,7 +161,7 @@ For fast data entry
 				| 'Description' |
 				| 'Company Ferron BP'  |
 		И в таблице "List" я выбираю текущую строку
-	Когда проверяю форму подбора товара с информацией по ценам в Sales order
+	Когда check the product selection form with price information in Sales order
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
 	И я нажимаю на кнопку 'Post and close'

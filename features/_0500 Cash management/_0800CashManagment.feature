@@ -12,7 +12,7 @@ For expense and income planning
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: _080001 create Incoming payment order
@@ -131,7 +131,7 @@ For expense and income planning
 
 Сценарий: _080004 check Description in IncomingPaymentOrder
 	И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
-	Когда проверяю работу Description
+	Когда check Description
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _080005 create Bank reciept based on Incoming payment order
@@ -296,7 +296,7 @@ For expense and income planning
 
 Сценарий: _080009 check Description in Outgoing payment order
 	И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
-	Когда проверяю работу Description
+	Когда check Description
 	И я закрыл все окна клиентского приложения
 
 Сценарий: _080010 create Bank payment based on Outgoing payment order

@@ -3,7 +3,7 @@
 @Positive
 
 
-Функционал: создание based on по цепочке документов продажи
+Функционал: creation mechanism based on for sales documents
 
 # Sales order - Sales invoice - Shipment confirmation - Bank reciept/Cash reciept
 
@@ -13,12 +13,12 @@
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 # Прямая схема поставки вначале инвойс, потом ордер
 
 
-Сценарий: _090401 create Sales invoice по нескольким Sales order с разными контрагентами
+Сценарий: _090401 create Sales invoice for several Sales order with different legal names
 # должно создаться 2 Sales invoice
 	И я создаю тестовый Sales order 324
 		Когда create the first test SO for a test on the creation mechanism based on
@@ -33,7 +33,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю Sales order 325
 		Когда create the second test SO for a test on the creation mechanism based on
@@ -48,9 +48,9 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
-	И я создаю based on Sales order 324 и 325 Sales invoice (должно создаться 2)
+	* Create Sales invoice based on Sales order 324 and 325 (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И в таблице "List" я перехожу к строке:
 			| Number |
@@ -76,7 +76,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 		И Я нажимаю кнопку командного интерфейса 'Sales invoice (create)'
 		И Пауза 2
@@ -102,11 +102,11 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _090402 create Sales invoice по нескольким Sales order с одинаковым партнером, контрагентом, соглашением, валютой и складом
+Сценарий: _090402 create Sales invoice for several Sales order with the same partner, legal name, partner term, currency and store
 # Должен создаться 1 Sales invoice
 	И я создаю тестовый Sales order 326
 		Когда create the first test SO for a test on the creation mechanism based on
@@ -126,7 +126,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю тестовый Sales order 327
 		Когда create the second test SO for a test on the creation mechanism based on
@@ -146,7 +146,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю based on Sales order 326 и 327 Sales invoice (должен создаться 1)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -176,11 +176,11 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 		И я закрыл все окна клиентского приложения
 	
-Сценарий: _090403 create Sales invoice по нескольким Sales order с разными партнерами одного контрагента (соглашения одинаковые)
+Сценарий: _090403 create Sales invoice for several Sales order with different partners of the same legal name (partner terms are the same)
 # Должно создаться 2 Sales invoice
 	И я добавляю Partner Ferron 1 и Partner Ferron 2 в сегмент Retail
 		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
@@ -244,7 +244,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю второй тестовый SO 329
 		Когда create the second test SO for a test on the creation mechanism based on
@@ -282,7 +282,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю based on Sales order 328 и 329 Sales invoice (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -310,7 +310,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 		И Я нажимаю кнопку командного интерфейса 'Sales invoice (create)'
 		И Пауза 2
@@ -336,12 +336,12 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090404 create Sales invoice по нескольким Sales order с разными соглашениями (цена с НДС и цена без НДС)
+Сценарий: _090404 create Sales invoice for several Sales order with different partner terms (price with VAT and price without VAT)
 # Должно создаться 2 Sales invoice
 	И я создаю первый тестовый SO 330
 		Когда create the first test SO for a test on the creation mechanism based on
@@ -379,7 +379,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю второй тестовый SO 331 Partner Ferron 1 и ставлю соглашение Vendor Ferron Discount
 		Когда create the second test SO for a test on the creation mechanism based on
@@ -416,7 +416,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю based on Sales order 330 и 331 Sales invoice (должно создаться 2)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -465,7 +465,7 @@
 	И я закрыл все окна клиентского приложения
 
 
-Сценарий: _090405 create Sales invoice по нескольким Sales order с разными складами (создается один)
+Сценарий: _090405 create Sales invoice for several Sales order with different stores (one is created)
 # Создается один SI
 	И я создаю первый тестовый PO 334
 		Когда create the first test SO for a test on the creation mechanism based on
@@ -503,7 +503,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю второй тестовый SO 335
 		Когда create the second test SO for a test on the creation mechanism based on
@@ -541,7 +541,7 @@
 		И я перехожу к закладке "Item list"
 		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 		И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-		# endвременно
+		# temporarily
 		И я нажимаю на кнопку 'Post and close'
 	И я создаю based on Sales order 335 и 334 Sales invoice (должен создаться 1)
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
@@ -570,7 +570,7 @@
 		И я закрыл все окна клиентского приложения
 
 	
-Сценарий: _090406 create Sales invoice по нескольким Sales order с разными собственными компаниями
+Сценарий: _090406 create Sales invoice for several Sales order with different own companies
 	И я создаю первый тестовый SO 336
 		Когда create the first test SO for a test on the creation mechanism based on
 		И я устанавливаю номер документа 336
@@ -690,7 +690,7 @@
 		И я нажимаю на кнопку 'Post and close'
 	И я закрыл все окна клиентского приложения
 
-Сценарий: _090407 create Shipment confirmation по нескольким Sales order с разными procurement method (товары и услуги)
+Сценарий: _090407 create Shipment confirmation for several Sales order with different procurement method (goods and services)
 	* Создание первого тестового SO №800
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
@@ -882,7 +882,7 @@
 			| 800    |
 		И В таблице  "List" я перехожу на одну строку вниз с выделением
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
-		* Check filling inтабличной части
+		* Check filling in tabular part
 			И     таблица "ItemList" содержит строки:
 			| 'Item'    | 'Item key' | 'Q'     |
 			| 'Service' | 'Rent'     | '1,000' |
@@ -899,7 +899,7 @@
 			И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 			И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 			И     элемент формы с именем "Store" стал равен 'Store 02'
-		* Check filling inтабличной части
+		* Check filling in tabular part
 			Тогда в таблице "ItemList" количество строк "меньше или равно" 2
 			И     таблица "ItemList" содержит строки:
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Shipment basis'   |

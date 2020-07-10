@@ -8,11 +8,11 @@
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий: check filling in Store field in the document Sales order
-	* Opening a document form Sales order
+	* Open document form Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in Partner and Legal name
@@ -38,7 +38,7 @@
 		И в таблице "ItemList" я активизирую поле "Q"
 		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
 		И в таблице "ItemList" я завершаю редактирование строки
-	*Check filling in Sales order
+	* Check filling in Sales order
 		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
 		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
 		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
@@ -82,7 +82,7 @@
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: check filling in Store field in the document Sales invoice
-	* Opening a document form Sales invoice
+	* Open document form Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in Partner and Legal name
@@ -152,7 +152,7 @@
 		И Я закрыл все окна клиентского приложения
 
 Сценарий: check filling in Store field in the document Purchase order
-	* Opening a document form Purchase order
+	* Open document form Purchase order
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in partner, legal name, partner term (store not specified)
@@ -230,7 +230,7 @@
 
 
 Сценарий: check filling in Store field in the document Purchase invoice
-	* Opening a document form Purchase invoice
+	* Open document form Purchase invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Filling in partner, legal name, partner term (store not specified)

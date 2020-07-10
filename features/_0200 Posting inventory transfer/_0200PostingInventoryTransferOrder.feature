@@ -8,7 +8,7 @@ I want to create a Inventory transfer order
 To coordinate the transfer of items from one store to another
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 # 1
 Сценарий: _020001 creating document Inventory Transfer Order - Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
@@ -40,7 +40,11 @@ To coordinate the transfer of items from one store to another
 	* Filling in items table
 		И я перехожу к закладке "Item list"
 		И я нажимаю на кнопку с именем 'Add'
-		Когда выбираю в заказе item Dress
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| Description |
+			| Dress       |
+		И в таблице "List" я выбираю текущую строку
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я перехожу к строке:
@@ -53,7 +57,11 @@ To coordinate the transfer of items from one store to another
 		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '50,000'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И я нажимаю на кнопку с именем 'Add'
-		Когда выбираю в заказе item Dress
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| Description |
+			| Dress       |
+		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я активизирую поле "Item key"
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я перехожу к строке:
@@ -116,7 +124,11 @@ checking Purchase Order N2 posting by register Order Balance (plus) - Goods rece
 	* Filling in items table
 		И я перехожу к закладке "Item list"
 		И я нажимаю на кнопку с именем 'Add'
-		Когда выбираю в заказе item Dress
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| Description |
+			| Dress       |
+		И в таблице "List" я выбираю текущую строку
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я перехожу к строке:
@@ -173,7 +185,11 @@ checking Purchase Order N2 posting by register Order Balance (plus) - Goods rece
 	* Filling in items table
 		И я перехожу к закладке "Item list"
 		И я нажимаю на кнопку с именем 'Add'
-		Когда выбираю в заказе item Dress
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| Description |
+			| Dress       |
+		И в таблице "List" я выбираю текущую строку
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я перехожу к строке:
@@ -234,7 +250,11 @@ checking Purchase Order N2 posting by register Order Balance (plus) - Goods rece
 	* Filling in items table
 		И я перехожу к закладке "Item list"
 		И я нажимаю на кнопку с именем 'Add'
-		Когда выбираю в заказе item Trousers
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| Description |
+			| Trousers       |
+		И в таблице "List" я выбираю текущую строку
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я перехожу к строке:
@@ -295,7 +315,11 @@ checking Purchase Order N2 posting by register Order Balance (plus) - Goods rece
 		* Filling in items table
 			И я перехожу к закладке "Item list"
 			И я нажимаю на кнопку с именем 'Add'
-			Когда выбираю в заказе item Dress
+			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+			И в таблице "List" я перехожу к строке:
+				| Description |
+				| Dress       |
+			И в таблице "List" я выбираю текущую строку
 			И я перехожу к следующему реквизиту
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 			И в таблице "List" я перехожу к строке:

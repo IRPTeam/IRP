@@ -2,18 +2,18 @@
 @tree
 @Positive
 
-Функционал: кнопки выбора документов-оснований
+Функционал: buttons for selecting base documents
 
 
 
 Контекст: 
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 	
 
 Сценарий: _2040001 preparation 
-	* Создание структуры клиентов и поставщиков для теста
-		* Сегмент соглашений с поставщиком Vendor + соглашения
-			* В долларах
+	* Creating a structure of customers and suppliers for the test
+		* Vendor segment + partner term
+			* In USD
 				И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 				И я нажимаю на кнопку с именем 'FormCreate'
 				И в поле 'ENG' я ввожу текст 'Vendor, USD'
@@ -47,7 +47,7 @@
 				И в таблице "List" я выбираю текущую строку
 				И я нажимаю на кнопку 'Save and close'
 				И я жду закрытия окна 'Partner term (create) *' в течение 20 секунд
-			* В лирах
+			* In TRY
 				И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
 				И я нажимаю на кнопку с именем 'FormCreate'
 				И в поле 'ENG' я ввожу текст 'Vendor, TRY'
@@ -78,7 +78,7 @@
 				И в таблице "List" я выбираю текущую строку
 				И я нажимаю на кнопку 'Save and close'
 			И Я закрыл все окна клиентского приложения
-		* Главный партнер и контрагент
+		* Main partner and Legal name
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'ENG' я ввожу текст 'Adel'
@@ -118,7 +118,7 @@
 			И я нажимаю на кнопку 'Save and close'
 			И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 			И я нажимаю на кнопку 'Save and close'
-		* Подчиненный партнер с собственным контрагентом
+		* Subordinate partner with own legal name
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'ENG' я ввожу текст 'Astar'
@@ -163,7 +163,7 @@
 			И я нажимаю на кнопку 'Save and close'
 			И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 			И я нажимаю на кнопку 'Save and close'
-		* Подчиненный партнер без собственного контрагента
+		* Subordinate partner without own legal name
 			И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
 			И я нажимаю на кнопку с именем 'FormCreate'
 			И в поле 'ENG' я ввожу текст 'Crystal'
@@ -199,10 +199,10 @@
 			И я нажимаю на кнопку 'Save and close'
 			И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
 			И я нажимаю на кнопку 'Save and close'
-	* Создание Sales order по прямой схеме отгрузки на Crystal по Basic Partner terms, TRY
+	* Creation of a Sales order on Crystal, Basic Partner terms, TRY, Sales invoice before Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки
+		* Filling the document header
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -220,7 +220,7 @@
 				| 'Description' |
 				| 'Store 02'    |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение товаров
+		* Filling in items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -267,7 +267,7 @@
 				| 'Boots (12 pcs)' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Указание схемы отгрузки и номера документа
+		* Specify shipping scheme and document number
 			И я перехожу к закладке "Other"
 			И я снимаю флаг 'Shipment confirmations before sales invoice'
 			И в поле 'Number' я ввожу текст '8 007'
@@ -275,10 +275,10 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 000'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Sales order по непрямой схеме отгрузки на Crystal по соглашению Basic Partner terms, TRY
+	* * Creation of a Sales order on Crystal, Basic Partner terms, TRY, Shipment confirmation before Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки
+		* Filling the document header
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -296,7 +296,7 @@
 				| 'Description' |
 				| 'Store 02'    |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение товаров
+		* Filling in items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -343,7 +343,7 @@
 				| 'Boots (12 pcs)' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Указание схемы отгрузки и номера документа
+		* Specify shipping scheme and document number
 			И я перехожу к закладке "Other"
 			И я устанавливаю флаг 'Shipment confirmations before sales invoice'
 			И в поле 'Number' я ввожу текст '9 001'
@@ -351,10 +351,10 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 001'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Sales order по прямой схеме отгрузки на Crystal по Basic Partner terms, TRY
+	* Creation of a Sales order on Crystal, Basic Partner terms, TRY, Sales invoice before Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки
+		* Filling the document header
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -372,7 +372,7 @@
 				| 'Description' |
 				| 'Store 02'    |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение товаров
+		* Filling in items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -419,7 +419,7 @@
 				| 'Boots (12 pcs)' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Указание схемы отгрузки и номера документа
+		* Specify shipping scheme and document number
 			И я перехожу к закладке "Other"
 			И я снимаю флаг 'Shipment confirmations before sales invoice'
 			И в поле 'Number' я ввожу текст '9 002'
@@ -427,10 +427,10 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 002'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Sales order по прямой схеме отгрузки на Crystal по Basic Partner terms, without VAT
+	* Creation of a Sales order on Crystal, Basic Partner terms, without VAT, TRY, Sales invoice before Shipment confirmation
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки
+		* Filling the document header
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -448,7 +448,7 @@
 				| 'Description' |
 				| 'Store 02'    |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение товаров
+		* Filling in items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -495,7 +495,7 @@
 				| 'Boots (12 pcs)' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Указание схемы отгрузки и номера документа
+		* Specify shipping scheme and document number
 			И я перехожу к закладке "Other"
 			И я снимаю флаг 'Shipment confirmations before sales invoice'
 			И в поле 'Number' я ввожу текст '9 004'
@@ -503,10 +503,10 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 004'
 			И я нажимаю на кнопку 'Post and close'
-		* Создание Sales order по непрямой схеме отгрузки на Crystal по соглашению Basic Partner terms, without VAT
+		* Creation of a Sales order on Crystal, Basic Partner terms, without VAT, TRY, Shipment confirmation before Sales invoice
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки
+		* Filling the document header
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -524,7 +524,7 @@
 				| 'Description' |
 				| 'Store 02'    |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение товаров
+		* Filling in items tab
 			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
 			И в таблице "List" я перехожу к строке:
@@ -571,7 +571,7 @@
 				| 'Boots (12 pcs)' |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Указание схемы отгрузки и номера документа
+		* Specify shipping scheme and document number
 			И я перехожу к закладке "Other"
 			И я снимаю флаг 'Shipment confirmations before sales invoice'
 			И в поле 'Number' я ввожу текст '9 005'
@@ -579,7 +579,7 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 005'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Shipment confirmation на Crystal без заказа
+	* Create Shipment confirmation on Crystal without Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
@@ -615,7 +615,7 @@
 		И в поле 'Number' я ввожу текст '8 999'
 		И я нажимаю на кнопку 'Post and close'
 		И Я закрыл все окна клиентского приложения
-	* Create one more Shipment confirmation на Crystal без заказа
+	* Create one more Shipment confirmation on Crystal without Sales order
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
@@ -651,7 +651,7 @@
 		И в поле 'Number' я ввожу текст '9 000'
 		И я нажимаю на кнопку 'Post and close'
 		И Я закрыл все окна клиентского приложения
-	* Создание Shipment confirmation на заказ 9 001
+	* Create Shipment confirmation to order 9 001
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 		Когда открылось окно 'Sales orders'
 		И в таблице "List" я перехожу к строке:
@@ -665,13 +665,13 @@
 		И в поле 'Number' я ввожу текст '9 001'
 		И я нажимаю на кнопку 'Post and close'
 		И Я закрыл все окна клиентского приложения
-	* Создание Purchase order по прямой схеме отгрузки на Crystal по соглашению Vendor, TRY № 9000
-		* Открытие формы для создания Purchase Order
+	* Creating Purchase order to Crystal by agreement Vendor, TRY, Goods receipt before Purchase invoice №9000
+		* Open form to create Purchase Order
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение статуса
+		* Filling in status
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -682,14 +682,14 @@
 				| Description        |
 				| Vendor, TRY |
 			И в таблице "List" я выбираю текущую строку
-		* Присвоение документу номера №9000
+		* Change document number to №9000
 			И я перехожу к закладке "Other"
 			И я снимаю флаг 'Goods receipt before purchase invoice'
 			И в поле 'Number' я ввожу текст '9 000'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 000'
-		* Заполнение товарной части документа
+		* Filling in item tab
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я выбираю текущую строку
@@ -719,13 +719,13 @@
 			И в таблице "ItemList" я завершаю редактирование строки
 		* Post document
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Purchase order по непрямой схеме отгрузки на Crystal по соглашению Vendor, TRY № 9001
-		* Открытие формы для создания Purchase Order
+	* Create Purchase order to Crystal, Vendor, TRY, Goods receipt before Purchase invoice № 9001
+		* Open form to create Purchase Order
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение статуса
+		* Filling in status
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -736,7 +736,7 @@
 				| Description        |
 				| Vendor, TRY |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение товарной части документа
+		* Filling in item tab
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я выбираю текущую строку
@@ -764,7 +764,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '12,000'
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '300'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Указание схемы отгрузки и номера документа
+		* Specify shipping scheme and document number
 			И я перехожу к закладке "Other"
 			И я устанавливаю флаг 'Goods receipt before purchase invoice'
 			И в поле 'Number' я ввожу текст '9 001'
@@ -772,13 +772,13 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 001'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Purchase order по непрямой схеме отгрузки на Crystal по соглашению Vendor, USD № 9003
-		* Открытие формы для создания Purchase Order
+	* Create Purchase order to Crystal, Vendor, USD, Goods receipt before Purchase invoice № 9003
+		* Open form to create Purchase Order
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение статуса
+		* Filling in status
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -789,7 +789,7 @@
 				| Description        |
 				| Vendor, USD |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение товарной части документа
+		* Filling in item tab
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я выбираю текущую строку
@@ -838,20 +838,20 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '5,000'
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '990'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Указание схемы отгрузки и номера документа
+		* Specify shipping scheme and document number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '9 003'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 003'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание  Purchase order по прямой схеме отгрузки на Crystal по Vendor, TRY № 9004
-		* Открытие формы для создания Purchase Order
+	* Create Purchase order to Crystal, Vendor, TRY, Purchase invoice before Goods receipt № 9004
+		* Open form to create Purchase Order
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение статуса
+		* Filling in status
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -862,7 +862,7 @@
 				| Description        |
 				| Vendor, TRY |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение товарной части
+		* Filling in item tab
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я выбираю текущую строку
@@ -926,7 +926,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '300'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Указание номера документа
+		* Change document number
 			И я перехожу к закладке "Other"
 			И я снимаю флаг 'Goods receipt before purchase invoice'
 			И в поле 'Number' я ввожу текст '9 004'
@@ -934,13 +934,13 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 004'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание  Purchase order по прямой схеме отгрузки на Astar по Vendor, TRY на ордерный склад № 9005
-		* Открытие формы для создания Purchase Order
+	* Create Purchase order to Astar по Vendor, TRY, Purchase invoice before Goods receipt № 9005
+		* Open form to create Purchase Order
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение статуса
+		* Filling in status
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -951,7 +951,7 @@
 				| Description        |
 				| Vendor, TRY |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение товарной части
+		* Filling in item tab
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я выбираю текущую строку
@@ -1015,7 +1015,7 @@
 			И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
 			И в таблице "ItemList" в поле 'Price' я ввожу текст '300'
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Указание номера документа
+		* Change document number
 			И я перехожу к закладке "Other"
 			И я снимаю флаг 'Goods receipt before purchase invoice'
 			И в поле 'Number' я ввожу текст '9 005'
@@ -1023,13 +1023,13 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 005'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание  Purchase order по прямой схеме отгрузки на Astar по Vendor, TRY со смешанных складов № 9002
-		* Открытие формы для создания Purchase Order
+	* Create Purchase order to Astar по Vendor, TRY, Purchase invoice before Goods receipt, one Store use Goods receipt the other does not № 9002
+		* Open form to create Purchase Order
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение статуса
+		* Filling in status
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -1040,7 +1040,7 @@
 				| Description        |
 				| Vendor, TRY |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение товарной части
+		* Filling in item tab
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я выбираю текущую строку
@@ -1114,7 +1114,7 @@
 				| 'Store 01'    |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Указание номера документа
+		* Change document number
 			И я перехожу к закладке "Other"
 			И я снимаю флаг 'Goods receipt before purchase invoice'
 			И в поле 'Number' я ввожу текст '9 002'
@@ -1122,13 +1122,13 @@
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 002'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание  Purchase order по непрямой схеме отгрузки на Astar по Vendor, TRY со смешанных складов № 9006
-		* Открытие формы для создания Purchase Order
+	* Create Purchase order to Astar по Vendor, TRY, Goods receipt before Purchase invoice, one Store use Goods receipt the other does not № 9002
+		* Open form to create Purchase Order
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение статуса
+		* Filling in status
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		* Заполнение информации о поставщике
+		* Filling in vendor info
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| Description |
@@ -1139,7 +1139,7 @@
 				| Description        |
 				| Vendor, TRY |
 			И в таблице "List" я выбираю текущую строку
-		* Заполнение товарной части документа
+		* Filling in item tab
 			И я нажимаю на кнопку с именем 'Add'
 			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 			И в таблице "List" я выбираю текущую строку
@@ -1172,7 +1172,7 @@
 				| 'Store 01'    |
 			И в таблице "List" я выбираю текущую строку
 			И в таблице "ItemList" я завершаю редактирование строки
-		* Указание схемы отгрузки и номера документа
+		* Specify shipping scheme and document number
 			И я перехожу к закладке "Other"
 			И я устанавливаю флаг 'Goods receipt before purchase invoice'
 			И в поле 'Number' я ввожу текст '9 006'
@@ -1184,12 +1184,12 @@
 
 
 
-Сценарий: _2040002 кнопка выбора Sales order в документе Sales invoice
-#  работает для выбора Sales order при прямой схеме работы. Отбор по соглашениям, партнеру, контрагенту, компании. Отображает незакрытые документы
+Сценарий: _2040002 Sales order selection button in the Sales invoice document
+# works to select Sales order when Sales invoice before Shipment confirmation. Selection by agreement, partner, legal name, company. Displays uncovered documents
 	* Open a creation form SI 
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -1200,7 +1200,7 @@
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Выбор Sales order
+	* Select Sales order
 		И в таблице "ItemList" я нажимаю на кнопку 'Select sales orders'
 		Тогда таблица "DocumentsTree" содержит строки:
 		| 'Sales order'                                 | 'Use' |
@@ -1222,7 +1222,7 @@
 		| 'Dress' | 'M/White'  | '4,000' | 'Basic Price Types' | 'pcs'            | 'Store 02' | 'Sales order 9 002*' |
 		| 'Boots' | '36/18SD'  | '1,000' | 'Basic Price Types' | 'Boots (12 pcs)' | 'Store 02' | 'Sales order 9 002*' |
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 6
-	* Проверка того что для выбора товара из Sales order недоступно уже добаленное количество по строкам
+	* Check that the quantity already added by rows is not available to select products from Sales order
 		И в таблице "ItemList" я перехожу к последней строке
 		# | 'Item'  | 'Item key' | 'Sales order'        |
 		# | 'Boots' | '37/18SD'  | 'Sales order 9 002*' |
@@ -1240,18 +1240,18 @@
 		| 'Dress, M/White, pcs, 2,000' | 'No'  |
 		| 'Boots, 37/18SD, pcs, 1,000' | 'No'  |
 		И я нажимаю на кнопку 'Cancel'
-	* Change the document number и его проведение
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '0'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '9 000'
 		И я нажимаю на кнопку 'Post and close'
-	* Create one more Sales invoice на остаток количества
+	* Create one more Sales invoice for the remainder
 		* Open a creation form SI 
 			И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки документа
+		* Filling the document header
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -1262,7 +1262,7 @@
 				| 'Description'           |
 				| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
-		* Выбор Sales order
+		* Select Sales order
 			И в таблице "ItemList" я нажимаю на кнопку 'Select sales orders'
 			Тогда таблица "DocumentsTree" содержит строки:
 			| 'Sales order'                | 'Use' |
@@ -1271,18 +1271,18 @@
 			| 'Boots, 37/18SD, pcs, 1,000' | 'No'  |
 			И я нажимаю на кнопку с именем 'FormSelectAll'
 			И я нажимаю на кнопку 'Ok'
-		* Change the document number и его проведение
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 002'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Sales invoice по соглашению Basic Partner terms, without VAT
+	* Create Sales invoice by partner term Basic Partner terms, without VAT
 		* Open a creation form SI 
 			И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки документа
+		* Filling the document header
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -1293,7 +1293,7 @@
 				| 'Description'           |
 				| 'Basic Partner terms, without VAT' |
 			И в таблице "List" я выбираю текущую строку
-		* Выбор Sales order
+		* Select Sales order
 			И в таблице "ItemList" я нажимаю на кнопку 'Select sales orders'
 			Тогда таблица "DocumentsTree" содержит строки:
 			| 'Sales order'                           | 'Use' |
@@ -1307,7 +1307,7 @@
 			| 'Boots, 37/18SD, pcs, 1,000'            | 'No'  |
 			И я нажимаю на кнопку с именем 'FormSelectAll'
 			И я нажимаю на кнопку 'Ok'
-		* Change the document number и его проведение
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
@@ -1316,12 +1316,12 @@
 			И я нажимаю на кнопку 'Post and close'
 
 
-Сценарий: _2040003 кнопка выбора Shipment confirmation в документе Sales invoice
-#  работает для выбора Shipment confirmation при непрямой схеме работы. Отбор по партнеру, контрагенту, компании. Отображает незакрытые документы
+Сценарий: _2040003 selection button Shipment confirmation in Sales invoice document
+# works to select Shipment confirmation when Shipment confirmation before Sales invoice. Selection by partner, legal name, company. Displays uncovered documents
 	* Open a creation form SI 
 		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -1332,7 +1332,7 @@
 			| 'Description'           |
 			| 'Basic Partner terms, without VAT' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка отбора Shipment confirmation по соглашениям
+	* Check Shippment confirmation by partner terms
 		И в таблице "ItemList" я нажимаю на кнопку 'Select shipment confirmations'
 		И я нажимаю на кнопку с именем 'FormSelectAll'
 		Тогда таблица "ShipmentConfirmationsTree" содержит строки:
@@ -1344,7 +1344,7 @@
 			| 'Dress, M/White, pcs, 10,000'  | 'Dress, M/White, pcs, 10,000'  |
 		И я нажимаю на кнопку 'Ok'
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 2
-		* Изменение соглашения и проверка отбора
+		* Change of agreement and check of selection
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 				| 'Description'           | 'Kind'    |
@@ -1367,11 +1367,11 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _2040004 выбор документов-оснований по строке в Shipment confirmation
+Сценарий: _2040004 selection of base documents in line in the Shipment confirmation
 	* Open a creation form SC
 		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -1388,7 +1388,7 @@
 			| 'Description'           |
 			| 'Store 02' |
 		И в таблице "List" я выбираю текущую строку
-	* Добавление товаров в табличную часть
+	* Filling in item tab
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -1419,7 +1419,7 @@
 		И в таблице "DocumentsTree" я перехожу к последней строке
 		И в таблице "DocumentsTree" я выбираю текущую строку
 		И в таблице "ItemList" я завершаю редактирование строки
-	* Проверка на отбор по товару при добавлении строки
+	* Check for product selections when adding a line
 		И я нажимаю на кнопку 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -1454,12 +1454,12 @@
 
 
 
-Сценарий: _2040004 кнопка выбора Purchase order в документе Purchase invoice
-#  работает для выбора Purchase order при прямой схеме работы. Отбор по соглашениям, партнеру, контрагенту, компании. Отображает незакрытые документы
+Сценарий: _2040005 purchase order selection button in Purchase invoice document
+# works to select Purchase order when Purchase invoice before Goods receipt. Selection by agreement, partner, legal name, company. Displays uncovered documents
 	* Open a creation form PI 
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -1470,7 +1470,7 @@
 			| 'Description'           |
 			| 'Vendor, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Выбор Purchase order
+	* Select Purchase order
 		И я нажимаю на кнопку 'Select purchase orders'
 		Тогда таблица "DocumentsTree" содержит строки:
 		| 'Purchase order'                        |
@@ -1493,7 +1493,7 @@
 		| 'Trousers' | '36/Yellow' | '5,000'  | 'pcs'            |
 		| 'Boots'    | '36/18SD'   | '5,000'  | 'Boots (12 pcs)' |
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 6
-	* Проверка того что для выбора товара из Purchase order недоступно уже добаленное количество по строкам
+	* Check that the quantity already added by rows is not available for selecting products from Purchase order
 		И в таблице "ItemList" я перехожу к строке
 		| 'Item'  | 'Item key' | 'Q'        |
 		| 'Dress' | 'M/White'  | '3,000' |
@@ -1511,18 +1511,18 @@
 		| 'Dress, M/White, pcs, 3,000'            |
 		| 'Boots, 36/18SD, Boots (12 pcs), 3,000' |
 		И я нажимаю на кнопку 'Cancel'
-	* Change the document number и его проведение
+	* Change the document number
 		И я перехожу к закладке "Other"
 		И в поле 'Number' я ввожу текст '0'
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '9 000'
 		И я нажимаю на кнопку 'Post and close'
-	* Create one more Purchase invoice на остаток количества
+	* Create one more Purchase invoice for the remainder
 		* Open a creation form SI 
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки документа
+		* Filling the document header
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -1533,7 +1533,7 @@
 				| 'Description'           |
 				| 'Vendor, TRY' |
 			И в таблице "List" я выбираю текущую строку
-		* Выбор Sales order
+		* Select Purchase order
 			И я нажимаю на кнопку 'Select purchase orders'
 			Тогда таблица "DocumentsTree" содержит строки:
 			| 'Purchase order'                        |
@@ -1542,18 +1542,18 @@
 			| 'Boots, 36/18SD, Boots (12 pcs), 3,000' |
 			И я нажимаю на кнопку с именем 'FormSelectAll'
 			И я нажимаю на кнопку 'Ok'
-		* Change the document number и его проведение
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'Yes'
 			И в поле 'Number' я ввожу текст '9 001'
 			И я нажимаю на кнопку 'Post and close'
-	* Создание Purchase invoice на Astar по соглашению 'Vendor, TRY'
+	* Create Purchase invoice to Astar by partner term 'Vendor, TRY'
 		* Open a creation form PI 
 			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки документа
+		* Filling the document header
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -1564,7 +1564,7 @@
 				| 'Description'           |
 				| 'Vendor, TRY' |
 			И в таблице "List" я выбираю текущую строку
-		* Выбор Purchase order
+		* Select Purchase order
 			И я нажимаю на кнопку 'Select purchase orders'
 			Тогда таблица "DocumentsTree" содержит строки:
 			| 'Purchase order'                        |
@@ -1583,7 +1583,7 @@
 			Тогда в таблице "ItemList" количество строк "меньше или равно" 8
 			И в таблице "ItemList" я перехожу к последней строке
 			И в таблице 'ItemList' я удаляю строку
-		* Change the document number и его проведение
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
@@ -1591,12 +1591,12 @@
 			И в поле 'Number' я ввожу текст '9 003'
 			И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _2040005 кнопка заполнения товаров из документов-оснований в Goods receipt
-	# работает как по прямой, так и непрямой схеме работы. Нет проверки по соглашениям. Проверка по валютам срабатывает при проведении. На склад проверки нет.
+Сценарий: _2040006 button for filling items from the base documents in Goods receipt
+	# No verification by partner term. A currency check is triggered when posted. There is no check at the store.
 	* Open a creation form GR
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И из выпадающего списка "Transaction type" я выбираю точное значение 'Purchase'
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
@@ -1608,7 +1608,7 @@
 			| 'Description'           |
 			| 'Company Adel' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка работы кнопки Fill 'From basises'
+	* Check button Fill 'From basises'
 		И я нажимаю на кнопку 'From basises'
 		Тогда таблица "DocumentsTree" содержит строки:
 		| 'Currency'                                         |
@@ -1652,10 +1652,10 @@
 		Тогда открылось окно '1C:Enterprise'
 		И я нажимаю на кнопку 'Yes'
 		И в поле 'Number' я ввожу текст '9 000'
-	* Проверка отображения ошибки о том, что в GR выбраны документы-основания с разными валютами
+	* Check the display of an error that GR documents with different currencies are selected in GR
 		И я нажимаю на кнопку 'Post'
-		Затем я жду, что в сообщениях пользователю будет подстрока "Multicurrency receipt basises" в течение 30 секунд
-	* Проверка проведения с одинаковыми валютами
+		Затем я жду, что в сообщениях пользователю будет подстрока "Multi currency receipt basises" в течение 30 секунд
+	* Post with the same currency
 		И я перехожу к закладке "Items"
 		И в таблице "ItemList" я перехожу к строке:
 			| 'Currency' | 'Item'  | 'Item key' | 'Quantity' | 'Store'    | 'Unit' |
@@ -1671,7 +1671,7 @@
 		И в таблице 'ItemList' я удаляю строку
 		И я нажимаю на кнопку 'Post'
 		Тогда в окне сообщений пользователю нет сообщений
-	* Проверка того что для выбора товара из документов-оснований недоступно уже добаленное количество по строкам
+	* Check that the quantity already added by lines is not available for the choice of goods from the bases documents
 		И в таблице "ItemList" я перехожу к строке
 		| 'Item'     | 'Item key' | 'Quantity'        |
 		| 'Trousers' | '36/Yellow'  | '10,000' |
@@ -1694,11 +1694,11 @@
 		Тогда в таблице "DocumentsTree" количество строк "меньше или равно" 11
 		И я нажимаю на кнопку 'Cancel'
 		И я нажимаю на кнопку 'Post and close'
-	* Create one more Goods receipt на остаток количества
+	* Create one more Goods receipt for the remainder
 		* Open a creation form GR
 			И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки документа
+		* Filling the document header
 			И из выпадающего списка "Transaction type" я выбираю точное значение 'Purchase'
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
@@ -1710,7 +1710,7 @@
 				| 'Description'           |
 				| 'Company Adel' |
 			И в таблице "List" я выбираю текущую строку
-		* Выбор документов-оснований
+		* Select документов-оснований
 			И я нажимаю на кнопку 'From basises'
 			Тогда таблица "DocumentsTree" содержит строки:
 			| 'Currency'                                         |
@@ -1726,7 +1726,7 @@
 			| 'Boots, 36/18SD, Boots (12 pcs), 60,000, Store 02' |
 			И я нажимаю на кнопку с именем 'FormSelectAll'
 			И я нажимаю на кнопку 'Ok'
-		* Удаление строк в долларах
+		* Delete lines in dollars
 			И я перехожу к закладке "Items"
 			И в таблице "ItemList" я перехожу к строке:
 				| 'Currency' | 'Item'  | 'Item key' | 'Quantity' | 'Store'    | 'Unit' |
@@ -1750,7 +1750,7 @@
 				| 'pcs'         |
 			И в таблице "List" я выбираю текущую строку
 		# temporarily
-		* Change the document number и его проведение
+		* Change the document number
 			И я перехожу к закладке "Other"
 			И в поле 'Number' я ввожу текст '0'
 			Тогда открылось окно '1C:Enterprise'
@@ -1758,24 +1758,21 @@
 			И в поле 'Number' я ввожу текст '9 001'
 			И я нажимаю на кнопку 'Post and close'
 	
-Сценарий: _2040006 кнопка заполнения документов-оснований в Goods receipt
+Сценарий: _2040007 button for filling in base documents in Goods receipt
 	* Open a creation form GR
 		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
 			| '9 001'     |
 		И в таблице "List" я выбираю текущую строку
-	* Очистка документов-оснований
+	* Cleaning of base documents
 		И в таблице "ItemList" я перехожу к первой строке
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Receipt basis"
 		И в таблице "ItemList" я завершаю редактирование строки
 		И в таблице "ItemList" я перехожу к следующей строке
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Receipt basis"
 		И в таблице "ItemList" я завершаю редактирование строки
-		# И в таблице "ItemList" я перехожу к следующей строке
-		# И в таблице "ItemList" я нажимаю кнопку очистить у поля "Receipt basis"
-		# И в таблице "ItemList" я завершаю редактирование строки
-	* Заполнение документов-оснований с помощью кнопку Fill receipt basises
+	* Fill in the base documents using the Fill receipt basises button
 		И я нажимаю на кнопку 'Fill receipt basises'
 	* Filling check
 		И     таблица "ItemList" содержит строки:
@@ -1783,7 +1780,7 @@
 			| 'Trousers' | '5,000'    | '36/Yellow' | 'Store 02' | 'pcs'  | 'Purchase order 9 003*'   |
 			| 'Trousers' | '5,000'    | '36/Yellow' | 'Store 02' | 'pcs'  | 'Purchase invoice 9 000*' |
 			| 'Boots'    | '24,000'   | '36/18SD'   | 'Store 02' | 'pcs'  | 'Purchase order 9 003*'   |
-	* Заполнение по строкам
+	* Filling line by line
 		И в таблице "ItemList" я перехожу к первой строке
 		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Receipt basis"
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Receipt basis"
@@ -1808,11 +1805,11 @@
 
 
 
-Сценарий: _2040007 кнопка заполнения товаров из Goods receipt в Purchase invoice
+Сценарий: _2040008 button to fill in items from Goods receipt in Purchase invoice
 	* Open a creation form PI
 		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -1823,7 +1820,7 @@
 			| 'Description'           |
 			| 'Vendor, TRY' |
 		И в таблице "List" я выбираю текущую строку
-	* Проверка кнопки заполнения товаров из Goods receipt
+	* Check the button for filling items from Goods receipt
 		И я нажимаю на кнопку 'Select goods receipt'
 		Тогда таблица "GoodsReceiptTree" содержит строки:
 		| 'Order'                            |
@@ -1834,16 +1831,4 @@
 		Тогда в таблице "GoodsReceiptTree" количество строк "меньше или равно" 4
 		И я нажимаю на кнопку с именем 'FormSelectAll'
 		И я нажимаю на кнопку 'Ok'
-		И Я закрыл все окна клиентского приложения
-
-
-
-
-
-
-
-
-
-
-
-	
+		И Я закрыл все окна клиентского приложения	

@@ -3,15 +3,15 @@
 @Positive
 
 
-Функционал: создание документов списания недостач и оприходования излишков товаров
+Функционал: product inventory
 
-Как разработчик
-Я хочу добавить функционал по списанию недостач и оприходованию излишков товаров
-Для работы с товаром
+As a developer
+I'd like to add functionality to write off shortages and recover surplus goods.
+To work with the products
 
 
 Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий
+	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
 
 
 Сценарий:_2990000 preparation
@@ -42,7 +42,7 @@
 		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
 		И Пауза 5
 	* Добавление остатков по созданным складам (Opening entry)
-		* Opening a document form для ввода начального остатка
+		* Open document form для ввода начального остатка
 			И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
 			И я нажимаю на кнопку с именем 'FormCreate'
 		* Заполнение информации о компании
@@ -145,13 +145,13 @@
 			И я нажимаю на кнопку 'Post and close'
 
 
-Сценарий: _2990001 заполнение справочника статусов для PhysicalInventory и PhysicalCountByLocation
+Сценарий: _2990001 filling in the status guide for PhysicalInventory and PhysicalCountByLocation
 	* Open a creation form ObjectStatuses
 		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
 	* Присвоение предопределенному элементу PhysicalInventory наименования 
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'     |
-			| 'Objects status historyes' |
+			| 'Objects status history' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| PhysicalInventory         |
@@ -200,7 +200,7 @@
 	* Присвоение предопределенному элементу PhysicalCountByLocation наименования 
 		И в таблице "List" я разворачиваю строку:
 			| 'Description'     |
-			| 'Objects status historyes' |
+			| 'Objects status history' |
 		И в таблице "List" я перехожу к строке:
 			| Predefined data item name |
 			| PhysicalCountByLocation         |
@@ -249,11 +249,11 @@
 
 
 
-Сценарий: _2990002 создание документа оприходования излишков товаров и проверка его проводок
-	* Opening a document form
+Сценарий: _2990002 create Stock adjustment as surplus
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -365,11 +365,11 @@
 		| ''                               | 'Receipt'     | '*'         | '8'              | 'Store 01'                | 'M/White'      | ''         | ''         | ''                    | ''                       | ''                     |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990003 создание документа списания недостач товаров и проверка его проводок
-	* Opening a document form
+Сценарий: _2990003 create Stock adjustment as write off
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение шапки документа
+	* Filling the document header
 		И я нажимаю кнопку выбора у поля "Company"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
@@ -481,8 +481,8 @@
 		| ''                                 | 'Expense'     | '*'         | '8'              | 'Store 01'                | 'M/White'      | ''         | ''         | ''                    | ''                       | ''                     |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990004 создание документа инвентаризации и проверка его проводок (склад ордерный)
-	* Opening a document form
+Сценарий: _2990004 create Physical inventory (store use GR and SC)
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Status" я выбираю точное значение 'Done'
@@ -591,8 +591,8 @@
 		И Я закрыл все окна клиентского приложения
 
 
-Сценарий: _2990004 создание документа инвентаризации и проверка его проводок (склад неордерный)
-	* Opening a document form
+Сценарий: _2990004 create Physical inventory (store doesn't use GR and SC)
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И из выпадающего списка "Status" я выбираю точное значение 'Done'
@@ -657,8 +657,8 @@
 		| ''                                          | 'Expense'     | '*'      | '2'         | 'Store 06'   | 'XS/Blue'               | ''          |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990005 создание документа StockAdjustmentAsSurplus based on инвентаризации и проверка его проводок
-	* Opening a document form
+Сценарий: _2990005 create Stock adjustment as surplus based on Physical inventory
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -752,8 +752,8 @@
 		И Я закрыл все окна клиентского приложения
 	
 
-Сценарий: _2990007 создание документа StockAdjustmentAsWriteOff based on инвентаризации и проверка его проводок
-	* Opening a document form
+Сценарий: _2990007 create Stock adjustment as write off based on Physical inventory
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -845,8 +845,8 @@
 		| ''                                          | 'Expense'     | '*'         | '2'            | 'Store 05'             | 'Physical inventory 1*' | 'XS/Blue'  | ''         | ''                    | ''                       | ''                     |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990008 create документов StockAdjustmentAsSurplus и StockAdjustmentAsWriteOff based on инвентаризации на частичное количество
-	* Opening a document form
+Сценарий: _2990008 create Stock adjustment as surplus and Stock adjustment as write off based on Physical inventory on a partial quantity
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И в таблице "List" я перехожу к строке:
 			| 'Number' |
@@ -946,8 +946,8 @@
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 1
 		И я нажимаю на кнопку 'Post and close'
 
-Сценарий: _2990009 проверка обновления Update Exp Count
-	* Opening a document form
+Сценарий: _2990009 check for updates Update Exp Count
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Check filling inдокумента остатками по складу
@@ -969,7 +969,7 @@
 			| '-405,000'   | '405,000'    | 'Trousers' | '36/Yellow' | 'pcs'  |
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListContextMenuDelete'
 		Тогда в таблице "ItemList" количество строк "меньше или равно" 1
-	* Добавление ещё одной строки по которой нет остатка по складу
+	* Add one more line по которой нет остатка по складу
 		И я нажимаю на кнопку с именем 'Add'
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
 		И в таблице "List" я перехожу к строке:
@@ -997,8 +997,8 @@
 			| '2,000'       | 'Boots'    | '2,000'      | '37/18SD'   | ''           | 'pcs'  |
 	И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990010 создание документа инвентаризации и пересчета к нему с распределением на ответсвенных
-	* Opening a document form
+Сценарий: _2990010 create Physical inventory and Physical count by location with distribution to responsible employees
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнения документа остатками по складу
@@ -1036,7 +1036,7 @@
 		И я нажимаю на кнопку 'Physical count by location'
 	* Проверка отображения в какие пересчеты попала строка
 		И     таблица "ItemList" содержит строки:
-			| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count'    |
+			| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count'    |
 			| 'Dress' | '-125,000'   | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date:*'      |
 			| 'Dress' | '-198,000'   | 'XS/Blue'  | '198,000'    | 'pcs'  | 'Arina Brown'        | '#2 date:*'      |
 	* Check filling inданных о пересчете в табличной части
@@ -1046,10 +1046,10 @@
 			| 'Arina Brown'        | 'Prepared' |
 			| 'Anna Petrova'       | 'Prepared' |
 	* Проведение оприходования излишков товара задним числом
-		* Opening a document form
+		* Open document form
 			И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
 			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение шапки документа
+		* Filling the document header
 			И я нажимаю кнопку выбора у поля "Company"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
@@ -1209,7 +1209,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Update exp. count'
 		И     таблица "ItemList" содержит строки:
-			| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count' |
+			| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
 			| 'Dress' | '-8,000'     | 'M/White'  | '8,000'      | 'pcs'  | ''                   | ''               |
 			| 'Shirt' | '-7,000'     | '36/Red'   | '7,000'      | 'pcs'  | ''                   | ''               |
 			| 'Boots' | '-4,000'     | '36/18SD'  | '4,000'      | 'pcs'  | ''                   | ''               |
@@ -1223,7 +1223,7 @@
 				И в таблице "ItemList" я активизирую поле "Item key"
 				И в таблице "ItemList" я удаляю строку
 				И     таблица "ItemList" содержит строки:
-				| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count' |
+				| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
 				| 'Dress' | '-125,000'   | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date*'       |
 			* Невозможность изменения количества по строке
 				И в таблице "ItemList" я перехожу к строке:
@@ -1269,7 +1269,7 @@
 			И я нажимаю на кнопку 'Physical count by location'
 		* create новых перерасчетов
 			И     таблица "ItemList" содержит строки:
-			| 'Item'  | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count' |
+			| 'Item'  | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
 			| 'Dress' | 'M/White'  | '8,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 			| 'Shirt' | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 			| 'Boots' | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
@@ -1349,7 +1349,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Update phys. count'
 		И     таблица "ItemList" содержит строки:
-		| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count' |
+		| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
 		| '10,000'      | 'Dress' | '2,000'      | 'M/White'  | '8,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date*'       |
 		| '7,000'       | 'Shirt' | ''           | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date*'       |
 		| '4,000'       | 'Boots' | ''           | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date*'       |
@@ -1387,7 +1387,7 @@
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю на кнопку 'Update phys. count'
 		И     таблица "ItemList" содержит строки:
-		| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Phys. count' |
+		| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
 		| '10,000'      | 'Dress' | '2,000'      | 'M/White'  | '8,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 		| '7,000'       | 'Shirt' | ''           | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 		| '4,000'       | 'Boots' | ''           | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
@@ -1427,7 +1427,7 @@
 		| ''                                          | 'Expense'     | '*'      | '5'         | 'Store 05'   | 'XS/Blue'               | ''         |
 		И Я закрыл все окна клиентского приложения
 
-Сценарий: _2990012 проверка открытия истории статусов в Physical inventory и Physical count by location
+Сценарий: _2990012 check the opening of the status history in Physical inventory and Physical count by location
 	* Проверка открытия истории статусов в Physical inventory
 		* Открытие нужного документа
 			И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
@@ -1460,8 +1460,8 @@
 			| '*'      | 'Physical count by location 3*' | 'Done'          |
 			И Я закрыл все окна клиентского приложения
 	
-Сценарий: _2990013 проверка вопроса о сохранении Physical inventory перед созданием Physical count by location
-	* Opening a document form
+Сценарий: _2990013 checking the question of saving Physical inventory before creating Physical count by location
+	* Open document form
 		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
 		И я нажимаю на кнопку с именем 'FormCreate'
 	* Заполнения документа остатками по складу

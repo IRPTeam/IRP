@@ -487,31 +487,30 @@
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
-      <queryText>SELECT
+      <queryText>SELECT DISTINCT
 	Table.Ref AS Ref,
 	Table.DeletionMark AS DeletionMark,
 	Table.Type AS Type,
 	Table.Partner AS Partner,
 	Table.Description_en AS Description,
-	Table.Kind,
-	Table.ApArPostingDetail
+	Table.Kind AS Kind,
+	Table.ApArPostingDetail AS ApArPostingDetail
 FROM
 	Catalog.Agreements AS Table
+		INNER JOIN InformationRegister.PartnerSegments AS PartnerSegments
+		ON ((Table.PartnerSegment = PartnerSegments.Segment
+				AND PartnerSegments.Partner = &amp;Partner)
+			OR NOT &amp;IncludePartnerSegments)
+		OR (Table.Partner = &amp;Partner
+			OR NOT &amp;IncludeFilterByPartner)
 WHERE
-	(CASE
-		WHEN &amp;IncludeFilterByPartner
-			THEN Table.Partner = &amp;Partner
-			OR &amp;IncludePartnerSegments
-			AND Table.PartnerSegment IN (&amp;PartnerSegments)
-		ELSE TRUE
-	END
-	AND CASE
+	CASE
 		WHEN &amp;IncludeFilterByEndOfUseDate
 			THEN Table.StartUsing &lt;= &amp;EndOfUseDate
-			AND (Table.EndOfUse >= &amp;EndOfUseDate
-			OR Table.EndOfUse = DATETIME(1, 1, 1))
+			AND Table.EndOfUse >= &amp;EndOfUseDate
+			OR Table.EndOfUse = DATETIME(1, 1, 1)
 		ELSE TRUE
-	END)</queryText>
+	END</queryText>
       <mainTable>Catalog.Agreements</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>

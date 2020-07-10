@@ -1577,7 +1577,6 @@
               <segments>Object.ItemList.PhysicalCountByLocationPresentation</segments>
             </paths>
           </dataPath>
-          <titleLocation>None</titleLocation>
           <extendedTooltip>
             <name>ItemListPhysicalCountByLocationPresentationExtendedTooltip</name>
             <id>344</id>

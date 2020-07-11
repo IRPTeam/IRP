@@ -2542,6 +2542,129 @@ EndProcedure
 Procedure GetTables_UsePurchaseOrder_UseSalesOrder_NotGoodsReceiptBeforeInvoice_ShipmentBeforeInvoice_UseGoodsReceipt_IsProduct(Tables, 
                                                                                                                                 TempManager, 
                                                                                                                                 TableName)
+	// tmp_2_2
+	
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	
+	#Region QueryText
+	Query.Text =
+		// [0] InventoryBalance
+		"SELECT
+		|	tmp.Company,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.ItemKey,
+		|	tmp.Period
+		|;
+		|
+		|//[1] GoodsInTransitIncoming
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.ReceiptBasis,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period,
+		|	tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.ReceiptBasis,
+		|	tmp.Period,
+		|	tmp.RowKey
+		|;
+		|//[2] GoodsReceiptSchedule_Expense
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.Order AS Order,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.RowKey AS RowKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period,
+		|	GoodsReceiptSchedule.DeliveryDate AS DeliveryDate
+		|FROM
+		|	tmp AS tmp
+		|		INNER JOIN AccumulationRegister.GoodsReceiptSchedule AS GoodsReceiptSchedule
+		|		ON GoodsReceiptSchedule.Recorder = tmp.Order
+		|		AND GoodsReceiptSchedule.RowKey = tmp.RowKey
+		|		AND GoodsReceiptSchedule.Company = tmp.Company
+		|		AND GoodsReceiptSchedule.Store = tmp.Store
+		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
+		|		AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.Order,
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.RowKey,
+		|	tmp.Period,
+		|	GoodsReceiptSchedule.DeliveryDate
+		|;
+		|//[3] GoodsReceiptSchedule_Receipt 
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.Order AS Order,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.RowKey AS RowKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period,
+		|	tmp.DeliveryDate AS DeliveryDate
+		|FROM
+		|	tmp AS tmp
+		|		INNER JOIN AccumulationRegister.GoodsReceiptSchedule AS GoodsReceiptSchedule
+		|		ON GoodsReceiptSchedule.Recorder = tmp.Order
+		|		AND GoodsReceiptSchedule.RowKey = tmp.RowKey
+		|		AND GoodsReceiptSchedule.Company = tmp.Company
+		|		AND GoodsReceiptSchedule.Store = tmp.Store
+		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
+		|		AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.Order,
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.RowKey,
+		|	tmp.Period,
+		|	tmp.DeliveryDate
+		|;
+		|//[4] OrderBalance
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Order AS Order,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period,
+		|	tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Order,
+		|	tmp.Period,
+		|	tmp.RowKey";
+	
+	
+	Query.Text = StrReplace(Query.Text, "tmp", TableName);
+	#EndRegion
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	PostingServer.MergeTables(Tables.InventoryBalance, QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitIncoming, QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Expense, QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Receipt, QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.OrderBalance, QueryResults[4].Unload());
+	
 	Return;
 EndProcedure
 

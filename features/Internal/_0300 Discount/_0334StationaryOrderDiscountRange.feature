@@ -274,13 +274,13 @@ So that the range discount is calculated correctly
 		И     таблица "ItemList" содержит строки:
 		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'      | 'Offers amount' | 'Unit' | 'Total amount'    |
 		| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | ''              | 'pcs'  | '5 200,00'        |
-		| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '30,000' | '840,00'        | 'pcs'  | '11 160,00'       |
+		| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '30,000' | '140,00'        | 'pcs'  | '11 860,00'       |
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
 	И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку "Post and close"
 	И таблица 'List' содержит строки
 		| 'Partner'    | 'Σ'     |
-		| 'Ferron BP'  |  '16 360,00'|
+		| 'Ferron BP'  |  '17 060,00'|
 
 
 	

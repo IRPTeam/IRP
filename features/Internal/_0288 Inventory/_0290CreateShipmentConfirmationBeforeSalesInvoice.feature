@@ -32,7 +32,7 @@ To sell a product when customer first receives items and then the documents arri
 	И я нажимаю кнопку выбора у поля "Partner"
 	И в таблице "List" я перехожу к строке:
 			| 'Description'             |
-			| 'MIO' |
+			| 'Kalipso' |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:
@@ -174,7 +174,7 @@ To sell a product when customer first receives items and then the documents arri
 	И я нажимаю кнопку выбора у поля "Partner"
 	И в таблице "List" я перехожу к строке:
 			| 'Description'             |
-			| 'MIO' |
+			| 'Kalipso' |
 	И в таблице "List" я выбираю текущую строку
 	И я нажимаю кнопку выбора у поля "Partner term"
 	И в таблице "List" я перехожу к строке:

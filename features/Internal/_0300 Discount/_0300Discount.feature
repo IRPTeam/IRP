@@ -276,10 +276,10 @@ For calculating special offers in documents
 		И я нажимаю на кнопку с именем 'FormChoose'
 		И Я закрываю окно 'Partner terms'
 		И я нажимаю на кнопку 'OK'
-		И в поле 'QuantityMoreThan' я ввожу текст '5'
-		И в поле 'QuantityFree' я ввожу текст '1'
-		И я изменяю флаг 'ForEachCase'
-		И я нажимаю кнопку выбора у поля "ItemKeys"
+		И в поле 'Quantity more than' я ввожу текст '5'
+		И в поле 'Quantity free' я ввожу текст '1'
+		И я изменяю флаг 'For each case'
+		И я нажимаю кнопку выбора у поля "Item keys"
 		И я нажимаю на кнопку с именем 'Assortment'
 		Тогда в таблице "List" я выделяю все строки
 		И я нажимаю на кнопку с именем 'FormChoose'
@@ -320,10 +320,10 @@ For calculating special offers in documents
 			И в таблице "List" я выбираю текущую строку
 			И Я закрываю окно 'Partner terms'
 			И я нажимаю на кнопку 'OK'
-			И в поле 'QuantityMoreThan' я ввожу текст '4'
-			И в поле 'QuantityFree' я ввожу текст '1'
-			И я изменяю флаг 'ForEachCase'
-			И я нажимаю кнопку выбора у поля "ItemKeys"
+			И в поле 'Quantity more than' я ввожу текст '4'
+			И в поле 'Quantity free' я ввожу текст '1'
+			И я изменяю флаг 'For each case'
+			И я нажимаю кнопку выбора у поля "Item keys"
 			И я нажимаю на кнопку с именем 'Assortment'
 			Тогда открылось окно 'Item keys'
 			И в таблице "List" я перехожу к строке:
@@ -369,9 +369,9 @@ For calculating special offers in documents
 			И в таблице "List" я выбираю текущую строку
 			И Я закрываю окно 'Partner terms'
 			И я нажимаю на кнопку 'OK'
-			И в поле 'QuantityMoreThan' я ввожу текст '3'
-			И в поле 'QuantityFree' я ввожу текст '1'
-			И я нажимаю кнопку выбора у поля "ItemKeys"
+			И в поле 'Quantity more than' я ввожу текст '3'
+			И в поле 'Quantity free' я ввожу текст '1'
+			И я нажимаю кнопку выбора у поля "Item keys"
 			И я нажимаю на кнопку с именем 'Assortment'
 			Тогда открылось окно 'Item keys'
 			И в таблице "List" я перехожу к строке:
@@ -436,10 +436,10 @@ For calculating special offers in documents
 		И Я закрываю окно 'Partner terms'
 		И я нажимаю на кнопку 'OK'
 		И Пауза 2
-		И в поле 'QuantityMoreThan' я ввожу текст '5'
-		И в поле 'QuantityFree' я ввожу текст '1'
-		И я изменяю флаг 'ForEachCase'
-		И я нажимаю кнопку выбора у поля "ItemKeys"
+		И в поле 'Quantity more than' я ввожу текст '5'
+		И в поле 'Quantity free' я ввожу текст '1'
+		И я изменяю флаг 'For each case'
+		И я нажимаю кнопку выбора у поля "Item keys"
 		И я нажимаю на кнопку с именем 'Assortment'
 		Тогда открылось окно 'Item keys'
 		Тогда в таблице "List" я выделяю все строки
@@ -483,10 +483,10 @@ For calculating special offers in documents
 			И Я закрываю окно 'Partner terms'
 			И я нажимаю на кнопку 'OK'
 			И Пауза 2
-			И в поле 'QuantityMoreThan' я ввожу текст '4'
-			И в поле 'QuantityFree' я ввожу текст '1'
-			И я изменяю флаг 'ForEachCase'
-			И я нажимаю кнопку выбора у поля "ItemKeys"
+			И в поле 'Quantity more than' я ввожу текст '4'
+			И в поле 'Quantity free' я ввожу текст '1'
+			И я изменяю флаг 'For each case'
+			И я нажимаю кнопку выбора у поля "Item keys"
 			И я нажимаю на кнопку с именем 'Assortment'
 			Тогда открылось окно 'Item keys'
 			И в таблице "List" я перехожу к строке:
@@ -536,9 +536,9 @@ For calculating special offers in documents
 			И Я закрываю окно 'Partner terms'
 			И я нажимаю на кнопку 'OK'
 			И Пауза 2
-			И в поле 'QuantityMoreThan' я ввожу текст '3'
-			И в поле 'QuantityFree' я ввожу текст '1'
-			И я нажимаю кнопку выбора у поля "ItemKeys"
+			И в поле 'Quantity more than' я ввожу текст '3'
+			И в поле 'Quantity free' я ввожу текст '1'
+			И я нажимаю кнопку выбора у поля "Item keys"
 			И я нажимаю на кнопку с именем 'Assortment'
 			Тогда открылось окно 'Item keys'
 			И в таблице "List" я перехожу к строке:

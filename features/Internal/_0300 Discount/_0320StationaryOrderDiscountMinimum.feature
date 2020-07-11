@@ -75,7 +75,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 			| '38/Black'  |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '8,000'
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -93,7 +93,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 			| '36/Yellow'  |
 		И в таблице "List" я выбираю текущую строку
 		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '12,000'
+		И в таблице "ItemList" в поле 'Q' я ввожу текст '4,000'
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 		И в таблице "ItemList" я завершаю редактирование строки
 	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
@@ -722,6 +722,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	И Пауза 2
+	И я нажимаю на кнопку "Post and close"
 	И таблица 'List' содержит строки
 		| 'Partner'   | 'Σ'     |
 		| 'Lomaniti'  |  '3 070,00'|

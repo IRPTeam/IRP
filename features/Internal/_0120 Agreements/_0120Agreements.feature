@@ -61,6 +61,25 @@ To specify the commercial terms of cooperation
 		И таблица "List" содержит строки:
 			| Segment | Partner |
 			| Dealer | Kalipso |
+	* Adding partner Kalipso to the Retail Segment
+		И я нажимаю на кнопку с именем 'FormCreate'
+		И Пауза 2
+		И я нажимаю кнопку выбора у поля "Segment"
+		И Пауза 2
+		И в таблице "List" я перехожу к строке:
+			| 'Description' |
+			| 'Retail'  |
+		И в таблице "List" я выбираю текущую строку
+		И Пауза 2
+		И я нажимаю кнопку выбора у поля "Partner"
+		И я нажимаю на кнопку с именем "FormList"
+		И Пауза 5
+		И в таблице "List" я перехожу к строке:
+			| 'Description'  |
+			| 'Kalipso' |
+		И в таблице "List" я выбираю текущую строку
+		И я нажимаю на кнопку 'Save and close'
+		И Пауза 5
 	* Adding partner Seven Brand to the Retail Segment
 		И я нажимаю на кнопку с именем 'FormCreate'
 		И Пауза 2

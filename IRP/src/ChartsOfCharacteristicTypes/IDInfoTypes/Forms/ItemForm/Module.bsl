@@ -65,4 +65,3 @@ Procedure PutSettingsToTempStorage(LineNumber)
 	ThisObject.AddressResult = PutToTempStorage(Settings.Get(), ThisObject.UUID);
 	ThisObject.RowNumber = LineNumber;
 EndProcedure
-

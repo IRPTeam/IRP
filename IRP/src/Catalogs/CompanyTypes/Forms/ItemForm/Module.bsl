@@ -25,7 +25,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient

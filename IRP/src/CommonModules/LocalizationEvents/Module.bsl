@@ -205,5 +205,3 @@ Procedure GetCatalogPresentationFieldsPresentationFieldsGetProcessing(Source, Fi
 	
 EndProcedure
 
-
-

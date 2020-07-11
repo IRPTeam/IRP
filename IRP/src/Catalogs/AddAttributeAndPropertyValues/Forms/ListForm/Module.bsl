@@ -36,6 +36,3 @@ Procedure ListBeforeRowChange(Item, Cancel)
 	FormParameters.Insert("Key", Items.List.CurrentRow);
 	OpenForm("Catalog.AddAttributeAndPropertyValues.ObjectForm", FormParameters, Item, UUID);
 EndProcedure
-
-
-

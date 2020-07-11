@@ -171,7 +171,6 @@ EndProcedure
 
 #EndRegion
 
-
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
 	DocGoodsReceiptClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
@@ -273,7 +272,6 @@ EndProcedure
 Procedure LoadDataFromQuantityCompareAtServer(Parameter)
 	DocGoodsReceiptServer.LoadDataFromQuantityCompare(Object, ThisObject, Parameter);
 EndProcedure
-
 
 #Region AddAttributes
 

@@ -11,7 +11,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemCompany
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData,  StandardProcessing) Export
@@ -36,7 +35,6 @@ EndProcedure
 #EndRegion
 
 #Region ItemLegalName
-
 Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	

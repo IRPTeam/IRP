@@ -11,4 +11,3 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		CommandExecuteParameters.Window,
 		CommandExecuteParameters.URL);
 EndProcedure
-

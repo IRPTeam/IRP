@@ -45,7 +45,6 @@ Procedure OnLoadDataFromSettingsAtServer(Settings)
 	UpdateListWithFilter();
 EndProcedure
 
-
 &AtClient
 Procedure IsSpecificationFilterOnChange(Item)
 	UpdateListWithFilter();
@@ -184,4 +183,3 @@ Procedure SearchStringClearing(Item, StandardProcessing)
 	ThisObject.SearchString = "";
 	UpdateListWithFilter();
 EndProcedure
-

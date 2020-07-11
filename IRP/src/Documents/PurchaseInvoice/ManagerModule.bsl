@@ -3202,7 +3202,6 @@ EndProcedure
 
 #Region Undoposting
 
-
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Return Undefined;
 EndFunction

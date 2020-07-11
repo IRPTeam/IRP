@@ -517,7 +517,6 @@ Procedure FillDocumentWithShipmentConfirmationArray(Object, Form, ArrayOfBasisDo
 		TaxInfo);
 EndProcedure
 
-
 #Region ListFormEvents
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export

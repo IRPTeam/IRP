@@ -19,4 +19,3 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 	LocalizationEvents.CreateSubFormItemDescription(ThisObject, Parameters.Values, "GroupDescriptions");
 EndProcedure
-

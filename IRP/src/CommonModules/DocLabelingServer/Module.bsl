@@ -12,7 +12,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region GenerateBarcode
 
 Procedure CreateCommandsAndItems(Object) Export

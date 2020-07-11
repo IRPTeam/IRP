@@ -56,7 +56,6 @@ Procedure StatusCheckOnChange(Item)
 	SetFilterByStatus();
 EndProcedure
 
-
 &AtClient
 Procedure StatusSelectionOnChange(Item)
 	StatusCheck = ValueIsFilled(StatusSelection);
@@ -77,8 +76,6 @@ Procedure SetFilterByStatus()
 	Filter.RightValue 	= ChequeBondType;
 	
 EndProcedure
-
-
 #EndRegion
 
 #Region ComandsEvents
@@ -98,7 +95,3 @@ Procedure StatusSelectionEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 #EndRegion
-
-
-
-

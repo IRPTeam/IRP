@@ -27,7 +27,6 @@ Procedure OnReadAtServer(CurrentObject)
 	ItemKeyItem = ServiceSystemServer.GetObjectAttribute(Record.ItemKey, "Item");
 EndProcedure
 
-
 &AtClient
 Procedure ItemKeyOnChange(Item)
 	ItemKeyItem = ServiceSystemServer.GetObjectAttribute(Record.ItemKey, "Item");

@@ -35,8 +35,6 @@ Procedure UpdateObjectAddAttributeHTML(Form, OwnerRef) Export
 EndProcedure
 
 Function AddAttributeInfoForHTML(ItemRef, UUID, FileRef = Undefined) Export
-	
-	
 	Filter = New Structure("ShowInHTML", True);
 	Str = AddAttributesAndPropertiesServer.PrepareDataForHTM(ItemRef, Filter);
 	

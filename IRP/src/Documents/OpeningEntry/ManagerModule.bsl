@@ -503,7 +503,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 				"RecordType, Period, Company, LegalName, Currency, Amount"),
 			Parameters.IsReposting));
 
-
 	Return PostingDataTables;
 EndFunction
 

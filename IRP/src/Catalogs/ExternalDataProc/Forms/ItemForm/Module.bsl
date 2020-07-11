@@ -88,4 +88,3 @@ Function GetFileFromStorage()
 	EndIf;
 	Return Undefined;
 EndFunction
-

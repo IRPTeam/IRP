@@ -33,7 +33,6 @@ Procedure PaymentListOnChange(Item)
 	EndDo;
 EndProcedure
 
-
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocIncomingPaymentOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
@@ -297,7 +296,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 
 #Region AddAttributes
 

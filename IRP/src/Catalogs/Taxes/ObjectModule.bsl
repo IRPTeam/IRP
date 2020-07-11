@@ -11,4 +11,3 @@ Procedure OnWrite(Cancel)
 		RecordSet.Write();
 	EndIf;
 EndProcedure
-

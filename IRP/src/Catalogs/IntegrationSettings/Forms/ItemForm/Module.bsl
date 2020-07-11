@@ -29,7 +29,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 EndProcedure
 
-
 &AtClient
 Procedure TestConnection(Command)
 	If Object.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
@@ -50,7 +49,7 @@ Procedure TestConnection(Command)
 		ResourceParameters = New Structure();
 		ResourceParameters.Insert("MetadataName", "TestConnection");
 		ServerResponse = IntegrationClientServer.SendRequest(ConnectionSetting, ResourceParameters);
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R()["S_016"],
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_016,
 				ServerResponse.Message,
 				ServerResponse.StatusCode,
 				ServerResponse.ResponseBody));
@@ -60,7 +59,7 @@ EndProcedure
 &AtClient
 Procedure Login(Command)
 	If Object.IntegrationType = PredefinedValue("Enum.IntegrationType.GoogleDrive") Then
-		GoogleDriveClient.Auth(ThisForm);
+		GoogleDriveClient.Auth(ThisObject);
 	EndIf;
 EndProcedure
 
@@ -167,7 +166,4 @@ Procedure OpenFormProcSettingsEndServer(Result)
 	ValueToFormAttribute(Obj, "Object");
 EndProcedure
 
-
-
 #EndRegion
-

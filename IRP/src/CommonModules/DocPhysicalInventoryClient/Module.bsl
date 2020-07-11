@@ -28,7 +28,6 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 		CalculationSettings);
 EndProcedure
 
-
 #Region PickUpItems
 
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export

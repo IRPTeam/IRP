@@ -12,7 +12,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	UpdateHeader(ThisObject);
 EndProcedure
 
-
 &AtServer
 Procedure SetDocumentListQueryText(Parameters)
 	Filters = Parameters.FiltersStructure;
@@ -236,11 +235,9 @@ Procedure Edit(Command)
 	ShowValue(, CurrentData.BasisDocument);
 EndProcedure
 
-
 &AtClient
 Procedure PickedDocumentsSelection(Item, RowSelected, Field, StandardProcessing)
 	DocChequeBondTransactionClient.ShowApArDocument(ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
-
 
 #EndRegion

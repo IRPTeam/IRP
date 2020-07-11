@@ -584,7 +584,6 @@ EndFunction
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient

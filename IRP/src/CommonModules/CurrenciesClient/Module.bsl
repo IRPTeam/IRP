@@ -1,6 +1,5 @@
-
 Procedure CurrenciesTable_Selection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
-	If Not ValueIsFilled(Find(Field.Name, "ShowReverseRate")) Then
+	If Not ValueIsFilled(StrFind(Field.Name, "ShowReverseRate")) Then
 		Return;
 	EndIf;
 	CurrentData = Form.Items[StrReplace(Field.Name, "ShowReverseRate", "")].CurrentData;
@@ -13,7 +12,7 @@ Procedure CurrenciesTable_Selection(Object, Form, Item, RowSelected, Field, Stan
 EndProcedure
 
 Procedure CurrenciesTable_RatePresentationOnChange(Object, Form, Item) Export
-	If Not ValueIsFilled(Find(Item.Name, "RatePresentation")) Then
+	If Not ValueIsFilled(StrFind(Item.Name, "RatePresentation")) Then
 		Return;
 	EndIf;
 	
@@ -39,7 +38,7 @@ Procedure CurrenciesTable_RatePresentationOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure CurrenciesTable_MultiplicityOnChange(Object, Form, Item) Export
-	If Not ValueIsFilled(Find(Item.Name, "Multiplicity")) Then
+	If Not ValueIsFilled(StrFind(Item.Name, "Multiplicity")) Then
 		Return;
 	EndIf;
 	
@@ -53,7 +52,7 @@ Procedure CurrenciesTable_MultiplicityOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure CurrenciesTable_AmountOnChange(Object, Form, Item) Export
-	If Not ValueIsFilled(Find(Item.Name, "Amount")) Then
+	If Not ValueIsFilled(StrFind(Item.Name, "Amount")) Then
 		Return;
 	EndIf;
 	
@@ -67,7 +66,7 @@ Procedure CurrenciesTable_AmountOnChange(Object, Form, Item) Export
 EndProcedure
 
 Function GetMainTableInfo(Object, Form, Item, ColumnName)
-	Result = New Structure();
+	Result = New Structure;
 	Result.Insert("Calculate", False);
 	Result.Insert("CurrentData", Undefined);
 	Result.Insert("Amount", 0);
@@ -123,4 +122,3 @@ Function GetMainTableInfo(Object, Form, Item, ColumnName)
 	
 	Return Result;
 EndFunction
-

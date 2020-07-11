@@ -25,15 +25,11 @@ EndProcedure
 
 #EndRegion
 
-
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
-
-
 #Region ItemCompany
-
 &AtClient
 Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
 	CatAgreementsClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
@@ -68,7 +64,6 @@ Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemPartnerSegment
 

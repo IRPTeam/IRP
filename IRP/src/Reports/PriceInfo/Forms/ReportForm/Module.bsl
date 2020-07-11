@@ -18,7 +18,6 @@ Procedure OnOpen(Cancel)
 	Items.Result.StatePresentation.Visible = False;
 EndProcedure
 
-
 &AtClient
 Procedure ResultSelection(Item, Area, StandardProcessing)
 	StandardProcessing = False;

@@ -405,7 +405,7 @@ Procedure PrepareTemplateDetails(ListOfFields
 		
 		While ValueIsFilled(ParameterName) Do
 			
-			If Find(ListOfFields + ",", " " + ParameterName + ",") > 0 Then
+			If StrFind(ListOfFields + ",", " " + ParameterName + ",") > 0 Then
 				
 				If ColumnNumber = 0 Then
 					
@@ -454,7 +454,7 @@ Procedure PrepareTemplateDetails(ListOfFields
 		
 		While ValueIsFilled(ParameterName) Do
 			
-			If Find(ListOfFields + ",", " " + ParameterName + ",") > 0 Then
+			If StrFind(ListOfFields + ",", " " + ParameterName + ",") > 0 Then
 				
 				If ColumnNumber = 0 Then
 					ColumnNumber = ColumnIndex;

@@ -33,5 +33,3 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 EndProcedure
-
-

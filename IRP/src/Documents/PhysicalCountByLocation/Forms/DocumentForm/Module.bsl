@@ -95,7 +95,6 @@ Procedure DescriptionClick(Item, StandardProcessing)
 	DocPhysicalCountByLocationClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
-
 #Region GroupTitleDecorations
 
 &AtClient
@@ -139,7 +138,6 @@ EndProcedure
 Procedure DecorationStatusHistoryClick(Item)
 	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
 EndProcedure
-
 
 #Region AddAttributes
 

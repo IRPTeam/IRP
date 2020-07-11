@@ -114,7 +114,6 @@ Procedure DescriptionClick(Item, StandardProcessing)
 	DocStockAdjustmentAsWriteOffClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
-
 #Region GroupTitleDecorations
 
 &AtClient
@@ -143,7 +142,6 @@ EndProcedure
 Procedure SearchByBarcode(Command)
 	DocStockAdjustmentAsWriteOffClient.SearchByBarcode(Command, Object, ThisObject);
 EndProcedure
-
 
 #Region AddAttributes
 

@@ -64,7 +64,6 @@ Procedure FilterOpponentOnChange(Item)
 	Item.TitleTextColor = ?(FilterOpponent, New Color(), WebColors.LightGray);
 EndProcedure
 
-
 &AtClientAtServerNoContext
 Procedure SetBooleanListFilter(FilterItems, FieldName, RightValue)
 	CommonFunctionsClientServer.SetFilterItem(FilterItems,

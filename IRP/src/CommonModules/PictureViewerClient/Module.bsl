@@ -208,7 +208,7 @@ Procedure PictureViewHTMLOnClick(Form, Item, EventData, StandardProcessing) Expo
 		Return;
 	EndIf;
 	If Form.Object.Ref.isEmpty() Then
-		ShowMessageBox(Undefined, R()["InfoMessage_004"]);
+		ShowMessageBox(Undefined, R().InfoMessage_004);
 	Else
 		PictureViewerClient.HTMLEvent(Form, Form.Object, Item.Document.defaultView.call1C);
 	EndIf;

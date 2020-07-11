@@ -67,10 +67,10 @@ Function UpdateUsersRole(AccessProfile)
 		If User = Undefined Then
 			Result.Success = False;
 			Result.ArrayOfResults.Add(New Structure("Success, Message", False,
-					StrTemplate(R()["UsersEvent_001"], QuerySelection.User.InfobaseUserID, QuerySelection.User.Description)));
+					StrTemplate(R().UsersEvent_001, QuerySelection.User.InfobaseUserID, QuerySelection.User.Description)));
 		Else
 			Result.ArrayOfResults.Add(New Structure("Success, Message", True,
-					StrTemplate(R()["UsersEvent_002"], QuerySelection.User.InfobaseUserID, QuerySelection.User.Description)));
+					StrTemplate(R().UsersEvent_002, QuerySelection.User.InfobaseUserID, QuerySelection.User.Description)));
 			User.Roles.Clear();
 			AddRoles(AccessProfile.Roles, User);
 			User.Write();

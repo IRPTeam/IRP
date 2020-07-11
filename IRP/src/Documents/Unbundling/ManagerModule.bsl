@@ -282,7 +282,7 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		AccumulationRegisters.StockBalance.GetLockFields(PostingServer.JoinTables(ArrayOfTables, "Store, ItemKey"));
 		DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
 	Else
-		Raise R()["Exc_002"];
+		Raise R().Exc_002;
 	EndIf;
 	
 	Return DataMapWithLockFields;
@@ -421,7 +421,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 				PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Store, ItemKey, Quantity"),
 				Parameters.IsReposting));
 	Else
-		Raise R()["Exc_002"];
+		Raise R().Exc_002;
 	EndIf;
 	
 	Return PostingDataTables;

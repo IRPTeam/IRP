@@ -92,7 +92,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region FormItemsEvents
 &AtClient
 Procedure StatusOnChange(Item)
@@ -577,7 +576,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 
 #Region AddAttributes
 

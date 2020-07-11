@@ -10,4 +10,3 @@ Procedure Settings(Command)
 		OpenForm("CommonForm.EditUserSettings", New Structure("UserOrGroup", CurrentRow), ThisObject);
 	EndIf;
 EndProcedure
-

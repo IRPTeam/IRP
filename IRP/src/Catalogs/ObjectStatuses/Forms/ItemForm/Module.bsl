@@ -52,4 +52,3 @@ Function GetArrayOfFilters()
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsFolder", False, DataCompositionComparisonType.Equal));
 	Return ArrayOfFilters;
 EndFunction
-

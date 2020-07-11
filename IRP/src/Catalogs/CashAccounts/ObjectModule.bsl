@@ -6,4 +6,3 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		Type = Enums.CashAccountTypes.Cash;
 	EndIf;
 EndProcedure
-

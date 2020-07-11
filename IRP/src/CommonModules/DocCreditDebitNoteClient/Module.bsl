@@ -212,7 +212,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region GroupTitle
 
 #Region GroupTitleDecorationsEvents

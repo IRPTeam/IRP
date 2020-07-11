@@ -30,7 +30,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region Commands
 
 &AtClient
@@ -53,6 +52,5 @@ Function ReportName()
 	SplittedFormName.Delete(SplittedFormName.UBound());
 	Return SplittedFormName.Get(SplittedFormName.UBound());
 EndFunction
-
 
 #EndRegion

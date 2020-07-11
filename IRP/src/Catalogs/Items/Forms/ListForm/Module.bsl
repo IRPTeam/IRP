@@ -71,10 +71,4 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		UpdateHTMLPictures();
 	EndIf;
 EndProcedure
-
-
 #EndRegion
-
-
-
-

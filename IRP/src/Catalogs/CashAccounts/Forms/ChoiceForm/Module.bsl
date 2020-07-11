@@ -33,4 +33,3 @@ Procedure CashAccountTypeFilterOnChange(Item)
 		DataCompositionComparisonType.Equal,
 		ValueIsFilled(CashAccountTypeFilter));
 EndProcedure
-

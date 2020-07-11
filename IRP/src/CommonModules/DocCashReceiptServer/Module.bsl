@@ -232,7 +232,6 @@ Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments) Exp
 	Return ArrayOfResults;
 EndFunction
 
-
 #Region ListFormEvents
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export

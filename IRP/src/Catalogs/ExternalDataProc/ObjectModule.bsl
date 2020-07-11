@@ -7,4 +7,3 @@ Procedure OnWrite(Cancel)
 	EndDo;
 	SessionParameters.ConnectedAddDataProc = New FixedStructure(ExternalDataProcNames);
 EndProcedure
-

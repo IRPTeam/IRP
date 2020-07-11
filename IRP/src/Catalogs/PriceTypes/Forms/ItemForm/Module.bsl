@@ -50,7 +50,6 @@ Procedure ExternalDataProcOnChange(Item)
 	PutSettingsToTempStorage();
 EndProcedure
 
-
 &AtServerNoContext
 Procedure CallMethodAddDataProc(Info)
 	AddDataProcServer.CallMethodAddDataProc(Info);
@@ -76,9 +75,7 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
-
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);

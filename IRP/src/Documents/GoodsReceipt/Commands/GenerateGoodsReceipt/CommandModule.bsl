@@ -353,30 +353,30 @@ Function GetErrorMessage(BasisDocument)
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.PurchaseOrder") Then
 		If Not BasisDocument.Status.Posting Or Not BasisDocument.Posted Then
-			Return StrTemplate(R()["Error_067"], String(BasisDocument));		
+			Return StrTemplate(R().Error_067, String(BasisDocument));		
 		EndIf;
 		
 		If BasisDocument.GoodsReceiptBeforePurchaseInvoice Then
 			If WithoutBalance(BasisDocument) And HasGoodReceipt(BasisDocument) Then
-			ErrorMessage = R()["Error_073"];
+			ErrorMessage = R().Error_073;
 			ErrorMessage = StrTemplate(ErrorMessage,  BasisDocument.Metadata().Synonym, Metadata.Documents.GoodsReceipt.Synonym);
 			Else
 				If PurchaseInvoiceExist(BasisDocument) Then
-					ErrorMessage = R()["Error_019"];
+					ErrorMessage = R().Error_019;
 					ErrorMessage = StrTemplate(ErrorMessage, R().S_021, BasisDocument.Metadata().Synonym);
 				Else
 					
 					
-					ErrorMessage = R()["Error_029"];
+					ErrorMessage = R().Error_029;
 				EndIf;
 				
 			EndIf;
 		Else
-			ErrorMessage = R()["Error_028"];
+			ErrorMessage = R().Error_028;
 		EndIf;
 		
 	Else
-		ErrorMessage = R()["Error_019"];
+		ErrorMessage = R().Error_019;
 		ErrorMessage = StrTemplate(ErrorMessage, R().S_021, BasisDocument.Metadata().Synonym);
 	EndIf;
 	

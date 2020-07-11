@@ -9,7 +9,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region CommandInterface
 
 &AtClient
@@ -25,14 +24,13 @@ EndProcedure
 Procedure SaveFile(Command)
 	If Parameters.Key.IsEmpty() Then
     	QuestionToUserNotify = New NotifyDescription("SaveFileNewObjectContinue", ThisObject);
-		ShowQueryBox(QuestionToUserNotify, R()["QuestionToUser_001"], QuestionDialogMode.YesNo);
+		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 		Return;
     EndIf;
     SaveFileContinue();
 EndProcedure
 
 #EndRegion
-
 
 &AtClient
 Procedure AddFileEndCall(FileDescription, AddInfo) Export

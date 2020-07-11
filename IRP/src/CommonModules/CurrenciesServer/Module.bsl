@@ -229,8 +229,6 @@ Procedure FillCurrencyTable(Object, Date, Company, Currency, RowKey, AgreementIn
 		                      Currency, 
 		                      ItemOfArray.CurrencyMovementType);
 	EndDo;
-	
-	
 EndProcedure
 
 Procedure AddRowToCurrencyTable(Date, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType) Export

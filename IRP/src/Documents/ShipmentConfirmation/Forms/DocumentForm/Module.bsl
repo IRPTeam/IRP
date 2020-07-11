@@ -191,7 +191,6 @@ EndProcedure
 
 #EndRegion
 
-
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
 	DocShipmentConfirmationClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
@@ -206,7 +205,6 @@ EndProcedure
 Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocShipmentConfirmationClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
-
 
 #Region Commands
 
@@ -227,7 +225,6 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
-
 
 #Region AddAttributes
 

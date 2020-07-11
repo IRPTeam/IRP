@@ -20,4 +20,3 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ItemName = Parameters.ItemName;
 EndProcedure
-

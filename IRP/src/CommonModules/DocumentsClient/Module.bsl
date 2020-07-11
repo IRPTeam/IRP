@@ -52,7 +52,7 @@ Procedure CurrencyOnChange(Object, Form, Module, Item = Undefined, Settings = Un
 		QuestionStructure.Insert("CurrentCurrency", Form.Currency);
 		QuestionStructure.Insert("AccountInfo", Settings.AccountInfo);
 		QuestionStructure.Insert("ProcedureName", "CurrencyOnChangeContinue");
-		QuestionStructure.Insert("QuestionText", StrTemplate(R()["R().QuestionToUser_006"]));
+		QuestionStructure.Insert("QuestionText", StrTemplate(R()/R().QuestionToUser_006));
 		QuestionStructure.Insert("Action", "Currency");
 		
 		Settings.Questions.Add(QuestionStructure);
@@ -666,7 +666,7 @@ Procedure PriceTypeOnChange(Object, Form, Module, Item = Undefined, Settings = U
 		QuestionStructure.Insert("CurrentPriceType", Form.CurrentPriceType);
 		QuestionStructure.Insert("AgreementInfo", Settings.AgreementInfo);
 		QuestionStructure.Insert("ProcedureName", "PriceTypeOnChangeContinue");
-		QuestionStructure.Insert("QuestionText", StrTemplate(R()["QuestionToUser_011"], String(Settings.AgreementInfo.PriceType)));
+		QuestionStructure.Insert("QuestionText", StrTemplate(R().QuestionToUser_011, String(Settings.AgreementInfo.PriceType)));
 		QuestionStructure.Insert("Action", "PriceTypes");
 		
 		Settings.Questions.Add(QuestionStructure);
@@ -846,7 +846,7 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 		And CalculationStringsClientServer.PricesChanged(Object, Form, Settings) Then
 		QuestionStructure = New Structure;
 		QuestionStructure.Insert("ProcedureName", "PricesChangedContinue");
-		QuestionStructure.Insert("QuestionText"	, R()["QuestionToUser_013"]);
+		QuestionStructure.Insert("QuestionText"	, R().QuestionToUser_013);
 		QuestionStructure.Insert("Action"		, "Prices");
 		Settings.Questions.Add(QuestionStructure);
 	EndIf;
@@ -1017,7 +1017,7 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 		
 		If Row.Property("Quantity") Then
 			Row.Quantity = Row.Quantity + ResultElement.Quantity;
-		ElsIF Row.Property("PhysCount") And Row.Property("Difference") Then
+		ElsIf Row.Property("PhysCount") And Row.Property("Difference") Then
 			Row.PhysCount = Row.PhysCount + ResultElement.Quantity;
 			Row.Difference = Row.PhysCount - Row.ExpCount;
 		EndIf;
@@ -1466,7 +1466,7 @@ Procedure SetTextOfDescriptionAtForm(Object, Form) Export
 	If ValueIsFilled(Object.Description) Then
 		Form.Description = Object.Description;
 	Else
-		Form.Description = R()["I_2"];
+		Form.Description = R().I_2;
 	EndIf;
 EndProcedure
 
@@ -1574,7 +1574,7 @@ Procedure UpdateStore(Object, Form, Settings) Export
 		QuestionStructure.Insert("StoreBeforeChange", Form.StoreBeforeChange);
 		QuestionStructure.Insert("NewStore"			, Settings.NewStore);
 		QuestionStructure.Insert("ProcedureName"	, "StoreOnChangeContinue");
-		QuestionStructure.Insert("QuestionText"		, StrTemplate(R()["QuestionToUser_009"], String(Settings.NewStore)));
+		QuestionStructure.Insert("QuestionText"		, StrTemplate(R().QuestionToUser_009, String(Settings.NewStore)));
 		QuestionStructure.Insert("Action"			, "Stores");
 		Settings.Questions.Add(QuestionStructure);
 		Return;
@@ -1873,7 +1873,6 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 		EndIf;
 	EndIf;
 EndProcedure
-
 
 Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export 
 	CurrentData = Form.Items.PaymentList.CurrentData;

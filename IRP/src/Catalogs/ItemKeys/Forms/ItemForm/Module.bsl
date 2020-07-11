@@ -1,6 +1,5 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-
 	If Parameters.Property("Item") And Not ValueIsFilled(Object.Ref) Then
 		Object.Item = Parameters.Item;
 		Items.Item.ReadOnly = True;
@@ -19,7 +18,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.UnitMode = ?(ValueIsFilled(Object.Unit), "Own", "Inherit");
 	ThisObject.SpecificationMode = ValueIsFilled(Object.Specification);
 	SetVisible();
-	
 EndProcedure
 
 &AtClient
@@ -44,12 +42,12 @@ EndProcedure
 
 &AtClient
 Procedure PictureViewHTMLDocumentComplete(Item)
-	PictureViewerClient.UpdateHTMLPicture(Item, ThisForm);
+	PictureViewerClient.UpdateHTMLPicture(Item, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure PictureViewHTMLOnClick(Item, EventData, StandardProcessing)
-	PictureViewerClient.PictureViewHTMLOnClick(ThisForm, Item, EventData, StandardProcessing);
+	PictureViewerClient.PictureViewHTMLOnClick(ThisObject, Item, EventData, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -75,10 +73,8 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		AddAttributesCreateFormControl();
 	EndIf;
 	
-	PictureViewerClient.HTMLEventAction(EventName, Parameter, Source, ThisForm);
+	PictureViewerClient.HTMLEventAction(EventName, Parameter, Source, ThisObject);
 EndProcedure
-
-
 
 &AtClient
 Procedure OnChangeTypeOfItemType()
@@ -148,6 +144,3 @@ Procedure SetVisible()
 	ThisObject.InheritUnit = ?(ValueIsFilled(Object.Item), Object.Item.Unit, Undefined);
 	ThisObject.ItemType = ?(ValueIsFilled(Object.Item), Object.Item.ItemType, Undefined);
 EndProcedure
-
-
-

@@ -89,7 +89,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemDate
 
 Procedure DateOnChange(Object, Form, Item) Export
@@ -100,7 +99,6 @@ Procedure DateOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemDescription
 
@@ -131,7 +129,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemSendDate
 
 Procedure SendDateOnChange(Object, Form, Item) Export
@@ -145,7 +142,6 @@ Procedure SetSendDate(Object, Form)
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemReceiveDate
 
@@ -161,7 +157,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemReceiveAmount
 
 Procedure ReceiveAmountOnChange(Object, Form, Item) Export
@@ -169,7 +164,6 @@ Procedure ReceiveAmountOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemSendAmount
 
@@ -183,7 +177,6 @@ Procedure SendAmountOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemSender
 
@@ -279,7 +272,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemSenderCurrency
 
 Procedure SetSenderCurrency(Object, Form)
@@ -292,7 +284,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemReceiverCurrency
 
 Procedure SetReceiverCurrency(Object, Form)
@@ -304,7 +295,6 @@ Procedure SetReceiverCurrency(Object, Form)
 EndProcedure
 
 #EndRegion
-
 
 #Region CheckFillData
 

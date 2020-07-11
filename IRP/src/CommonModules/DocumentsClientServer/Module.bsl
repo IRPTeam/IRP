@@ -80,7 +80,7 @@ Procedure ChangeTitleGroupTitle(Object, Form) Export
 	
 	TitleRow = New FormattedString(TitleArray);
 	If IsBlankString(TitleRow) Then
-		Form.Items.DecorationGroupTitleCollapsedLabel.Title = New FormattedString(R()["I_3"],
+		Form.Items.DecorationGroupTitleCollapsedLabel.Title = New FormattedString(R().I_3,
 				ValueFont, ValueTextColor, ValueBackColor);
 	Else
 		Form.Items.DecorationGroupTitleCollapsedLabel.Title = TitleRow;
@@ -126,7 +126,7 @@ Procedure ChangeTitleGroupTitle(Object, Form) Export
 	
 	TitleRow = New FormattedString(TitleArray);
 	If IsBlankString(TitleRow) Then
-		Form.Items.DecorationGroupTitleUncollapsedLabel.Title = New FormattedString(R()["I_3"],
+		Form.Items.DecorationGroupTitleUncollapsedLabel.Title = New FormattedString(R().I_3,
 				ValueFont, ValueTextColor, ValueBackColor);
 	Else
 		Form.Items.DecorationGroupTitleUncollapsedLabel.Title = TitleRow;
@@ -236,7 +236,6 @@ Function GetStructureFillStores() Export
 EndFunction
 
 #EndRegion
-
 
 #Region Common
 

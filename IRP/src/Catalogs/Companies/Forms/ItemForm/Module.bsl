@@ -71,7 +71,7 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 			Row = CompanyTaxes[Index];
 			If Not ValueIsFilled(Row.Period) Then
 				Cancel = True;
-				MessageText = StrTemplate(R()["Error_010"], "Period");
+				MessageText = StrTemplate(R().Error_010, "Period");
 				CommonFunctionsClientServer.ShowUsersMessage(MessageText,
 						"CompanyTaxes[" + Format(Index, "NG=0;") + "].Period");
 			EndIf;
@@ -80,7 +80,6 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 EndProcedure
 
 #EndRegion
-
 
 &AtClient
 Procedure CurrenciesMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
@@ -165,7 +164,6 @@ Procedure ReadTaxes()
 EndProcedure
 
 #EndRegion
-
 
 #Region AddAttributes
 

@@ -88,7 +88,7 @@ Procedure AccountOnChangeContinue(Result, AdditionalParameters) Export
 			RowPaymentList.Currency = Form.Currency;
 		EndDo;
 	Else
-		Raise R()["Error_032"];
+		Raise R().Error_032;
 	EndIf;
 	Notify("CallbackHandler", Undefined, Form);
 EndProcedure

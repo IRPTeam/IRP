@@ -37,7 +37,7 @@ Procedure UpdatePhysicalCountByLocations(Object, Form) Export
 		Row.Locked = False;
 	EndDo;
 	
-	For Each Row in LinkedPhysicalCountByLocation Do
+	For Each Row In LinkedPhysicalCountByLocation Do
 		For Each LinkedRow In Object.ItemList.FindRows(New Structure("Key", Row.Key)) Do
 			LinkedRow.PhysicalCountByLocation = Row.Ref;
 			LinkedRow.PhysicalCountByLocationPresentation = StrTemplate(R().InfoMessage_007, Row.Number, Row.Date);

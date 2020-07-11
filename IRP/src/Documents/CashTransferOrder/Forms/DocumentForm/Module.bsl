@@ -172,7 +172,6 @@ Procedure ReceiverEditTextChange(Item, Text, StandardProcessing)
 	DocCashTransferOrderClient.ReceiverEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
-
 &AtClient
 Procedure CashAdvanceHolderStartChoice(Item, ChoiceData, StandardProcessing)
 	DocCashTransferOrderClient.CashAdvanceHolderStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
@@ -333,7 +332,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 
 #Region AddAttributes
 

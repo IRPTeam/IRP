@@ -1,5 +1,3 @@
-
-
 #Region Commands
 
 &AtClient
@@ -80,9 +78,3 @@ Procedure FillUsersList(ListData)
 EndProcedure
 
 #EndRegion
-
-
-
-
-
-

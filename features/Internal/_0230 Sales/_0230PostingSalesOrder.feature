@@ -45,7 +45,11 @@ To track the items ordered by the customer
 		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
 		И в таблице "ItemList" я завершаю редактирование строки
 		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		Когда choose item Trousers in the order
+		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
+		И в таблице "List" я перехожу к строке:
+			| Description |
+			| Trousers       |
+		И в таблице "List" я выбираю текущую строку
 		И я перехожу к следующему реквизиту
 		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
 		И в таблице "List" я выбираю текущую строку

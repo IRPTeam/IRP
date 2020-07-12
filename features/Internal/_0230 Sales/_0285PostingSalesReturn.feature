@@ -335,6 +335,4 @@ To track a product that returned from customer
 		И     элемент формы с именем "ItemListTotalNetAmount" стал равен '466,10'
 		И     элемент формы с именем "ItemListTotalTaxAmount" стал равен '83,90'
 		И     элемент формы с именем "ItemListTotalTotalAmount" стал равен '550,00'
-		И     элемент формы с именем "CurrencyTotalAmount" стал равен 'USD'
-
 

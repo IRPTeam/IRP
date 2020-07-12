@@ -272,10 +272,6 @@
       <event>BeforeAddRow</event>
       <name>ListBeforeAddRow</name>
     </handlers>
-    <handlers>
-      <event>RefreshRequestProcessing</event>
-      <name>ListRefreshRequestProcessing</name>
-    </handlers>
     <searchStringAddition>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -439,14 +435,6 @@
       <segments>List.DefaultPicture</segments>
     </rowPictureDataPath>
     <extInfo xsi:type="form:DynamicListTableExtInfo">
-      <handlers>
-        <event>OnGetDataAtServer</event>
-        <name>ListOnGetDataAtServer</name>
-      </handlers>
-      <handlers>
-        <event>OnLoadUserSettingsAtServer</event>
-        <name>ListOnLoadUserSettingsAtServer</name>
-      </handlers>
       <autoRefreshPeriod>60</autoRefreshPeriod>
       <period>
         <startDate>0001-01-01T00:00:00</startDate>

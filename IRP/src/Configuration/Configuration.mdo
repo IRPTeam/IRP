@@ -39,7 +39,7 @@
   <modalityUseMode>DontUse</modalityUseMode>
   <synchronousExtensionAndAddInCallUseMode>DontUse</synchronousExtensionAndAddInCallUseMode>
   <synchronousPlatformExtensionAndAddInCallUseMode>DontUse</synchronousPlatformExtensionAndAddInCallUseMode>
-  <compatibilityMode>8.3.14</compatibilityMode>
+  <compatibilityMode>8.3.15</compatibilityMode>
   <languages uuid="f1c59d1c-aafe-420b-96cd-c5f1608cf9c1">
     <name>English</name>
     <synonym>
@@ -455,7 +455,6 @@
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
   <documents>Document.CashExpense</documents>
-  <documents>Document.CashInPOS</documents>
   <documents>Document.CashPayment</documents>
   <documents>Document.CashReceipt</documents>
   <documents>Document.CashRevenue</documents>
@@ -469,7 +468,6 @@
   <documents>Document.InventoryTransfer</documents>
   <documents>Document.InventoryTransferOrder</documents>
   <documents>Document.InvoiceMatch</documents>
-  <documents>Document.ItemsFlow</documents>
   <documents>Document.Labeling</documents>
   <documents>Document.OpeningEntry</documents>
   <documents>Document.OutgoingPaymentOrder</documents>
@@ -485,7 +483,6 @@
   <documents>Document.SalesOrder</documents>
   <documents>Document.SalesReturn</documents>
   <documents>Document.SalesReturnOrder</documents>
-  <documents>Document.SetupOfSpecialOffers</documents>
   <documents>Document.ShipmentConfirmation</documents>
   <documents>Document.StockAdjustmentAsSurplus</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>

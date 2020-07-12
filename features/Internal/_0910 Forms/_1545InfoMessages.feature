@@ -1,4 +1,4 @@
-#language: ru
+﻿#language: ru
 @tree
 @Positive
 
@@ -1194,12 +1194,12 @@
 			И я нажимаю на кнопку 'Post'
 		* Checking message output when trying to generate a PO
 			И я нажимаю на кнопку 'Purchase order'
-			Тогда элемент формы с именем "Field1" стал равен шаблону 'Not properly status of Sales order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of sales order*'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 		* Checking message output when trying to generate a PI
 			И я нажимаю на кнопку 'Purchase invoice'
-			Тогда элемент формы с именем "Field1" стал равен шаблону 'Not properly status of Sales order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of sales order*'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 	* Checking the message output when it is impossible to create SC because the goods have not yet come from the vendor provided that the type of supply "through orders" is selected
@@ -1216,7 +1216,7 @@
 			И Пауза 2
 		* Checking message output when trying to generate SC
 			И я нажимаю на кнопку 'Shipment confirmation'
-			Тогда элемент формы с именем "Field1" стал равен 'Items were not received from supplier according to procurement method.'
+			Тогда элемент формы с именем "Message" стал равен 'Items were not received from supplier according to procurement method.'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 	* Check when trying to create SC when only a PO has been created but the goods have not been delivered
@@ -1256,7 +1256,7 @@
 			И я нажимаю на кнопку 'Post and close'
 		* Checking message output when trying to create SC
 			И я нажимаю на кнопку 'Shipment confirmation'
-			Тогда элемент формы с именем "Field1" стал равен 'Items were not received from supplier according to procurement method.'
+			Тогда элемент формы с именем "Message" стал равен 'Items were not received from supplier according to procurement method.'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И я закрыл все окна клиентского приложения
@@ -1318,7 +1318,7 @@
 			| 'Number' | 'Partner'   |
 			| '3 024'  | 'DFC'       |
 			И я нажимаю на кнопку с именем 'FormDocumentPurchaseOrderGeneratePurchaseOrder'
-			Тогда элемент формы с именем "Field1" стал равен 'All items in sales order are already ordered by purchase order(s).'
+			Тогда элемент формы с именем "Message" стал равен 'All items in sales order are already ordered by purchase order(s).'
 			И я закрыл все окна клиентского приложения
 	* Checking the message when there are no lines in the sales  order with procurement method "purchase"
 		* Create SO with procurement method Stock
@@ -1361,7 +1361,7 @@
 				И я нажимаю на кнопку 'Post'
 		* Checking message output when trying to create a PO
 			И я нажимаю на кнопку 'Purchase order'
-			Тогда элемент формы с именем "Field1" стал равен 'No lines with properly procurement method.'
+			Тогда элемент формы с именем "Message" стал равен 'No lines with properly procurement method.'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И я закрыл все окна клиентского приложения
@@ -1415,19 +1415,19 @@
 		И я нажимаю на кнопку 'Post'
 		* Check message output when trying to create SalesInvoice
 			И я нажимаю на кнопку 'Sales invoice'
-			Тогда элемент формы с именем "Field1" стал равен шаблону 'Not properly status of Sales order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of sales order*'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю на кнопку 'Purchase invoice'
-			Тогда элемент формы с именем "Field1" стал равен шаблону 'Not properly status of Sales order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of sales order*'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю на кнопку 'Purchase order'
-			Тогда элемент формы с именем "Field1" стал равен шаблону 'Not properly status of Sales order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of sales order*'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю на кнопку 'Shipment confirmation'
-			Тогда элемент формы с именем "Field1" стал равен шаблону 'Not properly status of Sales order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of sales order*'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
@@ -1469,11 +1469,11 @@
 			И я нажимаю на кнопку 'Post'
 		* Check the message output when trying to create PurchaseInvoice
 			И я нажимаю на кнопку 'Purchase invoice'
-			Тогда элемент формы с именем "Field1" стал равен шаблону 'Not properly status of Purchase order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of Purchase order*'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю на кнопку 'Goods receipt'
-			Тогда элемент формы с именем "Field1" стал равен шаблону 'Not properly status of Purchase order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of Purchase order*'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И я закрыл все окна клиентского приложения
@@ -1487,7 +1487,7 @@
 		И в таблице "List" я выбираю текущую строку
 	* Check the message output when trying to uncheck a tick for Store "Use Goods receipt"
 		И я снимаю флаг 'Use goods receipt'
-		Тогда элемент формы с именем "Field1" стал равен 'Unchecking "Use goods receipt" isn`t possible. Goods receipts from store Store 02 have already been created previously.'
+		Тогда элемент формы с именем "Message" стал равен 'Unchecking "Use goods receipt" isn`t possible. Goods receipts from store Store 02 have already been created previously.'
 	И я закрыл все окна клиентского приложения
 	* Open Store 02
 		И я открываю навигационную ссылку "e1cib/list/Catalog.Stores"
@@ -1497,7 +1497,7 @@
 		И в таблице "List" я выбираю текущую строку
 	* Check the message output when trying to uncheck a tick for Store "Use shipment confirmation"
 		И я снимаю флаг 'Use shipment confirmation'
-		Тогда элемент формы с именем "Field1" стал равен 'Unchecking "Use shipment confirmation" isn`t possible. Shipment confirmations from store Store 02 have already been created previously.'
+		Тогда элемент формы с именем "Message" стал равен 'Unchecking "Use shipment confirmation" isn`t possible. Shipment confirmations from store Store 02 have already been created previously.'
 		И я закрыл все окна клиентского приложения
 
 

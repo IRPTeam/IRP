@@ -1432,30 +1432,6 @@ I want to check opening and closing of documents and catalogs forms
 	Если появилось предупреждение тогда
 		Тогда я вызываю исключение "Не удалось открыть форму документа SalesReturnOrder"
 	И Я закрываю текущее окно
-
-
-
-
-	
-	
-Сценарий: Open list form "SetupOfSpecialOffers" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "SetupOfSpecialOffers"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа SetupOfSpecialOffers"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "SetupOfSpecialOffers"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "SetupOfSpecialOffers"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа SetupOfSpecialOffers"
-	И Я закрываю текущее окно
-
-
-
-
-	
 	
 Сценарий: Open list form "ShipmentConfirmation" 
 	И я закрыл все окна клиентского приложения
@@ -1470,11 +1446,6 @@ I want to check opening and closing of documents and catalogs forms
 	Если появилось предупреждение тогда
 		Тогда я вызываю исключение "Не удалось открыть форму документа ShipmentConfirmation"
 	И Я закрываю текущее окно
-
-
-
-
-	
 	
 Сценарий: Open list form "Unbundling" 
 	И я закрыл все окна клиентского приложения
@@ -1490,11 +1461,6 @@ I want to check opening and closing of documents and catalogs forms
 		Тогда я вызываю исключение "Не удалось открыть форму документа Unbundling"
 	И Я закрываю текущее окно
 
-
-
-
-	
-	
 Сценарий: Open list form "StockAdjustmentAsWriteOff" 
 	И я закрыл все окна клиентского приложения
 	Дано Я открываю основную форму списка документа "StockAdjustmentAsWriteOff"

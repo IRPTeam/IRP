@@ -376,6 +376,14 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 	И Пауза 2
 	И  флаг "Manually" равен "No"
 	И я нажимаю на кнопку "Save and close"
+	И в таблице "List" я перехожу к строке:
+			| 'Description'              |
+			| 'Discount 1 without Vat' |
+	И в таблице "List" я выбираю текущую строку
+	И я снимаю флаг "Manually"
+	И Пауза 2
+	И  флаг "Manually" равен "No"
+	И я нажимаю на кнопку "Save and close"
 	И Я закрываю окно 'Special offers'
 	Когда changing the auto apply of Discount 1 without Vat
 	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'

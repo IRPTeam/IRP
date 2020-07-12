@@ -37,6 +37,9 @@ For fast data entry
 	И я нажимаю кнопку выбора у поля "Partner term"
 	Тогда таблица "List" стала равной:
 		| 'Description'            |
+		| 'Basic Partner terms, TRY'         |
+		| 'Basic Partner terms, $'           |
+		| 'Basic Partner terms, without VAT' |
 		| 'Personal Partner terms, $' |
 	И я закрываю текущее окно
 	И Я закрываю текущее окно

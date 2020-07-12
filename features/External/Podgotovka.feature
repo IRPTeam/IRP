@@ -88,7 +88,7 @@
 
 
 
-Сценарий: changing the auto apply of Discount 1 without Vat for test
+Сценарий: changing the auto apply of Discount 1 without Vat
 	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
 	И я нажимаю на кнопку 'List'
 	И в таблице "List" я перехожу к строке:

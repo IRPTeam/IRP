@@ -22,7 +22,6 @@ To track a product that returned from customer
 	* Checking the details
 		И     элемент формы с именем "Partner" стал равен 'Kalipso'
 		И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-		И     элемент формы с именем "Agreement" стал равен 'Personal Partner terms, $'
 		И     элемент формы с именем "Description" стал равен 'Click for input description'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 	И я нажимаю кнопку выбора у поля "Store"

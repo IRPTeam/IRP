@@ -23,17 +23,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-&AtClient
 Procedure OnOpen(Cancel)
 	DocLabelingClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
@@ -102,6 +91,21 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region ExternalCommands
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);	
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
 #EndRegion

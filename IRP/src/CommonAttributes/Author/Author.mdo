@@ -39,10 +39,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.SetupOfSpecialOffers</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.StockAdjustmentAsSurplus</metadata>
     <use>Use</use>
   </content>
@@ -88,10 +84,6 @@
   </content>
   <content>
     <metadata>Document.Unbundling</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.CashInPOS</metadata>
     <use>Use</use>
   </content>
   <content>

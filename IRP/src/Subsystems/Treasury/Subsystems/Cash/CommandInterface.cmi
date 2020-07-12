@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
-  <commandsVisibility>
-    <visibilityFragments>
-      <command>Document.CashInPOS.StandardCommand.OpenList</command>
-      <visible/>
-    </visibilityFragments>
-  </commandsVisibility>
   <commandsOrder>
     <orderFragments>
       <group>NavigationPanelOrdinary</group>
       <commands>Document.CashPayment.StandardCommand.OpenList</commands>
       <commands>Document.CashReceipt.StandardCommand.OpenList</commands>
-      <commands>Document.CashInPOS.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

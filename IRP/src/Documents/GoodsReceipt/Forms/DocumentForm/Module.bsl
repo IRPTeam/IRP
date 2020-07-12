@@ -246,17 +246,6 @@ Procedure FillReceiptBasis(Command)
 EndProcedure
 
 &AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-&AtClient
 Procedure CompareQuantity(Command)
 	DocGoodsReceiptClient.CompareQuantity(Object, ThisObject, Command);
 EndProcedure
@@ -283,6 +272,21 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region ExternalCommands
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);	
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
 #EndRegion

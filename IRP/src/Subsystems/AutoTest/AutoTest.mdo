@@ -28,10 +28,8 @@
   <content>Catalog.ItemSegments</content>
   <content>Catalog.ItemTypes</content>
   <content>Catalog.TaxRates</content>
-  <content>Document.SetupOfSpecialOffers</content>
   <content>Document.CashReceipt</content>
   <content>Document.CashPayment</content>
-  <content>Document.CashInPOS</content>
   <content>5a2a8a1f-b29b-4352-9833-04e70902c2cb</content>
   <content>Document.PriceList</content>
   <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
@@ -48,7 +46,6 @@
   <content>Catalog.PaymentSchedules</content>
   <content>Catalog.PartnerSegments</content>
   <content>Catalog.Agreements</content>
-  <content>Document.ItemsFlow</content>
   <content>InformationRegister.RemainingItemsInfo</content>
   <content>AccumulationRegister.ItemsInStores</content>
   <content>Catalog.AccessGroups</content>

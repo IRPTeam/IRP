@@ -41,7 +41,6 @@
   <content>Document.InvoiceMatch</content>
   <content>Document.PhysicalCountByLocation</content>
   <content>Document.SalesInvoice.Attribute.IsOpeningEntry</content>
-  <content>Document.CashInPOS</content>
   <content>Document.PriceList.TabularSection.DataSet</content>
   <content>Document.SalesInvoice.TabularSection.SpecialOffers</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.OffersAmount</content>
@@ -60,11 +59,9 @@
   <content>Document.InventoryTransfer</content>
   <content>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.OffersAmount</content>
   <content>Document.InternalSupplyRequest</content>
-  <content>Document.SetupOfSpecialOffers</content>
   <content>Document.SalesReturnOrder.Attribute.ManagerSegment</content>
   <content>Document.Labeling</content>
   <content>Document.SalesInvoice.Attribute.Manager</content>
-  <content>Document.ItemsFlow</content>
   <content>Document.PurchaseInvoice.TabularSection.SpecialOffers</content>
   <content>Document.PurchaseReturnOrder.TabularSection.SpecialOffers</content>
   <content>Document.PurchaseReturnOrder.Attribute.ManagerSegment</content>

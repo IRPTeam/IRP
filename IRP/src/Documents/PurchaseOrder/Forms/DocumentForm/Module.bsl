@@ -451,17 +451,6 @@ Procedure SearchByBarcode(Command)
 	DocPurchaseOrderClient.SearchByBarcode(Command, Object, ThisObject);
 EndProcedure
 
-&AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
 #EndRegion
 
 #Region Currencies
@@ -630,6 +619,20 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+#Region ExternalCommands
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);	
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
 #EndRegion

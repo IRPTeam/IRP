@@ -69,7 +69,6 @@
       <types>DocumentRef.SalesReturnOrder</types>
       <types>DocumentRef.CashPayment</types>
       <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.CashInPOS</types>
       <types>DocumentRef.InvoiceMatch</types>
       <types>DocumentRef.BankReceipt</types>
       <types>DocumentRef.PurchaseReturn</types>
@@ -86,11 +85,9 @@
       <types>DocumentRef.OutgoingPaymentOrder</types>
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.SetupOfSpecialOffers</types>
       <types>DocumentRef.StockAdjustmentAsSurplus</types>
       <types>DocumentRef.StockAdjustmentAsWriteOff</types>
       <types>DocumentRef.Bundling</types>
-      <types>DocumentRef.ItemsFlow</types>
       <types>DocumentRef.InventoryTransferOrder</types>
       <types>DocumentRef.InventoryTransfer</types>
       <types>DocumentRef.GoodsReceipt</types>

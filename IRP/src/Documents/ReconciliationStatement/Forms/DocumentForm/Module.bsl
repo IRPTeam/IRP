@@ -216,17 +216,6 @@ EndProcedure
 #Region Commands
 
 &AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-&AtClient
 Procedure PartnerOnChange(Item)
 	DocReconciliationStatementClient.PartnerOnChange(Object, ThisObject, Item);
 EndProcedure
@@ -258,6 +247,20 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+#Region ExternalCommands
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);	
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
 #EndRegion

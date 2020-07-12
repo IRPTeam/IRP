@@ -338,13 +338,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.SetupOfSpecialOffers</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.IDInfoSets</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -664,13 +657,6 @@
 	</object>
 	<object>
 		<name>Document.Unbundling</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashInPOS</name>
 		<right>
 			<name>InteractiveDelete</name>
 			<value>false</value>
@@ -1000,13 +986,6 @@
 	</object>
 	<object>
 		<name>Document.CashTransferOrder</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ItemsFlow</name>
 		<right>
 			<name>InteractiveDelete</name>
 			<value>false</value>

@@ -756,15 +756,16 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 	И в таблице "Offers" я выбираю текущую строку
 	И я нажимаю на кнопку 'OK'
 	И я нажимаю на кнопку 'Save'
-	И таблица "ItemList" содержит строки:
-	| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'| 'Total amount' |
-	| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '474,56'        | 'pcs' | '2 240,02'     |
-	| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '271,20'        | 'pcs' | '1 279,97'     |
+	И И таблица "ItemList" содержит строки:
+		| 'Item'     | 'Price'  | 'Item key'  | 'Store'         | 'Q'      | 'Offers amount' | 'Unit'|
+		| 'Shirt'    | '296,61' | '36/Red'    | 'Store 02'      | '10,000' | '593,20'        | 'pcs' |
+		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02'      | '12,000' | '813,60'        | 'pcs' |
 	И я нажимаю на кнопку "Post and close"
 	И Пауза 2
 	И таблица 'List' содержит строки
 		| 'Partner'     | 'Σ'         |
-		| 'MIO'         | '3 519,99' |
+		| 'MIO'         | '6 639,93' |
+
 
 
 

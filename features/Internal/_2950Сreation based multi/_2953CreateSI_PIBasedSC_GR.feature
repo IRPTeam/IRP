@@ -609,21 +609,29 @@
 		И я нажимаю на кнопку с именем 'FormDocumentSalesInvoiceGenerateSalesInvoice'
 		И     элемент формы с именем "Partner" стал равен 'Kalipso'
 		И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-		И     элемент формы с именем "Agreement" стал равен 'Personal Partner terms, $'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-		И     таблица "ItemList" содержит строки:
+		Если поле с именем "Agreement" имеет значение "Personal Partner terms, $" тогда
+			И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'        | 'Shipment confirmation'      |
 			| '500,00' | 'Trousers' | '18%' | '38/Yellow' | '5,000' | '406,11'     | '1%'       | 'Basic Price Types' | 'pcs'  | '2 093,89'   | '2 500,00'     | 'Store 02' | 'Sales order 9 010*' | 'Shipment confirmation 465*' |
+		Если поле с именем "Agreement" имеет значение "Basic Partner terms, TRY" тогда
+			И     таблица "ItemList" содержит строки:
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'        | 'Shipment confirmation'      |
+			| '500,00' | 'Trousers' | '18%' | '36/Yellow' | '5,000' | '406,11'     | '1%'       | 'Basic Price Types' | 'pcs'  | '2 093,89'   | '2 500,00'     | 'Store 02' | 'Sales order 9 011*' | 'Shipment confirmation 466*' |
 		И я нажимаю на кнопку 'Post and close'
 		И Я нажимаю кнопку командного интерфейса 'Sales invoice (create)'
 		И Пауза 2
 		И     элемент формы с именем "Partner" стал равен 'Kalipso'
 		И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
 		И     элемент формы с именем "Company" стал равен 'Main Company'
 		И     элемент формы с именем "Store" стал равен 'Store 02'
-		И     таблица "ItemList" содержит строки:
+		Если поле с именем "Agreement" имеет значение "Personal Partner terms, $" тогда
+			И     таблица "ItemList" содержит строки:
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'        | 'Shipment confirmation'      |
+			| '500,00' | 'Trousers' | '18%' | '38/Yellow' | '5,000' | '406,11'     | '1%'       | 'Basic Price Types' | 'pcs'  | '2 093,89'   | '2 500,00'     | 'Store 02' | 'Sales order 9 010*' | 'Shipment confirmation 465*' |
+		Если поле с именем "Agreement" имеет значение "Basic Partner terms, TRY" тогда
+			И     таблица "ItemList" содержит строки:
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'        | 'Shipment confirmation'      |
 			| '500,00' | 'Trousers' | '18%' | '36/Yellow' | '5,000' | '406,11'     | '1%'       | 'Basic Price Types' | 'pcs'  | '2 093,89'   | '2 500,00'     | 'Store 02' | 'Sales order 9 011*' | 'Shipment confirmation 466*' |
 		И я нажимаю на кнопку 'Post and close'

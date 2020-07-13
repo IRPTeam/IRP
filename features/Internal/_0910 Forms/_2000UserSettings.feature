@@ -1201,7 +1201,7 @@ For ease of filling in documents
 		| 'Description'                          |
 		| 'Alexander Orlov (Commercial Agent 2)' |
 		И я нажимаю на кнопку 'Settings'
-		Тогда открылось окно 'Edit user default settings'
+		Тогда открылось окно 'Edit user settings'
 	И я закрыл все окна клиентского приложения
 
 

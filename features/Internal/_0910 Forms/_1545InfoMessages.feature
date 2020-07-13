@@ -979,7 +979,12 @@
 			| 'Company Ferron BP' |
 		И в таблице "List" я выбираю текущую строку
 		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я выбираю текущую строку
+		И в таблице "List" я перехожу к строке:
+			| 'Description'        |
+			| 'Vendor Ferron, TRY' |
+		И я нажимаю на кнопку с именем 'FormChoose'
+		Затем Если появилось окно диалога я нажимаю на кнопку с именем 'OK'
+		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" я активизирую поле "Price"
 		И в таблице "ItemList" я выбираю текущую строку
 		И в таблице "ItemList" в поле 'Price' я ввожу текст '100,00'
@@ -1113,9 +1118,9 @@
 		И я нажимаю кнопку выбора у поля "Partner"
 		И в таблице "List" я перехожу к строке:
 			| 'Description' |
-			| 'DFC'         |
+			| 'Kalipso'         |
 		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "LegalName" стал равен 'DFC'
+		И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 		И я нажимаю кнопку выбора у поля "Partner term"
 		И в таблице "List" я перехожу к строке:
 				| 'Description'       |
@@ -1199,7 +1204,7 @@
 			И я нажимаю на кнопку 'OK'
 		* Checking message output when trying to generate a PI
 			И я нажимаю на кнопку 'Purchase invoice'
-			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of sales order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of Sales order*'
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 	* Checking the message output when it is impossible to create SC because the goods have not yet come from the vendor provided that the type of supply "through orders" is selected
@@ -1272,7 +1277,7 @@
 				И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 				И в таблице "List" я перехожу к строке:
 				| 'Number' | 'Partner'   |
-				| '3 024'  | 'DFC'       |
+				| '3 024'  | 'Kalipso'       |
 				И я нажимаю на кнопку с именем 'FormDocumentShipmentConfirmationGenerateShipmentConfirmation'
 				И     таблица "ItemList" содержит строки:
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Store'    |
@@ -1285,15 +1290,12 @@
 			И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 			И в таблице "List" я перехожу к строке:
 			| 'Number' | 'Partner'   |
-			| '3 024'  | 'DFC'       |
+			| '3 024'  | 'Kalipso'       |
 			И в таблице "List" я выбираю текущую строку
 			И я нажимаю на кнопку 'Purchase order'
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
 			И я нажимаю кнопку выбора у поля "Partner"
 			Тогда открылось окно 'Partners'
-			И в таблице "List" я перехожу к строке:
-				| 'Description' |
-				| 'DFC'         |
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
 				| 'Ferron BP'   |
@@ -1316,7 +1318,7 @@
 			И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
 			И в таблице "List" я перехожу к строке:
 			| 'Number' | 'Partner'   |
-			| '3 024'  | 'DFC'       |
+			| '3 024'  | 'Kalipso'       |
 			И я нажимаю на кнопку с именем 'FormDocumentPurchaseOrderGeneratePurchaseOrder'
 			Тогда элемент формы с именем "Message" стал равен 'All items in sales order are already ordered by purchase order(s).'
 			И я закрыл все окна клиентского приложения
@@ -1327,9 +1329,9 @@
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
-				| 'DFC'         |
+				| 'Kalipso'         |
 			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "LegalName" стал равен 'DFC'
+			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'       |
@@ -1374,13 +1376,13 @@
 			И я нажимаю кнопку выбора у поля "Partner"
 			И в таблице "List" я перехожу к строке:
 				| 'Description' |
-				| 'DFC'         |
+				| 'Kalipso'         |
 			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "LegalName" стал равен 'DFC'
+			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
 			И я нажимаю кнопку выбора у поля "Partner term"
 			И в таблице "List" я перехожу к строке:
 					| 'Description'       |
-					| 'Partner term DFC' |
+					| 'Basic Partner terms, TRY' |
 			И в таблице "List" я выбираю текущую строку
 			* Add a row of items
 				И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
@@ -1415,19 +1417,19 @@
 		И я нажимаю на кнопку 'Post'
 		* Check message output when trying to create SalesInvoice
 			И я нажимаю на кнопку 'Sales invoice'
-			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of sales order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону "Not properly status of Sales order* to proceed."
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю на кнопку 'Purchase invoice'
-			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of sales order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону "Not properly status of Sales order* to proceed."
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю на кнопку 'Purchase order'
-			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of sales order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону "Not properly status of sales order* to proceed."
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И я нажимаю на кнопку 'Shipment confirmation'
-			Тогда элемент формы с именем "Message" стал равен шаблону 'Not properly status of sales order*'
+			Тогда элемент формы с именем "Message" стал равен шаблону "Not properly status of Sales order* to proceed."
 			Когда открылось окно '1C:Enterprise'
 			И я нажимаю на кнопку 'OK'
 			И из выпадающего списка "Status" я выбираю точное значение 'Approved'

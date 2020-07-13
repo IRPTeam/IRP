@@ -536,6 +536,12 @@ For ease of filling
 			| 'Code' |
 			| 'TRY'  |
 		И в таблице "List" я выбираю текущую строку
+	* Select Company
+		И я нажимаю кнопку выбора у поля "Company"
+		И в таблице "List" я перехожу к строке:
+			| 'Description'  |
+			| 'Main Company' |
+		И в таблице "List" я выбираю текущую строку
 	* Add cheque
 		И в таблице "ChequeBonds" я нажимаю на кнопку 'Fill cheques'
 		И в таблице "List" я перехожу к строке:

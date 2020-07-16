@@ -363,11 +363,11 @@ Function GetErrorMessage(BasisDocument)
 			Else
 				If PurchaseInvoiceExist(BasisDocument) Then
 					ErrorMessage = R().Error_019;
-					ErrorMessage = StrTemplate(ErrorMessage, R().S_021, BasisDocument.Metadata().Synonym);
+					ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.GoodsReceipt.Synonym, BasisDocument.Metadata().Synonym);
 				Else
 					
 					
-					ErrorMessage = R().Error_029;
+					ErrorMessage = R().Error_017;
 				EndIf;
 				
 			EndIf;
@@ -377,7 +377,7 @@ Function GetErrorMessage(BasisDocument)
 		
 	Else
 		ErrorMessage = R().Error_019;
-		ErrorMessage = StrTemplate(ErrorMessage, R().S_021, BasisDocument.Metadata().Synonym);
+		ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.GoodsReceipt.Synonym, BasisDocument.Metadata().Synonym);
 	EndIf;
 	
 	Return ErrorMessage;

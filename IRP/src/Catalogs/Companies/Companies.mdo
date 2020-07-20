@@ -108,11 +108,11 @@
       <value>Type</value>
     </synonym>
     <type>
-      <types>CatalogRef.CompanyTypes</types>
+      <types>EnumRef.CompanyLegalType</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

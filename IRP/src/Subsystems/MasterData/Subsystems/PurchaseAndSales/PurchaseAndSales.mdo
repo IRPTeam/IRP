@@ -7,7 +7,6 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.CompanyTypes</content>
   <content>Catalog.Partners</content>
   <content>Catalog.PartnerSegments</content>
   <content>Catalog.Countries</content>

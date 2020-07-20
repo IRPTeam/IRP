@@ -1,222 +1,222 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: product / service selection filter
+Feature: product / service selection filter
 
-Как разработчик
-Я хочу добавить фильтр по выбору товара/услуги
-Для удобства добавления товара в документы закупки и перемещения
+As a developer
+I want to add a product/service filter.
+For the convenience of adding items to the purchase and transfer documents
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
-# услуги доступны
+# services available
 
-Сценарий: _300401 check filter on the choice of services in the document Purchase order
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку с именем 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" содержит строки:
+Scenario: _300401 check filter on the choice of services in the document Purchase order
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	And I click the button named "FormCreate"
+	And I click the button named "Add"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table contains lines
 		| Description          |
 		| Dress TR             |
 		| Service TR           |
 		| Router               |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300402 check filter on the choice of services in the document Purchase invoice
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку с именем 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" содержит строки:
+Scenario: _300402 check filter on the choice of services in the document Purchase invoice
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I click the button named "FormCreate"
+	And I click the button named "Add"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table contains lines
 		| Description          |
 		| Dress TR             |
 		| Service TR           |
 		| Router               |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300403 check filter on the choice of services in the document Sales order
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" содержит строки:
+Scenario: _300403 check filter on the choice of services in the document Sales order
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And in the table "ItemList" I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table contains lines
 		| Description          |
 		| Dress TR             |
 		| Service TR           |
 		| Router               |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: _300404 check filter on the choice of services in the document Sales invoice
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" содержит строки:
+Scenario: _300404 check filter on the choice of services in the document Sales invoice
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I click the button named "FormCreate"
+	And in the table "ItemList" I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table contains lines
 		| Description          |
 		| Dress TR             |
 		| Service TR           |
 		| Router               |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-# услуги не доступны
+# services not available
 
-Сценарий: _300405 check filter on the choice of services in the document Inventory transfer
-	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку с именем 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+Scenario: _300405 check filter on the choice of services in the document Inventory transfer
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	And I click the button named "FormCreate"
+	And I click the button named "Add"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300406 check filter on the choice of services in the document Inventory transfer order
-	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку с именем 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+Scenario: _300406 check filter on the choice of services in the document Inventory transfer order
+	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+	And I click the button named "FormCreate"
+	And I click the button named "Add"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300407 check filter on the choice of services in the document Internal Supply Request
-	И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+Scenario: _300407 check filter on the choice of services in the document Internal Supply Request
+	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+	And I click the button named "FormCreate"
+	And in the table "ItemList" I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300408 check filter on the choice of services in the document Purchase return order
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку с именем 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+Scenario: _300408 check filter on the choice of services in the document Purchase return order
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+	And I click the button named "FormCreate"
+	And I click the button named "Add"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300409 check filter on the choice of services in the document Purchase return
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку с именем 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+Scenario: _300409 check filter on the choice of services in the document Purchase return
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I click the button named "FormCreate"
+	And I click the button named "Add"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300410 check filter on the choice of services in the document Sales Return
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку с именем 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+Scenario: _300410 check filter on the choice of services in the document Sales Return
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I click the button named "FormCreate"
+	And I click the button named "Add"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300411 check filter on the choice of services in the document Sales return order
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+Scenario: _300411 check filter on the choice of services in the document Sales return order
+	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+	And I click the button named "FormCreate"
+	And I click "Add" button
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300412 check filter on the choice of services in the document GoodsReceipt
-	И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+Scenario: _300412 check filter on the choice of services in the document GoodsReceipt
+	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+	And I click the button named "FormCreate"
+	And I click "Add" button
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300413 check filter on the choice of services in the document Shipment Confirmation
-	И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку с именем 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+Scenario: _300413 check filter on the choice of services in the document Shipment Confirmation
+	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+	And I click the button named "FormCreate"
+	And I click the button named "Add"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: _300416 check filter on the choice of services in the document Bundling
-	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Item bundle"
-	Тогда открылось окно 'Items'
-	Тогда таблица "List" не содержит строки:
+Scenario: _300416 check filter on the choice of services in the document Bundling
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	And I click the button named "FormCreate"
+	And I click Select button of "Item bundle" field
+	Then "Items" window is opened
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрываю окно 'Items'
-	И я перехожу к закладке "Item list"
-	И в таблице "ItemList" я нажимаю на кнопку 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+	And I close "Items" window
+	And I move to "Item list" tab
+	And in the table "ItemList" I click "Add" button
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300417 check filter on the choice of services in the document Unbundling
-	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Item bundle"
-	Тогда открылось окно 'Items'
-	Тогда таблица "List" не содержит строки:
+Scenario: _300417 check filter on the choice of services in the document Unbundling
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
+	And I click the button named "FormCreate"
+	And I click Select button of "Item bundle" field
+	Then "Items" window is opened
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрываю окно 'Items'
-	И я перехожу к закладке "Item list"
-	И в таблице "ItemList" я нажимаю на кнопку 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+	And I close "Items" window
+	And I move to "Item list" tab
+	And in the table "ItemList" I click "Add" button
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300418 check filter on the choice of services in the document StockAdjustmentAsSurplus
-	И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+Scenario: _300418 check filter on the choice of services in the document StockAdjustmentAsSurplus
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+	And I click the button named "FormCreate"
+	And I click "Add" button
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300419 check filter on the choice of services in the document StockAdjustmentAsWriteOff
-	И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+Scenario: _300419 check filter on the choice of services in the document StockAdjustmentAsWriteOff
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+	And I click the button named "FormCreate"
+	And I click "Add" button
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300420 check filter on the choice of services in the document PhysicalInventory
-	И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку 'Add'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда таблица "List" не содержит строки:
+Scenario: _300420 check filter on the choice of services in the document PhysicalInventory
+	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+	And I click the button named "FormCreate"
+	And I click "Add" button
+	And I click choice button of "Item" attribute in "ItemList" table
+	And "List" table does not contain lines
 		| Description          |
 		| Service TR           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows

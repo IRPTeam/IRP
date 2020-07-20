@@ -1,681 +1,680 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 @Test
 
-Функционал: access rights
+Feature: access rights
 
 As an owner
 I want to create groups, User access profiles and users
 To restrict user access rights
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I open new TestClient session or connect the existing one
 
 
-Сценарий: _008001 adding employees to the Partners catalog
+Scenario: _008001 adding employees to the Partners catalog
 	* Opening the form for filling in Partners
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And Delay 2
 	* Creating test partners for employees: Alexander Orlov, Anna Petrova, David Romanov, Arina Brown
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Alexander Orlov'
-		И в поле с именем 'Description_tr' я ввожу текст 'Alexander Orlov TR'
-		И я нажимаю на кнопку 'Ok'
-		И я устанавливаю флаг с именем 'Employee'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Anna Petrova'
-		И в поле с именем 'Description_tr' я ввожу текст 'Anna Petrova TR'
-		И я нажимаю на кнопку 'Ok'
-		И я устанавливаю флаг с именем 'Employee'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'David Romanov'
-		И в поле с именем 'Description_tr' я ввожу текст 'David Romanov TR'
-		И я нажимаю на кнопку 'Ok'
-		И я устанавливаю флаг с именем 'Employee'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Arina Brown'
-		И в поле с именем 'Description_tr' я ввожу текст 'Arina Brown TR'
-		И я нажимаю на кнопку 'Ok'
-		И я устанавливаю флаг с именем 'Employee'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Checking for created elements
-		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Alexander Orlov"
-		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Anna Petrova"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "David Romanov"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Arina Brown"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Alexander Orlov" text in the field named "Description_en"
+		And I input "Alexander Orlov TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox named "Employee"
+		And I click the button named "FormWriteAndClose"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Anna Petrova" text in the field named "Description_en"
+		And I input "Anna Petrova TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox named "Employee"
+		And I click the button named "FormWriteAndClose"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "David Romanov" text in the field named "Description_en"
+		And I input "David Romanov TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox named "Employee"
+		And I click the button named "FormWriteAndClose"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Arina Brown" text in the field named "Description_en"
+		And I input "Arina Brown TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox named "Employee"
+		And I click the button named "FormWriteAndClose"
+	* Check for created elements
+		Then I check for the "Partners" catalog element with the "Description_en" "Alexander Orlov"
+		Then I check for the "Partners" catalog element with the "Description_en" "Anna Petrova"
+		And Delay 2
+		Then I check for the "Partners" catalog element with the "Description_en" "David Romanov"
+		And Delay 2
+		Then I check for the "Partners" catalog element with the "Description_en" "Arina Brown"
 
 
 
 
-Сценарий: _008002 User access groups creation
+Scenario: _008002 User access groups creation
 	* Opening the form for filling in User access groups
-		И я открываю навигационную ссылку "e1cib/list/Catalog.AccessGroups"
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
 	* Access group creation Commercial Agent
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Commercial Agent'
-		И в поле с именем 'Description_tr' я ввожу текст 'Commercial Agent TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Commercial Agent" text in the field named "Description_en"
+		And I input "Commercial Agent TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Access group creation "Manager"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Manager'
-		И в поле с именем 'Description_tr' я ввожу текст 'Manager TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Manager" text in the field named "Description_en"
+		And I input "Manager TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Access group creation "Administrators"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Administrators'
-		И в поле с именем 'Description_tr' я ввожу текст 'Administrators TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Administrators" text in the field named "Description_en"
+		And I input "Administrators TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Access group creation "Financier"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Financier'
-		И в поле с именем 'Description_tr' я ввожу текст 'Financier TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-	* Checking for created elements
-		Тогда В базе появился хотя бы один элемент справочника "AccessGroups"
-		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_en" "Commercial Agent"  
-		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_tr" "Commercial Agent TR"
-		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_en" "Manager"  
-		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_en" "Administrators"  
-		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_en" "Financier" 
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Financier" text in the field named "Description_en"
+		And I input "Financier TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+	* Check for created elements
+		Then I check for the "AccessGroups" catalog element with the "Description_en" "Commercial Agent"  
+		Then I check for the "AccessGroups" catalog element with the "Description_tr" "Commercial Agent TR"
+		Then I check for the "AccessGroups" catalog element with the "Description_en" "Manager"  
+		Then I check for the "AccessGroups" catalog element with the "Description_en" "Administrators"  
+		Then I check for the "AccessGroups" catalog element with the "Description_en" "Financier" 
 
-Сценарий: _008003 User access profiles creation
+Scenario: _008003 User access profiles creation
 	* Opening the form for filling in profiles
-		И я открываю навигационную ссылку "e1cib/list/Catalog.AccessProfiles"
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.AccessProfiles"
+		And Delay 2
 	* User access profiles creation Commercial Agent
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Commercial Agent'
-		И в поле с именем 'Description_tr' я ввожу текст 'Commercial Agent TR'
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "Roles" я нажимаю на кнопку 'Update roles'
-		И я настраиваю доступ для торгового агента
-			И в таблице "Roles" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Commercial Agent" text in the field named "Description_en"
+		And I input "Commercial Agent TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And in the table "Roles" I click "Update roles" button
+		* Set up access for the Commercial Agent
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'      | 'Use' |
 				| 'IRP'           | 'Run mobile client' | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И в таблице "Roles" я перехожу к строке:
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'    | 'Use' |
 				| 'IRP'           | 'Run thin client' | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И в таблице "Roles" я перехожу к строке:
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'   | 'Use' |
 				| 'IRP'           | 'Run web client' | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И в таблице "Roles" я перехожу к строке:
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation' | 'Use' |
 				| 'IRP'           | 'Basic role'   | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-			И я жду закрытия окна 'User access profiles (create)' в течение 20 секунд
-			И Пауза 5
+			And I change "Use" checkbox in "Roles" table
+			And I click the button named "FormWriteAndClose"
+			And I wait "User access profiles (create)" window closing in 20 seconds
+			And Delay 5
 	* User access profiles creation Manager
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Manager'
-		И в поле с именем 'Description_tr' я ввожу текст 'Manager TR'
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "Roles" я нажимаю на кнопку 'Update roles'
-		И я указываю права доступа для менеджера
-			И в таблице "Roles" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Manager" text in the field named "Description_en"
+		And I input "Manager TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And in the table "Roles" I click "Update roles" button
+		* Set up access for the Manager
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'     | 'Use' |
 				| 'IRP'           | 'Run thick client' | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И в таблице "Roles" я перехожу к строке:
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'    | 'Use' |
 				| 'IRP'           | 'Run thin client' | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И в таблице "Roles" я перехожу к строке:
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'   | 'Use' |
 				| 'IRP'           | 'Run web client' | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я жду закрытия окна 'User access profiles (create)' в течение 20 секунд
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+		And I click the button named "FormWriteAndClose"
+		And I wait "User access profiles (create)" window closing in 20 seconds
 	* User access profiles creation Financier
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Financier'
-		И в поле с именем 'Description_tr' я ввожу текст 'Financier TR'
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "Roles" я нажимаю на кнопку 'Update roles'
-		И я указываю права доступа для финансиста
-			И в таблице "Roles" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Financier" text in the field named "Description_en"
+		And I input "Financier TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And in the table "Roles" I click "Update roles" button
+		* Set up access for the Financier
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'    | 'Use' |
 				| 'IRP'           | 'Run thin client' | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И в таблице "Roles" я перехожу к строке:
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'   | 'Use' |
 				| 'IRP'           | 'Run web client' | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я жду закрытия окна 'User access profiles (create)' в течение 20 секунд
+			And I change "Use" checkbox in "Roles" table
+		And I click the button named "FormWriteAndClose"
+		And I wait "User access profiles (create)" window closing in 20 seconds
 	* User access profiles creation Administrators
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Administrators'
-		И в поле с именем 'Description_tr' я ввожу текст 'Administrators TR'
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "Roles" я нажимаю на кнопку 'Update roles'
-		И я указываю права доступа для админа
-			И в таблице "Roles" я нажимаю на кнопку 'Update roles'
-			И в таблице "Roles" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Administrators" text in the field named "Description_en"
+		And I input "Administrators TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And in the table "Roles" I click "Update roles" button
+		Set up access for admin
+			And in the table "Roles" I click "Update roles" button
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation' | 'Use' |
 				| 'IRP'           | 'Full access'  | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И в таблице "Roles" я перехожу к строке:
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'     | 'Use' |
 				| 'IRP'           | 'Run thick client' | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И в таблице "Roles" я перехожу к строке:
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'    | 'Use' |
 				| 'IRP'           | 'Run thin client' | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И в таблице "Roles" я перехожу к строке:
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'   | 'Use' |
 				| 'IRP'           | 'Run web client' | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И в таблице "Roles" я перехожу к строке:
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'      | 'Use' |
 				| 'IRP'           | 'Run mobile client' | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И в таблице "Roles" я перехожу к строке:
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation' | 'Use' |
 				| 'IRP'           | 'Basic role'   | 'No'  |
-			И в таблице "Roles" я изменяю флаг 'Use'
-			И в таблице "Roles" я завершаю редактирование строки
-			И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-			И я жду закрытия окна 'User access profiles (create)' в течение 20 секунд
-	* Checking for created elements
-		Тогда В базе появился хотя бы один элемент справочника "AccessProfiles"
-		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_en" "Commercial Agent"  
-		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_en" "Manager"  
-		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_en" "Financier"  
-		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_en" "Administrators"  
+			And I change "Use" checkbox in "Roles" table
+			And I finish line editing in "Roles" table
+			And I click the button named "FormWriteAndClose"
+			And I wait "User access profiles (create)" window closing in 20 seconds
+	* Check for created elements
+		Then I check for the "AccessProfiles" catalog element with the "Description_en" "Commercial Agent"  
+		Then I check for the "AccessProfiles" catalog element with the "Description_en" "Manager"  
+		Then I check for the "AccessProfiles" catalog element with the "Description_en" "Financier"  
+		Then I check for the "AccessProfiles" catalog element with the "Description_en" "Administrators"  
 
 
 
-Сценарий: _008004 filling in the "Users" catalog 
+Scenario: _008004 filling in the "Users" catalog 
 	* Opening the form for filling in users
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Users"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And Delay 2
 	* User creation Commercial Agent 1
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Daniel Smith (Commercial Agent 1)'
-		И в поле с именем 'Description_tr' я ввожу текст 'Daniel Smith (Commercial Agent 1) TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Login' я ввожу текст 'DSmith'
-		И в поле 'Localization code' я ввожу текст 'EN' 
-		И в поле 'Interface localization code' я ввожу текст 'en' 
-		И я устанавливаю флаг с именем "ShowInList"
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		Тогда В базе появился хотя бы один элемент справочника "Users"
+		And I click Open button of the field named "Description_en"
+		And I input "Daniel Smith (Commercial Agent 1)" text in the field named "Description_en"
+		And I input "Daniel Smith (Commercial Agent 1) TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "DSmith" text in "Login" field
+		And I input "EN" text in "Localization code" field
+		And I input "en" text in "Interface localization code" field
+		And I set checkbox named "ShowInList"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* User creation Commercial Agent 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Alexander Orlov (Commercial Agent 2)'
-		И в поле с именем 'Description_tr' я ввожу текст 'Alexander Orlov (Commercial Agent 2) TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Login' я ввожу текст 'AOrlov'
-		И в поле 'Localization code' я ввожу текст 'tr' 
-		И в поле 'Interface localization code' я ввожу текст 'tr'
-		И я устанавливаю флаг с именем "ShowInList"
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Alexander Orlov (Commercial Agent 2)" text in the field named "Description_en"
+		And I input "Alexander Orlov (Commercial Agent 2) TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "AOrlov" text in "Login" field
+		And I input "tr" text in "Localization code" field
+		And I input "tr" text in "Interface localization code" field
+		And I set checkbox named "ShowInList"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Alexander Orlov |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* User creation Commercial Agent 3
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Anna Petrova (Commercial Agent 3)'
-		И в поле с именем 'Description_tr' я ввожу текст 'Anna Petrova (Commercial Agent 3) TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Login' я ввожу текст 'APetrova'
-		И в поле 'Localization code' я ввожу текст 'tr' 
-		И в поле 'Interface localization code' я ввожу текст 'tr'
-		И я устанавливаю флаг с именем "ShowInList"
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Anna Petrova (Commercial Agent 3)" text in the field named "Description_en"
+		And I input "Anna Petrova (Commercial Agent 3) TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "APetrova" text in "Login" field
+		And I input "tr" text in "Localization code" field
+		And I input "tr" text in "Interface localization code" field
+		And I set checkbox named "ShowInList"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Anna Petrova |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* User creation Manager 1
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Olivia Williams (Manager 1)'
-		И в поле с именем 'Description_tr' я ввожу текст 'Olivia Williams (Manager 1) TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Login' я ввожу текст 'OWilliams'
-		И в поле 'Localization code' я ввожу текст 'tr' 
-		И в поле 'Interface localization code' я ввожу текст 'tr'
-		И я устанавливаю флаг с именем "ShowInList"
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Olivia Williams (Manager 1)" text in the field named "Description_en"
+		And I input "Olivia Williams (Manager 1) TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "OWilliams" text in "Login" field
+		And I input "tr" text in "Localization code" field
+		And I input "tr" text in "Interface localization code" field
+		And I set checkbox named "ShowInList"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* User creation Manager 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Emily Jones (Manager 2)'
-		И в поле с именем 'Description_tr' я ввожу текст 'Emily Jones (Manager 2) TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Login' я ввожу текст 'EJones'
-		И в поле 'Localization code' я ввожу текст 'tr' 
-		И в поле 'Interface localization code' я ввожу текст 'tr'
-		И я устанавливаю флаг с именем "ShowInList"
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Emily Jones (Manager 2)" text in the field named "Description_en"
+		And I input "Emily Jones (Manager 2) TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "EJones" text in "Login" field
+		And I input "tr" text in "Localization code" field
+		And I input "tr" text in "Interface localization code" field
+		And I set checkbox named "ShowInList"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* User creation Manager 3
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Sofia Borisova (Manager 3)'
-		И в поле с именем 'Description_tr' я ввожу текст 'Sofia Borisova (Manager 3) TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Login' я ввожу текст 'SBorisova'
-		И в поле 'Localization code' я ввожу текст 'tr' 
-		И в поле 'Interface localization code' я ввожу текст 'tr'
-		И я устанавливаю флаг с именем "ShowInList"
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Sofia Borisova (Manager 3)" text in the field named "Description_en"
+		And I input "Sofia Borisova (Manager 3) TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "SBorisova" text in "Login" field
+		And I input "tr" text in "Localization code" field
+		And I input "tr" text in "Interface localization code" field
+		And I set checkbox named "ShowInList"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* User creation Financier 1
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'David Romanov (Financier 1)'
-		И в поле с именем 'Description_tr' я ввожу текст 'David Romanov (Financier 1) TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Login' я ввожу текст 'DRomanov'
-		И в поле 'Localization code' я ввожу текст 'tr' 
-		И в поле 'Interface localization code' я ввожу текст 'tr'
-		И я устанавливаю флаг с именем "ShowInList"
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "David Romanov (Financier 1)" text in the field named "Description_en"
+		And I input "David Romanov (Financier 1) TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "DRomanov" text in "Login" field
+		And I input "tr" text in "Localization code" field
+		And I input "tr" text in "Interface localization code" field
+		And I set checkbox named "ShowInList"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| David Romanov |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
 	* User creation Financier 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Ella Zelenova (Financier 2)'
-		И в поле с именем 'Description_tr' я ввожу текст 'Ella Zelenova (Financier 2) TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Login' я ввожу текст 'EZelenova'
-		И в поле 'Localization code' я ввожу текст 'tr' 
-		И в поле 'Interface localization code' я ввожу текст 'tr'
-		И я устанавливаю флаг с именем "ShowInList"
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Ella Zelenova (Financier 2)" text in the field named "Description_en"
+		And I input "Ella Zelenova (Financier 2) TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "EZelenova" text in "Login" field
+		And I input "tr" text in "Localization code" field
+		And I input "tr" text in "Interface localization code" field
+		And I set checkbox named "ShowInList"
+		And I click the button named "FormWriteAndClose"
 	* User creation Financier 3
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Arina Brown (Financier 3)'
-		И в поле с именем 'Description_tr' я ввожу текст 'Arina Brown (Financier 3)TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Login' я ввожу текст 'ABrown'
-		И в поле 'Localization code' я ввожу текст 'tr' 
-		И в поле 'Interface localization code' я ввожу текст 'tr'
-		И я устанавливаю флаг с именем "ShowInList"
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Arina Brown (Financier 3)" text in the field named "Description_en"
+		And I input "Arina Brown (Financier 3)TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "ABrown" text in "Login" field
+		And I input "tr" text in "Localization code" field
+		And I input "tr" text in "Interface localization code" field
+		And I set checkbox named "ShowInList"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Arina Brown |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Checking for created elements
-		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "Daniel Smith (Commercial Agent 1)"
-		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "Alexander Orlov (Commercial Agent 2)"  
-		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "Anna Petrova (Commercial Agent 3)"
-		И Пауза 1
-		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "Olivia Williams (Manager 1)"
-		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "Emily Jones (Manager 2)"
-		И Пауза 1
-		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "Sofia Borisova (Manager 3)"
-		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "David Romanov (Financier 1)"
-		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "Ella Zelenova (Financier 2)"
-		И Пауза 1
-		Тогда я проверяю наличие элемента справочника "Users" со значением поля "Description_en" "Arina Brown (Financier 3)"
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+	* Check for created elements
+		Then I check for the "Users" catalog element with the "Description_en" "Daniel Smith (Commercial Agent 1)"
+		Then I check for the "Users" catalog element with the "Description_en" "Alexander Orlov (Commercial Agent 2)"  
+		Then I check for the "Users" catalog element with the "Description_en" "Anna Petrova (Commercial Agent 3)"
+		And Delay 1
+		Then I check for the "Users" catalog element with the "Description_en" "Olivia Williams (Manager 1)"
+		Then I check for the "Users" catalog element with the "Description_en" "Emily Jones (Manager 2)"
+		And Delay 1
+		Then I check for the "Users" catalog element with the "Description_en" "Sofia Borisova (Manager 3)"
+		Then I check for the "Users" catalog element with the "Description_en" "David Romanov (Financier 1)"
+		Then I check for the "Users" catalog element with the "Description_en" "Ella Zelenova (Financier 2)"
+		And Delay 1
+		Then I check for the "Users" catalog element with the "Description_en" "Arina Brown (Financier 3)"
 
 
-Сценарий: _008005 assignment of access rights to users
+Scenario: _008005 assignment of access rights to users
 	* Opening the User access groups catalog
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AccessGroups'
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
 	* Assignment of access rights to sales rep
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Commercial Agent'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Profiles" я нажимаю на кнопку с именем 'ProfilesAdd'
-		И в таблице "Profiles" я нажимаю кнопку выбора у реквизита "Profile"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Profiles" I click the button named "ProfilesAdd"
+		And I click choice button of "Profile" attribute in "Profiles" table
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Commercial Agent'       |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 1
-		И я перехожу к закладке "Users"
-		И в таблице "Profiles" я завершаю редактирование строки
-		И в таблице "Users" я нажимаю на кнопку с именем 'UsersAdd'
-		И в таблице "Users" я нажимаю кнопку выбора у реквизита "User"
-		И Пауза 3
-		И я активизирую окно "Users"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 1
+		And I move to "Users" tab
+		And I finish line editing in "Profiles" table
+		And in the table "Users" I click the button named "UsersAdd"
+		And I click choice button of "User" attribute in "Users" table
+		And Delay 3
+		And I activate "Users" window
+		And I go to line in "List" table
 			| 'Login'  |
 			| 'DSmith' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Users" я завершаю редактирование строки
-		И в таблице "Users" я нажимаю на кнопку с именем 'UsersAdd'
-		И в таблице "Users" я нажимаю кнопку выбора у реквизита "User"
-		И Пауза 1
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Users" table
+		And in the table "Users" I click the button named "UsersAdd"
+		And I click choice button of "User" attribute in "Users" table
+		And Delay 1
+		And I go to line in "List" table
 			| 'Login' |
 			| 'AOrlov'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Users" я завершаю редактирование строки
-		И в таблице "Users" я нажимаю на кнопку с именем 'UsersAdd'
-		И в таблице "Users" я нажимаю кнопку выбора у реквизита "User"
-		И Пауза 1
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Users" table
+		And in the table "Users" I click the button named "UsersAdd"
+		And I click choice button of "User" attribute in "Users" table
+		And Delay 1
+		And I go to line in "List" table
 			| 'Login' |
 			| 'APetrova'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Users" я завершаю редактирование строки
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I select current line in "List" table
+		And I finish line editing in "Users" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Assignment of access rights to managers
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Manager'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Profiles" я нажимаю на кнопку с именем 'ProfilesAdd'
-		И в таблице "Profiles" я нажимаю кнопку выбора у реквизита "Profile"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Profiles" I click the button named "ProfilesAdd"
+		And I click choice button of "Profile" attribute in "Profiles" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Commercial Agent'       |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 1
-		И я перехожу к закладке "Users"
-		И в таблице "Profiles" я завершаю редактирование строки
-		И в таблице "Users" я нажимаю на кнопку с именем 'UsersAdd'
-		И в таблице "Users" я нажимаю кнопку выбора у реквизита "User"
-		И Пауза 1
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 1
+		And I move to "Users" tab
+		And I finish line editing in "Profiles" table
+		And in the table "Users" I click the button named "UsersAdd"
+		And I click choice button of "User" attribute in "Users" table
+		And Delay 1
+		And I go to line in "List" table
 			| 'Login' |
 			| 'OWilliams'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Users" я завершаю редактирование строки
-		И в таблице "Users" я нажимаю на кнопку с именем 'UsersAdd'
-		И в таблице "Users" я нажимаю кнопку выбора у реквизита "User"
-		И Пауза 1
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Users" table
+		And in the table "Users" I click the button named "UsersAdd"
+		And I click choice button of "User" attribute in "Users" table
+		And Delay 1
+		And I go to line in "List" table
 				| 'Login' |
 				| 'EJones'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Users" я завершаю редактирование строки
-		И в таблице "Users" я нажимаю на кнопку с именем 'UsersAdd'
-		И в таблице "Users" я нажимаю кнопку выбора у реквизита "User"
-		И Пауза 1
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Users" table
+		And in the table "Users" I click the button named "UsersAdd"
+		And I click choice button of "User" attribute in "Users" table
+		And Delay 1
+		And I go to line in "List" table
 				| 'Login' |
 				| 'SBorisova'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Users" я завершаю редактирование строки
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I select current line in "List" table
+		And I finish line editing in "Users" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Assignment of access rights to financiers
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Financier'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Profiles" я нажимаю на кнопку с именем 'ProfilesAdd'
-		И в таблице "Profiles" я нажимаю кнопку выбора у реквизита "Profile"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Profiles" I click the button named "ProfilesAdd"
+		And I click choice button of "Profile" attribute in "Profiles" table
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Financier'       |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 1
-		И я перехожу к закладке "Users"
-		И в таблице "Profiles" я завершаю редактирование строки
-		И в таблице "Users" я нажимаю на кнопку с именем 'UsersAdd'
-		И в таблице "Users" я нажимаю кнопку выбора у реквизита "User"
-		И Пауза 1
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 1
+		And I move to "Users" tab
+		And I finish line editing in "Profiles" table
+		And in the table "Users" I click the button named "UsersAdd"
+		And I click choice button of "User" attribute in "Users" table
+		And Delay 1
+		And I go to line in "List" table
 				| 'Login' |
 				| 'DRomanov'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Users" я завершаю редактирование строки
-		И в таблице "Users" я нажимаю на кнопку с именем 'UsersAdd'
-		И в таблице "Users" я нажимаю кнопку выбора у реквизита "User"
-		И Пауза 1
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Users" table
+		And in the table "Users" I click the button named "UsersAdd"
+		And I click choice button of "User" attribute in "Users" table
+		And Delay 1
+		And I go to line in "List" table
 				| 'Login' |
 				| 'EZelenova'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Users" я завершаю редактирование строки
-		И в таблице "Users" я нажимаю на кнопку с именем 'UsersAdd'
-		И в таблице "Users" я нажимаю кнопку выбора у реквизита "User"
-		И Пауза 1
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Users" table
+		And in the table "Users" I click the button named "UsersAdd"
+		And I click choice button of "User" attribute in "Users" table
+		And Delay 1
+		And I go to line in "List" table
 				| 'Login' |
 				| 'ABrown'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Users" я завершаю редактирование строки
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
+		And I select current line in "List" table
+		And I finish line editing in "Users" table
+		And I click the button named "FormWriteAndClose"
 	* Adding a user with administrator access (Turkish localization)
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Administrators'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Profiles" я нажимаю на кнопку с именем 'ProfilesAdd'
-		И в таблице "Profiles" я нажимаю кнопку выбора у реквизита "Profile"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Profiles" I click the button named "ProfilesAdd"
+		And I click choice button of "Profile" attribute in "Profiles" table
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Administrators'       |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 1
-		И я перехожу к закладке "Users"
-		И в таблице "Profiles" я завершаю редактирование строки
-		И в таблице "Users" я нажимаю на кнопку с именем 'UsersAdd'
-		И в таблице "Users" я нажимаю кнопку выбора у реквизита "User"
-		И Пауза 1
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 1
+		And I move to "Users" tab
+		And I finish line editing in "Profiles" table
+		And in the table "Users" I click the button named "UsersAdd"
+		And I click choice button of "User" attribute in "Users" table
+		And Delay 1
+		And I go to line in "List" table
 				| 'Login' |
 				| 'ABrown'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Users" я завершаю редактирование строки
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I select current line in "List" table
+		And I finish line editing in "Users" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 
 
-Сценарий: _008006 creating Partner segments content (employee)
+Scenario: _008006 create Partner segments content (employee)
 	* Opening the form for filling Partner segments content
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.PartnerSegments'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.PartnerSegments"
+		And I click the button named "FormCreate"
+		And Delay 2
 	* Filling in segment information Region 1
-		И я изменяю флаг 'Managers'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Region 1'
-		И в поле с именем 'Description_tr' я ввожу текст '1 Region'
-		И я нажимаю на кнопку 'Ok'
+		And I change checkbox "Managers"
+		And I click Open button of the field named "Description_en"
+		And I input "Region 1" text in the field named "Description_en"
+		And I input "1 Region" text in the field named "Description_tr"
+		And I click "Ok" button
 	* Saving and checking the result
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 10
-		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_en" "Region 1" 
+		And I click the button named "FormWriteAndClose"
+		And Delay 10
+		Then I check for the "PartnerSegments" catalog element with the "Description_en" "Region 1" 
 	* Filling in segment information Region 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я изменяю флаг 'Managers'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Region 2'
-		И в поле с именем 'Description_tr' я ввожу текст '2 Region'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 10
-	* Checking for segment creation Region 2
-		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_en" "Region 2" 
+		And I click the button named "FormCreate"
+		And I change checkbox "Managers"
+		And I click Open button of the field named "Description_en"
+		And I input "Region 2" text in the field named "Description_en"
+		And I input "2 Region" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 10
+	* Check for segment creation Region 2
+		Then I check for the "PartnerSegments" catalog element with the "Description_en" "Region 2" 
 
 
-Сценарий: _008007 adding employees to the Region 1 (A+B) segment from the form
+Scenario: _008007 adding employees to the Region 1 (A+B) segment from the form
 	* Opening Partners catalog
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Adding "Alexander Orlov" to the segment Region 1
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Alexander Orlov' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Manager segment"
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I click Select button of "Manager segment" field
+		And Delay 2
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Region 1' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 2
+		And I select current line in "List" table
+		And Delay 2
+		And I click the button named "FormWriteAndClose"
+		And Delay 2
 	* Adding "Anna Petrova" to the segment Region 1
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Anna Petrova' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Manager segment"
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I click Select button of "Manager segment" field
+		And Delay 2
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Region 1' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 2
+		And I select current line in "List" table
+		And Delay 2
+		And I click the button named "FormWriteAndClose"
+		And Delay 2
 
-Сценарий: _008008 adding employees to the Region 2 (A) segment from the form
+Scenario: _008008 adding employees to the Region 2 (A) segment from the form
 	* Opening Partners catalog
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	*  Adding Alexander Orlov to the segment Region 2
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Alexander Orlov' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Manager segment"
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I click Select button of "Manager segment" field
+		And Delay 2
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Region 2' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I select current line in "List" table
+		And Delay 2
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 
 
-Сценарий: _008009 adding employees to the segment Region 1 from the form (the employee also is a client)
+Scenario: _008009 adding employees to the segment Region 1 from the form (the employee also is a client)
 	* Opening Partners catalog
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Adding Anna Petrova to the segment Region 1
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Anna Petrova' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я изменяю флаг 'Customer'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I change checkbox "Customer"
+		And I click the button named "FormWriteAndClose"
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Anna Petrova' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Manager segment"
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I click Select button of "Manager segment" field
+		And Delay 2
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Region 1' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I select current line in "List" table
+		And Delay 2
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 
 
 
-Сценарий: _008010 addition of employees to the segment Region 2 (C) in register
+Scenario: _008010 addition of employees to the segment Region 2 (C) in register
 	* Opening register Partner segments content
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
+		Given I open hyperlink "e1cib/list/InformationRegister.PartnerSegments"
 	* Adding David Romanov to the segment Region 1
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Segment"
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Select button of "Segment" field
+		And Delay 2
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Region 1'  |
-		И в таблице "List" я выбираю текущую строку
-		Тогда открылось окно 'Partner segments content (create) *'
-		И я нажимаю кнопку выбора у поля "Partner"
-		И Пауза 5
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then "Partner segments content (create) *" window is opened
+		And I click Select button of "Partner" field
+		And Delay 5
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'David Romanov' |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		И таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And "List" table contains lines
 			| Segment | Partner |
 			| Region 1 | David Romanov |
+
+

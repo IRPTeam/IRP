@@ -1,10 +1,10 @@
-#language: ru
+﻿#language: en
 
 @Positive
 @Discount
 @IgnoreOnCIMainBuild
 @tree
-Функционал: check that the discount window is displayed in Sales Order
+Feature: check that the discount window is displayed in Sales Order
 
 As a developer
 I want to add a discount window to the order.
@@ -12,26 +12,26 @@ So that the manager can immediately see the interest and discount amount on the 
 
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 # For each product, a percentage discount is given (e.g. Product A from 2 to 5%, Product B from 3 to 7%). 
 # The sales rep can set a discount from the specified range in the order himself
 
-Сценарий: _033901 check the discount window in the order (displaying discounts accrued on the order)
+Scenario: _033901 check the discount window in the order (displaying discounts accrued on the order)
 	* Inactive Discount on Basic Partner terms
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-		И я нажимаю на кнопку 'List'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I click "List" button
+		And I go to line in "List" table
 			| 'Description'              |
 			| '3+1 Product 1 and Product 2 (not multiplicity), Discount on Basic Partner terms' |
-		И в таблице "List" я выбираю текущую строку
-		И я изменяю флаг 'Launch'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	Когда создаю заказ на Partner A Basic Partner terms, TRY (Product 1 -10 и Product 3 - 5)
+		And I select current line in "List" table
+		And I change checkbox "Launch"
+		And I click "Save and close" button
+		And Delay 10
+	When create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	* Check display of valid discounts in % Offers window
-		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		И     таблица "Offers" стала равной:
+		And in the table "ItemList" I click "% Offers" button
+		And "Offers" table became equal
 			| 'Presentation'                                                                 | 'Is select' | '%' | '∑' |
 			| 'Special Offers'                                                               | ''          | ''  | ''  |
 			| 'Sum'                                                                          | ''          | ''  | ''  |
@@ -46,12 +46,12 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'All items 5+1, Discount on Basic Partner terms'                                  | ' '         | ''  | ''  |
 			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms'                    | ' '         | ''  | ''  |
 	* Check display of selected discount, its amount and percentage
-		И в таблице "Offers" я перехожу к строке:
+		And I go to line in "Offers" table
 			| 'Presentation'                  |
 			| 'All items 5+1, Discount on Basic Partner terms' |
-		И в таблице "Offers" я активизирую поле "Is select"
-		И в таблице "Offers" я выбираю текущую строку
-		И     таблица "Offers" стала равной:
+		And I activate "Is select" field in "Offers" table
+		And I select current line in "Offers" table
+		And "Offers" table became equal
 			| 'Presentation'                                                                 | 'Is select' | '%' | '∑' |
 			| 'Special Offers'                                                               | ''          | ''  | ''  |
 			| 'Sum'                                                                          | ''          | ''  | ''  |
@@ -65,9 +65,9 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'Discount 2 without Vat'                                                       | ' '         | ''  | ''  |
 			| 'All items 5+1, Discount on Basic Partner terms'                                  | '✔'         | ''  | ''  |
 			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms'                    | ' '         | ''  | ''  |
-		И я нажимаю на кнопку 'OK'
-		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		И     таблица "Offers" стала равной:
+		And I click "OK" button
+		And in the table "ItemList" I click "% Offers" button
+		And "Offers" table became equal
 			| 'Presentation'                                                                 | 'Is select' | '%'     | '∑'        |
 			| 'Special Offers'                                                               | ''          | ''      | ''         |
 			| 'Sum'                                                                          | ''          | ''      | ''         |
@@ -82,12 +82,12 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'All items 5+1, Discount on Basic Partner terms'                                  | '✔'         | '15,00' | '1 650,00' |
 			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms'                    | ' '         | ''      | ''         |
 	* Check that the discount is not displayed after cancellation in the order.
-		И в таблице "Offers" я перехожу к строке:
+		And I go to line in "Offers" table
 			| 'Presentation'                  |
 			| 'All items 5+1, Discount on Basic Partner terms' |
-		И в таблице "Offers" я активизирую поле "Is select"
-		И в таблице "Offers" я выбираю текущую строку
-		И     таблица "Offers" стала равной:
+		And I activate "Is select" field in "Offers" table
+		And I select current line in "Offers" table
+		And "Offers" table became equal
 			| 'Presentation'                                              | 'Is select' | '%' | '∑' |
 			| 'Special Offers'                                            | ''          | ''  | ''  |
 			| 'Sum'                                                       | ''          | ''  | ''  |
@@ -101,28 +101,28 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'Discount 2 without Vat'                                    | ' '         | ''  | ''  |
 			| 'All items 5+1, Discount on Basic Partner terms'               | ' '         | ''  | ''  |
 			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms' | ' '         | ''  | ''  |
-		И в таблице "Offers" я перехожу к строке:
+		And I go to line in "Offers" table
 			| 'Presentation'                  |
 			| 'All items 5+1, Discount on Basic Partner terms' |
-		И в таблице "Offers" я активизирую поле "Is select"
-		И в таблице "Offers" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
+		And I activate "Is select" field in "Offers" table
+		And I select current line in "Offers" table
+		And I click "OK" button
 	* Check the discount recalculation in the discount window
-		И я меняю количество по Product 1 на 30 штук
-			И в таблице "ItemList" я нажимаю на кнопку 'Add'
-			Тогда открылось окно 'Pick up items'
-			И в таблице "ItemsList" я перехожу к строке:
+		* Change q-ty for Product 1 to 30 pcs
+			And in the table "ItemList" I click "Add" button
+			Then "Pick up items" window is opened
+			And I go to line in "ItemsList" table
 				| 'Info'          | 'Item'      |
 				| '20 unit × 550' | 'Product 1' |
-			И я меняю значение переключателя 'FastQuantity' на '10'
-			И в таблице "ItemsList" я активизирую поле "Info"
-			И в таблице "ItemsList" я выбираю текущую строку
-			И я нажимаю на кнопку 'OK'
+			And I change "FastQuantity" radio button value to "10"
+			And I activate "Info" field in "ItemsList" table
+			And I select current line in "ItemsList" table
+			And I click "OK" button
 	* Discount recalculation check
-		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		И я нажимаю на кнопку 'OK'
-		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		И     таблица "Offers" стала равной:
+		And in the table "ItemList" I click "% Offers" button
+		And I click "OK" button
+		And in the table "ItemList" I click "% Offers" button
+		And "Offers" table became equal
 			| 'Presentation'                                                                 | 'Is select' | '%'     | '∑'        |
 			| 'Special Offers'                                                               | ''          | ''      | ''         |
 			| 'Sum'                                                                          | ''          | ''      | ''         |
@@ -136,17 +136,17 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'Discount 2 without Vat'                                                       | ' '         | ''      | ''         |
 			| 'All items 5+1, Discount on Basic Partner terms'                                  | '✔'         | '16,67' | '2 750,00' |
 			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms'                    | ' '         | ''      | ''         |
-		И я нажимаю на кнопку 'OK'
+		And I click "OK" button
 	* The discount window shows several valid discounts on order
-		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		И в таблице "Offers" я перехожу к строке:
+		And in the table "ItemList" I click "% Offers" button
+		And I go to line in "Offers" table
 			| 'Presentation'                  |
 			| 'Discount Price 1' |
-		И в таблице "Offers" я активизирую поле "Is select"
-		И в таблице "Offers" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		И     таблица "Offers" стала равной:
+		And I activate "Is select" field in "Offers" table
+		And I select current line in "Offers" table
+		And I click "OK" button
+		And in the table "ItemList" I click "% Offers" button
+		And "Offers" table became equal
 			| 'Presentation'                                                                 | 'Is select' | '%'     | '∑'        |
 			| 'Special Offers'                                                               | ''          | ''      | ''         |
 			| 'Sum'                                                                          | ''          | ''      | ''         |
@@ -160,25 +160,25 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'Discount 2 without Vat'                                                       | ' '         | ''      | ''         |
 			| 'All items 5+1, Discount on Basic Partner terms'                                  | '✔'         | '16,67' | '2 750,00' |
 			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms'                    | ' '         | ''      | ''         |
-		И я нажимаю на кнопку 'OK'
-	* Checking the range discount display (not displayed in this window)
-		И я по Product 1 ставлю диапазонную скидку 8%
-			И в таблице "ItemList" я перехожу к строке:
+		And I click "OK" button
+	* Check the range discount display (not displayed in this window)
+		* Select discount 8% for Product 1
+			And I go to line in "ItemList" table
 				| 'Item'      |
 				| 'Product 1' |
-			И в таблице "ItemList" я активизирую поле с именем "ItemListInfo"
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListContextMenuCheckOffersInRow'
-			И в таблице "Offers" я перехожу к строке:
+			And I activate field named "ItemListInfo" in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListContextMenuCheckOffersInRow"
+			And I go to line in "Offers" table
 				| 'Offer'                               |
 				| 'Range Discount Basic (Product 1, 3)' |
-			И в таблице "Offers" я активизирую поле "∑"
-			И в таблице "Offers" я выбираю текущую строку
-			И в поле с именем "Percent" я ввожу текст "8"
-			И я нажимаю на кнопку '<< Back'
-			И в таблице "Offers" я нажимаю на кнопку 'OK'
-			И Пауза 2
-		И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-		И     таблица "Offers" стала равной:
+			And I activate "∑" field in "Offers" table
+			And I select current line in "Offers" table
+			And I input "8" text in the field named "Percent"
+			And I click "<< Back" button
+			And in the table "Offers" I click "OK" button
+			And Delay 2
+		And in the table "ItemList" I click "% Offers" button
+		And "Offers" table became equal
 			| 'Presentation'                                                                 | 'Is select' | '%'     | '∑'        |
 			| 'Special Offers'                                                               | ''          | ''      | ''         |
 			| 'Sum'                                                                          | ''          | ''      | ''         |
@@ -192,8 +192,8 @@ So that the manager can immediately see the interest and discount amount on the 
 			| 'Discount 2 without Vat'                                                       | ' '         | ''      | ''         |
 			| 'All items 5+1, Discount on Basic Partner terms'                                  | '✔'         | '16,67' | '2 750,00' |
 			| '4+1 Product 1 and Product 2, Discount on Basic Partner terms'                    | ' '         | ''      | ''         |
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю на кнопку "Post and close"
+		And I click "OK" button
+		And I click "Post and close" button
 
 
 
@@ -229,6 +229,7 @@ So that the manager can immediately see the interest and discount amount on the 
 
 
 	
+
 
 
 

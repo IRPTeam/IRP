@@ -1,434 +1,434 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: cheque bond transaction
+Feature: cheque bond transaction
 
 As an accountant
 I want to create a Cheque bond transaction document
 For settlements with partners
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _090001 check for metadata ( catalog and document) availability
-	Дано Я открываю основную форму списка документа "ChequeBondTransaction"
-	Дано Я открываю основную форму списка справочника "ChequeBonds"
-	И я закрыл все окна клиентского приложения
+Scenario: _090001 check for metadata ( catalog and document) availability
+	Given I open "ChequeBondTransaction" document default form
+	Given I open "ChequeBonds" catalog default form
+	And I close all client application windows
 
-Сценарий: _090002 create statuses for Cheque bond
+Scenario: _090002 create statuses for Cheque bond
 	* Opening of the catalog Objects status historyes and renaming of predefined elements for Cheque bond
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ObjectStatuses'
-		И в таблице "List" я разворачиваю текущую строку
-		И в таблице "List" я разворачиваю строку:
+		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
+		And I expand current line in "List" table
+		And I expand a line in "List" table
 			| 'Predefined data item name' |
 			| 'ChequeBondTransaction'     |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Predefined data item name' |
 			| 'ChequeBondIncoming'     |
-		И в таблице "List" я активизирую поле "Predefined data item name"
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuChange'
-		И в поле 'ENG' я ввожу текст 'ChequeBondIncoming'
-		И я нажимаю на кнопку 'Save and close'
-		И в таблице "List" я перехожу к строке:
+		And I activate "Predefined data item name" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuChange"
+		And I input "ChequeBondIncoming" text in "ENG" field
+		And I click "Save and close" button
+		And I go to line in "List" table
 			| 'Predefined data item name' |
 			| 'ChequeBondOutgoing'     |
-		И в таблице "List" я активизирую поле "Predefined data item name"
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuChange'
-		И в поле 'ENG' я ввожу текст 'ChequeBondOutgoing'
-		И я нажимаю на кнопку 'Save and close'
+		And I activate "Predefined data item name" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuChange"
+		And I input "ChequeBondOutgoing" text in "ENG" field
+		And I click "Save and close" button
 	* Create statuses for Cheque bond incoming
 		* Create status Taken from partner
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 			| 'Description'        |
 			| 'ChequeBondIncoming' |
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст '01. TakenFromPartner'
-			И я устанавливаю флаг 'Set by default'
-			И я перехожу к закладке с именем "GroupPosting"
-			И я меняю значение переключателя 'Cheque bond balance' на 'Posting'
-			И я меняю значение переключателя 'Advanced' на 'Posting'
-			И я меняю значение переключателя 'Partner account transactions' на 'Posting'
-			И я меняю значение переключателя 'Reconciliation statement' на 'Posting'
-			И я меняю значение переключателя 'Planning cash transactions' на 'Posting'
-			И я нажимаю на кнопку 'Save and close'
+			And I click the button named "FormCreate"
+			And I input "01. TakenFromPartner" text in "ENG" field
+			And I set checkbox "Set by default"
+			And I move to the tab named "GroupPosting"
+			And I change "Cheque bond balance" radio button value to "Posting"
+			And I change "Advanced" radio button value to "Posting"
+			And I change "Partner account transactions" radio button value to "Posting"
+			And I change "Reconciliation statement" radio button value to "Posting"
+			And I change "Planning cash transactions" radio button value to "Posting"
+			And I click "Save and close" button
 		* Create status Payment received
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 			| 'Description'        |
 			| 'ChequeBondIncoming' |
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст '03. PaymentReceived'
-			И я перехожу к закладке с именем "GroupPosting"
-			И я меняю значение переключателя 'Account balance' на 'Posting'
-			И я меняю значение переключателя 'Planning cash transactions' на 'Reversal'
-			И я нажимаю на кнопку 'Save and close'
+			And I click the button named "FormCreate"
+			And I input "03. PaymentReceived" text in "ENG" field
+			And I move to the tab named "GroupPosting"
+			And I change "Account balance" radio button value to "Posting"
+			And I change "Planning cash transactions" radio button value to "Reversal"
+			And I click "Save and close" button
 		* Create status Protested
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 			| 'Description'        |
 			| 'ChequeBondIncoming' |
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст '04. Protested'
-			И я перехожу к закладке с именем "GroupPosting"
-			И я меняю значение переключателя 'Cheque bond balance' на 'Reversal'
-			И я меняю значение переключателя 'Advanced' на 'Reversal'
-			И я меняю значение переключателя 'Partner account transactions' на 'Reversal'
-			И я меняю значение переключателя 'Reconciliation statement' на 'Reversal'
-			И я меняю значение переключателя 'Planning cash transactions' на 'Reversal'
-			И я нажимаю на кнопку 'Save and close'
+			And I click the button named "FormCreate"
+			And I input "04. Protested" text in "ENG" field
+			And I move to the tab named "GroupPosting"
+			And I change "Cheque bond balance" radio button value to "Reversal"
+			And I change "Advanced" radio button value to "Reversal"
+			And I change "Partner account transactions" radio button value to "Reversal"
+			And I change "Reconciliation statement" radio button value to "Reversal"
+			And I change "Planning cash transactions" radio button value to "Reversal"
+			And I click "Save and close" button
 		* Create status Give to bank as assurance
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 			| 'Description'        |
 			| 'ChequeBondIncoming' |
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст '02. GiveToBankAsAssurance'
-			И я нажимаю на кнопку 'Save and close'
+			And I click the button named "FormCreate"
+			And I input "02. GiveToBankAsAssurance" text in "ENG" field
+			And I click "Save and close" button
 	* Create statuses for Cheque bond outgoing
 		* Create status Given to partner
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 				| 'Description'        |
 				| 'ChequeBondOutgoing' |
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст '01. GivenToPartner'
-			И я устанавливаю флаг 'Set by default'
-			И я перехожу к закладке с именем "GroupPosting"
-			И я меняю значение переключателя 'Cheque bond balance' на 'Posting'
-			И я меняю значение переключателя 'Advanced' на 'Posting'
-			И я меняю значение переключателя 'Partner account transactions' на 'Posting'
-			И я меняю значение переключателя 'Reconciliation statement' на 'Posting'
-			И я меняю значение переключателя 'Planning cash transactions' на 'Posting'
-			И я нажимаю на кнопку 'Save and close'
+			And I click the button named "FormCreate"
+			And I input "01. GivenToPartner" text in "ENG" field
+			And I set checkbox "Set by default"
+			And I move to the tab named "GroupPosting"
+			And I change "Cheque bond balance" radio button value to "Posting"
+			And I change "Advanced" radio button value to "Posting"
+			And I change "Partner account transactions" radio button value to "Posting"
+			And I change "Reconciliation statement" radio button value to "Posting"
+			And I change "Planning cash transactions" radio button value to "Posting"
+			And I click "Save and close" button
 		* Create status Payed
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 				| 'Description'        |
 				| 'ChequeBondOutgoing' |
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст '02. Payed'
-			И я перехожу к закладке с именем "GroupPosting"
-			И я меняю значение переключателя 'Account balance' на 'Posting'
-			И я меняю значение переключателя 'Planning cash transactions' на 'Reversal'
-			И я нажимаю на кнопку 'Save and close'
+			And I click the button named "FormCreate"
+			And I input "02. Payed" text in "ENG" field
+			And I move to the tab named "GroupPosting"
+			And I change "Account balance" radio button value to "Posting"
+			And I change "Planning cash transactions" radio button value to "Reversal"
+			And I click "Save and close" button
 		* Create status Protested
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 				| 'Description'        |
 				| 'ChequeBondOutgoing' |
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст '03. Protested'
-			И я перехожу к закладке с именем "GroupPosting"
-			И я меняю значение переключателя 'Cheque bond balance' на 'Reversal'
-			И я меняю значение переключателя 'Advanced' на 'Reversal'
-			И я меняю значение переключателя 'Partner account transactions' на 'Reversal'
-			И я меняю значение переключателя 'Reconciliation statement' на 'Reversal'
-			И я меняю значение переключателя 'Planning cash transactions' на 'Reversal'
-			И я нажимаю на кнопку 'Save and close'
+			And I click the button named "FormCreate"
+			And I input "03. Protested" text in "ENG" field
+			And I move to the tab named "GroupPosting"
+			And I change "Cheque bond balance" radio button value to "Reversal"
+			And I change "Advanced" radio button value to "Reversal"
+			And I change "Partner account transactions" radio button value to "Reversal"
+			And I change "Reconciliation statement" radio button value to "Reversal"
+			And I change "Planning cash transactions" radio button value to "Reversal"
+			And I click "Save and close" button
 	* Setting the order of statuses for incoming cheques
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'          |
 			| '01. TakenFromPartner' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "NextPossibleStatuses" я нажимаю на кнопку с именем 'NextPossibleStatusesAdd'
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
+		And Delay 2
+		And I go to line in "List" table
 			| 'Description'               |
 			| '02. GiveToBankAsAssurance' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "NextPossibleStatuses" я завершаю редактирование строки
-		И в таблице "NextPossibleStatuses" я нажимаю на кнопку с именем 'NextPossibleStatusesAdd'
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "NextPossibleStatuses" я завершаю редактирование строки
-		И в таблице "NextPossibleStatuses" я нажимаю на кнопку с именем 'NextPossibleStatusesAdd'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
+		And I go to line in "List" table
 			| 'Description'   |
 			| '04. Protested' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "NextPossibleStatuses" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна '01. TakenFromPartner (Order status) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And I click "Save and close" button
+		And I wait "01. TakenFromPartner (Order status) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Description'               |
 			| '02. GiveToBankAsAssurance' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "NextPossibleStatuses" я нажимаю на кнопку 'Add'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "NextPossibleStatuses" I click "Add" button
+		And I go to line in "List" table
 			| 'Description'         |
 			| '03. PaymentReceived' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "NextPossibleStatuses" я завершаю редактирование строки
-		И в таблице "NextPossibleStatuses" я нажимаю на кнопку 'Add'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And in the table "NextPossibleStatuses" I click "Add" button
+		And I go to line in "List" table
 			| 'Description'   |
 			| '04. Protested' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "NextPossibleStatuses" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And I click "Save and close" button
 	* Setting the order of statuses for outgoing cheques
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'          |
 			| '01. GivenToPartner' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "NextPossibleStatuses" я нажимаю на кнопку с именем 'NextPossibleStatusesAdd'
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
+		And Delay 2
+		And I go to line in "List" table
 			| 'Description'               |
 			| '02. Payed' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "NextPossibleStatuses" я завершаю редактирование строки
-		И в таблице "NextPossibleStatuses" я нажимаю на кнопку 'Add'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And in the table "NextPossibleStatuses" I click "Add" button
+		And I go to line in "List" table
 			| 'Description'   |
 			| '03. Protested' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "NextPossibleStatuses" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And I click "Save and close" button
 
 
-Сценарий: _090003 create an incoming and outgoing check in the Cheque bonds catalog
+Scenario: _090003 create an incoming and outgoing check in the Cheque bonds catalog
 	* Open catalog form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ChequeBonds'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Catalog.ChequeBonds"
+		And I click the button named "FormCreate"
 	* Create an incoming check
-		И в поле 'Cheque No' я ввожу текст 'Partner cheque 1'
-		И в поле 'Cheque serial No' я ввожу текст 'AA'
-		И из выпадающего списка "Type" я выбираю точное значение 'Partner cheque'
-		И в поле "Due date" я ввожу конец текущего месяца
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I input "Partner cheque 1" text in "Cheque No" field
+		And I input "AA" text in "Cheque serial No" field
+		And I select "Partner cheque" exact value from "Type" drop-down list
+		And I input end of the current month date in "Due date" field
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Amount' я ввожу текст '2 000,00'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I input "2 000,00" text in "Amount" field
+		And I click "Save and close" button
 	* Create an outgoing check
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'Cheque No' я ввожу текст 'Own cheque 1'
-		И в поле 'Cheque serial No' я ввожу текст 'BB'
-		И из выпадающего списка "Type" я выбираю точное значение 'Own cheque'
-		И в поле "Due date" я ввожу конец текущего месяца
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I input "Own cheque 1" text in "Cheque No" field
+		And I input "BB" text in "Cheque serial No" field
+		And I select "Own cheque" exact value from "Type" drop-down list
+		And I input end of the current month date in "Due date" field
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Amount' я ввожу текст '5 000,00'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I input "5 000,00" text in "Amount" field
+		And I click "Save and close" button
 	* Create cheque bond
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ChequeBonds'
-		Тогда таблица "List" содержит строки:
+		Given I open hyperlink "e1cib/list/Catalog.ChequeBonds"
+		And "List" table contains lines
 		| 'Cheque No'        | 'Cheque serial No' | 'Amount'   | 'Type'           | 'Currency' |
 		| 'Own cheque 1'     | 'BB'               | '5 000,00' | 'Own cheque'     | 'TRY'      |
 		| 'Partner cheque 1' | 'AA'               | '2 000,00' | 'Partner cheque' | 'TRY'      |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Check that fields are required to be filled in
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ChequeBonds'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку 'Save'
-		Затем я жду, что в сообщениях пользователю будет подстрока '"Cheque No" is a required field' в течение 5 секунд
-		Затем я жду, что в сообщениях пользователю будет подстрока '"Type" is a required field' в течение 5 секунд
-		Затем я жду, что в сообщениях пользователю будет подстрока '"Due date" is a required field' в течение 5 секунд
-		Затем я жду, что в сообщениях пользователю будет подстрока '"Currency" is a required field' в течение 5 секунд
-		Затем я жду, что в сообщениях пользователю будет подстрока '"Amount" is a required field' в течение 5 секунд
-		И я закрыл все окна клиентского приложения
+		Given I open hyperlink "e1cib/list/Catalog.ChequeBonds"
+		And I click the button named "FormCreate"
+		And I click "Save" button
+		Then I wait that in user messages the "\"Cheque No\" is a required field" substring will appear in 5 seconds
+		Then I wait that in user messages the "\"Type\" is a required field" substring will appear in 5 seconds
+		Then I wait that in user messages the "\"Due date\" is a required field" substring will appear in 5 seconds
+		Then I wait that in user messages the "\"Currency\" is a required field" substring will appear in 5 seconds
+		Then I wait that in user messages the "\"Amount\" is a required field" substring will appear in 5 seconds
+		And I close all client application windows
 
 
-Сценарий: _090004 preparation
+Scenario: _090004 preparation
 	* Create a partner and legal name from whom the cheque bond was received and to whom the heque bond was issued
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'DFC'
-		И я изменяю флаг 'Vendor'
-		И я изменяю флаг 'Customer'
-		И я изменяю флаг 'Shipment confirmations before sales invoice'
-		И я изменяю флаг 'Goods receipt before purchase invoice'
-		И я нажимаю на кнопку 'Save'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Segment"
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I click the button named "FormCreate"
+		And I input "DFC" text in "ENG" field
+		And I change checkbox "Vendor"
+		And I change checkbox "Customer"
+		And I change checkbox "Shipment confirmations before sales invoice"
+		And I change checkbox "Goods receipt before purchase invoice"
+		And I click "Save" button
+		And In this window I click command interface button "Partner segments content"
+		And I click the button named "FormCreate"
+		And I click Select button of "Segment" field
 		
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Retail'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Partner segments content (create) *' в течение 20 секунд
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Company'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'DFC'
-		И я нажимаю кнопку выбора у поля "Country"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Partner segments content (create) *" window closing in 20 seconds
+		And In this window I click command interface button "Company"
+		And I click the button named "FormCreate"
+		And I input "DFC" text in "ENG" field
+		And I click Select button of "Country" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Turkey'      |
-		И в таблице "List" я выбираю текущую строку
-		Тогда открылось окно 'Company (create) *'
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Company (create) *' в течение 20 секунд
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'DFC (Partner)' в течение 20 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Big foot'
-		И я изменяю флаг 'Customer'
-		И я изменяю флаг 'Vendor'
-		И я изменяю флаг 'Shipment confirmations before sales invoice'
-		И я изменяю флаг 'Goods receipt before purchase invoice'
-		И я нажимаю на кнопку 'Save'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Segment"
+		And I select current line in "List" table
+		Then "Company (create) *" window is opened
+		And I click "Save and close" button
+		And I wait "Company (create) *" window closing in 20 seconds
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
+		And I wait "DFC (Partner)" window closing in 20 seconds
+		And I click the button named "FormCreate"
+		And I input "Big foot" text in "ENG" field
+		And I change checkbox "Customer"
+		And I change checkbox "Vendor"
+		And I change checkbox "Shipment confirmations before sales invoice"
+		And I change checkbox "Goods receipt before purchase invoice"
+		And I click "Save" button
+		And In this window I click command interface button "Partner segments content"
+		And I click the button named "FormCreate"
+		And I click Select button of "Segment" field
 		
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Retail'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Partner segments content (create) *' в течение 20 секунд
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Company'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Big foot'
-		И я нажимаю кнопку выбора у поля "Country"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Partner segments content (create) *" window closing in 20 seconds
+		And In this window I click command interface button "Company"
+		And I click the button named "FormCreate"
+		And I input "Big foot" text in "ENG" field
+		And I click Select button of "Country" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Turkey'      |
-		И в таблице "List" я выбираю текущую строку
-		Тогда открылось окно 'Company (create) *'
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Company (create) *' в течение 20 секунд
-		Тогда открылось окно 'Big foot (Partner)'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Big foot (Partner)' в течение 20 секунд
+		And I select current line in "List" table
+		Then "Company (create) *" window is opened
+		And I click "Save and close" button
+		And I wait "Company (create) *" window closing in 20 seconds
+		Then "Big foot (Partner)" window is opened
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
+		And I wait "Big foot (Partner)" window closing in 20 seconds
 	* Create test Sales invoice for DFC
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Partner" я выбираю по строке 'dfc'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I select from "Partner" drop-down list by "dfc" string
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '15,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я перехожу к закладке "Other"
-		И я разворачиваю группу "Currency"
-		И я перехожу к закладке с именем "GroupCurrency"
-		И я разворачиваю группу "More"
-		И в поле 'Number' я ввожу текст '3 000'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '3 000'
-		И я нажимаю на кнопку 'Post and close'
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "15,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Other" tab
+		And I expand "Currency" group
+		And I move to the tab named "GroupCurrency"
+		And I expand "More" group
+		And I input "3 000" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "3 000" text in "Number" field
+		And I click "Post and close" button
 
 
-Сценарий: _090005 create a document Cheque bond transaction (Cheque bond from partner + Cheque bond written to another partner)
+Scenario: _090005 create a document Cheque bond transaction (Cheque bond from partner + Cheque bond written to another partner)
 	* Open a document form Cheque bond transaction
-		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
+		And I click the button named "FormCreate"
 	* Filling in basic details
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Add Cheque bonds to the table part
-		И в таблице "ChequeBonds" я нажимаю на кнопку с именем 'ChequeBondsAdd'
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Cheque"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ChequeBonds" I click the button named "ChequeBondsAdd"
+		And I click choice button of "Cheque" attribute in "ChequeBonds" table
+		And I go to line in "List" table
 			| 'Amount'   | 'Cheque No'        |
 			| '2 000,00' | 'Partner cheque 1' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я активизирую поле "New status"
-		И в таблице "ChequeBonds" из выпадающего списка "New status" я выбираю точное значение '01. TakenFromPartner'
-		И я перехожу к следующему реквизиту
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита с именем "ChequeBondsPartner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "New status" field in "ChequeBonds" table
+		And I select "01. TakenFromPartner" exact value from "New status" drop-down list in "ChequeBonds" table
+		And I move to the next attribute
+		And I click choice button of the attribute named "ChequeBondsPartner" in "ChequeBonds" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я активизирую поле "Legal name"
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Legal name" field in "ChequeBonds" table
+		And I click choice button of "Legal name" attribute in "ChequeBonds" table
+		And I go to line in "List" table
 			| 'Description'      |
 			| 'DFC' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я активизирую поле "Partner term"
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Partner term" field in "ChequeBonds" table
+		And I click choice button of "Partner term" attribute in "ChequeBonds" table
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я завершаю редактирование строки
-		И в таблице "ChequeBonds" я нажимаю на кнопку с именем 'ChequeBondsAdd'
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Cheque"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я активизирую поле "New status"
-		И в таблице "ChequeBonds" из выпадающего списка "New status" я выбираю точное значение '01. GivenToPartner'
-		И я перехожу к следующему реквизиту
-		И в таблице "ChequeBonds" я активизирую поле с именем "ChequeBondsPartner"
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита с именем "ChequeBondsPartner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ChequeBonds" table
+		And in the table "ChequeBonds" I click the button named "ChequeBondsAdd"
+		And I click choice button of "Cheque" attribute in "ChequeBonds" table
+		And I select current line in "List" table
+		And I activate "New status" field in "ChequeBonds" table
+		And I select "01. GivenToPartner" exact value from "New status" drop-down list in "ChequeBonds" table
+		And I move to the next attribute
+		And I activate field named "ChequeBondsPartner" in "ChequeBonds" table
+		And I click choice button of the attribute named "ChequeBondsPartner" in "ChequeBonds" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Big foot'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я активизирую поле "Legal name"
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Legal name" field in "ChequeBonds" table
+		And I click choice button of "Legal name" attribute in "ChequeBonds" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Big foot'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я активизирую поле "Cash/Bank accounts"
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Cash/Bank accounts"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Cash/Bank accounts" field in "ChequeBonds" table
+		And I click choice button of "Cash/Bank accounts" attribute in "ChequeBonds" table
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я завершаю редактирование строки
-		И в таблице "ChequeBonds" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ChequeBonds" table
+		And I go to line in "ChequeBonds" table
 			| 'Cheque'           | 'Partner' |
 			| 'Partner cheque 1' | 'DFC'     |
-		И в таблице "ChequeBonds" я выбираю текущую строку
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Cash/Bank accounts"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "ChequeBonds" table
+		And I click choice button of "Cash/Bank accounts" attribute in "ChequeBonds" table
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "ChequeBonds" table
 	* Add bases dpcuments
-		И в таблице "PaymentList" я нажимаю на кнопку 'Fill'
-		И в таблице "DocumentsList" я выбираю текущую строку
-		И в таблице "PickedDocuments" я активизирую поле "Amount balance"
-		И в таблице "PickedDocuments" я выбираю текущую строку
-		И в таблице "PickedDocuments" в поле 'Amount balance' я ввожу текст '1 800,00'
-		И в таблице "PickedDocuments" я завершаю редактирование строки
-		И в таблице "DocumentsList" я нажимаю на кнопку 'Transfer to document'
+		And in the table "PaymentList" I click "Fill" button
+		And I select current line in "DocumentsList" table
+		And I activate "Amount balance" field in "PickedDocuments" table
+		And I select current line in "PickedDocuments" table
+		And I input "1 800,00" text in "Amount balance" field of "PickedDocuments" table
+		And I finish line editing in "PickedDocuments" table
+		And in the table "DocumentsList" I click "Transfer to document" button
 	* Change the document number
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '1'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '1'
+		And I move to "Other" tab
+		And I input "1" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "1" text in "Number" field
 	* Post document
-		И я нажимаю на кнопку 'Post'
+		And I click "Post" button
 	* Check movements
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I click "Registrations report" button
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Cheque bond transaction 1*'            | ''            | ''                     | ''                 | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | ''                     |
 		| 'Document registrations records'        | ''            | ''                     | ''                 | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | ''                     |
 		| 'Register  "Cheque bond statuses"'      | ''            | ''                     | ''                 | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | ''                     |
@@ -513,21 +513,21 @@ For settlements with partners
 		| ''                                      | 'Receipt'     | '*'                    | '856,16'           | 'Main Company'     | 'Big foot'             | 'Big foot'   | 'USD'                 | 'Own cheque 1'          | 'Reporting currency'       | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '5 000'            | 'Main Company'     | 'Big foot'             | 'Big foot'   | 'TRY'                 | 'Own cheque 1'          | 'en descriptions is empty' | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '5 000'            | 'Main Company'     | 'Big foot'             | 'Big foot'   | 'TRY'                 | 'Own cheque 1'          | 'Local currency'           | 'No'                       | ''                     |
-		И я закрыл все окна клиентского приложения
-	* Checking the deleting of the added bases document
+		And I close all client application windows
+	* Check the deleting of the added bases document
 		* Open document form Cheque bond transaction
-			И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
-			Тогда открылось окно 'Cheque bond transactions'
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
+			Then "Cheque bond transactions" window is opened
+			And I go to line in "List" table
 				| 'Number' |
 				| '1'      |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" я активизирую поле "Partner ar basis document"
-			И в таблице 'PaymentList' я удаляю строку
-			И я нажимаю на кнопку 'Post'
+			And I select current line in "List" table
+			And I activate "Partner ar basis document" field in "PaymentList" table
+			And I delete a line in "PaymentList" table
+			And I click "Post" button
 		* Check for movement changes
-			И я нажимаю на кнопку 'Registrations report'
-			Тогда табличный документ "ResultTable" равен по шаблону:
+			And I click "Registrations report" button
+			Then "ResultTable" spreadsheet document is equal by template
 			| 'Cheque bond transaction 1*'            | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Document registrations records'        | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Register  "Cheque bond statuses"'      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -603,41 +603,41 @@ For settlements with partners
 			| ''                                      | 'Receipt'     | '*'                    | '856,16'              | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'USD'                 | 'Own cheque 1'     | 'Reporting currency'       | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'en descriptions is empty' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'Local currency'           | 'No'                       | ''                     |
-			И я закрыл все окна клиентского приложения
-	* Clear postings Cheque bond transactions and check that there is no movements on the registers
-		* Отмена проведения Cheque bond transactions
-			И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
-			И в таблице "List" я перехожу к строке:
+			And I close all client application windows
+	* Clear movements Cheque bond transactions and check that there is no movements on the registers
+		* Unpost Cheque bond transactions
+			Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
+			And I go to line in "List" table
 				| 'Number' |
 				| '1'      |
-			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		* Check that there is no movement on the registers
-			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.ChequeBondBalance'
-			Тогда таблица "List" не содержит строки:
+			Given I open hyperlink "e1cib/list/AccumulationRegister.ChequeBondBalance"
+			And "List" table does not contain lines
 			| 'Cheque'           |
 			| 'Partner cheque 1' |
 			| 'Own cheque 1'     |
-			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ChequeBondStatuses'
-			Тогда таблица "List" не содержит строки:
+			Given I open hyperlink "e1cib/list/InformationRegister.ChequeBondStatuses"
+			And "List" table does not contain lines
 			| 'Cheque'           | 'Recorder'                   | 'Status'               |
 			| 'Partner cheque 1' | 'Cheque bond transaction 1*' | '01. TakenFromPartner' |
 			| 'Own cheque 1'     | 'Cheque bond transaction 1*' | '01. GivenToPartner'   |
-			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PlaningCashTransactions'
-			Тогда таблица "List" не содержит строки:
+			Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
+			And "List" table does not contain lines
 			| 'Recorder'           |
 			| 'Partner cheque 1' |
 			| 'Own cheque 1'     |
-			И я закрыл все окна клиентского приложения
+			And I close all client application windows
 	* Re-Posting the document and check movements
-		* Проведения Cheque bond transactions
-			И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
-			И в таблице "List" я перехожу к строке:
+		* Post Cheque bond transactions
+			Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
+			And I go to line in "List" table
 				| 'Number' |
 				| '1'      |
-			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
+			And in the table "List" I click the button named "ListContextMenuPost"
 		* Check movements
-			И я нажимаю на кнопку 'Registrations report'
-			Тогда табличный документ "ResultTable" равен по шаблону:
+			And I click "Registrations report" button
+			Then "ResultTable" spreadsheet document is equal by template
 			| 'Cheque bond transaction 1*'            | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Document registrations records'        | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Register  "Cheque bond statuses"'      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -713,26 +713,26 @@ For settlements with partners
 			| ''                                      | 'Receipt'     | '*'                    | '856,16'              | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'USD'                 | 'Own cheque 1'     | 'Reporting currency'       | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'en descriptions is empty' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'Local currency'           | 'No'                       | ''                     |
-			И я закрыл все окна клиентского приложения
+			And I close all client application windows
 
-Сценарий: _090006 motion check when removing a cheque from document Cheque bond transaction
+Scenario: _090006 motion check when removing a cheque from document Cheque bond transaction
 	* Select Cheque bond transaction
-		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Delete cheque bond
-		И в таблице "ChequeBonds" я перехожу к строке:
+		And I go to line in "ChequeBonds" table
 		| 'Amount'   | 'Cash/Bank accounts'      | 'Cheque'       | 'Currency' | 'Legal name' | 'New status'         | 'Partner'  |
 		| '5 000,00' | 'Bank account, TRY' | 'Own cheque 1' | 'TRY'      | 'Big foot'   | '01. GivenToPartner' | 'Big foot' |
-		И в таблице "ChequeBonds" я активизирую поле "Status"
-		И в таблице "ChequeBonds" я нажимаю на кнопку 'Delete'
-		И я нажимаю на кнопку 'Post'
+		And I activate "Status" field in "ChequeBonds" table
+		And in the table "ChequeBonds" I click "Delete" button
+		And I click "Post" button
 	* Check movements
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда открылось окно 'Document registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I click "Registrations report" button
+		Then "Document registrations report" window is opened
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Cheque bond transaction 1*'            | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 		| 'Document registrations records'        | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 		| 'Register  "Cheque bond statuses"'      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -775,36 +775,36 @@ For settlements with partners
 		| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'en descriptions is empty' | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'Local currency'           | 'No'                       | ''                     |
 	* Returning the second check bond recording and motion check
-		И Я закрываю окно 'Document registrations report'
-		И в таблице "ChequeBonds" я нажимаю на кнопку с именем 'ChequeBondsAdd'
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Cheque"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я активизирую поле "New status"
-		И в таблице "ChequeBonds" из выпадающего списка "New status" я выбираю точное значение '01. GivenToPartner'
-		И я перехожу к следующему реквизиту
-		И в таблице "ChequeBonds" я активизирую поле с именем "ChequeBondsPartner"
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита с именем "ChequeBondsPartner"
-		И в таблице "List" я перехожу к строке:
+		And I close "Document registrations report" window
+		And in the table "ChequeBonds" I click the button named "ChequeBondsAdd"
+		And I click choice button of "Cheque" attribute in "ChequeBonds" table
+		And I select current line in "List" table
+		And I activate "New status" field in "ChequeBonds" table
+		And I select "01. GivenToPartner" exact value from "New status" drop-down list in "ChequeBonds" table
+		And I move to the next attribute
+		And I activate field named "ChequeBondsPartner" in "ChequeBonds" table
+		And I click choice button of the attribute named "ChequeBondsPartner" in "ChequeBonds" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Big foot'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я активизирую поле "Legal name"
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Legal name" field in "ChequeBonds" table
+		And I click choice button of "Legal name" attribute in "ChequeBonds" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Big foot'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я активизирую поле "Cash/Bank accounts"
-		И в таблице "ChequeBonds" я нажимаю кнопку выбора у реквизита "Cash/Bank accounts"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Cash/Bank accounts" field in "ChequeBonds" table
+		And I click choice button of "Cash/Bank accounts" attribute in "ChequeBonds" table
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ChequeBonds" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post'
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда открылось окно 'Document registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I select current line in "List" table
+		And I finish line editing in "ChequeBonds" table
+		And I click "Post" button
+		And I click "Registrations report" button
+		Then "Document registrations report" window is opened
+		Then "ResultTable" spreadsheet document is equal by template
 			| 'Cheque bond transaction 1*'            | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Document registrations records'        | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Register  "Cheque bond statuses"'      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -880,7 +880,7 @@ For settlements with partners
 			| ''                                      | 'Receipt'     | '*'                    | '856,16'              | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'USD'                 | 'Own cheque 1'     | 'Reporting currency'       | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'en descriptions is empty' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'Local currency'           | 'No'                       | ''                     |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
@@ -903,5 +903,6 @@ For settlements with partners
 
 
 	
+
 
 

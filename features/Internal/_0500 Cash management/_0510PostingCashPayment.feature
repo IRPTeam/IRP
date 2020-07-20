@@ -1,274 +1,280 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: create Cash payment
+Feature: create Cash payment
 
-As a сashier
-I want to pay cash
-Для того чтобы фиксировать факт оплаты
+As a cashier
+//I want to pay cash
+//In order to record the fact of payment
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 # The currency of reports is lira
 # CashBankDocFilters export scenarios
 
 
-Сценарий: _051001 create Cash payment based on Purchase invoice
-	* Open list form Purchase invoice и выбор PI №1
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
-		И в таблице "List" я перехожу к строке:
+Scenario: _051001 create Cash payment based on Purchase invoice
+	* Open list form Purchase invoice and select PI №1
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И я нажимаю на кнопку с именем 'FormDocumentCashPaymentGenerateCashPayment'
+		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 	* Create and filling in Purchase invoice
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
-		И     элемент формы с именем "Currency" стал равен 'TRY'
-		И     таблица "PaymentList" содержит строки:
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '137 000,00' | 'Purchase invoice 1*' |
-		И     таблица "PaymentListCurrencies" содержит строки:
+		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Amount'    | 'Multiplicity' |
 			| 'Reporting currency' | '23 458,90' | '1'            |
 	* Data overflow check
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Cash desk №2' |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "CashAccount" стал равен 'Cash desk №2'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №2"
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '137 000,00' | 'Purchase invoice 1*' |
-		И     таблица "PaymentListCurrencies" содержит строки:
+		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'    | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '23 458,90' | '1'            |
 	* Check calculation Document amount
-		И     элемент формы с именем "DocumentAmount" стал равен '137 000,00'
+		Then the form attribute named "DocumentAmount" became equal to "137 000,00"
 	* Change in basis document
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And I click choice button of "Basis document" attribute in "PaymentList" table
+		And I go to line in "List" table
 		| 'Legal name'        | 'Partner'   | 'Document amount' |
 		| 'Company Ferron BP' | 'Ferron BP' | '496 650,00'      |
-		И я нажимаю на кнопку 'Select'
-		И в таблице "PaymentList" я перехожу к следующей ячейке
+		And I click "Select" button
+		And in "PaymentList" table I move to the next cell
 	* Change in payment amount
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '20 000,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     таблица "PaymentList" содержит строки:
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "20 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '20 000,00' | 'Purchase invoice 6*' |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
 
 
-Сценарий: _051001 create Cash payment (independently)
+Scenario: _051001 create Cash payment (independently)
 	* Create Cash payment in lire for Ferron BP (Sales invoice in lire)
-		И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
 		* Filling in the details of the document
-			И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash account"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Cash account" field
+			And I go to line in "List" table
 				| Description    |
 				| Cash desk №1 |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Currency"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Currency" field
+			And I go to line in "List" table
 				| Code | Description  |
 				| TRY  | Turkish lira |
-			И я нажимаю на кнопку 'Select'
+			And I click "Select" button
 		* Change the document number to 1
-			И в поле 'Number' я ввожу текст '0'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '1'
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
+			And I input "0" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "1" text in "Number" field
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in a partner in a tabular part
-			И в таблице "PaymentList" я активизирую поле "Partner"
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I activate "Partner" field in "PaymentList" table
+			And I click choice button of "Partner" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| Description |
 				| Ferron BP   |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payee"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click choice button of "Payee" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| Description       |
 				| Company Ferron BP |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in an Partner term
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click choice button of "Partner term" attribute in "PaymentList" table
+			And I go to line in "List" table
 					| 'Description'           |
 					| 'Vendor Ferron, TRY' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		# temporarily
 		* Filling in basis documents in a tabular part
-			# temporarily
-			Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-			# temporarily
-			И в таблице "List" я перехожу к строке:
+			// # temporarily
+			// When I Check the steps for Exception
+			// |'And I click choice button of "Basis document" attribute in "PaymentList" table'|
+			// # temporarily
+			And I finish line editing in "PaymentList" table
+			And I activate "Basis document" field in "PaymentList" table
+			And I select current line in "PaymentList" table
+			And I go to line in "List" table
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
-			И я нажимаю на кнопку 'Select'
+			And I click "Select" button
 		# temporarily
 		* Filling in amount in a tabular part
-			И в таблице "PaymentList" я активизирую поле "Amount"
-			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '1000,00'
-			И в таблице "PaymentList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
+			And I activate "Amount" field in "PaymentList" table
+			And I input "1000,00" text in "Amount" field of "PaymentList" table
+			And I finish line editing in "PaymentList" table
+		And I click "Post and close" button
 		* Check creation a Cash payment
-			Тогда таблица "List" содержит строки:
+			And "List" table contains lines
 			| Number |
 			|   1    |
 	* Create Cash payment in USD for Ferron BP (Sales invoice in lire)
-		И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
 		* Filling in the details of the document
-			И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash account"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Cash account" field
+			And I go to line in "List" table
 				| Description    |
 				| Cash desk №1 |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Currency"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Currency" field
+			And I go to line in "List" table
 				| Code | Description     |
 				| USD  | American dollar |
-			И я нажимаю на кнопку 'Select'
+			And I click "Select" button
 		* Change the document number to 2
-			И в поле 'Number' я ввожу текст '0'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '2'
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
+			And I input "0" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "2" text in "Number" field
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in a partner in a tabular part
-			И в таблице "PaymentList" я активизирую поле "Partner"
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I activate "Partner" field in "PaymentList" table
+			And I click choice button of "Partner" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| Description |
 				| Ferron BP   |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payee"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click choice button of "Payee" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| Description       |
 				| Company Ferron BP |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in an Partner term
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click choice button of "Partner term" attribute in "PaymentList" table
+			And I go to line in "List" table
 					| 'Description'           |
 					| 'Vendor Ferron, TRY' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		# temporarily
 		* Filling in basis documents in a tabular part
-			# temporarily
-			Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-			# temporarily
-			И в таблице "List" я перехожу к строке:
+			// # temporarily
+			// When I Check the steps for Exception
+			// |'And I click choice button of "Basis document" attribute in "PaymentList" table'|
+			// # temporarily
+			And I finish line editing in "PaymentList" table
+			And I activate "Basis document" field in "PaymentList" table
+			And I select current line in "PaymentList" table
+			And I go to line in "List" table
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
-			И я нажимаю на кнопку 'Select'
+			And I click "Select" button
 		# temporarily
 		* Filling in amount in a tabular part
-			И в таблице "PaymentList" я активизирую поле "Amount"
-			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '20,00'
-			И в таблице "PaymentList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
+			And I activate "Amount" field in "PaymentList" table
+			And I input "20,00" text in "Amount" field of "PaymentList" table
+			And I finish line editing in "PaymentList" table
+		And I click "Post and close" button
 		* Check creation a Cash receipt
-			Тогда таблица "List" содержит строки:
+			And "List" table contains lines
 			| Number |
 			|   2    |
 	* Create Cash payment in Euro for Ferron BP (Partner term in USD)
-		И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
 		* Filling in the details of the document
-			И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Cash account"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Cash account" field
+			And I go to line in "List" table
 				| Description    |
 				| Cash desk №2 |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Currency"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Currency" field
+			And I go to line in "List" table
 				| Code | Description |
 				| EUR  | Euro        |
-			И я нажимаю на кнопку 'Select'
+			And I click "Select" button
 		* Change the document number to 3
-			И в поле 'Number' я ввожу текст '0'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '3'
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
+			And I input "0" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "3" text in "Number" field
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in a partner in a tabular part
-			И в таблице "PaymentList" я активизирую поле "Partner"
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I activate "Partner" field in "PaymentList" table
+			And I click choice button of "Partner" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| Description |
 				| Ferron BP   |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payee"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click choice button of "Payee" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| Description       |
 				| Company Ferron BP |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in an Partner term
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click choice button of "Partner term" attribute in "PaymentList" table
+			And I go to line in "List" table
 					| 'Description'           |
 					| 'Vendor Ferron, USD' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in amount in a tabular part
-			И в таблице "PaymentList" я активизирую поле "Amount"
-			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '150,00'
-			И в таблице "PaymentList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
+			And I activate "Amount" field in "PaymentList" table
+			And I input "150,00" text in "Amount" field of "PaymentList" table
+			And I finish line editing in "PaymentList" table
+		And I click "Post and close" button
 		* Check creation a Cash payment
-			Тогда таблица "List" содержит строки:
+			And "List" table contains lines
 			| Number |
 			|   3    |	
 	
-	Сценарий: check Cash payment movements by register PartnerApTransactions
-		И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.PartnerApTransactions"
-		Тогда таблица "List" содержит строки:
+Scenario: check Cash payment movements by register Partner Ap Transactions
+		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerApTransactions"
+		And "List" table contains lines
 		| 'Currency' | 'Recorder'        | 'Legal name'        | 'Basis document'      | 'Company'      | 'Amount'   | 'Partner term'           | 'Partner'   |
 		| 'TRY'      | 'Cash payment 1*' | 'Company Ferron BP' | 'Purchase invoice 1*' | 'Main Company' | '1 000,00' | 'Vendor Ferron, TRY'  | 'Ferron BP' |
 		| 'USD'      | 'Cash payment 2*' | 'Company Ferron BP' | 'Purchase invoice 1*' | 'Main Company' | '20,00'    | 'Vendor Ferron, TRY'  | 'Ferron BP' |
 		| 'EUR'      | 'Cash payment 3*' | 'Company Ferron BP' | ''                    | 'Main Company' | '150,00'   | 'Vendor Ferron, USD'  | 'Ferron BP' |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _050002 check Cash payment movements with transaction type Payment to the vendor
+Scenario: _050002 check Cash payment movements with transaction type Payment to the vendor
 	* Open Cash payment 1
-		И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
 	* Check movements Cash payment 1
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I click "Registrations report" button
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Cash payment 1*'                      | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 		| 'Document registrations records'       | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 		| 'Register  "Accounts statement"'           | ''            | ''                    | ''                    | ''               | ''                                             | ''               | ''                         | ''                     | ''                  | ''                         | ''                     |
@@ -295,38 +301,38 @@ I want to pay cash
 		| ''                                     | 'Expense'     | '*'      | '171,23'    | 'Main Company'    | 'Cash desk №1'      | 'USD'          | 'Reporting currency'       | 'No'                    | ''         | ''                         | ''                     |
 		| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Cash desk №1'      | 'TRY'          | 'en descriptions is empty' | 'No'                    | ''         | ''                         | ''                     |
 		| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Cash desk №1'      | 'TRY'          | 'Local currency'           | 'No'                    | ''         | ''                         | ''                     |
-		И Я закрыл все окна клиентского приложения
-	* Clear postings Cash payment 1 and check that there is no movement on the registers
-		* Clear postings
-			И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-			И в таблице "List" я перехожу к строке:
+		And I close all client application windows
+	* Clear movements Cash payment 1 and check that there is no movement on the registers
+		* Clear movements
+			Given I open hyperlink "e1cib/list/Document.CashPayment"
+			And I go to line in "List" table
 				| 'Number' |
 				| '1'      |
-			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		* Check that there is no movement on the registers
-			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PartnerApTransactions'
-			Тогда таблица "List" не содержит строки:
+			Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerApTransactions"
+			And "List" table does not contain lines
 				| 'Recorder'           |
 				| 'Cash payment 1*' |
-			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.AccountBalance'
-			Тогда таблица "List" не содержит строки:
+			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+			And "List" table does not contain lines
 				| 'Recorder'           |
 				| 'Cash payment 1*' |
-			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.ReconciliationStatement'
-			Тогда таблица "List" не содержит строки:
+			Given I open hyperlink "e1cib/list/AccumulationRegister.ReconciliationStatement"
+			And "List" table does not contain lines
 				| 'Recorder'           |
 				| 'Cash payment 1*' |
-			И я закрыл все окна клиентского приложения
-	* * Re-posting the document and checking postings on the registers
+			And I close all client application windows
+	* * Re-posting the document and checking movements on the registers
 		* Posting the document
-			И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.CashPayment"
+			And I go to line in "List" table
 				| 'Number' |
 				| '1'      |
-			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
+			And in the table "List" I click the button named "ListContextMenuPost"
 		* Check movements
-			И я нажимаю на кнопку 'Registrations report'
-			Тогда табличный документ "ResultTable" равен по шаблону:
+			And I click "Registrations report" button
+			Then "ResultTable" spreadsheet document is equal by template
 			| 'Cash payment 1*'                      | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| 'Document registrations records'       | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| 'Register  "Accounts statement"'           | ''            | ''                    | ''                    | ''               | ''                                             | ''               | ''                         | ''                     | ''                  | ''                         | ''                     |
@@ -353,154 +359,155 @@ I want to pay cash
 			| ''                                     | 'Expense'     | '*'      | '171,23'    | 'Main Company'    | 'Cash desk №1'      | 'USD'          | 'Reporting currency'       | 'No'                    | ''         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Cash desk №1'      | 'TRY'          | 'en descriptions is empty' | 'No'                    | ''         | ''                         | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '1 000'     | 'Main Company'    | 'Cash desk №1'      | 'TRY'          | 'Local currency'           | 'No'                    | ''         | ''                         | ''                     |
-			И Я закрыл все окна клиентского приложения
+			And I close all client application windows
 
 # Filters
 
-Сценарий: _051002 filter check by own companies in the document Cash payment
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-	Когда проверяю фильтр по собственным компаниям
+Scenario: _051002 filter check by own companies in the document Cash payment
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	When check the filter by own company
 
 
-Сценарий: _051003 cash filter check (bank selection not available) in the document Cash payment
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-	Когда проверяю фильтр по кассам (выбор банка недоступен)
+Scenario: _051003 cash filter check (bank selection not available) in the document Cash payment
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	When check the filter by cash account (bank account selection is not available)
 
-Сценарий: _051004 check input Description in the documentCash payment
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-	Когда проверяю ввод Description
+Scenario: _051004 check input Description in the documentCash payment
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	When check filling in Description
 
-Сценарий: _051005 checking the choice of transaction type in the document Cash payment
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-	Когда проверяю выбор вида операции в документах оплаты
+Scenario: _051005 check the choice of transaction type in the document Cash payment
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	When check the choice of type of operation in the payment documents
 
-Сценарий: _051006 check legal name filter in tabular part in document Cash payment
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-	Когда проверяю фильтр по контрагенту в табличной части в документах оплаты
+Scenario: _051006 check legal name filter in tabular part in document Cash payment
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	When check the legal name filter in the tabular part of the payment documents
 
-Сценарий: _051007 check partner filter in tabular part in document Cash payment
+Scenario: _051007 check partner filter in tabular part in document Cash payment
 	# when selecting a legal name, only its partners should be available on the partner selection list
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-	Когда проверяю фильтр по партнеру в табличной части в документах оплаты
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	When check the partner filter in the tabular part of the payment documents.
 	
-Сценарий: _051008 check basis document filter in Cash payment
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario: _051008 check basis document filter in Cash payment
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-		И я нажимаю кнопку выбора у поля "Company"
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И в таблице "List" я перехожу к строке:
+		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+		And I click Select button of "Company" field
+		And I click the button named "FormChoose"
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
 				| Description    |
 				| Cash desk №1 |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "CashAccount" стал равен 'Cash desk №1'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
+		And I select current line in "List" table
+		Then the form attribute named "CashAccount" became equal to "Cash desk №1"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 	* Filling in partner and legal name
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payee"
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click choice button of "Payee" attribute in "PaymentList" table
+		And "List" table contains lines
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 			| Partner   | Payee             |
 			| Ferron BP | Company Ferron BP |
-	Когда проверяю фильтр по документам-основания в документах оплаты
+	When check the filter on the basis documents in the payment documents
 
 
 
 # EndFilters
 
 
-Сценарий: _051010 check currency selection in Cash payment document in case the currency is specified in the account
+Scenario: _051010 check currency selection in Cash payment document in case the currency is specified in the account
 # the choice is not available
-	Когда создаю временную кассу Cash desk №4 со строго фиксированной валютой (лиры)
-	И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда проверяю выбор валюты в кассовом платежном документе в случае если валюта указана в счете
+	When create a temporary cash desk Cash account No. 4 with a strictly fixed currency (lira)
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I click the button named "FormCreate"
+	When check the choice of currency in the cash payment document if the currency is indicated in the account
 
 
 
 
-Сценарий: _051012 check the display of details on the form Cash payment with the type of operation Payment to the vendor
-	И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
+Scenario: _051012 check the display of details on the form Cash payment with the type of operation Payment to the vendor
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I click the button named "FormCreate"
+	And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
 	* Then I check the display on the form of available fields
-		И     элемент формы с именем "Company" доступен
-		И     элемент формы с именем "CashAccount" доступен
-		И     элемент формы с именем "Description" доступен
-		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
-		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Date" доступен
+		And form attribute named "Company" is available
+		And form attribute named "CashAccount" is available
+		And form attribute named "Description" is available
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		And form attribute named "Currency" is available
+		And form attribute named "Date" is available
 	* And I check the display of the tabular part
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description  |
 			| Kalipso |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 		| # | Partner | Amount | Payee              | Basis document | Planning transaction basis |
 		| 1 | Kalipso | ''     | Company Kalipso    | ''             | ''                        |
 
 
 
-Сценарий: _051013 check the display of details on the form Cash payment with the type of operation Currency exchange
-	И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
+Scenario: _051013 check the display of details on the form Cash payment with the type of operation Currency exchange
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I click the button named "FormCreate"
+	And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Then I check the display on the form of available fields
-		И     элемент формы с именем "Company" доступен
-		И     элемент формы с именем "CashAccount" доступен
-		И     элемент формы с именем "Description" доступен
-		И     элемент формы с именем "TransactionType" стал равен 'Currency exchange'
-		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Date" доступен
+		And form attribute named "Company" is available
+		And form attribute named "CashAccount" is available
+		And form attribute named "Description" is available
+		Then the form attribute named "TransactionType" became equal to "Currency exchange"
+		And form attribute named "Currency" is available
+		And form attribute named "Date" is available
 	* And I check the display of the tabular part
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description  |
 			| Anna Petrova |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 		| # | Partner      | Amount| Planning transaction basis |
 		| 1 | Anna Petrova | ''    | ''                        |
 
 
-Сценарий: _051014 check the display of details on the form Cash payment with the type of operation Cash transfer order
-	И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
+Scenario: _051014 check the display of details on the form Cash payment with the type of operation Cash transfer order
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I click the button named "FormCreate"
+	And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 	* Then I check the display on the form of available fields
-		И     элемент формы с именем "Company" доступен
-		И     элемент формы с именем "CashAccount" доступен
-		И     элемент формы с именем "Description" доступен
-		И     элемент формы с именем "TransactionType" стал равен 'Cash transfer order'
-		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Date" доступен
+		And form attribute named "Company" is available
+		And form attribute named "CashAccount" is available
+		And form attribute named "Description" is available
+		Then the form attribute named "TransactionType" became equal to "Cash transfer order"
+		And form attribute named "Currency" is available
+		And form attribute named "Date" is available
 	* And I check the display of the tabular part
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '100,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		Если в таблице "PaymentList" нет колонки с именем "Payee" Тогда
-		Если в таблице "PaymentList" нет колонки с именем "Partner" Тогда
-		И     таблица "PaymentList" содержит строки:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		If "PaymentList" table does not contain column named "Payee" Then
+		If "PaymentList" table does not contain column named "Partner" Then
+		And "PaymentList" table contains lines
 		| # | 'Amount'    | Planning transaction basis |
 		| 1 | '100,00'    | ''                        |
+

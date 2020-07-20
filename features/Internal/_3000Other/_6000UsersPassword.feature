@@ -1,61 +1,61 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: password check
+Feature: password check
 
 
 
-Контекст:
-    Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _351001 check user password setting from enterprise mode
-    * Select пользователя
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.Users'
-        И в таблице "List" я перехожу к строке:
-            | 'Description'                 |
-            | 'Arina Brown (Financier 3)TR' |
-        И в таблице "List" я выбираю текущую строку
-        * Изменение кода локализации
-            И в поле 'Interface localization code' я ввожу текст 'en'
-            И я нажимаю на кнопку 'Save'
-    * Установка пароля
-        И я нажимаю на кнопку 'Set password'
-        И в поле 'Password' я ввожу текст 'F12345'
-        * Проверка вывода сообщения если подтверждение пароля не совпадает
-            И в поле 'Confirm password' я ввожу текст 'F12346'
-            И я нажимаю на кнопку 'Ok'
-            Затем я жду, что в сообщениях пользователю будет подстрока "Password and password confirmation do not match" в течении 30 секунд
-        * Правильный ввод пароля
-            И в поле 'Confirm password' я ввожу текст ''
-            И в поле 'Confirm password' я ввожу текст 'F12345'
-            И я нажимаю на кнопку 'Ok'
-            И я нажимаю на кнопку 'Save and close'
-            И Пауза 10
-    * Проверка установленного пароля
-        И я подключаю TestClient "Тест" логин "ABrown" пароль "F12345"
-        И Пауза 3
-        Когда В панели разделов я выбираю 'Sales - A/R'
-        И я закрываю сеанс TESTCLIENT
-        Затем Я подключаю уже запущенный клиент тестирования "Этот клиент"
+Scenario: _351001 check user password setting from enterprise mode
+        * Select user
+                Given I open hyperlink "e1cib/list/Catalog.Users"
+                And I go to line in "List" table
+                | 'Description'                 |
+                | 'Arina Brown (Financier 3)TR' |
+                And I select current line in "List" table
+                * Change localization code
+                        And I input "en" text in "Interface localization code" field
+                        And I click "Save" button
+        * Set password
+                And I click "Set password" button
+                And I input "F12345" text in "Password" field
+                * Check message output if password confirmation does not match
+                        And I input "F12346" text in "Confirm password" field
+                        And I click "Ok" button
+                        Then I wait that in user messages the "Password and password confirmation do not match" substring will appear in "30" seconds
+                * Password entry is correct
+                        And I input "" text in "Confirm password" field
+                        And I input "F12345" text in "Confirm password" field
+                        And I click "Ok" button
+                        And I click "Save and close" button
+                        And Delay 10
+        * Verify password set
+                And I connect "Test" TestClient using "ABrown" login and "F12345" password
+                And Delay 3
+                When in sections panel I select "Sales - A/R"
+                And I close TestClient session
+                Then I connect launched Test client "Этот клиент"
 
-Сценарий: _351002 check user password generation from enterprise mode
-   * Select пользователя
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.Users'
-        И в таблице "List" я перехожу к строке:
-            | 'Description'                 |
-            | 'Arina Brown (Financier 3)TR' |
-        И в таблице "List" я выбираю текущую строку
-    * Установка пароля
-        И я нажимаю на кнопку 'Set password'
-        И я нажимаю на кнопку 'Generate'
-        И я запоминаю значение поля с именем "GeneratedValue" как "password"
-        И я нажимаю на кнопку 'Ok'
-        И я нажимаю на кнопку 'Save and close'
-        И Пауза 10
-    * Проверка установленного пароля
-        И я подключаю TestClient "Тест" логин "ABrown" пароль "$password$"
-        И Пауза 3
-        Когда В панели разделов я выбираю 'Sales - A/R'
-        И я закрываю сеанс TESTCLIENT
-        Затем Я подключаю уже запущенный клиент тестирования "Этот клиент"
+Scenario: _351002 check user password generation from enterprise mode
+        * Select user
+                Given I open hyperlink "e1cib/list/Catalog.Users"
+                And I go to line in "List" table
+                | 'Description'                 |
+                | 'Arina Brown (Financier 3)TR' |
+                And I select current line in "List" table
+        * Set password
+                And I click "Set password" button
+                And I click "Generate" button
+                And I save the value of the field named "GeneratedValue" as "password"
+                And I click "Ok" button
+                And I click "Save and close" button
+                And Delay 10
+        * Verify password set
+                And I connect "Test" TestClient using "ABrown" login and "$password$" password
+                And Delay 3
+                When in sections panel I select "Sales - A/R"
+                And I close TestClient session
+                Then I connect launched Test client "Этот клиент"

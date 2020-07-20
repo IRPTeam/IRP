@@ -1,53 +1,54 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: create a group of item types
+Feature: create a group of item types
 
 
 
-Контекст:
-    Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+    Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _351501 create a group of item types
-    * Open catalog вида номенклатуры
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemTypes'
-    * Создание группы видов номенклатуры
-        И я нажимаю на кнопку с именем 'FormCreateFolder'
-        И я нажимаю на кнопку открытия поля "TR"
-        И в поле 'ENG' я ввожу текст 'Accessories'
-         И в поле 'TR' я ввожу текст 'Accessories TR'
-        И я нажимаю на кнопку 'Ok'
-        И я нажимаю на кнопку 'Save and close'
-    * Create item type в группе Accessories
-        И я нажимаю на кнопку с именем 'FormCreate'
-        И я нажимаю на кнопку открытия поля "TR"
-        И в поле с именем 'Description_en' я ввожу текст 'Earrings'
-        И в поле с именем 'Description_tr' я ввожу текст 'Earrings TR'
-        И я нажимаю на кнопку 'Ok'
-        И из выпадающего списка "Parent" я выбираю по строке 'Accessories'
-        И В открытой форме я нажимаю на кнопку "Save and close"
-    * Сreate item type Earrings
-        И в таблице "List" я перехожу к строке:
+Scenario: _351501 create a group of item types
+    * Open catalog Item Type
+        Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+    * Create Item Type group
+        And I click the button named "FormCreateFolder"
+        And I click Open button of "TR" field
+        And I input "Accessories" text in "ENG" field
+        And I input "Accessories TR" text in "TR" field
+        And I click "Ok" button
+        And I click "Save and close" button
+    * Create item type in group Accessories
+        And I click the button named "FormCreate"
+        And I click Open button of "TR" field
+        And I input "Earrings" text in the field named "Description_en"
+        And I input "Earrings TR" text in the field named "Description_tr"
+        And I click "Ok" button
+        And I select from "Parent" drop-down list by "Accessories" string
+        And I click "Save and close" button
+    * Create item type Earrings
+        And I go to line in "List" table
             | 'Description' |
             | 'Accessories TR'            |
-        И в таблице  "List" я перехожу на один уровень вниз
-        Тогда таблица "List" стала равной:
+        And I move one level down in "List" table
+        And "List" table became equal
             | 'Description'    |
             | 'Accessories TR' |
             | 'Earrings TR'    |
-        И я закрыл все окна клиентского приложения
-    * Checking the items group display in AddAttributeAndPropertySets by item key
-        И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-        И в таблице "List" я перехожу к строке:
+        And I close all client application windows
+    * Check the items group display in AddAttributeAndPropertySets by item key
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
         | 'Predefined data item name' |
         | 'Catalog_ItemKeys'          |
-        И в таблице "List" я выбираю текущую строку
-        И     таблица "AttributesTree" содержит строки:
+        And I select current line in "List" table
+        And "AttributesTree" table contains lines
             | 'Presentation'      |
             | 'Accessories TR'    |
             | 'Earrings TR'       |
-        И я закрыл все окна клиентского приложения
+        And I close all client application windows
+
 
 
 

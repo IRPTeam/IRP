@@ -1,24 +1,24 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: checking the output of the document movement report
+Feature: check the output of the document movement report
 
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _017002 checking the output of the document movement report for Purchase Order
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
+Scenario: _017002 check the output of the document movement report for Purchase Order
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	* Check the report output for the selected document from the list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '2'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Purchase order 2*'                  | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
 		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
@@ -34,16 +34,16 @@
 		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Store 01'     | 'Purchase order 2*' | 'M/White'   | '*'         | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Store 01'     | 'Purchase order 2*' | 'L/Green'   | '*'         | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | 'Purchase order 2*' | '36/Yellow' | '*'         | ''        | ''              |
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	* Check the report output from the selected document
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '2'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Purchase order 2*'                  | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
 		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
@@ -59,29 +59,29 @@
 		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Store 01'     | 'Purchase order 2*' | 'M/White'   | '*'         | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Store 01'     | 'Purchase order 2*' | 'L/Green'   | '*'         | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | 'Purchase order 2*' | '36/Yellow' | '*'         | ''        | ''              |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _0170020 clear postings Purchase Order and check that there is no movements on the registers
+Scenario: _0170020 clear movements Purchase Order and check that there is no movements on the registers
 	* Select Purchase order
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
 			| 'Number' |
 			| '2'      |
-	* Clear postings Purchase Order and check that there is no movement on the registers
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
+	* Clear movements Purchase Order and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
 		| Register  "Goods receipt schedule" |
 		| Register  "Order balance" |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Posting the document and check movements
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
 			| 'Number' |
 			| '2'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Purchase order 2*'                  | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
 		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
@@ -97,19 +97,19 @@
 		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Store 01'     | 'Purchase order 2*' | 'M/White'   | '*'         | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Store 01'     | 'Purchase order 2*' | 'L/Green'   | '*'         | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | 'Purchase order 2*' | '36/Yellow' | '*'         | ''        | ''              |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
 
-Сценарий: _016502 checking the output of the document movement report for Internal Supply Request
+Scenario: _016502 check the output of the document movement report for Internal Supply Request
 	* Open list form Internal Supply Request
-		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 	* Check the report generation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Internal supply request 1*'     | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
 		| 'Register  "Order balance"'      | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
@@ -118,15 +118,15 @@
 		| ''                               | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Internal supply request 1*' | '36/Yellow' | '*'       |
 		| ''                               | 'Receipt'     | '*'      | '20'        | 'Store 01'   | 'Internal supply request 1*' | '38/Black'  | '*'       |
 		| ''                               | 'Receipt'     | '*'      | '25'        | 'Store 01'   | 'Internal supply request 1*' | '36/Red'    | '*'       |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Check the report generation from document
-		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Internal supply request 1*'     | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
 		| 'Register  "Order balance"'      | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
@@ -135,29 +135,29 @@
 		| ''                               | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Internal supply request 1*' | '36/Yellow' | '*'       |
 		| ''                               | 'Receipt'     | '*'      | '20'        | 'Store 01'   | 'Internal supply request 1*' | '38/Black'  | '*'       |
 		| ''                               | 'Receipt'     | '*'      | '25'        | 'Store 01'   | 'Internal supply request 1*' | '36/Red'    | '*'       |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0170021 clear postings Internal Supply Request and check that there is no movements on the registers 
+Scenario: _0170021 clear movements Internal Supply Request and check that there is no movements on the registers 
 	* Open list form Internal Supply Request
-		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 	* Check the report generation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-	* Clear postings document and check that there is no movement on the registers
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
 			| Register  "Order balance" |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Posting the document and check movements
-		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Internal supply request 1*'     | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
 		| 'Register  "Order balance"'      | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
@@ -166,21 +166,21 @@
 		| ''                               | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Internal supply request 1*' | '36/Yellow' | '*'       |
 		| ''                               | 'Receipt'     | '*'      | '20'        | 'Store 01'   | 'Internal supply request 1*' | '38/Black'  | '*'       |
 		| ''                               | 'Receipt'     | '*'      | '25'        | 'Store 01'   | 'Internal supply request 1*' | '36/Red'    | '*'       |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
 
-Сценарий: _018019 checking the output of the document movement report for Purchase Invoice
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
+Scenario: _018019 check the output of the document movement report for Purchase Invoice
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	* Check the report output for the selected document from the list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Purchase invoice 1*'                  | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| 'Document registrations records'       | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| 'Register  "Inventory balance"'        | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
@@ -267,16 +267,16 @@
 		| ''                                     | 'Receipt'     | '*'         | '100'           | 'Store 01'     | 'M/White'             | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| ''                                     | 'Receipt'     | '*'         | '200'           | 'Store 01'     | 'L/Green'             | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| ''                                     | 'Receipt'     | '*'         | '300'           | 'Store 01'     | '36/Yellow'           | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	* Check the report output from the selected document
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Purchase invoice 1*'                  | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| 'Document registrations records'       | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| 'Register  "Inventory balance"'        | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
@@ -363,33 +363,33 @@
 		| ''                                     | 'Receipt'     | '*'         | '100'           | 'Store 01'     | 'M/White'             | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| ''                                     | 'Receipt'     | '*'         | '200'           | 'Store 01'     | 'L/Green'             | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| ''                                     | 'Receipt'     | '*'         | '300'           | 'Store 01'     | '36/Yellow'           | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _01801901 clear postings Purchase invoice and check that there is no movements on the registers 
+Scenario: _01801901 clear movements Purchase invoice and check that there is no movements on the registers 
 	* Open list form Purchase invoice
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	* Check the report generation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-	* Clear postings document and check that there is no movement on the registers
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
 			| Register  "Purchase turnovers" |
 			| 'Register  "Inventory balance"'        |
 			| 'Register  "Taxes turnovers"'          |
 			| 'Register  "Stock reservation"'        |
 			| 'Register  "Reconciliation statement"' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Posting the document and check movements
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Purchase invoice 1*'                  | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| 'Document registrations records'       | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| 'Register  "Inventory balance"'        | ''            | ''          | ''              | ''             | ''                    | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
@@ -476,22 +476,22 @@
 		| ''                                     | 'Receipt'     | '*'         | '100'           | 'Store 01'     | 'M/White'             | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| ''                                     | 'Receipt'     | '*'         | '200'           | 'Store 01'     | 'L/Green'             | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
 		| ''                                     | 'Receipt'     | '*'         | '300'           | 'Store 01'     | '36/Yellow'           | ''                    | ''                  | ''                   | ''                        | ''                         | ''                     | ''                         | ''                     |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
 
 
 
-Сценарий: _022011 checking the output of the document movement report for Purchase return order
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
+Scenario: _022011 check the output of the document movement report for Purchase return order
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	* Check the report output for the selected document from the list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Purchase return order 1*'       | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Purchase turnovers"' | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
@@ -516,16 +516,16 @@
 		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                    | 'Item key'            | 'Row key'  | ''         | ''        | ''                         | ''                     |
 		| ''                               | 'Receipt'     | '*'         | '2'         | 'Store 02'   | 'Purchase return order 1*' | 'L/Green'             | '*'        | ''         | ''        | ''                         | ''                     |
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	* Check the report output from the selected document
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Purchase return order 1*'       | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Purchase turnovers"' | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
@@ -550,32 +550,32 @@
 		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                    | 'Item key'            | 'Row key'  | ''         | ''        | ''                         | ''                     |
 		| ''                               | 'Receipt'     | '*'         | '2'         | 'Store 02'   | 'Purchase return order 1*' | 'L/Green'             | '*'        | ''         | ''        | ''                         | ''                     |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _02201101 clear postings Purchase Return Order and check that there is no movements on the registers 
+Scenario: _02201101 clear movements Purchase Return Order and check that there is no movements on the registers 
 	* Open list form Purchase Return Order
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	* Check the report generation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-	* Clear postings document and check that there is no movement on the registers
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Purchase turnovers"' |
 			| 'Register  "Order reservation"'  |
 			| 'Register  "Stock reservation"'  |
 			| 'Register  "Order balance"'      |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Posting the document and check movements
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Purchase return order 1*'       | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Purchase turnovers"' | ''            | ''          | ''          | ''           | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
@@ -600,22 +600,22 @@
 		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                         | ''                    | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                    | 'Item key'            | 'Row key'  | ''         | ''        | ''                         | ''                     |
 		| ''                               | 'Receipt'     | '*'         | '2'         | 'Store 02'   | 'Purchase return order 1*' | 'L/Green'             | '*'        | ''         | ''        | ''                         | ''                     |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
 
 
 
-Сценарий: _022336 checking the output of the document movement report for Purchase Return
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
+Scenario: _022336 check the output of the document movement report for Purchase Return
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	* Check the report output for the selected document from the list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Purchase return 1*'                    | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
 		| 'Document registrations records'        | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AR transactions"'   | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
@@ -663,16 +663,16 @@
 		| ''                                      | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
 		| ''                                      | ''            | ''          | 'Quantity'  | 'Store'        | 'Order'                    | 'Item key'  | 'Row key'           | ''                   | ''                         | ''                         | ''                     |
 		| ''                                      | 'Expense'     | '*'         | '2'         | 'Store 02'     | 'Purchase return order 1*' | 'L/Green'   | '*'                 | ''                   | ''                         | ''                         | ''                     |
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	* Check the report output from the selected document
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Purchase return 1*'                    | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
 		| 'Document registrations records'        | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AR transactions"'   | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
@@ -720,35 +720,35 @@
 		| ''                                      | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
 		| ''                                      | ''            | ''          | 'Quantity'  | 'Store'        | 'Order'                    | 'Item key'  | 'Row key'           | ''                   | ''                         | ''                         | ''                     |
 		| ''                                      | 'Expense'     | '*'         | '2'         | 'Store 02'     | 'Purchase return order 1*' | 'L/Green'   | '*'                 | ''                   | ''                         | ''                         | ''                     |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: _02233601 clear postings Purchase Return and check that there is no movements on the registers 
+Scenario: _02233601 clear movements Purchase Return and check that there is no movements on the registers 
 	* Open list form Purchase Return Order
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	* Check the report generation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-	* Clear postings document and check that there is no movement on the registers
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Partner AR transactions"'   |
 			| 'Register  "Inventory balance"'         |
 			| 'Register  "Goods in transit outgoing"' |
 			| 'Register  "Order reservation"'         |
 			| 'Register  "Reconciliation statement"'  |
 			| 'Register  "Order balance"'             |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Posting the document and check movements
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Purchase return 1*'                    | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
 		| 'Document registrations records'        | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AR transactions"'   | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
@@ -796,22 +796,22 @@
 		| ''                                      | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
 		| ''                                      | ''            | ''          | 'Quantity'  | 'Store'        | 'Order'                    | 'Item key'  | 'Row key'           | ''                   | ''                         | ''                         | ''                     |
 		| ''                                      | 'Expense'     | '*'         | '2'         | 'Store 02'     | 'Purchase return order 1*' | 'L/Green'   | '*'                 | ''                   | ''                         | ''                         | ''                     |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
 
 
 
-Сценарий: _021048 checking the output of the document movement report for Inventory transfer
-	И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransfer"
+Scenario: _021048 check the output of the document movement report for Inventory transfer
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	* Check the report output for the selected document from the list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Inventory transfer 1*'                 | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
 		| 'Register  "Transfer order balance"'    | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
@@ -831,16 +831,16 @@
 		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'              | ''                              | ''         | ''        |
 		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'S/Yellow'              | ''                              | ''         | ''        |
 		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'M/White'               | ''                              | ''         | ''        |
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransfer"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	* Check the report output from the selected document
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Inventory transfer 1*'                 | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
 		| 'Register  "Transfer order balance"'    | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
@@ -860,33 +860,33 @@
 		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'              | ''                              | ''         | ''        |
 		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'S/Yellow'              | ''                              | ''         | ''        |
 		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'M/White'               | ''                              | ''         | ''        |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
 
-Сценарий: _02104801 clear postings Inventory transfer and check that there is no movements on the registers 
+Scenario: _02104801 clear movements Inventory transfer and check that there is no movements on the registers 
 	* Open list form Inventory transfer
-		И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransfer"
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	* Check the report generation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-	* Clear postings document and check that there is no movement on the registers
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Transfer order balance"'    |
 			| 'Register  "Goods in transit incoming"' |
 			| 'Register  "Stock balance"'             |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Posting the document and check movements
-		И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransfer"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Inventory transfer 1*'                 | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
 		| 'Register  "Transfer order balance"'    | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
@@ -906,19 +906,19 @@
 		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'              | ''                              | ''         | ''        |
 		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'S/Yellow'              | ''                              | ''         | ''        |
 		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'M/White'               | ''                              | ''         | ''        |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
-Сценарий: _024043 checking the output of the document movement report for Sales Invoice
-	И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
+Scenario: _024043 check the output of the document movement report for Sales Invoice
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	* Check the report output for the selected document from the list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Sales invoice 1*'                           | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AR transactions"'        | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
@@ -1005,16 +1005,16 @@
 		| ''                                           | 'Expense'     | '*'         | '4'             | 'Main Company'  | 'Sales order 1*'    | 'Store 01'     | '36/Yellow'         | '*'                     | '*'                        | ''                         | ''                         | ''                         | ''                     |
 		| ''                                           | 'Expense'     | '*'         | '5'             | 'Main Company'  | 'Sales order 1*'    | 'Store 01'     | 'L/Green'           | '*'                     | '*'                        | ''                         | ''                         | ''                         | ''                     |
 
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	* Check the report output from the selected document
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Sales invoice 1*'                           | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AR transactions"'        | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
@@ -1101,20 +1101,20 @@
 		| ''                                           | 'Expense'     | '*'         | '4'             | 'Main Company'  | 'Sales order 1*'    | 'Store 01'     | '36/Yellow'         | '*'                     | '*'                        | ''                         | ''                         | ''                         | ''                     |
 		| ''                                           | 'Expense'     | '*'         | '5'             | 'Main Company'  | 'Sales order 1*'    | 'Store 01'     | 'L/Green'           | '*'                     | '*'                        | ''                         | ''                         | ''                         | ''                     |
 
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: __02404301 clear postings Sales invoice and check that there is no movements on the registers 
+Scenario: __02404301 clear movements Sales invoice and check that there is no movements on the registers 
 	* Open list form Sales invoice
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	* Check the report generation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-	* Clear postings document and check that there is no movement on the registers
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Partner AR transactions"'        |
 			| 'Register  "Inventory balance"'              |
 			| 'Register  "Order reservation"'              |
@@ -1122,15 +1122,15 @@
 			| 'Register  "Sales turnovers"'                |
 			| 'Register  "Reconciliation statement"'       |
 			| 'Register  "Order balance"'                  |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Posting the document and check movements
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Sales invoice 1*'                           | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AR transactions"'        | ''            | ''          | ''              | ''              | ''                  | ''             | ''                  | ''                      | ''                         | ''                         | ''                         | ''                         | ''                     |
@@ -1216,22 +1216,22 @@
 		| ''                                           | ''            | ''          | 'Quantity'      | 'Company'       | 'Order'             | 'Store'        | 'Item key'          | 'Row key'               | 'Delivery date'            | ''                         | ''                         | ''                         | ''                     |
 		| ''                                           | 'Expense'     | '*'         | '4'             | 'Main Company'  | 'Sales order 1*'    | 'Store 01'     | '36/Yellow'         | '*'                     | '*'                        | ''                         | ''                         | ''                         | ''                     |
 		| ''                                           | 'Expense'     | '*'         | '5'             | 'Main Company'  | 'Sales order 1*'    | 'Store 01'     | 'L/Green'           | '*'                     | '*'                        | ''                         | ''                         | ''                         | ''                     |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
 
 
 
-Сценарий: _028013 checking the output of the document movement report for Sales Return Order
-	И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
+Scenario: _028013 check the output of the document movement report for Sales Return Order
+	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 	* Check the report output for the selected document from the list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Sales return order 1*'          | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Sales turnovers"'    | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
@@ -1246,16 +1246,16 @@
 		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                 | 'Item key'     | 'Row key'          | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                               | 'Receipt'     | '*'         | '1'         | 'Store 02'   | 'Sales return order 1*' | 'L/Green'      | '*'                | ''         | ''         | ''        | ''                         | ''                     |
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 	* Check the report output from the selected document
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Sales return order 1*'          | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Sales turnovers"'    | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
@@ -1270,31 +1270,31 @@
 		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                 | 'Item key'     | 'Row key'          | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                               | 'Receipt'     | '*'         | '1'         | 'Store 02'   | 'Sales return order 1*' | 'L/Green'      | '*'                | ''         | ''         | ''        | ''                         | ''                     |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: _02801301 clear postings Sales Return Order and check that there is no movements on the registers 
+Scenario: _02801301 clear movements Sales Return Order and check that there is no movements on the registers 
 	* Open list form Sales Return Order
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 	* Check the report generation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-	* Clear postings document and check that there is no movement on the registers
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Sales turnovers"'    |
 			| 'Register  "Order balance"'      |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Posting the document and check movements
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Sales return order 1*'          | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Sales turnovers"'    | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
@@ -1309,22 +1309,22 @@
 		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                 | 'Item key'     | 'Row key'          | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                               | 'Receipt'     | '*'         | '1'         | 'Store 02'   | 'Sales return order 1*' | 'L/Green'      | '*'                | ''         | ''         | ''        | ''                         | ''                     |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
 
 
 
-Сценарий: _028811 checking the output of the document movement report for Shipment Confirmation
-	И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
+Scenario: _028811 check the output of the document movement report for Shipment Confirmation
+	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 	* Check the report output for the selected document from the list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '95'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Shipment confirmation 95*'                  | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'             | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
 		| 'Register  "Goods in transit outgoing"'      | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
@@ -1344,16 +1344,16 @@
 		| ''                                           | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'            | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
 		| ''                                           | 'Expense'     | '*'      | '10'        | 'Main Company' | 'Sales invoice 2*' | 'Store 02'  | 'L/Green'   | '*'       | '*'             |
 		| ''                                           | 'Expense'     | '*'      | '14'        | 'Main Company' | 'Sales invoice 2*' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 	* Check the report output from the selected document
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '95'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Shipment confirmation 95*'                  | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'             | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
 		| 'Register  "Goods in transit outgoing"'      | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
@@ -1373,32 +1373,32 @@
 		| ''                                           | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'            | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
 		| ''                                           | 'Expense'     | '*'      | '10'        | 'Main Company' | 'Sales invoice 2*' | 'Store 02'  | 'L/Green'   | '*'       | '*'             |
 		| ''                                           | 'Expense'     | '*'      | '14'        | 'Main Company' | 'Sales invoice 2*' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: _02881101 clear postings Shipment confirmation and check that there is no movements on the registers 
+Scenario: _02881101 clear movements Shipment confirmation and check that there is no movements on the registers 
 	* Open list form Shipment confirmation
-		И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 	* Check the report generation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '95'      |
-	* Clear postings document and check that there is no movement on the registers
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Goods in transit outgoing"'      |
 			| 'Register  "Stock balance"'                  |
 			| 'Register  "Shipment confirmation schedule"' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Posting the document and check movements
-		И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
 			| 'Number' |
 			| '95'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Shipment confirmation 95*'                  | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'             | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
 		| 'Register  "Goods in transit outgoing"'      | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
@@ -1418,21 +1418,21 @@
 		| ''                                           | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'            | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
 		| ''                                           | 'Expense'     | '*'      | '10'        | 'Main Company' | 'Sales invoice 2*' | 'Store 02'  | 'L/Green'   | '*'       | '*'             |
 		| ''                                           | 'Expense'     | '*'      | '14'        | 'Main Company' | 'Sales invoice 2*' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
 
 
-Сценарий: _028905 checking the output of the document movement report for Goods Receipt
-	И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
+Scenario: _028905 check the output of the document movement report for Goods Receipt
+	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	* Check the report output for the selected document from the list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '106'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Goods receipt 106*'                    | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
 		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
@@ -1456,16 +1456,16 @@
 		| ''                                      | 'Receipt'     | '*'      | '500'       | 'Store 02'     | 'L/Green'             | ''         | ''         | ''        | ''              |
 
 
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	* Check the report output from the selected document
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '106'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Goods receipt 106*'                    | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
 		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
@@ -1489,33 +1489,33 @@
 		| ''                                      | 'Receipt'     | '*'      | '500'       | 'Store 02'     | 'L/Green'             | ''         | ''         | ''        | ''              |
 
 
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: _02890501 clear postings Goods receipt and check that there is no movements on the registers 
+Scenario: _02890501 clear movements Goods receipt and check that there is no movements on the registers 
 	* Open list form Goods receipt
-		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	* Check the report generation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '106'      |
-	* Clear postings document and check that there is no movement on the registers
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Goods in transit incoming"' |
 			| 'Register  "Stock reservation"'         |
 			| 'Register  "Goods receipt schedule"'    |
 			| 'Register  "Stock balance"'             |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Posting the document and check movements
-		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
 			| 'Number' |
 			| '106'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Goods receipt 106*'                    | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
 		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
@@ -1537,22 +1537,22 @@
 		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                    | ''         | ''         | ''        | ''              |
 		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'            | ''         | ''         | ''        | ''              |
 		| ''                                      | 'Receipt'     | '*'      | '500'       | 'Store 02'     | 'L/Green'             | ''         | ''         | ''        | ''              |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
 
 
 
-Сценарий: _029519 checking the output of the document movement report for Bundling
-	И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
+Scenario: _029519 check the output of the document movement report for Bundling
+	Given I open hyperlink "e1cib/list/Document.Bundling"
 	* Check the report output for the selected document from the list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Bundling 1*'                    | ''            | ''          | ''                              | ''           | ''                              |
 		| 'Document registrations records' | ''            | ''          | ''                              | ''           | ''                              |
 		| 'Register  "Bundles content"'    | ''            | ''          | ''                              | ''           | ''                              |
@@ -1575,16 +1575,16 @@
 		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
 		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
 
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Bundling"
 	* Check the report output from the selected document
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Bundling 1*'                    | ''            | ''          | ''                              | ''           | ''                              |
 		| 'Document registrations records' | ''            | ''          | ''                              | ''           | ''                              |
 		| 'Register  "Bundles content"'    | ''            | ''          | ''                              | ''           | ''                              |
@@ -1607,32 +1607,32 @@
 		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
 		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
 
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: _02951901 clear postings Bundling and check that there is no movements on the registers 
+Scenario: _02951901 clear movements Bundling and check that there is no movements on the registers 
 	* Open list form Bundling
-		И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
+		Given I open hyperlink "e1cib/list/Document.Bundling"
 	* Check the report generation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-	* Clear postings document and check that there is no movement on the registers
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Bundles content"'    |
 			| 'Register  "Stock reservation"'  |
 			| 'Register  "Stock balance"'      |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Posting the document and check movements
-		И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Bundling 1*'                    | ''            | ''          | ''                              | ''           | ''                              |
 		| 'Document registrations records' | ''            | ''          | ''                              | ''           | ''                              |
 		| 'Register  "Bundles content"'    | ''            | ''          | ''                              | ''           | ''                              |
@@ -1654,7 +1654,7 @@
 		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
 		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
 		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
@@ -1663,15 +1663,15 @@
 
 
 
-Сценарий: _029612 checking the output of the document movement report for Unbundling
-	И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
+Scenario: _029612 check the output of the document movement report for Unbundling
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Check the report output for the selected document from the list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Unbundling 1*'                  | ''            | ''       | ''          | ''           | ''          |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
 		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
@@ -1692,16 +1692,16 @@
 		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
 		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
 
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Check the report output from the selected document
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Unbundling 1*'                  | ''            | ''       | ''          | ''           | ''          |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
 		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
@@ -1722,30 +1722,30 @@
 		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
 		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
 
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _02961201 clear postings Unbundling and check that there is no movements on the registers 
+Scenario: _02961201 clear movements Unbundling and check that there is no movements on the registers 
 	* Open list form Unbundling
-		И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Check the report generation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-	* Clear postings document and check that there is no movement on the registers
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		И табличный документ "ResultTable" не содержит значения:
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Stock reservation"'  |
 			| 'Register  "Stock balance"'      |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Posting the document and check movements
-		И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Unbundling 1*'                  | ''            | ''       | ''          | ''           | ''          |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
 		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
@@ -1765,20 +1765,20 @@
 		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
 		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
 		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
 
-Сценарий: _023023 checking the output of the document movement report for Sales Order
-	И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
+Scenario: _023023 check the output of the document movement report for Sales Order
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	* Check the report output for the selected document from the list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Sales order 1*'                             | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
 		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
@@ -1816,16 +1816,16 @@
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'          | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date'            | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Main Company' | 'Sales order 1*' | 'Store 01'  | '36/Yellow' | '*'       | '*'                        | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Main Company' | 'Sales order 1*' | 'Store 01'  | 'L/Green'   | '*'       | '*'                        | ''                     |
-	И я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	* Check the report output from the selected document
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Sales order 1*'                             | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
 		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''               | ''          | ''          | ''        | ''                         | ''                     |
@@ -1863,4 +1863,4 @@
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'          | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date'            | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Main Company' | 'Sales order 1*' | 'Store 01'  | '36/Yellow' | '*'       | '*'                        | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Main Company' | 'Sales order 1*' | 'Store 01'  | 'L/Green'   | '*'       | '*'                        | ''                     |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows

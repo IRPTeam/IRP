@@ -1,147 +1,147 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: checking the display of lists of catalogs elements for which there are selections
+Feature: check the display of lists of catalogs elements for which there are selections
 
 
 
-Контекст: 
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 	
-Сценарий: _0203001 check filters in the partner term catalog
+Scenario: _0203001 check filters in the partner term catalog
 	* Check for data availability
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-		Тогда таблица "List" содержит строки:
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And "List" table contains lines
 		| 'Description'                             |
 		| 'Basic Partner terms, TRY'                   |
 		| 'Vendor Ferron, TRY'                      |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Filter check according to partner term with customers in the sales section
 		* Open list form
-			И В панели разделов я выбираю 'Sales - A/R'
-			И В панели функций я выбираю 'Customers partner terms'
+			When in sections panel I select "Sales - A/R"
+			And in functions panel I select "Customers partner terms"
 		* Filter check
-			Тогда таблица "List" не содержит строки:
+			And "List" table does not contain lines
 			| 'Description'                             |
 			| 'Vendor Ferron, TRY'                      |
-			Тогда таблица "List" содержит строки:
+			And "List" table contains lines
 			| 'Description'                             |
 			| 'Basic Partner terms, TRY'                   |
 	* Filter check according to partner term with vendors in the purchase section
 		* Open list form
-			Когда В панели разделов я выбираю 'Purchase  - A/P'
-			И В панели функций я выбираю 'Vendors partner terms'
+			When in sections panel I select "Purchase  - A/P"
+			And in functions panel I select "Vendors partner terms"
 		* Filter check
-			Тогда таблица "List" содержит строки:
+			And "List" table contains lines
 			| 'Description'                             |
 			| 'Vendor Ferron, TRY'                      |
-			Тогда таблица "List" не содержит строки:
+			And "List" table does not contain lines
 			| 'Description'                             |
 			| 'Basic Partner terms, TRY'                   |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _0203002 check filters in the partner catalog
+Scenario: _0203002 check filters in the partner catalog
 	* Check for data availability
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-		Тогда таблица "List" содержит строки:
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And "List" table contains lines
 			| 'Description'      |
 			| 'Ferron BP'        |
 			| 'Kalipso'          |
 			| 'Nicoletta'        |
 			| 'Veritas'          |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Filter check customers in the sales section
 		* Open list form
-			И В панели разделов я выбираю 'Sales - A/R'
-			И В панели функций я выбираю 'Customers'
+			When in sections panel I select "Sales - A/R"
+			And in functions panel I select "Customers"
 		* Check the selection by customer
-			Тогда таблица "List" не содержит строки:
+			And "List" table does not contain lines
 			| 'Description'      |
 			| 'Veritas'          |
-			Тогда таблица "List" содержит строки:
+			And "List" table contains lines
 			| 'Description'      |
 			| 'Ferron BP'        |
 			| 'Kalipso'          |
 			| 'Nicoletta'        |
 		* Filter check customers who are suppliers also
-			И я устанавливаю флаг 'Vendor'
-			Тогда таблица "List" не содержит строки:
+			And I set checkbox "Vendor"
+			And "List" table does not contain lines
 			| 'Description'      |
 			| 'Kalipso'          |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Filter check customers in the purchase section
 		* Open list form
-			Когда В панели разделов я выбираю 'Purchase  - A/P'
-			И В панели функций я выбираю 'Vendors'
+			When in sections panel I select "Purchase  - A/P"
+			And in functions panel I select "Vendors"
 		* Check the selection by vendors
-			Тогда таблица "List" содержит строки:
+			And "List" table contains lines
 			| 'Description'      |
 			| 'Ferron BP'        |
 			| 'Veritas'          |
 			| 'Nicoletta'        |
-			Тогда таблица "List" не содержит строки:
+			And "List" table does not contain lines
 			| 'Description'      |
 			| 'Kalipso'          |
-		* Filter check по поставщикам которые являются клиентами
-			И я устанавливаю флаг 'Customer'
-			Тогда таблица "List" не содержит строки:
+		* Filter check for vendors that are also customers
+			And I set checkbox "Customer"
+			And "List" table does not contain lines
 			| 'Description'      |
 			| 'Veritas'          |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Check filters in the catalog Partners
 		* Open catalog
-			И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
+			Given I open hyperlink "e1cib/list/Catalog.Partners"
 		* Check the selection by customer
-			И я устанавливаю флаг 'Customer'
-			Тогда таблица "List" содержит строки:
+			And I set checkbox "Customer"
+			And "List" table contains lines
 			| 'Description'      |
 			| 'Ferron BP'        |
 			| 'Kalipso'          |
 			| 'Nicoletta'        |
-			Тогда таблица "List" не содержит строки:
+			And "List" table does not contain lines
 			| 'Description'      |
 			| 'Veritas'          |
 		* Check the selection by vendor
-			И я снимаю флаг 'Customer'
-			И я устанавливаю флаг 'Vendor'
-			Тогда таблица "List" не содержит строки:
+			And I remove checkbox "Customer"
+			And I set checkbox "Vendor"
+			And "List" table does not contain lines
 			| 'Description'      |
 			| 'Kalipso'          |
-			Тогда таблица "List" содержит строки:
+			And "List" table contains lines
 			| 'Description'      |
 			| 'Ferron BP'        |
 			| 'Veritas'          |
 			| 'Nicoletta'        |
 		* Check the selection by employee
-			И я снимаю флаг 'Vendor'
-			И я устанавливаю флаг 'Employee'
-			Тогда таблица "List" не содержит строки:
+			And I remove checkbox "Vendor"
+			And I set checkbox "Employee"
+			And "List" table does not contain lines
 			| 'Description'      |
 			| 'Ferron BP'        |
 			| 'Kalipso'          |
 			| 'Nicoletta'        |
 			| 'Veritas'          |
-			Тогда таблица "List" содержит строки:
+			And "List" table contains lines
 			| 'Description'     |
 			| 'Alexander Orlov' |
 			| 'Anna Petrova'    |
 			| 'David Romanov'   |
 			| 'Arina Brown'     |
 		* Check the selection by opponent
-			И я устанавливаю флаг 'Opponent'
-			И я снимаю флаг 'Employee'
-			Тогда в таблице "List" количество строк "равно" 0
-		И я закрыл все окна клиентского приложения
+			And I set checkbox "Opponent"
+			And I remove checkbox "Employee"
+			Then the number of "List" table lines is "равно" 0
+		And I close all client application windows
 
 
 
 
 
-Сценарий: _0203003 check filters in the Cash/Bank accounts catalog
+Scenario: _0203003 check filters in the Cash/Bank accounts catalog
 	* Check for data availability
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.CashAccounts'
-		Тогда таблица "List" содержит строки:
+		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+		And "List" table contains lines
 			| 'Description'      |
 			| 'Cash desk №1'     |
 			| 'Cash desk №2'     |
@@ -150,44 +150,44 @@
 			| 'Bank account, TRY'|
 			| 'Bank account, USD'|
 	* Check the selection by cash account
-		И я меняю значение переключателя 'CashAccountTypeFilter' на 'Cash'
-		Тогда таблица "List" содержит строки:
+		And I change "CashAccountTypeFilter" radio button value to "Cash"
+		And "List" table contains lines
 			| 'Description'      |
 			| 'Cash desk №1'     |
 			| 'Cash desk №2'     |
-		Тогда таблица "List" не содержит строки:
+		And "List" table does not contain lines
 			| 'Description'      |
 			| 'Transit Main'     |
 			| 'Transit Second'   |
 			| 'Bank account, TRY'|
 			| 'Bank account, USD'|
 	* Check the selection by bank account
-		И я меняю значение переключателя 'CashAccountTypeFilter' на 'Bank'
-		Тогда таблица "List" содержит строки:
+		And I change "CashAccountTypeFilter" radio button value to "Bank"
+		And "List" table contains lines
 			| 'Description'      |
 			| 'Bank account, TRY'|
 			| 'Bank account, USD'|
-		Тогда таблица "List" не содержит строки:
+		And "List" table does not contain lines
 			| 'Description'      |
 			| 'Transit Main'     |
 			| 'Transit Second'   |
 			| 'Cash desk №1'     |
 			| 'Cash desk №2'     |
 	* Check the selection by transit account
-		И я меняю значение переключателя 'CashAccountTypeFilter' на 'Transit'
-		Тогда таблица "List" содержит строки:
+		And I change "CashAccountTypeFilter" radio button value to "Transit"
+		And "List" table contains lines
 			| 'Description'      |
 			| 'Transit Main'     |
 			| 'Transit Second'   |
-		Тогда таблица "List" не содержит строки:
+		And "List" table does not contain lines
 			| 'Description'      |
 			| 'Bank account, TRY'|
 			| 'Bank account, USD'|
 			| 'Cash desk №1'     |
 			| 'Cash desk №2'     |
 	* Filter reset check
-		И я меняю значение переключателя 'CashAccountTypeFilter' на 'All'
-		Тогда таблица "List" содержит строки:
+		And I change "CashAccountTypeFilter" radio button value to "All"
+		And "List" table contains lines
 			| 'Description'      |
 			| 'Cash desk №1'     |
 			| 'Cash desk №2'     |
@@ -195,6 +195,7 @@
 			| 'Transit Second'   |
 			| 'Bank account, TRY'|
 			| 'Bank account, USD'|
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
+
 
 

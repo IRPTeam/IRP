@@ -1,310 +1,310 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: write-off of accounts receivable and payable
+Feature: write-off of accounts receivable and payable
 
 As an accountant
 I want to create a Credit_DebitNote document.
 For write-off of accounts receivable and payable
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _095001 preparation
+Scenario: _095001 preparation
 	* Create customer and vendor
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Lunch'
-		И я изменяю флаг 'Vendor'
-		И я изменяю флаг 'Customer'
-		И я нажимаю на кнопку 'Save'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Segment"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I click the button named "FormCreate"
+		And I input "Lunch" text in "ENG" field
+		And I change checkbox "Vendor"
+		And I change checkbox "Customer"
+		And I click "Save" button
+		And In this window I click command interface button "Partner segments content"
+		And I click the button named "FormCreate"
+		And I click Select button of "Segment" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Retail'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Partner segments content (create) *' в течение 20 секунд
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Company'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Company Lunch'
-		И я нажимаю кнопку выбора у поля "Country"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Partner segments content (create) *" window closing in 20 seconds
+		And In this window I click command interface button "Company"
+		And I click the button named "FormCreate"
+		And I input "Company Lunch" text in "ENG" field
+		And I click Select button of "Country" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Turkey'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Maxim'
-		И я изменяю флаг 'Customer'
-		И я изменяю флаг 'Vendor'
-		И я нажимаю на кнопку 'Save'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Segment"
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
+		And I click the button named "FormCreate"
+		And I input "Maxim" text in "ENG" field
+		And I change checkbox "Customer"
+		And I change checkbox "Vendor"
+		And I click "Save" button
+		And In this window I click command interface button "Partner segments content"
+		And I click the button named "FormCreate"
+		And I click Select button of "Segment" field
 		
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Retail'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Company'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Company Maxim'
-		И я нажимаю кнопку выбора у поля "Country"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And In this window I click command interface button "Company"
+		And I click the button named "FormCreate"
+		And I input "Company Maxim" text in "ENG" field
+		And I click Select button of "Country" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Turkey'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Company Aldis'
-		И я нажимаю кнопку выбора у поля "Country"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I click the button named "FormCreate"
+		And I input "Company Aldis" text in "ENG" field
+		And I click Select button of "Country" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Turkey'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
 	* Create vendor Partner term for Maxim, Ap-Ar - posting details (by Partner terms)
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Partner term Maxim'
-		И я меняю значение переключателя 'Type' на 'Vendor'
-		И в поле 'Date' я ввожу текст '01.12.2019'
-		И я нажимаю кнопку выбора у поля "Multi currency movement type"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I click the button named "FormCreate"
+		And I input "Partner term Maxim" text in "ENG" field
+		And I change "Type" radio button value to "Vendor"
+		And I input "01.12.2019" text in "Date" field
+		And I click Select button of "Multi currency movement type" field
+		And I go to line in "List" table
 			| 'Currency' |
 			| 'TRY'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Maxim'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Price type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Vendor price, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я изменяю флаг 'Price include tax'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I change checkbox "Price include tax"
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Start using' я ввожу текст '01.11.2019'
-		И я нажимаю на кнопку 'Save and close'
-	И Пауза 30
+		And I select current line in "List" table
+		And I input "01.11.2019" text in "Start using" field
+		And I click "Save and close" button
+	And Delay 30
 	* Create a Sales invoice for creating customer
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Partner" я выбираю по строке 'Lunch'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I select from "Partner" drop-down list by "Lunch" string
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '15,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я перехожу к закладке "Other"
-		И я разворачиваю группу "Currency"
-		И я перехожу к закладке с именем "GroupCurrency"
-		И я разворачиваю группу "More"
-		И в поле 'Number' я ввожу текст '2 900'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '2 900'
-		И в поле 'Date' я ввожу текст '01.01.2020  10:00:00'
-		И Пауза 1
-		И я перехожу к закладке "Item list"
-		И я нажимаю на кнопку 'Post and close'
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "15,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Other" tab
+		And I expand "Currency" group
+		And I move to the tab named "GroupCurrency"
+		And I expand "More" group
+		And I input "2 900" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "2 900" text in "Number" field
+		And I input "01.01.2020  10:00:00" text in "Date" field
+		And Delay 1
+		And I move to "Item list" tab
+		And I click "Post and close" button
 	* Create Purchase invoice for creating vendor
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		* Filling data о поставщике
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+		* Filling data about vendor
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Maxim'     |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Legal name"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
 				| 'Description'   |
 				| 'Company Maxim' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Change the document number to 601
-			И я перехожу к закладке "Other"
-			И в поле 'Number' я ввожу текст '2 900'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '2 900'
+			And I move to "Other" tab
+			And I input "2 900" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "2 900" text in "Number" field
 		* Adding items to Purchase Invoice
-			И я перехожу к закладке "Item list"
-			И  я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I move to "Item list" tab
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item key' |
 				| 'L/Green'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Q"
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '20,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '550,00'
+			And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I input "20,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I input "550,00" text in "Price" field of "ItemList" table
 		* Change of date in Purchase invoice
-			И я перехожу к закладке "Other"
-			И в поле 'Date' я ввожу текст '01.01.2020  10:00:00'
-			И Пауза 1
-			И я перехожу к закладке "Item list"
-			И Пауза 5
-			Тогда открылось окно 'Update item list info'
-			И я изменяю флаг 'Update filled price types on Vendor price, TRY'
-			И я изменяю флаг 'Update filled prices.'
-			И я нажимаю на кнопку 'OK'
-			И я нажимаю на кнопку 'Post and close'
+			And I move to "Other" tab
+			And I input "01.01.2020  10:00:00" text in "Date" field
+			And Delay 1
+			And I move to "Item list" tab
+			And Delay 5
+			Then "Update item list info" window is opened
+			And I change checkbox "Update filled price types on Vendor price, TRY"
+			And I change checkbox "Update filled prices."
+			And I click "OK" button
+			And I click "Post and close" button
 	* Create one more Purchase invoice
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		* Filling data о поставщике
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+		* Filling data about vendor
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Maxim'     |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Legal name"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
 				| 'Description'   |
 				| 'Company Maxim' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Change the document number to 2901
-			И я перехожу к закладке "Other"
-			И в поле 'Number' я ввожу текст '2 901'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '2 901'
+			And I move to "Other" tab
+			And I input "2 901" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "2 901" text in "Number" field
 		* Adding items to Purchase Invoice
-			И я перехожу к закладке "Item list"
-			И  я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I move to "Item list" tab
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item key' |
 				| 'L/Green'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Q"
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '20,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '500,00'
+			And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I input "20,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I input "500,00" text in "Price" field of "ItemList" table
 		* Change of date in Purchase invoice
-			И я перехожу к закладке "Other"
-			И в поле 'Date' я ввожу текст '01.01.2020  10:00:00'
-			И Пауза 1
-			И я перехожу к закладке "Item list"
-			И Пауза 5
-			Тогда открылось окно 'Update item list info'
-			И я изменяю флаг 'Update filled price types on Vendor price, TRY'
-			И я изменяю флаг 'Update filled prices.'
-			И я нажимаю на кнопку 'OK'
-			И я нажимаю на кнопку 'Post and close'
+			And I move to "Other" tab
+			And I input "01.01.2020  10:00:00" text in "Date" field
+			And Delay 1
+			And I move to "Item list" tab
+			And Delay 5
+			Then "Update item list info" window is opened
+			And I change checkbox "Update filled price types on Vendor price, TRY"
+			And I change checkbox "Update filled prices."
+			And I click "OK" button
+			And I click "Post and close" button
 	
 
-Сценарий: _095002 check movements of the document Credit_DebitNote by operation type payable
+Scenario: _095002 check movements of the document Credit_DebitNote by operation type payable
 	* Create document
-		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И из выпадающего списка "Operation type" я выбираю точное значение 'Payable'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select "Payable" exact value from "Operation type" drop-down list
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Maxim'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Company Maxim' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the basis document for debt write-offs
-		И в таблице "Transactions" я нажимаю на кнопку с именем 'TransactionsAdd'
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Partner ap transactions basis document"
-		Тогда открылось окно 'Select data type'
-		И в таблице "" я перехожу к строке:
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner ap transactions basis document" attribute in "Transactions" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
 			| ''                 |
 			| 'Purchase invoice' |
-		И в таблице "" я выбираю текущую строку
-		* Checking the selection of basis documents for the specified partner
-			Тогда в таблице "List" количество строк "меньше или равно" 2
-			Тогда таблица "List" содержит строки:
+		And I select current line in "" table
+		* Check the selection of basis documents for the specified partner
+			Then the number of "List" table lines is "less or equal" 2
+			And "List" table contains lines
 			| 'Number' | 'Legal name'    | 'Partner' | 'Document amount'   | 'Currency' |
 			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00'         | 'TRY'      |
 			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00'         | 'TRY'      |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '2 900'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я активизирую поле с именем "TransactionsAmount"
-		И в таблице "Transactions" в поле с именем 'TransactionsAmount' я ввожу текст '1 000,00'
-		И в таблице "Transactions" я завершаю редактирование строки
-		И в таблице "Transactions" я активизирую поле "Business unit"
-		И в таблице "Transactions" я выбираю текущую строку
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Business unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I activate "Business unit" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Business unit" attribute in "Transactions" table
+		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я активизирую поле "Expense type"
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Expense type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Expense type" field in "Transactions" table
+		And I click choice button of "Expense type" attribute in "Transactions" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Software'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "Transactions" table
 	* Change the document number
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '1'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '1'
-	* Check movements документа
-		И я нажимаю на кнопку 'Post'
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I move to "Other" tab
+		And I input "1" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "1" text in "Number" field
+	* Check movements
+		And I click "Post" button
+		And I click "Registrations report" button
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Credit debit note 1*'                 | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| 'Document registrations records'       | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| 'Register  "Accounts statement"'       | ''            | ''                    | ''                    | ''                        | ''                       | ''               | ''              | ''                    | ''                         | ''                         | ''                     |
@@ -332,34 +332,34 @@ For write-off of accounts receivable and payable
 		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
 		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'Local currency'           | 'No'                   |
 		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'TRY'                      | 'No'                   |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _095003 change of the basis document and the amount in the already performed Credit debit note and movement check
+Scenario: _095003 change of the basis document and the amount in the already performed Credit debit note and movement check
 	* Choose a document already created
-		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
-		И в таблице "List" я выбираю текущую строку
-	* Сhange of the basis document and the amount
-		И в таблице "Transactions" я выбираю текущую строку
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Partner ap transactions basis document"
-		Тогда открылось окно 'Select data type'
-		И в таблице "" я перехожу к строке:
+		And I select current line in "List" table
+	* Change of the basis document and the amount
+		And I select current line in "Transactions" table
+		And I click choice button of "Partner ap transactions basis document" attribute in "Transactions" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
 			| ''                 |
 			| 'Purchase invoice' |
-		И в таблице "" я выбираю текущую строку
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "" table
+		And I go to line in "List" table
 			| 'Document amount'     | 'Currency' | 'Legal name'    | 'Number' | 'Partner' |
 			| '10 000,00' | 'TRY'      | 'Company Maxim' | '2 901'  | 'Maxim'   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я активизирую поле с именем "TransactionsAmount"
-		И в таблице "Transactions" в поле с именем 'TransactionsAmount' я ввожу текст '2 000,00'
-		И в таблице "Transactions" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "2 000,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
 	* Check movements
-		И я нажимаю на кнопку 'Post'
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I click "Post" button
+		And I click "Registrations report" button
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Credit debit note 1*'                 | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| 'Document registrations records'       | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
 		| 'Register  "Accounts statement"'       | ''            | ''                    | ''                    | ''                        | ''                       | ''               | ''              | ''                    | ''                         | ''                         | ''                     |
@@ -387,73 +387,73 @@ For write-off of accounts receivable and payable
 		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
 		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'Local currency'           | 'No'                   |
 		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'TRY'                      | 'No'                   |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _095004 check movements of the document Credit_DebitNote by operation type Receivable
+Scenario: _095004 check movements of the document Credit_DebitNote by operation type Receivable
 	* Create a document
-		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И из выпадающего списка "Operation type" я выбираю точное значение 'Receivable'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select "Receivable" exact value from "Operation type" drop-down list
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Lunch'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Company Lunch' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the basis document for debt write-offs
-		И в таблице "Transactions" я нажимаю на кнопку с именем 'TransactionsAdd'
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Partner AR transactions basis document"
-		Тогда открылось окно 'Select data type'
-		И в таблице "" я перехожу к строке:
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner AR transactions basis document" attribute in "Transactions" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
 			| ''                 |
 			| 'Sales invoice' |
-		И в таблице "" я выбираю текущую строку
-		* Checking the selection of basis documents for the specified partner
-			Тогда в таблице "List" количество строк "меньше или равно" 1
-			Тогда таблица "List" содержит строки:
+		And I select current line in "" table
+		* Check the selection of basis documents for the specified partner
+			Then the number of "List" table lines is "less or equal" 1
+			And "List" table contains lines
 			| 'Number' |
 			| '2 900'  |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '2 900'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я активизирую поле с именем "TransactionsAmount"
-		И в таблице "Transactions" в поле с именем 'TransactionsAmount' я ввожу текст '1 000,00'
-		И в таблице "Transactions" я завершаю редактирование строки
-		И в таблице "Transactions" я активизирую поле "Business unit"
-		И в таблице "Transactions" я выбираю текущую строку
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Business unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I activate "Business unit" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Business unit" attribute in "Transactions" table
+		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я активизирую поле "Expense type"
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Expense type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Expense type" field in "Transactions" table
+		And I click choice button of "Expense type" attribute in "Transactions" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Software'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "Transactions" table
 	* Change the document number
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '2'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '2'
-	* Check movements документа
-		И я нажимаю на кнопку 'Post'
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I move to "Other" tab
+		And I input "2" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "2" text in "Number" field
+	* Check movements
+		And I click "Post" button
+		And I click "Registrations report" button
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Credit debit note 2*'                 | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
 		| 'Document registrations records'       | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
 		| 'Register  "Partner AR transactions"'  | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
@@ -481,164 +481,165 @@ For write-off of accounts receivable and payable
 		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
 		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Legal name'                                    | 'Currency' | ''              | ''                      | ''                         | ''                         | ''                     |
 		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Company Lunch'                                 | 'TRY'      | ''              | ''                      | ''                         | ''                         | ''                     |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _095005 check the legal name filling if the partner has only one
+Scenario: _095005 check the legal name filling if the partner has only one
 	* Create a document
-		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+		And I click the button named "FormCreate"
 	* Filling in legal name
-		И я нажимаю кнопку выбора у поля с именем "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Lunch'       |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "LegalName" стал равен 'Company Lunch'
-	* Checking legal name re-filling at partner re-selection.
-		И я нажимаю кнопку выбора у поля с именем "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "Company Lunch"
+	* Check legal name re-filling at partner re-selection.
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "LegalName" стал равен 'DFC'
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "DFC"
 
-Сценарий: _095006 check re-selection of the transaction type in the Credit Debit Note document
+Scenario: _095006 check re-selection of the transaction type in the Credit Debit Note document
 	* Create a document
-		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И из выпадающего списка "Operation type" я выбираю точное значение 'Receivable'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select "Receivable" exact value from "Operation type" drop-down list
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Lunch'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Company Lunch' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the basis document for debt write-offs
-		И в таблице "Transactions" я нажимаю на кнопку с именем 'TransactionsAdd'
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Partner AR transactions basis document"
-		Тогда открылось окно 'Select data type'
-		И в таблице "" я перехожу к строке:
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner AR transactions basis document" attribute in "Transactions" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
 			| ''                 |
 			| 'Sales invoice' |
-		И в таблице "" я выбираю текущую строку
-		* Checking the selection of basis documents for the specified partner
-			Тогда в таблице "List" количество строк "меньше или равно" 1
-			Тогда таблица "List" содержит строки:
+		And I select current line in "" table
+		* Check the selection of basis documents for the specified partner
+			Then the number of "List" table lines is "меньше или равно" 1
+			And "List" table contains lines
 			| 'Number' |
 			| '2 900'  |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Number' |
 			| '2 900'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я активизирую поле с именем "TransactionsAmount"
-		И в таблице "Transactions" в поле с именем 'TransactionsAmount' я ввожу текст '1 000,00'
-		И в таблице "Transactions" я завершаю редактирование строки
-		И в таблице "Transactions" я активизирую поле "Business unit"
-		И в таблице "Transactions" я выбираю текущую строку
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Business unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I activate "Business unit" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Business unit" attribute in "Transactions" table
+		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я активизирую поле "Expense type"
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Expense type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Expense type" field in "Transactions" table
+		And I click choice button of "Expense type" attribute in "Transactions" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Software'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "Transactions" table
 	* Change the document number
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '12'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '12'
-		И я нажимаю на кнопку 'Post'
+		And I move to "Other" tab
+		And I input "12" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "12" text in "Number" field
+		And I click "Post" button
 	* Re-select operatiom type
-		И из выпадающего списка "Operation type" я выбираю точное значение 'Payable'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		Тогда в таблице "Transactions" количество строк "равно" 0
-		И Я закрыл все окна клиентского приложения
+		And I select "Payable" exact value from "Operation type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then the number of "Transactions" table lines is "равно" 0
+		And I close all client application windows
 	* Click cancel when re-selecting the operation type
-		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+		And I go to line in "List" table
 		| 'Number' |
 		| '12'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на гиперссылку "Decoration group title collapsed picture"
-		И из выпадающего списка "Operation type" я выбираю точное значение 'Payable'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'No'
-		И     таблица "Transactions" содержит строки:
+		And I select current line in "List" table
+		And I click "Decoration group title collapsed picture" hyperlink
+		And I select "Payable" exact value from "Operation type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "No" button
+		And "Transactions" table contains lines
 		| 'Partner AR transactions basis document'        | 'Partner' | 'Partner term'             | 'Amount'   | 'Business unit'           | 'Currency' | 'Expense type' |
 		| 'Sales invoice 2 900*'                          | 'Lunch'   | 'Basic Partner terms, TRY' | '1 000,00' | 'Distribution department' | 'TRY'      | 'Software'     |
-		И из выпадающего списка "Operation type" я выбираю точное значение 'Payable'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Cancel'
-		И     таблица "Transactions" содержит строки:
+		And I select "Payable" exact value from "Operation type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "Cancel" button
+		And "Transactions" table contains lines
 		| 'Partner AR transactions basis document'        | 'Partner' | 'Partner term'             | 'Amount'   | 'Business unit'           | 'Currency' | 'Expense type' |
 		| 'Sales invoice 2 900*'                          | 'Lunch'   | 'Basic Partner terms, TRY' | '1 000,00' | 'Distribution department' | 'TRY'      | 'Software'     |
 	
 
-Сценарий: _095007 check filling and refilling of the tabular part using the Fill button
+Scenario: _095007 check filling and refilling of the tabular part using the Fill button
 	* Create a document
-		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И из выпадающего списка "Operation type" я выбираю точное значение 'Receivable'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select "Receivable" exact value from "Operation type" drop-down list
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Company Kalipso' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the tabular part
-		И в таблице "Transactions" я нажимаю на кнопку 'Fill transactions'
-		И     таблица "Transactions" содержит строки:
+		And in the table "Transactions" I click "Fill transactions" button
+		And "Transactions" table contains lines
 			| 'Partner AR transactions basis document'      |
 			| 'Sales invoice 180*'                          |
 			| 'Sales invoice 181*'                          |
 			| 'Sales invoice 3*'                            |
 	* Re-select partner and check re-filling tabular part
-		И я нажимаю кнопку выбора у поля с именем "Partner"
-		Тогда открылось окно 'Partners'
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Partner"
+		Then "Partners" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'     |
-		И в таблице "List" я выбираю текущую строку
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		Тогда в таблице "Transactions" количество строк "равно" 0
-		И в таблице "Transactions" я нажимаю на кнопку 'Fill transactions'
-		И     таблица "Transactions" не содержит строки:
+		And I select current line in "List" table
+		Then the number of "Transactions" table lines is "равно" 0
+		And in the table "Transactions" I click "Fill transactions" button
+		And "Transactions" table does not contain lines
 			| 'Partner AR transactions basis document'      |
 			| 'Sales invoice 180*'                          |
 			| 'Sales invoice 181*'                          |
 			| 'Sales invoice 3*'                            |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
+
 

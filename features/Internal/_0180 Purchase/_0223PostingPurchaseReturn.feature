@@ -1,327 +1,328 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: creating document Purchase return
+Feature: create document Purchase return
 
 As a procurement manager
 I want to create a Purchase return document
 To track a product that returned to the vendor
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _022301 creating document Purchase return, store use Shipment confirmation, based on Purchase return order
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
-	И в таблице "List" я перехожу к строке:
+Scenario: _022301 create document Purchase return, store use Shipment confirmation, based on Purchase return order
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+	And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку с именем 'FormDocumentPurchaseReturnGeneratePurchaseReturn'
+	And I select current line in "List" table
+	And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
 	* Check filling details
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, USD'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Company" became equal to "Main Company"
 	* Select store
-		И я нажимаю кнопку выбора у поля "Store"
-		Тогда открылось окно 'Stores'
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Store" field
+		Then "Stores" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'  |
-		И в таблице "List" я выбираю текущую строку
-	* Checking the addition of the store to the tabular part
-		И я перехожу к закладке "Item list"
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+	* Check the addition of the store to the tabular part
+		And I move to "Item list" tab
+		And "ItemList" table contains lines
 		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Q'     |
 		| 'Dress' | 'L/Green'  | 'Purchase invoice 2*' | 'Store 02' | 'pcs' | '2,000' |
 	* Filling in the document number 1
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '1'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '1'
-	И я нажимаю на кнопку 'Post and close'
+		And I move to "Other" tab
+		And I input "1" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "1" text in "Number" field
+	And I click "Post and close" button
 
-Сценарий: _022302 checking postings of the document Purchase return order in the OrderBalance (store use Shipment confirmation, based on Purchase return order) - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _022302 check movements of the document Purchase return order in the OrderBalance (store use Shipment confirmation, based on Purchase return order) - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Order'                    | 'Item key' |
 		| '2,000'    | 'Purchase return 1*' | '1'           | 'Store 02' | 'Purchase return order 1*' | 'L/Green'  |
 
-Сценарий: _022303 checking postings of the document Purchase return order in the InventoryBalance (store use Shipment confirmation, based on Purchase return order - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _022303 check movements of the document Purchase return order in the InventoryBalance (store use Shipment confirmation, based on Purchase return order - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
+	And "List" table contains lines
 	| 'Quantity' | 'Recorder'           | 'Line number' | 'Company'      | 'Item key' |
 	| '2,000'    | 'Purchase return 1*' | '1'           | 'Main Company' | 'L/Green'  |
 
-Сценарий: _022304 checking postings of the document Purchase return order in the GoodsInTransitOutgoing (store use Shipment confirmation, based on Purchase return order) - plus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
-	Тогда таблица "List" содержит строки:
+Scenario: _022304 check movements of the document Purchase return order in the GoodsInTransitOutgoing (store use Shipment confirmation, based on Purchase return order) - plus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
+	And "List" table contains lines
 	| 'Quantity' | 'Recorder'           | 'Shipment basis'     | 'Line number' | 'Store'    | 'Item key' |
 	| '2,000'    | 'Purchase return 1*' | 'Purchase return 1*' | '1'           | 'Store 02' | 'L/Green'  |
 
-Сценарий: _022305 checking postings of the document Purchase return order in the OrderReservation (store use Shipment confirmation, based on Purchase return order) - plus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderReservation'
-	Тогда таблица "List" содержит строки:
+Scenario: _022305 check movements of the document Purchase return order in the OrderReservation (store use Shipment confirmation, based on Purchase return order) - plus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
+	And "List" table contains lines
 	| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Item key' |
 	| '2,000'    | 'Purchase return 1*' | '1'           | 'Store 02' | 'L/Green'  |
 
 	
-Сценарий: _022306 checking that there are no postings of Purchase return in register PurchaseTurnovers (store use Shipment confirmation, based on Purchase return order)
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PurchaseTurnovers'
-	Тогда таблица "List" не содержит строки:
+Scenario: _022306 check that there are no movements of Purchase return in register PurchaseTurnovers (store use Shipment confirmation, based on Purchase return order)
+	Given I open hyperlink "e1cib/list/AccumulationRegister.PurchaseTurnovers"
+	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'           |
 		| '-2,000'   | 'Purchase return 1*' |
 	
 
-Сценарий: _022307 checking that there are no postings of Purchase return in register StockBalance (store use Shipment confirmation, based on Purchase return order)
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-	Тогда таблица "List" не содержит строки:
+Scenario: _022307 check that there are no movements of Purchase return in register StockBalance (store use Shipment confirmation, based on Purchase return order)
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Item key' |
 		| '2,000'    | 'Purchase return 1*' | '1'           | 'Store 02' | 'L/Green'  |
 
 
-Сценарий: _022308 checking that there are no postings of Purchase return in register StockReservation (store use Shipment confirmation, based on Purchase return order)
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-	Тогда таблица "List" не содержит строки:
+Scenario: _022308 check that there are no movements of Purchase return in register StockReservation (store use Shipment confirmation, based on Purchase return order)
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	And "List" table does not contain lines
 	| 'Quantity' | 'Recorder'              | 'Line number' | 'Store'    | 'Item key'  |
 	| '2,000'    | 'Purchase return 1*'    | '1'           | 'Store 02' | 'L/Green'   |
 
 
-Сценарий: _022309 creating document Purchase retur, store use Shipment confirmation, based on Purchase return order
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
-	И в таблице "List" я перехожу к строке:
+Scenario: _022309 create document Purchase retur, store use Shipment confirmation, based on Purchase return order
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+	And I go to line in "List" table
 		| 'Number' |
 		| '2'      |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку с именем 'FormDocumentPurchaseReturnGeneratePurchaseReturn'
-	И я проверяю заполнения реквизитов
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Description" стал равен 'Click for input description'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
+	And I select current line in "List" table
+	And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
+	* Check filling in
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Description" became equal to "Click for input description"
+		Then the form attribute named "Company" became equal to "Main Company"
 	* Select store
-		И я нажимаю кнопку выбора у поля "Store"
-		Тогда открылось окно 'Stores'
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Store" field
+		Then "Stores" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'  |
-		И в таблице "List" я выбираю текущую строку
-	Временно цены
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '200,00'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I select current line in "List" table
+//	Temporarily prices
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Filling in the document number 2
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '2'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '2'
-	И я нажимаю на кнопку 'Post and close'
-	И Я закрываю текущее окно
+		And I move to "Other" tab
+		And I input "2" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "2" text in "Number" field
+	And I click "Post and close" button
+	And I close current window
 
-Сценарий: _022310 checking postings of the document Purchase return order in the OrderBalance (store use Shipment confirmation, based on Purchase return order) - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _022310 check movements of the document Purchase return order in the OrderBalance (store use Shipment confirmation, based on Purchase return order) - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Order'                    | 'Item key' |
 		| '3,000'    | 'Purchase return 2*' | '1'           | 'Store 01' | 'Purchase return order 2*' | '36/Yellow'  |
 
-Сценарий: _022311 checking postings of the document Purchase return order in the InventoryBalance (store use Shipment confirmation, based on Purchase return order) - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _022311 check movements of the document Purchase return order in the InventoryBalance (store use Shipment confirmation, based on Purchase return order) - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
+	And "List" table contains lines
 	| 'Quantity' | 'Recorder'           | 'Line number' | 'Company'      | 'Item key' |
 	| '3,000'    | 'Purchase return 2*' | '1'           | 'Main Company' | '36/Yellow'  |
 
-Сценарий: _022312 checking postings of the document Purchase return order in the InventoryBalance (store use Shipment confirmation, based on Purchase return order) - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _022312 check movements of the document Purchase return order in the InventoryBalance (store use Shipment confirmation, based on Purchase return order) - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Item key' |
 		| '3,000'    | 'Purchase return 2*' | '1'           | 'Store 01' | '36/Yellow'  |
 
-Сценарий: _022313 checking postings of the document Purchase return order in the OrderReservation (store use Shipment confirmation, based on Purchase return order) - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderReservation'
-	Тогда таблица "List" содержит строки:
+Scenario: _022313 check movements of the document Purchase return order in the OrderReservation (store use Shipment confirmation, based on Purchase return order) - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Item key' |
 		| '3,000'    | 'Purchase return 2*' | '1'           | 'Store 01' | '36/Yellow'  |
 
-Сценарий: _022314 creating document Purchase return, store use Shipment confirmation, without Purchase return order
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-	И в таблице "List" я перехожу к строке:
+Scenario: _022314 create document Purchase return, store use Shipment confirmation, without Purchase return order
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
 		| 'Number' |
 		| '2'      |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку с именем 'FormDocumentPurchaseReturnGeneratePurchaseReturn'
+	And I select current line in "List" table
+	And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
 	* Check filling details
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, USD'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-	И я нажимаю кнопку выбора у поля "Store"
-	И в таблице "List" я перехожу к строке:
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I click Select button of "Store" field
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Store 02'  |
-	И в таблице "List" я выбираю текущую строку
-	И я проверяю, что в возврат подтягивается количество из поступления за minusом предыдущих возвратов
-		И таблица "ItemList" содержит строки:
+	And I select current line in "List" table
+	* Check that the amount from the receipt minus the previous returns is pulled into the return
+		And "ItemList" table contains lines
 			| 'Purchase return order' | 'Item'  | 'Item key' | 'Purchase invoice'    | 'Unit' | 'Q'       |
 			| ''                      | 'Dress' | 'L/Green'  | 'Purchase invoice 2*' | 'pcs' | '498,000' |
-	И в таблице "ItemList" я активизирую поле "Q"
-	И в таблице "ItemList" я выбираю текущую строку
-	И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
-	И в таблице "ItemList" я завершаю редактирование строки
+	And I activate "Q" field in "ItemList" table
+	And I select current line in "ItemList" table
+	And I input "10,000" text in "Q" field of "ItemList" table
+	And I finish line editing in "ItemList" table
 	* Filling in the document number 3
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '3'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '3'
-	И я нажимаю на кнопку 'Post and close'
-	И Я закрываю текущее окно
+		And I move to "Other" tab
+		And I input "3" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "3" text in "Number" field
+	And I click "Post and close" button
+	And I close current window
 
-Сценарий: _022315 checking that there are no postings of Purchase return document by OrderBalance (store use Shipment confirmation, without Purchase return order) - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-	Тогда таблица "List" не содержит строки:
+Scenario: _022315 check that there are no movements of Purchase return document by OrderBalance (store use Shipment confirmation, without Purchase return order) - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Item key' |
 		| '10,000'    | 'Purchase return 3*' | '1'           | 'Store 02' | 'L/Green'  |
 
-Сценарий: _022316 проверка движений Purchase return по регистру PurchaseTurnovers (store use Shipment confirmation, without Purchase return order) - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PurchaseTurnovers'
-	Тогда таблица "List" содержит строки:
+Scenario: _022316 check movements Purchase return in the register PurchaseTurnovers (store use Shipment confirmation, without Purchase return order) - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.PurchaseTurnovers"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'           |
 		| '-10,000'   | 'Purchase return 3*' |
 
-Сценарий: _022317 checking postings of the document Purchase return order in the InventoryBalance (store use Shipment confirmation, without Purchase return order) - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _022317 check movements of the document Purchase return order in the InventoryBalance (store use Shipment confirmation, without Purchase return order) - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
+	And "List" table contains lines
 	| 'Quantity' | 'Recorder'           | 'Line number' | 'Company'      | 'Item key' |
 	| '10,000'    | 'Purchase return 3*' | '1'           | 'Main Company' | 'L/Green'  |
 
-Сценарий: _022318 checking postings of the document Purchase return order in the GoodsInTransitOutgoing (store use Shipment confirmation, without Purchase return order) - plus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
-	Тогда таблица "List" содержит строки:
+Scenario: _022318 check movements of the document Purchase return order in the GoodsInTransitOutgoing (store use Shipment confirmation, without Purchase return order) - plus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
+	And "List" table contains lines
 	| 'Quantity' | 'Recorder'           | 'Shipment basis'     | 'Line number' | 'Store'    | 'Item key' |
 	| '10,000'    | 'Purchase return 3*' | 'Purchase return 3*' | '1'           | 'Store 02' | 'L/Green'  |
 
-Сценарий: _022319 checking that there are no postings of Purchase return in register StockBalance (store use Shipment confirmation, without Purchase return order)
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-	Тогда таблица "List" не содержит строки:
+Scenario: _022319 check that there are no movements of Purchase return in register StockBalance (store use Shipment confirmation, without Purchase return order)
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Item key' |
 		| '10,000'    | 'Purchase return 3*' | '1'           | 'Store 02' | 'L/Green'  |
 
-Сценарий: _022320 checking purchase return postings by register StockReservation (store use Shipment confirmation, without Purchase return order)
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-	Тогда таблица "List" содержит строки:
+Scenario: _022320 check purchase return movements by register StockReservation (store use Shipment confirmation, without Purchase return order)
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'              | 'Line number' | 'Store'    | 'Item key'  |
 		| '10,000'    | 'Purchase return 3*'    | '1'           | 'Store 02' | 'L/Green'   |
 
-Сценарий: _022321 checking purchase return postings by register Purchase return по регистру OrderReservation (store use Shipment confirmation, without Purchase return order)
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderReservation'
-	Тогда таблица "List" не содержит строки:
+Scenario: _022321 check purchase return movements by register Purchase return in the register OrderReservation (store use Shipment confirmation, without Purchase return order)
+	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
+	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'            | 'Line number' | 'Store'    | 'Item key' |
 		| '10,000'    | 'Purchase return 3*' | '1'           | 'Store 02' | 'L/Green'  |
 
 
-Сценарий: _022322 creating document Purchase return, store doesn't use Shipment confirmation, without Purchase return order
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-	И в таблице "List" я перехожу к строке:
+Scenario: _022322 create document Purchase return, store doesn't use Shipment confirmation, without Purchase return order
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
 		| 'Number' |
 		| '1'      |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку с именем 'FormDocumentPurchaseReturnGeneratePurchaseReturn'
+	And I select current line in "List" table
+	And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
 	* Check filling details
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-	И я нажимаю кнопку выбора у поля "Store"
-	И в таблице "List" я перехожу к строке:
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I click Select button of "Store" field
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Store 01'  |
-	И в таблице "List" я выбираю текущую строку
-	И Пауза 2
-	И в таблице "ItemList" я перехожу к строке:
+	And I select current line in "List" table
+	And Delay 2
+	And I go to line in "ItemList" table
 		| 'Item'     | 'Item key' |
 		| 'Trousers' | '36/Yellow'|
-	И в таблице "ItemList" я активизирую поле "Q"
-	И в таблице "ItemList" я выбираю текущую строку
-	И Пауза 2
-	И в таблице "ItemList" в поле 'Q' я ввожу текст '12,000'
-	И в таблице "ItemList" я завершаю редактирование строки
-	И в таблице "ItemList" я перехожу к строке:
+	And I activate "Q" field in "ItemList" table
+	And I select current line in "ItemList" table
+	And Delay 2
+	And I input "12,000" text in "Q" field of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And I go to line in "ItemList" table
 		| 'Item'  | 'Item key' | 'Unit' |
 		| 'Dress' | 'L/Green'  | 'pcs'  |
-	И в таблице 'ItemList' я удаляю строку
-	И в таблице "ItemList" я перехожу к строке:
+	And I delete a line in "ItemList" table
+	And I go to line in "ItemList" table
 		| 'Item'  |
 		| 'Dress' |
-	И в таблице 'ItemList' я удаляю строку
+	And I delete a line in "ItemList" table
 	* Filling in the document number 4
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '4'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '4'
-	И я нажимаю на кнопку 'Post and close'
-	И Я закрываю текущее окно
+		And I move to "Other" tab
+		And I input "4" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "4" text in "Number" field
+	And I click "Post and close" button
+	And I close current window
 
-Сценарий: _022323 checking postings of the document Purchase return order in the PurchaseTurnovers (store doesn't use Shipment confirmation, without Purchase return order) - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.PurchaseTurnovers'
-	Тогда таблица "List" содержит строки:
+Scenario: _022323 check movements of the document Purchase return order in the PurchaseTurnovers (store doesn't use Shipment confirmation, without Purchase return order) - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.PurchaseTurnovers"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'           |
 		| '-12,000'   | 'Purchase return 4*' |
 
-Сценарий: _022324 checking postings of the document Purchase return order in the InventoryBalance (store doesn't use Shipment confirmation, without Purchase return order) - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _022324 check movements of the document Purchase return order in the InventoryBalance (store doesn't use Shipment confirmation, without Purchase return order) - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
+	And "List" table contains lines
 	| 'Quantity' | 'Recorder'           | 'Line number' | 'Company'      | 'Item key' |
 	| '12,000'    | 'Purchase return 4*' | '1'           | 'Main Company' | '36/Yellow'  | 
 
-Сценарий: _022325 checking that there are no postings of Purchase return document by GoodsInTransitOutgoing (store doesn't use Shipment confirmation, without Purchase return order)
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
-	Тогда таблица "List" не содержит строки:
+Scenario: _022325 check that there are no movements of Purchase return document by GoodsInTransitOutgoing (store doesn't use Shipment confirmation, without Purchase return order)
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
+	And "List" table does not contain lines
 	| 'Quantity' | 'Recorder'           | 'Shipment basis'     | 'Line number' | 'Item key' |
 	| '12,000'    | 'Purchase return 4*' | 'Purchase return 4*' | '1'           | '36/Yellow'  |
 
-Сценарий: _022326 checking postings of the document Purchase return order in the StockBalance (store doesn't use Shipment confirmation, without Purchase return order) - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _022326 check movements of the document Purchase return order in the StockBalance (store doesn't use Shipment confirmation, without Purchase return order) - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Item key' |
 		| '12,000'   | 'Purchase return 4*' | '1'           | 'Store 01' | '36/Yellow'  |
 
-Сценарий: _022327 checking postings of the document Purchase return order in the StockReservation (store doesn't use Shipment confirmation, without Purchase return order) - minus
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-	Тогда таблица "List" содержит строки:
+Scenario: _022327 check movements of the document Purchase return order in the StockReservation (store doesn't use Shipment confirmation, without Purchase return order) - minus
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Item key' |
 		| '12,000'   | 'Purchase return 4*' | '1'           | 'Store 01' | '36/Yellow'  |
 
-Сценарий: _022328 checking that there are no postings of Purchase return in register StockReservation (store doesn't use Shipment confirmation, without Purchase return order)
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-	Тогда таблица "List" не содержит строки:
+Scenario: _022328 check that there are no movements of Purchase return in register StockReservation (store doesn't use Shipment confirmation, without Purchase return order)
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'              | 'Line number' | 'Store'    | 'Item key'  |
 		| '12,000'    | 'Purchase return 4*'    | '1'           | 'Store 01' | '36/Yellow'   |
 
-Сценарий: _022329 checking that there are no postings of Purchase return document by OrderReservation (store doesn't use Shipment confirmation, without Purchase return order)
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderReservation'
-	Тогда таблица "List" не содержит строки:
+Scenario: _022329 check that there are no movements of Purchase return document by OrderReservation (store doesn't use Shipment confirmation, without Purchase return order)
+	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
+	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'            | 'Line number' | 'Store'    | 'Item key' |
 		| '12,000'    | 'Purchase return 3*' | '1'           | 'Store 01' | '36/Yellow'  |
 
 
-Сценарий: _022335 checking totals in the document Purchase return
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
-	И я выбираю документ PurchaseReturn
-		И в таблице "List" я перехожу к строке:
+Scenario: _022335 check totals in the document Purchase return
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	* Select Purchase Return
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И в таблице "List" я выбираю текущую строку
-	* Checking totals in the document Purchase return
-		И     у элемента формы с именем "ItemListTotalTaxAmount" текст редактирования стал равен '12,20'
-		И     у элемента формы с именем "ItemListTotalNetAmount" текст редактирования стал равен '67,80'
-		И     у элемента формы с именем "ItemListTotalTotalAmount" текст редактирования стал равен '80,00'
+		And I select current line in "List" table
+	* Check totals in the document Purchase return
+		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "12,20"
+		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "67,80"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "80,00"
+
 
 
 

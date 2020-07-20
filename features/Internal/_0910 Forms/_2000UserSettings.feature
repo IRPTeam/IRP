@@ -1,1209 +1,1210 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: check filling in user settings
+Feature: check filling in user settings
 
 As a developer
 I want to create a system of custom settings
 For ease of filling in documents
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _200001 customize the CI user settings
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.Users'
-	И в таблице "List" я перехожу к строке:
+Scenario: _200001 customize the CI user settings
+	Given I open hyperlink "e1cib/list/Catalog.Users"
+	And I go to line in "List" table
 		| 'Login' |
 		| 'CI'          |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'ENG' я ввожу текст 'CI'
-	И в поле 'Interface localization code' я ввожу текст 'en'
-	И я нажимаю на кнопку 'Save'
-	И я нажимаю на кнопку 'Settings'
+	And I select current line in "List" table
+	And I input "CI" text in "ENG" field
+	And I input "en" text in "Interface localization code" field
+	And I click "Save" button
+	And I click "Settings" button
 	* Fill in custom settings for Sales order
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 		| 'Group name'  |
 		| 'Sales order' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Partner term'  | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Store'      | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Use"
-		И в таблице "MetadataTree" я изменяю флаг 'Use'
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Use" field in "MetadataTree" table
+		And I change "Use" checkbox in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
 	* Fill in custom settings for Sales invoice
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'  |
 			| 'Sales invoice' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Partner term'  | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Store'      | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Use"
-		И в таблице "MetadataTree" я изменяю флаг 'Use'
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Use" field in "MetadataTree" table
+		And I change "Use" checkbox in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
 	* Fill in custom settings for Purchase order
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'  |
 			| 'Purchase order' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Store'      | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Use"
-		И в таблице "MetadataTree" я изменяю флаг 'Use'
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Use" field in "MetadataTree" table
+		And I change "Use" checkbox in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 03'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
 	* Fill in custom settings for Purchase invoice
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'  |
 			| 'Purchase invoice' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Store'      | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Use"
-		И в таблице "MetadataTree" я изменяю флаг 'Use'
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Use" field in "MetadataTree" table
+		And I change "Use" checkbox in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
 	* Fill in custom settings for Bank payment
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'   |
 			| 'Bank payment' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Account'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Currency'   | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Bank receipt
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'   |
 			| 'Bank receipt' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Account'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Bank account, USD' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Currency'   | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'USD'  | 'American dollar' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Bundling
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name' |
 			| 'Bundling'   |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		Тогда открылось окно 'Companies'
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		Then "Companies" window is opened
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Store'      | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		Тогда открылось окно 'Stores'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		Then "Stores" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
 	* Fill in custom settings for Cash transfer order
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'          |
 			| 'Cash transfer order' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Sender'     | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Cash desk №3' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Receiver'   | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'USD'      | 'Bank account, USD' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Invoice match
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'    |
 			| 'Invoice match' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		Тогда открылось окно 'Companies'
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		Then "Companies" window is opened
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for GoodsReceipt
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 		| 'Group name'    |
 		| 'Goods receipt' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Purchase return
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 		| 'Group name'    |
 		| 'Purchase return' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Purchase return order
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'    |
 			| 'Purchase return order' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Sales return order
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'    |
 			| 'Sales return order' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Sales return
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'    |
 			| 'Sales return' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Reconciliation statement
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'    |
 			| 'Reconciliation statement' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Cash payment
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 		| 'Group name'   |
 		| 'Cash payment' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use' |
 			| 'Cash account' | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Cash desk №3' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Currency'   | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		Тогда открылось окно 'Currencies'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		Then "Currencies" window is opened
+		And I go to line in "List" table
 			| 'Code' | 'Description' |
 			| 'EUR'  | 'Euro'        |
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
 	* Fill in custom settings for Cash receipt
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'   |
 			| 'Cash receipt' |
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use' |
 			| 'Cash account' | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Cash desk №3' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Currency'   | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		Тогда открылось окно 'Currencies'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		Then "Currencies" window is opened
+		And I go to line in "List" table
 			| 'Code' | 'Description'     |
 			| 'USD'  | 'American dollar' |
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
 	* Fill in custom settings for Cash expense
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'   |
 			| 'Cash expense' |
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Account'    | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Cash desk №3' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
 	* Fill in custom settings for Cash expense
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'   |
 			| 'Cash revenue' |
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Account'    | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Cash desk №3' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
 	* Fill in custom settings for Credit debit note
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'        |
 			| 'Credit debit note' |
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Incoming payment order
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'             |
 			| 'Incoming payment order' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Account'    | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Cash desk №2' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Currency'   | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Code' | 'Description'     |
 			| 'USD'  | 'American dollar' |
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я выбираю текущую строку
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
 	* Fill in custom settings for Outgoing payment order
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'             |
 			| 'Outgoing payment order' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Account'    | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Cash desk №3' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Currency'   | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Code' | 'Description'     |
 			| 'USD'  | 'American dollar' |
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я выбираю текущую строку
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
 	* Fill in custom settings for Inventory transfer
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'         |
 			| 'Inventory transfer' |
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use' |
 			| 'Store sender' | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name'     | 'Use' |
 			| 'Store receiver' | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 03'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name'    | 'Use' |
 			| 'Store transit' | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name'               |
 			| 'Inventory transfer order' |
 	* Fill in custom settings for Inventory transfer order
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'               |
 			| 'Inventory transfer order' |
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'   | 'Use' |
 			| 'Store sender' | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name'     | 'Use' |
 			| 'Store receiver' | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 03'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Shipment confirmation
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'            |
 			| 'Shipment confirmation' |
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Store'      | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Unbundling
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name' |
 			| 'Unbundling' |
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Store'      | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 03'    |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fill in custom settings for Internal supply request 
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'              |
 			| 'Internal supply request' |
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Company'    | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
 			| 'Store'      | 'No'  |
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "MetadataTree" я завершаю редактирование строки
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+	And I click "Ok" button
+	And I click "Save and close" button
 
 
-Сценарий: _200002 check filling in field from custom user settings in Sales order (partner has an agreement that's specified in the settings)
+Scenario: _200002 check filling in field from custom user settings in Sales order (partner has an agreement that's specified in the settings)
 	# the store is filled from the agreement, if not specified in the agreement, then from the user settings
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
-		И     элемент формы с именем "Status" стал равен 'Approved'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Status" became equal to "Approved"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
 	* Check the filling in of fields when selecting a partner who has an agreement 'Basic Partner terms, TRY'
 	# completed fields should not be cleared
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
-		И     элемент формы с именем "Status" стал равен 'Approved'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-		И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Status" became equal to "Approved"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I close all client application windows
 
-Сценарий: _200003 check filling in field from custom user settings in Sales order (partner does not have an agreement that is specified in the settings)
+Scenario: _200003 check filling in field from custom user settings in Sales order (partner does not have an agreement that is specified in the settings)
 	# the store is filled from the agreement, if not specified in the agreement, then from the user settings
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
-		И     элемент формы с именем "Status" стал равен 'Approved'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Status" became equal to "Approved"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
 	* Check the filling in of fields when selecting a partner who has an agreement 'Basic Partner terms, TRY'
 	# completed fields should not be cleared
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Anna Petrova'   |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "LegalName" стал равен ''
-		И     элемент формы с именем "Agreement" стал равен ''
-		И     элемент формы с именем "Status" стал равен 'Approved'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-		И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to ""
+		Then the form attribute named "Agreement" became equal to ""
+		Then the form attribute named "Status" became equal to "Approved"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I close all client application windows
 
 
-Сценарий: _200004 check filling in field from custom user settings in Bank payment
-	И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario: _200004 check filling in field from custom user settings in Bank payment
+	Given I open hyperlink "e1cib/list/Document.BankPayment"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Account" стал равен 'Bank account, TRY'
-		И     элемент формы с именем "Currency" стал равен 'TRY'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+		Then the form attribute named "Currency" became equal to "TRY"
+	And I close all client application windows
 
-Сценарий: _200005 check filling in field from custom user settings in Bank receipt
-	И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario: _200005 check filling in field from custom user settings in Bank receipt
+	Given I open hyperlink "e1cib/list/Document.BankReceipt"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Account" стал равен 'Bank account, USD'
-		И     элемент формы с именем "Currency" стал равен 'USD'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Account" became equal to "Bank account, USD"
+		Then the form attribute named "Currency" became equal to "USD"
+	And I close all client application windows
 
 
 
-Сценарий:  _200008 check filling in field from custom user settings in Bundling
-	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200008 check filling in field from custom user settings in Bundling
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
 
 
-Сценарий:  _200009 check filling in field from custom user settings in Cash payment
-	И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200009 check filling in field from custom user settings in Cash payment
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "CashAccount" стал равен 'Cash desk №3'
-		И     элемент формы с именем "Currency" стал равен 'EUR'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
+		Then the form attribute named "Currency" became equal to "EUR"
+	And I close all client application windows
 
-Сценарий:  _200010 check filling in field from custom user settings in Cash receipt
-	И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200010 check filling in field from custom user settings in Cash receipt
+	Given I open hyperlink "e1cib/list/Document.CashReceipt"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "CashAccount" стал равен 'Cash desk №3'
-		И     элемент формы с именем "Currency" стал равен 'USD'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
+		Then the form attribute named "Currency" became equal to "USD"
+	And I close all client application windows
 
-Сценарий:  _200011 check filling in field from custom user settings in Cash transfer
-	И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200011 check filling in field from custom user settings in Cash transfer
+	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Sender" стал равен 'Cash desk №3'
-		И     элемент формы с именем "Receiver" стал равен 'Bank account, USD'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Sender" became equal to "Cash desk №3"
+		Then the form attribute named "Receiver" became equal to "Bank account, USD"
+	And I close all client application windows
 
-Сценарий:  _200012 check filling in field from custom user settings in Invoice match
-	И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200012 check filling in field from custom user settings in Invoice match
+	Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
 
-Сценарий:  _200013 check filling in field from custom user settings in Goods receipt
-	И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200013 check filling in field from custom user settings in Goods receipt
+	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
 
-Сценарий:  _200014 check filling in field from custom user settings in Incoming payment order
-	И я открываю навигационную ссылку 'e1cib/list/Document.IncomingPaymentOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200014 check filling in field from custom user settings in Incoming payment order
+	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Second Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Second Company"
+	And I close all client application windows
 
-Сценарий:  _200015 check filling in field from custom user settings in Internal supply request
-	И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200015 check filling in field from custom user settings in Internal supply request
+	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+	And I close all client application windows
 
 
-Сценарий:  _200016 check filling in field from custom user settings in Inventory transfer
-	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200016 check filling in field from custom user settings in Inventory transfer
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "StoreSender" стал равен 'Store 02'
-		И     элемент формы с именем "StoreReceiver" стал равен 'Store 03'
-		И     элемент формы с именем "StoreTransit" стал равен 'Store 02'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "StoreSender" became equal to "Store 02"
+		Then the form attribute named "StoreReceiver" became equal to "Store 03"
+		Then the form attribute named "StoreTransit" became equal to "Store 02"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
 
-Сценарий:  _200017 check filling in field from custom user settings in Inventory transfer order
-	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200017 check filling in field from custom user settings in Inventory transfer order
+	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "StoreSender" стал равен 'Store 02'
-		И     элемент формы с именем "StoreReceiver" стал равен 'Store 03'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "StoreSender" became equal to "Store 02"
+		Then the form attribute named "StoreReceiver" became equal to "Store 03"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
 
-Сценарий:  _200018 check filling in field from custom user settings in Outgoing payment order
-	И я открываю навигационную ссылку 'e1cib/list/Document.OutgoingPaymentOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200018 check filling in field from custom user settings in Outgoing payment order
+	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Account" стал равен 'Cash desk №3'
-		И     элемент формы с именем "Currency" стал равен 'USD'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Account" became equal to "Cash desk №3"
+		Then the form attribute named "Currency" became equal to "USD"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
 
-Сценарий:  _200019 check filling in field from custom user settings in Purchase invoice
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200019 check filling in field from custom user settings in Purchase invoice
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Store" стал равен 'Store 02'
-		И     элемент формы с именем "Company" стал равен 'Second Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "Company" became equal to "Second Company"
+	And I close all client application windows
 
-Сценарий:  _200020 check filling in field from custom user settings in Purchase order
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200020 check filling in field from custom user settings in Purchase order
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Store" стал равен 'Store 03'
-		И     элемент формы с именем "Company" стал равен 'Second Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Store" became equal to "Store 03"
+		Then the form attribute named "Company" became equal to "Second Company"
+	And I close all client application windows
 
-Сценарий:  _200021 check filling in field from custom user settings in Purchase return
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200021 check filling in field from custom user settings in Purchase return
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Second Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Second Company"
+	And I close all client application windows
 
-Сценарий:  _200022 check filling in field from custom user settings in Purchase return order
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200022 check filling in field from custom user settings in Purchase return order
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Second Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Second Company"
+	And I close all client application windows
 
-Сценарий:  _200023 check filling in field from custom user settings in Sales invoice
+Scenario:  _200023 check filling in field from custom user settings in Sales invoice
 	# the store is filled out of the agreement, if the agreement doesn't specify, then from user settings. So is the company.
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-	И я нажимаю на кнопку с именем 'FormCreate'
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows
 
-Сценарий:  _200024 check filling in field from custom user settings in Sales return
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200024 check filling in field from custom user settings in Sales return
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Second Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Second Company"
+	And I close all client application windows
 
 
 
-Сценарий:  _200026 check filling in field from custom user settings in Unbundling
-	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200026 check filling in field from custom user settings in Unbundling
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 03'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 03"
+	And I close all client application windows
 
-Сценарий:  _200027 check filling in field from custom user settings in Reconciliation statement
-	И я открываю навигационную ссылку 'e1cib/list/Document.ReconciliationStatement'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario:  _200027 check filling in field from custom user settings in Reconciliation statement
+	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
+	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		И     элемент формы с именем "Company" стал равен 'Second Company'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Second Company"
+	And I close all client application windows
 
 
-Сценарий:  _200028 create a custom display setting for entering in a row objects marked for deletion
+Scenario:  _200028 create a custom display setting for entering in a row objects marked for deletion
 	* Open Chart of characteristic types - Custom user settings
-		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.CustomUserSettings'
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.CustomUserSettings"
 	* Create custom user settings
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Use object with deletion mark'
-		И в поле 'Unique ID' я ввожу текст 'Use_object_with_deletion_mark'
-		И я нажимаю кнопку выбора у поля "Value type"
-		И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I input "Use object with deletion mark" text in "ENG" field
+		And I input "Use_object_with_deletion_mark" text in "Unique ID" field
+		And I click Select button of "Value type" field
+		And I go to line in "" table
 			| ''        |
 			| 'Boolean' |
-		И я нажимаю на кнопку 'OK'
-		И в таблице "RefersToObjects" я нажимаю на кнопку 'Add refers to object'
-		И в таблице "MetadataObjectsTable" я перехожу к строке:
+		And I click "OK" button
+		And in the table "RefersToObjects" I click "Add refers to object" button
+		And I go to line in "MetadataObjectsTable" table
 			| 'Synonym' | 'Use' |
 			| 'Items'   | 'No'  |
-		И в таблице "MetadataObjectsTable" я изменяю флаг 'Use'
-		И в таблице "MetadataObjectsTable" я завершаю редактирование строки
-		И в таблице "MetadataObjectsTable" я перехожу к строке:
+		And I change "Use" checkbox in "MetadataObjectsTable" table
+		And I finish line editing in "MetadataObjectsTable" table
+		And I go to line in "MetadataObjectsTable" table
 			| 'Synonym'                           | 'Use' |
 			| 'Additional attribute values' | 'No'  |
-		И в таблице "MetadataObjectsTable" я изменяю флаг 'Use'
-		И в таблице "MetadataObjectsTable" я завершаю редактирование строки
-		И в таблице "MetadataObjectsTable" я перехожу к строке:
+		And I change "Use" checkbox in "MetadataObjectsTable" table
+		And I finish line editing in "MetadataObjectsTable" table
+		And I go to line in "MetadataObjectsTable" table
 			| 'Synonym'  | 'Use' |
 			| 'Partners' | 'No'  |
-		И в таблице "MetadataObjectsTable" я изменяю флаг 'Use'
-		И в таблице "MetadataObjectsTable" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
+		And I change "Use" checkbox in "MetadataObjectsTable" table
+		And I finish line editing in "MetadataObjectsTable" table
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
 	* Check custom user settings
-		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.CustomUserSettings'
-		Тогда таблица "List" содержит строки:
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.CustomUserSettings"
+		And "List" table contains lines
 		| 'Description'                   |
 		| 'Use object with deletion mark' |
 
-Сценарий: _200029 filling in user settings for a user group
+Scenario: _200029 filling in user settings for a user group
 	* Open catalog User Groups
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.UserGroups'
-	* Creating a new group and filling out a user preference for displaying objects marked for deletion
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Admin'
-		И я нажимаю на кнопку 'Save'
-		И я нажимаю на кнопку 'Settings'
+		Given I open hyperlink "e1cib/list/Catalog.UserGroups"
+	* create a new group and filling out a user preference for displaying objects marked for deletion
+		And I click the button named "FormCreate"
+		And I input "Admin" text in "ENG" field
+		And I click "Save" button
+		And I click "Settings" button
 	* Filling in the settings for the display of Additional attribute values ​​marked for deletion when entering by line
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name'                        |
 			| 'Additional attribute values' |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name'                    | 'Use' |
 			| 'Use object with deletion mark' | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		Тогда открылось окно 'Select data type'
-		И в таблице "" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
 			| ''        |
 			| 'Boolean' |
-		И в таблице "" я выбираю текущую строку
-		И в таблице "MetadataTree" из выпадающего списка "Value" я выбираю точное значение 'No'
-		И в таблице "MetadataTree" я завершаю редактирование строки
+		And I select current line in "" table
+		And I select "No" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
 	* Fill in the settings for displaying items marked for deletion when entering by line	
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name' |
 			| 'Items'      |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name'                    | 'Use' |
 			| 'Use object with deletion mark' | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		Тогда открылось окно 'Select data type'
-		И в таблице "" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
 			| ''        |
 			| 'Boolean' |
-		И в таблице "" я выбираю текущую строку
-		И в таблице "MetadataTree" из выпадающего списка "Value" я выбираю точное значение 'No'
-		И в таблице "MetadataTree" я завершаю редактирование строки
+		And I select current line in "" table
+		And I select "No" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
 	* Fill in the settings for displaying partners marked for deletion when entering by line
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I go to line in "MetadataTree" table
 			| 'Group name' |
 			| 'Partners'   |
-		И в таблице "MetadataTree" я активизирую поле "Group name"
-		И в таблице "MetadataTree" я перехожу к строке:
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
 			| 'Group name'                    | 'Use' |
 			| 'Use object with deletion mark' | 'No'  |
-		И в таблице "MetadataTree" я активизирую поле "Value"
-		И в таблице "MetadataTree" я выбираю текущую строку
-		И в таблице "MetadataTree" я нажимаю кнопку выбора у реквизита "Value"
-		Тогда открылось окно 'Select data type'
-		И в таблице "" я перехожу к строке:
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
 			| ''        |
 			| 'Boolean' |
-		И в таблице "" я выбираю текущую строку
-		И в таблице "MetadataTree" из выпадающего списка "Value" я выбираю точное значение 'No'
-		И в таблице "MetadataTree" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Ok'
+		And I select current line in "" table
+		And I select "No" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button
 	* Saving the group
-		И я нажимаю на кнопку 'Save and close'
+		And I click "Save and close" button
 
-Сценарий: _200030  adding a group of user settings for the user
+Scenario: _200030  adding a group of user settings for the user
 	* Open user catalog
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Users'
+		Given I open hyperlink "e1cib/list/Catalog.Users"
 	* Select user
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'CI'          |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Specify custom settings group
-		И я нажимаю кнопку выбора у поля "User group"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "User group" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Admin'       |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Save settings
-		И я нажимаю на кнопку 'Save and close'
+		And I click "Save and close" button
 
-Сценарий: _200031 line entry check of objects marked for deletion (AddAttributeAndPropertyValues and Partner)
-	* Creating an AddAttributeAndPropertyValues and marking it for deletion
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertyValues'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст '100'
-		И я нажимаю кнопку выбора у поля "Additional attribute"
-		И в таблице "List" я перехожу к строке:
+Scenario: _200031 line entry check of objects marked for deletion (AddAttributeAndPropertyValues and Partner)
+	* create an AddAttributeAndPropertyValues and marking it for deletion
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
+		And I click the button named "FormCreate"
+		And I input "100" text in "ENG" field
+		And I click Select button of "Additional attribute" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Size'        |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Size'          | '100'         |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuSetDeletionMark'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-	* Creating a Partner and marking it for deletion
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Delete'
-		И я устанавливаю флаг 'Customer'
-		И я нажимаю на кнопку 'Save and close'
-		И в таблице "List" я перехожу к строке:
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+	* create a Partner and marking it for deletion
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I click the button named "FormCreate"
+		And I input "Delete" text in "ENG" field
+		And I set checkbox "Customer"
+		And I click "Save and close" button
+		And I go to line in "List" table
 			| 'Description'      |
 			| 'Delete' |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuSetDeletionMark'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-	* Checking the selection by line of partner marked for deletion
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		Когда Проверяю шаги на Исключение:
-			|'И из выпадающего списка "Partner" я выбираю по строке 'Delete''|
-		И в поле 'Partner' я ввожу текст ''
-		И я закрыл все окна клиентского приложения
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+	* Check the selection by line of partner marked for deletion
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		When I Check the steps for Exception
+			|'And I select from "Partner" drop-down list by "Delete" string'|
+		And I input "" text in "Partner" field
+		And I close all client application windows
 	* Check the selection by line marked for AddAttributeAndPropertyValues deletion
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 		| 'Description' |
 		| 'Shirt'       |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		Когда Проверяю шаги на Исключение:
-			|'И из выпадающего списка "Size" я выбираю по строке '100''|
-		И в поле 'Size' я ввожу текст ''
-		И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And In this window I click command interface button "Item keys"
+		And I click the button named "FormCreate"
+		When I Check the steps for Exception
+			|'And I select from "Size" drop-down list by '100' string'|
+		And I input "" text in "Size" field
+		And I close all client application windows
 
 
-Сценарий: _200032 check the availability of editing custom settings from the user list
+Scenario: _200032 check the availability of editing custom settings from the user list
 	* Open user list
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Users'
+		Given I open hyperlink "e1cib/list/Catalog.Users"
 	* Check that custom settings are opened from the user list
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'                          |
 		| 'Alexander Orlov (Commercial Agent 2)' |
-		И я нажимаю на кнопку 'Settings'
-		Тогда открылось окно 'Edit user settings'
-	И я закрыл все окна клиентского приложения
+		And I click "Settings" button
+		Then "Edit user settings" window is opened
+	And I close all client application windows
 
 
 	
+
 

@@ -1,1014 +1,1012 @@
-#language: ru
+﻿#language: en
 @ExportScenarios
 @IgnoreOnCIMainBuild
 @tree
 
-Функционал: export scenarios
+Feature: export scenarios
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-	Сценарий: creating an order for Lomaniti Basic Agreements (Dress and Boots)
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+	Scenario: creating an order for Lomaniti Basic Agreements (Dress and Boots)
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 			| 'Description'             |
 			| 'Lomaniti' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
 			| 'Description'                     |
 			| 'Basic Agreements, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Legal name"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Legal name" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Company Lomaniti'  |
-	И в таблице "List" я выбираю текущую строку
+	And I select current line in "List" table
 	* Adding items to sales order
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		Тогда открылось окно 'Items'
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
 			| 'Description'                     |
 			| 'Dress' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'XS/Blue'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		Тогда открылось окно 'Items'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "10,000" text in "Q" field of "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
 			| 'Description'                     |
 			| 'Boots' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| '36/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '5,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-	И я нажимаю на кнопку 'Post'
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	And I click "Post" button
 
 
 	
 
-Сценарий: creating an order for Ferron BP Basic Agreements, TRY (Dress -10 and Trousers - 5)
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+Scenario: creating an order for Ferron BP Basic Agreements, TRY (Dress -10 and Trousers - 5)
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 			| 'Description'             |
 			| 'Ferron BP' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
 			| 'Description'                     |
 			| 'Basic Agreements, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Legal name"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Legal name" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Company Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
+	And I select current line in "List" table
 	* Adding items to sales order
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		Тогда открылось окно 'Items'
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
 			| 'Description'                     |
 			| 'Dress' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'XS/Blue'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		Тогда открылось окно 'Items'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "10,000" text in "Q" field of "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
 			| 'Description'                     |
 			| 'Trousers' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| 'Item key' |
 			| '36/Yellow'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '5,000'
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" я завершаю редактирование строки
-	И я нажимаю на кнопку 'Post'
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+	And I click "Post" button
 
 
-Сценарий: creating a Purchase Order document
+Scenario: creating a Purchase Order document
 	* Open a form to create Purchase Order
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю необходимые реквизиты
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+	* Filling in details
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 		| Description  |
 		| Main Company |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in vendor's info
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| Description        |
 			| Vendor Ferron, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 03'  |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
+		And I select current line in "List" table
+		And I select "Approved" exact value from "Status" drop-down list
 	* Filling in items table
-		И я перехожу к закладке "Item list"
-		И я нажимаю на кнопку с именем "Add"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I move to "Item list" tab
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'S/Yellow'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Dress' | 'S/Yellow'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '205,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем "Add"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "205,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'XS/Blue'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Dress' | 'XS/Blue'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '205,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем "Add"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "205,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Dress' | 'M/White'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '205,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем "Add"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "205,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'XL/Green'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Dress' | 'XL/Green'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '205,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем "Add"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "205,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| '36/Yellow'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Trousers' | '36/Yellow'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '220,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем "Add"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "220,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| '38/Yellow'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Trousers' | '38/Yellow'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '220,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем "Add"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "220,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Shirt'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| '36/Red'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Shirt' | '36/Red'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '250,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем "Add"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "250,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Shirt'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| '38/Black'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Shirt' | '38/Black'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '240,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем "Add"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "240,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| '36/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '36/18SD'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '190,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем "Add"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "190,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| '37/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '37/18SD'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '190,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем "Add"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "190,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| '38/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '38/18SD'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '195,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем "Add"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "195,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| '39/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '39/18SD'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '180,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-	И я нажимаю на кнопку 'Post and close'
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "180,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	And I click "Post and close" button
 
-	Сценарий: change purchase order number to 103
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И в таблице "List" я перехожу к последней строке
-		И в таблице "List" я выбираю текущую строку
-		И я устанавливаю номер документа 3
-			И я перехожу к закладке "Other"
-			И я разворачиваю группу "More"
-			И в поле 'Number' я ввожу текст '103'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '103'
-		И я нажимаю на кнопку 'Post and close'
+	Scenario: change purchase order number to 103
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		* Change the document number to 3
+			And I move to "Other" tab
+			And I expand "More" group
+			And I input "103" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "103" text in "Number" field
+		And I click "Post and close" button
 
 
 
-	Сценарий: create an item for the set including the specification
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Hat + kerchief'
-		И в поле с именем 'Description_tr' я ввожу текст 'Hat + kerchief TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля  с именем "ItemType"
-		И в таблице "List" я перехожу к строке:
+	Scenario: create an item for the set including the specification
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Hat + kerchief" text in the field named "Description_en"
+		And I input "Hat + kerchief TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Choice button of the field named "ItemType"
+		And I go to line in "List" table
 			| 'Description' |
-			| 'Сlothes'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "List" я перехожу к строке:
+			| 'Clothes'       |
+		And I select current line in "List" table
+		And I go to line in "List" table
 			| Description |
 			| pcs      |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку 'Post'
-		И Пауза 5
+		And I select current line in "List" table
+		And I click "Post" button
+		And Delay 5
 
 
-	Сценарий: purchase an item for a set
-	И я создаю документ Purchase Invoice без заказа	
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю необходимые реквизиты
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+	Scenario: purchase an item for a set
+	* Create Purchase Invoice without order	
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Filling in details
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		Тогда открылось окно 'Stores'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		Then "Stores" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in items table
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I move to "Item list" tab
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Hat + kerchief'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'Dress/A-8'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '100,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post'
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "100,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
 
 
 
-	Сценарий: creating a purchase invoice for the purchase of sets and dimensional grids at the tore 02
-	И я создаю документ Purchase Invoice без заказа	
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю необходимые реквизиты
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+	Scenario: creating a purchase invoice for the purchase of sets and dimensional grids at the tore 02
+	* Create Purchase Invoice without order
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Filling in details
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in vendor's info
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| Description        |
 			| Vendor Ferron, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in items table
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'Dress/A-8'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '100,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "100,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Boots       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Item  | Item key  |
 			| Boots | Boots/S-8 |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post'
-	И я создаю приходный ордер
-		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+	* Create Goods receipt
+		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Post and close'
-		И я жду закрытия окна 'Goods receipt (create)' в течение 20 секунд
-		И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I click "Post and close" button
+		And I wait "Goods receipt (create)" window closing in 20 seconds
+		And I close all client application windows
 	
-	Сценарий: creating Sales invoice for Ferron BP in USD
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+	Scenario: creating Sales invoice for Ferron BP in USD
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я создаю соглашение в долларах
-			И в поле 'ENG' я ввожу текст 'Ferron, USD'
-			И я меняю значение переключателя 'Type' на 'Customer'
-			И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
-			И в поле 'Number' я ввожу текст '234'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I click the button named "FormCreate"
+		* Create partner term in USD
+			And I input "Ferron, USD" text in "ENG" field
+			And I change "Type" radio button value to "Customer"
+			And I change "AP/AR posting detail" radio button value to "By documents"
+			And I input "234" text in "Number" field
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description |
 				| Main company     |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| Description |
 				| Ferron BP   |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Multi currency movement type"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Multi currency movement type" field
+			And I go to line in "List" table
 				| 'Currency' | 'Type'      |
 				| 'USD'      | 'Partner term' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Price type"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Price type" field
+			And I go to line in "List" table
 				| Description |
 				| Price USD |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Start using' я ввожу текст '01.01.2019'
-			И я изменяю флаг 'Price include tax'
-			И я нажимаю на кнопку 'Save and close'
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "01.01.2019" text in "Start using" field
+			And I change checkbox "Price include tax"
+			And I click "Save and close" button
+		And I click the button named "FormChoose"
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron, USD |
-		И в таблице "List" я выбираю текущую строку
-		* Filling in items table реализации
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		* Filling in items table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| Description |
 				| Trousers    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| Item     | Item key  |
 				| Trousers | 38/Yellow |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListStore" in "ItemList" table
+			And I click choice button of "Store" attribute in "ItemList" table
+			And I go to line in "List" table
 				| Description |
 				| Store 01  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Sales order"
-			И в таблице "ItemList" я активизирую поле "Q"
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
-			И в таблице "ItemList" я активизирую поле "Price"
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '20,00'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И я меняю номер реализации на 234
-				И я перехожу к закладке "Other"
-				И я разворачиваю группу "More"
-				И в поле 'Number' я ввожу текст '182'
-				Тогда открылось окно '1C:Enterprise'
-				И я нажимаю на кнопку 'Yes'
-				И в поле 'Number' я ввожу текст '234'
-			И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-			И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-			И я нажимаю на кнопку 'Post and close'
-			И Пауза 2
+			And I select current line in "List" table
+			And I activate "Sales order" field in "ItemList" table
+			And I activate "Q" field in "ItemList" table
+			And I input "10,000" text in "Q" field of "ItemList" table
+			And I activate "Price" field in "ItemList" table
+			And I input "20,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			* Change the document number to 234
+				And I move to "Other" tab
+				And I expand "More" group
+				And I input "182" text in "Number" field
+				Then "1C:Enterprise" window is opened
+				And I click "Yes" button
+				And I input "234" text in "Number" field
+			And in the table "ItemList" I click "% Offers" button
+			And in the table "Offers" I click the button named "FormOK"
+			And I click "Post and close" button
+			And Delay 2
 
 
 
 
 
-Сценарий: adding the items to the sales order (Dress and Trousers)
-	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	Тогда открылось окно 'Items'
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "ItemList" я активизирую поле "Item key"
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-	И в таблице "List" я перехожу к строке:
+Scenario: adding the items to the sales order (Dress and Trousers)
+	And in the table "ItemList" I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	Then "Items" window is opened
+	And I select current line in "List" table
+	And I activate "Item key" field in "ItemList" table
+	And I click choice button of "Item key" attribute in "ItemList" table
+	And I go to line in "List" table
 		| 'Item key' |
 		| 'L/Green'  |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "ItemList" я активизирую поле "Q"
-	И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
-	И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-	И в таблице "ItemList" я завершаю редактирование строки
-	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I activate "Q" field in "ItemList" table
+	And I input "10,000" text in "Q" field of "ItemList" table
+	And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+	And I finish line editing in "ItemList" table
+	And in the table "ItemList" I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I go to line in "List" table
 		| Description |
 		| Trousers       |
-	И в таблице "List" я выбираю текущую строку
-	И я перехожу к следующему реквизиту
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "ItemList" я активизирую поле "Q"
-	И в таблице "ItemList" в поле 'Q' я ввожу текст '14,000'
-	И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-	И в таблице "ItemList" я завершаю редактирование строки
+	And I select current line in "List" table
+	And I move to the next attribute
+	And I click choice button of "Item key" attribute in "ItemList" table
+	And I select current line in "List" table
+	And I activate "Q" field in "ItemList" table
+	And I input "14,000" text in "Q" field of "ItemList" table
+	And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+	And I finish line editing in "ItemList" table
 
-Сценарий: create the first test PO for a test on the creation mechanism based on
+Scenario: create the first test PO for a test on the creation mechanism based on
 	* Open a form to create Purchase Order
-			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-			И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю необходимые реквизиты
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+			And I click the button named "FormCreate"
+		* Filling in details
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 			| Description  |
 			| Main Company |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in vendor's info
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| Description |
 				| Ferron BP   |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Legal name"
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
 				| Description       |
 				| Company Ferron BP |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| Description        |
 				| Vendor Ferron, TRY |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| Description |
 				| Store 02  |
-			И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
+			And I select current line in "List" table
+		And I select "Approved" exact value from "Status" drop-down list
 		* Filling in items table
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item key' |
 				| 'M/White'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item key' |
 				| 'L/Green'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'M/White' | 'pcs' |
-			И в таблице "ItemList" я активизирую поле "Q"
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '20,000'
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '200,00'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I activate "Q" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "20,000" text in "Q" field of "ItemList" table
+			And I input "200,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '2' | 'Dress' | 'L/Green'  | 'pcs' |
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '20,000'
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '210,00'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I select current line in "ItemList" table
+			And I input "20,000" text in "Q" field of "ItemList" table
+			And I input "210,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'     | 'Item key' | 'Unit' |
 				| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '30,000'
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '210,00'
-			И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post'
-		# И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedPicture"
+			And I select current line in "ItemList" table
+			And I input "30,000" text in "Q" field of "ItemList" table
+			And I input "210,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		And I click "Post" button
 
 
-Сценарий: create the second test PO for a test on the creation mechanism based on
+Scenario: create the second test PO for a test on the creation mechanism based on
 	* Open a form to create Purchase Order
-			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-			И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю необходимые реквизиты
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+			And I click the button named "FormCreate"
+		* Filling in details
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in vendor's info
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| Description |
 				| Ferron BP   |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Legal name"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
 				| Description       |
 				| Second Company Ferron BP |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| Description        |
 				| Vendor Ferron, TRY |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| Description |
 				| Store 02  |
-			И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
+			And I select current line in "List" table
+		And I select "Approved" exact value from "Status" drop-down list
 		* Filling in items table
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item key' |
 				| 'M/White'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'M/White' | 'pcs' |
-			И в таблице "ItemList" я активизирую поле "Q"
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '200,00'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И я нажимаю на кнопку 'Post'
-			# И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedPicture"
+			And I activate "Q" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "10,000" text in "Q" field of "ItemList" table
+			And I input "200,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
 
 
-Сценарий: create the first test SO for a test on the creation mechanism based on
+Scenario: create the first test SO for a test on the creation mechanism based on
 	* Open a form to create Sales Order
-			И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-			И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю необходимые реквизиты
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.SalesOrder"
+			And I click the button named "FormCreate"
+		* Filling in details
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 			| Description  |
 			| Main Company |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in vendor's info
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| Description |
 				| Ferron BP   |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Legal name"
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
 				| Description       |
 				| Company Ferron BP |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| Description        |
 				| Basic Partner terms, TRY |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| Description |
 				| Store 02  |
-			И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
+			And I select current line in "List" table
+		And I select "Approved" exact value from "Status" drop-down list
 		* Filling in items table
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item key' |
 				| 'M/White'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item key' |
 				| 'L/Green'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'M/White' | 'pcs' |
-			И в таблице "ItemList" я активизирую поле "Q"
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '20,000'
-			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I activate "Q" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "20,000" text in "Q" field of "ItemList" table
+			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '2' | 'Dress' | 'L/Green'  | 'pcs' |
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '20,000'
-			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I select current line in "ItemList" table
+			And I input "20,000" text in "Q" field of "ItemList" table
+			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'     | 'Item key' | 'Unit' |
 				| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '30,000'
-			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-			И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post'
+			And I select current line in "ItemList" table
+			And I input "30,000" text in "Q" field of "ItemList" table
+			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I finish line editing in "ItemList" table
+		And I click "Post" button
 
 
-Сценарий: create the second test SO for a test on the creation mechanism based on
+Scenario: create the second test SO for a test on the creation mechanism based on
 	* Open a form to create Sales Order
-			И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-			И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю необходимые реквизиты
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.SalesOrder"
+			And I click the button named "FormCreate"
+		* Filling in details
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in vendor's info
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| Description |
 				| Ferron BP   |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Legal name"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
 				| Description       |
 				| Second Company Ferron BP |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| Description        |
 				| Basic Partner terms, TRY |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| Description |
 				| Store 02  |
-			И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
+			And I select current line in "List" table
+		And I select "Approved" exact value from "Status" drop-down list
 		* Filling in items table
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item key' |
 				| 'M/White'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'M/White' | 'pcs' |
-			И в таблице "ItemList" я активизирую поле "Q"
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
-			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И я нажимаю на кнопку 'Post'
+			And I activate "Q" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "10,000" text in "Q" field of "ItemList" table
+			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
 
-Сценарий: creating an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+Scenario: creating an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 			| 'Description'             |
 			| 'Ferron BP' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
 			| 'Description'                     |
 			| 'Basic Partner terms, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Legal name"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Legal name" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Company Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
-	И я добавляю в заказ клиента товар
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		Тогда открылось окно 'Items'
-		И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	* Add items to the order
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
 			| 'Description'                     |
 			| 'Dress' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'XS/Blue'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		Тогда открылось окно 'Items'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "10,000" text in "Q" field of "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
 			| 'Description'                     |
 			| 'Trousers' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| 'Item key' |
 			| '36/Yellow'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '5,000'
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" я завершаю редактирование строки
-	И я нажимаю на кнопку 'Post'
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+	And I click "Post" button

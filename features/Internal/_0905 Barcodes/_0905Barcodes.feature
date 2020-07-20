@@ -1,136 +1,136 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: barcode management
+Feature: barcode management
 
 As a developer
 I want to add barcode functionality
 To work with the products
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _0905 barcode registry entry
-	И я удаляю все записи РегистрСведений "Barcodes"
+Scenario: _0905 barcode registry entry
 	* Adding barcode entries for Dress
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 			| Description |
 			| Dress       |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Barcodes'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'Barcode' я ввожу текст '2202283705'
-		И я нажимаю кнопку выбора у поля "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And In this window I click command interface button "Barcodes"
+		And I click the button named "FormCreate"
+		And I input "2202283705" text in "Barcode" field
+		And I click Select button of "Item key" field
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Dress | XS/Blue  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Unit" field
+		And I go to line in "List" table
 			| Description |
 			| pcs         |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Presentation' я ввожу текст '2202283705'
-		И я нажимаю на кнопку 'Save and close'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'Barcode' я ввожу текст '2202283713'
-		И я нажимаю кнопку выбора у поля "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "2202283705" text in "Presentation" field
+		And I click "Save and close" button
+		And I click the button named "FormCreate"
+		And I input "2202283713" text in "Barcode" field
+		And I click Select button of "Item key" field
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Dress | S/Yellow |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Unit" field
+		And I go to line in "List" table
 			| Description |
 			| pcs         |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Presentation' я ввожу текст '2202283713'
-		И я нажимаю на кнопку 'Save and close'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'Barcode' я ввожу текст '2202283739'
-		И я нажимаю кнопку выбора у поля "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "2202283713" text in "Presentation" field
+		And I click "Save and close" button
+		And I click the button named "FormCreate"
+		And I input "2202283739" text in "Barcode" field
+		And I click Select button of "Item key" field
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Dress | L/Green  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Unit" field
+		And I go to line in "List" table
 			| Description |
 			| pcs         |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Presentation' я ввожу текст '2202283739'
-		И я нажимаю на кнопку 'Save and close'
-	И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I input "2202283739" text in "Presentation" field
+		And I click "Save and close" button
+	And I close all client application windows
 	* Adding barcode entries for Boots
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 			| Description |
 			| Boots       |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Barcodes'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'Barcode' я ввожу текст '4820024700016'
-		И я нажимаю кнопку выбора у поля "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And In this window I click command interface button "Barcodes"
+		And I click the button named "FormCreate"
+		And I input "4820024700016" text in "Barcode" field
+		And I click Select button of "Item key" field
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Boots | 36/18SD  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Unit" field
+		And I go to line in "List" table
 			| Description |
 			| pcs         |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Presentation' я ввожу текст '4820024700016'
-		И я нажимаю на кнопку 'Save and close'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'Barcode' я ввожу текст '978020137962'
-		И я нажимаю кнопку выбора у поля "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "4820024700016" text in "Presentation" field
+		And I click "Save and close" button
+		And I click the button named "FormCreate"
+		And I input "978020137962" text in "Barcode" field
+		And I click Select button of "Item key" field
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Boots | 37/18SD  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Unit" field
+		And I go to line in "List" table
 			| Description |
 			| pcs         |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Presentation' я ввожу текст '978020137962'
-		И я нажимаю на кнопку 'Save and close'
-	И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I input "978020137962" text in "Presentation" field
+		And I click "Save and close" button
+	And I close all client application windows
 
-Сценарий: _0906 check barcode display by Item and item key
+Scenario: _0906 check barcode display by Item and item key
 	* Opening the item catalog and selecting Dress
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 			| Description |
 			| Dress       |
-		И в таблице "List" я выбираю текущую строку
-	* CheckingItem barcodes by Item
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Barcodes'
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+	* CheckItem barcodes by Item
+		And In this window I click command interface button "Barcodes"
+		And "List" table contains lines
 		| 'Barcode'    | 'Unit' | 'Item key' |
 		| '2202283705' | 'pcs'  | 'XS/Blue'  |
 		| '2202283713' | 'pcs'  | 'S/Yellow' |
 		| '2202283739' | 'pcs'  | 'L/Green'  |
-	* CheckingItem barcodes by Item key
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И в таблице "List" я перехожу к строке:
+	* CheckItem barcodes by Item key
+		And In this window I click command interface button "Item keys"
+		And I go to line in "List" table
 		| 'Item key' |
 		| 'S/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Barcodes'
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And In this window I click command interface button "Barcodes"
+		And "List" table contains lines
 		| 'Barcode'    | 'Unit' | 'Item key' |
 		| '2202283713' | 'pcs'  | 'S/Yellow' |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
+
 
 
 

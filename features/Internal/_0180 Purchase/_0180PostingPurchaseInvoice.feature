@@ -1,292 +1,293 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: creating document Purchase invoice
+Feature: create document Purchase invoice
 
 As a procurement manager
 I want to create a Purchase invoice document
 To track a product that has been received from a vendor
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _018001 creating document Purchase Invoice based on order - Goods receipt is not used
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-	И в таблице "List" я перехожу к строке:
+Scenario: _018001 create document Purchase Invoice based on order - Goods receipt is not used
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	And I go to line in "List" table
 		| 'Number' |
 		| '2'      |
-	И в таблице "List" я выбираю текущую строку
+	And I select current line in "List" table
 	* Check filling of elements upon entry based on
-		И я нажимаю на кнопку с именем 'FormDocumentPurchaseInvoiceGeneratePurchaseInvoice'
-		Тогда элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
+		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Store" became equal to "Store 01"
 	* Filling in the main details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я выбираю текущую строку
+		And I click Select button of "Company" field
+		And I select current line in "List" table
 	* Check filling items table
-		И я перехожу к закладке "Item list"
-		И     таблица "ItemList" содержит строки:
+		And I move to "Item list" tab
+		And "ItemList" table contains lines
 		| 'Item'     | 'Purchase order'    | 'Item key' | 'Unit'| 'Q'       |
 		| 'Dress'    | 'Purchase order 2*' | 'M/White'  | 'pcs' | '100,000' |
 		| 'Dress'    | 'Purchase order 2*' | 'L/Green'  | 'pcs' | '200,000' |
 		| 'Trousers' | 'Purchase order 2*' | '36/Yellow'| 'pcs' | '300,000' |
 	* Check filling prices
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Price'  | 'Item'     | 'Item key'  | 'Q'       | 'Price type'                         | 'Store'    |
 		| '200,00' | 'Dress'    | 'M/White'   | '100,000' | 'en descriptions is empty'           | 'Store 01' |
 		| '210,00' | 'Dress'    | 'L/Green'   | '200,000' | 'en descriptions is empty'           | 'Store 01' |
 		| '250,00' | 'Trousers' | '36/Yellow' | '300,000' | 'en descriptions is empty'           | 'Store 01' |
 	* Filling in the document number 1
-		И в поле 'Number' я ввожу текст '1'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '1'
-	* Checking addition of the store in tabular part
-		И я перехожу к закладке "Item list"
-		И     таблица "ItemList" содержит строки:
+		And I input "1" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "1" text in "Number" field
+	* Check addition of the store in tabular part
+		And I move to "Item list" tab
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Store'    | 'Unit' | 'Q'       |
 		| 'Dress'    | 'M/White'   | 'Store 01' | 'pcs' | '100,000' |
-	И я нажимаю на кнопку 'Post and close'
+	And I click "Post and close" button
 	
 
-Сценарий: _018002 Checking Purchase Invoice postings by register Order Balance (minus) - Goods receipt is not used
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _018002 check Purchase Invoice movements by register Order Balance (minus) - Goods receipt is not used
+	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'            |  'Store'    | 'Order'             | 'Item key' |
 		| '100,000'  | 'Purchase invoice 1*' |  'Store 01' | 'Purchase order 2*' | 'M/White'  |
 		| '200,000'  | 'Purchase invoice 1*' |  'Store 01' | 'Purchase order 2*' | 'L/Green'  |
 		| '300,000'  | 'Purchase invoice 1*' |  'Store 01' | 'Purchase order 2*' | '36/Yellow'|
 
 
-Сценарий: _018003 Checking Purchase Invoice postings by register Stock Balance (plus) - Goods receipt is not used
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _018003 check Purchase Invoice movements by register Stock Balance (plus) - Goods receipt is not used
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'            | 'Store'     | 'Item key' |
 		| '100,000'  | 'Purchase invoice 1*' | 'Store 01'  | 'M/White'  |
 		| '200,000'  | 'Purchase invoice 1*' |  'Store 01' | 'L/Green'  |
 		| '300,000'  | 'Purchase invoice 1*' |  'Store 01' | '36/Yellow'|
 
-Сценарий: _018004 Checking Purchase Invoice postings by register Stock Reservation (plus) - Goods receipt is not used
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-	Тогда таблица "List" содержит строки:
+Scenario: _018004 check Purchase Invoice movements by register Stock Reservation (plus) - Goods receipt is not used
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'             | 'Store'    | 'Item key'  |
 		| '100,000'  | 'Purchase invoice 1*'  |  'Store 01' | 'M/White'  |
 		| '200,000'  | 'Purchase invoice 1*'  |  'Store 01' | 'L/Green'  |
 		| '300,000'  | 'Purchase invoice 1*'  |  'Store 01' | '36/Yellow'|
 
-Сценарий: _018005 Checking Purchase Invoice postings by register Inventory Balance - Goods receipt is not used
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _018005 check Purchase Invoice movements by register Inventory Balance - Goods receipt is not used
+	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'             |  'Company'     | 'Item key' |
 		| '100,000'  | 'Purchase invoice 1*'  | 'Main Company' | 'M/White'  |
 		| '200,000'  | 'Purchase invoice 1*'  | 'Main Company' | 'L/Green'  |
 		| '300,000'  | 'Purchase invoice 1*'  | 'Main Company' | '36/Yellow'|
 
-Сценарий: _018006 creating document Purchase Invoice based on order - Goods receipt is used
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-	И в таблице "List" я перехожу к строке:
+Scenario: _018006 create document Purchase Invoice based on order - Goods receipt is used
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	And I go to line in "List" table
 		| 'Number' |
 		| '3'      |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку с именем "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+	And I select current line in "List" table
+	And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
 	* Check filling of elements upon entry based on
-		Тогда элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, USD'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
+		Then the form attribute named "Store" became equal to "Store 02"
 	* Filling in the main details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я выбираю текущую строку
+		And I click Select button of "Company" field
+		And I select current line in "List" table
 	* Check filling items table
-		И я перехожу к закладке "Item list"
-		И     таблица "ItemList" содержит строки:
+		And I move to "Item list" tab
+		And "ItemList" table contains lines
 		| 'Item'     | 'Purchase order'    | 'Item key' | 'Unit' | 'Q'       |
 		| 'Dress'    | 'Purchase order 3*' | 'L/Green'  | 'pcs' | '500,000' |
 	* Filling prices
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Price' | 'Item'  | 'Item key' | 'Q'       | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' |
 		| '40,00' | 'Dress' | 'L/Green'  | '500,000' | 'en descriptions is empty' | 'pcs'  | '3 050,85'   | '16 949,15'  | '20 000,00'    |
 	* Filling in the document number 2
-		И в поле 'Number' я ввожу текст '2'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '2'
-	И я нажимаю на кнопку 'Post and close'
+		And I input "2" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "2" text in "Number" field
+	And I click "Post and close" button
 	
 
-Сценарий: _018007 Checking Purchase Invoice postings by register Order Balance (minus) - Goods receipt is used
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _018007 check Purchase Invoice movements by register Order Balance (minus) - Goods receipt is used
+	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'            | 'Line number' | 'Store'    | 'Order'             | 'Item key' |
 		| '500,000'  | 'Purchase invoice 2*' | '1'           | 'Store 02' | 'Purchase order 3*' | 'L/Green'  |
 
 
-Сценарий: _018008 Checking Purchase Invoice postings by register Inventory Balance (plus) - Goods receipt is used
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _018008 check Purchase Invoice movements by register Inventory Balance (plus) - Goods receipt is used
+	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'             | 'Line number' | 'Company'      | 'Item key' |
 		| '500,000'  | 'Purchase invoice 2*'  | '1'           | 'Main Company' | 'L/Green'  |
 
-Сценарий: _018009 Checking Purchase Invoice postings by register GoodsInTransitIncoming (plus) - Goods receipt is used
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
-	Тогда таблица "List" содержит строки:
+Scenario: _018009 check Purchase Invoice movements by register GoodsInTransitIncoming (plus) - Goods receipt is used
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'             | 'Receipt basis'        | 'Line number' | 'Store'    | 'Item key' |
 		| '500,000'  | 'Purchase invoice 2*'  | 'Purchase invoice 2*'  | '1'           | 'Store 02' | 'L/Green'  |
 
-Сценарий: _018010 checking that there are no postings of Purchase Invoice document by register StockBalance if used Goods receipt 
+Scenario: _018010 check that there are no movements of Purchase Invoice document by register StockBalance if used Goods receipt 
 # if Goods receipt is used, there will be no posting
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-	Тогда таблица "List" не содержит строки: 
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'             | 'Line number' | 'Store'    | 'Item key' |
 		| '500,000'  | 'Purchase invoice 2*'  | '1'           | 'Store 02' | 'L/Green'  |
 
-Сценарий: _018011 checking that there are no postings of Purchase Invoice document by register StockReservation if used Goods receipt 
+Scenario: _018011 check that there are no movements of Purchase Invoice document by register StockReservation if used Goods receipt 
 # if Goods receipt is used, there will be no posting
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-	Тогда таблица "List" не содержит строки:
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'             | 'Line number' | 'Store'    | 'Item key' |
 		| '500,000'  | 'Purchase invoice 2*'  | '1'           | 'Store 01' | 'L/Green'  |
 
-Сценарий: _018012 Purchase invoice creation on set, store does not use Goods receipt
+Scenario: _018012 Purchase invoice creation on set, store does not use Goods receipt
 	* Creating Purchase Invoice without Purchase order	
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the document number
-		И в поле 'Number' я ввожу текст '5'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '5'
+		And I input "5" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "5" text in "Number" field
 	* Filling in vendor information
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| Description        |
 			| Vendor Ferron, EUR |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in store
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in items table
-		И я перехожу к закладке "Item list"
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I move to "Item list" tab
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'Dress/A-8'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '10,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '200,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "10,000" text in "Q" field of "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Boots       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Item  | Item key  |
 			| Boots | Boots/S-8 |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '20,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '250,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-	* Checking postings by register
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-		Тогда таблица "List" содержит строки: 
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "20,000" text in "Q" field of "ItemList" table
+		And I input "250,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+	* Check movements by register
+		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key' |
 			| '10,000'   | 'Purchase invoice 5*'        | 'Store 01' | 'Dress/A-8'|
 			| '20,000'   | 'Purchase invoice 5*'        | 'Store 01' | 'Boots/S-8'|
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-		Тогда таблица "List" содержит строки:
+		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key' |
 			| '10,000'   | 'Purchase invoice 5*'        | 'Store 01' | 'Dress/A-8'|
 			| '20,000'   | 'Purchase invoice 5*'        | 'Store 01' | 'Boots/S-8'|
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
-		Тогда таблица "List" содержит строки:
+		Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
+		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                   | 'Item key' |
 			| '10,000'   | 'Purchase invoice 5*'        | 'Dress/A-8'|
 			| '20,000'   | 'Purchase invoice 5*'        | 'Boots/S-8'|
 
 
-Сценарий: _018018 checking totals in the document Purchase invoice
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
+Scenario: _018018 check totals in the document Purchase invoice
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	* Select Purchase Invoice
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| Number |
 		| 2      |
-		И в таблице "List" я выбираю текущую строку
-	* Checking totals
-		И     элемент формы с именем "ItemListTotalNetAmount" стал равен '16 949,15'
-		И     элемент формы с именем "ItemListTotalTaxAmount" стал равен '3 050,85'
-		И     элемент формы с именем "ItemListTotalTotalAmount" стал равен '20 000,00'
+		And I select current line in "List" table
+	* Check totals
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "16 949,15"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "3 050,85"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "20 000,00"
 
 
-Сценарий: _018020 checking the form Pick up items in the document Purchase invoice
-	И    Я закрыл все окна клиентского приложения
+Scenario: _018020 check the form Pick up items in the document Purchase invoice
+	And I close all client application windows
 	* Opening a form for creating Purchase invoice
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
 	* Filling in the main details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in vendor information
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| Description        |
 			| Vendor Ferron, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		Тогда открылось окно 'Stores'
-		И в таблице "List" я выбираю текущую строку
-	Когда check the product selection form with price information in Purchase invoice
-	И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		Then "Stores" window is opened
+		And I select current line in "List" table
+	When check the product selection form with price information in Purchase invoice
+	And I close all client application windows
+
 

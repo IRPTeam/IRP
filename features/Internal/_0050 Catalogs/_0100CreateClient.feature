@@ -1,1143 +1,1135 @@
-﻿#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: filling in customer contact information
+Feature: filling in customer contact information
 
 As an owner
 I want there to be a mechanism for entering customer contact information
 To specify: address, phone, e-mail, gps coordinate on the map
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I open new TestClient session or connect the existing one
    
 
 
-Сценарий: _010001 add Plugin sessing for entering addresses
+Scenario: _010001 add Plugin sessing for entering addresses
 	* Opening a form to add Plugin sessing
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		And I click the button named "FormCreate"
 	* Adding Plugin sessing 
-		И я буду выбирать внешний файл "#workingDir#\DataProcessor\InputAddress.epf"
-		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to plugin for test' я ввожу текст ''
-		И в поле 'Name' я ввожу текст 'ExternaInputAddress'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'ExternalInputAddress'
-		И в поле 'TR' я ввожу текст 'ExternalInputAddress'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I select external file "#workingDir#\DataProcessor\InputAddress.epf"
+		And I click the button named "FormAddExtDataProc"
+		And I input "" text in "Path to plugin for test" field
+		And I input "ExternaInputAddress" text in "Name" field
+		And I click Open button of the field named "Description_en"
+		And I input "ExternalInputAddress" text in "ENG" field
+		And I input "ExternalInputAddress" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
 	* Check adding Plugin sessing
-		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalInputAddress"
+		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalInputAddress"
 
-Сценарий: _010002 add Plugin sessing for GPS
+Scenario: _010002 add Plugin sessing for GPS
 	* Opening a form to add Plugin sessing
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		And I click the button named "FormCreate"
 	* Adding Plugin sessing 
-		И я буду выбирать внешний файл "#workingDir#\DataProcessor\Coordinates.epf"
-		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to plugin for test' я ввожу текст ''
-		И в поле 'Name' я ввожу текст 'ExternalCoordinates'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'ExternalCoordinates'
-		И в поле 'TR' я ввожу текст 'ExternalCoordinates'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I select external file "#workingDir#\DataProcessor\Coordinates.epf"
+		And I click the button named "FormAddExtDataProc"
+		And I input "" text in "Path to plugin for test" field
+		And I input "ExternalCoordinates" text in "Name" field
+		And I click Open button of the field named "Description_en"
+		And I input "ExternalCoordinates" text in "ENG" field
+		And I input "ExternalCoordinates" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
 	* Check adding Plugin sessing
-		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalCoordinates"
+		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalCoordinates"
 
-Сценарий: _010003 add Plugin sessing for phone
+Scenario: _010003 add Plugin sessing for phone
 	* Opening a form to add Plugin sessing
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		And I click the button named "FormCreate"
 	* Filling in the 'External Input Phone Ukraine' and adding it to the database
-		И я буду выбирать внешний файл "#workingDir#\DataProcessor\InputPhoneUkraine.epf"
-		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to plugin for test' я ввожу текст ''
-		И в поле 'Name' я ввожу текст 'ExternalInputPhoneUkraine'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'ExternalInputPhoneUkraine'
-		И в поле 'TR' я ввожу текст 'ExternalInputPhoneUkraine'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalInputPhoneUkraine"
+		And I select external file "#workingDir#\DataProcessor\InputPhoneUkraine.epf"
+		And I click the button named "FormAddExtDataProc"
+		And I input "" text in "Path to plugin for test" field
+		And I input "ExternalInputPhoneUkraine" text in "Name" field
+		And I click Open button of the field named "Description_en"
+		And I input "ExternalInputPhoneUkraine" text in "ENG" field
+		And I input "ExternalInputPhoneUkraine" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalInputPhoneUkraine"
 	* Add processing Phone TR
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я буду выбирать внешний файл "#workingDir#\DataProcessor\InputPhoneUkraine.epf"
-		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to plugin for test' я ввожу текст ''
-		И в поле 'Name' я ввожу текст 'PhoneTR'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Phone TR'
-		И в поле 'TR' я ввожу текст 'Phone TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "Phone TR"
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		And I click the button named "FormCreate"
+		And I select external file "#workingDir#\DataProcessor\InputPhoneUkraine.epf"
+		And I click the button named "FormAddExtDataProc"
+		And I input "" text in "Path to plugin for test" field
+		And I input "PhoneTR" text in "Name" field
+		And I click Open button of the field named "Description_en"
+		And I input "Phone TR" text in "ENG" field
+		And I input "Phone TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "Phone TR"
 
-Сценарий: _010004 creating Contact info Type - Addresses
+Scenario: _010004 create Contact info Type - Addresses
 	* Opening a form to add Plugin sessing
-		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Google Addreses'
-		И в поле 'TR' я ввожу текст 'Google Addreses TR'
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'	
-		И в поле 'Unique ID' я ввожу текст 'Adr_10'
-		И я изменяю флаг 'Show on form'
-		И я изменяю флаг 'Read only'
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Google Addreses" text in "ENG" field
+		And I input "Google Addreses TR" text in "TR" field
+		And I click "Ok" button
+		And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
+		And I input "Adr_10" text in "Unique ID" field
+		And I change checkbox "Show on form"
+		And I change checkbox "Read only"
 	* Adding Plugin sessing for addresses
-		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
-		И в таблице "List" я перехожу к строке:
+		And I click choice button of "Country" attribute in "ExternalDataProcess" table
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Ukraine'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProcess" я активизирую поле "Plugins"
-		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
-		Тогда открылось окно 'Plugins'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Plugins" field in "ExternalDataProcess" table
+		And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
+		Then "Plugins" window is opened
+		And I go to line in "List" table
 			| 'Description'                |
 			| 'ExternalInputAddress' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 5
+		And "List" table contains lines
 		| 'Description' |
 		| 'Google Addreses'  |
 
-Сценарий: _010004 verification of UNIQ ID uniqueness control in IDInfoTypes
+Scenario: _010004 verification of UNIQ ID uniqueness control in IDInfoTypes
 	* Create one more item with ID Adr_10
-		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Test'
-		И в поле 'TR' я ввожу текст 'Test'
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'	
-		И в поле 'Unique ID' я ввожу текст 'Adr_10'
-		И я изменяю флаг 'Show on form'
-		И я изменяю флаг 'Read only'
-		И я нажимаю на кнопку 'Save and close'
-		И Я закрываю окно предупреждения
-	* Checking message by non-unique ID
-		Затем я жду, что в сообщениях пользователю будет подстрока "Value is not unique" в течение 30 секунд
-		И Я закрыл все окна клиентского приложения
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Test" text in "ENG" field
+		And I input "Test" text in "TR" field
+		And I click "Ok" button
+		And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
+		And I input "Adr_10" text in "Unique ID" field
+		And I change checkbox "Show on form"
+		And I change checkbox "Read only"
+		And I click "Save and close" button
+		And I close warning window
+	* Check message by non-unique ID
+		Then I wait that in user messages the "Value is not unique" substring will appear in 30 seconds
+		And I close all client application windows
 
-Сценарий: _010005 creating company for Partners (Ferron, Kalipso, Lomaniti)
+Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 	* Opening the form for filling in Company
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Companies'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
+		And I click the button named "FormCreate"
+		And Delay 2
 	* Filling in company data 'Company Ferron BP'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Company Ferron BP'
-		И в поле 'TR' я ввожу текст 'Company Ferron BP TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле "Country" я ввожу текст 'Turkey'
-		И в поле "Partner" я ввожу текст 'Ferron BP'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-	* Checking the availability of the created company  "Company Ferron BP"
-		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_en" "Company Ferron BP" 
-		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_tr" "Company Ferron BP TR"
+		And I click Open button of the field named "Description_en"
+		And I input "Company Ferron BP" text in "ENG" field
+		And I input "Company Ferron BP TR" text in "TR" field
+		And I click "Ok" button
+		And I input "Turkey" text in "Country" field
+		And I input "Ferron BP" text in "Partner" field
+		And I click "Save and close" button
+		And Delay 5
+	* Check the availability of the created company  "Company Ferron BP"
+		Then I check for the "Companies" catalog element with the "Description_en" "Company Ferron BP" 
+		Then I check for the "Companies" catalog element with the "Description_tr" "Company Ferron BP TR"
 	* Creating "Company Kalipso"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Company Kalipso'
-		И в поле 'TR' я ввожу текст 'Company Kalipso TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле "Country" я ввожу текст 'Ukraine'
-		И в поле "Partner" я ввожу текст 'Kalipso'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_en" "Company Kalipso" 
-		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_tr" "Company Kalipso TR" 
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Company Kalipso" text in "ENG" field
+		And I input "Company Kalipso TR" text in "TR" field
+		And I click "Ok" button
+		And I input "Ukraine" text in "Country" field
+		And I input "Kalipso" text in "Partner" field
+		And I click "Save and close" button
+		And Delay 5
+		Then I check for the "Companies" catalog element with the "Description_en" "Company Kalipso" 
+		Then I check for the "Companies" catalog element with the "Description_tr" "Company Kalipso TR" 
 	* Creating "Company Lomaniti"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Company Lomaniti'
-		И в поле 'TR' я ввожу текст 'Company Lomaniti TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле "Country" я ввожу текст 'Ukraine'
-		И в поле "Partner" я ввожу текст 'Lomaniti'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_en" "Company Lomaniti" 
-		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_tr" "Company Lomaniti TR"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Company Lomaniti" text in "ENG" field
+		And I input "Company Lomaniti TR" text in "TR" field
+		And I click "Ok" button
+		And I input "Ukraine" text in "Country" field
+		And I input "Lomaniti" text in "Partner" field
+		And I click "Save and close" button
+		And Delay 5
+		Then I check for the "Companies" catalog element with the "Description_en" "Company Lomaniti" 
+		Then I check for the "Companies" catalog element with the "Description_tr" "Company Lomaniti TR"
 
-Сценарий: _010006 creating a structure of partners (partners), 1 main partner and several subordinates
+Scenario: _010006 create a structure of partners (partners), 1 main partner and several subordinates
 	* Opening the form for filling in partners
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I click the button named "FormCreate"
+		And Delay 2
 	* Creating partners: 'Alians', 'MIO', 'Seven Brand'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Alians'
-		И в поле 'TR' я ввожу текст 'Alians TR'
-		И я нажимаю на кнопку 'Ok'
-		И я изменяю флаг 'Customer'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'MIO'
-		И в поле 'TR' я ввожу текст 'MIO TR'
-		И я нажимаю на кнопку 'Ok'
-		И я изменяю флаг 'Customer'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Seven Brand'
-		И в поле 'TR' я ввожу текст 'Seven Brand TR'
-		И я нажимаю на кнопку 'Ok'
-		И я изменяю флаг 'Customer'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-	* Checking for created partners: 'Alians', 'MIO', 'Seven Brand'
-		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Alians" 
-		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "MIO"
-		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Seven Brand" 
+		And I click Open button of the field named "Description_en"
+		And I input "Alians" text in "ENG" field
+		And I input "Alians TR" text in "TR" field
+		And I click "Ok" button
+		And I change checkbox "Customer"
+		And I click "Save and close" button
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "MIO" text in "ENG" field
+		And I input "MIO TR" text in "TR" field
+		And I click "Ok" button
+		And I change checkbox "Customer"
+		And I click "Save and close" button
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Seven Brand" text in "ENG" field
+		And I input "Seven Brand TR" text in "TR" field
+		And I click "Ok" button
+		And I change checkbox "Customer"
+		And I click "Save and close" button
+		And Delay 5
+	* Check for created partners: 'Alians', 'MIO', 'Seven Brand'
+		Then I check for the "Partners" catalog element with the "Description_en" "Alians" 
+		Then I check for the "Partners" catalog element with the "Description_en" "MIO"
+		Then I check for the "Partners" catalog element with the "Description_en" "Seven Brand" 
 	* Subordination of partners 'Alians', 'MIO' to the main partner 'Seven Brand'
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Alians'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Main partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Main partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Seven Brand'  |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Parent" стал равен 'Seven Brand'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда открылось окно 'Partners'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "Parent" became equal to "Seven Brand"
+		And I click "Save and close" button
+		And Delay 5
+		Then "Partners" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'MIO'  |
-		И в таблице "List" я выбираю текущую строку	
-		И я нажимаю кнопку выбора у поля "Main partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Main partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Seven Brand'  |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Parent" стал равен 'Seven Brand'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I select current line in "List" table
+		Then the form attribute named "Parent" became equal to "Seven Brand"
+		And I click "Save and close" button
+		And Delay 5
 	* Structure check
-		И таблица  "List" не содержит строки:
+		And "List" table does not contain lines
 			| 'Description' |
 			| 'MIO' |
 			| 'Alians'  |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Seven Brand'  |
-		И в таблице  "List" я перехожу на один уровень вниз
-		Тогда таблица "List" стала равной:
+		And I move one level down in "List" table
+		And "List" table became equal
 			| 'Description' |
 			| 'Seven Brand' |
 			| 'Alians' |
 			| 'MIO' |
 
-Сценарий: _010007 adding additional details for partners "Business region"
+Scenario: _010007 adding additional details for partners "Business region"
 	* Opening a form for adding additional attributes for partners
-		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name |
 			| Catalog_Partners          |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the name of the settings for adding additional details for partners
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Partners'
-		И в поле 'TR' я ввожу текст 'Partners TR'
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
+		And I click Open button of the field named "Description_en"
+		And I input "Partners" text in "ENG" field
+		And I input "Partners TR" text in "TR" field
+		And I click "Ok" button
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
 	* Adding additional attribute Business region
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Business region'
-		И в поле 'TR' я ввожу текст 'Business region TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Unique ID' я ввожу текст 'BusinessRegion'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormChoose'
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Business region" text in "ENG" field
+		And I input "Business region TR" text in "TR" field
+		And I click "Ok" button
+		And I input "BusinessRegion" text in "Unique ID" field
+		And I click "Save and close" button
+		And Delay 5
+		And I click the button named "FormChoose"
 	* Create an UI group for additional attribute
-		И в таблице "Attributes" я активизирую поле "UI group"
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Main information'
-		И в поле 'TR' я ввожу текст 'Main information TR'
-		И я нажимаю на кнопку 'Ok'
-		И я меняю значение переключателя 'Form position' на 'Left'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "Attributes" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И Я закрыл все окна клиентского приложения
+		And I activate "UI group" field in "Attributes" table
+		And I click choice button of "UI group" attribute in "Attributes" table
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Main information" text in "ENG" field
+		And I input "Main information TR" text in "TR" field
+		And I click "Ok" button
+		And I change "Form position" radio button value to "Left"
+		And I click "Save and close" button
+		And Delay 5
+		And I click the button named "FormChoose"
+		And I finish line editing in "Attributes" table
+		And I click "Save and close" button
+		And Delay 5
+		And I close all client application windows
 	* Filling in the created additional attribute for partners
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Business region"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Region Turkey'
-		И в поле 'TR' я ввожу текст 'Turkey TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Region Ukraine'
-		И в поле 'TR' я ввожу текст 'Ukraine TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Business region" field
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Region Turkey" text in "ENG" field
+		And I input "Turkey TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Region Ukraine" text in "ENG" field
+		And I input "Ukraine TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		And I go to line in "List" table
 			| Description |
 			| Region Ukraine     |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+		And Delay 2
+		And I go to line in "List" table
 			| Description |
 			| Lomaniti   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Business region"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Business region" field
+		And I go to line in "List" table
 			| Description |
 			| Region Ukraine     |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+		And Delay 2
+		And I go to line in "List" table
 			| Description |
 			| Kalipso   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Business region"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Business region" field
+		And I go to line in "List" table
 			| Description |
 			| Region Ukraine     |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку 'List'
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+		And Delay 2
+		And I click "List" button
+		And I go to line in "List" table
 			| Description |
 			| Alians   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Business region"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Business region" field
+		And I go to line in "List" table
 			| Description |
 			| Region Turkey     |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+		And Delay 2
+		And I go to line in "List" table
 			| Description |
 			| MIO   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Business region"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Business region" field
+		And I go to line in "List" table
 			| Description |
 			| Region Turkey     |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+		And Delay 2
 
 
-Сценарий: _010008 creating of a partner structure (Partners), 1 main partner, under which a 2nd level partner and under which 2 3rd level partners
+Scenario: _010008 create of a partner structure (Partners), 1 main partner, under which a 2nd level partner and under which 2 3rd level partners
 	* Opening the catalog Partners
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Filling in the "Seven Brand" partner Kalipso as the main partner
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Seven Brand'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Main partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Main partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'  |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Parent" стал равен 'Kalipso'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-	* Checking the subordination of "Seven Brand" (together with the "Alians" and "MIO" subordinates) to Kalipso partner
-		И я нажимаю на кнопку 'Hierarchical list'
-		И таблица  "List" содержит строки:
+		And I select current line in "List" table
+		Then the form attribute named "Parent" became equal to "Kalipso"
+		And I click "Save and close" button
+		And Delay 5
+	* Check the subordination of "Seven Brand" (together with the "Alians" and "MIO" subordinates) to Kalipso partner
+		And I click "Hierarchical list" button
+		And "List" table contains lines
 			| 'Description' |
 			| 'Kalipso' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'  |
-		И в таблице  "List" я перехожу на один уровень вниз
-		И в таблице  "List" я перехожу на один уровень вниз
-		Тогда таблица "List" стала равной:
+		And I move one level down in "List" table
+		And I move one level down in "List" table
+		And "List" table became equal
 			| 'Description' |
 			| 'Kalipso' |
 			| 'Alians' |
 			| 'MIO' |
 
-Сценарий: _010009 adding phones to Contact info type
+Scenario: _010009 adding phones to Contact info type
 	* Opening the form for filling in Contact info type
-		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 	* Creation Company phone
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Value type"
-		И я заполняю наименование и тип данных
-			И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I click Select button of "Value type" field
+		* Filling in description and data type
+			And I go to line in "" table
 				| ''       |
 				| 'String' |
-			И я нажимаю на кнопку 'OK'
-			И в поле 'Unique ID' я ввожу текст 'Phone_1'
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
-			И в поле 'ENG' я ввожу текст 'Company phone'
-			И в поле 'TR' я ввожу текст 'Company phone TR'
-			И я нажимаю на кнопку 'Ok'
-			И я изменяю флаг 'Show on form'
-			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
-			И в таблице "List" я перехожу к строке:
+			And I click "OK" button
+			And I input "Phone_1" text in "Unique ID" field
+			And I click Open button of the field named "Description_en"
+			And I input "Company phone" text in "ENG" field
+			And I input "Company phone TR" text in "TR" field
+			And I click "Ok" button
+			And I change checkbox "Show on form"
+			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
+			And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
+			And I go to line in "List" table
 				| 'Description'                      |
 				| 'ExternalInputPhoneUkraine' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ExternalDataProcess" я завершаю редактирование строки
-			И в таблице "ExternalDataProcess" я активизирую поле "Country"
-			И в таблице "ExternalDataProcess" я выбираю текущую строку
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I finish line editing in "ExternalDataProcess" table
+			And I activate "Country" field in "ExternalDataProcess" table
+			And I select current line in "ExternalDataProcess" table
+			And I click choice button of "Country" attribute in "ExternalDataProcess" table
+			And I go to line in "List" table
 				| Description |
 				| Ukraine   |
-			И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProcess" я завершаю редактирование строки
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 5
-			И я ввожу значение поля UniqueID для телефона String
-	* Checking for created "Company phone"
-		И таблица "List" содержит строки:
+			And I select current line in "List" table
+		And I finish line editing in "ExternalDataProcess" table
+			And I click "Save and close" button
+			And Delay 5
+			And I enter a Unique ID String field type value for the phone
+	* Check for created "Company phone"
+		And "List" table contains lines
 		| 'Description'     |
 		| 'Company phone' |
 	* Creation Partner phone
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю наименование и тип данных
-			Тогда открылось окно 'Contact info type (create)'
-			И я нажимаю кнопку выбора у поля "Value type"
-			Тогда открылось окно 'Edit data type'
-			И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		* Filling in description and data type
+			Then "Contact info type (create)" window is opened
+			And I click Select button of "Value type" field
+			Then "Edit data type" window is opened
+			And I go to line in "" table
 				| ''       |
 				| 'String' |
-			И я нажимаю на кнопку 'OK'
-			И в поле 'Unique ID' я ввожу текст 'Phone_2'
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
-			# И я перехожу к закладке "< >"
-			И в поле 'ENG' я ввожу текст 'Partner phone'
-			И в поле 'TR' я ввожу текст 'Partner phone'
-			И я нажимаю на кнопку 'Ok'
-			И я изменяю флаг 'Show on form'
-			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
-			И в таблице "List" я перехожу к строке:
+			And I click "OK" button
+			And I input "Phone_2" text in "Unique ID" field
+			And I click Open button of the field named "Description_en"
+			And I input "Partner phone" text in "ENG" field
+			And I input "Partner phone" text in "TR" field
+			And I click "Ok" button
+			And I change checkbox "Show on form"
+			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
+			And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
+			And I go to line in "List" table
 				| 'Description'                      |
 				| 'ExternalInputPhoneUkraine' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ExternalDataProcess" я завершаю редактирование строки
-			И в таблице "ExternalDataProcess" я активизирую поле "Country"
-			И в таблице "ExternalDataProcess" я выбираю текущую строку
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I finish line editing in "ExternalDataProcess" table
+			And I activate "Country" field in "ExternalDataProcess" table
+			And I select current line in "ExternalDataProcess" table
+			And I click choice button of "Country" attribute in "ExternalDataProcess" table
+			And I go to line in "List" table
 				| Description |
 				| Ukraine   |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 5
-			И я ввожу значение поля UniqueID для телефона партнера String
-	* Checking for created Partner phone
-		И таблица "List" содержит строки:
+			And I select current line in "List" table
+			And I click "Save and close" button
+			And Delay 5
+			And I enter a Unique ID String field type value for the partner phone
+	* Check for created Partner phone
+		And "List" table contains lines
 			| 'Description'     |
 			| 'Partner phone' |
 
-Сценарий: _010010 adding addresses to an Contact info type
+Scenario: _010010 adding addresses to an Contact info type
 	* Opening the form for filling in Contact info type
-		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 	* Adding an actual address for partners
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю вид и тип данных
-			И я нажимаю кнопку выбора у поля "Value type"
-			Тогда открылось окно 'Edit data type'
-			И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		* Filling in data type
+			And I click Select button of "Value type" field
+			Then "Edit data type" window is opened
+			And I go to line in "" table
 				| ''                |
 				| 'Address hierarchy' |
-			И я нажимаю на кнопку 'OK'
-			И в поле 'Unique ID' я ввожу текст 'Adr_1'
-			И я изменяю флаг 'Show on form'
+			And I click "OK" button
+			And I input "Adr_1" text in "Unique ID" field
+			And I change checkbox "Show on form"
 		* Filling in the name of the address
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
-			И в поле 'ENG' я ввожу текст 'Location address (Partner)'
-			И в поле 'TR' я ввожу текст 'Location address (Partner) TR'
-			И я нажимаю на кнопку 'Ok'
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 5
+			And I click Open button of the field named "Description_en"
+			And I input "Location address (Partner)" text in "ENG" field
+			And I input "Location address (Partner) TR" text in "TR" field
+			And I click "Ok" button
+			And I click "Save and close" button
+			And Delay 5
 	* Adding an actual address for company
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю вид и тип данных
-			И я нажимаю кнопку выбора у поля "Value type"
-			Тогда открылось окно 'Edit data type'
-			И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		* Filling in data type
+			And I click Select button of "Value type" field
+			Then "Edit data type" window is opened
+			And I go to line in "" table
 				| ''                |
 				| 'Address hierarchy' |
-			И я нажимаю на кнопку 'OK'
-			И в поле 'Unique ID' я ввожу текст 'Adr_2'
-			И я изменяю флаг 'Show on form'
-			И я устанавливаю флаг с именем "ReadOnly"
+			And I click "OK" button
+			And I input "Adr_2" text in "Unique ID" field
+			And I change checkbox "Show on form"
+			And I set checkbox named "ReadOnly"
 		* Filling in the name of the address
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
-			И в поле 'ENG' я ввожу текст 'Billing address (Company)'
-			И в поле 'TR' я ввожу текст 'Billing address (Company) TR'
-			И я нажимаю на кнопку 'Ok'
-			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
+			And I click Open button of the field named "Description_en"
+			And I input "Billing address (Company)" text in "ENG" field
+			And I input "Billing address (Company) TR" text in "TR" field
+			And I click "Ok" button
+			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
 		* Adding Plugin sessing to specify the address for Ukraine
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
-			И в таблице "List" я перехожу к строке:
+			And I click choice button of "Country" attribute in "ExternalDataProcess" table
+			And I go to line in "List" table
 				| Description |
 				| Ukraine     |
-			И в таблице "List" я выбираю текущую строку
-			И я перехожу к следующему реквизиту
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
-			Тогда открылось окно 'Plugins'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I move to the next attribute
+			And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
+			Then "Plugins" window is opened
+			And I go to line in "List" table
 				| 'Description'                |
 				| 'ExternalInputAddress' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ExternalDataProcess" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I finish line editing in "ExternalDataProcess" table
 		* Adding Plugin sessing to specify the address for Turkey
-			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
-			И в таблице "List" я перехожу к строке:
+			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
+			And I click choice button of "Country" attribute in "ExternalDataProcess" table
+			And I go to line in "List" table
 				| Description |
 				| Turkey     |
-			И в таблице "List" я выбираю текущую строку
-			И я перехожу к следующему реквизиту
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
-			Тогда открылось окно 'Plugins'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I move to the next attribute
+			And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
+			Then "Plugins" window is opened
+			And I go to line in "List" table
 				| 'Description'                |
 				| 'ExternalInputAddress' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ExternalDataProcess" я завершаю редактирование строки
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 5
+			And I select current line in "List" table
+			And I finish line editing in "ExternalDataProcess" table
+			And I click "Save and close" button
+			And Delay 5
 	* Adding a legal address for a company
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я заполняю вид и тип данных
-			И я нажимаю кнопку выбора у поля "Value type"
-			Тогда открылось окно 'Edit data type'
-			И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		* Filling in data type
+			And I click Select button of "Value type" field
+			Then "Edit data type" window is opened
+			And I go to line in "" table
 				| ''                |
 				| 'Address hierarchy' |
-			И я нажимаю на кнопку 'OK'
-			И в поле 'Unique ID' я ввожу текст 'Adr_3'
-			И я изменяю флаг 'Show on form'
-			И я устанавливаю флаг с именем "ReadOnly"
+			And I click "OK" button
+			And I input "Adr_3" text in "Unique ID" field
+			And I change checkbox "Show on form"
+			And I set checkbox named "ReadOnly"
 		* Filling in the name of the address detail
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
-			И в поле 'ENG' я ввожу текст 'Registered address  (Company)'
-			И в поле 'TR' я ввожу текст 'Registered address (Company) TR'
-			И я нажимаю на кнопку 'Ok'
-			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
+			And I click Open button of the field named "Description_en"
+			And I input "Registered address  (Company)" text in "ENG" field
+			And I input "Registered address (Company) TR" text in "TR" field
+			And I click "Ok" button
+			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
 		* Adding Plugin sessing to specify the address for Ukraine
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
-			И в таблице "List" я перехожу к строке:
+			And I click choice button of "Country" attribute in "ExternalDataProcess" table
+			And I go to line in "List" table
 				| Description |
 				| Ukraine     |
-			И в таблице "List" я выбираю текущую строку
-			И я перехожу к следующему реквизиту
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
-			Тогда открылось окно 'Plugins'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I move to the next attribute
+			And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
+			Then "Plugins" window is opened
+			And I go to line in "List" table
 				| 'Description'                |
 				| 'ExternalInputAddress' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ExternalDataProcess" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I finish line editing in "ExternalDataProcess" table
 		* Adding Plugin sessing to specify the address for Turkey
-			И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
-			И в таблице "List" я перехожу к строке:
+			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
+			And I click choice button of "Country" attribute in "ExternalDataProcess" table
+			And I go to line in "List" table
 				| Description |
 				| Turkey     |
-			И в таблице "List" я выбираю текущую строку
-			И я перехожу к следующему реквизиту
-			И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
-			Тогда открылось окно 'Plugins'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I move to the next attribute
+			And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
+			Then "Plugins" window is opened
+			And I go to line in "List" table
 				| 'Description'                |
 				| 'ExternalInputAddress' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ExternalDataProcess" я завершаю редактирование строки
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 5
+			And I select current line in "List" table
+			And I finish line editing in "ExternalDataProcess" table
+			And I click "Save and close" button
+			And Delay 5
 		* Specify an arbitrary structure at Location address (Partner)
-			И я ввожу значение поля UniqueID для адреса партнера String
-		* Checking for created
-			Тогда таблица "List" содержит строки:
+			And I enter a Unique ID String field type value for the partner addresses
+		* Check for created
+			And "List" table contains lines
 				| 'Description'                     |
 				| 'Location address (Partner)'    |
 				| 'Billing address (Company)'    |
 				| 'Registered address  (Company)' |
 
 
-Сценарий: _010011 adding gps to an Contact info type
+Scenario: _010011 adding gps to an Contact info type
 	* Opening the form for filling in Contact info type
-		И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes'
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 	* Adding Contact info gps coordinates for partners in Ukraine
-		И я нажимаю на кнопку с именем 'FormCreate'
-		Тогда открылось окно 'Contact info type (create)'
-		И я нажимаю кнопку выбора у поля "Value type"
-		Тогда открылось окно 'Edit data type'
-		И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		Then "Contact info type (create)" window is opened
+		And I click Select button of "Value type" field
+		Then "Edit data type" window is opened
+		And I go to line in "" table
 			| ''       |
 			| 'String' |
-		И в таблице "" я выбираю текущую строку:
-		И я нажимаю на кнопку 'OK'
-		И в поле 'Unique ID' я ввожу текст 'GPS'
-		И я изменяю флаг 'Show on form'
-		И я устанавливаю флаг с именем "ReadOnly"
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'GPS Ukraine'
-		И в поле 'TR' я ввожу текст 'GPS Ukraine TR'
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-		И в таблице "ExternalDataProcess" я активизирую поле "Plugins"
-		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "" table
+		And I click "OK" button
+		And I input "GPS" text in "Unique ID" field
+		And I change checkbox "Show on form"
+		And I set checkbox named "ReadOnly"
+		And I click Open button of the field named "Description_en"
+		And I input "GPS Ukraine" text in "ENG" field
+		And I input "GPS Ukraine TR" text in "TR" field
+		And I click "Ok" button
+		And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
+		And I activate "Plugins" field in "ExternalDataProcess" table
+		And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
+		And I go to line in "List" table
 			| 'Description'                 |
 			| 'ExternalCoordinates'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProcess" я выбираю текущую строку
-		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I select current line in "ExternalDataProcess" table
+		And I click choice button of "Country" attribute in "ExternalDataProcess" table
+		And I go to line in "List" table
 			| Description |
 			| Ukraine   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProcess" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "ExternalDataProcess" table
 	* Adding address structure by gps for Ukraine
-		И в таблице "ExternalDataProcess" я нажимаю на кнопку 'Set settings'
-		Тогда открылось окно 'Coordinates'
-		И я указываю адрес который будет перезаполнятся при выборе gps
-			И я нажимаю кнопку выбора у поля "Structured address"
-			Тогда открылось окно 'Contact info types'
-			И в таблице "List" я перехожу к строке:
+		And in the table "ExternalDataProcess" I click "Set settings" button
+		Then "Coordinates" window is opened
+		* Specify the address that will be refilled when selecting gps
+			And I click Select button of "Structured address" field
+			Then "Contact info types" window is opened
+			And I go to line in "List" table
 				| Description       |
 				| Google Addreses |
-			И в таблице "List" я выбираю текущую строку
-		И в таблице "Levels" я нажимаю на кнопку 'Get all levels'
-		И в поле 'Lat' я ввожу текст '46,477400'
-		И в поле 'Lng' я ввожу текст '30,732872'
-		И в таблице "AllLevels" я перехожу к строке:
+			And I select current line in "List" table
+		And in the table "Levels" I click "Get all levels" button
+		And I input "46,477400" text in "Lat" field
+		And I input "30,732872" text in "Lng" field
+		And I go to line in "AllLevels" table
 			| Level     |
 			| political |
-		И в таблице "AllLevels" я перехожу к строке:
+		And I go to line in "AllLevels" table
 			| Level   |
 			| country |
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я перехожу к строке:
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And I go to line in "AllLevels" table
 			| Level    |
 			| locality |
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я перехожу к строке:
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And I go to line in "AllLevels" table
 			| Level |
 			| route |
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveDown'
-		И в таблице "AllLevels" я перехожу к строке:
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveDown"
+		And I go to line in "AllLevels" table
 			| Level     |
 			| political |
-		И в таблице 'AllLevels' я удаляю строку
-		И в таблице 'AllLevels' я удаляю строку
-		И в таблице 'AllLevels' я удаляю строку
-		И в таблице 'AllLevels' я удаляю строку
-		И я нажимаю на кнопку 'Ok'
-		Тогда открылось окно 'Coordinates'
-		И я нажимаю на кнопку 'Ok'
+		And I delete a line in "AllLevels" table
+		And I delete a line in "AllLevels" table
+		And I delete a line in "AllLevels" table
+		And I delete a line in "AllLevels" table
+		And I click "Ok" button
+		Then "Coordinates" window is opened
+		And I click "Ok" button
 	* Filling in settings for gps coordinates
-		И я перехожу к закладке "Related values"
-		И в таблице "RelatedValues" я нажимаю на кнопку с именем 'RelatedValuesAdd'
-		И в таблице "RelatedValues" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info types'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Related values" tab
+		And in the table "RelatedValues" I click the button named "RelatedValuesAdd"
+		And I click choice button of "Contact info type" attribute in "RelatedValues" table
+		Then "Contact info types" window is opened
+		And I go to line in "List" table
 			| 'Description'                  |
 			| 'Location address (Partner)' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 1
-		И в таблице "RelatedValues" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И я ввожу значение поля UniqueID String
-	* Checking for created items
-		И таблица "List" содержит строки:
+		And I select current line in "List" table
+		And Delay 1
+		And I finish line editing in "RelatedValues" table
+		And I click "Save and close" button
+		And Delay 5
+		And I enter the UniqueID String field value type
+	* Check for created items
+		And "List" table contains lines
 		| 'Description'                     |
 		| 'GPS Ukraine'    |
 	* Adding Contact info gps coordinates for partners in Turkey
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Value type"
-		И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I click Select button of "Value type" field
+		And I go to line in "" table
 			| ''       |
 			| 'String' |
-		И в таблице "" я выбираю текущую строку:
-		И я нажимаю на кнопку 'OK'
-		И в поле 'Unique ID' я ввожу текст 'GPSTurkey'
-		И я изменяю флаг 'Show on form'
-		И я устанавливаю флаг с именем "ReadOnly"
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'GPS Turkey'
-		И в поле 'TR' я ввожу текст 'GPS Turkey TR'
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "ExternalDataProcess" я нажимаю на кнопку с именем 'ExternalDataProcessAdd'
-		И в таблице "ExternalDataProcess" я активизирую поле "Plugins"
-		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Plugins"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "" table
+		And I click "OK" button
+		And I input "GPSTurkey" text in "Unique ID" field
+		And I change checkbox "Show on form"
+		And I set checkbox named "ReadOnly"
+		And I click Open button of the field named "Description_en"
+		And I input "GPS Turkey" text in "ENG" field
+		And I input "GPS Turkey TR" text in "TR" field
+		And I click "Ok" button
+		And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
+		And I activate "Plugins" field in "ExternalDataProcess" table
+		And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
+		And I go to line in "List" table
 			| 'Description'                 |
 			| 'ExternalCoordinates'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProcess" я выбираю текущую строку
-		И в таблице "ExternalDataProcess" я нажимаю кнопку выбора у реквизита "Country"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I select current line in "ExternalDataProcess" table
+		And I click choice button of "Country" attribute in "ExternalDataProcess" table
+		And I go to line in "List" table
 			| Description |
 			| Turkey   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ExternalDataProcess" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "ExternalDataProcess" table
 	* Adding gps address structure for Turkey
-		И в таблице "ExternalDataProcess" я нажимаю на кнопку 'Set settings'
-		И я указываю адрес который будет перезаполнятся при выборе gps
-			И я нажимаю кнопку выбора у поля "Structured address"
-			Тогда открылось окно 'Contact info types'
-			И в таблице "List" я перехожу к строке:
+		And in the table "ExternalDataProcess" I click "Set settings" button
+		* Specify the address that will be refilled when selecting gps
+			And I click Select button of "Structured address" field
+			Then "Contact info types" window is opened
+			And I go to line in "List" table
 				| Description       |
 				| Google Addreses |
-			И в таблице "List" я выбираю текущую строку
-		И в таблице "Levels" я нажимаю на кнопку 'Get all levels'
-		И в поле 'Lat' я ввожу текст '40,983577'
-		И в поле 'Lng' я ввожу текст '29,078498'
-		И в таблице "AllLevels" я перехожу к строке:
+			And I select current line in "List" table
+		And in the table "Levels" I click "Get all levels" button
+		And I input "40,983577" text in "Lat" field
+		And I input "29,078498" text in "Lng" field
+		And I go to line in "AllLevels" table
 		| Level   | Value  |
 		| country | Turkey |
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я перехожу к строке:
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And I go to line in "AllLevels" table
 			| Level                       |
 			| administrative_area_level_1 |
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я перехожу к строке:
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And I go to line in "AllLevels" table
 			| Level                       |
 			| administrative_area_level_2 |
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я перехожу к строке:
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And I go to line in "AllLevels" table
 			| Level | Value            |
 			| route | Hafız İmam Sokak |
-		И в таблице "AllLevels" я нажимаю на кнопку с именем 'AllLevelsMoveUp'
-		И в таблице "AllLevels" я перехожу к строке:
+		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+		And I go to line in "AllLevels" table
 			| Level                       |
 			| administrative_area_level_4 |
-		И в таблице 'AllLevels' я удаляю строку
-		И в таблице 'AllLevels' я удаляю строку
-		И в таблице 'AllLevels' я удаляю строку
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Ok'
+		And I delete a line in "AllLevels" table
+		And I delete a line in "AllLevels" table
+		And I delete a line in "AllLevels" table
+		And I click "Ok" button
+		And I click "Ok" button
 	* Filling in gps coordinates settings
-		И я перехожу к закладке "Related values"
-		И в таблице "RelatedValues" я нажимаю на кнопку с именем 'RelatedValuesAdd'
-		И в таблице "RelatedValues" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info types'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Related values" tab
+		And in the table "RelatedValues" I click the button named "RelatedValuesAdd"
+		And I click choice button of "Contact info type" attribute in "RelatedValues" table
+		Then "Contact info types" window is opened
+		And I go to line in "List" table
 			| 'Description'                  |
 			| 'Location address (Partner)' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 1
-		И в таблице "RelatedValues" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И я ввожу значение поля UniqueID для GPS Turkey String
-	* Checking for created items
-		И таблица "List" содержит строки:
+		And I select current line in "List" table
+		And Delay 1
+		And I finish line editing in "RelatedValues" table
+		And I click "Save and close" button
+		And Delay 5
+		And I enter a Unique ID String field type value for the GPS Turkey String
+	* Check for created items
+		And "List" table contains lines
 		| 'Description'                     |
 		| 'GPS Turkey'    |
 
 
-Сценарий: _010012 settings for displaying contact information in Stores, Partners, Company
+Scenario: _010012 settings for displaying contact information in Stores, Partners, Company
 	* Complete settings to display contact information for Partners
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.IDInfoSets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.IDInfoSets"
+		And I go to line in "List" table
 		| 'Predefined data item name' |
 		| 'Catalog_Partners'          |
-		И в таблице "List" я выбираю текущую строку
-		Тогда элемент формы с именем "PredefinedDataName" стал равен 'Catalog_Partners'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Partners'
-		И в поле 'TR' я ввожу текст 'Partners TR'
-		И я нажимаю на кнопку 'OK'
-		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "PredefinedDataName" became equal to "Catalog_Partners"
+		And I click Open button of the field named "Description_en"
+		And I input "Partners" text in "ENG" field
+		And I input "Partners TR" text in "TR" field
+		And I click "OK" button
+		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
+		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
+		And I go to line in "List" table
 			| Description                  |
 			| Location address (Partner) |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "IDInfoTypes" я завершаю редактирование строки
-		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "IDInfoTypes" table
+		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
+		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
+		And I go to line in "List" table
 			| Description                  |
 			| Google Addreses |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "IDInfoTypes" я завершаю редактирование строки
-		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "IDInfoTypes" table
+		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
+		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
+		And I go to line in "List" table
 			| Description   |
 			| GPS Ukraine |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "IDInfoTypes" я завершаю редактирование строки
-		И в таблице "IDInfoTypes" я нажимаю на кнопку 'Set condition'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в таблице "SettingsFilter" я нажимаю на кнопку с именем 'SettingsFilterAddFilterItem'
-		И в таблице "SettingsFilter" я нажимаю кнопку выбора у реквизита "Field"
-		И в таблице "Source" я разворачиваю строку:
+		And I select current line in "List" table
+		And I finish line editing in "IDInfoTypes" table
+		And in the table "IDInfoTypes" I click "Set condition" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+		And I click choice button of "Field" attribute in "SettingsFilter" table
+		And I expand a line in "Source" table
 			| Available fields |
 			| Reference        |
-		И в таблице "Source" я перехожу к строке:
+		And I go to line in "Source" table
 			| Available fields |
 			| Business region  |
-		И в таблице "Source" я выбираю текущую строку
-		И в таблице "SettingsFilter" я активизирую поле "Value"
-		И в таблице "SettingsFilter" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "Source" table
+		And I activate "Value" field in "SettingsFilter" table
+		And I click choice button of "Value" attribute in "SettingsFilter" table
+		And I go to line in "List" table
 			| Description |
 			| Region Ukraine     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "SettingsFilter" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "IDInfoTypes" я нажимаю на кнопку 'Add'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info types'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "SettingsFilter" table
+		And I click "Ok" button
+		And in the table "IDInfoTypes" I click "Add" button
+		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
+		Then "Contact info types" window is opened
+		And I go to line in "List" table
 			| Description  |
 			| GPS Turkey |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "IDInfoTypes" я завершаю редактирование строки
-		И в таблице "IDInfoTypes" я нажимаю на кнопку 'Set condition'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в таблице "SettingsFilter" я нажимаю на кнопку с именем 'SettingsFilterAddFilterItem'
-		И в таблице "SettingsFilter" я нажимаю кнопку выбора у реквизита "Field"
-		Тогда открылось окно 'Select field'
-		И в таблице "Source" я разворачиваю строку:
+		And I select current line in "List" table
+		And I finish line editing in "IDInfoTypes" table
+		And in the table "IDInfoTypes" I click "Set condition" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+		And I click choice button of "Field" attribute in "SettingsFilter" table
+		Then "Select field" window is opened
+		And I expand a line in "Source" table
 			| Available fields |
 			| Reference        |
-		И в таблице "Source" я перехожу к строке:
+		And I go to line in "Source" table
 			| Available fields |
 			| Business region  |
-		И в таблице "Source" я выбираю текущую строку
-		И в таблице "SettingsFilter" я активизирую поле "Value"
-		И в таблице "SettingsFilter" я нажимаю кнопку выбора у реквизита "Value"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "Source" table
+		And I activate "Value" field in "SettingsFilter" table
+		And I click choice button of "Value" attribute in "SettingsFilter" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| Description |
 			| Region Turkey      |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "SettingsFilter" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "IDInfoTypes" я нажимаю на кнопку 'Add'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "SettingsFilter" table
+		And I click "Ok" button
+		And in the table "IDInfoTypes" I click "Add" button
+		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
+		And I go to line in "List" table
 			| Description     |
 			| Partner phone |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "IDInfoTypes" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Partners (Contact info sets) *' в течение 20 секунд
+		And I select current line in "List" table
+		And I finish line editing in "IDInfoTypes" table
+		And I click "Save and close" button
+		And I wait "Partners (Contact info sets) *" window closing in 20 seconds
 	* Fill in the settings for displaying Company contact information
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Predefined data item name' |
 			| 'Catalog_Companies'          |
-		И в таблице "List" я выбираю текущую строку
-		Тогда элемент формы с именем "PredefinedDataName" стал равен 'Catalog_Companies'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Company'
-		И в поле 'TR' я ввожу текст 'Company TR'
-		И я нажимаю на кнопку 'OK'
-		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info types'
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "IDInfoTypes" я завершаю редактирование строки
-		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info types'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "PredefinedDataName" became equal to "Catalog_Companies"
+		And I click Open button of the field named "Description_en"
+		And I input "Company" text in "ENG" field
+		And I input "Company TR" text in "TR" field
+		And I click "OK" button
+		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
+		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
+		Then "Contact info types" window is opened
+		And I select current line in "List" table
+		And I finish line editing in "IDInfoTypes" table
+		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
+		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
+		Then "Contact info types" window is opened
+		And I go to line in "List" table
 			| 'Description'                  |
 			| 'Billing address (Company)' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "IDInfoTypes" я завершаю редактирование строки
-		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info types'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "IDInfoTypes" table
+		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
+		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
+		Then "Contact info types" window is opened
+		And I go to line in "List" table
 			| 'Description'                     |
 			| 'Registered address  (Company)' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "IDInfoTypes" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I select current line in "List" table
+		And I finish line editing in "IDInfoTypes" table
+		And I click "Save and close" button
+		And Delay 5
 	* Fill in the settings for displaying Store contact information
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Predefined data item name' |
 			| 'Catalog_Stores'          |
-		И в таблице "List" я выбираю текущую строку
-		Тогда элемент формы с именем "PredefinedDataName" стал равен 'Catalog_Stores'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Stores'
-		И в поле 'TR' я ввожу текст 'Stores TR'
-		И я нажимаю на кнопку 'OK'
-		И в таблице "IDInfoTypes" я нажимаю на кнопку с именем 'IDInfoTypesAdd'
-		И в таблице "IDInfoTypes" я нажимаю кнопку выбора у реквизита "Contact info type"
-		Тогда открылось окно 'Contact info types'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "PredefinedDataName" became equal to "Catalog_Stores"
+		And I click Open button of the field named "Description_en"
+		And I input "Stores" text in "ENG" field
+		And I input "Stores TR" text in "TR" field
+		And I click "OK" button
+		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
+		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
+		Then "Contact info types" window is opened
+		And I go to line in "List" table
 			| 'Description'                  |
 			| 'Location address (Partner)' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "IDInfoTypes" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'en descriptions is empty (Contact info sets) *' в течение 20 секунд
+		And I select current line in "List" table
+		And I finish line editing in "IDInfoTypes" table
+		And I click "Save and close" button
+		And I wait "en descriptions is empty (Contact info sets) *" window closing in 20 seconds
 		
 
-Сценарий: _010013 filling phones for partners
+Scenario: _010013 filling phones for partners
 	* Opening a partner catalog form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Filling a phone for partner Ferron BP
-		И я нажимаю на кнопку с именем "FormList"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormList"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Contact information"
-		И я нажимаю на кнопку открытия поля "Partner phone"
-		И в поле 'Phone' я ввожу текст '+305500077043'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I move to "Contact information" tab
+		And I click Open button of "Partner phone" field
+		And I input "+305500077043" text in "Phone" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Filling a phone for partner Kalipso
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Contact information"
-		И я нажимаю на кнопку открытия поля "Partner phone"
-		И в поле 'Phone' я ввожу текст '+305300040042'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I move to "Contact information" tab
+		And I click Open button of "Partner phone" field
+		And I input "+305300040042" text in "Phone" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Filling a phone for partner Lomaniti
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Lomaniti' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Contact information"
-		И я нажимаю на кнопку открытия поля "Partner phone"
-		И в поле 'Phone' я ввожу текст '+30560105055'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I move to "Contact information" tab
+		And I click Open button of "Partner phone" field
+		And I input "+30560105055" text in "Phone" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Filling a phone for partner Alians
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Alians' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Contact information"
-		И я нажимаю на кнопку открытия поля "Partner phone"
-		И в поле 'Phone' я ввожу текст '+30920107011'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I move to "Contact information" tab
+		And I click Open button of "Partner phone" field
+		And I input "+30920107011" text in "Phone" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Filling a phone for partner Seven Brand
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Seven Brand' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Contact information"
-		И я нажимаю на кнопку открытия поля "Partner phone"
-		И в поле 'Phone' я ввожу текст '+30420209012'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I move to "Contact information" tab
+		And I click Open button of "Partner phone" field
+		And I input "+30420209012" text in "Phone" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Filling a phone for partner MIO
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'MIO' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Contact information"
-		И я нажимаю на кнопку открытия поля "Partner phone"
-		И в поле 'Phone' я ввожу текст '+30330309077'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I move to "Contact information" tab
+		And I click Open button of "Partner phone" field
+		And I input "+30330309077" text in "Phone" field
+		And I click "Ok" button
+		And I click "Save and close" button
 
 
 
-Сценарий: _010014 partner address filling
+Scenario: _010014 partner address filling
 	* Opening a partner catalog form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Filling address partner Kalipso
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Contact information"
-	* Checking the display of contact information
-		И     элемент формы с именем "_Adr_1" присутствует на форме
-		И     элемент формы с именем "_Adr_10" присутствует на форме
-		И     элемент формы с именем "_GPS" присутствует на форме
-		И     элемент формы с именем "_Phone_2" присутствует на форме
+		And I select current line in "List" table
+		And I move to "Contact information" tab
+	* Check the display of contact information
+		And the field named "_Adr_1" exists on the form
+		And the field named "_Adr_10" exists on the form
+		And the field named "_GPS" exists on the form
+		And the field named "_Phone_2" exists on the form
 	* Address Filling
-		И в поле 'Location address (Partner)' я ввожу текст 'Odessa, Bunina, 2, №32'
-	* Checking address display
-		И элемент формы с именем "_Adr_1" стал равен 'Odessa, Bunina, 2, №32'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I input "Odessa, Bunina, 2, №32" text in "Location address (Partner)" field
+	* Check address display
+		Then the form attribute named "_Adr_1" became equal to "Odessa, Bunina, 2, №32"
+		And I click "Save and close" button
+		And Delay 5
 	
-Сценарий: _010015 address structure input
+Scenario: _010015 address structure input
 	* Opening a company catalog form
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Companies"
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
 	* Filling in address structure for companies
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Contact information"
-		И я нажимаю на кнопку открытия поля "Billing address (Company)"
-		И в таблице "CountryTable" я перехожу к строке:
+		And I select current line in "List" table
+		And I move to "Contact information" tab
+		And I click Open button of "Billing address (Company)" field
+		And I go to line in "CountryTable" table
 		| Country |
 		| Ukraine |
-		И в таблице "CountryTable" я выбираю текущую строку
-		И в поле 'InputLevel_1' я ввожу текст 'Country'
-		И я нажимаю на кнопку с именем 'ButtonAdd_2'
-		И в поле 'InputLevel_2' я ввожу текст 'Region'
-		И я нажимаю на кнопку с именем 'ButtonAdd_3'
-		И в поле 'InputLevel_3' я ввожу текст 'City'
-		И я нажимаю на кнопку с именем 'ButtonAdd_4'
-		И в поле 'InputLevel_4' я ввожу текст 'Street'
-		И в поле 'InputValue_1' я ввожу текст 'Ukraine'
-		И в поле 'InputValue_2' я ввожу текст 'Odesska oblast'
-		И в поле 'InputValue_3' я ввожу текст 'Odessa'
-		И в поле 'InputValue_4' я ввожу текст 'Kanatna'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-	* Checking to save the address structure for Billing address (Company)
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "CountryTable" table
+		And I input "Country" text in "InputLevel_1" field
+		And I click the button named "ButtonAdd_2"
+		And I input "Region" text in "InputLevel_2" field
+		And I click the button named "ButtonAdd_3"
+		And I input "City" text in "InputLevel_3" field
+		And I click the button named "ButtonAdd_4"
+		And I input "Street" text in "InputLevel_4" field
+		And I input "Ukraine" text in "InputValue_1" field
+		And I input "Odesska oblast" text in "InputValue_2" field
+		And I input "Odessa" text in "InputValue_3" field
+		And I input "Kanatna" text in "InputValue_4" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+	* Check to save the address structure for Billing address (Company)
+		And I go to line in "List" table
 		| Description     |
 		| Company Kalipso |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Contact information"
-		И я нажимаю на кнопку открытия поля "Billing address (Company)"
-		И в таблице "CountryTable" я перехожу к строке:
+		And I select current line in "List" table
+		And I move to "Contact information" tab
+		And I click Open button of "Billing address (Company)" field
+		And I go to line in "CountryTable" table
 		| Country |
 		| Ukraine |
-		И в таблице "CountryTable" я выбираю текущую строку
-		И из выпадающего списка "InputLevel_1" я выбираю по строке 'С'
-		И я нажимаю на кнопку с именем 'ButtonAdd_2'
-		И я нажимаю на кнопку с именем 'ButtonAdd_3'
-		И я нажимаю на кнопку с именем 'ButtonAdd_4'
-		И в поле 'InputValue_4' я ввожу текст 'Bunina'
-		И     элемент формы с именем "InputLevel_1" стал равен 'Country'
-		И     элемент формы с именем "InputValue_1" стал равен 'Ukraine'
-		И     элемент формы с именем "InputLevel_2" стал равен 'Region'
-		И     элемент формы с именем "InputValue_2" стал равен 'Odesska oblast'
-		И     элемент формы с именем "InputLevel_3" стал равен 'City'
-		И     элемент формы с именем "InputValue_3" стал равен 'Odessa'
-		И     элемент формы с именем "InputLevel_4" стал равен 'Street'
-		И     элемент формы с именем "InputValue_4" стал равен 'Bunina'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "CountryTable" table
+		And I select from "InputLevel_1" drop-down list by "C" string
+		And I click the button named "ButtonAdd_2"
+		And I click the button named "ButtonAdd_3"
+		And I click the button named "ButtonAdd_4"
+		And I input "Bunina" text in "InputValue_4" field
+		Then the form attribute named "InputLevel_1" became equal to "Country"
+		Then the form attribute named "InputValue_1" became equal to "Ukraine"
+		Then the form attribute named "InputLevel_2" became equal to "Region"
+		Then the form attribute named "InputValue_2" became equal to "Odesska oblast"
+		Then the form attribute named "InputLevel_3" became equal to "City"
+		Then the form attribute named "InputValue_3" became equal to "Odessa"
+		Then the form attribute named "InputLevel_4" became equal to "Street"
+		Then the form attribute named "InputValue_4" became equal to "Bunina"
+		And I click "Ok" button
+		And I click "Save and close" button
 
 
-Сценарий: _010016 gps coordinates on the map for clients from different countries and filling in the address from Google map
+Scenario: _010016 gps coordinates on the map for clients from different countries and filling in the address from Google map
 	* Opening the catalog Partners
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Filling in gps coordinates for Kalipso client by searching for the address on the map (Ukraine)
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Contact information"
-		И я нажимаю на кнопку открытия поля "GPS Ukraine"
-		И Пауза 5
-		И я нажимаю на кнопку 'Update address by GPS'
-		И Пауза 10
-		И я нажимаю на кнопку 'Ok'
-		И Пауза 10
-	* Checking gps coordinates saved
-		И     элемент формы с именем "_GPS" стал равен '46.48082,30.748159'
-		И поле с именем "_Adr_10" заполнено
-		И я нажимаю на кнопку 'Save and close'
-		И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I move to "Contact information" tab
+		And I click Open button of "GPS Ukraine" field
+		And Delay 5
+		And I click "Update address by GPS" button
+		And Delay 10
+		And I click "Ok" button
+		And Delay 10
+	* Check gps coordinates saved
+		Then the form attribute named "_GPS" became equal to "46.48082,30.748159"
+		And the field named "_Adr_10" is filled
+		And I click "Save and close" button
+		And I close all client application windows
 	* Filling in gps coordinates for Alians client by searching for the address on the map (Ukraine)
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Alians' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Contact information"
-		И в поле 'Location address (Partner)' я ввожу текст 'Park sok, 15, Yenikapi, Antalya, Turkey'
-		И я нажимаю на кнопку 'Save'
-		И я нажимаю на кнопку открытия поля "GPS Turkey"
-		И я нажимаю на кнопку 'Update address by GPS'
-		И Пауза 10
-		И я нажимаю на кнопку 'Ok'
-		И Пауза 10
-	* Checking gps coordinates saved
-		И поле с именем "_GPSTurkey" заполнено
-		И поле с именем "_Adr_10" заполнено
-		И я нажимаю на кнопку 'Save and close'
-		И Я закрыл все окна клиентского приложения
-	
-
-
-		
-
-
-
+		And I select current line in "List" table
+		And I move to "Contact information" tab
+		And I input "Park sok, 15, Yenikapi, Antalya, Turkey" text in "Location address (Partner)" field
+		And I click "Save" button
+		And I click Open button of "GPS Turkey" field
+		And I click "Update address by GPS" button
+		And Delay 10
+		And I click "Ok" button
+		And Delay 10
+	* Check gps coordinates saved
+		And the field named "_GPSTurkey" is filled
+		And the field named "_Adr_10" is filled
+		And I click "Save and close" button
+		And I close all client application windows

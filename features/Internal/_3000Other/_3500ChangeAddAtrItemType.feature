@@ -1,450 +1,450 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: checking a bunch of additional details in the item type for the item key composition
+Feature: checking a bunch of additional details in the item type for the item key composition
 
-Как Разработчик
-Я хочу создать связку для передачи доп реквизитов из item type в состав item key
-Для присвоения их товарам
+As a Developer
+I want to create a link to transfer the extra details from item type to item key
+For appropriation of their items
 
-Контекст:
-    Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+    Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _350000 preparation for checking a bunch of additional details in item type and their display in the set for item key / price key
-    * Открытие набора доп реквизитов для item key
-        И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-        И в таблице "List" я перехожу к строке:
+Scenario: _350000 preparation for check a bunch of additional details in item type and their display in the set for item key / price key
+    * Open Add attribute and property sets for item key
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
             | 'Predefined data item name' |
             | 'Catalog_ItemKeys'          |
-        И в таблице "List" я выбираю текущую строку
-        И я нажимаю на кнопку открытия поля "TR"
-        И в поле 'ENG' я ввожу текст 'Item key'
-        И я нажимаю на кнопку 'Ok'
-        И я нажимаю на кнопку 'Save'
-     * Создание item type
-        И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-        И Пауза 2
-        И я нажимаю на кнопку с именем 'FormCreate'
-        И Пауза 2
-        И я нажимаю на кнопку открытия поля "TR"
-        И в поле с именем 'Description_en' я ввожу текст 'Socks'
-        И в поле с именем 'Description_tr' я ввожу текст 'Socks TR'
-        И я нажимаю на кнопку 'Ok'
-        И В открытой форме я нажимаю на кнопку "Save"
-    * Создание доп реквизитов для Socks
-        * Создание доп реквизита Color Socks TR
-            И я открываю навигационную ссылку "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
-            И я нажимаю на кнопку с именем 'FormCreate'
-            И я нажимаю на кнопку открытия поля "TR"
-            И в поле 'TR' я ввожу текст 'Color Socks TR'
-            И в поле 'ENG' я ввожу текст 'Color Socks'
-            И я нажимаю на кнопку 'Ok'
-        * Установка обязательного заполнения доп реквизита Color Socks TR
-            И я нажимаю на кнопку 'Set "Required" at all sets'
-            Тогда открылось окно 'Choice value'
-            И из выпадающего списка "InputFld" я выбираю точное значение 'Yes'
-            И я нажимаю на кнопку 'OK'
-            И я нажимаю на кнопку 'Save and close'
-            И Пауза 2
-        * Создание доп реквизита Brand Socks TR
-            И я открываю навигационную ссылку "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
-            И я нажимаю на кнопку с именем 'FormCreate'
-            И я нажимаю на кнопку открытия поля "TR"
-            И в поле 'TR' я ввожу текст 'Brand Socks TR'
-            И в поле 'ENG' я ввожу текст 'Brand Socks'
-            И я нажимаю на кнопку 'Ok'
-            И я нажимаю на кнопку 'Save and close'
-            И я закрыл все окна клиентского приложения
-         * Создание доп реквизита Article Socks TR
-            И я открываю навигационную ссылку "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
-            И я нажимаю на кнопку с именем 'FormCreate'
-            И я нажимаю на кнопку открытия поля "TR"
-            И в поле 'TR' я ввожу текст 'Article Socks TR'
-            И в поле 'ENG' я ввожу текст 'Article Socks'
-            И я нажимаю на кнопку 'Ok'
-            И я нажимаю на кнопку 'Save and close'
-            И я закрыл все окна клиентского приложения
-    * Наименование AddAttributeAndProperty sets для Price key
-        И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-        И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+        And I click Open button of "TR" field
+        And I input "Item key" text in "ENG" field
+        And I click "Ok" button
+        And I click "Save" button
+    * Create item type
+        Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+        And Delay 2
+        And I click the button named "FormCreate"
+        And Delay 2
+        And I click Open button of "TR" field
+        And I input "Socks" text in the field named "Description_en"
+        And I input "Socks TR" text in the field named "Description_tr"
+        And I click "Ok" button
+        And I click "Save" button
+    * Create Add attribute for Socks
+        * Create Add attribute Color Socks TR
+            Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
+            And I click the button named "FormCreate"
+            And I click Open button of "TR" field
+            And I input "Color Socks TR" text in "TR" field
+            And I input "Color Socks" text in "ENG" field
+            And I click "Ok" button
+        * Setting the required filling additional attribute Color Socks TR
+            And I click "Set \"Required\" at all sets" button
+            Then "Choice value" window is opened
+            And I select "Yes" exact value from "InputFld" drop-down list
+            And I click "OK" button
+            And I click "Save and close" button
+            And Delay 2
+        * Create Add attribute Brand Socks TR
+            Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
+            And I click the button named "FormCreate"
+            And I click Open button of "TR" field
+            And I input "Brand Socks TR" text in "TR" field
+            And I input "Brand Socks" text in "ENG" field
+            And I click "Ok" button
+            And I click "Save and close" button
+            And I close all client application windows
+        * Create Add attribute Article Socks TR
+            Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
+            And I click the button named "FormCreate"
+            And I click Open button of "TR" field
+            And I input "Article Socks TR" text in "TR" field
+            And I input "Article Socks" text in "ENG" field
+            And I click "Ok" button
+            And I click "Save and close" button
+            And I close all client application windows
+    * Filling in sescription AddAttributeAndProperty sets for Price key
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
         | 'Predefined data item name' |
         | 'Catalog_PriceKeys'          |
-        И в таблице "List" я выбираю текущую строку
-        И я нажимаю на кнопку открытия поля "TR"
-        И в поле 'ENG' я ввожу текст 'Price Keys'
-        И я нажимаю на кнопку 'Ok'
-        И я нажимаю на кнопку 'Save'
-    И я закрыл все окна клиентского приложения
+        And I select current line in "List" table
+        And I click Open button of "TR" field
+        And I input "Price Keys" text in "ENG" field
+        And I click "Ok" button
+        And I click "Save" button
+    And I close all client application windows
 
 
 
-Сценарий: _350001 check the connection between adding additional details to item type and displaying them in the set for item key
-    * Открытие item type Socks
-        И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-        И в таблице "List" я перехожу к строке:
+Scenario: _350001 check the connection between adding additional details to item type and displaying them in the set for item key
+    * Open item type Socks
+        Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+        And I go to line in "List" table
             | 'Description' |
             | 'Socks TR'    |
-        И в таблице "List" я выбираю текущую строку
-    * Открытие Additional attribute sets для item key
-        И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-        И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+    * Open Additional attribute sets for item key
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
             | 'Predefined data item name' |
             | 'Catalog_ItemKeys'          |
-        И в таблице "List" я выбираю текущую строку
-    * Проверка связки
-        * Добавление доп реквизитов в item type
-            Когда В панели открытых я выбираю 'Item types'
-            И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-            И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-            И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+    * Check the ligament
+        * Add additional attribute in item type
+            When in opened panel I select "Item types"
+            And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+            And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+            And I go to line in "List" table
                 | 'Description' |
                 | 'Brand Socks TR'    |
-            И в таблице "List" я выбираю текущую строку
-            И в таблице "AvailableAttributes" я устанавливаю флаг 'Required'
-            И в таблице "AvailableAttributes" я завершаю редактирование строки
-            И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-            И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-            И в таблице "List" я перехожу к строке:
+            And I select current line in "List" table
+            And I set "Required" checkbox in "AvailableAttributes" table
+            And I finish line editing in "AvailableAttributes" table
+            And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+            And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+            And I go to line in "List" table
                 | 'Description' |
                 | 'Color Socks TR'    |
-            И в таблице "List" я выбираю текущую строку
-            И в таблице "AvailableAttributes" я завершаю редактирование строки
-            И я нажимаю на кнопку 'Save'
-        * Проверка их добавления в Additional attribute sets по item key
-            И В панели открытых я выбираю 'Additional attribute sets'
-            И     таблица "AttributesTree" содержит строки:
+            And I select current line in "List" table
+            And I finish line editing in "AvailableAttributes" table
+            And I click "Save" button
+        * Check to add them to Additional attribute sets by item key
+            When in opened panel I select "Additional attribute sets"
+            And "AttributesTree" table contains lines
                 | 'Presentation'    |
                 | 'Socks TR'        |
                 | 'Brand Socks TR'       |
                 | 'Color Socks TR'        |
-        * Удаление доп реквизита из item type и проверка его удаления из Additional attribute sets по item key
-            Когда В панели открытых я выбираю 'Item types'
-            И в таблице "AvailableAttributes" я перехожу к строке:
+        * Removing an additional attribute from an item type and checking to delete it from Additional attribute sets by item key
+            When in opened panel I select "Item types"
+            And I go to line in "AvailableAttributes" table
                 | 'Attribute' |
                 | 'Brand Socks TR'  |
-            И в таблице 'AvailableAttributes' я удаляю строку
-            И я нажимаю на кнопку 'Save'
-            И В панели открытых я выбираю 'Additional attribute sets'
-            И     таблица "AttributesTree" не содержит строки:
+            And I delete a line in "AvailableAttributes" table
+            And I click "Save" button
+            When in opened panel I select "Additional attribute sets"
+            And "AttributesTree" table does not contain lines
                 | 'Presentation'    |
                 |  'Brand Socks TR' |
-        * Добавление доп реквизита обратно и проверка связки
-            Когда В панели открытых я выбираю 'Item types'
-            И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-            И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-            И в таблице "List" я перехожу к строке:
+        * Add additional attribute back and check ligament 
+            When in opened panel I select "Item types"
+            And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+            And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+            And I go to line in "List" table
                 | 'Description' |
                 | 'Brand Socks TR'    |
-            И в таблице "List" я выбираю текущую строку
-            И я нажимаю на кнопку 'Save'
-            И В панели открытых я выбираю 'Additional attribute sets'
-            И     таблица "AttributesTree" содержит строки:
+            And I select current line in "List" table
+            And I click "Save" button
+            When in opened panel I select "Additional attribute sets"
+            And "AttributesTree" table contains lines
                 | 'Presentation'    |
                 | 'Brand Socks TR'  |
-        И я закрыл все окна клиентского приложения
-        * Удаление доп реквизита из Additional attribute sets по item key и проверка связки с item type
-            * Удаление реквизита из AddAttributeAndPropertySets по item key
-                И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-                И в таблице "List" я перехожу к строке:
+        And I close all client application windows
+        * Deletion of additional attributes from Additional attribute sets by item key and check of linkage with item type
+            * Delete additional attribute AddAttributeAndPropertySets from item key
+                Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+                And I go to line in "List" table
                     | 'Predefined data item name' |
                     | 'Catalog_ItemKeys'          |
-                И в таблице "List" я выбираю текущую строку
-                И в таблице "AttributesTree" я перехожу к строке:
+                And I select current line in "List" table
+                And I go to line in "AttributesTree" table
                     | 'Presentation'    |
                     | 'Brand Socks TR'  |
-                И я нажимаю на кнопку 'DeleteItemType'
-            * Открытие item type и проверка удаления реквизита
-                И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-                И в таблице "List" я перехожу к строке:
+                And I click "DeleteItemType" button
+            * Open item type and check deletion
+                Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+                And I go to line in "List" table
                     | 'Description' |
                     | 'Socks TR'    |
-                И в таблице "List" я выбираю текущую строку
-                И     таблица "AvailableAttributes" не содержит строки:
+                And I select current line in "List" table
+                And "AvailableAttributes" table does not contain lines
                     | 'Attribute' |
                     | 'Brand Socks TR'  |
-            * Добавление реквизита обратно
-                И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-                И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-                И в таблице "List" я перехожу к строке:
+            * Add additional attribute back
+                And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+                And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+                And I go to line in "List" table
                     | 'Description' |
                     | 'Brand Socks TR'    |
-                И в таблице "List" я выбираю текущую строку
-                И я нажимаю на кнопку 'Save'
-        И я закрыл все окна клиентского приложения
+                And I select current line in "List" table
+                And I click "Save" button
+        And I close all client application windows
 
-Сценарий: _350002 checking the connection between the installation according to the additional attribute of the sign of influence on the price and Add atribute and property sets by Price key
-          * Открытие Additional attribute sets для price key
-            И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-            И в таблице "List" я перехожу к строке:
+Scenario: _350002 check the connection between the installation according to the additional attribute of the sign of influence on the price and Add atribute and property sets by Price key
+        * Open Additional attribute sets for price key
+            Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+            And I go to line in "List" table
             | 'Predefined data item name' |
             | 'Catalog_PriceKeys'          |
-            И в таблице "List" я выбираю текущую строку
-        * Открытие item type Socks
-            И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-            И в таблице "List" я перехожу к строке:
+            And I select current line in "List" table
+        * Open item type Socks
+            Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+            And I go to line in "List" table
             | 'Description' |
             | 'Socks TR'    |
-            И в таблице "List" я выбираю текущую строку
-            И     таблица "AvailableAttributes" содержит строки:
+            And I select current line in "List" table
+            And "AvailableAttributes" table contains lines
             | 'Attribute'      | 'Affect pricing' |
             | 'Color Socks TR' | 'No'             |
             | 'Brand Socks TR' | 'No'             |
-        * Добавление признака того, что Color Socks TR будет влиять на цену
-            Когда В панели открытых я выбираю 'Item types'
-            И в таблице "AvailableAttributes" я активизирую поле "Attribute"
-            И в таблице "AvailableAttributes" я перехожу к строке:
+        * Add a sign that Color Socks TR will affect the price
+            When in opened panel I select "Item types"
+            And I activate "Attribute" field in "AvailableAttributes" table
+            And I go to line in "AvailableAttributes" table
                 | 'Attribute'      |
                 | 'Color Socks TR' |
-            И в таблице "AvailableAttributes" я активизирую поле "Affect pricing"
-            И в таблице "AvailableAttributes" я устанавливаю флаг 'Affect pricing'
-            И в таблице "AvailableAttributes" я завершаю редактирование строки
-            И я нажимаю на кнопку 'Save'
-        * Проверка связки с Additional attribute sets по price key
-            И В панели открытых я выбираю 'Additional attribute sets'
-            И     таблица "AttributesTree" содержит строки:
+            And I activate "Affect pricing" field in "AvailableAttributes" table
+            And I set "Affect pricing" checkbox in "AvailableAttributes" table
+            And I finish line editing in "AvailableAttributes" table
+            And I click "Save" button
+        * Check the ligament with Additional attribute sets by price key
+            When in opened panel I select "Additional attribute sets"
+            And "AttributesTree" table contains lines
                 | 'Presentation'   |
                 | 'Socks TR'       |
                 | 'Color Socks TR' |
-        * Снятие признака того, что Color Socks TR будет влиять на цену
-            Когда В панели открытых я выбираю 'Item types'
-            И в таблице "AvailableAttributes" я активизирую поле "Attribute"
-            И в таблице "AvailableAttributes" я перехожу к строке:
+        * Remove the sign that Color Socks TR will affect the price
+            When in opened panel I select "Item types"
+            And I activate "Attribute" field in "AvailableAttributes" table
+            And I go to line in "AvailableAttributes" table
                 | 'Attribute'      |
                 | 'Color Socks TR' |
-            И в таблице "AvailableAttributes" я активизирую поле "Affect pricing"
-            И в таблице "AvailableAttributes" я снимаю флаг 'Affect pricing'
-            И в таблице "AvailableAttributes" я завершаю редактирование строки
-            И я нажимаю на кнопку 'Save'
-        * Проверка связки с Additional attribute sets по price key
-            И В панели открытых я выбираю 'Additional attribute sets'
-            И     таблица "AttributesTree" не содержит строки:
+            And I activate "Affect pricing" field in "AvailableAttributes" table
+            And I remove "Affect pricing" checkbox in "AvailableAttributes" table
+            And I finish line editing in "AvailableAttributes" table
+            And I click "Save" button
+        * Check the ligament with Additional attribute sets by price key
+            When in opened panel I select "Additional attribute sets"
+            And "AttributesTree" table does not contain lines
                 | 'Presentation'   |
                 | 'Color Socks TR' |
-        * Повторная установка галочки влияния на цену
-            Когда В панели открытых я выбираю 'Item types'
-            И в таблице "AvailableAttributes" я активизирую поле "Attribute"
-            И в таблице "AvailableAttributes" я перехожу к строке:
+        * Tick the price impact again
+            When in opened panel I select "Item types"
+            And I activate "Attribute" field in "AvailableAttributes" table
+            And I go to line in "AvailableAttributes" table
                 | 'Attribute'      |
                 | 'Color Socks TR' |
-            И в таблице "AvailableAttributes" я активизирую поле "Affect pricing"
-            И в таблице "AvailableAttributes" я устанавливаю флаг 'Affect pricing'
-            И в таблице "AvailableAttributes" я завершаю редактирование строки
-            И я нажимаю на кнопку 'Save'
-         * Проверка связки с Additional attribute sets по price key
-            И В панели открытых я выбираю 'Additional attribute sets'
-            И     таблица "AttributesTree" содержит строки:
+            And I activate "Affect pricing" field in "AvailableAttributes" table
+            And I set "Affect pricing" checkbox in "AvailableAttributes" table
+            And I finish line editing in "AvailableAttributes" table
+            And I click "Save" button
+        * Check the ligament Additional attribute sets by price key
+            When in opened panel I select "Additional attribute sets"
+            And "AttributesTree" table contains lines
                 | 'Presentation'   |
                 | 'Socks TR'       |
                 | 'Color Socks TR' |
-        И я закрыл все окна клиентского приложения
+        And I close all client application windows
 
-Сценарий: _350003 mark on removal of Item type and non-display in Add atribute and property sets by Price key and by item key
-    * Открытие списка выбора item type и пометка на удаление нужного элемента
-        И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-        И в таблице "List" я перехожу к строке:
+Scenario: _350003 mark on removal of Item type and non-display in Add atribute and property sets by Price key and by item key
+    * Open the list of item type selection and mark to delete the necessary item
+        Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+        And I go to line in "List" table
             | 'Description' |
             | 'Socks TR'    |
-        И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuSetDeletionMark'
-        Тогда открылось окно '1C:Enterprise'
-        И я нажимаю на кнопку 'Yes'
-    * Проверка, что помеченный на удаление Item type не отображается в Add atribute and property sets по Price key
-        И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-        И в таблице "List" я перехожу к строке:
+        And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+        Then "1C:Enterprise" window is opened
+        And I click "Yes" button
+    * Check that Item type marked for deletion is not displayed in Add atribute and property sets by Price key
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
             | 'Predefined data item name' |
             | 'Catalog_PriceKeys'          |
-        И в таблице "List" я выбираю текущую строку
-        И     таблица "AttributesTree" не содержит строки:
+        And I select current line in "List" table
+        And "AttributesTree" table does not contain lines
             | 'Presentation'   |
             | 'Socks TR'       |
             | 'Color Socks TR' |
-        И я закрыл все окна клиентского приложения
-     * Проверка, что помеченный на удаление Item type не отображается в Add atribute and property sets по item key
-        И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-        И в таблице "List" я перехожу к строке:
+        And I close all client application windows
+    * Check that the Item type marked for deletion is not displayed in Add atribute and property sets by item key
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
             | 'Predefined data item name' |
             | 'Catalog_ItemKeys'          |
-        И в таблице "List" я выбираю текущую строку
-        И     таблица "AttributesTree" не содержит строки:
+        And I select current line in "List" table
+        And "AttributesTree" table does not contain lines
             | 'Presentation'    |
             | 'Socks TR'        |
             | 'Brand Socks TR'       |
             | 'Color Socks TR'        |
-        И я закрыл все окна клиентского приложения
-    * Снятие пометки на удаление с Item type
-        И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-        И в таблице "List" я перехожу к строке:
+        And I close all client application windows
+    * Remove marking for removal from Item type
+        Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+        And I go to line in "List" table
             | 'Description' |
             | 'Socks TR'    |
-        И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuSetDeletionMark'
-        Тогда открылось окно '1C:Enterprise'
-        И я нажимаю на кнопку 'Yes'
-    * Проверка, что при снятии пометки на удаление Item type отображается в Add atribute and property sets по Price key
-        И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-        И в таблице "List" я перехожу к строке:
+        And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+        Then "1C:Enterprise" window is opened
+        And I click "Yes" button
+    * Check that when removing the mark for deleting Item type is displayed in Add atribute and property sets by Price key
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
             | 'Predefined data item name' |
             | 'Catalog_PriceKeys'          |
-        И в таблице "List" я выбираю текущую строку
-        И     таблица "AttributesTree" содержит строки:
+        And I select current line in "List" table
+        And "AttributesTree" table contains lines
             | 'Presentation'   |
             | 'Socks TR'       |
             | 'Color Socks TR' |
-        И я закрыл все окна клиентского приложения
-     * Проверка, что при снятии пометки на удаление Item type отображается в Add atribute and property sets по item key
-        И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-        И в таблице "List" я перехожу к строке:
+        And I close all client application windows
+    * Check that when you uncheck Item type for deletion, it is displayed in Add atribute and property sets by item key
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
             | 'Predefined data item name' |
             | 'Catalog_ItemKeys'          |
-        И в таблице "List" я выбираю текущую строку
-        И     таблица "AttributesTree" содержит строки:
+        And I select current line in "List" table
+        And "AttributesTree" table contains lines
             | 'Presentation'    |
             | 'Socks TR'        |
             | 'Brand Socks TR'       |
             | 'Color Socks TR'        |
-        И я закрыл все окна клиентского приложения
+        And I close all client application windows
 
-Сценарий: _350004 edit Item type and check changes in Add atribute and property sets by item key
-     * Открытие Additional attribute sets для item key
-        И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-        И в таблице "List" я перехожу к строке:
+Scenario: _350004 edit Item type and check changes in Add atribute and property sets by item key
+    * Open Additional attribute sets for item key
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
             | 'Predefined data item name' |
             | 'Catalog_ItemKeys'          |
-        И в таблице "List" я выбираю текущую строку
-     * Редактирование item type Socks
-        И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-        И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+    * Edit item type Socks
+        Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+        And I go to line in "List" table
             | 'Description' |
             | 'Socks TR'    |
-        И в таблице "List" я выбираю текущую строку
-        И в поле 'TR' я ввожу текст 'Warm Socks TR'
-        И я нажимаю на кнопку 'Save and close'
-    * Проверка замены item type в Add atribute and property sets по item key
-        И В панели открытых я выбираю 'Additional attribute sets'
-        И     таблица "AttributesTree" содержит строки:
+        And I select current line in "List" table
+        And I input "Warm Socks TR" text in "TR" field
+        And I click "Save and close" button
+    * Check item type replacement in Add atribute and property sets by item key
+        When in opened panel I select "Additional attribute sets"
+        And "AttributesTree" table contains lines
             | 'Presentation'    |
             | 'Warm Socks TR'   |
             | 'Brand Socks TR'  |
             | 'Color Socks TR'  |
-        И я закрыл все окна клиентского приложения
+        And I close all client application windows
 
 
-Сценарий: _350005 check the selection conditions when adding additional details on item
-    * Открытие Additional attribute sets для item
-        И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-        И в таблице "List" я перехожу к строке:
+Scenario: _350005 check the selection conditions when adding additional details on item
+    * Open Additional attribute sets for item
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
             | 'Predefined data item name' |
             | 'Catalog_Items'          |
-        И в таблице "List" я выбираю текущую строку
-    * Добавление доп реквизита только для item type Warm Socks TR
-        И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-        И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-        И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+    * Add additional details only for item type Warm Socks TR
+        And in the table "Attributes" I click the button named "AttributesAdd"
+        And I click choice button of "Attribute" attribute in "Attributes" table
+        And I go to line in "List" table
             | 'Description'      |
             | 'Article Socks TR' |
-        И в таблице "List" я выбираю текущую строку
-        И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
-        И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+        And I click choice button of "UI group" attribute in "Attributes" table
+        And I go to line in "List" table
             | 'Description'               |
             | 'Accounting information TR' |
-        И в таблице "List" я выбираю текущую строку
-        И в таблице "Attributes" я завершаю редактирование строки
-        И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesSetCondition'
-        Тогда открылось окно '1C:Enterprise'
-        И я нажимаю на кнопку 'Yes'
-        И в таблице "SettingsFilter" я нажимаю на кнопку с именем 'SettingsFilterAddFilterItem'
-        И в таблице "SettingsFilter" из выпадающего списка "Field" я выбираю точное значение 'Item type'
-        И я перехожу к следующему реквизиту
-        И в таблице "SettingsFilter" я нажимаю кнопку выбора у реквизита "Comparison type"
-        И в таблице "SettingsFilter" я активизирую поле "Value"
-        И в таблице "SettingsFilter" я нажимаю кнопку выбора у реквизита "Value"
-        И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+        And I finish line editing in "Attributes" table
+        And in the table "Attributes" I click the button named "AttributesSetCondition"
+        Then "1C:Enterprise" window is opened
+        And I click "Yes" button
+        And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+        And I select "Item type" exact value from "Field" drop-down list in "SettingsFilter" table
+        And I move to the next attribute
+        And I click choice button of "Comparison type" attribute in "SettingsFilter" table
+        And I activate "Value" field in "SettingsFilter" table
+        And I click choice button of "Value" attribute in "SettingsFilter" table
+        And I go to line in "List" table
             | 'Description'   |
             | 'Warm Socks TR' |
-        И в таблице "List" я выбираю текущую строку
-        И в таблице "SettingsFilter" я завершаю редактирование строки
-        И я нажимаю на кнопку 'Ok'
-        И я нажимаю на кнопку 'Save and close'
-        И Пауза 5
-    * Проверка прорисовки доп реквизитов для товара с видом номенклатуры Warm Socks TR
-        * Создание Item с видом номенклатуры Warm Socks TR
-            И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-            И я нажимаю на кнопку с именем 'FormCreate'
-            И в поле 'TR' я ввожу текст 'Socks'
-            И я нажимаю кнопку выбора у поля "Item type"
-            И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+        And I finish line editing in "SettingsFilter" table
+        And I click "Ok" button
+        And I click "Save and close" button
+        And Delay 5
+    * Check the drawing of additional details for the product with the item type of Warm Socks TR
+        * Create Item with item type Warm Socks TR
+            Given I open hyperlink "e1cib/list/Catalog.Items"
+            And I click the button named "FormCreate"
+            And I input "Socks" text in "TR" field
+            And I click Select button of "Item type" field
+            And I go to line in "List" table
                 | 'Description'   |
                 | 'Warm Socks TR' |
-            И в таблице "List" я выбираю текущую строку
-            И я нажимаю кнопку выбора у поля "Unit"
-            И в таблице "List" я перехожу к строке:
+            And I select current line in "List" table
+            And I click Select button of "Unit" field
+            And I go to line in "List" table
                 | 'Description' |
                 | 'adet'        |
-            И в таблице "List" я выбираю текущую строку
-            И я нажимаю на кнопку 'Save and close'
-            И Пауза 2
-        * Проверка отображения реквизита Article Socks TR
-            И в таблице "List" я перехожу к строке:
+            And I select current line in "List" table
+            And I click "Save and close" button
+            And Delay 2
+        * Check display Article Socks TR
+            And I go to line in "List" table
                 | 'Description' |
                 | 'Socks'       |
-            И в таблице "List" я выбираю текущую строку
-            И поле "Article Socks TR" существует
-            И Я закрываю текущее окно
-            И в таблице "List" я перехожу к строке:
+            And I select current line in "List" table
+            And field "Article Socks TR" exists
+            And I close current window
+            And I go to line in "List" table
                 | 'Description' |
                 | 'Dress TR'       |
-            И в таблице "List" я выбираю текущую строку
-            И поле "Article Socks TR" не существует
-            И я закрыл все окна клиентского приложения
+            And I select current line in "List" table
+            And field "Article Socks TR" does not exist
+            And I close all client application windows
 
 
-Сценарий: _350006 check error when doubling additional details on item
-    * Открытие Additional attribute sets для Items
-        И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-        И в таблице "List" я перехожу к строке:
+Scenario: _350006 check error when doubling additional attribute on item
+    * Open Additional attribute sets for Items
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
             | 'Predefined data item name' |
             | 'Catalog_Items'          |
-        И в таблице "List" я выбираю текущую строку
-    * Проверка в наличии доп реквизитов
-        И     таблица "Attributes"содержит строки:
+        And I select current line in "List" table
+    * Check additional attribute
+        And "Attributes" table contains lines
         | 'Attribute'                 |
         | 'Producer TR'               |
         | 'Article TR'                |
         | 'Brand TR'                  |
         | 'Country of consignment TR' |
         | 'Article Socks TR'          |
-    * Добавление доп реквизита Brand TR
-        И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-        И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-        И в таблице "List" я перехожу к строке:
+    * Add additional attribute Brand TR
+        And in the table "Attributes" I click the button named "AttributesAdd"
+        And I click choice button of "Attribute" attribute in "Attributes" table
+        And I go to line in "List" table
             | 'Description'      |
             | 'Brand TR' |
-        И в таблице "List" я выбираю текущую строку
-    * Проверка сообщения об ошибке сохранения
-        И я нажимаю на кнопку 'Save'
-        Тогда я жду, что в сообщениях пользователю будет подстрока "Duplicated attribute: Brand TR" в течение 10 секунд
-    И я закрыл все окна клиентского приложения
+        And I select current line in "List" table
+    * Check save error message
+        And I click "Save" button
+        Then I wait that in user messages the "Duplicated attribute: Brand TR" substring will appear in 10 seconds
+    And I close all client application windows
 
-Сценарий: _350007 check error when duplicating an additional attribute of an item key
-    * Открытие Item type для Socks
-        И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-        И в таблице "List" я перехожу к строке:
+Scenario: _350007 check error when duplicating an additional attribute of an item key
+    * Open Item type for Socks
+        Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+        And I go to line in "List" table
             | 'Description'   |
             | 'Warm Socks TR' |
-        И в таблице "List" я выбираю текущую строку
-    * Проверка в наличии доп реквизитов
-        И     таблица "AvailableAttributes" содержит строки:
+        And I select current line in "List" table
+    * Check additional attribute
+        And "AvailableAttributes" table contains lines
             | 'Attribute'      |
             | 'Color Socks TR' |
             | 'Brand Socks TR' |
-    * Добавление доп реквизита Brand Socks TR
-        И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-        И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-        И в таблице "List" я перехожу к строке:
+    * Add additional attribute Brand Socks TR
+        And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+        And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+        And I go to line in "List" table
             | 'Description'    |
             | 'Brand Socks TR' |
-        И в таблице "List" я выбираю текущую строку
-        И в таблице "AvailableAttributes" я завершаю редактирование строки
-    * Проверка сообщения об ошибке сохранения
-        И я нажимаю на кнопку 'Save'
-        Тогда я жду, что в сообщениях пользователю будет подстрока "Duplicated attribute: Brand Socks TR" в течение 10 секунд
-    И я закрыл все окна клиентского приложения
+        And I select current line in "List" table
+        And I finish line editing in "AvailableAttributes" table
+    * Check save error message
+        And I click "Save" button
+        Then I wait that in user messages the "Duplicated attribute: Brand Socks TR" substring will appear in 10 seconds
+    And I close all client application windows

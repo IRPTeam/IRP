@@ -1,16 +1,17 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: Saas data separation
+Feature: Saas data separation
 
-Как Разработчик
-Я хочу создать систему разделения данных по областям
-Для работы нескольких компаний в единой базе
+As a Developer
+I want to create a system for separating data by area
+For multiple companies to work in a single base
 
-Контекст:
-    Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+    Given I launch TestClient opening script or connect the existing one
 
-Сценарий: _9001001 check the Saas mode constant on and off
-    И Я устанавливаю в константу "SaasMode" значение "True"
-    И Я устанавливаю в константу "SaasMode" значение "False"
+Scenario: _9001001 check the Saas mode constant on and off
+    And I set "True" value to the constant "SaasMode"
+    And I set "False" value to the constant "SaasMode"
+
 

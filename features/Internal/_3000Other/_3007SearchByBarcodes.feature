@@ -1,106 +1,102 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: add items to documents by barcode
-
-Как разработчик
-Я хочу добавить функционал по добавлению товара в документы по штрих-коду
-Для работы с товаром
+Feature: add items to documents by barcode
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _300701 barcode check in Sales order + price and tax filling
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	Когда check the barcode search in the sales documents + price and tax filling in
+Scenario: _300701 barcode check in Sales order + price and tax filling
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	When check the barcode search in the sales documents + price and tax filling in
 
-Сценарий: _300702 barcode check in Sales invoice + price and tax filling
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-	Когда check the barcode search in the sales documents + price and tax filling in
+Scenario: _300702 barcode check in Sales invoice + price and tax filling
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	When check the barcode search in the sales documents + price and tax filling in
 
-Сценарий: _300703 barcode check in Sales return + price and tax filling
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
-	Когда check the barcode search on the return documents
+Scenario: _300703 barcode check in Sales return + price and tax filling
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	When check the barcode search on the return documents
 
-Сценарий: _300704 barcode check in Sales return order + price and tax filling
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
-	Когда check the barcode search on the return documents
+Scenario: _300704 barcode check in Sales return order + price and tax filling
+	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+	When check the barcode search on the return documents
 
-Сценарий: _300705 barcode check in Purchase order
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-	Когда check the barcode search in the purchase/purchase returns
+Scenario: _300705 barcode check in Purchase order
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	When check the barcode search in the purchase/purchase returns
 
-Сценарий: _300706 barcode check in Purchase invoice
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+Scenario: _300706 barcode check in Purchase invoice
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 		| Description |
 		| Partner Kalipso     |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку 'SearchByBarcode'
-	И в поле 'InputFld' я ввожу текст '2202283713'
-	И я нажимаю на кнопку 'OK'
-	И я проверяю добавление товара и заполнение цены в табличной части
-		И     таблица "ItemList" содержит строки:
+	And I select current line in "List" table
+	And I click "SearchByBarcode" button
+	And I input "2202283713" text in "InputFld" field
+	And I click "OK" button
+	* Check adding an items and filling in the price in the tabular part
+		And "ItemList" table contains lines
 			| 'Item'  |'Item key' |'Q'     | 'Unit' |
 			| 'Dress TR' |'S/Yellow TR'  |'1,000' | 'adet'  |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _300707 barcode check in Purchase return order
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
-	Когда check the barcode search in the purchase/purchase returns
+Scenario: _300707 barcode check in Purchase return order
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+	When check the barcode search in the purchase/purchase returns
 
-Сценарий: _300708 barcode check in Purchase return
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
-	Когда check the barcode search in the purchase/purchase returns
+Scenario: _300708 barcode check in Purchase return
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	When check the barcode search in the purchase/purchase returns
 
-Сценарий: _300709 barcode check in Goods reciept
-	И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
-	Когда check the barcode search in storage operations documents
+Scenario: _300709 barcode check in Goods reciept
+	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+	When check the barcode search in storage operations documents
 
-Сценарий: _300710 barcode check in Shipment confirmation
-	И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
-	Когда check the barcode search in storage operations documents
+Scenario: _300710 barcode check in Shipment confirmation
+	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+	When check the barcode search in storage operations documents
 
-Сценарий: _300711 barcode check in Inventory transfer
-	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
-	Когда check the barcode search in storage operations documents
+Scenario: _300711 barcode check in Inventory transfer
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	When check the barcode search in storage operations documents
 
-Сценарий: _300712 barcode check in Inventory transfer order
-	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
-	Когда check the barcode search in storage operations documents
+Scenario: _300712 barcode check in Inventory transfer order
+	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+	When check the barcode search in storage operations documents
 
-Сценарий: _300713 barcode check in Internal Supply Request
-	И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
-	Когда check the barcode search in storage operations documents
-
-
-Сценарий: _300716 barcode check in Bundling
-	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-	Когда check the barcode search in the product bundling documents
-
-Сценарий: _300717 barcode check in Unbundling
-	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-	Когда check the barcode search in the product bundling documents
-
-Сценарий: _300718 barcode check in StockAdjustmentAsSurplus
-	И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
-	Когда check the barcode search in storage operations documents
-
-Сценарий: _300719 barcode check in StockAdjustmentAsWriteOff
-	И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
-	Когда check the barcode search in storage operations documents
+Scenario: _300713 barcode check in Internal Supply Request
+	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+	When check the barcode search in storage operations documents
 
 
-Сценарий: _300720 barcode check in PhysicalInventory
-	И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
-	Когда check the barcode search in the PhysicalInventory documents
+Scenario: _300716 barcode check in Bundling
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	When check the barcode search in the product bundling documents
 
-Сценарий: _300721 barcode check in PhysicalCountByLocation
-	И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalCountByLocation'
-	Когда check the barcode search in storage operations documents
+Scenario: _300717 barcode check in Unbundling
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
+	When check the barcode search in the product bundling documents
+
+Scenario: _300718 barcode check in StockAdjustmentAsSurplus
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+	When check the barcode search in storage operations documents
+
+Scenario: _300719 barcode check in StockAdjustmentAsWriteOff
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+	When check the barcode search in storage operations documents
+
+
+Scenario: _300720 barcode check in PhysicalInventory
+	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+	When check the barcode search in the PhysicalInventory documents
+
+Scenario: _300721 barcode check in PhysicalCountByLocation
+	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+	When check the barcode search in storage operations documents

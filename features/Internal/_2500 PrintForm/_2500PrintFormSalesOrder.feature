@@ -1,137 +1,136 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: check print functionality (Sales order)
+Feature: check print functionality (Sales order)
 
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
 
-Сценарий: _25001 adding print plugin for sales order
+Scenario: _25001 adding print plugin for sales order
 	* Open form to add plugin
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		And I click the button named "FormCreate"
 	* Filling plugin data and adding it to the database
-		И я буду выбирать внешний файл "#workingDir#\DataProcessor\PrintFormSalesOrder.epf"
-		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to plugin for test' я ввожу текст ''
-		И в поле 'Name' я ввожу текст 'PrintFormSalesOrder'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Sales order'
-		И в поле 'TR' я ввожу текст 'Sales order tr'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I select external file "#workingDir#\DataProcessor\PrintFormSalesOrder.epf"
+		And I click the button named "FormAddExtDataProc"
+		And I input "" text in "Path to plugin for test" field
+		And I input "PrintFormSalesOrder" text in "Name" field
+		And I click Open button of the field named "Description_en"
+		And I input "Sales order" text in "ENG" field
+		And I input "Sales order tr" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
 	* Check the addition of plugin
-		Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "Sales order"
+		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "Sales order"
 
-Сценарий: _25002 creating a print command for Sales order
+Scenario: _25002 create a print command for Sales order
 	* Open Command register
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And I click the button named "FormCreate"
 	* Filling test command data for Sales order
 		* Create metadata for sales order and select it for the command
-			И я нажимаю кнопку выбора у поля "Configuration metadata"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Configuration metadata" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Documents'   |
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 				| 'Description' |
 				| 'SalesOrder'  |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Plugins"
-			Тогда открылось окно 'Plugins'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			Then "Plugins" window is opened
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Sales Order' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Set UI group for command
-			И я нажимаю кнопку выбора у поля "UI group"
+			And I click Select button of "UI group" field
 			* Create UI group Print
-				И я нажимаю на кнопку с именем 'FormCreate'
-				И в поле 'ENG' я ввожу текст 'Print'
-				И я нажимаю на кнопку открытия поля "ENG"
-				И в поле 'TR' я ввожу текст 'Print'
-				И в поле 'RU' я ввожу текст 'Печать'
-				И я нажимаю на кнопку 'Ok'
-				И я нажимаю на кнопку 'Save and close'
-			И я нажимаю на кнопку с именем 'FormChoose'
+				And I click the button named "FormCreate"
+				And I input "Print" text in "ENG" field
+				And I click Open button of "ENG" field
+				And I input "Print" text in "TR" field
+				And I input "Печать" text in "RU" field
+				And I click "Ok" button
+				And I click "Save and close" button
+			And I click the button named "FormChoose"
 	* Save command
-		И я нажимаю на кнопку 'Save and close'
+		And I click "Save and close" button
 	* Check command save
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.ExternalCommands'
-		Тогда таблица "List" содержит строки:
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And "List" table contains lines
 		| 'Configuration metadata' | 'Plugins' | 'UI group' |
 		| 'SalesOrder'             | 'Sales Order'        | 'Print'           |
 
-Сценарий: _25003 check Sales order printing
+Scenario: _25003 check Sales order printing
 	* Create Sales order
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'                   |
 			| 'Basic Partner terms, without VAT' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Shirt'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '36/Red'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
 	* Change document number and date
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '8 000'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '8 000'
-		И в поле 'Date' я ввожу текст '01.12.2019  0:00:01'
-		И я перехожу к закладке "Item list"
-		# Когда открылось окно 'Update item list info'
-		# И я нажимаю на кнопку 'Ок'
+		And I move to "Other" tab
+		And I input "8 000" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "8 000" text in "Number" field
+		And I input "01.12.2019  0:00:01" text in "Date" field
+		And I move to "Item list" tab
 	* Post document
-		И я нажимаю на кнопку 'Post and close'
-		И в таблице "List" я перехожу к строке:
+		And I click "Post and close" button
+		And I go to line in "List" table
 		| 'Number' |
 		| '8 000'  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Printing out of a document
-		И я нажимаю на кнопку 'Sales Order'
+		And I click "Sales Order" button
 	* Check printing form
-		И я жду открытия окна "Table" в течение 20 секунд
-		Дано Табличный документ "" равен макету "SalesOrderPrintForm" по шаблону
-		И Пауза 30
-	И Я закрыл все окна клиентского приложения
+		And I wait "Table" window opening in 20 seconds
+		Given "" spreadsheet document is equal to "SalesOrderPrintForm" by template
+		And Delay 30
+	And I close all client application windows
+
 
 
 

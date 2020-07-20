@@ -1,155 +1,155 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: label processing
+Feature: label processing
 
 
 
-Контекст: 
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 	
-Сценарий: create print layout
+Scenario: create print layout
 	* Opening the constructor
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.PrintTemplates'
+		Given I open hyperlink "e1cib/list/Catalog.PrintTemplates"
 	* Create Label 1
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку 'Get default'
-		И в поле 'ENG' я ввожу текст 'Label 1'
-		И в поле 'Labels in row' я ввожу текст '2'
-		И в поле 'Labels in column' я ввожу текст '4'
-		И в таблице "OrderOrderAvailableFields" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I click "Get default" button
+		And I input "Label 1" text in "ENG" field
+		And I input "2" text in "Labels in row" field
+		And I input "4" text in "Labels in column" field
+		And I go to line in "OrderOrderAvailableFields" table
 			| 'Available fields' |
 			| 'Barcode picture'  |
-		И в таблице "OrderOrderAvailableFields" я выбираю текущую строку
-		И в таблице "OrderOrderAvailableFields" я перехожу к строке:
+		And I select current line in "OrderOrderAvailableFields" table
+		And I go to line in "OrderOrderAvailableFields" table
 			| 'Available fields' |
 			| 'Barcode'          |
-		И в таблице "OrderOrderAvailableFields" я выбираю текущую строку
-		И в таблице "OrderOrderAvailableFields" я перехожу к строке:
+		And I select current line in "OrderOrderAvailableFields" table
+		And I go to line in "OrderOrderAvailableFields" table
 			| 'Available fields' |
 			| 'Item key'         |
-		И в табличном документе 'TemplateSpreadsheet' я перехожу к ячейке "R4C1"
-		И в таблице "OrderOrderAvailableFields" я выбираю текущую строку
-		И в табличном документе 'TemplateSpreadsheet' я перехожу к ячейке "R7C2"
-		И в таблице "OrderOrderAvailableFields" я перехожу к строке:
+		And in "TemplateSpreadsheet" spreadsheet document I move to "R4C1" cell
+		And I select current line in "OrderOrderAvailableFields" table
+		And in "TemplateSpreadsheet" spreadsheet document I move to "R7C2" cell
+		And I go to line in "OrderOrderAvailableFields" table
 			| 'Available fields' |
 			| 'Item picture'     |
-		И в таблице "OrderOrderAvailableFields" я выбираю текущую строку
-		И в табличном документе 'TemplateSpreadsheet' я перехожу к ячейке "R7C1"
-		И в таблице "OrderOrderAvailableFields" я перехожу к строке:
+		And I select current line in "OrderOrderAvailableFields" table
+		And in "TemplateSpreadsheet" spreadsheet document I move to "R7C1" cell
+		And I go to line in "OrderOrderAvailableFields" table
 			| 'Available fields' |
 			| 'Price'            |
-		И в таблице "OrderOrderAvailableFields" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "OrderOrderAvailableFields" table
+		And I click "Save and close" button
 	* Create Label 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку 'Get default'
-		И в поле 'ENG' я ввожу текст 'Label 2'
-		И в поле 'Labels in row' я ввожу текст '2'
-		И в поле 'Labels in column' я ввожу текст '4'
-		И в таблице "OrderOrderAvailableFields" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I click "Get default" button
+		And I input "Label 2" text in "ENG" field
+		And I input "2" text in "Labels in row" field
+		And I input "4" text in "Labels in column" field
+		And I go to line in "OrderOrderAvailableFields" table
 			| 'Available fields' |
 			| 'Barcode picture'  |
-		И в таблице "OrderOrderAvailableFields" я выбираю текущую строку
-		И в таблице "OrderOrderAvailableFields" я перехожу к строке:
+		And I select current line in "OrderOrderAvailableFields" table
+		And I go to line in "OrderOrderAvailableFields" table
 			| 'Available fields' |
 			| 'Barcode'          |
-		И в таблице "OrderOrderAvailableFields" я выбираю текущую строку
-		И в таблице "OrderOrderAvailableFields" я перехожу к строке:
+		And I select current line in "OrderOrderAvailableFields" table
+		And I go to line in "OrderOrderAvailableFields" table
 			| 'Available fields' |
 			| 'Item key'         |
-		И в табличном документе 'TemplateSpreadsheet' я перехожу к ячейке "R4C1"
-		И в таблице "OrderOrderAvailableFields" я выбираю текущую строку
-		И в табличном документе 'TemplateSpreadsheet' я перехожу к ячейке "R7C2"
-		И в таблице "OrderOrderAvailableFields" я перехожу к строке:
+		And in "TemplateSpreadsheet" spreadsheet document I move to "R4C1" cell
+		And I select current line in "OrderOrderAvailableFields" table
+		And in "TemplateSpreadsheet" spreadsheet document I move to "R7C2" cell
+		And I go to line in "OrderOrderAvailableFields" table
 			| 'Available fields' |
 			| 'Item picture'     |
-		И в таблице "OrderOrderAvailableFields" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "OrderOrderAvailableFields" table
+		And I click "Save and close" button
 
 
 
-Сценарий: adding items to label printing processing
+Scenario: adding items to label printing processing
 	* Open the processing form
-		И я открываю навигационную ссылку 'e1cib/app/DataProcessor.PrintLabels'
+		Given I open hyperlink "e1cib/app/DataProcessor.PrintLabels"
 	* Add items and selecting labels by lines
-		И из выпадающего списка с именем "BarcodeType" я выбираю точное значение 'Auto'
-		И я нажимаю кнопку выбора у поля с именем "PriceType"
-		И в таблице "List" я перехожу к строке:
+		And I select "Auto" exact value from the drop-down list named "BarcodeType"
+		And I click Choice button of the field named "PriceType"
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Basic Price Types' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'S/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Quantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я активизирую поле "Template"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Template"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Template" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Template" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Label 1'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Quantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я активизирую поле "Template"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Template"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Template" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Template" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Label 2'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Template' |
 		| 'Dress'    | 'Label 1'  |
 		| 'Trousers' | 'Label 2'  |
 	* Reselect the label for all lines in the processing header
-		И из выпадающего списка "Label template" я выбираю точное значение 'Label 1'
-		И     таблица "ItemList" содержит строки:
+		And I select "Label 1" exact value from "Label template" drop-down list
+		And "ItemList" table contains lines
 		| 'Item'     | 'Template' |
 		| 'Dress'    | 'Label 1'  |
 		| 'Trousers' | 'Label 1'  |
 	* Print line selection
-		И в таблице "ItemList" я перехожу к строке:
+		And I go to line in "ItemList" table
 			| 'Barcode'    | 'Barcode type' | 'Item'  | 'Item key' | 'Price'  | 'Price type'        | 'Print' | 'Quantity' | 'Template' | 'Unit' |
 			| '2202283713' | 'Auto'         | 'Dress' | 'S/Yellow' | '550,00' | 'Basic Price Types' | 'No'    | '2'        | 'Label 1'  | 'pcs'  |
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю на кнопку 'Check print for selected rows'
-		И     таблица "ItemList" содержит строки:
+		And I activate "Item key" field in "ItemList" table
+		And in the table "ItemList" I click "Check print for selected rows" button
+		And "ItemList" table contains lines
 			| 'Print' | 'Price type'        | 'Item'     | 'Quantity' | 'Price'  | 'Item key'  | 'Unit' | 'Barcode'    | 'Barcode type' | 'Template' |
 			| 'Yes'   | 'Basic Price Types' | 'Dress'    | '2'        | '550,00' | 'S/Yellow'  | 'pcs'  | '2202283713' | 'Auto'         | 'Label 1'  |
-		И в таблице "ItemList" я нажимаю на кнопку 'Uncheck print for selected rows'
-		И     таблица "ItemList" содержит строки:
+		And in the table "ItemList" I click "Uncheck print for selected rows" button
+		And "ItemList" table contains lines
 			| 'Print' | 'Price type'        | 'Item'     | 'Quantity' | 'Price'  | 'Item key'  | 'Unit' | 'Barcode'    | 'Barcode type' | 'Template' |
 			| 'No'   | 'Basic Price Types' | 'Dress'    | '2'        |  '550,00' | 'S/Yellow'  | 'pcs'  | '2202283713' | 'Auto'         | 'Label 1'  |
-		И в таблице "ItemList" я нажимаю на кнопку 'Check print for selected rows'
+		And in the table "ItemList" I click "Check print for selected rows" button
 	* Print output check
-		И я нажимаю на кнопку 'Print'
-		Тогда табличный документ "" равен:
+		And I click "Print" button
+		Then "" spreadsheet document is equal
 			| ''           | '' | '' | '' | '' | '' | '2202283713' |
 			| ''           | '' | '' | '' | '' | '' | ''           |
 			| ''           | '' | '' | '' | '' | '' | ''           |
@@ -167,3 +167,4 @@
 			| ''           | '' | '' | '' | '' | '' | ''           |
 			| ''           | '' | '' | '' | '' | '' | ''           |
 			| '550'        | '' | '' | '' | '' | '' | ''           |
+

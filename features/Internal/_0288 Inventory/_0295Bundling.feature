@@ -1,689 +1,689 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: Bundling
+Feature: Bundling
 
 As a sales manager
 I want to create Bundle
 For joint sale of products
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
-Сценарий: _029500 test data creation
+Scenario: _029500 test data creation
 	* Create store that use Goods receipt and doesn't use Shipment confirmation
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Stores'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Store 07'
-		И в поле с именем 'Description_tr' я ввожу текст 'Store 07 TR'
-		И я нажимаю на кнопку 'Ok'
-		И я устанавливаю флаг с именем 'UseGoodsReceipt'
-		И я снимаю флаг с именем 'UseShipmentConfirmation'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.Stores"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Store 07" text in the field named "Description_en"
+		And I input "Store 07 TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox named "UseGoodsReceipt"
+		And I remove checkbox named "UseShipmentConfirmation"
+		And I click the button named "FormWriteAndClose"
+		And Delay 2
 	* Create store that use Shipment confirmation and doesn't use Goods receipt
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Stores'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Store 08'
-		И в поле с именем 'Description_tr' я ввожу текст 'Store 08 TR'
-		И я нажимаю на кнопку 'Ok'
-		И я снимаю флаг с именем 'UseGoodsReceipt'
-		И я устанавливаю флаг с именем 'UseShipmentConfirmation'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 2
-		И Я закрыл все окна клиентского приложения
+		Given I open hyperlink "e1cib/list/Catalog.Stores"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Store 08" text in the field named "Description_en"
+		And I input "Store 08 TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I remove checkbox named "UseGoodsReceipt"
+		And I set checkbox named "UseShipmentConfirmation"
+		And I click the button named "FormWriteAndClose"
+		And Delay 2
+		And I close all client application windows
 
 
-Сценарий: _029501 create Bundling (Store doesn't use Shipment confirmation and Goods receipt)
-	И Я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario: _029501 create Bundling (Store doesn't use Shipment confirmation and Goods receipt)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	And I click the button named "FormCreate"
 	* Change number
-		И в поле 'Number' я ввожу текст '1'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '1'
-	И я нажимаю кнопку выбора у поля "Company"
-	И в таблице "List" я перехожу к строке:
+		And I input "1" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "1" text in "Number" field
+	And I click Select button of "Company" field
+	And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Item bundle"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Item bundle" field
+	And I go to line in "List" table
 		| 'Description'       |
 		| 'Bound Dress+Shirt' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля с именем "Unit"
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Store"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Choice button of the field named "Unit"
+	And I select current line in "List" table
+	And I click Select button of "Store" field
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Store 01'  |
-	И в таблице "List" я выбираю текущую строку
-	И в поле с именем 'Quantity' я ввожу текст '10,000'
-	И я перехожу к закладке "Item list"
-	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "ItemList" я активизирую поле "Item key"
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I input "10,000" text in the field named "Quantity"
+	And I move to "Item list" tab
+	And in the table "ItemList" I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I select current line in "List" table
+	And I activate "Item key" field in "ItemList" table
+	And I click choice button of "Item key" attribute in "ItemList" table
+	And I go to line in "List" table
 		| 'Item'  | 'Item key' |
 		| 'Dress' | 'XS/Blue'  |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-	И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1,000'
-	И в таблице "ItemList" я завершаю редактирование строки
-	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I activate field named "ItemListQuantity" in "ItemList" table
+	And I input "1,000" text in "Quantity" field of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And in the table "ItemList" I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Shirt'       |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "ItemList" я активизирую поле "Item key"
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-	И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1,000'
-	И в таблице "ItemList" я завершаю редактирование строки
-	И я нажимаю на кнопку 'Post and close'
-	И Пауза 5
+	And I select current line in "List" table
+	And I activate "Item key" field in "ItemList" table
+	And I click choice button of "Item key" attribute in "ItemList" table
+	And I select current line in "List" table
+	And I activate field named "ItemListQuantity" in "ItemList" table
+	And I input "1,000" text in "Quantity" field of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And I click "Post and close" button
+	And Delay 5
 
-Сценарий: _029502 check the automatic creation of the Bundle specification
-	И Я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
-	И в таблице "List" я перехожу к строке:
+Scenario: _029502 check the automatic creation of the Bundle specification
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.Specifications"
+	And I go to line in "List" table
 		| 'Description' | 'Type'   |
 		| 'Dress+Shirt' | 'Bundle' |
-	И в таблице "List" я выбираю текущую строку
-	И     элемент формы с именем "Type" стал равен 'Bundle'
-	И     элемент формы с именем "ItemBundle" стал равен 'Bound Dress+Shirt'
-	И     таблица "FormTable*" содержит строки:
+	And I select current line in "List" table
+	Then the form attribute named "Type" became equal to "Bundle"
+	Then the form attribute named "ItemBundle" became equal to "Bound Dress+Shirt"
+	And "FormTable*" table contains lines
 		| 'Size' | 'Color' | 'Quantity' |
 		| 'XS'   | 'Blue'  | '1*'    |
-	И Я закрываю текущее окно
+	And I close current window
 
-Сценарий: _029503 checking Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register StockBalance
+Scenario: _029503 check Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register StockBalance
 # In this case a Bandle is received by register and the goods from the Bandle are written off
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-	Тогда таблица "List" содержит строки:
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+	And "List" table contains lines
 	| 'Quantity' | 'Recorder'               | 'Store'    | 'Item key'                      |
 	| '10,000'   | 'Bundling 1*'            | 'Store 01' | 'Bound Dress+Shirt/Dress+Shirt' |
 	| '10,000'   | 'Bundling 1*'            | 'Store 01' | 'XS/Blue'                       |
 	| '10,000'   | 'Bundling 1*'            | 'Store 01' | '36/Red'                        |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029504 checking Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register StockReservation
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-	Тогда таблица "List" содержит строки:
+Scenario: _029504 check Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register StockReservation
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	And "List" table contains lines
 	| 'Quantity' | 'Recorder'               | 'Store'    | 'Item key'                      |
 	| '10,000'   | 'Bundling 1*'            | 'Store 01' | 'Bound Dress+Shirt/Dress+Shirt' |
 	| '10,000'   | 'Bundling 1*'            | 'Store 01' | 'XS/Blue'                       |
 	| '10,000'   | 'Bundling 1*'            | 'Store 01' | '36/Red'                        |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029505 checking the absence posting of Bundling (store doesn't use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
-	Тогда таблица "List" не содержит строки:
+Scenario: _029505 check the absence posting of Bundling (store doesn't use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
+	And "List" table does not contain lines
 		| 'Recorder'                 |
 		| 'Bundling 1*'              |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029506 checking the absence posting of Bundling (store doesn't use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
-	Тогда таблица "List" не содержит строки:
+Scenario: _029506 check the absence posting of Bundling (store doesn't use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
+	And "List" table does not contain lines
 		| 'Recorder'                 |
 		| 'Bundling 1*'              |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029507 create Bundling ( Store use Shipment confirmation and Goods receipt)
-	И Я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario: _029507 create Bundling ( Store use Shipment confirmation and Goods receipt)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	And I click the button named "FormCreate"
 	* Change number
-			И в поле 'Number' я ввожу текст '2'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '2'
-	И я нажимаю кнопку выбора у поля "Company"
-	И в таблице "List" я перехожу к строке:
+			And I input "2" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "2" text in "Number" field
+	And I click Select button of "Company" field
+	And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Item bundle"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Item bundle" field
+	And I go to line in "List" table
 		| 'Description'       |
 		| 'Bound Dress+Trousers' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля с именем "Unit"
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Store"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Choice button of the field named "Unit"
+	And I select current line in "List" table
+	And I click Select button of "Store" field
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Store 02'  |
-	И в таблице "List" я выбираю текущую строку
-	И в поле с именем 'Quantity' я ввожу текст '7,000'
-	И я перехожу к закладке "Item list"
-	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "ItemList" я активизирую поле "Item key"
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I input "7,000" text in the field named "Quantity"
+	And I move to "Item list" tab
+	And in the table "ItemList" I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I select current line in "List" table
+	And I activate "Item key" field in "ItemList" table
+	And I click choice button of "Item key" attribute in "ItemList" table
+	And I go to line in "List" table
 		| 'Item'  | 'Item key' |
 		| 'Dress' | 'XS/Blue'  |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-	И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-	И в таблице "ItemList" я завершаю редактирование строки
-	И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I activate field named "ItemListQuantity" in "ItemList" table
+	And I input "2,000" text in "Quantity" field of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And in the table "ItemList" I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Trousers'       |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "ItemList" я активизирую поле "Item key"
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I activate "Item key" field in "ItemList" table
+	And I click choice button of "Item key" attribute in "ItemList" table
+	And I go to line in "List" table
 		| 'Item key'  |
 		| '36/Yellow' |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-	И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-	И в таблице "ItemList" я завершаю редактирование строки
-	И я нажимаю на кнопку 'Post and close'
-	И Пауза 5
+	And I select current line in "List" table
+	And I activate field named "ItemListQuantity" in "ItemList" table
+	And I input "2,000" text in "Quantity" field of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And I click "Post and close" button
+	And Delay 5
 
-Сценарий: _029508 проверка автоматического создания дополнительной спецификации по созданному Bundle
-	И Я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
-	И в таблице "List" я перехожу к строке:
+Scenario: _029508 check the automatic creation of an additional specification for the created Bundle
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.Specifications"
+	And I go to line in "List" table
 		| 'Description' | 'Type'   |
 		| 'Dress+Trousers' | 'Bundle' |
-	И в таблице "List" я выбираю текущую строку
-	Тогда элемент формы с именем "Description_en" стал равен 'Dress+Trousers'
-	И     элемент формы с именем "Type" стал равен 'Bundle'
-	И     элемент формы с именем "ItemBundle" стал равен 'Bound Dress+Trousers'
-	И     таблица "FormTable*" содержит строки:
+	And I select current line in "List" table
+	Then the form attribute named "Description_en" became equal to "Dress+Trousers"
+	Then the form attribute named "Type" became equal to "Bundle"
+	Then the form attribute named "ItemBundle" became equal to "Bound Dress+Trousers"
+	And "FormTable*" table contains lines
 		| 'Size' | 'Color' | 'Quantity' |
 		| 'XS'   | 'Blue'  | '2*'    |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
 
-Сценарий: _029509 checking the absence posting of Bundling (store use Shipment confirmation and Goods receipt) by register StockBalance
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-	Тогда таблица "List" не содержит строки:
+Scenario: _029509 check the absence posting of Bundling (store use Shipment confirmation and Goods receipt) by register StockBalance
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+	And "List" table does not contain lines
 	| 'Quantity' | 'Recorder'                 | 'Store'    | Item key             |
 	| '7,000'    | 'Bundling 2*'              | 'Store 02' | Bound Dress+Trousers |
 	| '14,000'   | 'Bundling 2*'              | 'Store 02' | XS/Blue              |
 	| '14,000'   | 'Bundling 2*'              | 'Store 02' | 36/Yellow            |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029510 checking Bundling posting (store use Shipment confirmation and Goods receipt) by register StockReservation
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-	Тогда таблица "List" содержит строки:
+Scenario: _029510 check Bundling posting (store use Shipment confirmation and Goods receipt) by register StockReservation
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	And "List" table contains lines
 	| 'Quantity' | 'Recorder'        | 'Store'    | 'Item key'                      |
 	| '14,000'   | 'Bundling 2*'     | 'Store 02' | 'XS/Blue'                       |
 	| '14,000'   | 'Bundling 2*'     | 'Store 02' | '36/Yellow'                     |
-	Тогда таблица "List" не содержит строки:
+	And "List" table does not contain lines
 	| 'Quantity' | 'Recorder'                 | 'Store'    | 'Item key'             |
 	| '7,000'    | 'Bundling 2*'              | 'Store 02' | 'Bound Dress+Trousers' |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029511 checking Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
-	Тогда таблица "List" содержит строки:
+Scenario: _029511 check Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'              | 'Receipt basis'         | 'Store'    | 'Item key'                            |
 		| '7,000'    | 'Bundling 2*'           | 'Bundling 2*'           | 'Store 02' | 'Bound Dress+Trousers/Dress+Trousers' |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029512 checking Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
-	Тогда таблица "List" содержит строки:
+Scenario: _029512 check Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
+	And "List" table contains lines
 	| 'Quantity' | 'Recorder'                 | 'Shipment basis'        | 'Store'    | 'Item key'  |
 	| '14,000'   | 'Bundling 2*'              | 'Bundling 2*'           | 'Store 02' | 'XS/Blue'   |
 	| '14,000'   | 'Bundling 2*'              | 'Bundling 2*'           | 'Store 02' | '36/Yellow' |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029513 create Shipment confirmation and Goods receipt based on Bundling
-	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-	И в таблице "List" я перехожу к строке:
+Scenario: _029513 create Shipment confirmation and Goods receipt based on Bundling
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	And I go to line in "List" table
 		| 'Item bundle'          | 'Number' |
 		| 'Bound Dress+Trousers' | '2'      |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку с именем "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	И     элемент формы с именем "Company" стал равен 'Main Company'
-	И в поле 'Number' я ввожу текст '151'
-	Тогда открылось окно '1C:Enterprise'
-	И я нажимаю на кнопку 'Yes'
-	И в поле 'Number' я ввожу текст '151'
-	И я нажимаю на кнопку 'Post and close'
-	И Пауза 5
-	И я нажимаю на кнопку с именем "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
-	И     элемент формы с именем "Company" стал равен 'Main Company'
-	И в поле 'Number' я ввожу текст '151'
-	Тогда открылось окно '1C:Enterprise'
-	И я нажимаю на кнопку 'Yes'
-	И в поле 'Number' я ввожу текст '151'
-	И я нажимаю на кнопку 'Post and close'
-	И Пауза 5
-	И Я закрываю текущее окно
+	And I select current line in "List" table
+	And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+	Then the form attribute named "Company" became equal to "Main Company"
+	And I input "151" text in "Number" field
+	Then "1C:Enterprise" window is opened
+	And I click "Yes" button
+	And I input "151" text in "Number" field
+	And I click "Post and close" button
+	And Delay 5
+	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+	Then the form attribute named "Company" became equal to "Main Company"
+	And I input "151" text in "Number" field
+	Then "1C:Enterprise" window is opened
+	And I click "Yes" button
+	And I input "151" text in "Number" field
+	And I click "Post and close" button
+	And Delay 5
+	And I close current window
 
-Сценарий: _029514 checking Shipment confirmation and Goods receipt postings based on document Bundling
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _029514 check Shipment confirmation and Goods receipt movements based on document Bundling
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key'             |
 		| '7,000'    | 'Goods receipt 151*'         | 'Store 02' | 'Bound Dress+Trousers/Dress+Trousers' |
 		| '14,000'   | 'Shipment confirmation 151*' | 'Store 02' | 'XS/Blue'              |
 		| '14,000'   | 'Shipment confirmation 151*' | 'Store 02' | '36/Yellow'            |
-	И Я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-	Тогда таблица "List" содержит строки:
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                    | 'Store'    | 'Item key'                     |
 		| '7,000'    | 'Goods receipt 151*'          | 'Store 02' | 'Bound Dress+Trousers/Dress+Trousers' |
-	И Я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
-	Тогда таблица "List" содержит строки:
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                | 'Receipt basis'         | 'Store'    | 'Item key'| 
 		| '7,000'    | 'Goods receipt 151*'      | 'Bundling 2*'         | 'Store 02' | 'Bound Dress+Trousers/Dress+Trousers' |
-	И Я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
-	Тогда таблица "List" содержит строки:
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                   | 'Shipment basis'       | 'Store'    | 'Item key'  |
 		| '14,000'   | 'Shipment confirmation 151*' | 'Bundling 2*'          | 'Store 02' | 'XS/Blue'   |
 		| '14,000'   | 'Shipment confirmation 151*' | 'Bundling 2*'          | 'Store 02' | '36/Yellow' |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029515 checking automatic creation of ItemKey by bundles
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-	И в таблице "List" я перехожу к строке:
+Scenario: _029515 check automatic creation of ItemKey by bundles
+	Given I open hyperlink "e1cib/list/Catalog.Items"
+	And I go to line in "List" table
 		| Description       | Item type |
-		| Bound Dress+Shirt | Сlothes   |
-	И в таблице "List" я выбираю текущую строку
-	И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-	И в таблице "List" я перехожу к строке:
+		| Bound Dress+Shirt | Clothes   |
+	And I select current line in "List" table
+	And In this window I click command interface button "Item keys"
+	And I go to line in "List" table
 		| Item key                      |
 		| Bound Dress+Shirt/Dress+Shirt |
-	И Я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-	И в таблице "List" я перехожу к строке:
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.Items"
+	And I go to line in "List" table
 		| Description          | Item type |
-		| Bound Dress+Trousers | Сlothes   |
-	И в таблице "List" я выбираю текущую строку
-	И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-	И в таблице "List" я перехожу к строке:
+		| Bound Dress+Trousers | Clothes   |
+	And I select current line in "List" table
+	And In this window I click command interface button "Item keys"
+	And I go to line in "List" table
 		| Item key                            |
 		| Bound Dress+Trousers/Dress+Trousers |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029516 hecking duplicate specifications when creating the same bundle
+Scenario: _029516 hecking duplicate specifications when creating the same bundle
 	* Create Bundle
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Bound Dress+Shirt' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'  |
-		И в таблице "List" я выбираю текущую строку
-		И в поле с именем 'Quantity' я ввожу текст '2,000'
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "2,000" text in the field named "Quantity"
+		And I move to "Item list" tab
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'XS/Blue'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Shirt'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-		И Пауза 5
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
-		Тогда таблица "List" стала равной:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+		And Delay 5
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Catalog.Specifications"
+		And "List" table became equal
 			| 'Description'    | 'Type'   |
 			| 'A-8'            | 'Set'    |
 			| 'S-8'            | 'Set'    |
 			| 'Dress+Shirt'    | 'Bundle' |
 			| 'Dress+Trousers' | 'Bundle' |
 
-Сценарий: _029517 checking the creation of a specification when forming a bundle for the same item
+Scenario: _029517 check the creation of a specification when forming a bundle for the same item
 	* Create Bundle
-		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I click the button named "FormCreate"
 		* Change number
-			И в поле 'Number' я ввожу текст '4'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '4'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+			And I input "4" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "4" text in "Number" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| Description |
 			| Trousers    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I go to line in "List" table
 			| Description |
 			| pcs         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'  |
-		И в таблице "List" я выбираю текущую строку
-		И в поле с именем 'Quantity' я ввожу текст '10,000'
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "10,000" text in the field named "Quantity"
+		And I move to "Item list" tab
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Trousers    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Item     | Item key  |
 			| Trousers | 38/Yellow |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Trousers    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-		И Пауза 10
-	* Checking item key creation for bundle by Trousers
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+		And Delay 10
+	* Check item key creation for bundle by Trousers
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 			| Description    | Item type |
-			| Trousers       | Сlothes   |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И в таблице "List" я перехожу к строке:
+			| Trousers       | Clothes   |
+		And I select current line in "List" table
+		And In this window I click command interface button "Item keys"
+		And I go to line in "List" table
 			| Item key          |
 			| Trousers/Trousers |
-		И Я закрыл все окна клиентского приложения
-	* Checking an auto-generated specification on Set
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
-		И в таблице "List" я перехожу к строке:
+		And I close all client application windows
+	* Check an auto-generated specification on Set
+		Given I open hyperlink "e1cib/list/Catalog.Specifications"
+		And I go to line in "List" table
 			| 'Description' | 'Type'   |
 			| 'Trousers' | 'Set' |
-		И в таблице "List" я выбираю текущую строку
-		Тогда элемент формы с именем "Description_en" стал равен 'Trousers'
-		И     элемент формы с именем "Type" стал равен 'Set'
-		И     таблица "FormTable*" содержит строки:
+		And I select current line in "List" table
+		Then the form attribute named "Description_en" became equal to "Trousers"
+		Then the form attribute named "Type" became equal to "Set"
+		And "FormTable*" table contains lines
 			| 'Size' | 'Color'  | 'Quantity' |
 			| '36'   | 'Yellow' | '2,000'    |
 			| '38'   | 'Yellow' | '2,000'    |
-		И     элемент формы с именем "ItemField*" стал равен 'Сlothes'
-		И Я закрыл все окна клиентского приложения
-	* Checking postings
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-		Тогда таблица "List" содержит строки:
+		Then the form attribute named "ItemField*" became equal to "Clothes"
+		And I close all client application windows
+	* Check movements
+		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                    | 'Store'    | 'Item key'             |
 			| '10,000'   | 'Bundling 4*'                 | 'Store 01' | 'Trousers/Trousers'    |
 			| '20,000'   | 'Bundling 4*'                 | 'Store 01' | '36/Yellow'            |
 			| '20,000'   | 'Bundling 4*'                 | 'Store 01' | '38/Yellow'            |
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-		Тогда таблица "List" содержит строки:
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                    | 'Store'    | 'Item key'          |
 			| '10,000'   | 'Bundling 4*'                 | 'Store 01' | 'Trousers/Trousers' |
 			| '20,000'   | 'Bundling 4*'                 | 'Store 01' | '36/Yellow'         |
 			| '20,000'   | 'Bundling 4*'                 | 'Store 01' | '38/Yellow'         |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _029518 creating a bundle of 2 different properties + one repeating of the same item + 1 other item
+Scenario: _029518 creating a bundle of 2 different properties + one repeating of the same item + 1 other item
 	* Create bundle
-		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I click the button named "FormCreate"
 		* Change number
-			И в поле 'Number' я ввожу текст '5'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '5'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+			And I input "5" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "5" text in "Number" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| Description |
 			| Bound Dress+Shirt    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I go to line in "List" table
 			| Description |
 			| pcs         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'  |
-		И в таблице "List" я выбираю текущую строку
-		И в поле с именем 'Quantity' я ввожу текст '2,000'
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "2,000" text in the field named "Quantity"
+		And I move to "Item list" tab
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Item  | Item key  |
 			| Dress | XS/Blue |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Item  | Item key  |
 			| Dress | XS/Blue |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Item  | Item key  |
 			| Dress | L/Green |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Shirt    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Item  | Item key  |
 			| Shirt | 36/Red |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-		И Пауза 10
-	* Checking creation of an Item key on a bundle by Dress + Shirt
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+		And Delay 10
+	* Check creation of an Item key on a bundle by Dress + Shirt
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 			| Description         | Item type |
-			| Bound Dress+Shirt   | Сlothes   |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И таблица "List" содержит строки:
+			| Bound Dress+Shirt   | Clothes   |
+		And I select current line in "List" table
+		And In this window I click command interface button "Item keys"
+		And "List" table contains lines
 			| Item key                      |
 			| Bound Dress+Shirt/Dress+Shirt |
 			| Bound Dress+Shirt/Dress+Shirt |
-		И Я закрыл все окна клиентского приложения
-	* Checking an auto-generated specification on Bundle
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
-		И в таблице "List" я перехожу к последней строке
-		И в таблице "List" я выбираю текущую строку
-		Тогда элемент формы с именем "Description_en" стал равен 'Dress+Shirt'
-		И     элемент формы с именем "Type" стал равен 'Bundle'
-		И     таблица "FormTable*" содержит строки:
+		And I close all client application windows
+	* Check an auto-generated specification on Bundle
+		Given I open hyperlink "e1cib/list/Catalog.Specifications"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Description_en" became equal to "Dress+Shirt"
+		Then the form attribute named "Type" became equal to "Bundle"
+		And "FormTable*" table contains lines
 			| 'Size' | 'Color' | 'Quantity' |
 			| 'XS'   | 'Blue'  | '2,000'    |
 			| 'XS'   | 'Blue'  | '2,000'    |
 			| 'L'    | 'Green' | '2,000'    |
-		И Я закрыл все окна клиентского приложения
-	* Checking postings
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-		Тогда таблица "List" содержит строки:
+		And I close all client application windows
+	* Check movements
+		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+		And "List" table contains lines
 			| 'Quantity' | 'Recorder'              	| 'Store'    | 'Item key'             |
 			| '2,000'      | 'Bundling 5*'          | 'Store 01' | 'Bound Dress+Shirt/Dress+Shirt'     |
 			| '4,000'      | 'Bundling 5*'          | 'Store 01' | 'XS/Blue'                           |
 			| '4,000'      | 'Bundling 5*'          | 'Store 01' | 'XS/Blue'                           |
 			| '4,000'      | 'Bundling 5*'          | 'Store 01' | 'L/Green'                           |
 			| '4,000'      | 'Bundling 5*'          | 'Store 01' | '36/Red'                            |
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-		Тогда таблица "List" содержит строки:
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		And "List" table contains lines
 			| 'Quantity' | 'Recorder'              | 'Store'    | 'Item key'             |
 			| '2,000'      | 'Bundling 5*'         | 'Store 01' | 'Bound Dress+Shirt/Dress+Shirt'     |
 			| '8,000'      | 'Bundling 5*'         | 'Store 01' | 'XS/Blue'                           |
 			| '4,000'      | 'Bundling 5*'         | 'Store 01' | 'L/Green'                           |
 			| '4,000'      | 'Bundling 5*'         | 'Store 01' | '36/Red'                            |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _029519 create Bundling (Store use Goods receipt, doesn't use Shipment confirmation)
+Scenario: _029519 create Bundling (Store use Goods receipt, doesn't use Shipment confirmation)
 	* Opening form for creating Bundle
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I click the button named "FormCreate"
 	* Change number
-			И в поле 'Number' я ввожу текст '7'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '7'
+			And I input "7" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "7" text in "Number" field
 	* Filling in details
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Bound Dress+Trousers' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 07'  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in items table
-		И в поле с именем 'Quantity' я ввожу текст '7,000'
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I input "7,000" text in the field named "Quantity"
+		And I move to "Item list" tab
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'XS/Blue'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key'  |
 			| '36/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-	* Post document and check postings
-		И я нажимаю на кнопку 'Post'
-		И Пауза 5
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Post document and check movements
+		And I click "Post" button
+		And Delay 5
+		And I click "Registrations report" button
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Bundling 7*'                           | ''            | ''          | ''                                    | ''           | ''              | ''                                    | ''        |
 		| 'Document registrations records'        | ''            | ''          | ''                                    | ''           | ''              | ''                                    | ''        |
 		| 'Register  "Bundles content"'           | ''            | ''          | ''                                    | ''           | ''              | ''                                    | ''        |
@@ -708,71 +708,71 @@ For joint sale of products
 		| ''                                      | ''            | ''          | 'Quantity'                            | 'Store'      | 'Item key'      | ''                                    | ''        |
 		| ''                                      | 'Expense'     | '*'         | '14'                                  | 'Store 07'   | 'XS/Blue'       | ''                                    | ''        |
 		| ''                                      | 'Expense'     | '*'         | '14'                                  | 'Store 07'   | '36/Yellow'     | ''                                    | ''        |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _029520 create Bundling (Store use Shipment confirmation, doesn't use Goods receipt)
+Scenario: _029520 create Bundling (Store use Shipment confirmation, doesn't use Goods receipt)
 	* Opening form for creating Bundle
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I click the button named "FormCreate"
 	* Change number
-		И в поле 'Number' я ввожу текст '8'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '8'
+		And I input "8" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "8" text in "Number" field
 	* Filling in details
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Bound Dress+Trousers' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 08'  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in items table
-		И в поле с именем 'Quantity' я ввожу текст '7,000'
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I input "7,000" text in the field named "Quantity"
+		And I move to "Item list" tab
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'XS/Blue'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key'  |
 			| '36/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListQuantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-	* Post document and check postings
-		И я нажимаю на кнопку 'Post'
-		И Пауза 5
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Post document and check movements
+		And I click "Post" button
+		And Delay 5
+		And I click "Registrations report" button
+		Then "ResultTable" spreadsheet document is equal by template
 			| 'Bundling 8*'                           | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
 			| 'Document registrations records'        | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
 			| 'Register  "Bundles content"'           | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
@@ -798,4 +798,5 @@ For joint sale of products
 			| ''                                      | 'Record type' | 'Period'    | 'Resources'                           | 'Dimensions' | ''                                    | ''          | ''        |
 			| ''                                      | ''            | ''          | 'Quantity'                            | 'Store'      | 'Item key'                            | ''          | ''        |
 			| ''                                      | 'Receipt'     | '*'         | '7'                                   | 'Store 08'   | 'Bound Dress+Trousers/Dress+Trousers' | ''          | ''        |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
+

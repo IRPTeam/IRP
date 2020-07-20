@@ -1,1909 +1,1909 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: forms check
+Feature: forms check
 
 I want to check the form display and autofill documents
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _0154000 preparation
+Scenario: _0154000 preparation
 	* Create one more legal name for Ferron
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Company'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Second Company Ferron BP'
-		И я нажимаю кнопку выбора у поля "Country"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля "ENG"
-		И в поле 'TR' я ввожу текст 'Second Company Ferron BP TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And In this window I click command interface button "Company"
+		And I click the button named "FormCreate"
+		And I input "Second Company Ferron BP" text in "ENG" field
+		And I click Select button of "Country" field
+		And I select current line in "List" table
+		And I click Open button of "ENG" field
+		And I input "Second Company Ferron BP TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Create one more own company Second Company
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Companies'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Second Company'
-		И я нажимаю на кнопку открытия поля "ENG"
-		И в поле 'TR' я ввожу текст 'Second Company TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Country"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
+		And I click the button named "FormCreate"
+		And I input "Second Company" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Second Company TR" text in "TR" field
+		And I click "Ok" button
+		And I click Select button of "Country" field
+		And I go to line in "List" table
 			| Description |
 			| Ukraine      |
-		И в таблице "List" я выбираю текущую строку
-		И я устанавливаю флаг 'Our'
+		And I select current line in "List" table
+		And I set checkbox "Our"
 		* Filling in Currency info (Local currency and Reporting currency)
-			И я перехожу к закладке "Currencies"
+			And I move to "Currencies" tab
 			* Create and add Local currency
-				И в таблице "Currencies" я нажимаю на кнопку с именем 'CurrenciesAdd'
-				И в таблице "Currencies" я нажимаю кнопку выбора у реквизита "Movement type"
-				И я нажимаю на кнопку с именем 'FormCreate'
-				И в поле 'ENG' я ввожу текст 'Local currency UA'
-				И я нажимаю кнопку выбора у поля "Currency"
-				И в таблице "List" я перехожу к строке:
+				And in the table "Currencies" I click the button named "CurrenciesAdd"
+				And I click choice button of "Movement type" attribute in "Currencies" table
+				And I click the button named "FormCreate"
+				And I input "Local currency UA" text in "ENG" field
+				And I click Select button of "Currency" field
+				And I go to line in "List" table
 					| 'Code' |
 					| 'UAH'  |
-				И в таблице "List" я выбираю текущую строку
-				И я нажимаю кнопку выбора у поля "Source"
-				И в таблице "List" я перехожу к строке:
+				And I select current line in "List" table
+				And I click Select button of "Source" field
+				And I go to line in "List" table
 					| 'Description'  |
 					| 'Bank UA' |
-				И в таблице "List" я выбираю текущую строку
-				И из выпадающего списка "Type" я выбираю точное значение 'Legal'
-				И я нажимаю на кнопку 'Save and close'
-				И Пауза 5
-				И я нажимаю на кнопку с именем 'FormChoose'
-				И в таблице "Currencies" я завершаю редактирование строки
+				And I select current line in "List" table
+				And I select "Legal" exact value from "Type" drop-down list
+				And I click "Save and close" button
+				And Delay 5
+				And I click the button named "FormChoose"
+				And I finish line editing in "Currencies" table
 			* Create and add Reporting currency
-				И в таблице "Currencies" я нажимаю на кнопку с именем 'CurrenciesAdd'
-				И в таблице "Currencies" я нажимаю кнопку выбора у реквизита "Movement type"
-				И я нажимаю на кнопку с именем 'FormCreate'
-				И я нажимаю кнопку выбора у поля "Currency"
-				И в таблице "List" я перехожу к строке:
+				And in the table "Currencies" I click the button named "CurrenciesAdd"
+				And I click choice button of "Movement type" attribute in "Currencies" table
+				And I click the button named "FormCreate"
+				And I click Select button of "Currency" field
+				And I go to line in "List" table
 					| 'Code' |
 					| 'EUR'  |
-				И в таблице "List" я активизирую поле "Description"
-				И в таблице "List" я выбираю текущую строку
-				И я нажимаю кнопку выбора у поля "Source"
-				И в таблице "List" я перехожу к строке:
+				And I activate "Description" field in "List" table
+				And I select current line in "List" table
+				And I click Select button of "Source" field
+				And I go to line in "List" table
 					| 'Description'  |
 					| 'Bank UA' |
-				И в таблице "List" я выбираю текущую строку
-				И из выпадающего списка "Type" я выбираю точное значение 'Reporting'
-				И в поле 'ENG' я ввожу текст 'Reporting currency UA'
-				И я нажимаю на кнопку 'Save and close'
-				И Пауза 5
-				И я нажимаю на кнопку с именем 'FormChoose'
-				И в таблице "Currencies" я завершаю редактирование строки
-				И я нажимаю на кнопку 'Save and close'
+				And I select current line in "List" table
+				And I select "Reporting" exact value from "Type" drop-down list
+				And I input "Reporting currency UA" text in "ENG" field
+				And I click "Save and close" button
+				And Delay 5
+				And I click the button named "FormChoose"
+				And I finish line editing in "Currencies" table
+				And I click "Save and close" button
 
 
 
-Сценарий: _0154001 check that additional attributes are displayed on the form without re-opening (catalog Item key)
+Scenario: _0154001 check that additional attributes are displayed on the form without re-opening (catalog Item key)
 	* Create item type
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemTypes'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Test'
-		И я нажимаю на кнопку открытия поля "ENG"
-		И в поле 'TR' я ввожу текст 'Test TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I click the button named "FormCreate"
+		And I input "Test" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Test TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 10
 	* Create item
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Test'
-		И я нажимаю на кнопку открытия поля "ENG"
-		И в поле 'TR' я ввожу текст 'Test TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Item type"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I click the button named "FormCreate"
+		And I input "Test" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Test TR" text in "TR" field
+		And I click "Ok" button
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Unit" field
+		And I go to line in "List" table
 			| Description |
 			| pcs         |
-		И в таблице "List" я выбираю текущую строку
-	Then I go into the item key and check that additional properties are not displayed on it (not specified in the item type)
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		Тогда элемент формы с именем "Item" стал равен 'Test'
-		И     элемент формы с именем "ItemType" стал равен 'Test'
-		И     элемент формы с именем "InheritUnit" стал равен 'pcs'
-		И     элемент формы с именем "SpecificationMode" стал равен 'No'
+		And I select current line in "List" table
+	* Open item key and check that additional properties are not displayed on it (not specified in the item type)
+		And In this window I click command interface button "Item keys"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I click the button named "FormCreate"
+		Then the form attribute named "Item" became equal to "Test"
+		Then the form attribute named "ItemType" became equal to "Test"
+		Then the form attribute named "InheritUnit" became equal to "pcs"
+		Then the form attribute named "SpecificationMode" became equal to "No"
 	* Add a new attribute to the item type without re-open the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemTypes'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-		И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Test'
-		И я нажимаю на кнопку открытия поля "ENG"
-		И в поле 'TR' я ввожу текст 'Test TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Unique ID' я ввожу текст '_a154'
-		И я нажимаю на кнопку 'Save and close'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+		And I click the button named "FormCreate"
+		And I input "Test" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Test TR" text in "TR" field
+		And I click "Ok" button
+		And I input "_a154" text in "Unique ID" field
+		And I click "Save and close" button
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "AvailableAttributes" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form for item key
-		И Я нажимаю кнопку командного интерфейса 'Test (Item)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormChoose"
+		And I finish line editing in "AvailableAttributes" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form for item key
+		When I click command interface button "Test (Item)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий: _0154002 check that additional attributes are displayed on the form without re-opening (catalog Item)
-	Тогда я проверяю наличие элемента справочника "Items" со значением поля "Description_en" "Test"
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario: _0154002 check that additional attributes are displayed on the form without re-opening (catalog Item)
+	Then I check for the "Items" catalog element with the "Description_en" "Test"
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open Item form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И элемент формы "Test" отсутствует на форме
+		And I select current line in "List" table
+		And field "Test" is not present on the form
 	* Adding by selected Item additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name |
 			| Catalog_Items             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я активизирую поле "UI group"
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "UI group" field in "Attributes" table
+		And I click choice button of "UI group" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description      |
 			| Main information |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-		И Я нажимаю кнопку командного интерфейса 'Test (Item)'
-	* Checking that the additional Test attribute has been displayed on the form
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I click "Save and close" button
+		When I click command interface button "Test (Item)"
+	* Check that the additional Test attribute has been displayed on the form
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _0154003 check that additional attributes are displayed on the form without re-opening (catalog Item type)
-	Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_en" "Test"
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _0154003 check that additional attributes are displayed on the form without re-opening (catalog Item type)
+	Then I check for the "ItemTypes" catalog element with the "Description_en" "Test"
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open Item form type
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemTypes'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И элемент формы "Test" отсутствует на форме
+		And I select current line in "List" table
+		And field "Test" is not present on the form
 	* Adding by selected Item type additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Catalog_ItemTypes             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Item types'
-		И я нажимаю на кнопку 'Save and close'
-		И Я нажимаю кнопку командного интерфейса 'Item types'
-	* Checking that the additional Test attribute has been displayed on the form
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Item types" text in "ENG" field
+		And I click "Save and close" button
+		When I click command interface button "Item types"
+	* Check that the additional Test attribute has been displayed on the form
+		And field "Test" is present on the form
+	And I close all client application windows
 		
 
-Сценарий:  _0154004 check that additional attributes are displayed on the form without re-opening (catalog Partners)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _0154004 check that additional attributes are displayed on the form without re-opening (catalog Partners)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Create Partners
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'Test'
-		И я устанавливаю флаг 'Customer'
-		И я нажимаю на кнопку 'Save and close'
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I click the button named "FormCreate"
+		And I input "Test" text in "ENG" field
+		And I set checkbox "Customer"
+		And I click "Save and close" button
 	* Open Partners form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И элемент формы "Test" отсутствует на форме
+		And I select current line in "List" table
+		And field "Test" is not present on the form
 	* Adding by selected Partners additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Catalog_Partners              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I click choice button of "UI group" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description      |
 			| Main information |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Test (Partner)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Test (Partner)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _0154006 check that additional attributes are displayed on the form without re-opening (document Sales invoice)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _0154006 check that additional attributes are displayed on the form without re-opening (document Sales invoice)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Sales Invoice
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding by selected Sales invoice additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_SalesInvoice              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Sales invoice'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Sales invoice (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Sales invoice" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Sales invoice (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _01540060 check that additional attributes are displayed on the form without re-opening (document PurchaseInvoice)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _01540060 check that additional attributes are displayed on the form without re-opening (document PurchaseInvoice)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PurchaseInvoice
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_PurchaseInvoice              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Purchase Invoice'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Purchase invoice (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Purchase Invoice" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Purchase invoice (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _01540061 check that additional attributes are displayed on the form without re-opening (document SalesOrder)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _01540061 check that additional attributes are displayed on the form without re-opening (document SalesOrder)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create SalesOrder
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_SalesOrder              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Sales Order'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Sales order (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Sales Order" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Sales order (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _01540062 check that additional attributes are displayed on the form without re-opening (document Purchase Order)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _01540062 check that additional attributes are displayed on the form without re-opening (document Purchase Order)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PurchaseOrder
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_PurchaseOrder              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Purchase Order'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Purchase order (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Purchase Order" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Purchase order (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _01540063 check that additional attributes are displayed on the form without re-opening (Catalog_ExpenseAndRevenueTypes)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _01540063 check that additional attributes are displayed on the form without re-opening (Catalog_ExpenseAndRevenueTypes)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Catalog_ExpenseAndRevenueTypes
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExpenseAndRevenueTypes'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.ExpenseAndRevenueTypes"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_ExpenseAndRevenueTypes     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Expense and revenue types'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Expense and revenue types'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Expense and revenue types" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Expense and revenue types"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _01540063 check that additional attributes are displayed on the form without re-opening (Catalog_BusinessUnits)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _01540063 check that additional attributes are displayed on the form without re-opening (Catalog_BusinessUnits)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Catalog_BusinessUnits
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.BusinessUnits'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.BusinessUnits"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_BusinessUnits     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Business units'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Business units'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Business units" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Business units"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _01540064 check adding additional properties for Specifications (Catalog_Specifications)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _01540064 check adding additional properties for Specifications (Catalog_Specifications)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_Specifications     |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Properties"
-		И в таблице "Properties" я нажимаю на кнопку с именем 'PropertiesAdd'
-		И в таблице "Properties" я нажимаю кнопку выбора у реквизита "Property"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Properties" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Specifications'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
-		И в таблице "List" я выбираю текущую строку 
-		И я нажимаю на кнопку 'Add properties'
-		Тогда таблица "Properties" содержит строки:
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I input "Specifications" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		Given I open hyperlink "e1cib/list/Catalog.Specifications"
+		And I select current line in "List" table
+		And I click "Add properties" button
+		And "Properties" table contains lines
 		| 'Property' | 'Value' |
 		| 'Test'     | ''      |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий:  _01540064 check that additional attributes are displayed on the form without re-opening (Catalog_ChequeBonds)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _01540064 check that additional attributes are displayed on the form without re-opening (Catalog_ChequeBonds)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Catalog_ChequeBonds
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ChequeBonds'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.ChequeBonds"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_ChequeBonds     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Cheque Bonds'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Cheque bonds'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Cheque Bonds" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Cheque bonds"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _015400640 check that additional attributes are displayed on the form without re-opening (Catalog_Agreements)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400640 check that additional attributes are displayed on the form without re-opening (Catalog_Agreements)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Partner terms
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_Agreements     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Partner terms'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Partner terms'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Partner terms" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Partner terms"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
-Сценарий:  _015400641 check that additional attributes are displayed on the form without re-opening (Catalog_Cash/Bank accounts)
-Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400641 check that additional attributes are displayed on the form without re-opening (Catalog_Cash/Bank accounts)
+Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CashAccounts
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.CashAccounts'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_CashAccounts     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Cash/Bank accounts'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Cash/Bank accounts'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Cash/Bank accounts" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Cash/Bank accounts"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _015400642 check that additional attributes are displayed on the form without re-opening (Catalog_Companies)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400642 check that additional attributes are displayed on the form without re-opening (Catalog_Companies)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Companies
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Companies'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_Companies     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Companies'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Companies'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Companies" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Companies"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400643 check that additional attributes are displayed on the form without re-opening (Catalog_Company types)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400643 check that additional attributes are displayed on the form without re-opening (Catalog_Company types)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CompanyTypes
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.CompanyTypes'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.CompanyTypes"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_CompanyTypes     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Company types'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Company types'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Company types" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Company types"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _015400644 check that additional attributes are displayed on the form without re-opening (Catalog_Countries)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400644 check that additional attributes are displayed on the form without re-opening (Catalog_Countries)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Countries
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Countries'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.Countries"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_Countries     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Countries'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Countries'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Countries" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Countries"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
 
-Сценарий:  _015400645 check that additional attributes are displayed on the form without re-opening (Catalog_Currencies)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400645 check that additional attributes are displayed on the form without re-opening (Catalog_Currencies)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Currencies
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Currencies'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.Currencies"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_Currencies     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Currencies'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Currencies'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Currencies" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Currencies"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _015400646 check that additional attributes are displayed on the form without re-opening (Catalog_Price types)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400646 check that additional attributes are displayed on the form without re-opening (Catalog_Price types)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PriceTypes
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.PriceTypes'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.PriceTypes"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_PriceTypes     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Price types'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Price types'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Price types" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Price types"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400647 check that additional attributes are displayed on the form without re-opening (Catalog_Item serial/lot number)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400647 check that additional attributes are displayed on the form without re-opening (Catalog_Item serial/lot number)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create SerialLotNumbers
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.SerialLotNumbers'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_SerialLotNumbers     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Item serial/lot number'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Item serial/lot numbers'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Item serial/lot number" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Item serial/lot numbers"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
 
-Сценарий:  _015400648 check that additional attributes are displayed on the form without re-opening (Catalog_Stores)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400648 check that additional attributes are displayed on the form without re-opening (Catalog_Stores)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Stores
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Stores'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.Stores"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_Stores     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Stores'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Stores'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Stores" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Stores"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400649 check that additional attributes are displayed on the form without re-opening (Catalog_Taxes)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400649 check that additional attributes are displayed on the form without re-opening (Catalog_Taxes)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Tax types
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Taxes'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.Taxes"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_Taxes     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Tax types'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Tax types'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Tax types" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Tax types"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _015400650 check that additional attributes are displayed on the form without re-opening (Catalog_Units)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400650 check that additional attributes are displayed on the form without re-opening (Catalog_Units)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to createItem units
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Units'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.Units"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_Units     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Units'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Item units'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Units" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Item units"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
-Сценарий:  _015400651 check that additional attributes are displayed on the form without re-opening (Catalog_Users)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400651 check that additional attributes are displayed on the form without re-opening (Catalog_Users)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Users
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Users'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name          |
 			| Catalog_Users     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Users'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И В панели открытых я выбираю 'Users'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Users" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Users"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _015400652 check that additional attributes are displayed on the form without re-opening (document Bank payment)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400652 check that additional attributes are displayed on the form without re-opening (document Bank payment)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create BankPayment
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_BankPayment              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Bank payment'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Bank payment (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Bank payment" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Bank payment (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400653 check that additional attributes are displayed on the form without re-opening (document Bank receipt)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400653 check that additional attributes are displayed on the form without re-opening (document Bank receipt)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create BankReceipt
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_BankReceipt              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Bank receipt'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Bank receipt (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Bank receipt" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Bank receipt (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
-Сценарий:  _015400655 check that additional attributes are displayed on the form without re-opening (document Bundling)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400655 check that additional attributes are displayed on the form without re-opening (document Bundling)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Bundling
-		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_Bundling              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Bundling'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Bundling (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Bundling" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Bundling (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400656 check that additional attributes are displayed on the form without re-opening (document Cash expense)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400656 check that additional attributes are displayed on the form without re-opening (document Cash expense)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CashExpense
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashExpense'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_CashExpense              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Cash expense'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Cash expense (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Cash expense" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Cash expense (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400657 check that additional attributes are displayed on the form without re-opening (document Cash payment)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400657 check that additional attributes are displayed on the form without re-opening (document Cash payment)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CashPayment
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_CashPayment              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Cash payment'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Cash payment (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Cash payment" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Cash payment (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
-Сценарий:  _015400658 check that additional attributes are displayed on the form without re-opening (document Cash receipt)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400658 check that additional attributes are displayed on the form without re-opening (document Cash receipt)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CashReceipt
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_CashReceipt              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Cash receipt'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Cash receipt (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Cash receipt" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Cash receipt (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
 
-Сценарий:  _015400659 check that additional attributes are displayed on the form without re-opening (document Cash revenue)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400659 check that additional attributes are displayed on the form without re-opening (document Cash revenue)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CashRevenue
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashRevenue'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_CashRevenue              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Cash revenue'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Cash revenue (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Cash revenue" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Cash revenue (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400660 check that additional attributes are displayed on the form without re-opening (document Cash transfer order)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400660 check that additional attributes are displayed on the form without re-opening (document Cash transfer order)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CashTransferOrder
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_CashTransferOrder              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Cash transfer order'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Cash transfer order (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Cash transfer order" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Cash transfer order (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _015400661 check that additional attributes are displayed on the form without re-opening (document Cheque bond transaction)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400661 check that additional attributes are displayed on the form without re-opening (document Cheque bond transaction)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create ChequeBondTransaction
-		И я открываю навигационную ссылку 'e1cib/list/Document.ChequeBondTransaction'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_ChequeBondTransaction              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Cheque bond transaction'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Cheque bond transaction (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Cheque bond transaction" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Cheque bond transaction (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400662 check that additional attributes are displayed on the form without re-opening (document Goods receipt)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400662 check that additional attributes are displayed on the form without re-opening (document Goods receipt)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Goods receipt
-		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_GoodsReceipt              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Goods receipt'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Goods receipt (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Goods receipt" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Goods receipt (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
-Сценарий:  _015400663 check that additional attributes are displayed on the form without re-opening (document Incoming payment order)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400663 check that additional attributes are displayed on the form without re-opening (document Incoming payment order)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create IncomingPaymentOrder
-		И я открываю навигационную ссылку 'e1cib/list/Document.IncomingPaymentOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_IncomingPaymentOrder              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Incoming payment order'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Incoming payment order (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Incoming payment order" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Incoming payment order (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400664 check that additional attributes are displayed on the form without re-opening (document Inventory transfer)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400664 check that additional attributes are displayed on the form without re-opening (document Inventory transfer)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Inventory transfer
-		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_InventoryTransfer              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Inventory transfer'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Inventory transfer (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Inventory transfer" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Inventory transfer (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400665 check that additional attributes are displayed on the form without re-opening (document Inventory transfer order)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400665 check that additional attributes are displayed on the form without re-opening (document Inventory transfer order)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Inventory transfer order
-		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_InventoryTransferOrder              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Inventory transfer order'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Inventory transfer order (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Inventory transfer order" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Inventory transfer order (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
 
-Сценарий:  _015400667 check that additional attributes are displayed on the form without re-opening (document Invoice match)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400667 check that additional attributes are displayed on the form without re-opening (document Invoice match)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create InvoiceMatch
-		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_InvoiceMatch              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Invoice match'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Invoice match (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Invoice match" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Invoice match (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
-Сценарий:  _015400668 check that additional attributes are displayed on the form without re-opening (document Labeling)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400668 check that additional attributes are displayed on the form without re-opening (document Labeling)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Labeling
-		И я открываю навигационную ссылку 'e1cib/list/Document.Labeling'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.Labeling"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_Labeling              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Labeling'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Labeling (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Labeling" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Labeling (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400669 check that additional attributes are displayed on the form without re-opening (document Opening entry)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400669 check that additional attributes are displayed on the form without re-opening (document Opening entry)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create OpeningEntry
-		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_OpeningEntry              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Opening entry'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Opening entry (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Opening entry" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Opening entry (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
 
 
-Сценарий:  _015400670 check that additional attributes are displayed on the form without re-opening (document Outgoing payment order)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400670 check that additional attributes are displayed on the form without re-opening (document Outgoing payment order)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create OutgoingPaymentOrder
-		И я открываю навигационную ссылку 'e1cib/list/Document.OutgoingPaymentOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_OutgoingPaymentOrder              |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Outgoing payment order'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Outgoing payment order (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Outgoing payment order" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Outgoing payment order (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
 
-Сценарий:  _015400671 check that additional attributes are displayed on the form without re-opening (document Physical count by location)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400671 check that additional attributes are displayed on the form without re-opening (document Physical count by location)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PhysicalCountByLocation
-		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalCountByLocation'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_PhysicalCountByLocation             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Physical count by location'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Physical count by location (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Physical count by location" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Physical count by location (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400672 check that additional attributes are displayed on the form without re-opening (document Physical inventory)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400672 check that additional attributes are displayed on the form without re-opening (document Physical inventory)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PhysicalInventory
-		И я открываю навигационную ссылку 'e1cib/list/Document.PhysicalInventory'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_PhysicalInventory             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Physical inventory'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Physical inventory (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Physical inventory" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Physical inventory (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _015400673 check that additional attributes are displayed on the form without re-opening (document Price list)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400673 check that additional attributes are displayed on the form without re-opening (document Price list)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PriceList
-		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_PriceList             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Price list'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Price list (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Price list" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Price list (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
-Сценарий:  _015400674 check that additional attributes are displayed on the form without re-opening (document Purchase return)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400674 check that additional attributes are displayed on the form without re-opening (document Purchase return)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PurchaseReturn
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_PurchaseReturn             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Purchase return'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Purchase return (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Purchase return" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Purchase return (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
-Сценарий:  _015400675 check that additional attributes are displayed on the form without re-opening (document Purchase return order)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400675 check that additional attributes are displayed on the form without re-opening (document Purchase return order)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PurchaseReturnOrder
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_PurchaseReturnOrder             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Purchase return order'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Purchase return order (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Purchase return order" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Purchase return order (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
 
-Сценарий:  _015400676 check that additional attributes are displayed on the form without re-opening (document Reconciliation statement)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400676 check that additional attributes are displayed on the form without re-opening (document Reconciliation statement)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create ReconciliationStatement
-		И я открываю навигационную ссылку 'e1cib/list/Document.ReconciliationStatement'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_ReconciliationStatement             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Reconciliation statement'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Reconciliation statement (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Reconciliation statement" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Reconciliation statement (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
-Сценарий:  _015400677 check that additional attributes are displayed on the form without re-opening (document Sales return)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400677 check that additional attributes are displayed on the form without re-opening (document Sales return)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Sales return
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_SalesReturn             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Sales return'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Sales return (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Sales return" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Sales return (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400678 check that additional attributes are displayed on the form without re-opening (document Sales return order)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400678 check that additional attributes are displayed on the form without re-opening (document Sales return order)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Sales return order
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_SalesReturnOrder             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Sales return order'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Sales return order (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Sales return order" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Sales return order (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
 
-Сценарий:  _015400679 check that additional attributes are displayed on the form without re-opening (document Shipment confirmation)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400679 check that additional attributes are displayed on the form without re-opening (document Shipment confirmation)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create ShipmentConfirmation
-		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_ShipmentConfirmation             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Shipment confirmation'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Shipment confirmation (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Shipment confirmation" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Shipment confirmation (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400680 check that additional attributes are displayed on the form without re-opening (document Stock adjustment as surplus)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400680 check that additional attributes are displayed on the form without re-opening (document Stock adjustment as surplus)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create StockAdjustmentAsSurplus
-		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsSurplus'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_StockAdjustmentAsSurplus             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Stock adjustment as surplus'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Stock adjustment as surplus (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Stock adjustment as surplus" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Stock adjustment as surplus (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
-Сценарий:  _015400681 check that additional attributes are displayed on the form without re-opening (document Stock adjustment as write-off)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400681 check that additional attributes are displayed on the form without re-opening (document Stock adjustment as write-off)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create StockAdjustmentAsWriteOff
-		И я открываю навигационную ссылку 'e1cib/list/Document.StockAdjustmentAsWriteOff'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_StockAdjustmentAsWriteOff             |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Stock adjustment as write off'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Stock adjustment as write-off (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Stock adjustment as write off" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Stock adjustment as write-off (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _015400683 check that additional attributes are displayed on the form without re-opening (document Unbundling)
-	Тогда я проверяю наличие элемента плана вида характеристик "AddAttributeAndPropertyValues" со значением поля Description Eng "Test"
+Scenario:  _015400683 check that additional attributes are displayed on the form without re-opening (document Unbundling)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Unbundling
-		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я перехожу к закладке "Other"
-		И элемент формы "Test" отсутствует на форме
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| Predefined data item name     |
 			| Document_Unbundling           |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| Description |
 			| Test        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в поле 'ENG' я ввожу текст 'Unbundling'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking that the additional Test attribute has been displayed on the form
-		И Я нажимаю кнопку командного интерфейса 'Unbundling (create)'
-		И элемент формы "Test" присутствует на форме
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Unbundling" text in "ENG" field
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Unbundling (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 
-Сценарий:  _0154007 delete Test attribute
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-	И в таблице "List" я перехожу к строке:
+Scenario:  _0154007 delete Test attribute
+	Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+	And I go to line in "List" table
 		| Description |
 		| Items       |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "Attributes" я перехожу к строке:
+	And I select current line in "List" table
+	And I go to line in "Attributes" table
 		| Attribute | 
 		| Test      |
-	И в таблице "Attributes" я активизирую поле "Attribute"
-	И в таблице 'Attributes' я удаляю строку
-	И я нажимаю на кнопку 'Save and close'
-	И в таблице "List" я перехожу к строке:
+	And I activate "Attribute" field in "Attributes" table
+	And I delete a line in "Attributes" table
+	And I click "Save and close" button
+	And I go to line in "List" table
 		| Predefined data item name |
 		| Catalog_ItemTypes         |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "Attributes" я активизирую поле "Attribute"
-	И в таблице "Attributes" я перехожу к строке:
+	And I select current line in "List" table
+	And I activate "Attribute" field in "Attributes" table
+	And I go to line in "Attributes" table
 		| Attribute |
 		| Test      |
-	И в таблице "Attributes" я активизирую поле "Attribute"
-	И в таблице 'Attributes' я удаляю строку
-	И я нажимаю на кнопку 'Save and close'
-	И в таблице "List" я перехожу к строке:
+	And I activate "Attribute" field in "Attributes" table
+	And I delete a line in "Attributes" table
+	And I click "Save and close" button
+	And I go to line in "List" table
 		| Predefined data item name |
 		| Document_SalesInvoice     |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "Attributes" я активизирую поле "Attribute"
-	И в таблице "Attributes" я перехожу к строке:
+	And I select current line in "List" table
+	And I activate "Attribute" field in "Attributes" table
+	And I go to line in "Attributes" table
 		| Attribute |
 		| Test      |
-	И в таблице "Attributes" я активизирую поле "Attribute"
-	И в таблице 'Attributes' я удаляю строку
-	И я нажимаю на кнопку 'Save and close'
-	И в таблице "List" я перехожу к строке:
+	And I activate "Attribute" field in "Attributes" table
+	And I delete a line in "Attributes" table
+	And I click "Save and close" button
+	And I go to line in "List" table
 		| Predefined data item name |
 		| Catalog_Partners          |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "Attributes" я перехожу к строке:
+	And I select current line in "List" table
+	And I go to line in "Attributes" table
 		| Attribute |
 		| Test      |
-	И в таблице "Attributes" я активизирую поле "Attribute"
-	И в таблице 'Attributes' я удаляю строку
-	И я нажимаю на кнопку 'Save and close'
-	И я удаляю элемент справочника "Items" со значением поля Description_en "Test"
-	И я удаляю элемент справочника "ItemTypes" со значением поля Description_en "Test"
-	И я удаляю элемент справочника "Partners" со значением поля Description_en "Test"
+	And I activate "Attribute" field in "Attributes" table
+	And I delete a line in "Attributes" table
+	And I click "Save and close" button
+	And I delete "Items" catalog element with the Description_en "Test"
+	And I delete "ItemTypes" catalog element with the Description_en "Test"
+	And I delete "Partners" catalog element with the Description_en "Test"
 
-Сценарий:  _0154008 check autofilling the Partner term field in Purchase order
-	Когда create a test partner with one vendor partner term and one customer partner term
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
-	И я закрыл все окна клиентского приложения
+Scenario:  _0154008 check autofilling the Partner term field in Purchase order
+	When create a test partner with one vendor partner term and one customer partner term
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	And I click the button named "FormCreate"
+	When check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
+	And I close all client application windows
 
-Сценарий:  _0154009 check autofilling the Partner term field in Purchase invoice
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
-	И я закрыл все окна клиентского приложения
+Scenario:  _0154009 check autofilling the Partner term field in Purchase invoice
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I click the button named "FormCreate"
+	When check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
+	And I close all client application windows
 
-Сценарий: _0154010 check autofilling the Partner term field in Purchase return
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
-	И я закрыл все окна клиентского приложения
+Scenario: _0154010 check autofilling the Partner term field in Purchase return
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I click the button named "FormCreate"
+	When check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
+	And I close all client application windows
 
-Сценарий: _0154011  check autofilling the Partner term field in Purchase return order
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
-	И я закрыл все окна клиентского приложения
-
-
-Сценарий: _0154012 check autofilling the Partner term field in Sales order
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check the autocompletion of the partner term (by customer) in the documents of sales/returns 
-	И я закрыл все окна клиентского приложения
-
-Сценарий: _0154013 check autofilling the Partner term field in Sales invoice
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check the autocompletion of the partner term (by customer) in the documents of sales/returns 
-	И я закрыл все окна клиентского приложения
-
-Сценарий: _0154014 check autofilling the Partner term field in Sales return order
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check the autocompletion of the partner term (by customer) in the documents of sales/returns 
-	И я закрыл все окна клиентского приложения
-
-Сценарий: _0154015 check autofilling the Partner term field in Sales return
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check the autocompletion of the partner term (by customer) in the documents of sales/returns 
-	И я закрыл все окна клиентского приложения
-
-Сценарий: _0154016 check autofilling item key in Sales order by item only with one item key
-	Когда create test item with one item key
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in sales/returns documents for an item that has only one item key
-
-Сценарий: _0154017 check autofilling item key in Sales invoice by item only with one item key
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in sales/returns documents for an item that has only one item key
-
-Сценарий: _0154018 check autofilling item key in Sales return order by item only with one item key
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in sales/returns documents for an item that has only one item key
-
-Сценарий: _0154019 check autofilling item key in Sales return by item only with one item key
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
-
-Сценарий: _0154020 check autofilling item key in Shipment Confirmation by item only with one item key
-	И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
-
-Сценарий: _0154021 check autofilling item key in GoodsReceipt by item only with one item key
-	И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
-
-Сценарий: _0154022 check autofilling item key in Purchase order by item only with one item key
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
-
-Сценарий: _0154023 check autofilling item key in Purchase invoice by item only with one item key
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
-
-Сценарий: _0154024 check autofilling item key in Purchase return by item only with one item key
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
-
-Сценарий: _0154025 check autofilling item key in Purchase return order by item only with one item key
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
+Scenario: _0154011  check autofilling the Partner term field in Purchase return order
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+	And I click the button named "FormCreate"
+	When check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
+	And I close all client application windows
 
 
-Сценарий: _0154026 check autofilling item key in Bundling by item only with one item key
-	И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in bundling/transfer documents for an item that has only one item key
+Scenario: _0154012 check autofilling the Partner term field in Sales order
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	When check the autocompletion of the partner term (by customer) in the documents of sales/returns 
+	And I close all client application windows
 
-Сценарий: _0154027 check autofilling item key in Unbundling by item only with one item key
-	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in bundling/transfer documents for an item that has only one item key
+Scenario: _0154013 check autofilling the Partner term field in Sales invoice
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I click the button named "FormCreate"
+	When check the autocompletion of the partner term (by customer) in the documents of sales/returns 
+	And I close all client application windows
+
+Scenario: _0154014 check autofilling the Partner term field in Sales return order
+	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+	And I click the button named "FormCreate"
+	When check the autocompletion of the partner term (by customer) in the documents of sales/returns 
+	And I close all client application windows
+
+Scenario: _0154015 check autofilling the Partner term field in Sales return
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I click the button named "FormCreate"
+	When check the autocompletion of the partner term (by customer) in the documents of sales/returns 
+	And I close all client application windows
+
+Scenario: _0154016 check autofilling item key in Sales order by item only with one item key
+	When create test item with one item key
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	When check item key autofilling in sales/returns documents for an item that has only one item key
+
+Scenario: _0154017 check autofilling item key in Sales invoice by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I click the button named "FormCreate"
+	When check item key autofilling in sales/returns documents for an item that has only one item key
+
+Scenario: _0154018 check autofilling item key in Sales return order by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+	And I click the button named "FormCreate"
+	When check item key autofilling in sales/returns documents for an item that has only one item key
+
+Scenario: _0154019 check autofilling item key in Sales return by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
+
+Scenario: _0154020 check autofilling item key in Shipment Confirmation by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
+
+Scenario: _0154021 check autofilling item key in GoodsReceipt by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
+
+Scenario: _0154022 check autofilling item key in Purchase order by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
+
+Scenario: _0154023 check autofilling item key in Purchase invoice by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
+
+Scenario: _0154024 check autofilling item key in Purchase return by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
+
+Scenario: _0154025 check autofilling item key in Purchase return order by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
 
+Scenario: _0154026 check autofilling item key in Bundling by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	And I click the button named "FormCreate"
+	When check item key autofilling in bundling/transfer documents for an item that has only one item key
 
-Сценарий: _0154030 check autofilling item key in Inventory transfer by item only with one item key 
-	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
-
-Сценарий: _0154031 check autofilling item key in Inventory transfer order by item only with one item key 
-	И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in bundling/transfer documents for an item that has only one item key
-
-Сценарий: _0154032 check autofilling item key in Internal Supply Request у которых только один item key 
-	И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Когда check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
+Scenario: _0154027 check autofilling item key in Unbundling by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
+	And I click the button named "FormCreate"
+	When check item key autofilling in bundling/transfer documents for an item that has only one item key
 
 
 
+Scenario: _0154030 check autofilling item key in Inventory transfer by item only with one item key 
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
-Сценарий: _0154033 check if the Partner form contains an option to include a partner in the segment
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
+Scenario: _0154031 check autofilling item key in Inventory transfer order by item only with one item key 
+	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+	And I click the button named "FormCreate"
+	When check item key autofilling in bundling/transfer documents for an item that has only one item key
+
+Scenario: _0154032 check autofilling item key in Internal Supply Request only with one item key 
+	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
+
+
+
+
+Scenario: _0154033 check if the Partner form contains an option to include a partner in the segment
+	Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Select partner
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Description |
 			| Seven Brand |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Add a test partner to the Dealer segment
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner segments content'
-		Тогда таблица "List" не содержит строки:
+		And In this window I click command interface button "Partner segments content"
+		And "List" table does not contain lines
 		| Segment | Partner     |
 		| Dealer  | Seven Brand |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Segment"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I click Select button of "Segment" field
+		And I go to line in "List" table
 			| Description |
 			| Dealer      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click "Save and close" button
 	* Add a test partner to the Retail segment
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Partner     | Segment |
 			| Seven Brand | Retail  |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Partner     | Segment |
 			| Seven Brand | Dealer  |
 	* Delete added record
-		И в таблице 'List' я удаляю строку
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-	Тогда я закрыл все окна клиентского приложения
+		And I delete a line in "List" table
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+	And I close all client application windows
 
 
-Сценарий:  _0154034 check item key selection in the form of item key
+Scenario:  _0154034 check item key selection in the form of item key
 	* Open the item key selection form from the Sales order document.
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Partner Kalipso     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
 	* Check the selection by properties
 	# Single item key + item key specifications that contain this property should be displayed
-		И из выпадающего списка "Color" я выбираю по строке 'yellow'
-		И я нажимаю кнопку выбора у поля "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select from "Color" drop-down list by "yellow" string
+		And I click Select button of "Color" field
+		And I go to line in "List" table
 			| Additional attribute | Description |
 			| Color         | Yellow      |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "List" стала равной:
+		And I select current line in "List" table
+		And "List" table became equal
 			| Item key  | Item  |
 			| S/Yellow  | Dress |
 			| Dress/A-8 | Dress |
-	* Checking the filter by single item key and by specifications
-		И я меняю значение переключателя 'IsSpecificationFilter' на 'Single'
-		И     таблица "List" стала равной:
+	* Check the filter by single item key and by specifications
+		And I change "IsSpecificationFilter" radio button value to "Single"
+		And "List" table became equal
 			| Item key  | Item  |
 			| S/Yellow  | Dress |
-		И я меняю значение переключателя 'IsSpecificationFilter' на 'Specification'
-		И     таблица "List" стала равной:
+		And I change "IsSpecificationFilter" radio button value to "Specification"
+		And "List" table became equal
 			| Item key  | Item  |
 			| Dress/A-8 | Dress |
-		И я меняю значение переключателя 'IsSpecificationFilter' на 'All'
-		И     таблица "List" стала равной:
+		And I change "IsSpecificationFilter" radio button value to "All"
+		And "List" table became equal
 			| Item key  | Item  |
 			| S/Yellow  | Dress |
 			| Dress/A-8 | Dress |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий:  _0154035 search the item key selection list
+Scenario:  _0154035 search the item key selection list
 	* Open the Sales order creation form
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
-		И я нажимаю на кнопку 'Create'
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click "Create" button
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
 	* General search check including All/Single/Specification switch selection
-		И в поле 'SearchString' я ввожу текст 's'
-		Тогда таблица "List" не содержит строки:
+		And I input "s" text in "SearchString" field
+		And "List" table does not contain lines
 		| 'Item key'  | 'Item'  |
 		| 'M/White'   | 'Dress' |
 		| 'L/Green'   | 'Dress' |
 		| 'XL/Green'  | 'Dress' |
 		| 'XXL/Red'   | 'Dress' |
 		| 'M/Brown'   | 'Dress' |
-		И я нажимаю кнопку очистить у поля "SearchString"
-		И я меняю значение переключателя 'IsSpecificationFilter' на 'Single'
-		И в поле 'SearchString' я ввожу текст 'gr'
-		Тогда таблица "List" не содержит строки:
+		And I click Clear button of "SearchString" field
+		And I change "IsSpecificationFilter" radio button value to "Single"
+		And I input "gr" text in "SearchString" field
+		And "List" table does not contain lines
 		| 'Item key'  | 'Item'  |
 		| 'S/Yellow'  | 'Dress' |
 		| 'XS/Blue'   | 'Dress' |
@@ -1911,9 +1911,9 @@ I want to check the form display and autofill documents
 		| 'Dress/A-8' | 'Dress' |
 		| 'XXL/Red'   | 'Dress' |
 		| 'M/Brown'   | 'Dress' |
-		И я нажимаю кнопку очистить у поля "SearchString"
-		И я меняю значение переключателя 'IsSpecificationFilter' на 'Specification'
-		Тогда таблица "List" не содержит строки:
+		And I click Clear button of "SearchString" field
+		And I change "IsSpecificationFilter" radio button value to "Specification"
+		And "List" table does not contain lines
 		| 'Item key'  | 'Item'  |
 		| 'S/Yellow'  | 'Dress' |
 		| 'XS/Blue'   | 'Dress' |
@@ -1922,10 +1922,10 @@ I want to check the form display and autofill documents
 		| 'XL/Green'  | 'Dress' |
 		| 'XXL/Red'   | 'Dress' |
 		| 'M/Brown'   | 'Dress' |
-		И я нажимаю кнопку очистить у поля "SearchString"
-		И я меняю значение переключателя 'IsSpecificationFilter' на 'All'
-		И из выпадающего списка "Size" я выбираю по строке 's'
-		Тогда таблица "List" не содержит строки:
+		And I click Clear button of "SearchString" field
+		And I change "IsSpecificationFilter" radio button value to "All"
+		And I select from "Size" drop-down list by "s" string
+		And "List" table does not contain lines
 		| 'Item key'  | 'Item'  |
 		| 'XS/Blue'   | 'Dress' |
 		| 'M/White'   | 'Dress' |
@@ -1934,18 +1934,18 @@ I want to check the form display and autofill documents
 		| 'XXL/Red'   | 'Dress' |
 		| 'M/Brown'   | 'Dress' |
 	* Check search by properties
-		И я нажимаю кнопку очистить у поля "Size"
-		И из выпадающего списка "Color" я выбираю по строке 'gr'
-		Тогда таблица "List" не содержит строки:
+		And I click Clear button of "Size" field
+		And I select from "Color" drop-down list by "gr" string
+		And "List" table does not contain lines
 		| 'Item key'  | 'Item'  |
 		| 'S/Yellow'  | 'Dress' |
 		| 'XS/Blue'   | 'Dress' |
 		| 'M/White'   | 'Dress' |
 		| 'XXL/Red'   | 'Dress' |
 		| 'M/Brown'   | 'Dress' |
-		И я меняю значение переключателя 'IsSpecificationFilter' на 'Single'
-		И из выпадающего списка "Color" я выбираю по строке 'gr'
-		Тогда таблица "List" не содержит строки:
+		And I change "IsSpecificationFilter" radio button value to "Single"
+		And I select from "Color" drop-down list by "gr" string
+		And "List" table does not contain lines
 		| 'Item key'  | 'Item'  |
 		| 'S/Yellow'  | 'Dress' |
 		| 'XS/Blue'   | 'Dress' |
@@ -1953,1769 +1953,1766 @@ I want to check the form display and autofill documents
 		| 'Dress/A-8' | 'Dress' |
 		| 'XXL/Red'   | 'Dress' |
 		| 'M/Brown'   | 'Dress' |
-		И я меняю значение переключателя 'IsSpecificationFilter' на 'Specification'
-		И из выпадающего списка "Color" я выбираю по строке 'Black'
-		Тогда в таблице "List" количество строк "равно" 0
-		И я закрыл все окна клиентского приложения
+		And I change "IsSpecificationFilter" radio button value to "Specification"
+		And I select from "Color" drop-down list by "Black" string
+		Then the number of "List" table lines is "равно" 0
+		And I close all client application windows
 
 
-Сценарий:  _0154036 check the Deleting of the store field value by line with the service in a document Sales order
+Scenario:  _0154036 check the Deleting of the store field value by line with the service in a document Sales order
 	* Open a creation form Sales Order
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Service
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Service'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Service' | 'Rent'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
 	* Deleting of the store field value by line with the service
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check that the store field has been cleared
-		Тогда таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | ''         |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий:  _0154037 check impossibility deleting of the store field by line with the product in a Sales order
+Scenario:  _0154037 check impossibility deleting of the store field by line with the product in a Sales order
 	* Open a creation form Sales Order
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Product
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
-	* Checking that the store field is still filled
-		Тогда таблица "ItemList" содержит строки:
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check that the store field is still filled
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	
-Сценарий:  _0154038 check the Deleting of the store field value by line with the service in a document Sales invoice
+Scenario:  _0154038 check the Deleting of the store field value by line with the service in a document Sales invoice
 	* Open a creation form Sales invoice
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Service
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Service'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Service' | 'Rent'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
 	* Deleting of the store field value by line with the service
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check that the store field has been cleared
-		Тогда таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | ''         |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий:  _0154039 check impossibility deleting of the store field by line with the product in a Sales invoice
+Scenario:  _0154039 check impossibility deleting of the store field by line with the product in a Sales invoice
 	* Open a creation form Sales invoice
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Product
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
-	* Checking that the store field is still filled
-		Тогда таблица "ItemList" содержит строки:
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check that the store field is still filled
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	
-Сценарий:  _0154040 check the Deleting of the store field value by line with the service in a document Purchase order
+Scenario:  _0154040 check the Deleting of the store field value by line with the service in a document Purchase order
 	* Open a creation form Purchase order
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Service
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Service'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Service' | 'Rent'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
 	* Deleting of the store field value by line with the service
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check that the store field has been cleared
-		Тогда таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | ''         |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий:  _0154041 check impossibility deleting of the store field by line with the product in a Purchase Order
+Scenario:  _0154041 check impossibility deleting of the store field by line with the product in a Purchase Order
 	* Open a creation form Purchase order
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Product
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
-	* Checking that the store field is still filled
-		Тогда таблица "ItemList" содержит строки:
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check that the store field is still filled
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-		И я закрыл все окна клиентского приложения	
+		And I close all client application windows
 		
-Сценарий:  _0154042 check the Deleting of the store field value by line with the service in a document Purchase invoice
+Scenario:  _0154042 check the Deleting of the store field value by line with the service in a document Purchase invoice
 	* Open a creation form Purchase invoice
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Service
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Service'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Service' | 'Rent'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
 	* Deleting of the store field value by line with the service
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check that the store field has been cleared
-		Тогда таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | ''         |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий:  _0154043 check impossibility deleting of the store field by line with the product in a Purchase invoice
+Scenario:  _0154043 check impossibility deleting of the store field by line with the product in a Purchase invoice
 	* Open a creation form Purchase invoice
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Product
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
-	* Checking that the store field is still filled
-		Тогда таблица "ItemList" содержит строки:
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check that the store field is still filled
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-		И я закрыл все окна клиентского приложения	
+		And I close all client application windows
 
-Сценарий:  _0154044 check impossibility deleting of the store field by line with the product in a Sales return order
+Scenario:  _0154044 check impossibility deleting of the store field by line with the product in a Sales return order
 	* Open a creation form Sales Return Order
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Product
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
-	* Checking that the store field is still filled
-		Тогда таблица "ItemList" содержит строки:
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check that the store field is still filled
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-		И я закрыл все окна клиентского приложения	
+		And I close all client application windows
 
-Сценарий:  _0154045 check impossibility deleting of the store field by line with the product in a Sales return
+Scenario:  _0154045 check impossibility deleting of the store field by line with the product in a Sales return
 	* Open a creation form Sales Return
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturn"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Product
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
-	* Checking that the store field is still filled
-		Тогда таблица "ItemList" содержит строки:
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check that the store field is still filled
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-		И я закрыл все окна клиентского приложения	
+		And I close all client application windows
 
-Сценарий:  _0154046 check impossibility deleting of the store field by line with the product in a Purchase return
+Scenario:  _0154046 check impossibility deleting of the store field by line with the product in a Purchase return
 	* Open a creation form Purchase Return
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Product
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
-	* Checking that the store field is still filled
-		Тогда таблица "ItemList" содержит строки:
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check that the store field is still filled
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	
-Сценарий:  _0154047 check impossibility deleting of the store field by line with the product in a Purchase return order
+Scenario:  _0154047 check impossibility deleting of the store field by line with the product in a Purchase return order
 	* Open a creation form Purchase Return order
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Product
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
-	* Checking that the store field is still filled
-		Тогда таблица "ItemList" содержит строки:
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check that the store field is still filled
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий:  _0154048 check impossibility deleting of the store field by line with the product in a Goods receipt
+Scenario:  _0154048 check impossibility deleting of the store field by line with the product in a Goods receipt
 	* Open a creation form Goods receipt
-		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Product
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Quantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 02' |
 	* Delete store field by product line 
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
-	* Checking that the store field is still filled
-		Тогда таблица "ItemList" содержит строки:
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check that the store field is still filled
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 02' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий:  _0154049 check impossibility deleting of the store field by line with the product in a  ShipmentConfirmation
+Scenario:  _0154049 check impossibility deleting of the store field by line with the product in a  ShipmentConfirmation
 	* Open a creation form ShipmentConfirmation
-		И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
 	* Add to the table part of the product with the item type - Product
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Quantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		Тогда таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 02' |
 	* Delete store field by product line 
-		И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку очистить у поля "Store"
-		И в таблице "ItemList" я завершаю редактирование строки
-	* Checking that the store field is still filled
-		Тогда таблица "ItemList" содержит строки:
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Store" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check that the store field is still filled
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 02' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 			
 		
 		
-Сценарий:  _0154050 check item and item key input by search in line in a document Sales order (in english)
+Scenario:  _0154050 check item and item key input by search in line in a document Sales order (in english)
 	* Open a creation form Sales order
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	
 
-Сценарий:  _0154051 check item and item key input by search in line in a document Sales invoice (in english)
+Scenario:  _0154051 check item and item key input by search in line in a document Sales invoice (in english)
 	* Open a creation form Sales invoice
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154052 check item and item key input by search in line in a document Sales return order (in english)
+Scenario: _0154052 check item and item key input by search in line in a document Sales return order (in english)
 	* Open a creation form Sales return order
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154053 check item and item key input by search in line in a document Sales return (in english)
+Scenario: _0154053 check item and item key input by search in line in a document Sales return (in english)
 	* Open a creation form Sales return 
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturn"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And I click the button named "Add"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154054 check item and item key input by search in line in a document Purchase invoice (in english)
+Scenario: _0154054 check item and item key input by search in line in a document Purchase invoice (in english)
 	* Open a creation form Purchase invoice
-		И я открываю навигационную ссылку "e1cib/list/Document.Purchaseinvoice"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.Purchaseinvoice"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And I click the button named "Add"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154055 check item and item key input by search in line in a document Purchase order (in english)
+Scenario: _0154055 check item and item key input by search in line in a document Purchase order (in english)
 	* Open a creation form Purchase order
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And I click the button named "Add"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154056 check item and item key input by search in line in a document Goods Receipt (in english)
+Scenario: _0154056 check item and item key input by search in line in a document Goods Receipt (in english)
 	* Open a creation form Goods Receipt
-		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And I click the button named "ItemListAdd"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154057 check item and item key input by search in line in a document Shipment confirmation (in english)
+Scenario: _0154057 check item and item key input by search in line in a document Shipment confirmation (in english)
 	* Open a creation form Shipment confirmation
-		И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And I click the button named "Add"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154058 check item and item key input by search in line in a document InternalSupplyRequest (in english)
+Scenario: _0154058 check item and item key input by search in line in a document InternalSupplyRequest (in english)
 	* Open a creation form Internal Supply Request
-		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И в таблице "ItemList" я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And in the table "ItemList" I click "Add" button
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154059 check item and item key input by search in line in a document InventoryTransferOrder (in english)
+Scenario: _0154059 check item and item key input by search in line in a document InventoryTransferOrder (in english)
 	* Open a creation form Inventory Transfer Order
-		И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransferOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And I click "Add" button
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154060 check item and item key input by search in line in a document InventoryTransfer (in english)
+Scenario: _0154060 check item and item key input by search in line in a document InventoryTransfer (in english)
 	* Open a creation form Inventory Transfer
-		И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransfer"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And I click "Add" button
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154061 check item and item key input by search in line in a document Bundling (in english)
+Scenario: _0154061 check item and item key input by search in line in a document Bundling (in english)
 	* Open a creation form Bundling
-		И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154062 check item and item key input by search in line in a document UnBundling (in english)
+Scenario: _0154062 check item and item key input by search in line in a document UnBundling (in english)
 	* Open a creation form UnBundling
-		И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: _015406401 check item and item key input by search in line in a document StockAdjustmentAsSurplus (in english)
+Scenario: _015406401 check item and item key input by search in line in a document StockAdjustmentAsSurplus (in english)
 	* Open a creation form StockAdjustmentAsSurplus
-		И я открываю навигационную ссылку "e1cib/list/Document.StockAdjustmentAsSurplus"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And I click "Add" button
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _015406402 check item and item key input by search in line in a document StockAdjustmentAsWriteOff (in english)
+Scenario: _015406402 check item and item key input by search in line in a document StockAdjustmentAsWriteOff (in english)
 	* Open a creation form StockAdjustmentAsWriteOff
-		И я открываю навигационную ссылку "e1cib/list/Document.StockAdjustmentAsWriteOff"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And I click "Add" button
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _015406403 check item and item key input by search in line in a document PhysicalInventory (in english)
+Scenario: _015406403 check item and item key input by search in line in a document PhysicalInventory (in english)
 	* Open a creation form PhysicalInventory
-		И я открываю навигационную ссылку "e1cib/list/Document.PhysicalInventory"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And I click "Add" button
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _015406404 check item and item key input by search in line in a document PhysicalCountByLocation (in english)
+Scenario: _015406404 check item and item key input by search in line in a document PhysicalCountByLocation (in english)
 	* Open a creation form PhysicalCountByLocation
-		И я открываю навигационную ссылку "e1cib/list/Document.PhysicalCountByLocation"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'boo'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemList" содержит строки:
+		And I click "Add" button
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154065 check item, item key and properties input by search in line in a document Price list (in english)
-	И я закрыл все окна клиентского приложения
+Scenario: _0154065 check item, item key and properties input by search in line in a document Price list (in english)
+	And I close all client application windows
 	* Open a creation form Price List
-		И я открываю навигационную ссылку "e1cib/list/Document.PriceList"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя 'Set price' на 'By Item keys'
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I click the button named "FormCreate"
+		And I change "Set price" radio button value to "By Item keys"
 	* Item and item key input by search in line
-		И я нажимаю на кнопку с именем 'ItemKeyListAdd'
-		И в таблице "ItemKeyList" из выпадающего списка "Item" я выбираю по строке 'tr'
-		И в таблице "ItemKeyList" я активизирую поле "Item key"
-		И в таблице "ItemKeyList" из выпадающего списка "Item key" я выбираю по строке '36'
-	* Checking entered values
-		И     таблица "ItemKeyList" содержит строки:
+		And I click the button named "ItemKeyListAdd"
+		And I select "tr" from "Item" drop-down list by string in "ItemKeyList" table
+		And I activate "Item key" field in "ItemKeyList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemKeyList" table
+	* Check entered values
+		And "ItemKeyList" table contains lines
 		| 'Item'        | 'Item key'  |
 		| 'Trousers'    | '36/Yellow' |
 
 	
 
-Сценарий: _0154066 check partner, legal name, Partner term, company and store input by search in line in a document Sales order (in english)
+Scenario: _0154066 check partner, legal name, Partner term, company and store input by search in line in a document Sales order (in english)
 	* Open a creation form Sales order
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Partner input by search in line
-		И из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And I select from "Partner" drop-down list by "fer" string
 	* Legal name input by search in line
-		И из выпадающего списка "Legal name" я выбираю по строке 'com'
+		And I select from "Legal name" drop-down list by "com" string
 	* Partner term input by search in line
-		И из выпадающего списка "Partner term" я выбираю по строке 'TRY'
+		And I select from "Partner term" drop-down list by "TRY" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Checking entered values
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Store" by "01" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows
 
-Сценарий: _0154066 check partner, legal name, company, currency input by search in line in a document Reconcilation statement (in english)
+Scenario: _0154066 check partner, legal name, company, currency input by search in line in a document Reconcilation statement (in english)
 	* Open a creation form Reconciliation Statement
-		И я открываю навигационную ссылку "e1cib/list/Document.ReconciliationStatement"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
+		And I click the button named "FormCreate"
 	* Partner input by search in line
-		И из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And I select from "Partner" drop-down list by "fer" string
 	* Legal name input by search in line
-		И из выпадающего списка "Legal name" я выбираю по строке 'com'
+		And I select from "Legal name" drop-down list by "com" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Currency input by search in line
-		И из выпадающего списка с именем "Currency" я выбираю по строке 't'
-	* Checking entered values
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Currency" стал равен 'TRY'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Currency" by "t" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+	And I close all client application windows
 
-Сценарий: _0154067 check partner, legal name, Partner term, company and store input by search in line in a document Sales invoice (in english)
+Scenario: _0154067 check partner, legal name, Partner term, company and store input by search in line in a document Sales invoice (in english)
 	* Open a creation form Sales invoice
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
 	* Partner input by search in line
-		И из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And I select from "Partner" drop-down list by "fer" string
 	* Legal name input by search in line
-		И из выпадающего списка "Legal name" я выбираю по строке 'com'
+		And I select from "Legal name" drop-down list by "com" string
 	* Partner term input by search in line
-		И из выпадающего списка "Partner term" я выбираю по строке 'TRY'
+		And I select from "Partner term" drop-down list by "TRY" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Checking entered values
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Store" by "01" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows
 
-Сценарий: _0154068 check partner, legal name, Partner term, company and store input by search in line in a document Sales return (in english)
+Scenario: _0154068 check partner, legal name, Partner term, company and store input by search in line in a document Sales return (in english)
 	* Open a creation form Sales return
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturn"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
 	* Partner input by search in line
-		И из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And I select from "Partner" drop-down list by "fer" string
 	* Legal name input by search in line
-		И из выпадающего списка "Legal name" я выбираю по строке 'com'
+		And I select from "Legal name" drop-down list by "com" string
 	* Partner term input by search in line
-		И из выпадающего списка "Partner term" я выбираю по строке 'TRY'
+		And I select from "Partner term" drop-down list by "TRY" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Checking entered values
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Store" by "01" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows
 
-Сценарий: _0154069 check partner, legal name, Partner term, company and store input by search in line in a document Sales return order (in english)
+Scenario: _0154069 check partner, legal name, Partner term, company and store input by search in line in a document Sales return order (in english)
 	* Open a creation form Sales return order
-		И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click the button named "FormCreate"
 	* Partner input by search in line
-		И из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And I select from "Partner" drop-down list by "fer" string
 	* Legal name input by search in line
-		И из выпадающего списка "Legal name" я выбираю по строке 'com'
+		And I select from "Legal name" drop-down list by "com" string
 	* Partner term input by search in line
-		И из выпадающего списка "Partner term" я выбираю по строке 'TRY'
+		And I select from "Partner term" drop-down list by "TRY" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Checking entered values
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Store" by "01" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows
 
-Сценарий: _0154070 check partner, legal name, Partner term, company and store input by search in line in a document Purchase order (in english)
+Scenario: _0154070 check partner, legal name, Partner term, company and store input by search in line in a document Purchase order (in english)
 	* Open a creation form Purchase order
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Partner input by search in line
-		И из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And I select from "Partner" drop-down list by "fer" string
 	* Legal name input by search in line
-		И из выпадающего списка "Legal name" я выбираю по строке 'com'
+		And I select from "Legal name" drop-down list by "com" string
 	* Partner term input by search in line
-		И из выпадающего списка "Partner term" я выбираю по строке 'TRY'
+		And I select from "Partner term" drop-down list by "TRY" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Checking entered values
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Store" by "01" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows
 
-Сценарий: _0154071 check partner, legal name, Partner term, company and store input by search in line in a document Purchase invoice (in english)
+Scenario: _0154071 check partner, legal name, Partner term, company and store input by search in line in a document Purchase invoice (in english)
 	* Open a creation form Purchase invoice
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
 	* Partner input by search in line
-		И из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And I select from "Partner" drop-down list by "fer" string
 	* Legal name input by search in line
-		И из выпадающего списка "Legal name" я выбираю по строке 'com'
+		And I select from "Legal name" drop-down list by "com" string
 	* Partner term input by search in line
-		И из выпадающего списка "Partner term" я выбираю по строке 'TRY'
+		And I select from "Partner term" drop-down list by "TRY" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Checking entered values
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Store" by "01" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows
 
-Сценарий: _0154072 check partner, legal name, Partner term, company and store input by search in line in a document Purchase return (in english)
+Scenario: _0154072 check partner, legal name, Partner term, company and store input by search in line in a document Purchase return (in english)
 	* Open a creation form Purchase return
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I click the button named "FormCreate"
 	* Partner input by search in line
-		И из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And I select from "Partner" drop-down list by "fer" string
 	* Legal name input by search in line
-		И из выпадающего списка "Legal name" я выбираю по строке 'com'
+		And I select from "Legal name" drop-down list by "com" string
 	* Partner term input by search in line
-		И из выпадающего списка "Partner term" я выбираю по строке 'TRY'
+		And I select from "Partner term" drop-down list by "TRY" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Checking entered values
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Store" by "01" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows
 
-Сценарий: _0154073 check partner, legal name, Partner term, company and store input by search in line in a document Purchase return order (in english)
+Scenario: _0154073 check partner, legal name, Partner term, company and store input by search in line in a document Purchase return order (in english)
 	* Open a creation form Purchase return order
-		И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I click the button named "FormCreate"
 	* Partner input by search in line
-		И из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And I select from "Partner" drop-down list by "fer" string
 	* Legal name input by search in line
-		И из выпадающего списка "Legal name" я выбираю по строке 'com'
+		And I select from "Legal name" drop-down list by "com" string
 	* Partner term input by search in line
-		И из выпадающего списка "Partner term" я выбираю по строке 'TRY'
+		And I select from "Partner term" drop-down list by "TRY" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Checking entered values
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Store" by "01" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows
 
-Сценарий: _0154074 check partner, legal name, company, store input by search in line in a document Goods Receipt (in english)
+Scenario: _0154074 check partner, legal name, company, store input by search in line in a document Goods Receipt (in english)
 	* Open a creation form Goods Receipt
-		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Purchase'
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+		And I select "Purchase" exact value from "Transaction type" drop-down list
 	* Partner input by search in line
-		И из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And I select from "Partner" drop-down list by "fer" string
 	* Legal name input by search in line
-		И из выпадающего списка "Legal name" я выбираю по строке 'com'
+		And I select from "Legal name" drop-down list by "com" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '02'
-	* Checking entered values
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Store" by "02" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+	And I close all client application windows
 
-Сценарий: _0154075 check partner, legal name, company, store input by search in line in a document Shipment confirmation (in english)
+Scenario: _0154075 check partner, legal name, company, store input by search in line in a document Shipment confirmation (in english)
 	* Open a creation form Shipment confirmation
-		И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+		And I select "Sales" exact value from "Transaction type" drop-down list
 	* Partner input by search in line
-		И из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And I select from "Partner" drop-down list by "fer" string
 	* Legal name input by search in line
-		И из выпадающего списка "Legal name" я выбираю по строке 'com'
+		And I select from "Legal name" drop-down list by "com" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '02'
-	* Checking entered values
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Store" by "02" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+	And I close all client application windows
 
-Сценарий: _0154076 check company, store input by search in line in a document InternalSupplyRequest (in english)
+Scenario: _0154076 check company, store input by search in line in a document InternalSupplyRequest (in english)
 	* Open a creation form InternalSupplyRequest
-		И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Checking entered values
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Store" by "01" string
+	* Check entered values
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+	And I close all client application windows
 
 
 
-Сценарий: _0154077 check partner, legal name, company, store input by search in line in a document InventoryTransferOrder (in english)
+Scenario: _0154077 check partner, legal name, company, store input by search in line in a document InventoryTransferOrder (in english)
 	* Open a creation form InventoryTransferOrder
-		И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransferOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "StoreSender" я выбираю по строке '01'
-		И из выпадающего списка с именем "StoreReceiver" я выбираю по строке '02'
-	* Checking entered values
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "StoreSender" стал равен 'Store 01'
-		И     элемент формы с именем "StoreReceiver" стал равен 'Store 02'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "StoreSender" by "01" string
+		And I select from the drop-down list named "StoreReceiver" by "02" string
+	* Check entered values
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "StoreSender" became equal to "Store 01"
+		Then the form attribute named "StoreReceiver" became equal to "Store 02"
+	And I close all client application windows
 
 
-Сценарий: _0154078 check company, store input by search in line in a InventoryTransfer (in english)
+Scenario: _0154078 check company, store input by search in line in a InventoryTransfer (in english)
 	* Open a creation form InventoryTransfer
-		И я открываю навигационную ссылку "e1cib/list/Document.InventoryTransfer"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "StoreSender" я выбираю по строке '01'
-		И из выпадающего списка с именем "StoreReceiver" я выбираю по строке '02'
-	* Checking entered values
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "StoreSender" стал равен 'Store 01'
-		И     элемент формы с именем "StoreReceiver" стал равен 'Store 02'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "StoreSender" by "01" string
+		And I select from the drop-down list named "StoreReceiver" by "02" string
+	* Check entered values
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "StoreSender" became equal to "Store 01"
+		Then the form attribute named "StoreReceiver" became equal to "Store 02"
+	And I close all client application windows
 
 
 
-Сценарий: _0154081 check company, store, item bundle input by search in line in a Bundling (in english)
+Scenario: _0154081 check company, store, item bundle input by search in line in a Bundling (in english)
 	* Open a creation form Bundling
-		И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '01'
-	* Ввод по строке Item bundle
-		И из выпадающего списка с именем "ItemBundle" я выбираю по строке 'Trousers'
-	* Checking entered values
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-		И     элемент формы с именем "ItemBundle" стал равен 'Trousers'
-	И я закрыл все окна клиентского приложения
+		And I select from the drop-down list named "Store" by "01" string
+	* Input by string Item bundle
+		And I select from the drop-down list named "ItemBundle" by "Trousers" string
+	* Check entered values
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "ItemBundle" became equal to "Trousers"
+	And I close all client application windows
 
-Сценарий:  _0154082 check company, store, item box input by search in line in a UnBundling (in english)
+Scenario:  _0154082 check company, store, item box input by search in line in a UnBundling (in english)
 	* Open a creation form Unbundling
-		И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		И из выпадающего списка с именем "Store" я выбираю по строке '01'
+		And I select from the drop-down list named "Store" by "01" string
 	* Item bundle input by search in line
-		И из выпадающего списка "Item bundle" я выбираю по строке 'Trousers'
-	* Checking entered values
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-		И     элемент формы с именем "ItemBundle" стал равен 'Trousers'
-	И я закрыл все окна клиентского приложения
+		And I select from "Item bundle" drop-down list by "Trousers" string
+	* Check entered values
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "ItemBundle" became equal to "Trousers"
+	And I close all client application windows
 
-Сценарий: _0154083 check company, Cash accounts, transaction type, currency, partner, payee, Partner term input by search in line in a Cash payment (in english)
+Scenario: _0154083 check company, Cash accounts, transaction type, currency, partner, payee, Partner term input by search in line in a Cash payment (in english)
 	* Open a creation form Cash payment
-		И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Cash accounts input by search in line
-		И из выпадающего списка "Cash account" я выбираю по строке '3'
+		And I select from "Cash account" drop-down list by "3" string
 	* Transaction type input by search in line
-		И из выпадающего списка "Transaction type" я выбираю по строке 'vendor'
+		And I select from "Transaction type" drop-down list by "vendor" string
 	* Currency input by search in line
-		И из выпадающего списка с именем "Currency" я выбираю по строке 'T'
+		And I select from the drop-down list named "Currency" by "T" string
 	* Partner input by search in line
-		И в таблице "PaymentList" я нажимаю на кнопку 'Add'
-		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And in the table "PaymentList" I click "Add" button
+		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
 	* Payee input by search in line
-		И в таблице "PaymentList" я активизирую поле "Payee"
-		И в таблице "PaymentList" из выпадающего списка "Payee" я выбираю по строке 'co'
+		And I activate "Payee" field in "PaymentList" table
+		And I select "co" from "Payee" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
-		И в таблице "PaymentList" я активизирую поле "Partner term"
-		И в таблице "PaymentList" из выпадающего списка "Partner term" я выбираю по строке 'tr'
-	* Checking entered values
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "CashAccount" стал равен 'Cash desk №3'
-		И     элемент формы с именем "Description" стал равен 'Click for input description'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
-		И     элемент формы с именем "Currency" стал равен 'TRY'
-		И     таблица "PaymentList" содержит строки:
+		And I activate "Partner term" field in "PaymentList" table
+		And I select "tr" from "Partner term" drop-down list by string in "PaymentList" table
+	* Check entered values
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
+		Then the form attribute named "Description" became equal to "Click for input description"
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "PaymentList" table contains lines
 		| 'Partner'   | 'Payee'             | 'Partner term'             |
 		| 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: _0154084 check company, Cash/Bank accounts, transaction type, currency, partner, payee, Partner term input by search in line in a Bank payment (in english)
+Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency, partner, payee, Partner term input by search in line in a Bank payment (in english)
 	* Open a creation form Bank payment
-		И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Cash/Bank accounts input by search in line
-		И из выпадающего списка "Account" я выбираю по строке 'usd'
+		And I select from "Account" drop-down list by "usd" string
 	* Transaction type input by search in line
-		И из выпадающего списка "Transaction type" я выбираю по строке 'vendor'
+		And I select from "Transaction type" drop-down list by "vendor" string
 	* Currency input by search in line
-		И из выпадающего списка с именем "Currency" я выбираю по строке 'dol'
+		And I select from the drop-down list named "Currency" by "dol" string
 	* Partner input by search in line
-		И в таблице "PaymentList" я нажимаю на кнопку 'Add'
-		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And in the table "PaymentList" I click "Add" button
+		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
 	* Payee input by search in line
-		И в таблице "PaymentList" я активизирую поле "Payee"
-		И в таблице "PaymentList" из выпадающего списка "Payee" я выбираю по строке 'co'
+		And I activate "Payee" field in "PaymentList" table
+		And I select "co" from "Payee" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
-		И в таблице "PaymentList" я активизирую поле "Partner term"
-		И в таблице "PaymentList" из выпадающего списка "Partner term" я выбираю по строке 'tr'
-	* Checking entered values
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Account" стал равен 'Bank account, USD'
-		И     элемент формы с именем "Description" стал равен 'Click for input description'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
-		И     элемент формы с именем "Currency" стал равен 'USD'
-		И     таблица "PaymentList" содержит строки:
+		And I activate "Partner term" field in "PaymentList" table
+		And I select "tr" from "Partner term" drop-down list by string in "PaymentList" table
+	* Check entered values
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Account" became equal to "Bank account, USD"
+		Then the form attribute named "Description" became equal to "Click for input description"
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		Then the form attribute named "Currency" became equal to "USD"
+		And "PaymentList" table contains lines
 		| 'Partner'   | 'Payee'             | 'Partner term'             |
 		| 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _0154085 check company, Cash/Bank accounts, transaction type, currency, partner, payee, input by search in line in a Bank receipt (in english)
+Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency, partner, payee, input by search in line in a Bank receipt (in english)
 	* Open a creation form Bank receipt
-		И я открываю навигационную ссылку "e1cib/list/Document.BankReceipt"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Cash/Bank accounts input by search in line
-		И из выпадающего списка "Account" я выбираю по строке 'usd'
+		And I select from "Account" drop-down list by "usd" string
 	* Transaction type input by search in line
-		И из выпадающего списка "Transaction type" я выбираю по строке 'customer'
+		And I select from "Transaction type" drop-down list by "customer" string
 	* Currency input by search in line
-		И из выпадающего списка с именем "Currency" я выбираю по строке 'dol'
+		And I select from the drop-down list named "Currency" by "dol" string
 	* Partner input by search in line
-		И в таблице "PaymentList" я нажимаю на кнопку 'Add'
-		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And in the table "PaymentList" I click "Add" button
+		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
 	* Payee input by search in line
-		И в таблице "PaymentList" я активизирую поле "Payer"
-		И в таблице "PaymentList" из выпадающего списка "Payer" я выбираю по строке 'co'
+		And I activate "Payer" field in "PaymentList" table
+		And I select "co" from "Payer" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
-		И в таблице "PaymentList" я активизирую поле "Partner term"
-		И в таблице "PaymentList" из выпадающего списка "Partner term" я выбираю по строке 'usd'
-	* Checking entered values
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Account" стал равен 'Bank account, USD'
-		И     элемент формы с именем "Description" стал равен 'Click for input description'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
-		И     элемент формы с именем "Currency" стал равен 'USD'
-		И     таблица "PaymentList" содержит строки:
+		And I activate "Partner term" field in "PaymentList" table
+		And I select "usd" from "Partner term" drop-down list by string in "PaymentList" table
+	* Check entered values
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Account" became equal to "Bank account, USD"
+		Then the form attribute named "Description" became equal to "Click for input description"
+		Then the form attribute named "TransactionType" became equal to "Payment from customer"
+		Then the form attribute named "Currency" became equal to "USD"
+		And "PaymentList" table contains lines
 		| 'Partner'   | 'Payer'              | 'Partner term' |
 		| 'Ferron BP' | 'Company Ferron BP' | 'Ferron, USD' |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _0154086 check company, Cash accounts, transaction type, currency, partner, payee, input by search in line in a Cash receipt (in english)
+Scenario: _0154086 check company, Cash accounts, transaction type, currency, partner, payee, input by search in line in a Cash receipt (in english)
 	* Open a creation form Cash receipt
-		И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Cash/Bank accounts input by search in line
-		И из выпадающего списка "Cash account" я выбираю по строке '3'
+		And I select from "Cash account" drop-down list by "3" string
 	* Transaction type input by search in line
-		И из выпадающего списка "Transaction type" я выбираю по строке 'customer'
+		And I select from "Transaction type" drop-down list by "customer" string
 	* Currency input by search in line
-		И из выпадающего списка с именем "Currency" я выбираю по строке 'dol'
+		And I select from the drop-down list named "Currency" by "dol" string
 	* Partner input by search in line
-		И в таблице "PaymentList" я нажимаю на кнопку 'Add'
-		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And in the table "PaymentList" I click "Add" button
+		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
 	* Payee input by search in line
-		И в таблице "PaymentList" я активизирую поле "Payer"
-		И в таблице "PaymentList" из выпадающего списка "Payer" я выбираю по строке 'co'
+		And I activate "Payer" field in "PaymentList" table
+		And I select "co" from "Payer" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
-		И в таблице "PaymentList" я активизирую поле "Partner term"
-		И в таблице "PaymentList" из выпадающего списка "Partner term" я выбираю по строке 'usd'
-	* Checking entered values
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "CashAccount" стал равен 'Cash desk №3'
-		И     элемент формы с именем "Description" стал равен 'Click for input description'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
-		И     элемент формы с именем "Currency" стал равен 'USD'
-		И     таблица "PaymentList" содержит строки:
+		And I activate "Partner term" field in "PaymentList" table
+		And I select "usd" from "Partner term" drop-down list by string in "PaymentList" table
+	* Check entered values
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
+		Then the form attribute named "Description" became equal to "Click for input description"
+		Then the form attribute named "TransactionType" became equal to "Payment from customer"
+		Then the form attribute named "Currency" became equal to "USD"
+		And "PaymentList" table contains lines
 		| 'Partner'   | 'Payer'              | 'Partner term' |
 		| 'Ferron BP' | 'Company Ferron BP' | 'Ferron, USD' |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
 
 
-Сценарий: _0154087 check company, sender, receiver, send currency, receive currency, cash advance holder input by search in line in a Cash Transfer Order (in english)
+Scenario: _0154087 check company, sender, receiver, send currency, receive currency, cash advance holder input by search in line in a Cash Transfer Order (in english)
 	* Open a creation form Cash Transfer Order
-		И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Sender input by search in line
-		И из выпадающего списка "Sender" я выбираю по строке '3'
-	* Ввод по строке Receiver
-		И из выпадающего списка "Receiver" я выбираю по строке '1'
+		And I select from "Sender" drop-down list by "3" string
+	* Input by string Receiver
+		And I select from "Receiver" drop-down list by "1" string
 	* Currency input by search in line
-		И из выпадающего списка "Send currency" я выбираю по строке 'dol'
-		И из выпадающего списка "Receive currency" я выбираю по строке 'EUR'
+		And I select from "Send currency" drop-down list by "dol" string
+		And I select from "Receive currency" drop-down list by "EUR" string
 	* Cash advance holder input by search in line
-		И из выпадающего списка "Cash advance holder" я выбираю по строке 'ari'
-	* Checking entered values
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Sender" стал равен 'Cash desk №3'
-		И     элемент формы с именем "SendCurrency" стал равен 'USD'
-		И     элемент формы с именем "CashAdvanceHolder" стал равен 'Arina Brown'
-		И     элемент формы с именем "Receiver" стал равен 'Cash desk №1'
-		И     элемент формы с именем "ReceiveCurrency" стал равен 'EUR'
-		И я закрыл все окна клиентского приложения
+		And I select from "Cash advance holder" drop-down list by "ari" string
+	* Check entered values
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Sender" became equal to "Cash desk №3"
+		Then the form attribute named "SendCurrency" became equal to "USD"
+		Then the form attribute named "CashAdvanceHolder" became equal to "Arina Brown"
+		Then the form attribute named "Receiver" became equal to "Cash desk №1"
+		Then the form attribute named "ReceiveCurrency" became equal to "EUR"
+		And I close all client application windows
 
-Сценарий: _0154088 check company, operation type, partner, legal name, Partner term, business unit, expence type input by search in line in a CreditDebitNote (in english)
+Scenario: _0154088 check company, operation type, partner, legal name, Partner term, business unit, expence type input by search in line in a CreditDebitNote (in english)
 	* Open a creation form CreditDebitNote
-		И я открываю навигационную ссылку "e1cib/list/Document.CreditDebitNote"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Operation type input by search in line
-		И из выпадающего списка "Operation type" я выбираю по строке 'Recei'
+		And I select from "Operation type" drop-down list by "Recei" string
 	* Partner input by search in line
-		И из выпадающего списка "Partner" я выбираю по строке 'fer'
+		And I select from "Partner" drop-down list by "fer" string
 	* Legal name input by search in line
-		И из выпадающего списка "Legal name" я выбираю по строке 'second'
+		And I select from "Legal name" drop-down list by "second" string
 	* Filling the tabular part by searching the value by line
-		И в таблице "Transactions" я нажимаю на кнопку 'Add'
-		И в таблице "Transactions" я активизирую поле "Partner"
-		И в таблице "Transactions" из выпадающего списка "Partner" я выбираю по строке 'fer'
-		И в таблице "Transactions" я активизирую поле "Partner term"
-		И в таблице "Transactions" из выпадающего списка "Partner term" я выбираю по строке 'without'
-		И в таблице "Transactions" из выпадающего списка "Currency" я выбираю по строке 'lir'
-		И в таблице "Transactions" я активизирую поле "Business unit"
-		И в таблице "Transactions" я выбираю текущую строку
-		И в таблице "Transactions" из выпадающего списка "Business unit" я выбираю по строке 'lo'
-		И в таблице "Transactions" я активизирую поле "Expense type"
-		И в таблице "Transactions" из выпадающего списка "Expense type" я выбираю по строке 'fu'
+		And in the table "Transactions" I click "Add" button
+		And I activate "Partner" field in "Transactions" table
+		And I select "fer" from "Partner" drop-down list by string in "Transactions" table
+		And I activate "Partner term" field in "Transactions" table
+		And I select "without" from "Partner term" drop-down list by string in "Transactions" table
+		And I select "lir" from "Currency" drop-down list by string in "Transactions" table
+		And I activate "Business unit" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I select "lo" from "Business unit" drop-down list by string in "Transactions" table
+		And I activate "Expense type" field in "Transactions" table
+		And I select "fu" from "Expense type" drop-down list by string in "Transactions" table
 	* Filling check
-		И     элемент формы с именем "OperationType" стал равен 'Receivable'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Second Company Ferron BP'
-			И     таблица "Transactions" содержит строки:
+		Then the form attribute named "OperationType" became equal to "Receivable"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Second Company Ferron BP"
+			And "Transactions" table contains lines
 		| 'Partner'   | 'Partner term'                     | 'Business unit'        | 'Currency' | 'Expense type' |
 		| 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Logistics department' | 'TRY'      | 'Fuel'         |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154089 check company, account, currency input by search in line in Incoming payment order (in english)
+Scenario: _0154089 check company, account, currency input by search in line in Incoming payment order (in english)
 	* Open a creation form IncomingPaymentOrder
-		И я открываю навигационную ссылку "e1cib/list/Document.IncomingPaymentOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке Account
-		И из выпадающего списка "Account" я выбираю по строке '2'
+		And I select from "Company" drop-down list by "main" string
+	* Input by string Account
+		And I select from "Account" drop-down list by "2" string
 	* Currency input by search in line
-		И из выпадающего списка "Currency" я выбираю по строке 'dol'
+		And I select from "Currency" drop-down list by "dol" string
 	* Filling the tabular part by searching the value by line
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
-		И в таблице "PaymentList" я активизирую поле "Payer"
-		И в таблице "PaymentList" из выпадающего списка "Payer" я выбираю по строке 'Second Company F'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
+		And I activate "Payer" field in "PaymentList" table
+		And I select "Second Company F" from "Payer" drop-down list by string in "PaymentList" table
 	* Filling check
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Account" стал равен 'Cash desk №2'
-		И     элемент формы с именем "Currency" стал равен 'USD'
-		И     таблица "PaymentList" содержит строки:
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Account" became equal to "Cash desk №2"
+		Then the form attribute named "Currency" became equal to "USD"
+		And "PaymentList" table contains lines
 		| 'Partner'   | 'Payer'                    |
 		| 'Ferron BP' | 'Second Company Ferron BP' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154090 check company, account, currency input by search in line in Outgoing payment order (in english)
+Scenario: _0154090 check company, account, currency input by search in line in Outgoing payment order (in english)
 	* Open a creation form OutgoingPaymentOrder
-		И я открываю навигационную ссылку "e1cib/list/Document.OutgoingPaymentOrder"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
-	* Ввод по строке Account
-		И из выпадающего списка "Account" я выбираю по строке '2'
+		And I select from "Company" drop-down list by "main" string
+	* Input by string Account
+		And I select from "Account" drop-down list by "2" string
 	* Currency input by search in line
-		И из выпадающего списка "Currency" я выбираю по строке 'dol'
+		And I select from "Currency" drop-down list by "dol" string
 	* Filling the tabular part by searching the value by line
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" из выпадающего списка "Partner" я выбираю по строке 'fer'
-		И в таблице "PaymentList" я активизирую поле "Payee"
-		И в таблице "PaymentList" из выпадающего списка "Payee" я выбираю по строке 'Second Company F'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
+		And I activate "Payee" field in "PaymentList" table
+		And I select "Second Company F" from "Payee" drop-down list by string in "PaymentList" table
 	* Filling check
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Account" стал равен 'Cash desk №2'
-		И     элемент формы с именем "Currency" стал равен 'USD'
-		И     таблица "PaymentList" содержит строки:
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Account" became equal to "Cash desk №2"
+		Then the form attribute named "Currency" became equal to "USD"
+		And "PaymentList" table contains lines
 		| 'Partner'   | 'Payee'                    |
 		| 'Ferron BP' | 'Second Company Ferron BP' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: _0154091 check company, account, currency input by search in line in ChequeBondTransaction (in english)
+Scenario: _0154091 check company, account, currency input by search in line in ChequeBondTransaction (in english)
 	* Open a creation form ChequeBondTransaction
-		И я открываю навигационную ссылку "e1cib/list/Document.ChequeBondTransaction"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Currency input by search in line
-		И из выпадающего списка "Currency" я выбираю по строке 'lir'
+		And I select from "Currency" drop-down list by "lir" string
 	* Filling the tabular part by searching the value by line (partner and legal name)
-		И в таблице "ChequeBonds" я нажимаю на кнопку с именем 'ChequeBondsAdd'
-		И в таблице "ChequeBonds" я активизирую поле "Partner"
-		И в таблице "ChequeBonds" из выпадающего списка "Partner" я выбираю по строке 'fer'
-		И в таблице "ChequeBonds" из выпадающего списка "Legal name" я выбираю по строке 'se'
-	* Check filling inданных
-		Тогда элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Currency" стал равен 'TRY'
-		И     таблица "ChequeBonds" содержит строки:
+		And in the table "ChequeBonds" I click the button named "ChequeBondsAdd"
+		And I activate "Partner" field in "ChequeBonds" table
+		And I select "fer" from "Partner" drop-down list by string in "ChequeBonds" table
+		And I select "se" from "Legal name" drop-down list by string in "ChequeBonds" table
+	* Check filling in
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "ChequeBonds" table contains lines
 		| 'Legal name'               | 'Partner'   |
 		| 'Second Company Ferron BP' | 'Ferron BP' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: _0154092 check store, responsible person input by search in line in PhysicalCountByLocation (in english)
+Scenario: _0154092 check store, responsible person input by search in line in PhysicalCountByLocation (in english)
 	* Open a creation form PhysicalCountByLocation
-		И я открываю навигационную ссылку "e1cib/list/Document.PhysicalCountByLocation"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I click the button named "FormCreate"
 	* Store input by search in line
-		И из выпадающего списка "Store" я выбираю по строке '02'
+		And I select from "Store" drop-down list by "02" string
 	* Responsible person input by search in line
-		И из выпадающего списка "Responsible person" я выбираю по строке 'Anna'
-	* Check filling inданных
-		И     элемент формы с именем "Store" стал равен 'Store 02'
-		И     элемент формы с именем "ResponsiblePerson" стал равен 'Anna Petrova'
-		И я закрыл все окна клиентского приложения
+		And I select from "Responsible person" drop-down list by "Anna" string
+	* Check filling in
+		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "ResponsiblePerson" became equal to "Anna Petrova"
+		And I close all client application windows
 
 
-Сценарий: _0154093 check store input by search in line in PhysicalInventory (in english)
+Scenario: _0154093 check store input by search in line in PhysicalInventory (in english)
 	* Open a creation form PhysicalInventory
-		И я открываю навигационную ссылку "e1cib/list/Document.PhysicalInventory"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I click the button named "FormCreate"
 	* Store input by search in line
-		И из выпадающего списка "Store" я выбираю по строке '02'
-	* Check filling inданных
-		И     элемент формы с именем "Store" стал равен 'Store 02'
-		И я закрыл все окна клиентского приложения
+		And I select from "Store" drop-down list by "02" string
+	* Check filling in
+		Then the form attribute named "Store" became equal to "Store 02"
+		And I close all client application windows
 
 
-Сценарий: _0154094 check store, company, tabular part input by search in line in StockAdjustmentAsWriteOff (in english)
+Scenario: _0154094 check store, company, tabular part input by search in line in StockAdjustmentAsWriteOff (in english)
 	* Open a creation form StockAdjustmentAsWriteOff
-		И я открываю навигационную ссылку "e1cib/list/Document.StockAdjustmentAsWriteOff"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I click the button named "FormCreate"
 	* Store input by search in line
-		И из выпадающего списка "Store" я выбираю по строке '02'
+		And I select from "Store" drop-down list by "02" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'Main'
+		And I select from "Company" drop-down list by "Main" string
 	* Check filling in
-		И     элемент формы с именем "Store" стал равен 'Store 02'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
+		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "Company" became equal to "Main Company"
 	* Business unit, expence type input by search in line
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я активизирую поле "Business unit"
-		И в таблице "ItemList" из выпадающего списка "Business unit" я выбираю по строке 'log'
-		И я перехожу к следующему реквизиту
-		И в таблице "ItemList" я активизирую поле "Expense type"
-		И в таблице "ItemList" из выпадающего списка "Expense type" я выбираю по строке 'fu'
+		And I click the button named "Add"
+		And I activate "Business unit" field in "ItemList" table
+		And I select "log" from "Business unit" drop-down list by string in "ItemList" table
+		And I move to the next attribute
+		And I activate "Expense type" field in "ItemList" table
+		And I select "fu" from "Expense type" drop-down list by string in "ItemList" table
 	* Check filling in
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Business unit'        | 'Expense type' |
 		| 'Logistics department' | 'Fuel'         |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: _0154095 check store, company, tabular part input by search in line in StockAdjustmentAsSurplus (in english)
+Scenario: _0154095 check store, company, tabular part input by search in line in StockAdjustmentAsSurplus (in english)
 	* Open a creation form StockAdjustmentAsSurplus
-		И я открываю навигационную ссылку "e1cib/list/Document.StockAdjustmentAsSurplus"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I click the button named "FormCreate"
 	* Store input by search in line
-		И из выпадающего списка "Store" я выбираю по строке '02'
+		And I select from "Store" drop-down list by "02" string
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'Main'
+		And I select from "Company" drop-down list by "Main" string
 	* Check filling in
-		И     элемент формы с именем "Store" стал равен 'Store 02'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
+		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "Company" became equal to "Main Company"
 	* Business unit, expence type input by search in line
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я активизирую поле "Business unit"
-		И в таблице "ItemList" из выпадающего списка "Business unit" я выбираю по строке 'log'
-		И я перехожу к следующему реквизиту
-		И в таблице "ItemList" я активизирую поле "Revenue type"
-		И в таблице "ItemList" из выпадающего списка "Revenue type" я выбираю по строке 'fu'
+		And I click the button named "Add"
+		And I activate "Business unit" field in "ItemList" table
+		And I select "log" from "Business unit" drop-down list by string in "ItemList" table
+		And I move to the next attribute
+		And I activate "Revenue type" field in "ItemList" table
+		And I select "fu" from "Revenue type" drop-down list by string in "ItemList" table
 	* Check filling in
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Business unit'        | 'Revenue type' |
 		| 'Logistics department' | 'Fuel'         |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: _0154096 check company, account, currency input by search in line in Opening Entry (in english)
+Scenario: _0154096 check company, account, currency input by search in line in Opening Entry (in english)
 	* Open a creation form OpeningEntry
-		И я открываю навигационную ссылку "e1cib/list/Document.OpeningEntry"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
 	* Company input by search in line
-		И из выпадающего списка "Company" я выбираю по строке 'main'
+		And I select from "Company" drop-down list by "main" string
 	* Filling the tabular part by searching the value by line Inventory
-		И я перехожу к закладке "Inventory"
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" из выпадающего списка "Item" я выбираю по строке 'dress'
-		И в таблице "Inventory" я активизирую поле "Item key"
-		И в таблице "Inventory" из выпадающего списка "Item key" я выбираю по строке 'L'
-		И в таблице "Inventory" я активизирую поле "Store"
-		И в таблице "Inventory" из выпадающего списка "Store" я выбираю по строке '01'
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '2,000'
+		And I move to "Inventory" tab
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I select "dress" from "Item" drop-down list by string in "Inventory" table
+		And I activate "Item key" field in "Inventory" table
+		And I select "L" from "Item key" drop-down list by string in "Inventory" table
+		And I activate "Store" field in "Inventory" table
+		And I select "01" from "Store" drop-down list by string in "Inventory" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "2,000" text in "Quantity" field of "Inventory" table
 	* Filling the tabular part by searching the value by line Account balance
-		И я перехожу к закладке "Account balance"
-		И в таблице "AccountBalance" я нажимаю на кнопку с именем 'AccountBalanceAdd'
-		И в таблице "AccountBalance" из выпадающего списка 'Account' я выбираю по строке '№1'
-		И в таблице "AccountBalance" из выпадающего списка 'Currency' я выбираю по строке 't'
+		And I move to "Account balance" tab
+		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
+		And I select "№1" from "Account" drop-down list by string in "AccountBalance" table
+		And I select "t" from "Currency" drop-down list by string in "AccountBalance" table
 	* Filling the tabular part by searching the value by line Advance
-		И я перехожу к закладке "Advance"
-		И в таблице "AdvanceFromCustomers" я нажимаю на кнопку с именем 'AdvanceFromCustomersAdd'
-		И в таблице "AdvanceFromCustomers" из выпадающего списка "Partner" я выбираю по строке 'fer'
-		И я перехожу к следующему реквизиту
-		И в таблице "AdvanceFromCustomers" я активизирую поле с именем "AdvanceFromCustomersLegalName"
-		И в таблице "AdvanceFromCustomers" из выпадающего списка "Legal name" я выбираю по строке 'se'
-		И в таблице "AccountBalance" из выпадающего списка 'Currency' я выбираю по строке 't'
-		И я перехожу к закладке "To suppliers"
-		И в таблице "AdvanceToSuppliers" я нажимаю на кнопку с именем 'AdvanceToSuppliersAdd'
-		И в таблице "AdvanceToSuppliers" из выпадающего списка "Partner" я выбираю по строке 'fer'
-		И я перехожу к следующему реквизиту
-		И в таблице "AdvanceFromCustomers" я активизирую поле с именем "AdvanceFromCustomersLegalName"
-		И в таблице "AdvanceToSuppliers" из выпадающего списка "Legal name" я выбираю по строке 'se'
-		И в таблице "AdvanceToSuppliers" из выпадающего списка 'Currency' я выбираю по строке 't'
+		And I move to "Advance" tab
+		And in the table "AdvanceFromCustomers" I click the button named "AdvanceFromCustomersAdd"
+		And I select "fer" from "Partner" drop-down list by string in "AdvanceFromCustomers" table
+		And I move to the next attribute
+		And I activate field named "AdvanceFromCustomersLegalName" in "AdvanceFromCustomers" table
+		And I select "se" from "Legal name" drop-down list by string in "AdvanceFromCustomers" table
+		And I select "t" from "Currency" drop-down list by string in "AccountBalance" table
+		And I move to "To suppliers" tab
+		And in the table "AdvanceToSuppliers" I click the button named "AdvanceToSuppliersAdd"
+		And I select "fer" from "Partner" drop-down list by string in "AdvanceToSuppliers" table
+		And I move to the next attribute
+		And I activate field named "AdvanceFromCustomersLegalName" in "AdvanceFromCustomers" table
+		And I select "se" from "Legal name" drop-down list by string in "AdvanceToSuppliers" table
+		And I select "t" from "Currency" drop-down list by string in "AdvanceToSuppliers" table
 	* Filling the tabular part by searching the value by line Account payable
 		* By Partner terms
-			И я перехожу к закладке "Account payable"
-			И в таблице "AccountPayableByAgreements" я нажимаю на кнопку с именем 'AccountPayableByAgreementsAdd'
-			И в таблице "AccountPayableByAgreements" из выпадающего списка с именем "AccountPayableByAgreementsPartner" я выбираю по строке 'fer'
-			И я перехожу к следующему реквизиту
-			И в таблице "AccountPayableByAgreements" из выпадающего списка с именем "AccountPayableByAgreementsLegalName" я выбираю по строке 'sec'
-			И в таблице "AccountPayableByAgreements" из выпадающего списка с именем "AccountPayableByAgreementsAgreement" я выбираю по строке 'usd'
-			И в таблице "AccountPayableByAgreements" из выпадающего списка с именем "AccountPayableByAgreementsCurrency" я выбираю по строке 't'
+			And I move to "Account payable" tab
+			And in the table "AccountPayableByAgreements" I click the button named "AccountPayableByAgreementsAdd"
+			And I select "fer" by string from the drop-down list named "AccountPayableByAgreementsPartner" in "AccountPayableByAgreements" table
+			And I move to the next attribute
+			And I select "sec" by string from the drop-down list named "AccountPayableByAgreementsLegalName" in "AccountPayableByAgreements" table
+			And I select "usd" by string from the drop-down list named "AccountPayableByAgreementsAgreement" in "AccountPayableByAgreements" table
+			And I select "t" by string from the drop-down list named "AccountPayableByAgreementsCurrency" in "AccountPayableByAgreements" table
 		* By documents
-			И я перехожу к закладке с именем "GroupAccountPayableByDocuments"
-			И в таблице "AccountPayableByDocuments" я нажимаю на кнопку с именем 'AccountPayableByDocumentsAdd'
-			И в таблице "AccountPayableByDocuments" из выпадающего списка с именем "AccountPayableByDocumentsPartner" я выбираю по строке 'fer'
-			И я перехожу к следующему реквизиту
-			И в таблице "AccountPayableByDocuments" из выпадающего списка с именем "AccountPayableByDocumentsLegalName" я выбираю по строке 's'
-			И в таблице "AccountPayableByDocuments" я активизирую поле с именем "AccountPayableByDocumentsAgreement"
-			И в таблице "AccountPayableByDocuments" из выпадающего списка с именем "AccountPayableByDocumentsAgreement" я выбираю по строке 've'
-			И в таблице "AccountPayableByDocuments" из выпадающего списка с именем "AccountPayableByDocumentsCurrency" я выбираю по строке 't'
-			И в таблице "AccountPayableByDocuments" я завершаю редактирование строки
+			And I move to the tab named "GroupAccountPayableByDocuments"
+			And in the table "AccountPayableByDocuments" I click the button named "AccountPayableByDocumentsAdd"
+			And I select "fer" by string from the drop-down list named "AccountPayableByDocumentsPartner" in "AccountPayableByDocuments" table
+			And I move to the next attribute
+			And I select "s" by string from the drop-down list named "AccountPayableByDocumentsLegalName" in "AccountPayableByDocuments" table
+			And I activate field named "AccountPayableByDocumentsAgreement" in "AccountPayableByDocuments" table
+			And I select "ve" by string from the drop-down list named "AccountPayableByDocumentsAgreement" in "AccountPayableByDocuments" table
+			And I select "t" by string from the drop-down list named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
+			And I finish line editing in "AccountPayableByDocuments" table
 	* Filling the tabular part by searching the value by line Account receivable
 		* By Partner terms
-			И я перехожу к закладке "Account receivable"
-			И в таблице "AccountReceivableByAgreements" я нажимаю на кнопку с именем 'AccountReceivableByAgreementsAdd'
-			И в таблице "AccountReceivableByAgreements" из выпадающего списка с именем "AccountReceivableByAgreementsPartner" я выбираю по строке 'DF'
-			И я перехожу к следующему реквизиту
-			И в таблице "AccountReceivableByAgreements" из выпадающего списка с именем "AccountReceivableByAgreementsLegalName" я выбираю по строке 'DF'
-			# И в таблице "AccountReceivableByAgreements" из выпадающего списка с именем "AccountReceivableByAgreementsAgreement" я выбираю по строке 'DF'
-			И в таблице "AccountReceivableByAgreements" из выпадающего списка с именем "AccountReceivableByAgreementsCurrency" я выбираю по строке 't'
+			And I move to "Account receivable" tab
+			And in the table "AccountReceivableByAgreements" I click the button named "AccountReceivableByAgreementsAdd"
+			And I select "DF" by string from the drop-down list named "AccountReceivableByAgreementsPartner" in "AccountReceivableByAgreements" table
+			And I move to the next attribute
+			And I select "DF" by string from the drop-down list named "AccountReceivableByAgreementsLegalName" in "AccountReceivableByAgreements" table
+			And I select "t" by string from the drop-down list named "AccountReceivableByAgreementsCurrency" in "AccountReceivableByAgreements" table
 		* By documents
-			И я перехожу к закладке с именем "GroupAccountReceivableByDocuments"
-			И в таблице "AccountReceivableByDocuments" я нажимаю на кнопку с именем 'AccountReceivableByDocumentsAdd'
-			И в таблице "AccountReceivableByDocuments" из выпадающего списка с именем "AccountReceivableByDocumentsPartner" я выбираю по строке 'DF'
-			И я перехожу к следующему реквизиту
-			И в таблице "AccountReceivableByDocuments" из выпадающего списка с именем "AccountReceivableByDocumentsLegalName" я выбираю по строке 'DF'
-			# И в таблице "AccountReceivableByDocuments" я активизирую поле с именем "AccountReceivableByDocumentsPartner term"
-			# И в таблице "AccountReceivableByDocuments" из выпадающего списка с именем "AccountReceivableByDocumentsPartner term" я выбираю по строке 'DF'
-			И в таблице "AccountReceivableByDocuments" из выпадающего списка с именем "AccountReceivableByDocumentsCurrency" я выбираю по строке 't'
-			И в таблице "AccountReceivableByDocuments" я завершаю редактирование строки
+			And I move to the tab named "GroupAccountReceivableByDocuments"
+			And in the table "AccountReceivableByDocuments" I click the button named "AccountReceivableByDocumentsAdd"
+			And I select "DF" by string from the drop-down list named "AccountReceivableByDocumentsPartner" in "AccountReceivableByDocuments" table
+			And I move to the next attribute
+			And I select "DF" by string from the drop-down list named "AccountReceivableByDocumentsLegalName" in "AccountReceivableByDocuments" table
+			And I select "t" by string from the drop-down list named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
+			And I finish line editing in "AccountReceivableByDocuments" table
 	* Filling check
-		И Пауза 2
-		И     таблица "Inventory" содержит строки:
+		And Delay 2
+		And "Inventory" table contains lines
 		| 'Item'  | 'Quantity' | 'Item key' | 'Store'    |
 		| 'Dress' | '2,000'    | 'L/Green' | 'Store 01' |
-		И     таблица "AccountBalance" содержит строки:
+		And "AccountBalance" table contains lines
 			| 'Account'      | 'Currency' |
 			| 'Cash desk №1' | 'TRY'      |
-		И     таблица "AdvanceFromCustomers" содержит строки:
+		And "AdvanceFromCustomers" table contains lines
 			| 'Partner'   | 'Legal name'               |
 			| 'Ferron BP' | 'Second Company Ferron BP' |
-		И     таблица "AdvanceToSuppliers" содержит строки:
+		And "AdvanceToSuppliers" table contains lines
 			| 'Partner'   | 'Legal name'               |
 			| 'Ferron BP' | 'Second Company Ferron BP' |
-		И     таблица "AccountPayableByAgreements" содержит строки:
+		And "AccountPayableByAgreements" table contains lines
 			| 'Partner'   | 'Partner term'          | 'Legal name'               | 'Currency' |
 			| 'Ferron BP' | 'Vendor Ferron, USD' | 'Second Company Ferron BP' | 'TRY'      |
-		И     таблица "AccountPayableByDocuments"  содержит строки:
+		And "AccountPayableByDocuments" table contains lines
 			| 'Partner'   | 'Partner term'          | 'Legal name'               | 'Currency' |
 			| 'Ferron BP' | 'Vendor Ferron, TRY' | 'Second Company Ferron BP' | 'TRY'      |
-		И     таблица "AccountReceivableByAgreements" содержит строки:
+		And "AccountReceivableByAgreements" table contains lines
 			| 'Partner' | 'Legal name' | 'Currency' |
 			| 'DFC'     | 'DFC'        | 'TRY'      |
-		И     таблица "AccountReceivableByDocuments"  содержит строки:
+		And "AccountReceivableByDocuments" table contains lines
 			| 'Partner' | 'Legal name' | 'Currency' |
 			| 'DFC'     | 'DFC'        | 'TRY'      |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _0154097 check company and account (in english) input by search in line in Cash revenue
+Scenario: _0154097 check company and account (in english) input by search in line in Cash revenue
 	* Open a creation form Cash revenue
-		И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Company input by search in line и account
-		И из выпадающего списка "Company" я выбираю по строке 'main'
-		И из выпадающего списка "Account" я выбираю по строке 'TRY'
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I click the button named "FormCreate"
+	* Company input by search in line and account
+		And I select from "Company" drop-down list by "main" string
+		And I select from "Account" drop-down list by "TRY" string
 	* Filling check
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Account" стал равен 'Bank account, TRY'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+	And I close all client application windows
 
 
 
-Сценарий: _0154098 check company и account (in english) input by search in line in CashExpense
+Scenario: _0154098 check company and account (in english) input by search in line in CashExpense
 	* Open a creation form CashExpense
-		И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Company input by search in line и account
-		И из выпадающего списка "Company" я выбираю по строке 'main'
-		И из выпадающего списка "Account" я выбираю по строке 'TRY'
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I click the button named "FormCreate"
+	* Company input by search in line and account
+		And I select from "Company" drop-down list by "main" string
+		And I select from "Account" drop-down list by "TRY" string
 	* Filling check
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Account" стал равен 'Bank account, TRY'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+	And I close all client application windows
 
-Сценарий: _0154099 check partner и legal name (in english) input by search in line in Invoice Match
-	И я закрыл все окна клиентского приложения
+Scenario: _0154099 check partner and legal name (in english) input by search in line in Invoice Match
+	And I close all client application windows
 	* Open document form
-		И я открываю навигационную ссылку 'e1cib/list/Document.InvoiceMatch'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Checking the filter when typing by Partner/Legal name
-		И в таблице "Transactions" я нажимаю на кнопку с именем 'TransactionsAdd'
-		И в таблице "Transactions" из выпадающего списка с именем "TransactionsPartner" я выбираю по строке 'MIO'
-		И в таблице "Transactions" из выпадающего списка с именем "TransactionsLegalName" я выбираю по строке 'Company Kalipso'
-	* Checking that there is only one legal name available for selection
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита с именем "TransactionsLegalName"
-		Тогда таблица "List" стала равной:
+		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
+		And I click the button named "FormCreate"
+	* Check the filter when typing by Partner/Legal name
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I select "MIO" by string from the drop-down list named "TransactionsPartner" in "Transactions" table
+		And I select "Company Kalipso" by string from the drop-down list named "TransactionsLegalName" in "Transactions" table
+	* Check that there is only one legal name available for selection
+		And I click choice button of the attribute named "TransactionsLegalName" in "Transactions" table
+		And "List" table became equal
 		| 'Description' |
 		| 'Company Kalipso'         |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
 
-Сценарий: _010018 check the display on the Partners Description ENG form after changes (without re-open)
+Scenario: _010018 check the display on the Partners Description ENG form after changes (without re-open)
 	* Open catalog Partners
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Select Anna Petrova
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Anna Petrova'         |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Changing Description_en to Anna Petrova1 and display checking
-		И в поле 'ENG' я ввожу текст 'Anna Petrova1'
-		И я нажимаю на кнопку 'Save'
-		Тогда элемент формы с именем "Description_en" стал равен 'Anna Petrova1'
+		And I input "Anna Petrova1" text in "ENG" field
+		And I click "Save" button
+		Then the form attribute named "Description_en" became equal to "Anna Petrova1"
 	* Changing Description_en back and display checking
-		И в поле 'ENG' я ввожу текст 'Anna Petrova'
-		И я нажимаю на кнопку 'Save'
-		Тогда элемент формы с именем "Description_en" стал равен 'Anna Petrova'
-		И я нажимаю на кнопку 'Save and close'
+		And I input "Anna Petrova" text in "ENG" field
+		And I click "Save" button
+		Then the form attribute named "Description_en" became equal to "Anna Petrova"
+		And I click "Save and close" button
 
-Сценарий: _010019 check the display on the Company Description ENG form after changes (without re-open)
+Scenario: _010019 check the display on the Company Description ENG form after changes (without re-open)
 	* Open catalog Companies
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Companies"
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
 	* Select Company Lomaniti
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Company Lomaniti'         |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Changing Description_en to Company Lomaniti1 and display checking
-		И в поле 'ENG' я ввожу текст 'Company Lomaniti1'
-		И я нажимаю на кнопку 'Save'
-		Тогда элемент формы с именем "Description_en" стал равен 'Company Lomaniti1'
-		И в поле 'ENG' я ввожу текст 'Company Lomaniti'
-		И я нажимаю на кнопку 'Save'
+		And I input "Company Lomaniti1" text in "ENG" field
+		And I click "Save" button
+		Then the form attribute named "Description_en" became equal to "Company Lomaniti1"
+		And I input "Company Lomaniti" text in "ENG" field
+		And I click "Save" button
 	* Changing Description_en back and display checking
-		Тогда элемент формы с именем "Description_en" стал равен 'Company Lomaniti'
-		И я нажимаю на кнопку 'Save and close'
+		Then the form attribute named "Description_en" became equal to "Company Lomaniti"
+		And I click "Save and close" button
 
 
-Сценарий: _010017 check the move to the Company tab from the Partner (shows the partner's Legal name)
+Scenario: _010017 check the move to the Company tab from the Partner (shows the partner's Legal name)
 	* Open catalog Partners
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Select Ferron BP
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
+		And I select current line in "List" table
+		And Delay 2
 	* Check the move to the Company tab
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Company'
-		Тогда таблица "List" стала равной:
+		And In this window I click command interface button "Company"
+		And "List" table became equal
 			| 'Description'       |
 			| 'Company Ferron BP' |
 			| 'Second Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я проверяю отображение информации по Company
-			Тогда элемент формы с именем "Country" стал равен 'Turkey'
-			И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-			И     элемент формы с именем "Description_en" стал равен 'Company Ferron BP'
-		И Я закрываю текущее окно
-		И Я закрываю текущее окно
+		And I select current line in "List" table
+		* Check the display of Company information
+			Then the form attribute named "Country" became equal to "Turkey"
+			Then the form attribute named "Partner" became equal to "Ferron BP"
+			Then the form attribute named "Description_en" became equal to "Company Ferron BP"
+		And I close current window
+		And I close current window
 
-Сценарий: _005034 check filling in the required fields in the Items catalog
-	И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-	Когда creating a catalog element with the name Test.
-	Если в текущем окне есть сообщения пользователю Тогда
-	И     Я закрываю текущее окно
-	Тогда открылось окно '1C:Enterprise'
-	И я нажимаю на кнопку 'No'
-
-
-Сценарий: _005035 check filling in the required fields in the AddAttributeAndPropertyValues catalog 
-	И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
-	Когда creating a catalog element with the name Test.
-	Если в текущем окне есть сообщения пользователю Тогда
-	И     Я закрываю текущее окно
-	Тогда открылось окно '1C:Enterprise'
-	И я нажимаю на кнопку 'No'
+Scenario: _005034 check filling in the required fields in the Items catalog
+	Given I open hyperlink "e1cib/list/Catalog.Items"
+	When create a catalog element with the name Test
+	If current window contains user messages Then
+	And I close current window
+	Then "1C:Enterprise" window is opened
+	And I click "No" button
 
 
+Scenario: _005035 check filling in the required fields in the AddAttributeAndPropertyValues catalog 
+	Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
+	When create a catalog element with the name Test
+	If current window contains user messages Then
+	And I close current window
+	Then "1C:Enterprise" window is opened
+	And I click "No" button
 
-Сценарий: _005037 check filling in the required fields in the Users catalog 
-	И я открываю навигационную ссылку "e1cib/list/Catalog.Users"
-	Когда creating a catalog element with the name Test.
-	И Я закрываю текущее окно
-	Тогда открылось окно '1C:Enterprise'
-	И я нажимаю на кнопку 'No'
 
 
-Сценарий: _005118 check the display on the Items Description ENG form after changes (without re-open)
+Scenario: _005037 check filling in the required fields in the Users catalog 
+	Given I open hyperlink "e1cib/list/Catalog.Users"
+	When create a catalog element with the name Test
+	And I close current window
+	Then "1C:Enterprise" window is opened
+	And I click "No" button
+
+
+Scenario: _005118 check the display on the Items Description ENG form after changes (without re-open)
 	* Open Item Box
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Box'         |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Changing Description_en to Box1 and display checking
-		И в поле 'ENG' я ввожу текст 'Box1'
-		И я нажимаю на кнопку 'Save'
-		Тогда элемент формы с именем "Description_en" стал равен 'Box1'
-		И в поле 'ENG' я ввожу текст 'Box'
-		И я нажимаю на кнопку 'Save'
+		And I input "Box1" text in "ENG" field
+		And I click "Save" button
+		Then the form attribute named "Description_en" became equal to "Box1"
+		And I input "Box" text in "ENG" field
+		And I click "Save" button
 	* Changing Description_en back
-		Тогда элемент формы с именем "Description_en" стал равен 'Box'
-		И я нажимаю на кнопку 'Save and close'
+		Then the form attribute named "Description_en" became equal to "Box"
+		And I click "Save and close" button
 
-Сценарий: _012008 check the display on the Partner term Description ENG form after changes (without re-open)
+Scenario: _012008 check the display on the Partner term Description ENG form after changes (without re-open)
 	* Open Personal Partner terms, $ (catalog Partner terms)  
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Personal Partner terms, $'         |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Changing Description_en to Personal Partner terms, $ 1 and display checking
-		И в поле 'ENG' я ввожу текст 'Personal Partner terms, $ 1'
-		И я нажимаю на кнопку 'Save'
-		Тогда элемент формы с именем "Description_en" стал равен 'Personal Partner terms, $ 1'
+		And I input "Personal Partner terms, $ 1" text in "ENG" field
+		And I click "Save" button
+		Then the form attribute named "Description_en" became equal to "Personal Partner terms, $ 1"
 	* Changing Description_en back
-		И в поле 'ENG' я ввожу текст 'Personal Partner terms, $'
-		И я нажимаю на кнопку 'Save'
-		Тогда элемент формы с именем "Description_en" стал равен 'Personal Partner terms, $'
-		И я нажимаю на кнопку 'Save and close'
+		And I input "Personal Partner terms, $" text in "ENG" field
+		And I click "Save" button
+		Then the form attribute named "Description_en" became equal to "Personal Partner terms, $"
+		And I click "Save and close" button
 
-Сценарий: _012009 check the move to Partner terms from the Partner card (shows available partner Partner terms)
+Scenario: _012009 check the move to Partner terms from the Partner card (shows available partner Partner terms)
 	* Open Ferron BP (catalog Partners)
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
+		And I select current line in "List" table
+		And Delay 2
 	* Moving to Partner terms
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner terms'
+		And In this window I click command interface button "Partner terms"
 	* Check the display of only available Partner terms
-		И я запоминаю количество строк таблицы "List" как "QS"
-		Тогда переменная "QS" имеет значение 8
-		Тогда таблица "List" содержит строки:
+		And I save number of "List" table lines as "QS"
+		Then "QS" variable is equal to 8
+		And "List" table contains lines
 			| Description                     |
 			| Basic Partner terms, TRY         |
 			| Basic Partner terms, $           |
@@ -3725,502 +3722,503 @@ I want to check the form display and autofill documents
 			| Vendor Ferron, EUR            |
 			| Sale autum, TRY               |
 			| Ferron, USD               |
-		И Я закрываю текущее окно
+		And I close current window
 	
 
-Сценарий: сheck the filter by Company and Legal name field when creating an Partner term
+Scenario: check the filter by Company and Legal name field when creating an Partner term
 	* Open a creation form Partner term
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I click the button named "FormCreate"
 	* Check the filter by Company
-		И я нажимаю кнопку выбора у поля "Company"
-		Тогда таблица "List" стала равной:
+		And I click Select button of "Company" field
+		And "List" table became equal
 			| 'Description'              |
 			| 'Main Company'             |
 			| 'Second Company'           |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the filter by Legal name
-		И я нажимаю кнопку выбора у поля "Legal name"
-		Тогда таблица "List" не содержит строки:
+		And I click Select button of "Legal name" field
+		And "List" table does not contain lines
 			| 'Description'              |
 			| 'Main Company'             |
 			| 'Second Company'           |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the filter by partners Legal name 
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		Тогда таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And "List" table does not contain lines
 		| 'Description'              |
 		| 'Company Ferron BP'        |
 		| 'DFC'                      |
 		| 'Big foot'                 |
 		| 'Second Company Ferron BP' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: filter check by Partner segment when creating an Partner term
+Scenario: filter check by Partner segment when creating an Partner term
 	* Open a creation form Partner term
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя 'Type' на 'Customer'
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I click the button named "FormCreate"
+		And I change "Type" radio button value to "Customer"
 	* Check the filter by Partner segment
-		И я нажимаю кнопку выбора у поля "Partner segment"
-		Тогда таблица "List" содержит строки:
+		And I click Select button of "Partner segment" field
+		And "List" table contains lines
 			| 'Description' |
 			| 'Retail'      |
 			| 'Dealer'      |
-		Тогда таблица "List" не содержит строки:
+		And "List" table does not contain lines
 			| 'Description' |
 			| 'Region 1'    |
 			| 'Region 2'    |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	
 
-Сценарий: inability to create your own company for Partner
+Scenario: inability to create your own company for Partner
 	* Open Partner
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Company'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		And I select current line in "List" table
+		And In this window I click command interface button "Company"
+		And I click the button named "FormCreate"
 	* Check that Our checkbox is not available
-		Если элемент "Our" не доступен для редактирования Тогда
+		If "Our" attribute is not editable Then
 
-Сценарий: check the selection of the segment manager in the sales order
+Scenario: check the selection of the segment manager in the sales order
 	* Open the Sales order creation form
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Filling in Partner and Legal name
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Other"
-		И я разворачиваю группу "More"
-		И я нажимаю кнопку выбора у поля "Manager segment"
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I expand "More" group
+		And I click Select button of "Manager segment" field
 	* Check the display of manager segments
-		Тогда таблица "List" стала равной:
+		And "List" table became equal
 		| 'Description' |
 		| 'Region 1'    |
 		| 'Region 2'    |
 
 
 
-Сценарий: check row key when cloning a string in Sales order
+Scenario: check row key when cloning a string in Sales order
 	* Filling in the details of the documentsales order
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'                   |
 			| 'Basic Partner terms, without VAT' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in Sales order
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItem"
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListContextMenuCopy'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post'
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItem" in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
 	* Check that the row keys do not match
-		И я нажимаю на кнопку 'Registrations report'
-		И я запоминаю значение ячейки табличного документа "ResultTable" "R34C8" в переменную "Rov1"
-		И я запоминаю значение ячейки табличного документа "ResultTable" "R35C8" в переменную "Rov2"
-		И я вывожу значение переменной "Rov1"
-		И я вывожу значение переменной "Rov2"
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-		И в таблице "List" я перехожу к строке:
+		And I click "Registrations report" button
+		And I save spreadsheet document cell value "ResultTable" "R34C8" to "Rov1" variable
+		And I save spreadsheet document cell value "ResultTable" "R35C8" to "Rov2" variable
+		And I display "Rov1" variable value
+		And I display "Rov2" variable value
+		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		And I go to line in "List" table
 		| 'Row key' |
 		| '$Rov1$'    |
-		И в таблице "List" я активизирую поле "Row key"
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuFindByCurrentValue'
-		Тогда в таблице "List" количество строк "меньше или равно" 1
+		And I activate "Row key" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
+		Then the number of "List" table lines is "меньше или равно" 1
 
-Сценарий: check row key when cloning a string in Sales invoice
+Scenario: check row key when cloning a string in Sales invoice
 	* Filling in the details of the document Sales invoice
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'                   |
 			| 'Basic Partner terms, without VAT' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in Sales invoice
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItem"
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListContextMenuCopy'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post'
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItem" in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
 	* Check that the row keys do not match
-		И я нажимаю на кнопку 'Registrations report'
-		И я запоминаю значение ячейки табличного документа "ResultTable" "R19C8" в переменную "Rov1"
-		И я запоминаю значение ячейки табличного документа "ResultTable" "R20C8" в переменную "Rov2"
-		И я вывожу значение переменной "Rov1"
-		И я вывожу значение переменной "Rov2"
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
-		И в таблице "List" я перехожу к строке:
+		And I click "Registrations report" button
+		And I save spreadsheet document cell value "ResultTable" "R19C8" to "Rov1" variable
+		And I save spreadsheet document cell value "ResultTable" "R20C8" to "Rov2" variable
+		And I display "Rov1" variable value
+		And I display "Rov2" variable value
+		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
+		And I go to line in "List" table
 		| 'Row key' |
 		| '$Rov1$'    |
-		И в таблице "List" я активизирую поле "Row key"
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuFindByCurrentValue'
-		Тогда в таблице "List" количество строк "меньше или равно" 1
+		And I activate "Row key" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
+		Then the number of "List" table lines is "меньше или равно" 1
 
-Сценарий: check row key when cloning a string in Purchase order
+Scenario: check row key when cloning a string in Purchase order
 	* Filling in the details of the document Purchase order
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Ferron BP'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I select "Approved" exact value from "Status" drop-down list
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Store 02'     |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in Purchase order
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Price"
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '100,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItem"
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListContextMenuCopy'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post'
+		And I select current line in "List" table
+		And I activate "Price" field in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItem" in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
 	* Check that the row keys do not match
-		И я нажимаю на кнопку 'Registrations report'
-		И я запоминаю значение ячейки табличного документа "ResultTable" "R6C9" в переменную "Rov1"
-		И я запоминаю значение ячейки табличного документа "ResultTable" "R7C9" в переменную "Rov2"
-		И я вывожу значение переменной "Rov1"
-		И я вывожу значение переменной "Rov2"
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsReceiptSchedule'
-		И в таблице "List" я перехожу к строке:
+		And I click "Registrations report" button
+		And I save spreadsheet document cell value "ResultTable" "R6C9" to "Rov1" variable
+		And I save spreadsheet document cell value "ResultTable" "R7C9" to "Rov2" variable
+		And I display "Rov1" variable value
+		And I display "Rov2" variable value
+		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsReceiptSchedule"
+		And I go to line in "List" table
 		| 'Row key' |
 		| '$Rov1$'    |
-		И в таблице "List" я активизирую поле "Row key"
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuFindByCurrentValue'
-		Тогда в таблице "List" количество строк "меньше или равно" 1
+		And I activate "Row key" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
+		Then the number of "List" table lines is "меньше или равно" 1
 
-Сценарий: check row key when cloning a string in Shipment confirmation
+Scenario: check row key when cloning a string in Shipment confirmation
 	* Filling in the details of the document Shipment confirmation
-		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+		And I select "Sales" exact value from "Transaction type" drop-down list
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Ferron BP'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in Shipment confirmation
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Quantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItem"
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListContextMenuCopy'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post'
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItem" in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
 	* Check that the row keys do not match
-		И я нажимаю на кнопку 'Registrations report'
-		И я запоминаю значение ячейки табличного документа "ResultTable" "R6C8" в переменную "Rov1"
-		И я запоминаю значение ячейки табличного документа "ResultTable" "R7C8" в переменную "Rov2"
-		И я вывожу значение переменной "Rov1"
-		И я вывожу значение переменной "Rov2"
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
-		И в таблице "List" я перехожу к строке:
+		And I click "Registrations report" button
+		And I save spreadsheet document cell value "ResultTable" "R6C8" to "Rov1" variable
+		And I save spreadsheet document cell value "ResultTable" "R7C8" to "Rov2" variable
+		And I display "Rov1" variable value
+		And I display "Rov2" variable value
+		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
+		And I go to line in "List" table
 		| 'Row key' |
 		| '$Rov1$'    |
-		И в таблице "List" я активизирую поле "Row key"
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuFindByCurrentValue'
-		Тогда в таблице "List" количество строк "меньше или равно" 1
+		And I activate "Row key" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
+		Then the number of "List" table lines is "меньше или равно" 1
 
 
 
 
 
 
-Сценарий: check filling in procurement method using the button Fill in SO
+Scenario: check filling in procurement method using the button Fill in SO
 	* Open a creation form Sales order
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Filling in the details
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Adding items to Sales order (4 string)
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Shirt'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '38/Black' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '5,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '38/18SD'  |
-		И в таблице "List" я активизирую поле "Item"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '8,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item" field in "List" table
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "8,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'High shoes'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| 'Item'       | 'Item key' |
 			| 'High shoes' | '37/19SD'  |
-		И в таблице "List" я активизирую поле "Item"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item" field in "List" table
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я активизирую поле "Item"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '3,000'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I activate "Item" field in "List" table
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "3,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check the button
-		И в таблице "ItemList" я перехожу к строке:
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Q'     |
 			| 'Shirt' | '38/Black' | '5,000' |
-		И В таблице  "ItemList" я перехожу на одну строку вниз с выделением
-		И в таблице "ItemList" я нажимаю на кнопку 'Procurement'
-		И я устанавливаю флаг 'Stock'
-		И я нажимаю на кнопку 'OK'
-		И в таблице "ItemList" я перехожу к строке:
+		And I move one line down in "ItemList" table and select line
+		And in the table "ItemList" I click "Procurement" button
+		And I set checkbox "Stock"
+		And I click "OK" button
+		And I go to line in "ItemList" table
 			| 'Item'       | 'Item key' | 'Q'     |
 			| 'High shoes' | '37/19SD'  | '2,000' |
-		И В таблице  "ItemList" я перехожу на одну строку вниз с выделением
-		И в таблице "ItemList" я нажимаю на кнопку 'Procurement'
-		И я изменяю флаг 'Purchase'
-		И я нажимаю на кнопку 'OK'
-		И в таблице "ItemList" я перехожу к строке:
+		And I move one line down in "ItemList" table and select line
+		And in the table "ItemList" I click "Procurement" button
+		And I change checkbox "Purchase"
+		And I click "OK" button
+		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Q'     |
 			| 'Boots' | '38/18SD'  | '8,000' |
-		И В таблице  "ItemList" я перехожу на одну строку вниз с выделением
-		И в таблице "ItemList" я нажимаю на кнопку 'Procurement'
-		И я изменяю флаг 'Repeal'
-		И я нажимаю на кнопку 'OK'
+		And I move one line down in "ItemList" table and select line
+		And in the table "ItemList" I click "Procurement" button
+		And I change checkbox "Repeal"
+		And I click "OK" button
 	* Check filling in Procurement method in the Sales order
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Item'       | 'Item key'  | 'Procurement method' | 'Q'     |
 		| 'Shirt'      | '38/Black'  | 'Stock'              | '5,000' |
 		| 'Boots'      | '38/18SD'   | 'Repeal'             | '8,000' |
 		| 'High shoes' | '37/19SD'   | 'Repeal'             | '2,000' |
 		| 'Trousers'   | '38/Yellow' | 'Purchase'           | '3,000' |
 	* Add a line with the service
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Service'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Service'  | 'Rent' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Procurement method"
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '100,00'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate "Procurement method" field in "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check the cleaning method on the line with the service
-		И в таблице "ItemList" я перехожу к строке:
+		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key' | 'Procurement method' |
 			| 'Service' | 'Rent'     | 'Stock'              |
-		И в таблице "ItemList" я активизирую поле "Procurement method"
-		И в таблице "ItemList" я выбираю текущую строку
-		И В таблице "ItemList" я нажимаю кнопку очистить у поля "Procurement method"
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I activate "Procurement method" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Procurement method" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Procurement method' |
 			| 'Trousers' | '38/Yellow' | 'Purchase'           |
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'  | 'Procurement method' |
 			| 'Shirt'      | '38/Black'  | 'Stock'              |
 			| 'Boots'      | '38/18SD'   | 'Repeal'             |
 			| 'High shoes' | '37/19SD'   | 'Repeal'             |
 			| 'Trousers'   | '38/Yellow' | 'Purchase'           |
 			| 'Service'    | 'Rent'      | ''                   |
-		И я нажимаю на кнопку 'Post'
-	* Checking the cleaning method on the line with the product
-		И в таблице "ItemList" я перехожу к строке:
+		And I click "Post" button
+	* Check the cleaning method on the line with the product
+		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Procurement method' |
 			| 'Trousers' | '38/Yellow' | 'Purchase'           |
-		И В таблице "ItemList" я нажимаю кнопку очистить у поля "Procurement method"
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I click Clear button of "Procurement method" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| 'Item'       | 'Item key' | 'Procurement method' |
 			| 'High shoes' | '37/19SD'  | 'Repeal'             |
-		И я нажимаю на кнопку 'Post'
-		Затем я жду, что в сообщениях пользователю будет подстрока "Field: [Procurement method] is empty" в течение 30 секунд
-		И я закрыл все окна клиентского приложения
+		And I click "Post" button
+		Then I wait that in user messages the "Field: [Procurement method] is empty" substring will appear in 30 seconds
+		And I close all client application windows
 
 
-Сценарий: check filling in partner and customer/vendor sign when creating Partner term from partner card
+Scenario: check filling in partner and customer/vendor sign when creating Partner term from partner card
 	* Opening a customer partner card
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Open a creation form Partner term
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner terms'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		And In this window I click command interface button "Partner terms"
+		And I click the button named "FormCreate"
 	* Check filling in partner and customer sign
-		И     элемент формы с именем "Partner" стал равен 'Kalipso'
-		И     элемент формы с именем "Type" стал равен 'Customer'
+		Then the form attribute named "Partner" became equal to "Kalipso"
+		Then the form attribute named "Type" became equal to "Customer"
 	* Open a supplier partner card
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Veritas' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Open a creation form Partner term
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Partner terms'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		And In this window I click command interface button "Partner terms"
+		And I click the button named "FormCreate"
 	* Check filling in Partner and Vendor sign
-		И     элемент формы с именем "Partner" стал равен 'Veritas'
-		И     элемент формы с именем "Type" стал равен 'Vendor'
-	И я закрыл все окна клиентского приложения
+		Then the form attribute named "Partner" became equal to "Veritas"
+		Then the form attribute named "Type" became equal to "Vendor"
+	And I close all client application windows
+

@@ -1,24 +1,22 @@
-
-#language: ru
+﻿
+#language: en
 @ExportScenarios
 @IgnoreOnCIMainBuild
 @tree
 
-Функционал: export scenarios
+Feature: export scenarios
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: creating a catalog element with the name Test.
-
-	И Пауза 2
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И Пауза 2
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	# И я перехожу к закладке "< >"
-	И в поле с именем 'Description_en' я ввожу текст 'Test ENG'
-	И в поле с именем 'Description_tr' я ввожу текст 'Test TR'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку с именем 'FormWrite'
-	И Пауза 5
+Scenario: creating a catalog element with the name Test
+	And Delay 2
+	And I click the button named "FormCreate"
+	And Delay 2
+	And I click Open button of the field named "Description_en"
+	And I input "Test ENG" text in the field named "Description_en"
+	And I input "Test TR" text in the field named "Description_tr"
+	And I click "Ok" button
+	And I click the button named "FormWrite"
+	And Delay 5

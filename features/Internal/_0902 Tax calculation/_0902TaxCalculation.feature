@@ -1,224 +1,224 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: tax calculation check
+Feature: tax calculation check
 
 
 # individually applying Tax types
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
 
-Сценарий: _0902000 preparation
+Scenario: _0902000 preparation
 	* Create item type
 		* Open a creation form ItemTypes
-			И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-			И я нажимаю на кнопку с именем 'FormCreate'
-		* Создание видов номенклатуры: Bags
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
-			И в поле с именем 'Description_en' я ввожу текст 'Bags'
-			И в поле с именем 'Description_tr' я ввожу текст 'Bags TR'
-			И я нажимаю на кнопку 'Ok'
-			И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-			И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+			And I click the button named "FormCreate"
+		* Create item type: Bags
+			And I click Open button of the field named "Description_en"
+			And I input "Bags" text in the field named "Description_en"
+			And I input "Bags TR" text in the field named "Description_tr"
+			And I click "Ok" button
+			And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+			And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Producer'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "AvailableAttributes" я завершаю редактирование строки
-			И я нажимаю на кнопку 'Save and close'
-			И я закрыл все окна клиентского приложения
+			And I select current line in "List" table
+			And I finish line editing in "AvailableAttributes" table
+			And I click "Save and close" button
+			And I close all client application windows
 	* Create Item Bag
 		* Open a creation form Items
-			И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-			И я нажимаю на кнопку с именем 'FormCreate'
+			Given I open hyperlink "e1cib/list/Catalog.Items"
+			And I click the button named "FormCreate"
 		* Create Item Bag
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
-			И в поле с именем 'Description_en' я ввожу текст 'Bag'
-			И в поле с именем 'Description_tr' я ввожу текст 'Bag TR'
-			И я нажимаю на кнопку 'Ok'
-			И я нажимаю кнопку выбора у поля  с именем "ItemType"
-			И в таблице "List" я перехожу к строке:
+			And I click Open button of the field named "Description_en"
+			And I input "Bag" text in the field named "Description_en"
+			And I input "Bag TR" text in the field named "Description_tr"
+			And I click "Ok" button
+			And I click Choice button of the field named "ItemType"
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Bags'       |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля с именем "Unit"
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку 'Save'
+			And I select current line in "List" table
+			And I click Choice button of the field named "Unit"
+			And I select current line in "List" table
+			And I click "Save" button
 	* Create item key for Bag
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Producer"
-		И в таблице "List" я перехожу к строке:
+		And In this window I click command interface button "Item keys"
+		And I click the button named "FormCreate"
+		And I click Select button of "Producer" field
+		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Producer'      | 'ODS'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Producer"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I click the button named "FormCreate"
+		And I click Select button of "Producer" field
+		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Producer'      | 'PZU'         |
-		И в таблице "List" я активизирую поле "Additional attribute"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
+		And I activate "Additional attribute" field in "List" table
+		And I select current line in "List" table
+		And I click "Save and close" button
 	* Filling tax rates for Item key in the register
-		И я открываю навигационную ссылку "e1cib/list/InformationRegister.TaxSettings"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя 'RecordType' на 'Item key'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/InformationRegister.TaxSettings"
+		And I click the button named "FormCreate"
+		And I change "RecordType" radio button value to "Item key"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Tax"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Tax" field
+		And I go to line in "List" table
 			| 'Description' | 'Reference' |
 			| 'VAT'         | 'VAT'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item key" field
+		And I go to line in "List" table
 			| 'Item' | 'Item key' |
 			| 'Bag'  | 'ODS'      |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Tax rate" я выбираю точное значение '0%'
-		И в поле 'Period' я ввожу текст '01.01.2020'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I select "0%" exact value from "Tax rate" drop-down list
+		And I input "01.01.2020" text in "Period" field
+		And I click "Save and close" button
 	* Filling tax rates for Item in the register
-		И я открываю навигационную ссылку "e1cib/list/InformationRegister.TaxSettings"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя 'RecordType' на 'Item'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/InformationRegister.TaxSettings"
+		And I click the button named "FormCreate"
+		And I change "RecordType" radio button value to "Item"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Tax"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Tax" field
+		And I go to line in "List" table
 			| 'Description' | 'Reference' |
 			| 'VAT'         | 'VAT'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Bag'         |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Tax rate" я выбираю точное значение '18%'
-		И в поле 'Period' я ввожу текст '01.01.2020'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I select "18%" exact value from "Tax rate" drop-down list
+		And I input "01.01.2020" text in "Period" field
+		And I click "Save and close" button
 	* Filling tax rates for Item type in the register
-		И я открываю навигационную ссылку "e1cib/list/InformationRegister.TaxSettings"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя 'RecordType' на 'Item type'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/InformationRegister.TaxSettings"
+		And I click the button named "FormCreate"
+		And I change "RecordType" radio button value to "Item type"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Tax"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Tax" field
+		And I go to line in "List" table
 			| 'Description' | 'Reference' |
 			| 'VAT'         | 'VAT'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Bags'         |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Tax rate" я выбираю точное значение '18%'
-		И в поле 'Period' я ввожу текст '01.01.2020'
-		И я нажимаю на кнопку 'Save and close'
-	И я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I select "18%" exact value from "Tax rate" drop-down list
+		And I input "01.01.2020" text in "Period" field
+		And I click "Save and close" button
+	And I close all client application windows
 
 
-Сценарий: _090200 activating Sales Tax calculation in Sales order and Sales invoice documents
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.Taxes'
-	И в таблице "List" я перехожу к строке:
+Scenario: _090200 activating Sales Tax calculation in Sales order and Sales invoice documents
+	Given I open hyperlink "e1cib/list/Catalog.Taxes"
+	And I go to line in "List" table
 		| 'Description' | 'Reference' |
 		| 'SalesTax'    | 'SalesTax'  |
-	И в таблице "List" я выбираю текущую строку
-	И я перехожу к закладке "Use documents"
-	И в таблице "UseDocuments" я нажимаю на кнопку с именем 'UseDocumentsAdd'
-	И в таблице "UseDocuments" из выпадающего списка "Document name" я выбираю точное значение 'Sales order'
-	И в таблице "UseDocuments" я завершаю редактирование строки
-	И в таблице "UseDocuments" я нажимаю на кнопку с именем 'UseDocumentsAdd'
-	И в таблице "UseDocuments" из выпадающего списка "Document name" я выбираю точное значение 'Sales invoice'
-	И в таблице "UseDocuments" я завершаю редактирование строки
-	И я нажимаю на кнопку 'Save and close'
+	And I select current line in "List" table
+	And I move to "Use documents" tab
+	And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
+	And I select "Sales order" exact value from "Document name" drop-down list in "UseDocuments" table
+	And I finish line editing in "UseDocuments" table
+	And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
+	And I select "Sales invoice" exact value from "Document name" drop-down list in "UseDocuments" table
+	And I finish line editing in "UseDocuments" table
+	And I click "Save and close" button
 
-Сценарий: _090201 VAT and Sales Tax calculation in Sales order (Price include tax box is set)
+Scenario: _090201 VAT and Sales Tax calculation in Sales order (Price include tax box is set)
 	* Open the Sales order creation form
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Adding items to Sales order
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Procurement method"
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate "Procurement method" field in "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check the calculation of VAT and Sales Tax
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 		| '400,00' | 'Trousers' | '18%' | '38/Yellow' | 'Stock'              | '1,000' | '64,98'      | '1%'       | 'pcs'  | '335,02'     | '400,00'       |
-		И     таблица "TaxTree" содержит строки:
+		And "TaxTree" table contains lines
 		| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 		| 'VAT'      | ''         | ''         | ''          | ''          | '61,02'  | '61,02'         |
 		| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '61,02'         |
 		| 'SalesTax' | ''         | ''         | ''          | ''          | '3,96'   | '3,96'          |
 		| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
 	* Add one more line and check the calculation of VAT and Sales Tax
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Procurement method"
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И я перехожу к следующему реквизиту
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Procurement method" field in "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I move to the next attribute
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '64,98'      | '1%'       | '335,02'     | '400,00'       |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | '2,000' | '227,42'     | '1%'       | '1 172,58'   | '1 400,00'     |
-		И     таблица "TaxTree" содержит строки:
+		And "TaxTree" table contains lines
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '274,58' | '274,58'        |
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '61,02'         |
@@ -227,93 +227,93 @@
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
 			| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '13,86'  | '13,86'         |
 	* Deleting the row and checking the VAT and Sales Tax recalculation
-		И в таблице "ItemList" я перехожу к строке:
+		And I go to line in "ItemList" table
 		| 'Item'     | 'Item key'  |
 		| 'Trousers' | '38/Yellow' |
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице 'ItemList' я удаляю строку
-		И     таблица "ItemList" содержит строки:
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I delete a line in "ItemList" table
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'SalesTax' | 'Net amount' | 'Total amount' |
 			| '700,00' | 'Boots' | '18%' | '37/18SD'  | '2,000' | '227,42'     | '1%'       | '1 172,58'   | '1 400,00'     |
-		И     таблица "TaxTree" стала равной:
+		And "TaxTree" table became equal
 			| 'Tax'      | 'Tax rate' | 'Item' | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''     | ''         | ''          | '213,56' | '213,56'        |
 			| 'SalesTax' | ''         | ''     | ''         | ''          | '13,86'  | '13,86'         |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _090202 VAT and Sales Tax calculation in Sales order (Price include tax box isn't set)
+Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price include tax box isn't set)
 	* Open the Sales order creation form
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Other"
-		И я разворачиваю группу "More"
-		И я снимаю флаг 'Price include tax'
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I expand "More" group
+		And I remove checkbox "Price include tax"
 	* Adding items to Sales order
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Procurement method"
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate "Procurement method" field in "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check the calculation of VAT and Sales Tax
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '76,00'      | '1%'       | 'pcs'  | '400,00'     | '476,00'       |
-		И     таблица "TaxTree" содержит строки:
+		And "TaxTree" table contains lines
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '72,00'  | '72,00'         |
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '72,00'         |
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '4,00'   | '4,00'          |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
 	* Add one more line and check the calculation of VAT and Sales Tax
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Procurement method"
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И я перехожу к следующему реквизиту
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Procurement method" field in "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I move to the next attribute
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | 'Stock'              | '1,000' | '76,00'      | '1%'       | 'pcs'  | '400,00'     | '476,00'       |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | 'Stock'              | '2,000' | '266,00'     | '1%'       | 'pcs'  | '1 400,00'   | '1 666,00'     |
-		И     таблица "TaxTree" содержит строки:
+		And "TaxTree" table contains lines
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '324,00' | '324,00'        |
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '72,00'         |
@@ -322,215 +322,215 @@
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
 			| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '14,00'  | '14,00'         |
 	* Deleting the row and checking the VAT and Sales Tax recalculation
-		И в таблице "ItemList" я перехожу к строке:
+		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице 'ItemList' я удаляю строку
-		И     таблица "ItemList" содержит строки:
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I delete a line in "ItemList" table
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | '2,000' | ''              | '266,00'     | '1%'       | 'pcs'  | '1 400,00'   | '1 666,00'     |
-		И     таблица "TaxTree" стала равной:
+		And "TaxTree" table became equal
 			| 'Tax'      | 'Tax rate' | 'Item' | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''     | ''         | ''          | '252,00' | '252,00'        |
 			| 'SalesTax' | ''         | ''     | ''         | ''          | '14,00'  | '14,00'         |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _090203 manual tax correction in Sales order
+Scenario: _090203 manual tax correction in Sales order
 	* Open the Sales order creation form
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Other"
-		И я разворачиваю группу "More"
-		И я снимаю флаг 'Price include tax'
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I expand "More" group
+		And I remove checkbox "Price include tax"
 	* Adding items to Sales order
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Procurement method"
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate "Procurement method" field in "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Manual tax correction and check display
-		И я перехожу к закладке "Tax list"
-		И в таблице "TaxTree" я перехожу к строке:
+		And I move to "Tax list" tab
+		And I go to line in "TaxTree" table
 			| 'Amount' | 'Item'     |
 			| '72,00'  | 'Trousers' |
-		И в таблице "TaxTree" я выбираю текущую строку
-		И в таблице "TaxTree" в поле 'Manual amount' я ввожу текст '71,00'
-		И Пауза 60
-		И в таблице "TaxTree" я разворачиваю текущую строку
-		И я перехожу к закладке "Item list"
+		And I select current line in "TaxTree" table
+		And I input "71,00" text in "Manual amount" field of "TaxTree" table
+		And Delay 60
+		And I expand current line in "TaxTree" table
+		And I move to "Item list" tab
 	* Save verification
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '75,00'      | '1%'       | 'pcs'  | '400,00'     | '475,00'       |
-		И     таблица "TaxTree" стала равной:
+		And "TaxTree" table became equal
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '72,00'  | '71,00'         |
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '71,00'         |
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '4,00'   | '4,00'          |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
 	* Check deleting manual correction when quantity changes
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И     таблица "ItemList" содержит строки:
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount'  | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | '152,00'      | '1%'       | 'pcs'   | '800,00'      | '952,00'     |
-		И     таблица "TaxTree" содержит строки:
+		And "TaxTree" table contains lines
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '144,00' | '144,00'        |
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '144,00' | '144,00'        |
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '8,00'   | '8,00'          |
 	* Check deleting manual correction when price changes
-		И я перехожу к закладке "Tax list"
-		И в таблице "TaxTree" я перехожу к строке:
+		And I move to "Tax list" tab
+		And I go to line in "TaxTree" table
 			| 'Item'     | 'Item key'  | 'Tax' | 'Tax rate' |
 			| 'Trousers' | '38/Yellow' | 'VAT' | '18%'      |
-		И в таблице "TaxTree" я активизирую поле с именем "TaxTreeAmount"
-		И в таблице "TaxTree" я выбираю текущую строку
-		И в таблице "TaxTree" я активизирую поле "Manual amount"
-		И в таблице "TaxTree" я выбираю текущую строку
-		И в таблице "TaxTree" в поле 'Manual amount' я ввожу текст '142,00'
-		И в таблице "TaxTree" я завершаю редактирование строки
-		И     таблица "ItemList" содержит строки:
+		And I activate field named "TaxTreeAmount" in "TaxTree" table
+		And I select current line in "TaxTree" table
+		And I activate "Manual amount" field in "TaxTree" table
+		And I select current line in "TaxTree" table
+		And I input "142,00" text in "Manual amount" field of "TaxTree" table
+		And I finish line editing in "TaxTree" table
+		And "ItemList" table contains lines
 			| 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| 'Trousers' | '18%' | '38/Yellow' | '2,000' | '150,00'     | '1%'       | 'pcs'  | '800,00'     | '950,00'     |
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я активизирую поле "Price"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '510,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И     таблица "TaxTree" содержит строки:
+		And I move to "Item list" tab
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "510,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "TaxTree" table contains lines
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '183,60' | '183,60'        |
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '183,60' | '183,60'        |
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '10,20'  | '10,20'         |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '10,20'  | '10,20'         |
 	* Check deleting manual correction when iten key changes
-		И я перехожу к закладке "Tax list"
-		И в таблице "TaxTree" я перехожу к строке:
+		And I move to "Tax list" tab
+		And I go to line in "TaxTree" table
 			| 'Item'     | 'Item key'  | 'Tax' | 'Tax rate' |
 			| 'Trousers' | '38/Yellow' | 'VAT' | '18%'      |
-		И в таблице "TaxTree" я активизирую поле с именем "TaxTreeAmount"
-		И в таблице "TaxTree" я выбираю текущую строку
-		И в таблице "TaxTree" я активизирую поле "Manual amount"
-		И в таблице "TaxTree" я выбираю текущую строку
-		И в таблице "TaxTree" в поле 'Manual amount' я ввожу текст '182,00'
-		И в таблице "TaxTree" я завершаю редактирование строки
-		И я перехожу к закладке "Item list"
-		И     таблица "ItemList" содержит строки:
+		And I activate field named "TaxTreeAmount" in "TaxTree" table
+		And I select current line in "TaxTree" table
+		And I activate "Manual amount" field in "TaxTree" table
+		And I select current line in "TaxTree" table
+		And I input "182,00" text in "Manual amount" field of "TaxTree" table
+		And I finish line editing in "TaxTree" table
+		And I move to "Item list" tab
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '510,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | '192,20'     | '1%'       | 'pcs'  | '1 020,00'   | '1 212,20'     |
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '36/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "TaxTree" содержит строки:
+		And I select current line in "List" table
+		And "TaxTree" table contains lines
 		| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 		| 'VAT'      | ''         | ''         | ''          | ''          | '144,00' | '144,00'        |
 		| 'VAT'      | '18%'      | 'Trousers' | '36/Yellow' | ''          | '144,00' | '144,00'        |
 		| 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
 		| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '8,00'   | '8,00'          |
 	* Manual selection of tax rate
-		И в таблице "ItemList" я активизирую поле "VAT"
-		И в таблице "ItemList" из выпадающего списка "VAT" я выбираю точное значение '0%'
-		И     таблица "TaxTree" стала равной:
+		And I activate "VAT" field in "ItemList" table
+		And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+		And "TaxTree" table became equal
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | ''       | ''              |
 			| 'VAT'      | '0%'       | 'Trousers' | '36/Yellow' | ''          | ''       | ''              |
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
 			| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '8,00'   | '8,00'          |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: _090204 check tax transfer in Sales invoice when it is created based on
+Scenario: _090204 check tax transfer in Sales invoice when it is created based on
 	* Create Sales order
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Procurement method"
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Procurement method" field in "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Procurement method"
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И я перехожу к следующему реквизиту
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Procurement method" field in "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I move to the next attribute
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Price type'        | 'Q'     | 'Unit' | 'SalesTax' | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | 'Basic Price Types' | '1,000' | 'pcs'  | '1%'       | '64,98'      | '335,02'     | '400,00'       |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | 'Basic Price Types' | '2,000' | 'pcs'  | '1%'       | '227,42'     | '1 172,58'   | '1 400,00'     |
-		И     таблица "TaxTree" содержит строки:
+		And "TaxTree" table contains lines
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '274,58' | '274,58'        |
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '61,02'         |
@@ -538,29 +538,29 @@
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '17,82'  | '17,82'         |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
 			| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '13,86'  | '13,86'         |
-		И в таблице "TaxTree" я перехожу к строке:
+		And I go to line in "TaxTree" table
 			| 'Item'     | 'Item key'  | 'Tax' | 'Tax rate' |
 			| 'Trousers' | '38/Yellow' | 'VAT' | '18%'      |
-		И в таблице "TaxTree" я активизирую поле с именем "TaxTreeAmount"
-		И в таблице "TaxTree" я выбираю текущую строку
-		И в таблице "TaxTree" я активизирую поле "Manual amount"
-		И в таблице "TaxTree" я выбираю текущую строку
-		И в таблице "TaxTree" в поле 'Manual amount' я ввожу текст '62,00'
-		И в таблице "TaxTree" я завершаю редактирование строки
-		И я перехожу к закладке "Other"
-		И я разворачиваю группу "More"
-		И в поле 'Number' я ввожу текст '0'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '3 000'
-		И я нажимаю на кнопку 'Post'
+		And I activate field named "TaxTreeAmount" in "TaxTree" table
+		And I select current line in "TaxTree" table
+		And I activate "Manual amount" field in "TaxTree" table
+		And I select current line in "TaxTree" table
+		And I input "62,00" text in "Manual amount" field of "TaxTree" table
+		And I finish line editing in "TaxTree" table
+		And I move to "Other" tab
+		And I expand "More" group
+		And I input "0" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "3 000" text in "Number" field
+		And I click "Post" button
 	* Create Sales invoice based on Sales order and check filling Tax types
-		И я нажимаю на кнопку 'Sales invoice'
-		И     таблица "ItemList" содержит строки:
+		And I click "Sales invoice" button
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'SalesTax' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'pcs'  | '1%'       | '65,96'      | '334,04'     | '400,00'       | 'Store 01' |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | '2,000' | 'pcs'  | '1%'       | '227,42'     | '1 172,58'   | '1 400,00'     | 'Store 01' |
-		И     таблица "TaxTree" содержит строки:
+		And "TaxTree" table contains lines
 			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT'      | ''         | ''         | ''          | ''          | '274,58' | '275,56'        |
 			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '62,00'         |
@@ -568,67 +568,68 @@
 			| 'SalesTax' | ''         | ''         | ''          | ''          | '17,82'  | '17,82'         |
 			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
 			| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '13,86'  | '13,86'         |
-		И я нажимаю на кнопку 'Post and close'
-		И я закрыл все окна клиентского приложения
+		And I click "Post and close" button
+		And I close all client application windows
 
-Сценарий: _090205 priority tax rate check on the example of Sales order
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario: _090205 priority tax rate check on the example of Sales order
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
 	* Filling in the details of the document Sales order
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the tax rate for Item key Bag ODS
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Bag'         |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item' | 'Item key' |
 			| 'Bag'  | 'ODS'      |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item' | 'VAT' | 'Item key' | 'Q'     |
 			| 'Bag'  | '0%'  | 'ODS'      | '1,000' |
 	* Check the tax rate by item
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Bag'         |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item' | 'Item key' |
 			| 'Bag'  | 'PZU'      |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item' | 'VAT' | 'Item key' | 'Q'     |
 			| 'Bag'  | '18%'  | 'PZU'      | '1,000' |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 		
 
 
 
 
 	
+
 
 
 

@@ -1,521 +1,521 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: check filling in and re-filling returns
+Feature: check filling in and re-filling returns
 
-Как тестировщик
-Я хочу проверить заполнение и перезаполнение возвратов
-
-
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+As a QA
+I want to check the filling and refilling of returns
 
 
-Сценарий: _299901 check filling in and re-filling Sales return order
-	* Открытие формы Sales return order
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+Background:
+	Given I launch TestClient opening script or connect the existing one
+
+
+Scenario: _299901 check filling in and re-filling Sales return order
+	* Open form  Sales return order
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "LegalName" стал равен 'DFC'
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "DFC"
 	* Check filling in Partner term if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Nicoletta'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard Partner term Customer'
+		And I select current line in "List" table
+		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term Customer"
 	* Check filling in Company from Partner term
-		* Изменение компании в Sales return order
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		* Change company in Sales return order
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'    |
 				| 'Second Company' |
-			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
+			Then the form attribute named "Company" became equal to "Second Company"
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
 		* Check the refill when selecting a partner term
-			И     элемент формы с именем "Company" стал равен 'Main Company'
+			Then the form attribute named "Company" became equal to "Main Company"
 	* Check filling in Store from Partner term
-		И     элемент формы с именем "Store" стал равен 'Store 01'
+		Then the form attribute named "Store" became equal to "Store 01"
 	* Check clearing legal name, Partner term when re-selecting a partner
 		* Re-select partner
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Kalipso'     |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Check clearing fields
-			И     элемент формы с именем "Agreement" стал равен ''
+			Then the form attribute named "Agreement" became equal to ""
 		* Check filling in legal name after re-selecting a partner
-			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
+			Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		* Select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'                   |
 				| 'Basic Partner terms, without VAT' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 	* Check filling in Store and Compane from Partner term when re-selection partner
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Router'      |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			И в таблице 'ItemList' я удаляю строку
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And I delete a line in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '500,00'
+			And I select current line in "List" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I input "500,00" text in "Price" field of "ItemList" table
 		* Check store and price re-filling in the added line
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '500,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 02' |
 	* Check the re-drawing of the form for taxes at company re-selection.
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '500,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 02' |
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		Если в таблице "ItemList" нет колонки "VAT" Тогда
-	* Проверка очистки строки в дереве налогов при удалении строки из заявки на возврат
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		If "ItemList" table does not contain "VAT" column Then
+	* Check for clearing a line in the tax tree when deleting a line from a Sales return order
+		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице 'ItemList' я удаляю строку
-		И я перехожу к закладке "Tax list"
-		Тогда таблица "ItemList" не содержит строки:
+		And I delete a line in "ItemList" table
+		And I move to "Tax list" tab
+		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
 	* Add line
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I close all client application windows
 
 
-Сценарий: _299902 check filling in and re-filling Sales return
-	* Открытие формы Sales return
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
-		И я нажимаю на кнопку с именем 'FormCreate'
+Scenario: _299902 check filling in and re-filling Sales return
+	* Open form  Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "LegalName" стал равен 'DFC'
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "DFC"
 	* Check filling in Partner term if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Nicoletta'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard Partner term Customer'
+		And I select current line in "List" table
+		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term Customer"
 	* Check filling in Company from Partner term
-		* Изменение компании в Sales return order
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		* Change company in Sales return order
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'    |
 				| 'Second Company' |
-			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
+			Then the form attribute named "Company" became equal to "Second Company"
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
 		* Check the refill when selecting a partner term
-			И     элемент формы с именем "Company" стал равен 'Main Company'
+			Then the form attribute named "Company" became equal to "Main Company"
 	* Check filling in Store from Partner term
-		И     элемент формы с именем "Store" стал равен 'Store 01'
+		Then the form attribute named "Store" became equal to "Store 01"
 	* Check clearing legal name, Partner term when re-selecting a partner
 		* Re-select partner
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Kalipso'     |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Check clearing fields
-			И     элемент формы с именем "Agreement" стал равен ''
+			Then the form attribute named "Agreement" became equal to ""
 		* Check filling in legal name after re-selecting a partner
-			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
+			Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		* Select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'                   |
 				| 'Basic Partner terms, without VAT' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 	* Check filling in Store and Compane from Partner term when re-selection partner
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I click "Add" button
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Router'      |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
 		* Filling in item and item key
-			И в таблице 'ItemList' я удаляю строку
-			И я нажимаю на кнопку 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And I delete a line in "ItemList" table
+			And I click "Add" button
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '500,00'
-	* Проверка перезаполнения склада при перевыборе соглашения
+			And I select current line in "List" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I input "500,00" text in "Price" field of "ItemList" table
+	* Check re-filling store when re-select partner term
 		* Re-select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Basic Partner terms, TRY' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
-		* Проверка перезаполнения склада в добавленной строке
-			И     таблица "ItemList" содержит строки:
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
+		* Check store overfill in the added string
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '500,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 	* Check the re-drawing of the form for taxes at company re-selection.
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '500,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		Если в таблице "ItemList" нет колонки "VAT" Тогда
-	* Проверка очистки строки в дереве налогов при удалении строки из заявки на возврат
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		If "ItemList" table does not contain "VAT" column Then
+	* Check for clearing a line in the tax tree when deleting a line from a Sales return order
+		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице 'ItemList' я удаляю строку
-		И я перехожу к закладке "Tax list"
-		Тогда таблица "ItemList" не содержит строки:
+		And I delete a line in "ItemList" table
+		And I move to "Tax list" tab
+		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
 	* Add line
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I click "Add" button
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I close all client application windows
 
-Сценарий: _299903 check filling in and re-filling Purchase return order
-	* Открытие формы Purchase return order
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+Scenario: _299903 check filling in and re-filling Purchase return order
+	* Open form  Purchase return order
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "LegalName" стал равен 'DFC'
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "DFC"
 	* Check filling in Partner term if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Veritas'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard Partner term (Veritas)'
+		And I select current line in "List" table
+		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term (Veritas)"
 	* Check filling in Company from Partner term
-		* Изменение компании в Purchase return order
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		* Change company in Purchase return order
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'    |
 				| 'Second Company' |
-			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
+			Then the form attribute named "Company" became equal to "Second Company"
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
 		* Check the refill when selecting a partner term
-			И     элемент формы с именем "Company" стал равен 'Main Company'
+			Then the form attribute named "Company" became equal to "Main Company"
 	* Check filling in Store from Partner term
-		И     элемент формы с именем "Store" стал равен 'Store 01'
+		Then the form attribute named "Store" became equal to "Store 01"
 	* Check clearing legal name, Partner term when re-selecting a partner
 		* Re-select partner
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Partner Kalipso'     |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Check clearing fields
-			И     элемент формы с именем "Agreement" стал равен ''
+			Then the form attribute named "Agreement" became equal to ""
 		* Check filling in legal name after re-selecting a partner
-			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
+			Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		* Select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'                   |
 				| 'Partner Kalipso Vendor' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 	* Check filling in Store and Compane from Partner term when re-selection partner
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I click "Add" button
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Router'      |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
 		* Filling in item and item key
-			И в таблице 'ItemList' я удаляю строку
-			И я нажимаю на кнопку 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And I delete a line in "ItemList" table
+			And I click "Add" button
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '500,00'
-	* Проверка перезаполнения склада при перевыборе соглашения
+			And I select current line in "List" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		And I input "500,00" text in "Price" field of "ItemList" table
+	* Check re-filling store when re-select partner term
 		* Re-select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Partner term vendor Partner Kalipso' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
-		* Проверка перезаполнения склада в добавленной строке
-			И     таблица "ItemList" содержит строки:
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
+		* Check store overfill in the added string
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '500,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check the re-drawing of the form for taxes at company re-selection.
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '500,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		Если в таблице "ItemList" нет колонки "VAT" Тогда
-	* Проверка очистки строки в дереве налогов при удалении строки из заявки на возврат
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		If "ItemList" table does not contain "VAT" column Then
+	* Check for clearing a line in the tax tree when deleting a line from a Sales return order
+		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице 'ItemList' я удаляю строку
-		И я перехожу к закладке "Tax list"
-		Тогда таблица "ItemList" не содержит строки:
+		And I delete a line in "ItemList" table
+		And I move to "Tax list" tab
+		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
 	* Add line
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I click "Add" button
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I close all client application windows
 
-Сценарий: _299904 check filling in and re-filling Purchase return
-	* Открытие формы Purchase return
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
-		И я нажимаю на кнопку с именем 'FormCreate'
+Scenario: _299904 check filling in and re-filling Purchase return
+	* Open form  Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "LegalName" стал равен 'DFC'
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "DFC"
 	* Check filling in Partner term if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Veritas'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Posting by Standard Partner term (Veritas)'
+		And I select current line in "List" table
+		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term (Veritas)"
 	* Check filling in Company from Partner term
-		* Изменение компании в Purchase return
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		* Change company in Purchase return
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'    |
 				| 'Second Company' |
-			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
+			Then the form attribute named "Company" became equal to "Second Company"
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
 		* Check the refill when selecting a partner term
-			И     элемент формы с именем "Company" стал равен 'Main Company'
+			Then the form attribute named "Company" became equal to "Main Company"
 	* Check filling in Store from Partner term
-		И     элемент формы с именем "Store" стал равен 'Store 01'
+		Then the form attribute named "Store" became equal to "Store 01"
 	* Check clearing legal name, Partner term when re-selecting a partner
 		* Re-select partner
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Partner Kalipso'     |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Check clearing fields
-			И     элемент формы с именем "Agreement" стал равен ''
+			Then the form attribute named "Agreement" became equal to ""
 		* Check filling in legal name after re-selecting a partner
-			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
+			Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		* Select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'                   |
 				| 'Partner Kalipso Vendor' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 	* Check filling in Store and Compane from Partner term when re-selection partner
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I click "Add" button
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Router'      |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
 		* Filling in item and item key
-			И в таблице 'ItemList' я удаляю строку
-			И я нажимаю на кнопку 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And I delete a line in "ItemList" table
+			And I click "Add" button
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '500,00'
-	* Проверка перезаполнения склада при перевыборе соглашения
+			And I select current line in "List" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I input "500,00" text in "Price" field of "ItemList" table
+	* Check re-filling store when re-select partner term
 		* Re-select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Partner term vendor Partner Kalipso' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
-		* Проверка перезаполнения склада в добавленной строке
-			И     таблица "ItemList" содержит строки:
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
+		* Check store overfill in the added string
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '500,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check the re-drawing of the form for taxes at company re-selection.
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '500,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		Если в таблице "ItemList" нет колонки "VAT" Тогда
-	* Проверка очистки строки в дереве налогов при удалении строки из заявки на возврат
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		If "ItemList" table does not contain "VAT" column Then
+	* Check for clearing a line in the tax tree when deleting a line from a Sales return order
+		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице 'ItemList' я удаляю строку
-		И я перехожу к закладке "Tax list"
-		Тогда таблица "ItemList" не содержит строки:
+		And I delete a line in "ItemList" table
+		And I move to "Tax list" tab
+		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
 	* Add line
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I click "Add" button
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I close all client application windows
 
 	
 	

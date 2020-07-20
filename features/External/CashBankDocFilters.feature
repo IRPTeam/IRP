@@ -1,455 +1,440 @@
-#language: ru
+﻿#language: en
 @ExportScenarios
 @IgnoreOnCIMainBuild
 @tree
 
-Функционал: экспортные сценарии
+Feature: export scenarios
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: проверяю фильтр по собственным компаниям
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Check the filter by отбору собственной компании
-		И я нажимаю кнопку выбора у поля "Company"
-		Тогда таблица "List" стала равной:
+Scenario: check the filter by own company
+	And I click the button named "FormCreate"
+	* Check the filter by own company
+		And I click Select button of "Company" field
+		And "List" table became equal
 		| Description  |
 		| Main Company |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И Пауза 2
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-	И я проверяю фильтр при вводе по строке
-		И Пауза 2
-		И в поле 'Company' я ввожу текст 'Company Kalipso'
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Currency"
-		Тогда открылось окно "Companies"
-		Тогда таблица "List" не содержит строки:
+		And I click the button named "FormChoose"
+		And Delay 2
+		Then the form attribute named "Company" became equal to "Main Company"
+	* Check the filter by string input
+		And Delay 2
+		And I input "Company Kalipso" text in "Company" field
+		And Delay 2
+		And I click Select button of "Currency" field
+		Then "Companies" window is opened
+		And "List" table does not contain lines
 			| Description  |
 			| Company Kalipso |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		Когда Проверяю шаги на Исключение:
-			|'И     элемент формы с именем "Company" стал равен 'Company Kalipso''|
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormChoose"
+		When I Check the steps for Exception
+			|'Then the form attribute named "Company" became equal to 'Company Kalipso''|
+	And I close all client application windows
 
-Сценарий: проверяю фильтр по собственным компаниям в Cash transfer order
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Check the filter by отбору собственной компании
-		И я нажимаю кнопку выбора у поля "Company"
-		Тогда таблица "List" стала равной:
+Scenario: check the filter by own company in the Cash transfer order
+	And I click the button named "FormCreate"
+	* Check the filter by own company
+		And I click Select button of "Company" field
+		And "List" table became equal
 		| Description  |
 		| Main Company |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И Пауза 2
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-	И я проверяю фильтр при вводе по строке
-		И Пауза 2
-		И в поле 'Company' я ввожу текст 'Company Kalipso'
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Sender"
-		Тогда открылось окно "Companies"
-		Тогда таблица "List" не содержит строки:
+		And I click the button named "FormChoose"
+		And Delay 2
+		Then the form attribute named "Company" became equal to "Main Company"
+	* Check the filter by string input
+		And Delay 2
+		And I input "Company Kalipso" text in "Company" field
+		And Delay 2
+		And I click Select button of "Sender" field
+		Then "Companies" window is opened
+		And "List" table does not contain lines
 			| Description  |
 			| Company Kalipso |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		Когда Проверяю шаги на Исключение:
-			|'И     элемент формы с именем "Company" стал равен 'Company Kalipso''|
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormChoose"
+		When I Check the steps for Exception
+			|'Then the form attribute named "Company" became equal to 'Company Kalipso''|
+	And I close all client application windows
 
-Сценарий: проверяю фильтр по банковским счетам (выбор кассы недоступен) + заполнение валюты из банковского счета
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Company"
-	И я нажимаю на кнопку с именем 'FormChoose'
-	Check the filter by банковским счетам
-		И я нажимаю кнопку выбора у поля "Account"
-		И я запоминаю количество строк таблицы "List" как "QS"
-		Тогда переменная "QS" имеет значение 3
-		Тогда таблица "List" содержит строки:
+Scenario: check the filter for bank accounts (cash account selection is not available) + filling in currency from a bank account
+	And I click the button named "FormCreate"
+	And I click Select button of "Company" field
+	And I click the button named "FormChoose"
+	* Check the filter by bank account
+		And I click Select button of "Account" field
+		And I save number of "List" table lines as "QS"
+		Then "QS" variable is equal to 3
+		And "List" table contains lines
 			| Description         |
 			| Bank account, TRY |
 			| Bank account, USD |
 			| Bank account, EUR |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Account" стал равен 'Bank account, TRY'
-	И я проверяю заполнение валюты
-		И     элемент формы с именем "Currency" стал равен 'TRY'
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+	* Check the filling in currency
+		Then the form attribute named "Currency" became equal to "TRY"
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| Description         |
 			| Bank account, USD |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Currency" стал равен 'USD'
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "Currency" became equal to "USD"
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| Description         |
 			| Bank account, EUR |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Currency" стал равен 'EUR'
-	И я проверяю фильтр при вводе по строке
-		И Пауза 2
-		И в поле 'Account' я ввожу текст 'Cash desk №1'
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Currency"
-		Тогда таблица "List" не содержит строки:
+		And I select current line in "List" table
+		Then the form attribute named "Currency" became equal to "EUR"
+	* Check the filter by string input
+		And Delay 2
+		And I input "Cash desk №1" text in "Account" field
+		And Delay 2
+		And I click Select button of "Currency" field
+		And "List" table does not contain lines
 			| Description  |
 			| Cash desk №1 |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		Когда Проверяю шаги на Исключение:
-			|'И     элемент формы с именем "CashAccount" стал равен 'Cash desk №1''|
-	И Я закрыл все окна клиентского приложения
+		And I click the button named "FormChoose"
+		When I Check the steps for Exception
+			|'Then the form attribute named "CashAccount" became equal to 'Cash desk №1''|
+	And I close all client application windows
 
-Сценарий: проверяю фильтр по кассам (выбор банка недоступен)
-	И я нажимаю на кнопку с именем 'FormCreate'
-	Check the filter by банковским счетам
-		И я нажимаю кнопку выбора у поля "Company"
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И я запоминаю количество строк таблицы "List" как "QS"
-		Тогда переменная "QS" имеет значение 3
-		Тогда таблица "List" содержит строки:
+Scenario: check the filter by cash account (bank account selection is not available)
+	And I click the button named "FormCreate"
+	* Check the filter by bank account
+		And I click Select button of "Company" field
+		And I click the button named "FormChoose"
+		And I click Select button of "Cash account" field
+		And I save number of "List" table lines as "QS"
+		Then "QS" variable is equal to 3
+		And "List" table contains lines
 			| Description         |
 			| Cash desk №1 |
 			| Cash desk №2 |
 			| Cash desk №3 |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "CashAccount" стал равен 'Cash desk №1'
-	И я проверяю фильтр при вводе по строке
-		И Пауза 2
-		И в поле 'Cash account' я ввожу текст 'Bank account, TRY'
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Currency"
-		Тогда таблица "List" не содержит строки:
+		And I select current line in "List" table
+		Then the form attribute named "CashAccount" became equal to "Cash desk №1"
+	* Check the filter by string input
+		And Delay 2
+		And I input "Bank account, TRY" text in "Cash account" field
+		And Delay 2
+		And I click Select button of "Currency" field
+		And "List" table does not contain lines
 			| Description  |
 			| Bank account, TRY |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		Когда Проверяю шаги на Исключение:
-			|'И     элемент формы с именем "CashAccount" стал равен 'Bank account, TRY''|
-	И Я закрыл все окна клиентского приложения
+		And I click the button named "FormChoose"
+		When I Check the steps for Exception
+			|'Then the form attribute named "CashAccount" became equal to 'Bank account, TRY''|
+	And I close all client application windows
 
-Сценарий: проверяю ввод Description
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я ввожу Description
-		И я нажимаю на гиперссылку "Description"
-		И в поле 'Text' я ввожу текст 'Test Description'
-		И я нажимаю на кнопку 'OK'
-		И     элемент формы с именем "Description" стал равен 'Test Description'
-	И Я закрыл все окна клиентского приложения
+Scenario: check filling in Description
+	And I click the button named "FormCreate"
+	* Filling in Description
+		And I click "Description" hyperlink
+		And I input "Test Description" text in "Text" field
+		And I click "OK" button
+		Then the form attribute named "Description" became equal to "Test Description"
+	And I close all client application windows
 
-Сценарий: проверяю выбор вида операции в документах оплаты
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я выбираю вид операции
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-		И     элемент формы с именем "TransactionType" стал равен 'Currency exchange'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		И     элемент формы с именем "TransactionType" стал равен 'Cash transfer order'
-	И Я закрыл все окна клиентского приложения
+Scenario: check the choice of type of operation in the payment documents
+	And I click the button named "FormCreate"
+	* Select operation type
+		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
+		Then the form attribute named "TransactionType" became equal to "Currency exchange"
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then the form attribute named "TransactionType" became equal to "Cash transfer order"
+	And I close all client application windows
 
-Сценарий: проверяю выбор вида операции в документах поступления оплаты
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я выбираю вид операции
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-		И     элемент формы с именем "TransactionType" стал равен 'Currency exchange'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		И     элемент формы с именем "TransactionType" стал равен 'Cash transfer order'
-	И Я закрыл все окна клиентского приложения
+Scenario: check the choice of the type of operation in the documents of receipt of payment
+	And I click the button named "FormCreate"
+	* Select the type of operation
+		And I select "Payment from customer" exact value from "Transaction type" drop-down list
+		Then the form attribute named "TransactionType" became equal to "Payment from customer"
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
+		Then the form attribute named "TransactionType" became equal to "Currency exchange"
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then the form attribute named "TransactionType" became equal to "Cash transfer order"
+	And I close all client application windows
 
-Сценарий: проверяю фильтр по контрагенту в табличной части в документах оплаты
+Scenario: check the legal name filter in the tabular part of the payment documents
 	# when selecting a partner, only its legal names should be available on the selection list
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю данные по партнеру
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+	And I click the button named "FormCreate"
+	* Filling in partner info
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-	Check the filter by контрагенту
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payee"
-		И я запоминаю количество строк таблицы "List" как "QS"
-		Тогда переменная "QS" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+	* Check the filter by legal name
+		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I save number of "List" table lines as "QS"
+		Then "QS" variable is equal to 1
+		And "List" table contains lines
 		| Description       |
 		| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к следующему реквизиту
-		И Пауза 2
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And I move to the next attribute
+		And Delay 2
+		And "PaymentList" table contains lines
 		| Partner   | Payee             |
 		| Ferron BP | Company Ferron BP |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: проверяю фильтр по контрагенту в табличной части в документах поступления оплаты
+Scenario: checking the legal name filter in the tabular part of the payment receipt documents
 	# when selecting a partner, only its legal names should be available on the selection list
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
-	И я заполняю данные по партнеру
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+	And I click the button named "FormCreate"
+	And I select "Payment from customer" exact value from "Transaction type" drop-down list
+	* Filling in partner info
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-	Check the filter by контрагенту
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payer"
-		И я запоминаю количество строк таблицы "List" как "QS"
-		Тогда переменная "QS" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+	* Check the filter by legal name
+		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I save number of "List" table lines as "QS"
+		Then "QS" variable is equal to 1
+		And "List" table contains lines
 		| Description       |
 		| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к следующему реквизиту
-		И Пауза 2
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And I move to the next attribute
+		And Delay 2
+		And "PaymentList" table contains lines
 		| Partner   | Payer             |
 		| Ferron BP | Company Ferron BP |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: проверяю фильтр по партнеру в табличной части в документах оплаты
+Scenario: check the partner filter in the tabular part of the payment documents.
 	# when selecting a legal name, only its partners should be available on the partner selection list
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я заполняю данные по контрагенту
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payee"
-		И в таблице "List" я перехожу к строке:
+	And I click the button named "FormCreate"
+	* Filling in legal name info
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Company Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-	Check the filter by партнеру
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И я запоминаю количество строк таблицы "List" как "QS"
-		Тогда переменная "QS" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And Delay 2
+	* Check the filter by partner
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I save number of "List" table lines as "QS"
+		Then "QS" variable is equal to 1
+		And "List" table contains lines
 		| Description     |
 		| Ferron BP       |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к следующему реквизиту
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And I move to the next attribute
+		And "PaymentList" table contains lines
 		| Partner   | Payee             |
 		| Ferron BP | Company Ferron BP |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: проверяю фильтр по партнеру в табличной части в документах поступления оплаты
+Scenario: check the partner filter in the tabular part of the payment receipt documents
 	# when selecting a legal name, only its partners should be available on the partner selection list
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
-	И я заполняю данные по контрагенту
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payer"
-		И в таблице "List" я перехожу к строке:
+	And I click the button named "FormCreate"
+	And I select "Payment from customer" exact value from "Transaction type" drop-down list
+	* Filling in legal name info
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Company Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-	Check the filter by партнеру
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И я запоминаю количество строк таблицы "List" как "QS"
-		Тогда переменная "QS" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And Delay 2
+	* Check the filter by partner
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I save number of "List" table lines as "QS"
+		Then "QS" variable is equal to 1
+		And "List" table contains lines
 		| Description     |
 		| Ferron BP       |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к следующему реквизиту
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And I move to the next attribute
+		And "PaymentList" table contains lines
 		| Partner   | Payer             |
 		| Ferron BP | Company Ferron BP |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: проверяю фильтр по документам-основания в документах оплаты
-	И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-	И в таблице "List" я перехожу к строке:
+Scenario: check the filter on the basis documents in the payment documents
+	And I click choice button of "Partner term" attribute in "PaymentList" table
+	And I go to line in "List" table
 		| 'Description'           |
 		| 'Basic Partner terms, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	Check the filter by документам основания
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		И Пауза 2
-		Тогда таблица "List" не содержит строки:
+	And I select current line in "List" table
+	* Check the filter by basis documents
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And "List" table does not contain lines
 			| Legal name      | Partner |
 			| Company Kalipso | Kalipso |
-		И я закрываю текущее окно
-	И я проверяю фильтр ещё по документам по партнеру Kalipso
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I close current window
+	* Check the filter by basis documents for Kalipso
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Kalipso   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payee"
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click choice button of "Payee" attribute in "PaymentList" table
+		And "List" table contains lines
 			| Description       |
 			| Company Kalipso |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 			| Partner   | Payee             |
 			| Kalipso | Company Kalipso |
-	Check the filter by документам основания
-		И в таблице "PaymentList" я перехожу к строке:
+	* Check the filter by basis documents
+		And I go to line in "PaymentList" table
 			| Partner | Payee           |
 			| Kalipso | Company Kalipso |
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
 		| 'Description'           | 'Kind'    |
 		| 'Basic Partner terms, TRY' | 'Regular' |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я перехожу к следующему реквизиту
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		Тогда таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And Delay 2
+		And I move to the next attribute
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And "List" table does not contain lines
 			| Legal name        | Partner   |
 			| Company Ferron BP | Ferron BP |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: проверяю фильтр по документам-основания в документах поступления оплаты
-# нужно исправить
-	И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-	И в таблице "List" я перехожу к строке:
+Scenario: check the filter on the basis documents in the documents of receipt of payment
+	And I click choice button of "Partner term" attribute in "PaymentList" table
+	And I go to line in "List" table
 		| 'Description'           |
 		| 'Basic Partner terms, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	Check the filter by документам основания
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		Тогда таблица "List" не содержит строки:
+	And I select current line in "List" table
+	* Check the filter by basis documents
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And "List" table does not contain lines
 			| Legal name      | Partner |
 			| Company Kalipso | Kalipso |
-		# И я закрываю текущее окно
-	И я проверяю фильтр ещё по документам по партнеру Kalipso
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+	* Check the filter by basis documents for Kalipso
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Kalipso   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payer"
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click choice button of "Payer" attribute in "PaymentList" table
+		And "List" table contains lines
 			| Description       |
 			| Company Kalipso |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 			| Partner   | Payer             |
 			| Kalipso | Company Kalipso |
-	Check the filter by документам основания
-		И в таблице "PaymentList" я перехожу к строке:
+	* Check the filter by basis documents
+		And I go to line in "PaymentList" table
 			| Partner | Payer           |
 			| Kalipso | Company Kalipso |
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		Тогда таблица "List" не содержит строки:
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And "List" table does not contain lines
 			|Legal name        | Partner   |
 			| Company Ferron BP | Ferron BP |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: проверяю выбор типа документа-основания в документах поступления оплаты
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я проверяю выбор вида документа-основания
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
+Scenario: check the choice of the type of document-basis in the documents of receipt of payment
+	And I click the button named "FormCreate"
+	* Check the choice of the type of document-basis
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		# temporarily
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
 		# temporarily
-		# Тогда таблица "List" содержит строки:
-		# | Reference                                    |
-		# | Purchase invoice*                            |
-		# | Sales return*                                |
-		Тогда таблица "List" не содержит строки:
+		And "List" table does not contain lines
 		| Reference                                    |
 		| Sales invoice*                               |
 		| Purchase return*                             |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: проверяю выбор типа документа-основания в документах оплаты
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я проверяю выбор вида документа-основания
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		# temporarily
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		# temporarily
-		Тогда таблица "List" не содержит строки:
-		| Reference                                    |
-		| Purchase invoice*                            |
-		| Sales return*                                |
-		# Тогда таблица "List" содержит строки:
-		# | Reference                                    |
-		# | Sales invoice*                               |
-		# | Purchase return*                             |
-	И Я закрыл все окна клиентского приложения
 	
-Сценарий: проверяю выбор валюты в банковском платежном документе в случае если валюта указана в счете
-# поменять валюту в таком случае нельзя (документы: Bank payment, Bank reciept)
-	И я нажимаю кнопку выбора у поля "Company"
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Account"
-	И в таблице "List" я перехожу к строке:
+Scenario: check the choice of currency in the bank payment document if the currency is indicated in the account
+# in this case you cannot change the currency (documents: Bank payment, Bank reciept)
+	And I click Select button of "Company" field
+	And I select current line in "List" table
+	And I click Select button of "Account" field
+	And I go to line in "List" table
 			| Description    |
 			| Bank account, TRY |
-	И в таблице "List" я выбираю текущую строку
-	И     элемент формы с именем "Currency" стал равен 'TRY'
-	И я меняю валюту с лиры на доллар
-		И я нажимаю кнопку выбора у поля с именем "Currency"
-		И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	Then the form attribute named "Currency" became equal to "TRY"
+	* Change currency from lira to USD
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
 			| Code | Description     |
 			| USD  | American dollar |
-		И в таблице "List" я выбираю текущую строку
-	И я проверяю, что валюта документа осталась лира
-		И     элемент формы с именем "Currency" стал равен 'USD'
-		И     элемент формы с именем "Account" стал равен ''
-	И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+	* Check that the document currency is the lira
+		Then the form attribute named "Currency" became equal to "USD"
+		Then the form attribute named "Account" became equal to ""
+	And I close all client application windows
 
-Сценарий: проверяю выбор валюты в кассовом платежном документе в случае если валюта указана в счете
-# поменять валюту в таком случае нельзя (документы: Cash payment, Cash reciept)
-	И я нажимаю кнопку выбора у поля "Company"
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Cash account"
-	И в таблице "List" я перехожу к строке:
+Scenario: check the choice of currency in the cash payment document if the currency is indicated in the account
+# in this case you cannot change the currency (documents: Cash payment, Cash reciept)
+	And I click Select button of "Company" field
+	And I select current line in "List" table
+	And I click Select button of "Cash account" field
+	And I go to line in "List" table
 			| Description    |
 			| Cash desk №4 |
-	И в таблице "List" я выбираю текущую строку
-	И     элемент формы с именем "Currency" стал равен 'TRY'
-	И я меняю валюту с лиры на доллар
-		И я нажимаю кнопку выбора у поля с именем "Currency"
-		И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	Then the form attribute named "Currency" became equal to "TRY"
+	* Change currency from lira to USD
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
 			| Code | Description     |
 			| USD  | American dollar |
-		И в таблице "List" я выбираю текущую строку
-	И я проверяю, что валюта документа стала USD при этом поле Cash desk очистилось
-		И     элемент формы с именем "Currency" стал равен 'USD'
-		И     элемент формы с именем "CashAccount" стал равен ''
-	И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+	* Check that the currency of the document has become USD while the Cash account field has cleared
+		Then the form attribute named "Currency" became equal to "USD"
+		Then the form attribute named "CashAccount" became equal to ""
+	And I close all client application windows
 
 
-Сценарий: создаю временную кассу Cash desk №4 со строго фиксированной валютой (лиры)
-	И я открываю навигационную ссылку "e1cib/list/Catalog.CashAccounts"
-	И Пауза 2
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле с именем 'Description_en' я ввожу текст 'Cash desk №4'
-	И в поле с именем 'Description_tr' я ввожу текст 'Cash desk №4 TR'
-	И я нажимаю на кнопку 'Ok'
-	Тогда элемент формы с именем "Type" стал равен 'Cash'
-	И я нажимаю кнопку выбора у поля "Company"
-	И в таблице "List" я перехожу к строке:
+Scenario: create a temporary cash desk Cash account No. 4 with a strictly fixed currency (lira)
+	Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+	And Delay 2
+	And I click the button named "FormCreate"
+	And I click Open button of the field named "Description_en"
+	And I input "Cash desk №4" text in the field named "Description_en"
+	And I input "Cash desk №4 TR" text in the field named "Description_tr"
+	And I click "Ok" button
+	Then the form attribute named "Type" became equal to "Cash"
+	And I click Select button of "Company" field
+	And I go to line in "List" table
 		| Description  |
 		| Main Company |
-	И в таблице "List" я выбираю текущую строку
-	И я меняю значение переключателя с именем 'CurrencyType' на 'Fixed'
-	И я нажимаю кнопку выбора у поля с именем "Currency"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I change the radio button named "CurrencyType" value to "Fixed"
+	And I click Choice button of the field named "Currency"
+	And I go to line in "List" table
 		| Code | Description  |
 		| TRY  | Turkish lira |
-	И в таблице "List" я выбираю текущую строку
-	И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	И Пауза 5
-	Тогда В базе появился хотя бы один элемент справочника "CashAccounts"
-	Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Cash desk №4"  
-	Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_tr" "Cash desk №4 TR" 
+	And I select current line in "List" table
+	And I click the button named "FormWriteAndClose"
+	And Delay 5
+	Then I check for the "CashAccounts" catalog element with the "Description_en" "Cash desk №4"  
+	Then I check for the "CashAccounts" catalog element with the "Description_tr" "Cash desk №4 TR" 
+
+
+
+
+

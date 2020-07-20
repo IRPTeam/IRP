@@ -1,867 +1,864 @@
-#language: ru
+﻿#language: en
 @ExportScenarios
 @IgnoreOnCIMainBuild
 
-Функционал: экспортные сценарии
+Feature: export scenarios for special offers
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
-Сценарий: select the plugin to create the type of special offer 
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferTypes'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Plugins"
-	И в таблице "List" я перехожу к строке:
+Scenario: select the plugin to create the type of special offer 
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOfferTypes"
+	And I click the button named "FormCreate"
+	And I click Select button of "Plugins" field
+	And I go to line in "List" table
 		| 'Description'                 |
 		| 'ExternalSpecialOfferRules' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
+	And I select current line in "List" table
+	And I click Open button of the field named "Description_en"
 
-Сценарий: select the plugin to create the rule of special offer 
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferRules'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Plugins"
-	И в таблице "List" я перехожу к строке:
+Scenario: select the plugin to create the rule of special offer 
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOfferRules"
+	And I click the button named "FormCreate"
+	And I click Select button of "Plugins" field
+	And I go to line in "List" table
 		| 'Description'                 |
 		| 'ExternalSpecialOfferRules' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
+	And I select current line in "List" table
+	And I click Open button of the field named "Description_en"
 
 
-Сценарий: move on to the Price Type settings
-	И я нажимаю на кнопку 'Set settings'
-	И я нажимаю кнопку выбора у поля "Price type"
+Scenario: move on to the Price Type settings
+	And I click "Set settings" button
+	And I click Select button of "Price type" field
 
-Сценарий: save the special offer setting
-	И я нажимаю на кнопку 'Save settings'
-	И Пауза 2
-	И я нажимаю на кнопку 'Save and close'
-	И Пауза 5
+Scenario: save the special offer setting
+	And I click "Save settings" button
+	And Delay 2
+	And I click "Save and close" button
+	And Delay 5
 
-Сценарий: choose the plugin to create a special offer type (message)
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferTypes'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Plugins"
-	И в таблице "List" я перехожу к строке:
+Scenario: choose the plugin to create a special offer type (message)
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOfferTypes"
+	And I click the button named "FormCreate"
+	And I click Select button of "Plugins" field
+	And I go to line in "List" table
 		| 'Description'           | 
 		| 'ExternalSpecialMessage' | 
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
+	And I select current line in "List" table
+	And I click Open button of the field named "Description_en"
 
 
-Сценарий: choose the plugin to create a special offer
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку с именем 'FormCreateFolder'
-	И я нажимаю кнопку выбора у поля "Special offer type"
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Plugins"
-	И в таблице "List" я перехожу к строке:
+Scenario: choose the plugin to create a special offer
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click the button named "FormCreateFolder"
+	And I click Select button of "Special offer type" field
+	And I click the button named "FormCreate"
+	And I click Select button of "Plugins" field
+	And I go to line in "List" table
 		| 'Description'                 |
 		| 'ExternalSpecialOfferRules' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
+	And I select current line in "List" table
+	And I click Open button of the field named "Description_en"
 
-Сценарий: open a special offer window
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Special offer type"
-	И Пауза 2
+Scenario: open a special offer window
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click the button named "FormCreate"
+	And I click Select button of "Special offer type" field
+	And Delay 2
 
-Сценарий: enter the discount period this month
-	И в поле "Start of" я ввожу начало текущего месяца
-	И в поле "End of" я ввожу конец текущего месяца
+Scenario: enter the discount period this month
+	And I input begin of the current month date in "Start of" field
+	And I input end of the current month date in "End of" field
 
-Сценарий: add a special offer rule
-	И в таблице "Rules" я нажимаю на кнопку с именем 'RulesAdd'
-	И в таблице "Rules" я нажимаю кнопку выбора у реквизита "Rule"
-	И Пауза 1
+Scenario: add a special offer rule
+	And in the table "Rules" I click the button named "RulesAdd"
+	And I click choice button of "Rule" attribute in "Rules" table
+	And Delay 1
 
-Сценарий: save the rule for a special offer
-	И в таблице "List" я выбираю текущую строку
-	И Пауза 1
-	И в таблице "Rules" я завершаю редактирование строки
-	И я нажимаю на кнопку 'Save and close'
-	И Пауза 10
+Scenario: save the rule for a special offer
+	And I select current line in "List" table
+	And Delay 1
+	And I finish line editing in "Rules" table
+	And I click "Save and close" button
+	And Delay 10
 
-Сценарий: move the Discount 2 without Vat special offer from Maximum to Minimum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the Discount 2 without Vat special offer from Maximum to Minimum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount 2 without Vat' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuLevelDown'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And in the table "List" I click the button named "ListContextMenuLevelDown"
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
 		| 'No'     | 'No'       | '2'        | 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move Discount 2 without Vat and Discount 1 without Vat discounts from the group Minimum to the group Maximum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move Discount 2 without Vat and Discount 1 without Vat discounts from the group Minimum to the group Maximum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount 1 without Vat' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
 		| 'No'     | 'No'       | '3'        | 'Maximum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
-	Тогда открылось окно 'Special offers'
-	И в таблице "List" я перехожу к строке:
+	And I click the button named "FormChoose"
+	Then "Special offers" window is opened
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount 2 without Vat' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I go to line in "List" table
 		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
 		| 'No'     | 'No'       | '3'        | 'Maximum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: transfer Discount 2 without Vat and Discount 1 without Vat discounts from Maximum to Minimum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: transfer Discount 2 without Vat and Discount 1 without Vat discounts from Maximum to Minimum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount 1 without Vat' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
-	Тогда открылось окно 'Special offers'
-	И в таблице "List" я перехожу к строке:
+	And I click the button named "FormChoose"
+	Then "Special offers" window is opened
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount 2 without Vat' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: transfer the Discount Price 2 discount to the Minimum group
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: transfer the Discount Price 2 discount to the Minimum group
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 2' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: change the Discount Price 2 manual
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change the Discount Price 2 manual
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 2' |
-	И в таблице "List" я выбираю текущую строку
-	И я устанавливаю флаг 'Manually'
-	И я нажимаю на кнопку 'Save'
-	И Пауза 2
-	И  флаг "Manually" равен "Yes"
-	И я нажимаю на кнопку "Save and close"
-	И Я закрываю окно 'Special offers'
+	And I select current line in "List" table
+	And I set checkbox "Manually"
+	And I click "Save" button
+	And Delay 2
+	And checkbox "Manually" is equal to "Yes"
+	And I click "Save and close" button
+	And I close "Special offers" window
 
 
-Сценарий: change the manual setting of the Discount Price 1 discount.
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change the manual setting of the Discount Price 1 discount.
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 1' |
-	И в таблице "List" я выбираю текущую строку
-	И я устанавливаю флаг 'Manually'
-	И я нажимаю на кнопку 'Save'
-	И Пауза 2
-	И  флаг "Manually" равен "Yes"
-	И я нажимаю на кнопку "Save and close"
-	И Я закрываю окно 'Special offers'
+	And I select current line in "List" table
+	And I set checkbox "Manually"
+	And I click "Save" button
+	And Delay 2
+	And checkbox "Manually" is equal to "Yes"
+	And I click "Save and close" button
+	And I close "Special offers" window
 
-Сценарий: change the auto setting of the Discount Price 2
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change the auto setting of the Discount Price 2
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 2' |
-	И в таблице "List" я выбираю текущую строку
-	И я снимаю флаг 'Manually'
-	И я нажимаю на кнопку 'Save'
-	И Пауза 2
-	И  флаг "Manually" равен "No"
-	И я нажимаю на кнопку "Save and close"
-	И Я закрываю окно 'Special offers'
+	And I select current line in "List" table
+	And I remove checkbox "Manually"
+	And I click "Save" button
+	And Delay 2
+	And checkbox "Manually" is equal to "No"
+	And I click "Save and close" button
+	And I close "Special offers" window
 
 
-Сценарий: change the auto setting of the special offer Discount Price 1
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change the auto setting of the special offer Discount Price 1
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 1' |
-	И в таблице "List" я выбираю текущую строку
-	И я снимаю флаг 'Manually'
-	И я нажимаю на кнопку 'Save'
-	И Пауза 2
-	И  флаг "Manually" равен "No"
-	И я нажимаю на кнопку "Save and close"
-	И Я закрываю окно 'Special offers'
+	And I select current line in "List" table
+	And I remove checkbox "Manually"
+	And I click "Save" button
+	And Delay 2
+	And checkbox "Manually" is equal to "No"
+	And I click "Save and close" button
+	And I close "Special offers" window
 
-Сценарий:  move the Discount Price 1 to Minimum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario:  move the Discount Price 1 to Minimum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 1' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий:  move the Discount Price 1 to Maximum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario:  move the Discount Price 1 to Maximum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 1' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Maximum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий:  move the Discount Price 2 special offer to Maximum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario:  move the Discount Price 2 special offer to Maximum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 2' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Maximum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the special offer Discount Price 2 to Minimum (for test)
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the special offer Discount Price 2 to Minimum (for test)
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 2' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the Discount Price 1 to Sum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the Discount Price 1 to Sum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 1' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the Discount Price 2 special offer to Sum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the Discount Price 2 special offer to Sum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 2' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: change the priority Discount Price 1 from 1 to 3
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change the priority Discount Price 1 from 1 to 3
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 1' |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Priority' я ввожу текст '3'
-	И я нажимаю на кнопку 'Save and close'
-	И Пауза 2
+	And I select current line in "List" table
+	And I input "3" text in "Priority" field
+	And I click "Save and close" button
+	And Delay 2
 
 
-Сценарий: change the priority Discount Price 1 to 1
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change the priority Discount Price 1 to 1
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 1' |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Priority' я ввожу текст '1'
-	И я нажимаю на кнопку 'Save and close'
-	И Пауза 2
+	And I select current line in "List" table
+	And I input "1" text in "Priority" field
+	And I click "Save and close" button
+	And Delay 2
 
-Сценарий: change the priority special offer Discount Price 2 from 4 to 2
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change the priority special offer Discount Price 2 from 4 to 2
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 2' |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Priority' я ввожу текст '2'
-	И я нажимаю на кнопку 'Save and close'
-	И Пауза 2
+	And I select current line in "List" table
+	And I input "2" text in "Priority" field
+	And I click "Save and close" button
+	And Delay 2
 
-Сценарий: move the Discount 1 without Vat discount to Minimum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the Discount 1 without Vat discount to Minimum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount 1 without Vat' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the Discount 2 without Vat discount to the Minimum group
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the Discount 2 without Vat discount to the Minimum group
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount 2 without Vat' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the Discount 1 without Vat discount to the Sum group
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the Discount 1 without Vat discount to the Sum group
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount 1 without Vat' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
 
-Сценарий: move the Discount 1 without Vat discount to the Sum in Minimum group
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the Discount 1 without Vat discount to the Sum in Minimum group
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount 2 without Vat' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the group Sum in Minimum to Minimum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the group Sum in Minimum to Minimum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'      |
 		| 'Sum in Minimum' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the Discount 1 without Vat discount to Sum in Minimum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the Discount 1 without Vat discount to Sum in Minimum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount 1 without Vat' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the Discount 2 without Vat discount to Special Offers
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the Discount 2 without Vat discount to Special Offers
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount 2 without Vat' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I click the button named "FormChoose"
 
-Сценарий: move Discount 1 without Vat в Special Offers
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move Discount 1 without Vat in Special Offers
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount 1 without Vat' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I click the button named "FormChoose"
 
-Сценарий: change auto setting 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change auto setting 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
-	И в таблице "List" я выбираю текущую строку
-	И я снимаю флаг 'Manually'
-	И я нажимаю на кнопку 'Save'
-	И Пауза 2
-	И  флаг "Manually" равен "No"
-	И я нажимаю на кнопку "Save and close"
-	И Я закрываю окно 'Special offers'
+	And I select current line in "List" table
+	And I remove checkbox "Manually"
+	And I click "Save" button
+	And Delay 2
+	And checkbox "Manually" is equal to "No"
+	And I click "Save and close" button
+	And I close "Special offers" window
 
-Сценарий: change auto setting 4+1 Dress and Trousers, Discount on Basic Partner terms
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change auto setting 4+1 Dress and Trousers, Discount on Basic Partner terms
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
-	И в таблице "List" я выбираю текущую строку
-	И я снимаю флаг 'Manually'
-	И я нажимаю на кнопку 'Save'
-	И Пауза 2
-	И  флаг "Manually" равен "No"
-	И я нажимаю на кнопку "Save and close"
-	И Я закрываю окно 'Special offers'
+	And I select current line in "List" table
+	And I remove checkbox "Manually"
+	And I click "Save" button
+	And Delay 2
+	And checkbox "Manually" is equal to "No"
+	And I click "Save and close" button
+	And I close "Special offers" window
 
-Сценарий: change auto setting All items 5+1, Discount on Basic Partner terms
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change auto setting All items 5+1, Discount on Basic Partner terms
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'All items 5+1, Discount on Basic Partner terms' |
-	И в таблице "List" я выбираю текущую строку
-	И я снимаю флаг 'Manually'
-	И я нажимаю на кнопку 'Save'
-	И Пауза 2
-	И  флаг "Manually" равен "No"
-	И я нажимаю на кнопку "Save and close"
-	И Я закрываю окно 'Special offers'
+	And I select current line in "List" table
+	And I remove checkbox "Manually"
+	And I click "Save" button
+	And Delay 2
+	And checkbox "Manually" is equal to "No"
+	And I click "Save and close" button
+	And I close "Special offers" window
 
-Сценарий: change manually setting 4+1 Dress and Trousers, Discount on Basic Partner terms
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change manually setting 4+1 Dress and Trousers, Discount on Basic Partner terms
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
-	И в таблице "List" я выбираю текущую строку
-	И я устанавливаю флаг 'Manually'
-	И я нажимаю на кнопку 'Save'
-	И Пауза 2
-	И  флаг "Manually" равен "Yes"
-	И я нажимаю на кнопку "Save and close"
-	И Я закрываю окно 'Special offers'
+	And I select current line in "List" table
+	And I set checkbox "Manually"
+	And I click "Save" button
+	And Delay 2
+	And checkbox "Manually" is equal to "Yes"
+	And I click "Save and close" button
+	And I close "Special offers" window
 
-Сценарий: change manually setting 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change manually setting 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
-	И в таблице "List" я выбираю текущую строку
-	И я устанавливаю флаг 'Manually'
-	И я нажимаю на кнопку 'Save'
-	И Пауза 2
-	И  флаг "Manually" равен "Yes"
-	И я нажимаю на кнопку "Save and close"
-	И Я закрываю окно 'Special offers'
+	And I select current line in "List" table
+	And I set checkbox "Manually"
+	And I click "Save" button
+	And Delay 2
+	And checkbox "Manually" is equal to "Yes"
+	And I click "Save and close" button
+	And I close "Special offers" window
 
-Сценарий: change manually setting All items 5+1, Discount on Basic Partner terms
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: change manually setting All items 5+1, Discount on Basic Partner terms
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'All items 5+1, Discount on Basic Partner terms' |
-	И в таблице "List" я выбираю текущую строку
-	И я устанавливаю флаг 'Manually'
-	И я нажимаю на кнопку 'Save'
-	И Пауза 2
-	И  флаг "Manually" равен "Yes"
-	И я нажимаю на кнопку "Save and close"
-	И Я закрываю окно 'Special offers'
+	And I select current line in "List" table
+	And I set checkbox "Manually"
+	And I click "Save" button
+	And Delay 2
+	And checkbox "Manually" is equal to "Yes"
+	And I click "Save and close" button
+	And I close "Special offers" window
 
-Сценарий: move the discount All items 5+1, Discount on Basic Partner terms to the group Minimum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the discount All items 5+1, Discount on Basic Partner terms to the group Minimum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'All items 5+1, Discount on Basic Partner terms' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the discount 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms to the group Minimum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the discount 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms to the group Minimum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the discount 4+1 Dress and Trousers, Discount on Basic Partner terms to the group Minimum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the discount 4+1 Dress and Trousers, Discount on Basic Partner terms to the group Minimum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the discount All items 5+1, Discount on Basic Partner terms to the group Sum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the discount All items 5+1, Discount on Basic Partner terms to the group Sum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'All items 5+1, Discount on Basic Partner terms' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the discount 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms to the group Sum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the discount 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms to the group Sum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the discount 4+1 Dress and Trousers, Discount on Basic Partner terms to the group Sum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the discount 4+1 Dress and Trousers, Discount on Basic Partner terms to the group Sum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: change Type joing in the group Maximum to Maximum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-		И я нажимаю на кнопку 'List'
-		И в таблице "List" я перехожу к строке:
+Scenario: change Type joing in the group Maximum to Maximum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I click "List" button
+		And I go to line in "List" table
 			| 'Description'      |
 			| 'Maximum' |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuChange'
-		И я нажимаю на кнопку открытия поля "Special offer type"
-		И я нажимаю на кнопку 'Set settings'
-		Тогда открылось окно 'Special offer rules'
-		И из выпадающего списка "Type joining" я выбираю точное значение 'Maximum'
-		И я нажимаю на кнопку 'Save settings'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
+		And in the table "List" I click the button named "ListContextMenuChange"
+		And I click Open button of "Special offer type" field
+		And I click "Set settings" button
+		Then "Special offer rules" window is opened
+		And I select "Maximum" exact value from "Type joining" drop-down list
+		And I click "Save settings" button
+		And I click "Save and close" button
+		And Delay 10
+		And I click "Save and close" button
+		And Delay 10
 
-Сценарий: change Type joing in the group Maximum to MaximumInRow
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-		И я нажимаю на кнопку 'List'
-		И в таблице "List" я перехожу к строке:
+Scenario: change Type joing in the group Maximum to MaximumInRow
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I click "List" button
+		And I go to line in "List" table
 			| 'Description'      |
 			| 'Maximum' |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuChange'
-		И я нажимаю на кнопку открытия поля "Special offer type"
-		И я нажимаю на кнопку 'Set settings'
-		Тогда открылось окно 'Special offer rules'
-		И из выпадающего списка "Type joining" я выбираю точное значение 'Maximum by row'
-		И я нажимаю на кнопку 'Save settings'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
+		And in the table "List" I click the button named "ListContextMenuChange"
+		And I click Open button of "Special offer type" field
+		And I click "Set settings" button
+		Then "Special offer rules" window is opened
+		And I select "Maximum by row" exact value from "Type joining" drop-down list
+		And I click "Save settings" button
+		And I click "Save and close" button
+		And Delay 10
+		And I click "Save and close" button
+		And Delay 10
 
-Сценарий: move the discount All items 5+1, Discount on Basic Partner terms to the group Special Offers
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the discount All items 5+1, Discount on Basic Partner terms to the group Special Offers
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'All items 5+1, Discount on Basic Partner terms' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I go to line in "List" table
         | 'Special offer type' | 'Priority' |
         | 'Special Offers'     | '1'        |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the discount 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms to the group Special Offers
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the discount 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms to the group Special Offers
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I go to line in "List" table
         | 'Special offer type' | 'Priority' |
         | 'Special Offers'     | '1'        |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the discount 4+1 Dress and Trousers, Discount on Basic Partner terms to the group Special Offers
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the discount 4+1 Dress and Trousers, Discount on Basic Partner terms to the group Special Offers
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I go to line in "List" table
         | 'Special offer type' | 'Priority' |
         | 'Special Offers'     | '1'        |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move Discount Price 1 to Special Offers
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move Discount Price 1 to Special Offers
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 1' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I go to line in "List" table
         | 'Special offer type' | 'Priority' |
         | 'Special Offers'     | '1'        |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move Discount Price 1 to the group Special Offers
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move Discount Price 1 to the group Special Offers
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'Discount Price 2' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I go to line in "List" table
         | 'Special offer type' | 'Priority' |
         | 'Special Offers'     | '1'        |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the discount All items 5+1, Discount on Basic Partner terms to the group Maximum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the discount All items 5+1, Discount on Basic Partner terms to the group Maximum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| 'All items 5+1, Discount on Basic Partner terms' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И я нажимаю на кнопку 'List'
-	# И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Maximum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the discount 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms to the group Maximum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the discount 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms to the group Maximum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И я нажимаю на кнопку 'List'
-	# И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Maximum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: move the discount 4+1 Dress and Trousers, Discount on Basic Partner terms to the group Maximum
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: move the discount 4+1 Dress and Trousers, Discount on Basic Partner terms to the group Maximum
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'              |
 		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И я нажимаю на кнопку 'List'
-	# И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Maximum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
 
 	
 
-Сценарий: creating an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+Scenario: creating an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 			| 'Description'             |
 			| 'Lomaniti' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
 			| 'Description'                     |
 			| 'Basic Partner terms, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Legal name"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Legal name" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Company Lomaniti'  |
-	И в таблице "List" я выбираю текущую строку
+	And I select current line in "List" table
 	* Adding items to sales order
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		Тогда открылось окно 'Items'
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
 			| 'Description'                     |
 			| 'Dress' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'XS/Blue'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '5,000'
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		Тогда открылось окно 'Items'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
 			| 'Description'                     |
 			| 'Boots' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| 'Item key' |
 			| '36/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" я завершаю редактирование строки
-	И я нажимаю на кнопку 'Post'
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+	And I click "Post" button
 
 
 
 
-Сценарий: changing the manual apply of Discount 2 without Vat for test
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: changing the manual apply of Discount 2 without Vat for test
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 			| 'Description'              |
 			| 'Discount 2 without Vat' |
-	И в таблице "List" я выбираю текущую строку
-	И Пауза 2
-	И я устанавливаю флаг с именем 'Manually'
-	И  флаг "Manually" равен "Yes"
-	И я нажимаю на кнопку "Save and close"
-	И Я закрываю окно 'Special offers'
+	And I select current line in "List" table
+	And Delay 2
+	And I set checkbox named "Manually"
+	And checkbox "Manually" is equal to "Yes"
+	And I click "Save and close" button
+	And I close "Special offers" window

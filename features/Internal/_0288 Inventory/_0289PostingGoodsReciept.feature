@@ -1,62 +1,63 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: creating document Goods receipt
+Feature: create document Goods receipt
 
 As a storekeeper
 I want to create a Goods receipt
 To take products to the store
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
 
-Сценарий: _028901 creating document Goods Reciept based on Purchase invoice
-	И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-	И в таблице "List" я перехожу к строке:
+Scenario: _028901 create document Goods Reciept based on Purchase invoice
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
 		| 'Number' |
 		| '2'      |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку с именем "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Checking that information is filled in when creating based on
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
+	And I select current line in "List" table
+	And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+	* Check that information is filled in when creating based on
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 	* Change of document number - 106
-		И в поле 'Number' я ввожу текст '1'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '106'
-	* Checking the filling in the tabular part of the  items
-		И     таблица "ItemList" содержит строки:
+		And I input "1" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "106" text in "Number" field
+	* Check the filling in the tabular part of the  items
+		And "ItemList" table contains lines
 		| '#' | 'Item'     | 'Receipt basis'     | 'Item key' | 'Unit' | 'Quantity'       |
 		| '1' | 'Dress'    | 'Purchase invoice 2*' | 'L/Green'  | 'pcs' | '500,000' |
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Item'  | 'Quantity' | 'Item key' | 'Store'    | 'Unit' |
 		| 'Dress' | '500,000'  | 'L/Green'  | 'Store 02' | 'pcs' |
-	И я нажимаю на кнопку 'Post and close'
-	И Я закрываю текущее окно
+	And I click "Post and close" button
+	And I close current window
 	
 
-Сценарий: _028902 checking  Goods Reciept posting by register GoodsInTransitIncoming (-)
+Scenario: _028902 check  Goods Reciept posting by register GoodsInTransitIncoming (-)
 	
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
-	Тогда таблица "List" содержит строки:
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'          | 'Receipt basis'         | 'Line number' | 'Store'    | 'Item key'  |
 		| '500,000'  | 'Goods receipt 106*'  | 'Purchase invoice 2*'   | '1'           | 'Store 02' | 'L/Green'   |
 
-Сценарий: _028903 checking  Goods Reciept posting by register StockBalance (+)
+Scenario: _028903 check  Goods Reciept posting by register StockBalance (+)
 	
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-	Тогда таблица "List" содержит строки: 
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'             | 'Line number'  | 'Store'    | 'Item key' |
 		| '500,000'  | 'Goods receipt 106*'   | '1'            | 'Store 02' | 'L/Green'  |
 
-Сценарий: _028904 checking  Goods Reciept posting by register StockReservation (+)
+Scenario: _028904 check  Goods Reciept posting by register StockReservation (+)
 	
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-	Тогда таблица "List" содержит строки: 
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                          | 'Line number' | 'Store'    | 'Item key' |
 		| '500,000'  | 'Goods receipt 106*'                 | '1'           | 'Store 02'    | 'L/Green'  |
+
 

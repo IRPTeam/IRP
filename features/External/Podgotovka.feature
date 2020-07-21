@@ -94,7 +94,7 @@ Scenario: changing the auto apply of Discount 1 without Vat
 	And I click "Save and close" button
 	And I close "Special offers" window
 
-Scenario: creating an order for MIO Basic Partner terms, without VAT (High shoes and Boots)
+Scenario: create an order for MIO Basic Partner terms, without VAT (High shoes and Boots)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field

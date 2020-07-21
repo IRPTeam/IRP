@@ -10,7 +10,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: creating a catalog element with the name Test
+Scenario: create a catalog element with the name Test
 	And Delay 2
 	And I click the button named "FormCreate"
 	And Delay 2

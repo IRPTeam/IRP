@@ -790,7 +790,7 @@ Scenario: move the discount 4+1 Dress and Trousers, Discount on Basic Partner te
 
 	
 
-Scenario: creating an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
+Scenario: create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field

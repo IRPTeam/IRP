@@ -269,7 +269,7 @@ Scenario: _095002 check movements of the document Credit_DebitNote by operation 
 			| 'Purchase invoice' |
 		And I select current line in "" table
 		* Check the selection of basis documents for the specified partner
-			Then the number of "List" table lines is "less or equal" 2
+			Then the number of "List" table lines is "меньше или равно" 2
 			And "List" table contains lines
 			| 'Number' | 'Legal name'    | 'Partner' | 'Document amount'   | 'Currency' |
 			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00'         | 'TRY'      |

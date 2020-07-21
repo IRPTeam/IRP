@@ -183,7 +183,7 @@ Scenario: check the legal name filter in the tabular part of the payment documen
 		| Ferron BP | Company Ferron BP |
 	And I close all client application windows
 
-Scenario: checking the legal name filter in the tabular part of the payment receipt documents
+Scenario: check the legal name filter in the tabular part of the payment receipt documents
 	# when selecting a partner, only its legal names should be available on the selection list
 	And I click the button named "FormCreate"
 	And I select "Payment from customer" exact value from "Transaction type" drop-down list

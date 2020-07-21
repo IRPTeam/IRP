@@ -9,64 +9,64 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-	Scenario: creating an order for Lomaniti Basic Agreements (Dress and Boots)
-	Given I open hyperlink "e1cib/list/Document.SalesOrder"
-	And I click the button named "FormCreate"
-	And I click Select button of "Partner" field
-	And I go to line in "List" table
-			| 'Description'             |
-			| 'Lomaniti' |
-	And I select current line in "List" table
-	And I click Select button of "Partner term" field
-	And I go to line in "List" table
-			| 'Description'                     |
-			| 'Basic Agreements, TRY' |
-	And I select current line in "List" table
-	And I click Select button of "Legal name" field
-	And I go to line in "List" table
-			| 'Description' |
-			| 'Company Lomaniti'  |
-	And I select current line in "List" table
-	* Adding items to sales order
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		Then "Items" window is opened
+Scenario: creating an order for Lomaniti Basic Agreements (Dress and Boots)
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Dress' |
+				| 'Description'             |
+				| 'Lomaniti' |
 		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
+		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'XS/Blue'  |
+				| 'Description'                     |
+				| 'Basic Agreements, TRY' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
-		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		Then "Items" window is opened
+		And I click Select button of "Legal name" field
 		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Boots' |
+				| 'Description' |
+				| 'Company Lomaniti'  |
 		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key' |
-			| '36/18SD'  |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	And I click "Post" button
+		* Adding items to sales order
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			Then "Items" window is opened
+			And I go to line in "List" table
+				| 'Description'                     |
+				| 'Dress' |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item key' |
+				| 'XS/Blue'  |
+			And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I input "10,000" text in "Q" field of "ItemList" table
+			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			Then "Items" window is opened
+			And I go to line in "List" table
+				| 'Description'                     |
+				| 'Boots' |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item key' |
+				| '36/18SD'  |
+			And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I input "5,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		And I click "Post" button
 
 
 	
 
-Scenario: creating an order for Ferron BP Basic Agreements, TRY (Dress -10 and Trousers - 5)
+Scenario: create an order for Ferron BP Basic Agreements, TRY (Dress -10 and Trousers - 5)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
@@ -401,7 +401,7 @@ Scenario: creating a Purchase Order document
 		And I finish line editing in "ItemList" table
 	And I click "Post and close" button
 
-	Scenario: change purchase order number to 103
+Scenario: change purchase order number to 103
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to the last line in "List" table
 		And I select current line in "List" table
@@ -475,82 +475,82 @@ Scenario: creating a Purchase Order document
 
 
 
-	Scenario: creating a purchase invoice for the purchase of sets and dimensional grids at the tore 02
-	* Create Purchase Invoice without order
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I click the button named "FormCreate"
-	* Filling in details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
-		And I select current line in "List" table
-	* Filling in vendor's info
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I activate "Description" field in "List" table
-		And I go to line in "List" table
-			| Description       |
-			| Company Ferron BP |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-			| Description        |
-			| Vendor Ferron, TRY |
-		And I select current line in "List" table
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
-		And I select current line in "List" table
-	* Filling in items table
-		And I click the button named "Add"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'    |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'Dress/A-8'  |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "100,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| Description |
-			| Boots       |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| Item  | Item key  |
-			| Boots | Boots/S-8 |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
-	* Create Goods receipt
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
-		And I select current line in "List" table
-		And I click "Post and close" button
-		And I wait "Goods receipt (create)" window closing in 20 seconds
-		And I close all client application windows
+	Scenario: create a purchase invoice for the purchase of sets and dimensional grids at the tore 02
+		* Create Purchase Invoice without order
+			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+			And I click the button named "FormCreate"
+		* Filling in details
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+					| 'Description'  |
+					| 'Main Company' |
+			And I select current line in "List" table
+		* Filling in vendor's info
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| Description |
+				| Ferron BP   |
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
+				| Description       |
+				| Company Ferron BP |
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| Description        |
+				| Vendor Ferron, TRY |
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 02'  |
+			And I select current line in "List" table
+		* Filling in items table
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item key' |
+				| 'Dress/A-8'  |
+			And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I input "100,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| Description |
+				| Boots       |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| Item  | Item key  |
+				| Boots | Boots/S-8 |
+			And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I input "200,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
+		* Create Goods receipt
+			And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+					| 'Description'  |
+					| 'Main Company' |
+			And I select current line in "List" table
+			And I click "Post and close" button
+			And I wait "Goods receipt (create)" window closing in 20 seconds
+			And I close all client application windows
 	
-	Scenario: creating Sales invoice for Ferron BP in USD
+	Scenario: create Sales invoice for Ferron BP in USD
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
@@ -954,7 +954,7 @@ Scenario: create the second test SO for a test on the creation mechanism based o
 			And I finish line editing in "ItemList" table
 			And I click "Post" button
 
-Scenario: creating an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
+Scenario: create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
@@ -1010,3 +1010,283 @@ Scenario: creating an order for Ferron BP Basic Partner term, TRY (Dress -10 and
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click "Post" button
+
+Scenario: create a Purchase Order document
+	* Open a form to create Purchase Order
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+	* Filling in details
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+		| Description  |
+		| Main Company |
+		And I select current line in "List" table
+	* Filling in vendor's info
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| Description |
+			| Ferron BP   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
+			| Description       |
+			| Company Ferron BP |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| Description        |
+			| Vendor Ferron, TRY |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 03'  |
+		And I select current line in "List" table
+		And I select "Approved" exact value from "Status" drop-down list
+	* Filling in items table
+		And I move to "Item list" tab
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'S/Yellow'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Dress' | 'S/Yellow'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "205,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'XS/Blue'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Dress' | 'XS/Blue'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "205,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'M/White'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Dress' | 'M/White'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "205,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'XL/Green'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Dress' | 'XL/Green'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "205,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| '36/Yellow'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Trousers' | '36/Yellow'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "220,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| '38/Yellow'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Trousers' | '38/Yellow'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "220,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| '36/Red'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Shirt' | '36/Red'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "250,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| '38/Black'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Shirt' | '38/Black'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "240,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| '36/18SD'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Boots' | '36/18SD'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "190,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| '37/18SD'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Boots' | '37/18SD'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "190,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| '38/18SD'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Boots' | '38/18SD'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "195,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| '39/18SD'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Boots' | '39/18SD'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "180,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	And I click "Post and close" button
+
+
+

@@ -158,22 +158,6 @@ Scenario: Open object form "Companies"
 	And I close current window
 
 
-Scenario: Open list form "CompanyTypes" 
-	And I close all client application windows
-	Given I open "CompanyTypes" catalog default form
-	If the warning is displayed then
-		Then I raise "Failed to open catalog form CompanyTypes" exception
-	And I close current window
-
-Scenario: Open object form "CompanyTypes"
-	And I close all client application windows
-	Given I open "CompanyTypes" reference main form
-	If the warning is displayed then
-		Then I raise "Failed to open catalog form CompanyTypes" exception
-	And I close current window
-
-
-
 	
 Scenario: Open list form "ConfigurationMetadata" 
 	And I close all client application windows

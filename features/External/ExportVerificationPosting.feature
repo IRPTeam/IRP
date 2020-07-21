@@ -10,7 +10,7 @@ Background:
 
 
 
-Scenario: creating a test SO for VerificationPosting
+Scenario: create a test SO for VerificationPosting
 	* Open form to create Sales Order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -70,7 +70,7 @@ Scenario: creating a test SO for VerificationPosting
 		And I finish line editing in "ItemList" table
 	And I click "Post" button
 
-Scenario: creating a test SO for VerificationPosting by package
+Scenario: create a test SO for VerificationPosting by package
 	* Open form to create Sales Order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"

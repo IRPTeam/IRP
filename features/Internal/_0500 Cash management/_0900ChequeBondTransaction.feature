@@ -257,6 +257,7 @@ Scenario: _090004 preparation
 			| 'Description' |
 			| 'Turkey'      |
 		And I select current line in "List" table
+		And I select "Company" exact value from the drop-down list named "Type"
 		Then "Company (create) *" window is opened
 		And I click "Save and close" button
 		And I wait "Company (create) *" window closing in 20 seconds
@@ -288,6 +289,7 @@ Scenario: _090004 preparation
 			| 'Description' |
 			| 'Turkey'      |
 		And I select current line in "List" table
+		And I select "Company" exact value from the drop-down list named "Type"
 		Then "Company (create) *" window is opened
 		And I click "Save and close" button
 		And I wait "Company (create) *" window closing in 20 seconds

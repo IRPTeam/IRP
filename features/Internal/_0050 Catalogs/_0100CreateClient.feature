@@ -143,6 +143,7 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And I click "Ok" button
 		And I input "Turkey" text in "Country" field
 		And I input "Ferron BP" text in "Partner" field
+		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save and close" button
 		And Delay 5
 	* Check the availability of the created company  "Company Ferron BP"
@@ -157,6 +158,7 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And I click "Ok" button
 		And I input "Ukraine" text in "Country" field
 		And I input "Kalipso" text in "Partner" field
+		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save and close" button
 		And Delay 5
 		Then I check for the "Companies" catalog element with the "Description_en" "Company Kalipso" 
@@ -170,6 +172,7 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And I click "Ok" button
 		And I input "Ukraine" text in "Country" field
 		And I input "Lomaniti" text in "Partner" field
+		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save and close" button
 		And Delay 5
 		Then I check for the "Companies" catalog element with the "Description_en" "Company Lomaniti" 

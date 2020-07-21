@@ -42,6 +42,7 @@ Scenario: _060001 preparation
 			| 'Description' |
 			| 'Turkey'      |
 		And I select current line in "List" table
+		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save and close" button
 		And In this window I click command interface button "Main"
 		And I click "Save and close" button
@@ -59,6 +60,7 @@ Scenario: _060001 preparation
 			| 'Description' |
 			| 'Turkey'      |
 		And I select current line in "List" table
+		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save and close" button
 		And In this window I click command interface button "Main"
 		And I click "Save and close" button

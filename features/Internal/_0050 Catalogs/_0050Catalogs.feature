@@ -171,6 +171,7 @@ Scenario: _005013 filling in the "Companies" catalog
 		And I click "Ok" button
 		And I input "Turkey" text in the field named "Country"
 		And I set checkbox "Our"
+		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save" button
 	* Filling in currency information (Local currency and Reporting currency)
 		And I move to "Currencies" tab
@@ -956,34 +957,6 @@ Scenario: _005033 filling in the "Tax rates" catalog
 		Then I check for the "TaxRates" catalog element with the "Description_en" "1%"
 
 
-
-Scenario: _005038 filling in the "Company types" catalog  
-	* Opening a form for creating Company types
-		Given I open hyperlink "e1cib/list/Catalog.CompanyTypes"
-	* Create company types: Entrepreneur, Legal entity, Private individual
-		And I click the button named "FormCreate"
-		And I click Open button of the field named "Description_en"
-		And I input "Entrepreneur" text in the field named "Description_en"
-		And I input "Entrepreneur TR" text in the field named "Description_tr"
-		And I click "Ok" button
-		And I click the button named "FormWriteAndClose"
-		And I click the button named "FormCreate"
-		And I click Open button of the field named "Description_en"
-		And I input "Legal entity" text in the field named "Description_en"
-		And I input "Legal entity TR" text in the field named "Description_tr"
-		And I click "Ok" button
-		And I click the button named "FormWriteAndClose"
-		And I click the button named "FormCreate"
-		And I click Open button of the field named "Description_en"
-		And I input "Private individual" text in the field named "Description_en"
-		And I input "Private individual TR" text in the field named "Description_tr"
-		And I click "Ok" button
-		And I click the button named "FormWriteAndClose"
-	* Check creation 
-		Then I check for the "CompanyTypes" catalog element with the "Description_en" "Entrepreneur"  
-		Then I check for the "CompanyTypes" catalog element with the "Description_en" "Legal entity"
-		And Delay 2
-		Then I check for the "CompanyTypes" catalog element with the "Description_en" "Private individual" 
 
 Scenario: _005039 filling in the status catalog for Inventory transfer order
 	* Opening a form for creating Objects status historyes

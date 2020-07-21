@@ -26,6 +26,7 @@ Scenario: _0154000 preparation
 		And I click Open button of "ENG" field
 		And I input "Second Company Ferron BP TR" text in "TR" field
 		And I click "Ok" button
+		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save and close" button
 	* Create one more own company Second Company
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
@@ -40,6 +41,7 @@ Scenario: _0154000 preparation
 			| Ukraine      |
 		And I select current line in "List" table
 		And I set checkbox "Our"
+		And I select "Company" exact value from the drop-down list named "Type"
 		* Filling in Currency info (Local currency and Reporting currency)
 			And I move to "Currencies" tab
 			* Create and add Local currency
@@ -551,32 +553,6 @@ Scenario:  _015400642 check that additional attributes are displayed on the form
 		And field "Test" is present on the form
 	And I close all client application windows
 
-
-Scenario:  _015400643 check that additional attributes are displayed on the form without re-opening (Catalog_Company types)
-	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
-	* Open a form to create CompanyTypes
-		Given I open hyperlink "e1cib/list/Catalog.CompanyTypes"
-		And I click the button named "FormCreate"
-		And field "Test" is not present on the form
-	* Adding additional Test attribute without closing the form
-		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
-		And I go to line in "List" table
-			| Predefined data item name          |
-			| Catalog_CompanyTypes     |
-		And I select current line in "List" table
-		And in the table "Attributes" I click the button named "AttributesAdd"
-		And I click choice button of "Attribute" attribute in "Attributes" table
-		And I go to line in "List" table
-			| Description |
-			| Test        |
-		And I select current line in "List" table
-		And I finish line editing in "Attributes" table
-		And I input "Company types" text in "ENG" field
-		And I click "Save and close" button
-	* Check that the additional Test attribute has been displayed on the form
-		When in opened panel I select "Company types"
-		And field "Test" is present on the form
-	And I close all client application windows
 
 Scenario:  _015400644 check that additional attributes are displayed on the form without re-opening (Catalog_Countries)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"

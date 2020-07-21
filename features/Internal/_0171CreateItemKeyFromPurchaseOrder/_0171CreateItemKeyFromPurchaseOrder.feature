@@ -1,105 +1,105 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: creating missing Item key by Item when creating Purchase Order
+Feature: create missing Item key by Item when creating Purchase Order
 
 As a procurement manager
 I want to create an Item key for the items
 In order to form an order with a vendor
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _017101 checking input item key by line
+Scenario: _017101 check input item key by line
 	* Opening a form to create a purchase order
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Filling in details
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		Тогда открылось окно 'Stores'
-		И в таблице "List" я выбираю текущую строку
+		And I click Select button of "Company" field
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		Then "Stores" window is opened
+		And I select current line in "List" table
 	* Filling out vendor information
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check input item key line by line
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке 's'
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" я завершаю редактирование строки
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "s" from "Item key" drop-down list by string in "ItemList" table
+		And I activate "Q" field in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 		| Item  | Item key |
 		| Dress | S/Yellow |
-		И Я закрываю текущее окно
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'No'
+		And I close current window
+		Then "1C:Enterprise" window is opened
+		And I click "No" button
 
 
-Сценарий: _017102 checking for the creation of the missing item key from the Purchase order document
+Scenario: _017102 check for the creation of the missing item key from the Purchase order document
 	* Opening a form to create a purchase order
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Filling in details
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		Тогда открылось окно 'Stores'
-		И в таблице "List" я выбираю текущую строку
+		And I click Select button of "Company" field
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		Then "Stores" window is opened
+		And I select current line in "List" table
 	* Filling out vendor information
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| Description        |
 			| Vendor Ferron, TRY |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Creating an item key when filling out the tabular part
-		И я перехожу к закладке "Item list"
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I move to "Item list" tab
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И из выпадающего списка "Size" я выбираю по строке 'xxl'
-		И из выпадающего списка "Color" я выбираю по строке 'red'
-		И я нажимаю на кнопку 'Create new'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2	
-		И в поле 'Size' я ввожу текст ''
-		И в поле 'Color' я ввожу текст ''
-		Тогда таблица "List" стала равной:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I select from "Size" drop-down list by "xxl" string
+		And I select from "Color" drop-down list by "red" string
+		And I click "Create new" button
+		And I click "Save and close" button
+		And Delay 2
+		And I input "" text in "Size" field
+		And I input "" text in "Color" field
+		And "List" table became equal
 		| Item key  | Item  |
 		| S/Yellow  | Dress |
 		| XS/Blue   | Dress |
@@ -108,57 +108,57 @@ In order to form an order with a vendor
 		| XL/Green  | Dress |
 		| Dress/A-8 | Dress |
 		| XXL/Red   | Dress |
-		И Я закрываю текущее окно
-		И Я закрываю текущее окно
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'No'
+		And I close current window
+		And I close current window
+		Then "1C:Enterprise" window is opened
+		And I click "No" button
 
 
-Сценарий: _017105 filter when selecting item key in a purchase order document
+Scenario: _017105 filter when selecting item key in a purchase order document
 	* Opening a form to create a purchase order
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Filling in details
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		Тогда открылось окно 'Stores'
-		И в таблице "List" я выбираю текущую строку
+		And I click Select button of "Company" field
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		Then "Stores" window is opened
+		And I select current line in "List" table
 	* Filling out vendor information
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filter check on item key when filling out the commodity part
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И из выпадающего списка "Size" я выбираю по строке 'l'
-		Тогда таблица "List" стала равной:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I select from "Size" drop-down list by "l" string
+		And "List" table became equal
 		| Item key |
 		| L/Green  |
 		| Dress/A-8  |
-		И в поле 'Size' я ввожу текст ''
-		И из выпадающего списка "Color" я выбираю по строке 'gr'
-		Тогда таблица "List" стала равной:
+		And I input "" text in "Size" field
+		And I select from "Color" drop-down list by "gr" string
+		And "List" table became equal
 		| Item key |
 		| L/Green  |
 		| XL/Green |
 		| Dress/A-8  |
-		И Я закрываю текущее окно
-		И Я закрываю текущее окно
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'No'
+		And I close current window
+		And I close current window
+		Then "1C:Enterprise" window is opened
+		And I click "No" button

@@ -1,394 +1,360 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: image setting
+Feature: image setting
 
-Как Разработчик
-Я хочу создать подсистему картинок
-Для присвоения их товарам
+As a Developer
+I want to create an image subsystem
 
-Контекст:
-    Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
-
-# предварительно необходимо создать папку Picture, в которую нужно положить 3 папки: Preview, Script, Source. У пользователя 1с должен быть к ним доступ
+Background:
+    Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _300101 image setting
-    * Внесение настроек в справочник File storages info
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.FileStoragesInfo'
-        Тогда я нажимаю на кнопку 'Create'
-        И в поле 'Path to catalog at server' я ввожу текст '#workingDir#\DataProcessor\Picture\Preview'
-        И в поле 'URL alias' я ввожу текст 'preview'
-        И я нажимаю на кнопку 'Save and close'
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.FileStoragesInfo'
-        Тогда я нажимаю на кнопку 'Create'
-        И в поле 'Path to catalog at server' я ввожу текст '#workingDir#\DataProcessor\Picture\Script'
-        И в поле 'URL alias' я ввожу текст 'js'
-        И я нажимаю на кнопку 'Save and close'
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.FileStoragesInfo'
-        Тогда я нажимаю на кнопку 'Create'
-        И в поле 'Path to catalog at server' я ввожу текст '#workingDir#\DataProcessor\Picture\Source'
-        И в поле 'URL alias' я ввожу текст 'pic'
-        И я нажимаю на кнопку 'Save and close'
-   * Внесение настроек в справочник Integration Settings для PICTURE STORAGE
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.IntegrationSettings'
-        Тогда я нажимаю на кнопку 'Create'
-        И в поле 'Description' я ввожу текст 'PICTURE STORAGE'
-        И из выпадающего списка "Integration type" я выбираю точное значение 'Local file storage'
-        И в таблице "ConnectionSetting" я нажимаю на кнопку с именем 'ConnectionSettingFillByDefault'
-        И в таблице "ConnectionSetting" я перехожу к строке:
+Scenario: _300101 image setting
+    * Filling in settings in  File storages info
+        Given I open hyperlink "e1cib/list/Catalog.FileStoragesInfo"
+        And I click "Create" button
+        And I input "#workingDir#\DataProcessor\Picture\Preview" text in "Path to catalog at server" field
+        And I input "preview" text in "URL alias" field
+        And I click "Save and close" button
+        Given I open hyperlink "e1cib/list/Catalog.FileStoragesInfo"
+        And I click "Create" button
+        And I input "#workingDir#\DataProcessor\Picture\Script" text in "Path to catalog at server" field
+        And I input "js" text in "URL alias" field
+        And I click "Save and close" button
+        Given I open hyperlink "e1cib/list/Catalog.FileStoragesInfo"
+        And I click "Create" button
+        And I input "#workingDir#\DataProcessor\Picture\Source" text in "Path to catalog at server" field
+        And I input "pic" text in "URL alias" field
+        And I click "Save and close" button
+   * Filling in settings in Integration Settings for PICTURE STORAGE
+        Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+        And I click "Create" button
+        And I input "PICTURE STORAGE" text in "Description" field
+        And I select "Local file storage" exact value from "Integration type" drop-down list
+        And in the table "ConnectionSetting" I click the button named "ConnectionSettingFillByDefault"
+        And I go to line in "ConnectionSetting" table
             | 'Key'         |
             | 'AddressPath' |
-        И в таблице "ConnectionSetting" я активизирую поле "Value"
-        И в таблице "ConnectionSetting" я выбираю текущую строку
-        И в таблице "ConnectionSetting" в поле 'Value' я ввожу текст '#workingDir#\DataProcessor\Picture\Source'
-        И в таблице "ConnectionSetting" я завершаю редактирование строки
-        И в таблице "ConnectionSetting" я перехожу к строке:
+        And I activate "Value" field in "ConnectionSetting" table
+        And I select current line in "ConnectionSetting" table
+        And I input "#workingDir#\DataProcessor\Picture\Source" text in "Value" field of "ConnectionSetting" table
+        And I finish line editing in "ConnectionSetting" table
+        And I go to line in "ConnectionSetting" table
             | 'Key'       | 'Value' |
             | 'QueryType' | 'POST'  |
-        И в таблице "ConnectionSetting" я активизирую поле "Key"
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И я нажимаю на кнопку 'Save and close'
-    * Внесение настроек в справочник Integration Settings для PREVIEW STORAGE
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.IntegrationSettings'
-        Тогда я нажимаю на кнопку 'Create'
-        И в поле 'Description' я ввожу текст 'PREWIEV STORAGE'
-        И из выпадающего списка "Integration type" я выбираю точное значение 'Local file storage'
-        И в таблице "ConnectionSetting" я нажимаю на кнопку с именем 'ConnectionSettingFillByDefault'
-        И в таблице "ConnectionSetting" я перехожу к строке:
+        And I activate "Key" field in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I click "Save and close" button
+    * Filling in settings in  Integration Settings for PREVIEW STORAGE
+        Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+        And I click "Create" button
+        And I input "PREWIEV STORAGE" text in "Description" field
+        And I select "Local file storage" exact value from "Integration type" drop-down list
+        And in the table "ConnectionSetting" I click the button named "ConnectionSettingFillByDefault"
+        And I go to line in "ConnectionSetting" table
             | 'Key'         |
             | 'AddressPath' |
-        И в таблице "ConnectionSetting" я активизирую поле "Value"
-        И в таблице "ConnectionSetting" я выбираю текущую строку
-        И в таблице "ConnectionSetting" в поле 'Value' я ввожу текст 'C:\Users\NTrukhacheva\Desktop\Picture\Prewiev'
-        И в таблице "ConnectionSetting" я завершаю редактирование строки
-        И в таблице "ConnectionSetting" я перехожу к строке:
+        And I activate "Value" field in "ConnectionSetting" table
+        And I select current line in "ConnectionSetting" table
+        And I input "C:\Users\NTrukhacheva\Desktop\Picture\Prewiev" text in "Value" field of "ConnectionSetting" table
+        And I finish line editing in "ConnectionSetting" table
+        And I go to line in "ConnectionSetting" table
             | 'Key'       | 'Value' |
             | 'QueryType' | 'POST'  |
-        И в таблице "ConnectionSetting" я активизирую поле "Key"
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И в таблице 'ConnectionSetting' я удаляю строку
-        И я нажимаю на кнопку 'Save and close'
-    * Внесение настроек в справочник File Storage Volumes
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.FileStorageVolumes'
-        Тогда я нажимаю на кнопку 'Create'
-        И в поле 'Description' я ввожу текст 'DEFAULT PICTURE STORAGE'
-        И из выпадающего списка "Files type" я выбираю точное значение 'Picture'
-        И я нажимаю кнопку выбора у поля "POST Integration settings"
-        И в таблице "List" я перехожу к строке:
+        And I activate "Key" field in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I delete a line in "ConnectionSetting" table
+        And I click "Save and close" button
+    * Filling in settings in  File Storage Volumes
+        Given I open hyperlink "e1cib/list/Catalog.FileStorageVolumes"
+        And I click "Create" button
+        And I input "DEFAULT PICTURE STORAGE" text in "Description" field
+        And I select "Picture" exact value from "Files type" drop-down list
+        And I click Select button of "POST Integration settings" field
+        And I go to line in "List" table
             | Description     |
             | PICTURE STORAGE |
-        И в таблице "List" я выбираю текущую строку
-        И я нажимаю кнопку выбора у поля "GET Integration settings"
-        И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+        And I click Select button of "GET Integration settings" field
+        And I go to line in "List" table
             | Description     |
             | PICTURE STORAGE |
-        И в таблице "List" я выбираю текущую строку
-        И я нажимаю на кнопку 'Save and close'
-    * Заполнение константы по расположению картинок 
-        Когда В панели разделов я выбираю 'Settings'
-        И В панели функций я выбираю 'Default picture storage volume'
-        И я нажимаю кнопку выбора у поля "Default picture storage volume"
-        И я нажимаю на кнопку с именем 'FormChoose'
-        И я нажимаю на кнопку 'Save and close'
-        И Пауза 3
+        And I select current line in "List" table
+        And I click "Save and close" button
+    * Filling a constant by the location of the pictures
+        When in sections panel I select "Settings"
+        And in functions panel I select "Default picture storage volume"
+        And I click Select button of "Default picture storage volume" field
+        And I click the button named "FormChoose"
+        And I click "Save and close" button
+        And Delay 3
 
 
-Сценарий: _300102 item/item key details display in list form (html field)
-    * Открытие формы настройки доп реквизитов для Item
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.AddAttributeAndPropertySets'
-        И в таблице "List" я перехожу к строке:
+Scenario: _300102 item/item key details display in list form (html field)
+    * Opening the form for setting additional details for Item
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
             | 'Description' | 'Predefined data item name' |
             | 'Items'       | 'Catalog_Items'             |
-        И в таблице "List" я выбираю текущую строку
-    * Настройка отображения реквизитов в html поле
-        И в таблице "Attributes" я перехожу к строке:
+        And I select current line in "List" table
+    * Setting display details in the html field
+        And I go to line in "Attributes" table
             | 'Attribute' |
             | 'Brand TR'     |
-        И в таблице "Attributes" я устанавливаю флаг с именем 'AttributesShowInHTML'
-        И в таблице "Attributes" я завершаю редактирование строки
-        И в таблице "Attributes" я перехожу к строке:
+        And I set checkbox named "AttributesShowInHTML" in "Attributes" table
+        And I finish line editing in "Attributes" table
+        And I go to line in "Attributes" table
             | 'Attribute'              |
             | 'Country of consignment TR' |
-        И в таблице "Attributes"я устанавливаю флаг с именем 'AttributesShowInHTML'
-        И в таблице "Attributes" я завершаю редактирование строки
-        И я нажимаю на кнопку 'Save and close'
-    * Открытие формы настройки доп реквизитов для Item key
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemTypes'
-        И в таблице "List" я перехожу к строке:
+        And I set checkbox named "AttributesShowInHTML" in "Attributes" table
+        And I finish line editing in "Attributes" table
+        And I click "Save and close" button
+    * Opening the form for setting additional details for Item key
+        Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+        And I go to line in "List" table
             | 'Description'   |
-            | 'Сlothes TR'       |
-        И в таблице "List" я выбираю текущую строку
-    * Настройка отображения реквизитов в html поле
-        И в таблице "AvailableAttributes" я перехожу к строке:
+            | 'Clothes TR'       |
+        And I select current line in "List" table
+    * Setting display details in the html field
+        And I go to line in "AvailableAttributes" table
             | 'Attribute' |
             | 'Color TR'     |
-        И в таблице "AvailableAttributes" я устанавливаю флаг 'Show in HTML'
-        И в таблице "AvailableAttributes" я завершаю редактирование строки
-        И в таблице "AvailableAttributes" я перехожу к строке:
+        And I set "Show in HTML" checkbox in "AvailableAttributes" table
+        And I finish line editing in "AvailableAttributes" table
+        And I go to line in "AvailableAttributes" table
             | 'Attribute' |
             | 'Size TR'     |
-        И в таблице "AvailableAttributes" я устанавливаю флаг 'Show in HTML'
-        И в таблице "AvailableAttributes" я завершаю редактирование строки
-        И я нажимаю на кнопку 'Save and close'
+        And I set "Show in HTML" checkbox in "AvailableAttributes" table
+        And I finish line editing in "AvailableAttributes" table
+        And I click "Save and close" button
 
 
 
 
-Сценарий:_300110 add pictures to additional details and additional properties
-    * Открытие перечня доп реквизитов и доп свойствам
-        И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty'
-    * Добавление картинки к доп реквизиту/доп свойству
-        И в таблице "List" я перехожу к строке:
+Scenario:_300110 add pictures to additional details and additional properties
+    * Open add attribute and property
+        Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
+    * Add a picture to an additional attribute / additional property
+        And I go to line in "List" table
         | 'Description' |
         | 'Brand TR'     |
-        И в таблице "List" я выбираю текущую строку
-        И я буду выбирать внешний файл "#workingDir#\features\_3000Other\16466.png"
-        И я нажимаю на гиперссылку "Icon"
-    * Проверка добавления картинки к доп реквизиту
-        Тогда значение поля с именем "Icon" содержит текст 'e1cib/tempstorage/'
-        И я нажимаю на кнопку 'Save and close'
+        And I select current line in "List" table
+        And I select external file "#workingDir#\features\_3000Other\16466.png"
+        And I click "Icon" hyperlink
+    * Check adding a picture to an additional attribute
+        Then the field named "Icon" value contains "e1cib/tempstorage/" text
+        And I click "Save and close" button
 
-Сценарий: _300111 cleaning up the added picture to the additional details and additional properties
-    * Открытие перечня доп реквизитов и доп свойствам
-        И я открываю навигационную ссылку 'e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty'
-    * Добавление картинки к доп реквизиту/доп свойству
-        И в таблице "List" я перехожу к строке:
+Scenario: _300111 cleaning up the added picture to the additional details and additional properties
+    * Open add attribute and property
+        Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
+    * Add a picture to an additional attribute / additional property
+        And I go to line in "List" table
         | 'Description' |
         | 'Brand TR'     |
-        И в таблице "List" я выбираю текущую строку
-        И я нажимаю на гиперссылку "Icon"
-        Тогда открылось окно '1C:Enterprise'
-        И я нажимаю на кнопку 'Clear'
-    * Проверка удаления картинки 
-        Тогда значение поля с именем "Icon" не содержит текст 'e1cib/tempstorage/'
-        И я нажимаю на кнопку 'Save and close'
-    * Добавление обратно картинки к доп реквизиту/доп свойству
-        И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+        And I click "Icon" hyperlink
+        Then "1C:Enterprise" window is opened
+        And I click "Clear" button
+    * Check deletion picture
+        Then the field named "Icon" value does not contain "e1cib/tempstorage/" text
+        And I click "Save and close" button
+    * Add back a picture to an additional attribute / additional property
+        And I go to line in "List" table
         | 'Description' |
         | 'Brand TR'     |
-        И в таблице "List" я выбираю текущую строку
-        И я буду выбирать внешний файл "#workingDir#\features\_3000Other\16466.png"
-        И я нажимаю на гиперссылку "Icon"
-    * Проверка добавления картинки к доп реквизиту
-        Тогда значение поля с именем "Icon" содержит текст 'e1cib/tempstorage/'
-        И я нажимаю на кнопку 'Save and close'
+        And I select current line in "List" table
+        And I select external file "#workingDir#\features\_3000Other\16466.png"
+        And I click "Icon" hyperlink
+    * Check adding a picture to an additional attribute
+        Then the field named "Icon" value contains "e1cib/tempstorage/" text
+        And I click "Save and close" button
 
 
 
-
-# Сценарий: _300102 настройка интеграции с гугл диском
-#     И я открываю навигационную ссылку 'e1cib/list/Catalog.IntegrationSettings'
-#     И я нажимаю на кнопку с именем 'FormCreate'
-#     И в поле 'Description' я ввожу текст 'Google drive'
-#     И из выпадающего списка "Integration type" я выбираю точное значение 'Google drive'
-#     И в таблице "ConnectionSetting" я активизирую поле "Key"
-#     И в таблице 'ConnectionSetting' я удаляю строку
-#     И в таблице 'ConnectionSetting' я удаляю строку
-#     И в таблице 'ConnectionSetting' я удаляю строку
-#     И в таблице 'ConnectionSetting' я удаляю строку
-#     И в таблице 'ConnectionSetting' я удаляю строку
-#     И в таблице 'ConnectionSetting' я удаляю строку
-#     И в таблице 'ConnectionSetting' я удаляю строку
-#     И в таблице 'ConnectionSetting' я удаляю строку
-#     И в таблице 'ConnectionSetting' я удаляю строку
-#     И в таблице 'ConnectionSetting' я удаляю строку
-#     И в таблице 'ConnectionSetting' я удаляю строку
-#     И в таблице "ConnectionSetting" я нажимаю на кнопку 'Login'
-#     Затем клик на картинку "accaunt"
-#     Затем клик на картинку "allow"
-#     Когда В панели открытых я выбираю 'Integration settings'
-#     И в таблице "ConnectionSetting" я нажимаю на кнопку 'Test'
-#     Затем я жду, что в сообщениях пользователю будет подстрока "Done" в течение 30 секунд
-#     И я закрыл все окна клиентского приложения
-
-Сценарий: _300103 item pictures upload
-    * Open list form товаров и выбор нужного элемента
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-        И в таблице "List" я перехожу к строке:
+Scenario: _300103 item pictures upload
+    * Open item list form and select item
+        Given I open hyperlink "e1cib/list/Catalog.Items"
+        And I go to line in "List" table
             | 'Description'  |
             | 'Trousers TR'     |
-        И в таблице "List" я выбираю текущую строку
-    * Добавление картинки
-        И я буду выбирать внешний файл "#workingDir#\features\_3000Other\16466.png"
-        И Пауза 3
-        Затем клик на картинку "plus"
-    * Проверка добавления картинки 
-        И В текущем окне я нажимаю кнопку командного интерфейса 'Attached files'
-        Тогда таблица "List" содержит строки:
+        And I select current line in "List" table
+    * Add picture
+        And I select external file "#workingDir#\features\_3000Other\16466.png"
+        And Delay 3
+        Then click "plus" picture
+    * Check adding picture 
+        And In this window I click command interface button "Attached files"
+        And "List" table contains lines
             | 'Owner'       | 'File'      |
             | 'Trousers TR'    | '16466.png' |
-    * Добавление ещё одной картинки
-        И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-        И я буду выбирать внешний файл "#workingDir#\features\_3000Other\dressblue.jpg"
-        Дано курсор к картинке "plus3"
-        Затем клик на картинку "plus3"
-        Дано я нажимаю ENTER
-     * Проверка добавления картинки 
-        И В текущем окне я нажимаю кнопку командного интерфейса 'Attached files'
-        И я нажимаю на кнопку 'Refresh'
-        Тогда таблица "List" содержит строки:
+    * Add one more picture
+        And In this window I click command interface button "Main"
+        And I select external file "#workingDir#\features\_3000Other\dressblue.jpg"
+        Given cursor to "plus3" picture
+        Then click "plus3" picture
+        Given I press ENTER
+     * Check adding picture 
+        And In this window I click command interface button "Attached files"
+        And I click "Refresh" button
+        And "List" table contains lines
             | 'Owner'          | 'File'          |
             | 'Trousers TR'    | '16466.png'     |
             | 'Trousers TR'    | 'dressblue.jpg' |
-        И я закрыл все окна клиентского приложения
+        And I close all client application windows
 
 
 
-Сценарий: _300105 opening Files catalog element
+Scenario: _300105 opening Files catalog element
     * Open catalog Files
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.Files'
-    * Открытие элемента справочника Files
-        И в таблице "List" я перехожу к строке:
+        Given I open hyperlink "e1cib/list/Catalog.Files"
+    * Open element
+        And I go to line in "List" table
             | 'Extension' | 'File name' |
             | 'PNG'       | '16466.png' |
-        И в таблице "List" я выбираю текущую строку
-        Тогда не появилось окно предупреждения системы
+        And I select current line in "List" table
+        Then system warning window does not appear
 
-
-# надо будет дописать после исправления багов
-Сценарий: _300106 removal of unused elements of the Files catalog
+// to do after bug fix
+Scenario: _300106 removal of unused elements of the Files catalog
     * Open catalog Files
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.Files'
-    * Вызов команды удаления неиспользуемых элементов
-        И я нажимаю на кнопку 'Delete unused files'
-    * Поиск неиспользуемых файлов
-        И в таблице "Files" я нажимаю на кнопку 'Find unused files'
-        И Пауза 3
-    * Select всех неспользуемых файлов
-        И в таблице "Files" я нажимаю на кнопку 'Check all'
-    * Удаление неиспользуемых файлов
-        И в таблице "Files" я нажимаю на кнопку 'Delete unused files'
-    И я закрыл все окна клиентского приложения
+        Given I open hyperlink "e1cib/list/Catalog.Files"
+    * Calling the delete unused items command
+        And I click "Delete unused files" button
+    * Search unused files
+        And in the table "Files" I click "Find unused files" button
+        And Delay 3
+    * Select all unused files
+        And in the table "Files" I click "Check all" button
+    * Delete unused files
+        And in the table "Files" I click "Delete unused files" button
+    And I close all client application windows
 
 
 
-Сценарий: _300107 item key pictures upload
-    * Open list form товаров и выбор нужного элемента
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-        И в таблице "List" я перехожу к строке:
+Scenario: _300107 item key pictures upload
+    * Open Item list form
+        Given I open hyperlink "e1cib/list/Catalog.Items"
+        And I go to line in "List" table
             | 'Description'  |
             | 'Trousers TR'     |
-        И в таблице "List" я выбираю текущую строку
-        И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-        И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+        And In this window I click command interface button "Item keys"
+        And I go to line in "List" table
             | 'Item key'     |
             | '38/Yellow TR' |
-        И в таблице "List" я выбираю текущую строку
-    * Добавление картинки
-        И я буду выбирать внешний файл "#workingDir#\features\_3000Other\16466.png"
-        И Пауза 3
-        Затем клик на картинку "plus"
-    * Проверка добавления картинки
-        И В текущем окне я нажимаю кнопку командного интерфейса 'Attached files'
-        Тогда таблица "List" содержит строки:
+        And I select current line in "List" table
+    * Add picture
+        And I select external file "#workingDir#\features\_3000Other\16466.png"
+        And Delay 3
+        Then click "plus" picture
+    * Check adding picture
+        And In this window I click command interface button "Attached files"
+        And "List" table contains lines
             | 'Owner'        | 'File'      |
             | '38/Yellow TR' | '16466.png' |
-    * Добавление ещё одной картинки
-        И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-        И я буду выбирать внешний файл "#workingDir#\features\_3000Other\pinkdress.jpg"
-        Дано курсор к картинке "plus3"
-        Затем клик на картинку "plus3"
-        Дано я нажимаю ENTER
-    * Проверка добавления картинки 
-        И В текущем окне я нажимаю кнопку командного интерфейса 'Attached files'
-        И я нажимаю на кнопку 'Refresh'
-        Тогда таблица "List" содержит строки:
+    * Add one more picture
+        And In this window I click command interface button "Main"
+        And I select external file "#workingDir#\features\_3000Other\pinkdress.jpg"
+        Given cursor to "plus3" picture
+        Then click "plus3" picture
+        Given I press ENTER
+    * Check adding picture 
+        And In this window I click command interface button "Attached files"
+        And I click "Refresh" button
+        And "List" table contains lines
             | 'Owner'           | 'File'          |
             | '38/Yellow TR'    | '16466.png'     |
             | '38/Yellow TR'    | 'pinkdress.jpg' |
-        И я закрыл все окна клиентского приложения
+        And I close all client application windows
 
 
-Сценарий: _300108 open picture gallery from Item and item key
-    * Проверка открытия галереи из Item
-        * Open list form товаров и выбор нужного элемента
-            И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-            И в таблице "List" я перехожу к строке:
+Scenario: _300108 open picture gallery from Item and item key
+    * Open picture gallery from Item
+        Open Item list form
+            Given I open hyperlink "e1cib/list/Catalog.Items"
+            And I go to line in "List" table
                 | 'Description'  |
                 | 'Shirt TR'     |
-            И в таблице "List" я выбираю текущую строку
-        * Открытие окна галереи
-            Дано курсор к картинке "gallery"
-            Затем клик на картинку "gallery"
-        * Проверка наличия в галереи картинки
-            И я жду открытия окна "" в течение 20 секунд
-            Дано курсор к картинке "verificationpicture"
-        * Проверка выбора картинки при клике
-            Затем клик на картинку "selectverificationpic"
-            Дано курсор к картинке "addselectedpicture"
-        # * Проверка добавления картинки из галереи
-        #     Затем клик на картинку "addselectedpicture"
-        И я закрыл все окна клиентского приложения
-    * Проверка открытия галереи из Item key
-        * Open list form товаров и выбор нужного элемента
-            И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-            И в таблице "List" я перехожу к строке:
+            And I select current line in "List" table
+        * Open gallery
+            Given cursor to "gallery" picture
+            Then click "gallery" picture
+        * Check the availability of pictures in the gallery
+            And I wait "" window opening in 20 seconds
+            Given cursor to "verificationpicture" picture
+        * Check click image
+            Then click "selectverificationpic" picture
+            Given cursor to "addselectedpicture" picture
+        And I close all client application windows
+    * Open picture gallery from Item key
+        * Open Item list form
+            Given I open hyperlink "e1cib/list/Catalog.Items"
+            And I go to line in "List" table
                 | 'Description'  |
                 | 'Shirt TR'     |
-            И в таблице "List" я выбираю текущую строку
-            И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-            И в таблице "List" я перехожу к строке:
+            And I select current line in "List" table
+            And In this window I click command interface button "Item keys"
+            And I go to line in "List" table
                 | 'Item key'     |
                 | '36/Red TR' |
-            И в таблице "List" я выбираю текущую строку
-        * Открытие окна галереи
-            Дано курсор к картинке "gallery"
-            Затем клик на картинку "gallery"
-        * Проверка наличия в галереи картинки
-            И я жду открытия окна "" в течение 20 секунд
-            Дано курсор к картинке "verificationpicture"
-        * Проверка выбора картинки при клике
-            Затем клик на картинку "selectverificationpic"
-            Дано курсор к картинке "addselectedpicture"
-        # * Проверка добавления картинки из галереи
-        #     Затем клик на картинку "addselectedpicture"
-    И я закрыл все окна клиентского приложения
+            And I select current line in "List" table
+         * Open gallery
+            Given cursor to "gallery" picture
+            Then click "gallery" picture
+        * Check the availability of pictures in the gallery
+            And I wait "" window opening in 20 seconds
+            Given cursor to "verificationpicture" picture
+         * Check click image
+            Then click "selectverificationpic" picture
+            Given cursor to "addselectedpicture" picture
+    And I close all client application windows
 
-Сценарий: _300109 check removal of pictures from Item and item key
-    * Open list form товаров и выбор нужного элемента
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-        И в таблице "List" я перехожу к строке:
+Scenario: _300109 check removal of pictures from Item and item key
+    * Open Item list form
+        Given I open hyperlink "e1cib/list/Catalog.Items"
+        And I go to line in "List" table
             | 'Description'  |
             | 'Trousers TR'     |
-        И в таблице "List" я выбираю текущую строку
-    * Удаление картинки из Item
-        Дано курсор к картинке "deletepic"
-        Затем клик на картинку "deletepic"
-        Тогда не появилось окно предупреждения системы
-    И я закрыл все окна клиентского приложения
-    * Open list form товаров и выбор нужного элемента
-        И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-        И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+    * Delete picture from Item
+        Given cursor to "deletepic" picture
+        Then click "deletepic" picture
+        Then system warning window does not appear
+    And I close all client application windows
+    * Open Item list form
+        Given I open hyperlink "e1cib/list/Catalog.Items"
+        And I go to line in "List" table
             | 'Description'     |
             | 'Trousers TR'     |
-        И в таблице "List" я выбираю текущую строку
-        И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-        И в таблице "List" я перехожу к строке:
+        And I select current line in "List" table
+        And In this window I click command interface button "Item keys"
+        And I go to line in "List" table
             | 'Item key'     |
             | '38/Yellow TR' |
-        И в таблице "List" я выбираю текущую строку
-    * Удаление картинки из Item key
-        Дано курсор к картинке "deletepic"
-        Затем клик на картинку "deletepic"
-        Тогда не появилось окно предупреждения системы
-     И я закрыл все окна клиентского приложения
+        And I select current line in "List" table
+    * Delete picture from Item key
+        Given cursor to "deletepic" picture
+        Then click "deletepic" picture
+        Then system warning window does not appear
+     And I close all client application windows

@@ -1,1352 +1,1345 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: filling in catalogs Items
+Feature: filling in catalogs Items
 
 As an owner
 I want to fill out items information
 To further use it when reflecting in the program of business processes
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I open new TestClient session or connect the existing one
 
 
-# All indivisible packages of the same product are wound up using Specifiсation with type Set. Then a separate Item key is created for the product, in which the necessary set is specified.
+# All indivisible packages of the same product are wound up using Specification with type Set. Then a separate Item key is created for the product, in which the necessary set is specified.
 # and a price is set on it. It's the Set that's stored on the remains. In order to break it up you need to run the Unbandling document
 # For the simple accounting of goods in the packages of documents (the remnants are stored pieces) usedItem units of measurement pcs. For each product, a different Unit is specified
 # like pcs consisting of 6 pieces, 10 pieces, etc. # In this case, the price of the order gets as the price of a piece. There's pcs going through the registers, too. 
 
 
 
-Сценарий: _005110 filling in the "UI groups" catalog 
+Scenario: _005110 filling in the "UI groups" catalog 
 # Catalog "UI group" is designed to create groups of additional attributes for the items. Also provides for the location of the group on the item's form (right or left)
 	* Opening the UI groups creation form 
-		И я открываю навигационную ссылку "e1cib/list/Catalog.InterfaceGroups"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Catalog.InterfaceGroups"
+		And I click the button named "FormCreate"
 	* Creating UI groups: Product information, Accounting information, Purchase and production 
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Product information'
-		И в поле 'TR' я ввожу текст 'Product information TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'UI groups (create)' в течение 5 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Accounting information'
-		И в поле 'TR' я ввожу текст 'Accounting information TR'
-		И я нажимаю на кнопку 'Ok'
-		И я меняю значение переключателя с именем 'FormPosition' на 'Right'
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'UI groups (create)' в течение 5 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Purchase and production'
-		И в поле 'TR' я ввожу текст 'Purchase and production TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'UI groups (create)' в течение 5 секунд
-	* Checking for added UI groups in the catalog 
-		Тогда В базе появился хотя бы один элемент справочника "InterfaceGroups"
-		Тогда я проверяю наличие элемента справочника "InterfaceGroups" со значением поля "Description_en" "Product information"  
-		Тогда я проверяю наличие элемента справочника "InterfaceGroups" со значением поля "Description_tr" "Product information TR"
-		Тогда я проверяю наличие элемента справочника "InterfaceGroups" со значением поля "Description_en" "Accounting information"  
-		Тогда я проверяю наличие элемента справочника "InterfaceGroups" со значением поля "Description_tr" "Accounting information TR"
-		Тогда я проверяю наличие элемента справочника "InterfaceGroups" со значением поля "Description_en" "Purchase and production"  
-		Тогда я проверяю наличие элемента справочника "InterfaceGroups" со значением поля "Description_tr" "Purchase and production TR"
+		And I click Open button of the field named "Description_en"
+		And I input "Product information" text in "ENG" field
+		And I input "Product information TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And I wait "UI groups (create)" window closing in 5 seconds
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Accounting information" text in "ENG" field
+		And I input "Accounting information TR" text in "TR" field
+		And I click "Ok" button
+		And I change the radio button named "FormPosition" value to "Right"
+		And I click "Save and close" button
+		And I wait "UI groups (create)" window closing in 5 seconds
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Purchase and production" text in "ENG" field
+		And I input "Purchase and production TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And I wait "UI groups (create)" window closing in 5 seconds
+	* Check for added UI groups in the catalog 
+		Then I check for the "InterfaceGroups" catalog element with the "Description_en" "Product information"  
+		Then I check for the "InterfaceGroups" catalog element with the "Description_tr" "Product information TR"
+		Then I check for the "InterfaceGroups" catalog element with the "Description_en" "Accounting information"  
+		Then I check for the "InterfaceGroups" catalog element with the "Description_tr" "Accounting information TR"
+		Then I check for the "InterfaceGroups" catalog element with the "Description_en" "Purchase and production"  
+		Then I check for the "InterfaceGroups" catalog element with the "Description_tr" "Purchase and production TR"
 
 
-Сценарий: _005111 filling in the "Add attribute and property" catalog 
+Scenario: _005111 filling in the "Add attribute and property" catalog 
 	* Opening the Add attribute and property creation form 
-		И я открываю навигационную ссылку "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 5
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
+		And I click the button named "FormCreate"
+		And Delay 5
 	* Creating additional attribute Type
-		И я нажимаю кнопку выбора у поля с именем "ValueType"
-		И Пауза 2
-		И в таблице "*" я перехожу к строке:
+		And I click Choice button of the field named "ValueType"
+		And Delay 2
+		And I go to line in "*" table
 				| ''       |
 				| 'String' |
-		И я нажимаю на кнопку с именем 'OK'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Type'
-		И в поле с именем 'Description_tr' я ввожу текст 'Type TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку с именем 'FormWrite'
-		И в поле с именем 'UniqueID' я ввожу текст 'V123445'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
+		And I click the button named "OK"
+		And I click Open button of the field named "Description_en"
+		And I input "Type" text in the field named "Description_en"
+		And I input "Type TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWrite"
+		And I input "V123445" text in the field named "UniqueID"
+		And I click the button named "FormWriteAndClose"
 	* Creating additional attribute Brand
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 5
-		И я нажимаю кнопку выбора у поля с именем "ValueType"
-		И Пауза 2
-		И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 5
+		And I click Choice button of the field named "ValueType"
+		And Delay 2
+		And I go to line in "" table
 				| ''       |
 				| 'Additional attribute value' |
-		И я нажимаю на кнопку с именем 'OK'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Brand'
-		И в поле с именем 'Description_tr' я ввожу текст 'Brand TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку с именем 'FormWrite'
-		И в поле с именем 'UniqueID' я ввожу текст 'V123446'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
+		And I click the button named "OK"
+		And I click Open button of the field named "Description_en"
+		And I input "Brand" text in the field named "Description_en"
+		And I input "Brand TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWrite"
+		And I input "V123446" text in the field named "UniqueID"
+		And I click the button named "FormWriteAndClose"
 	* Creating additional attribute producer 
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 5
-		И я нажимаю кнопку выбора у поля с именем "ValueType"
-		И Пауза 2
-		И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 5
+		And I click Choice button of the field named "ValueType"
+		And Delay 2
+		And I go to line in "" table
 				| ''       |
 				| 'Additional attribute value' |
-		И я нажимаю на кнопку с именем 'OK'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Producer'
-		И в поле с именем 'Description_tr' я ввожу текст 'Producer TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку с именем 'FormWrite'
-		И в поле с именем 'UniqueID' я ввожу текст 'V123447'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
+		And I click the button named "OK"
+		And I click Open button of the field named "Description_en"
+		And I input "Producer" text in the field named "Description_en"
+		And I input "Producer TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWrite"
+		And I input "V123447" text in the field named "UniqueID"
+		And I click the button named "FormWriteAndClose"
 	* Creating additional attribute Size
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 5
-		И я нажимаю кнопку выбора у поля с именем "ValueType"
-		И Пауза 2
-		И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 5
+		And I click Choice button of the field named "ValueType"
+		And Delay 2
+		And I go to line in "" table
 				| ''       |
 				| 'Additional attribute value' |
-		И я нажимаю на кнопку с именем 'OK'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Size'
-		И в поле с именем 'Description_tr' я ввожу текст 'Size TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку с именем 'FormWrite'
-		И в поле с именем 'UniqueID' я ввожу текст 'Size1'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
+		And I click the button named "OK"
+		And I click Open button of the field named "Description_en"
+		And I input "Size" text in the field named "Description_en"
+		And I input "Size TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWrite"
+		And I input "Size1" text in the field named "UniqueID"
+		And I click the button named "FormWriteAndClose"
 	* Creating additional attribute Color
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 5
-		И я нажимаю кнопку выбора у поля с именем "ValueType"
-		И Пауза 2
-		И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 5
+		And I click Choice button of the field named "ValueType"
+		And Delay 2
+		And I go to line in "" table
 				| ''       |
 				| 'Additional attribute value' |
-		И я нажимаю на кнопку с именем 'OK'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Color'
-		И в поле с именем 'Description_tr' я ввожу текст 'Color TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку с именем 'FormWrite'
-		И в поле с именем 'UniqueID' я ввожу текст 'Color1'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
+		And I click the button named "OK"
+		And I click Open button of the field named "Description_en"
+		And I input "Color" text in the field named "Description_en"
+		And I input "Color TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWrite"
+		And I input "Color1" text in the field named "UniqueID"
+		And I click the button named "FormWriteAndClose"
 	* Creating additional property article
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 5
-		И я нажимаю кнопку выбора у поля с именем "ValueType"
-		И Пауза 2
-		И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 5
+		And I click Choice button of the field named "ValueType"
+		And Delay 2
+		And I go to line in "" table
 				| ''       |
 				| 'String' |
-		И в таблице "" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'OK'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Article'
-		И в поле с именем 'Description_tr' я ввожу текст 'Article TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку с именем 'FormWrite'
-		И в поле с именем 'UniqueID' я ввожу текст 'V123448'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
+		And I select current line in "" table
+		And I click the button named "OK"
+		And I click Open button of the field named "Description_en"
+		And I input "Article" text in the field named "Description_en"
+		And I input "Article TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWrite"
+		And I input "V123448" text in the field named "UniqueID"
+		And I click the button named "FormWriteAndClose"
 	* Creating additional property country of consignment
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 5
-		И я нажимаю кнопку выбора у поля с именем "ValueType"
-		И Пауза 2
-		И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 5
+		And I click Choice button of the field named "ValueType"
+		And Delay 2
+		And I go to line in "" table
 				| ''       |
 				| 'Additional attribute value' |
-		И я нажимаю на кнопку с именем 'OK'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Country of consignment'
-		И в поле с именем 'Description_tr' я ввожу текст 'Country of consignment TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку с именем 'FormWrite'
-		И в поле с именем 'UniqueID' я ввожу текст 'V123449'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
+		And I click the button named "OK"
+		And I click Open button of the field named "Description_en"
+		And I input "Country of consignment" text in the field named "Description_en"
+		And I input "Country of consignment TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWrite"
+		And I input "V123449" text in the field named "UniqueID"
+		And I click the button named "FormWriteAndClose"
 	* Creating additional property season
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 5
-		И я нажимаю кнопку выбора у поля с именем "ValueType"
-		И Пауза 2
-		И в таблице "" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 5
+		And I click Choice button of the field named "ValueType"
+		And Delay 2
+		And I go to line in "" table
 				| ''       |
 				| 'Additional attribute value' |
-		И я нажимаю на кнопку с именем 'OK'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Season'
-		И в поле с именем 'Description_tr' я ввожу текст 'Season TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку с именем 'FormWrite'
-		И в поле с именем 'UniqueID' я ввожу текст 'V123450'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я жду закрытия окна 'Add attribute and property (create) *' в течение 20 секунд	
+		And I click the button named "OK"
+		And I click Open button of the field named "Description_en"
+		And I input "Season" text in the field named "Description_en"
+		And I input "Season TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWrite"
+		And I input "V123450" text in the field named "UniqueID"
+		And I click the button named "FormWriteAndClose"
+		And I wait "Add attribute and property (create) *" window closing in 20 seconds
 
-Сценарий: _005112 filling in Additional attribute values with type Additional attribute values
+Scenario: _005112 filling in Additional attribute values with type Additional attribute values
 # the value of additional attributes (Producer, Color, Size,Season, Country of consignment)
 	* Opening the Add attribute and property form
-		И я открываю навигационную ссылку "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
 	* Adding value Size
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description' |
 		| 'Size'      |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Additional attribute values'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'S'
-		И в поле 'TR' я ввожу текст 'S'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'XS'
-		И в поле 'TR' я ввожу текст 'XS'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'M'
-		И в поле 'TR' я ввожу текст 'M'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'L'
-		И в поле 'TR' я ввожу текст 'L'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'XL'
-		И в поле 'TR' я ввожу текст 'XL'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'XXL'
-		И в поле 'TR' я ввожу текст 'XXL'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст '36'
-		И в поле 'TR' я ввожу текст '36'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст '37'
-		И в поле 'TR' я ввожу текст '37'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст '38'
-		И в поле 'TR' я ввожу текст '38'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст '39'
-		И в поле 'TR' я ввожу текст '39'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И Я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And In this window I click command interface button "Additional attribute values"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "S" text in "ENG" field
+		And I input "S" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "XS" text in "ENG" field
+		And I input "XS" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "M" text in "ENG" field
+		And I input "M" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "L" text in "ENG" field
+		And I input "L" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "XL" text in "ENG" field
+		And I input "XL" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "XXL" text in "ENG" field
+		And I input "XXL" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "36" text in "ENG" field
+		And I input "36" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "37" text in "ENG" field
+		And I input "37" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "38" text in "ENG" field
+		And I input "38" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "39" text in "ENG" field
+		And I input "39" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
 	* Adding value Color
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description' |
 		| 'Color'      |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Additional attribute values'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Yellow'
-		И в поле 'TR' я ввожу текст 'Yellow TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Blue'
-		И в поле 'TR' я ввожу текст 'Blue TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Brown'
-		И в поле 'TR' я ввожу текст 'Brown TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'White'
-		И в поле 'TR' я ввожу текст 'White TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Red'
-		И в поле 'TR' я ввожу текст 'Red TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Green'
-		И в поле 'TR' я ввожу текст 'Green TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Black'
-		И в поле 'TR' я ввожу текст 'Black TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И Я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And In this window I click command interface button "Additional attribute values"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Yellow" text in "ENG" field
+		And I input "Yellow TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Blue" text in "ENG" field
+		And I input "Blue TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Brown" text in "ENG" field
+		And I input "Brown TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "White" text in "ENG" field
+		And I input "White TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Red" text in "ENG" field
+		And I input "Red TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Green" text in "ENG" field
+		And I input "Green TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Black" text in "ENG" field
+		And I input "Black TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
 	* Adding value Season
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description' |
 		| 'Season'      |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Additional attribute values'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст '18SD'
-		И в поле 'TR' я ввожу текст '18SD'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст '19SD'
-		И в поле 'TR' я ввожу текст '19SD'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст '20SD'
-		И в поле 'TR' я ввожу текст '20SD'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And In this window I click command interface button "Additional attribute values"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "18SD" text in "ENG" field
+		And I input "18SD" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "19SD" text in "ENG" field
+		And I input "19SD" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "20SD" text in "ENG" field
+		And I input "20SD" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
 	* Adding value Country of consignment
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description' |
 		| 'Country of consignment'      |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Additional attribute values'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Turkey'
-		И в поле 'TR' я ввожу текст 'Turkey TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Romania'
-		И в поле 'TR' я ввожу текст 'Romania TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Ukraine'
-		И в поле 'TR' я ввожу текст 'Ukraine TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Poland'
-		И в поле 'TR' я ввожу текст 'Poland TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And In this window I click command interface button "Additional attribute values"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Turkey" text in "ENG" field
+		And I input "Turkey TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Romania" text in "ENG" field
+		And I input "Romania TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Ukraine" text in "ENG" field
+		And I input "Ukraine TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Poland" text in "ENG" field
+		And I input "Poland TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
 	* Adding value Producer
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description' |
 		| 'Producer'      |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Additional attribute values'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'UNIQ'
-		И в поле 'TR' я ввожу текст 'UNIQ'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'PZU'
-		И в поле 'TR' я ввожу текст 'PZU'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'ODS'
-		И в поле 'TR' я ввожу текст 'ODS'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And In this window I click command interface button "Additional attribute values"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "UNIQ" text in "ENG" field
+		And I input "UNIQ" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "PZU" text in "ENG" field
+		And I input "PZU" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "ODS" text in "ENG" field
+		And I input "ODS" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
 	* Adding value Brand
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description' |
 		| 'Brand'      |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Additional attribute values'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'York'
-		И в поле 'TR' я ввожу текст 'York'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Gir'
-		И в поле 'TR' я ввожу текст 'Gir'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Rose'
-		И в поле 'TR' я ввожу текст 'Rose'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Montel'
-		И в поле 'TR' я ввожу текст 'Montel'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 2
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And In this window I click command interface button "Additional attribute values"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "York" text in "ENG" field
+		And I input "York" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Gir" text in "ENG" field
+		And I input "Gir" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Rose" text in "ENG" field
+		And I input "Rose" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Montel" text in "ENG" field
+		And I input "Montel" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 2
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
 
 
-Сценарий: _005113 filling in the "Item types" catalog 
-	* Clearing the Item types catalog 
-		И я удаляю все элементы Справочника "ItemTypes"
-		И в базе нет элементов Справочника "ItemTypes"
+Scenario: _005113 filling in the "Item types" catalog 
 	* Opening the form for filling in Item types
-		И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-	* Creating item types: Сlothes, Box, Shoes
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Сlothes'
-		И в поле с именем 'Description_tr' я ввожу текст 'Сlothes TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		Тогда В базе появился хотя бы один элемент справочника "ItemTypes"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Box'
-		И в поле с именем 'Description_tr' я ввожу текст 'Box TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Shoes'
-		И в поле с именем 'Description_tr' я ввожу текст 'Shoes TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-	* Checking for created elements
-		Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_en" "Сlothes"  
-		Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_tr" "Сlothes TR"
-		Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_en" "Shoes"  
-		Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_tr" "Shoes TR"
-		Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_en" "Box"  
-		Тогда я проверяю наличие элемента справочника "ItemTypes" со значением поля "Description_tr" "Box TR"
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And Delay 2
+	* Creating item types: Clothes, Box, Shoes
+		And I click Open button of the field named "Description_en"
+		And I input "Clothes" text in the field named "Description_en"
+		And I input "Clothes TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Box" text in the field named "Description_en"
+		And I input "Box TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Shoes" text in the field named "Description_en"
+		And I input "Shoes TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+	* Check for created elements
+		Then I check for the "ItemTypes" catalog element with the "Description_en" "Clothes"  
+		Then I check for the "ItemTypes" catalog element with the "Description_tr" "Clothes TR"
+		Then I check for the "ItemTypes" catalog element with the "Description_en" "Shoes"  
+		Then I check for the "ItemTypes" catalog element with the "Description_tr" "Shoes TR"
+		Then I check for the "ItemTypes" catalog element with the "Description_en" "Box"  
+		Then I check for the "ItemTypes" catalog element with the "Description_tr" "Box TR"
 
 
-Сценарий: _005114 adding general additional attributes for Item
+Scenario: _005114 adding general additional attributes for Item
 # AddAttributeAndPropertySets (Catalog_Items)
 	* Opening the form for adding additional attributes for Items
-		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertySets"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
 			| 'Predefined data item name' |
 			| 'Catalog_Items'      |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Adding additional attributes
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Producer'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Article'   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Brand'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в таблице "Attributes" я нажимаю на кнопку с именем 'AttributesAdd'
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
 			| 'Description'              |
 			| 'Country of consignment' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в таблице "Attributes" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I go to line in "Attributes" table
 			| 'Attribute' |
 			| 'Producer'  |
 	* Distribution of added additional attributes by UI groups
-		И в таблице "Attributes" я активизирую поле "UI group"
-		И в таблице "Attributes" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
-		И в таблице "List" я перехожу к строке:
+		And I activate "UI group" field in "Attributes" table
+		And I select current line in "Attributes" table
+		And I click choice button of "UI group" attribute in "Attributes" table
+		And I go to line in "List" table
 			| 'Description'      |
 			| 'Purchase and production' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в таблице "Attributes" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I go to line in "Attributes" table
 			| 'Attribute' |
 			| 'Article'   |
-		И в таблице "Attributes" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "Attributes" table
+		And I click choice button of "UI group" attribute in "Attributes" table
+		And I go to line in "List" table
 			| 'Description'      |
 			| 'Accounting information' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в таблице "Attributes" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I go to line in "Attributes" table
 			| 'Attribute' |
 			| 'Brand'     |
-		И в таблице "Attributes" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "Attributes" table
+		And I click choice button of "UI group" attribute in "Attributes" table
+		And I go to line in "List" table
 			| 'Description'      |
 			| 'Product information' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И в таблице "Attributes" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I go to line in "Attributes" table
 			| 'Attribute'              |
 			| 'Country of consignment' |
-		И в таблице "Attributes" я выбираю текущую строку
-		И в таблице "Attributes" я нажимаю кнопку выбора у реквизита "UI group"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "Attributes" table
+		And I click choice button of "UI group" attribute in "Attributes" table
+		And I go to line in "List" table
 			| 'Description'      |
 			| 'Product information' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Attributes" я завершаю редактирование строки
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Items'
-		И в поле 'TR' я ввожу текст 'Items'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I click Open button of the field named "Description_en"
+		And I input "Items" text in "ENG" field
+		And I input "Items" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 
-Сценарий: _005115 filling in the "Items" catalog 
-	* Clearing the Items catalog 
-		И я удаляю все элементы Справочника "Items"
-		И в базе нет элементов Справочника "Items"
+Scenario: _005115 filling in the "Items" catalog 
 	* Opening the form for creating Items
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And Delay 2
 	* Test item creation Dress
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Dress'
-		И в поле с именем 'Description_tr' я ввожу текст 'Dress TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля  с именем "ItemType"
-		И в таблице "List" я перехожу к строке:
+		And I click Open button of the field named "Description_en"
+		And I input "Dress" text in the field named "Description_en"
+		And I input "Dress TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Choice button of the field named "ItemType"
+		And I go to line in "List" table
 			| 'Description' |
-			| 'Сlothes'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Producer"
-		И в таблице "List" я перехожу к строке:
+			| 'Clothes'       |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I select current line in "List" table
+		And I click Select button of "Producer" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'UNIQ'        |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Brand"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Brand" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Rose'        |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Country of consignment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Country of consignment" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Poland'      |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Test item creation Trousers
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Trousers'
-		И в поле с именем 'Description_tr' я ввожу текст 'Trousers TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля  с именем "ItemType"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Trousers" text in the field named "Description_en"
+		And I input "Trousers TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Choice button of the field named "ItemType"
+		And I go to line in "List" table
 				| 'Description' |
-				| 'Сlothes'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+				| 'Clothes'       |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Test item creation Shirt
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Shirt'
-		И в поле с именем 'Description_tr' я ввожу текст 'Shirt TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля  с именем "ItemType"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Shirt" text in the field named "Description_en"
+		And I input "Shirt TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Choice button of the field named "ItemType"
+		And I go to line in "List" table
 				| 'Description' |
-				| 'Сlothes'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+				| 'Clothes'       |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Test item creation Boots
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Boots'
-		И в поле с именем 'Description_tr' я ввожу текст 'Boots TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля  с именем "ItemType"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Boots" text in the field named "Description_en"
+		And I input "Boots TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Choice button of the field named "ItemType"
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Shoes'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Test item creation High shoes
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'High shoes'
-		И в поле с именем 'Description_tr' я ввожу текст 'High shoes TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля  с именем "ItemType"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "High shoes" text in the field named "Description_en"
+		And I input "High shoes TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Choice button of the field named "ItemType"
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Shoes'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Test item creation Box
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Box'
-		И в поле с именем 'Description_tr' я ввожу текст 'Box TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля  с именем "ItemType"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Box" text in the field named "Description_en"
+		And I input "Box TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Choice button of the field named "ItemType"
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Box'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Units"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		Given I open hyperlink "e1cib/list/Catalog.Units"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'box (4 pcs)'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Box'       |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Test item creation на набор Bound Dress+Shirt
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Bound Dress+Shirt'
-		И в поле с именем 'Description_tr' я ввожу текст 'Bound Dress+Shirt TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля  с именем "ItemType"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+	* Test item creation for bundle Bound Dress+Shirt
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Bound Dress+Shirt" text in the field named "Description_en"
+		And I input "Bound Dress+Shirt TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Choice button of the field named "ItemType"
+		And I go to line in "List" table
 			| 'Description' |
-			| 'Сlothes'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-	* Test item creation на набор Bound Dress+Trousers
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Bound Dress+Trousers'
-		И в поле с именем 'Description_tr' я ввожу текст 'Bound Dress+Trousers TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля  с именем "ItemType"
-		И в таблице "List" я перехожу к строке:
+			| 'Clothes'       |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+	* Test item creation for bundle Bound Dress+Trousers
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Bound Dress+Trousers" text in the field named "Description_en"
+		And I input "Bound Dress+Trousers TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Choice button of the field named "ItemType"
+		And I go to line in "List" table
 			| 'Description' |
-			| 'Сlothes'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+			| 'Clothes'       |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 
 
-Сценарий: _005116 filling in the settings for creating ItemKeys for Item type Closets and Shoes
+Scenario: _005116 filling in the settings for creating ItemKeys for Item type Closets and Shoes
 # for clothes specify the color, for shoes - season
 # It is indicated through the type of item with duplication in sets
 	* Opening the form for filling in Item keys settings 
-		И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-	* Item key creation options for Сlothes
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+	* Item key creation options for Clothes
+		And I go to line in "List" table
 			| Description      |
-			| Сlothes |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-		И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+			| Clothes |
+		And I select current line in "List" table
+		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+		And I go to line in "List" table
 			| Description |
 			| Size      |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AvailableAttributes" я завершаю редактирование строки
-		И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-		И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "AvailableAttributes" table
+		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+		And I go to line in "List" table
 			| Description |
 			| Color      |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AvailableAttributes" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I finish line editing in "AvailableAttributes" table
+		And I click "Save and close" button
 	* Item key creation options for Shoes
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Description      |
 			| Shoes |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-		И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+		And I go to line in "List" table
 			| Description |
 			| Size      |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AvailableAttributes" я завершаю редактирование строки
-		И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-		И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "AvailableAttributes" table
+		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+		And I go to line in "List" table
 			| Description |
 			| Season      |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AvailableAttributes" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-		И Я закрываю текущее окно
+		And I select current line in "List" table
+		And I finish line editing in "AvailableAttributes" table
+		And I click "Save and close" button
+		And I close current window
 
 
-Сценарий: _005117 fill in Item keys
+Scenario: _005117 fill in Item keys
 # Dress, Trousers, Shirt, Boots, High shoes, Box
-	И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
+	Given I open hyperlink "e1cib/list/Catalog.Items"
 	* Filling in Item keys for Dress
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'      |
 		| 'Dress' |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item keys (create) *' в течение 20 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And In this window I click command interface button "Item keys"
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item keys (create) *" window closing in 20 seconds
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'XS'          |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'M'           |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'L'           |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'XL'          |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'S'        |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Color"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Color" field
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'XS'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Color" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Blue'        |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'XS (Item key) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "XS (Item key) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'M'        |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Color" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'White'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'M (Item key) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "M (Item key) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'L'        |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Color" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Green'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'L (Item key) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "L (Item key) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'XL'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Color" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Green'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'XL (Item key) *' в течение 20 секунд
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Dress (Item)' в течение 20 секунд
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "XL (Item key) *" window closing in 20 seconds
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
+		And I wait "Dress (Item)" window closing in 20 seconds
 	* Filling in Item keys for Trousers
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 			| 'Description' | 'Item type' |
-			| 'Trousers'    | 'Сlothes'   |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+			| 'Trousers'    | 'Clothes'   |
+		And I select current line in "List" table
+		And In this window I click command interface button "Item keys"
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| '36'          |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| '38'          |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Item key' |
 			| '36'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Color"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна '* (Item key) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Color" field
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "* (Item key) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Item key' |
 			| '38'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Color"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна '* (Item key) *' в течение 20 секунд
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Trousers (Item)' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Color" field
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "* (Item key) *" window closing in 20 seconds
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
+		And I wait "Trousers (Item)" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Description' | 'Item type' |
-			| 'Shirt'       | 'Сlothes'   |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+			| 'Shirt'       | 'Clothes'   |
+		And I select current line in "List" table
+		And In this window I click command interface button "Item keys"
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| '36'          |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| '38'          |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Item key' |
 			| '36'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Color" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Red'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна '* (Item key) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "* (Item key) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Item key' |
 			| '38'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Color" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Black'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна '* (Item key) *' в течение 20 секунд
-		Тогда открылось окно 'Shirt (Item)'
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "* (Item key) *" window closing in 20 seconds
+		Then "Shirt (Item)" window is opened
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
+		And Delay 5
+		And I go to line in "List" table
 			| 'Description' | 'Item type' |
 			| 'Boots'       | 'Shoes'     |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And In this window I click command interface button "Item keys"
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| '36'          |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| '37'          |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| '38'          |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| '39'          |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Item key' |
 			| '36'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Season"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна '* (Item key) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Season" field
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "* (Item key) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Item key' |
 			| '37'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Season"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна '* (Item key) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Season" field
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "* (Item key) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Item key' |
 			| '38'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Season"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна '* (Item key) *' в течение 20 секунд
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Season" field
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "* (Item key) *" window closing in 20 seconds
+		And I go to line in "List" table
 			| 'Item key' |
 			| '39'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Season"
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна '* (Item key) *' в течение 20 секунд
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Season" field
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+		And I wait "* (Item key) *" window closing in 20 seconds
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
+		And Delay 5
+		And I go to line in "List" table
 			| 'Description' | 'Item type' |
 			| 'High shoes'  | 'Shoes'     |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And In this window I click command interface button "Item keys"
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| '39'          |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Season"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I select current line in "List" table
+		And I click Select button of "Season" field
+		And I go to line in "List" table
 			| 'Description' |
 			| '19SD'        |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна '* (Item key) *' в течение 20 секунд
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "* (Item key) *" window closing in 20 seconds
+		And I click the button named "FormCreate"
+		And I click Select button of "Size" field
+		And I go to line in "List" table
 			| 'Description' |
 			| '37'          |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Item key (create) *' в течение 20 секунд
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Season"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Item key (create) *" window closing in 20 seconds
+		And I select current line in "List" table
+		And I click Select button of "Season" field
+		And I go to line in "List" table
 			| 'Description' |
 			| '19SD'        |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна '* (Item key) *' в течение 20 секунд
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Main'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "* (Item key) *" window closing in 20 seconds
+		And In this window I click command interface button "Main"
+		And I click "Save and close" button
+		And Delay 5
 
 		
 
-Сценарий: _005119 packaging for High shoes
-	* Opening the form for creatingItem units
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Units"
+Scenario: _005119 packaging for High shoes
+	* Opening the form for creating Item units
+		Given I open hyperlink "e1cib/list/Catalog.Units"
 	* Create packaging High shoes box (8 pcs)
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'High shoes box (8 pcs)'
-		И в поле 'TR' я ввожу текст 'High shoes box (8 adet) TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Item"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "High shoes box (8 pcs)" text in "ENG" field
+		And I input "High shoes box (8 adet) TR" text in "TR" field
+		And I click "Ok" button
+		And I click Select button of "Item" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'High shoes'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Basis unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Basis unit" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'pcs'      |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Quantity' я ввожу текст '8'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I input "8" text in "Quantity" field
+		And I click "Save and close" button
 	* Create packaging Boots (12 pcs)
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Boots (12 pcs)'
-		И в поле 'TR' я ввожу текст 'Boots (12 adet) TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Item"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Boots (12 pcs)" text in "ENG" field
+		And I input "Boots (12 adet) TR" text in "TR" field
+		And I click "Ok" button
+		And I click Select button of "Item" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Basis unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Basis unit" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'pcs'      |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Quantity' я ввожу текст '12'
-		И я нажимаю на кнопку 'Save and close'
-	И Я закрываю текущее окно
+		And I select current line in "List" table
+		And I input "12" text in "Quantity" field
+		And I click "Save and close" button
+	And I close current window
 
-Сценарий: _005120 set Closets/Shoes specification creation
+Scenario: _005120 set Closets/Shoes specification creation
 # Set is a dimensional grid, set to the type of item
-	* Create a specification for Сlothes
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Specifications"
-		И я нажимаю на кнопку с именем "FormCreate"
-		И я меняю значение переключателя 'Type' на 'Set'
-		И я нажимаю кнопку выбора у поля "Item type"
-		И в таблице "List" я перехожу к строке:
+	* Create a specification for Clothes
+		Given I open hyperlink "e1cib/list/Catalog.Specifications"
+		And I click the button named "FormCreate"
+		And I change "Type" radio button value to "Set"
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
 			| 'Description' |
-			| 'Сlothes'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Color"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+			| 'Clothes'     |
+		And I select current line in "List" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I select current line in "List" table
+		And I activate "Color" field in "FormTable*" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "1,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'XS'          |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Color"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Color" field in "FormTable*" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Blue'        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "1,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'M'           |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Color"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Color" field in "FormTable*" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Brown'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "2,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'L'           |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Color"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Color" field in "FormTable*" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Green'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'A-8'
-		И в поле 'TR' я ввожу текст 'A-8'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "2,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And I click Open button of the field named "Description_en"
+		And I input "A-8" text in "ENG" field
+		And I input "A-8" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 10
 	* Create a specification for Shoes
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Specifications"
-		И я нажимаю на кнопку с именем "FormCreate"
-		И я меняю значение переключателя 'Type' на 'Set'
-		И я нажимаю кнопку выбора у поля "Item type"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Specifications"
+		And I click the button named "FormCreate"
+		And I change "Type" radio button value to "Set"
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Shoes'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| Description |
 			| 36          |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Season"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Season"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Season" field in "FormTable*" table
+		And I click choice button of "Season" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| 'Description' |
 			| '18SD'        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "1,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| 'Description' |
 			| '37'          |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Season"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Season"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Season" field in "FormTable*" table
+		And I click choice button of "Season" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| '18SD'        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "1,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| 'Description' |
 			| '38'          |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Season"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Season"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Season" field in "FormTable*" table
+		And I click choice button of "Season" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| '18SD'        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "1,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| 'Description' |
 			| '39'          |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Season"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Season"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Season" field in "FormTable*" table
+		And I click choice button of "Season" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| '18SD'        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'S-8'
-		И в поле 'TR' я ввожу текст 'S-8'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "1,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And I click Open button of the field named "Description_en"
+		And I input "S-8" text in "ENG" field
+		And I input "S-8" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 10
 
-Сценарий: _005121 filling item key according to specification for set
+Scenario: _005121 filling item key according to specification for set
 	* Opening the Dress element in the Items catalog
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 			| 'Description' | 'Item type' |
-			| 'Dress'       | 'Сlothes'   |
-		И в таблице "List" я выбираю текущую строку
+			| 'Dress'       | 'Clothes'   |
+		And I select current line in "List" table
 	* Creating for Dress a new item key for the specification
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я изменяю флаг 'Specification'
-		И я нажимаю кнопку выбора у поля с именем "Specification"
-		И таблица "List" не содержит строки:
+		And In this window I click command interface button "Item keys"
+		And I click the button named "FormCreate"
+		And I change checkbox "Specification"
+		And I click Choice button of the field named "Specification"
+		And "List" table does not contain lines
 			| 'Description' | 'Type' |
 			| 'S-8'         | 'Set'  |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' | 'Type' |
 			| 'A-8'         | 'Set'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 5
+		And "List" table contains lines
 			| 'Item key'   |
 			| 'Dress/A-8'  |
-		И Я закрываю текущее окно
+		And I close current window
 	* Opening the Boots element in the Items catalog
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 			| 'Description' | 'Item type' |
 			| 'Boots'       | 'Shoes'   |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Creating for Boots a new item key for the specification
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я изменяю флаг 'Specification'
-		И я нажимаю кнопку выбора у поля с именем "Specification"
-		И таблица "List" не содержит строки:
+		And In this window I click command interface button "Item keys"
+		And I click the button named "FormCreate"
+		And I change checkbox "Specification"
+		And I click Choice button of the field named "Specification"
+		And "List" table does not contain lines
 			| 'Description' | 'Type' |
 			| 'A-8'         | 'Set'  |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' | 'Type' |
 			| 'S-8'         | 'Set'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 5
+		And "List" table contains lines
 			| 'Item key'   |
 			| 'Boots/S-8'  |
-		И Я закрываю текущее окно
+		And I close current window
+

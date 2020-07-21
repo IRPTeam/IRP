@@ -1,227 +1,228 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: auto creation item key when Unbundling (by specification)
+Feature: auto creation item key when Unbundling (by specification)
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _300301 preparation
-	* Создание item для bundle
+Scenario: _300301 preparation
+	* Create item  for bundle
 		* Open a creation form Items
-			И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-			И я нажимаю на кнопку с именем 'FormCreate'
-		* Создание тестовой номенклатуры Сhewing gum
-			И я нажимаю на кнопку открытия поля с именем "Description_tr"
-			И в поле с именем 'Description_en' я ввожу текст 'Сhewing gum'
-			И в поле с именем 'Description_tr' я ввожу текст 'Сhewing gum TR'
-			И я нажимаю на кнопку 'Ok'
-			* Создание и выбор вида номенклатуры для конфет
-				И я нажимаю кнопку выбора у поля "Item type"
-				И я нажимаю на кнопку с именем 'FormCreate'
-				И в поле 'TR' я ввожу текст 'Сhewing gum'
-				И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-				И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-				И я нажимаю на кнопку с именем 'FormCreate'
-				И в поле 'TR' я ввожу текст 'Сhewing gum taste'
-				И я нажимаю на кнопку 'Save and close'
-				И я нажимаю на кнопку с именем 'FormCreate'
-				И в поле 'TR' я ввожу текст 'Сhewing gum brand'
-				И я нажимаю на кнопку 'Save and close'
-				И Пауза 5
-				И я нажимаю на кнопку с именем 'FormChoose'
-				И в таблице "AvailableAttributes" я завершаю редактирование строки
-				И в таблице "AvailableAttributes" я нажимаю на кнопку с именем 'AvailableAttributesAdd'
-				И в таблице "AvailableAttributes" я нажимаю кнопку выбора у реквизита "Attribute"
-				И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Catalog.Items"
+			And I click the button named "FormCreate"
+		* Create item type Chewing gum
+			And I click Open button of the field named "Description_tr"
+			And I input "Chewing gum" text in the field named "Description_en"
+			And I input "Chewing gum TR" text in the field named "Description_tr"
+			And I click "Ok" button
+			* Create item type for candy
+				And I click Select button of "Item type" field
+				And I click the button named "FormCreate"
+				And I input "Chewing gum" text in "TR" field
+				And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+				And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+				And I click the button named "FormCreate"
+				And I input "Chewing gum taste" text in "TR" field
+				And I click "Save and close" button
+				And I click the button named "FormCreate"
+				And I input "Chewing gum brand" text in "TR" field
+				And I click "Save and close" button
+				And Delay 5
+				And I click the button named "FormChoose"
+				And I finish line editing in "AvailableAttributes" table
+				And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+				And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+				And I go to line in "List" table
 					| 'Description' |
-					| 'Сhewing gum taste' |
-				И я нажимаю на кнопку с именем 'FormChoose'
-				И в таблице "AvailableAttributes" я завершаю редактирование строки
-				И я нажимаю на кнопку 'Save and close'
-				И Пауза 5
-				И я нажимаю на кнопку с именем 'FormChoose'
-			* Select единицы измерения
-				И я нажимаю кнопку выбора у поля "Unit"
-				И в таблице "List" я перехожу к строке:
+					| 'Chewing gum taste' |
+				And I click the button named "FormChoose"
+				And I finish line editing in "AvailableAttributes" table
+				And I click "Save and close" button
+				And Delay 5
+				And I click the button named "FormChoose"
+			* Select unit
+				And I click Select button of "Unit" field
+				And I go to line in "List" table
 					| 'Description' |
 					| 'adet'         |
-				И в таблице "List" я выбираю текущую строку
-			И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-			И Пауза 5
-	* Внесение значений доп реквизита Сhewing gum brand и Сhewing gum taste
-		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'TR' я ввожу текст 'Cherry'
-		И я нажимаю кнопку выбора у поля "Additional attribute"
-		И в таблице "List" я перехожу к строке:
+				And I select current line in "List" table
+			And I click the button named "FormWriteAndClose"
+			And Delay 5
+	* Filling in add attribute and property values for Chewing gum brand and Chewing gum taste
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
+		And I click the button named "FormCreate"
+		And I input "Cherry" text in "TR" field
+		And I click Select button of "Additional attribute" field
+		And I go to line in "List" table
 			| 'Description' |
-			| 'Сhewing gum taste' |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'TR' я ввожу текст 'Mango'
-		И я нажимаю кнопку выбора у поля "Additional attribute"
-		И в таблице "List" я перехожу к строке:
+			| 'Chewing gum taste' |
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
+		And I click the button named "FormCreate"
+		And I input "Mango" text in "TR" field
+		And I click Select button of "Additional attribute" field
+		And I go to line in "List" table
 			| 'Description' |
-			| 'Сhewing gum taste' |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я открываю навигационную ссылку "e1cib/list/Catalog.AddAttributeAndPropertyValues"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'TR' я ввожу текст 'Mint'
-		И я нажимаю кнопку выбора у поля "Additional attribute"
-		И в таблице "List" я перехожу к строке:
+			| 'Chewing gum taste' |
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
+		And I click the button named "FormCreate"
+		And I input "Mint" text in "TR" field
+		And I click Select button of "Additional attribute" field
+		And I go to line in "List" table
 			| 'Description' |
-			| 'Сhewing gum brand' |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Создание спецификации
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
-		* Создание спецификации Сhewing gum
-			И я нажимаю на кнопку с именем "FormCreate"
-			И я меняю значение переключателя 'Type' на 'Set'
-			И я нажимаю кнопку выбора у поля "Item type"
-			И в таблице "List" я перехожу к строке:
+			| 'Chewing gum brand' |
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+	* Create Specification
+		Given I open hyperlink "e1cib/list/Catalog.Specifications"
+		* Create Specification Chewing gum
+			And I click the button named "FormCreate"
+			And I change "Type" radio button value to "Set"
+			And I click Select button of "Item type" field
+			And I go to line in "List" table
 				| 'Description' |
-				| 'Сhewing gum'     |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-			И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Сhewing gum taste"
-			И в таблице "List" я перехожу к строке:
+				| 'Chewing gum'     |
+			And I select current line in "List" table
+			And in the table "FormTable*" I click "Add" button
+			And I click choice button of "Chewing gum taste" attribute in "FormTable*" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Mango'          |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "FormTable*" я активизирую поле "Сhewing gum brand"
-			И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Сhewing gum brand"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "FormTable*" я активизирую поле "Quantity"
-			И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '10,000'
-			И в таблице "FormTable*" я завершаю редактирование строки
-			И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-			И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Сhewing gum taste"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Chewing gum brand" field in "FormTable*" table
+			And I click choice button of "Chewing gum brand" attribute in "FormTable*" table
+			And I select current line in "List" table
+			And I activate "Quantity" field in "FormTable*" table
+			And I input "10,000" text in "Quantity" field of "FormTable*" table
+			And I finish line editing in "FormTable*" table
+			And in the table "FormTable*" I click "Add" button
+			And I click choice button of "Chewing gum taste" attribute in "FormTable*" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Cherry'          |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "FormTable*" я активизирую поле "Сhewing gum brand"
-			И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Сhewing gum brand"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "FormTable*" я активизирую поле "Quantity"
-			И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '10,000'
-			И в таблице "FormTable*" я завершаю редактирование строки
-			И я нажимаю на кнопку открытия поля с именем "Description_tr"
-			И в поле 'ENG' я ввожу текст 'Сhewing gum'
-			И в поле 'TR' я ввожу текст 'Сhewing gum'
-			И я нажимаю на кнопку 'Ok'
-			И я нажимаю на кнопку 'Save'
-			И я закрыл все окна клиентского приложения
-	* Создание item key для Сhewing gum Specifications
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-		И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Chewing gum brand" field in "FormTable*" table
+			And I click choice button of "Chewing gum brand" attribute in "FormTable*" table
+			And I select current line in "List" table
+			And I activate "Quantity" field in "FormTable*" table
+			And I input "10,000" text in "Quantity" field of "FormTable*" table
+			And I finish line editing in "FormTable*" table
+			And I click Open button of the field named "Description_tr"
+			And I input "Chewing gum" text in "ENG" field
+			And I input "Chewing gum" text in "TR" field
+			And I click "Ok" button
+			And I click "Save" button
+			And I close all client application windows
+	* Create item key  for Chewing gum Specifications
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 				| 'Description' |
-				| 'Сhewing gum TR'          |
-		И в таблице "List" я выбираю текущую строку
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг с именем 'SpecificationMode'
-		И я нажимаю кнопку выбора у поля с именем "Specification"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-		И я закрыл все окна клиентского приложения
+				| 'Chewing gum TR'          |
+		And I select current line in "List" table
+		And In this window I click command interface button "Item keys"
+		And I click the button named "FormCreate"
+		And I set checkbox named "SpecificationMode"
+		And I click Choice button of the field named "Specification"
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 10
+		And I close all client application windows
 
-Сценарий: _300302 create Unbundling and check creation item key
+Scenario: _300302 create Unbundling and check creation item key
 	* Filling the document header Unbundling
-		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company TR |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| Description |
-			| Сhewing gum TR       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item key bundle"
-		И в таблице "List" я перехожу к строке:
+			| Chewing gum TR       |
+		And I select current line in "List" table
+		And I click Select button of "Item key bundle" field
+		And I go to line in "List" table
 			| Item key  |
-			| Сhewing gum TR/Сhewing gum |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я перехожу к строке:
+			| Chewing gum TR/Chewing gum |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I go to line in "List" table
 			| Description |
 			| adet      |
-		И в таблице "List" я выбираю текущую строку
-		И в поле с именем 'Quantity' я ввожу текст '2,000'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "2,000" text in the field named "Quantity"
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01 TR' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку 'By specification'
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I move to "Item list" tab
+		And in the table "ItemList" I click "By specification" button
+		And "ItemList" table contains lines
 			| 'Item'           | 'Quantity' | 'Item key'    | 'Unit' |
-			| 'Сhewing gum TR' | '10,000'   | 'Mint/Mango'  | 'adet' |
-			| 'Сhewing gum TR' | '10,000'   | 'Mint/Cherry' | 'adet' |
-		И я нажимаю на кнопку 'Post and close'
-	* create недостающих item key
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ItemKeys'
-		Тогда таблица "List" содержит строки:
+			| 'Chewing gum TR' | '10,000'   | 'Mint/Mango'  | 'adet' |
+			| 'Chewing gum TR' | '10,000'   | 'Mint/Cherry' | 'adet' |
+		And I click "Post and close" button
+	* Create item key
+		Given I open hyperlink "e1cib/list/Catalog.ItemKeys"
+		And "List" table contains lines
 		| 'Item key'                                     |
 		| 'Mint/Mango'                                   |
 		| 'Mint/Cherry'                                  |
-		И я закрыл все окна клиентского приложения
-	* Проверка того, что при повторном создании Unbundling строки не задублируются
+		And I close all client application windows
+	* Check that when re-create Unbundling, lines are not duplicated
 		* Create one more Unbundling
-			И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.Unbundling"
+			And I click the button named "FormCreate"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company TR |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Item bundle"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Item bundle" field
+			And I go to line in "List" table
 				| Description |
-				| Сhewing gum TR       |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Item key bundle"
-			И в таблице "List" я перехожу к строке:
+				| Chewing gum TR       |
+			And I select current line in "List" table
+			And I click Select button of "Item key bundle" field
+			And I go to line in "List" table
 				| Item key  |
-				| Сhewing gum TR/Сhewing gum |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля с именем "Unit"
-			И в таблице "List" я перехожу к строке:
+				| Chewing gum TR/Chewing gum |
+			And I select current line in "List" table
+			And I click Choice button of the field named "Unit"
+			And I go to line in "List" table
 				| Description |
 				| adet      |
-			И в таблице "List" я выбираю текущую строку
-			И в поле с именем 'Quantity' я ввожу текст '2,000'
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "2,000" text in the field named "Quantity"
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 01 TR' |
-			И в таблице "List" я выбираю текущую строку
-			И я перехожу к закладке "Item list"
-			И в таблице "ItemList" я нажимаю на кнопку 'By specification'
-			И     таблица "ItemList" содержит строки:
+			And I select current line in "List" table
+			And I move to "Item list" tab
+			And in the table "ItemList" I click "By specification" button
+			And "ItemList" table contains lines
 				| 'Item'           | 'Quantity' | 'Item key'    | 'Unit' |
-				| 'Сhewing gum TR' | '10,000'   | 'Mint/Mango'  | 'adet' |
-				| 'Сhewing gum TR' | '10,000'   | 'Mint/Cherry' | 'adet' |
-			И я нажимаю на кнопку 'Post and close'
-		* Проверка, что item key не задублировались
-			И я открываю навигационную ссылку "e1cib/list/Catalog.Items"
-			И в таблице "List" я перехожу к строке:
+				| 'Chewing gum TR' | '10,000'   | 'Mint/Mango'  | 'adet' |
+				| 'Chewing gum TR' | '10,000'   | 'Mint/Cherry' | 'adet' |
+			And I click "Post and close" button
+		* Check that item key was not duplicated
+			Given I open hyperlink "e1cib/list/Catalog.Items"
+			And I go to line in "List" table
 				| 'Description' |
-				| 'Сhewing gum TR'          |
-			И в таблице "List" я выбираю текущую строку
-			И В текущем окне я нажимаю кнопку командного интерфейса 'Item keys'
-			Тогда в таблице  "List" количество строк "меньше или равно" 3
-			И я закрыл все окна клиентского приложения
+				| 'Chewing gum TR'          |
+			And I select current line in "List" table
+			And In this window I click command interface button "Item keys"
+			Then the number of "List" table lines is "меньше или равно" 3
+			And I close all client application windows
+
 

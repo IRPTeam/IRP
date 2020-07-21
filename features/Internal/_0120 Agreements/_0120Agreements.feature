@@ -1,644 +1,645 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
 
-Функционал: terms of cooperation with partners
+Feature: terms of cooperation with partners
 
 As an accountant
 I want to add a mechanism for partner Partner terms
 To specify the commercial terms of cooperation
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _012001 adding partners (customers) to a segment (register)
+Scenario: _012001 adding partners (customers) to a segment (register)
 	* Opening a register for Partner segments content
-		И Я закрыл все окна клиентского приложения 
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/InformationRegister.PartnerSegments"
 	* Adding partner Ferron BP to the Retail Segment
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Segment"
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Select button of "Segment" field
+		And Delay 2
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Retail'  |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Partner"
-		И Пауза 5
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I click Select button of "Partner" field
+		And Delay 5
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 5
+		And "List" table contains lines
 			| Segment | Partner |
 			| Retail | Ferron BP |
 	* Adding partner Kalipso to the Dealer Segment
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Segment"
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Select button of "Segment" field
+		And Delay 2
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dealer'  |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Partner"
-		И Пауза 5
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I click Select button of "Partner" field
+		And Delay 5
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Kalipso' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		И таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 5
+		And "List" table contains lines
 			| Segment | Partner |
 			| Dealer | Kalipso |
 	* Adding partner Kalipso to the Retail Segment
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Segment"
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Select button of "Segment" field
+		And Delay 2
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Retail'  |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Partner"
-		И я нажимаю на кнопку с именем "FormList"
-		И Пауза 5
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I click Select button of "Partner" field
+		And I click the button named "FormList"
+		And Delay 5
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Kalipso' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 5
 	* Adding partner Seven Brand to the Retail Segment
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Segment"
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Select button of "Segment" field
+		And Delay 2
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Retail'  |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Partner"
-		И я нажимаю на кнопку с именем "FormList"
-		И Пауза 5
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I click Select button of "Partner" field
+		And I click the button named "FormList"
+		And Delay 5
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Seven Brand' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 5
 	* Adding partner MIO to the Retail Segment
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Segment"
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Select button of "Segment" field
+		And Delay 2
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Retail'  |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Partner"
-		И я нажимаю на кнопку с именем "FormList"
-		И Пауза 5
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I click Select button of "Partner" field
+		And I click the button named "FormList"
+		And Delay 5
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'MIO' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 5
 	* Adding partner Lomaniti to the Retail Segment
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Segment"
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Select button of "Segment" field
+		And Delay 2
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Retail'  |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Partner"
-		И я нажимаю на кнопку с именем "FormList"
-		И Пауза 5
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I click Select button of "Partner" field
+		And I click the button named "FormList"
+		And Delay 5
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Lomaniti' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 5
 
-Сценарий: _012002 adding partners (customers) to 2 segments at the same time (register)
+Scenario: _012002 adding partners (customers) to 2 segments at the same time (register)
 # Ferron BP client is included in the retail and dealership segment
 	* Opening a register for Partner segments content
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.PartnerSegments'
+		Given I open hyperlink "e1cib/list/InformationRegister.PartnerSegments"
 	* Adding partner Ferron BP to the Dealer Segment
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Segment"
-		И Пауза 2
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Select button of "Segment" field
+		And Delay 2
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dealer'  |
-		И в таблице "List" я выбираю текущую строку
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Partner"
-		И Пауза 5
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And Delay 2
+		And I click Select button of "Partner" field
+		And Delay 5
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	* Checking to add a Ferron BP partner to 2 segments at the same time
-		И таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 10
+	* Check to add a Ferron BP partner to 2 segments at the same time
+		And "List" table contains lines
 			| Segment | Partner |
 			| Retail | Ferron BP |
 			| Dealer | Ferron BP |
 
-Сценарий: _012003 filling in the segment of managers in the customers
+Scenario: _012003 filling in the segment of managers in the customers
 	* Opening the partner catalog
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Partners'
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Filling Manager segment for partner Ferron BP
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Manager segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Manager segment" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Region 1'  |
-		И в таблице "List" я выбираю текущую строку		
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click "Save and close" button
 	* Filling Manager segment for partner Kalipso
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Manager segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Manager segment" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Region 2'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click "Save and close" button
 	* Filling Manager segment for partner Lomaniti
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Lomaniti' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Manager segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Manager segment" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Region 2'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click "Save and close" button
 	* Filling Manager segment for partner Seven Brand
-		И я нажимаю на кнопку с именем "FormList"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormList"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Seven Brand' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Manager segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Manager segment" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Region 1'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click "Save and close" button
 	* Filling Manager segment for partner MIO
-		И я нажимаю на кнопку с именем "FormList"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormList"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'MIO' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Manager segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Manager segment" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Region 2'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click "Save and close" button
 
 
-Сценарий: _012004 creating common Partner term
+Scenario: _012004 create common Partner term
 	* Opening an Partner term catalog
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Creating and checking customer Partner term Basic Partner terms, TRY
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя с именем "Type" на 'Customer'
-		И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
-		И в поле 'Number' я ввожу текст '20'
-		И в поле 'Date' я ввожу текст '01.11.2018'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I change the radio button named "Type" value to "Customer"
+		And I change "AP/AR posting detail" radio button value to "By documents"
+		And I input "20" text in "Number" field
+		And I input "01.11.2018" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Main Company'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Multi currency movement type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Multi currency movement type" field
+		And I go to line in "List" table
 			| 'Currency' | 'Type'      |
 			| 'TRY'      | 'Partner term' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Price type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Basic Price Types'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner segment" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Retail'       |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Start using' я ввожу текст '01.11.2018'
-		И Пауза 3
-		И я изменяю флаг 'Price include tax'
-		И в поле 'Number days before delivery' я ввожу текст '4'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "01.11.2018" text in "Start using" field
+		And Delay 3
+		And I change checkbox "Price include tax"
+		And I input "4" text in "Number days before delivery" field
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Store 01'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Basic Partner terms, TRY'
-		И в поле 'TR' я ввожу текст 'Basic Partner terms, TRY'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Basic Partner terms, TRY'
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "Basic Partner terms, TRY" text in "ENG" field
+		And I input "Basic Partner terms, TRY" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		Then I check for the "Agreements" catalog element with the "Description_en" "Basic Partner terms, TRY"
 	* Creating and checking customer Partner term Basic Partner terms, $
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя с именем "Type" на 'Customer'
-		И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
-		И в поле 'Number' я ввожу текст '21'
-		И в поле 'Date' я ввожу текст '01.11.2018'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I change the radio button named "Type" value to "Customer"
+		And I change "AP/AR posting detail" radio button value to "By documents"
+		And I input "21" text in "Number" field
+		And I input "01.11.2018" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Main Company'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Multi currency movement type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Multi currency movement type" field
+		And I go to line in "List" table
 			| 'Currency' | 'Type'      |
 			| 'USD'      | 'Partner term' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Price type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Basic Price Types'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner segment" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Retail'       |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Start using' я ввожу текст '01.11.2018'
-		И Пауза 3
-		И в поле 'Number days before delivery' я ввожу текст '5'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "01.11.2018" text in "Start using" field
+		And Delay 3
+		And I input "5" text in "Number days before delivery" field
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Store 02'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Basic Partner terms, $'
-		И в поле 'TR' я ввожу текст 'Basic Partner terms, $'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Basic Partner terms, $'
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "Basic Partner terms, $" text in "ENG" field
+		And I input "Basic Partner terms, $" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		Then I check for the "Agreements" catalog element with the "Description_en" 'Basic Partner terms, $'
 	* Creating and checking customer Partner term Basic Partner terms, without VAT
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя с именем "Type" на 'Customer'
-		И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
-		И в поле 'Number' я ввожу текст '22'
-		И в поле 'Date' я ввожу текст '01.11.2018'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I click the button named "FormCreate"
+		And I change the radio button named "Type" value to "Customer"
+		And I change "AP/AR posting detail" radio button value to "By documents"
+		And I input "22" text in "Number" field
+		And I input "01.11.2018" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Main Company'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Multi currency movement type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Multi currency movement type" field
+		And I go to line in "List" table
 			| 'Currency' | 'Type'      |
 			| 'TRY'      | 'Partner term' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Price type"
-		Тогда открылось окно 'Price types'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Price type" field
+		Then "Price types" window is opened
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Basic Price without VAT'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner segment" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Retail'       |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Start using' я ввожу текст '01.11.2018'
-		И Пауза 3
-		И в поле 'Number days before delivery' я ввожу текст '4'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "01.11.2018" text in "Start using" field
+		And Delay 3
+		And I input "4" text in "Number days before delivery" field
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Store 02'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Basic Partner terms, without VAT'
-		И в поле 'TR' я ввожу текст 'Basic Partner terms, without VAT'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Basic Partner terms, without VAT'
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "Basic Partner terms, without VAT" text in "ENG" field
+		And I input "Basic Partner terms, without VAT" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		Then I check for the "Agreements" catalog element with the "Description_en" 'Basic Partner terms, without VAT'
 
-Сценарий: _012005 creation of an individual Partner term in USD 
+Scenario: _012005 creation of an individual Partner term in USD 
 	* Opening an Partner term catalog
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Creating and checking customer Partner term Personal Partner terms, $
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя с именем "Type" на 'Customer'
-		И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
-		И в поле 'Number' я ввожу текст '31'
-		И в поле 'Date' я ввожу текст '01.11.2018'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I change the radio button named "Type" value to "Customer"
+		And I change "AP/AR posting detail" radio button value to "By documents"
+		And I input "31" text in "Number" field
+		And I input "01.11.2018" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Main Company'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Multi currency movement type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Multi currency movement type" field
+		And I go to line in "List" table
 			| 'Currency' | 'Type'      |
 			| 'USD'      | 'Partner term' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Price type"
-		Тогда открылось окно 'Price types'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Price type" field
+		Then "Price types" window is opened
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Basic Price Types'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Kalipso'       |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Start using' я ввожу текст '01.11.2018'
-		И я изменяю флаг 'Price include tax'
-		И в поле 'Number days before delivery' я ввожу текст '2'
-		И я нажимаю кнопку выбора у поля "Store"
-		Тогда открылось окно 'Stores'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "01.11.2018" text in "Start using" field
+		And I change checkbox "Price include tax"
+		And I input "2" text in "Number days before delivery" field
+		And I click Select button of "Store" field
+		Then "Stores" window is opened
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Store 02'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Personal Partner terms, $'
-		И в поле 'TR' я ввожу текст 'Personal Partner terms, $'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Personal Partner terms, $'
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "Personal Partner terms, $" text in "ENG" field
+		And I input "Personal Partner terms, $" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		Then I check for the "Agreements" catalog element with the "Description_en" 'Personal Partner terms, $'
 	* Creating and checking vendor Partner term Vendor Ferron, TRY
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя с именем "Type" на 'Vendor'
-		И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
-		И в поле 'Number' я ввожу текст '31'
-		И в поле 'Date' я ввожу текст '01.11.2018'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I click the button named "FormCreate"
+		And I change the radio button named "Type" value to "Vendor"
+		And I change "AP/AR posting detail" radio button value to "By documents"
+		And I input "31" text in "Number" field
+		And I input "01.11.2018" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Main Company'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Multi currency movement type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Multi currency movement type" field
+		And I go to line in "List" table
 			| 'Currency' | 'Type'      |
 			| 'TRY'      | 'Partner term' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Price type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
 				| Description         |
 				| Vendor price, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 				| Description |
 				| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Start using' я ввожу текст '01.11.2018'
-		И я изменяю флаг 'Price include tax'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Vendor Ferron, TRY'
-		И в поле 'TR' я ввожу текст 'Vendor Ferron, TRY TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Vendor Ferron, TRY'
+		And I select current line in "List" table
+		And I input "01.11.2018" text in "Start using" field
+		And I change checkbox "Price include tax"
+		And I click Open button of the field named "Description_en"
+		And I input "Vendor Ferron, TRY" text in "ENG" field
+		And I input "Vendor Ferron, TRY TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		Then I check for the "Agreements" catalog element with the "Description_en" 'Vendor Ferron, TRY'
 	* Creating and checking vendor Partner term Vendor Ferron, USD
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя с именем "Type" на 'Vendor'
-		И в поле 'Number' я ввожу текст '31'
-		И в поле 'Date' я ввожу текст '01.11.2018'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I click the button named "FormCreate"
+		And I change the radio button named "Type" value to "Vendor"
+		And I input "31" text in "Number" field
+		And I input "01.11.2018" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Main Company'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Multi currency movement type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Multi currency movement type" field
+		And I go to line in "List" table
 			| 'Currency' | 'Type'      |
 			| 'USD'      | 'Partner term' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Price type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
 			| Description         |
 			| Vendor price, USD |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Start using' я ввожу текст '01.11.2018'
-		И я изменяю флаг 'Price include tax'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Vendor Ferron, USD'
-		И в поле 'TR' я ввожу текст 'Vendor Ferron, USD TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Vendor Ferron, USD'
+		And I select current line in "List" table
+		And I input "01.11.2018" text in "Start using" field
+		And I change checkbox "Price include tax"
+		And I click Open button of the field named "Description_en"
+		And I input "Vendor Ferron, USD" text in "ENG" field
+		And I input "Vendor Ferron, USD TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		Then I check for the "Agreements" catalog element with the "Description_en" 'Vendor Ferron, USD'
 	* Creating and checking vendor Partner term Vendor Ferron, EUR
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя с именем "Type" на 'Vendor'
-		И в поле 'Number' я ввожу текст '31'
-		И в поле 'Date' я ввожу текст '01.11.2018'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I click the button named "FormCreate"
+		And I change the radio button named "Type" value to "Vendor"
+		And I input "31" text in "Number" field
+		And I input "01.11.2018" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Main Company'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Multi currency movement type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Multi currency movement type" field
+		And I go to line in "List" table
 			| 'Currency' | 'Type'      |
 			| 'EUR'      | 'Partner term' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Price type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
 			| Description         |
 			| Vendor price, EUR |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Start using' я ввожу текст '01.11.2018'
-		И я изменяю флаг 'Price include tax'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Vendor Ferron, EUR'
-		И в поле 'TR' я ввожу текст 'Vendor Ferron, EUR TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Vendor Ferron, EUR'
+		And I select current line in "List" table
+		And I input "01.11.2018" text in "Start using" field
+		And I change checkbox "Price include tax"
+		And I click Open button of the field named "Description_en"
+		And I input "Vendor Ferron, EUR" text in "ENG" field
+		And I input "Vendor Ferron, EUR TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		Then I check for the "Agreements" catalog element with the "Description_en" 'Vendor Ferron, EUR'
 
 	
 
-Сценарий: _012007 creating common Partner term with Item Segment
+Scenario: _012007 create common Partner term with Item Segment
 	* Opening an Partner term catalog
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Creating common Partner term with Item Segment
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя с именем "Type" на 'Customer'
-		И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
-		И в поле 'Number' я ввожу текст '23'
-		И в поле 'Date' я ввожу текст '01.11.2018'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I change the radio button named "Type" value to "Customer"
+		And I change "AP/AR posting detail" radio button value to "By documents"
+		And I input "23" text in "Number" field
+		And I input "01.11.2018" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Main Company'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Multi currency movement type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Multi currency movement type" field
+		And I go to line in "List" table
 			| 'Currency' | 'Type'      |
 			| 'EUR'      | 'Partner term' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Price type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Basic Price Types'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner segment" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Retail'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item segment" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Sale autum'       |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Start using' я ввожу текст '01.11.2018'
-		И в поле 'End of Use' я ввожу текст '01.11.2018'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Sale autum, TRY'
-		И в поле 'TR' я ввожу текст 'Sale autum, TRY'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-	* Checking the creation of the Partner term
-		Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Sale autum, TRY'
+		And I select current line in "List" table
+		And I input "01.11.2018" text in "Start using" field
+		And I input "01.11.2018" text in "End of Use" field
+		And I click Open button of the field named "Description_en"
+		And I input "Sale autum, TRY" text in "ENG" field
+		And I input "Sale autum, TRY" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+	* Check the creation of the Partner term
+		Then I check for the "Agreements" catalog element with the "Description_en" 'Sale autum, TRY'
 
 
 
-Сценарий: _012010 creating Partner term without currency (negative test)
+Scenario: _012010 create Partner term without currency (negative test)
 	* Opening an Partner term catalog
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-	* Сreating Partner term without currency
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя с именем "Type" на 'Customer'
-		И в поле 'Number' я ввожу текст '302'
-		И в поле 'Date' я ввожу текст '01.11.2018'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+	* Creating Partner term without currency
+		And I click the button named "FormCreate"
+		And I change the radio button named "Type" value to "Customer"
+		And I input "302" text in "Number" field
+		And I input "01.11.2018" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Main Company'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Price type"
-		Тогда открылось окно 'Price types'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Price type" field
+		Then "Price types" window is opened
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Basic Price Types'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner segment" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Retail'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item segment" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Sale autum'       |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Start using' я ввожу текст '01.11.2018'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Currency, TRY'
-		И в поле 'TR' я ввожу текст 'Currency, TRY'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	* Checking that the Partner term without currency is not created
-		Если в текущем окне есть сообщения пользователю Тогда
-		И Я закрыл все окна клиентского приложения
-		Когда Проверяю шаги на Исключение:
-			|'Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Currency, TRY''|
+		And I select current line in "List" table
+		And I input "01.11.2018" text in "Start using" field
+		And I click Open button of the field named "Description_en"
+		And I input "Currency, TRY" text in "ENG" field
+		And I input "Currency, TRY" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 10
+	* Check that the Partner term without currency is not created
+		If current window contains user messages Then
+		And I close all client application windows
+		When I Check the steps for Exception
+			|'Then I check for the "Agreements" catalog element with the "Description_en" 'Currency, TRY''|
 
-Сценарий: _012011 creating Partner term without price type (negative test)
+Scenario: _012011 create Partner term without price type (negative test)
 	* Opening an Partner term catalog
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Creating Partner term without price type
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя с именем "Type" на 'Customer'
-		И в поле 'Number' я ввожу текст '301'
-		И в поле 'Date' я ввожу текст '01.11.2018'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I change the radio button named "Type" value to "Customer"
+		And I input "301" text in "Number" field
+		And I input "01.11.2018" text in "Date" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Main Company'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Multi currency movement type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Multi currency movement type" field
+		And I go to line in "List" table
 			| 'Currency' | 'Type'      |
 			| 'TRY'      | 'Partner term' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner segment" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Retail'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item segment"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item segment" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Sale autum'       |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Start using' я ввожу текст '01.11.2018'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Price Type, TRY'
-		И в поле 'TR' я ввожу текст 'Price Type, TRY'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
+		And I select current line in "List" table
+		And I input "01.11.2018" text in "Start using" field
+		And I click Open button of the field named "Description_en"
+		And I input "Price Type, TRY" text in "ENG" field
+		And I input "Price Type, TRY" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 10
 	*  Checking that the Partner term without price type is not created
-		Если в текущем окне есть сообщения пользователю Тогда
-		И Я закрыл все окна клиентского приложения
-		Когда Проверяю шаги на Исключение:
-			|'Тогда я проверяю наличие элемента справочника "Agreements" со значением поля "Description_en" 'Price Type, TRY''|
+		If current window contains user messages Then
+		And I close all client application windows
+		When I Check the steps for Exception
+			|'Then I check for the "Agreements" catalog element with the "Description_en" 'Price Type, TRY''|
+

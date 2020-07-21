@@ -1,91 +1,92 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: product labeling
+Feature: product labeling
 
-Как Разработчик
-Я хочу создать документ маркировки товара
-Для присвоения товарам уникального штрих-кода (серии)
-
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+As a developer
+I want to create a product labeling document
+To assign a unique barcode (series) to products
 
 
-Сценарий: _300000 user check for Turkish data
-	* Открытие спика пользователей
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Users'
-	* Изменение кода локализации для пользователя CI
-		И в таблице "List" я перехожу к строке:
+Background:
+	Given I launch TestClient opening script or connect the existing one
+
+
+Scenario: _300000 user check for Turkish data
+	* Open users list
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+	* Change localization code for CI
+		And I go to line in "List" table
 			| 'Description' |
 			| 'CI'          |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Localization code' я ввожу текст 'tr'
-		И я нажимаю на кнопку 'Save and close'
-	И я закрываю сеанс TESTCLIENT
+		And I select current line in "List" table
+		And I input "tr" text in "Localization code" field
+		And I click "Save and close" button
+	And I close TestClient session
 
 
-Сценарий: _300201 add-on plugin to generate unique barcodes
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я буду выбирать внешний файл "#workingDir#\DataProcessor\GenerateBarcode.epf"
-	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to plugin for test' я ввожу текст ''
-	И в поле 'Name' я ввожу текст 'GenerateBarcode'
-	И я нажимаю на кнопку открытия поля с именем "Description_tr"
-	И в поле 'ENG' я ввожу текст 'GenerateBarcode'
-	И в поле 'TR' я ввожу текст 'GenerateBarcodeTR'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save and close'
-	И я жду закрытия окна 'Plugins (create)' в течение 10 секунд
-	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "GenerateBarcode"
+Scenario: _300201 add-on plugin to generate unique barcodes
+	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+	And I click the button named "FormCreate"
+	And I select external file "#workingDir#\DataProcessor\GenerateBarcode.epf"
+	And I click the button named "FormAddExtDataProc"
+	And I input "" text in "Path to plugin for test" field
+	And I input "GenerateBarcode" text in "Name" field
+	And I click Open button of the field named "Description_tr"
+	And I input "GenerateBarcode" text in "ENG" field
+	And I input "GenerateBarcodeTR" text in "TR" field
+	And I click "Ok" button
+	And I click "Save and close" button
+	And I wait "Plugins (create)" window closing in 10 seconds
+	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "GenerateBarcode"
 
-Сценарий: _300202 setting up barcode generation button display in Purchase order document
-	И я вношу настройки в справочник ConfigurationMetadata
-		И я открываю навигационную ссылку "e1cib/list/Catalog.ConfigurationMetadata"
-		И в таблице  "List" я перехожу на один уровень вниз
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'Description' я ввожу текст 'Labeling'
-		И я нажимаю кнопку выбора у поля "Parent"
-		И в таблице "List" я перехожу к строке:
+Scenario: _300202 setting up barcode generation button display in Purchase order document
+	* Add settings to the catalog ConfigurationMetadata
+		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
+		And I move one level down in "List" table
+		And I click the button named "FormCreate"
+		And I input "Labeling" text in "Description" field
+		And I click Select button of "Parent" field
+		And I go to line in "List" table
 			| Description |
 			| Documents   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-	И я вношу настройка в регистр ExternalCommands
-		И я открываю навигационную ссылку "e1cib/list/InformationRegister.ExternalCommands"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Configuration metadata"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 5
+	* Add settings to the register ExternalCommands
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And I click the button named "FormCreate"
+		And I click Select button of "Configuration metadata" field
+		And I go to line in "List" table
 			| Description |
 			| Documents   |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Description         |
 			| Labeling |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Plugins"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Plugins" field
+		And I go to line in "List" table
 			| Description       |
 			| GenerateBarcodeTR |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Form type" я выбираю точное значение 'Object form'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-	И я проверяю отображение кнопки GenerateBarcode в документе Labeling
-		И я открываю навигационную ссылку "e1cib/list/Document.Labeling"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И элемент формы "GenerateBarcodeTR" присутствует на форме
+		And I select current line in "List" table
+		And I select "Object form" exact value from "Form type" drop-down list
+		And I click "Save and close" button
+		And Delay 5
+	* Check the display of the GenerateBarcode button in the Labeling document
+		Given I open hyperlink "e1cib/list/Document.Labeling"
+		And I click the button named "FormCreate"
+		And field "GenerateBarcodeTR" is present on the form
 
-Сценарий: _300203 create Labeling based on Purchase order
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
-	И в таблице "List" я перехожу к строке:
+Scenario: _300203 create Labeling based on Purchase order
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	And I go to line in "List" table
 		| Number |
 		| 101 |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку 'Labeling'
-	И я нажимаю на кнопку 'GenerateBarcodeTR'
-	И я проверяю заполнение документа
-		Тогда таблица "Items" содержит строки:
+	And I select current line in "List" table
+	And I click "Labeling" button
+	And I click "GenerateBarcodeTR" button
+	* Check filling in document
+		And "Items" table contains lines
 			| '#'  | 'Item'        | 'Item key'     | 'Item serial/lot number' | 'Barcode' |
 			| '1'  | 'Dress TR'    | 'M/White TR'   | '*'                 | '*'       |
 			| '2'  | 'Dress TR'    | 'M/White TR'   | '*'                 | '*'       |
@@ -157,4 +158,4 @@
 			| '68' | 'Trousers TR' | '36/Yellow TR' | '*'                 | '*'       |
 			| '69' | 'Trousers TR' | '36/Yellow TR' | '*'                 | '*'       |
 			| '70' | 'Trousers TR' | '36/Yellow TR' | '*'                 | '*'       |
-	И я нажимаю на кнопку 'Post and close'
+	And I click "Post and close" button

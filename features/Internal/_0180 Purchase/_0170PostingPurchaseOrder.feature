@@ -1,119 +1,119 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: creating document Purchase order
+Feature: create document Purchase order
 
 As a procurement manager
 I want to create a Purchase order document
 For tracking an item that has been ordered from a vendor
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _017001 creating document Purchase order - Goods receipt is not used
+Scenario: _017001 create document Purchase order - Goods receipt is not used
 	* Opening a form to create Purchase Order
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Status filling
-		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
+		And I select "Approved" exact value from "Status" drop-down list
 	* Filling in vendor information
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| Description        |
 			| Vendor Ferron, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 01'  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the document number №2
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '2'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '2'
+		And I move to "Other" tab
+		And I input "2" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "2" text in "Number" field
 	* Filling in items table
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		Тогда открылось окно 'Items'
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'L/Green'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		Тогда открылось окно 'Items'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '1' | 'Dress' | 'M/White' | 'pcs' |
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '100'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '200'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100" text in "Q" field of "ItemList" table
+		And I input "200" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '2' | 'Dress' | 'L/Green'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '200'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '210'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "200" text in "Q" field of "ItemList" table
+		And I input "210" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| '#' | 'Item'     | 'Item key' | 'Unit' |
 			| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '300'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '250'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "ItemList" table
+		And I input "300" text in "Q" field of "ItemList" table
+		And I input "250" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 			| 'Item'     | 'Q' | 'Item key'  | 'Store' | 'Unit' |
 			| 'Dress'    | '100,000'  | 'M/White'   | 'Store 01'      | 'pcs' |
 	* Post document
-		И я нажимаю на кнопку 'Post and close'
+		And I click "Post and close" button
 
-Сценарий: _017002 checking Purchase Order N2 posting by register Order Balance (+) - Goods receipt is not used
+Scenario: _017002 check Purchase Order N2 posting by register Order Balance (+) - Goods receipt is not used
 	* Opening register Order Balance
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-	* Checking the register form
-		Если в таблице "List" есть колонки Тогда
+		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+	* Check the register form
+		If "List" table contains columns Then
 			| 'Period' |
 			| 'Quantity' |
 			| 'Recorder' |
@@ -121,279 +121,280 @@ For tracking an item that has been ordered from a vendor
 			| 'Store' |
 			| 'Order' |
 			| 'Item key' |
-	* Checking Purchase Order N2 posting by register Order Balance
-		Тогда таблица "List" содержит строки:
+	* Check Purchase Order N2 posting by register Order Balance
+		And "List" table contains lines
 			| 'Quantity' | 'Recorder'          | 'Store'    | 'Order'             | 'Item key' |
 			| '100,000'  | 'Purchase order 2*' | 'Store 01' | 'Purchase order 2*' | 'M/White' |
 			| '200,000'  | 'Purchase order 2*' | 'Store 01' | 'Purchase order 2*' | 'L/Green'  |
 			| '300,000'  | 'Purchase order 2*' | 'Store 01' | 'Purchase order 2*' | '36/Yellow'   |
 
-Сценарий: _017003 creating document Purchase order - Goods receipt is used
+Scenario: _017003 create document Purchase order - Goods receipt is used
 	* Opening a form to create Purchase Order
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Filling in the details
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 		| Description  |
 		| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
+		And I select current line in "List" table
+		And I select "Approved" exact value from "Status" drop-down list
 	* Filling in vendor information
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| Description        |
 			| Vendor Ferron, USD |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the document number №3
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '3'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '3'
+		And I move to "Other" tab
+		And I input "3" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "3" text in "Number" field
 	* Filling in items table
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		Тогда открылось окно 'Items'
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'L/Green'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '1' | 'Dress' | 'L/Green'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '500,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '40,00'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I select current line in "ItemList" table
+		And I input "500,000" text in "Q" field of "ItemList" table
+		And I input "40,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Post document
-		И я нажимаю на кнопку 'Post and close'
+		And I click "Post and close" button
 
-Сценарий: _017004 checking Purchase Order N3 posting by register Order Balance (+) - Goods receipt is not used
+Scenario: _017004 check Purchase Order N3 posting by register Order Balance (+) - Goods receipt is not used
 	* Opening of register Order Balance
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-	* Checking Purchase Order N3 posting by register Order Balance
-		Тогда таблица "List" содержит строки:
+		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+	* Check Purchase Order N3 posting by register Order Balance
+		And "List" table contains lines
 			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key' |
 			| '500,000'  | 'Purchase order 3*' | '1'           | 'Store 02' | 'Purchase order 3*' | 'L/Green'  |
 
-Сценарий: _017005 checking postings by status and status history of a Purchase Order document
-	И    Я закрыл все окна клиентского приложения
+Scenario: _017005 check movements by status and status history of a Purchase Order document
+	And I close all client application windows
 	* Opening a form to create Purchase Order
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Filling in the details
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 		| Description  |
 		| Main Company |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in vendor information
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| Description        |
 			| Vendor Ferron, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		Тогда открылось окно 'Stores'
-		И в таблице "List" я выбираю текущую строку
-	* Checking the default status "Wait"
-		И элемент формы с именем "Status" стал равен "Wait"
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		Then "Stores" window is opened
+		And I select current line in "List" table
+	* Check the default status "Wait"
+		Then the form attribute named "Status" became equal to "Wait"
 	* Filling in the document number №101
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '101'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '101'
+		And I move to "Other" tab
+		And I input "101" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "101" text in "Number" field
 	* Filling in items table
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'L/Green'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '1' | 'Dress' | 'M/White' | 'pcs' |
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '20,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '200,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "20,000" text in "Q" field of "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '2' | 'Dress' | 'L/Green'  | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '20,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '210,00'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я перехожу к строке:
+		And I select current line in "ItemList" table
+		And I input "20,000" text in "Q" field of "ItemList" table
+		And I input "210,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
 			| '#' | 'Item'     | 'Item key' | 'Unit' |
 			| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '30,000'
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '210,00'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I select current line in "ItemList" table
+		And I input "30,000" text in "Q" field of "ItemList" table
+		And I input "210,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Post document
-		И я нажимаю на кнопку 'Post and close'
-		И я закрываю текущее окно
-	* Checking the absence of postings Purchase Order N101 by register Order Balance
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-		Тогда таблица "List" не содержит строки:
+		And I click "Post and close" button
+		And I close current window
+	* Check the absence of movements Purchase Order N101 by register Order Balance
+		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		And "List" table does not contain lines
 			| 'Recorder'          | 'Store'    | 'Order'             |
 			| 'Purchase order 101*' | 'Store 01' | 'Purchase order 101*' |
-		И    Я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Setting the status by Purchase Order №101 'Approved'
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
 			| 'Number' |
 			| '101'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedPicture"
-		И из выпадающего списка "Status" я выбираю точное значение 'Approved'
-		И я нажимаю на кнопку 'Post'
-		И я нажимаю на гиперссылку с именем "DecorationStatusHistory"
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+		And I select "Approved" exact value from "Status" drop-down list
+		And I click "Post" button
+		And I click the hyperlink named "DecorationStatusHistory"
+		And "List" table contains lines
 			| Object             | Status   |
 			| Purchase order 101* | Wait     |
 			| Purchase order 101* | Approved |
-		И я закрываю текущее окно
-		И я нажимаю на кнопку 'Post and close'
-		И я закрываю текущее окно
-	* Checking document postings after the status is set to Approved
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-		Тогда таблица "List" содержит строки:
+		And I close current window
+		And I click "Post and close" button
+		And I close current window
+	* Check document movements after the status is set to Approved
+		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		And "List" table contains lines
 			| 'Recorder'          | 'Store'    | 'Order'             |
 			| 'Purchase order 101*' | 'Store 01' | 'Purchase order 101*' |
-		И я закрываю текущее окно
-	* Checking for cancelled postings when the Approved status is changed to Wait
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И в таблице "List" я перехожу к строке:
+		And I close current window
+	* Check for cancelled movements when the Approved status is changed to Wait
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
 			| 'Number' |
 			| '101'      |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на гиперссылку "Decoration group title collapsed picture"
-		И из выпадающего списка "Status" я выбираю точное значение 'Wait'
-		И я нажимаю на кнопку 'Post'
-		И я нажимаю на гиперссылку с именем "DecorationStatusHistory"
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click "Decoration group title collapsed picture" hyperlink
+		And I select "Wait" exact value from "Status" drop-down list
+		And I click "Post" button
+		And I click the hyperlink named "DecorationStatusHistory"
+		And "List" table contains lines
 			| 'Object'             | 'Status'   |
 			| 'Purchase order 101*' | 'Wait'     |
 			| 'Purchase order 101*' | 'Approved' |
 			| 'Purchase order 101*' | 'Wait'     |
-		И я закрываю текущее окно
-		И я нажимаю на кнопку 'Post and close'
-		И я закрываю текущее окно
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.OrderBalance'
-		Тогда таблица "List" не содержит строки:
+		And I close current window
+		And I click "Post and close" button
+		And I close current window
+		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		And "List" table does not contain lines
 			| 'Recorder'          | 'Store'    | 'Order'             |
 			| 'Purchase order 101*' | 'Store 01' | 'Purchase order 101*' |
-		И я закрываю текущее окно
+		And I close current window
 
 
 
-Сценарий: _017011 checking totals in the document Purchase Order
+Scenario: _017011 check totals in the document Purchase Order
 	* Opening a list of documents Purchase Order
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	* Selecting PurchaseOrder
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| Number |
 		| 2      |
-		И в таблице "List" я выбираю текущую строку
-	* Checking totals in the document
-		И     у элемента формы с именем "ItemListTotalOffersAmount" текст редактирования стал равен '0,00'
-		И     элемент формы с именем "ItemListTotalNetAmount" стал равен '116 101,69'
-		И     элемент формы с именем "ItemListTotalTaxAmount" стал равен '20 898,31'
-		И     у элемента формы с именем "ItemListTotalTotalAmount" текст редактирования стал равен '137 000,00'
+		And I select current line in "List" table
+	* Check totals in the document
+		And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "116 101,69"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "20 898,31"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "137 000,00"
 
 	
 
 
-Сценарий: _017003 checking the form Pick up items in the document Purchase order
+Scenario: _017003 check the form Pick up items in the document Purchase order
 	* Opening a form to create Purchase Order
-		И    Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Filling in vendor information
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| Description        |
 			| Vendor Ferron, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Store"
-		Тогда открылось окно 'Stores'
-		И в таблице "List" я выбираю текущую строку
-	* Checking the form Pick up items
-		Когда check the product selection form with price information in Purchase order
-		И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		Then "Stores" window is opened
+		And I select current line in "List" table
+	* Check the form Pick up items
+		When check the product selection form with price information in Purchase order
+		And I close all client application windows
 	
+
 
 
 

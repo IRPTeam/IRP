@@ -1,1232 +1,1232 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 @Discount
 
 
-Функционал: special offers
+Feature: special offers
 
 As a sales manager
 I want to create a basic system of discounts: price type discount, 5+1 type discount, range discount (manually selected), information message.
 For calculating special offers in documents
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _030001 add Pluginsessor SpecialMessage
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я буду выбирать внешний файл "#workingDir#\DataProcessor\SpecialOffer_Message.epf"
-	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to plugin for test' я ввожу текст ''
-	И в поле 'Name' я ввожу текст 'ExternalSpecialMessage'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'ExternalSpecialMessage'
-	И в поле 'TR' я ввожу текст 'ExternalSpecialMessage'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save and close'
-	И я жду закрытия окна 'Plugins (create)' в течение 10 секунд
-	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalSpecialMessage"
+Scenario: _030001 add Pluginsessor SpecialMessage
+	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+	And I click the button named "FormCreate"
+	And I select external file "#workingDir#\DataProcessor\SpecialOffer_Message.epf"
+	And I click the button named "FormAddExtDataProc"
+	And I input "" text in "Path to plugin for test" field
+	And I input "ExternalSpecialMessage" text in "Name" field
+	And I click Open button of the field named "Description_en"
+	And I input "ExternalSpecialMessage" text in "ENG" field
+	And I input "ExternalSpecialMessage" text in "TR" field
+	And I click "Ok" button
+	And I click "Save and close" button
+	And I wait "Plugins (create)" window closing in 10 seconds
+	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalSpecialMessage"
 
-Сценарий: _030002 add Pluginsessor DocumentDiscount
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я буду выбирать внешний файл "#workingDir#\DataProcessor\DocumentDiscount.epf"
-	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to plugin for test' я ввожу текст ''
-	И в поле 'Name' я ввожу текст 'DocumentDiscount'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'DocumentDiscount'
-	И в поле 'TR' я ввожу текст 'DocumentDiscount'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save and close'
-	И я жду закрытия окна 'Plugins (create)' в течение 10 секунд
-	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "DocumentDiscount"
+Scenario: _030002 add Pluginsessor DocumentDiscount
+	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+	And I click the button named "FormCreate"
+	And I select external file "#workingDir#\DataProcessor\DocumentDiscount.epf"
+	And I click the button named "FormAddExtDataProc"
+	And I input "" text in "Path to plugin for test" field
+	And I input "DocumentDiscount" text in "Name" field
+	And I click Open button of the field named "Description_en"
+	And I input "DocumentDiscount" text in "ENG" field
+	And I input "DocumentDiscount" text in "TR" field
+	And I click "Ok" button
+	And I click "Save and close" button
+	And I wait "Plugins (create)" window closing in 10 seconds
+	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "DocumentDiscount"
 
-Сценарий: _030003 add Pluginsessor SpecialRules
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я буду выбирать внешний файл "#workingDir#\DataProcessor\SpecialOfferRules.epf"
-	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to plugin for test' я ввожу текст ''
-	И в поле 'Name' я ввожу текст 'ExternalSpecialOfferRules'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'ExternalSpecialOfferRules'
-	И в поле 'TR' я ввожу текст 'ExternalSpecialOfferRules'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save and close'
-	И я жду закрытия окна 'Plugins (create)' в течение 10 секунд
-	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalSpecialOfferRules"
+Scenario: _030003 add Pluginsessor SpecialRules
+	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+	And I click the button named "FormCreate"
+	And I select external file "#workingDir#\DataProcessor\SpecialOfferRules.epf"
+	And I click the button named "FormAddExtDataProc"
+	And I input "" text in "Path to plugin for test" field
+	And I input "ExternalSpecialOfferRules" text in "Name" field
+	And I click Open button of the field named "Description_en"
+	And I input "ExternalSpecialOfferRules" text in "ENG" field
+	And I input "ExternalSpecialOfferRules" text in "TR" field
+	And I click "Ok" button
+	And I click "Save and close" button
+	And I wait "Plugins (create)" window closing in 10 seconds
+	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalSpecialOfferRules"
 
-Сценарий: _030004 add Pluginsessor RangeDiscount
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я буду выбирать внешний файл "#workingDir#\DataProcessor\RangeDiscount.epf"
-	И я нажимаю на кнопку с именем "FormAddExtDataProc"
-	И в поле 'Path to plugin for test' я ввожу текст ''
-	И в поле 'Name' я ввожу текст 'ExternalRangeDiscount'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'ExternalRangeDiscount'
-	И в поле 'TR' я ввожу текст 'ExternalRangeDiscount'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save and close'
-	И я жду закрытия окна 'Plugins (create)' в течение 10 секунд
-	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalRangeDiscount"
+Scenario: _030004 add Pluginsessor RangeDiscount
+	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+	And I click the button named "FormCreate"
+	And I select external file "#workingDir#\DataProcessor\RangeDiscount.epf"
+	And I click the button named "FormAddExtDataProc"
+	And I input "" text in "Path to plugin for test" field
+	And I input "ExternalRangeDiscount" text in "Name" field
+	And I click Open button of the field named "Description_en"
+	And I input "ExternalRangeDiscount" text in "ENG" field
+	And I input "ExternalRangeDiscount" text in "TR" field
+	And I click "Ok" button
+	And I click "Save and close" button
+	And I wait "Plugins (create)" window closing in 10 seconds
+	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalRangeDiscount"
 
 
-Сценарий: _030005 add Pluginsessor FivePlusOne
+Scenario: _030005 add Pluginsessor FivePlusOne
 	* Opening a form to add Pluginsessor
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.ExternalDataProc'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		And I click the button named "FormCreate"
 	* Add Pluginsessor FivePlusOneType
-		И я буду выбирать внешний файл "#workingDir#\DataProcessor\FivePlusOne.epf"
-		И я нажимаю на кнопку с именем "FormAddExtDataProc"
-		И в поле 'Path to plugin for test' я ввожу текст ''
-		И в поле 'Name' я ввожу текст 'ExternalFivePlusOne'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'ExternalFivePlusOne'
-		И в поле 'TR' я ввожу текст 'ExternalFivePlusOne'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	Тогда я проверяю наличие элемента справочника "ExternalDataProc" со значением поля "Description_en" "ExternalFivePlusOne"
+		And I select external file "#workingDir#\DataProcessor\FivePlusOne.epf"
+		And I click the button named "FormAddExtDataProc"
+		And I input "" text in "Path to plugin for test" field
+		And I input "ExternalFivePlusOne" text in "Name" field
+		And I click Open button of the field named "Description_en"
+		And I input "ExternalFivePlusOne" text in "ENG" field
+		And I input "ExternalFivePlusOne" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 10
+	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalFivePlusOne"
 
 
-Сценарий: _030006 create Special Offer Types (price type)
-	Когда select the plugin to create the type of special offer
-	И в поле 'ENG' я ввожу текст 'Discount Price 1'
-	И в поле 'TR' я ввожу текст 'Discount Price 1'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save'
-	Когда move on to the Price Type settings
-	И в таблице "List" я перехожу к строке:
+Scenario: _030006 create Special Offer Types (price type)
+	When select the plugin to create the type of special offer
+	And I input "Discount Price 1" text in "ENG" field
+	And I input "Discount Price 1" text in "TR" field
+	And I click "Ok" button
+	And I click "Save" button
+	When move on to the Price Type settings
+	And I go to line in "List" table
 		| 'Description'            |
 		| 'Discount Price TRY 1' |
-	И в таблице "List" я выбираю текущую строку
-	Когда save the special offer setting
-	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Discount Price 1"
-	Когда select the plugin to create the type of special offer
-	И в поле 'ENG' я ввожу текст 'Discount Price 2'
-	И в поле 'TR' я ввожу текст 'Discount Price 2'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save'
-	Когда move on to the Price Type settings
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	When save the special offer setting
+	Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Discount Price 1"
+	When select the plugin to create the type of special offer
+	And I input "Discount Price 2" text in "ENG" field
+	And I input "Discount Price 2" text in "TR" field
+	And I click "Ok" button
+	And I click "Save" button
+	When move on to the Price Type settings
+	And I go to line in "List" table
 		| 'Description'            |
 		| 'Discount Price TRY 2' |
-	И в таблице "List" я выбираю текущую строку
-	Когда save the special offer setting
-	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Discount Price 2"
-	Когда select the plugin to create the type of special offer
-	И в поле 'ENG' я ввожу текст 'Discount 1 without Vat'
-	И в поле 'TR' я ввожу текст 'Discount 1 without Vat'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save'
-	Когда move on to the Price Type settings
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	When save the special offer setting
+	Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Discount Price 2"
+	When select the plugin to create the type of special offer
+	And I input "Discount 1 without Vat" text in "ENG" field
+	And I input "Discount 1 without Vat" text in "TR" field
+	And I click "Ok" button
+	And I click "Save" button
+	When move on to the Price Type settings
+	And I go to line in "List" table
 		| 'Description'            |
 		| 'Discount 1 TRY without VAT' |
-	И в таблице "List" я выбираю текущую строку
-	Когда save the special offer setting
-	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Discount 1 without Vat"
-	Когда select the plugin to create the type of special offer
-	И в поле 'ENG' я ввожу текст 'Discount 2 TRY without VAT'
-	И в поле 'TR' я ввожу текст 'Discount 2 TRY without VAT'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save'
-	Когда move on to the Price Type settings
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	When save the special offer setting
+	Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Discount 1 without Vat"
+	When select the plugin to create the type of special offer
+	And I input "Discount 2 TRY without VAT" text in "ENG" field
+	And I input "Discount 2 TRY without VAT" text in "TR" field
+	And I click "Ok" button
+	And I click "Save" button
+	When move on to the Price Type settings
+	And I go to line in "List" table
 		| 'Description'            |
 		| 'Discount 2 TRY without VAT' |
-	И в таблице "List" я выбираю текущую строку
-	Когда save the special offer setting
-	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Discount 2 TRY without VAT"
+	And I select current line in "List" table
+	When save the special offer setting
+	Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Discount 2 TRY without VAT"
 
-Сценарий: _030007 create Special Offer Types special message (Notification)
-	Когда choose the plugin to create a special offer type (message)
-	И в поле 'ENG' я ввожу текст 'Special Message Notification'
-	И в поле 'TR' я ввожу текст 'Special Message Notification'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save'
-	И я нажимаю на кнопку 'Set settings'
-	И из выпадающего списка "Message type" я выбираю точное значение 'Notification'
-	И в поле 'Message Description_en' я ввожу текст 'Message Notification'
-	И в поле 'Message Description_tr' я ввожу текст 'Message Notification'
-	Когда save the special offer setting
-	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Special Message Notification"
+Scenario: _030007 create Special Offer Types special message (Notification)
+	When choose the plugin to create a special offer type (message)
+	And I input "Special Message Notification" text in "ENG" field
+	And I input "Special Message Notification" text in "TR" field
+	And I click "Ok" button
+	And I click "Save" button
+	And I click "Set settings" button
+	And I select "Notification" exact value from "Message type" drop-down list
+	And I input "Message Notification" text in "Message Description_en" field
+	And I input "Message Notification" text in "Message Description_tr" field
+	When save the special offer setting
+	Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Special Message Notification"
 
 
-Сценарий: _030008 create Special Offer Rule RangeDiscount
+Scenario: _030008 create Special Offer Rule RangeDiscount
 	* Selecting external processor to create a special offer rule RangeDiscount
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferRules'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Plugins"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOfferRules"
+		And I click the button named "FormCreate"
+		And I click Select button of "Plugins" field
+		And I go to line in "List" table
 			| 'Description'                 |
 			| 'ExternalRangeDiscount' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
 		* Filling the rule name
-			И в поле 'ENG' я ввожу текст 'Range Discount Basic (Dress)'
-			И в поле 'TR' я ввожу текст 'Range Discount Basic (Dress)'
-			И я нажимаю на кнопку 'Ok'
-			И я нажимаю на кнопку 'Save'
+			And I input "Range Discount Basic (Dress)" text in "ENG" field
+			And I input "Range Discount Basic (Dress)" text in "TR" field
+			And I click "Ok" button
+			And I click "Save" button
 	* Filling special offer rule: Basic Partner terms TRY, Dress,3
-		И я нажимаю на кнопку 'Set settings'
-		И я нажимаю кнопку выбора у поля "Partner terms"
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ValueList" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I click "Set settings" button
+		And I click Select button of "Partner terms" field
+		And I click the button named "Add"
+		And I click choice button of "Value" attribute in "ValueList" table
+		And I go to line in "List" table
 		| 'Description'             |
 		| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ValueList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю на кнопку с именем 'ItemKeysTableAdd'
-		И я нажимаю на кнопку открытия поля "Item key"
-		И в таблице "ItemKeysTable" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ValueList" table
+		And I click "OK" button
+		And I click the button named "ItemKeysTableAdd"
+		And I click Open button of "Item key" field
+		And I click choice button of "Item key" attribute in "ItemKeysTable" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| 'Item key'      |
 			| 'S/Yellow' |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		Тогда открылось окно 'Range discount'
-		И в таблице "ItemKeysTable" я завершаю редактирование строки
-		И в таблице "ItemKeysTable" я нажимаю на кнопку с именем 'ItemKeysTableAdd'
-		И в таблице "ItemKeysTable" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormChoose"
+		Then "Range discount" window is opened
+		And I finish line editing in "ItemKeysTable" table
+		And in the table "ItemKeysTable" I click the button named "ItemKeysTableAdd"
+		And I click choice button of "Item key" attribute in "ItemKeysTable" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| 'Item key'      |
 			| 'XS/Blue' |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю на кнопку 'Save settings'
-		И Пауза 10
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	Тогда я проверяю наличие элемента справочника "SpecialOfferRules" со значением поля "Description_en" "Range Discount Basic (Dress)"
+		And I click the button named "FormChoose"
+		And I click "Save settings" button
+		And Delay 10
+		And I click "Save and close" button
+		And Delay 10
+	Then I check for the "SpecialOfferRules" catalog element with the "Description_en" "Range Discount Basic (Dress)"
 	* Selecting external processor to create a special offer rule RangeDiscount
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferRules'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Plugins"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOfferRules"
+		And I click the button named "FormCreate"
+		And I click Select button of "Plugins" field
+		And I go to line in "List" table
 			| 'Description'                 |
 			| 'ExternalRangeDiscount' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
 		* Filling the rule name
-			И в поле 'ENG' я ввожу текст 'Range Discount Basic (Trousers)'
-			И в поле 'TR' я ввожу текст 'Range Discount Basic (Trousers)'
-			И я нажимаю на кнопку 'Ok'
-			И я нажимаю на кнопку 'Save'
+			And I input "Range Discount Basic (Trousers)" text in "ENG" field
+			And I input "Range Discount Basic (Trousers)" text in "TR" field
+			And I click "Ok" button
+			And I click "Save" button
 	* Filling special offer rule: Basic Partner terms TRY, Trousers
-		И я нажимаю на кнопку 'Set settings'
-		И я нажимаю кнопку выбора у поля "Partner terms"
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ValueList" я нажимаю кнопку выбора у реквизита "Value"
-		И в таблице "List" я перехожу к строке:
+		And I click "Set settings" button
+		And I click Select button of "Partner terms" field
+		And I click the button named "Add"
+		And I click choice button of "Value" attribute in "ValueList" table
+		And I go to line in "List" table
 		| 'Description'             |
 		| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ValueList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю на кнопку с именем 'ItemKeysTableAdd'
-		И я нажимаю на кнопку открытия поля "Item key"
-		И в таблице "ItemKeysTable" я нажимаю кнопку выбора у реквизита "Item key"
-		Тогда открылось окно 'Item keys'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "ValueList" table
+		And I click "OK" button
+		And I click the button named "ItemKeysTableAdd"
+		And I click Open button of "Item key" field
+		And I click choice button of "Item key" attribute in "ItemKeysTable" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
 			| 'Item key'      |
 			| '36/Yellow' |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "ItemKeysTable" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save settings'
-		И Пауза 10
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	Тогда я проверяю наличие элемента справочника "SpecialOfferRules" со значением поля "Description_en" "Range Discount Basic (Trousers)"
+		And I click the button named "FormChoose"
+		And I finish line editing in "ItemKeysTable" table
+		And I click "Save settings" button
+		And Delay 10
+		And I click "Save and close" button
+		And Delay 10
+	Then I check for the "SpecialOfferRules" catalog element with the "Description_en" "Range Discount Basic (Trousers)"
 	
 
-Сценарий: _030009 create Special Offer Rule Present Discount
+Scenario: _030009 create Special Offer Rule Present Discount
 	* Selecting external processor to create a special offer rule 5+1
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferRules'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Plugins"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOfferRules"
+		And I click the button named "FormCreate"
+		And I click Select button of "Plugins" field
+		And I go to line in "List" table
 			| 'Description'                 |
 			| 'ExternalFivePlusOne' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
 	* Filling the rule name
-		И в поле 'ENG' я ввожу текст 'All items 5+1, Discount on Basic Partner terms'
-		И в поле 'TR' я ввожу текст 'All items 5+1 TR, Discount on Basic Partner terms'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save'
-	* Filling special offer rule: Basic Partner terms TRY, весь товар, 5+1, кратна 
-		И я нажимаю на кнопку с именем "FormSetSettings"
-		И я нажимаю кнопку выбора у поля "Partner terms"
-		И я нажимаю на кнопку с именем 'Assortment'
-		И в таблице "List" я перехожу к строке:
+		And I input "All items 5+1, Discount on Basic Partner terms" text in "ENG" field
+		And I input "All items 5+1 TR, Discount on Basic Partner terms" text in "TR" field
+		And I click "Ok" button
+		And I click "Save" button
+	* Filling special offer rule: Basic Partner terms TRY, all items, 5+1, multiple 
+		And I click the button named "FormSetSettings"
+		And I click Select button of "Partner terms" field
+		And I click the button named "Assortment"
+		And I go to line in "List" table
 			| Description                   |
 			| Personal Partner terms, $ |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I go to line in "List" table
 			| Description                   |
 			| Basic Partner terms, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И Я закрываю окно 'Partner terms'
-		И я нажимаю на кнопку 'OK'
-		И в поле 'Quantity more than' я ввожу текст '5'
-		И в поле 'Quantity free' я ввожу текст '1'
-		И я изменяю флаг 'For each case'
-		И я нажимаю кнопку выбора у поля "Item keys"
-		И я нажимаю на кнопку с именем 'Assortment'
-		Тогда в таблице "List" я выделяю все строки
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И Я закрываю окно 'Item keys'
-		Тогда открылось окно 'Value list'
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю на кнопку 'Save settings'
-		И Пауза 10
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	Тогда я проверяю наличие элемента справочника "SpecialOfferRules" со значением поля "Description_en" "All items 5+1, Discount on Basic Partner terms"
+		And I select current line in "List" table
+		And I click the button named "FormChoose"
+		And I close "Partner terms" window
+		And I click "OK" button
+		And I input "5" text in "Quantity more than" field
+		And I input "1" text in "Quantity free" field
+		And I change checkbox "For each case"
+		And I click Select button of "Item keys" field
+		And I click the button named "Assortment"
+		Then I select all lines of "List" table
+		And I click the button named "FormChoose"
+		And I close "Item keys" window
+		Then "Value list" window is opened
+		And I click "OK" button
+		And I click "Save settings" button
+		And Delay 10
+		And I click "Save and close" button
+		And Delay 10
+	Then I check for the "SpecialOfferRules" catalog element with the "Description_en" "All items 5+1, Discount on Basic Partner terms"
 	* Create rule Basic Partner terms TRY, Dress and Trousers 4+1, multiple
 		* Select Pluginsessor for special offer rule 4+1
-			И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferRules'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Plugins"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Catalog.SpecialOfferRules"
+			And I click the button named "FormCreate"
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
 				| 'Description'                 |
 				| 'ExternalFivePlusOne' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
+			And I select current line in "List" table
+			And I click Open button of the field named "Description_en"
 		* Filling the rule name
-			И в поле 'ENG' я ввожу текст 'Dress and Trousers 4+1, Discount on Basic Partner terms'
-			И в поле 'TR' я ввожу текст 'Dress and Trousers 4+1 TR, Discount on Basic Partner terms'
-			И я нажимаю на кнопку 'Ok'
-			И я нажимаю на кнопку 'Save'
-		* Filling special offer rule: Basic Partner terms TRY, товар 1, 2, 4+1, кратна 
-			И я нажимаю на кнопку с именем "FormSetSettings"
-			И я нажимаю кнопку выбора у поля "Partner terms"
-			И я нажимаю на кнопку с именем 'Assortment'
-			Тогда открылось окно 'Partner terms'
-			И в таблице "List" я перехожу к строке:
+			And I input "Dress and Trousers 4+1, Discount on Basic Partner terms" text in "ENG" field
+			And I input "Dress and Trousers 4+1 TR, Discount on Basic Partner terms" text in "TR" field
+			And I click "Ok" button
+			And I click "Save" button
+		* Filling special offer rule: Basic Partner terms TRY, 4+1, multiple 
+			And I click the button named "FormSetSettings"
+			And I click Select button of "Partner terms" field
+			And I click the button named "Assortment"
+			Then "Partner terms" window is opened
+			And I go to line in "List" table
 				| 'Description'              |
 				| 'Personal Partner terms, $' |
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 				| 'Description'             |
 				| 'Basic Partner terms, TRY' |
-			И в таблице "List" я выбираю текущую строку
-			И Я закрываю окно 'Partner terms'
-			И я нажимаю на кнопку 'OK'
-			И в поле 'Quantity more than' я ввожу текст '4'
-			И в поле 'Quantity free' я ввожу текст '1'
-			И я изменяю флаг 'For each case'
-			И я нажимаю кнопку выбора у поля "Item keys"
-			И я нажимаю на кнопку с именем 'Assortment'
-			Тогда открылось окно 'Item keys'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I close "Partner terms" window
+			And I click "OK" button
+			And I input "4" text in "Quantity more than" field
+			And I input "1" text in "Quantity free" field
+			And I change checkbox "For each case"
+			And I click Select button of "Item keys" field
+			And I click the button named "Assortment"
+			Then "Item keys" window is opened
+			And I go to line in "List" table
 				| 'Item key'  |
 				| 'XS/Blue'   |
-			И я нажимаю на кнопку с именем 'FormChoose'
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormChoose"
+			And I go to line in "List" table
 				| 'Item key'  |
 				| '36/Yellow' |
-			И я нажимаю на кнопку с именем 'FormChoose'
-			И Я закрываю окно 'Item keys'
-			И я нажимаю на кнопку 'OK'
-			И я нажимаю на кнопку 'Save settings'
-			И Пауза 10
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 10
-	Тогда я проверяю наличие элемента справочника "SpecialOfferRules" со значением поля "Description_en" "Dress and Trousers 4+1, Discount on Basic Partner terms"
+			And I click the button named "FormChoose"
+			And I close "Item keys" window
+			And I click "OK" button
+			And I click "Save settings" button
+			And Delay 10
+			And I click "Save and close" button
+			And Delay 10
+	Then I check for the "SpecialOfferRules" catalog element with the "Description_en" "Dress and Trousers 4+1, Discount on Basic Partner terms"
 	* Create rule Basic Partner terms TRY, Dress and Trousers 3+1, not multiple
 		* Select Pluginsessor for special offer rule 3+1
-			И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferRules'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Plugins"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Catalog.SpecialOfferRules"
+			And I click the button named "FormCreate"
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
 				| 'Description'                 |
 				| 'ExternalFivePlusOne' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
+			And I select current line in "List" table
+			And I click Open button of the field named "Description_en"
 		* Filling the rule name
-			И в поле 'ENG' я ввожу текст 'Dress and Trousers 3+1, Discount on Basic Partner terms'
-			И в поле 'TR' я ввожу текст 'Dress and Trousers 3+1 TR, Discount on Basic Partner terms'
-			И я нажимаю на кнопку 'Ok'
-			И я нажимаю на кнопку 'Save'
+			And I input "Dress and Trousers 3+1, Discount on Basic Partner terms" text in "ENG" field
+			And I input "Dress and Trousers 3+1 TR, Discount on Basic Partner terms" text in "TR" field
+			And I click "Ok" button
+			And I click "Save" button
 		* Filling special offer rule: Basic Partner terms TRY
-			И я нажимаю на кнопку с именем "FormSetSettings"
-			И я нажимаю кнопку выбора у поля "Partner terms"
-			И я нажимаю на кнопку с именем 'Assortment'
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormSetSettings"
+			And I click Select button of "Partner terms" field
+			And I click the button named "Assortment"
+			And I go to line in "List" table
 				| 'Description'              |
 				| 'Personal Partner terms, $' |
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 				| 'Description'             |
 				| 'Basic Partner terms, TRY' |
-			И в таблице "List" я выбираю текущую строку
-			И Я закрываю окно 'Partner terms'
-			И я нажимаю на кнопку 'OK'
-			И в поле 'Quantity more than' я ввожу текст '3'
-			И в поле 'Quantity free' я ввожу текст '1'
-			И я нажимаю кнопку выбора у поля "Item keys"
-			И я нажимаю на кнопку с именем 'Assortment'
-			Тогда открылось окно 'Item keys'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I close "Partner terms" window
+			And I click "OK" button
+			And I input "3" text in "Quantity more than" field
+			And I input "1" text in "Quantity free" field
+			And I click Select button of "Item keys" field
+			And I click the button named "Assortment"
+			Then "Item keys" window is opened
+			And I go to line in "List" table
 				| 'Item key'  |
 				| 'XS/Blue'   |
-			И я нажимаю на кнопку с именем 'FormChoose'
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormChoose"
+			And I go to line in "List" table
 				| 'Item key'  |
 				| '36/Yellow' |
-			И я нажимаю на кнопку с именем 'FormChoose'
-			И Я закрываю окно 'Item keys'
-			Тогда открылось окно 'Value list'
-			И я нажимаю на кнопку 'OK'
-			И я нажимаю на кнопку 'Save settings'
-			И Пауза 10
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 10
-	Тогда я проверяю наличие элемента справочника "SpecialOfferRules" со значением поля "Description_en" "Dress and Trousers 3+1, Discount on Basic Partner terms"
+			And I click the button named "FormChoose"
+			And I close "Item keys" window
+			Then "Value list" window is opened
+			And I click "OK" button
+			And I click "Save settings" button
+			And Delay 10
+			And I click "Save and close" button
+			And Delay 10
+	Then I check for the "SpecialOfferRules" catalog element with the "Description_en" "Dress and Trousers 3+1, Discount on Basic Partner terms"
 
 
-Сценарий: _030010 create Special Offer Types special message (DialogBox)
-	Когда choose the plugin to create a special offer type (message)
-	И в поле 'ENG' я ввожу текст 'Special Message DialogBox'
-	И в поле 'TR' я ввожу текст 'Special Message DialogBox'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save'
-	И я нажимаю на кнопку 'Set settings'
-	И из выпадающего списка "Message type" я выбираю точное значение 'DialogBox'
-	И в поле 'Message Description_en' я ввожу текст 'Message 2'
-	И в поле 'Message Description_tr' я ввожу текст 'Message 2'
-	Когда save the special offer setting
-	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Special Message DialogBox"
-	И Я закрыл все окна клиентского приложения
+Scenario: _030010 create Special Offer Types special message (DialogBox)
+	When choose the plugin to create a special offer type (message)
+	And I input "Special Message DialogBox" text in "ENG" field
+	And I input "Special Message DialogBox" text in "TR" field
+	And I click "Ok" button
+	And I click "Save" button
+	And I click "Set settings" button
+	And I select "DialogBox" exact value from "Message type" drop-down list
+	And I input "Message 2" text in "Message Description_en" field
+	And I input "Message 2" text in "Message Description_tr" field
+	When save the special offer setting
+	Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Special Message DialogBox"
+	And I close all client application windows
 
-Сценарий: _030011 create Special Offer Types Present Discount
-	Когда выбираю обработку для создания типа скидки 5+1
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferTypes'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Plugins"
-		И в таблице "List" я перехожу к строке:
+Scenario: _030011 create Special Offer Types Present Discount
+	* Select plugin for special offer 5+1
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOfferTypes"
+		And I click the button named "FormCreate"
+		And I click Select button of "Plugins" field
+		And I go to line in "List" table
 			| 'Description'                 |
 			| 'ExternalFivePlusOne' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
 	* Filling in type name
-		И в поле 'ENG' я ввожу текст 'All items 5+1, Discount on Basic Partner terms'
-		И в поле 'TR' я ввожу текст 'All items 5+1 TR, Discount on Basic Partner terms'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save'
+		And I input "All items 5+1, Discount on Basic Partner terms" text in "ENG" field
+		And I input "All items 5+1 TR, Discount on Basic Partner terms" text in "TR" field
+		And I click "Ok" button
+		And I click "Save" button
 	* Filling in type: Basic Partner terms TRY, all items, 5+1, multiple
-		И я нажимаю на кнопку с именем "FormSetSettings"
-		И Пауза 2
-		И я нажимаю кнопку выбора у поля "Partner terms"
-		И я нажимаю на кнопку с именем 'Assortment'
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormSetSettings"
+		And Delay 2
+		And I click Select button of "Partner terms" field
+		And I click the button named "Assortment"
+		And I go to line in "List" table
 			| 'Description'              |
 			| 'Personal Partner terms, $' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'             |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И Я закрываю окно 'Partner terms'
-		И я нажимаю на кнопку 'OK'
-		И Пауза 2
-		И в поле 'Quantity more than' я ввожу текст '5'
-		И в поле 'Quantity free' я ввожу текст '1'
-		И я изменяю флаг 'For each case'
-		И я нажимаю кнопку выбора у поля "Item keys"
-		И я нажимаю на кнопку с именем 'Assortment'
-		Тогда открылось окно 'Item keys'
-		Тогда в таблице "List" я выделяю все строки
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И Я закрываю окно 'Item keys'
-		И я нажимаю на кнопку 'OK'
-		И Пауза 2
-		И я нажимаю на кнопку 'Save settings'
-		И Пауза 10
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "All items 5+1, Discount on Basic Partner terms"
+		And I select current line in "List" table
+		And I close "Partner terms" window
+		And I click "OK" button
+		And Delay 2
+		And I input "5" text in "Quantity more than" field
+		And I input "1" text in "Quantity free" field
+		And I change checkbox "For each case"
+		And I click Select button of "Item keys" field
+		And I click the button named "Assortment"
+		Then "Item keys" window is opened
+		Then I select all lines of "List" table
+		And I click the button named "FormChoose"
+		And I close "Item keys" window
+		And I click "OK" button
+		And Delay 2
+		And I click "Save settings" button
+		And Delay 10
+		And I click "Save and close" button
+		And Delay 10
+	Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "All items 5+1, Discount on Basic Partner terms"
 	* Create type Basic Partner terms TRY, Dress and Trousers 4+1, multiple
-		Когда выбираю обработку для создания типа скидки 4+1
-			И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferTypes'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Plugins"
-			И в таблице "List" я перехожу к строке:
+		* Select plugin for special offer 4+1
+			Given I open hyperlink "e1cib/list/Catalog.SpecialOfferTypes"
+			And I click the button named "FormCreate"
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
 				| 'Description'                 |
 				| 'ExternalFivePlusOne' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
+			And I select current line in "List" table
+			And I click Open button of the field named "Description_en"
 		* Filling in type name
-			И в поле 'ENG' я ввожу текст 'Dress,2 4+1, Discount on Basic Partner terms'
-			И в поле 'TR' я ввожу текст 'Dress,2 4+1 TR, Discount on Basic Partner terms'
-			И я нажимаю на кнопку 'Ok'
-			И я нажимаю на кнопку 'Save'
+			And I input "Dress,2 4+1, Discount on Basic Partner terms" text in "ENG" field
+			And I input "Dress,2 4+1 TR, Discount on Basic Partner terms" text in "TR" field
+			And I click "Ok" button
+			And I click "Save" button
 		* Filling in type: Basic Partner terms TRY, all items, 4+1, multiple 
-			И я нажимаю на кнопку с именем "FormSetSettings"
-			И Пауза 2
-			И я нажимаю кнопку выбора у поля "Partner terms"
-			И я нажимаю на кнопку с именем 'Assortment'
-			Тогда открылось окно 'Partner terms'
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormSetSettings"
+			And Delay 2
+			And I click Select button of "Partner terms" field
+			And I click the button named "Assortment"
+			Then "Partner terms" window is opened
+			And I go to line in "List" table
 				| 'Description'              |
 				| 'Personal Partner terms, $' |
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 				| 'Description'             |
 				| 'Basic Partner terms, TRY' |
-			И в таблице "List" я выбираю текущую строку
-			И Я закрываю окно 'Partner terms'
-			И я нажимаю на кнопку 'OK'
-			И Пауза 2
-			И в поле 'Quantity more than' я ввожу текст '4'
-			И в поле 'Quantity free' я ввожу текст '1'
-			И я изменяю флаг 'For each case'
-			И я нажимаю кнопку выбора у поля "Item keys"
-			И я нажимаю на кнопку с именем 'Assortment'
-			Тогда открылось окно 'Item keys'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I close "Partner terms" window
+			And I click "OK" button
+			And Delay 2
+			And I input "4" text in "Quantity more than" field
+			And I input "1" text in "Quantity free" field
+			And I change checkbox "For each case"
+			And I click Select button of "Item keys" field
+			And I click the button named "Assortment"
+			Then "Item keys" window is opened
+			And I go to line in "List" table
 				| 'Item key'  |
 				| 'XS/Blue'   |
-			И я нажимаю на кнопку с именем 'FormChoose'
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormChoose"
+			And I go to line in "List" table
 				| 'Item key'  |
 				| '36/Yellow' |
-			И я нажимаю на кнопку с именем 'FormChoose'
-			И Я закрываю окно 'Item keys'
-			И я нажимаю на кнопку 'OK'
-			И Пауза 2
-			И я нажимаю на кнопку 'Save settings'
-			И Пауза 10
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 10
-		Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Dress,2 4+1, Discount on Basic Partner terms"
+			And I click the button named "FormChoose"
+			And I close "Item keys" window
+			And I click "OK" button
+			And Delay 2
+			And I click "Save settings" button
+			And Delay 10
+			And I click "Save and close" button
+			And Delay 10
+		Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Dress,2 4+1, Discount on Basic Partner terms"
 	* Create type Basic Partner terms TRY, Dress 3+1, not multiple
-		Когда выбираю обработку для создания типа скидки 4+1
-			И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferTypes'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Plugins"
-			И в таблице "List" я перехожу к строке:
+		* Select plugin for special offer 4+1
+			Given I open hyperlink "e1cib/list/Catalog.SpecialOfferTypes"
+			And I click the button named "FormCreate"
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
 				| 'Description'                 |
 				| 'ExternalFivePlusOne' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
+			And I select current line in "List" table
+			And I click Open button of the field named "Description_en"
 		* Filling in type name
-			И в поле 'ENG' я ввожу текст 'Dress,2 3+1, Discount on Basic Partner terms'
-			И в поле 'TR' я ввожу текст 'Dress,2 3+1 TR, Discount on Basic Partner terms'
-			И я нажимаю на кнопку 'Ok'
-			И я нажимаю на кнопку 'Save'
+			And I input "Dress,2 3+1, Discount on Basic Partner terms" text in "ENG" field
+			And I input "Dress,2 3+1 TR, Discount on Basic Partner terms" text in "TR" field
+			And I click "Ok" button
+			And I click "Save" button
 		* Filling in type: Basic Partner terms TRY, all items, 4+1, multiple
-			И я нажимаю на кнопку с именем "FormSetSettings"
-			И Пауза 2
-			И я нажимаю кнопку выбора у поля "Partner terms"
-			И я нажимаю на кнопку с именем 'Assortment'
-			Тогда открылось окно 'Partner terms'
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormSetSettings"
+			And Delay 2
+			And I click Select button of "Partner terms" field
+			And I click the button named "Assortment"
+			Then "Partner terms" window is opened
+			And I go to line in "List" table
 				| 'Description'              |
 				| 'Personal Partner terms, $' |
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 				| 'Description'             |
 				| 'Basic Partner terms, TRY' |
-			И в таблице "List" я выбираю текущую строку
-			И Я закрываю окно 'Partner terms'
-			И я нажимаю на кнопку 'OK'
-			И Пауза 2
-			И в поле 'Quantity more than' я ввожу текст '3'
-			И в поле 'Quantity free' я ввожу текст '1'
-			И я нажимаю кнопку выбора у поля "Item keys"
-			И я нажимаю на кнопку с именем 'Assortment'
-			Тогда открылось окно 'Item keys'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I close "Partner terms" window
+			And I click "OK" button
+			And Delay 2
+			And I input "3" text in "Quantity more than" field
+			And I input "1" text in "Quantity free" field
+			And I click Select button of "Item keys" field
+			And I click the button named "Assortment"
+			Then "Item keys" window is opened
+			And I go to line in "List" table
 				| 'Item key'  |
 				| 'XS/Blue'   |
-			И я нажимаю на кнопку с именем 'FormChoose'
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormChoose"
+			And I go to line in "List" table
 				| 'Item key'  |
 				| '36/Yellow' |
-			И я нажимаю на кнопку с именем 'FormChoose'
-			И Я закрываю окно 'Item keys'
-			И я нажимаю на кнопку 'OK'
-			И Пауза 2
-			И я нажимаю на кнопку 'Save settings'
-			И Пауза 10
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 10
-		Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Dress,2 3+1, Discount on Basic Partner terms"
+			And I click the button named "FormChoose"
+			And I close "Item keys" window
+			And I click "OK" button
+			And Delay 2
+			And I click "Save settings" button
+			And Delay 10
+			And I click "Save and close" button
+			And Delay 10
+		Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Dress,2 3+1, Discount on Basic Partner terms"
 
-Сценарий: _030012 create Special Offer Types Range Discount
-	Когда выбираю обработку для создания типа скидки Range Discount
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferTypes'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Plugins"
-		И в таблице "List" я перехожу к строке:
+Scenario: _030012 create Special Offer Types Range Discount
+	* Select plugin for special offer Range Discount
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOfferTypes"
+		And I click the button named "FormCreate"
+		And I click Select button of "Plugins" field
+		And I go to line in "List" table
 			| 'Description'                 |
 			| 'ExternalRangeDiscount' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
 	* Filling in type name
-		И в поле 'ENG' я ввожу текст 'Range Discount Basic (Dress)'
-		И в поле 'TR' я ввожу текст 'Range Discount Basic (Dress)'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save'
+		And I input "Range Discount Basic (Dress)" text in "ENG" field
+		And I input "Range Discount Basic (Dress)" text in "TR" field
+		And I click "Ok" button
+		And I click "Save" button
 	* Filling in type: Basic Partner terms TRY, Dress,3
-		И я нажимаю на кнопку 'Set settings'
-		И в таблице "ItemKeysTable" я нажимаю на кнопку с именем 'ItemKeysTableAdd'
-		И в таблице "ItemKeysTable" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I click "Set settings" button
+		And in the table "ItemKeysTable" I click the button named "ItemKeysTableAdd"
+		And I click choice button of "Item key" attribute in "ItemKeysTable" table
+		And I go to line in "List" table
 			| 'Item key' |
 			| 'XS/Blue'  |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к следующему реквизиту
-		И в таблице "ItemKeysTable" в поле 'Min percent' я ввожу текст '3'
-		И в таблице "ItemKeysTable" я активизирую поле "Max percent"
-		И в таблице "ItemKeysTable" в поле 'Max percent' я ввожу текст '10'
-		И в таблице "ItemKeysTable" я завершаю редактирование строки
-		И в таблице "ItemKeysTable" я нажимаю на кнопку с именем 'ItemKeysTableAdd'
-		И в таблице "ItemKeysTable" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I move to the next attribute
+		And I input "3" text in "Min percent" field of "ItemKeysTable" table
+		And I activate "Max percent" field in "ItemKeysTable" table
+		And I input "10" text in "Max percent" field of "ItemKeysTable" table
+		And I finish line editing in "ItemKeysTable" table
+		And in the table "ItemKeysTable" I click the button named "ItemKeysTableAdd"
+		And I click choice button of "Item key" attribute in "ItemKeysTable" table
+		And I go to line in "List" table
 			| 'Item key'  |
 			| 'S/Yellow' |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к следующему реквизиту
-		И в таблице "ItemKeysTable" в поле 'Min percent' я ввожу текст '4'
-		И в таблице "ItemKeysTable" я активизирую поле "Max percent"
-		И в таблице "ItemKeysTable" в поле 'Max percent' я ввожу текст '8'
-		И в таблице "ItemKeysTable" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save settings'
-		И Пауза 2
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Range Discount Basic (Dress)"
+		And I select current line in "List" table
+		And I move to the next attribute
+		And I input "4" text in "Min percent" field of "ItemKeysTable" table
+		And I activate "Max percent" field in "ItemKeysTable" table
+		And I input "8" text in "Max percent" field of "ItemKeysTable" table
+		And I finish line editing in "ItemKeysTable" table
+		And I click "Save settings" button
+		And Delay 2
+		And I click "Save and close" button
+		And Delay 10
+	Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Range Discount Basic (Dress)"
 	* Create Types Range Discount Basic (Trousers)
-		Когда выбираю обработку для создания типа скидки Range Discount
-			И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOfferTypes'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Plugins"
-			И в таблице "List" я перехожу к строке:
+		* Select plugin for special offer Range Discount
+			Given I open hyperlink "e1cib/list/Catalog.SpecialOfferTypes"
+			And I click the button named "FormCreate"
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
 				| 'Description'                 |
 				| 'ExternalRangeDiscount' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
+			And I select current line in "List" table
+			And I click Open button of the field named "Description_en"
 		* Filling in type name
-			И в поле 'ENG' я ввожу текст 'Range Discount Basic (Trousers)'
-			И в поле 'TR' я ввожу текст 'Range Discount Basic (Trousers)'
-			И я нажимаю на кнопку 'Ok'
-			И я нажимаю на кнопку 'Save'
+			And I input "Range Discount Basic (Trousers)" text in "ENG" field
+			And I input "Range Discount Basic (Trousers)" text in "TR" field
+			And I click "Ok" button
+			And I click "Save" button
 		* Filling in type: Basic Partner terms TRY, Dress
-			И я нажимаю на кнопку 'Set settings'
-			И в таблице "ItemKeysTable" я нажимаю на кнопку с именем 'ItemKeysTableAdd'
-			И в таблице "ItemKeysTable" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I click "Set settings" button
+			And in the table "ItemKeysTable" I click the button named "ItemKeysTableAdd"
+			And I click choice button of "Item key" attribute in "ItemKeysTable" table
+			And I go to line in "List" table
 				| 'Item key'  |
 				| '36/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И я перехожу к следующему реквизиту
-			И в таблице "ItemKeysTable" в поле 'Min percent' я ввожу текст '5'
-			И в таблице "ItemKeysTable" я активизирую поле "Max percent"
-			И в таблице "ItemKeysTable" в поле 'Max percent' я ввожу текст '7'
-			И в таблице "ItemKeysTable" я завершаю редактирование строки
-			И я нажимаю на кнопку 'Save settings'
-			И Пауза 2
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 10
-	Тогда я проверяю наличие элемента справочника "SpecialOfferTypes" со значением поля "Description_en" "Range Discount Basic (Trousers)"	
+			And I select current line in "List" table
+			And I move to the next attribute
+			And I input "5" text in "Min percent" field of "ItemKeysTable" table
+			And I activate "Max percent" field in "ItemKeysTable" table
+			And I input "7" text in "Max percent" field of "ItemKeysTable" table
+			And I finish line editing in "ItemKeysTable" table
+			And I click "Save settings" button
+			And Delay 2
+			And I click "Save and close" button
+			And Delay 10
+	Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Range Discount Basic (Trousers)"	
 
 
-Сценарий: _030013 create Special Offer Rules (Partner term)
-	Когда select the plugin to create the rule of special offer
-	И в поле 'ENG' я ввожу текст 'Discount on Basic Partner terms'
-	И в поле 'TR' я ввожу текст 'Discount on Basic Partner terms'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save'
-	И я нажимаю на кнопку 'Set settings'
-	И в поле "Name" я ввожу текст 'Partner terms in list '
-	И из выпадающего списка "Rule type" я выбираю точное значение 'Partner terms in list'
-	И я нажимаю кнопку выбора у поля "Partner terms"
-	И Пауза 2
-	И я нажимаю на кнопку с именем 'Add'
-	И в таблице "ValueList" я нажимаю кнопку выбора у реквизита "Value"
-	И в таблице "List" я перехожу к строке:
+Scenario: _030013 create Special Offer Rules (Partner term)
+	When select the plugin to create the rule of special offer
+	And I input "Discount on Basic Partner terms" text in "ENG" field
+	And I input "Discount on Basic Partner terms" text in "TR" field
+	And I click "Ok" button
+	And I click "Save" button
+	And I click "Set settings" button
+	And I input "Partner terms in list " text in "Name" field
+	And I select "Partner terms in list" exact value from "Rule type" drop-down list
+	And I click Select button of "Partner terms" field
+	And Delay 2
+	And I click the button named "Add"
+	And I click choice button of "Value" attribute in "ValueList" table
+	And I go to line in "List" table
 		| 'Description'             |
 		| 'Basic Partner terms, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	И Пауза 1
-	И в таблице "ValueList" я завершаю редактирование строки
-	И я нажимаю на кнопку 'OK'
-	Когда save the special offer setting
-	Тогда я проверяю наличие элемента справочника "SpecialOfferRules" со значением поля "Description_en" "Discount on Basic Partner terms"
-	Когда select the plugin to create the rule of special offer
-	И в поле 'ENG' я ввожу текст 'Discount on Basic Partner terms without Vat'
-	И в поле 'TR' я ввожу текст 'Discount on Basic Partner terms without Vat'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save'
-	И я нажимаю на кнопку 'Set settings'
-	И из выпадающего списка "Rule type" я выбираю точное значение 'Partner terms in list'
-	И я нажимаю кнопку выбора у поля "Partner terms"
-	И Пауза 2
-	И я нажимаю на кнопку с именем 'Add'
-	И в таблице "ValueList" я нажимаю кнопку выбора у реквизита "Value"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And Delay 1
+	And I finish line editing in "ValueList" table
+	And I click "OK" button
+	When save the special offer setting
+	Then I check for the "SpecialOfferRules" catalog element with the "Description_en" "Discount on Basic Partner terms"
+	When select the plugin to create the rule of special offer
+	And I input "Discount on Basic Partner terms without Vat" text in "ENG" field
+	And I input "Discount on Basic Partner terms without Vat" text in "TR" field
+	And I click "Ok" button
+	And I click "Save" button
+	And I click "Set settings" button
+	And I select "Partner terms in list" exact value from "Rule type" drop-down list
+	And I click Select button of "Partner terms" field
+	And Delay 2
+	And I click the button named "Add"
+	And I click choice button of "Value" attribute in "ValueList" table
+	And I go to line in "List" table
 		| 'Description'             |
 		| 'Basic Partner terms, without VAT' |
-	И в таблице "List" я выбираю текущую строку
-	И Пауза 1
-	И в таблице "ValueList" я завершаю редактирование строки
-	И я нажимаю на кнопку 'OK'
-	Когда save the special offer setting
-	Тогда я проверяю наличие элемента справочника "SpecialOfferRules" со значением поля "Description_en" "Discount on Basic Partner terms"
+	And I select current line in "List" table
+	And Delay 1
+	And I finish line editing in "ValueList" table
+	And I click "OK" button
+	When save the special offer setting
+	Then I check for the "SpecialOfferRules" catalog element with the "Description_en" "Discount on Basic Partner terms"
 
 
 
-Сценарий: _030014 create Special Offer (group Maximum by row/Special Offers Maximum by row)
-	Когда choose the plugin to create a special offer
-	И в поле 'ENG' я ввожу текст 'Special Offers'
-	И в поле 'TR' я ввожу текст 'Special Offers'
-	И я нажимаю на кнопку 'Ok'
-	И я изменяю флаг 'Group types'
-	И я нажимаю на кнопку 'Save'
-	И я нажимаю на кнопку 'Set settings'
-	И Пауза 2
-	И из выпадающего списка "Type joining" я выбираю точное значение 'Maximum by row'
-	Когда save the special offer setting
-	И я нажимаю на кнопку с именем 'FormChoose'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Special Offers'
-	И в поле 'TR' я ввожу текст 'Special Offers'
-	И я нажимаю на кнопку 'Ok'
-	И в поле 'Priority' я ввожу текст '1'
-	И я нажимаю на кнопку 'Save and close'
-	И Пауза 10
-	Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Special Offers"
-	Когда choose the plugin to create a special offer
-	И в поле 'ENG' я ввожу текст 'Maximum'
-	И в поле 'TR' я ввожу текст 'Maximum'
-	И я нажимаю на кнопку 'Ok'
-	И я изменяю флаг 'Group types'
-	И я нажимаю на кнопку 'Save'
-	И я нажимаю на кнопку 'Set settings'
-	И Пауза 2
-	И из выпадающего списка "Type joining" я выбираю точное значение 'Maximum by row'
-	Когда save the special offer setting
-	И я нажимаю на кнопку с именем 'FormChoose'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Maximum'
-	И в поле 'TR' я ввожу текст 'Maximum'
-	И я нажимаю на кнопку 'Ok'
-	И в поле 'Priority' я ввожу текст '3'
-	И я нажимаю на кнопку 'Save and close'
-	И Пауза 10
-	Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Maximum"
+Scenario: _030014 create Special Offer (group Maximum by row/Special Offers Maximum by row)
+	When choose the plugin to create a special offer
+	And I input "Special Offers" text in "ENG" field
+	And I input "Special Offers" text in "TR" field
+	And I click "Ok" button
+	And I change checkbox "Group types"
+	And I click "Save" button
+	And I click "Set settings" button
+	And Delay 2
+	And I select "Maximum by row" exact value from "Type joining" drop-down list
+	When save the special offer setting
+	And I click the button named "FormChoose"
+	And I click Open button of the field named "Description_en"
+	And I input "Special Offers" text in "ENG" field
+	And I input "Special Offers" text in "TR" field
+	And I click "Ok" button
+	And I input "1" text in "Priority" field
+	And I click "Save and close" button
+	And Delay 10
+	Then I check for the "SpecialOffers" catalog element with the "Description_en" "Special Offers"
+	When choose the plugin to create a special offer
+	And I input "Maximum" text in "ENG" field
+	And I input "Maximum" text in "TR" field
+	And I click "Ok" button
+	And I change checkbox "Group types"
+	And I click "Save" button
+	And I click "Set settings" button
+	And Delay 2
+	And I select "Maximum by row" exact value from "Type joining" drop-down list
+	When save the special offer setting
+	And I click the button named "FormChoose"
+	And I click Open button of the field named "Description_en"
+	And I input "Maximum" text in "ENG" field
+	And I input "Maximum" text in "TR" field
+	And I click "Ok" button
+	And I input "3" text in "Priority" field
+	And I click "Save and close" button
+	And Delay 10
+	Then I check for the "SpecialOffers" catalog element with the "Description_en" "Maximum"
 
-Сценарий: _030015 create Special Offer (group Sum)
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку с именем 'FormCreateFolder'
-	И я нажимаю кнопку выбора у поля "Special offer type"
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Plugins"
-	И в таблице "List" я перехожу к строке:
+Scenario: _030015 create Special Offer (group Sum)
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click the button named "FormCreateFolder"
+	And I click Select button of "Special offer type" field
+	And I click the button named "FormCreate"
+	And I click Select button of "Plugins" field
+	And I go to line in "List" table
 		| 'Description'                 |
 		| 'ExternalSpecialOfferRules' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Sum'
-	И в поле 'TR' я ввожу текст 'Sum'
-	И я нажимаю на кнопку 'Ok'
-	И я изменяю флаг 'Group types'
-	И я нажимаю на кнопку 'Save'
-	И я нажимаю на кнопку 'Set settings'
-	И Пауза 2
-	И из выпадающего списка "Type joining" я выбираю точное значение 'Sum'
-	Когда save the special offer setting
-	И я нажимаю на кнопку с именем 'FormChoose'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Sum'
-	И в поле 'TR' я ввожу текст 'Sum'
-	И я нажимаю на кнопку 'Ok'
-	И в поле 'Priority' я ввожу текст '1'
-	И я нажимаю на кнопку 'Save and close'
-	И Пауза 10
-	Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Sum"
+	And I select current line in "List" table
+	And I click Open button of the field named "Description_en"
+	And I input "Sum" text in "ENG" field
+	And I input "Sum" text in "TR" field
+	And I click "Ok" button
+	And I change checkbox "Group types"
+	And I click "Save" button
+	And I click "Set settings" button
+	And Delay 2
+	And I select "Sum" exact value from "Type joining" drop-down list
+	When save the special offer setting
+	And I click the button named "FormChoose"
+	And I click Open button of the field named "Description_en"
+	And I input "Sum" text in "ENG" field
+	And I input "Sum" text in "TR" field
+	And I click "Ok" button
+	And I input "1" text in "Priority" field
+	And I click "Save and close" button
+	And Delay 10
+	Then I check for the "SpecialOffers" catalog element with the "Description_en" "Sum"
 
-Сценарий: _030016 create Special Offer (group Minimum )
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку с именем 'FormCreateFolder'
-	И я нажимаю кнопку выбора у поля "Special offer type"
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Plugins"
-	И в таблице "List" я перехожу к строке:
+Scenario: _030016 create Special Offer (group Minimum )
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click the button named "FormCreateFolder"
+	And I click Select button of "Special offer type" field
+	And I click the button named "FormCreate"
+	And I click Select button of "Plugins" field
+	And I go to line in "List" table
 		| 'Description'                 |
 		| 'ExternalSpecialOfferRules' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Minimum'
-	И в поле 'TR' я ввожу текст 'Minimum'
-	И я нажимаю на кнопку 'Ok'
-	И я изменяю флаг 'Group types'
-	И я нажимаю на кнопку 'Save'
-	И я нажимаю на кнопку 'Set settings'
-	И Пауза 2
-	И из выпадающего списка "Type joining" я выбираю точное значение 'Minimum'
-	Когда save the special offer setting
-	И я нажимаю на кнопку с именем 'FormChoose'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Minimum'
-	И в поле 'TR' я ввожу текст 'Minimum'
-	И я нажимаю на кнопку 'Ok'
-	И в поле 'Priority' я ввожу текст '2'
-	И я нажимаю на кнопку 'Save and close'
-	И Пауза 10
-	Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Minimum"
+	And I select current line in "List" table
+	And I click Open button of the field named "Description_en"
+	And I input "Minimum" text in "ENG" field
+	And I input "Minimum" text in "TR" field
+	And I click "Ok" button
+	And I change checkbox "Group types"
+	And I click "Save" button
+	And I click "Set settings" button
+	And Delay 2
+	And I select "Minimum" exact value from "Type joining" drop-down list
+	When save the special offer setting
+	And I click the button named "FormChoose"
+	And I click Open button of the field named "Description_en"
+	And I input "Minimum" text in "ENG" field
+	And I input "Minimum" text in "TR" field
+	And I click "Ok" button
+	And I input "2" text in "Priority" field
+	And I click "Save and close" button
+	And Delay 10
+	Then I check for the "SpecialOffers" catalog element with the "Description_en" "Minimum"
 
-Сценарий: _030017 create Special Offer (manual) Discount Price 1-2 (discount price, group maximum)
-	Когда open a special offer window
-	И в таблице "List" я перехожу к строке:
+Scenario: _030017 create Special Offer (manual) Discount Price 1-2 (discount price, group maximum)
+	When open a special offer window
+	And I go to line in "List" table
 		| 'Description'        |
 		| 'Discount Price 1' |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Priority' я ввожу текст '1'
-	И я изменяю флаг 'Manually'
-	И я изменяю флаг 'Launch'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Discount Price 1'
-	И в поле 'TR' я ввожу текст 'Discount Price 1'
-	И я нажимаю на кнопку 'Ok'
-	И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-	Когда enter the discount period this month
-	Когда add a special offer rule
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I input "1" text in "Priority" field
+	And I change checkbox "Manually"
+	And I change checkbox "Launch"
+	And I click Open button of the field named "Description_en"
+	And I input "Discount Price 1" text in "ENG" field
+	And I input "Discount Price 1" text in "TR" field
+	And I click "Ok" button
+	And I select "Sales" exact value from "Document type" drop-down list
+	When enter the discount period this month
+	When add a special offer rule
+	And I go to line in "List" table
 		| 'Description'                    |
 		| 'Discount on Basic Partner terms' |
-	Когда save the rule for a special offer
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	И Пауза 1
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	When save the rule for a special offer
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	And Delay 1
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Maximum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
-	Когда open a special offer window
-	И в таблице "List" я перехожу к строке:
+	And I click the button named "FormChoose"
+	When open a special offer window
+	And I go to line in "List" table
 		| 'Description'        |
 		| 'Discount Price 2' |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Priority' я ввожу текст '2'
-	И я изменяю флаг 'Manually'
-	И я изменяю флаг 'Launch'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Discount Price 2'
-	И в поле 'TR' я ввожу текст 'Discount Price 2'
-	И я нажимаю на кнопку 'Ok'
-	И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-	Когда enter the discount period this month
-	Когда add a special offer rule
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I input "2" text in "Priority" field
+	And I change checkbox "Manually"
+	And I change checkbox "Launch"
+	And I click Open button of the field named "Description_en"
+	And I input "Discount Price 2" text in "ENG" field
+	And I input "Discount Price 2" text in "TR" field
+	And I click "Ok" button
+	And I select "Sales" exact value from "Document type" drop-down list
+	When enter the discount period this month
+	When add a special offer rule
+	And I go to line in "List" table
 		| 'Description'                    |
 		| 'Discount on Basic Partner terms' |
-	Когда save the rule for a special offer
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	И Пауза 1
-	И в таблице "List" я перехожу к строке:
+	When save the rule for a special offer
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	And Delay 1
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Maximum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
-	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Discount Price 1"
-	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Discount Price 2"
+	And I click the button named "FormChoose"
+	Then I check for the "SpecialOffers" catalog element with the "Description_en" "Discount Price 1"
+	Then I check for the "SpecialOffers" catalog element with the "Description_en" "Discount Price 2"
 
-Сценарий: _030018 create Special Offer - Special Message (Notification)
-	Когда open a special offer window
-	И в таблице "List" я перехожу к строке:
+Scenario: _030018 create Special Offer - Special Message (Notification)
+	When open a special offer window
+	And I go to line in "List" table
 		| 'Description'        |
 		| 'Special Message Notification' |
-	И в таблице "List" я выбираю текущую строку
-	И Пауза 2
-	И в поле 'Priority' я ввожу текст '1'
-	Когда enter the discount period this month
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Special Message Notification'
-	И в поле 'TR' я ввожу текст 'Special Message Notification'
-	И я нажимаю на кнопку 'Ok'
-	И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-	И я изменяю флаг 'Launch'
-	Когда add a special offer rule
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And Delay 2
+	And I input "1" text in "Priority" field
+	When enter the discount period this month
+	And I click Open button of the field named "Description_en"
+	And I input "Special Message Notification" text in "ENG" field
+	And I input "Special Message Notification" text in "TR" field
+	And I click "Ok" button
+	And I select "Sales" exact value from "Document type" drop-down list
+	And I change checkbox "Launch"
+	When add a special offer rule
+	And I go to line in "List" table
 		| 'Description'                    |
 		| 'Discount on Basic Partner terms' |
-	Когда save the rule for a special offer
-	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Special Message Notification"
-	Тогда открылось окно 'Special offers'
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	When save the rule for a special offer
+	Then I check for the "SpecialOffers" catalog element with the "Description_en" "Special Message Notification"
+	Then "Special offers" window is opened
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 	| 'Special offer type' |
 	| 'Maximum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
-Сценарий: _030019 create Special Offer - Special Message (DialogBox)
-	Когда open a special offer window
-	И в таблице "List" я перехожу к строке:
+Scenario: _030019 create Special Offer - Special Message (DialogBox)
+	When open a special offer window
+	And I go to line in "List" table
 		| 'Description'        |
 		| 'Special Message DialogBox' |
-	И в таблице "List" я выбираю текущую строку
-	И Пауза 2
-	И в поле 'Priority' я ввожу текст '2'
-	Когда enter the discount period this month
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Special Message DialogBox'
-	И в поле 'TR' я ввожу текст 'Special Message DialogBox'
-	И я нажимаю на кнопку 'Ok'
-	И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-	И я изменяю флаг 'Launch'
-	Когда add a special offer rule
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And Delay 2
+	And I input "2" text in "Priority" field
+	When enter the discount period this month
+	And I click Open button of the field named "Description_en"
+	And I input "Special Message DialogBox" text in "ENG" field
+	And I input "Special Message DialogBox" text in "TR" field
+	And I click "Ok" button
+	And I select "Sales" exact value from "Document type" drop-down list
+	And I change checkbox "Launch"
+	When add a special offer rule
+	And I go to line in "List" table
 		| 'Description'                    |
 		| 'Discount on Basic Partner terms without Vat' |
-	Когда save the rule for a special offer
-	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Special Message DialogBox"
-	Тогда открылось окно 'Special offers'
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	When save the rule for a special offer
+	Then I check for the "SpecialOffers" catalog element with the "Description_en" "Special Message DialogBox"
+	Then "Special offers" window is opened
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 	| 'Special offer type' |
 	| 'Maximum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
+	And I click the button named "FormChoose"
 
 
-Сценарий: _030020 create Special Offer, automatic use Discount Price 1-2 without Vat (discount price, group minimum)
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Special offer type"
-	Тогда открылось окно 'Special offer types'
-	И в таблице "List" я перехожу к строке:
+Scenario: _030020 create Special Offer, automatic use Discount Price 1-2 without Vat (discount price, group minimum)
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I click the button named "FormCreate"
+	And I click Select button of "Special offer type" field
+	Then "Special offer types" window is opened
+	And I go to line in "List" table
 		| 'Description'        |
 		| 'Discount 1 without Vat' |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Priority' я ввожу текст '3'
-	И я изменяю флаг 'Launch'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Discount 1 without Vat'
-	И в поле 'TR' я ввожу текст 'Discount 1 without Vat'
-	И я нажимаю на кнопку 'Ok'
-	И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-	Когда enter the discount period this month
-	Когда add a special offer rule
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I input "3" text in "Priority" field
+	And I change checkbox "Launch"
+	And I click Open button of the field named "Description_en"
+	And I input "Discount 1 without Vat" text in "ENG" field
+	And I input "Discount 1 without Vat" text in "TR" field
+	And I click "Ok" button
+	And I select "Sales" exact value from "Document type" drop-down list
+	When enter the discount period this month
+	When add a special offer rule
+	And I go to line in "List" table
 		| 'Description'                    |
 		| 'Discount on Basic Partner terms without Vat' |
-	Когда save the rule for a special offer
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Special offer type"
-	Тогда открылось окно 'Special offer types'
-	И в таблице "List" я перехожу к строке:
+	When save the rule for a special offer
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I click the button named "FormCreate"
+	And I click Select button of "Special offer type" field
+	Then "Special offer types" window is opened
+	And I go to line in "List" table
 		| 'Description'        |
 		| 'Discount 2 TRY without VAT' |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Priority' я ввожу текст '4'
-	И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-	И я изменяю флаг 'Launch'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Discount 2 without Vat'
-	И в поле 'TR' я ввожу текст 'Discount 2 without Vat'
-	И я нажимаю на кнопку 'Ok'
-	Когда enter the discount period this month
-	Когда add a special offer rule
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I input "4" text in "Priority" field
+	And I select "Sales" exact value from "Document type" drop-down list
+	And I change checkbox "Launch"
+	And I click Open button of the field named "Description_en"
+	And I input "Discount 2 without Vat" text in "ENG" field
+	And I input "Discount 2 without Vat" text in "TR" field
+	And I click "Ok" button
+	When enter the discount period this month
+	When add a special offer rule
+	And I go to line in "List" table
 		| 'Description'                    |
 		| 'Discount on Basic Partner terms without Vat' |
-	Когда save the rule for a special offer
-	Когда move the Discount 1 without Vat discount to Minimum
-	Когда move the Discount 2 without Vat discount to the Minimum group 
-	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Discount 2 without Vat"
-	И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Discount 1 without Vat"
+	When save the rule for a special offer
+	When move the Discount 1 without Vat discount to Minimum
+	When move the Discount 2 without Vat discount to the Minimum group 
+	Then I check for the "SpecialOffers" catalog element with the "Description_en" "Discount 2 without Vat"
+	Then I check for the "SpecialOffers" catalog element with the "Description_en" "Discount 1 without Vat"
 
 
-Сценарий: _030021 moving special offer from one group to another
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку "Hierarchical list"
-	И в таблице "List" я перехожу к строке:
+Scenario: _030021 moving special offer from one group to another
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "Hierarchical list" button
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Maximum'   |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
 		| 'No'     | 'No'       | '2'        | 'Minimum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вверх
-	И в таблице "List" я перехожу к строке:
+	And I click the button named "FormChoose"
+	Then "Special offers" window is opened
+	And I move one level up in "List" table
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Minimum'   |
-	И в таблице "List" я выбираю текущую строку
-	И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuMoveItem'
-	Тогда открылось окно 'Special offers'
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
+	Then "Special offers" window is opened
+	And I go to line in "List" table
 		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
 		| 'No'     | 'No'       | '3'        | 'Maximum'            |
-	И я нажимаю на кнопку с именем 'FormChoose'
-	Когда  move the Discount Price 1 to Maximum
+	And I click the button named "FormChoose"
+	When  move the Discount Price 1 to Maximum
 
-Сценарий: _030022 creating special offer group within another special offer group
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'Hierarchical list'
-	И в таблице "List" я перехожу к строке:
+Scenario: _030022 create special offer group within another special offer group
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "Hierarchical list" button
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Minimum'   |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку с именем 'FormCreateFolder'
-	И Пауза 2
-	И я нажимаю кнопку выбора у поля "Special offer type"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click the button named "FormCreateFolder"
+	And Delay 2
+	And I click Select button of "Special offer type" field
+	And I go to line in "List" table
 		| Description |
 		| Sum         |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Priority' я ввожу текст '10'
-	И я нажимаю на кнопку открытия поля с именем "Description_en"
-	И в поле 'ENG' я ввожу текст 'Sum in Minimum'
-	И в поле 'TR' я ввожу текст 'Sum in Minimum'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю на кнопку 'Save'
-	И Пауза 2
-	И я запоминаю значение поля "Parent" как "Minimum"
-	И поле с именем "Parent" равно переменной "Minimum"
-	И я нажимаю на кнопку 'Save and close'
+	And I select current line in "List" table
+	And I input "10" text in "Priority" field
+	And I click Open button of the field named "Description_en"
+	And I input "Sum in Minimum" text in "ENG" field
+	And I input "Sum in Minimum" text in "TR" field
+	And I click "Ok" button
+	And I click "Save" button
+	And Delay 2
+	And I save the value of "Parent" field as "Minimum"
+	And the field named "Parent" is equal to "Minimum" variable
+	And I click "Save and close" button
 
-Сценарий: _030023 moving a special offer inside another special offer (Parent change)
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+Scenario: _030023 moving a special offer inside another special offer (Parent change)
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description'      |
 		| 'Sum in Minimum' |
-	И я нажимаю на кнопку 'Edit'
-	И я запоминаю значение поля "Parent" как "Sum"
-	И поле с именем "Parent" равно переменной "Sum"
-	И я нажимаю на кнопку 'Save and close'
-	И в таблице "List" я перехожу к строке:
+	And I click "Edit" button
+	And I save the value of "Parent" field as "Sum"
+	And the field named "Parent" is equal to "Sum" variable
+	And I click "Save and close" button
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Minimum'   |
-	И я нажимаю на кнопку 'Move to folder'
-	Тогда открылось окно 'Special offers'
-	И в таблице  "List" я перехожу на один уровень вниз
-	И в таблице "List" я перехожу к строке:
+	And I click "Move to folder" button
+	Then "Special offers" window is opened
+	And I move one level down in "List" table
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Special Offers'     |
-	И я нажимаю на кнопку с именем 'FormChoose'
-	Тогда открылось окно 'Special offers'
-	И в таблице "List" я перехожу к строке:
+	And I click the button named "FormChoose"
+	Then "Special offers" window is opened
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Maximum'   |
-	И я нажимаю на кнопку 'Move to folder'
-	Тогда открылось окно 'Special offers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+	And I click "Move to folder" button
+	Then "Special offers" window is opened
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Special Offers'     |
-	И я нажимаю на кнопку с именем 'FormChoose'
-	Тогда открылось окно 'Special offers'
-	И я нажимаю на кнопку 'List'
-	И в таблице "List" я перехожу к строке:
+	And I click the button named "FormChoose"
+	Then "Special offers" window is opened
+	And I click "List" button
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Sum'            |
-	И я нажимаю на кнопку 'Move to folder'
-	Тогда открылось окно 'Special offers'
-	И в таблице "List" я перехожу к строке:
+	And I click "Move to folder" button
+	Then "Special offers" window is opened
+	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Special Offers'     |
-	И я нажимаю на кнопку с именем 'FormChoose'
-	Тогда открылось окно 'Special offers'
-	И я нажимаю на кнопку 'Move to folder'
-	И Я закрываю текущее окно
+	And I click the button named "FormChoose"
+	Then "Special offers" window is opened
+	And I click "Move to folder" button
+	And I close current window
 
-Сценарий: _030024 create special offer Present Discount
-	Когда open a special offer window
+Scenario: _030024 create special offer Present Discount
+	When open a special offer window
 	* Filling in special offer 5+1 (manual)
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'                                   |
 			| 'All items 5+1, Discount on Basic Partner terms' |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Priority' я ввожу текст '4'
-		Когда enter the discount period this month
-		И я изменяю флаг 'Manually'
-		И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-		И я устанавливаю флаг 'Launch'
-		И в таблице "Rules" я нажимаю на кнопку с именем 'RulesAdd'
-		И в таблице "Rules" я нажимаю кнопку выбора у реквизита "Rule"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "4" text in "Priority" field
+		When enter the discount period this month
+		And I change checkbox "Manually"
+		And I select "Sales" exact value from "Document type" drop-down list
+		And I set checkbox "Launch"
+		And in the table "Rules" I click the button named "RulesAdd"
+		And I click choice button of "Rule" attribute in "Rules" table
+		And I go to line in "List" table
 			| 'Description'                                   |
 			| 'All items 5+1, Discount on Basic Partner terms' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Rules" я завершаю редактирование строки
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'All items 5+1, Discount on Basic Partner terms'
-		И в поле 'TR' я ввожу текст 'All items 5+1, Discount on Basic Partner terms'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
+		And I select current line in "List" table
+		And I finish line editing in "Rules" table
+		And I click Open button of the field named "Description_en"
+		And I input "All items 5+1, Discount on Basic Partner terms" text in "ENG" field
+		And I input "All items 5+1, Discount on Basic Partner terms" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 10
 	* Create  special offer 4+1, multiple
-		Когда open a special offer window
+		When open a special offer window
 		* Filling in special offer 4+1 (manual)
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 				| 'Description'                                   |
 				| 'Dress,2 4+1, Discount on Basic Partner terms' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Priority' я ввожу текст '4'
-			Когда enter the discount period this month
-			И я изменяю флаг 'Manually'
-			И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-			И я устанавливаю флаг 'Launch'
-			И в таблице "Rules" я нажимаю на кнопку с именем 'RulesAdd'
-			И в таблице "Rules" я нажимаю кнопку выбора у реквизита "Rule"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "4" text in "Priority" field
+			When enter the discount period this month
+			And I change checkbox "Manually"
+			And I select "Sales" exact value from "Document type" drop-down list
+			And I set checkbox "Launch"
+			And in the table "Rules" I click the button named "RulesAdd"
+			And I click choice button of "Rule" attribute in "Rules" table
+			And I go to line in "List" table
 				| 'Description'                                   |
 				| 'Dress and Trousers 4+1, Discount on Basic Partner terms' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "Rules" я завершаю редактирование строки
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
-			И в поле 'ENG' я ввожу текст '4+1 Dress and Trousers, Discount on Basic Partner terms'
-			И в поле 'TR' я ввожу текст '4+1 Dress and Trousers TR, Discount on Basic Partner terms'
-			И я нажимаю на кнопку 'Ok'
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 10
+			And I select current line in "List" table
+			And I finish line editing in "Rules" table
+			And I click Open button of the field named "Description_en"
+			And I input "4+1 Dress and Trousers, Discount on Basic Partner terms" text in "ENG" field
+			And I input "4+1 Dress and Trousers TR, Discount on Basic Partner terms" text in "TR" field
+			And I click "Ok" button
+			And I click "Save and close" button
+			And Delay 10
 	* Create special offer 3+1, not multiple
-		Когда open a special offer window
+		When open a special offer window
 		* Filling in special offer 3+1 (manual)
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 				| 'Description'                                   |
 				| 'Dress,2 3+1, Discount on Basic Partner terms' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Priority' я ввожу текст '4'
-			Когда enter the discount period this month
-			И я изменяю флаг 'Manually'
-			И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-			И я устанавливаю флаг 'Launch'
-			И в таблице "Rules" я нажимаю на кнопку с именем 'RulesAdd'
-			И в таблице "Rules" я нажимаю кнопку выбора у реквизита "Rule"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "4" text in "Priority" field
+			When enter the discount period this month
+			And I change checkbox "Manually"
+			And I select "Sales" exact value from "Document type" drop-down list
+			And I set checkbox "Launch"
+			And in the table "Rules" I click the button named "RulesAdd"
+			And I click choice button of "Rule" attribute in "Rules" table
+			And I go to line in "List" table
 				| 'Description'                                   |
 				| 'Dress and Trousers 3+1, Discount on Basic Partner terms' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "Rules" я завершаю редактирование строки
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
-			И в поле 'ENG' я ввожу текст '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms'
-			И в поле 'TR' я ввожу текст '3+1 Dress and Trousers (not multiplicity) TR, Discount on Basic Partner terms'
-			И я нажимаю на кнопку 'Ok'
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 10
+			And I select current line in "List" table
+			And I finish line editing in "Rules" table
+			And I click Open button of the field named "Description_en"
+			And I input "3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms" text in "ENG" field
+			And I input "3+1 Dress and Trousers (not multiplicity) TR, Discount on Basic Partner terms" text in "TR" field
+			And I click "Ok" button
+			And I click "Save and close" button
+			And Delay 10
 	* Save verification
-		И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms"
-		И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "4+1 Dress and Trousers, Discount on Basic Partner terms"
-		И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "All items 5+1, Discount on Basic Partner terms"
+		Then I check for the "SpecialOffers" catalog element with the "Description_en" "3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms"
+		Then I check for the "SpecialOffers" catalog element with the "Description_en" "4+1 Dress and Trousers, Discount on Basic Partner terms"
+		Then I check for the "SpecialOffers" catalog element with the "Description_en" "All items 5+1, Discount on Basic Partner terms"
 	* Moving special offers to the group Maximum
-		Когда move the discount All items 5+1, Discount on Basic Partner terms to the group Maximum
-		Когда move the discount 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms to the group Maximum
-		Когда move the discount 4+1 Dress and Trousers, Discount on Basic Partner terms to the group Maximum
+		When move the discount All items 5+1, Discount on Basic Partner terms to the group Maximum
+		When move the discount 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms to the group Maximum
+		When move the discount 4+1 Dress and Trousers, Discount on Basic Partner terms to the group Maximum
 
 
 
-Сценарий: _030025 create Range Discount
-	Когда open a special offer window
+Scenario: _030025 create Range Discount
+	When open a special offer window
 	* Filling in special offer Range Discount Basic (Trousers)
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'                                   |
 			| 'Range Discount Basic (Trousers)' |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Priority' я ввожу текст '4'
-		Когда enter the discount period this month
-		И я изменяю флаг 'Manually'
-		И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-		И я изменяю флаг 'Launch'
-		И я изменяю флаг 'Manual input value'
-		И я меняю значение переключателя 'Type' на 'For row'
-		И в таблице "Rules" я нажимаю на кнопку с именем 'RulesAdd'
-		И в таблице "Rules" я нажимаю кнопку выбора у реквизита "Rule"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "4" text in "Priority" field
+		When enter the discount period this month
+		And I change checkbox "Manually"
+		And I select "Sales" exact value from "Document type" drop-down list
+		And I change checkbox "Launch"
+		And I change checkbox "Manual input value"
+		And I change "Type" radio button value to "For row"
+		And in the table "Rules" I click the button named "RulesAdd"
+		And I click choice button of "Rule" attribute in "Rules" table
+		And I go to line in "List" table
 			| 'Description'                                   |
 			| 'Range Discount Basic (Trousers)' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Rules" я завершаю редактирование строки
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Range Discount Basic (Trousers)'
-		И в поле 'TR' я ввожу текст 'Range Discount Basic (Trousers)'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-	Когда open a special offer window
+		And I select current line in "List" table
+		And I finish line editing in "Rules" table
+		And I click Open button of the field named "Description_en"
+		And I input "Range Discount Basic (Trousers)" text in "ENG" field
+		And I input "Range Discount Basic (Trousers)" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 10
+	When open a special offer window
 	* Filling in special offer Range Discount Basic (Dress)
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'                                   |
 			| 'Range Discount Basic (Dress)' |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Priority' я ввожу текст '4'
-		Когда enter the discount period this month
-		И я изменяю флаг 'Manually'
-		И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-		И я изменяю флаг 'Launch'
-		И я изменяю флаг 'Manual input value'
-		И я меняю значение переключателя 'Type' на 'For row'
-		И в таблице "Rules" я нажимаю на кнопку с именем 'RulesAdd'
-		И в таблице "Rules" я нажимаю кнопку выбора у реквизита "Rule"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "4" text in "Priority" field
+		When enter the discount period this month
+		And I change checkbox "Manually"
+		And I select "Sales" exact value from "Document type" drop-down list
+		And I change checkbox "Launch"
+		And I change checkbox "Manual input value"
+		And I change "Type" radio button value to "For row"
+		And in the table "Rules" I click the button named "RulesAdd"
+		And I click choice button of "Rule" attribute in "Rules" table
+		And I go to line in "List" table
 			| 'Description'                                   |
 			| 'Range Discount Basic (Dress)' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Rules" я завершаю редактирование строки
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Range Discount Basic (Dress)'
-		И в поле 'TR' я ввожу текст 'Range Discount Basic (Dress)'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
+		And I select current line in "List" table
+		And I finish line editing in "Rules" table
+		And I click Open button of the field named "Description_en"
+		And I input "Range Discount Basic (Dress)" text in "ENG" field
+		And I input "Range Discount Basic (Dress)" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 10
 	* Save verification
-		И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Range Discount Basic (Dress)"
-		И я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Range Discount Basic (Trousers)"
-		И Я закрываю текущее окно
+		Then I check for the "SpecialOffers" catalog element with the "Description_en" "Range Discount Basic (Dress)"
+		Then I check for the "SpecialOffers" catalog element with the "Description_en" "Range Discount Basic (Trousers)"
+		And I close current window
 
-Сценарий: _030026 create Document discount
-	И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И в поле 'ENG' я ввожу текст 'Document discount'
-	И я нажимаю на кнопку открытия поля "ENG"
-	И в поле 'TR' я ввожу текст 'Document discount TR'
-	И я нажимаю на кнопку 'Ok'
-	И из выпадающего списка "Document type" я выбираю точное значение 'Purchases and sales'
-	И я изменяю флаг 'Launch'
-	И я нажимаю кнопку выбора у поля "Special offer type"
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И в поле 'ENG' я ввожу текст 'Document discount'
-	И я нажимаю на кнопку открытия поля "ENG"
-	И в поле 'TR' я ввожу текст 'Document discount TR'
-	И я нажимаю на кнопку 'Ok'
-	И я нажимаю кнопку выбора у поля "Plugins"
-	Тогда открылось окно 'Plugins'
-	И в таблице "List" я перехожу к строке:
+Scenario: _030026 create Document discount
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click the button named "FormCreate"
+	And I input "Document discount" text in "ENG" field
+	And I click Open button of "ENG" field
+	And I input "Document discount TR" text in "TR" field
+	And I click "Ok" button
+	And I select "Purchases and sales" exact value from "Document type" drop-down list
+	And I change checkbox "Launch"
+	And I click Select button of "Special offer type" field
+	And I click the button named "FormCreate"
+	And I input "Document discount" text in "ENG" field
+	And I click Open button of "ENG" field
+	And I input "Document discount TR" text in "TR" field
+	And I click "Ok" button
+	And I click Select button of "Plugins" field
+	Then "Plugins" window is opened
+	And I go to line in "List" table
 		| Description               |
 		| ExternalSpecialOfferRules |
-	И в таблице "List" я перехожу к строке:
+	And I go to line in "List" table
 		| Description      |
 		| DocumentDiscount |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю на кнопку 'Save and close'
-	И я жду закрытия окна 'Special offer type (create) *' в течение 20 секунд
-	Тогда открылось окно 'Special offer types'
-	И я нажимаю на кнопку с именем 'FormChoose'
-	И в поле 'Priority' я ввожу текст '5'
-	И в поле "Start of" я ввожу текущую дату
-	И я изменяю флаг 'Manually'
-	И я изменяю флаг 'Manual input value'
-	И я нажимаю на кнопку 'Save and close'
-	И я жду закрытия окна 'Special offer (create) *' в течение 20 секунд
+	And I select current line in "List" table
+	And I click "Save and close" button
+	And I wait "Special offer type (create) *" window closing in 20 seconds
+	Then "Special offer types" window is opened
+	And I click the button named "FormChoose"
+	And I input "5" text in "Priority" field
+	And I input current date in "Start of" field
+	And I change checkbox "Manually"
+	And I change checkbox "Manual input value"
+	And I click "Save and close" button
+	And I wait "Special offer (create) *" window closing in 20 seconds

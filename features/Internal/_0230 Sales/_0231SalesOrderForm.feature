@@ -1,7 +1,7 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: Sales order document form
+Feature: Sales order document form
 
 
 As a sales manager
@@ -9,185 +9,186 @@ I want the Sales order document form convenient
 For fast data entry
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
 
-Сценарий: _023101 displaying in the Sales order only available valid Partner terms for the selected customer
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+Scenario: _023101 displaying in the Sales order only available valid Partner terms for the selected customer
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	Тогда таблица "List" стала равной:
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And "List" table became equal
 		| 'Description'                   |
 		| 'Basic Partner terms, TRY'         |
 		| 'Basic Partner terms, $'           |
 		| 'Basic Partner terms, without VAT' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	Тогда таблица "List" стала равной:
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And "List" table became equal
 		| 'Description'            |
 		| 'Basic Partner terms, TRY'         |
 		| 'Basic Partner terms, $'           |
 		| 'Basic Partner terms, without VAT' |
 		| 'Personal Partner terms, $' |
-	И я закрываю текущее окно
-	И Я закрываю текущее окно
-	И я нажимаю на кнопку 'No'
-	* Checking that expired Partner terms are not displayed in the selection list
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-		И в таблице "List" я перехожу к строке:
+	And I close current window
+	And I close current window
+	And I click "No" button
+	* Check that expired Partner terms are not displayed in the selection list
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I go to line in "List" table
 		| 'Description'           |
 		| 'Basic Partner terms, $' |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'End of use' я ввожу текст '02.11.2018'
-		И я нажимаю на кнопку 'Save and close'
-		И я закрываю текущее окно
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "02.11.2018" text in "End of use" field
+		And I click "Save and close" button
+		And I close current window
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		Тогда таблица "List" стала равной:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And "List" table became equal
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY'         |
 			| 'Basic Partner terms, without VAT' |
-		И Я закрываю текущее окно
-		И Я закрываю текущее окно
-		И я нажимаю на кнопку 'No'
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Agreements'
-		И в таблице "List" я перехожу к строке:
+		And I close current window
+		And I close current window
+		And I click "No" button
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, $' |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'End of use' я ввожу текст '02.11.2019'
-		И я нажимаю на кнопку 'Save and close'
-		И я закрываю текущее окно
+		And I select current line in "List" table
+		And I input "02.11.2019" text in "End of use" field
+		And I click "Save and close" button
+		And I close current window
 
-Сценарий: _023102 select only your own companies in the Company field
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+Scenario: _023102 select only your own companies in the Company field
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
 		| 'Description'           |
 		| 'Basic Partner terms, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Company"
-	Тогда таблица "List" стала равной:
+	And I select current line in "List" table
+	And I click Select button of "Company" field
+	And "List" table became equal
 		| 'Description'  |
 		| 'Main Company' |
-	И я закрываю текущее окно
-	И Я закрываю текущее окно
-	И я нажимаю на кнопку 'No'
+	And I close current window
+	And I close current window
+	And I click "No" button
 
-Сценарий: _023103 filling in Company field from the Partner term
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+Scenario: _023103 filling in Company field from the Partner term
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
 		| 'Description'           |
 		| 'Basic Partner terms, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	И элемент формы с именем "Company" стал равен 'Main Company'
-	И Я закрываю текущее окно
-	И я нажимаю на кнопку 'No'
+	And I select current line in "List" table
+	Then the form attribute named "Company" became equal to "Main Company"
+	And I close current window
+	And I click "No" button
 
 
-Сценарий: _023104 filling in Store field from the Partner term
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+Scenario: _023104 filling in Store field from the Partner term
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
 		| 'Description'       |
 		| 'Basic Partner terms, without VAT' |
-	И в таблице "List" я выбираю текущую строку
-	И     элемент формы с именем "Store" стал равен 'Store 02'
-	И я нажимаю кнопку выбора у поля "Partner term"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	Then the form attribute named "Store" became equal to "Store 02"
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
 		| 'Description'       |
 		| 'Basic Partner terms, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	И     элемент формы с именем "Store" стал равен 'Store 01'
-	И Я закрываю текущее окно
-	И я нажимаю на кнопку 'No'
+	And I select current line in "List" table
+	Then the form attribute named "Store" became equal to "Store 01"
+	And I close current window
+	And I click "No" button
 
-Сценарий: _023105 check that the Account field is missing from the order
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И элемент формы "Account" отсутствует на форме
+Scenario: _023105 check that the Account field is missing from the order
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And field "Account" is not present on the form
 
 
-Сценарий: _023106 checking the form of selection of items (sales order)
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario: _023106 check the form of selection of items (sales order)
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
 	* Filling in the details
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'  |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 				| 'Description'       |
 				| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Company Ferron BP'  |
-		И в таблице "List" я выбираю текущую строку
-	Когда check the product selection form with price information in Sales order
-	И в таблице "ItemList" я нажимаю на кнопку '% Offers'
-	И в таблице "Offers" я нажимаю на кнопку с именем 'FormOK'
-	И я нажимаю на кнопку 'Post and close'
-	* Checking Sales order Saving
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+	When check the product selection form with price information in Sales order
+	And in the table "ItemList" I click "% Offers" button
+	And in the table "Offers" I click the button named "FormOK"
+	And I click "Post and close" button
+	* Check Sales order Saving
+		And "List" table contains lines
 		| 'Currency'  | 'Partner'     | 'Status'   | 'Σ'         |
 		| 'TRY'       | 'Ferron BP'   | 'Approved' | '2 050,00'  |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
 
 
-Сценарий: _023113 checking totals in the document Sales order
+Scenario: _023113 check totals in the document Sales order
 	* Open list form Sales order
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	* Select Sales order
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check for document results
-		И     элемент формы с именем "ItemListTotalOffersAmount" стал равен '0,00'
-		И     элемент формы с именем "ItemListTotalNetAmount" стал равен '3 686,44'
-		И     элемент формы с именем "ItemListTotalTaxAmount" стал равен '663,56'
-		И     элемент формы с именем "ItemListTotalTotalAmount" стал равен '4 350,00'
-		И     элемент формы с именем "CurrencyTotalAmount" стал равен 'TRY'
+		Then the form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "3 686,44"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "663,56"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "4 350,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+

@@ -1,293 +1,294 @@
-#language: ru
+﻿#language: en
 
 @Positive
 @Discount
 @tree
 
-Функционал: Checking discounts in purchase documents Purchase order/Purchase invoice
+Feature: check discounts in purchase documents Purchase order/Purchase invoice
 
 As a developer
-I want to add discount functionality to the purchase documents.
+I want to add discount functionality to the purchase documents
 So you can display the amount of the vendor's discount
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 # discount for document
 
-Сценарий: check the Document discount in Purchase order
+Scenario: check the Document discount in Purchase order
 	* Activating discount Document discount
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-		И я нажимаю на кнопку 'List'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I click "List" button
+		And I go to line in "List" table
 			| 'Description'              |
 			| 'Document discount' |
-		И в таблице "List" я выбираю текущую строку
-		И я устанавливаю флаг 'Launch'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I set checkbox "Launch"
+		And I click "Save and close" button
 	* Create Purchase order
 		* Open a form to create Purchase Order
-			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-			И я нажимаю на кнопку с именем 'FormCreate'
+			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+			And I click the button named "FormCreate"
 		* Filling in the necessary details
-			И из выпадающего списка "Status" я выбираю точное значение 'Approved'
+			And I select "Approved" exact value from "Status" drop-down list
 		* Filling in vendor's info
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| Description |
 				| Ferron BP   |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Legal name"
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
 				| Description       |
 				| Company Ferron BP |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| Description        |
 				| Vendor Ferron, TRY |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 01'  |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in items table
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item key' |
 				| 'M/White'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			Тогда открылось окно 'Item keys'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			Then "Item keys" window is opened
+			And I go to line in "List" table
 				| 'Item key' |
 				| 'L/Green'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'M/White' | 'pcs' |
-			И в таблице "ItemList" я активизирую поле "Q"
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '100'
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '200'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I activate "Q" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "100" text in "Q" field of "ItemList" table
+			And I input "200" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '2' | 'Dress' | 'L/Green'  | 'pcs' |
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '200'
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '210'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I select current line in "ItemList" table
+			And I input "200" text in "Q" field of "ItemList" table
+			And I input "210" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'     | 'Item key' | 'Unit' |
 				| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '300'
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '250'
-			И в таблице "ItemList" я завершаю редактирование строки
+			And I select current line in "ItemList" table
+			And I input "300" text in "Q" field of "ItemList" table
+			And I input "250" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 	* Calculate Document discount for Purchase order
-		И я нажимаю на кнопку '% Offers'
-		И в таблице "Offers" я выбираю текущую строку
-		И в поле 'Percent' я ввожу текст '10,00'
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "Offers" я нажимаю на кнопку 'OK'
+		And I click "% Offers" button
+		And I select current line in "Offers" table
+		And I input "10,00" text in "Percent" field
+		And I click "Ok" button
+		And in the table "Offers" I click "OK" button
 	* Check the discount calculation
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
 		| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
 		| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
 		| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
 	* Check the transfer of the discount value from Purchase order to Purchase invoice when creating based on
-		И я нажимаю на кнопку 'Post'
-		И я нажимаю на кнопку 'Purchase invoice'
-		И     таблица "ItemList" содержит строки:
+		And I click "Post" button
+		And I click "Purchase invoice" button
+		And "ItemList" table contains lines
 		| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
 		| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
 		| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
 		| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: check the Document discount in Purchase invoice
+Scenario: check the Document discount in Purchase invoice
 	* Activating discount Document discount
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-		И я нажимаю на кнопку 'List'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I click "List" button
+		And I go to line in "List" table
 			| 'Description'              |
 			| 'Document discount' |
-		И в таблице "List" я выбираю текущую строку
-		И я устанавливаю флаг 'Launch'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I set checkbox "Launch"
+		And I click "Save and close" button
 	* Create Purchase invoice
 		* Open form for creating Purchase invoice
-			И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-			И я нажимаю на кнопку с именем 'FormCreate'
+			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+			And I click the button named "FormCreate"
 		* Filling in vendor's info
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| Description |
 				| Ferron BP   |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Legal name"
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
 				| Description       |
 				| Company Ferron BP |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| Description        |
 				| Vendor Ferron, TRY |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 01'  |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in items table
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item key' |
 				| 'M/White'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			Тогда открылось окно 'Item keys'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			Then "Item keys" window is opened
+			And I go to line in "List" table
 				| 'Item key' |
 				| 'L/Green'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'M/White' | 'pcs' |
-			И в таблице "ItemList" я активизирую поле "Q"
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '100'
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '200'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I activate "Q" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "100" text in "Q" field of "ItemList" table
+			And I input "200" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '2' | 'Dress' | 'L/Green'  | 'pcs' |
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '200'
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '210'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я перехожу к строке:
+			And I select current line in "ItemList" table
+			And I input "200" text in "Q" field of "ItemList" table
+			And I input "210" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
 				| '#' | 'Item'     | 'Item key' | 'Unit' |
 				| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '300'
-			И в таблице "ItemList" в поле 'Price' я ввожу текст '250'
-			И в таблице "ItemList" я завершаю редактирование строки
+			And I select current line in "ItemList" table
+			And I input "300" text in "Q" field of "ItemList" table
+			And I input "250" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 	* Calculate Document discount for Purchase invoice
-		И я нажимаю на кнопку '% Offers'
-		И в таблице "Offers" я выбираю текущую строку
-		И в поле 'Percent' я ввожу текст '10,00'
-		И я нажимаю на кнопку 'Ok'
-		И в таблице "Offers" я нажимаю на кнопку 'OK'
+		And I click "% Offers" button
+		And I select current line in "Offers" table
+		And I input "10,00" text in "Percent" field
+		And I click "Ok" button
+		And in the table "Offers" I click "OK" button
 	* Check the discount calculation
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
 		| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
 		| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
 		| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: check that discounts with the Sales document type are not displayed in the purchase documents
+Scenario: check that discounts with the Sales document type are not displayed in the purchase documents
 	* Open Purchase Invoice
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Checking the discount tree
-		И я нажимаю на кнопку '% Offers'
-		Тогда таблица "Offers" стала равной:
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Check the discount tree
+		And I click "% Offers" button
+		And "Offers" table became equal
 		| 'Presentation'      | 'Is select' | '%' | '∑' |
 		| 'Document discount' | ' '         | ''  | ''  |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Open Purchase Order
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Checking the discount tree
-		И я нажимаю на кнопку '% Offers'
-		Тогда таблица "Offers" стала равной:
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+	* Check the discount tree
+		And I click "% Offers" button
+		And "Offers" table became equal
 		| 'Presentation'      | 'Is select' | '%' | '∑' |
 		| 'Document discount' | ' '         | ''  | ''  |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: check that discounts with the Purchase document type are not displayed in the sales documents
+Scenario: check that discounts with the Purchase document type are not displayed in the sales documents
 	* Change the type of Document discount from Purchases and sales to Purchases
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-		И я нажимаю на кнопку 'List'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I click "List" button
+		And I go to line in "List" table
 			| 'Description'              |
 			| 'Document discount' |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Document type" я выбираю точное значение 'Purchases'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I select "Purchases" exact value from "Document type" drop-down list
+		And I click "Save and close" button
 	* Check that the Document discount is not displayed in the Sales order document
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку '% Offers'
-		Тогда таблица "Offers" не содержит строки:
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click "% Offers" button
+		And "Offers" table does not contain lines
 		| 'Presentation'      | 'Is select' | '%' | '∑' |
 		| 'Document discount' | ' '         | ''  | ''  |
-		И Я закрыл все окна клиентского приложения
-	* Checking that the Document discount is not displayed in the Sales invoice document
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку '% Offers'
-		Тогда таблица "Offers" не содержит строки:
+		And I close all client application windows
+	* Check that the Document discount is not displayed in the Sales invoice document
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click "% Offers" button
+		And "Offers" table does not contain lines
 		| 'Presentation'      | 'Is select' | '%' | '∑' |
 		| 'Document discount' | ' '         | ''  | ''  |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 	* Then I return the Document discount type back
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.SpecialOffers'
-		И я нажимаю на кнопку 'List'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I click "List" button
+		And I go to line in "List" table
 			| 'Description'              |
 			| 'Document discount' |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Document type" я выбираю точное значение 'Purchases and sales'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I select "Purchases and sales" exact value from "Document type" drop-down list
+		And I click "Save and close" button
+
 
 
 

@@ -1,289 +1,241 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: check setting item prices for Item
+Feature: check setting item prices for Item
 
 As a sales manager.
 I want to put a price on the Item and the properties
 In order to have the same price applied to all item key of one Item, and also to be able to set prices for the properties of
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _150000 preparation
+Scenario: _150000 preparation
 	* Select in Item type properties that will affect the price
-		* For item type Сlothes
-			И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-			И в таблице "List" я перехожу к строке:
+		* For item type Clothes
+			Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+			And I go to line in "List" table
 				| Description |
-				| Сlothes     |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "AvailableAttributes" я перехожу к строке:
+				| Clothes     |
+			And I select current line in "List" table
+			And I go to line in "AvailableAttributes" table
 				| Attribute |
 				| Color     |
-			И в таблице "AvailableAttributes" я устанавливаю флаг 'Affect pricing'
-			И в таблице "AvailableAttributes" я завершаю редактирование строки
-			И в таблице "AvailableAttributes" я перехожу к строке:
+			And I set "Affect pricing" checkbox in "AvailableAttributes" table
+			And I finish line editing in "AvailableAttributes" table
+			And I go to line in "AvailableAttributes" table
 				| Attribute |
 				| Size      |
-			И в таблице "AvailableAttributes" я устанавливаю флаг 'Affect pricing'
-			И в таблице "AvailableAttributes" я завершаю редактирование строки
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 5
+			And I set "Affect pricing" checkbox in "AvailableAttributes" table
+			And I finish line editing in "AvailableAttributes" table
+			And I click "Save and close" button
+			And Delay 5
 		* For item type Shoes
-			И я открываю навигационную ссылку "e1cib/list/Catalog.ItemTypes"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+			And I go to line in "List" table
 				| Description |
 				| Shoes     |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "AvailableAttributes" я перехожу к строке:
+			And I select current line in "List" table
+			And I go to line in "AvailableAttributes" table
 				| Attribute |
 				| Size      |
-			И в таблице "AvailableAttributes" я устанавливаю флаг 'Affect pricing'
-			И в таблице "AvailableAttributes" я завершаю редактирование строки
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 5
-		И Я закрыл все окна клиентского приложения
+			And I set "Affect pricing" checkbox in "AvailableAttributes" table
+			And I finish line editing in "AvailableAttributes" table
+			And I click "Save and close" button
+			And Delay 5
+		And I close all client application windows
 
 
-Сценарий: _150001 basic price entry by properties (including VAT)
-	* Create price list by property for item type Сlothes
-		И я открываю навигационную ссылку "e1cib/list/Document.PriceList"
-		И я нажимаю на кнопку с именем 'FormCreate'
+Scenario: _150001 basic price entry by properties (including VAT)
+	* Create price list by property for item type Clothes
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I click the button named "FormCreate"
 	* Filling in price list
-		И я перехожу к закладке "Other"
-		И в поле 'Description' я ввожу текст 'Basic price'
-		И я нажимаю кнопку выбора у поля "Price type"
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I input "Basic price" text in "Description" field
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
 				| 'Description' |
 				| 'Basic Price Types'  |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Number' я ввожу текст '0'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		Тогда открылось окно 'Price list (create) *'
-		И в поле 'Number' я ввожу текст '107'
-		И в поле "Date" я ввожу начало текущего месяца
+		And I select current line in "List" table
+		And I input "0" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "Price list (create) *" window is opened
+		And I input "107" text in "Number" field
+		And I input begin of the current month date in "Date" field
 	* Filling in tabular part
-		И я меняю значение переключателя 'Set price' на 'By Properties'
-		И я нажимаю кнопку выбора у поля "Item type"
-		И в таблице "List" я перехожу к строке:
+		And I change "Set price" radio button value to "By Properties"
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
 			| Description |
-			| Сlothes     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'PriceKeyListAdd'
-		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+			| Clothes     |
+		And I select current line in "List" table
+		And I click the button named "PriceKeyListAdd"
+		And I click choice button of "Item" attribute in "PriceKeyList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress       |
-		И в таблице "List" я выбираю текущую строку
-		# И в таблице "PriceKeyList" я активизирую поле с именем "PriceKeyListUnit"
-		# И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Unit"
-		# И в таблице "List" я перехожу к строке:
-		# 	| Description |
-		# 	| pcs         |
-		# И в таблице "List" я выбираю текущую строку
-		И в таблице "PriceKeyList" я активизирую поле "Size"
-		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Size" field in "PriceKeyList" table
+		And I click choice button of "Size" attribute in "PriceKeyList" table
+		And I go to line in "List" table
 			| Additional attribute | Description |
 			| Size          | L           |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PriceKeyList" я активизирую поле "Color"
-		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Color" field in "PriceKeyList" table
+		And I click choice button of "Color" attribute in "PriceKeyList" table
+		And I go to line in "List" table
 			| Additional attribute | Description |
 			| Color         | Green       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PriceKeyList" в поле 'Price' я ввожу текст '350,00'
-		И в таблице "PriceKeyList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем 'PriceKeyListAdd'
-		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "350,00" text in "Price" field of "PriceKeyList" table
+		And I finish line editing in "PriceKeyList" table
+		And I click the button named "PriceKeyListAdd"
+		And I click choice button of "Item" attribute in "PriceKeyList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress       |
-		И в таблице "List" я выбираю текущую строку
-		# И в таблице "PriceKeyList" я активизирую поле с именем "PriceKeyListUnit"
-		# И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Unit"
-		# И в таблице "List" я перехожу к строке:
-		# 	| Description |
-		# 	| pcs         |
-		# И в таблице "List" я выбираю текущую строку
-		И в таблице "PriceKeyList" я активизирую поле "Size"
-		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Size" field in "PriceKeyList" table
+		And I click choice button of "Size" attribute in "PriceKeyList" table
+		And I go to line in "List" table
 			| Additional attribute | Description |
 			| Size          | S           |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PriceKeyList" я активизирую поле "Color"
-		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Color" field in "PriceKeyList" table
+		And I click choice button of "Color" attribute in "PriceKeyList" table
+		And I go to line in "List" table
 			| Additional attribute | Description |
 			| Color         | Yellow       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PriceKeyList" в поле 'Price' я ввожу текст '300,00'
-		И в таблице "PriceKeyList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем 'PriceKeyListAdd'
-		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "300,00" text in "Price" field of "PriceKeyList" table
+		And I finish line editing in "PriceKeyList" table
+		And I click the button named "PriceKeyListAdd"
+		And I click choice button of "Item" attribute in "PriceKeyList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress       |
-		И в таблице "List" я выбираю текущую строку
-		# И в таблице "PriceKeyList" я активизирую поле с именем "PriceKeyListUnit"
-		# И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Unit"
-		# И в таблице "List" я перехожу к строке:
-		# 	| Description |
-		# 	| pcs         |
-		# И в таблице "List" я выбираю текущую строку
-		И в таблице "PriceKeyList" я активизирую поле "Size"
-		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Size" field in "PriceKeyList" table
+		And I click choice button of "Size" attribute in "PriceKeyList" table
+		And I go to line in "List" table
 			| Additional attribute | Description |
 			| Size          | M           |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PriceKeyList" я активизирую поле "Color"
-		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Color" field in "PriceKeyList" table
+		And I click choice button of "Color" attribute in "PriceKeyList" table
+		And I go to line in "List" table
 			| Additional attribute | Description |
 			| Color         | Yellow       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PriceKeyList" в поле 'Price' я ввожу текст '415,00'
-		И в таблице "PriceKeyList" я завершаю редактирование строки
-		И в поле 'Number' я ввожу текст '0'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		Тогда открылось окно 'Price list (create) *'
-		И в поле 'Number' я ввожу текст '107'
-		И в поле "Date" я ввожу начало текущего месяца
-		И я нажимаю на кнопку 'Post and close'
-		И Пауза 10
+		And I select current line in "List" table
+		And I input "415,00" text in "Price" field of "PriceKeyList" table
+		And I finish line editing in "PriceKeyList" table
+		And I input "0" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "Price list (create) *" window is opened
+		And I input "107" text in "Number" field
+		And I input begin of the current month date in "Date" field
+		And I click "Post and close" button
+		And Delay 10
 	* Create Price key for Dress
-		И я открываю навигационную ссылку "e1cib/list/Catalog.PriceKeys"
-		Тогда таблица "List" содержит строки:
+		Given I open hyperlink "e1cib/list/Catalog.PriceKeys"
+		And "List" table contains lines
 			| 'Price key'|
 			| 'L/Green'  |
 			| 'S/Yellow' |
 			| 'M/Yellow' |
 		* PriceKeys MD5 completion check
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 			| 'Price key'|
 			| 'S/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И поле "Affect pricing MD5" заполнено
-		И Я закрыл все окна клиентского приложения
+			And I select current line in "List" table
+			And field "Affect pricing MD5" is filled
+		And I close all client application windows
 
 
 
-Сценарий: _150002 basic price entry by items (including VAT)
-	И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
-	И я нажимаю на кнопку с именем 'FormCreate'
+Scenario: _150002 basic price entry by items (including VAT)
+	Given I open hyperlink "e1cib/list/Document.PriceList"
+	And I click the button named "FormCreate"
 	* Filling in price list by item key
-		И я перехожу к закладке "Other"
-		И в поле 'Description' я ввожу текст 'Basic price'
-		И я нажимаю кнопку выбора у поля "Price type"
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I input "Basic price" text in "Description" field
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Basic Price Types'  |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Number' я ввожу текст '0'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		Тогда открылось окно 'Price list (create) *'
-		И в поле 'Number' я ввожу текст '110'
-		И в поле "Date" я ввожу начало текущего месяца
-	И я перехожу к закладке "Item keys"
-	И я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "0" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "Price list (create) *" window is opened
+		And I input "110" text in "Number" field
+		And I input begin of the current month date in "Date" field
+	And I move to "Item keys" tab
+	And I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Dress'       |
-	И в таблице "List" я выбираю текущую строку
-	# И в таблице "ItemList" я активизирую поле "Unit"
-	# И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Unit"
-	# И в таблице "List" я перехожу к строке:
-	# 	| Description |
-	# 	| pcs         |
-	# И в таблице "List" я выбираю текущую строку
-	И я перехожу к следующему реквизиту
-	И в таблице "ItemList" в поле 'Price' я ввожу текст '700,00'
-	И в таблице "ItemList" я завершаю редактирование строки
-	И я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I move to the next attribute
+	And I input "700,00" text in "Price" field of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Trousers'       |
-	И в таблице "List" я выбираю текущую строку
-	# И в таблице "ItemList" я активизирую поле "Unit"
-	# И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Unit"
-	# И в таблице "List" я перехожу к строке:
-	# 	| Description |
-	# 	| pcs         |
-	# И в таблице "List" я выбираю текущую строку
-	И я перехожу к следующему реквизиту
-	И в таблице "ItemList" в поле 'Price' я ввожу текст '500,00'
-	И в таблице "ItemList" я завершаю редактирование строки
-	И я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I move to the next attribute
+	And I input "500,00" text in "Price" field of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Shirt'       |
-	И в таблице "List" я выбираю текущую строку
-	# И в таблице "ItemList" я активизирую поле "Unit"
-	# И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Unit"
-	# И в таблице "List" я перехожу к строке:
-	# 	| Description |
-	# 	| pcs         |
-	# И в таблице "List" я выбираю текущую строку
-	И я перехожу к следующему реквизиту
-	И в таблице "ItemList" в поле 'Price' я ввожу текст '400,00'
-	И в таблице "ItemList" я завершаю редактирование строки
-	И я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I move to the next attribute
+	And I input "400,00" text in "Price" field of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I go to line in "List" table
 		| 'Description' |
 		| 'Boots'       |
-	И в таблице "List" я выбираю текущую строку
-	# И в таблице "ItemList" я активизирую поле "Unit"
-	# И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Unit"
-	# И в таблице "List" я перехожу к строке:
-	# 	| Description |
-	# 	| pcs         |
-	# И в таблице "List" я выбираю текущую строку
-	И я перехожу к следующему реквизиту
-	И в таблице "ItemList" в поле 'Price' я ввожу текст '600,00'
-	И в таблице "ItemList" я завершаю редактирование строки
-	И я нажимаю на кнопку с именем 'ItemListAdd'
-	И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I move to the next attribute
+	And I input "600,00" text in "Price" field of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I go to line in "List" table
 		| 'Description' |
 		| 'High shoes'       |
-	И в таблице "List" я выбираю текущую строку
-	# И в таблице "ItemList" я активизирую поле "Unit"
-	# И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Unit"
-	# И в таблице "List" я перехожу к строке:
-	# 	| Description |
-	# 	| pcs         |
-	# И в таблице "List" я выбираю текущую строку
-	И я перехожу к следующему реквизиту
-	И в таблице "ItemList" в поле 'Price' я ввожу текст '400,00'
-	И в таблице "ItemList" я завершаю редактирование строки
-	И я нажимаю на кнопку 'Post and close'
-	И Пауза 10
+	And I select current line in "List" table
+	And I move to the next attribute
+	And I input "400,00" text in "Price" field of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And I click "Post and close" button
+	And Delay 10
 
 
-Сценарий: _150003 check that the current prices are displayed in the Item
+Scenario: _150003 check that the current prices are displayed in the Item
 	* OPen item Dress
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Items'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 		| 'Description' |
 		| 'Dress'       |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Open price report (tab Price info)
-		И В текущем окне я нажимаю кнопку командного интерфейса 'Price info'
-		Тогда табличный документ "Result" равен по шаблону:
+		And In this window I click command interface button "Price info"
+		Then "Result" spreadsheet document is equal by template
 			| 'Prices on*'           | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| ''                     | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| 'Item'                 | 'Item Key'   | 'Basic Price Types' | ''                        | 'Discount Price TRY 1' | ''                     | 'Discount Price TRY 2' | ''                     | 'Basic Price without VAT' | ''                     | 'Discount 1 TRY without VAT' | ''                     | 'Discount 2 TRY without VAT' | ''                     | 'Dependent Price' | ''                        |
@@ -320,9 +272,9 @@ In order to have the same price applied to all item key of one Item, and also to
 			| 'Dress'                | 'XXL/Red'   | '700'               | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 			| 'Dress'                | 'M/Brown'   | '700'               | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     | ''                | ''                        |
 		* Check to display the current prices at an earlier date
-			И в поле 'on date' я ввожу текст '12.12.2019'
-			И я нажимаю на кнопку 'Refresh'
-			Тогда табличный документ "Result" равен по шаблону:
+			And I input "12.12.2019" text in "on date" field
+			And I click "Refresh" button
+			Then "Result" spreadsheet document is equal by template
 			| 'Prices on 12.12.2019' | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
 			| ''                     | ''          | ''                  | ''                        | ''                     | ''                     | ''                     | ''                     | ''                        | ''                     | ''                           | ''                     | ''                           | ''                     |
 			| 'Item'                 | 'Item Key'   | 'Basic Price Types' | ''                        | 'Discount Price TRY 1' | ''                     | 'Discount Price TRY 2' | ''                     | 'Basic Price without VAT' | ''                     | 'Discount 1 TRY without VAT' | ''                     | 'Discount 2 TRY without VAT' | ''                     |
@@ -353,202 +305,202 @@ In order to have the same price applied to all item key of one Item, and also to
 
 
 
-Сценарий: _150004 check the price calculation according to the specification (based on the Item and properties price) in Sales order document
+Scenario: _150004 check the price calculation according to the specification (based on the Item and properties price) in Sales order document
 	* Unpost Basic Price list by item key
-		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I go to line in "List" table
 		| Description | Number | Price list type    |
 		| Basic price | 100    | Price by item keys |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	Тогда открылось окно 'Partner terms'
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	Then "Partner terms" window is opened
+	And I go to line in "List" table
 			| 'Description'       |
 			| 'Basic Partner terms, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Legal name"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Legal name" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Company Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
+	And I select current line in "List" table
 	* Add item
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Item  | Item key  |
 			| Dress | Dress/A-8 |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check price calculation
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Item'  | 'Price'    | 'Item key'  | 'Store'    | 'Q'     | 'Unit' |
 		| 'Dress' | '3 100,00' | 'Dress/A-8' | 'Store 01' | '1,000' | 'pcs'  |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _150004 check the price calculation for the bandle (based on the properties price) in the Sales order document
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+Scenario: _150004 check the price calculation for the bandle (based on the properties price) in the Sales order document
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	Тогда открылось окно 'Partner terms'
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	Then "Partner terms" window is opened
+	And I go to line in "List" table
 			| 'Description'       |
 			| 'Basic Partner terms, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Legal name"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Legal name" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Company Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
+	And I select current line in "List" table
 	* Add item
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Bound Dress+Shirt       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Item              | Item key  |
 			| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check price calculation
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Item'              | 'Price'    | 'Item key'                      | 'Store'    | 'Q'     | 'Unit'  |
 		| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | 'Store 01' | '1,000' |  'pcs'  |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _150005 price check by properties in Sales order
-	И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Partner"
-	И в таблице "List" я перехожу к строке:
+Scenario: _150005 price check by properties in Sales order
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Partner term"
-	Тогда открылось окно 'Partner terms'
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	Then "Partner terms" window is opened
+	And I go to line in "List" table
 			| 'Description'       |
 			| 'Basic Partner terms, TRY' |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Legal name"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Legal name" field
+	And I go to line in "List" table
 			| 'Description' |
 			| 'Company Ferron BP'  |
-	И в таблице "List" я выбираю текущую строку
+	And I select current line in "List" table
 	* Add item
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Description |
 			| Dress       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| Item     | Item key  |
 			| Dress    | L/Green |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check price calculation
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 		| 'Item'  | 'Price'  | 'Item key'| 'Store'    | 'Q'     | 'Unit'  |
 		| 'Dress' | '350,00' | 'L/Green' | 'Store 01' | '1,000' |  'pcs'  |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _150006 check the redrawing of columns in the price list for additional properties when re-selecting the type of items
+Scenario: _150006 check the redrawing of columns in the price list for additional properties when re-selecting the type of items
 	* Open Price list with price variant by properties
-		И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я меняю значение переключателя 'Set price' на 'By Properties'
-	* Checking the addition of properties for item type Clothes
-		И я нажимаю кнопку выбора у поля "Item type"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I click the button named "FormCreate"
+		And I change "Set price" radio button value to "By Properties"
+	* Check the addition of properties for item type Clothes
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
 			| Description |
-			| Сlothes     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'PriceKeyListAdd'
-		И     таблица "PriceKeyList" стала равной:
+			| Clothes     |
+		And I select current line in "List" table
+		And I click the button named "PriceKeyListAdd"
+		And "PriceKeyList" table became equal
 			| 'Item' | 'Size' | 'Color' | 'Price' |
 			| ''     | ''     | ''      | ''      |
-		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита с именем "PriceKeyListItem"
-		И в таблице "List" я перехожу к строке:
+		And I click choice button of the attribute named "PriceKeyListItem" in "PriceKeyList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PriceKeyList" я активизирую поле "Size"
-		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Size" field in "PriceKeyList" table
+		And I click choice button of "Size" attribute in "PriceKeyList" table
+		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Size'          | 'M'           |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PriceKeyList" я активизирую поле "Color"
-		И в таблице "PriceKeyList" я нажимаю кнопку выбора у реквизита "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Color" field in "PriceKeyList" table
+		And I click choice button of "Color" attribute in "PriceKeyList" table
+		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Color'         | 'Brown'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PriceKeyList" в поле 'Price' я ввожу текст '200,00'
-		И в таблице "PriceKeyList" я завершаю редактирование строки
-	* Checking the addition of properties for item type Clothes
-		И я нажимаю кнопку выбора у поля "Item type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "200,00" text in "Price" field of "PriceKeyList" table
+		And I finish line editing in "PriceKeyList" table
+	* Check the addition of properties for item type Clothes
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
 			| Description |
 			| Shoes     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'PriceKeyListAdd'
-		И     таблица "PriceKeyList" стала равной:
+		And I select current line in "List" table
+		And I click the button named "PriceKeyListAdd"
+		And "PriceKeyList" table became equal
 			| 'Item' | 'Size' | 'Price' |
 			| ''     | ''     | ''      |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: check input by line in the price list for additional properties
-	И я закрыл все окна клиентского приложения
+Scenario: check input by line in the price list for additional properties
+	And I close all client application windows
 	* Open a creation form Price List
-		И я открываю навигационную ссылку "e1cib/list/Document.PriceList"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I click the button named "FormCreate"
 	* Input additionel properties by string 
-		И я меняю значение переключателя 'Set price' на 'By Properties'
-		И я нажимаю кнопку выбора у поля "Item type"
-		И в таблице "List" я перехожу к строке:
+		And I change "Set price" radio button value to "By Properties"
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
 			| 'Description' |
-			| 'Сlothes'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку с именем 'PriceKeyListAdd'
-		И в таблице "PriceKeyList" из выпадающего списка с именем "PriceKeyListItem" я выбираю по строке 'dress'
-		И в таблице "PriceKeyList" я активизирую поле "Size"
-		И в таблице "PriceKeyList" из выпадающего списка "Size" я выбираю по строке '36'
-		И в таблице "PriceKeyList" я активизирую поле "Color"
-		И в таблице "PriceKeyList" из выпадающего списка "Color" я выбираю по строке 'bla'
+			| 'Clothes'     |
+		And I select current line in "List" table
+		And I click the button named "PriceKeyListAdd"
+		And I select "dress" by string from the drop-down list named "PriceKeyListItem" in "PriceKeyList" table
+		And I activate "Size" field in "PriceKeyList" table
+		And I select "36" from "Size" drop-down list by string in "PriceKeyList" table
+		And I activate "Color" field in "PriceKeyList" table
+		And I select "bla" from "Color" drop-down list by string in "PriceKeyList" table
 	* Check entered values
-		И     таблица "PriceKeyList" содержит строки:
+		And "PriceKeyList" table contains lines
 		| 'Item'  | 'Size' | 'Color' |
 		| 'Dress' | '36'   | 'Black' |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows

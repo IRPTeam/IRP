@@ -1,328 +1,268 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: check opening entry
+Feature: check opening entry
 
-Как разработчик
-Я хочу создать документ для ввода начального остатка
-Чтобы перенести остатки клиента при начале работы с базой
+As a developer
+I want to create a document to enter the opening balance
+To input the client's balance when you start working with the base
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-# необходимо дописать тесты на ввод нач остатка по документам
-Сценарий: _400000 preparation
-	* Создание SI для ввода нач остатка по документам
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Partner" я выбираю по строке 'DFC'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+# it's necessary to add tests to start the remainder of the documents
+Scenario: _400000 preparation
+	* Create SI for opening entry by documents
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I select from "Partner" drop-down list by "DFC" string
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Partner term DFC' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '15,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '5 900'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '5 900'
-		И я устанавливаю флаг 'Is opening entry'
-		И Пауза 1
-		И я нажимаю на кнопку 'Post and close'
-	* Создание PI для ввода нач остатка по документам
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Partner" я выбираю по строке 'DFC'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "15,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Other" tab
+		And I input "5 900" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "5 900" text in "Number" field
+		And I set checkbox "Is opening entry"
+		And Delay 1
+		And I click "Post and close" button
+	* Create PI for opening entry by documents
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+		And I select from "Partner" drop-down list by "DFC" string
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Partner term vendor DFC' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '15,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '5 900'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '5 900'
-		И я устанавливаю флаг 'Is opening entry'
-		И Пауза 1
-		И я нажимаю на кнопку 'Post and close'
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "15,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Other" tab
+		And I input "5 900" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "5 900" text in "Number" field
+		And I set checkbox "Is opening entry"
+		And Delay 1
+		And I click "Post and close" button
 
 
-Сценарий: _400001 opening entry account balance
-	* Open document form для ввода начального остатка
-		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение информации о компании
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+Scenario: _400001 opening entry account balance
+	* Open document form for opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-	* Заполнение номера документа
-		И в поле 'Number' я ввожу текст '1'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '1'
-	* Filling in the tabular part по остаткам ДС в кассе и на банковских счетах
-		И в таблице "AccountBalance" я нажимаю на кнопку с именем 'AccountBalanceAdd'
-		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Account"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceCurrency"
-		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+	* Change the document number
+		And I input "1" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "1" text in "Number" field
+	* Filling in the tabular part account balance
+		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
+		And I click choice button of "Account" attribute in "AccountBalance" table
+		And I select current line in "List" table
+		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
+		And I click choice button of "Currency" attribute in "AccountBalance" table
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceAmount"
-		И в таблице "AccountBalance" в поле 'Amount' я ввожу текст '1 000,00'
-		И в таблице "AccountBalance" я завершаю редактирование строки
-		И в таблице "AccountBalance" я нажимаю на кнопку с именем 'AccountBalanceAdd'
-		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
+		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
+		And I finish line editing in "AccountBalance" table
+		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
+		And I click choice button of "Account" attribute in "AccountBalance" table
+		And I go to line in "List" table
 			| Description  |
 			| Cash desk №2 |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceCurrency"
-		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
+		And I click choice button of "Currency" attribute in "AccountBalance" table
+		And I go to line in "List" table
 			| Code | Description     |
 			| USD  | American dollar |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceAmount"
-		И в таблице "AccountBalance" в поле 'Amount' я ввожу текст '1 000,00'
-		И в таблице "AccountBalance" я завершаю редактирование строки
-		И в таблице "AccountBalance" я нажимаю на кнопку с именем 'AccountBalanceAdd'
-		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
+		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
+		And I finish line editing in "AccountBalance" table
+		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
+		And I click choice button of "Account" attribute in "AccountBalance" table
+		And I go to line in "List" table
 			| Description  |
 			| Cash desk №3 |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceCurrency"
-		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
+		And I click choice button of "Currency" attribute in "AccountBalance" table
+		And I go to line in "List" table
 			| Code | Description |
 			| EUR  | Euro        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceAmount"
-		И в таблице "AccountBalance" в поле 'Amount' я ввожу текст '1 000,00'
-		И в таблице "AccountBalance" я завершаю редактирование строки
-		И в таблице "AccountBalance" я нажимаю на кнопку с именем 'AccountBalanceAdd'
-		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
+		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
+		And I finish line editing in "AccountBalance" table
+		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
+		And I click choice button of "Account" attribute in "AccountBalance" table
+		And I go to line in "List" table
 			| Description       |
 			| Bank account, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceAmount"
-		И в таблице "AccountBalance" в поле 'Amount' я ввожу текст '10 000,00'
-		И в таблице "AccountBalance" я завершаю редактирование строки
-		И в таблице "AccountBalance" я нажимаю на кнопку с именем 'AccountBalanceAdd'
-		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
+		And I input "10 000,00" text in "Amount" field of "AccountBalance" table
+		And I finish line editing in "AccountBalance" table
+		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
+		And I click choice button of "Account" attribute in "AccountBalance" table
+		And I go to line in "List" table
 			| Description       |
 			| Bank account, USD |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceCurrency"
-		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceAmount"
-		И в таблице "AccountBalance" в поле 'Amount' я ввожу текст '5 000,00'
-		И в таблице "AccountBalance" я завершаю редактирование строки
-		И в таблице "AccountBalance" я нажимаю на кнопку с именем 'AccountBalanceAdd'
-		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
+		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
+		And I input "5 000,00" text in "Amount" field of "AccountBalance" table
+		And I finish line editing in "AccountBalance" table
+		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
+		And I click choice button of "Account" attribute in "AccountBalance" table
+		And I go to line in "List" table
 			| Description       |
 			| Bank account, EUR |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceAmount"
-		И в таблице "AccountBalance" в поле 'Amount' я ввожу текст '8 000,00'
-		И в таблице "AccountBalance" я завершаю редактирование строки
-	* Check filling inкурса пересчета по вводу начальных остатков
-		* Заполнение курса по остатку ДС в Cash desk №2
-			И в таблице "AccountBalance" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
+		And I input "8 000,00" text in "Amount" field of "AccountBalance" table
+		And I finish line editing in "AccountBalance" table
+	* Check filling in currency rate
+		* Filling in currency rate Cash desk №2
+			And I go to line in "AccountBalance" table
 				| 'Account'      | 'Amount'   | 'Currency' |
 				| 'Cash desk №2' | '1 000,00' | 'USD'      |
-			И в таблице "CurrenciesAccountBalance" я перехожу к строке:
+			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
 				| 'USD'  | 'Local currency' | 'TRY' | 'Legal' |
-			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceRatePresentation' я ввожу текст '0,1756'
-			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceMultiplicity' я ввожу текст '1'
-			И в таблице "CurrenciesAccountBalance" я активизирую поле "Amount"
-			И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
-		* Заполнение курса по остатку ДС в Cash desk №3
-			И в таблице "AccountBalance" я перехожу к строке:
+			And I input "0,1756" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
+			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
+			And I activate "Amount" field in "CurrenciesAccountBalance" table
+			And I finish line editing in "CurrenciesAccountBalance" table
+		* Filling in currency rate Cash desk №3
+			And I go to line in "AccountBalance" table
 				| 'Account'      | 'Amount'   | 'Currency' |
 				| 'Cash desk №3' | '1 000,00' | 'EUR'      |
-			И в таблице "AccountBalance" я активизирую поле "Account"
-			И в таблице "CurrenciesAccountBalance" я перехожу к строке:
+			And I activate "Account" field in "AccountBalance" table
+			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
 				| 'EUR'  | 'Local currency' | 'TRY' | 'Legal' |
-			И в таблице "CurrenciesAccountBalance" я выбираю текущую строку
-			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceRatePresentation' я ввожу текст '0,1758'
-			И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
-			И в таблице "CurrenciesAccountBalance" я перехожу к строке:
+			And I select current line in "CurrenciesAccountBalance" table
+			And I input "0,1758" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
+			And I finish line editing in "CurrenciesAccountBalance" table
+			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'      | 'To'  | 'Type'      |
 				| 'EUR'  | 'Reporting currency' | 'USD' | 'Reporting' |
-			И в таблице "CurrenciesAccountBalance" я выбираю текущую строку
-			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceRatePresentation' я ввожу текст '1,1000'
-			И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
-			И в таблице "CurrenciesAccountBalance" я перехожу к строке:
+			And I select current line in "CurrenciesAccountBalance" table
+			And I input "1,1000" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
+			And I finish line editing in "CurrenciesAccountBalance" table
+			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'  | 'Type'  |
 				| 'EUR'  | 'Local currency' | 'Legal' |
-			И в таблице "CurrenciesAccountBalance" я выбираю текущую строку
-			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceMultiplicity' я ввожу текст '1'
-			И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
-			И в таблице "CurrenciesAccountBalance" я перехожу к строке:
+			And I select current line in "CurrenciesAccountBalance" table
+			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
+			And I finish line editing in "CurrenciesAccountBalance" table
+			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'      | 'Rate'   | 'To'  | 'Type'      |
 				| 'EUR'  | 'Reporting currency' | '1,1000' | 'USD' | 'Reporting' |
-			И в таблице "CurrenciesAccountBalance" я выбираю текущую строку
-			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceMultiplicity' я ввожу текст '1'
-			И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
-		* Заполнение курса по остатку ДС в Bank account, USD
-			И в таблице "AccountBalance" я перехожу к строке:
+			And I select current line in "CurrenciesAccountBalance" table
+			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
+			And I finish line editing in "CurrenciesAccountBalance" table
+		* Filling in currency rate Bank account, USD
+			And I go to line in "AccountBalance" table
 				| 'Account'           | 'Currency' |
 				| 'Bank account, USD' | 'USD'      |
-			И в таблице "CurrenciesAccountBalance" я выбираю текущую строку
-			И в таблице "CurrenciesAccountBalance" я перехожу к строке:
+			And I select current line in "CurrenciesAccountBalance" table
+			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
 				| 'USD'  | 'Local currency' | 'TRY' | 'Legal' |
-			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceRatePresentation' я ввожу текст '0,1758'
-			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceMultiplicity' я ввожу текст '1'
-			И в таблице "CurrenciesAccountBalance" я активизирую поле "Amount"
-			И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
-		* Заполнение курса по остатку ДС в Bank account, EUR
-			И в таблице "AccountBalance" я перехожу к строке:
+			And I input "0,1758" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
+			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
+			And I activate "Amount" field in "CurrenciesAccountBalance" table
+			And I finish line editing in "CurrenciesAccountBalance" table
+		* Filling in currency rate Bank account, EUR
+			And I go to line in "AccountBalance" table
 				| 'Account'           | 'Currency' |
 				| 'Bank account, EUR' | 'EUR'      |
-			И в таблице "CurrenciesAccountBalance" я перехожу к строке:
+			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
 				| 'EUR'  | 'Local currency' | 'TRY' | 'Legal' |
-			И в таблице "CurrenciesAccountBalance" я выбираю текущую строку
-			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceRatePresentation'я ввожу текст '0,1758'
-			И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
-			И в таблице "CurrenciesAccountBalance" я перехожу к строке:
+			And I select current line in "CurrenciesAccountBalance" table
+			And I input "0,1758" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
+			And I finish line editing in "CurrenciesAccountBalance" table
+			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'      | 'To'  | 'Type'      |
 				| 'EUR'  | 'Reporting currency' | 'USD' | 'Reporting' |
-			И в таблице "CurrenciesAccountBalance" я выбираю текущую строку
-			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceRatePresentation' я ввожу текст '1,1000'
-			И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
-			И в таблице "CurrenciesAccountBalance" я перехожу к строке:
+			And I select current line in "CurrenciesAccountBalance" table
+			And I input "1,1000" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
+			And I finish line editing in "CurrenciesAccountBalance" table
+			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
 				| 'EUR'  | 'Local currency' | 'TRY' | 'Legal' |
-			И в таблице "CurrenciesAccountBalance" я выбираю текущую строку
-			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceMultiplicity' я ввожу текст '1'
-			И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
-			И в таблице "CurrenciesAccountBalance" я перехожу к строке:
+			And I select current line in "CurrenciesAccountBalance" table
+			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
+			And I finish line editing in "CurrenciesAccountBalance" table
+			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'      | 'Rate'   | 'To'  | 'Type'      |
 				| 'EUR'  | 'Reporting currency' | '1,1000' | 'USD' | 'Reporting' |
-			И в таблице "CurrenciesAccountBalance" я выбираю текущую строку
-			И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceMultiplicity' я ввожу текст '1'
-			И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
+			And I select current line in "CurrenciesAccountBalance" table
+			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
+			And I finish line editing in "CurrenciesAccountBalance" table
 	* Post document
-		И я нажимаю на кнопку 'Post and close'
-		И Пауза 5
-		* Check movements документа
-			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.AccountBalance'
-			Тогда таблица "List" содержит строки:
-			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Local currency'         | '1 000,00'  |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'     | '171,23'    |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | 'Local currency'         | '5 694,76'  |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | 'Reporting currency'     | '1 000,00'  |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №3'      | 'Local currency'         | '5 688,28'  |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'     | '909,09'    |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | 'Local currency'         | '10 000,00' |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'     | '1 712,33'  |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | 'Local currency'         | '28 441,41' |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | 'Reporting currency'     | '5 000,00'  |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | 'Local currency'         | '45 506,26' |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'     | '7 272,73'  |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | '*'                      | '1 000,00'  |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | '*'                      | '1 000,00'  |
-			| 'EUR'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №3'      | '*'                      | '1 000,00'  |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | '*'                      | '10 000,00' |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | '*'                      | '5 000,00'  |
-			| 'EUR'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | '*'                      | '8 000,00'  |
-			И Я закрыл все окна клиентского приложения
-	* Clear postings документа and  check movement reversal
-		* Clear postings документа
-			И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
-			И в таблице "List" я перехожу к строке:
-			| 'Number' |
-			| '1'      |
-			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
-		* Проверка отмены движений
-			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.AccountBalance'
-			Тогда таблица "List" не содержит строки:
-			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Local currency'         | '1 000,00'  |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'     | '171,23'    |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | 'Local currency'         | '5 694,76'  |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | 'Reporting currency'     | '1 000,00'  |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №3'      | 'Local currency'         | '5 688,28'  |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'     | '909,09'    |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | 'Local currency'         | '10 000,00' |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'     | '1 712,33'  |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | 'Local currency'         | '28 441,41' |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | 'Reporting currency'     | '5 000,00'  |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | 'Local currency'         | '45 506,26' |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'     | '7 272,73'  |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | '*'                      | '1 000,00'  |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | '*'                      | '1 000,00'  |
-			| 'EUR'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №3'      | '*'                      | '1 000,00'  |
-			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | '*'                      | '10 000,00' |
-			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | '*'                      | '5 000,00'  |
-			| 'EUR'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | '*'                      | '8 000,00'  |
-			И Я закрыл все окна клиентского приложения
-	* Posting the documentобратно и проверка движений
-		* Post document
-			И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
-			И в таблице "List" я перехожу к строке:
-			| 'Number' |
-			| '1'      |
-			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
+		And I click "Post and close" button
+		And Delay 5
 		* Check movements
-			И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.AccountBalance'
-			Тогда таблица "List" содержит строки:
+			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+			And "List" table contains lines
 			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
 			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Local currency'         | '1 000,00'  |
 			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'     | '171,23'    |
@@ -342,278 +282,316 @@
 			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | '*'                      | '10 000,00' |
 			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | '*'                      | '5 000,00'  |
 			| 'EUR'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | '*'                      | '8 000,00'  |
-			И Я закрыл все окна клиентского приложения
+			And I close all client application windows
+	* Clear movements and  check movement reversal
+		* Clear movements
+			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+			And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		* Check clearing movements
+			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+			And "List" table does not contain lines
+			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Local currency'         | '1 000,00'  |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'     | '171,23'    |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | 'Local currency'         | '5 694,76'  |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | 'Reporting currency'     | '1 000,00'  |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №3'      | 'Local currency'         | '5 688,28'  |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'     | '909,09'    |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | 'Local currency'         | '10 000,00' |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'     | '1 712,33'  |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | 'Local currency'         | '28 441,41' |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | 'Reporting currency'     | '5 000,00'  |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | 'Local currency'         | '45 506,26' |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'     | '7 272,73'  |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | '*'                      | '1 000,00'  |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | '*'                      | '1 000,00'  |
+			| 'EUR'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №3'      | '*'                      | '1 000,00'  |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | '*'                      | '10 000,00' |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | '*'                      | '5 000,00'  |
+			| 'EUR'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | '*'                      | '8 000,00'  |
+			And I close all client application windows
+	* Posting the document back and check movements
+		* Post document
+			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+			And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+			And in the table "List" I click the button named "ListContextMenuPost"
+		* Check movements
+			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+			And "List" table contains lines
+			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Local currency'         | '1 000,00'  |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'     | '171,23'    |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | 'Local currency'         | '5 694,76'  |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | 'Reporting currency'     | '1 000,00'  |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №3'      | 'Local currency'         | '5 688,28'  |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'     | '909,09'    |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | 'Local currency'         | '10 000,00' |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'     | '1 712,33'  |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | 'Local currency'         | '28 441,41' |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | 'Reporting currency'     | '5 000,00'  |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | 'Local currency'         | '45 506,26' |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'     | '7 272,73'  |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №1'      | '*'                      | '1 000,00'  |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №2'      | '*'                      | '1 000,00'  |
+			| 'EUR'      | 'Opening entry 1*' | 'Main Company' | 'Cash desk №3'      | '*'                      | '1 000,00'  |
+			| 'TRY'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, TRY' | '*'                      | '10 000,00' |
+			| 'USD'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, USD' | '*'                      | '5 000,00'  |
+			| 'EUR'      | 'Opening entry 1*' | 'Main Company' | 'Bank account, EUR' | '*'                      | '8 000,00'  |
+			And I close all client application windows
 
 
 
 
-Сценарий: _400002 opening entry inventory balance
-	* Open document form для ввода начального остатка
-		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение информации о компании
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+Scenario: _400002 opening entry inventory balance
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-	* Заполнение номера документа
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '2'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '2'
-	* Filling in the tabular part по остаткам товара
-		И я перехожу к закладке "Inventory"
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+	* Change the document number
+		And I move to "Other" tab
+		And I input "2" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "2" text in "Number" field
+	* Filling in the tabular part Inventory
+		And I move to "Inventory" tab
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Dress | XS/Blue  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Description |
 			| Store 01    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '500,000'
-		# И в таблице "Inventory" я активизирую поле с именем "InventoryAmount"
-		# И в таблице "Inventory" в поле 'Amount' я ввожу текст '200 000,00'
-		И в таблице "Inventory" я завершаю редактирование строки
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "500,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Dress | S/Yellow |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Store"
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Store" field in "Inventory" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Description |
 			| Store 02    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '400,000'
-		# И в таблице "Inventory" я активизирую поле с именем "InventoryAmount"
-		# И в таблице "Inventory" в поле 'Amount' я ввожу текст '80 000,00'
-		И в таблице "Inventory" я завершаю редактирование строки
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "400,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Dress | XS/Blue  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Store"
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Store" field in "Inventory" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Description |
 			| Store 01    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я завершаю редактирование строки
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" я выбираю текущую строку
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '400,000'
-		# И в таблице "Inventory" я активизирую поле с именем "InventoryAmount"
-		# И в таблице "Inventory" в поле 'Amount' я ввожу текст '80 000,00'
-		И в таблице "Inventory" я завершаю редактирование строки
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Inventory" table
+		And I activate "Quantity" field in "Inventory" table
+		And I select current line in "Inventory" table
+		And I input "400,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Item     | Item key  |
 			| Trousers | 38/Yellow |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Store"
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Store" field in "Inventory" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Description |
 			| Store 02    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '100,000'
-		# И в таблице "Inventory" я активизирую поле с именем "InventoryAmount"
-		# И в таблице "Inventory" в поле 'Amount' я ввожу текст '20 000,00'
-		И в таблице "Inventory" я завершаю редактирование строки
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "100,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Item     | Item key  |
 			| Trousers | 38/Yellow |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Description |
 			| Store 01    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '100,000'
-		# И в таблице "Inventory" я активизирую поле с именем "InventoryAmount"
-		# И в таблице "Inventory" в поле 'Amount' я ввожу текст '19 000,00'
-		И в таблице "Inventory" я завершаю редактирование строки
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "100,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Shirt'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Shirt | 36/Red   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Description |
 			| Store 02    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '100,000'
-		# И в таблице "Inventory" я активизирую поле с именем "InventoryAmount"
-		# И в таблице "Inventory" в поле 'Amount' я ввожу текст '21 000,00'
-		И в таблице "Inventory" я завершаю редактирование строки
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "100,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Shirt'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Shirt | 36/Red   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Description |
 			| Store 01    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '100,000'
-		# И в таблице "Inventory" я активизирую поле с именем "InventoryAmount"
-		# И в таблице "Inventory" в поле 'Amount' я ввожу текст '21 000,00'
-		И в таблице "Inventory" я завершаю редактирование строки
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "100,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Boots | 36/18SD  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Description |
 			| Store 02    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '200,000'
-		# И в таблице "Inventory" я активизирую поле с именем "InventoryAmount"
-		# И в таблице "Inventory" в поле 'Amount' я ввожу текст '40 000,00'
-		И в таблице "Inventory" я завершаю редактирование строки
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "200,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Boots'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Boots | 36/18SD  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Store"
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Store" field in "Inventory" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Description |
 			| Store 01    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '300,000'
-		# И в таблице "Inventory" я активизирую поле с именем "InventoryAmount"
-		# И в таблице "Inventory" в поле 'Amount' я ввожу текст '60 000,00'
-		И в таблице "Inventory" я завершаю редактирование строки
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "300,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Dress | L/Green  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Store"
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Store"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '500,000'
-		# И в таблице "Inventory" я активизирую поле с именем "InventoryAmount"
-		# И в таблице "Inventory" в поле 'Amount' я ввожу текст '200 000,00'
-		И в таблице "Inventory" я завершаю редактирование строки
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Store" field in "Inventory" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "500,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Dress | L/Green  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Store"
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Store" field in "Inventory" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Description |
 			| Store 02    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я завершаю редактирование строки
-		И в таблице "Inventory" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "Inventory" table
+		And I go to line in "Inventory" table
 			| 'Item key' | 'Quantity' | 'Store'    |
 			| 'L/Green'  | '500,000'  | 'Store 01' |
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" я перехожу к строке:
+		And I activate "Quantity" field in "Inventory" table
+		And I go to line in "Inventory" table
 			| Item key | Store    |
 			| L/Green  | Store 02 |
-		И в таблице "Inventory" я выбираю текущую строку
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '100,000'
-		# И в таблице "Inventory" я активизирую поле с именем "InventoryAmount"
-		# И в таблице "Inventory" в поле 'Amount' я ввожу текст '40 000,00'
-		И в таблице "Inventory" я завершаю редактирование строки
+		And I select current line in "Inventory" table
+		And I input "100,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
 	* Post document
-		И я нажимаю на кнопку 'Post'
-	* Check movements документа
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.InventoryBalance'
-		Тогда таблица "List" содержит строки:
+		And I click "Post" button
+	* Check movements
+		Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
+		And "List" table contains lines
 		| 'Quantity' | 'Recorder'         | 'Company'      | 'Item key'  |
 		| '500,000'  | 'Opening entry 2*' | 'Main Company' | 'XS/Blue'   |
 		| '400,000'  | 'Opening entry 2*' | 'Main Company' | 'S/Yellow'  |
@@ -626,9 +604,9 @@
 		| '300,000'  | 'Opening entry 2*' | 'Main Company' | '36/18SD'   |
 		| '500,000'  | 'Opening entry 2*' | 'Main Company' | 'L/Green'   |
 		| '100,000'  | 'Opening entry 2*' | 'Main Company' | 'L/Green'   |
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-		Тогда таблица "List" содержит строки:
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		And "List" table contains lines
 		| 'Quantity' | 'Recorder'         | 'Store'    | 'Item key'  |
 		| '500,000'  | 'Opening entry 2*' | 'Store 01' | 'XS/Blue'   |
 		| '400,000'  | 'Opening entry 2*' | 'Store 02' | 'S/Yellow'  |
@@ -641,9 +619,9 @@
 		| '300,000'  | 'Opening entry 2*' | 'Store 01' | '36/18SD'   |
 		| '500,000'  | 'Opening entry 2*' | 'Store 01' | 'L/Green'   |
 		| '100,000'  | 'Opening entry 2*' | 'Store 02' | 'L/Green'   |
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-		Тогда таблица "List" содержит строки:
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+		And "List" table contains lines
 		| 'Quantity' | 'Recorder'         | 'Store'    | 'Item key'  |
 		| '500,000'  | 'Opening entry 2*' | 'Store 01' | 'XS/Blue'   |
 		| '400,000'  | 'Opening entry 2*' | 'Store 02' | 'S/Yellow'  |
@@ -656,70 +634,70 @@
 		| '300,000'  | 'Opening entry 2*' | 'Store 01' | '36/18SD'   |
 		| '500,000'  | 'Opening entry 2*' | 'Store 01' | 'L/Green'   |
 		| '100,000'  | 'Opening entry 2*' | 'Store 02' | 'L/Green'   |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _400003 opening entry advance balance
-	* Open document form для ввода начального остатка
-		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение информации о компании
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+Scenario: _400003 opening entry advance balance
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-	* Заполнение номера документа
-		И в поле 'Number' я ввожу текст '3'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '3'
-	* Заполнение аванса от клиента
-		И в таблице "AdvanceFromCustomers" я нажимаю на кнопку с именем 'AdvanceFromCustomersAdd'
-		И в таблице "AdvanceFromCustomers" я нажимаю кнопку выбора у реквизита с именем "AdvanceFromCustomersPartner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+	* Change the document number
+		And I input "3" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "3" text in "Number" field
+	* Filling in AdvanceFromCustomers
+		And in the table "AdvanceFromCustomers" I click the button named "AdvanceFromCustomersAdd"
+		And I click choice button of the attribute named "AdvanceFromCustomersPartner" in "AdvanceFromCustomers" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AdvanceFromCustomers" я активизирую поле с именем "AdvanceFromCustomersCurrency"
-		И в таблице "AdvanceFromCustomers" я нажимаю кнопку выбора у реквизита с именем "AdvanceFromCustomersCurrency"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
+		And I click choice button of the attribute named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AdvanceFromCustomers" я активизирую поле с именем "AdvanceFromCustomersAmount"
-		И в таблице "AdvanceFromCustomers" в поле с именем 'AdvanceFromCustomersAmount' я ввожу текст '100,00'
-		И в таблице "AdvanceFromCustomers" я завершаю редактирование строки
-	* Заполнение аванса от поставщика
-		И я перехожу к закладке "To suppliers"
-		И в таблице "AdvanceToSuppliers" я нажимаю на кнопку с именем 'AdvanceToSuppliersAdd'
-		И в таблице "AdvanceToSuppliers" я нажимаю кнопку выбора у реквизита с именем "AdvanceToSuppliersPartner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AdvanceFromCustomersAmount" in "AdvanceFromCustomers" table
+		And I input "100,00" text in the field named "AdvanceFromCustomersAmount" of "AdvanceFromCustomers" table
+		And I finish line editing in "AdvanceFromCustomers" table
+	* Filling in AdvanceToSuppliers
+		And I move to "To suppliers" tab
+		And in the table "AdvanceToSuppliers" I click the button named "AdvanceToSuppliersAdd"
+		And I click choice button of the attribute named "AdvanceToSuppliersPartner" in "AdvanceToSuppliers" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AdvanceToSuppliers" я завершаю редактирование строки
-		И в таблице "AdvanceToSuppliers" я активизирую поле с именем "AdvanceToSuppliersLegalName"
-		И в таблице "AdvanceToSuppliers" я выбираю текущую строку
-		И в таблице "AdvanceToSuppliers" я нажимаю кнопку выбора у реквизита с именем "AdvanceToSuppliersLegalName"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "AdvanceToSuppliers" table
+		And I activate field named "AdvanceToSuppliersLegalName" in "AdvanceToSuppliers" table
+		And I select current line in "AdvanceToSuppliers" table
+		And I click choice button of the attribute named "AdvanceToSuppliersLegalName" in "AdvanceToSuppliers" table
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AdvanceToSuppliers" я активизирую поле с именем "AdvanceToSuppliersCurrency"
-		И в таблице "AdvanceToSuppliers" я нажимаю кнопку выбора у реквизита с именем "AdvanceToSuppliersCurrency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
+		And I click choice button of the attribute named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AdvanceToSuppliers" я активизирую поле с именем "AdvanceToSuppliersAmount"
-		И в таблице "AdvanceToSuppliers" в поле с именем 'AdvanceToSuppliersAmount' я ввожу текст '100,00'
-		И в таблице "AdvanceToSuppliers" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate field named "AdvanceToSuppliersAmount" in "AdvanceToSuppliers" table
+		And I input "100,00" text in the field named "AdvanceToSuppliersAmount" of "AdvanceToSuppliers" table
+		And I finish line editing in "AdvanceToSuppliers" table
 	* Post document
-		И я нажимаю на кнопку 'Post'
-	* Check movements документа
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I click "Post" button
+	* Check movements
+		And I click "Registrations report" button
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Opening entry 3*'                     | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
 		| 'Document registrations records'       | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
 		| 'Register  "Accounts statement"'       | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
@@ -747,90 +725,90 @@
 		| ''                                     | 'Receipt'     | '*'      | '17,12'               | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'USD'          | 'Opening entry 3*' | 'Reporting currency'       | 'No'                   | ''         |
 		| ''                                     | 'Receipt'     | '*'      | '100'                 | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'TRY'          | 'Opening entry 3*' | 'en descriptions is empty' | 'No'                   | ''         |
 		| ''                                     | 'Receipt'     | '*'      | '100'                 | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'TRY'          | 'Opening entry 3*' | 'Local currency'           | 'No'                   | ''         |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: _400004 opening entry AP balance by partner terms (vendors)
-	* Open document form для ввода начального остатка
-		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение информации о компании
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+Scenario: _400004 opening entry AP balance by partner terms (vendors)
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-	* Заполнение номера документа
-		И в поле 'Number' я ввожу текст '4'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '4'
-	* Заполнение ввода начального остатка по задолженности поставщику
+		And I select current line in "List" table
+	* Change the document number
+		And I input "4" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "4" text in "Number" field
+	* Filling in Account payable
 		* Filling in partner and Legal name
-			И я перехожу к закладке "Account payable"
-			И в таблице "AccountPayableByAgreements" я нажимаю на кнопку 'Add'
-			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I move to "Account payable" tab
+			And in the table "AccountPayableByAgreements" I click "Add" button
+			And I click choice button of "Partner" attribute in "AccountPayableByAgreements" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'DFC'         |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I finish line editing in "AccountPayableByAgreements" table
 		* Check filling in legal name
-				И     таблица "AccountPayableByAgreements" содержит строки:
+				And "AccountPayableByAgreements" table contains lines
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
-		* Создание тестового соглашения с взаиморасчетами по соглашениям
-			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Partner term"
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я меняю значение переключателя 'AP/AR posting detail' на 'By partner terms'
-			И я меняю значение переключателя 'Type' на 'Vendor'
-			И в поле 'ENG' я ввожу текст 'DFC Vendor by Partner terms'
-			И в поле 'Date' я ввожу текст '01.12.2019'
-			И я нажимаю кнопку выбора у поля "Multi currency movement type"
-			И в таблице "List" я перехожу к строке:
+		* Create test partner term with AP/AR posting detail - By partner terms (type Vendor)
+			And I click choice button of "Partner term" attribute in "AccountPayableByAgreements" table
+			And I click the button named "FormCreate"
+			And I change "AP/AR posting detail" radio button value to "By partner terms"
+			And I change "Type" radio button value to "Vendor"
+			And I input "DFC Vendor by Partner terms" text in "ENG" field
+			And I input "01.12.2019" text in "Date" field
+			And I click Select button of "Multi currency movement type" field
+			And I go to line in "List" table
 				| 'Currency' | 'Description' | 'Source'       | 'Type'      |
 				| 'TRY'      | 'TRY'         | 'Forex Seling' | 'Partner term' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Price type"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Price type" field
+			And I go to line in "List" table
 				| 'Currency' | 'Description'       | 'Reference'         |
 				| 'TRY'      | 'Vendor price, TRY' | 'Vendor price, TRY' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Start using' я ввожу текст '01.12.2019'
-			И я нажимаю на кнопку 'Save and close'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "01.12.2019" text in "Start using" field
+			And I click "Save and close" button
+			And I go to line in "List" table
 			| 'Description'              |
 			| 'DFC Vendor by Partner terms' |
-			И я нажимаю на кнопку с именем 'FormChoose'
-		* Заполнение суммы и валюты
-			И в таблице "AccountPayableByAgreements" я активизирую поле "Currency"
-			И в таблице "AccountPayableByAgreements" я выбираю текущую строку
-			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Currency"
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormChoose"
+		* Filling in amount and currency
+			And I activate "Currency" field in "AccountPayableByAgreements" table
+			And I select current line in "AccountPayableByAgreements" table
+			And I click choice button of "Currency" attribute in "AccountPayableByAgreements" table
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountPayableByAgreements" я активизирую поле "Amount"
-			И в таблице "AccountPayableByAgreements" в поле 'Amount' я ввожу текст '100,00'
-			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
-		* Проверка расчета Reporting currency
-			И в таблице "CurrenciesAccountPayableByAgreements" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Amount" field in "AccountPayableByAgreements" table
+			And I input "100,00" text in "Amount" field of "AccountPayableByAgreements" table
+			And I finish line editing in "AccountPayableByAgreements" table
+		* Check calculation Reporting currency
+			And I go to line in "CurrenciesAccountPayableByAgreements" table
 			| 'Movement type'      | 'Type'      |
 			| 'Reporting currency' | 'Reporting' |
-			И в таблице "CurrenciesAccountPayableByAgreements" я выбираю текущую строку
-			И в таблице "CurrenciesAccountPayableByAgreements" в поле с именем "CurrenciesAccountPayableByAgreementsRatePresentation" я ввожу текст '5,8400'
-			И в таблице "CurrenciesAccountPayableByAgreements" в поле с именем "CurrenciesAccountPayableByAgreementsMultiplicity" я ввожу текст '1'
-			И в таблице "CurrenciesAccountPayableByAgreements" я завершаю редактирование строки
-			И     таблица "CurrenciesAccountPayableByDocuments" содержит строки:
+			And I select current line in "CurrenciesAccountPayableByAgreements" table
+			And I input "5,8400" text in the field named "CurrenciesAccountPayableByAgreementsRatePresentation" of "CurrenciesAccountPayableByAgreements" table
+			And I input "1" text in the field named "CurrenciesAccountPayableByAgreementsMultiplicity" of "CurrenciesAccountPayableByAgreements" table
+			And I finish line editing in "CurrenciesAccountPayableByAgreements" table
+			And "CurrenciesAccountPayableByDocuments" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
 	* Post document
-		И я нажимаю на кнопку 'Post and close'
-		И Пауза 5
-		* Check movements документа
-			И я нажимаю на кнопку 'Registrations report'
-			Тогда табличный документ "ResultTable" равен по шаблону:
+		And I click "Post and close" button
+		And Delay 5
+		* Check movements
+			And I click "Registrations report" button
+			Then "ResultTable" spreadsheet document is equal by template
 			| 'Opening entry 4*'                     | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                         | ''         | ''                         | ''                     |
 			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                         | ''         | ''                         | ''                     |
 			| 'Register  "Accounts statement"'           | ''            | ''                   | ''                    | ''               | ''                       | ''               | ''             | ''                         | ''           | ''                         | ''                     |
@@ -853,87 +831,87 @@
 
 
 	
-Сценарий: _400005 opening entry AR balance by partner terms (customers)
-	* Open document form для ввода начального остатка
-		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение информации о компании
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+Scenario: _400005 opening entry AR balance by partner terms (customers)
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-	* Заполнение номера документа
-		И в поле 'Number' я ввожу текст '5'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '5'
-	* Заполнение ввода начального остатка по задолженности клиента
+		And I select current line in "List" table
+	* Change the document number
+		And I input "5" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "5" text in "Number" field
+	* Filling in Account receivable
 		* Filling in partner and Legal name
-			И я перехожу к закладке "Account receivable"
-			И в таблице "AccountReceivableByAgreements" я нажимаю на кнопку 'Add'
-			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I move to "Account receivable" tab
+			And in the table "AccountReceivableByAgreements" I click "Add" button
+			And I click choice button of "Partner" attribute in "AccountReceivableByAgreements" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'DFC'         |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I finish line editing in "AccountReceivableByAgreements" table
 		* Check filling in legal name
-				И     таблица "AccountReceivableByAgreements" содержит строки:
+				And "AccountReceivableByAgreements" table contains lines
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
-		* Создание тестового соглашения с взаиморасчетами по соглашениям
-			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Partner term"
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я меняю значение переключателя 'AP/AR posting detail' на 'By partner terms'
-			И я меняю значение переключателя 'Type' на 'Customer'
-			И в поле 'ENG' я ввожу текст 'DFC Customer by Partner terms'
-			И в поле 'Date' я ввожу текст '01.12.2019'
-			И я нажимаю кнопку выбора у поля "Multi currency movement type"
-			И в таблице "List" я перехожу к строке:
+		* Create test partner term with AP/AR posting detail - By partner terms (type Customer)
+			And I click choice button of "Partner term" attribute in "AccountReceivableByAgreements" table
+			And I click the button named "FormCreate"
+			And I change "AP/AR posting detail" radio button value to "By partner terms"
+			And I change "Type" radio button value to "Customer"
+			And I input "DFC Customer by Partner terms" text in "ENG" field
+			And I input "01.12.2019" text in "Date" field
+			And I click Select button of "Multi currency movement type" field
+			And I go to line in "List" table
 				| 'Currency' | 'Description' | 'Source'       | 'Type'      |
 				| 'TRY'      | 'TRY'         | 'Forex Seling' | 'Partner term' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Price type"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Price type" field
+			And I go to line in "List" table
 				| 'Description'       |
 				| 'Basic Price Types' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Start using' я ввожу текст '01.12.2019'
-			И я нажимаю на кнопку 'Save and close'
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "01.12.2019" text in "Start using" field
+			And I click "Save and close" button
+			And I go to line in "List" table
 				| 'Description'              |
 				| 'DFC Customer by Partner terms' |
-			И я нажимаю на кнопку с именем 'FormChoose'
-		* Заполнение суммы и валюты
-			И в таблице "AccountReceivableByAgreements" я активизирую поле "Currency"
-			И в таблице "AccountReceivableByAgreements" я выбираю текущую строку
-			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Currency"
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormChoose"
+		* Filling in amount and currency
+			And I activate "Currency" field in "AccountReceivableByAgreements" table
+			And I select current line in "AccountReceivableByAgreements" table
+			And I click choice button of "Currency" attribute in "AccountReceivableByAgreements" table
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountReceivableByAgreements" я активизирую поле "Amount"
-			И в таблице "AccountReceivableByAgreements" в поле 'Amount' я ввожу текст '100,00'
-			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
-		* Проверка расчета Reporting currency
-			И в таблице "CurrenciesAccountReceivableByAgreements" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Amount" field in "AccountReceivableByAgreements" table
+			And I input "100,00" text in "Amount" field of "AccountReceivableByAgreements" table
+			And I finish line editing in "AccountReceivableByAgreements" table
+		* Check calculation Reporting currency
+			And I go to line in "CurrenciesAccountReceivableByAgreements" table
 				| 'Movement type'      | 'Type'      |
 				| 'Reporting currency' | 'Reporting' |
-			И в таблице "CurrenciesAccountReceivableByAgreements" я выбираю текущую строку
-			И в таблице "CurrenciesAccountReceivableByAgreements" в поле с именем "CurrenciesAccountReceivableByAgreementsRatePresentation" я ввожу текст '5,8400'
-			И в таблице "CurrenciesAccountReceivableByAgreements" в поле с именем "CurrenciesAccountReceivableByAgreementsMultiplicity" я ввожу текст '1'
-			И в таблице "CurrenciesAccountReceivableByAgreements" я завершаю редактирование строки
-			И     таблица "CurrenciesAccountReceivableByDocuments" содержит строки:
+			And I select current line in "CurrenciesAccountReceivableByAgreements" table
+			And I input "5,8400" text in the field named "CurrenciesAccountReceivableByAgreementsRatePresentation" of "CurrenciesAccountReceivableByAgreements" table
+			And I input "1" text in the field named "CurrenciesAccountReceivableByAgreementsMultiplicity" of "CurrenciesAccountReceivableByAgreements" table
+			And I finish line editing in "CurrenciesAccountReceivableByAgreements" table
+			And "CurrenciesAccountReceivableByDocuments" table contains lines
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
 	* Post document
-		И я нажимаю на кнопку 'Post and close'
-		И Пауза 5
-	* Check movements документа
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I click "Post and close" button
+		And Delay 5
+	* Check movements
+		And I click "Registrations report" button
+		Then "ResultTable" spreadsheet document is equal by template
 			| 'Opening entry 5*'                     | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                           | ''         | ''                         | ''                     |
 			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                           | ''         | ''                         | ''                     |
 			| 'Register  "Partner AR transactions"'  | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                           | ''         | ''                         | ''                     |
@@ -956,286 +934,283 @@
 
 
 
-Сценарий: _400008 check the entry of the account balance, inventory balance, Ap/Ar balance, advance in one document
-	* Open document form для ввода начального остатка
-		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение информации о компании
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+Scenario: _400008 check the entry of the account balance, inventory balance, Ap/Ar balance, advance in one document
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-	* Заполнение номера документа
-		И в поле 'Number' я ввожу текст '8'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '8'
-	* Filling in the tabular part по остаткам ДС в кассе
-		И в таблице "AccountBalance" я нажимаю на кнопку с именем 'AccountBalanceAdd'
-		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+	* Change the document number
+		And I input "8" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "8" text in "Number" field
+	* Filling in the tabular part Account Balance
+		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
+		And I click choice button of "Account" attribute in "AccountBalance" table
+		And I go to line in "List" table
 			| Description  |
 			| Cash desk №2 |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceCurrency"
-		И в таблице "AccountBalance" я нажимаю кнопку выбора у реквизита "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
+		And I click choice button of "Currency" attribute in "AccountBalance" table
+		And I go to line in "List" table
 			| Code | Description     |
 			| USD  | American dollar |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountBalance" я активизирую поле с именем "AccountBalanceAmount"
-		И в таблице "AccountBalance" в поле 'Amount' я ввожу текст '1 000,00'
-		И в таблице "AccountBalance" я завершаю редактирование строки
-		И в таблице "AccountBalance" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
+		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
+		And I finish line editing in "AccountBalance" table
+		And I go to line in "AccountBalance" table
 			| 'Account'      | 'Amount'   | 'Currency' |
 			| 'Cash desk №2' | '1 000,00' | 'USD'      |
-		И в таблице "CurrenciesAccountBalance" я перехожу к строке:
+		And I go to line in "CurrenciesAccountBalance" table
 			| 'From' | 'Movement type'  | 'To'  | 'Type'  |
 			| 'USD'  | 'Local currency' | 'TRY' | 'Legal' |
-		И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceRatePresentation' я ввожу текст '0,1756'
-		И в таблице "CurrenciesAccountBalance" в поле с именем 'CurrenciesAccountBalanceMultiplicity' я ввожу текст '1'
-		И в таблице "CurrenciesAccountBalance" я активизирую поле "Amount"
-		И в таблице "CurrenciesAccountBalance" я завершаю редактирование строки
-	* Filling in the tabular part по остаткам товара
-		И я перехожу к закладке "Inventory"
-		И в таблице "Inventory" я нажимаю на кнопку с именем 'InventoryAdd'
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I input "0,1756" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
+		And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
+		And I activate "Amount" field in "CurrenciesAccountBalance" table
+		And I finish line editing in "CurrenciesAccountBalance" table
+	* Filling in the tabular part Inventory
+		And I move to "Inventory" tab
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Item  | Item key |
 			| Dress | XS/Blue  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я нажимаю кнопку выбора у реквизита "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
 			| Description |
 			| Store 01    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Inventory" я активизирую поле "Quantity"
-		И в таблице "Inventory" в поле 'Quantity' я ввожу текст '10,000'
-		И в таблице "Inventory" я завершаю редактирование строки
-	* Заполнение аванса от клиента
-		И в таблице "AdvanceFromCustomers" я нажимаю на кнопку с именем 'AdvanceFromCustomersAdd'
-		И в таблице "AdvanceFromCustomers" я нажимаю кнопку выбора у реквизита с именем "AdvanceFromCustomersPartner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "10,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+	* Filling in Advance from Customers
+		And in the table "AdvanceFromCustomers" I click the button named "AdvanceFromCustomersAdd"
+		And I click choice button of the attribute named "AdvanceFromCustomersPartner" in "AdvanceFromCustomers" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AdvanceFromCustomers" я активизирую поле с именем "AdvanceFromCustomersCurrency"
-		И в таблице "AdvanceFromCustomers" я нажимаю кнопку выбора у реквизита с именем "AdvanceFromCustomersCurrency"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
+		And I click choice button of the attribute named "AdvanceFromCustomersCurrency" in "AdvanceFromCustomers" table
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AdvanceFromCustomers" я активизирую поле с именем "AdvanceFromCustomersAmount"
-		И в таблице "AdvanceFromCustomers" в поле с именем 'AdvanceFromCustomersAmount' я ввожу текст '525,00'
-		И в таблице "AdvanceFromCustomers" я завершаю редактирование строки
-	* Заполнение аванса от поставщика
-		И я перехожу к закладке "To suppliers"
-		И в таблице "AdvanceToSuppliers" я нажимаю на кнопку с именем 'AdvanceToSuppliersAdd'
-		И в таблице "AdvanceToSuppliers" я нажимаю кнопку выбора у реквизита с именем "AdvanceToSuppliersPartner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AdvanceFromCustomersAmount" in "AdvanceFromCustomers" table
+		And I input "525,00" text in the field named "AdvanceFromCustomersAmount" of "AdvanceFromCustomers" table
+		And I finish line editing in "AdvanceFromCustomers" table
+	* Filling in Advance to suppliers
+		And I move to "To suppliers" tab
+		And in the table "AdvanceToSuppliers" I click the button named "AdvanceToSuppliersAdd"
+		And I click choice button of the attribute named "AdvanceToSuppliersPartner" in "AdvanceToSuppliers" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AdvanceToSuppliers" я завершаю редактирование строки
-		И в таблице "AdvanceToSuppliers" я активизирую поле с именем "AdvanceToSuppliersLegalName"
-		И в таблице "AdvanceToSuppliers" я выбираю текущую строку
-		И в таблице "AdvanceToSuppliers" я нажимаю кнопку выбора у реквизита с именем "AdvanceToSuppliersLegalName"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "AdvanceToSuppliers" table
+		And I activate field named "AdvanceToSuppliersLegalName" in "AdvanceToSuppliers" table
+		And I select current line in "AdvanceToSuppliers" table
+		And I click choice button of the attribute named "AdvanceToSuppliersLegalName" in "AdvanceToSuppliers" table
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AdvanceToSuppliers" я активизирую поле с именем "AdvanceToSuppliersCurrency"
-		И в таблице "AdvanceToSuppliers" я нажимаю кнопку выбора у реквизита с именем "AdvanceToSuppliersCurrency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
+		And I click choice button of the attribute named "AdvanceToSuppliersCurrency" in "AdvanceToSuppliers" table
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AdvanceToSuppliers" я активизирую поле с именем "AdvanceToSuppliersAmount"
-		И в таблице "AdvanceToSuppliers" в поле с именем 'AdvanceToSuppliersAmount' я ввожу текст '811,00'
-		И в таблице "AdvanceToSuppliers" я завершаю редактирование строки
-	* Заполнение ввода начального остатка по задолженности поставщику по соглашениям
+		And I select current line in "List" table
+		And I activate field named "AdvanceToSuppliersAmount" in "AdvanceToSuppliers" table
+		And I input "811,00" text in the field named "AdvanceToSuppliersAmount" of "AdvanceToSuppliers" table
+		And I finish line editing in "AdvanceToSuppliers" table
+	* Filling in Account payable by agreements
 		* Filling in partner and Legal name
-			И я перехожу к закладке "Account payable"
-			И в таблице "AccountPayableByAgreements" я нажимаю на кнопку 'Add'
-			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I move to "Account payable" tab
+			And in the table "AccountPayableByAgreements" I click "Add" button
+			And I click choice button of "Partner" attribute in "AccountPayableByAgreements" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'DFC'         |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I finish line editing in "AccountPayableByAgreements" table
 		* Check filling in legal name
-				И     таблица "AccountPayableByAgreements" содержит строки:
+				And "AccountPayableByAgreements" table contains lines
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
-		* Select тестового соглашения с взаиморасчетами по соглашениям
-			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Partner term"
-			И в таблице "List" я перехожу к строке:
+		* Select partner term
+			And I click choice button of "Partner term" attribute in "AccountPayableByAgreements" table
+			And I go to line in "List" table
 			| 'Description'              |
 			| 'DFC Vendor by Partner terms' |
-			И я нажимаю на кнопку с именем 'FormChoose'
-		* Заполнение суммы и валюты
-			И в таблице "AccountPayableByAgreements" я активизирую поле "Currency"
-			И в таблице "AccountPayableByAgreements" я выбираю текущую строку
-			И в таблице "AccountPayableByAgreements" я нажимаю кнопку выбора у реквизита "Currency"
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormChoose"
+		* Filling in amount and currency
+			And I activate "Currency" field in "AccountPayableByAgreements" table
+			And I select current line in "AccountPayableByAgreements" table
+			And I click choice button of "Currency" attribute in "AccountPayableByAgreements" table
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountPayableByAgreements" я активизирую поле "Amount"
-			И в таблице "AccountPayableByAgreements" в поле 'Amount' я ввожу текст '111,00'
-			И в таблице "AccountPayableByAgreements" я завершаю редактирование строки
-		* Проверка расчета Reporting currency
-			И в таблице "CurrenciesAccountPayableByAgreements" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Amount" field in "AccountPayableByAgreements" table
+			And I input "111,00" text in "Amount" field of "AccountPayableByAgreements" table
+			And I finish line editing in "AccountPayableByAgreements" table
+		* Check calculation Reporting currency
+			And I go to line in "CurrenciesAccountPayableByAgreements" table
 			| 'Movement type'      | 'Type'      |
 			| 'Reporting currency' | 'Reporting' |
-			И в таблице "CurrenciesAccountPayableByAgreements" я выбираю текущую строку
-			И в таблице "CurrenciesAccountPayableByAgreements" в поле с именем "CurrenciesAccountPayableByAgreementsRatePresentation" я ввожу текст '5,8400'
-			И в таблице "CurrenciesAccountPayableByAgreements" в поле с именем "CurrenciesAccountPayableByAgreementsMultiplicity" я ввожу текст '1'
-			И в таблице "CurrenciesAccountPayableByAgreements" я завершаю редактирование строки
-	* Заполнение ввода начального остатка по задолженности клиента  по соглашениям
+			And I select current line in "CurrenciesAccountPayableByAgreements" table
+			And I input "5,8400" text in the field named "CurrenciesAccountPayableByAgreementsRatePresentation" of "CurrenciesAccountPayableByAgreements" table
+			And I input "1" text in the field named "CurrenciesAccountPayableByAgreementsMultiplicity" of "CurrenciesAccountPayableByAgreements" table
+			And I finish line editing in "CurrenciesAccountPayableByAgreements" table
+	* Filling in Account receivable by agreements
 		* Filling in partner and Legal name
-			И я перехожу к закладке "Account receivable"
-			И в таблице "AccountReceivableByAgreements" я нажимаю на кнопку 'Add'
-			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I move to "Account receivable" tab
+			And in the table "AccountReceivableByAgreements" I click "Add" button
+			And I click choice button of "Partner" attribute in "AccountReceivableByAgreements" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'DFC'         |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I finish line editing in "AccountReceivableByAgreements" table
 		* Check filling in legal name
-				И     таблица "AccountReceivableByAgreements" содержит строки:
+				And "AccountReceivableByAgreements" table contains lines
 				| 'Partner' | 'Legal name' |
 				| 'DFC'     | 'DFC'        |
-		* Select тестового соглашения с взаиморасчетами по соглашениям
-			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Partner term"
-			И в таблице "List" я перехожу к строке:
+		* Select partner term
+			And I click choice button of "Partner term" attribute in "AccountReceivableByAgreements" table
+			And I go to line in "List" table
 				| 'Description'              |
 				| 'DFC Customer by Partner terms' |
-			И я нажимаю на кнопку с именем 'FormChoose'
-		* Заполнение суммы и валюты
-			И в таблице "AccountReceivableByAgreements" я активизирую поле "Currency"
-			И в таблице "AccountReceivableByAgreements" я выбираю текущую строку
-			И в таблице "AccountReceivableByAgreements" я нажимаю кнопку выбора у реквизита "Currency"
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormChoose"
+		* Filling in amount and currency
+			And I activate "Currency" field in "AccountReceivableByAgreements" table
+			And I select current line in "AccountReceivableByAgreements" table
+			And I click choice button of "Currency" attribute in "AccountReceivableByAgreements" table
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "AccountReceivableByAgreements" я активизирую поле "Amount"
-			И в таблице "AccountReceivableByAgreements" в поле 'Amount' я ввожу текст '151,00'
-			И в таблице "AccountReceivableByAgreements" я завершаю редактирование строки
-		* Проверка расчета Reporting currency
-			И в таблице "CurrenciesAccountReceivableByAgreements" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Amount" field in "AccountReceivableByAgreements" table
+			And I input "151,00" text in "Amount" field of "AccountReceivableByAgreements" table
+			And I finish line editing in "AccountReceivableByAgreements" table
+		* Check calculation Reporting currency
+			And I go to line in "CurrenciesAccountReceivableByAgreements" table
 				| 'Movement type'      | 'Type'      |
 				| 'Reporting currency' | 'Reporting' |
-			И в таблице "CurrenciesAccountReceivableByAgreements" я выбираю текущую строку
-			И в таблице "CurrenciesAccountReceivableByAgreements" в поле с именем "CurrenciesAccountReceivableByAgreementsRatePresentation" я ввожу текст '5,8400'
-			И в таблице "CurrenciesAccountReceivableByAgreements" в поле с именем "CurrenciesAccountReceivableByAgreementsMultiplicity" я ввожу текст '1'
-			И в таблице "CurrenciesAccountReceivableByAgreements" я завершаю редактирование строки
-	# * Заполнение ввода начального остатка по задолженности клиента  по документам
-	# * Заполнение ввода начального остатка по задолженности поставщика  по документам
+			And I select current line in "CurrenciesAccountReceivableByAgreements" table
+			And I input "5,8400" text in the field named "CurrenciesAccountReceivableByAgreementsRatePresentation" of "CurrenciesAccountReceivableByAgreements" table
+			And I input "1" text in the field named "CurrenciesAccountReceivableByAgreementsMultiplicity" of "CurrenciesAccountReceivableByAgreements" table
+			And I finish line editing in "CurrenciesAccountReceivableByAgreements" table
 
 
-Сценарий: _400009 check the entry of the Ap/Ar balance by documents
-	* Open document form для ввода начального остатка
-		И я открываю навигационную ссылку 'e1cib/list/Document.OpeningEntry'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение информации о компании
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+Scenario: _400009 check the entry of the Ap/Ar balance by documents
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-	* Заполнение номера документа
-		И в поле 'Number' я ввожу текст '9'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '9'
-	* Заполнение AP по документам
-		И я перехожу к закладке "Account payable"
-		И я перехожу к закладке с именем "GroupAccountPayableByDocuments"
-		И в таблице "AccountPayableByDocuments" я нажимаю на кнопку с именем 'AccountPayableByDocumentsAdd'
-		И в таблице "AccountPayableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountPayableByDocumentsPartner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+	* Change the document number
+		And I input "9" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "9" text in "Number" field
+	* Filling in AP by documents
+		And I move to "Account payable" tab
+		And I move to the tab named "GroupAccountPayableByDocuments"
+		And in the table "AccountPayableByDocuments" I click the button named "AccountPayableByDocumentsAdd"
+		And I click choice button of the attribute named "AccountPayableByDocumentsPartner" in "AccountPayableByDocuments" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountPayableByDocuments" я завершаю редактирование строки
-		И я перехожу к следующему реквизиту
-		И в таблице "AccountPayableByDocuments" я активизирую поле с именем "AccountPayableByDocumentsAgreement"
-		И в таблице "AccountPayableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountPayableByDocumentsAgreement"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "AccountPayableByDocuments" table
+		And I move to the next attribute
+		And I activate field named "AccountPayableByDocumentsAgreement" in "AccountPayableByDocuments" table
+		And I click choice button of the attribute named "AccountPayableByDocumentsAgreement" in "AccountPayableByDocuments" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Partner term vendor DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountPayableByDocuments" я выбираю текущую строку
-		И в таблице "AccountPayableByDocuments" я активизирую поле с именем "AccountPayableByDocumentsCurrency"
-		И в таблице "AccountPayableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountPayableByDocumentsCurrency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I select current line in "AccountPayableByDocuments" table
+		And I activate field named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
+		And I click choice button of the attribute named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountPayableByDocuments" я активизирую поле с именем "AccountPayableByDocumentsBasisDocument"
-		И в таблице "AccountPayableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountPayableByDocumentsBasisDocument"
-		И в таблице "" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountPayableByDocumentsBasisDocument" in "AccountPayableByDocuments" table
+		And I click choice button of the attribute named "AccountPayableByDocumentsBasisDocument" in "AccountPayableByDocuments" table
+		And I go to line in "" table
 			| ''                 |
 			| 'Purchase invoice' |
-		И в таблице "" я выбираю текущую строку
-		Тогда в таблице "List" количество строк "меньше или равно" 1
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "" table
+		Then the number of "List" table lines is "меньше или равно" 1
+		And I go to line in "List" table
 			| 'Legal name' | 'Number' |
 			| 'DFC'        | '5 900'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountPayableByDocuments" я активизирую поле с именем "AccountPayableByDocumentsAmount"
-		И в таблице "AccountPayableByDocuments" в поле с именем 'AccountPayableByDocumentsAmount' я ввожу текст '100,00'
-		И в таблице "AccountPayableByDocuments" я завершаю редактирование строки
-	* Заполнение AR по документам
-		И я перехожу к закладке "Account receivable"
-		И я перехожу к закладке с именем "GroupAccountReceivableByDocuments"
-		И в таблице "AccountReceivableByDocuments" я нажимаю на кнопку с именем 'AccountReceivableByDocumentsAdd'
-		И в таблице "AccountReceivableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountReceivableByDocumentsPartner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountPayableByDocumentsAmount" in "AccountPayableByDocuments" table
+		And I input "100,00" text in the field named "AccountPayableByDocumentsAmount" of "AccountPayableByDocuments" table
+		And I finish line editing in "AccountPayableByDocuments" table
+	* Filling in AR by documents
+		And I move to "Account receivable" tab
+		And I move to the tab named "GroupAccountReceivableByDocuments"
+		And in the table "AccountReceivableByDocuments" I click the button named "AccountReceivableByDocumentsAdd"
+		And I click choice button of the attribute named "AccountReceivableByDocumentsPartner" in "AccountReceivableByDocuments" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к следующему реквизиту
-		И в таблице "AccountReceivableByDocuments" я активизирую поле с именем "AccountReceivableByDocumentsAgreement"
-		И в таблице "AccountReceivableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountReceivableByDocumentsAgreement"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I move to the next attribute
+		And I activate field named "AccountReceivableByDocumentsAgreement" in "AccountReceivableByDocuments" table
+		And I click choice button of the attribute named "AccountReceivableByDocumentsAgreement" in "AccountReceivableByDocuments" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Partner term DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountReceivableByDocuments" я активизирую поле с именем "AccountReceivableByDocumentsCurrency"
-		И в таблице "AccountReceivableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountReceivableByDocumentsCurrency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
+		And I click choice button of the attribute named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountReceivableByDocuments" я нажимаю кнопку выбора у реквизита с именем "AccountReceivableByDocumentsBasisDocument"
-		И в таблице "" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of the attribute named "AccountReceivableByDocumentsBasisDocument" in "AccountReceivableByDocuments" table
+		And I go to line in "" table
 			| ''              |
 			| 'Sales invoice' |
-		И в таблице "" я выбираю текущую строку
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "" table
+		And I go to line in "List" table
 			| 'Number' |
 			| '5 900'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "AccountReceivableByDocuments" я завершаю редактирование строки
-		И в таблице "AccountReceivableByDocuments" я активизирую поле с именем "AccountReceivableByDocumentsAmount"
-		И в таблице "AccountReceivableByDocuments" я выбираю текущую строку
-		И в таблице "AccountReceivableByDocuments" в поле с именем 'AccountReceivableByDocumentsAmount' я ввожу текст '200,00'
-		И в таблице "AccountReceivableByDocuments" я завершаю редактирование строки
-	* Проведение и проверка движений
-		И я нажимаю на кнопку 'Post'
-	# 	И я нажимаю на кнопку 'Registrations report'
+		And I select current line in "List" table
+		And I finish line editing in "AccountReceivableByDocuments" table
+		And I activate field named "AccountReceivableByDocumentsAmount" in "AccountReceivableByDocuments" table
+		And I select current line in "AccountReceivableByDocuments" table
+		And I input "200,00" text in the field named "AccountReceivableByDocumentsAmount" of "AccountReceivableByDocuments" table
+		And I finish line editing in "AccountReceivableByDocuments" table
+	* Post and check movements
+		And I click "Post" button
 	# AccountByDocumentsMainTablePartnerOnChange
 	# AccountPayableByDocumentsPartnerOnChange
 	# AccountReceivableByDocumentsPartnerOnChange

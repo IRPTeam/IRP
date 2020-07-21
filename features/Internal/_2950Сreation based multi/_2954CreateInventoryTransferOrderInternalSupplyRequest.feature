@@ -1,231 +1,231 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: creating Inventory transfer order based on several Internal supply request
+Feature: create Inventory transfer order based on several Internal supply request
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
 
-Сценарий: _295400 preparation 
-	* Создание первого Internal supply request со склада Store 02
+Scenario: _295400 preparation 
+	* Create first Internal supply request from Store 02
 		* Open a creation form Internal Supply Request
-			И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
-			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение номера документа
-			И в поле 'Number' я ввожу текст '0'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '295'
-		* Filling in basic details документа
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+			And I click the button named "FormCreate"
+		* Change the document number
+			And I input "0" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "295" text in "Number" field
+		* Filling in basic details
+			And I click Select button of "Company" field
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
 				| Description  |
 				| Main Company | 
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| Description |
 				| Store 02  |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in the tabular part
-			И я нажимаю на кнопку'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I click "Add" button
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Boots'       |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'  | 'Item key' |
 				| 'Boots' | '37/18SD'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'High shoes'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'       | 'Item key' |
 				| 'High shoes' | '37/19SD'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-	* Создание второго Internal supply request со склада Store 02
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+	* Create second Internal supply request from Store 02
 		* Open a creation form Internal Supply Request
-			И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
-			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение номера документа
-			И в поле 'Number' я ввожу текст '0'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '296'
-		* Filling in basic details документа
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+			And I click the button named "FormCreate"
+		* Change the document number
+			And I input "0" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "296" text in "Number" field
+		* Filling in basic details
+			And I click Select button of "Company" field
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
 				| Description  |
 				| Main Company | 
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| Description |
 				| Store 02  |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in the tabular part
-			И я нажимаю на кнопку'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I click "Add" button
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Dress'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'     | 'Item key'  |
 				| 'Dress' | 'S/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Boots'       |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'  | 'Item key' |
 				| 'Boots' | '37/18SD'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'High shoes'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'       | 'Item key' |
 				| 'High shoes' | '37/19SD'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-	* Создание третьего Internal supply request со склада Store 03
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+	* Create third Internal supply request from Store 03
 		* Open a creation form Internal Supply Request
-			И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
-			И я нажимаю на кнопку с именем 'FormCreate'
-		* Заполнение номера документа
-			И в поле 'Number' я ввожу текст '0'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '297'
-		* Filling in basic details документа
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+			And I click the button named "FormCreate"
+		* Change the document number
+			And I input "0" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "297" text in "Number" field
+		* Filling in basic details
+			And I click Select button of "Company" field
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
 				| Description  |
 				| Main Company | 
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| Description |
 				| Store 03  |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling in the tabular part
-			И я нажимаю на кнопку'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I click "Add" button
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Dress'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'M/White' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Boots'       |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'  | 'Item key' |
 				| 'Boots' | '37/18SD'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'High shoes'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'       | 'Item key' |
 				| 'High shoes' | '37/19SD'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		And I click "Post and close" button
 
 
-Сценарий: _295401 сheck filling in Inventory transfer order when creating based on two Internal supply requests with the same warehouse
+Scenario: _295401 check filling in Inventory transfer order when creating based on two Internal supply requests with the same warehouse
 	* Select InternalSupplyRequest
-		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
 			| 'Number'  |
 			| '295' | 
-		И в таблице 'List' я перехожу на одну строку вниз с выделением
-	* Создание Inventory transfer order и проверка заполнения
-		И я нажимаю на кнопку с именем 'FormDocumentInventoryTransferOrderGenerateInventoryTransferOrder'
-		И     таблица "ItemList" содержит строки:
+		And I move one line down in "List" table and select line
+	* Create Inventory transfer order and check filling in
+		And I click the button named "FormDocumentInventoryTransferOrderGenerateInventoryTransferOrder"
+		And "ItemList" table contains lines
 		| 'Item'       | 'Quantity' | 'Internal supply request'      | 'Item key'  | 'Unit' |
 		| 'Dress'      | '2,000'    | 'Internal supply request 296*' | 'S/Yellow'  | 'pcs'  |
 		| 'Trousers'   | '2,000'    | 'Internal supply request 295*' | '38/Yellow' | 'pcs'  |
@@ -233,26 +233,26 @@
 		| 'Boots'      | '2,000'    | 'Internal supply request 296*' | '37/18SD'   | 'pcs'  |
 		| 'High shoes' | '2,000'    | 'Internal supply request 295*' | '37/19SD'   | 'pcs'  |
 		| 'High shoes' | '2,000'    | 'Internal supply request 296*' | '37/19SD'   | 'pcs'  |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _295402 сheck filling in Inventory transfer order when creating based on two Internal supply requests with the different warehouse
+Scenario: _295402 check filling in Inventory transfer order when creating based on two Internal supply requests with the different warehouse
 	* Select InternalSupplyRequest
-		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
 			| 'Number'  |
 			| '296' | 
-		И в таблице 'List' я перехожу на одну строку вниз с выделением
-		И я нажимаю на кнопку с именем 'FormDocumentInventoryTransferOrderGenerateInventoryTransferOrder'
-		И в таблице "Stores" я перехожу к строке:
+		And I move one line down in "List" table and select line
+		And I click the button named "FormDocumentInventoryTransferOrderGenerateInventoryTransferOrder"
+		And I go to line in "Stores" table
 			| 'Store'    |
 			| 'Store 03' |
-		И в таблице "Stores" я устанавливаю флаг 'Use'
-		И в таблице "Stores" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Ok'
-	* Создание Inventory transfer order и проверка заполнения
-		И     таблица "ItemList" содержит строки:
+		And I set "Use" checkbox in "Stores" table
+		And I finish line editing in "Stores" table
+		And I click "Ok" button
+	* Create Inventory transfer order and check filling in
+		And "ItemList" table contains lines
 		| 'Item'       | 'Quantity' | 'Internal supply request'      | 'Item key' | 'Unit' |
 		| 'Dress'      | '2,000'    | 'Internal supply request 297*' | 'M/White'  | 'pcs'  |
 		| 'Boots'      | '2,000'    | 'Internal supply request 297*' | '37/18SD'  | 'pcs'  |
 		| 'High shoes' | '2,000'    | 'Internal supply request 297*' | '37/19SD'  | 'pcs'  |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows

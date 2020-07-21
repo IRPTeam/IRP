@@ -1,125 +1,124 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: filling in exchange rates in registers
+Feature: filling in exchange rates in registers
 
 As an accountant
 I want to fill out the exchange rate
 To use multi-currency accounting
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _006101 filling in exchange rates in registers
+Scenario: _006101 filling in exchange rates in registers
 * Opening of register CurrencyRates
-	И я открываю навигационную ссылку 'e1cib/list/InformationRegister.CurrencyRates'
-	И я удаляю все записи РегистрСведений "CurrencyRates"
+	Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
 * Filling the lira to euro rate
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Currency from"
-	И в таблице "List" я перехожу к строке:
+	And I click the button named "FormCreate"
+	And I click Select button of "Currency from" field
+	And I go to line in "List" table
 		| Code |
 		| TRY  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Currency to"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Currency to" field
+	And I go to line in "List" table
 		| Code |
 		| EUR  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Source"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Source" field
+	And I go to line in "List" table
 		| Description    |
 		| Forex Seling |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Multiplicity' я ввожу текст '1'
-	И в поле 'Rate' я ввожу текст '6,54'
-	И в поле 'Period' я ввожу текст '21.06.2019 17:40:13'
-	И я нажимаю на кнопку 'Save and close'
+	And I select current line in "List" table
+	And I input "1" text in "Multiplicity" field
+	And I input "6,54" text in "Rate" field
+	And I input "21.06.2019 17:40:13" text in "Period" field
+	And I click "Save and close" button
 * Filling the lira to USD rate
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Currency from"
-	И в таблице "List" я перехожу к строке:
+	And I click the button named "FormCreate"
+	And I click Select button of "Currency from" field
+	And I go to line in "List" table
 		| Code |
 		| TRY  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Currency to"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Currency to" field
+	And I go to line in "List" table
 		| Code |
 		| USD  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Source"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Source" field
+	And I go to line in "List" table
 		| Description    |
 		| Forex Seling |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Multiplicity' я ввожу текст '1'
-	И в поле 'Rate' я ввожу текст '5,84'
-	И в поле 'Period' я ввожу текст '21.06.2019 17:40:13'
-	И я нажимаю на кнопку 'Save and close'
+	And I select current line in "List" table
+	And I input "1" text in "Multiplicity" field
+	And I input "5,84" text in "Rate" field
+	And I input "21.06.2019 17:40:13" text in "Period" field
+	And I click "Save and close" button
 * Filling the lira to lira rate
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Currency from"
-	И в таблице "List" я перехожу к строке:
+	And I click the button named "FormCreate"
+	And I click Select button of "Currency from" field
+	And I go to line in "List" table
 		| Code |
 		| TRY  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Currency to"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Currency to" field
+	And I go to line in "List" table
 		| Code |
 		| TRY  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Source"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Source" field
+	And I go to line in "List" table
 		| Description    |
 		| Forex Seling |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Multiplicity' я ввожу текст '1'
-	И в поле 'Rate' я ввожу текст '1'
-	И в поле 'Period' я ввожу текст '01.01.2019 17:40:13'
-	И я нажимаю на кнопку 'Save and close'
+	And I select current line in "List" table
+	And I input "1" text in "Multiplicity" field
+	And I input "1" text in "Rate" field
+	And I input "01.01.2019 17:40:13" text in "Period" field
+	And I click "Save and close" button
 * Filling the USD to euro rate
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Currency from"
-	И в таблице "List" я перехожу к строке:
+	And I click the button named "FormCreate"
+	And I click Select button of "Currency from" field
+	And I go to line in "List" table
 		| Code |
 		| USD  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Currency to"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Currency to" field
+	And I go to line in "List" table
 		| Code |
 		| EUR  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Source"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Source" field
+	And I go to line in "List" table
 		| Description    |
 		| Forex Seling |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Multiplicity' я ввожу текст '1'
-	И в поле 'Rate' я ввожу текст '0,8900'
-	И в поле 'Period' я ввожу текст '21.06.2019 17:40:13'
-	И я нажимаю на кнопку 'Save and close'
+	And I select current line in "List" table
+	And I input "1" text in "Multiplicity" field
+	And I input "0,8900" text in "Rate" field
+	And I input "21.06.2019 17:40:13" text in "Period" field
+	And I click "Save and close" button
 * Filling the USD to lira rate
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И я нажимаю кнопку выбора у поля "Currency from"
-	И в таблице "List" я перехожу к строке:
+	And I click the button named "FormCreate"
+	And I click Select button of "Currency from" field
+	And I go to line in "List" table
 		| Code |
 		| USD  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Currency to"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Currency to" field
+	And I go to line in "List" table
 		| Code |
 		| TRY  |
-	И в таблице "List" я выбираю текущую строку
-	И я нажимаю кнопку выбора у поля "Source"
-	И в таблице "List" я перехожу к строке:
+	And I select current line in "List" table
+	And I click Select button of "Source" field
+	And I go to line in "List" table
 		| Description    |
 		| Forex Seling |
-	И в таблице "List" я выбираю текущую строку
-	И в поле 'Multiplicity' я ввожу текст '1'
-	И в поле 'Rate' я ввожу текст '0,1770'
-	И в поле 'Period' я ввожу текст '21.06.2019 17:40:13'
-	И я нажимаю на кнопку 'Save and close'
+	And I select current line in "List" table
+	And I input "1" text in "Multiplicity" field
+	And I input "0,1770" text in "Rate" field
+	And I input "21.06.2019 17:40:13" text in "Period" field
+	And I click "Save and close" button
 	

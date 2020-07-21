@@ -1,118 +1,115 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: check loading currency from external resources
+Feature: check loading currency from external resources
 
 As a developer
 I want to create a processing to download currency rates from external resources.
 To upload currency rates to the base
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: check load currency rate
-	# Включая проверку загрузки только выбранных валют
-	И я включаю асинхронный режим выполнения шагов с интервалом "1"
+Scenario: check load currency rate
+	And I turn on asynchronous execution mode with interval "1"
 	* Filling in the setting for currency rate loading from Bank UA
-		И я открываю навигационную ссылку "e1cib/list/Catalog.IntegrationSettings"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+		And I go to line in "List" table
 			| Description |
 			| Bank UA     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Settings'
-		И я нажимаю кнопку выбора у поля "Currency from"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Settings" button
+		And I click Select button of "Currency from" field
+		And I go to line in "List" table
 			| Code | Description     |
 			| UAH  | Ukraine Hryvnia |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Open catalog currency
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Currencies"
+		Given I open hyperlink "e1cib/list/Catalog.Currencies"
 	* Upload currency rate Forex Buying (from tcmb.gov.tr)
-		И я нажимаю на кнопку 'Integrations'
-		И в таблице "IntegrationTable" я перехожу к строке:
+		And I click "Integrations" button
+		And I go to line in "IntegrationTable" table
 			| Integration settings |
 			| Forex Buying         |
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Period"
-		И я нажимаю на кнопку 'Clear period'
-		И в поле "DateBegin" я ввожу начало текущего месяца
-		И в поле "DateEnd" я ввожу текущую дату
-		И я нажимаю на кнопку 'Select'
-		И в таблице "Currencies" я перехожу к строке:
+		And I click "Ok" button
+		And I click Select button of "Period" field
+		And I click "Clear period" button
+		And I input begin of the current month date in "DateBegin" field
+		And I input current date in "DateEnd" field
+		And I click "Select" button
+		And I go to line in "Currencies" table
 			| 'Code' |
 			| 'USD'  |
-		И в таблице "Currencies" я устанавливаю флаг 'Download'
-		И в таблице "Currencies" я завершаю редактирование строки
-		И в таблице "Currencies" я перехожу к строке:
+		And I set "Download" checkbox in "Currencies" table
+		And I finish line editing in "Currencies" table
+		And I go to line in "Currencies" table
 			| 'Code' |
 			| 'EUR'  |
-		И в таблице "Currencies" я устанавливаю флаг 'Download'
-		И в таблице "Currencies" я завершаю редактирование строки
-		И в таблице "Currencies" я нажимаю на кнопку 'Download'
-		И Пауза 40
-		И Я закрываю текущее окно
+		And I set "Download" checkbox in "Currencies" table
+		And I finish line editing in "Currencies" table
+		And in the table "Currencies" I click "Download" button
+		And Delay 40
+		And I close current window
 	* Upload currency rate Forex Selling (from tcmb.gov.tr)
-		И я нажимаю на кнопку 'Integrations'
-		И в таблице "IntegrationTable" я перехожу к строке:
+		And I click "Integrations" button
+		And I go to line in "IntegrationTable" table
 			| Integration settings |
 			| Forex Seling         |
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Period"
-		И я нажимаю на кнопку 'Clear period'
-		И в поле "DateBegin" я ввожу начало текущего месяца
-		И в поле "DateEnd" я ввожу текущую дату
-		И я нажимаю на кнопку 'Select'
-		И в таблице "Currencies" я перехожу к строке:
+		And I click "Ok" button
+		And I click Select button of "Period" field
+		And I click "Clear period" button
+		And I input begin of the current month date in "DateBegin" field
+		And I input current date in "DateEnd" field
+		And I click "Select" button
+		And I go to line in "Currencies" table
 			| Code |
 			| USD  |
-		И в таблице "Currencies" я устанавливаю флаг 'Download'
-		И в таблице "Currencies" я завершаю редактирование строки
-		И в таблице "Currencies" я нажимаю на кнопку 'Download'
-		И Пауза 40
-		И Я закрываю текущее окно
+		And I set "Download" checkbox in "Currencies" table
+		And I finish line editing in "Currencies" table
+		And in the table "Currencies" I click "Download" button
+		And Delay 40
+		And I close current window
 	* Upload currency rate Bank UA (from bank.gov.ua)
-		И я нажимаю на кнопку 'Integrations'
-		И в таблице "IntegrationTable" я перехожу к строке:
+		And I click "Integrations" button
+		And I go to line in "IntegrationTable" table
 			| Integration settings |
 			| Bank UA         |
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Period"
-		И я нажимаю на кнопку 'Clear period'
-		И в поле "DateBegin" я ввожу начало текущего месяца
-		И в поле "DateEnd" я ввожу текущую дату
-		И я нажимаю на кнопку 'Select'
-		И в таблице "Currencies" я перехожу к строке:
+		And I click "Ok" button
+		And I click Select button of "Period" field
+		And I click "Clear period" button
+		And I input begin of the current month date in "DateBegin" field
+		And I input current date in "DateEnd" field
+		And I click "Select" button
+		And I go to line in "Currencies" table
 			| 'Code' |
 			| 'USD'  |
-		И в таблице "Currencies" я устанавливаю флаг 'Download'
-		И в таблице "Currencies" я завершаю редактирование строки
-		И в таблице "Currencies" я перехожу к строке:
+		And I set "Download" checkbox in "Currencies" table
+		And I finish line editing in "Currencies" table
+		And I go to line in "Currencies" table
 			| 'Code' |
 			| 'EUR'  |
-		И в таблице "Currencies" я устанавливаю флаг 'Download'
-		И в таблице "Currencies" я завершаю редактирование строки
-		И в таблице "Currencies" я перехожу к строке:
+		And I set "Download" checkbox in "Currencies" table
+		And I finish line editing in "Currencies" table
+		And I go to line in "Currencies" table
 			| 'Code' |
 			| 'TRY'  |
-		И в таблице "Currencies" я устанавливаю флаг 'Download'
-		И в таблице "Currencies" я завершаю редактирование строки
-		И в таблице "Currencies" я нажимаю на кнопку 'Download'
-		И Пауза 40
-		И Я закрываю текущее окно
+		And I set "Download" checkbox in "Currencies" table
+		And I finish line editing in "Currencies" table
+		And in the table "Currencies" I click "Download" button
+		And Delay 40
+		And I close current window
 	* Check currency downloads
-		И я открываю навигационную ссылку "e1cib/list/InformationRegister.CurrencyRates"
-		Тогда таблица "List" содержит строки:
+		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
+		And "List" table contains lines
 			| 'Currency from'  | 'Currency to'   | 'Source'        | 'Multiplicity' | 'Rate'  |
-			# | 'TRY'            | 'USD'           | 'Forex Buying'  | '1'            | '*'     |
-			# | 'TRY'            | 'EUR'           | 'Forex Buying'  | '1'            | '*'     |
-			# | 'TRY'            | 'USD'           | 'Forex Selling' | '1'            | '*'     |
 			| 'UAH'            | 'USD'           | 'Bank UA'       | '1'            | '*'     |
 			| 'UAH'            | 'EUR'           | 'Bank UA'       | '1'            | '*'     |
 			| 'UAH'            | 'TRY'           | 'Bank UA'       | '1'            | '*'     |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
+
 
 

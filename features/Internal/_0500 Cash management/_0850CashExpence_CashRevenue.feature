@@ -1,101 +1,101 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: write off expenses and record income directly to/from the account
+Feature: write off expenses and record income directly to/from the account
 
 As an accountant
 I want to create Cash revenue and Cash expence documents
 For write off expenses and record income directly to/from the account
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 # Cash revenue
 
-Сценарий: check tax calculation in the document Cash revenue
+Scenario: check tax calculation in the document Cash revenue
 	* Open document form
-		И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I click the button named "FormCreate"
 	* Filling in company and account
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the tabular part by cost
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListRevenueType"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListRevenueType"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "PaymentListRevenueType" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListRevenueType" in "PaymentList" table
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Fuel'        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListNetAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListNetAmount' я ввожу текст '100,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate field named "PaymentListNetAmount" in "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
 	* Tax calculation check
-		И     таблица "PaymentList" содержит строки:
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Business unit'      | 'Revenue type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
 			| '100,00'     | 'Accountants office' | 'Fuel'         | '118,00'       | 'TRY'      | '18%' | '18,00'      |
-		И     таблица "TaxTree" содержит строки:
+		And "TaxTree" table contains lines
 			| 'Tax' | 'Tax rate' | 'Currency' | 'Business unit'      | 'Amount' | 'Revenue type' | 'Manual amount' |
 			| 'VAT' | ''         | 'TRY'      | ''                   | '18,00'  | ''             | '18,00'         |
 			| 'VAT' | '18%'      | 'TRY'      | 'Accountants office' | '18,00'  | 'Fuel'         | '18,00'         |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: check movements of the document Cash revenue
+Scenario: check movements of the document Cash revenue
 	* Open document form
-		И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I click the button named "FormCreate"
 	* Filling in company and account
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the tabular part by cost
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListRevenueType"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListRevenueType"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "PaymentListRevenueType" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListRevenueType" in "PaymentList" table
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Fuel'        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListNetAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListNetAmount' я ввожу текст '100,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate field named "PaymentListNetAmount" in "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
 	* Change the document number
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '1'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '1'
-		И я нажимаю на кнопку 'Post'
+		And I move to "Other" tab
+		And I input "1" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "1" text in "Number" field
+		And I click "Post" button
 	* Check movements
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Cash revenue 1*'                | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
 		| 'Register  "Taxes turnovers"'    | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
@@ -118,38 +118,38 @@ For write off expenses and record income directly to/from the account
 		| ''                               | 'Receipt'     | '*'         | '20,21'         | 'Main Company'       | 'Bank account, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   | ''                         | ''                     | ''         | ''                         | ''                     |
 		| ''                               | 'Receipt'     | '*'         | '118'           | 'Main Company'       | 'Bank account, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   | ''                         | ''                     | ''         | ''                         | ''                     |
 		| ''                               | 'Receipt'     | '*'         | '118'           | 'Main Company'       | 'Bank account, TRY' | 'TRY'      | 'Local currency'           | 'No'                   | ''                         | ''                     | ''         | ''                         | ''                     |
-		И я закрыл все окна клиентского приложения
-	* Clear postings and check that there is no movement on the registers
-		* Clear postings Cash revenue 1
-			И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
-			И в таблице "List" я перехожу к строке:
+		And I close all client application windows
+	* Clear movements and check that there is no movement on the registers
+		* Clear movements Cash revenue 1
+			Given I open hyperlink "e1cib/list/Document.CashRevenue"
+			And I go to line in "List" table
 				| 'Account'           | 'Company'      | 'Number' |
 				| 'Bank account, TRY' | 'Main Company' | '1'      |
-			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		* Check that there is no movement on the registers
-			И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.TaxesTurnovers"
-			Тогда таблица "List" не содержит строки:
+			Given I open hyperlink "e1cib/list/AccumulationRegister.TaxesTurnovers"
+			And "List" table does not contain lines
 			| 'Recorder'        |
 			| 'Cash revenue 1*' |
-			И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.RevenuesTurnovers"
-			Тогда таблица "List" не содержит строки:
+			Given I open hyperlink "e1cib/list/AccumulationRegister.RevenuesTurnovers"
+			And "List" table does not contain lines
 			| 'Recorder'        |
 			| 'Cash revenue 1*' |
-			И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.AccountBalance"
-			Тогда таблица "List" не содержит строки:
+			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+			And "List" table does not contain lines
 			| 'Recorder'        |
 			| 'Cash revenue 1*' |
-			И я закрыл все окна клиентского приложения
-	* Re-posting the document and checking postings on the registers
+			And I close all client application windows
+	* Re-posting the document and checking movements on the registers
 		* Post document
-			И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.CashRevenue"
+			And I go to line in "List" table
 				| 'Account'           | 'Company'      | 'Number' |
 				| 'Bank account, TRY' | 'Main Company' | '1'      |
-			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
+			And in the table "List" I click the button named "ListContextMenuPost"
 		* Check movements
-			И я нажимаю на кнопку 'Registrations report'
-			Тогда табличный документ "ResultTable" равен по шаблону:
+			And I click "Registrations report" button
+			Then "ResultTable" spreadsheet document is equal by template
 			| 'Cash revenue 1*'                | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
 			| 'Document registrations records' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
 			| 'Register  "Taxes turnovers"'    | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
@@ -172,138 +172,138 @@ For write off expenses and record income directly to/from the account
 			| ''                               | 'Receipt'     | '*'         | '20,21'         | 'Main Company'       | 'Bank account, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   | ''                         | ''                     | ''         | ''                         | ''                     |
 			| ''                               | 'Receipt'     | '*'         | '118'           | 'Main Company'       | 'Bank account, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   | ''                         | ''                     | ''         | ''                         | ''                     |
 			| ''                               | 'Receipt'     | '*'         | '118'           | 'Main Company'       | 'Bank account, TRY' | 'TRY'      | 'Local currency'           | 'No'                   | ''                         | ''                     | ''         | ''                         | ''                     |
-			И я закрыл все окна клиентского приложения
+			And I close all client application windows
 
 
 
 
 
-Сценарий: check the unavailability of currency selection in Cash revenue when it is strongly fixed in the Account
+Scenario: check the unavailability of currency selection in Cash revenue when it is strongly fixed in the Account
 	* Open document form
-		И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the Currency field unavailability
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListCurrency"'|
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		When I Check the steps for Exception
+			|'And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table'|
 
-Сценарий: check the availability of currency selection in Cash revenue (not fixed in the Account)
+Scenario: check the availability of currency selection in Cash revenue (not fixed in the Account)
 	* Open document form
-		И я открываю навигационную ссылку "e1cib/list/Document.CashRevenue"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Cash desk №1' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the Currency field availability
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" поле "Currency" доступно
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And in "PaymentList" table "Currency" attribute is available
 
 
 # Cash expence
 
-Сценарий: check tax calculation in the document Cash expense
+Scenario: check tax calculation in the document Cash expense
 	* Open document form
-		И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I click the button named "FormCreate"
 	* Filling in company and account
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the tabular part by cost
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListExpenseType"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListExpenseType"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "PaymentListExpenseType" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListExpenseType" in "PaymentList" table
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Fuel'        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListNetAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListNetAmount' я ввожу текст '100,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate field named "PaymentListNetAmount" in "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
 	* Tax calculation check
-		И     таблица "PaymentList" содержит строки:
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
 			| '100,00'     | 'Accountants office' | 'Fuel'         | '118,00'       | 'TRY'      | '18%' | '18,00'      |
-		И     таблица "TaxTree" содержит строки:
+		And "TaxTree" table contains lines
 			| 'Tax' | 'Tax rate' | 'Currency' | 'Business unit'      | 'Amount' | 'Expense type' | 'Manual amount' |
 			| 'VAT' | ''         | 'TRY'      | ''                   | '18,00'  | ''             | '18,00'         |
 			| 'VAT' | '18%'      | 'TRY'      | 'Accountants office' | '18,00'  | 'Fuel'         | '18,00'         |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: check movements of the document Cash expense
+Scenario: check movements of the document Cash expense
 	* Open document form
-		И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I click the button named "FormCreate"
 	* Filling in company and account
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the tabular part by cost
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListExpenseType"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListExpenseType"
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "PaymentListExpenseType" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListExpenseType" in "PaymentList" table
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Fuel'        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListNetAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListNetAmount' я ввожу текст '100,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I activate field named "PaymentListNetAmount" in "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
 	* Change the document number
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '1'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '1'
-		И я нажимаю на кнопку 'Post'
-	* Check movements документа
-		И я нажимаю на кнопку с именем "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I move to "Other" tab
+		And I input "1" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "1" text in "Number" field
+		And I click "Post" button
+	* Check movements
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		Then "ResultTable" spreadsheet document is equal by template
 		| 'Cash expense 1*'                | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
 		| 'Register  "Expenses turnovers"' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
@@ -326,38 +326,38 @@ For write off expenses and record income directly to/from the account
 		| ''                               | 'Expense'     | '*'         | '20,21'         | 'Main Company'       | 'Bank account, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   | ''                         | ''                     | ''         | ''                         | ''                     |
 		| ''                               | 'Expense'     | '*'         | '118'           | 'Main Company'       | 'Bank account, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   | ''                         | ''                     | ''         | ''                         | ''                     |
 		| ''                               | 'Expense'     | '*'         | '118'           | 'Main Company'       | 'Bank account, TRY' | 'TRY'      | 'Local currency'           | 'No'                   | ''                         | ''                     | ''         | ''                         | ''                     |
-		И я закрыл все окна клиентского приложения
-	* Clear postings and check that there is no movement on the registers
-		* Clear postings документа Cash expense 1
-			И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
-			И в таблице "List" я перехожу к строке:
+		And I close all client application windows
+	* Clear movements and check that there is no movement on the registers
+		* Clear movements Cash expense 1
+			Given I open hyperlink "e1cib/list/Document.CashExpense"
+			And I go to line in "List" table
 				| 'Account'           | 'Company'      | 'Number' |
 				| 'Bank account, TRY' | 'Main Company' | '1'      |
-			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuUndoPosting'
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		* Check that there is no movement on the registers
-			И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.TaxesTurnovers"
-			Тогда таблица "List" не содержит строки:
+			Given I open hyperlink "e1cib/list/AccumulationRegister.TaxesTurnovers"
+			And "List" table does not contain lines
 				| 'Recorder'        |
 				| 'Cash expense 1*' |
-			И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.RevenuesTurnovers"
-			Тогда таблица "List" не содержит строки:
+			Given I open hyperlink "e1cib/list/AccumulationRegister.RevenuesTurnovers"
+			And "List" table does not contain lines
 				| 'Recorder'        |
 				| 'Cash expense 1*' |
-			И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.AccountBalance"
-			Тогда таблица "List" не содержит строки:
+			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+			And "List" table does not contain lines
 				| 'Recorder'        |
 				| 'Cash expense 1*' |
-			И я закрыл все окна клиентского приложения
-	* Posting the documentобратно и проверка проводок
+			And I close all client application windows
+	* Posting the document back and check movements
 		* Post document
-			И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.CashExpense"
+			And I go to line in "List" table
 				| 'Account'           | 'Company'      | 'Number' |
 				| 'Bank account, TRY' | 'Main Company' | '1'      |
-			И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuPost'
+			And in the table "List" I click the button named "ListContextMenuPost"
 		* Check movements
-			И я нажимаю на кнопку 'Registrations report'
-			Тогда табличный документ "ResultTable" равен по шаблону:
+			And I click "Registrations report" button
+			Then "ResultTable" spreadsheet document is equal by template
 			| 'Cash expense 1*'                | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
 			| 'Document registrations records' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
 			| 'Register  "Expenses turnovers"' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
@@ -380,47 +380,48 @@ For write off expenses and record income directly to/from the account
 			| ''                               | 'Expense'     | '*'         | '20,21'         | 'Main Company'       | 'Bank account, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   | ''                         | ''                     | ''         | ''                         | ''                     |
 			| ''                               | 'Expense'     | '*'         | '118'           | 'Main Company'       | 'Bank account, TRY' | 'TRY'      | 'en descriptions is empty' | 'No'                   | ''                         | ''                     | ''         | ''                         | ''                     |
 			| ''                               | 'Expense'     | '*'         | '118'           | 'Main Company'       | 'Bank account, TRY' | 'TRY'      | 'Local currency'           | 'No'                   | ''                         | ''                     | ''         | ''                         | ''                     |
-			И я закрыл все окна клиентского приложения
+			And I close all client application windows
 
 
 
-Сценарий: check the unavailability of currency selection in Cash expense when it is strongly fixed in the Account
+Scenario: check the unavailability of currency selection in Cash expense when it is strongly fixed in the Account
 	* Open document form
-		И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the Currency field unavailability
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListCurrency"'|
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		When I Check the steps for Exception
+			|'And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table'|
 
 
-Сценарий: check the availability of currency selection in Cash revenue (not fixed in the Account)
+Scenario: check the availability of currency selection in Cash revenue (not fixed in the Account)
 	* Open document form
-		И я открываю навигационную ссылку "e1cib/list/Document.CashExpense"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Cash desk №1' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the Currency field availability
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" поле "Currency" доступно
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And in "PaymentList" table "Currency" attribute is available
 	
+

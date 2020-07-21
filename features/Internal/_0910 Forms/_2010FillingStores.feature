@@ -1,491 +1,491 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: filling of stores in documents
+Feature: filling of stores in documents
 
 
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: check filling in Store field in the document Sales order
+Scenario: check filling in Store field in the document Sales order
 	* Open document form Sales order
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Filling in Partner and Legal name
 	# the other details are filled in from the custom settings
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Legal name" я выбираю по строке 'comp'
+		And I select current line in "List" table
+		And I select from "Legal name" drop-down list by "comp" string
 	* Filling in items tab
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'dre'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке 'xs'
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'sh'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "dre" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "xs" from "Item key" drop-down list by string in "ItemList" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "sh" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check filling in Sales order
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
-		И     элемент формы с именем "Status" стал равен 'Approved'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-		И     таблица "ItemList" содержит строки:
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Status" became equal to "Approved"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 	* Change store on Store 03 (not specified in agreement or settings)
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 03'    |
-		И в таблице "List" я выбираю текущую строку
-		Когда открылось окно 'Update item list info'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
 	* Cleaning the store value
-		И в поле с именем 'Store' я ввожу текст ''
-		И я нажимаю на кнопку 'OK'
+		And I input "" text in the field named "Store"
+		And I click "OK" button
 	* Check filling in store from agreement
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 	* Choosing an agreement with an empty store field
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron, USD' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I click "OK" button
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: check filling in Store field in the document Sales invoice
+Scenario: check filling in Store field in the document Sales invoice
 	* Open document form Sales invoice
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
 	* Filling in Partner and Legal name
 	# the other details are filled in from the custom settings
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Legal name" я выбираю по строке 'comp'
+		And I select current line in "List" table
+		And I select from "Legal name" drop-down list by "comp" string
 	* Filling in items tab
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'dre'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке 'xs'
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'sh'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "dre" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "xs" from "Item key" drop-down list by string in "ItemList" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "sh" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check filling in Sales order
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Basic Partner terms, TRY'
-		И     элемент формы с именем "Store" стал равен 'Store 01'
-		И     таблица "ItemList" содержит строки:
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 	* Change store on Store 03 (not specified in agreement or settings)
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 03'    |
-		И в таблице "List" я выбираю текущую строку
-		Когда открылось окно 'Update item list info'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
 	* Cleaning the store value
-		И в поле с именем 'Store' я ввожу текст ''
-		И я нажимаю на кнопку 'OK'
+		And I input "" text in the field named "Store"
+		And I click "OK" button
 	* Check filling in store from agreement
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 	* Choosing an agreement with an empty store field
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron, USD' |
-		И в таблице "List" я выбираю текущую строку
-		Когда открылось окно 'Update item list info'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: check filling in Store field in the document Purchase order
+Scenario: check filling in Store field in the document Purchase order
 	* Open document form Purchase order
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Filling in partner, legal name, partner term (store not specified)
 	# the other details are filled in from the custom settings
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in items tab
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'dre'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке 'xs'
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'sh'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I click the button named "Add"
+		And I select "dre" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "xs" from "Item key" drop-down list by string in "ItemList" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I select "sh" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check filling in Purchase order
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
-		И     элемент формы с именем "Store" стал равен 'Store 03'
-		И     таблица "ItemList" содержит строки:
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Store" became equal to "Store 03"
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
 	* Changing store on Store 02 (not specified in the partner terms or in the settings)
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		Когда открылось окно 'Update item list info'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 02' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 02' |
 	* Cleaning the store value
-		И в поле с именем 'Store' я ввожу текст ''
-		И я нажимаю на кнопку 'OK'
+		And I input "" text in the field named "Store"
+		And I click "OK" button
 	* Check filling in store from user settings (store not specified in agreement)
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
 	* Re-selecting a partner term with an empty store and check filling in the store from user settings
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Vendor Ferron, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: check filling in Store field in the document Purchase invoice
+Scenario: check filling in Store field in the document Purchase invoice
 	* Open document form Purchase invoice
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
 	* Filling in partner, legal name, partner term (store not specified)
 	# the other details are filled in from the custom settings
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in items tab
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'dre'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке 'xs'
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" из выпадающего списка "Item" я выбираю по строке 'sh'
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" из выпадающего списка "Item key" я выбираю по строке '36'
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
+		And I click the button named "Add"
+		And I select "dre" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "xs" from "Item key" drop-down list by string in "ItemList" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I select "sh" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Check filling in Purchase order
-		И     элемент формы с именем "Partner" стал равен 'Ferron BP'
-		И     элемент формы с именем "LegalName" стал равен 'Company Ferron BP'
-		И     элемент формы с именем "Agreement" стал равен 'Vendor Ferron, TRY'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
-		И     таблица "ItemList" содержит строки:
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Store" became equal to "Store 02"
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 02' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 02' |
 	* Change of store on Store 04 (not specified either in the partner terms or in the settings)
-		И я нажимаю кнопку выбора у поля с именем "Store"
-		И в таблице "List" я перехожу к строке:
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 04'    |
-		И в таблице "List" я выбираю текущую строку
-		Когда открылось окно 'Update item list info'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 04' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 04' |
 	* Cleaning the store value
-		И в поле с именем 'Store' я ввожу текст ''
-		И я нажимаю на кнопку 'OK'
+		And I input "" text in the field named "Store"
+		And I click "OK" button
 	* Check filling in store from user settings (store in partner term not specified)
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 02' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 02' |
 	* Re-selecting a partner term with an empty store and check filling in the store from user settings
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Vendor Ferron, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 02' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 02' |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: _0154516  check filling in Store field in the Shipment confirmation
+Scenario: _0154516  check filling in Store field in the Shipment confirmation
 	* Open a creation form Shipment confirmation
-		И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
-		И я нажимаю на кнопку 'Create'
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click "Create" button
 	* Fillin in store and items tab
 		* Filling store and type of operation
-			И из выпадающего списка "Transaction type" я выбираю точное значение 'Sales'
-			И я нажимаю кнопку выбора у поля с именем "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select "Sales" exact value from "Transaction type" drop-down list
+			And I click Choice button of the field named "Store"
+			And I go to line in "List" table
 			| 'Description' |
 			| 'Store 03'    |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Add first line with the product
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 		* Add second line
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "Add"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 			| 'Description' |
 			| 'Shirt'       |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '38/Black' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListStore"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I activate field named "ItemListStore" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListStore" in "ItemList" table
+			And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Check filling in store by lines
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
 			| 'Shirt'    | '1,000'    | '38/Black'  | 'pcs'  | 'Store 02' |
 		* Change the store in the header and check the refill by lines
-			И я нажимаю кнопку выбора у поля с именем "Store"
-			И в таблице "List" я перехожу к строке:
+			And I click Choice button of the field named "Store"
+			And I go to line in "List" table
 			| 'Description' |
 			| 'Store 03'    |
-			И в таблице "List" я выбираю текущую строку
-			* Вывод информационного сообщения
-				Когда открылось окно '1C:Enterprise'
-				И я нажимаю на кнопку 'Yes'
-			И     таблица "ItemList" содержит строки:
+			And I select current line in "List" table
+			* Info message
+				Then "1C:Enterprise" window is opened
+				And I click "Yes" button
+			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
 			| 'Shirt'    | '1,000'    | '38/Black'  | 'pcs'  | 'Store 03' |
 		* Delete a line
-			И в таблице "ItemList" я перехожу к последней строке
-			И в таблице "ItemList" я удаляю текущую строку
-		* Checking that the warehouse is not cleared on the lines with the products
-			И в таблице "ItemList" я перехожу к строке:
+			And I go to the last line in "ItemList" table
+			And I delete current line in "ItemList" table
+		* Check that the warehouse is not cleared on the lines with the products
+			And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Store'    | 'Unit' |
 			| 'Trousers' | '38/Yellow' | '2,000'    | 'Store 03' | 'pcs'  |
-			И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле с именем 'ItemListStore' я ввожу текст ''
-			И в таблице "ItemList" я завершаю редактирование строки
-			И     таблица "ItemList" содержит строки:
+			And I activate field named "ItemListStore" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "" text in the field named "ItemListStore" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
-			И в поле с именем 'Store' я ввожу текст ''
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'No'
-			И     таблица "ItemList" содержит строки:
+			And I input "" text in the field named "Store"
+			Then "1C:Enterprise" window is opened
+			And I click "No" button
+			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
-			И Я закрыл все окна клиентского приложения
+			And I close all client application windows
 
 
-Сценарий: _0154517  check filling in Store field in the Goods receipt
+Scenario: _0154517  check filling in Store field in the Goods receipt
 	* Open a creation form Goods receipt
-		И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
-		И я нажимаю на кнопку 'Create'
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click "Create" button
 	* Fillin in store and items tab
 		* Filling store and type of operation
-			И из выпадающего списка "Transaction type" я выбираю точное значение 'Purchase'
-			И я нажимаю кнопку выбора у поля с именем "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select "Purchase" exact value from "Transaction type" drop-down list
+			And I click Choice button of the field named "Store"
+			And I go to line in "List" table
 			| 'Description' |
 			| 'Store 03'    |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Adding the first line with the product
-			И я нажимаю на кнопку 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I click "Add" button
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 		* Add second line
-			И я нажимаю на кнопку 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I click "Add" button
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
 			| 'Description' |
 			| 'Shirt'       |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Item key"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '38/Black' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Quantity"
-			И в таблице "ItemList" в поле 'Quantity' я ввожу текст '1,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListStore"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I activate field named "ItemListStore" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListStore" in "ItemList" table
+			And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Check filling in store by lines
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
 			| 'Shirt'    | '1,000'    | '38/Black'  | 'pcs'  | 'Store 02' |
 		* Change the store in the header and check the refill by lines
-			И я нажимаю кнопку выбора у поля с именем "Store"
-			И в таблице "List" я перехожу к строке:
+			And I click Choice button of the field named "Store"
+			And I go to line in "List" table
 			| 'Description' |
 			| 'Store 03'    |
-			И в таблице "List" я выбираю текущую строку
-			* Вывод информационного сообщения
-				Когда открылось окно '1C:Enterprise'
-				И я нажимаю на кнопку 'Yes'
-			И     таблица "ItemList" содержит строки:
+			And I select current line in "List" table
+			* Info message
+				Then "1C:Enterprise" window is opened
+				And I click "Yes" button
+			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
 			| 'Shirt'    | '1,000'    | '38/Black'  | 'pcs'  | 'Store 03' |
 		* Delete a line
-			И в таблице "ItemList" я перехожу к последней строке
-			И в таблице "ItemList" я удаляю текущую строку
-		* Checking that the warehouse is not cleared on the lines with the products
-			И в таблице "ItemList" я перехожу к строке:
+			And I go to the last line in "ItemList" table
+			And I delete current line in "ItemList" table
+		* Check that the warehouse is not cleared on the lines with the products
+			And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Store'    | 'Unit' |
 			| 'Trousers' | '38/Yellow' | '2,000'    | 'Store 03' | 'pcs'  |
-			И в таблице "ItemList" я активизирую поле с именем "ItemListStore"
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemList" в поле с именем 'ItemListStore' я ввожу текст ''
-			И в таблице "ItemList" я завершаю редактирование строки
-			И     таблица "ItemList" содержит строки:
+			And I activate field named "ItemListStore" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "" text in the field named "ItemListStore" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
-			И в поле с именем 'Store' я ввожу текст ''
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'No'
-			И     таблица "ItemList" содержит строки:
+			And I input "" text in the field named "Store"
+			Then "1C:Enterprise" window is opened
+			And I click "No" button
+			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
-			И Я закрыл все окна клиентского приложения
+			And I close all client application windows

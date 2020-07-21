@@ -1,956 +1,949 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: check that the item is not cleared when saving the document
+Feature: check that the item is not cleared when saving the document
 
 As a QA
 I want to check that Item (without item key) is not cleared when saving a document
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
 
 
-Сценарий: saving information about an Item without a completed item key in a document Sales order
+Scenario: saving information about an Item without a completed item key in a document Sales order
 	* Open document form Sales order
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Add Item item key
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я разворачиваю группу "More"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I expand "More" group
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я активизирую поле "Procurement method"
-		И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedLabel"
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Procurement method" field in "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I select current line in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'         |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I click "OK" button
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'    | 'Item'  |
 			| 'Sales order*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: saving information about an Item without a completed item key in a document Sales invoice
+Scenario: saving information about an Item without a completed item key in a document Sales invoice
 	* Open document form Sales invoice
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
 	* Add Item item key
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я разворачиваю группу "More"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I expand "More" group
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedLabel"
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'         |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I click "OK" button
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'      | 'Item'  |
 			| 'Sales invoice*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: saving information about an Item without a completed item key in a document SalesReturn
+Scenario: saving information about an Item without a completed item key in a document SalesReturn
 	* Open document form SalesReturn
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
 	* Add Item item key
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturn'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedLabel"
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'         |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I click "OK" button
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'     | 'Item'  |
 			| 'Sales return*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: saving information about an Item without a completed item key in a document SalesReturnOrder
+Scenario: saving information about an Item without a completed item key in a document SalesReturnOrder
 	* Open document form SalesReturnOrder
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click the button named "FormCreate"
 	* Add Item item key
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesReturnOrder'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedLabel"
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'         |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I click "OK" button
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'           | 'Item'  |
 			| 'Sales return order*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 	
-Сценарий: saving information about an Item without a completed item key in a document PurchaseOrder
+Scenario: saving information about an Item without a completed item key in a document PurchaseOrder
 	* Open document form PurchaseOrder
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Add Item item key
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я разворачиваю группу "More"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I expand "More" group
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedLabel"
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "OK" button
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И в таблице "ItemList" я активизирую поле "Price"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '200,00'
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I click "OK" button
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'       | 'Item'  |
 			| 'Purchase order*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: saving information about an Item without a completed item key in a document PurchaseInvoice
+Scenario: saving information about an Item without a completed item key in a document PurchaseInvoice
 	* Open document form PurchaseInvoice
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
 	* Add Item item key
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedLabel"
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "OK" button
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И в таблице "ItemList" я активизирую поле "Price"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '200,00'
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I click "OK" button
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'         | 'Item'  |
 			| 'Purchase invoice*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: saving information about an Item without a completed item key in a document PurchaseReturn
+Scenario: saving information about an Item without a completed item key in a document PurchaseReturn
 	* Open document form PurchaseReturn
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I click the button named "FormCreate"
 	* Add Item item key
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturn'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedLabel"
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "OK" button
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И в таблице "ItemList" я активизирую поле "Price"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '200,00'
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I click "OK" button
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'        | 'Item'  |
 			| 'Purchase return*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: saving information about an Item without a completed item key in a document PurchaseReturnOrder
+Scenario: saving information about an Item without a completed item key in a document PurchaseReturnOrder
 	* Open document form PurchaseReturnOrder
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I click the button named "FormCreate"
 	* Add Item item key
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseReturnOrder'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedLabel"
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "OK" button
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'OK'
-		И в таблице "ItemList" я активизирую поле "Price"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" в поле 'Price' я ввожу текст '200,00'
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I click "OK" button
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'              | 'Item'  |
 			| 'Purchase return order*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
 
-Сценарий: saving information about an Item without a completed item key in a document Bundling
+Scenario: saving information about an Item without a completed item key in a document Bundling
 	* Open document form Bundling
-		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Add Item item key
-		И я заполняю основные реквизиты документа
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I click the button named "FormCreate"
+		* Filling in main attributes
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 					| 'Description'  |
 					| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Item bundle"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Item bundle" field
+			And I go to line in "List" table
 				| 'Description'       |
 				| 'Bound Dress+Shirt' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля с именем "Unit"
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Choice button of the field named "Unit"
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 01'  |
-			И в таблице "List" я выбираю текущую строку
-			И в поле с именем 'Quantity' я ввожу текст '1,000'
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "1,000" text in the field named "Quantity"
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.Bundling'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Quantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'   | 'Item'  |
 			| 'Bundling*'    | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: saving information about an Item without a completed item key in a document Unbundling
+Scenario: saving information about an Item without a completed item key in a document Unbundling
 	* Open document form Unbundling
-		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Add Item item key
-		И я заполняю основные реквизиты документа
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I click the button named "FormCreate"
+		* Filling in main attributes
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 					| 'Description'  |
 					| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Item bundle"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Item bundle" field
+			And I go to line in "List" table
 				| 'Description'       |
 				| 'Bound Dress+Shirt' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля с именем "Unit"
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Choice button of the field named "Unit"
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 01'  |
-			И в таблице "List" я выбираю текущую строку
-			И в поле с именем 'Quantity' я ввожу текст '1,000'
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "1,000" text in the field named "Quantity"
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И я нажимаю на гиперссылку с именем "DecorationGroupTitleCollapsedLabel"
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Bound Dress+Shirt' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item key bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item key bundle" field
+		And I go to line in "List" table
 			| 'Item key'                      |
 			| 'Bound Dress+Shirt/Dress+Shirt' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Unit"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Unit" field
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Quantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'     | 'Item'  |
 			| 'Unbundling*'    | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: saving information about an Item without a completed item key in a document GoodsReceipt
+Scenario: saving information about an Item without a completed item key in a document GoodsReceipt
 	* Open document form GoodsReceipt
-		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Add Item item key
-		И я заполняю основные реквизиты документа
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+	* Filling in main attributes
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 					| 'Description'  |
 					| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 02'  |
-			И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.GoodsReceipt'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Quantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'     | 'Item'  |
 			| 'GoodsReceipt*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: saving information about an Item without a completed item key in a document ShipmentConfirmation
+Scenario: saving information about an Item without a completed item key in a document ShipmentConfirmation
 	* Open document form ShipmentConfirmation
-		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Add Item item key
-		И я заполняю основные реквизиты документа
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+		* Filling in main attributes
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 					| 'Description'  |
 					| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 02'  |
-			И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.ShipmentConfirmation'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Quantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'             | 'Item'  |
 			| 'ShipmentConfirmation*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: saving information about an Item without a completed item key in a document InternalSupplyRequest
+Scenario: saving information about an Item without a completed item key in a document InternalSupplyRequest
 	* Open document form InternalSupplyRequest
-		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Add Item item key
-		И я заполняю основные реквизиты документа
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I click the button named "FormCreate"
+		* Filling in main attributes
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 					| 'Description'  |
 					| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 01'  |
-			И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.InternalSupplyRequest'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Quantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'              | 'Item'  |
 			| 'InternalSupplyRequest*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: saving information about an Item without a completed item key in a document InventoryTransfer
+Scenario: saving information about an Item without a completed item key in a document InventoryTransfer
 	* Open document form InventoryTransfer
-		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Add Item item key
-		И я заполняю основные реквизиты документа
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
+		* Filling in main attributes
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 					| 'Description'  |
 					| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store sender"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store sender" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 01'  |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store receiver"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store receiver" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 02'  |
-			И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransfer'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Quantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'          | 'Item'  |
 			| 'InventoryTransfer*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: saving information about an Item without a completed item key in a document InventoryTransferOrder
+Scenario: saving information about an Item without a completed item key in a document InventoryTransferOrder
 	* Open document form InventoryTransferOrder
-		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Add Item item key
-		И я заполняю основные реквизиты документа
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I click the button named "FormCreate"
+		* Filling in main attributes
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 					| 'Description'  |
 					| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store sender"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store sender" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 01'  |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Store receiver"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Store receiver" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 02'  |
-			И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item"
-		И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Dress'         |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I click "Save" button
 	* Check saving Item
-		И     таблица "ItemList" содержит строки:
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
-		И я перехожу к закладке "Other"
-		И я запоминаю значение поля с именем "Number" как "DocumentNumber"
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/Document.InventoryTransferOrder'
-		И в таблице "List" я перехожу к строке:
+		And I move to "Other" tab
+		And I save the value of the field named "Number" as "DocumentNumber"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I go to line in "List" table
 			| 'Number'   |
 			| '$DocumentNumber$'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'  |
 			| 'Dress' |
 	* Check the Saved Item register cleaning
-		И в таблице "ItemList" я активизирую поле "Item key"
-		И в таблице "ItemList" я выбираю текущую строку
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита "Item key"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Quantity"
-		И в таблице "ItemList" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Post and close'
-		И я открываю навигационную ссылку 'e1cib/list/InformationRegister.SavedItems'
-		И таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
+		And "List" table does not contain lines
 			| 'Object ref'               | 'Item'  |
 			| 'InventoryTransferOrder*'  | 'Dress' |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows

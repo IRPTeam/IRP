@@ -1,1439 +1,1352 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 @Test
 
 
-Функционал: filling in catalogs
+Feature: filling in catalogs
 
 As an owner
 I want to fill out information on the company
 To further use it when reflecting in the program of business processes
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
-	И Я устанавливаю в константу "ShowBetaTesting" значение "True"
-	И Я устанавливаю в константу "ShowAlphaTestingSaas" значение "True"
-	И Я устанавливаю в константу "UseItemKey" значение "True"
-	И Я устанавливаю в константу "UseCompanies" значение "True"
+Background:
+	Given I open new TestClient session or connect the existing one
+	And I set "True" value to the constant "ShowBetaTesting"
+	And I set "True" value to the constant "ShowAlphaTestingSaas"
+	And I set "True" value to the constant "UseItemKey"
+	And I set "True" value to the constant "UseCompanies"
 
 
 
-Сценарий: _005010 filling in the "Countries" catalog
+Scenario: _005010 filling in the "Countries" catalog
 	* Clearing the Countries catalog
-		И    Я закрыл все окна клиентского приложения
-		И я удаляю все элементы Справочника "Countries"
-		И в базе нет элементов Справочника "Countries"
+		And I close all client application windows
 	* Opening the Country creation form
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Countries"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.Countries"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And Delay 2
 	* Data Filling - Turkey
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Turkey'
-		И в поле 'TR' я ввожу текст 'Turkey TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		Тогда В базе появился хотя бы один элемент справочника "Countries"
+		And I click Open button of the field named "Description_en"
+		And I input "Turkey" text in "ENG" field
+		And I input "Turkey TR" text in "TR" field
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Data Filling - Ukraine and Kazakhstan
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Ukraine'
-		И в поле с именем 'Description_tr' я ввожу текст 'Ukraine TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Kazakhstan'
-		И в поле с именем 'Description_tr' я ввожу текст 'Kazakhstan TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-	* Checking for added countries in the catalog
-		Тогда я проверяю наличие элемента справочника "Countries" со значением поля "Description_en" "Turkey"
-		Тогда я проверяю наличие элемента справочника "Countries" со значением поля "Description_tr" "Turkey TR"
-		Тогда я проверяю наличие элемента справочника "Countries" со значением поля "Description_en" "Kazakhstan"
-		Тогда я проверяю наличие элемента справочника "Countries" со значением поля "Description_en" "Ukraine"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Ukraine" text in the field named "Description_en"
+		And I input "Ukraine TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Kazakhstan" text in the field named "Description_en"
+		And I input "Kazakhstan TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+	* Check for added countries in the catalog
+		Then I check for the "Countries" catalog element with the "Description_en" "Turkey"
+		Then I check for the "Countries" catalog element with the "Description_tr" "Turkey TR"
+		Then I check for the "Countries" catalog element with the "Description_en" "Kazakhstan"
+		Then I check for the "Countries" catalog element with the "Description_en" "Ukraine"
 
 
 
-Сценарий: _005011 filling in the "Currencies" catalog
-	* Clearing the Currencies catalog
-		И я удаляю все элементы Справочника "Currencies"
-		И в базе нет элементов Справочника "Currencies"
+Scenario: _005011 filling in the "Currencies" catalog
 	* Opening the Currency creation form
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Currencies"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.Currencies"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And Delay 2
 	* Creating currencies: Turkish lira, American dollar, Euro, Ukraine Hryvnia
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Turkish lira'
-		И в поле с именем 'Description_tr' я ввожу текст 'Turkish lira'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Symbol' я ввожу текст 'TL'
-		И в поле 'Code' я ввожу текст 'TRY'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'American dollar'
-		И в поле с именем 'Description_tr' я ввожу текст 'American dollar'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Symbol' я ввожу текст '$'
-		И в поле 'Code' я ввожу текст 'USD'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Euro'
-		И в поле с именем 'Description_tr' я ввожу текст 'Euro'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Symbol' я ввожу текст '€'
-		И в поле 'Code' я ввожу текст 'EUR'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Ukraine Hryvnia'
-		И в поле с именем 'Description_tr' я ввожу текст 'Ukraine Hryvnia'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Symbol' я ввожу текст '₴'
-		И в поле 'Code' я ввожу текст 'UAH'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-	* Checking for added currencies in the catalog
-		Тогда В базе появился хотя бы один элемент справочника "Currencies"
-		Тогда я проверяю наличие элемента справочника "Currencies" со значением поля "Description_en" "Turkish lira"
-		Тогда я проверяю наличие элемента справочника "Currencies" со значением поля "Description_tr" "Turkish lira"
-		Тогда я проверяю наличие элемента справочника "Currencies" со значением поля "Description_en" "American dollar"
-		Тогда я проверяю наличие элемента справочника "Currencies" со значением поля "Description_en" "Euro"
-		Тогда я проверяю наличие элемента справочника "Currencies" со значением поля "Description_en" "Ukraine Hryvnia"
+		And I click Open button of the field named "Description_en"
+		And I input "Turkish lira" text in the field named "Description_en"
+		And I input "Turkish lira" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "TL" text in "Symbol" field
+		And I input "TRY" text in "Code" field
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "American dollar" text in the field named "Description_en"
+		And I input "American dollar" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "$" text in "Symbol" field
+		And I input "USD" text in "Code" field
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Euro" text in the field named "Description_en"
+		And I input "Euro" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "€" text in "Symbol" field
+		And I input "EUR" text in "Code" field
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Ukraine Hryvnia" text in the field named "Description_en"
+		And I input "Ukraine Hryvnia" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "₴" text in "Symbol" field
+		And I input "UAH" text in "Code" field
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+	* Check for added currencies in the catalog
+		Then I check for the "Currencies" catalog element with the "Description_en" "Turkish lira"
+		Then I check for the "Currencies" catalog element with the "Description_tr" "Turkish lira"
+		Then I check for the "Currencies" catalog element with the "Description_en" "American dollar"
+		Then I check for the "Currencies" catalog element with the "Description_en" "Euro"
+		Then I check for the "Currencies" catalog element with the "Description_en" "Ukraine Hryvnia"
 
 
-Сценарий: _005012 create integration settings to load the currency rate (without Plugin sessing connected)
+Scenario: _005012 create integration settings to load the currency rate (without Plugin sessing connected)
 	* Creating a setting to download the Forex Seling course (tcmb.gov.tr)
-		И я открываю навигационную ссылку "e1cib/list/Catalog.IntegrationSettings"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'Description' я ввожу текст 'Forex Seling'
-		И в поле 'Unique ID' я ввожу текст 'ForexSeling'
-		И я нажимаю на кнопку 'Save'
-		И из выпадающего списка "Integration type" я выбираю точное значение 'Currency rates'
-		И я нажимаю кнопку выбора у поля "Plugins"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+		And I click the button named "FormCreate"
+		And I input "Forex Seling" text in "Description" field
+		And I input "ForexSeling" text in "Unique ID" field
+		And I click "Save" button
+		And I select "Currency rates" exact value from "Integration type" drop-down list
+		And I click Select button of "Plugins" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'ExternalTCMBGovTr' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 10
 	* Creating a setting to download the Forex Buying course (tcmb.gov.tr)
-		И я открываю навигационную ссылку "e1cib/list/Catalog.IntegrationSettings"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'Description' я ввожу текст 'Forex Buying'
-		И в поле 'Unique ID' я ввожу текст 'ForexBuying'
-		И я нажимаю на кнопку 'Save'
-		И из выпадающего списка "Integration type" я выбираю точное значение 'Currency rates'
-		И я нажимаю кнопку выбора у поля "Plugins"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+		And I click the button named "FormCreate"
+		And I input "Forex Buying" text in "Description" field
+		And I input "ForexBuying" text in "Unique ID" field
+		And I click "Save" button
+		And I select "Currency rates" exact value from "Integration type" drop-down list
+		And I click Select button of "Plugins" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'ExternalTCMBGovTr' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 10
 	* Creating a setting to download the course (bank.gov.ua)
-		И я открываю навигационную ссылку "e1cib/list/Catalog.IntegrationSettings"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'Description' я ввожу текст 'Bank UA'
-		И в поле 'Unique ID' я ввожу текст 'BankUA'
-		И я нажимаю на кнопку 'Save'
-		И из выпадающего списка "Integration type" я выбираю точное значение 'Currency rates'
-		И я нажимаю кнопку выбора у поля "Plugins"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+		And I click the button named "FormCreate"
+		And I input "Bank UA" text in "Description" field
+		And I input "BankUA" text in "Unique ID" field
+		And I click "Save" button
+		And I select "Currency rates" exact value from "Integration type" drop-down list
+		And I click Select button of "Plugins" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'ExternalBankUa' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 10
 
 
 
-Сценарий: _005013 filling in the "Companies" catalog
-	* Clearing the Companies catalog
-		И я удаляю все элементы Справочника "Companies"
-		И в базе нет элементов Справочника "Companies"
+Scenario: _005013 filling in the "Companies" catalog
 	* Opening the form for filling in
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Companies"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And Delay 2
 	* Filling in company information
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Main Company'
-		И в поле с именем 'Description_tr' я ввожу текст 'Main Company TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле с именем 'Country' я ввожу текст 'Turkey'
-		И я устанавливаю флаг 'Our'
-		И я нажимаю на кнопку 'Save'
+		And I click Open button of the field named "Description_en"
+		And I input "Main Company" text in the field named "Description_en"
+		And I input "Main Company TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "Turkey" text in the field named "Country"
+		And I set checkbox "Our"
+		And I select "Company" exact value from the drop-down list named "Type"
+		And I click "Save" button
 	* Filling in currency information (Local currency and Reporting currency)
-		И я перехожу к закладке "Currencies"
+		And I move to "Currencies" tab
 		* Creation and addition of Local currency
-			И в таблице "Currencies" я нажимаю на кнопку с именем 'CurrenciesAdd'
-			И в таблице "Currencies" я нажимаю кнопку выбора у реквизита "Movement type"
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст 'Local currency'
-			И я нажимаю кнопку выбора у поля "Currency"
-			И в таблице "List" я перехожу к строке:
+			And in the table "Currencies" I click the button named "CurrenciesAdd"
+			And I click choice button of "Movement type" attribute in "Currencies" table
+			And I click the button named "FormCreate"
+			And I input "Local currency" text in "ENG" field
+			And I click Select button of "Currency" field
+			And I go to line in "List" table
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Source"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Source" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Forex Seling' |
-			И в таблице "List" я выбираю текущую строку
-			И из выпадающего списка "Type" я выбираю точное значение 'Legal'
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 5
-			И я нажимаю на кнопку с именем 'FormChoose'
-			И в таблице "Currencies" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I select "Legal" exact value from "Type" drop-down list
+			And I click "Save and close" button
+			And Delay 5
+			And I click the button named "FormChoose"
+			And I finish line editing in "Currencies" table
 		* Creation and addition of Reporting currency
-			И в таблице "Currencies" я нажимаю на кнопку с именем 'CurrenciesAdd'
-			И в таблице "Currencies" я нажимаю кнопку выбора у реквизита "Movement type"
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Currency"
-			И в таблице "List" я перехожу к строке:
+			And in the table "Currencies" I click the button named "CurrenciesAdd"
+			And I click choice button of "Movement type" attribute in "Currencies" table
+			And I click the button named "FormCreate"
+			And I click Select button of "Currency" field
+			And I go to line in "List" table
 				| 'Code' | 'Description'     |
 				| 'USD'  | 'American dollar' |
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Source"
-			И в таблице "List" я перехожу к строке:
+			And I activate "Description" field in "List" table
+			And I select current line in "List" table
+			And I click Select button of "Source" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Forex Seling' |
-			И в таблице "List" я выбираю текущую строку
-			И из выпадающего списка "Type" я выбираю точное значение 'Reporting'
-			И в поле 'ENG' я ввожу текст 'Reporting currency'
-			И я нажимаю на кнопку 'Save and close'
-			И Пауза 5
-			И я нажимаю на кнопку с именем 'FormChoose'
-			И в таблице "Currencies" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
-	* Checking the availability of the created company in the catalog
-		Тогда В базе появился хотя бы один элемент справочника "Companies"
-		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_en" "Main Company" 
-		Тогда я проверяю наличие элемента справочника "Companies" со значением поля "Description_tr" "Main Company TR"
+			And I select current line in "List" table
+			And I select "Reporting" exact value from "Type" drop-down list
+			And I input "Reporting currency" text in "ENG" field
+			And I click "Save and close" button
+			And Delay 5
+			And I click the button named "FormChoose"
+			And I finish line editing in "Currencies" table
+		And I click "Save and close" button
+		And Delay 5
+	* Check the availability of the created company in the catalog
+		Then I check for the "Companies" catalog element with the "Description_en" "Main Company" 
+		Then I check for the "Companies" catalog element with the "Description_tr" "Main Company TR"
 
 
-Сценарий: _005017 creation Movement Type for Partner term currencies
+Scenario: _005017 creation Movement Type for Partner term currencies
 	* Opening charts of characteristic types - Currency movement
-		И я открываю навигационную ссылку "e1cib/list/ChartOfCharacteristicTypes.CurrencyMovementType"
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.CurrencyMovementType"
 	* Create currency for Partner terms - TRY
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'TRY'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I input "TRY" text in "ENG" field
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Source"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Source" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Forex Seling' |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Type" я выбираю точное значение 'Partner term'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I select "Partner term" exact value from "Type" drop-down list
+		And I click "Save and close" button
 	* Create currency for Partner terms - EUR
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'EUR'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I input "EUR" text in "ENG" field
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| 'Code' | 'Description' |
 			| 'EUR'  | 'Euro'        |
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Source"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I click Select button of "Source" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Forex Seling' |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Type" я выбираю точное значение 'Partner term'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I select "Partner term" exact value from "Type" drop-down list
+		And I click "Save and close" button
 	* Create currency for Partner terms - USD
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И в поле 'ENG' я ввожу текст 'USD'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I input "USD" text in "ENG" field
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| 'Code' | 'Description'     |
 			| 'USD'  | 'American dollar' |
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Source"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I click Select button of "Source" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Forex Seling' |
-		И в таблице "List" я выбираю текущую строку
-		И из выпадающего списка "Type" я выбираю точное значение 'Partner term'
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I select current line in "List" table
+		And I select "Partner term" exact value from "Type" drop-down list
+		And I click "Save and close" button
+		And Delay 5
 
 
-Сценарий: _005014 filling in the "Units" catalog
-	* Clearing theItem units catalog
-		И я удаляю все элементы Справочника "Units"
-		И в базе нет элементов Справочника "Units"
+Scenario: _005014 filling in the "Units" catalog
 	* Opening the form for filling in "Units"
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Units"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Catalog.Units"
+		And Delay 2
+		And I click the button named "FormCreate"
 	* Creating a unit of measurement 'pcs'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'pcs'
-		И в поле с именем 'Description_tr' я ввожу текст 'adet'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click Open button of the field named "Description_en"
+		And I input "pcs" text in the field named "Description_en"
+		And I input "adet" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Create a unit of measurement for 4 pcs packaging
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля с именем "BasisUnit"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'box (4 pcs)'
-		И в поле с именем 'Description_tr' я ввожу текст 'box (4 adet)'
-		И я нажимаю на кнопку 'Ok'
-		И в поле с именем 'Quantity' я ввожу текст '4'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "BasisUnit"
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "box (4 pcs)" text in the field named "Description_en"
+		And I input "box (4 adet)" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "4" text in the field named "Quantity"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Create a unit of measurement for 8 pcs packaging
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля с именем "BasisUnit"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'box (8 pcs)'
-		И в поле с именем 'Description_tr' я ввожу текст 'box (8 adet)'
-		И я нажимаю на кнопку 'Ok'
-		И в поле с именем 'Quantity' я ввожу текст '8'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "BasisUnit"
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "box (8 pcs)" text in the field named "Description_en"
+		And I input "box (8 adet)" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "8" text in the field named "Quantity"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Create a unit of measurement for 16 pcs packaging
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля с именем "BasisUnit"
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'box (16 pcs)'
-		И в поле с именем 'Description_tr' я ввожу текст 'box (16 adet)'
-		И я нажимаю на кнопку 'Ok'
-		И в поле с именем 'Quantity' я ввожу текст '16'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-	* Checking for created elements
-		Тогда В базе появился хотя бы один элемент справочника "Units"
-		Тогда я проверяю наличие элемента справочника "Units" со значением поля "Description_en" "pcs"  
-		Тогда я проверяю наличие элемента справочника "Units" со значением поля "Description_tr" "adet"
-		Тогда я проверяю наличие элемента справочника "Units" со значением поля "Description_en" "box (4 pcs)"
-		Тогда я проверяю наличие элемента справочника "Units" со значением поля "Description_en" "box (8 pcs)"
-		Тогда я проверяю наличие элемента справочника "Units" со значением поля "Description_en" "box (16 pcs)"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "BasisUnit"
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "box (16 pcs)" text in the field named "Description_en"
+		And I input "box (16 adet)" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "16" text in the field named "Quantity"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+	* Check for created elements
+		Then I check for the "Units" catalog element with the "Description_en" "pcs"  
+		Then I check for the "Units" catalog element with the "Description_tr" "adet"
+		Then I check for the "Units" catalog element with the "Description_en" "box (4 pcs)"
+		Then I check for the "Units" catalog element with the "Description_en" "box (8 pcs)"
+		Then I check for the "Units" catalog element with the "Description_en" "box (16 pcs)"
 
 
-Сценарий: _005015 filling in the "AccessGroups" catalog
-	* Clearing the User access groups catalog
-		И я удаляю все элементы Справочника "AccessGroups"
-		И в базе нет элементов Справочника "AccessGroups"
+Scenario: _005015 filling in the "AccessGroups" catalog
 	* Opening the form for filling in AccessGroups
-		И я открываю навигационную ссылку "e1cib/list/Catalog.AccessGroups"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
+		And I click the button named "FormCreate"
+		And Delay 2
 	* Data Filling - Admin
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Admin'
-		И в поле с именем 'Description_tr' я ввожу текст 'Admin TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-	* Checking for created AccessGroups
-		Тогда В базе появился хотя бы один элемент справочника "AccessGroups"
-		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_en" "Admin"  
-		Тогда я проверяю наличие элемента справочника "AccessGroups" со значением поля "Description_tr" "Admin TR"
+		And I click Open button of the field named "Description_en"
+		And I input "Admin" text in the field named "Description_en"
+		And I input "Admin TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+	* Check for created AccessGroups
+		Then I check for the "AccessGroups" catalog element with the "Description_en" "Admin"  
+		Then I check for the "AccessGroups" catalog element with the "Description_tr" "Admin TR"
 
-Сценарий: _005016 filling in the "AccessProfiles" catalog
-	* Clearing the User access profile catalog
-		И я удаляю все элементы Справочника "AccessProfiles"
-		И в базе нет элементов Справочника "AccessProfiles"
+Scenario: _005016 filling in the "AccessProfiles" catalog
 	* Opening the form for filling in AccessProfiles
-		И я открываю навигационную ссылку "e1cib/list/Catalog.AccessProfiles"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.AccessProfiles"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And Delay 2
 	* Data Filling - Admin
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Admin'
-		И в поле с именем 'Description_tr' я ввожу текст 'Admin TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем 'RolesUpdateRoles'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-	* Checking for created User access profiles
-		Тогда В базе появился хотя бы один элемент справочника "AccessProfiles"
-		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_en" "Admin"  
-		Тогда я проверяю наличие элемента справочника "AccessProfiles" со значением поля "Description_tr" "Admin TR"
+		And I click Open button of the field named "Description_en"
+		And I input "Admin" text in the field named "Description_en"
+		And I input "Admin TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named 'RolesUpdateRoles'
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+	* Check for created User access profiles
+		Then I check for the "AccessProfiles" catalog element with the "Description_en" "Admin"  
+		Then I check for the "AccessProfiles" catalog element with the "Description_tr" "Admin TR"
 
 
 
 
-Сценарий: _005018 filling in the "Cash/Bank accounts" catalog
-	* Clearing the Cash/Bank accounts catalog
-		И я удаляю все элементы Справочника "CashAccounts"
-		И в базе нет элементов Справочника "CashAccounts"
+Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 	* Opening the form for filling in Accounts
-		И я открываю навигационную ссылку "e1cib/list/Catalog.CashAccounts"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+		And Delay 2
+		And I click the button named "FormCreate"
 	* Create and check the creation of Cash/Bank accounts: Cash desk №1, Cash desk №2, Cash desk №3
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Cash desk №1'
-		И в поле с именем 'Description_tr' я ввожу текст 'Cash desk №1 TR'
-		И я нажимаю на кнопку 'Ok'
-		Тогда элемент формы с именем "Type" стал равен 'Cash'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Open button of the field named "Description_en"
+		And I input "Cash desk №1" text in the field named "Description_en"
+		And I input "Cash desk №1 TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		Then the form attribute named "Type" became equal to "Cash"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		Тогда В базе появился хотя бы один элемент справочника "CashAccounts"
-		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Cash desk №1"  
-		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_tr" "Cash desk №1 TR" 
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Cash desk №2'
-		И в поле с именем 'Description_tr' я ввожу текст 'Cash desk №2 TR'
-		И я нажимаю на кнопку 'Ok'
-		Тогда элемент формы с именем "Type" стал равен 'Cash'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		Then I check for the "CashAccounts" catalog element with the "Description_en" "Cash desk №1"  
+		Then I check for the "CashAccounts" catalog element with the "Description_tr" "Cash desk №1 TR" 
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Cash desk №2" text in the field named "Description_en"
+		And I input "Cash desk №2 TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		Then the form attribute named "Type" became equal to "Cash"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Cash desk №2"  
-		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_tr" "Cash desk №2 TR" 
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Cash desk №3'
-		И в поле с именем 'Description_tr' я ввожу текст 'Cash desk №3 TR'
-		И я нажимаю на кнопку 'Ok'
-		Тогда элемент формы с именем "Type" стал равен 'Cash'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		Then I check for the "CashAccounts" catalog element with the "Description_en" "Cash desk №2"  
+		Then I check for the "CashAccounts" catalog element with the "Description_tr" "Cash desk №2 TR" 
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Cash desk №3" text in the field named "Description_en"
+		And I input "Cash desk №3 TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		Then the form attribute named "Type" became equal to "Cash"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Cash desk №3"  
-		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_tr" "Cash desk №3 TR" 
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		Then I check for the "CashAccounts" catalog element with the "Description_en" "Cash desk №3"  
+		Then I check for the "CashAccounts" catalog element with the "Description_tr" "Cash desk №3 TR" 
 	* Create and check the creation of bank account: Bank account TRY, Bank account USD, Bank account EUR
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Bank account, TRY'
-		И в поле с именем 'Description_tr' я ввожу текст 'Bank account, TRY TR'
-		И я нажимаю на кнопку 'Ok'
-		И я меняю значение переключателя с именем "Type" на 'Bank'
-		И в поле 'Number' я ввожу текст '112000000018'
-		И в поле 'Bank name' я ввожу текст 'OTP'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Bank account, TRY" text in the field named "Description_en"
+		And I input "Bank account, TRY TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I change the radio button named "Type" value to "Bank"
+		And I input "112000000018" text in "Number" field
+		And I input "OTP" text in "Bank name" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
 			| Code | Description  |
 			| TRY  | Turkish lira |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Bank account, TRY"  
-		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_tr" "Bank account, TRY TR" 
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Bank account, USD'
-		И в поле с именем 'Description_tr' я ввожу текст 'Bank account, USD TR'
-		И я нажимаю на кнопку 'Ok'
-		И я меняю значение переключателя с именем "Type" на 'Bank'
-		И в поле 'Number' я ввожу текст '112000000019'
-		И в поле 'Bank name' я ввожу текст 'OTP'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		Then I check for the "CashAccounts" catalog element with the "Description_en" "Bank account, TRY"  
+		Then I check for the "CashAccounts" catalog element with the "Description_tr" "Bank account, TRY TR" 
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Bank account, USD" text in the field named "Description_en"
+		And I input "Bank account, USD TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I change the radio button named "Type" value to "Bank"
+		And I input "112000000019" text in "Number" field
+		And I input "OTP" text in "Bank name" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
 			| Code | Description     |
 			| USD  | American dollar |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Bank account, USD"  
-		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_tr" "Bank account, USD TR" 
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Bank account, EUR'
-		И в поле с именем 'Description_tr' я ввожу текст 'Bank account, EUR TR'
-		И я нажимаю на кнопку 'Ok'
-		И я меняю значение переключателя с именем "Type" на 'Bank'
-		И в поле 'Number' я ввожу текст '112000000020'
-		И в поле 'Bank name' я ввожу текст 'OTP'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		Then I check for the "CashAccounts" catalog element with the "Description_en" "Bank account, USD"  
+		Then I check for the "CashAccounts" catalog element with the "Description_tr" "Bank account, USD TR" 
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Bank account, EUR" text in the field named "Description_en"
+		And I input "Bank account, EUR TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I change the radio button named "Type" value to "Bank"
+		And I input "112000000020" text in "Number" field
+		And I input "OTP" text in "Bank name" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
 			| Code | Description |
 			| EUR  | Euro        |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Bank account, EUR"  
-		Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_tr" "Bank account, EUR TR"
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		Then I check for the "CashAccounts" catalog element with the "Description_en" "Bank account, EUR"  
+		Then I check for the "CashAccounts" catalog element with the "Description_tr" "Bank account, EUR TR"
 	* Create Transit bank account
 		* Create Transit Main
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
-			И в поле с именем 'Description_en' я ввожу текст 'Transit Main'
-			И в поле с именем 'Description_tr' я ввожу текст 'Transit Main'
-			И я нажимаю на кнопку 'Ok'
-			И я меняю значение переключателя с именем "Type" на 'Transit'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormCreate"
+			And I click Open button of the field named "Description_en"
+			And I input "Transit Main" text in the field named "Description_en"
+			And I input "Transit Main" text in the field named "Description_tr"
+			And I click "Ok" button
+			And I change the radio button named "Type" value to "Transit"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
-			И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-			И Пауза 5
-			Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Transit Main"
+			And I select current line in "List" table
+			And I click the button named "FormWriteAndClose"
+			And Delay 5
+			Then I check for the "CashAccounts" catalog element with the "Description_en" "Transit Main"
 		* Create Transit Second
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю на кнопку открытия поля с именем "Description_en"
-			И в поле с именем 'Description_en' я ввожу текст 'Transit Second'
-			И в поле с именем 'Description_tr' я ввожу текст 'Transit Second'
-			И я нажимаю на кнопку 'Ok'
-			И я меняю значение переключателя с именем "Type" на 'Transit'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "FormCreate"
+			And I click Open button of the field named "Description_en"
+			And I input "Transit Second" text in the field named "Description_en"
+			And I input "Transit Second" text in the field named "Description_tr"
+			And I click "Ok" button
+			And I change the radio button named "Type" value to "Transit"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
-			И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-			И Пауза 5
-			Тогда я проверяю наличие элемента справочника "CashAccounts" со значением поля "Description_en" "Transit Second"
+			And I select current line in "List" table
+			And I click the button named "FormWriteAndClose"
+			And Delay 5
+			Then I check for the "CashAccounts" catalog element with the "Description_en" "Transit Second"
 	* Filling Transit account in the Bank account, TRY
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.CashAccounts'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Transit account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Transit account" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Transit Main' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click "Save and close" button
 	* Filling Transit account in the Bank account, USD
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Bank account, USD' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Transit account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Transit account" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'Transit Second' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click "Save and close" button
 
 
-Сценарий: _005022 filling in the "Partners" catalog
-	* Clearing the Partners catalog
-		И я удаляю все элементы Справочника "Partners"
-		И в базе нет элементов Справочника "Partners"
+Scenario: _005022 filling in the "Partners" catalog
 	* Opening the form for filling in Partners
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Partners"
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And Delay 2
 	* Create partners: Ferron BP, Kalipso, Manager B, Lomaniti
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Ferron BP'
-		И в поле с именем 'Description_tr' я ввожу текст 'Ferron BP TR'
-		И я нажимаю на кнопку 'Ok'
-		И я устанавливаю флаг с именем 'Customer'
-		И я устанавливаю флаг с именем 'Vendor'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		Тогда В базе появился хотя бы один элемент справочника "Partners"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Kalipso'
-		И в поле с именем 'Description_tr' я ввожу текст 'Kalipso TR'
-		И я нажимаю на кнопку 'Ok'
-		И я устанавливаю флаг с именем 'Customer'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Manager B'
-		И в поле с именем 'Description_tr' я ввожу текст 'Manager B TR'
-		И я нажимаю на кнопку 'Ok'
-		И я устанавливаю флаг с именем 'Customer'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Lomaniti'
-		И в поле с именем 'Description_tr' я ввожу текст 'Lomaniti TR'
-		И я нажимаю на кнопку 'Ok'
-		И я устанавливаю флаг с именем 'Customer'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Checking for created partners
-		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Ferron BP"  
-		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_tr" "Ferron BP TR"
-		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Kalipso"
-		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Manager B"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "Partners" со значением поля "Description_en" "Lomaniti"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Ferron BP" text in the field named "Description_en"
+		And I input "Ferron BP TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox named "Customer"
+		And I set checkbox named "Vendor"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Kalipso" text in the field named "Description_en"
+		And I input "Kalipso TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox named "Customer"
+		And I click the button named "FormWriteAndClose"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Manager B" text in the field named "Description_en"
+		And I input "Manager B TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox named "Customer"
+		And I click the button named "FormWriteAndClose"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Lomaniti" text in the field named "Description_en"
+		And I input "Lomaniti TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox named "Customer"
+		And I click the button named "FormWriteAndClose"
+	* Check for created partners
+		Then I check for the "Partners" catalog element with the "Description_en" "Ferron BP"  
+		Then I check for the "Partners" catalog element with the "Description_tr" "Ferron BP TR"
+		Then I check for the "Partners" catalog element with the "Description_en" "Kalipso"
+		Then I check for the "Partners" catalog element with the "Description_en" "Manager B"
+		And Delay 2
+		Then I check for the "Partners" catalog element with the "Description_en" "Lomaniti"
 
-Сценарий: _005023 filling in the "Partner segments content" catalog
-	* Clearing the PartnerSegments catalog
-		И я удаляю все элементы Справочника "PartnerSegments"
-		И в базе нет элементов Справочника "PartnerSegments"
+Scenario: _005023 filling in the "Partner segments content" catalog
 	* Opening the form for filling in Partner segments content
-		И я открываю навигационную ссылку "e1cib/list/Catalog.PartnerSegments"
-		И Пауза 2
-	* Сreate segments: Retail, Dealer
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Retail'
-		И в поле с именем 'Description_tr' я ввожу текст 'Retail TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 2
-		Тогда В базе появился хотя бы один элемент справочника "PartnerSegments"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Dealer'
-		И в поле с именем 'Description_tr' я ввожу текст 'Dealer TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 2
-	* Checking for created Partner segments content
-		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_en" "Dealer"  
-		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_tr" "Dealer TR"
-		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_tr" "Retail TR"
-		Тогда я проверяю наличие элемента справочника "PartnerSegments" со значением поля "Description_en" "Retail" 
+		Given I open hyperlink "e1cib/list/Catalog.PartnerSegments"
+		And Delay 2
+	* Create segments: Retail, Dealer
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Retail" text in the field named "Description_en"
+		And I input "Retail TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Dealer" text in the field named "Description_en"
+		And I input "Dealer TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 2
+	* Check for created Partner segments content
+		Then I check for the "PartnerSegments" catalog element with the "Description_en" "Dealer"  
+		Then I check for the "PartnerSegments" catalog element with the "Description_tr" "Dealer TR"
+		Then I check for the "PartnerSegments" catalog element with the "Description_tr" "Retail TR"
+		Then I check for the "PartnerSegments" catalog element with the "Description_en" "Retail" 
 
-Сценарий: _005024 filling in the "Payment terms" catalog 
-	* Clearing the Payment terms catalog
-		И я удаляю все элементы Справочника "PaymentSchedules"
-		И в базе нет элементов Справочника "PaymentSchedules"
+Scenario: _005024 filling in the "Payment terms" catalog 
 	* Opening a form and creating Payment terms
-		И я открываю навигационную ссылку "e1cib/list/Catalog.PaymentSchedules"
-		Когда creating a catalog element with the name Test.
-	* Checking for created Payment terms
-		Тогда В базе появился хотя бы один элемент справочника "PaymentSchedules"
-		Тогда я проверяю наличие элемента справочника "PaymentSchedules" со значением поля "Description_en" "Test ENG"  
-		Тогда я проверяю наличие элемента справочника "PaymentSchedules" со значением поля "Description_tr" "Test TR"
-	* Deletion of created elements 
-		И я удаляю все элементы Справочника "PaymentSchedules"
+		Given I open hyperlink "e1cib/list/Catalog.PaymentSchedules"
+		When creating a catalog element with the name Test
+	* Check for created Payment terms
+		Then I check for the "PaymentSchedules" catalog element with the "Description_en" "Test ENG"  
+		Then I check for the "PaymentSchedules" catalog element with the "Description_tr" "Test TR"
 
 
-Сценарий: _005026 filling in the "Item segments content" catalog 
+Scenario: _005026 filling in the "Item segments content" catalog 
 	* Opening a form and creating Item segments content
-		И я открываю навигационную ссылку "e1cib/list/Catalog.ItemSegments"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Sale autum'
-		И в поле с именем 'Description_tr' я ввожу текст 'Sale autum TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 2
-	* Checking creation Item segments content
-		Тогда я проверяю наличие элемента справочника "ItemSegments" со значением поля "Description_en" "Sale autum"
-		Тогда я проверяю наличие элемента справочника "ItemSegments" со значением поля "Description_tr" "Sale autum TR"
+		Given I open hyperlink "e1cib/list/Catalog.ItemSegments"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Sale autum" text in the field named "Description_en"
+		And I input "Sale autum TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 2
+	* Check creation Item segments content
+		Then I check for the "ItemSegments" catalog element with the "Description_en" "Sale autum"
+		Then I check for the "ItemSegments" catalog element with the "Description_tr" "Sale autum TR"
 
 
 
-Сценарий: _005027 filling in the "Payment types" catalog  
-	* Clearing the Payment types catalog
-		И я удаляю все элементы Справочника "PaymentTypes"
-		И в базе нет элементов Справочника "PaymentTypes"
+Scenario: _005027 filling in the "Payment types" catalog  
 	* Opening a form and creating Payment types
-		И я открываю навигационную ссылку "e1cib/list/Catalog.PaymentTypes"
-		Когда creating a catalog element with the name Test.
-		И Я закрываю текущее окно
-	* Checking for created Payment types
-		Тогда В базе появился хотя бы один элемент справочника "PaymentTypes"
-		Тогда я проверяю наличие элемента справочника "PaymentTypes" со значением поля "Description_en" "Test ENG"  
-		Тогда я проверяю наличие элемента справочника "PaymentTypes" со значением поля "Description_tr" "Test TR"
-	* Deletion of created elements 
-		И я удаляю все элементы Справочника "PaymentTypes"
+		Given I open hyperlink "e1cib/list/Catalog.PaymentTypes"
+		When creating a catalog element with the name Test
+		And I close current window
+	* Check for created Payment types
+		Then I check for the "PaymentTypes" catalog element with the "Description_en" "Test ENG"  
+		Then I check for the "PaymentTypes" catalog element with the "Description_tr" "Test TR"
 
 
-Сценарий: _005028 filling in the "Price types" catalog  
+
+Scenario: _005028 filling in the "Price types" catalog  
 	* Opening a form and creating customer prices Basic Price Types, Price USD, Discount Price TRY 1, Discount Price TRY 2, Basic Price without VAT, Discount 1 TRY without VAT, Discount 2 TRY without VAT
-		И я открываю навигационную ссылку "e1cib/list/Catalog.PriceTypes"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Basic Price Types'
-		И в поле с именем 'Description_tr' я ввожу текст 'Basic Price Types TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.PriceTypes"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Basic Price Types" text in the field named "Description_en"
+		And I input "Basic Price Types TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Price USD'
-		И в поле с именем 'Description_tr' я ввожу текст 'Price USD TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Price USD" text in the field named "Description_en"
+		And I input "Price USD TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| USD  |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Discount Price TRY 1'
-		И в поле с именем 'Description_tr' я ввожу текст 'Discount Price TRY 1 TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Discount Price TRY 1" text in the field named "Description_en"
+		And I input "Discount Price TRY 1 TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Discount Price TRY 2'
-		И в поле с именем 'Description_tr' я ввожу текст 'Discount Price TRY 2 TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Discount Price TRY 2" text in the field named "Description_en"
+		And I input "Discount Price TRY 2 TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Basic Price without VAT'
-		И в поле с именем 'Description_tr' я ввожу текст 'Basic Price without VAT'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Basic Price without VAT" text in the field named "Description_en"
+		And I input "Basic Price without VAT" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Discount 1 TRY without VAT'
-		И в поле с именем 'Description_tr' я ввожу текст 'Discount 1 TRY without VAT'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Discount 1 TRY without VAT" text in the field named "Description_en"
+		And I input "Discount 1 TRY without VAT" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Discount 2 TRY without VAT'
-		И в поле с именем 'Description_tr' я ввожу текст 'Discount 2 TRY without VAT'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Discount 2 TRY without VAT" text in the field named "Description_en"
+		And I input "Discount 2 TRY without VAT" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
 	* Creating price types for vendors: Vendor price, TRY, Vendor price, USD, Vendor price, EUR
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Vendor price, TRY'
-		И в поле с именем 'Description_tr' я ввожу текст 'Vendor price, TRY TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Vendor price, TRY" text in the field named "Description_en"
+		And I input "Vendor price, TRY TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Vendor price, USD'
-		И в поле с именем 'Description_tr' я ввожу текст 'Vendor price, USD TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Vendor price, USD" text in the field named "Description_en"
+		And I input "Vendor price, USD TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| USD  |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Vendor price, EUR'
-		И в поле с именем 'Description_tr' я ввожу текст 'Vendor price, EUR TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Vendor price, EUR" text in the field named "Description_en"
+		And I input "Vendor price, EUR TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| EUR  |
-		И в таблице "List" я выбираю текущую строку
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Checking for created price types
-		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Vendor price, TRY"
-		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Vendor price, USD"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Vendor price, EUR"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Basic Price Types"
-		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_tr" "Basic Price Types TR"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Price USD"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Discount Price TRY 1"
-		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Discount Price TRY 2"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Basic Price without VAT"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Discount 1 TRY without VAT"
-		Тогда я проверяю наличие элемента справочника "PriceTypes" со значением поля "Description_en" "Discount 2 TRY without VAT"
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+	* Check for created price types
+		Then I check for the "PriceTypes" catalog element with the "Description_en" "Vendor price, TRY"
+		Then I check for the "PriceTypes" catalog element with the "Description_en" "Vendor price, USD"
+		And Delay 2
+		Then I check for the "PriceTypes" catalog element with the "Description_en" "Vendor price, EUR"
+		And Delay 2
+		Then I check for the "PriceTypes" catalog element with the "Description_en" "Basic Price Types"
+		Then I check for the "PriceTypes" catalog element with the "Description_tr" "Basic Price Types TR"
+		And Delay 2
+		Then I check for the "PriceTypes" catalog element with the "Description_en" "Price USD"
+		And Delay 2
+		Then I check for the "PriceTypes" catalog element with the "Description_en" "Discount Price TRY 1"
+		Then I check for the "PriceTypes" catalog element with the "Description_en" "Discount Price TRY 2"
+		And Delay 2
+		Then I check for the "PriceTypes" catalog element with the "Description_en" "Basic Price without VAT"
+		And Delay 2
+		Then I check for the "PriceTypes" catalog element with the "Description_en" "Discount 1 TRY without VAT"
+		Then I check for the "PriceTypes" catalog element with the "Description_en" "Discount 2 TRY without VAT"
 
 
 
-Сценарий: _005031 filling in the "Special offers" catalog
-	* Clearing the Special offers catalog
-		И я удаляю все элементы Справочника "SpecialOffers"
-		И в базе нет элементов Справочника "SpecialOffers"
+Scenario: _005031 filling in the "Special offers" catalog
 	* Opening a form and creating Special offers: Special Price
-		И я открываю навигационную ссылку "e1cib/list/Catalog.SpecialOffers"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Special Price'
-		И в поле с именем 'Description_tr' я ввожу текст 'Special Price TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю кнопку выбора у поля "Special offer type"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Plugins"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Special Price'
-		И в поле с именем 'Description_tr' я ввожу текст 'Special Price'
-		И я нажимаю на кнопку 'Ok'
-		И в поле с именем 'Name' я ввожу текст 'Special Price'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я жду закрытия окна 'Plugins (create)' в течение 20 секунд
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Special Price'
-		И в поле с именем 'Description_tr' я ввожу текст 'Special Price'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 2
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в поле с именем 'Priority' я ввожу текст '2'
-		И в поле с именем 'StartOf' я ввожу текст '03.12.2018  0:00:00'
-		И в поле с именем 'EndOf' я ввожу текст '05.12.2018  0:00:00'
-		И из выпадающего списка "Document type" я выбираю точное значение 'Sales'
-		И я устанавливаю флаг с именем 'Manually'
-		И я устанавливаю флаг с именем 'Launch'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 2
-	* Checking creation
-		Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_en" "Special Price"  
-		Тогда я проверяю наличие элемента справочника "SpecialOffers" со значением поля "Description_tr" "Special Price TR"
-	* Deletion of created elements 
-		И я удаляю все элементы Справочника "SpecialOffers"
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And Delay 2
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Special Price" text in the field named "Description_en"
+		And I input "Special Price TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Special offer type" field
+		And I click the button named "FormCreate"
+		And I click Select button of "Plugins" field
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Special Price" text in the field named "Description_en"
+		And I input "Special Price" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "Special Price" text in the field named "Name"
+		And I click the button named "FormWriteAndClose"
+		And I wait "Plugins (create)" window closing in 20 seconds
+		And I click the button named "FormChoose"
+		And I click Open button of the field named "Description_en"
+		And I input "Special Price" text in the field named "Description_en"
+		And I input "Special Price" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 2
+		And I click the button named "FormChoose"
+		And I input "2" text in the field named "Priority"
+		And I input "03.12.2018  0:00:00" text in the field named "StartOf"
+		And I input "05.12.2018  0:00:00" text in the field named "EndOf"
+		And I select "Sales" exact value from "Document type" drop-down list
+		And I set checkbox named "Manually"
+		And I set checkbox named "Launch"
+		And I click the button named "FormWriteAndClose"
+		And Delay 2
+	* Check creation
+		Then I check for the "SpecialOffers" catalog element with the "Description_en" "Special Price"  
+		Then I check for the "SpecialOffers" catalog element with the "Description_tr" "Special Price TR"
 
-Сценарий: _005032 filling in the "Stores" catalog
-	* Clearing the Stores catalog
-		И я удаляю все элементы Справочника "Stores"
-		И в базе нет элементов Справочника "Stores"
+
+Scenario: _005032 filling in the "Stores" catalog
 	* Opening a form for creating Stores
-		И я открываю навигационную ссылку "e1cib/list/Catalog.Stores"
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.Stores"
+		And Delay 2
 	* Create Store 01
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Store 01'
-		И в поле с именем 'Description_tr' я ввожу текст 'Store 01 TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-		Тогда В базе появился хотя бы один элемент справочника "Stores"
-		И Пауза 2
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Store 01" text in the field named "Description_en"
+		And I input "Store 01 TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Create Store 02
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Store 02'
-		И в поле с именем 'Description_tr' я ввожу текст 'Store 02 TR'
-		И я нажимаю на кнопку 'Ok'
-		И я устанавливаю флаг с именем 'UseGoodsReceipt'
-		И я устанавливаю флаг с именем 'UseShipmentConfirmation'
-		И     элемент формы с именем "Transit" стал равен 'No'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Store 02" text in the field named "Description_en"
+		And I input "Store 02 TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox named "UseGoodsReceipt"
+		And I set checkbox named "UseShipmentConfirmation"
+		Then the form attribute named "Transit" became equal to "No"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Create Store 03
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Store 03'
-		И в поле с именем 'Description_tr' я ввожу текст 'Store 03 TR'
-		И я нажимаю на кнопку 'Ok'
-		И я устанавливаю флаг с именем 'UseGoodsReceipt'
-		И я устанавливаю флаг с именем 'UseShipmentConfirmation'
-		И     элемент формы с именем "Transit" стал равен 'No'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Store 03" text in the field named "Description_en"
+		And I input "Store 03 TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox named "UseGoodsReceipt"
+		And I set checkbox named "UseShipmentConfirmation"
+		Then the form attribute named "Transit" became equal to "No"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Create Store 04
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Store 04'
-		И в поле с именем 'Description_tr' я ввожу текст 'Store 04 TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-	* Checking creation "Stores"
-		Тогда я проверяю наличие элемента справочника "Stores" со значением поля "Description_en" "Store 01"  
-		Тогда я проверяю наличие элемента справочника "Stores" со значением поля "Description_tr" "Store 01 TR"
-		Тогда я проверяю наличие элемента справочника "Stores" со значением поля "Description_en" "Store 02"  
-		Тогда я проверяю наличие элемента справочника "Stores" со значением поля "Description_en" "Store 03"
-		Тогда я проверяю наличие элемента справочника "Stores" со значением поля "Description_en" "Store 04"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Store 04" text in the field named "Description_en"
+		And I input "Store 04 TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+	* Check creation "Stores"
+		Then I check for the "Stores" catalog element with the "Description_en" "Store 01"  
+		Then I check for the "Stores" catalog element with the "Description_tr" "Store 01 TR"
+		Then I check for the "Stores" catalog element with the "Description_en" "Store 02"  
+		Then I check for the "Stores" catalog element with the "Description_en" "Store 03"
+		Then I check for the "Stores" catalog element with the "Description_en" "Store 04"
 
-Сценарий: _005033 filling in the "Tax rates" catalog  
-	* Clearing the Tax rates catalog
-		И я удаляю все элементы Справочника "TaxRates"
-		И в базе нет элементов Справочника "TaxRates"
+Scenario: _005033 filling in the "Tax rates" catalog  
 	* Opening a form for creating Tax rates
-		И я открываю навигационную ссылку "e1cib/list/Catalog.TaxRates"
-		И Пауза 2
+		Given I open hyperlink "e1cib/list/Catalog.TaxRates"
+		And Delay 2
 	* Create tax rate '8%'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст '8%'
-		И в поле с именем 'Description_tr' я ввожу текст '8% TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле с именем 'Rate' я ввожу текст '8,000000000000'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "8%" text in the field named "Description_en"
+		And I input "8% TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "8,000000000000" text in the field named "Rate"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Create tax rate '18%'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст '18%'
-		И в поле с именем 'Description_tr' я ввожу текст '18% TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле 'Rate' я ввожу текст '18,000000000000'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "18%" text in the field named "Description_en"
+		And I input "18% TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "18,000000000000" text in "Rate" field
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Create tax rate 'Without VAT'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Without VAT'
-		И в поле с именем 'Description_tr' я ввожу текст 'Without VAT TR'
-		И я нажимаю на кнопку 'Ok'
-		И в поле с именем 'Rate' я ввожу текст '0,000000000000'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Without VAT" text in the field named "Description_en"
+		And I input "Without VAT TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "0,000000000000" text in the field named "Rate"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Create tax rate '0%'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст '0%'
-		И в поле с именем 'Description_tr' я ввожу текст '0%'
-		И я нажимаю на кнопку 'Ok'
-		И в поле с именем 'Rate' я ввожу текст '0,000000000000'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "0%" text in the field named "Description_en"
+		And I input "0%" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "0,000000000000" text in the field named "Rate"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Create tax rate '1%'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И Пауза 2
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст '1%'
-		И в поле с именем 'Description_tr' я ввожу текст '1%'
-		И я нажимаю на кнопку 'Ok'
-		И в поле с именем 'Rate' я ввожу текст '1,000000000000'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И Пауза 5
-	* Checking creation tax rates
-		Тогда В базе появился хотя бы один элемент справочника "TaxRates"
-		Тогда я проверяю наличие элемента справочника "TaxRates" со значением поля "Description_en" "8%"  
-		Тогда я проверяю наличие элемента справочника "TaxRates" со значением поля "Description_tr" "8% TR"
-		Тогда я проверяю наличие элемента справочника "TaxRates" со значением поля "Description_en" "Without VAT"  
-		Тогда я проверяю наличие элемента справочника "TaxRates" со значением поля "Description_en" "18%"
-		Тогда я проверяю наличие элемента справочника "TaxRates" со значением поля "Description_en" "1%"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "1%" text in the field named "Description_en"
+		And I input "1%" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "1,000000000000" text in the field named "Rate"
+		And I click the button named "FormWriteAndClose"
+		And Delay 5
+	* Check creation tax rates
+		Then I check for the "TaxRates" catalog element with the "Description_en" "8%"  
+		Then I check for the "TaxRates" catalog element with the "Description_tr" "8% TR"
+		Then I check for the "TaxRates" catalog element with the "Description_en" "Without VAT"  
+		Then I check for the "TaxRates" catalog element with the "Description_en" "18%"
+		Then I check for the "TaxRates" catalog element with the "Description_en" "1%"
 
 
 
-Сценарий: _005038 filling in the "Company types" catalog  
-	* Opening a form for creating Company types
-		И я открываю навигационную ссылку "e1cib/list/Catalog.CompanyTypes"
-	* Create company types: Entrepreneur, Legal entity, Private individual
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Entrepreneur'
-		И в поле с именем 'Description_tr' я ввожу текст 'Entrepreneur TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Legal entity'
-		И в поле с именем 'Description_tr' я ввожу текст 'Legal entity TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Private individual'
-		И в поле с именем 'Description_tr' я ввожу текст 'Private individual TR'
-		И я нажимаю на кнопку 'Ok'
-		И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
-	* Checking creation 
-		Тогда я проверяю наличие элемента справочника "CompanyTypes" со значением поля "Description_en" "Entrepreneur"  
-		Тогда я проверяю наличие элемента справочника "CompanyTypes" со значением поля "Description_en" "Legal entity"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "CompanyTypes" со значением поля "Description_en" "Private individual" 
-
-Сценарий: _005039 filling in the status catalog for Inventory transfer order
+Scenario: _005039 filling in the status catalog for Inventory transfer order
 	* Opening a form for creating Objects status historyes
-		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
+		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element InventoryTransferOrder
-		И в таблице "List" я разворачиваю строку:
+		And I expand a line in "List" table
 			| 'Description'    |
 			| 'Objects status history' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Predefined data item name |
 			| InventoryTransferOrder                |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Inventory transfer order'
-		И в поле 'TR' я ввожу текст 'Inventory transfer order TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "Inventory transfer order" text in "ENG" field
+		And I input "Inventory transfer order TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Wait"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Inventory transfer order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Set by default'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Wait'
-		И в поле 'TR' я ввожу текст 'Wait TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I set checkbox "Set by default"
+		And I click Open button of the field named "Description_en"
+		And I input "Wait" text in "ENG" field
+		And I input "Wait TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Approved"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Inventory transfer order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Posting'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Approved'
-		И в поле 'TR' я ввожу текст 'Approved TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I set checkbox "Posting"
+		And I click Open button of the field named "Description_en"
+		And I input "Approved" text in "ENG" field
+		And I input "Approved TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Send"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Inventory transfer order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Posting'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Send'
-		И в поле 'TR' я ввожу текст 'Send TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I set checkbox "Posting"
+		And I click Open button of the field named "Description_en"
+		And I input "Send" text in "ENG" field
+		And I input "Send TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Receive"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Inventory transfer order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Posting'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Receive'
-		И в поле 'TR' я ввожу текст 'Receive TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Я закрываю текущее окно
+		And I click the button named "FormCreate"
+		And I set checkbox "Posting"
+		And I click Open button of the field named "Description_en"
+		And I input "Receive" text in "ENG" field
+		And I input "Receive TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And I close current window
 
-Сценарий: _005040 filling in the status catalog for Outgoing Payment Order
+Scenario: _005040 filling in the status catalog for Outgoing Payment Order
 	* Opening a form for creating Objects status historyes
-		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
+		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element OutgoingPaymentOrder
-		И в таблице "List" я разворачиваю строку:
+		And I expand a line in "List" table
 			| 'Description'    |
 			| 'Objects status history' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Predefined data item name |
 			| OutgoingPaymentOrder                |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Outgoing payment order'
-		И в поле 'TR' я ввожу текст 'Outgoing payment order TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "Outgoing payment order" text in "ENG" field
+		And I input "Outgoing payment order TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Wait"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Outgoing payment order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Set by default'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Wait'
-		И в поле 'TR' я ввожу текст 'Wait TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I set checkbox "Set by default"
+		And I click Open button of the field named "Description_en"
+		And I input "Wait" text in "ENG" field
+		And I input "Wait TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Approved"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Outgoing payment order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Posting'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Approved'
-		И в поле 'TR' я ввожу текст 'Approved TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I set checkbox "Posting"
+		And I click Open button of the field named "Description_en"
+		And I input "Approved" text in "ENG" field
+		And I input "Approved TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 
-Сценарий: _005041 filling in the status catalog for Purchase return order
+Scenario: _005041 filling in the status catalog for Purchase return order
 	* Opening a form for creating Objects status historyes
-		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
+		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element  PurchaseReturnOrder
-		И в таблице "List" я разворачиваю строку:
+		And I expand a line in "List" table
 			| 'Description'    |
 			| 'Objects status history' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Predefined data item name |
 			| PurchaseReturnOrder                |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Purchase return order'
-		И в поле 'TR' я ввожу текст 'Purchase return order TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "Purchase return order" text in "ENG" field
+		And I input "Purchase return order TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Wait"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Purchase return order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Set by default'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Wait'
-		И в поле 'TR' я ввожу текст 'Wait TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I set checkbox "Set by default"
+		And I click Open button of the field named "Description_en"
+		And I input "Wait" text in "ENG" field
+		And I input "Wait TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Approved"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Purchase return order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Posting'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Approved'
-		И в поле 'TR' я ввожу текст 'Approved TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I set checkbox "Posting"
+		And I click Open button of the field named "Description_en"
+		And I input "Approved" text in "ENG" field
+		And I input "Approved TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 
 
-Сценарий: _005042 filling in the status catalog for Purchase order
+Scenario: _005042 filling in the status catalog for Purchase order
 	* Opening a form for creating Objects status historyes
-		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
+		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element PurchaseOrder
-		И в таблице "List" я разворачиваю строку:
+		And I expand a line in "List" table
 			| 'Description'    |
 			| 'Objects status history' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Predefined data item name |
 			| PurchaseOrder                |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Purchase order'
-		И в поле 'TR' я ввожу текст 'Purchase order TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "Purchase order" text in "ENG" field
+		And I input "Purchase order TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Wait"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Purchase order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Set by default'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Wait'
-		И в поле 'TR' я ввожу текст 'Wait TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I set checkbox "Set by default"
+		And I click Open button of the field named "Description_en"
+		And I input "Wait" text in "ENG" field
+		And I input "Wait TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Approved"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Purchase order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Posting'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Approved'
-		И в поле 'TR' я ввожу текст 'Approved TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I set checkbox "Posting"
+		And I click Open button of the field named "Description_en"
+		And I input "Approved" text in "ENG" field
+		And I input "Approved TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 
-Сценарий: _005043 filling in the status catalog for Sales return order
+Scenario: _005043 filling in the status catalog for Sales return order
 	* Opening a form for creating Objects status historyes
-		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
+		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element  SalesReturnOrder
-		И в таблице "List" я разворачиваю строку:
+		And I expand a line in "List" table
 			| 'Description'    |
 			| 'Objects status history' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Predefined data item name |
 			| SalesReturnOrder                |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Sales return order'
-		И в поле 'TR' я ввожу текст 'Sales return order TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "Sales return order" text in "ENG" field
+		And I input "Sales return order TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Wait"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Sales return order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Set by default'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Wait'
-		И в поле 'TR' я ввожу текст 'Wait TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I set checkbox "Set by default"
+		And I click Open button of the field named "Description_en"
+		And I input "Wait" text in "ENG" field
+		And I input "Wait TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Approved"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Sales return order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Posting'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Approved'
-		И в поле 'TR' я ввожу текст 'Approved TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I set checkbox "Posting"
+		And I click Open button of the field named "Description_en"
+		And I input "Approved" text in "ENG" field
+		And I input "Approved TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 
-Сценарий: _005044 filling in the status catalog for Sales order
+Scenario: _005044 filling in the status catalog for Sales order
 	* Opening a form for creating Objects status historyes
-		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
+		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element  SalesOrder
-		И в таблице "List" я разворачиваю строку:
+		And I expand a line in "List" table
 			| 'Description'    |
 			| 'Objects status history' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Predefined data item name |
 			| SalesOrder                |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Sales order'
-		И в поле 'TR' я ввожу текст 'Sales order TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I select current line in "List" table
+		And I click Open button of the field named "Description_en"
+		And I input "Sales order" text in "ENG" field
+		And I input "Sales order TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Wait"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Sales order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Wait'
-		И в поле 'TR' я ввожу текст 'Wait TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Wait" text in "ENG" field
+		And I input "Wait TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Approved"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Sales order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Posting'
-		И я устанавливаю флаг 'Set by default'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Approved'
-		И в поле 'TR' я ввожу текст 'Approved TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
+		And I click the button named "FormCreate"
+		And I set checkbox "Posting"
+		And I set checkbox "Set by default"
+		And I click Open button of the field named "Description_en"
+		And I input "Approved" text in "ENG" field
+		And I input "Approved TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
 	* Adding status "Done"
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Description'              |
 		| 'Sales order' |
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я устанавливаю флаг 'Posting'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Done'
-		И в поле 'TR' я ввожу текст 'Done TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-	И Я закрыл все окна клиентского приложения
+		And I click the button named "FormCreate"
+		And I set checkbox "Posting"
+		And I click Open button of the field named "Description_en"
+		And I input "Done" text in "ENG" field
+		And I input "Done TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	And I close all client application windows
 
-Сценарий: _005045 check for clearing the UniqueID field when copying the status
+Scenario: _005045 check for clearing the UniqueID field when copying the status
 	* Opening a form for creating Objects status historyes
-		И я открываю навигационную ссылку "e1cib/list/Catalog.ObjectStatuses"
-		И в таблице "List" я разворачиваю строку:
+		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
+		And I expand a line in "List" table
 			| 'Description'    |
 			| 'Objects status history' |
 	* Copy status
-		И в таблице "List" я разворачиваю строку:
+		And I expand a line in "List" table
 			| 'Description' | 'Predefined data item name' |
 			| 'Sales order' | 'SalesOrder'                |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Wait'        |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuCopy'
-	* Checking UniqueID field deleting
-		И     элемент формы с именем "UniqueID" стал равен ''
-		И     элемент формы с именем "Description_en" стал равен 'Wait'
-	И Я закрыл все окна клиентского приложения
+		And in the table "List" I click the button named "ListContextMenuCopy"
+	* Check UniqueID field deleting
+		Then the form attribute named "UniqueID" became equal to ""
+		Then the form attribute named "Description_en" became equal to "Wait"
+	And I close all client application windows
 
 
 
-Сценарий: _005046 заполнение Business units
+Scenario: _005046 filling in Business units
 	* Open a creation form Business units
-		И я открываю навигационную ссылку "e1cib/list/Catalog.BusinessUnits"
-	* Создание подразделения 'Front office'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Front office'
-		И в поле 'TR' я ввожу текст 'Front office TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-	* Создание подразделения 'Accountants office'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Accountants office'
-		И в поле 'TR' я ввожу текст 'Accountants office TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-	* Создание подразделения 'Distribution department'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Distribution department'
-		И в поле 'TR' я ввожу текст 'Distribution department TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-	* Создание подразделения 'Logistics department'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Logistics department'
-		И в поле 'TR' я ввожу текст 'Logistics department TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking creation Business units
-		Тогда я проверяю наличие элемента справочника "BusinessUnits" со значением поля "Description_en" "Front office"
-		Тогда я проверяю наличие элемента справочника "BusinessUnits" со значением поля "Description_en" "Accountants office"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "BusinessUnits" со значением поля "Description_en" "Distribution department"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "BusinessUnits" со значением поля "Description_en" "Logistics department"
+		Given I open hyperlink "e1cib/list/Catalog.BusinessUnits"
+	* Create business unit 'Front office'
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Front office" text in "ENG" field
+		And I input "Front office TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Create business unit 'Accountants office'
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Accountants office" text in "ENG" field
+		And I input "Accountants office TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Create business unit 'Distribution department'
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Distribution department" text in "ENG" field
+		And I input "Distribution department TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Create business unit 'Logistics department'
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Logistics department" text in "ENG" field
+		And I input "Logistics department TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Check creation Business units
+		Then I check for the "BusinessUnits" catalog element with the "Description_en" "Front office"
+		Then I check for the "BusinessUnits" catalog element with the "Description_en" "Accountants office"
+		And Delay 2
+		Then I check for the "BusinessUnits" catalog element with the "Description_en" "Distribution department"
+		And Delay 2
+		Then I check for the "BusinessUnits" catalog element with the "Description_en" "Logistics department"
 
-Сценарий: _005047 заполнение Expense type
+Scenario: _005047 filling in Expense type
 	* Open a creation form Expense type
-		И я открываю навигационную ссылку "e1cib/list/Catalog.ExpenseAndRevenueTypes"
-	* Создание статьи 'Rent'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Rent'
-		И в поле 'TR' я ввожу текст 'Rent TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-	* Создание статьи  'Telephone communications'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Telephone communications'
-		И в поле 'TR' я ввожу текст 'Telephone communications TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-	И я создаю статью 'Fuel'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Fuel'
-		И в поле 'TR' я ввожу текст 'Fuel TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-	* Создание статьи  'Software'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Software'
-		И в поле 'TR' я ввожу текст 'Software TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-	* Создание статьи  'Delivery'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Delivery'
-		И в поле 'TR' я ввожу текст 'Delivery TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-	* Checking creation Expense type
-		Тогда я проверяю наличие элемента справочника "ExpenseAndRevenueTypes" со значением поля "Description_en" "Rent"
-		Тогда я проверяю наличие элемента справочника "ExpenseAndRevenueTypes" со значением поля "Description_en" "Telephone communications"
-		Тогда я проверяю наличие элемента справочника "ExpenseAndRevenueTypes" со значением поля "Description_en" "Fuel"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "ExpenseAndRevenueTypes" со значением поля "Description_en" "Software"
-		И Пауза 2
-		Тогда я проверяю наличие элемента справочника "ExpenseAndRevenueTypes" со значением поля "Description_en" "Delivery"
+		Given I open hyperlink "e1cib/list/Catalog.ExpenseAndRevenueTypes"
+	* Create expense type 'Rent'
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Rent" text in "ENG" field
+		And I input "Rent TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Create expense type  'Telephone communications'
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Telephone communications" text in "ENG" field
+		And I input "Telephone communications TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Create expense type 'Fuel'
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Fuel" text in "ENG" field
+		And I input "Fuel TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Create expense type  'Software'
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Software" text in "ENG" field
+		And I input "Software TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Create expense type  'Delivery'
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Delivery" text in "ENG" field
+		And I input "Delivery TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Check creation Expense type
+		Then I check for the "ExpenseAndRevenueTypes" catalog element with the "Description_en" "Rent"
+		Then I check for the "ExpenseAndRevenueTypes" catalog element with the "Description_en" "Telephone communications"
+		Then I check for the "ExpenseAndRevenueTypes" catalog element with the "Description_en" "Fuel"
+		And Delay 2
+		Then I check for the "ExpenseAndRevenueTypes" catalog element with the "Description_en" "Software"
+		And Delay 2
+		Then I check for the "ExpenseAndRevenueTypes" catalog element with the "Description_en" "Delivery"
 
-Сценарий: _005048 filling in the "Item segments content" catalog  "Tax additional analytics"
-	* Открытие и заполнение формы Tax additional analytics
-		И я открываю навигационную ссылку "e1cib/list/Catalog.TaxAnalytics"
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Analytics 01'
-		И в поле 'TR' я ввожу текст 'Analytics 01 TR'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save and close'
-		И Я закрыл все окна клиентского приложения
-		И Пауза 2
-	* Checking for created  Tax additional analytics
-		Тогда я проверяю наличие элемента справочника "TaxAnalytics" со значением поля "Description_en" "Analytics 01"  
-		Тогда я проверяю наличие элемента справочника "TaxAnalytics" со значением поля "Description_tr" "Analytics 01 TR"
-
+Scenario: _005048 filling in the "Item segments content" catalog  "Tax additional analytics"
+	* Open and filling in Tax additional analytics
+		Given I open hyperlink "e1cib/list/Catalog.TaxAnalytics"
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Analytics 01" text in "ENG" field
+		And I input "Analytics 01 TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+		And I close all client application windows
+		And Delay 2
+	* Check for created  Tax additional analytics
+		Then I check for the "TaxAnalytics" catalog element with the "Description_en" "Analytics 01"  
+		Then I check for the "TaxAnalytics" catalog element with the "Description_tr" "Analytics 01 TR"
 

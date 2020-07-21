@@ -1,1524 +1,1498 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 @Test
 
 
-Функционал: basic check documents and catalogs
+Feature: basic check documents and catalogs
 
 As an QA
 I want to check opening and closing of documents and catalogs forms
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
-	И Я устанавливаю в константу "ShowBetaTesting" значение "True"
-	И Я устанавливаю в константу "ShowAlphaTestingSaas" значение "True"
-	И Я устанавливаю в константу "UseItemKey" значение "True"
-	И Я устанавливаю в константу "UseCompanies" значение "True"
-
-
-	
-Сценарий: Open list form "AccessGroups" 
-
-	Дано Я открываю основную форму списка справочника "AccessGroups"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника AccessGroups"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "AccessGroups"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "AccessGroups"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника AccessGroups"
-	И Я закрываю текущее окно
-
-	
-Сценарий: Open list form "AccessProfiles" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "AccessProfiles"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника AccessProfiles"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "AccessProfiles"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "AccessProfiles"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника AccessProfiles"
-	И Я закрываю текущее окно
-
-
-	
-Сценарий: Open list form "AddAttributeAndPropertySets" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "AddAttributeAndPropertySets"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника AddAttributeAndPropertySets"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "AddAttributeAndPropertySets"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "AddAttributeAndPropertySets"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника AddAttributeAndPropertySets"
-	И Я закрываю текущее окно
-
-	
-Сценарий: Open list form "AddAttributeAndPropertyValues" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "AddAttributeAndPropertyValues"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника AddAttributeAndPropertyValues"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "AddAttributeAndPropertyValues"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "AddAttributeAndPropertyValues"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника AddAttributeAndPropertyValues"
-	И Я закрываю текущее окно
-
-
-Сценарий: Open list form "Partner terms" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Agreements"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Partner terms"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "Partner terms"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Agreements"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Partner terms"
-	И Я закрываю текущее окно
-
-
-
-	
-Сценарий: Open list form "BusinessUnits" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "BusinessUnits"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника BusinessUnits"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "BusinessUnits"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "BusinessUnits"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника BusinessUnits"
-	И Я закрываю текущее окно
-
+Background:
+	Given I launch TestClient opening script or connect the existing one
+	And I set "True" value to the constant "ShowBetaTesting"
+	And I set "True" value to the constant "ShowAlphaTestingSaas"
+	And I set "True" value to the constant "UseItemKey"
+	And I set "True" value to the constant "UseCompanies"
+
+
+	
+Scenario: Open list form "AccessGroups" 
+
+	Given I open "AccessGroups" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AccessGroups" exception
+	And I close current window
+
+Scenario: Open object form "AccessGroups"
+	And I close all client application windows
+	Given I open "AccessGroups" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AccessGroups" exception
+	And I close current window
+
+	
+Scenario: Open list form "AccessProfiles" 
+	And I close all client application windows
+	Given I open "AccessProfiles" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AccessProfiles" exception
+	And I close current window
+
+Scenario: Open object form "AccessProfiles"
+	And I close all client application windows
+	Given I open "AccessProfiles" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AccessProfiles" exception
+	And I close current window
+
+
+	
+Scenario: Open list form "AddAttributeAndPropertySets" 
+	And I close all client application windows
+	Given I open "AddAttributeAndPropertySets" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AddAttributeAndPropertySets" exception
+	And I close current window
+
+Scenario: Open object form "AddAttributeAndPropertySets"
+	And I close all client application windows
+	Given I open "AddAttributeAndPropertySets" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AddAttributeAndPropertySets" exception
+	And I close current window
+
+	
+Scenario: Open list form "AddAttributeAndPropertyValues" 
+	And I close all client application windows
+	Given I open "AddAttributeAndPropertyValues" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AddAttributeAndPropertyValues" exception
+	And I close current window
+
+Scenario: Open object form "AddAttributeAndPropertyValues"
+	And I close all client application windows
+	Given I open "AddAttributeAndPropertyValues" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AddAttributeAndPropertyValues" exception
+	And I close current window
+
+
+Scenario: Open list form "Partner terms" 
+	And I close all client application windows
+	Given I open "Agreements" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Partner terms" exception
+	And I close current window
+
+Scenario: Open object form "Partner terms"
+	And I close all client application windows
+	Given I open "Agreements" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Partner terms" exception
+	And I close current window
+
+
+
+	
+Scenario: Open list form "BusinessUnits" 
+	And I close all client application windows
+	Given I open "BusinessUnits" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form BusinessUnits" exception
+	And I close current window
+
+Scenario: Open object form "BusinessUnits"
+	And I close all client application windows
+	Given I open "BusinessUnits" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form BusinessUnits" exception
+	And I close current window
+
 
 	
-Сценарий: Open list form "CashAccounts" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "CashAccounts"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника CashAccounts"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "CashAccounts"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "CashAccounts"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника CashAccounts"
-	И Я закрываю текущее окно
-
-
-	
-Сценарий: Open list form "ChequeBonds" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "ChequeBonds"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ChequeBonds"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "ChequeBonds"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "ChequeBonds"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ChequeBonds"
-	И Я закрываю текущее окно
-
-	
-Сценарий: Open list form "Companies" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Companies"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Companies"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "Companies"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Companies"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Companies"
-	И Я закрываю текущее окно
-
-
-Сценарий: Open list form "CompanyTypes" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "CompanyTypes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника CompanyTypes"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "CompanyTypes"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "CompanyTypes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника CompanyTypes"
-	И Я закрываю текущее окно
-
-
-
-	
-Сценарий: Open list form "ConfigurationMetadata" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "ConfigurationMetadata"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ConfigurationMetadata"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "ConfigurationMetadata"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "ConfigurationMetadata"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ConfigurationMetadata"
-	И Я закрываю текущее окно
-
-	
-Сценарий: Open list form "Countries" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Countries"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Countries"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "Countries"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Countries"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Countries"
-	И Я закрываю текущее окно
-
-Сценарий: Open list form "Currencies" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Currencies"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Currencies"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "Currencies"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Currencies"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Currencies"
-	И Я закрываю текущее окно
+Scenario: Open list form "CashAccounts" 
+	And I close all client application windows
+	Given I open "CashAccounts" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form CashAccounts" exception
+	And I close current window
+
+Scenario: Open object form "CashAccounts"
+	And I close all client application windows
+	Given I open "CashAccounts" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form CashAccounts" exception
+	And I close current window
+
+
+	
+Scenario: Open list form "ChequeBonds" 
+	And I close all client application windows
+	Given I open "ChequeBonds" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ChequeBonds" exception
+	And I close current window
+
+Scenario: Open object form "ChequeBonds"
+	And I close all client application windows
+	Given I open "ChequeBonds" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ChequeBonds" exception
+	And I close current window
+
+	
+Scenario: Open list form "Companies" 
+	And I close all client application windows
+	Given I open "Companies" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Companies" exception
+	And I close current window
+
+Scenario: Open object form "Companies"
+	And I close all client application windows
+	Given I open "Companies" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Companies" exception
+	And I close current window
+
+
+	
+Scenario: Open list form "ConfigurationMetadata" 
+	And I close all client application windows
+	Given I open "ConfigurationMetadata" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ConfigurationMetadata" exception
+	And I close current window
+
+Scenario: Open object form "ConfigurationMetadata"
+	And I close all client application windows
+	Given I open "ConfigurationMetadata" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ConfigurationMetadata" exception
+	And I close current window
+
+	
+Scenario: Open list form "Countries" 
+	And I close all client application windows
+	Given I open "Countries" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Countries" exception
+	And I close current window
+
+Scenario: Open object form "Countries"
+	And I close all client application windows
+	Given I open "Countries" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Countries" exception
+	And I close current window
+
+Scenario: Open list form "Currencies" 
+	And I close all client application windows
+	Given I open "Currencies" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Currencies" exception
+	And I close current window
+
+Scenario: Open object form "Currencies"
+	And I close all client application windows
+	Given I open "Currencies" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Currencies" exception
+	And I close current window
 
-	
-Сценарий: Open list form "ExpenseAndRevenueTypes" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "ExpenseAndRevenueTypes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ExpenseAndRevenueTypes"
-	И Я закрываю текущее окно
-
-Сценарий: Open object form "ExpenseAndRevenueTypes"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "ExpenseAndRevenueTypes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ExpenseAndRevenueTypes"
-	И Я закрываю текущее окно
-
+	
+Scenario: Open list form "ExpenseAndRevenueTypes" 
+	And I close all client application windows
+	Given I open "ExpenseAndRevenueTypes" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ExpenseAndRevenueTypes" exception
+	And I close current window
+
+Scenario: Open object form "ExpenseAndRevenueTypes"
+	And I close all client application windows
+	Given I open "ExpenseAndRevenueTypes" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ExpenseAndRevenueTypes" exception
+	And I close current window
+
 	
-Сценарий: Open list form "ExternalDataProc" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "ExternalDataProc"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ExternalDataProc"
-	И Я закрываю текущее окно
+Scenario: Open list form "ExternalDataProc" 
+	And I close all client application windows
+	Given I open "ExternalDataProc" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ExternalDataProc" exception
+	And I close current window
 
-Сценарий: Open object form "ExternalDataProc"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "ExternalDataProc"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ExternalDataProc"
-	И Я закрываю текущее окно
+Scenario: Open object form "ExternalDataProc"
+	And I close all client application windows
+	Given I open "ExternalDataProc" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ExternalDataProc" exception
+	And I close current window
 
 
 	
-Сценарий: Open list form "Files" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Files"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Files"
-	И Я закрываю текущее окно
+Scenario: Open list form "Files" 
+	And I close all client application windows
+	Given I open "Files" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Files" exception
+	And I close current window
 
-Сценарий: Open object form "Files"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Files"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Files"
-	И Я закрываю текущее окно
+Scenario: Open object form "Files"
+	And I close all client application windows
+	Given I open "Files" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Files" exception
+	And I close current window
 
 
-Сценарий: Open list form "FileStoragesInfo" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "FileStoragesInfo"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника FileStoragesInfo"
-	И Я закрываю текущее окно
+Scenario: Open list form "FileStoragesInfo" 
+	And I close all client application windows
+	Given I open "FileStoragesInfo" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form FileStoragesInfo" exception
+	And I close current window
 
-Сценарий: Open object form "FileStoragesInfo"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "FileStoragesInfo"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника FileStoragesInfo"
-	И Я закрываю текущее окно
+Scenario: Open object form "FileStoragesInfo"
+	And I close all client application windows
+	Given I open "FileStoragesInfo" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form FileStoragesInfo" exception
+	And I close current window
 
-Сценарий: Open list form "FileStorageVolumes" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "FileStorageVolumes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника FileStorageVolumes"
-	И Я закрываю текущее окно
+Scenario: Open list form "FileStorageVolumes" 
+	And I close all client application windows
+	Given I open "FileStorageVolumes" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form FileStorageVolumes" exception
+	And I close current window
 
-Сценарий: Open object form "FileStorageVolumes"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "FileStorageVolumes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника FileStorageVolumes"
-	И Я закрываю текущее окно
+Scenario: Open object form "FileStorageVolumes"
+	And I close all client application windows
+	Given I open "FileStorageVolumes" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form FileStorageVolumes" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "IDInfoAddresses" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "IDInfoAddresses"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника IDInfoAddresses"
-	И Я закрываю текущее окно
+Scenario: Open list form "IDInfoAddresses" 
+	And I close all client application windows
+	Given I open "IDInfoAddresses" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form IDInfoAddresses" exception
+	And I close current window
 
-Сценарий: Open object form "IDInfoAddresses"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "IDInfoAddresses"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника IDInfoAddresses"
-	И Я закрываю текущее окно
+Scenario: Open object form "IDInfoAddresses"
+	And I close all client application windows
+	Given I open "IDInfoAddresses" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form IDInfoAddresses" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "IDInfoSets" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "IDInfoSets"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника IDInfoSets"
-	И Я закрываю текущее окно
+Scenario: Open list form "IDInfoSets" 
+	And I close all client application windows
+	Given I open "IDInfoSets" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form IDInfoSets" exception
+	And I close current window
 
-Сценарий: Open object form "IDInfoSets"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "IDInfoSets"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника IDInfoSets"
-	И Я закрываю текущее окно
+Scenario: Open object form "IDInfoSets"
+	And I close all client application windows
+	Given I open "IDInfoSets" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form IDInfoSets" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "IntegrationSettings" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "IntegrationSettings"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника IntegrationSettings"
-	И Я закрываю текущее окно
+Scenario: Open list form "IntegrationSettings" 
+	And I close all client application windows
+	Given I open "IntegrationSettings" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form IntegrationSettings" exception
+	And I close current window
 
-Сценарий: Open object form "IntegrationSettings"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "IntegrationSettings"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника IntegrationSettings"
-	И Я закрываю текущее окно
+Scenario: Open object form "IntegrationSettings"
+	And I close all client application windows
+	Given I open "IntegrationSettings" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form IntegrationSettings" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "InterfaceGroups" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "InterfaceGroups"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника InterfaceGroups"
-	И Я закрываю текущее окно
+Scenario: Open list form "InterfaceGroups" 
+	And I close all client application windows
+	Given I open "InterfaceGroups" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form InterfaceGroups" exception
+	And I close current window
 
-Сценарий: Open object form "InterfaceGroups"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "InterfaceGroups"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника InterfaceGroups"
-	И Я закрываю текущее окно
+Scenario: Open object form "InterfaceGroups"
+	And I close all client application windows
+	Given I open "InterfaceGroups" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form InterfaceGroups" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "ItemKeys" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "ItemKeys"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ItemKeys"
-	И Я закрываю текущее окно
+Scenario: Open list form "ItemKeys" 
+	And I close all client application windows
+	Given I open "ItemKeys" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ItemKeys" exception
+	And I close current window
 
-Сценарий: Open object form "ItemKeys"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "ItemKeys"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ItemKeys"
-	И Я закрываю текущее окно
+Scenario: Open object form "ItemKeys"
+	And I close all client application windows
+	Given I open "ItemKeys" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ItemKeys" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "Items" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Items"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Items"
-	И Я закрываю текущее окно
+Scenario: Open list form "Items" 
+	And I close all client application windows
+	Given I open "Items" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Items" exception
+	And I close current window
 
-Сценарий: Open object form "Items"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Items"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Items"
-	И Я закрываю текущее окно
+Scenario: Open object form "Items"
+	And I close all client application windows
+	Given I open "Items" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Items" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "ItemSegments" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "ItemSegments"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ItemSegments"
-	И Я закрываю текущее окно
+Scenario: Open list form "ItemSegments" 
+	And I close all client application windows
+	Given I open "ItemSegments" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ItemSegments" exception
+	And I close current window
 
-Сценарий: Open object form "ItemSegments"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "ItemSegments"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ItemSegments"
-	И Я закрываю текущее окно
+Scenario: Open object form "ItemSegments"
+	And I close all client application windows
+	Given I open "ItemSegments" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ItemSegments" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "ItemTypes" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "ItemTypes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ItemTypes"
-	И Я закрываю текущее окно
+Scenario: Open list form "ItemTypes" 
+	And I close all client application windows
+	Given I open "ItemTypes" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ItemTypes" exception
+	And I close current window
 
-Сценарий: Open object form "ItemTypes"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "ItemTypes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ItemTypes"
-	И Я закрываю текущее окно
+Scenario: Open object form "ItemTypes"
+	And I close all client application windows
+	Given I open "ItemTypes" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ItemTypes" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PrintTemplates" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "PrintTemplates"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника PrintTemplates"
-	И Я закрываю текущее окно
+Scenario: Open list form "PrintTemplates" 
+	And I close all client application windows
+	Given I open "PrintTemplates" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PrintTemplates" exception
+	And I close current window
 
-Сценарий: Open object form "PrintTemplates"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "PrintTemplates"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника PrintTemplates"
-	И Я закрываю текущее окно
+Scenario: Open object form "PrintTemplates"
+	And I close all client application windows
+	Given I open "PrintTemplates" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PrintTemplates" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "ObjectStatuses" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "ObjectStatuses"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ObjectStatuses"
-	И Я закрываю текущее окно
+Scenario: Open list form "ObjectStatuses" 
+	And I close all client application windows
+	Given I open "ObjectStatuses" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ObjectStatuses" exception
+	And I close current window
 
-Сценарий: Open object form "ObjectStatuses"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "ObjectStatuses"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника ObjectStatuses"
-	И Я закрываю текущее окно
+Scenario: Open object form "ObjectStatuses"
+	And I close all client application windows
+	Given I open "ObjectStatuses" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ObjectStatuses" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "Partners" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Partners"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Partners"
-	И Я закрываю текущее окно
+Scenario: Open list form "Partners" 
+	And I close all client application windows
+	Given I open "Partners" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Partners" exception
+	And I close current window
 
-Сценарий: Open object form "Partners"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Partners"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Partners"
-	И Я закрываю текущее окно
+Scenario: Open object form "Partners"
+	And I close all client application windows
+	Given I open "Partners" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Partners" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PartnerSegments" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "PartnerSegments"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника PartnerSegments"
-	И Я закрываю текущее окно
+Scenario: Open list form "PartnerSegments" 
+	And I close all client application windows
+	Given I open "PartnerSegments" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PartnerSegments" exception
+	And I close current window
 
-Сценарий: Open object form "PartnerSegments"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "PartnerSegments"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника PartnerSegments"
-	И Я закрываю текущее окно
+Scenario: Open object form "PartnerSegments"
+	And I close all client application windows
+	Given I open "PartnerSegments" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PartnerSegments" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PaymentSchedules" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "PaymentSchedules"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника PaymentSchedules"
-	И Я закрываю текущее окно
+Scenario: Open list form "PaymentSchedules" 
+	And I close all client application windows
+	Given I open "PaymentSchedules" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PaymentSchedules" exception
+	And I close current window
 
-Сценарий: Open object form "PaymentSchedules"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "PaymentSchedules"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника PaymentSchedules"
-	И Я закрываю текущее окно
+Scenario: Open object form "PaymentSchedules"
+	And I close all client application windows
+	Given I open "PaymentSchedules" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PaymentSchedules" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PaymentTypes" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "PaymentTypes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника PaymentTypes"
-	И Я закрываю текущее окно
+Scenario: Open list form "PaymentTypes" 
+	And I close all client application windows
+	Given I open "PaymentTypes" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PaymentTypes" exception
+	And I close current window
 
-Сценарий: Open object form "PaymentTypes"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "PaymentTypes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника PaymentTypes"
-	И Я закрываю текущее окно
+Scenario: Open object form "PaymentTypes"
+	And I close all client application windows
+	Given I open "PaymentTypes" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PaymentTypes" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PriceKeys" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "PriceKeys"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника PriceKeys"
-	И Я закрываю текущее окно
+Scenario: Open list form "PriceKeys" 
+	And I close all client application windows
+	Given I open "PriceKeys" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PriceKeys" exception
+	And I close current window
 
-Сценарий: Open object form "PriceKeys"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "PriceKeys"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника PriceKeys"
-	И Я закрываю текущее окно
+Scenario: Open object form "PriceKeys"
+	And I close all client application windows
+	Given I open "PriceKeys" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PriceKeys" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PriceTypes" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "PriceTypes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника PriceTypes"
-	И Я закрываю текущее окно
+Scenario: Open list form "PriceTypes" 
+	And I close all client application windows
+	Given I open "PriceTypes" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PriceTypes" exception
+	And I close current window
 
-Сценарий: Open object form "PriceTypes"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "PriceTypes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника PriceTypes"
-	И Я закрываю текущее окно
+Scenario: Open object form "PriceTypes"
+	And I close all client application windows
+	Given I open "PriceTypes" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PriceTypes" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "SerialLotNumbers" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "SerialLotNumbers"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника SerialLotNumbers"
-	И Я закрываю текущее окно
+Scenario: Open list form "SerialLotNumbers" 
+	And I close all client application windows
+	Given I open "SerialLotNumbers" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form SerialLotNumbers" exception
+	And I close current window
 
-Сценарий: Open object form "SerialLotNumbers"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "SerialLotNumbers"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника SerialLotNumbers"
-	И Я закрываю текущее окно
+Scenario: Open object form "SerialLotNumbers"
+	And I close all client application windows
+	Given I open "SerialLotNumbers" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form SerialLotNumbers" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "SpecialOfferRules" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "SpecialOfferRules"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника SpecialOfferRules"
-	И Я закрываю текущее окно
+Scenario: Open list form "SpecialOfferRules" 
+	And I close all client application windows
+	Given I open "SpecialOfferRules" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form SpecialOfferRules" exception
+	And I close current window
 
-Сценарий: Open object form "SpecialOfferRules"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "SpecialOfferRules"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника SpecialOfferRules"
-	И Я закрываю текущее окно
+Scenario: Open object form "SpecialOfferRules"
+	And I close all client application windows
+	Given I open "SpecialOfferRules" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form SpecialOfferRules" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "SpecialOffers" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "SpecialOffers"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника SpecialOffers"
-	И Я закрываю текущее окно
+Scenario: Open list form "SpecialOffers" 
+	And I close all client application windows
+	Given I open "SpecialOffers" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form SpecialOffers" exception
+	And I close current window
 
-Сценарий: Open object form "SpecialOffers"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "SpecialOffers"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника SpecialOffers"
-	И Я закрываю текущее окно
+Scenario: Open object form "SpecialOffers"
+	And I close all client application windows
+	Given I open "SpecialOffers" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form SpecialOffers" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "SpecialOfferTypes" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "SpecialOfferTypes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника SpecialOfferTypes"
-	И Я закрываю текущее окно
+Scenario: Open list form "SpecialOfferTypes" 
+	And I close all client application windows
+	Given I open "SpecialOfferTypes" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form SpecialOfferTypes" exception
+	And I close current window
 
-Сценарий: Open object form "SpecialOfferTypes"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "SpecialOfferTypes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника SpecialOfferTypes"
-	И Я закрываю текущее окно
+Scenario: Open object form "SpecialOfferTypes"
+	And I close all client application windows
+	Given I open "SpecialOfferTypes" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form SpecialOfferTypes" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "Specifications" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Specifications"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Specifications"
-	И Я закрываю текущее окно
+Scenario: Open list form "Specifications" 
+	And I close all client application windows
+	Given I open "Specifications" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Specifications" exception
+	And I close current window
 
-Сценарий: Open object form "Specifications"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Specifications"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Specifications"
-	И Я закрываю текущее окно
+Scenario: Open object form "Specifications"
+	And I close all client application windows
+	Given I open "Specifications" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Specifications" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "Stores" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Stores"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Stores"
-	И Я закрываю текущее окно
+Scenario: Open list form "Stores" 
+	And I close all client application windows
+	Given I open "Stores" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Stores" exception
+	And I close current window
 
-Сценарий: Open object form "Stores"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Stores"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Stores"
-	И Я закрываю текущее окно
+Scenario: Open object form "Stores"
+	And I close all client application windows
+	Given I open "Stores" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Stores" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "TaxAnalytics" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "TaxAnalytics"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника TaxAnalytics"
-	И Я закрываю текущее окно
+Scenario: Open list form "TaxAnalytics" 
+	And I close all client application windows
+	Given I open "TaxAnalytics" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form TaxAnalytics" exception
+	And I close current window
 
-Сценарий: Open object form "TaxAnalytics"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "TaxAnalytics"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника TaxAnalytics"
-	И Я закрываю текущее окно
+Scenario: Open object form "TaxAnalytics"
+	And I close all client application windows
+	Given I open "TaxAnalytics" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form TaxAnalytics" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "Tax types" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Taxes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Taxes"
-	И Я закрываю текущее окно
+Scenario: Open list form "Tax types" 
+	And I close all client application windows
+	Given I open "Taxes" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Taxes" exception
+	And I close current window
 
-Сценарий: Open object form "Tax types"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Taxes"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Taxes"
-	И Я закрываю текущее окно
+Scenario: Open object form "Tax types"
+	And I close all client application windows
+	Given I open "Taxes" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Taxes" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "TaxRates" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "TaxRates"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника TaxRates"
-	И Я закрываю текущее окно
+Scenario: Open list form "TaxRates" 
+	And I close all client application windows
+	Given I open "TaxRates" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form TaxRates" exception
+	And I close current window
 
-Сценарий: Open object form "TaxRates"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "TaxRates"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника TaxRates"
-	И Я закрываю текущее окно
+Scenario: Open object form "TaxRates"
+	And I close all client application windows
+	Given I open "TaxRates" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form TaxRates" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "Units" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Units"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Units"
-	И Я закрываю текущее окно
+Scenario: Open list form "Units" 
+	And I close all client application windows
+	Given I open "Units" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Units" exception
+	And I close current window
 
-Сценарий: Open object form "Units"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Units"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Units"
-	И Я закрываю текущее окно
+Scenario: Open object form "Units"
+	And I close all client application windows
+	Given I open "Units" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Units" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "UserGroups" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "UserGroups"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника UserGroups"
-	И Я закрываю текущее окно
+Scenario: Open list form "UserGroups" 
+	And I close all client application windows
+	Given I open "UserGroups" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form UserGroups" exception
+	And I close current window
 
-Сценарий: Open object form "UserGroups"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "UserGroups"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника UserGroups"
-	И Я закрываю текущее окно
+Scenario: Open object form "UserGroups"
+	And I close all client application windows
+	Given I open "UserGroups" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form UserGroups" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "Users" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Users"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Users"
-	И Я закрываю текущее окно
+Scenario: Open list form "Users" 
+	And I close all client application windows
+	Given I open "Users" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Users" exception
+	And I close current window
 
-Сценарий: Open object form "Users"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Users"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Users"
-	И Я закрываю текущее окно
+Scenario: Open object form "Users"
+	And I close all client application windows
+	Given I open "Users" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Users" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "CurrencyMovementSets" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "CurrencyMovementSets"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника CurrencyMovementSets"
-	И Я закрываю текущее окно
+Scenario: Open list form "CurrencyMovementSets" 
+	And I close all client application windows
+	Given I open "CurrencyMovementSets" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form CurrencyMovementSets" exception
+	And I close current window
 
-Сценарий: Open object form "CurrencyMovementSets"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "CurrencyMovementSets"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника CurrencyMovementSets"
-	И Я закрываю текущее окно
+Scenario: Open object form "CurrencyMovementSets"
+	And I close all client application windows
+	Given I open "CurrencyMovementSets" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form CurrencyMovementSets" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "Extensions" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка справочника "Extensions"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Extensions"
-	И Я закрываю текущее окно
+Scenario: Open list form "Extensions" 
+	And I close all client application windows
+	Given I open "Extensions" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Extensions" exception
+	And I close current window
 
-Сценарий: Open object form "Extensions"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму справочника "Extensions"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму справочника Extensions"
-	И Я закрываю текущее окно
+Scenario: Open object form "Extensions"
+	And I close all client application windows
+	Given I open "Extensions" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Extensions" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "BankPayment" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "BankPayment"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа BankPayment"
-	И Я закрываю текущее окно
+Scenario: Open list form "BankPayment" 
+	And I close all client application windows
+	Given I open "BankPayment" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form BankPayment" exception
+	And I close current window
 
-Сценарий: Open object form "BankPayment"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "BankPayment"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа BankPayment"
-	И Я закрываю текущее окно
+Scenario: Open object form "BankPayment"
+	And I close all client application windows
+	Given I open "BankPayment" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form BankPayment" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "BankReceipt" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "BankReceipt"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа BankReceipt"
-	И Я закрываю текущее окно
+Scenario: Open list form "BankReceipt" 
+	And I close all client application windows
+	Given I open "BankReceipt" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form BankReceipt" exception
+	And I close current window
 
-Сценарий: Open object form "BankReceipt"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "BankReceipt"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа BankReceipt"
-	И Я закрываю текущее окно
+Scenario: Open object form "BankReceipt"
+	And I close all client application windows
+	Given I open "BankReceipt" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form BankReceipt" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "Bundling" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "Bundling"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа Bundling"
-	И Я закрываю текущее окно
+Scenario: Open list form "Bundling" 
+	And I close all client application windows
+	Given I open "Bundling" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form Bundling" exception
+	And I close current window
 
-Сценарий: Open object form "Bundling"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "Bundling"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа Bundling"
-	И Я закрываю текущее окно
+Scenario: Open object form "Bundling"
+	And I close all client application windows
+	Given I open "Bundling" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form Bundling" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "CashExpense" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "CashExpense"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа CashExpense"
-	И Я закрываю текущее окно
+Scenario: Open list form "CashExpense" 
+	And I close all client application windows
+	Given I open "CashExpense" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CashExpense" exception
+	And I close current window
 
-Сценарий: Open object form "CashExpense"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "CashExpense"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа CashExpense"
-	И Я закрываю текущее окно
+Scenario: Open object form "CashExpense"
+	And I close all client application windows
+	Given I open "CashExpense" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CashExpense" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "CashPayment" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "CashPayment"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа CashPayment"
-	И Я закрываю текущее окно
+Scenario: Open list form "CashPayment" 
+	And I close all client application windows
+	Given I open "CashPayment" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CashPayment" exception
+	And I close current window
 
-Сценарий: Open object form "CashPayment"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "CashPayment"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа CashPayment"
-	И Я закрываю текущее окно
+Scenario: Open object form "CashPayment"
+	And I close all client application windows
+	Given I open "CashPayment" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CashPayment" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "CashReceipt" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "CashReceipt"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа CashReceipt"
-	И Я закрываю текущее окно
+Scenario: Open list form "CashReceipt" 
+	And I close all client application windows
+	Given I open "CashReceipt" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CashReceipt" exception
+	And I close current window
 
-Сценарий: Open object form "CashReceipt"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "CashReceipt"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа CashReceipt"
-	И Я закрываю текущее окно
+Scenario: Open object form "CashReceipt"
+	And I close all client application windows
+	Given I open "CashReceipt" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CashReceipt" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "CashRevenue" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "CashRevenue"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа CashRevenue"
-	И Я закрываю текущее окно
+Scenario: Open list form "CashRevenue" 
+	And I close all client application windows
+	Given I open "CashRevenue" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CashRevenue" exception
+	And I close current window
 
-Сценарий: Open object form "CashRevenue"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "CashRevenue"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа CashRevenue"
-	И Я закрываю текущее окно
+Scenario: Open object form "CashRevenue"
+	And I close all client application windows
+	Given I open "CashRevenue" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CashRevenue" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "CashTransferOrder" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "CashTransferOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа CashTransferOrder"
-	И Я закрываю текущее окно
+Scenario: Open list form "CashTransferOrder" 
+	And I close all client application windows
+	Given I open "CashTransferOrder" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CashTransferOrder" exception
+	And I close current window
 
-Сценарий: Open object form "CashTransferOrder"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "CashTransferOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа CashTransferOrder"
-	И Я закрываю текущее окно
+Scenario: Open object form "CashTransferOrder"
+	And I close all client application windows
+	Given I open "CashTransferOrder" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CashTransferOrder" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "ChequeBondTransaction" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "ChequeBondTransaction"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа ChequeBondTransaction"
-	И Я закрываю текущее окно
+Scenario: Open list form "ChequeBondTransaction" 
+	And I close all client application windows
+	Given I open "ChequeBondTransaction" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ChequeBondTransaction" exception
+	And I close current window
 
-Сценарий: Open object form "ChequeBondTransaction"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "ChequeBondTransaction"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа ChequeBondTransaction"
-	И Я закрываю текущее окно
+Scenario: Open object form "ChequeBondTransaction"
+	And I close all client application windows
+	Given I open "ChequeBondTransaction" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ChequeBondTransaction" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "CreditDebitNote" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "CreditDebitNote"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа CreditDebitNote"
-	И Я закрываю текущее окно
+Scenario: Open list form "CreditDebitNote" 
+	And I close all client application windows
+	Given I open "CreditDebitNote" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CreditDebitNote" exception
+	And I close current window
 
-Сценарий: Open object form "CreditDebitNote"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "CreditDebitNote"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа CreditDebitNote"
-	И Я закрываю текущее окно
+Scenario: Open object form "CreditDebitNote"
+	And I close all client application windows
+	Given I open "CreditDebitNote" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CreditDebitNote" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "GoodsReceipt" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "GoodsReceipt"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа GoodsReceipt"
-	И Я закрываю текущее окно
+Scenario: Open list form "GoodsReceipt" 
+	And I close all client application windows
+	Given I open "GoodsReceipt" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form GoodsReceipt" exception
+	And I close current window
 
-Сценарий: Open object form "GoodsReceipt"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "GoodsReceipt"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа GoodsReceipt"
-	И Я закрываю текущее окно
+Scenario: Open object form "GoodsReceipt"
+	And I close all client application windows
+	Given I open "GoodsReceipt" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form GoodsReceipt" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "IncomingPaymentOrder" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "IncomingPaymentOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа IncomingPaymentOrder"
-	И Я закрываю текущее окно
+Scenario: Open list form "IncomingPaymentOrder" 
+	And I close all client application windows
+	Given I open "IncomingPaymentOrder" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form IncomingPaymentOrder" exception
+	And I close current window
 
-Сценарий: Open object form "IncomingPaymentOrder"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "IncomingPaymentOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа IncomingPaymentOrder"
-	И Я закрываю текущее окно
+Scenario: Open object form "IncomingPaymentOrder"
+	And I close all client application windows
+	Given I open "IncomingPaymentOrder" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form IncomingPaymentOrder" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "InternalSupplyRequest" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "InternalSupplyRequest"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа InternalSupplyRequest"
-	И Я закрываю текущее окно
+Scenario: Open list form "InternalSupplyRequest" 
+	And I close all client application windows
+	Given I open "InternalSupplyRequest" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form InternalSupplyRequest" exception
+	And I close current window
 
-Сценарий: Open object form "InternalSupplyRequest"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "InternalSupplyRequest"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа InternalSupplyRequest"
-	И Я закрываю текущее окно
+Scenario: Open object form "InternalSupplyRequest"
+	And I close all client application windows
+	Given I open "InternalSupplyRequest" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form InternalSupplyRequest" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "InventoryTransfer" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "InventoryTransfer"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа InventoryTransfer"
-	И Я закрываю текущее окно
+Scenario: Open list form "InventoryTransfer" 
+	And I close all client application windows
+	Given I open "InventoryTransfer" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form InventoryTransfer" exception
+	And I close current window
 
-Сценарий: Open object form "InventoryTransfer"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "InventoryTransfer"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа InventoryTransfer"
-	И Я закрываю текущее окно
+Scenario: Open object form "InventoryTransfer"
+	And I close all client application windows
+	Given I open "InventoryTransfer" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form InventoryTransfer" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "InventoryTransferOrder" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "InventoryTransferOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа InventoryTransferOrder"
-	И Я закрываю текущее окно
+Scenario: Open list form "InventoryTransferOrder" 
+	And I close all client application windows
+	Given I open "InventoryTransferOrder" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form InventoryTransferOrder" exception
+	And I close current window
 
-Сценарий: Open object form "InventoryTransferOrder"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "InventoryTransferOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа InventoryTransferOrder"
-	И Я закрываю текущее окно
+Scenario: Open object form "InventoryTransferOrder"
+	And I close all client application windows
+	Given I open "InventoryTransferOrder" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form InventoryTransferOrder" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "InvoiceMatch" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "InvoiceMatch"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа InvoiceMatch"
-	И Я закрываю текущее окно
+Scenario: Open list form "InvoiceMatch" 
+	And I close all client application windows
+	Given I open "InvoiceMatch" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form InvoiceMatch" exception
+	And I close current window
 
-Сценарий: Open object form "InvoiceMatch"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "InvoiceMatch"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа InvoiceMatch"
-	И Я закрываю текущее окно
+Scenario: Open object form "InvoiceMatch"
+	And I close all client application windows
+	Given I open "InvoiceMatch" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form InvoiceMatch" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "Labeling" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "Labeling"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа Labeling"
-	И Я закрываю текущее окно
+Scenario: Open list form "Labeling" 
+	And I close all client application windows
+	Given I open "Labeling" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form Labeling" exception
+	And I close current window
 
-Сценарий: Open object form "Labeling"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "Labeling"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа Labeling"
-	И Я закрываю текущее окно
+Scenario: Open object form "Labeling"
+	And I close all client application windows
+	Given I open "Labeling" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form Labeling" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "OpeningEntry" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "OpeningEntry"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа OpeningEntry"
-	И Я закрываю текущее окно
+Scenario: Open list form "OpeningEntry" 
+	And I close all client application windows
+	Given I open "OpeningEntry" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form OpeningEntry" exception
+	And I close current window
 
-Сценарий: Open object form "OpeningEntry"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "OpeningEntry"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа OpeningEntry"
-	И Я закрываю текущее окно
+Scenario: Open object form "OpeningEntry"
+	And I close all client application windows
+	Given I open "OpeningEntry" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form OpeningEntry" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "OutgoingPaymentOrder" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "OutgoingPaymentOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа OutgoingPaymentOrder"
-	И Я закрываю текущее окно
+Scenario: Open list form "OutgoingPaymentOrder" 
+	And I close all client application windows
+	Given I open "OutgoingPaymentOrder" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form OutgoingPaymentOrder" exception
+	And I close current window
 
-Сценарий: Open object form "OutgoingPaymentOrder"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "OutgoingPaymentOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа OutgoingPaymentOrder"
-	И Я закрываю текущее окно
+Scenario: Open object form "OutgoingPaymentOrder"
+	And I close all client application windows
+	Given I open "OutgoingPaymentOrder" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form OutgoingPaymentOrder" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PhysicalCountByLocation" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "PhysicalCountByLocation"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PhysicalCountByLocation"
-	И Я закрываю текущее окно
+Scenario: Open list form "PhysicalCountByLocation" 
+	And I close all client application windows
+	Given I open "PhysicalCountByLocation" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PhysicalCountByLocation" exception
+	And I close current window
 
-Сценарий: Open object form "PhysicalCountByLocation"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "PhysicalCountByLocation"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PhysicalCountByLocation"
-	И Я закрываю текущее окно
+Scenario: Open object form "PhysicalCountByLocation"
+	And I close all client application windows
+	Given I open "PhysicalCountByLocation" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PhysicalCountByLocation" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PriceList" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "PriceList"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PriceList"
-	И Я закрываю текущее окно
+Scenario: Open list form "PriceList" 
+	And I close all client application windows
+	Given I open "PriceList" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PriceList" exception
+	And I close current window
 
-Сценарий: Open object form "PriceList"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "PriceList"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PriceList"
-	И Я закрываю текущее окно
+Scenario: Open object form "PriceList"
+	And I close all client application windows
+	Given I open "PriceList" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PriceList" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PurchaseInvoice" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "PurchaseInvoice"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PurchaseInvoice"
-	И Я закрываю текущее окно
+Scenario: Open list form "PurchaseInvoice" 
+	And I close all client application windows
+	Given I open "PurchaseInvoice" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PurchaseInvoice" exception
+	And I close current window
 
-Сценарий: Open object form "PurchaseInvoice"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "PurchaseInvoice"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PurchaseInvoice"
-	И Я закрываю текущее окно
+Scenario: Open object form "PurchaseInvoice"
+	And I close all client application windows
+	Given I open "PurchaseInvoice" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PurchaseInvoice" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PurchaseOrder" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "PurchaseOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PurchaseOrder"
-	И Я закрываю текущее окно
+Scenario: Open list form "PurchaseOrder" 
+	And I close all client application windows
+	Given I open "PurchaseOrder" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PurchaseOrder" exception
+	And I close current window
 
-Сценарий: Open object form "PurchaseOrder"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "PurchaseOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PurchaseOrder"
-	И Я закрываю текущее окно
+Scenario: Open object form "PurchaseOrder"
+	And I close all client application windows
+	Given I open "PurchaseOrder" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PurchaseOrder" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PurchaseReturn" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "PurchaseReturn"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PurchaseReturn"
-	И Я закрываю текущее окно
+Scenario: Open list form "PurchaseReturn" 
+	And I close all client application windows
+	Given I open "PurchaseReturn" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PurchaseReturn" exception
+	And I close current window
 
-Сценарий: Open object form "PurchaseReturn"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "PurchaseReturn"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PurchaseReturn"
-	И Я закрываю текущее окно
+Scenario: Open object form "PurchaseReturn"
+	And I close all client application windows
+	Given I open "PurchaseReturn" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PurchaseReturn" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PurchaseReturnOrder" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "PurchaseReturnOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PurchaseReturnOrder"
-	И Я закрываю текущее окно
+Scenario: Open list form "PurchaseReturnOrder" 
+	And I close all client application windows
+	Given I open "PurchaseReturnOrder" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PurchaseReturnOrder" exception
+	And I close current window
 
-Сценарий: Open object form "PurchaseReturnOrder"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "PurchaseReturnOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PurchaseReturnOrder"
-	И Я закрываю текущее окно
+Scenario: Open object form "PurchaseReturnOrder"
+	And I close all client application windows
+	Given I open "PurchaseReturnOrder" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PurchaseReturnOrder" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "ReconciliationStatement" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "ReconciliationStatement"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа ReconciliationStatement"
-	И Я закрываю текущее окно
+Scenario: Open list form "ReconciliationStatement" 
+	And I close all client application windows
+	Given I open "ReconciliationStatement" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ReconciliationStatement" exception
+	And I close current window
 
-Сценарий: Open object form "ReconciliationStatement"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "ReconciliationStatement"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа ReconciliationStatement"
-	И Я закрываю текущее окно
+Scenario: Open object form "ReconciliationStatement"
+	And I close all client application windows
+	Given I open "ReconciliationStatement" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ReconciliationStatement" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "SalesInvoice" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "SalesInvoice"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа SalesInvoice"
-	И Я закрываю текущее окно
+Scenario: Open list form "SalesInvoice" 
+	And I close all client application windows
+	Given I open "SalesInvoice" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form SalesInvoice" exception
+	And I close current window
 
-Сценарий: Open object form "SalesInvoice"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "SalesInvoice"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа SalesInvoice"
-	И Я закрываю текущее окно
+Scenario: Open object form "SalesInvoice"
+	And I close all client application windows
+	Given I open "SalesInvoice" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form SalesInvoice" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "SalesOrder" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "SalesOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа SalesOrder"
-	И Я закрываю текущее окно
+Scenario: Open list form "SalesOrder" 
+	And I close all client application windows
+	Given I open "SalesOrder" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form SalesOrder" exception
+	And I close current window
 
-Сценарий: Open object form "SalesOrder"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "SalesOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа SalesOrder"
-	И Я закрываю текущее окно
+Scenario: Open object form "SalesOrder"
+	And I close all client application windows
+	Given I open "SalesOrder" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form SalesOrder" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "SalesReturn" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "SalesReturn"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа SalesReturn"
-	И Я закрываю текущее окно
+Scenario: Open list form "SalesReturn" 
+	And I close all client application windows
+	Given I open "SalesReturn" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form SalesReturn" exception
+	And I close current window
 
-Сценарий: Open object form "SalesReturn"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "SalesReturn"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа SalesReturn"
-	И Я закрываю текущее окно
+Scenario: Open object form "SalesReturn"
+	And I close all client application windows
+	Given I open "SalesReturn" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form SalesReturn" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "SalesReturnOrder" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "SalesReturnOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа SalesReturnOrder"
-	И Я закрываю текущее окно
+Scenario: Open list form "SalesReturnOrder" 
+	And I close all client application windows
+	Given I open "SalesReturnOrder" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form SalesReturnOrder" exception
+	And I close current window
 
-Сценарий: Open object form "SalesReturnOrder"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "SalesReturnOrder"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа SalesReturnOrder"
-	И Я закрываю текущее окно
+Scenario: Open object form "SalesReturnOrder"
+	And I close all client application windows
+	Given I open "SalesReturnOrder" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form SalesReturnOrder" exception
+	And I close current window
 	
-Сценарий: Open list form "ShipmentConfirmation" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "ShipmentConfirmation"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа ShipmentConfirmation"
-	И Я закрываю текущее окно
+Scenario: Open list form "ShipmentConfirmation" 
+	And I close all client application windows
+	Given I open "ShipmentConfirmation" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ShipmentConfirmation" exception
+	And I close current window
 
-Сценарий: Open object form "ShipmentConfirmation"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "ShipmentConfirmation"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа ShipmentConfirmation"
-	И Я закрываю текущее окно
+Scenario: Open object form "ShipmentConfirmation"
+	And I close all client application windows
+	Given I open "ShipmentConfirmation" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ShipmentConfirmation" exception
+	And I close current window
 	
-Сценарий: Open list form "Unbundling" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "Unbundling"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа Unbundling"
-	И Я закрываю текущее окно
+Scenario: Open list form "Unbundling" 
+	And I close all client application windows
+	Given I open "Unbundling" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form Unbundling" exception
+	And I close current window
 
-Сценарий: Open object form "Unbundling"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "Unbundling"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа Unbundling"
-	И Я закрываю текущее окно
+Scenario: Open object form "Unbundling"
+	And I close all client application windows
+	Given I open "Unbundling" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form Unbundling" exception
+	And I close current window
 
-Сценарий: Open list form "StockAdjustmentAsWriteOff" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "StockAdjustmentAsWriteOff"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа StockAdjustmentAsWriteOff"
-	И Я закрываю текущее окно
+Scenario: Open list form "StockAdjustmentAsWriteOff" 
+	And I close all client application windows
+	Given I open "StockAdjustmentAsWriteOff" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form StockAdjustmentAsWriteOff" exception
+	And I close current window
 
-Сценарий: Open object form "StockAdjustmentAsWriteOff"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "StockAdjustmentAsWriteOff"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа StockAdjustmentAsWriteOff"
-	И Я закрываю текущее окно
+Scenario: Open object form "StockAdjustmentAsWriteOff"
+	And I close all client application windows
+	Given I open "StockAdjustmentAsWriteOff" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form StockAdjustmentAsWriteOff" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "StockAdjustmentAsSurplus" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "StockAdjustmentAsSurplus"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа StockAdjustmentAsSurplus"
-	И Я закрываю текущее окно
+Scenario: Open list form "StockAdjustmentAsSurplus" 
+	And I close all client application windows
+	Given I open "StockAdjustmentAsSurplus" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form StockAdjustmentAsSurplus" exception
+	And I close current window
 
-Сценарий: Open object form "StockAdjustmentAsSurplus"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "StockAdjustmentAsSurplus"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа StockAdjustmentAsSurplus"
-	И Я закрываю текущее окно
+Scenario: Open object form "StockAdjustmentAsSurplus"
+	And I close all client application windows
+	Given I open "StockAdjustmentAsSurplus" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form StockAdjustmentAsSurplus" exception
+	And I close current window
 
 
 
 
 	
 	
-Сценарий: Open list form "PhysicalInventory" 
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму списка документа "PhysicalInventory"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PhysicalInventory"
-	И Я закрываю текущее окно
+Scenario: Open list form "PhysicalInventory" 
+	And I close all client application windows
+	Given I open "PhysicalInventory" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PhysicalInventory" exception
+	And I close current window
 
-Сценарий: Open object form "PhysicalInventory"
-	И я закрыл все окна клиентского приложения
-	Дано Я открываю основную форму документа "PhysicalInventory"
-	Если появилось предупреждение тогда
-		Тогда я вызываю исключение "Не удалось открыть форму документа PhysicalInventory"
-	И Я закрываю текущее окно
-
-
-
-
-	
-
-
-
-
-	
+Scenario: Open object form "PhysicalInventory"
+	And I close all client application windows
+	Given I open "PhysicalInventory" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PhysicalInventory" exception
+	And I close current window

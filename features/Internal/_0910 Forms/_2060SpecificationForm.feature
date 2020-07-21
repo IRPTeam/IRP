@@ -1,230 +1,231 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
 
-Функционал: check specification filling 
+Feature: check specification filling 
 
 
 
-Контекст: 
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 	
-Сценарий: _206001 check message output when creating a Bundle with empty item
+Scenario: _206001 check message output when creating a Bundle with empty item
 	* Open the list of specifications
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Catalog.Specifications"
+		And I click the button named "FormCreate"
 	* Filling in the Bundle name and items (without quantity)
-		И я меняю значение переключателя 'Type' на 'Bundle'
-		И в поле 'ENG' я ввожу текст 'Test'
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I change "Type" radio button value to "Bundle"
+		And I input "Test" text in "ENG" field
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| 'Description'          |
 			| 'Bound Dress+Trousers' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Size'          | 'M'           |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Color"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Color" field in "FormTable*" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Color'         | 'Blue'        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I finish line editing in "FormTable*" table
+		And I click "Save" button
 	* Check the output of the message that the quantity is not filled
-		Затем я жду, что в сообщениях пользователю будет подстрока "Field: [Quantity] is empty" в течение 10 секунд
+		Then I wait that in user messages the "Field: [Quantity] is empty" substring will appear in 10 seconds
 	* Filling in the quantity and check the saving
-		И в таблице "FormTable*" я выбираю текущую строку
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 10
-		Тогда я проверяю наличие элемента справочника "Specifications" со значением поля "Description_en" "Test"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "FormTable*" table
+		And I input "1,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And I click "Save and close" button
+		And Delay 10
+		Then I check for the "Specifications" catalog element with the "Description_en" "Test"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Test'        |
-		И в таблице "List" я выбираю текущую строку
-	* Checking for errors when saving without a filled item
-		И в поле 'Item' я ввожу текст ''
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+	* Check for errors when saving without a filled item
+		And I input "" text in "Item" field
+		And I click "Save" button
 		* Check the output of the message that the item is not filled
-			Затем я жду, что в сообщениях пользователю будет подстрока "Field: [Item] is empty" в течение 10 секунд
-	* Checking for errors when saving without a filled item bundle
-		И я нажимаю кнопку выбора у поля "Item"
-		И в таблице "List" я перехожу к строке:
+			Then I wait that in user messages the "Field: [Item] is empty" substring will appear in 10 seconds
+	* Check for errors when saving without a filled item bundle
+		And I click Select button of "Item" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Trousers'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я выбираю текущую строку
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I select current line in "FormTable*" table
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Size'          | 'M'           |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Color"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Color" field in "FormTable*" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Color'         | 'White'       |
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И в поле 'Item bundle' я ввожу текст ''
-		И я нажимаю на кнопку 'Save'
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "2,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And I input "" text in "Item bundle" field
+		And I click "Save" button
 		* Check the output of the message that the item bundle is not filled
-			Затем я жду, что в сообщениях пользователю будет подстрока "Field: [Item Bundle] is empty" в течение 10 секунд
-	* Checking for errors when saving without a filled property
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+			Then I wait that in user messages the "Field: [Item Bundle] is empty" substring will appear in 10 seconds
+	* Check for errors when saving without a filled property
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| 'Description'          |
 			| 'Bound Dress+Trousers' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Color"
-		И в таблице "FormTable*" я выбираю текущую строку
-		И В таблице "FormTable*" я нажимаю кнопку очистить у поля "Color"
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I activate "Color" field in "FormTable*" table
+		And I select current line in "FormTable*" table
+		And I click Clear button of "Color" attribute in "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And I click "Save" button
 		* Check the output of the message that the quantity is not filled
-			Затем я жду, что в сообщениях пользователю будет подстрока "Field: [Color] is empty" в течение 10 секунд
+			Then I wait that in user messages the "Field: [Color] is empty" substring will appear in 10 seconds
 	* Check for errors when saving with the same lines
-		И в таблице "FormTable*" я выбираю текущую строку
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "FormTable*" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Color'         | 'Yellow'      |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I finish line editing in "FormTable*" table
+		And I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Size'          | 'M'           |
-		И в таблице "List" я активизирую поле "Description"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Color"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		И в таблице "List" я перехожу к строке:
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I activate "Color" field in "FormTable*" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Color'         | 'Yellow'      |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" я выбираю текущую строку
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I finish line editing in "FormTable*" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I select current line in "FormTable*" table
+		And I input "1,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And I click "Save" button
 		* Check the output of the message that the quantity is not filled
-			Затем я жду, что в сообщениях пользователю будет подстрока "Value is not unique" в течение 10 секунд
+			Then I wait that in user messages the "Value is not unique" substring will appear in 10 seconds
 	* Delete double and check saving
-		И в таблице 'FormTable*' я удаляю строку
-		И я нажимаю на кнопку 'Save'
-		И я нажимаю на кнопку 'Save and close'
-		И я жду закрытия окна 'Test (Specification) *' в течение 10 секунд
-		Тогда я проверяю наличие элемента справочника "Specifications" со значением поля "Description_en" "Test"
+		And I delete a line in "FormTable*" table
+		And I click "Save" button
+		And I click "Save and close" button
+		And I wait "Test (Specification) *" window closing in 10 seconds
+		Then I check for the "Specifications" catalog element with the "Description_en" "Test"
 	* Mark to delete the created specification
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description' | 'Type'   |
 			| 'Test'        | 'Bundle' |
-		И в таблице "List" я нажимаю на кнопку с именем 'ListContextMenuSetDeletionMark'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-	И я закрыл все окна клиентского приложения
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+	And I close all client application windows
 
 
-Сценарий: create a specification double
+Scenario: create a specification double
 	# the double is created for the A-8 specification
 	* Open specification catalog
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
-		Тогда я проверяю наличие элемента справочника "Specifications" со значением поля "Description_en" "A-8"
+		Given I open hyperlink "e1cib/list/Catalog.Specifications"
+		Then I check for the "Specifications" catalog element with the "Description_en" "A-8"
 	* Create a copy of the A-8 specification set
-		И я нажимаю на кнопку с именем "FormCreate"
-		И я меняю значение переключателя 'Type' на 'Set'
-		И я нажимаю кнопку выбора у поля "Item type"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "FormCreate"
+		And I change "Type" radio button value to "Set"
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
 			| 'Description' |
-			| 'Сlothes'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Color"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+			| 'Clothes'     |
+		And I select current line in "List" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I select current line in "List" table
+		And I activate "Color" field in "FormTable*" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "1,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'XS'          |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Color"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Color" field in "FormTable*" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Blue'        |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '1,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "1,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'M'           |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Color"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Color" field in "FormTable*" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Brown'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И в таблице "FormTable*" я нажимаю на кнопку 'Add'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "2,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'L'           |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Color"
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		Тогда открылось окно 'Additional attribute values'
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Color" field in "FormTable*" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Green'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле "Quantity"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле 'ENG' я ввожу текст 'Duplicate A-8'
-		И в поле 'TR' я ввожу текст 'Duplicate A-8'
-		И я нажимаю на кнопку 'Ok'
-		И я нажимаю на кнопку 'Save'
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "2,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And I click Open button of the field named "Description_en"
+		And I input "Duplicate A-8" text in "ENG" field
+		And I input "Duplicate A-8" text in "TR" field
+		And I click "Ok" button
+		And I click "Save" button
 	* Check the output message that the specification cannot be saved
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		Затем я жду, что в сообщениях пользователю будет подстрока "Specification is not unique" в течение 10 секунд
-		И я закрыл все окна клиентского приложения
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Specification is not unique" substring will appear in 10 seconds
+		And I close all client application windows
+
 
 

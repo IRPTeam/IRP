@@ -1,381 +1,381 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: Unbundling
+Feature: Unbundling
 
 As a sales manager
 I want to create Unbundling
 For sale of products from a Bundle separately
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
 
-Сценарий: _029601 create Unbundling on a product with a specification (specification created in advance, Store doesn't use Shipment confirmation and Goods receipt)
+Scenario: _029601 create Unbundling on a product with a specification (specification created in advance, Store doesn't use Shipment confirmation and Goods receipt)
 # the fill button on the specification. The specification specifies all additional properties
-	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Dress/A-8, all item keys were created in advance
-		И я нажимаю на кнопку с именем 'FormCreate'
+		And I click the button named "FormCreate"
 		* Change number
-			И в поле 'Number' я ввожу текст '1'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '1'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+			And I input "1" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "1" text in "Number" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| Description |
 			| Dress       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item key bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item key bundle" field
+		And I go to line in "List" table
 			| Item  | Item key  |
 			| Dress | Dress/A-8 |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I go to line in "List" table
 			| Description |
 			| pcs      |
-		И в таблице "List" я выбираю текущую строку
-		И в поле с именем 'Quantity' я ввожу текст '2,000'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "2,000" text in the field named "Quantity"
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| Description |
 			| Store 01  |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку 'By specification'
-		И я нажимаю на кнопку 'Post and close'
-	* Checking the creation of Unbundling
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I move to "Item list" tab
+		And in the table "ItemList" I click "By specification" button
+		And I click "Post and close" button
+	* Check the creation of Unbundling
+		And "List" table contains lines
 			| Item key bundle | Company      |
 			| Dress/A-8       | Main Company |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 	
-Сценарий: _029602 checking Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register Stock Balance
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-	Тогда таблица "List" содержит строки:
+Scenario: _029602 check Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register Stock Balance
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key'                            |
 		| '2,000'    | 'Unbundling 1*'              | 'Store 01' | 'S/Yellow'                            |
 		| '2,000'    | 'Unbundling 1*'              | 'Store 01' | 'XS/Blue'                             |
 		| '4,000'    | 'Unbundling 1*'              | 'Store 01' | 'L/Green'                             |
 		| '4,000'    | 'Unbundling 1*'              | 'Store 01' | 'M/Brown'                             |
 		| '2,000'    | 'Unbundling 1*'              | 'Store 01' | 'Dress/A-8'                           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029603 checking Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register Stock Reservation
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-	Тогда таблица "List" содержит строки:
+Scenario: _029603 check Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register Stock Reservation
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                    | 'Store'     | 'Item key'                                                            |
 		| '2,000'    | 'Unbundling 1*'               | 'Store 01'  | 'S/Yellow'                                                            |
 		| '2,000'    | 'Unbundling 1*'               | 'Store 01'  | 'XS/Blue'                                                             |
 		| '4,000'    | 'Unbundling 1*'               | 'Store 01'  | 'L/Green'                                                             |
 		| '4,000'    | 'Unbundling 1*'               | 'Store 01'  | 'M/Brown'                                                             |
 		| '2,000'    | 'Unbundling 1*'               | 'Store 01'  | 'Dress/A-8'                                                           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029604 create Unbundling on a product with a specification (specification created in advance, Store use Shipment confirmation and Goods receipt)
-	Когда creating a purchase invoice for the purchase of sets and dimensional grids at the tore 02
-	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
+Scenario: _029604 create Unbundling on a product with a specification (specification created in advance, Store use Shipment confirmation and Goods receipt)
+	When create a purchase invoice for the purchase of sets and dimensional grids at the tore 02
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Boots/S-8, all item keys were created in advance
-		И я нажимаю на кнопку с именем 'FormCreate'
+		And I click the button named "FormCreate"
 		* Change number
-			И в поле 'Number' я ввожу текст '2'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '2'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+			And I input "2" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "2" text in "Number" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| Description |
 			| Boots       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item key bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item key bundle" field
+		And I go to line in "List" table
 			| Item  | Item key  |
 			| Boots | Boots/S-8 |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I go to line in "List" table
 			| Description |
 			| pcs      |
-		И в таблице "List" я выбираю текущую строку
-		И в поле с именем 'Quantity' я ввожу текст '2,000'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "2,000" text in the field named "Quantity"
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| Description |
 			| Store 02  |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку 'By specification'
-		И я нажимаю на кнопку 'Post and close'
-	* Checking the creation of Unbundling
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I move to "Item list" tab
+		And in the table "ItemList" I click "By specification" button
+		And I click "Post and close" button
+	* Check the creation of Unbundling
+		And "List" table contains lines
 			| Item key bundle | Company      |
 			| Boots/S-8       | Main Company |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029605 checking the absence posting of Unbundling (store use Shipment confirmation and Goods receipt) by register Stock Balance
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-	Тогда таблица "List" не содержит строки:
+Scenario: _029605 check the absence posting of Unbundling (store use Shipment confirmation and Goods receipt) by register Stock Balance
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+	And "List" table does not contain lines
 		| 'Recorder'                   |
 		| 'Unbundling 2*'              |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029606 checking Bundling posting (store use Shipment confirmation and Goods receipt) by register Stock Reservation
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-	Тогда таблица "List" содержит строки:
+Scenario: _029606 check Bundling posting (store use Shipment confirmation and Goods receipt) by register Stock Reservation
+	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	And "List" table contains lines
 		| 'Quantity'   | 'Recorder'                  | 'Store'        | 'Item key'                                                            |
 		| '2,000'    | 'Unbundling 2*'               | 'Store 02'     | 'Boots/S-8'                                                           |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029607 checking Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
-	Тогда таблица "List" содержит строки:
+Scenario: _029607 check Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                   | 'Shipment basis'        | 'Store'    | 'Item key'  |
 		| '2,000'    | 'Unbundling 2*'              | 'Unbundling 2*'         | 'Store 02' | 'Boots/S-8' |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029608 checking Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
-	И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
-	Тогда таблица "List" содержит строки:
+Scenario: _029608 check Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
+	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
+	And "List" table contains lines
 		| 'Quantity'   | 'Recorder'                | 'Receipt basis'       | 'Store'    | 'Item key'  |
 		| '2,000'      | 'Unbundling 2*'         | 'Unbundling 2*'         | 'Store 02' | '36/18SD'                             |
 		| '2,000'      | 'Unbundling 2*'         | 'Unbundling 2*'         | 'Store 02' | '37/18SD'                             |
 		| '2,000'      | 'Unbundling 2*'         | 'Unbundling 2*'         | 'Store 02' | '38/18SD'                             |
 		| '2,000'      | 'Unbundling 2*'         | 'Unbundling 2*'         | 'Store 02' | '39/18SD'                             |
-	И Я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _029609 create Goods receipt and Shipment confirmation based on Unbundling
-	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
+Scenario: _029609 create Goods receipt and Shipment confirmation based on Unbundling
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Goods receipt and Shipment confirmation
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Company      | Item key bundle | Number |
 			| Main Company | Boots/S-8       | 2      |
-		И я нажимаю на кнопку с именем 'FormDocumentShipmentConfirmationGenerateShipmentConfirmation'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
+		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+		Then the form attribute named "Company" became equal to "Main Company"
 		* Change number Shipment confirmation to 152
-			И в поле 'Number' я ввожу текст '152'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '152'
-		И я нажимаю на кнопку 'Post and close'
-		И Пауза 5
-		И я нажимаю на кнопку с именем 'FormDocumentGoodsReceiptGenerateGoodsReceipt'
-		И     элемент формы с именем "Company" стал равен 'Main Company'
+			And I input "152" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "152" text in "Number" field
+		And I click "Post and close" button
+		And Delay 5
+		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		Then the form attribute named "Company" became equal to "Main Company"
 		* Change number Goods receipt to 153
-			И в поле 'Number' я ввожу текст '153'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '153'
-		И я нажимаю на кнопку 'Post and close'
-		И Пауза 5
-		И Я закрыл все окна клиентского приложения
-	* Check postings
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockBalance'
-		Тогда таблица "List" содержит строки:
+			And I input "153" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "153" text in "Number" field
+		And I click "Post and close" button
+		And Delay 5
+		And I close all client application windows
+	* Check movements
+		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
+		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key'                            |
 			| '2,000'    | 'Goods receipt 153*'         | 'Store 02' | '36/18SD'                             |
 			| '2,000'    | 'Goods receipt 153*'         | 'Store 02' | '37/18SD'                             |
 			| '2,000'    | 'Goods receipt 153*'         | 'Store 02' | '38/18SD'                             |
 			| '2,000'    | 'Goods receipt 153*'         | 'Store 02' | '39/18SD'                             |
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.StockReservation'
-		Тогда таблица "List" содержит строки:
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		And "List" table contains lines
 			| 'Quantity'   | 'Recorder'                    | 'Store'    | 'Item key'                          |
 			| '2,000'    | 'Goods receipt 153*'            | 'Store 02' | '36/18SD'                             |
 			| '2,000'    | 'Goods receipt 153*'            | 'Store 02' | '37/18SD'                             |
 			| '2,000'    | 'Goods receipt 153*'            | 'Store 02' | '38/18SD'                             |
 			| '2,000'    | 'Goods receipt 153*'            | 'Store 02' | '39/18SD'                             |
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitOutgoing'
-		Тогда таблица "List" содержит строки:
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
+		And "List" table contains lines
 			| 'Quantity'   | 'Recorder'                   | 'Shipment basis'       | 'Store'    | 'Item key'  |
 			| '2,000'      | 'Shipment confirmation 152*' | 'Unbundling 2*'        | 'Store 02' | 'Boots/S-8' |
-		И Я закрыл все окна клиентского приложения
-		И я открываю навигационную ссылку 'e1cib/list/AccumulationRegister.GoodsInTransitIncoming'
-		Тогда таблица "List" содержит строки:
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
+		And "List" table contains lines
 		| 'Quantity'   | 'Recorder'                | 'Receipt basis'        |  'Store'    | 'Item key'  |
 		| '2,000'        | 'Goods receipt 153*'    | 'Unbundling 2*'         | 'Store 02' | '36/18SD'                             |
 		| '2,000'        | 'Goods receipt 153*'    | 'Unbundling 2*'         | 'Store 02' | '37/18SD'                             |
 		| '2,000'        | 'Goods receipt 153*'    | 'Unbundling 2*'         | 'Store 02' | '38/18SD'                             |
 		| '2,000'        | 'Goods receipt 153*'    | 'Unbundling 2*'         | 'Store 02' | '39/18SD'                             |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: _029610 create Unbundling (+check postings) for bundl which was created independently
-# When creating a Unbundling based on bundle from a vendor, the missing item key is additionally created. 
+Scenario: _029610 create Unbundling (+check movements) for bundl which was created independently
+# When create a Unbundling based on bundle from a vendor, the missing item key is additionally created. 
 # For example, there is a cola+chocolate bandle. When creating Unbundling on this bundle is created to unpack  2 items (Coke and Chocolate) and also item keys 
-	И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Bundle Dress+Shirt
-		И я нажимаю на кнопку с именем 'FormCreate'
+		And I click the button named "FormCreate"
 		* Change number
-			И в поле 'Number' я ввожу текст '3'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '3'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+			And I input "3" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "3" text in "Number" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| Description |
 			| Bound Dress+Shirt       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item key bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item key bundle" field
+		And I go to line in "List" table
 			| Item              | Item key  |
 			| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I go to line in "List" table
 			| Description |
 			| pcs      |
-		И в таблице "List" я выбираю текущую строку
-		И в поле с именем 'Quantity' я ввожу текст '2,000'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "2,000" text in the field named "Quantity"
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| Description |
 			| Store 01  |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку 'By specification'
-		И я нажимаю на кнопку 'Post and close'
-		* Checking the creation of Unbundling
-			Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I move to "Item list" tab
+		And in the table "ItemList" I click "By specification" button
+		And I click "Post and close" button
+		* Check the creation of Unbundling
+			And "List" table contains lines
 				| Item key bundle | Company      |
 				| Bound Dress+Shirt/Dress+Shirt       | Main Company |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _029611 create Unbundling (+check postings) for bundl (there is a Bundling document) for which the specification was changed
+Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bundling document) for which the specification was changed
 # the missing item key on the items is created automatically
 	* Change specification Dress+Trousers
-		И я открываю навигационную ссылку 'e1cib/list/Catalog.Specifications'
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Catalog.Specifications"
+		And I go to line in "List" table
 			| Description | Type |
 			| Trousers    | Set  |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| Description    | Type   |
 			| Dress+Trousers | Bundle |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я нажимаю на кнопку с именем 'FormTable*'
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Size"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "FormTable*" I click the button named "FormTable*"
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| Description |
 			| M           |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я нажимаю кнопку выбора у реквизита "Color"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		And I go to line in "List" table
 			| Description |
 			| White       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "FormTable*" я активизирую поле с именем "Quantity*"
-		И в таблице "FormTable*" в поле 'Quantity' я ввожу текст '2,000'
-		И в таблице "FormTable*" я завершаю редактирование строки
-		И я нажимаю на кнопку 'Save and close'
-		И Пауза 5
+		And I select current line in "List" table
+		And I activate field named "Quantity*" in "FormTable*" table
+		And I input "2,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And I click "Save and close" button
+		And Delay 5
 	* Create Unbundling for item Dress+Trousers
-		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I click the button named "FormCreate"
 		* Change number
-			И в поле 'Number' я ввожу текст '4'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '4'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+			And I input "4" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "4" text in "Number" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| Description |
 			| Bound Dress+Trousers       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item key bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item key bundle" field
+		And I go to line in "List" table
 			| Item              | Item key  |
 			| Bound Dress+Trousers | Bound Dress+Trousers/Dress+Trousers |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I go to line in "List" table
 			| Description |
 			| pcs      |
-		И в таблице "List" я выбираю текущую строку
-		И в поле с именем 'Quantity' я ввожу текст '2,000'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "2,000" text in the field named "Quantity"
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| Description |
 			| Store 01  |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку 'By bundle content'
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I move to "Item list" tab
+		And in the table "ItemList" I click "By bundle content" button
+		And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' |
 			| 'Dress'    | '2,000'    | 'XS/Blue'   | 'pcs' |
 			| 'Trousers' | '2,000'    | '36/Yellow' | 'pcs' |
-		И я нажимаю на кнопку 'Post and close'
-		* Checking the creation of Unbundling
-			Тогда таблица "List" содержит строки:
+		And I click "Post and close" button
+		* Check the creation of Unbundling
+			And "List" table contains lines
 				| Item key bundle | Company      |
 				| Bound Dress+Trousers/Dress+Trousers       | Main Company |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _029612 create Unbundling (Store use Goods receipt and doesn't use Shipment confirmation)
+Scenario: _029612 create Unbundling (Store use Goods receipt and doesn't use Shipment confirmation)
 	* Opening the creation form Unbundling
-		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I click the button named "FormCreate"
 	* Change number
-			И в поле 'Number' я ввожу текст '8'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '8'
+			And I input "8" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "8" text in "Number" field
 	* Filling in details
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| Description |
 			| Bound Dress+Shirt       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item key bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item key bundle" field
+		And I go to line in "List" table
 			| Item              | Item key  |
 			| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I go to line in "List" table
 			| Description |
 			| pcs      |
-		И в таблице "List" я выбираю текущую строку
-		И в поле с именем 'Quantity' я ввожу текст '2,000'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "2,000" text in the field named "Quantity"
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| Description |
 			| Store 07  |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку 'By specification'
-	* Check postings
-		И я нажимаю на кнопку 'Post'
-		И Пауза 5
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I select current line in "List" table
+		And I move to "Item list" tab
+		And in the table "ItemList" I click "By specification" button
+	* Check movements
+		And I click "Post" button
+		And Delay 5
+		And I click "Registrations report" button
+		Then "ResultTable" spreadsheet document is equal by template
 			| 'Unbundling 8*'                         | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
 			| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
 			| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
@@ -393,51 +393,51 @@ For sale of products from a Bundle separately
 			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | ''         | ''        |
 			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | ''         | ''        |
 			| ''                                      | 'Expense'     | '*'      | '2'         | 'Store 07'   | 'Bound Dress+Shirt/Dress+Shirt' | ''         | ''        |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 	
-	Сценарий: _029613 create Unbundling (Store use Shipment confirmation and doesn't use Goods receipt)
+	Scenario: _029613 create Unbundling (Store use Shipment confirmation and does not use Goods receipt)
 	* Opening the creation form
-		И я открываю навигационную ссылку 'e1cib/list/Document.Unbundling'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I click the button named "FormCreate"
 	* Change number
-			И в поле 'Number' я ввожу текст '9'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '9'
+			And I input "9" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "9" text in "Number" field
 	* Filling in details
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
 			| Description |
 			| Bound Dress+Shirt       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Item key bundle"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Item key bundle" field
+		And I go to line in "List" table
 			| Item              | Item key  |
 			| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I go to line in "List" table
 			| Description |
 			| pcs      |
-		И в таблице "List" я выбираю текущую строку
-		И в поле с именем 'Quantity' я ввожу текст '2,000'
-		И я нажимаю кнопку выбора у поля "Store"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I input "2,000" text in the field named "Quantity"
+		And I click Select button of "Store" field
+		And I go to line in "List" table
 			| Description |
 			| Store 08  |
-		И в таблице "List" я выбираю текущую строку
-		И я перехожу к закладке "Item list"
-		И в таблице "ItemList" я нажимаю на кнопку 'By specification'
-	* Check postings
-		И я нажимаю на кнопку 'Post'
-		И Пауза 5
-		И я нажимаю на кнопку 'Registrations report'
-		Тогда табличный документ "ResultTable" равен по шаблону:
+		And I select current line in "List" table
+		And I move to "Item list" tab
+		And in the table "ItemList" I click "By specification" button
+	* Check movements
+		And I click "Post" button
+		And Delay 5
+		And I click "Registrations report" button
+		Then "ResultTable" spreadsheet document is equal by template
 			| 'Unbundling 9*'                         | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
 			| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
 			| 'Register  "Goods in transit outgoing"' | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
@@ -457,4 +457,4 @@ For sale of products from a Bundle separately
 			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | ''                              | ''        |
 			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 08'   | 'XS/Blue'                       | ''                              | ''        |
 			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 08'   | '36/Red'                        | ''                              | ''        |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows

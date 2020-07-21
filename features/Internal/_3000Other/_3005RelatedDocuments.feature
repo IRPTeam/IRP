@@ -1,426 +1,329 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: related documents
-
-Как Разработчик
-Я хочу к документам подключить систему структуры подчиненности
-Для того чтобы видеть зависимости документов
-
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Feature: related documents
 
 
-Сценарий: _300501 check connection to Internal Supply Request report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.InternalSupplyRequest"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+
+Background:
+	Given I launch TestClient opening script or connect the existing one
+
+
+Scenario: _300501 check connection to Internal Supply Request report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'                           | 'Amount' |
-		# | 'Internal supply request 1*'    | '*'       |
-		# | 'Inventory transfer order 200*' | '*'       |
-		# | 'Purchase order 1*'             | '*'      |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300502 check connection to Purchase order report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseOrder"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300502 check connection to Purchase order report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 2      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'                      | 'Amount'  |
-		# | 'Purchase order 2*'        | '161 660' |
-		# | 'Purchase invoice 1*'      | '161 660' |
-		# | 'Purchase return 2*'       | '708,00'  |
-		# | 'Purchase return order 2*' | '708,00'  |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300503 check connection to Purchase invoice report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseInvoice"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300503 check connection to Purchase invoice report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 2      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'                      | 'Amount'   |
-		# | 'Purchase order 3*'        | '23 600'       |
-		# | 'Purchase invoice 2*'      | '23 600'       |
-		# | 'Bank payment 1*'          | '1 000,00' |
-		# | 'Cash payment 1*'          | '1 000,00' |
-		# | 'Cash payment 2*'          | '20,00'    |
-		# | 'Cash payment 3*'          | '150,00'   |
-		# | 'Goods receipt 106*'       | '*'         |
-		# | 'Purchase return 1*'       | '94,40'    |
-		# | 'Purchase return order 1*' | '94,40'    |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300504 check connection to Sales order report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300504 check connection to Sales order report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'                   | 'Amount'   |
-		# | 'Sales order 1*'        | '4 350,00' |
-		# | 'Sales invoice 1*'      | '4 350,00' |
-		# | 'Sales return order 2*' | '2 700,00' |
-		# | 'Sales return 4*'       | '2 700,00' |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300505 check connection to Sales invoice report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.SalesInvoice"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300505 check connection to Sales invoice report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'                   | 'Amount'   |
-		# | 'Sales order 1*'        | '4 350,00' |
-		# | 'Sales invoice 1*'      | '4 350,00' |
-		# | 'Cash receipt 1*'       | '100,00'   |
-		# | 'Cash receipt 2*'       | '100,00'   |
-		# | 'Sales return order 2*' | '2 700,00' |
-		# | 'Sales return 4*'       | '2 700,00' |
-		# | 'Bank receipt 1*'       | '100,00'   |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300506 check connection to Shipment Confirmation report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.ShipmentConfirmation"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300506 check connection to Shipment Confirmation report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 181      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'                       | 'Amount'    |
-		# | 'Sales order 2*'            | '11 099,93' |
-		# | 'Sales invoice 2*'          | '11 099,93' |
-		# | 'Shipment confirmation 95*' | '*'        |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
 
-Сценарий: _300507 check connection to GoodsReceipt report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.GoodsReceipt"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300507 check connection to GoodsReceipt report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'                | Amount |
-		# | 'Boxing 2*'          | '*'     |
-		# | 'Goods receipt 170'  | '*'     |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300508 check connection to PurchaseReturnOrder report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturnOrder"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300508 check connection to PurchaseReturnOrder report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'                      | 'Amount' |
-		# | 'Purchase order 3*'        | '*'     |
-		# | 'Purchase invoice 2*'      | '*'     |
-		# | 'Purchase return order 1*' | '94,40'  |
-		# | 'Purchase return 1*'       | '94,40'  |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300509 check connection to PurchaseReturn report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.PurchaseReturn"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300509 check connection to PurchaseReturn report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'                      | 'Amount' |
-		# | 'Purchase invoice 2*'      | '*'     |
-		# | 'Purchase return order 1*' | '94,40'  |
-		# | 'Purchase return 1*'       | '94,40'  |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300510 check connection to SalesReturnOrder report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.SalesReturnOrder"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300510 check connection to SalesReturnOrder report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'                   | 'Amount'    |
-		# | 'Sales order 2*'        | '11 099,93' |
-		# | 'Sales invoice 2*'      | '11 099,93' |
-		# | 'Sales return order 1*' | '550,00'    |
-		# | 'Sales return 3*'       | '550,00'    |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300511 check connection to SalesReturn report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.SalesReturn"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300511 check connection to SalesReturn report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 2      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'              | 'Amount'    |
-		# | 'Sales order 2*'   | '11 099,93' |
-		# | 'Sales invoice 2*' | '11 099,93' |
-		# | 'Sales return 2*'  | '550,00'    |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300512 check connection to CashPayment report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.CashPayment"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300512 check connection to CashPayment report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'                 | 'Amount'   |
-		# | 'Purchase order 3*'   | '*'        |
-		# | 'Purchase invoice 2*' | '*'        |
-		# | 'Cash payment 1*'     | '1 000,00' |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300513 check connection to CashReciept report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.CashReceipt"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300513 check connection to CashReciept report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.CashReceipt"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'              | 'Amount'   |
-		# | 'Sales order 1*'   | '4 350,00' |
-		# | 'Sales invoice 1*' | '4 350,00' |
-		# | 'Cash receipt 1*'  | '100,00'   |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300514 check connection to BankPayment report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.BankPayment"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300514 check connection to BankPayment report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.BankPayment"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'                 | 'Amount'   |
-		# | 'Purchase order 3*'   | '*'        |
-		# | 'Purchase invoice 2*' | '*'        |
-		# | 'Bank payment 1*'     | '1 000,00' |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300515 check connection to BankReciept report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.BankReceipt"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300515 check connection to BankReciept report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.BankReceipt"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'              | 'Amount'   |
-		# | 'Sales order 1*'   | '4 350,00' |
-		# | 'Sales invoice 1*' | '4 350,00' |
-		# | 'Bank receipt 1*'  | '100,00'   |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
 
-Сценарий: _300516 check connection to CashTransferOrder report "Related documents" и формирования отчета для текущего элемента (Cash receipt)
-	И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300516 check connection to CashTransferOrder report "Related documents" and generating a report for the current item (Cash receipt)
+	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		Тогда таблица "DocumentsTree" содержит строки:
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+		And "DocumentsTree" table contains lines
 		| 'Ref'                    | 'Amount' |
 		| 'Cash transfer order 1*' | '*'      |
 		| 'Cash payment 4*'        | '500,00' |
 		| 'Cash receipt 4*'        | '400,00' |
 		| 'Cash receipt 5*'        | '100,00' |
-	* * Check the report generation для элемента из списка
-		И в таблице "DocumentsTree" я перехожу к последней строке
-		И в таблице "DocumentsTree" я нажимаю на кнопку с именем 'DocumentsTreeGenerateForCurrent'
-		Тогда таблица "DocumentsTree" содержит строки:
+	*  Check the report generation from list
+		And I go to the last line in "DocumentsTree" table
+		And in the table "DocumentsTree" I click the button named "DocumentsTreeGenerateForCurrent"
+		And "DocumentsTree" table contains lines
 		| 'Ref'                    | 'Amount' |
 		| 'Cash transfer order 1*' | ''       |
 		| 'Cash receipt 5*'        | '100,00' |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
 
 
 
-Сценарий: _300519 check connection to Bundling report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.Bundling"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300519 check connection to Bundling report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'         | Amount |
-		# | 'Bundling 1*' | ''     |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
-Сценарий: _300520 check connection to Unbundling report "Related documents"
-	И я открываю навигационную ссылку "e1cib/list/Document.Unbundling"
-	И я формирую отчет по структуре подчиненности
-		И в таблице "List" я перехожу к строке:
+Scenario: _300520 check connection to Unbundling report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
+	* Form report Related documents
+		And I go to line in "List" table
 		| Number |
 		| 1      |
-		И я нажимаю на кнопку с именем 'FormFilterCriterionRelatedDocumentsRelatedDocuments'
-		И Пауза 1
-	Когда открылось окно 'Related documents'
-		# Тогда таблица "DocumentsTree" содержит строки:
-		# | 'Ref'           | Amount |
-		# | 'Unbundling 1*' | ''     |
-	И я закрыл все окна клиентского приложения
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
 
-Сценарий: _300521 check post/unpost/mark for deletion from report "Related documents"
+Scenario: _300521 check post/unpost/mark for deletion from report "Related documents"
 	* Preparation
-		* Создание Sales order
-			И я открываю навигационную ссылку "e1cib/list/Document.SalesOrder"
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+		* Create Sales order
+			Given I open hyperlink "e1cib/list/Document.SalesOrder"
+			And I click the button named "FormCreate"
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Nicoletta'   |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля с именем "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Choice button of the field named "Store"
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 02 TR' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers TR' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'        | 'Item key'     |
 				| 'Trousers TR' | '38/Yellow TR' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Manager segment"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Manager segment" field
+			And I go to line in "List" table
 				| 'Description' |
 				| '2 Region'    |
-			И в таблице "List" я выбираю текущую строку
-			И я перехожу к закладке "Other"
-			И я устанавливаю флаг 'Shipment confirmations before sales invoice'
-			И в поле 'Number' я ввожу текст '9 012'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '9 012'
-			И я нажимаю на кнопку 'Post'
-		* Создание Shipment confirmation based on созданного SO
-			И я нажимаю на кнопку 'Shipment confirmation'
-			И я перехожу к закладке "Other"
-			И в поле 'Number' я ввожу текст '9 012'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '9 012'
-			И я нажимаю на кнопку 'Post and close'
-			И Пауза 5
-		* Создание Sales invoice based on созданного SC
-			И я нажимаю на кнопку 'Sales invoice'
-			И я нажимаю на кнопку с именем 'FormSelectAll'
-			И я нажимаю на кнопку 'Ok'
-			И я перехожу к закладке "Other"
-			И в поле 'Number' я ввожу текст '9 012'
-			Тогда открылось окно '1C:Enterprise'
-			И я нажимаю на кнопку 'Yes'
-			И в поле 'Number' я ввожу текст '9 012'
-			И я нажимаю на кнопку 'Post and close'
-			И Пауза 5
-		* Открытие структуры подчинанности
-			Когда В панели открытых я выбираю 'Sales order 9 012*'
-			И я нажимаю на кнопку 'Related documents'
-			Тогда таблица "DocumentsTree" содержит строки:
+			And I select current line in "List" table
+			And I move to "Other" tab
+			And I set checkbox "Shipment confirmations before sales invoice"
+			And I input "9 092" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "9 092" text in "Number" field
+			And I click "Post" button
+		* Create Shipment confirmation based on SO
+			And I click "Shipment confirmation" button
+			And I move to "Other" tab
+			And I input "9 092" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "9 092" text in "Number" field
+			And I click "Post and close" button
+			And Delay 5
+		* Create Sales invoice based on created SC
+			And I click "Sales invoice" button
+			And I click the button named "FormSelectAll"
+			And I click "Ok" button
+			And I move to "Other" tab
+			And I input "9 012" text in "Number" field
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			And I input "9 012" text in "Number" field
+			And I click "Post and close" button
+			And Delay 5
+		* Open Related documents
+			When in opened panel I select "Sales order 9 092*"
+			And I click "Related documents" button
+			And "DocumentsTree" table contains lines
 			| 'Ref'                          |
-			| 'Sales order 9 012*'           |
-			| 'Shipment confirmation 9 012*' |
+			| 'Sales order 9 092*'           |
+			| 'Shipment confirmation 9 092*' |
 			| 'Sales invoice 9 012*'         |
-		* Проверка распроведения Sales invoice из структуры подчиненности
-			И в таблице "DocumentsTree" я перехожу к последней строке
-			И в таблице "DocumentsTree" я нажимаю на кнопку с именем 'DocumentsTreeUnpost'
-			И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.PartnerArTransactions"
-			И Пауза 10
-			Тогда таблица "List" не содержит строки:
+		* Check unpost Sales invoice from report Related documents
+			And I go to the last line in "DocumentsTree" table
+			And in the table "DocumentsTree" I click the button named "DocumentsTreeUnpost"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
+			And Delay 10
+			And "List" table does not contain lines
 			| 'Recorder'             |
 			| 'Sales invoice 9 012*' |
-		* Проверка проведения Sales invoice из структуры подчиненности
-			И В панели открытых я выбираю 'Related documents'
-			И в таблице "DocumentsTree" я перехожу к последней строке
-			И в таблице "DocumentsTree" я нажимаю на кнопку с именем 'DocumentsTreePost'
-			И я открываю навигационную ссылку "e1cib/list/AccumulationRegister.PartnerArTransactions"
-			И я нажимаю на кнопку 'Refresh'
-			И Пауза 10
-			Тогда таблица "List" содержит строки:
+		* Check post Sales invoice from report Related documents
+			When in opened panel I select "Related documents"
+			And I go to the last line in "DocumentsTree" table
+			And in the table "DocumentsTree" I click the button named "DocumentsTreePost"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
+			And I click "Refresh" button
+			And Delay 10
+			And "List" table contains lines
 			| 'Recorder'             |
 			| 'Sales invoice 9 012*' |
-		* Пометка на удаление Sales invoice из структуры подчиненности
-			И В панели открытых я выбираю 'Related documents'
-			И в таблице "DocumentsTree" я перехожу к последней строке
-			И в таблице "DocumentsTree" я нажимаю на кнопку с именем 'DocumentsTreeDelete'
-			И в таблице "DocumentsTree" я перехожу к последней строке
-			# И в таблице "List" текущая строка помечена на удаление
-		* Снятие пометки на удаление Sales invoice из структуры подчиненности
-			И В панели открытых я выбираю 'Related documents'
-			И в таблице "DocumentsTree" я перехожу к последней строке
-			И в таблице "DocumentsTree" я нажимаю на кнопку с именем 'DocumentsTreeDelete'
-			И в таблице "DocumentsTree" я перехожу к последней строке
-			# И в таблице "DocumentsTree" текущая строка не помечена на удаление
-		И я закрыл все окна клиентского приложения
+		* Mark for deletion Sales invoice from report Related documents
+			When in opened panel I select "Related documents"
+			And I go to the last line in "DocumentsTree" table
+			And in the table "DocumentsTree" I click the button named "DocumentsTreeDelete"
+			And I go to the last line in "DocumentsTree" table
+		* Unmark for deletion  Sales invoice from report Related documents
+			When in opened panel I select "Related documents"
+			And I go to the last line in "DocumentsTree" table
+			And in the table "DocumentsTree" I click the button named "DocumentsTreeDelete"
+			And I go to the last line in "DocumentsTree" table
+		And I close all client application windows
+
 
 
 

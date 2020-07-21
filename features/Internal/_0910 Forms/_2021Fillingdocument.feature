@@ -1,880 +1,880 @@
-﻿#language: ru
+﻿#language: en
 @tree
 @Positive
 
-Функционал: check filling in and re-filling in documents forms + currency form connection
+Feature: check filling in and re-filling in documents forms + currency form connection
 
 
 
-Контекст:
-	Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+	Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: _0154100 preparation
+Scenario: _0154100 preparation
 	* For a test of price and rate changes depending on the date
 	# check the Sales order reset when the date changes, check the Sales invoice reset when the date changes
 		* Input lira exchange rate to dollar 01.11.2018
-			И я открываю навигационную ссылку 'e1cib/list/InformationRegister.CurrencyRates'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Currency from"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
+			And I click the button named "FormCreate"
+			And I click Select button of "Currency from" field
+			And I go to line in "List" table
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Currency to"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Currency to" field
+			And I go to line in "List" table
 				| 'Code' | 'Description'     |
 				| 'USD'  | 'American dollar' |
-			И в таблице "List" я активизирую поле "Description"
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Period' я ввожу текст '01.11.2018  0:00:00'
-			И я нажимаю кнопку выбора у поля "Source"
-			И в таблице "List" я перехожу к строке:
+			And I activate "Description" field in "List" table
+			And I select current line in "List" table
+			And I input "01.11.2018  0:00:00" text in "Period" field
+			And I click Select button of "Source" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Forex Seling' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Multiplicity' я ввожу текст '1'
-			И в поле 'Rate' я ввожу текст '5,0000'
-			И я нажимаю на кнопку 'Save and close'
-			И я закрыл все окна клиентского приложения
+			And I select current line in "List" table
+			And I input "1" text in "Multiplicity" field
+			And I input "5,0000" text in "Rate" field
+			And I click "Save and close" button
+			And I close all client application windows
 		* Create price list of the previous period
-			И я открываю навигационную ссылку 'e1cib/list/Document.PriceList'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я меняю значение переключателя 'Set price' на 'By Item keys'
-			И я нажимаю кнопку выбора у поля "Price type"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.PriceList"
+			And I click the button named "FormCreate"
+			And I change "Set price" radio button value to "By Item keys"
+			And I click Select button of "Price type" field
+			And I go to line in "List" table
 				| 'Description'       |
 				| 'Basic Price Types' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку с именем 'ItemKeyListAdd'
-			И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click the button named "ItemKeyListAdd"
+			And I click choice button of "Item" attribute in "ItemKeyList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Dress'       |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemKeyList" я активизирую поле "Item key"
-			И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemKeyList" table
+			And I click choice button of "Item key" attribute in "ItemKeyList" table
+			And I go to line in "List" table
 				| 'Item'  | 'Item key' |
 				| 'Dress' | 'M/Brown'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemKeyList" я активизирую поле "Price"
-			И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '1 000,00'
-			И в таблице "ItemKeyList" я завершаю редактирование строки
-			И я перехожу к закладке "Other"
-			И в поле 'Date' я ввожу текст '18.11.2017  0:00:00'
-			И я нажимаю на кнопку 'Post and close'
+			And I select current line in "List" table
+			And I activate "Price" field in "ItemKeyList" table
+			And I input "1 000,00" text in "Price" field of "ItemKeyList" table
+			And I finish line editing in "ItemKeyList" table
+			And I move to "Other" tab
+			And I input "18.11.2017  0:00:00" text in "Date" field
+			And I click "Post and close" button
 		* Add Dress M/Brown to price list 100
-			И в таблице "List" я перехожу к строке:
+			And I go to line in "List" table
 				| 'Description' | 'Number' |
 				| 'Basic price' | '100'    |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку с именем 'ItemKeyListAdd'
-			И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click the button named "ItemKeyListAdd"
+			And I click choice button of "Item" attribute in "ItemKeyList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Dress'       |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemKeyList" я активизирую поле "Item key"
-			И в таблице "ItemKeyList" я нажимаю кнопку выбора у реквизита "Item key"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemKeyList" table
+			And I click choice button of "Item key" attribute in "ItemKeyList" table
+			And I go to line in "List" table
 				| 'Item'  | 'Item key' |
 				| 'Dress' | 'M/Brown'  |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemKeyList" я активизирую поле "Price"
-			И в таблице "ItemKeyList" в поле 'Price' я ввожу текст '500,00'
-			И в таблице "ItemKeyList" я завершаю редактирование строки
-			И я нажимаю на кнопку 'Post and close'
+			And I select current line in "List" table
+			And I activate "Price" field in "ItemKeyList" table
+			And I input "500,00" text in "Price" field of "ItemKeyList" table
+			And I finish line editing in "ItemKeyList" table
+			And I click "Post and close" button
 	* For the test of completing the purchase documents
 		* Preparation: creating a vendor partner term for DFC
-			И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст 'Partner term vendor DFC'
-			И я меняю значение переключателя 'Type' на 'Vendor'
-			И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Catalog.Agreements"
+			And I click the button named "FormCreate"
+			And I input "Partner term vendor DFC" text in "ENG" field
+			And I change "Type" radio button value to "Vendor"
+			And I change "AP/AR posting detail" radio button value to "By documents"
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'DFC'         |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Legal name"
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I select current line in "List" table
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Multi currency movement type"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Multi currency movement type" field
+			And I go to line in "List" table
 				| 'Currency' |  'Source'       | 'Type'      |
 				| 'TRY'      |  'Forex Seling' | 'Partner term' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Price type"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Price type" field
+			And I go to line in "List" table
 				| 'Currency' | 'Description'       | 'Reference'         |
 				| 'TRY'      | 'Basic Price Types' | 'Basic Price Types' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Start using' я ввожу текст '01.11.2018'
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "01.11.2018" text in "Start using" field
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 03'    |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку 'Save and close'
-			И я закрыл все окна клиентского приложения
+			And I select current line in "List" table
+			And I click "Save and close" button
+			And I close all client application windows
 		* Preparation: creating a vendor partner term for Partner Kalipso Vendor
-			И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И в поле 'ENG' я ввожу текст 'Partner term vendor Partner Kalipso'
-			И я меняю значение переключателя 'Type' на 'Vendor'
-			И я меняю значение переключателя 'AP/AR posting detail' на 'By documents'
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Catalog.Agreements"
+			And I click the button named "FormCreate"
+			And I input "Partner term vendor Partner Kalipso" text in "ENG" field
+			And I change "Type" radio button value to "Vendor"
+			And I change "AP/AR posting detail" radio button value to "By documents"
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Partner Kalipso'         |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Legal name"
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I select current line in "List" table
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Multi currency movement type"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Multi currency movement type" field
+			And I go to line in "List" table
 				| 'Currency' |  'Source'       | 'Type'      |
 				| 'TRY'      |  'Forex Seling' | 'Partner term' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Price type"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Price type" field
+			And I go to line in "List" table
 				| 'Currency' | 'Description'       | 'Reference'         |
 				| 'TRY'      | 'Basic Price Types' | 'Basic Price Types' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Start using' я ввожу текст '01.11.2018'
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "01.11.2018" text in "Start using" field
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 03'    |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку 'Save and close'
-			И я закрыл все окна клиентского приложения
-	И Пауза 5
+			And I select current line in "List" table
+			And I click "Save and close" button
+			And I close all client application windows
+	And Delay 5
 	* For the test of choice Planing transaction basis in bank/cash documents
 		* Creating a Cashtransfer order to move money between cash accounts
-			И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			And I click the button named "FormCreate"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 			* Filling Sender and Send amount
-				И я нажимаю кнопку выбора у поля "Sender"
-				И в таблице "List" я перехожу к строке:
+				And I click Select button of "Sender" field
+				And I go to line in "List" table
 					| Description    |
 					| Cash desk №1 |
-				И в таблице "List" я выбираю текущую строку
-				И в поле 'Send amount' я ввожу текст '400,00'
-				И я нажимаю кнопку выбора у поля "Send currency"
-				И в таблице "List" я перехожу к строке:
+				And I select current line in "List" table
+				And I input "400,00" text in "Send amount" field
+				And I click Select button of "Send currency" field
+				And I go to line in "List" table
 					| Code | Description     |
 					| USD  | American dollar |
-				И в таблице "List" я выбираю текущую строку
+				And I select current line in "List" table
 			* Filling Receiver and Receive amount
-				И я нажимаю кнопку выбора у поля "Receiver"
-				И в таблице "List" я перехожу к строке:
+				And I click Select button of "Receiver" field
+				And I go to line in "List" table
 					| Description    |
 					| Cash desk №2 |
-				И в таблице "List" я выбираю текущую строку
-				И в поле 'Receive amount' я ввожу текст '400,00'
-				И я нажимаю кнопку выбора у поля "Receive currency"
-				И в таблице "List" я перехожу к строке:
+				And I select current line in "List" table
+				And I input "400,00" text in "Receive amount" field
+				And I click Select button of "Receive currency" field
+				And I go to line in "List" table
 					| Code | Description     |
 					| USD  | American dollar |
-				И в таблице "List" я активизирую поле "Description"
-				И в таблице "List" я выбираю текущую строку
+				And I activate "Description" field in "List" table
+				And I select current line in "List" table
 			* Change the document number
-				И в поле 'Number' я ввожу текст '10'
-				Тогда открылось окно '1C:Enterprise'
-				И я нажимаю на кнопку 'Yes'
-				И в поле 'Number' я ввожу текст '10'
-			И я нажимаю на кнопку 'Post and close'
-			И Пауза 5
+				And I input "10" text in "Number" field
+				Then "1C:Enterprise" window is opened
+				And I click "Yes" button
+				And I input "10" text in "Number" field
+			And I click "Post and close" button
+			And Delay 5
 			* Check creation
-				И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
-				Тогда таблица "List" содержит строки:
+				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+				And "List" table contains lines
 				| Number | Sender        | Receiver     | Company      |
 				| 10      | Cash desk №1 | Cash desk №2 | Main Company |
-			И Я закрыл все окна клиентского приложения
-		И Пауза 5
+			And I close all client application windows
+		And Delay 5
 		* Create Cashtransfer order for currency exchange (cash accounts)
-			И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			And I click the button named "FormCreate"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 			* Filling Sender and Send amount
-				И я нажимаю кнопку выбора у поля "Sender"
-				И в таблице "List" я перехожу к строке:
+				And I click Select button of "Sender" field
+				And I go to line in "List" table
 					| Description    |
 					| Cash desk №2 |
-				И в таблице "List" я выбираю текущую строку
-				И в поле 'Send amount' я ввожу текст '210,00'
-				И я нажимаю кнопку выбора у поля "Send currency"
-				И в таблице "List" я перехожу к строке:
+				And I select current line in "List" table
+				And I input "210,00" text in "Send amount" field
+				And I click Select button of "Send currency" field
+				And I go to line in "List" table
 					| Code | Description     |
 					| USD  | American dollar |
-				И в таблице "List" я выбираю текущую строку
+				And I select current line in "List" table
 			* Filling Receiver and Receive amount
-				И я нажимаю кнопку выбора у поля "Receiver"
-				И в таблице "List" я перехожу к строке:
+				And I click Select button of "Receiver" field
+				And I go to line in "List" table
 					| Description    |
 					| Cash desk №1 |
-				И в таблице "List" я выбираю текущую строку
-				И в поле 'Receive amount' я ввожу текст '1200,00'
-				И я нажимаю кнопку выбора у поля "Receive currency"
-				И в таблице "List" я перехожу к строке:
+				And I select current line in "List" table
+				And I input "1200,00" text in "Receive amount" field
+				And I click Select button of "Receive currency" field
+				And I go to line in "List" table
 					| Code | Description  |
 					| TRY  | Turkish lira |
-				И в таблице "List" я активизирую поле "Description"
-				И в таблице "List" я выбираю текущую строку
-				И я нажимаю кнопку выбора у поля "Cash advance holder"
-				И в таблице "List" я перехожу к строке:
+				And I activate "Description" field in "List" table
+				And I select current line in "List" table
+				And I click Select button of "Cash advance holder" field
+				And I go to line in "List" table
 					| 'Description' |
 					| 'Arina Brown' |
-				И в таблице "List" я выбираю текущую строку
-			* Change the document number на 11
-				И в поле 'Number' я ввожу текст '11'
-				Тогда открылось окно '1C:Enterprise'
-				И я нажимаю на кнопку 'Yes'
-				И в поле 'Number' я ввожу текст '11'
-			И я нажимаю на кнопку 'Post and close'
-			И Пауза 5
+				And I select current line in "List" table
+			* Change the document number to 11
+				And I input "11" text in "Number" field
+				Then "1C:Enterprise" window is opened
+				And I click "Yes" button
+				And I input "11" text in "Number" field
+			And I click "Post and close" button
+			And Delay 5
 			* Check creation
-				И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
-				Тогда таблица "List" содержит строки:
+				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+				And "List" table contains lines
 				| Number | Sender       | Receiver     | Company      |
 				| 11      | Cash desk №2 | Cash desk №1 | Main Company |
-			И Я закрыл все окна клиентского приложения
-		И Пауза 5
+			And I close all client application windows
+		And Delay 5
 		* Create Cashtransfer order for currency exchange (bank accounts)
-			И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			And I click the button named "FormCreate"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 			* Filling Sender and Send amount
-				И я нажимаю кнопку выбора у поля "Sender"
-				И в таблице "List" я перехожу к строке:
+				And I click Select button of "Sender" field
+				And I go to line in "List" table
 					| Description    |
 					| Bank account, TRY |
-				И в таблице "List" я выбираю текущую строку
-				И в поле 'Send amount' я ввожу текст '1150,00'
+				And I select current line in "List" table
+				And I input "1150,00" text in "Send amount" field
 			* Filling Receiver and Receive amount
-				И я нажимаю кнопку выбора у поля "Receiver"
-				И в таблице "List" я перехожу к строке:
+				And I click Select button of "Receiver" field
+				And I go to line in "List" table
 					| Description    |
 					| Bank account, EUR |
-				И в таблице "List" я выбираю текущую строку
-				И в поле 'Receive amount' я ввожу текст '175,00'
-			* Change the document number на 13
-				И в поле 'Number' я ввожу текст '13'
-				Тогда открылось окно '1C:Enterprise'
-				И я нажимаю на кнопку 'Yes'
-				И в поле 'Number' я ввожу текст '13'
-			И я нажимаю на кнопку 'Post and close'
-			И Пауза 5
+				And I select current line in "List" table
+				And I input "175,00" text in "Receive amount" field
+			* Change the document number to 13
+				And I input "13" text in "Number" field
+				Then "1C:Enterprise" window is opened
+				And I click "Yes" button
+				And I input "13" text in "Number" field
+			And I click "Post and close" button
+			And Delay 5
 			* Check creation
-				И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
-				Тогда таблица "List" содержит строки:
+				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+				And "List" table contains lines
 				| Number  | Sender            | Receiver          | Company      |
 				| 13      | Bank account, TRY | Bank account, EUR | Main Company |
-			И Я закрыл все окна клиентского приложения
-		И Пауза 5
+			And I close all client application windows
+		And Delay 5
 		* Create Cash transfer order for cash transfer between bank accounts in one currency
 			* Create one more bank account in EUR
-				И я открываю навигационную ссылку "e1cib/list/Catalog.CashAccounts"
-				И Пауза 2
-				И я нажимаю на кнопку с именем 'FormCreate'
-				И я нажимаю на кнопку открытия поля с именем "Description_en"
-				И в поле с именем 'Description_en' я ввожу текст 'Bank account 2, EUR'
-				И в поле с именем 'Description_tr' я ввожу текст 'Bank account 2, EUR TR'
-				И я нажимаю на кнопку 'Ok'
-				И я меняю значение переключателя с именем "Type" на 'Bank'
-				И в поле 'Number' я ввожу текст '1120000000'
-				И в поле 'Bank name' я ввожу текст 'OTP'
-				И я нажимаю кнопку выбора у поля "Company"
-				И в таблице "List" я перехожу к строке:
+				Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+				And Delay 2
+				And I click the button named "FormCreate"
+				And I click Open button of the field named "Description_en"
+				And I input "Bank account 2, EUR" text in the field named "Description_en"
+				And I input "Bank account 2, EUR TR" text in the field named "Description_tr"
+				And I click "Ok" button
+				And I change the radio button named "Type" value to "Bank"
+				And I input "1120000000" text in "Number" field
+				And I input "OTP" text in "Bank name" field
+				And I click Select button of "Company" field
+				And I go to line in "List" table
 					| Description  |
 					| Main Company |
-				И в таблице "List" я выбираю текущую строку
-				И я нажимаю кнопку выбора у поля с именем "Currency"
-				И в таблице "List" я перехожу к строке:
+				And I select current line in "List" table
+				And I click Choice button of the field named "Currency"
+				And I go to line in "List" table
 					| Code |
 					| EUR  |
-				И в таблице "List" я выбираю текущую строку
-				И В открытой форме я нажимаю на кнопку с именем "FormWriteAndClose"
+				And I select current line in "List" table
+				And I click the button named "FormWriteAndClose"
 			* Create Cash transfer order for cash transfer between bank accounts in one currency
-				И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
-				И я нажимаю на кнопку с именем 'FormCreate'
-				И я нажимаю кнопку выбора у поля "Company"
-				И в таблице "List" я перехожу к строке:
+				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+				And I click the button named "FormCreate"
+				And I click Select button of "Company" field
+				And I go to line in "List" table
 					| Description  |
 					| Main Company |
-				И в таблице "List" я выбираю текущую строку
+				And I select current line in "List" table
 				* Filling Sender and Send amount
-					И я нажимаю кнопку выбора у поля "Sender"
-					И в таблице "List" я перехожу к строке:
+					And I click Select button of "Sender" field
+					And I go to line in "List" table
 						| Description    |
 						| Bank account 2, EUR |
-					И в таблице "List" я выбираю текущую строку
-					И в поле 'Send amount' я ввожу текст '1150,00'
+					And I select current line in "List" table
+					And I input "1150,00" text in "Send amount" field
 				* Filling Receiver and Receive amount
-					И я нажимаю кнопку выбора у поля "Receiver"
-					И в таблице "List" я перехожу к строке:
+					And I click Select button of "Receiver" field
+					And I go to line in "List" table
 						| Description    |
 						| Bank account, EUR |
-					И в таблице "List" я выбираю текущую строку
-					И в поле 'Receive amount' я ввожу текст '1150,00'
-				* Change the document number на 14
-					И в поле 'Number' я ввожу текст '14'
-					Тогда открылось окно '1C:Enterprise'
-					И я нажимаю на кнопку 'Yes'
-					И в поле 'Number' я ввожу текст '14'
-				И я нажимаю на кнопку 'Post and close'
-				И Пауза 5
+					And I select current line in "List" table
+					And I input "1150,00" text in "Receive amount" field
+				* Change the document number to 14
+					And I input "14" text in "Number" field
+					Then "1C:Enterprise" window is opened
+					And I click "Yes" button
+					And I input "14" text in "Number" field
+				And I click "Post and close" button
+				And Delay 5
 				* Check creation
-					И я открываю навигационную ссылку "e1cib/list/Document.CashTransferOrder"
-					Тогда таблица "List" содержит строки:
+					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+					And "List" table contains lines
 					| Number  | Sender              | Receiver          | Company      |
 					| 14      | Bank account 2, EUR | Bank account, EUR | Main Company |
-				И Я закрыл все окна клиентского приложения
+				And I close all client application windows
 
 
-Сценарий: _0154101 check filling in and re-filling Sales order
-	И Я закрыл все окна клиентского приложения
+Scenario: _0154101 check filling in and re-filling Sales order
+	And I close all client application windows
 	* Open the Sales order creation form
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "LegalName" стал равен 'DFC'
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "DFC"
 	* Check filling in Partner term if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Partner term DFC'
+		And I select current line in "List" table
+		Then the form attribute named "Agreement" became equal to "Partner term DFC"
 	* Check filling in Company from Partner term
-		* Изменение компании в Sales order
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		* Change company in Sales order
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'    |
 				| 'Second Company' |
-			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
+			Then the form attribute named "Company" became equal to "Second Company"
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
 		* Check the refill when selecting a partner term
-			И     элемент формы с именем "Company" стал равен 'Main Company'
+			Then the form attribute named "Company" became equal to "Main Company"
 	* Check filling in Store from Partner term
 		* Change of store in the selected partner term
-			И я нажимаю на кнопку открытия поля "Partner term"
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I click Open button of "Partner term" field
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 03'    |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку 'Save and close'
+			And I select current line in "List" table
+			And I click "Save and close" button
 		* Re-selection of the agreement and check of the store refill (items not added)
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я выбираю текущую строку
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
 	* Check clearing legal name, Partner term when re-selecting a partner
 		* Re-select partner
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Kalipso'     |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Check clearing fields
-			И     элемент формы с именем "Agreement" стал равен ''
+			Then the form attribute named "Agreement" became equal to ""
 		* Check filling in legal name after re-selection partner
-			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
+			Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		* Select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'                   |
 				| 'Basic Partner terms, without VAT' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 	* Check filling in Store and Compane from Partner term when re-selection partner
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Router'      |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			И в таблице 'ItemList' я удаляю строку
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And I delete a line in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Procurement method"
-			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-			И в таблице "ItemList" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I activate "Procurement method" field in "ItemList" table
+			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 		* Check filling in prices
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
 	* Check re-filling  price when reselection partner term
 		* Re-select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Basic Partner terms, TRY' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Check store and price re-filling in the added line
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Shirt'       |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле "Procurement method"
-			И в таблице "ItemList" из выпадающего списка "Procurement method" я выбираю точное значение 'Stock'
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I activate "Procurement method" field in "ItemList" table
+			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 		* Check filling in prices
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Procurement method' | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | 'Stock'              | '1,000' | 'pcs'  | 'Store 01' |
 				| 'Shirt'    | '350,00' | '38/Black'  | 'Stock'              | '2,000' | 'pcs'  | 'Store 01' |
 	* Check the re-drawing of the form for taxes at company re-selection.
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Procurement method' | 'Tax amount'  | 'SalesTax'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '*'    | '38/Yellow' | 'Stock'              | '*'           | '*'         | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
 				| '350,00' | 'Shirt'    | '*'    | '38/Black'  | 'Stock'              | '*'           | '*'         | '2,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'    |
 				| 'Second Company' |
-			И в таблице "List" я выбираю текущую строку
-			Если в таблице "ItemList" нет колонки "VAT" Тогда
+			And I select current line in "List" table
+			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Basic Partner terms, TRY' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Tax calculation check
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | ''       | 'Trousers' | '18%' | '38/Yellow' | 'Stock'              | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
 				| '350,00' | ''       | 'Shirt'    | '18%' | '38/Black'  | 'Stock'              | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
-			И в таблице "ItemList" я нажимаю на кнопку 'SearchByBarcode'
-			И в поле 'InputFld' я ввожу текст '2202283739'
-			И Пауза 4
-			И я нажимаю на кнопку 'OK'
-			И Пауза 4
+			And in the table "ItemList" I click "SearchByBarcode" button
+			And I input "2202283739" text in "InputFld" field
+			And Delay 4
+			And I click "OK" button
+			And Delay 4
 		* Check filling in prices and tax calculation
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | 'Stock'              | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
 				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | 'Stock'              | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | 'Stock'              | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
-			И Пауза 4
+			And Delay 4
 	* Check filling in prices and calculation of taxes when adding items through the goods selection form
 		* Add items via Pickup form
-			И в таблице "ItemList" я нажимаю на кнопку 'Pickup'
-			И в таблице "ItemList" я перехожу к строке:
+			And in the table "ItemList" I click "Pickup" button
+			And I go to line in "ItemList" table
 				| 'Title' |
 				| 'Dress' |
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemKeyList" я перехожу к строке:
+			And I select current line in "ItemList" table
+			And I go to line in "ItemKeyList" table
 				| 'Price'  | 'Title'   | 'Unit' |
 				| '520,00' | 'XS/Blue' | 'pcs'  |
-			И в таблице "ItemKeyList" я выбираю текущую строку
-			И я нажимаю на кнопку 'Transfer to document'
+			And I select current line in "ItemKeyList" table
+			And I click "Transfer to document" button
 		* Check filling in prices and tax calculation
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '38/Yellow' | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
 				| '350,00' | 'Shirt'    | '38/Black'  | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | 'L/Green'   | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress'    | 'XS/Blue'   | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 	* Check the line clearing in the tax tree when deleting a line from an order
-		И в таблице "ItemList" я перехожу к строке:
+		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице 'ItemList' я удаляю строку
-		И я перехожу к закладке "Tax list"
-		Тогда таблица "ItemList" не содержит строки:
+		And I delete a line in "ItemList" table
+		And I move to "Tax list" tab
+		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
-			И я перехожу к закладке "Other"
-			И я разворачиваю группу "More"
-			И я снимаю флаг 'Price include tax'
+			And I move to "Other" tab
+			And I expand "More" group
+			And I remove checkbox "Price include tax"
 		* Tax recalculation check
-			И я перехожу к закладке "Item list"
-			И     таблица "ItemList" содержит строки:
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '38/Black' | '133,00'     | '2,000' | 'pcs'  | '700,00'     | '833,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | 'L/Green'  | '104,50'     | '1,000' | 'pcs'  | '550,00'     | '654,50'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '98,80'      | '1,000' | 'pcs'  | '520,00'     | '618,80'       | 'Store 01' |
 		* Tick Price include Tax and check the calculation
-			И я перехожу к закладке "Other"
-			И я разворачиваю группу "More"
-			И я устанавливаю флаг 'Price include tax'
-			И я перехожу к закладке "Item list"
-			И     таблица "ItemList" содержит строки:
+			And I move to "Other" tab
+			And I expand "More" group
+			And I set checkbox "Price include tax"
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '38/Black' | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 	* Check filling in the Price include Tax check boxes when re-selecting an agreement and check tax recalculation
 		* Re-select partner term for which Price include Tax is not ticked 
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'                   |
 				| 'Basic Partner terms, without VAT' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Check that the Price include Tax checkbox value has been filled out from the partner term
-			И     элемент формы с именем "PriceIncludeTax" стал равен 'No'
+			Then the form attribute named "PriceIncludeTax" became equal to "No"
 		* Check tax recalculation 
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '296,61' | 'Shirt' | '18%' | '38/Black' | '112,71'     | '1%'       | '2,000' | 'pcs'  | '593,22'     | '705,93'       | 'Store 02' |
 			| '466,10' | 'Dress' | '18%' | 'L/Green'  | '88,56'      | '1%'       | '1,000' | 'pcs'  | '466,10'     | '554,66'       | 'Store 02' |
 			| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '83,73'      | '1%'       | '1,000' | 'pcs'  | '440,68'     | '524,41'       | 'Store 02' |
 		* Change of partner term to what was earlier
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Basic Partner terms, TRY' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
-			И     элемент формы с именем "PriceIncludeTax" стал равен 'Yes'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
+			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		* Tax recalculation check
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '38/Black' | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
-			И я нажимаю на кнопку 'Save'
-			И я перехожу к закладке с именем "GroupCurrency"
-			И     таблица "ObjectCurrencies" стала равной:
+			And I click "Save" button
+			And I move to the tab named "GroupCurrency"
+			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '303,08' | '1'            |
 
-Сценарий: _0154102 check filling in and re-filling Sales invoice
+Scenario: _0154102 check filling in and re-filling Sales invoice
 	* Open the Sales invoice creation form
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "LegalName" стал равен 'DFC'
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "DFC"
 	* Check filling in Partner term if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Partner term DFC'
+		And I select current line in "List" table
+		Then the form attribute named "Agreement" became equal to "Partner term DFC"
 	* Check filling in Company from Partner term
-		* Изменение компании в Sales order
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+		* Change company in Sales order
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'    |
 				| 'Second Company' |
-			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
+			Then the form attribute named "Company" became equal to "Second Company"
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
 		* Check the refill when selecting a partner term
-			И     элемент формы с именем "Company" стал равен 'Main Company'
+			Then the form attribute named "Company" became equal to "Main Company"
 	* Check filling in Store from Partner term
 		* Change of store in the selected partner term
-			И я нажимаю на кнопку открытия поля "Partner term"
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I click Open button of "Partner term" field
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 03'    |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку 'Save and close'
+			And I select current line in "List" table
+			And I click "Save and close" button
 		* Re-selection of the agreement and check of the store refill (items not added)
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я выбираю текущую строку
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
 	* Check clearing legal name, Partner term when re-selecting a partner
 		* Re-select partner
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Kalipso'     |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Check clearing fields
-			И     элемент формы с именем "Agreement" стал равен ''
+			Then the form attribute named "Agreement" became equal to ""
 		* Check filling in legal name after re-selecting a partner
-			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
+			Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		* Select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'                   |
 				| 'Basic Partner terms, without VAT' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 	* Check filling in Store and Compane from Partner term when re-selection partner
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Router'      |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			И в таблице 'ItemList' я удаляю строку
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And I delete a line in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-			И в таблице "ItemList" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 		* Check filling in prices
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
 	* Check re-filling  price when reselection partner term
 		* Re-select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Basic Partner terms, TRY' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Check store and price re-filling in the added line
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
-			И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Shirt'       |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 		* Check filling in prices
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 				| 'Shirt'    | '350,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 01' |
 	* Check the re-drawing of the form for taxes at company re-selection.
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'SalesTax'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '*'         | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
 				| '350,00' | 'Shirt'    | '*'    | '38/Black'  | '*'           | '*'         | '2,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'    |
 				| 'Second Company' |
-			И в таблице "List" я выбираю текущую строку
-			Если в таблице "ItemList" нет колонки "VAT" Тогда
+			And I select current line in "List" table
+			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Basic Partner terms, TRY' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Tax calculation check
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | ''       | 'Trousers' | '18%' | '38/Yellow' | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
 				| '350,00' | ''       | 'Shirt'    | '18%' | '38/Black'  | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
-			И в таблице "ItemList" я нажимаю на кнопку 'SearchByBarcode'
-			И в поле 'InputFld' я ввожу текст '2202283739'
-			И Пауза 2
-			И я нажимаю на кнопку 'OK'
-			И Пауза 4
+			And in the table "ItemList" I click "SearchByBarcode" button
+			And I input "2202283739" text in "InputFld" field
+			And Delay 2
+			And I click "OK" button
+			And Delay 4
 		* Check filling in prices and tax calculation
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
 				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
-			И Пауза 4
+			And Delay 4
 	* Check filling in prices and calculation of taxes when adding items through the goods selection form
 		* Add items via Pickup form
-			И в таблице "ItemList" я нажимаю на кнопку 'Pickup'
-			И в таблице "ItemList" я перехожу к строке:
+			And in the table "ItemList" I click "Pickup" button
+			And I go to line in "ItemList" table
 				| 'Title' |
 				| 'Dress' |
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemKeyList" я перехожу к строке:
+			And I select current line in "ItemList" table
+			And I go to line in "ItemKeyList" table
 				| 'Price'  | 'Title'   | 'Unit' |
 				| '520,00' | 'XS/Blue' | 'pcs'  |
-			И в таблице "ItemKeyList" я выбираю текущую строку
-			И я нажимаю на кнопку 'Transfer to document'
+			And I select current line in "ItemKeyList" table
+			And I click "Transfer to document" button
 		* Check filling in prices and tax calculation
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '38/Yellow' | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
 				| '350,00' | 'Shirt'    | '38/Black'  | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | 'L/Green'   | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress'    | 'XS/Blue'   | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 	* Check the line clearing in the tax tree when deleting a line from an order
-		И в таблице "ItemList" я перехожу к строке:
+		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице 'ItemList' я удаляю строку
-		И я перехожу к закладке "Tax list"
-		Тогда таблица "ItemList" не содержит строки:
+		And I delete a line in "ItemList" table
+		And I move to "Tax list" tab
+		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
-			И я перехожу к закладке "Other"
-			И я разворачиваю группу "More"
-			И я снимаю флаг 'Price include tax'
+			And I move to "Other" tab
+			And I expand "More" group
+			And I remove checkbox "Price include tax"
 		* Tax recalculation check
-			И я перехожу к закладке "Item list"
-			И     таблица "ItemList" содержит строки:
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '38/Black' | '133,00'     | '2,000' | 'pcs'  | '700,00'     | '833,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | 'L/Green'  | '104,50'     | '1,000' | 'pcs'  | '550,00'     | '654,50'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '98,80'      | '1,000' | 'pcs'  | '520,00'     | '618,80'       | 'Store 01' |
 		* Tick Price include Tax and check the calculation
-			И я перехожу к закладке "Other"
-			И я разворачиваю группу "More"
-			И я устанавливаю флаг 'Price include tax'
-			И я перехожу к закладке "Item list"
-			И     таблица "ItemList" содержит строки:
+			And I move to "Other" tab
+			And I expand "More" group
+			And I set checkbox "Price include tax"
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '38/Black' | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 	* Check filling in the Price include Tax check boxes when re-selecting an agreement and check tax recalculation
 		* Re-select partner term for which Price include Tax is not ticked 
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'                   |
 				| 'Basic Partner terms, without VAT' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Check that the Price include Tax checkbox value has been filled out from the partner term
-			И     элемент формы с именем "PriceIncludeTax" стал равен 'No'
+			Then the form attribute named "PriceIncludeTax" became equal to "No"
 		* Check tax recalculation 
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '296,61' | 'Shirt' | '18%' | '38/Black' | '112,71'     | '1%'       | '2,000' | 'pcs'  | '593,22'     | '705,93'       | 'Store 02' |
 			| '466,10' | 'Dress' | '18%' | 'L/Green'  | '88,56'      | '1%'       | '1,000' | 'pcs'  | '466,10'     | '554,66'       | 'Store 02' |
 			| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '83,73'      | '1%'       | '1,000' | 'pcs'  | '440,68'     | '524,41'       | 'Store 02' |
 		* Change of partner term to what was earlier
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Basic Partner terms, TRY' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
-			И     элемент формы с именем "PriceIncludeTax" стал равен 'Yes'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
+			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		* Tax recalculation check
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '38/Black' | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
-			И я перехожу к закладке с именем "GroupCurrency"
-			И     таблица "ObjectCurrencies" стала равной:
+			And I move to the tab named "GroupCurrency"
+			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'         | '5,8400'            | '303,08' | '1'            |
 		* Check tax recalculation when choosing a tax rate manually
-			И  в таблице "ItemList" я перехожу к строке:
+			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
-			И в таблице "ItemList" я активизирую поле "VAT"
-			И в таблице "ItemList" из выпадающего списка "VAT" я выбираю точное значение '0%'
-			И     таблица "TaxTree" содержит строки:
+			And I activate "VAT" field in "ItemList" table
+			And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+			And "TaxTree" table contains lines
 				| 'Tax'      | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
 				| 'VAT'      | ''         | ''      | ''         | ''          | '163,22' | '163,22'        |
 				| 'VAT'      | '18%'      | 'Dress' | 'L/Green'  | ''          | '83,90'  | '83,90'         |
@@ -884,786 +884,786 @@
 				| 'SalesTax' | '1%'       | 'Dress' | 'L/Green'  | ''          | '5,45'   | '5,45'          |
 				| 'SalesTax' | '1%'       | 'Dress' | 'XS/Blue'  | ''          | '5,15'   | '5,15'          |
 				| 'SalesTax' | '1%'       | 'Shirt' | '38/Black' | ''          | '6,93'   | '6,93'          |
-			И я закрыл все окна клиентского приложения
+			And I close all client application windows
 
 
 
-Сценарий: _0154103 check Sales order when changing date
+Scenario: _0154103 check Sales order when changing date
 	* Open the Sales order creation form
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
 	* Filling in partner and Legal name
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I select current line in "List" table
 	* Filling in an Partner term
-		И я нажимаю кнопку выбора у поля "Partner term"
-		Тогда в таблице "List" количество строк "меньше или равно" 4
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner term" field
+		Then the number of "List" table lines is "меньше или равно" 4
+		And I go to line in "List" table
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Add items and check prices on the current date
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/Brown'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '500,00' | 'Dress' | '18%' | 'M/Brown'  | '81,22'      | '1%'       | '1,000' | 'pcs'  | '418,78'     | '500,00'       | 'Store 01' |
 	* Change of date and check of price and tax recalculation
-		И я перехожу к закладке "Other"
-		И я разворачиваю группу "More"
-		И в поле 'Date' я ввожу текст '01.11.2018 10:00:00'
-		И я перехожу к закладке "Item list"
-		Когда открылось окно 'Update item list info'
-		И     элемент формы с именем "Prices" стал равен 'Yes'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "ItemList" содержит строки:
+		And I move to "Other" tab
+		And I expand "More" group
+		And I input "01.11.2018 10:00:00" text in "Date" field
+		And I move to "Item list" tab
+		Then "Update item list info" window is opened
+		Then the form attribute named "Prices" became equal to "Yes"
+		And I click "OK" button
+		And "ItemList" table contains lines
 			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | ''           | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
 	* Check the list of partner terms
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И     таблица "List" содержит строки:
+		And I click Select button of "Partner term" field
+		And "List" table contains lines
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY'         |
 			| 'Basic Partner terms, $'           |
 			| 'Basic Partner terms, without VAT' |
 			| 'Personal Partner terms, $'        |
 			| 'Sale autum, TRY'               |
-		И Я закрываю окно 'Partner terms'
+		And I close "Partner terms" window
 	* Check the recount of the currency table when the date is changed
-		И я перехожу к закладке с именем "GroupCurrency"
-		И     таблица "ObjectCurrencies" стала равной:
+		And I move to the tab named "GroupCurrency"
+		And "ObjectCurrencies" table became equal
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,0000'            | '200,00' | '1'            |
 
-Сценарий: _0154104 check Sales invoice when changing date
+Scenario: _0154104 check Sales invoice when changing date
 	* Open the Sales invoice creation form
-		И я открываю навигационную ссылку 'e1cib/list/Document.SalesInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
 	* Filling in partner and Legal name
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I select current line in "List" table
 	* Filling in an Partner term
-		И я нажимаю кнопку выбора у поля "Partner term"
-		Тогда в таблице "List" количество строк "меньше или равно" 4
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner term" field
+		Then the number of "List" table lines is "меньше или равно" 4
+		And I go to line in "List" table
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Add items and check prices on the current date
-		И в таблице "ItemList" я нажимаю на кнопку с именем 'ItemListAdd'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'       |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/Brown'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "ItemList" я активизирую поле "Q"
-		И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-		И в таблице "ItemList" я завершаю редактирование строки
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '500,00' | 'Dress' | '18%' | 'M/Brown'  | '81,22'      | '1%'       | '1,000' | 'pcs'  | '418,78'     | '500,00'       | 'Store 01' |
 	* Change of date and check of price and tax recalculation
-		И я перехожу к закладке "Other"
-		И я разворачиваю группу "More"
-		И в поле 'Date' я ввожу текст '01.11.2018 10:00:00'
-		И я перехожу к закладке "Item list"
-		Когда открылось окно 'Update item list info'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "ItemList" содержит строки:
+		And I move to "Other" tab
+		And I expand "More" group
+		And I input "01.11.2018 10:00:00" text in "Date" field
+		And I move to "Item list" tab
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table contains lines
 			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | ''           | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
 	* Check the list of partner terms
-		И я нажимаю кнопку выбора у поля "Partner term"
-		И     таблица "List" содержит строки:
+		And I click Select button of "Partner term" field
+		And "List" table contains lines
 		| 'Description'                   |
 		| 'Basic Partner terms, TRY'         |
 		| 'Basic Partner terms, $'           |
 		| 'Basic Partner terms, without VAT' |
 		| 'Personal Partner terms, $'        |
 		| 'Sale autum, TRY'               |
-		И Я закрываю окно 'Partner terms'
+		And I close "Partner terms" window
 	* Check the recount of the currency table when the date is changed
-		И я перехожу к закладке с именем "GroupCurrency"
-		И     таблица "ObjectCurrencies" стала равной:
+		And I move to the tab named "GroupCurrency"
+		And "ObjectCurrencies" table became equal
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,0000'            | '200,00' | '1'            |
 
-Сценарий: _0154105 check filling in and re-filling Purchase order
+Scenario: _0154105 check filling in and re-filling Purchase order
 	* Open the Purchase order creation form
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "LegalName" стал равен 'DFC'
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "DFC"
 	* Check filling in Partner term if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Partner term vendor DFC'
+		And I select current line in "List" table
+		Then the form attribute named "Agreement" became equal to "Partner term vendor DFC"
 	* Check filling in Company from Partner term
 		* Change company in the Purchase order
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'    |
 				| 'Second Company' |
-			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
+			Then the form attribute named "Company" became equal to "Second Company"
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
 		* Check the refill when selecting a partner term
-			И     элемент формы с именем "Company" стал равен 'Main Company'
+			Then the form attribute named "Company" became equal to "Main Company"
 	* Check filling in Store from Partner term
 		* Change of store in the selected partner term
-			И я нажимаю на кнопку открытия поля "Partner term"
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I click Open button of "Partner term" field
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 03'    |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку 'Save and close'
+			And I select current line in "List" table
+			And I click "Save and close" button
 		* Re-selection of the agreement and check of the store refill (items not added)
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я выбираю текущую строку
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
 	* Check clearing legal name, Partner term when re-selecting a partner
 		* Re-select partner
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Partner Kalipso'     |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Check clearing fields
-			И     элемент формы с именем "Agreement" стал равен ''
+			Then the form attribute named "Agreement" became equal to ""
 		* Check filling in legal name after re-selecting a partner
-			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
+			Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		* Select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'            |
 				| 'Partner Kalipso Vendor' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку открытия поля "Partner term"
-			И я нажимаю кнопку выбора у поля "Price type"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Open button of "Partner term" field
+			And I click Select button of "Price type" field
+			And I go to line in "List" table
 				| 'Description'             |
 				| 'Basic Price without VAT' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку 'Save and close'
+			And I select current line in "List" table
+			And I click "Save and close" button
 	* Check filling in Store and Compane from Partner term when re-selection partner
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Router'      |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			И в таблице 'ItemList' я удаляю строку
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And I delete a line in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-			И в таблице "ItemList" я завершаю редактирование строки
-			И Пауза 2
+			And I select current line in "List" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And Delay 2
 		* Check filling in prices
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     |
 				| 'Trousers' | '*'      | '38/Yellow' | '1,000' |
-			И Пауза 2
+			And Delay 2
 	* Check re-filling  price when reselection partner term
 		* Re-select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Partner term vendor Partner Kalipso' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Check store and price re-filling in the added line
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Shirt'       |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 		* Check filling in prices
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 				| 'Shirt'    | '350,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 03' |
 	* Check the re-drawing of the form for taxes at company re-selection.
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
 				| '350,00' | 'Shirt'    | '*'    | '38/Black'  | '*'           | '2,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'    |
 				| 'Second Company' |
-			И в таблице "List" я выбираю текущую строку
-			Если в таблице "ItemList" нет колонки "VAT" Тогда
+			And I select current line in "List" table
+			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Partner Kalipso Vendor' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я изменяю флаг 'Update filled stores on Store 02'
-			И я нажимаю на кнопку 'OK'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I change checkbox "Update filled stores on Store 02"
+			And I click "OK" button
 		* Tax calculation check
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '51,71'      | 'pcs'  | '287,27'     | '338,98'       | 'Store 03' |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
-			И я нажимаю на кнопку 'ItemListSearchByBarcode'
-			И в поле 'InputFld' я ввожу текст '2202283739'
-			И Пауза 2
-			И я нажимаю на кнопку 'OK'
-			И Пауза 4
+			And I click "ItemListSearchByBarcode" button
+			And I input "2202283739" text in "InputFld" field
+			And Delay 2
+			And I click "OK" button
+			And Delay 4
 		* Check filling in prices and tax calculation
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '51,71'      | 'pcs'  | '287,27'     | '338,98'       | 'Store 03' |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
 	* Check filling in prices and calculation of taxes when adding items through the goods selection form
 		* Add items via Pickup form
-			И я нажимаю на кнопку 'Pickup'
-			И в таблице "ItemList" я перехожу к строке:
+			And I click "Pickup" button
+			And I go to line in "ItemList" table
 				| 'Title' |
 				| 'Dress' |
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemKeyList" я перехожу к строке:
+			And I select current line in "ItemList" table
+			And I go to line in "ItemKeyList" table
 				| 'Price'  | 'Title'   | 'Unit' |
 				| '440,68' | 'XS/Blue' | 'pcs'  |
-			И в таблице "ItemKeyList" я выбираю текущую строку
-			И я нажимаю на кнопку 'Transfer to document'
+			And I select current line in "ItemKeyList" table
+			And I click "Transfer to document" button
 		* Check filling in prices and tax calculation
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '51,71'      | 'pcs'  | '287,27'     | '338,98'       | 'Store 03' |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 03' |
 	* Check the line clearing in the tax tree when deleting a line from an order
-		И в таблице "ItemList" я перехожу к строке:
+		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице 'ItemList' я удаляю строку
-		И я перехожу к закладке "Tax list"
-		Тогда таблица "ItemList" не содержит строки:
+		And I delete a line in "ItemList" table
+		And I move to "Tax list" tab
+		And "ItemList" table does not contain lines
 			| 'Item'     | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
-			И я перехожу к закладке "Other"
-			И я разворачиваю группу "More"
-			И я снимаю флаг 'Price include tax'
+			And I move to "Other" tab
+			And I expand "More" group
+			And I remove checkbox "Price include tax"
 		* Tax recalculation check
-			И я перехожу к закладке "Item list"
-			И     таблица "ItemList" содержит строки:
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '296,61' | 'Shirt' | '18%' | '38/Black' | '2,000' | '106,78'     | 'pcs'  | '593,22'     | '700,00'       | 'Store 03' |
 				| '466,10' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '83,90'      | 'pcs'  | '466,10'     | '550,00'       | 'Store 03' |
 				| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '79,32'      | 'pcs'  | '440,68'     | '520,00'       | 'Store 03' |
 		* Tick Price include Tax and check the calculation
-			И я перехожу к закладке "Other"
-			И я разворачиваю группу "More"
-			И я устанавливаю флаг 'Price include tax'
-			И я перехожу к закладке "Item list"
-			И     таблица "ItemList" содержит строки:
+			And I move to "Other" tab
+			And I expand "More" group
+			And I set checkbox "Price include tax"
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 03' |
 	* Check filling in the Price include Tax check boxes when re-selecting an agreement and check tax recalculation
-		* Re-select partner term на то у которого галочка Price include Tax установлена
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+		* Re-select partner term for which Price include Tax is ticked
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'                   |
 				| 'Partner Kalipso Vendor' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Check that the Price include Tax checkbox value has been filled out from the partner term
-			И     элемент формы с именем "PriceIncludeTax" стал равен 'Yes'
+			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		* Check tax recalculation 
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 02' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 02' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 02' |
 		* Change of partner term to what was earlier
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Partner term vendor Partner Kalipso' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
-			И     элемент формы с именем "PriceIncludeTax" стал равен 'No'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
+			Then the form attribute named "PriceIncludeTax" became equal to "No"
 		* Tax recalculation check
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | '126,00'     | 'pcs'  | '700,00'     | '826,00'       | 'Store 03' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '99,00'      | 'pcs'  | '550,00'     | '649,00'       | 'Store 03' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
 		* Check filling in currency tab
-			И я перехожу к закладке с именем "GroupCurrency"
-			И     таблица "ObjectCurrencies" стала равной:
+			And I move to the tab named "GroupCurrency"
+			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '357,64'  | '1'            |
 		* Check tax recalculation when choosing a tax rate manually
-			И  в таблице "ItemList" я перехожу к строке:
+			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
-			И в таблице "ItemList" я активизирую поле "VAT"
-			И в таблице "ItemList" из выпадающего списка "VAT" я выбираю точное значение '0%'
-			И     таблица "TaxTree" содержит строки:
+			And I activate "VAT" field in "ItemList" table
+			And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+			And "TaxTree" table contains lines
 				| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
 				| 'VAT' | ''         | ''      | ''         | ''          | '192,60' | '192,60'        |
 				| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '99,00'  | '99,00'         |
 				| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '93,60'  | '93,60'         |
 				| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
-			И я закрыл все окна клиентского приложения
+			And I close all client application windows
 
 
 
-Сценарий: _0154106 check filling in and re-filling Purchase invoice
+Scenario: _0154106 check filling in and re-filling Purchase invoice
 	* Open the Purchase invoice creation form
-		И я открываю навигационную ссылку 'e1cib/list/Document.PurchaseInvoice'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "LegalName" стал равен 'DFC'
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "DFC"
 	* Check filling in Partner term if the partner has only one
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Agreement" стал равен 'Partner term vendor DFC'
+		And I select current line in "List" table
+		Then the form attribute named "Agreement" became equal to "Partner term vendor DFC"
 	* Check filling in Company from Partner term
 		* Change company in the Purchase invoice
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'    |
 				| 'Second Company' |
-			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "Company" стал равен 'Second Company'
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
+			Then the form attribute named "Company" became equal to "Second Company"
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
 		* Check the refill when selecting a partner term
-			И     элемент формы с именем "Company" стал равен 'Main Company'
+			Then the form attribute named "Company" became equal to "Main Company"
 	* Check filling in Store from Partner term
 		* Change of store in the selected partner term
-			И я нажимаю на кнопку открытия поля "Partner term"
-			И я нажимаю кнопку выбора у поля "Store"
-			И в таблице "List" я перехожу к строке:
+			And I click Open button of "Partner term" field
+			And I click Select button of "Store" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 03'    |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку 'Save and close'
+			And I select current line in "List" table
+			And I click "Save and close" button
 		* Re-selection of the agreement and check of the store refill (items not added)
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я выбираю текущую строку
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
 	* Check clearing legal name, Partner term when re-selecting a partner
 		* Re-select partner
-			И я нажимаю кнопку выбора у поля "Partner"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Partner Kalipso'     |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Check clearing fields
-			И     элемент формы с именем "Agreement" стал равен ''
+			Then the form attribute named "Agreement" became equal to ""
 		* Check filling in legal name after re-selecting a partner
-			И     элемент формы с именем "LegalName" стал равен 'Company Kalipso'
+			Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		* Select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'            |
 				| 'Partner Kalipso Vendor' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку открытия поля "Partner term"
-			И я нажимаю кнопку выбора у поля "Price type"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Open button of "Partner term" field
+			And I click Select button of "Price type" field
+			And I go to line in "List" table
 				| 'Description'             |
 				| 'Basic Price without VAT' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю на кнопку 'Save and close'
+			And I select current line in "List" table
+			And I click "Save and close" button
 	* Check filling in Store and Compane from Partner term when re-selection partner
-		И     элемент формы с именем "Company" стал равен 'Main Company'
-		И     элемент формы с именем "Store" стал равен 'Store 02'
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		И я нажимаю на кнопку с именем 'Add'
-		И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-		И в таблице "List" я перехожу к строке:
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Router'      |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "ItemList" содержит строки:
+		And I select current line in "List" table
+		And "ItemList" table contains lines
 			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
 			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			И в таблице 'ItemList' я удаляю строку
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And I delete a line in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Trousers'    |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '1,000'
-			И в таблице "ItemList" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 		* Check filling in prices
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
 	* Check re-filling  price when reselection partner term
 		* Re-select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Partner term vendor Partner Kalipso' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Check store and price re-filling in the added line
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
-			И я нажимаю на кнопку с именем 'Add'
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItem"
-			И в таблице "List" я перехожу к строке:
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'Shirt'       |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" я активизирую поле с именем "ItemListItemKey"
-			И в таблице "ItemList" я нажимаю кнопку выбора у реквизита с именем "ItemListItemKey"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "ItemList" в поле 'Q' я ввожу текст '2,000'
-			И в таблице "ItemList" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
 		* Check filling in prices
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 				| 'Shirt'    | '350,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 03' |
 	* Check the re-drawing of the form for taxes at company re-selection.
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
 				| '350,00' | 'Shirt'    | '*'    | '38/Black'  | '*'           | '2,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'    |
 				| 'Second Company' |
-			И в таблице "List" я выбираю текущую строку
-			Если в таблице "ItemList" нет колонки "VAT" Тогда
+			And I select current line in "List" table
+			If "ItemList" table does not contain "VAT" column Then
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Partner Kalipso Vendor' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я изменяю флаг 'Update filled stores on Store 02'
-			И я нажимаю на кнопку 'OK'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I change checkbox "Update filled stores on Store 02"
+			And I click "OK" button
 		* Tax calculation check
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '51,71'      | 'pcs'  | '287,27'     | '338,98'       | 'Store 03' |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
-			И я нажимаю на кнопку 'SearchByBarcode'
-			И в поле 'InputFld' я ввожу текст '2202283739'
-			И Пауза 2
-			И я нажимаю на кнопку 'OK'
-			И Пауза 4
+			And I click "SearchByBarcode" button
+			And I input "2202283739" text in "InputFld" field
+			And Delay 2
+			And I click "OK" button
+			And Delay 4
 		* Check filling in prices and tax calculation
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '51,71'      | 'pcs'  | '287,27'     | '338,98'       | 'Store 03' |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
 	* Check filling in prices and calculation of taxes when adding items through the goods selection form
 		* Add items via Pickup form
-			И я нажимаю на кнопку 'Pickup'
-			И в таблице "ItemList" я перехожу к строке:
+			And I click "Pickup" button
+			And I go to line in "ItemList" table
 				| 'Title' |
 				| 'Dress' |
-			И в таблице "ItemList" я выбираю текущую строку
-			И в таблице "ItemKeyList" я перехожу к строке:
+			And I select current line in "ItemList" table
+			And I go to line in "ItemKeyList" table
 				| 'Price'  | 'Title'   | 'Unit' |
 				| '440,68' | 'XS/Blue' | 'pcs'  |
-			И в таблице "ItemKeyList" я выбираю текущую строку
-			И я нажимаю на кнопку 'Transfer to document'
+			And I select current line in "ItemKeyList" table
+			And I click "Transfer to document" button
 		* Check filling in prices and tax calculation
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '51,71'      | 'pcs'  | '287,27'     | '338,98'       | 'Store 03' |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 03' |
 	* Check the line clearing in the tax tree when deleting a line from an order
-		И в таблице "ItemList" я перехожу к строке:
+		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
-		И в таблице 'ItemList' я удаляю строку
-		И я перехожу к закладке "Tax list"
-		Тогда таблица "ItemList" не содержит строки:
+		And I delete a line in "ItemList" table
+		And I move to "Tax list" tab
+		And "ItemList" table does not contain lines
 			| 'Item'     | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
-			И я перехожу к закладке "Other"
-			И я снимаю флаг 'Price include tax'
+			And I move to "Other" tab
+			And I remove checkbox "Price include tax"
 		* Tax recalculation check
-			И я перехожу к закладке "Item list"
-			И     таблица "ItemList" содержит строки:
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '296,61' | 'Shirt' | '18%' | '38/Black' | '2,000' | '106,78'     | 'pcs'  | '593,22'     | '700,00'       | 'Store 03' |
 				| '466,10' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '83,90'      | 'pcs'  | '466,10'     | '550,00'       | 'Store 03' |
 				| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '79,32'      | 'pcs'  | '440,68'     | '520,00'       | 'Store 03' |
 		* Tick Price include Tax and check the calculation
-			И я перехожу к закладке "Other"
-			И я устанавливаю флаг 'Price include tax'
-			И я перехожу к закладке "Item list"
-			И     таблица "ItemList" содержит строки:
+			And I move to "Other" tab
+			And I set checkbox "Price include tax"
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 03' |
 	* Check filling in the Price include Tax check boxes when re-selecting an agreement and check tax recalculation
-		* Re-select partner term на то у которого галочка Price include Tax установлена
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+		* Re-select partner term for which Price include Tax is ticked
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'                   |
 				| 'Partner Kalipso Vendor' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Check that the Price include Tax checkbox value has been filled out from the partner term
-			И     элемент формы с именем "PriceIncludeTax" стал равен 'Yes'
+			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		* Check tax recalculation 
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 02' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 02' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 02' |
 		* Change of partner term to what was earlier
-			И я нажимаю кнопку выбора у поля "Partner term"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
 				| 'Description'           |
 				| 'Partner term vendor Partner Kalipso' |
-			И в таблице "List" я выбираю текущую строку
-			Когда открылось окно 'Update item list info'
-			И я нажимаю на кнопку 'OK'
-			И     элемент формы с именем "PriceIncludeTax" стал равен 'No'
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
+			Then the form attribute named "PriceIncludeTax" became equal to "No"
 		* Tax recalculation check
-			И     таблица "ItemList" содержит строки:
+			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | '126,00'     | 'pcs'  | '700,00'     | '826,00'       | 'Store 03' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '99,00'      | 'pcs'  | '550,00'     | '649,00'       | 'Store 03' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
 		* Check filling in currency tab
-			И я перехожу к закладке с именем "GroupCurrency"
-			И     таблица "ObjectCurrencies" стала равной:
+			And I move to the tab named "GroupCurrency"
+			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '357,64'  | '1'            |
 		* Check tax recalculation when choosing a tax rate manually
-			И  в таблице "ItemList" я перехожу к строке:
+			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
-			И в таблице "ItemList" я активизирую поле "VAT"
-			И в таблице "ItemList" из выпадающего списка "VAT" я выбираю точное значение '0%'
-			И     таблица "TaxTree" содержит строки:
+			And I activate "VAT" field in "ItemList" table
+			And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+			And "TaxTree" table contains lines
 				| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
 				| 'VAT' | ''         | ''      | ''         | ''          | '192,60' | '192,60'        |
 				| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '99,00'  | '99,00'         |
 				| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '93,60'  | '93,60'         |
 				| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
-			И я закрыл все окна клиентского приложения
+			And I close all client application windows
 
-Сценарий: _0154107 check filling in and re-filling Cash reciept (transaction type Payment from customer)
+Scenario: _0154107 check filling in and re-filling Cash reciept (transaction type Payment from customer)
 	* Open the Cash reciept creation form
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
 	* Check the default transaction type 'Payment from customer'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
+		Then the form attribute named "TransactionType" became equal to "Payment from customer"
+		And I select "Payment from customer" exact value from "Transaction type" drop-down list
 	* Check filling in company
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check filling in currency before select cash account
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| USD  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check filling in cash account (multicurrency)
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
 			| Description    |
 			| Cash desk №1 |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Re-selection of cash registers with a fixed currency and verification of overfilling of the Currency field
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
 			| Description    |
 			| Cash desk №4 |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Currency" стал равен 'TRY'
+		And I select current line in "List" table
+		Then the form attribute named "Currency" became equal to "TRY"
 	* Check currency re-selection and clearing the "Cash / Bank accounts" field if the currency is fixed at the cash account
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| USD  |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "CashAccount" стал равен ''
+		And I select current line in "List" table
+		Then the form attribute named "CashAccount" became equal to ""
 	* Select a multi-currency cash account and checking that the Currency field will not be cleared
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
 			| Description  |
 			| Cash desk №1 |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Currency" стал равен 'USD'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "Currency" became equal to "USD"
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the choice of a partner in the tabular section and filling in the legal name if one
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payer'|
 			| 'DFC'       | 'DFC'  |
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
+		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Nicoletta'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term'                              | 'Payer'             |
 			| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
+		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payer"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And "List" table contains lines
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY'         |
 			| 'Basic Partner terms, without VAT' |
@@ -1671,207 +1671,208 @@
 			| 'Vendor Ferron, USD'            |
 			| 'Vendor Ferron, EUR'            |
 			| 'Ferron, USD'                   |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filter check on the basis documents depending on Partner term
 		# temporarily
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
 		# temporarily
-		Дано В активном окне открылась форма с заголовком "Documents for incoming payment"
-		И таблица  "List" не содержит строки:
+		Given form with "Documents for incoming payment" header is opened in the active window
+		And "List" table does not contain lines
 			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| 'Sales invoice 234*' | '200,00'          | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '4 350,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
-		И я нажимаю на кнопку 'Select'
+		And I click "Select" button
 	* Check clearing basis document when clearing partner term
-		И в таблице "PaymentList" я выбираю текущую строку
-		И я нажимаю кнопку очистить у поля "Partner term"
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "PaymentList" table
+		And I click Clear button of "Partner term" field
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
 			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
 	* Check the addition of a base document without selecting a base document
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		Когда Проверяю шаги на Исключение:
-			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Checking the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		When I Check the steps for Exception
+			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
+		When I Check the steps for Exception
+			|'Given form with "Documents for incoming payment" header is opened in the active window'|
+	* Check the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Nicoletta   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payer"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Nicoletta |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Posting by Standard Partner term Customer' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the addition of a base document without selecting a base document
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		Когда Проверяю шаги на Исключение:
-			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
+		When I Check the steps for Exception
+			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
+		When I Check the steps for Exception
+			|'Given form with "Documents for incoming payment" header is opened in the active window'|
 	* Check the currency form connection
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '100,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-			И в таблице "PaymentList" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+			And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
 			| 'Nicoletta' | 'Company Nicoletta' |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     таблица "CurrenciesPaymentList" содержит строки:
+		And I select current line in "PaymentList" table
+		And I input "200,00" text in "Amount" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And "CurrenciesPaymentList" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '17,12'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '34,25'  | '1'            |
 	* Check the recalculation at the rate in case of date change
-		И я перехожу к закладке "Other"
-		И в поле 'Date' я ввожу текст '01.11.2018  0:00:00'
-		И я перехожу к закладке "Payments"
-		И     таблица "CurrenciesPaymentList" содержит строки:
+		And I move to "Other" tab
+		And I input "01.11.2018  0:00:00" text in "Date" field
+		And I move to "Payments" tab
+		And "CurrenciesPaymentList" table contains lines
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '20*'    | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '100'    | '1'            |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '*'                 | '40*'     | '1'            |
-		И Пауза 5
+		And Delay 5
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Post'
-		Если в сообщениях пользователю есть строка "Basis document is required on line 1" Тогда
+		And I select current line in "List" table
+		And I click "Post" button
+		If user messages contain "Basis document is required on line 1" string Then
 
-Сценарий: _0154108 total amount calculation in Cash reciept
+Scenario: _0154108 total amount calculation in Cash reciept
 	* Open form Cash reciept
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
 	* Check the Total amount calculation when adding rows
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '50,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '180,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '430,00'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "50,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
 	* Check the Total amount re-calculation when deleting rows
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 		| 'Amount' |
 		| '50,00'  |
-		И в таблице 'PaymentList' я удаляю строку
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '380,00'
+		And I delete a line in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "380,00"
 	* Check the Total amount calculation when adding rows
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '80,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '460,00'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
 		
-Сценарий: _0154109 check filling in and re-filling Bank reciept (transaction type Payment from customer)
+Scenario: _0154109 check filling in and re-filling Bank reciept (transaction type Payment from customer)
 	* Open form Bank reciept
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
 	* Check the default transaction type 'Payment from customer'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment from customer'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
+		Then the form attribute named "TransactionType" became equal to "Payment from customer"
+		And I select "Payment from customer" exact value from "Transaction type" drop-down list
 	* Check filling in company
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check filling in currencies before select an account
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| USD  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Bank account selection and check of Currency field refilling
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| Description    |
 			| Bank account, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Currency" стал равен 'TRY'
+		And I select current line in "List" table
+		Then the form attribute named "Currency" became equal to "TRY"
 	* Check currency re-selection and clearing the "Account" field
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| USD  |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Account" стал равен ''
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "Account" became equal to ""
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| Description    |
 			| Bank account, TRY |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the choice of a partner in the tabular section and filling in the legal name if one
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payer'|
 			| 'DFC'       | 'DFC'  |
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
+		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Nicoletta'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term'                              | 'Payer'             |
 			| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
+		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payer"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And "List" table contains lines
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY'         |
 			| 'Basic Partner terms, without VAT' |
@@ -1879,226 +1880,225 @@
 			| 'Vendor Ferron, USD'            |
 			| 'Vendor Ferron, EUR'            |
 			| 'Ferron, USD'                   |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filter check on the basis documents depending on Partner term
-		# temporarily
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		# temporarily
-		Дано В активном окне открылась форма с заголовком "Documents for incoming payment"
-		И таблица  "List" не содержит строки:
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		Given form with "Documents for incoming payment" header is opened in the active window
+		And "List" table does not contain lines
 			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| 'Sales invoice 234*' | '200,00'          | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '4 350,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
-		И я нажимаю на кнопку 'Select'
+		And I click "Select" button
 	* Check clearing basis document when clearing partner term
-		И в таблице "PaymentList" я выбираю текущую строку
-		И я нажимаю кнопку очистить у поля "Partner term"
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "PaymentList" table
+		And I click Clear button of "Partner term" field
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
 			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
 	* Check the addition of a base document without selecting a base document
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		Когда Проверяю шаги на Исключение:
-			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Checking the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		When I Check the steps for Exception
+			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
+		When I Check the steps for Exception
+			|'Given form with "Documents for incoming payment" header is opened in the active window'|
+	* Check the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Nicoletta   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payer"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Nicoletta |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Posting by Standard Partner term Customer' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the addition of a base document without selecting a base document
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		Когда Проверяю шаги на Исключение:
-			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
+		When I Check the steps for Exception
+			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
+		When I Check the steps for Exception
+			|'Given form with "Documents for incoming payment" header is opened in the active window'|
 	* Check the currency form connection
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '100,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-			И в таблице "PaymentList" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+			And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
 			| 'Nicoletta' | 'Company Nicoletta' |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     таблица "CurrenciesPaymentList" содержит строки:
+		And I select current line in "PaymentList" table
+		And I input "200,00" text in "Amount" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And "CurrenciesPaymentList" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '17,12'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '34,25'  | '1'            |
 	* Check the recalculation at the rate in case of date change
-		И я перехожу к закладке "Other"
-		И в поле 'Date' я ввожу текст '01.11.2018  0:00:00'
-		И я перехожу к закладке "Payments"
-		И в таблице "PaymentList" я перехожу к строке:
+		And I move to "Other" tab
+		And I input "01.11.2018  0:00:00" text in "Date" field
+		And I move to "Payments" tab
+		And I go to line in "PaymentList" table
 		| 'Amount' | 'Partner'   | 'Payer'             |
 		| '200,00' | 'Nicoletta' | 'Company Nicoletta' |
-		И     таблица "CurrenciesPaymentList" содержит строки:
+		And "CurrenciesPaymentList" table contains lines
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '40,00'  | '1'            |
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 		| 'Amount' | 'Partner'   | 'Payer'             |
 		| '100,00' | 'Ferron BP' | 'Company Ferron BP' |
-		И     таблица "CurrenciesPaymentList" содержит строки:
+		And "CurrenciesPaymentList" table contains lines
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '20,00'  | '1'            |
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Post'
-		Если в сообщениях пользователю есть строка "Basis document is required on line 1" Тогда
+		And I select current line in "List" table
+		And I click "Post" button
+		If user messages contain "Basis document is required on line 1" string Then
 
-Сценарий: _0154110 total amount calculation in в Bank reciept
+Scenario: _0154110 total amount calculation in Bank reciept
 	* Open form Bank reciept
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
 	* Check the Total amount calculation when adding rows
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '50,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '180,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '430,00'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "50,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
 	* Check the Total amount re-calculation when deleting rows
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 		| 'Amount' |
 		| '50,00'  |
-		И в таблице 'PaymentList' я удаляю строку
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '380,00'
+		And I delete a line in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "380,00"
 	* Check the Total amount calculation when adding rows
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '80,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '460,00'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
 
 
 
-Сценарий: _0154111 check filling in and re-filling Cash payment (transaction type Payment to the vendor)
+Scenario: _0154111 check filling in and re-filling Cash payment (transaction type Payment to the vendor)
 	* Open form Cash payment
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
 	* Check the default transaction type 'Payment from customer'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
 	* Check filling in company
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check filling in currency before select cash account
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| USD  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check filling in cash account (multicurrency)
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
 			| Description    |
 			| Cash desk №1 |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Re-selection of cash registers with a fixed currency and verification of overfilling of the Currency field
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
 			| Description    |
 			| Cash desk №4 |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Currency" стал равен 'TRY'
+		And I select current line in "List" table
+		Then the form attribute named "Currency" became equal to "TRY"
 	* Check currency re-selection and clearing the "Cash / Bank accounts" field if the currency is fixed at the cash account
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| USD  |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "CashAccount" стал равен ''
+		And I select current line in "List" table
+		Then the form attribute named "CashAccount" became equal to ""
 	* Select a multi-currency cash account and checking that the Currency field will not be cleared
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
 			| Description  |
 			| Cash desk №1 |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Currency" стал равен 'USD'
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "Currency" became equal to "USD"
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the choice of a partner in the tabular section and filling in the legal name if one
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'|
 			| 'DFC'       | 'DFC'  |
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
+		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Veritas'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term'                               | 'Payee'             |
 			| 'Veritas'   | 'Posting by Standard Partner term (Veritas)' | 'Company Veritas' |
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
+		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payee"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And "List" table contains lines
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY'         |
 			| 'Basic Partner terms, without VAT' |
@@ -2106,220 +2106,219 @@
 			| 'Vendor Ferron, USD'            |
 			| 'Vendor Ferron, EUR'            |
 			| 'Ferron, USD'                   |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filter check on the basis documents depending on Partner term
-		# temporarily
-		Когда Проверяю шаги на Исключение:
-		|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		# temporarily
-		И таблица  "List" не содержит строки:
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And "List" table does not contain lines
 			| 'Document amount'| 'Company'      | 'Legal name'        | 'Partner'   |
 			| '7 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
-		И я нажимаю на кнопку 'Select'
+		And I click "Select" button
 	* Check clearing basis document when clearing partner term
-		И в таблице "PaymentList" я выбираю текущую строку
-		И я нажимаю кнопку очистить у поля "Partner term"
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "PaymentList" table
+		And I click Clear button of "Partner term" field
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payee'             | 'Basis document' |
 			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
 	* Check the addition of a base document without selecting a base document
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		Когда Проверяю шаги на Исключение:
-			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Checking the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		When I Check the steps for Exception
+			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
+		When I Check the steps for Exception
+			|'Given form with "Documents for incoming payment" header is opened in the active window'|
+	* Check the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Veritas   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payee"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'      |
 			| 'Company Veritas ' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Posting by Standard Partner term (Veritas)' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the addition of a base document without selecting a base document
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		Когда Проверяю шаги на Исключение:
-			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
+		When I Check the steps for Exception
+			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
+		When I Check the steps for Exception
+			|'Given form with "Documents for incoming payment" header is opened in the active window'|
 	* Check the currency form connection
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '100,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-			И в таблице "PaymentList" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+			And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
 			| 'Veritas'   | 'Company Veritas '  |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And I input "200,00" text in "Amount" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Ferron BP' |
-		И     таблица "PaymentListCurrencies" содержит строки:
+		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'             | '17,12'  | '1'            |
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Veritas' |
-		И     таблица "PaymentListCurrencies" содержит строки:
+		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '34,25'  | '1'            |
 	* Check the recalculation at the rate in case of date change
-		И я перехожу к закладке "Other"
-		И в поле 'Date' я ввожу текст '01.11.2018  0:00:00'
-		И я перехожу к закладке "Payments"
-		И в таблице "PaymentList" я перехожу к строке:
+		And I move to "Other" tab
+		And I input "01.11.2018  0:00:00" text in "Date" field
+		And I move to "Payments" tab
+		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Ferron BP' |
-		И     таблица "PaymentListCurrencies" содержит строки:
+		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '20,00'  | '1'            |
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Veritas' |
-		И     таблица "PaymentListCurrencies" содержит строки:	
+		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '40*'     | '1'            |
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Post'
-		Если в сообщениях пользователю есть строка "Basis document is required on line 1" Тогда
+		And I select current line in "List" table
+		And I click "Post" button
+		If user messages contain "Basis document is required on line 1" string Then
 
-Сценарий: _0154112 total amount calculation in в Cash payment
+Scenario: _0154112 total amount calculation in Cash payment
 	* Open form Cash payment
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
 	* Check the Total amount calculation when adding rows
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '50,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '180,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '430,00'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "50,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
 	* Check the Total amount re-calculation when deleting rows
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 		| 'Amount' |
 		| '50,00'  |
-		И в таблице 'PaymentList' я удаляю строку
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '380,00'
+		And I delete a line in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "380,00"
 	* Check the Total amount calculation when adding rows
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '80,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '460,00'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
 
 
-Сценарий: _0154113 check filling in and re-filling Bank payment (transaction type Payment to the vendor)
+Scenario: _0154113 check filling in and re-filling Bank payment (transaction type Payment to the vendor)
 	* Open form Bank payment
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
 	* Check the default transaction type 'Payment from customer'
-		И     элемент формы с именем "TransactionType" стал равен 'Payment to the vendor'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
 	* Check filling in company
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-	* Check filling inвалюты до выбора банковского счета
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+	* Check filling in currency before selecting a bank account
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| USD  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Bank account selection and check of Currency field refilling
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| Description    |
 			| Bank account, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Currency" стал равен 'TRY'
-	* Check currency re-selection and clearing the "Account" field в случае если валюта зафиксированна по кассе
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "Currency" became equal to "TRY"
+	* Check currency re-selection and clearing the "Account" field in case of a fixed currency
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| USD  |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "Account" стал равен ''
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "Account" became equal to ""
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| Description    |
 			| Bank account, TRY |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the choice of a partner in the tabular section and filling in the legal name if one
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'|
 			| 'DFC'       | 'DFC'  |
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
+		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Veritas'         |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term'                               | 'Payee'             |
 			| 'Veritas'   | 'Posting by Standard Partner term (Veritas)' | 'Company Veritas' |
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
+		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Ferron BP   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payee"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description       |
 			| Company Ferron BP |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And "List" table contains lines
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY'         |
 			| 'Basic Partner terms, without VAT' |
@@ -2327,455 +2326,454 @@
 			| 'Vendor Ferron, USD'            |
 			| 'Vendor Ferron, EUR'            |
 			| 'Ferron, USD'                   |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filter check on the basis documents depending on Partner term
-		# temporarily
-		Когда Проверяю шаги на Исключение:
-		|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		# temporarily
-		И таблица  "List" не содержит строки:
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And "List" table does not contain lines
 			| 'Document amount'| 'Company'      | 'Legal name'        | 'Partner'   |
 			| '7 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
-		И я нажимаю на кнопку 'Select'
+		And I click "Select" button
 	* Check clearing basis document when clearing partner term
-		И в таблице "PaymentList" я выбираю текущую строку
-		И я нажимаю кнопку очистить у поля "Partner term"
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "PaymentList" table
+		And I click Clear button of "Partner term" field
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payee'             | 'Basis document' |
 			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
 	* Check the addition of a base document without selecting a base document
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		Когда Проверяю шаги на Исключение:
-			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
-	* Checking the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayee"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		When I Check the steps for Exception
+			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
+		When I Check the steps for Exception
+			|'Given form with "Documents for incoming payment" header is opened in the active window'|
+	* Check the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Veritas   |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payee"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'      |
 			| 'Company Veritas ' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Posting by Standard Partner term (Veritas)' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the addition of a base document without selecting a base document
-		Когда Проверяю шаги на Исключение:
-			|'И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Basis document"'|
-		Когда Проверяю шаги на Исключение:
-			|'Дано В активном окне открылась форма с заголовком "Documents for incoming payment"'|
+		When I Check the steps for Exception
+			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
+		When I Check the steps for Exception
+			|'Given form with "Documents for incoming payment" header is opened in the active window'|
 	* Check the currency form connection
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '100,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-			И в таблице "PaymentList" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+			And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
 			| 'Veritas'   | 'Company Veritas '  |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And I input "200,00" text in "Amount" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Ferron BP' |
-		И     таблица "PaymentListCurrencies" содержит строки:
+		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'             | '17,12'  | '1'            |
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Veritas' |
-		И     таблица "PaymentListCurrencies" содержит строки:
+		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '34,25'  | '1'            |
 	* Check the recalculation at the rate in case of date change
-		И я перехожу к закладке "Other"
-		И в поле 'Date' я ввожу текст '01.11.2018  0:00:00'
-		И я перехожу к закладке "Payments"
-		И в таблице "PaymentList" я перехожу к строке:
+		And I move to "Other" tab
+		And I input "01.11.2018  0:00:00" text in "Date" field
+		And I move to "Payments" tab
+		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Ferron BP' |
-		И     таблица "PaymentListCurrencies" содержит строки:
+		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '20,00'  | '1'            |
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Veritas' |
-		И     таблица "PaymentListCurrencies" содержит строки:	
+		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '40*'     | '1'            |
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner term"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю на кнопку 'Post'
-		Если в сообщениях пользователю есть строка "Basis document is required on line 1" Тогда
+		And I select current line in "List" table
+		And I click "Post" button
+		If user messages contain "Basis document is required on line 1" string Then
 
-Сценарий: _0154114 total amount calculation in в Bank payment
+Scenario: _0154114 total amount calculation in Bank payment
 	* Open form Bank payment
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
 	* Check the Total amount calculation when adding rows
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '50,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '180,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '430,00'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "50,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
 	* Check the Total amount re-calculation when deleting rows
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 		| 'Amount' |
 		| '50,00'  |
-		И в таблице 'PaymentList' я удаляю строку
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '380,00'
+		And I delete a line in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "380,00"
 	* Check the Total amount calculation when adding rows
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '80,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '460,00'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
 
-Сценарий: _01541140 total amount calculation in в Incoming payment order
+Scenario: _01541140 total amount calculation in Incoming payment order
 	* Open form Bank payment
-		И я открываю навигационную ссылку 'e1cib/list/Document.IncomingPaymentOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+		And I click the button named "FormCreate"
 	* Check the Total amount calculation when adding rows
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '50,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '180,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '430,00'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "50,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
 	* Check the Total amount re-calculation when deleting rows
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 		| 'Amount' |
 		| '50,00'  |
-		И в таблице 'PaymentList' я удаляю строку
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '380,00'
+		And I delete a line in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "380,00"
 	* Check the Total amount calculation when adding rows
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '80,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '460,00'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
 
-Сценарий: _01541141 total amount calculation in в Outgoing payment order
+Scenario: _01541141 total amount calculation in Outgoing payment order
 	* Open form Bank payment
-		И я открываю навигационную ссылку 'e1cib/list/Document.OutgoingPaymentOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		And I click the button named "FormCreate"
 	* Check the Total amount calculation when adding rows
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '50,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '180,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '430,00'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "50,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
 	* Check the Total amount re-calculation when deleting rows
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 		| 'Amount' |
 		| '50,00'  |
-		И в таблице 'PaymentList' я удаляю строку
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '380,00'
+		And I delete a line in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "380,00"
 	* Check the Total amount calculation when adding rows
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '80,00'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     у элемента формы с именем "DocumentAmount" текст редактирования стал равен '460,00'
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
 
-Сценарий: _0154115 check filling in and re-filling Cash transfer order
+Scenario: _0154115 check filling in and re-filling Cash transfer order
 	* Open form Cash transfer order
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check filling in currency when selecting a bank/cash account with fixed currency
-		И я нажимаю кнопку выбора у поля "Sender"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Sender" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Receiver"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Receiver" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'USD'      | 'Bank account, USD' |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "ReceiveCurrency" стал равен 'USD'
-		И     элемент формы с именем "SendCurrency" стал равен 'TRY'
+		And I select current line in "List" table
+		Then the form attribute named "ReceiveCurrency" became equal to "USD"
+		Then the form attribute named "SendCurrency" became equal to "TRY"
 	* Check filling in currency when re-select "Sender" and "Receiver"
-		И я нажимаю кнопку выбора у поля "Sender"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Sender" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'EUR'      | 'Bank account, EUR' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Receiver"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Receiver" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "ReceiveCurrency" стал равен 'TRY'
-		И     элемент формы с именем "SendCurrency" стал равен 'EUR'
+		And I select current line in "List" table
+		Then the form attribute named "ReceiveCurrency" became equal to "TRY"
+		Then the form attribute named "SendCurrency" became equal to "EUR"
 	* Check filling in ammount in Receive amount from Send amount in the case of the same currencies
-		И я нажимаю кнопку выбора у поля "Sender"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Sender" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Cash desk №2' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Send currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Send currency" field
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И в поле 'Send amount' я ввожу текст '100,00'
-		И я перехожу к следующему реквизиту
-		И     у элемента формы с именем "ReceiveAmount" текст редактирования стал равен '100,00'
-		И     у элемента формы с именем "SendAmount" текст редактирования стал равен '100,00'
+		And I select current line in "List" table
+		And I input "100,00" text in "Send amount" field
+		And I move to the next attribute
+		And the editing text of form attribute named "ReceiveAmount" became equal to "100,00"
+		And the editing text of form attribute named "SendAmount" became equal to "100,00"
 	* Check filling in Send date and Receive date
-		И в поле 'Date' я ввожу текст '01.01.2020  0:00:00'
-		И я перехожу к следующему реквизиту
-		И я запоминаю значение поля "Send date" как "Senddate"
-		Тогда переменная "Senddate" имеет значение "01.01.2020"
-		И я запоминаю значение поля "Receive date" как "Receivedate"
-		Тогда переменная "Receivedate" имеет значение "01.01.2020"
-		И в поле 'Date' я ввожу текст '01.03.2020  0:00:00'
-		И я перехожу к следующему реквизиту
-		И я запоминаю значение поля "Send date" как "Senddate"
-		Тогда переменная "Senddate" имеет значение "01.03.2020"
-		И я запоминаю значение поля "Receive date" как "Receivedate"
-		Тогда переменная "Receivedate" имеет значение "01.03.2020"
-	* Checking the drawing of Cash advance holder field in case of currency exchange through cash accounts
-		И я нажимаю кнопку выбора у поля "Sender"
-		И в таблице "List" я перехожу к строке:
+		And I input "01.01.2020  0:00:00" text in "Date" field
+		And I move to the next attribute
+		And I save the value of "Send date" field as "Senddate"
+		Then "Senddate" variable is equal to "01.01.2020"
+		And I save the value of "Receive date" field as "Receivedate"
+		Then "Receivedate" variable is equal to "01.01.2020"
+		And I input "01.03.2020  0:00:00" text in "Date" field
+		And I move to the next attribute
+		And I save the value of "Send date" field as "Senddate"
+		Then "Senddate" variable is equal to "01.03.2020"
+		And I save the value of "Receive date" field as "Receivedate"
+		Then "Receivedate" variable is equal to "01.03.2020"
+	* Check the drawing of Cash advance holder field in case of currency exchange through cash accounts
+		And I click Select button of "Sender" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Cash desk №2' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Send currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Send currency" field
+		And I go to line in "List" table
 			| 'Code' | 'Description'     |
 			| 'USD'  | 'American dollar' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Receiver"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Receiver" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Cash desk №2' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Receive currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Receive currency" field
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "CashAdvanceHolder" стал равен ''
-		И я нажимаю кнопку выбора у поля "Cash advance holder"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		Then the form attribute named "CashAdvanceHolder" became equal to ""
+		And I click Select button of "Cash advance holder" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Arina Brown' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check form by currency
-			И в поле 'Receive amount' я ввожу текст '584,00'
-			И я перехожу к следующему реквизиту
-			И     таблица "ObjectCurrencies" содержит строки:
+			And I input "584,00" text in "Receive amount" field
+			And I move to the next attribute
+			And "ObjectCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'            | '564,97' | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'USD'           | 'USD'      | '1'                 | '100'    | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '584'    | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '100,00' | '1'            |
 
-Сценарий: _01541151 check that the amount sent and received in Cash transfer order is the same
+Scenario: _01541151 check that the amount sent and received in Cash transfer order is the same
 	* Check cash transfer between two cash account
 		* Open form Cash transfer order
-			И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			And I click the button named "FormCreate"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling data
-			И я нажимаю кнопку выбора у поля "Sender"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Sender" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Cash desk №2' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Send currency"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Send currency" field
+			And I go to line in "List" table
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Send amount' я ввожу текст '100,00'
-			И я нажимаю кнопку выбора у поля "Receiver"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "100,00" text in "Send amount" field
+			And I click Select button of "Receiver" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Cash desk №1' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Receive currency"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Receive currency" field
+			And I go to line in "List" table
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Receive amount' я ввожу текст '120,00'
+			And I select current line in "List" table
+			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
-			И я нажимаю на кнопку 'Post'
-			Затем я жду, что в сообщениях пользователю будет подстрока "Currency transfer is possible only when amounts is equal." в течение 10 секунд
-			И я закрыл все окна клиентского приложения
+			And I click "Post" button
+			Then I wait that in user messages the "Currency transfer is possible only when amounts is equal." substring will appear in 10 seconds
+			And I close all client application windows
 	* Check cash transfer from cash account to bank account
 		* Open form Cash transfer order
-			И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			And I click the button named "FormCreate"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling data
-			И я нажимаю кнопку выбора у поля "Sender"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Sender" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Cash desk №2' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Send currency"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Send currency" field
+			And I go to line in "List" table
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Send amount' я ввожу текст '100,00'
-			И я нажимаю кнопку выбора у поля "Receiver"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "100,00" text in "Send amount" field
+			And I click Select button of "Receiver" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Bank account, TRY' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Receive amount' я ввожу текст '120,00'
+			And I select current line in "List" table
+			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
-			И я нажимаю на кнопку 'Post'
-			Затем я жду, что в сообщениях пользователю будет подстрока "Currency transfer is possible only when amounts is equal." в течение 10 секунд
-			И я закрыл все окна клиентского приложения
+			And I click "Post" button
+			Then I wait that in user messages the "Currency transfer is possible only when amounts is equal." substring will appear in 10 seconds
+			And I close all client application windows
 	* Check cash transfer from bank account to cash account
 		* Open form Cash transfer order
-			И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			And I click the button named "FormCreate"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling data
-			И я нажимаю кнопку выбора у поля "Receiver"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Receiver" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Cash desk №2' |
-			И в таблице "List" я выбираю текущую строку
-			И я нажимаю кнопку выбора у поля "Receive currency"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click Select button of "Receive currency" field
+			And I go to line in "List" table
 				| 'Code' | 'Description'  |
 				| 'TRY'  | 'Turkish lira' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Send amount' я ввожу текст '100,00'
-			И я нажимаю кнопку выбора у поля "Sender"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "100,00" text in "Send amount" field
+			And I click Select button of "Sender" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Bank account, TRY' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Receive amount' я ввожу текст '120,00'
+			And I select current line in "List" table
+			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
-			И я нажимаю на кнопку 'Post'
-			Затем я жду, что в сообщениях пользователю будет подстрока "Currency transfer is possible only when amounts is equal." в течение 10 секунд
-			И я закрыл все окна клиентского приложения
+			And I click "Post" button
+			Then I wait that in user messages the "Currency transfer is possible only when amounts is equal." substring will appear in 10 seconds
+			And I close all client application windows
 	* Check cash transfer between two bank account
 		* Open form Cash transfer order
-			И я открываю навигационную ссылку 'e1cib/list/Document.CashTransferOrder'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			And I click the button named "FormCreate"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Main Company' |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Filling data
-			И я нажимаю кнопку выбора у поля "Receiver"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Receiver" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Bank account 2, EUR' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Send amount' я ввожу текст '100,00'
-			И я нажимаю кнопку выбора у поля "Sender"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "100,00" text in "Send amount" field
+			And I click Select button of "Sender" field
+			And I go to line in "List" table
 				| 'Description'  |
 				| 'Bank account, EUR' |
-			И в таблице "List" я выбираю текущую строку
-			И в поле 'Receive amount' я ввожу текст '120,00'
+			And I select current line in "List" table
+			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
-			И я нажимаю на кнопку 'Post'
-			Затем я жду, что в сообщениях пользователю будет подстрока "Currency transfer is possible only when amounts is equal." в течение 10 секунд
-			И я закрыл все окна клиентского приложения
+			And I click "Post" button
+			Then I wait that in user messages the "Currency transfer is possible only when amounts is equal." substring will appear in 10 seconds
+			And I close all client application windows
 
 
 
-Сценарий: _0154116 check filling in and re-filling Cash expence
+Scenario: _0154116 check filling in and re-filling Cash expence
 	* Open form Cash expence
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashExpense'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I click the button named "FormCreate"
 	* Filter check by Account depending on the company
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		Тогда таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And "List" table does not contain lines
 			| 'Description'       | 'Currency' |
 			| 'Cash desk №1'      | ''         |
 			| 'Cash desk №2'      | ''         |
-		И я закрываю текущее окно
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I close current window
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And "List" table contains lines
 			| 'Description'       | 'Currency' |
 			| 'Cash desk №1'      | ''         |
 			| 'Cash desk №2'      | ''         |
@@ -2784,237 +2782,237 @@
 			| 'Bank account, USD' | 'USD'      |
 			| 'Bank account, EUR' | 'EUR'      |
 			| 'Cash desk №4'      | 'TRY'      |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the Net amount and VAT calculation when filling in the Total amount
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListExpenseType"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListExpenseType"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "PaymentListExpenseType" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListExpenseType" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'              |
 			| 'Telephone communications' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListTotalAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListTotalAmount' я ввожу текст '220,00'
-		Тогда таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "220,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,44'     | 'Telephone communications' | 'TRY'      | '18%' | '33,56'      | '220,00'       |
 	* Check the recalculation of Total amount when Tax changes
-		И я перехожу к закладке "Tax list"
-		И в таблице "TaxTree" я активизирую поле "Manual amount"
-		И в таблице "TaxTree" я перехожу к строке:
+		And I move to "Tax list" tab
+		And I activate "Manual amount" field in "TaxTree" table
+		And I go to line in "TaxTree" table
 			| 'Business unit'     |
 			| 'Accountants office' |
-		И в таблице "TaxTree" я выбираю текущую строку
-		И в таблице "TaxTree" в поле 'Manual amount' я ввожу текст '33,55'
-		И в таблице "TaxTree" я завершаю редактирование строки
-		И я перехожу к закладке "Payment list"
-		Тогда таблица "PaymentList" содержит строки:
+		And I select current line in "TaxTree" table
+		And I input "33,55" text in "Manual amount" field of "TaxTree" table
+		And I finish line editing in "TaxTree" table
+		And I move to "Payment list" tab
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Expense type'               | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,44'     | 'Telephone communications'   | 'TRY'      | '18%' | '33,55'      | '219,99'       |
 	* Check the Net amount recalculation when Total amount changes and with changes in taxes
-		И в таблице "PaymentList" в поле с именем 'PaymentListTotalAmount' я ввожу текст '220,00'
-		Тогда таблица "PaymentList" содержит строки:
+		And I input "220,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Business unit'      | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,45'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,00'       |
 	* Check the Total amount recalculation when Net amount changes and with changes in taxes
-		И в таблице "PaymentList" в поле с именем 'PaymentListNetAmount' я ввожу текст '187,00'
-		Тогда таблица "PaymentList" содержит строки:
+		And I input "187,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Expense type'                     | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '187,00'     | 'Telephone communications'         | 'TRY'      | '18%' | '33,55'      | '220,55'       |
 	* Check the currency form connection
-		И     таблица "PaymentListCurrencies" содержит строки:
+		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '37,77'  | '1'            |
 	* Add one more line
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Front office'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListExpenseType"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListExpenseType"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "PaymentListExpenseType" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListExpenseType" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Software'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле "VAT"
-		И в таблице "PaymentList" из выпадающего списка "VAT" я выбираю точное значение '18%'
-		И в таблице "PaymentList" в поле с именем 'PaymentListNetAmount' я ввожу текст '200,00'
-		И в таблице "TaxTree" я разворачиваю строку:
+		And I select current line in "List" table
+		And I activate "VAT" field in "PaymentList" table
+		And I select "18%" exact value from "VAT" drop-down list in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And I expand a line in "TaxTree" table
 			| 'Amount' | 'Currency' | 'Manual amount' | 'Tax' |
 			| '69,66'  | 'TRY'      | '69,55'         | 'VAT' |
-		И в таблице "PaymentList" я завершаю редактирование строки
+		And I finish line editing in "PaymentList" table
 	* Manual tax correction by line
-		И я перехожу к закладке "Tax list"
-		И в таблице "TaxTree" я перехожу к строке:
+		And I move to "Tax list" tab
+		And I go to line in "TaxTree" table
 			| 'Amount' | 'Business unit' | 'Currency' |
 			| '36,00'  | 'Front office'  | 'TRY'      |
-		И в таблице "TaxTree" я выбираю текущую строку
-		И в таблице "TaxTree" в поле 'Manual amount' я ввожу текст '38,00'
-		И в таблице "TaxTree" я завершаю редактирование строки
-		И я перехожу к закладке "Payment list"
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "TaxTree" table
+		And I input "38,00" text in "Manual amount" field of "TaxTree" table
+		And I finish line editing in "TaxTree" table
+		And I move to "Payment list" tab
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Business unit'      | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '187,00'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,55'       |
 			| '200,00'     | 'Front office'       | 'Software'                 | 'TRY'      | '18%' | '38,00'      | '238,00'       |
 	* Delete a line and check the total amount conversion
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListCurrency"
-		И в таблице "PaymentList" я перехожу к строке:
+		And I activate field named "PaymentListCurrency" in "PaymentList" table
+		And I go to line in "PaymentList" table
 			| 'Business unit'      | 'Currency' | 'Expense type'             | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
 			| 'Accountants office' | 'TRY'      | 'Telephone communications' | '187,00'     | '33,55'      | '220,55'       | '18%' |
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListContextMenuDelete'
-		И     у элемента формы с именем "PaymentListTotalNetAmount" текст редактирования стал равен '200,00'
-		И     у элемента формы с именем "PaymentListTotalTaxAmount" текст редактирования стал равен '38,00'
-		И     у элемента формы с именем "PaymentListTotalTotalAmount" текст редактирования стал равен '238,00'
+		And in the table "PaymentList" I click the button named "PaymentListContextMenuDelete"
+		And the editing text of form attribute named "PaymentListTotalNetAmount" became equal to "200,00"
+		And the editing text of form attribute named "PaymentListTotalTaxAmount" became equal to "38,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "238,00"
 	* Change Account
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'USD'      | 'Bank account, USD' |
-		И в таблице "List" я выбираю текущую строку
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Business unit' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
 	* Check that the Account does not change when you click No in the message window
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И     таблица "PaymentList" не содержит строки:
+		And I select current line in "List" table
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And "PaymentList" table does not contain lines
 			| 'Net amount' | 'Business unit' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
 	* Change the company (without taxes) and check to delete the VAT column
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я жду, что таблица "PaymentList" не станет содержать строки в течение 20 секунд:
+		And I select current line in "List" table
+		And I wait that "PaymentList" table will not contain lines for 20 seconds
 		| 'VAT' | 'Tax amount' |
 		| '18%' | '38,00'      |
 	* Change the company to the one with taxes and check the form by currency
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		* Изменение курса в форме по валютам
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+		And I select current line in "List" table
+		* Exchange rate change in the form by currency
+			And I go to line in "PaymentListCurrencies" table
 			| 'Amount' | 'Currency' | 'Currency from' | 'Movement type'      | 'Multiplicity' | 'Rate presentation' | 'Type'      |
 			| '40,41'  | 'USD'      | 'TRY'           | 'Reporting currency' | '1'            | '5,8400'            | 'Reporting' |
-			И в таблице "PaymentListCurrencies" я активизирую поле с именем "PaymentListCurrenciesAmount"
-			И в таблице "PaymentListCurrencies" я выбираю текущую строку
-			И в таблице "PaymentListCurrencies" в поле с именем 'PaymentListCurrenciesAmount' я ввожу текст '50,00'
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I activate field named "PaymentListCurrenciesAmount" in "PaymentListCurrencies" table
+			And I select current line in "PaymentListCurrencies" table
+			And I input "50,00" text in the field named "PaymentListCurrenciesAmount" of "PaymentListCurrencies" table
+			And I go to line in "PaymentListCurrencies" table
 			| 'Amount' | 'Currency' | 'Currency from' | 'Movement type'      | 'Multiplicity' | 'Rate presentation' | 'Type'      |
 			| '50,00'  | 'USD'      | 'TRY'           | 'Reporting currency' | '1'            | '4,7200'            | 'Reporting' |
 	* Add one more line with different cureency
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Cash desk №2' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListExpenseType"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of the attribute named "PaymentListExpenseType" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Software'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListCurrency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Code' | 'Description'     |
 			| 'USD'  | 'American dollar' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле "VAT"
-		И в таблице "PaymentList" из выпадающего списка "VAT" я выбираю точное значение '0%'
-		И в таблице "PaymentList" в поле с именем 'PaymentListNetAmount' я ввожу текст '100,00'
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And I activate "VAT" field in "PaymentList" table
+		And I select "0%" exact value from "VAT" drop-down list in "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'       | 'Software'     | 'TRY'      | '18%' | '36,00'      | '236,00'       |
 			| '100,00'     | 'Accountants office' | 'Software'     | 'USD'      | '0%'  | ''           | '100,00'       |
-		И   в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '100,00'     | 'Accountants office' | 'Software'     | 'USD'      | '0%'  | ''           | '100,00'       |
 	* Check the addition of a line to the form by currency
-		И  в таблице "PaymentListCurrencies" я перехожу к строке:
+		And I go to line in "PaymentListCurrencies" table
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '564,97' | '1'            |
 	* Change of currency on the first line and check of form on currencies
-		И   в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'       | 'Software'     | 'TRY'      | '18%' | '36,00'      | '236,00'       |
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListCurrency"
-		И в таблице "List" я перехожу к строке:
+		And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Code' | 'Description'     |
 			| 'USD'  | 'American dollar' |
-		И в таблице "List" я выбираю текущую строку
-		И   в таблице "PaymentList" я перехожу к строке:
+		And I select current line in "List" table
+		And I go to line in "PaymentList" table
 			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'       | 'Software'     | 'USD'      | '18%' | '36,00'      | '236,00'       |
-		И   в таблице "PaymentListCurrencies" я перехожу к строке:
+		And I go to line in "PaymentListCurrencies" table
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'            | '1 333,33' | '1'            |
 	* Manual correction of tax rate and check of tax calculations
-		И в таблице "PaymentList" я перехожу к строке:
+		And I go to line in "PaymentList" table
 			| 'Business unit' | 'Currency' | 'Expense type' | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
 			| 'Front office'  | 'USD'      | 'Software'     | '200,00'     | '36,00'      | '236,00'       | '18%' |
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" из выпадающего списка "VAT" я выбираю точное значение '8%'
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "PaymentList" table
+		And I select "8%" exact value from "VAT" drop-down list in "PaymentList" table
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Business unit' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '8%'  | '16,00'      | '236,00'       |
-		И     таблица "TaxTree" содержит строки:
+		And "TaxTree" table contains lines
 			| 'Tax' | 'Tax rate' | 'Currency' | 'Amount' | 'Manual amount' |
 			| 'VAT' | ''         | 'USD'      | '16,00'  | '16,00'         |
 			| 'VAT' | '8%'       | 'USD'      | '16,00'  | '16,00'         |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
 
 
 
-Сценарий: _0154117 check filling in and re-filling Cash revenue
+Scenario: _0154117 check filling in and re-filling Cash revenue
 	* Open form Cash revenue
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashRevenue'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I click the button named "FormCreate"
 	* Filter check by Account depending on the company
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		Тогда таблица "List" не содержит строки:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And "List" table does not contain lines
 			| 'Description'       | 'Currency' |
 			| 'Cash desk №1'      | ''         |
 			| 'Cash desk №2'      | ''         |
-		И я закрываю текущее окно
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I close current window
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		Тогда таблица "List" содержит строки:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And "List" table contains lines
 			| 'Description'       | 'Currency' |
 			| 'Cash desk №1'      | ''         |
 			| 'Cash desk №2'      | ''         |
@@ -3023,1409 +3021,1409 @@
 			| 'Bank account, USD' | 'USD'      |
 			| 'Bank account, EUR' | 'EUR'      |
 			| 'Cash desk №4'      | 'TRY'      |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the Net amount and VAT calculation when filling in the Total amount
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListRevenueType"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListRevenueType"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "PaymentListRevenueType" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListRevenueType" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description'              |
 			| 'Telephone communications' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListTotalAmount"
-		И в таблице "PaymentList" в поле с именем 'PaymentListTotalAmount' я ввожу текст '220,00'
-		Тогда таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "220,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,44'     | 'Telephone communications' | 'TRY'      | '18%' | '33,56'      | '220,00'       |
 	* Check the recalculation of Total amount when Tax changes
-		И я перехожу к закладке "Tax list"
-		И в таблице "TaxTree" я активизирую поле "Manual amount"
-		И в таблице "TaxTree" я перехожу к строке:
+		And I move to "Tax list" tab
+		And I activate "Manual amount" field in "TaxTree" table
+		And I go to line in "TaxTree" table
 		| 'Business unit'     |
 		| 'Accountants office' |
-		И в таблице "TaxTree" я выбираю текущую строку
-		И в таблице "TaxTree" в поле 'Manual amount' я ввожу текст '33,55'
-		И в таблице "TaxTree" я завершаю редактирование строки
-		И я перехожу к закладке "Payment list"
-		Тогда таблица "PaymentList" содержит строки:
+		And I select current line in "TaxTree" table
+		And I input "33,55" text in "Manual amount" field of "TaxTree" table
+		And I finish line editing in "TaxTree" table
+		And I move to "Payment list" tab
+		And "PaymentList" table contains lines
 		| 'Net amount' | 'Revenue type'               | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 		| '186,44'     | 'Telephone communications'   | 'TRY'      | '18%' | '33,55'      | '219,99'       |
 	* Check the Net amount recalculation when Total amount changes and with changes in taxes
-		И в таблице "PaymentList" в поле с именем 'PaymentListTotalAmount' я ввожу текст '220,00'
-		Тогда таблица "PaymentList" содержит строки:
+		And I input "220,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And "PaymentList" table contains lines
 		| 'Net amount' | 'Business unit'      | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 		| '186,45'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,00'       |
 	* Check the Total amount recalculation when Net amount changes and with changes in taxes
-		И в таблице "PaymentList" в поле с именем 'PaymentListNetAmount' я ввожу текст '187,00'
-		Тогда таблица "PaymentList" содержит строки:
+		And I input "187,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And "PaymentList" table contains lines
 		| 'Net amount' | 'Revenue type'                     | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 		| '187,00'     | 'Telephone communications'         | 'TRY'      | '18%' | '33,55'      | '220,55'       |
 	* Check the currency form connection
-		И     таблица "PaymentListCurrencies" содержит строки:
+		And "PaymentListCurrencies" table contains lines
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '37,77'  | '1'            |
 	* Add one more line
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListBusinessUnit"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Front office'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListRevenueType"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита с именем "PaymentListRevenueType"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "PaymentListRevenueType" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListRevenueType" in "PaymentList" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Software'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле "VAT"
-		И в таблице "PaymentList" из выпадающего списка "VAT" я выбираю точное значение '18%'
-		И в таблице "PaymentList" в поле с именем 'PaymentListNetAmount' я ввожу текст '200,00'
-		И в таблице "TaxTree" я разворачиваю строку:
+		And I select current line in "List" table
+		And I activate "VAT" field in "PaymentList" table
+		And I select "18%" exact value from "VAT" drop-down list in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And I expand a line in "TaxTree" table
 			| 'Amount' | 'Currency' | 'Manual amount' | 'Tax' |
 			| '69,66'  | 'TRY'      | '69,55'         | 'VAT' |
-		И в таблице "PaymentList" я завершаю редактирование строки
+		And I finish line editing in "PaymentList" table
 	* Manual tax correction by line
-		И я перехожу к закладке "Tax list"
-		И в таблице "TaxTree" я перехожу к строке:
+		And I move to "Tax list" tab
+		And I go to line in "TaxTree" table
 			| 'Amount' | 'Business unit' | 'Currency' |
 			| '36,00'  | 'Front office'  | 'TRY'      |
-		И в таблице "TaxTree" я выбираю текущую строку
-		И в таблице "TaxTree" в поле 'Manual amount' я ввожу текст '38,00'
-		И в таблице "TaxTree" я завершаю редактирование строки
-		И я перехожу к закладке "Payment list"
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "TaxTree" table
+		And I input "38,00" text in "Manual amount" field of "TaxTree" table
+		And I finish line editing in "TaxTree" table
+		And I move to "Payment list" tab
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Business unit'      | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '187,00'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,55'       |
 			| '200,00'     | 'Front office'       | 'Software'                 | 'TRY'      | '18%' | '38,00'      | '238,00'       |
 	* Delete a line and check the total amount conversion
-		И в таблице "PaymentList" я активизирую поле с именем "PaymentListCurrency"
-		И в таблице "PaymentList" я перехожу к строке:
+		And I activate field named "PaymentListCurrency" in "PaymentList" table
+		And I go to line in "PaymentList" table
 			| 'Business unit'      | 'Currency' | 'Revenue type'             | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
 			| 'Accountants office' | 'TRY'      | 'Telephone communications' | '187,00'     | '33,55'      | '220,55'       | '18%' |
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListContextMenuDelete'
-		И     у элемента формы с именем "PaymentListTotalNetAmount" текст редактирования стал равен '200,00'
-		И     у элемента формы с именем "PaymentListTotalTaxAmount" текст редактирования стал равен '38,00'
-		И     у элемента формы с именем "PaymentListTotalTotalAmount" текст редактирования стал равен '238,00'
+		And in the table "PaymentList" I click the button named "PaymentListContextMenuDelete"
+		And the editing text of form attribute named "PaymentListTotalNetAmount" became equal to "200,00"
+		And the editing text of form attribute named "PaymentListTotalTaxAmount" became equal to "38,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "238,00"
 	* Change Account
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'USD'      | 'Bank account, USD' |
-		И в таблице "List" я выбираю текущую строку
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Business unit' | 'Revenue type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
 	* Check that the Account does not change when you click in the No message window
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И     таблица "PaymentList" не содержит строки:
+		And I select current line in "List" table
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And "PaymentList" table does not contain lines
 			| 'Net amount' | 'Business unit' | 'Revenue type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
 	* Change the company (without taxes) and check to delete the VAT column
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я жду, что таблица "PaymentList" не станет содержать строки в течение 20 секунд:
+		And I select current line in "List" table
+		And I wait that "PaymentList" table will not contain lines for 20 seconds
 		| 'VAT' | 'Tax amount' |
 		| '18%' | '38,00'      |
 	* Check the manually tax rate correction
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "PaymentList" я активизирую поле "VAT"
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" из выпадающего списка "VAT" я выбираю точное значение '8%'
-		И в таблице "PaymentList" я завершаю редактирование строки
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And I activate "VAT" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "8%" exact value from "VAT" drop-down list in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table contains lines
 			| 'Net amount' | 'Revenue type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
 			| '200,00'     | 'Software'     | '236,00'       | 'TRY'      | '8%'  | '16,00'      |
-		И     таблица "TaxTree" содержит строки:
+		And "TaxTree" table contains lines
 			| 'Tax' | 'Tax rate' | 'Currency' | 'Amount' | 'Manual amount' |
 			| 'VAT' | ''         | 'TRY'      | '16,00'  | '16,00'         |
 			| 'VAT' | '8%'       | 'TRY'      | '16,00'  | '16,00'         |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154118 check the details cleaning on the form Cash reciept 
+Scenario: _0154118 check the details cleaning on the form Cash reciept 
 	* Open form CashReceipt
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document CashReceipt
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
 			| Description    |
 			| Cash desk №2 |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fillin in Partner, Payer and Partner term
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле "Partner"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Partner" field in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Nicoletta   |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 		| 'Partner'   | 'Partner term'                              | 'Payer'             |
 		| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
 	* Check clearing fields 'Partner term' and 'Payer' when re-selecting the type of operation to Currency exchange
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" содержит строки:
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| '#' | 'Partner'   | 'Amount' | 'Amount exchange' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''       | ''                | ''                          |
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" содержит строки:
+		And I select "Payment from customer" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''          | ''       | ''      | ''               | ''                          |
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" содержит строки:
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I select "Payment from customer" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: _0154119 check the details cleaning on the form Cash payment when re-selecting the type of operation
+Scenario: _0154119 check the details cleaning on the form Cash payment when re-selecting the type of operation
 	* Open form CashPayment
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document CashPayment
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
 			| Description    |
 			| Cash desk №2 |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fillin in Partner, Payer and Partner term
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле "Partner"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Partner" field in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Nicoletta   |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 		| 'Partner'   | 'Partner term'                              | 'Payee'             |
 		| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
 	* Check clearing fields 'Partner term' and 'Payee' when re-selecting the type of operation to Currency exchange
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" содержит строки:
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| '#' | 'Partner'   | 'Amount' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''       | ''                          |
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" содержит строки:
+		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | ''          | ''       | ''      | ''               | ''                          |
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" содержит строки:
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154120 check the details cleaning on the form Bank reciept when re-selecting the type of operation
+Scenario: _0154120 check the details cleaning on the form Bank reciept when re-selecting the type of operation
 	* Open form BankReceipt
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document CashReceipt
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| Description    |
 			| Bank account, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fillin in Partner, Payer and Partner term
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле "Partner"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Partner" field in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Nicoletta   |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 		| 'Partner'   | 'Partner term'                              | 'Payer'             |
 		| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
 	* Check clearing fields 'Partner term' and 'Payer' when re-selecting the type of operation to Currency exchange
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" содержит строки:
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| '#' | 'Amount' | 'Amount exchange' | 'Planning transaction basis' |
 		| '1' | ''       | ''                | ''                          |
-		* Check filling in Transit account из Accountant
-			И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" содержит строки:
+		* Check filling in Transit account form Accountant
+			Then the form attribute named "TransitAccount" became equal to "Transit Main"
+		And I select "Payment from customer" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''          | ''          | ''       | ''      | ''               | ''                          |
-		И     элемент формы с именем "TransitAccount" стал равен ''
+		Then the form attribute named "TransitAccount" became equal to ""
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" содержит строки:
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I select "Payment from customer" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: _0154121 check the details cleaning on the form Bank payment when re-selecting the type of operation
+Scenario: _0154121 check the details cleaning on the form Bank payment when re-selecting the type of operation
 	* Open form BankPayment
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document BankPayment
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| Description  |
 			| Main Company |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| Description    |
 			| Bank account, TRY |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| Code |
 			| TRY  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Fillin in Partner, Payer and Partner term
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я активизирую поле "Partner"
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-		И в таблице "List" я перехожу к строке:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Partner" field in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
 			| Description |
 			| Nicoletta   |
-		И в таблице "List" я выбираю текущую строку
-		И     таблица "PaymentList" содержит строки:
+		And I select current line in "List" table
+		And "PaymentList" table contains lines
 		| 'Partner'   | 'Partner term'                              | 'Payee'             |
 		| 'Nicoletta' | 'Posting by Standard Partner term Customer' | 'Company Nicoletta' |
 	* Check clearing fields 'Partner term' and 'Payee' when re-selecting the type of operation to Currency exchange
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" содержит строки:
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| '#' | 'Amount' | 'Planning transaction basis' |
 		| '1' | ''       | ''                          |
-		* Check filling in Transit account из Accountant
-			И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" содержит строки:
+		* Check filling in Transit account from Accountant
+			Then the form attribute named "TransitAccount" became equal to "Transit Main"
+		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''          | ''          | ''       | ''      | ''               | ''                          |
-		И     элемент формы с именем "TransitAccount" стал равен ''
+		Then the form attribute named "TransitAccount" became equal to ""
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment to the vendor'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		И     таблица "PaymentList" содержит строки:
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
-		И Я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: _0154122 check filling in and re-filling Reconcilation statement
+Scenario: _0154122 check filling in and re-filling Reconcilation statement
 	* Open document form
-		И я открываю навигационную ссылку "e1cib/list/Document.ReconciliationStatement"
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
+		And I click the button named "FormCreate"
 	* Filling in basic details
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Begin period"
-		И в поле 'Begin period' я ввожу текст '01.01.2020'
-		И в поле 'End period' я ввожу текст   '01.01.2025'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Begin period" field
+		And I input "01.01.2020" text in "Begin period" field
+		And I input "01.01.2025" text in "End period" field
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Company Kalipso'     |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я нажимаю на кнопку 'Fill'
+		And I select current line in "List" table
+		And in the table "Transactions" I click "Fill" button
 	* Check that the transaction table is filled out
-		И Пока в таблице "Transactions" количество строк ">" 0 Тогда
-		И я нажимаю на кнопку 'Post'
-		И     таблица "Transactions" не содержит строки:
+		And While the number of "Transactions" table lines ">" 0 Then
+		And I click "Post" button
+		And "Transactions" table does not contain lines
 			| 'Document'            | 'Credit'     | 'Debit'     |
 			| 'Purchase invoice 1*' | '137 000,00' | ''          |
 			| 'Sales invoice 1*'    | ''           | '4 350,00'  |
 			| 'Sales invoice 2*'    | ''           | '11 099,93' |
 	* Check re-filling when re-selecting a partner
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'   |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я нажимаю на кнопку 'Fill'
-		И     таблица "Transactions" содержит строки:
+		And I select current line in "List" table
+		And in the table "Transactions" I click "Fill" button
+		And "Transactions" table contains lines
 			| 'Document'            | 'Credit'     | 'Debit'     |
 			| 'Purchase invoice 1*' | '137 000,00' | ''          |
 			| 'Sales invoice 1*'    | ''           | '4 350,00'  |
 			| 'Sales invoice 2*'    | ''           | '11 099,93' |
-		И я нажимаю на кнопку 'Post'
+		And I click "Post" button
 	* Check re-filling when re-selecting a currency
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| 'Code' |
 			| 'USD'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я нажимаю на кнопку 'Fill'
-		И     таблица "Transactions" не содержит строки:
+		And I select current line in "List" table
+		And in the table "Transactions" I click "Fill" button
+		And "Transactions" table does not contain lines
 			| 'Document'            | 'Credit'     | 'Debit'     |
 			| 'Purchase invoice 1*' | '137 000,00' | ''          |
 			| 'Sales invoice 1*'    | ''           | '4 350,00'  |
 			| 'Sales invoice 2*'    | ''           | '11 099,93' |
-	* Проверка перезаполнения при перевыборе компании
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+	* Check refilling at company re-selection
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я нажимаю на кнопку 'Fill'
-		Тогда в таблице "Transactions" количество строк "равно" 0
+		And I select current line in "List" table
+		And in the table "Transactions" I click "Fill" button
+		Then the number of "Transactions" table lines is "равно" 0
 	* Check re-filling when re-selecting a legal name (partner previous)
-		И я нажимаю кнопку выбора у поля "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Second Company Ferron BP' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И Пока в таблице "Transactions" количество строк ">" 0 Тогда
-		И я нажимаю на кнопку 'Post'
-		И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		And While the number of "Transactions" table lines ">" 0 Then
+		And I click "Post" button
+		And I close all client application windows
 
 
-Сценарий: _0154123 filling in Transit account from Account when exchanging currency (Bank Receipt)
-	И Я закрыл все окна клиентского приложения
+Scenario: _0154123 filling in Transit account from Account when exchanging currency (Bank Receipt)
+	And I close all client application windows
 	* Open form Bank Receipt and select transaction type Currency exchange
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Check filling in Transit account 
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Description'       |
 			| 'Bank account, USD' |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "TransitAccount" стал равен 'Transit Second'
+		And I select current line in "List" table
+		Then the form attribute named "TransitAccount" became equal to "Transit Second"
 	* Check filling in Transit account when re-select Bank account
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
-		И Я закрыл все окна клиентского приложения
+		And I select current line in "List" table
+		Then the form attribute named "TransitAccount" became equal to "Transit Main"
+		And I close all client application windows
 
-Сценарий: _0154124 filling in Transit account from Account when exchanging currency (Bank Payment)
-	И Я закрыл все окна клиентского приложения
+Scenario: _0154124 filling in Transit account from Account when exchanging currency (Bank Payment)
+	And I close all client application windows
 	* Open form Bank Payment and select transaction type Currency exchange
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Check filling in Transit account 
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'USD'      | 'Bank account, USD' |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "TransitAccount" стал равен 'Transit Second'
+		And I select current line in "List" table
+		Then the form attribute named "TransitAccount" became equal to "Transit Second"
 	* Check filling in Transit account when re-select Bank account
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
-		И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
-		И Я закрыл все окна клиентского приложения
-	* Проверка выбора Transit account
+		And I select current line in "List" table
+		Then the form attribute named "TransitAccount" became equal to "Transit Main"
+		And I close all client application windows
 
-Сценарий: _0154125 check the selection by Planing transaction basis in Bank payment document in case of currency exchange
+
+Scenario: _0154125 check the selection by Planing transaction basis in Bank payment document in case of currency exchange
 	* Open form Bank Payment and select transaction type Currency exchange
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'         |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the selection by Planing transaction basis
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
 		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
-		И в таблице "List" я перехожу к строке:
+		And I go to line in "List" table
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
 		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
+		And I click the button named "FormChoose"
+		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
-		Тогда таблица "PaymentList" содержит строки:
+		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 13*'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And I go to line in "List" table
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
 		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
+		And I click the button named "FormChoose"
+		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when post Bank Payment
-		И я нажимаю на кнопку 'Post'
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		И в таблице "List" я перехожу к строке:
+		And I click "Post" button
+		And I select current line in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And I go to line in "List" table
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
 		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
+		And I click the button named "FormChoose"
+		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "PaymentList" table
+		And in the table "PaymentList" I click "Delete" button
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And I go to line in "List" table
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
 		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И я нажимаю на кнопку 'Post'
-		И я запоминаю значение поля "Number" как "Number"
+		And I click the button named "FormChoose"
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I click "Post" button
+		And I save the value of "Number" field as "Number"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Cancel'
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "Cancel" button
 	* Check clearing Planing transaction basis in case of transaction type change
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		Тогда таблица "PaymentList" содержит строки:
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 	
 
-Сценарий: _0154126 check the selection by Planing transaction basis in BankReceipt in case of currency exchange
+Scenario: _0154126 check the selection by Planing transaction basis in BankReceipt in case of currency exchange
 	* Open form Bank Payment and select transaction type Currency exchange
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'         |
 			| 'EUR'      | 'Bank account, EUR' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the selection by Planing transaction basis
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
 		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
+		And I click the button named "FormChoose"
+		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
-		Тогда таблица "PaymentList" содержит строки:
+		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 13*'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency'    | 'Company'      |
 		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
-	* Check that a document that is already selected is displayed in the Planning transaction basis selection form при проведенном Bank Receipt
-		И я нажимаю на кнопку 'Post'
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I click the button named "FormChoose"
+		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+	* Check that a document that is already selected is displayed in the Planning transaction basis selection form (Bank Receipt posted)
+		And I click "Post" button
+		And I select current line in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
 		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
+		And I click the button named "FormChoose"
+		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "PaymentList" table
+		And in the table "PaymentList" I click "Delete" button
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
 		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И я нажимаю на кнопку 'Post'
+		And I click the button named "FormChoose"
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I click "Post" button
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Cancel'
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "Cancel" button
 	* Check clearing Planing transaction basis in case of transaction type change
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		Тогда таблица "PaymentList" содержит строки:
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: _0154127 check the selection by Planing transaction basis in Cash Payment in case of currency exchange
+Scenario: _0154127 check the selection by Planing transaction basis in Cash Payment in case of currency exchange
 	* Open form CashPayment and select transaction type Currency exchange
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashPayment'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
 			| 'Description'         |
 			| 'Cash desk №2' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
 		| 'Code' | 'Description'     |
 		| 'USD'  | 'American dollar' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the selection by Planing transaction basis
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
 		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
+		And I click the button named "FormChoose"
+		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in Cash Payment
-		Тогда таблица "PaymentList" содержит строки:
+		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 11*'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
 		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
-		И я нажимаю на кнопку с именем 'FormChoose'
+		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Payment posted
-		И я нажимаю на кнопку 'Post'
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I click "Post" button
+		And I select current line in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
 		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
-		И я нажимаю на кнопку с именем 'FormChoose'
+		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "PaymentList" table
+		And in the table "PaymentList" I click "Delete" button
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
 		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И я нажимаю на кнопку 'Post'
+		And I click the button named "FormChoose"
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I click "Post" button
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Cancel'
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "Cancel" button
 	* Check clearing Planing transaction basis in case of transaction type change
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		Тогда таблица "PaymentList" содержит строки:
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
 
-Сценарий: _0154128 check the selection by Planing transaction basis in CashReceipt in case of currency exchange
+Scenario: _0154128 check the selection by Planing transaction basis in CashReceipt in case of currency exchange
 	* Open form CashReceipt and select transaction type Currency exchange
-		И я открываю навигационную ссылку 'e1cib/list/Document.CashReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Cash account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
 			| 'Description'         |
 			| 'Cash desk №1' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Currency"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
 			| 'Code' |
 			| 'TRY'  |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the selection by Planing transaction basis
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 			| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
 			| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
+		And I click the button named "FormChoose"
+		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in CashReceipt
-		Тогда таблица "PaymentList" содержит строки:
+		And "PaymentList" table contains lines
 			| 'Amount' | 'Planning transaction basis' |
 			| '100,00' | 'Cash transfer order 11*'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 			| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
 			| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
-		И я нажимаю на кнопку с именем 'FormChoose'
+		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Receipt posted 
-		И я нажимаю на кнопку 'Post'
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I click "Post" button
+		And I select current line in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
 		| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
-		И я нажимаю на кнопку с именем 'FormChoose'
+		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "PaymentList" table
+		And in the table "PaymentList" I click "Delete" button
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
 		| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И я нажимаю на кнопку 'Post'
+		And I click the button named "FormChoose"
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I click "Post" button
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Cancel'
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "Cancel" button
 	* Check clearing Planing transaction basis in case of transaction type change
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		Тогда таблица "PaymentList" содержит строки:
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий:  _0154129 check the selection by Planing transaction basis in BankPayment in case of cash transfer
+Scenario:  _0154129 check the selection by Planing transaction basis in BankPayment in case of cash transfer
 	* Open form Bank Payment and select transaction type Cash transfer order
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'         |
 			| 'EUR'      | 'Bank account 2, EUR' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the selection by Planing transaction basis
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
 		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
+		And I click the button named "FormChoose"
+		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
-		Тогда таблица "PaymentList" содержит строки:
+		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 14*'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
 		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
-		И я нажимаю на кнопку с именем 'FormChoose'
+		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Payment posted
-		И я нажимаю на кнопку 'Post'
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I click "Post" button
+		And I select current line in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
 		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
-		И я нажимаю на кнопку с именем 'FormChoose'
+		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "PaymentList" table
+		And in the table "PaymentList" I click "Delete" button
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
 		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И я нажимаю на кнопку 'Post'
+		And I click the button named "FormChoose"
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I click "Post" button
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Cancel'
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "Cancel" button
 	* Check clearing Planing transaction basis in case of transaction type change
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		Тогда таблица "PaymentList" содержит строки:
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий:  _0154130 check the selection by Planing transaction basis in Bank Receipt in case of cash transfer
+Scenario:  _0154130 check the selection by Planing transaction basis in Bank Receipt in case of cash transfer
 	* Open form Bank Receipt and select transaction type Cash transfer order
-		И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
-		И я нажимаю на кнопку с именем 'FormCreate'
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Cash transfer order'
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 	* Filling in the details of the document
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'         |
 			| 'EUR'      | 'Bank account, EUR' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Check the selection by Planing transaction basis
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
 		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '100,00'
+		And I click the button named "FormChoose"
+		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in BankReceipt
-		Тогда таблица "PaymentList" содержит строки:
+		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
 		| '100,00' | 'Cash transfer order 14*'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
 		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
-		И я нажимаю на кнопку с именем 'FormChoose'
+		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Receipt posted
-		И я нажимаю на кнопку 'Post'
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I click "Post" button
+		And I select current line in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
 		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
-		И я нажимаю на кнопку с именем 'FormChoose'
+		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
-		И в таблице "PaymentList" я выбираю текущую строку
-		И в таблице "PaymentList" я нажимаю на кнопку 'Delete'
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Planning transaction basis"
-		И я запоминаю количество строк таблицы "List" как "Q"
-		Тогда переменная "Q" имеет значение 1
-		Тогда таблица "List" содержит строки:
+		And I select current line in "PaymentList" table
+		And in the table "PaymentList" I click "Delete" button
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I save number of "List" table lines as "Q"
+		Then "Q" variable is equal to 1
+		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
 		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
-		И я нажимаю на кнопку с именем 'FormChoose'
-		И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '200,00'
-		И я нажимаю на кнопку 'Post'
+		And I click the button named "FormChoose"
+		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I click "Post" button
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Cancel'
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "Cancel" button
 	* Check clearing Planing transaction basis in case of transaction type change
-		И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
-		Когда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'OK'
-		Тогда таблица "PaymentList" содержит строки:
+		And I select "Currency exchange" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
-	И я закрыл все окна клиентского приложения
+	And I close all client application windows
 
-Сценарий: _053014 check the display of details on the form Bank payment with the type of operation Currency exchange
-	И Я закрыл все окна клиентского приложения
-	И я открываю навигационную ссылку 'e1cib/list/Document.BankPayment'
-	И я нажимаю на кнопку с именем 'FormCreate'
-	И из выпадающего списка "Transaction type" я выбираю точное значение 'Currency exchange'
+Scenario: _053014 check the display of details on the form Bank payment with the type of operation Currency exchange
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankPayment"
+	And I click the button named "FormCreate"
+	And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Then I check the display on the form of available fields
-		И     элемент формы с именем "Company" доступен
-		И     элемент формы с именем "Account" доступен
-		И     элемент формы с именем "Description" доступен
-		И     элемент формы с именем "TransactionType" стал равен 'Currency exchange'
-		И     элемент формы с именем "Currency" доступен
-		И     элемент формы с именем "Date" доступен
-		И     элемент формы с именем "TransitAccount" доступен
-		И я нажимаю кнопку выбора у поля "Account"
-		И в таблице "List" я перехожу к строке:
+		And form attribute named "Company" is available
+		And form attribute named "Account" is available
+		And form attribute named "Description" is available
+		Then the form attribute named "TransactionType" became equal to "Currency exchange"
+		And form attribute named "Currency" is available
+		And form attribute named "Date" is available
+		And form attribute named "TransitAccount" is available
+		And I click Select button of "Account" field
+		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Bank account, TRY' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* And I check the display of the tabular part
-		И     элемент формы с именем "TransitAccount" стал равен 'Transit Main'
-		И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-		И     таблица "PaymentList" содержит строки:
+		Then the form attribute named "TransitAccount" became equal to "Transit Main"
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And "PaymentList" table contains lines
 			| '#' | 'Amount' | 'Planning transaction basis' |
 			| '1' | ''       | ''                          |
 
 
 
-Сценарий: check filling in and re-filling Credit debit note
+Scenario: check filling in and re-filling Credit debit note
 	* Create a document
-		И я открываю навигационную ссылку 'e1cib/list/Document.CreditDebitNote'
-		И я нажимаю на кнопку с именем 'FormCreate'
+		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		И из выпадающего списка "Operation type" я выбираю точное значение 'Receivable'
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select "Receivable" exact value from "Operation type" drop-down list
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля с именем "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Lunch'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 			| 'Description'   |
 			| 'Company Lunch' |
-		И в таблице "List" я выбираю текущую строку
+		And I select current line in "List" table
 	* Filling in the basis document for debt write-offs
-		И в таблице "Transactions" я нажимаю на кнопку с именем 'TransactionsAdd'
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Partner ar transactions basis document"
-		Тогда открылось окно 'Select data type'
-		И в таблице "" я перехожу к строке:
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner ar transactions basis document" attribute in "Transactions" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
 			| ''                 |
 			| 'Sales invoice' |
-		И в таблице "" я выбираю текущую строку
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "" table
+		And I go to line in "List" table
 			| 'Number' |
 			| '2 900'  |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я активизирую поле с именем "TransactionsAmount"
-		И в таблице "Transactions" в поле с именем 'TransactionsAmount' я ввожу текст '1 000,00'
-		И в таблице "Transactions" я завершаю редактирование строки
-		И в таблице "Transactions" я активизирую поле "Business unit"
-		И в таблице "Transactions" я выбираю текущую строку
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Business unit"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I activate "Business unit" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Business unit" attribute in "Transactions" table
+		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я активизирую поле "Expense type"
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Expense type"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I activate "Expense type" field in "Transactions" table
+		And I click choice button of "Expense type" attribute in "Transactions" table
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Software'    |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я завершаю редактирование строки
+		And I select current line in "List" table
+		And I finish line editing in "Transactions" table
 	* Change the document number
-		И я перехожу к закладке "Other"
-		И в поле 'Number' я ввожу текст '14'
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в поле 'Number' я ввожу текст '14'
-		И я нажимаю на кнопку 'Post'
+		And I move to "Other" tab
+		And I input "14" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "14" text in "Number" field
+		And I click "Post" button
 	* Re-select partner and check of data cleansing in the tabular section
-		И я нажимаю кнопку выбора у поля "Partner"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
 			| 'Description' |
 			| 'Maxim'       |
-		И в таблице "List" я выбираю текущую строку
-		И я нажимаю кнопку выбора у поля "Legal name"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
 		| 'Description'   |
 		| 'Company Maxim' |
-		И в таблице "List" я выбираю текущую строку
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		Тогда в таблице "Transactions" количество строк "равно" 0
+		And I select current line in "List" table
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then the number of "Transactions" table lines is "равно" 0
 	* Filter check basis documents (depend of company)
-		И из выпадающего списка "Operation type" я выбираю точное значение 'Payable'
+		And I select "Payable" exact value from "Operation type" drop-down list
 	* Re-select company
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'    |
 			| 'Second Company' |
-		И в таблице "List" я выбираю текущую строку
-		И в таблице "Transactions" я нажимаю на кнопку 'Add'
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Partner ap transactions basis document"
-		И в таблице "" я перехожу к строке:
+		And I select current line in "List" table
+		And in the table "Transactions" I click "Add" button
+		And I click choice button of "Partner ap transactions basis document" attribute in "Transactions" table
+		And I go to line in "" table
 			| ''                 |
 			| 'Purchase invoice' |
-		И в таблице "" я выбираю текущую строку
-		Тогда в таблице "List" количество строк "равно" 0
-		И Я закрываю окно 'Purchase invoices'
-		И в таблице "Transactions" я завершаю редактирование строки
-		И я нажимаю кнопку выбора у поля "Company"
-		И в таблице "List" я перехожу к строке:
+		And I select current line in "" table
+		Then the number of "List" table lines is "равно" 0
+		And I close "Purchase invoices" window
+		And I finish line editing in "Transactions" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
-		И в таблице "List" я выбираю текущую строку
-		Тогда открылось окно '1C:Enterprise'
-		И я нажимаю на кнопку 'Yes'
-		И в таблице "Transactions" я нажимаю на кнопку 'Add'
-		И в таблице "Transactions" я нажимаю кнопку выбора у реквизита "Partner ap transactions basis document"
-		Тогда открылось окно 'Select data type'
-		И в таблице "" я перехожу к строке:
+		And I select current line in "List" table
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And in the table "Transactions" I click "Add" button
+		And I click choice button of "Partner ap transactions basis document" attribute in "Transactions" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
 			| ''                 |
 			| 'Purchase invoice' |
-		И в таблице "" я выбираю текущую строку
-		И таблица "List" содержит строки:	
+		And I select current line in "" table
+		And "List" table contains lines
 			| 'Number' | 'Legal name'    | 'Partner' | 'Document amount'    | 'Currency' |
 			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00' | 'TRY'      |
 			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00' | 'TRY'      |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154131  check currency form in  Bank Receipt
+Scenario: _0154131  check currency form in  Bank Receipt
 	* Filling in Bank Receipt
 		* Filling the document header
-			И я открываю навигационную ссылку 'e1cib/list/Document.BankReceipt'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И из выпадающего списка "Transaction type" я выбираю точное значение 'Payment from customer'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.BankReceipt"
+			And I click the button named "FormCreate"
+			And I select "Payment from customer" exact value from "Transaction type" drop-down list
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Bank account selection and check of Currency field refilling
-			И я нажимаю кнопку выбора у поля "Account"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Account" field
+			And I go to line in "List" table
 				| Description    |
 				| Bank account, TRY |
-			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "Currency" стал равен 'TRY'
+			And I select current line in "List" table
+			Then the form attribute named "Currency" became equal to "TRY"
 		* Check the choice of a partner in the tabular section and filling in the legal name if one
-			И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-			И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+			And I click choice button of "Partner" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'DFC'         |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
-			И в таблице "PaymentList" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I input "200,00" text in "Amount" field of "PaymentList" table
+			And I finish line editing in "PaymentList" table
 	* Check form by currency
 		* Basic recalculation at the rate
-			И в таблице "CurrenciesPaymentList" я перехожу к строке:
+			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
 		* Recalculation of Rate presentation when changing Amount
-			И в таблице "CurrenciesPaymentList" в поле с именем 'CurrenciesPaymentListAmount' я ввожу текст '35,00'
-			И в таблице "CurrenciesPaymentList" я завершаю редактирование строки
-			И в таблице "CurrenciesPaymentList" я перехожу к строке:
+			And I input "35,00" text in the field named "CurrenciesPaymentListAmount" of "CurrenciesPaymentList" table
+			And I finish line editing in "CurrenciesPaymentList" table
+			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '35,00'  | '1'            |
 		* Recount Amount when changing Multiplicity
-			И в таблице "CurrenciesPaymentList" в поле 'Multiplicity' я ввожу текст '2'
-			И в таблице "CurrenciesPaymentList" я завершаю редактирование строки
-			И в таблице "CurrenciesPaymentList" я перехожу к строке:
+			And I input "2" text in "Multiplicity" field of "CurrenciesPaymentList" table
+			And I finish line editing in "CurrenciesPaymentList" table
+			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '17,50'  | '2'            |
 		* Recount Amount when changing Multiplicity
-			И в таблице "CurrenciesPaymentList" в поле 'Rate presentation' я ввожу текст '6,0000'
-			И в таблице "CurrenciesPaymentList" я завершаю редактирование строки
-			И в таблице "CurrenciesPaymentList" я перехожу к строке:
+			And I input "6,0000" text in "Rate presentation" field of "CurrenciesPaymentList" table
+			And I finish line editing in "CurrenciesPaymentList" table
+			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '16,67'  | '2'            |
 		* Recount Amount when changing payment amount
-			И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '250,00'
-			И в таблице "CurrenciesPaymentList" я завершаю редактирование строки
-			И в таблице "CurrenciesPaymentList" я перехожу к строке:
+			And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
+			And I finish line editing in "CurrenciesPaymentList" table
+			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '20,83'  | '2'            |
 		* Check the standard currency rate when adding the next line
-			И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-			И В таблице "PaymentList" я нажимаю кнопку очистить у поля с именем "PaymentListPayer"
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+			And I click choice button of "Partner" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| Description |
 				| Veritas   |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payer"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click choice button of "Payer" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| 'Description'      |
 				| 'Company Veritas ' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
-			И в таблице "CurrenciesPaymentList" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "200,00" text in "Amount" field of "PaymentList" table
+			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
 		* Recount when currency changes
-			И я нажимаю кнопку выбора у поля "Account"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Account" field
+			And I go to line in "List" table
 				| 'Currency' | 'Description'       |
 				| 'USD'      | 'Bank account, USD' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "CurrenciesPaymentList" я перехожу к строке:
+			And I select current line in "List" table
+			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'TRY'            | 'Partner term' | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
-			И в таблице "CurrenciesPaymentList" я перехожу к строке:
+			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'TRY'            | 'Partner term' | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
 		* Reverse rate display check
-			Дано двойной клик на картинку "reverse"
-			И в таблице "PaymentList" я перехожу к строке:
+			Given double click at "reverse" picture
+			And I go to line in "PaymentList" table
 				| 'Partner term'                               | 'Amount' | 'Partner' | 'Payer'            |
 				| 'Posting by Standard Partner term (Veritas)' | '200,00' | 'Veritas' | 'Company Veritas ' |
-			И в таблице "PaymentList" я активизирую поле "Partner term"
-			Тогда таблица "CurrenciesPaymentList" содержит строки:
+			And I activate "Partner term" field in "PaymentList" table
+			And "CurrenciesPaymentList" table contains lines
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
-Сценарий: _0154132  check currency form in Incoming payment order
+Scenario: _0154132  check currency form in Incoming payment order
 	* Filling in Incoming payment order
 		* Filling the document header
-			И я открываю навигационную ссылку 'e1cib/list/Document.IncomingPaymentOrder'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+			And I click the button named "FormCreate"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Bank account selection and check of Currency field refilling
-			И я нажимаю кнопку выбора у поля "Account"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Account" field
+			And I go to line in "List" table
 				| Description    |
 				| Bank account, TRY |
-			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "Currency" стал равен 'TRY'
+			And I select current line in "List" table
+			Then the form attribute named "Currency" became equal to "TRY"
 		* Check the choice of a partner in the tabular section and filling in the legal name if one
-			И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click choice button of "Partner" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'DFC'         |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
-			И в таблице "PaymentList" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I input "200,00" text in "Amount" field of "PaymentList" table
+			And I finish line editing in "PaymentList" table
 	* Check form by currency
 		* Basic recalculation at the rate
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
 		* Recalculation of Rate presentation when changing Amount
-			И в таблице "PaymentListCurrencies" в поле с именем 'PaymentListCurrenciesAmount' я ввожу текст '35,00'
-			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I input "35,00" text in the field named "PaymentListCurrenciesAmount" of "PaymentListCurrencies" table
+			And I finish line editing in "PaymentListCurrencies" table
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '35,00'  | '1'            |
 		* Recount Amount when changing Multiplicity
-			И в таблице "PaymentListCurrencies" в поле 'Multiplicity' я ввожу текст '2'
-			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I input "2" text in "Multiplicity" field of "PaymentListCurrencies" table
+			And I finish line editing in "PaymentListCurrencies" table
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '17,50'  | '2'            |
 		* Recount Amount when changing Multiplicity Rate presentation
-			И в таблице "PaymentListCurrencies" в поле 'Rate presentation' я ввожу текст '6,0000'
-			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I input "6,0000" text in "Rate presentation" field of "PaymentListCurrencies" table
+			And I finish line editing in "PaymentListCurrencies" table
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '16,67'  | '2'            |
 		* Recount Amount when changing payment amount
-			И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '250,00'
-			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
+			And I finish line editing in "PaymentListCurrencies" table
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '20,83'  | '2'            |
 		* Check the standard currency rate when adding the next line
-			И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click choice button of "Partner" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| Description |
 				| Veritas   |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payer"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click choice button of "Payer" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| 'Description'      |
 				| 'Company Veritas ' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "200,00" text in "Amount" field of "PaymentList" table
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
 		* Recount when currency changes
-			И я нажимаю кнопку выбора у поля "Account"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Account" field
+			And I go to line in "List" table
 				| 'Currency' | 'Description'       |
 				| 'USD'      | 'Bank account, USD' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I select current line in "List" table
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
 		* Reverse rate display check 
-			Дано двойной клик на картинку "reverse"
-			И в таблице "PaymentList" я перехожу к строке:
+			Given double click at "reverse" picture
+			And I go to line in "PaymentList" table
 				| 'Amount' | 'Partner' | 'Payer'            |
 				| '200,00' | 'Veritas' | 'Company Veritas ' |
-			Тогда таблица "PaymentListCurrencies" содержит строки:
+			And "PaymentListCurrencies" table contains lines
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows
 
 
-Сценарий: _0154133  check currency form in Outgoing payment order
+Scenario: _0154133  check currency form in Outgoing payment order
 	* Filling in Outgoing Payment Order
 		* Filling the document header
-			И я открываю навигационную ссылку 'e1cib/list/Document.OutgoingPaymentOrder'
-			И я нажимаю на кнопку с именем 'FormCreate'
-			И я нажимаю кнопку выбора у поля "Company"
-			И в таблице "List" я перехожу к строке:
+			Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+			And I click the button named "FormCreate"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
 				| Description  |
 				| Main Company |
-			И в таблице "List" я выбираю текущую строку
+			And I select current line in "List" table
 		* Bank account selection and check of Currency field refilling
-			И я нажимаю кнопку выбора у поля "Account"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Account" field
+			And I go to line in "List" table
 				| Description    |
 				| Bank account, TRY |
-			И в таблице "List" я выбираю текущую строку
-			И     элемент формы с именем "Currency" стал равен 'TRY'
+			And I select current line in "List" table
+			Then the form attribute named "Currency" became equal to "TRY"
 		* Check the choice of a partner in the tabular section and filling in the legal name if one
-			И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click choice button of "Partner" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| 'Description' |
 				| 'DFC'         |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
-			И в таблице "PaymentList" я завершаю редактирование строки
+			And I select current line in "List" table
+			And I input "200,00" text in "Amount" field of "PaymentList" table
+			And I finish line editing in "PaymentList" table
 	* Check form by currency
 		* Basic recalculation at the rate
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
 		* Recalculation of Rate presentation when changing Amount
-			И в таблице "PaymentListCurrencies" в поле с именем 'PaymentListCurrenciesAmount' я ввожу текст '35,00'
-			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I input "35,00" text in the field named "PaymentListCurrenciesAmount" of "PaymentListCurrencies" table
+			And I finish line editing in "PaymentListCurrencies" table
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '35,00'  | '1'            |
 		* Recount Amount when changing Multiplicity
-			И в таблице "PaymentListCurrencies" в поле 'Multiplicity' я ввожу текст '2'
-			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I input "2" text in "Multiplicity" field of "PaymentListCurrencies" table
+			And I finish line editing in "PaymentListCurrencies" table
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '17,50'  | '2'            |
 		* Recount Amount when changing Multiplicity Rate presentation
-			И в таблице "PaymentListCurrencies" в поле 'Rate presentation' я ввожу текст '6,0000'
-			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I input "6,0000" text in "Rate presentation" field of "PaymentListCurrencies" table
+			And I finish line editing in "PaymentListCurrencies" table
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '16,67'  | '2'            |
 		* Recount Amount when changing payment amount
-			И в таблице "PaymentList" в поле с именем 'PaymentListAmount' я ввожу текст '250,00'
-			И в таблице "PaymentListCurrencies" я завершаю редактирование строки
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
+			And I finish line editing in "PaymentListCurrencies" table
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '20,83'  | '2'            |
 		* Check the standard currency rate when adding the next line
-			И в таблице "PaymentList" я нажимаю на кнопку с именем 'PaymentListAdd'
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Partner"
-			И в таблице "List" я перехожу к строке:
+			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click choice button of "Partner" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| Description |
 				| Veritas   |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" я нажимаю кнопку выбора у реквизита "Payee"
-			И в таблице "List" я перехожу к строке:
+			And I select current line in "List" table
+			And I click choice button of "Payee" attribute in "PaymentList" table
+			And I go to line in "List" table
 				| 'Description'      |
 				| 'Company Veritas ' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentList" в поле 'Amount' я ввожу текст '200,00'
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I select current line in "List" table
+			And I input "200,00" text in "Amount" field of "PaymentList" table
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
 		* Recount when currency changes
-			И я нажимаю кнопку выбора у поля "Account"
-			И в таблице "List" я перехожу к строке:
+			And I click Select button of "Account" field
+			And I go to line in "List" table
 				| 'Currency' | 'Description'       |
 				| 'USD'      | 'Bank account, USD' |
-			И в таблице "List" я выбираю текущую строку
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I select current line in "List" table
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
-			И в таблице "PaymentListCurrencies" я перехожу к строке:
+			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
 		* Reverse rate display check 
-			Дано двойной клик на картинку "reverse"
-			И в таблице "PaymentList" я перехожу к строке:
+			Given double click at "reverse" picture
+			And I go to line in "PaymentList" table
 				| 'Amount' | 'Partner' | 'Payee'            |
 				| '200,00' | 'Veritas' | 'Company Veritas ' |
-			Тогда таблица "PaymentListCurrencies" содержит строки:
+			And "PaymentListCurrencies" table contains lines
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
-		И я закрыл все окна клиентского приложения
+		And I close all client application windows

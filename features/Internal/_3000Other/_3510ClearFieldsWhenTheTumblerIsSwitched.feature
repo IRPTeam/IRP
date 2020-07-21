@@ -1,158 +1,159 @@
-#language: ru
+﻿#language: en
 @tree
 @Positive
-Функционал: check the cleaning of fields in forms of directories with switches (the drawing of the form depends on the switch)
+Feature: check the cleaning of fields in forms of directories with switches (the drawing of the form depends on the switch)
 
 
 
-Контекст:
-    Дано Я запускаю сценарий открытия TestClient или подключаю уже существующий.
+Background:
+Given I launch TestClient opening script or connect the existing one
 
 
-Сценарий: check the clearing of values ​​when changing the type of account in the Cash / Bank accounts catalog
-    * Открытие формы элемента справочника
-        И я открываю навигационную ссылку "e1cib/list/Catalog.CashAccounts"
-        И я нажимаю на кнопку с именем 'FormCreate'
-    * Filling in the details of the documentдля Bank account
-        И я меняю значение переключателя 'Type' на 'Bank'
-        И в поле 'TR' я ввожу текст 'Test Bank'
-        И я нажимаю кнопку выбора у поля "Company"
-        И в таблице "List" я перехожу к строке:
-            | 'Description'  |
-            | 'Main Company TR' |
-        И в таблице "List" я выбираю текущую строку
-        И в поле 'Number' я ввожу текст '12345'
-        И в поле 'Bank name' я ввожу текст '1234'
-        И я нажимаю кнопку выбора у поля "Transit account"
-        И в таблице "List" я перехожу к строке:
-            | 'Description'    |
-            | 'Transit Second' |
-        И в таблице "List" я выбираю текущую строку
-        И я нажимаю кнопку выбора у поля с именем "Currency"
-        И в таблице "List" я перехожу к строке:
-            | 'Code' | 'Description'     |
-            | 'USD'  | 'American dollar' |
-        И в таблице "List" я активизирую поле "Description"
-        И в таблице "List" я выбираю текущую строку
-    * Проверка заполненности реквизитов
-        Тогда элемент формы с именем "Type" стал равен 'Bank'
-        И     элемент формы с именем "Company" стал равен 'Main Company TR'
-        И     элемент формы с именем "Number" стал равен '12345'
-        И     элемент формы с именем "BankName" стал равен '1234'
-        И     элемент формы с именем "TransitAccount" стал равен 'Transit Second'
-        И     элемент формы с именем "Description_tr" стал равен 'Test Bank'
-        И     элемент формы с именем "CurrencyType" стал равен 'Fixed'
-        И     элемент формы с именем "Currency" стал равен 'USD'
-    * Переключение типа на Cash и потом обратно на Bank и проверка очистки заполненных реквизитов
-        И я меняю значение переключателя 'Type' на 'Cash'
-        И я меняю значение переключателя 'Type' на 'Bank'
-        Тогда элемент формы с именем "Type" стал равен 'Bank'
-        И     элемент формы с именем "Company" стал равен 'Main Company TR'
-        И     элемент формы с именем "Number" стал равен ''
-        И     элемент формы с именем "BankName" стал равен ''
-        И     элемент формы с именем "TransitAccount" стал равен ''
-        И     элемент формы с именем "CurrencyType" стал равен 'Fixed'
-        И     элемент формы с именем "Currency" стал равен ''
-    * Filling in the details of the documentпо Cash
-        И я меняю значение переключателя 'Type' на 'Cash'
-        И я меняю значение переключателя с именем 'CurrencyType' на 'Fixed'
-        И я нажимаю кнопку выбора у поля с именем "Currency"
-        И в таблице "List" я перехожу к строке:
-            | 'Code' | 'Description' |
-            | 'EUR'  | 'Euro'        |
-        И в таблице "List" я активизирую поле "Description"
-        И в таблице "List" я выбираю текущую строку
-    * Проверка сброса при переключении на Transit и обратно на Cash
-        И я меняю значение переключателя 'Type' на 'Transit'
-        И я меняю значение переключателя 'Type' на 'Cash'
-        И     элемент формы с именем "CurrencyType" стал равен 'Multi'
-        И я закрыл все окна клиентского приложения
+Scenario: check the clearing of values ​​when changing the type of account in the Cash / Bank accounts catalog
+* Open Cash account form
+        Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+        And I click the button named "FormCreate"
+* Filling in the details of the document for Bank account
+        And I change "Type" radio button value to "Bank"
+        And I input "Test Bank" text in "TR" field
+        And I click Select button of "Company" field
+        And I go to line in "List" table
+        | 'Description'  |
+        | 'Main Company TR' |
+        And I select current line in "List" table
+        And I input "12345" text in "Number" field
+        And I input "1234" text in "Bank name" field
+        And I click Select button of "Transit account" field
+        And I go to line in "List" table
+        | 'Description'    |
+        | 'Transit Second' |
+        And I select current line in "List" table
+        And I click Choice button of the field named "Currency"
+        And I go to line in "List" table
+        | 'Code' | 'Description'     |
+        | 'USD'  | 'American dollar' |
+        And I activate "Description" field in "List" table
+        And I select current line in "List" table
+        * Check filling in
+        Then the form attribute named "Type" became equal to "Bank"
+        Then the form attribute named "Company" became equal to "Main Company TR"
+        Then the form attribute named "Number" became equal to "12345"
+        Then the form attribute named "BankName" became equal to "1234"
+        Then the form attribute named "TransitAccount" became equal to "Transit Second"
+        Then the form attribute named "Description_tr" became equal to "Test Bank"
+        Then the form attribute named "CurrencyType" became equal to "Fixed"
+        Then the form attribute named "Currency" became equal to "USD"
+* Switching the type to Cash and then back to the Bank and checking the cleaning of the filled in details
+        And I change "Type" radio button value to "Cash"
+        And I change "Type" radio button value to "Bank"
+        Then the form attribute named "Type" became equal to "Bank"
+        Then the form attribute named "Company" became equal to "Main Company TR"
+        Then the form attribute named "Number" became equal to ""
+        Then the form attribute named "BankName" became equal to ""
+        Then the form attribute named "TransitAccount" became equal to ""
+        Then the form attribute named "CurrencyType" became equal to "Fixed"
+        Then the form attribute named "Currency" became equal to ""
+* Filling in the details for Cash account
+        And I change "Type" radio button value to "Cash"
+        And I change the radio button named "CurrencyType" value to "Fixed"
+        And I click Choice button of the field named "Currency"
+        And I go to line in "List" table
+        | 'Code' | 'Description' |
+        | 'EUR'  | 'Euro'        |
+        And I activate "Description" field in "List" table
+        And I select current line in "List" table
+* Check reset when switching to Transit and back to Cash
+        And I change "Type" radio button value to "Transit"
+        And I change "Type" radio button value to "Cash"
+        Then the form attribute named "CurrencyType" became equal to "Multi"
+        And I close all client application windows
 
 
-Сценарий: check clearing values ​​when changing the Ap-ar posting / Standard switch to Partner term
-    * Открытие формы элемента справочника
-        И я открываю навигационную ссылку "e1cib/list/Catalog.Agreements"
-        И я нажимаю на кнопку с именем 'FormCreate'
-    * Filling in the details of the documentдля соглашения с видом расчета по стандартным договорам
-        И я меняю значение переключателя 'Kind' на 'Regular'
-        И я нажимаю кнопку выбора у поля "Multi currency movement type"
-        И в таблице "List" я перехожу к строке:
-            | 'Description' |
-            | 'EUR'         |
-        И в таблице "List" я выбираю текущую строку
-        И я меняю значение переключателя 'AP/AR posting detail' на 'By standard partner term'
-        И я нажимаю кнопку выбора у поля "Standard Partner term"
-        * Создание стандартного соглашения в евро
-            И я нажимаю на кнопку с именем 'FormCreate'
-            И в поле 'TR' я ввожу текст 'Standard, EUR'
-            И я нажимаю на кнопку 'Save and close'
-        И я нажимаю на кнопку с именем 'FormChoose'
-        И я нажимаю кнопку выбора у поля "Price type"
-        И в таблице "List" я перехожу к строке:
-            | 'Description'       |
-            | 'Basic Price Types TR' |
-        И в таблице "List" я выбираю текущую строку
-    * Check filling inреквизитов
-        И     элемент формы с именем "CurrencyMovementType" стал равен 'EUR'
-        И     элемент формы с именем "StandardAgreement" стал равен 'Standard, EUR'
-        И     элемент формы с именем "PriceType" стал равен 'Basic Price Types TR'
-    * Переключение переключателя Ap-ar posting на значение By Partner terms и проверка очистки поля StandardPartner term
-        И я меняю значение переключателя 'AP/AR posting detail' на 'By partner terms'
-        И     элемент формы с именем "StandardAgreement" стал равен ''
-    * Check clearing fields при изменении переключателя на Standard
-        И я меняю значение переключателя 'Kind' на 'Standard'
-        И     элемент формы с именем "CurrencyMovementType" стал равен ''
-        И     элемент формы с именем "PriceType" стал равен ''
-        И я закрыл все окна клиентского приложения
+Scenario: check clearing values ​​when changing the Ap-ar posting / Standard switch to Partner term
+* Open Partner term form
+        Given I open hyperlink "e1cib/list/Catalog.Agreements"
+        And I click the button named "FormCreate"
+* Filling in the details of the document for partner term with AP/AR posting detail - By standard partner term
+        And I change "Kind" radio button value to "Regular"
+        And I click Select button of "Multi currency movement type" field
+        And I go to line in "List" table
+        | 'Description' |
+        | 'EUR'         |
+        And I select current line in "List" table
+        And I change "AP/AR posting detail" radio button value to "By standard partner term"
+        And I click Select button of "Standard Partner term" field
+        * Create standart agreement in EUR
+        And I click the button named "FormCreate"
+        And I input "Standard, EUR" text in "TR" field
+        And I click "Save and close" button
+        And I click the button named "FormChoose"
+        And I click Select button of "Price type" field
+        And I go to line in "List" table
+        | 'Description'       |
+        | 'Basic Price Types TR' |
+        And I select current line in "List" table
+* Check filling in
+        Then the form attribute named "CurrencyMovementType" became equal to "EUR"
+        Then the form attribute named "StandardAgreement" became equal to "Standard, EUR"
+        Then the form attribute named "PriceType" became equal to "Basic Price Types TR"
+* Switching the Ap-ar posting switch to By Partner terms and checking to clear the StandardPartner term field
+        And I change "AP/AR posting detail" radio button value to "By partner terms"
+        Then the form attribute named "StandardAgreement" became equal to ""
+* Check clearing fields when changing the switch to Standard
+        And I change "Kind" radio button value to "Standard"
+        Then the form attribute named "CurrencyMovementType" became equal to ""
+        Then the form attribute named "PriceType" became equal to ""
+        And I close all client application windows
 
 
-Сценарий: check clearing the values ​​of Tax types and Multi currency movement type when changing the Our checkmark in Company
-    * Открытие формы элемента справочника
-        И я открываю навигационную ссылку "e1cib/list/Catalog.Companies"
-        И я нажимаю на кнопку с именем 'FormCreate'
-    * Установка галочки Our и заполнение Tax types и Multi currency movement type
-        И в поле 'TR' я ввожу текст 'Test'
-        И я устанавливаю флаг 'Our'
-        * Заполнение Multi currency movement type
-            И в таблице "Currencies" я нажимаю на кнопку с именем 'CurrenciesAdd'
-            И в таблице "Currencies" я нажимаю кнопку выбора у реквизита "Movement type"
-            И в таблице "List" я перехожу к строке:
+Scenario: check clearing the values ​​of Tax types and Multi currency movement type when changing the Our checkmark in Company
+* Open Compant form
+        Given I open hyperlink "e1cib/list/Catalog.Companies"
+        And I click the button named "FormCreate"
+* Tick the box Our and fill in Tax types and Multi currency movement types
+        And I input "Test" text in "TR" field
+        And I set checkbox "Our"
+        * Filling in Multi currency movement type
+        And in the table "Currencies" I click the button named "CurrenciesAdd"
+        And I click choice button of "Movement type" attribute in "Currencies" table
+        And I go to line in "List" table
                 | 'Currency' | 'Deferred calculation' | 'Description'        | 'Reference'          | 'Source'       | 'Type'      |
                 | 'USD'      | 'No'                   | 'Reporting currency' | 'Reporting currency' | 'Forex Seling' | 'Reporting' |
-            И в таблице "List" я активизирую поле "Description"
-            И в таблице "List" я выбираю текущую строку
-            И в таблице "Currencies" я завершаю редактирование строки
-            И таблица "Currencies" содержит строки:
+        And I activate "Description" field in "List" table
+        And I select current line in "List" table
+        And I finish line editing in "Currencies" table
+        And "Currencies" table contains lines
                 | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
                 | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
-        * Заполнение Tax types
-            И я перехожу к закладке "Tax types"
-            И в таблице "CompanyTaxes" я нажимаю на кнопку с именем 'CompanyTaxesAdd'
-            И в поле 'Period' я ввожу текст '01.10.2019'
-            И в таблице "CompanyTaxes" я активизирую поле "Tax"
-            И в таблице "CompanyTaxes" я нажимаю кнопку выбора у реквизита "Tax"
-            И в таблице "List" я перехожу к строке:
+        * Filling in Tax types
+        And I move to "Tax types" tab
+        And in the table "CompanyTaxes" I click the button named "CompanyTaxesAdd"
+        And I input "01.10.2019" text in "Period" field
+        And I activate "Tax" field in "CompanyTaxes" table
+        And I click choice button of "Tax" attribute in "CompanyTaxes" table
+        And I go to line in "List" table
                 | 'Description' | 'Reference' |
                 | 'VAT'         | 'VAT'       |
-            И в таблице "List" я выбираю текущую строку
-            И в таблице "CompanyTaxes" я активизирую поле "Priority"
-            И в таблице "CompanyTaxes" в поле 'Priority' я ввожу текст '2'
-            И в таблице "CompanyTaxes" я завершаю редактирование строки
-            И     таблица "CompanyTaxes" содержит строки:
+        And I select current line in "List" table
+        And I activate "Priority" field in "CompanyTaxes" table
+        And I input "2" text in "Priority" field of "CompanyTaxes" table
+        And I finish line editing in "CompanyTaxes" table
+        And "CompanyTaxes" table contains lines
                 | 'Use' | 'Tax' | 'Priority' |
                 | 'Yes' | 'VAT' | '2'        |
-        * Проверка очистки заполненных данных при снятии галочки Our
-            И я перехожу к закладке "Info"
-            И я снимаю флаг 'Our'
-            И я нажимаю на кнопку 'Save'
-            И я устанавливаю флаг 'Our'
-            И таблица "Currencies" не содержит строки:
+        * Check to clear completed data when uncheck Our
+        And I move to "Info" tab
+        And I remove checkbox "Our"
+        And I click "Save" button
+        And I set checkbox "Our"
+        And "Currencies" table does not contain lines
                 | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
                 | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
-            И     таблица "CompanyTaxes" не содержит строки:
+        And "CompanyTaxes" table does not contain lines
                 | 'Use' | 'Tax' | 'Priority' |
                 | 'Yes' | 'VAT' | '2'        |
-            И я закрыл все окна клиентского приложения
+        And I close all client application windows
+
 
 
 

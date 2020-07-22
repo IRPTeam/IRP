@@ -222,7 +222,7 @@ Scenario: _300302 create Unbundling and check creation item key
 				| 'Chewing gum TR'          |
 			And I select current line in "List" table
 			And In this window I click command interface button "Item keys"
-			Then the number of "List" table lines is "меньше или равно" 3
+			Then the number of "List" table lines is "<=" 3
 			And I close all client application windows
 
 

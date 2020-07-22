@@ -3496,7 +3496,7 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			| 'Boots' | '38/18SD'  | 'pcs'  | '1,000' |
 	* Difference reconciliation
 		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
-		Then the number of "CompareItemList" table lines is "меньше или равно" 3
+		Then the number of "CompareItemList" table lines is "<=" 3
 		And "CompareItemList" table became equal
 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
 			| 'Dress' | '8,000'    | '-4,000'     | 'L/Green'  | 'pcs'  | '4,000' |
@@ -3539,7 +3539,7 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			| 'Item'  | 'Item key' | 'Q'     | 'Unit' |
 			| 'Dress' | 'L/Green'  | '5,000' | 'pcs'  |
 		And in the table "PhysItemList" I click the button named "PhysItemListDelete"
-		Then the number of "PhysItemList" table lines is "меньше или равно" 2
+		Then the number of "PhysItemList" table lines is "<=" 2
 	* Add items by scanning on the tab "CompareItemList"
 		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
 		And in the table "CompareItemList" I click the button named "CompareItemListSearchByBarcode"
@@ -3549,7 +3549,7 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
 			| 'Boots' | '15,000'   | '-11,000'    | '37/18SD'  | 'pcs'  | '4,000' |
 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
-		Then the number of "CompareItemList" table lines is "меньше или равно" 2
+		Then the number of "CompareItemList" table lines is "<=" 2
 	* Add items to the tab "CompareItemList" through the Add button
 		And in the table "CompareItemList" I click the button named "CompareItemListAdd"
 		And I click choice button of the attribute named "CompareItemListItem" in "CompareItemList" table
@@ -3574,7 +3574,7 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			| 'Boots' | '15,000'   | '-11,000'    | '37/18SD'  | 'pcs'  | '4,000' |
 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
 			| 'Shirt' | ''         | '1,000'      | '38/Black' | 'pcs'  | '1,000' |
-		Then the number of "CompareItemList" table lines is "меньше или равно" 3
+		Then the number of "CompareItemList" table lines is "<=" 3
 	* Add items to the tab "CompareItemList" through the Pick up button
 		And in the table "CompareItemList" I click the button named "CompareItemListOpenPickupItems"
 		And I go to line in "ItemList" table
@@ -3592,7 +3592,7 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
 			| 'Shirt' | ''         | '1,000'      | '38/Black' | 'pcs'  | '1,000' |
 			| 'Shirt' | ''         | '1,000'      | '36/Red'   | 'pcs'  | '1,000' |
-		Then the number of "CompareItemList" table lines is "меньше или равно" 4
+		Then the number of "CompareItemList" table lines is "<=" 4
 	* Collapse of the tabular part with data on documents-bases
 		And "ExpItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |

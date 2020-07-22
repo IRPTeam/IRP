@@ -159,7 +159,7 @@ Scenario:_300110 add pictures to additional details and additional properties
         | 'Description' |
         | 'Brand TR'     |
         And I select current line in "List" table
-        And I select external file "#workingDir#\features\_3000Other\16466.png"
+        And I select external file "#workingDir#\features\Internal\_3000Other\16466.png"
         And I click "Icon" hyperlink
     * Check adding a picture to an additional attribute
         Then the field named "Icon" value contains "e1cib/tempstorage/" text
@@ -200,7 +200,7 @@ Scenario: _300103 item pictures upload
             | 'Trousers TR'     |
         And I select current line in "List" table
     * Add picture
-        And I select external file "#workingDir#\features\_3000Other\16466.png"
+        And I select external file "#workingDir#\features\Internal\_3000Other\16466.png"
         And Delay 3
         Then click "plus" picture
     * Check adding picture 
@@ -210,7 +210,7 @@ Scenario: _300103 item pictures upload
             | 'Trousers TR'    | '16466.png' |
     * Add one more picture
         And In this window I click command interface button "Main"
-        And I select external file "#workingDir#\features\_3000Other\dressblue.jpg"
+        And I select external file "#workingDir#\features\Internal\_3000Other\dressblue.jpg"
         Given cursor to "plus3" picture
         Then click "plus3" picture
         Given I press ENTER
@@ -265,7 +265,7 @@ Scenario: _300107 item key pictures upload
             | '38/Yellow TR' |
         And I select current line in "List" table
     * Add picture
-        And I select external file "#workingDir#\features\_3000Other\16466.png"
+        And I select external file "#workingDir#\features\Internal\_3000Other\16466.png"
         And Delay 3
         Then click "plus" picture
     * Check adding picture
@@ -275,7 +275,7 @@ Scenario: _300107 item key pictures upload
             | '38/Yellow TR' | '16466.png' |
     * Add one more picture
         And In this window I click command interface button "Main"
-        And I select external file "#workingDir#\features\_3000Other\pinkdress.jpg"
+        And I select external file "#workingDir#\features\Internal\_3000Other\pinkdress.jpg"
         Given cursor to "plus3" picture
         Then click "plus3" picture
         Given I press ENTER

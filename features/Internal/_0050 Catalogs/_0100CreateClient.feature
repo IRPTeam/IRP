@@ -606,7 +606,7 @@ Scenario: _010010 adding addresses to an Contact info type
 				| 'Registered address  (Company)' |
 
 
-Scenario: _010011 adding gps to an Contact info type
+Scenario: _010011 adding gps to a Contact info type
 	* Opening the form for filling in Contact info type
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 	* Adding Contact info gps coordinates for partners in Ukraine
@@ -807,6 +807,7 @@ Scenario: _010011 adding gps to an Contact info type
 
 
 Scenario: _010012 settings for displaying contact information in Stores, Partners, Company
+	And I close all client application windows
 	* Complete settings to display contact information for Partners
 		Given I open hyperlink "e1cib/list/Catalog.IDInfoSets"
 		And I go to line in "List" table

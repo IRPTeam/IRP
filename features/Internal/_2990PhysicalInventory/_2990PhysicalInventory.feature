@@ -492,7 +492,7 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 		And I select current line in "List" table
 		And I click "Fill exp. count" button
 		And Delay 2
-		Then the number of "ItemList" table lines is "меньше или равно" 2
+		Then the number of "ItemList" table lines is "<=" 2
 		And "ItemList" table contains lines
 		| 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' |
 		| 'Dress' | '-120,000'   | 'S/Yellow' | '120,000'    | 'pcs'  |
@@ -602,7 +602,7 @@ Scenario: _2990004 create Physical inventory (store doesn't use GR and SC)
 		And I select current line in "List" table
 		And I click "Fill exp. count" button
 		And Delay 2
-		Then the number of "ItemList" table lines is "меньше или равно" 2
+		Then the number of "ItemList" table lines is "<=" 2
 		And "ItemList" table contains lines
 		| 'Item'     | 'Difference' | 'Item key'   | 'Exp. count' | 'Unit' |
 		| 'Dress'    | '-400,000'   | 'XS/Blue'    | '400,000'    | 'pcs'  |
@@ -683,7 +683,7 @@ Scenario: _2990005 create Stock adjustment as surplus based on Physical inventor
 		And "ItemList" table contains lines
 		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Revenue type' | 'Basis document'        |
 		| 'Dress' | '5,000'    | 'S/Yellow' | 'Logistics department' | 'pcs'  | 'Delivery'     | 'Physical inventory 1*' |
-		Then the number of "ItemList" table lines is "меньше или равно" 1
+		Then the number of "ItemList" table lines is "<=" 1
 	* Change the document number
 		And I move to "Other" tab
 		And I input "0" text in "Number" field
@@ -778,7 +778,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 		And "ItemList" table contains lines
 		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Expense type' | 'Basis document'        |
 		| 'Dress' | '2,000'    | 'XS/Blue'  | 'Logistics department' | 'pcs'  | 'Delivery'     | 'Physical inventory 1*' |
-		Then the number of "ItemList" table lines is "меньше или равно" 1
+		Then the number of "ItemList" table lines is "<=" 1
 	* Change the document number
 		And I move to "Other" tab
 		And I input "0" text in "Number" field
@@ -894,7 +894,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 		And "ItemList" table contains lines
 			| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Expense type' | 'Basis document'        |
 			| 'Dress' | '1,000'    | 'XS/Blue'  | 'Logistics department' | 'pcs'  | 'Delivery'     | 'Physical inventory 2*' |
-		Then the number of "ItemList" table lines is "меньше или равно" 1
+		Then the number of "ItemList" table lines is "<=" 1
 		And I click "Post and close" button
 	* Create a document StockAdjustmentAsSurplus on a partial quantity
 		And I click the button named "FormDocumentStockAdjustmentAsSurplusGenerateStockAdjustmentAsSurplus"
@@ -941,7 +941,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 		And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'   | 'Business unit'        | 'Unit' | 'Revenue type' | 'Basis document'        |
 			| 'Trousers' | '4,000'    | '36/Yellow'  | 'Logistics department' | 'pcs'  | 'Delivery'     | 'Physical inventory 2*' |
-		Then the number of "ItemList" table lines is "меньше или равно" 1
+		Then the number of "ItemList" table lines is "<=" 1
 		And I click "Post and close" button
 
 Scenario: _2990009 check for updates Update Exp Count
@@ -956,7 +956,7 @@ Scenario: _2990009 check for updates Update Exp Count
 		And I select current line in "List" table
 		And I click "Fill exp. count" button
 		And Delay 2
-		Then the number of "ItemList" table lines is "меньше или равно" 2
+		Then the number of "ItemList" table lines is "<=" 2
 		And "ItemList" table contains lines
 			| 'Item'     | 'Difference' | 'Item key'  | 'Exp. count' | 'Unit' |
 			| 'Dress'    | '-398,000'   | 'XS/Blue'   | '398,000'    | 'pcs'  |
@@ -966,7 +966,7 @@ Scenario: _2990009 check for updates Update Exp Count
 			| 'Difference' | 'Exp. count' | 'Item'     | 'Item key'  | 'Unit' |
 			| '-405,000'   | '405,000'    | 'Trousers' | '36/Yellow' | 'pcs'  |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
-		Then the number of "ItemList" table lines is "меньше или равно" 1
+		Then the number of "ItemList" table lines is "<=" 1
 	* Add one more line without stock remains
 		And I click the button named "Add"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -987,7 +987,7 @@ Scenario: _2990009 check for updates Update Exp Count
 		And I finish line editing in "ItemList" table
 	* Check update
 		And I click "Update exp. count" button
-		Then the number of "ItemList" table lines is "меньше или равно" 3
+		Then the number of "ItemList" table lines is "<=" 3
 		And "ItemList" table contains lines
 			| 'Phys. count' | 'Item'     | 'Difference' | 'Item key'  | 'Exp. count' | 'Unit' |
 			| ''            | 'Trousers' | '-405,000'   | '36/Yellow' | '405,000'    | 'pcs'  |
@@ -1007,7 +1007,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 		And I select current line in "List" table
 		And I click "Fill exp. count" button
 		And Delay 2
-		Then the number of "ItemList" table lines is "меньше или равно" 2
+		Then the number of "ItemList" table lines is "<=" 2
 	* Distribution of items for recalculation into two employees
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Unit' |

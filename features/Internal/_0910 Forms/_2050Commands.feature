@@ -1780,98 +1780,6 @@ Scenario: _0205020 add test command to the list of documents Cash Revenue
 			And I click "Save and close" button
 		And I close all client application windows
 
-Scenario: _0205021 add test command to the list of documents Cash transfer order
-	* Open Command register
-		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
-		And I click the button named "FormCreate"
-	* Filling test command data for Cash transfer order
-		* Create metadata for CashTransferOrder and select it for the command
-			And I click Select button of "Configuration metadata" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "CashTransferOrder" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'CashTransferOrder'  |
-			And I select current line in "List" table
-			And I click Select button of "Plugins" field
-			Then "Plugins" window is opened
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Test command' |
-			And I select current line in "List" table
-			And I select "List form" exact value from "Form type" drop-down list
-	* Save command
-		And I click "Save and close" button
-	* Check command save
-		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
-		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'CashTransferOrder'                | 'Test command'       |
-	* Check the command from the document list CashTransferOrder
-		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-		And I go to the last line in "List" table
-		And I click "Test command" button
-		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
-		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
-	* Check that the command is not displayed in the document
-		And I click "Create" button
-		When I Check the steps for Exception
-			|'And I click "Test command" button'|
-		And I close all client application windows
-	* Connect a command to a document form
-		* Open Command register
-			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
-			And I click the button named "FormCreate"
-		* Filling in command
-			And I click Select button of "Configuration metadata" field
-			And I click "List" button
-			And I go to line in "List" table
-				| 'Description'       |
-				| 'CashTransferOrder' |
-			And I select current line in "List" table
-			And I click Select button of "Plugins" field
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
-			And I select current line in "List" table
-			And I select "Object form" exact value from "Form type" drop-down list
-			And I click "Save and close" button
-	* Check that the command is displayed in the document
-		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-		And I click "Create" button
-		And I click "Test command" button
-		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
-		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
-		And I close all client application windows
-	* Connect the command to the document selection form
-		* Open Command register
-			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
-			And I click the button named "FormCreate"
-		* Filling in command
-			And I click Select button of "Configuration metadata" field
-			And I click "List" button
-			And I go to line in "List" table
-				| 'Description'       |
-				| 'CashTransferOrder' |
-			And I select current line in "List" table
-			And I click Select button of "Plugins" field
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Test command' |
-			And I select current line in "List" table
-			And I select "Choice form" exact value from "Form type" drop-down list
-			And I click "Save and close" button
-		And I close all client application windows
-
 
 Scenario: _0205022 add test command to the list of documents Cheque bond transaction
 	* Open Command register
@@ -3588,7 +3496,7 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			| 'Boots' | '38/18SD'  | 'pcs'  | '1,000' |
 	* Difference reconciliation
 		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
-		Then the number of "CompareItemList" table lines is "меньше или равно" 3
+		Then the number of "CompareItemList" table lines is "<=" 3
 		And "CompareItemList" table became equal
 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
 			| 'Dress' | '8,000'    | '-4,000'     | 'L/Green'  | 'pcs'  | '4,000' |
@@ -3631,7 +3539,7 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			| 'Item'  | 'Item key' | 'Q'     | 'Unit' |
 			| 'Dress' | 'L/Green'  | '5,000' | 'pcs'  |
 		And in the table "PhysItemList" I click the button named "PhysItemListDelete"
-		Then the number of "PhysItemList" table lines is "меньше или равно" 2
+		Then the number of "PhysItemList" table lines is "<=" 2
 	* Add items by scanning on the tab "CompareItemList"
 		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
 		And in the table "CompareItemList" I click the button named "CompareItemListSearchByBarcode"
@@ -3641,7 +3549,7 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
 			| 'Boots' | '15,000'   | '-11,000'    | '37/18SD'  | 'pcs'  | '4,000' |
 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
-		Then the number of "CompareItemList" table lines is "меньше или равно" 2
+		Then the number of "CompareItemList" table lines is "<=" 2
 	* Add items to the tab "CompareItemList" through the Add button
 		And in the table "CompareItemList" I click the button named "CompareItemListAdd"
 		And I click choice button of the attribute named "CompareItemListItem" in "CompareItemList" table
@@ -3666,7 +3574,7 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			| 'Boots' | '15,000'   | '-11,000'    | '37/18SD'  | 'pcs'  | '4,000' |
 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
 			| 'Shirt' | ''         | '1,000'      | '38/Black' | 'pcs'  | '1,000' |
-		Then the number of "CompareItemList" table lines is "меньше или равно" 3
+		Then the number of "CompareItemList" table lines is "<=" 3
 	* Add items to the tab "CompareItemList" through the Pick up button
 		And in the table "CompareItemList" I click the button named "CompareItemListOpenPickupItems"
 		And I go to line in "ItemList" table
@@ -3684,7 +3592,7 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
 			| 'Shirt' | ''         | '1,000'      | '38/Black' | 'pcs'  | '1,000' |
 			| 'Shirt' | ''         | '1,000'      | '36/Red'   | 'pcs'  | '1,000' |
-		Then the number of "CompareItemList" table lines is "меньше или равно" 4
+		Then the number of "CompareItemList" table lines is "<=" 4
 	* Collapse of the tabular part with data on documents-bases
 		And "ExpItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |

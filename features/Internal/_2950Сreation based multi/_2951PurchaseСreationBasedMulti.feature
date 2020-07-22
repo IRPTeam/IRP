@@ -48,7 +48,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
-		Then the number of "ItemList" table lines is "меньше или равно" 3
+		Then the number of "ItemList" table lines is "<=" 3
 		If the field named "LegalName" is equal to "Second Company Ferron BP" Then
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      | 'Goods receipt' | 'Sales order' |
@@ -75,7 +75,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
-		Then the number of "ItemList" table lines is "меньше или равно" 3
+		Then the number of "ItemList" table lines is "<=" 3
 		If the field named "LegalName" is equal to "Second Company Ferron BP" Then
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      | 'Goods receipt' | 'Sales order' |
@@ -378,7 +378,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 			| 128    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
-		Then the number of "ItemList" table lines is "меньше или равно" 3
+		Then the number of "ItemList" table lines is "<=" 3
 		* Change the document number to 130
 			And I input "130" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -387,7 +387,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		And I click "Post and close" button
 		When I click command interface button "Purchase invoice (create)"
 		And Delay 2
-		Then the number of "ItemList" table lines is "меньше или равно" 3
+		Then the number of "ItemList" table lines is "<=" 3
 		* Change the document number to 131
 			And I input "131" text in "Number" field
 			Then "1C:Enterprise" window is opened

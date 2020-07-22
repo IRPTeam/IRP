@@ -1931,7 +1931,7 @@ Scenario:  _0154035 search the item key selection list
 		| 'M/Brown'   | 'Dress' |
 		And I change "IsSpecificationFilter" radio button value to "Specification"
 		And I select from "Color" drop-down list by "Black" string
-		Then the number of "List" table lines is "равно" 0
+		Then the number of "List" table lines is "=" 0
 		And I close all client application windows
 
 
@@ -3834,7 +3834,7 @@ Scenario: check row key when cloning a string in Sales order
 		| '$Rov1$'    |
 		And I activate "Row key" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
-		Then the number of "List" table lines is "меньше или равно" 1
+		Then the number of "List" table lines is "<=" 1
 
 Scenario: check row key when cloning a string in Sales invoice
 	* Filling in the details of the document Sales invoice
@@ -3880,7 +3880,7 @@ Scenario: check row key when cloning a string in Sales invoice
 		| '$Rov1$'    |
 		And I activate "Row key" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
-		Then the number of "List" table lines is "меньше или равно" 1
+		Then the number of "List" table lines is "<=" 1
 
 Scenario: check row key when cloning a string in Purchase order
 	* Filling in the details of the document Purchase order
@@ -3939,7 +3939,7 @@ Scenario: check row key when cloning a string in Purchase order
 		| '$Rov1$'    |
 		And I activate "Row key" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
-		Then the number of "List" table lines is "меньше или равно" 1
+		Then the number of "List" table lines is "<=" 1
 
 Scenario: check row key when cloning a string in Shipment confirmation
 	* Filling in the details of the document Shipment confirmation
@@ -3998,7 +3998,7 @@ Scenario: check row key when cloning a string in Shipment confirmation
 		| '$Rov1$'    |
 		And I activate "Row key" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
-		Then the number of "List" table lines is "меньше или равно" 1
+		Then the number of "List" table lines is "<=" 1
 
 
 

@@ -616,7 +616,7 @@ Scenario: _005023 filling in the "Partner segments content" catalog
 Scenario: _005024 filling in the "Payment terms" catalog 
 	* Opening a form and creating Payment terms
 		Given I open hyperlink "e1cib/list/Catalog.PaymentSchedules"
-		When creating a catalog element with the name Test
+		When create a catalog element with the name Test
 	* Check for created Payment terms
 		Then I check for the "PaymentSchedules" catalog element with the "Description_en" "Test ENG"  
 		Then I check for the "PaymentSchedules" catalog element with the "Description_tr" "Test TR"
@@ -641,7 +641,7 @@ Scenario: _005026 filling in the "Item segments content" catalog
 Scenario: _005027 filling in the "Payment types" catalog  
 	* Opening a form and creating Payment types
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTypes"
-		When creating a catalog element with the name Test
+		When create a catalog element with the name Test
 		And I close current window
 	* Check for created Payment types
 		Then I check for the "PaymentTypes" catalog element with the "Description_en" "Test ENG"  

@@ -72,7 +72,6 @@
   <content>Catalog.IDInfoAddresses</content>
   <content>Catalog.IDInfoSets</content>
   <content>Catalog.ObjectStatuses</content>
-  <content>Catalog.CompanyTypes</content>
   <content>Catalog.Specifications</content>
   <content>Document.BankPayment</content>
   <content>Document.BankReceipt</content>

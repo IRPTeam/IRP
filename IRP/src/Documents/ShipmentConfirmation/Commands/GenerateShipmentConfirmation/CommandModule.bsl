@@ -289,7 +289,7 @@ Function GetErrorMessage(BasisDocument)
 				ErrorMessage = R().Error_019;
 				ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.ShipmentConfirmation.Synonym, BasisDocument.Metadata().Synonym);
 			Else
-				ErrorMessage = R().Error_024;
+				ErrorMessage = R().Error_018;
 			EndIf;
 			
 		EndIf;

@@ -69,10 +69,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.CompanyTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.TaxRates</metadata>
     <use>Use</use>
   </content>

@@ -409,7 +409,6 @@
   <catalogs>Catalog.CashAccounts</catalogs>
   <catalogs>Catalog.ChequeBonds</catalogs>
   <catalogs>Catalog.Companies</catalogs>
-  <catalogs>Catalog.CompanyTypes</catalogs>
   <catalogs>Catalog.ConfigurationMetadata</catalogs>
   <catalogs>Catalog.Countries</catalogs>
   <catalogs>Catalog.Currencies</catalogs>
@@ -519,6 +518,7 @@
   <enums>Enum.TaxType</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
+  <enums>Enum.CompanyLegalType</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>

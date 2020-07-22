@@ -1269,13 +1269,7 @@ Scenario: _016010 check dependent prices calculation
 		And I click "Save and close" button
 		And I wait "Plugins (create)" window closing in 10 seconds
 	* Creating price type that will use external processing
-		Given I open 	Then the form attribute named "DecorationContext" became equal to "PurchasePrice - purchase price SalesPrice    - sales price Example: SalesPrice = PurchasePrice + (PurchasePrice / 100  * 10)  10 percent increase in selling price"
-	And "PriceTypes" table became equal
-		| 'Purchase price type' | 'Сalculation formula for sales price' |
-		| 'Basic Price Types'   | ''                                    |
-
-
-hyperlink "e1cib/list/Catalog.PriceTypes"
+		Given I open hyperlink "e1cib/list/Catalog.PriceTypes"	
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
 		And I input "Dependent Price" text in the field named "Description_en"
@@ -1335,9 +1329,3 @@ hyperlink "e1cib/list/Catalog.PriceTypes"
 			And I click "Yes" button
 			And I input "200" text in "Number" field
 		And I click "Post and close" button
-		
-
-
-
-
-

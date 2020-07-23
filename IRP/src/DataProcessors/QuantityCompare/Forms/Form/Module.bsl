@@ -33,7 +33,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region Commands
 
 &AtClient
@@ -257,6 +256,4 @@ Function ListsToTempStorage(FormUUID)
 	Lists.Insert("ExpItemList", Object.ExpItemList.Unload());
 	Return PutToTempStorage(Lists, FormUUID);	
 EndFunction
-
-
 

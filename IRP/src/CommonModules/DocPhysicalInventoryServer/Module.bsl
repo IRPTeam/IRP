@@ -28,8 +28,8 @@ EndProcedure
 #EndRegion
 
 Procedure UpdatePhysicalCountByLocations(Object, Form) Export
-	Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef" ,Object.Ref);
-	LinkedPhisiaclCountByLocation = Documents.PhysicalCountByLocation.GetLinkedPhysicalCountByLocation(Object.Ref);
+	Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef", Object.Ref);
+	LinkedPhysicalCountByLocation = Documents.PhysicalCountByLocation.GetLinkedPhysicalCountByLocation(Object.Ref);
 	
 	For Each Row In Object.ItemList Do
 		Row.PhysicalCountByLocation = Undefined;
@@ -37,7 +37,7 @@ Procedure UpdatePhysicalCountByLocations(Object, Form) Export
 		Row.Locked = False;
 	EndDo;
 	
-	For Each Row in LinkedPhisiaclCountByLocation Do
+	For Each Row In LinkedPhysicalCountByLocation Do
 		For Each LinkedRow In Object.ItemList.FindRows(New Structure("Key", Row.Key)) Do
 			LinkedRow.PhysicalCountByLocation = Row.Ref;
 			LinkedRow.PhysicalCountByLocationPresentation = StrTemplate(R().InfoMessage_007, Row.Number, Row.Date);
@@ -45,8 +45,8 @@ Procedure UpdatePhysicalCountByLocations(Object, Form) Export
 		EndDo;
 	EndDo;
 	
-	Form.Items.GroupPhysicalCountByLocation.Visible = LinkedPhisiaclCountByLocation.Count() > 0;
-	Form.Items.ItemListPhysicalCountByLocationPresentation.Visible = LinkedPhisiaclCountByLocation.Count() > 0;
+	Form.Items.GroupPhysicalCountByLocation.Visible = LinkedPhysicalCountByLocation.Count() > 0;
+	Form.Items.ItemListPhysicalCountByLocationPresentation.Visible = LinkedPhysicalCountByLocation.Count() > 0;
 EndProcedure
 
 #Region GroupTitle

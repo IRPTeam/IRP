@@ -12,7 +12,6 @@
     <key>en</key>
     <value>Items</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <characteristics>
@@ -50,11 +49,9 @@
       <key>en</key>
       <value>Item type</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.ItemTypes</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
@@ -69,11 +66,9 @@
       <key>en</key>
       <value>Unit</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.Units</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
@@ -84,12 +79,15 @@
     <name>MainPricture</name>
     <synonym>
       <key>en</key>
-      <value>Main pricture</value>
+      <value>Main picture</value>
     </synonym>
     <comment>Temporary</comment>
     <type>
       <types>ValueStorage</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -102,12 +100,15 @@
     <type>
       <types>CatalogRef.Partners</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <choiceParameters>
       <name>Filter.Vendor</name>
       <value xsi:type="core:BooleanValue">
         <value>true</value>
       </value>
     </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -123,6 +124,11 @@
         <length>10</length>
       </stringQualifiers>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -134,20 +140,17 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
-    <comment></comment>
     <attributes uuid="81d83f43-5681-4735-a68d-2439d541ab98">
       <name>Property</name>
       <synonym>
         <key>en</key>
         <value>Property</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -158,11 +161,9 @@
         <key>en</key>
         <value>Value</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>Characteristic.AddAttributeAndProperty</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -174,7 +175,6 @@
       <key>en</key>
       <value>Item form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -207,5 +207,6 @@
       <types>CatalogRef.ItemTypes</types>
     </commandParameterType>
     <representation>Auto</representation>
+    <shortcut></shortcut>
   </commands>
 </mdclass:Catalog>

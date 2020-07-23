@@ -12,9 +12,8 @@
   <name>IDInfo</name>
   <synonym>
     <key>en</key>
-    <value>ID Info</value>
+    <value>Contact info</value>
   </synonym>
-  <comment></comment>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="f704a578-563f-49d8-85f9-8232e7b2f17e">
     <name>Value</name>
@@ -22,11 +21,9 @@
       <key>en</key>
       <value>Value</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>Characteristic.IDInfoTypes</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
@@ -39,11 +36,9 @@
       <key>en</key>
       <value>Info</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>ValueStorage</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
@@ -56,11 +51,9 @@
       <key>en</key>
       <value>Country</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.Countries</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
@@ -73,12 +66,10 @@
       <key>en</key>
       <value>Object</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>DocumentRef</types>
       <types>CatalogRef</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
@@ -91,13 +82,11 @@
     <name>IDInfoType</name>
     <synonym>
       <key>en</key>
-      <value>ID Info type</value>
+      <value>Contact info type</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>

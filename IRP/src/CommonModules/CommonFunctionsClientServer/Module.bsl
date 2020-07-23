@@ -158,7 +158,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region FormObjectAttributesPreviousValues
 
 Function GetObjectPreviousValue(Object, Form, AttributeName) Export

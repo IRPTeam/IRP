@@ -26,10 +26,10 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	IDInfoClient.NotificationProcessing(ThisObject, Object.Ref, EventName, Parameter, Source);
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 	If EventName = "UpdateIDInfo" Then
-		IDInfoCreateFormControll();
+		IDInfoCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -67,20 +67,19 @@ EndProcedure
 &AtServer
 Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	If Object.Our Then
-		For Index = 0 To CompanyTaxes.Count()-1 Do
+		For Index = 0 To CompanyTaxes.Count() - 1 Do
 			Row = CompanyTaxes[Index];
 			If Not ValueIsFilled(Row.Period) Then
 				Cancel = True;
-				MessageText = StrTemplate(R()["Error_010"], "Period");
+				MessageText = StrTemplate(R().Error_010, "Period");
 				CommonFunctionsClientServer.ShowUsersMessage(MessageText,
-						"CompanyTaxes[" + Format(Index, "NG=0;") + "].Period",);
+						"CompanyTaxes[" + Format(Index, "NG=0;") + "].Period");
 			EndIf;
 		EndDo;
 	EndIf;
 EndProcedure
 
 #EndRegion
-
 
 &AtClient
 Procedure CurrenciesMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
@@ -166,7 +165,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient
@@ -175,12 +173,12 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
 &AtServer
-Procedure IDInfoCreateFormControll()
+Procedure IDInfoCreateFormControl()
 	IDInfoServer.CreateFormControls(ThisObject);
 EndProcedure
 

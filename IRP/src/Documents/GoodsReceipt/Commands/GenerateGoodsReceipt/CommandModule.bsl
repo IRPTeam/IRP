@@ -24,6 +24,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_Bundling = New Array();
 	ArrayOf_InventoryTransfer = New Array();
@@ -61,6 +62,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	Return JoinDocumentsStructure(ArrayOfTables, "BasedOn, Company, Partner, LegalName, Agreement, Store");
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	
 	ValueTable = New ValueTable();
@@ -113,6 +115,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function PutQueryTableToTempTable(QueryTable)
 	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
 	For Each Row In QueryTable Do
@@ -144,7 +147,7 @@ Function PutQueryTableToTempTable(QueryTable)
 	Return tempManager;
 EndFunction
 
-
+&AtServer
 Function ExtractInfoFrom_PurchaseOrder(QueryTable)
 	Query = New Query();
 	Query.TempTablesManager = PutQueryTableToTempTable(QueryTable);
@@ -180,6 +183,7 @@ Function ExtractInfoFrom_PurchaseOrder(QueryTable)
 	Return QueryTable;
 EndFunction
 
+&AtServer
 Function ExtractInfoFrom_PurchaseInvoice(QueryTable)
 	Query = New Query();
 	Query.TempTablesManager = PutQueryTableToTempTable(QueryTable);
@@ -211,14 +215,17 @@ Function ExtractInfoFrom_PurchaseInvoice(QueryTable)
 	Return QueryTable;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_Bundling(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "Bundling");
 EndFunction
 
+&AtServer
 Function GetDocumentTable_InventoryTransfer(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "InventoryTransfer");
 EndFunction
 
+&AtServer
 Function GetDocumentTable_PurchaseInvoice(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -248,6 +255,7 @@ Function GetDocumentTable_PurchaseInvoice(ArrayOfBasisDocuments)
 	Return ExtractInfoFrom_PurchaseInvoice(QueryTable);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_PurchaseOrder(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -277,6 +285,7 @@ Function GetDocumentTable_PurchaseOrder(ArrayOfBasisDocuments)
 	Return ExtractInfoFrom_PurchaseOrder(QueryTable);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_SalesReturn(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -305,10 +314,12 @@ Function GetDocumentTable_SalesReturn(ArrayOfBasisDocuments)
 	Return QueryResult.Unload();
 EndFunction
 
+&AtServer
 Function GetDocumentTable_Unbundling(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "Unbundling");
 EndFunction
 
+&AtServer
 Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 	Query = New Query();
 	Query.Text =
@@ -335,51 +346,52 @@ Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 	Return QueryResult.Unload();
 EndFunction
 
-
+&AtServer
 Function GetErrorMessage(BasisDocument)
 	
 	ErrorMessage = Undefined;
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.PurchaseOrder") Then
 		If Not BasisDocument.Status.Posting Or Not BasisDocument.Posted Then
-			Return StrTemplate(R()["Error_067"], String(BasisDocument));		
+			Return StrTemplate(R().Error_067, String(BasisDocument));		
 		EndIf;
 		
 		If BasisDocument.GoodsReceiptBeforePurchaseInvoice Then
 			If WithoutBalance(BasisDocument) And HasGoodReceipt(BasisDocument) Then
-			ErrorMessage = R()["Error_073"];
+			ErrorMessage = R().Error_073;
 			ErrorMessage = StrTemplate(ErrorMessage,  BasisDocument.Metadata().Synonym, Metadata.Documents.GoodsReceipt.Synonym);
 			Else
-				If PurcheInvoiceExist(BasisDocument) Then
-					ErrorMessage = R()["Error_019"];
-					ErrorMessage = StrTemplate(ErrorMessage, R().S_021, BasisDocument.Metadata().Synonym);
+				If PurchaseInvoiceExist(BasisDocument) Then
+					ErrorMessage = R().Error_019;
+					ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.GoodsReceipt.Synonym, BasisDocument.Metadata().Synonym);
 				Else
 					
 					
-					ErrorMessage = R()["Error_029"];
+					ErrorMessage = R().Error_017;
 				EndIf;
 				
 			EndIf;
 		Else
-			ErrorMessage = R()["Error_028"];
+			ErrorMessage = R().Error_028;
 		EndIf;
 		
 	Else
-		ErrorMessage = R()["Error_019"];
-		ErrorMessage = StrTemplate(ErrorMessage, R().S_021, BasisDocument.Metadata().Synonym);
+		ErrorMessage = R().Error_019;
+		ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.GoodsReceipt.Synonym, BasisDocument.Metadata().Synonym);
 	EndIf;
 	
 	Return ErrorMessage;
 	
 EndFunction
 
-Function PurcheInvoiceExist(BasisDocument)
+&AtServer
+Function PurchaseInvoiceExist(BasisDocument)
 	
 	Return False;
 	
 EndFunction
 
-
+&AtServer
 Function HasGoodReceipt(BasisDocument)
 	
 	Query = New Query;
@@ -396,6 +408,7 @@ Function HasGoodReceipt(BasisDocument)
 	Return Not Query.Execute().IsEmpty();
 EndFunction
 
+&AtServer
 Function WithoutBalance(BasisDocument)
 	Query = New Query();
 	Query.Text =

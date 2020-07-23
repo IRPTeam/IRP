@@ -13,30 +13,27 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		Return;
 	EndIf;
 	
-	QueryTable = GetChoiseDataTable(Parameters);
+	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = New ValueList();
 	For Each Row In QueryTable Do
 		ChoiceData.Add(Row.Ref, Row.Presentation);
 	EndDo;
 EndProcedure
 
-Function GetChoiseDataTable(Parameters) Export
-	QueryBuilderText =
-		"SELECT ALLOWED TOP 50
-		|	Table.Ref AS Ref,
-		|	Table.Presentation
-		|FROM
-		|	Catalog.ObjectStatuses AS Table
-		|WHERE
-		|	Table.Description_en LIKE ""%%"" + &SearchString + ""%%""
+Function GetChoiceDataTable(Parameters) Export
+	Filter = "
 		|	AND CASE
 		|		WHEN &Filter_RefInList
 		|			THEN Table.Ref IN (&RefList)
 		|		ELSE TRUE
 		|	END
 		|";
-	QueryBuilderText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryBuilderText);
+
+	Settings = New Structure;
+	Settings.Insert("Name", "Catalog.ObjectStatuses");
+	Settings.Insert("Filter", Filter);
 	
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
 	If TypeOf(Parameters) = Type("Structure") And Parameters.Filter.Property("CustomSearchFilter") Then
@@ -61,4 +58,3 @@ Function GetChoiseDataTable(Parameters) Export
 	EndDo;
 	Return Query.Execute().Unload();
 EndFunction
-

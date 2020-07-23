@@ -65,7 +65,6 @@ EndProcedure
 
 #EndRegion
 
-
 &AtClient
 Procedure ClassifierTableSelection(Item, RowSelected, Field, StandardProcessing)
 	If Items.ClassifierTable.CurrentData = Undefined Then
@@ -74,7 +73,6 @@ Procedure ClassifierTableSelection(Item, RowSelected, Field, StandardProcessing)
 	
 	CreateItemFromClassifierRow(Items.ClassifierTable.CurrentData);
 EndProcedure
-
 
 &AtClient
 Procedure CreateItem(Command)
@@ -87,13 +85,13 @@ EndProcedure
 
 &AtClient
 Procedure CreateItemFromClassifierRow(ClassifierRow)
-	//TODO: check existing object
+	// TODO: check existing object
 	
 	NewItem = FillingFromClassifiers.CreateCatalogItemFromClassifier(MetadataName, 
 							AttributesList[0].Value, 
 							ClassifierRow[AttributesList[0].Value]);
 	If ValueIsFilled(NewItem) Then
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R()["InfoMessage_002"], NewItem)
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_002, NewItem)
 				, , ThisObject);
 	EndIf;
 EndProcedure

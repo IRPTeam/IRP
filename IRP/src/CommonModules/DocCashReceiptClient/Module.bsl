@@ -2,12 +2,10 @@
 #Region FormEvents
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	FillPayers(Object, Form);
+	Return;
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	FillPayers(Object, Form);
-	
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
@@ -23,9 +21,9 @@ Procedure SetAvailability(Object, Form) Export
 			EndIf;
 		EndDo;
 		Form.Items.CurrencyExchange.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.CurrencyExchange);
-		Form.Items.CashAccount.ReadOnly =  BasedOnCashTransferOrder And ValueIsFilled(Object.CashAccount);
-		Form.Items.Company.ReadOnly 	= BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
-		Form.Items.Currency.ReadOnly 	=  BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
+		Form.Items.CashAccount.ReadOnly 	 = BasedOnCashTransferOrder And ValueIsFilled(Object.CashAccount);
+		Form.Items.Company.ReadOnly 		 = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
+		Form.Items.Currency.ReadOnly 		 = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
 	EndIf;
 EndProcedure
 
@@ -90,15 +88,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPayer
-
-Procedure PayerOnChange(Object, Form, Item) Export
-	DocCashReceiptClient.SetCurrentPayer(Form, Form.Payer);
-	DocCashReceiptClient.ChangePaymentListPayer(Object.PaymentList, Form.Payer);
-EndProcedure
-
-#EndRegion
-
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export
@@ -136,7 +125,6 @@ Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Our", True, ComparisonType.Equal));
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
-
 
 Procedure OnActiveCell(Object, Form, Item, Cancel = Undefined) Export
 	
@@ -214,19 +202,7 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	FillPayers(Object, Form);
 	SetAvailability(Object, Form);
-EndProcedure
-
-Procedure PaymentListOnActivateRow(Object, Form, Item) Export
-	If Form.Items.PaymentList.CurrentData = Undefined Then
-		Return;
-	EndIf;
-	CurrentRowPayer = Form.Items.PaymentList.CurrentData.Payer;
-	If ValueIsFilled(CurrentRowPayer)
-		And CurrentRowPayer <> Form.CurrentPayer Then
-		DocCashReceiptClient.SetCurrentPayer(Form, CurrentRowPayer);
-	EndIf;
 EndProcedure
 
 Procedure PaymentListBasisDocumentOnChange(Object, Form, Item) Export
@@ -252,7 +228,7 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 	Form.Items.PaymentList.ChangeRow();
 	PaymentListOnChange(Object, Form, Item);
 	CurrentData = Form.Items.PaymentList.CurrentData;
-	If CurrentData <> Undefined And ValueIsFilled(Form.Payer)
+	If CurrentData <> Undefined
 		And Not Saas.SeparationUsed() Then
 		CurrentData.Partner = DocCashReceiptServer.GetPartnerByLegalName(CurrentData.Payer, CurrentData.Partner);
 		PaymentListPartnerOnChange(Object, Form, Item);
@@ -297,7 +273,6 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 	DocumentsClient.PaymentListPlaningTransactionBasisOnChange(Object, Form, Item);
 EndProcedure
 
-&AtClient
 Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData = Undefined Then
@@ -318,7 +293,7 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange") Then
 		
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", True, DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrencyExchange", True, DataCompositionComparisonType.Equal));
 		
 		If ValueIsFilled(Object.Currency) Then
 			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ReceiveCurrency", Object.Currency, DataCompositionComparisonType.Equal));
@@ -328,32 +303,32 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("SendCurrency", Object.CurrencyExchange, DataCompositionComparisonType.Equal));
 		EndIf;
 		
-		ArrayOfChoisedDocuments = New Array();
+		ArrayOfSelectedDocuments = New Array();
 		For Each Row In Object.PaymentList Do
-			ArrayOfChoisedDocuments.Add(Row.PlaningTransactionBasis);
+			ArrayOfSelectedDocuments.Add(Row.PlaningTransactionBasis);
 		EndDo;
 		
 		OpenSettings.FormParameters = New Structure();
-		OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
+		OpenSettings.FormParameters.Insert("ArrayOfSelectedDocuments", ArrayOfSelectedDocuments);
 		
 		OpenSettings.FormParameters.Insert("OwnerRef", Object.Ref);
 		
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Then
 		
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrensyExchange", False, DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrencyExchange", False, DataCompositionComparisonType.Equal));
 		
 		If ValueIsFilled(Object.Currency) Then
 			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ReceiveCurrency", Object.Currency, DataCompositionComparisonType.Equal));
 		EndIf;
 		
-		ArrayOfChoisedDocuments = New Array();
+		ArrayOfSelectedDocuments = New Array();
 		For Each Row In Object.PaymentList Do
-			ArrayOfChoisedDocuments.Add(Row.PlaningTransactionBasis);
+			ArrayOfSelectedDocuments.Add(Row.PlaningTransactionBasis);
 		EndDo;
 		
 		OpenSettings.FormParameters = New Structure();
-		OpenSettings.FormParameters.Insert("ArrayOfChoisedDocuments", ArrayOfChoisedDocuments);
+		OpenSettings.FormParameters.Insert("ArrayOfSelectedDocuments", ArrayOfSelectedDocuments);
 		
 		OpenSettings.FormParameters.Insert("OwnerRef", Object.Ref);
 		
@@ -429,7 +404,7 @@ Procedure PaymentListPartnerOnChange(Object, Form, Item) Export
 		NewAgreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 		If Not CurrentData.Agreement = NewAgreement Then
 			CurrentData.Agreement = NewAgreement;
-			PaymentListAgreementOnChange(Object, Form)
+			PaymentListAgreementOnChange(Object, Form);
 		EndIf;
 	EndIf;
 EndProcedure
@@ -600,7 +575,7 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
-Procedure DecorationGroupTitleCollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
@@ -608,7 +583,7 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
-Procedure DecorationGroupTitleUncollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
@@ -624,41 +599,6 @@ Function GetCalculateRowsActions() Export
 	Actions.Insert("CalculateNetAmountByTotalAmount");
 	Return Actions;
 EndFunction
-
-Procedure SetCurrentPayer(Form, Payer) Export
-	Form.CurrentPayer = Payer;
-EndProcedure
-
-Procedure ChangePaymentListPayer(PaymentList, Payer) Export
-	For Each Row In PaymentList Do
-		If Row.Payer <> Payer Then
-			Row.Payer = Payer;
-		EndIf;
-	EndDo;
-EndProcedure
-
-Procedure FillPayers(Object, Form) Export
-	PayerArray = New Array;
-	For Each Row In Object.PaymentList Do
-		If ValueIsFilled(Row.Payer) Then
-			If PayerArray.Find(Row.Payer) = Undefined Then
-				PayerArray.Add(Row.Payer);
-			EndIf;
-		EndIf;
-	EndDo;
-	If PayerArray.Count() = 0 Then
-		If Not ValueIsFilled(Form.Payer) Then
-			Form.Items.Payer.InputHint = "";
-			Form.Payer = PredefinedValue("Catalog.Companies.EmptyRef");
-		EndIf;
-	ElsIf PayerArray.Count() = 1 Then
-		Form.Items.Payer.InputHint = "";
-		Form.Payer = PayerArray[0];
-	Else
-		Form.Payer = PredefinedValue("Catalog.Companies.EmptyRef");
-		Form.Items.Payer.InputHint = StrConcat(PayerArray, "; ");
-	EndIf;
-EndProcedure
 
 Procedure FillUnfilledPayerInRow(Object, Item, Payer) Export
 	If Not ValueIsFilled(Item.CurrentData.Payer) Then

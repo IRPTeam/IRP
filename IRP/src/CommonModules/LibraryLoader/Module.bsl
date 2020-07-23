@@ -1,5 +1,4 @@
 
-&AtServer
 Function GetDeclarationInfo() Export
 	Declaration = New Structure();
 	Declaration.Insert("LibraryName", "");
@@ -18,7 +17,6 @@ Function GetCallHandlerParameters() Export
 	Return Parameters;
 EndFunction
 
-&AtServer
 Procedure AddActionHandler(Declaration, ActionHandler, ActionName, Owners) Export
 	Action = New Structure();
 	Action.Insert("ActionHandler", ActionHandler);
@@ -33,12 +31,10 @@ Procedure AddActionHandler(Declaration, ActionHandler, ActionName, Owners) Expor
 	Declaration.Actions.Add(Action);
 EndProcedure
 
-&AtServer
 Procedure PutData(Declaration, Data) Export
 	Declaration.Data = Data;
 EndProcedure
 
-&AtServer
 Procedure RegisterLibrary(Object, Form, Declaration) Export
 	If Not ValueIsFilled(Declaration.LibraryName) Then
 		Raise R().Exc_005;
@@ -53,7 +49,6 @@ Procedure RegisterLibrary(Object, Form, Declaration) Export
 	SaveFormData(Object, Form, Declaration.LibraryName, Declaration.Data);
 EndProcedure
 
-&AtServer
 Function RestoreFormData(Object, Form, AttributeName, InitValue = Undefined)
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, AttributeName) Then
 		ArrayOfNewAttribute = New Array();
@@ -68,21 +63,16 @@ Function RestoreFormData(Object, Form, AttributeName, InitValue = Undefined)
 	EndIf;
 EndFunction
 
-&AtServer
 Procedure SaveFormData(Object, Form, AttributeName, Data)
 	Form[AttributeName] = CommonFunctionsServer.SerializeXMLUseXDTO(Data);
 EndProcedure
 
-&AtServer
 Function PushOwnerActionHandlers(Action)
 	ArrayOfPushedHandlers = New Array();
 	For Each Owner In Action.Owners Do
 		PushedHandler = New Structure();
 		PushedHandler.Insert("ActionHandler", Owner.GetAction(Action.ActionName));
 		PushedHandler.Insert("ActionName", Action.ActionName);
-		// bugfix for web-client
-		//PushedHandler.Insert("OwnerType", TypeOf(Owner));
-		//If PushedHandler.OwnerType = Type("ClientApplicationForm") Then
 		If TypeOf(Owner) = Type("ClientApplicationForm") Then
 			PushedHandler.Insert("OwnerName", "_ClientApplicationForm_");
 		Else
@@ -307,9 +297,6 @@ Function FormItems_PaymentList_CallChainHandler(Object, Form, ActionHandler, Add
 		Return True;
 	ElsIf Upper(ActionHandler) = Upper("PaymentListPayeeOnChange") Then
 		Form.PaymentListPayeeOnChange(P1, AddInfo);
-		Return True;
-	ElsIf Upper(ActionHandler) = Upper("PayeeOnChange") Then
-		Form.PayeeOnChange(P1, AddInfo);
 		Return True;
 	ElsIf Upper(ActionHandler) = Upper("PaymentListPlaningTransactionBasisOnChange") Then
 		Form.PaymentListPlaningTransactionBasisOnChange(P1, AddInfo);

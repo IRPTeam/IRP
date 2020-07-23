@@ -12,14 +12,14 @@ EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	SetConditionalAppearence();
+	SetConditionalAppearance();
 	DocReconciliationStatementServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -36,7 +36,7 @@ EndProcedure
 #EndRegion
 
 &AtServer
-Procedure SetConditionalAppearence() Export
+Procedure SetConditionalAppearance() Export
 	ConditionalAppearance.Items.Clear();
 	
 	Arr = New Array();
@@ -47,30 +47,30 @@ Procedure SetConditionalAppearence() Export
 	
 	For Each ItemName In Arr Do
 		// >0
-		AppearenceElement = ConditionalAppearance.Items.Add();
+		AppearanceElement = ConditionalAppearance.Items.Add();
 		
-		FieldElement = AppearenceElement.Fields.Items.Add();
+		FieldElement = AppearanceElement.Fields.Items.Add();
 		FieldElement.Field = New DataCompositionField(ItemName);
 		
-		FilterElement = AppearenceElement.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterElement = AppearanceElement.Filter.Items.Add(Type("DataCompositionFilterItem"));
 		FilterElement.LeftValue = New DataCompositionField("Object." + ItemName);
 		FilterElement.ComparisonType = DataCompositionComparisonType.Greater;
 		FilterElement.RightValue = 0;
 		
-		AppearenceElement.Appearance.SetParameterValue("TextColor", WebColors.Green);
+		AppearanceElement.Appearance.SetParameterValue("TextColor", WebColors.Green);
 		
 		// <0
-		AppearenceElement = ConditionalAppearance.Items.Add();
+		AppearanceElement = ConditionalAppearance.Items.Add();
 		
-		FieldElement = AppearenceElement.Fields.Items.Add();
+		FieldElement = AppearanceElement.Fields.Items.Add();
 		FieldElement.Field = New DataCompositionField(ItemName);
 		
-		FilterElement = AppearenceElement.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterElement = AppearanceElement.Filter.Items.Add(Type("DataCompositionFilterItem"));
 		FilterElement.LeftValue = New DataCompositionField("Object." + ItemName);
 		FilterElement.ComparisonType = DataCompositionComparisonType.Less;
 		FilterElement.RightValue = 0;
 		
-		AppearenceElement.Appearance.SetParameterValue("TextColor", WebColors.Red);
+		AppearanceElement.Appearance.SetParameterValue("TextColor", WebColors.Red);
 	EndDo;
 	
 EndProcedure
@@ -197,8 +197,8 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLalelClick(Item)
-	DocReconciliationStatementClient.DecorationGroupTitleCollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocReconciliationStatementClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -207,24 +207,13 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
-	DocReconciliationStatementClient.DecorationGroupTitleUncollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocReconciliationStatementClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
 
 #Region Commands
-
-&AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
 
 &AtClient
 Procedure PartnerOnChange(Item)
@@ -248,7 +237,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient
@@ -257,8 +245,22 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+#Region ExternalCommands
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);	
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
 #EndRegion

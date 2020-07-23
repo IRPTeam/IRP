@@ -5,11 +5,9 @@
     <key>en</key>
     <value>ENG</value>
   </synonym>
-  <comment></comment>
   <type>
     <types>DefinedType.typeDescription</types>
   </type>
-  <mask></mask>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <dataHistory>Use</dataHistory>
@@ -47,6 +45,14 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.InterfaceGroups</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.CurrencyMovementSets</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.Countries</metadata>
     <use>Use</use>
   </content>
@@ -79,8 +85,16 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>ChartOfCharacteristicTypes.CustomUserSettings</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.IntegrationSettings</metadata>
     <use>DontUse</use>
+  </content>
+  <content>
+    <metadata>Catalog.Taxes</metadata>
+    <use>Use</use>
   </content>
   <content>
     <metadata>Catalog.SpecialOfferRules</metadata>
@@ -103,51 +117,15 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.Currencies</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.ExternalDataProc</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.Partners</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.ItemTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.PriceTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.PaymentTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.Companies</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.InterfaceGroups</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.ObjectStatuses</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.Specifications</metadata>
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.CompanyTypes</metadata>
+    <metadata>Catalog.ReportOptions</metadata>
+    <use>DontUse</use>
+  </content>
+  <content>
+    <metadata>Catalog.Currencies</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -159,6 +137,34 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.ExternalDataProc</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.Partners</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.PrintTemplates</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.ItemTypes</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.PriceTypes</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>ChartOfCharacteristicTypes.CurrencyMovementType</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.PaymentTypes</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.SerialLotNumbers</metadata>
     <use>Use</use>
   </content>
@@ -167,15 +173,11 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>ChartOfCharacteristicTypes.CustomUserSettings</metadata>
+    <metadata>Catalog.ObjectStatuses</metadata>
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.PrintTemplates</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.Taxes</metadata>
+    <metadata>Catalog.Companies</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -183,11 +185,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>ChartOfCharacteristicTypes.CurrencyMovementType</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.CurrencyMovementSets</metadata>
+    <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

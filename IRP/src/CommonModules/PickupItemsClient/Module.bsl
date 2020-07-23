@@ -6,7 +6,7 @@ Procedure OpenPickupItems(Object, Form, ClientModule, AddInfo = Undefined) Expor
 	NotifyDescription = New NotifyDescription("OpenPickupItemsEnd", ClientModule, NotifyParameters);
 	OpenFormParameters = AddInfo;	
 	#If MobileClient Then
-	FormName = "CommonForm.PickUpItemsMobile";
+	
 	#Else
 	FormName = "CommonForm.PickUpItems";
 	#EndIf

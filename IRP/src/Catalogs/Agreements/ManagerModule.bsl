@@ -80,23 +80,16 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	
 	StandardProcessing = False;
 	
-	QueryTable = GetChoiseDataTable(Parameters);
+	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = New ValueList();
 	For Each Row In QueryTable Do
 		ChoiceData.Add(Row.Ref, Row.Presentation);
 	EndDo;
 EndProcedure
 
-Function GetChoiseDataTable(Parameters) Export
+Function GetChoiceDataTable(Parameters) Export
 	
-	QueryBuilderText =
-		"SELECT ALLOWED TOP 50
-		|	Table.Ref AS Ref,
-		|	Table.Presentation
-		|FROM
-		|	Catalog.Agreements AS Table
-		|WHERE
-		|	Table.Description_en LIKE ""%%"" + &SearchString + ""%%""
+	Filter = "
 		|	AND (CASE
 		|		WHEN &IncludeFilterByPartner
 		|			THEN Table.Partner = &Partner
@@ -111,7 +104,11 @@ Function GetChoiseDataTable(Parameters) Export
 		|			OR Table.EndOfUse = DATETIME(1, 1, 1))
 		|		ELSE TRUE
 		|	END)";
-	QueryBuilderText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryBuilderText);
+	Settings = New Structure;
+	Settings.Insert("Name", "Catalog.Agreements");
+	Settings.Insert("Filter", Filter);
+	
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 	
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
@@ -139,9 +136,10 @@ Function GetChoiseDataTable(Parameters) Export
 
 	AdditionalParameters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.AdditionalParameters);
 	For Each QueryParameter In QueryParametersStr Do
-		Query.SetParameter(QueryParameter.Key, ?(AdditionalParameters.Property(QueryParameter.Key),
-				AdditionalParameters[QueryParameter.Key],
-				QueryParameter.Value));
+		KeyValue = ?(AdditionalParameters.Property(QueryParameter.Key),
+						AdditionalParameters[QueryParameter.Key],
+						QueryParameter.Value);
+		Query.SetParameter(QueryParameter.Key, KeyValue);
 	EndDo;
 	If Query.Parameters.IncludePartnerSegments Then
 		PartnersSegmentsArray = InformationRegisters.PartnerSegments.GetSegmentsRefArrayByPartner(Query.Parameters.Partner);
@@ -150,8 +148,8 @@ Function GetChoiseDataTable(Parameters) Export
 	Return Query.Execute().Unload();
 EndFunction
 
-Function GetDefaultChoiseRef(Parameters) Export
-	QueryTable = GetChoiseDataTable(New Structure("SearchString, Filter", "", Parameters));
+Function GetDefaultChoiceRef(Parameters) Export
+	QueryTable = GetChoiceDataTable(New Structure("SearchString, Filter", "", Parameters));
 	
 	If QueryTable.Count() = 1 Then
 		Return QueryTable[0].Ref;

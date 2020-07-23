@@ -12,7 +12,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Taxes_CreateFormControls();
 	Taxes_CreateTaxTree();
 	// {TAXES}
-	SetConditionalAppearence();
+	SetConditionalAppearance();
 EndProcedure
 
 &AtClient
@@ -23,7 +23,7 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 	
 	If Not Source = ThisObject Then
@@ -78,7 +78,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	For RowIndex = 0 To (Object.ItemList.Count() - 1) Do
 		Row = Object.ItemList[RowIndex];
 		If Not ValueIsFilled(Row.ProcurementMethod) AND Row.ItemType = Enums.ItemTypes.Product Then
-			MessageText = StrTemplate(R()["Error_010"], R().S_023);
+			MessageText = StrTemplate(R().Error_010, R().S_023);
 			CommonFunctionsClientServer.ShowUsersMessage(MessageText
 				, "Object.ItemList[" + RowIndex + "].ProcurementMethod"
 				, "Object.ItemList");
@@ -94,14 +94,14 @@ Procedure SetVisibilityAvailability(Object, Form) Export
 EndProcedure
 
 &AtServer
-Procedure SetConditionalAppearence()
+Procedure SetConditionalAppearance()
 	
-	AppearenceElement = ConditionalAppearance.Items.Add();
+	AppearanceElement = ConditionalAppearance.Items.Add();
 	
-	FieldElement = AppearenceElement.Fields.Items.Add();
+	FieldElement = AppearanceElement.Fields.Items.Add();
 	FieldElement.Field = New DataCompositionField(Items.ItemListProcurementMethod.Name);
 	
-	FilterElementGroup = AppearenceElement.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
+	FilterElementGroup = AppearanceElement.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
 	FilterElementGroup.GroupType = DataCompositionFilterItemsGroupType.AndGroup;
 	
 	FilterElement = FilterElementGroup.Items.Add(Type("DataCompositionFilterItem"));
@@ -113,11 +113,10 @@ Procedure SetConditionalAppearence()
 	FilterElement.LeftValue = New DataCompositionField("Object.ItemList.ProcurementMethod");
 	FilterElement.ComparisonType = DataCompositionComparisonType.NotFilled;
 	
-	AppearenceElement.Appearance.SetParameterValue("MarkIncomplete", True);
+	AppearanceElement.Appearance.SetParameterValue("MarkIncomplete", True);
 EndProcedure
 
 #EndRegion
-
 
 #Region FormItemsEvents
 &AtClient
@@ -331,6 +330,7 @@ Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Expo
 	SpecialOffersEditFinishAtServer_ForDocument(Result, AdditionalParameters);
 EndProcedure
 
+&AtServer
 Procedure SpecialOffersEditFinishAtServer_ForDocument(Result, AdditionalParameters) Export
 	DocumentsServer.FillItemList(Object);
 EndProcedure
@@ -364,8 +364,8 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLalelClick(Item)
-	DocSalesOrderClient.DecorationGroupTitleCollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocSalesOrderClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -374,8 +374,8 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
-	DocSalesOrderClient.DecorationGroupTitleUncollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocSalesOrderClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -485,17 +485,6 @@ EndProcedure
 &AtClient
 Procedure DecorationStatusHistoryClick(Item)
 	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
 #EndRegion
@@ -629,7 +618,7 @@ EndProcedure
 
 &AtServer
 Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	CurrenciesServer.FiilCurrencyTable(Object, 
+	CurrenciesServer.FillCurrencyTable(Object, 
 	                                   Object.Date, 
 	                                   Object.Company, 
 	                                   Currency, 
@@ -656,7 +645,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient
@@ -665,8 +653,23 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region ExternalCommands
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);	
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
 #EndRegion

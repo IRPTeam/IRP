@@ -24,27 +24,12 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	EndIf;
 	
 	StandardProcessing = False;
-	
-	QueryBuilderText =
-		"SELECT ALLOWED TOP 50
-		|	Table.Ref,
-		|	Table.Presentation
-		|FROM
-		|	TableType.%1 AS Table
-		|WHERE
-		|	Table.Description_en LIKE ""%2"" + &SearchString + ""%2""";
-	
-	MetadataObject = Metadata.FindByType(Type(Source));
-	If Metadata.Catalogs.Contains(MetadataObject) Then
-		QueryBuilderText = StrReplace(QueryBuilderText, "TableType", "Catalog");
-	ElsIf Metadata.ChartsOfCharacteristicTypes.Contains(MetadataObject) Then
-		QueryBuilderText = StrReplace(QueryBuilderText, "TableType", "ChartOfCharacteristicTypes");
-	Else
-		Raise R().Error_004;
-	EndIf;
-	
-	QueryBuilderText = StrTemplate(QueryBuilderText, MetadataObject.Name, "%");
-	QueryBuilderText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryBuilderText);
+
+	MetadataObject = Metadata.FindByType(Type(Source)).FullName();
+	Settings = New Structure;
+	Settings.Insert("Name", MetadataObject);
+	Settings.Insert("Filter", "");
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 	
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
@@ -95,6 +80,11 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	EndDo;
 EndProcedure
 
+Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table") Export
+	QueryField = "CASE WHEN %1.Description_%2 = """" THEN %1.Description_en ELSE %1.Description_%2 END ";
+	QueryField = StrTemplate(QueryField, TableName, LocalizationReuse.GetLocalizationCode());
+	Return StrReplace(QueryText, StrTemplate("%1.Description_en", TableName), QueryField);
+EndFunction
 
 Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing) Export
 	If Not StandardProcessing Then
@@ -132,12 +122,6 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 		EndIf;
 	EndIf;
 EndProcedure
-
-Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table") Export
-	QueryField = "CASE WHEN %1.Description_%2 = """" THEN %1.Description_en ELSE %1.Description_%2 END ";
-	QueryField = StrTemplate(QueryField, TableName, LocalizationReuse.GetLocalizationCode());
-	Return StrReplace(QueryText, StrTemplate("%1.Description_en", TableName), QueryField);
-EndFunction
 
 Procedure RefreshReusableValuesBeforeWrite(Source, Cancel) Export
 	RefreshReusableValues();
@@ -220,6 +204,4 @@ Procedure GetCatalogPresentationFieldsPresentationFieldsGetProcessing(Source, Fi
 	Fields = LocalizationServer.FieldsListForDescriptions(Source);
 	
 EndProcedure
-
-
 

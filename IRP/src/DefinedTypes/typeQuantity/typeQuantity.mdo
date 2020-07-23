@@ -8,7 +8,6 @@
     <key>en</key>
     <value>Type quantity</value>
   </synonym>
-  <comment></comment>
   <type>
     <types>Number</types>
     <numberQualifiers>

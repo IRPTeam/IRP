@@ -111,8 +111,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Kind</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Kind</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>KindExtendedTooltip</name>
@@ -161,8 +163,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.ApArPostingDetail</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.ApArPostingDetail</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ApArPostingDetailExtendedTooltip</name>
@@ -498,14 +502,19 @@ WHERE
 		WHEN &amp;IncludeFilterByPartner
 			THEN Table.Partner = &amp;Partner
 			OR &amp;IncludePartnerSegments
-			AND Table.PartnerSegment IN (&amp;PartnerSegments)
+			AND Table.PartnerSegment IN (SELECT
+							PartnerSegments.Segment AS Segment
+						FROM
+							InformationRegister.PartnerSegments AS PartnerSegments
+						WHERE
+							PartnerSegments.Partner = &amp;Partner)
 		ELSE TRUE
 	END
 	AND CASE
 		WHEN &amp;IncludeFilterByEndOfUseDate
 			THEN Table.StartUsing &lt;= &amp;EndOfUseDate
-			AND (Table.EndOfUse >= &amp;EndOfUseDate
-			OR Table.EndOfUse = DATETIME(1, 1, 1))
+			AND Table.EndOfUse >= &amp;EndOfUseDate
+			OR Table.EndOfUse = DATETIME(1, 1, 1)
 		ELSE TRUE
 	END)</queryText>
       <mainTable>Catalog.Agreements</mainTable>

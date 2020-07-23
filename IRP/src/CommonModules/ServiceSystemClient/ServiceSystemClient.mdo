@@ -5,6 +5,5 @@
     <key>en</key>
     <value>Service system client</value>
   </synonym>
-  <comment></comment>
   <clientManagedApplication>true</clientManagedApplication>
 </mdclass:CommonModule>

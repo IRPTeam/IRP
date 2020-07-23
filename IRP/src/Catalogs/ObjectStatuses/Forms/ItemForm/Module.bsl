@@ -16,7 +16,7 @@ EndProcedure
 
 &AtClient
 Procedure NextPossibleStatusesStatusStartChoice(Item, ChoiceData, StandardProcessing)
-	ObjectStatusesClient.StatusStartChoise(Object,
+	ObjectStatusesClient.StatusStartChoice(Object,
 	                                       ThisObject,
 	                                       GetArrayOfFilters(),
 	                                       Item,
@@ -52,4 +52,3 @@ Function GetArrayOfFilters()
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsFolder", False, DataCompositionComparisonType.Equal));
 	Return ArrayOfFilters;
 EndFunction
-

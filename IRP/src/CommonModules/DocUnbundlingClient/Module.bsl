@@ -113,7 +113,7 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
-Procedure DecorationGroupTitleCollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
@@ -121,7 +121,7 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
-Procedure DecorationGroupTitleUncollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
@@ -137,7 +137,13 @@ EndProcedure
 #EndRegion
 
 Procedure SearchByBarcode(Command, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject);
+	DocumentsClient.SearchByBarcode(Command, Object, Form);
+EndProcedure
+
+#Region PickUpItems
+
+Procedure OpenPickupItems(Object, Form, Command) Export
+	DocumentsClient.OpenPickupItems(Object, Form, Command); 
 EndProcedure
 
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export
@@ -162,3 +168,5 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	EndDo;
 	ItemListOnChange(AdditionalParameters.Object, AdditionalParameters.Form, Undefined, Undefined);
 EndProcedure
+#EndRegion
+

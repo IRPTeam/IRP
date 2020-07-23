@@ -5,19 +5,16 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		Return;
 	EndIf;
 	
-	Query = New Query();
-	Query.Text =
-		"SELECT TOP 50
-		|	Specifications.Ref
-		|FROM
-		|	Catalog.Specifications AS Specifications
-		|WHERE
-		|	Specifications.Ref IN (&ArrayOfRef)
-		|	AND Specifications.Description_en LIKE ""%"" + &SearchString + ""%""
-		|GROUP BY
-		|	Specifications.Ref";
+	Filter = "
+		|	AND Specifications.Ref IN (&ArrayOfRef)
+		|";
+
+	Settings = New Structure;
+	Settings.Insert("Name", "Catalog.Specifications");
+	Settings.Insert("Filter", Filter);
 	
-	Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text);
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
+	Query = New Query(QueryBuilderText);
 	Query.SetParameter("ArrayOfRef", GetAvailableSpecificationsByItem(Parameters.Filter.CustomFilterByItem));
 	Query.SetParameter("SearchString", Parameters.SearchString);
 	
@@ -57,7 +54,7 @@ Function GetAvailableSpecificationsByItem(Item) Export
 EndFunction
 
 Function FindOrCreateRefByProperties(TableOfItems, QuantityTable, ItemBundle, AddInfo = Undefined) Export
-	ArrayOfRefs = GetRefsByProperies(TableOfItems, QuantityTable, ItemBundle, AddInfo);
+	ArrayOfRefs = GetRefsByProperties(TableOfItems, QuantityTable, ItemBundle, AddInfo);
 	If ArrayOfRefs.Count() Then
 		Return ArrayOfRefs;
 	Else
@@ -72,7 +69,7 @@ Function CreateRefByProperties(TableOfItems, QuantityTable, ItemBundle, AddInfo 
 	NewObject.ItemBundle = ItemBundle;
 	NewObject.Type = GetSpecificationType(TableOfItems, AddInfo);
 	
-	SetDescriptionbyTableOfItems(NewObject, TableOfItems, AddInfo);
+	SetDescriptionByTableOfItems(NewObject, TableOfItems, AddInfo);
 	
 	TableOfItemsCopy = TableOfItems.Copy();
 	TableOfItemsCopy.GroupBy("Key");
@@ -107,7 +104,7 @@ Function CreateRefByProperties(TableOfItems, QuantityTable, ItemBundle, AddInfo 
 	Return NewObject.Ref;
 EndFunction
 
-Function GetRefsByProperies(TableOfItems, QuantityTable, ItemBundle, AddInfo = Undefined) Export
+Function GetRefsByProperties(TableOfItems, QuantityTable, ItemBundle, AddInfo = Undefined) Export
 	ArrayOfFoundedSpecifications = New Array();
 	SpecificationType = GetSpecificationType(TableOfItems, AddInfo);
 	For Each ItemRow In TableOfItems Do
@@ -251,7 +248,7 @@ Function GetSpecificationType(TableOfItems, AddInfo = Undefined) Export
 	Return ?(TableOfItemsCopy.Count() > 1, Enums.SpecificationType.Bundle, Enums.SpecificationType.Set);
 EndFunction
 
-Procedure SetDescriptionbyTableOfItems(NewObject, TableOfItems, AddInfo = Undefined)
+Procedure SetDescriptionByTableOfItems(NewObject, TableOfItems, AddInfo = Undefined)
 	ArrayOfDescriptions = LocalizationReuse.AllDescription(AddInfo);
 	
 	TableOfItemsCopy = TableOfItems.Copy();

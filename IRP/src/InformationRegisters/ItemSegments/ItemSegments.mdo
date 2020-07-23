@@ -12,9 +12,8 @@
   <name>ItemSegments</name>
   <synonym>
     <key>en</key>
-    <value>Item segments</value>
+    <value>Item segments content</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <dimensions uuid="5154e93f-9298-49ae-bee3-ba4b78f8b6cc">
@@ -23,11 +22,9 @@
       <key>en</key>
       <value>Segment</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.ItemSegments</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
@@ -45,11 +42,9 @@
       <key>en</key>
       <value>Item key</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.ItemKeys</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>

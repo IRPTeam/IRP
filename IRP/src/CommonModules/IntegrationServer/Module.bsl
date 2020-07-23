@@ -5,7 +5,7 @@ Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 	
 	If Not ValueIsFilled(IntegrationSettings.Ref) Then
 		Result.Success = False;
-		Result.Message = StrTemplate(R()["S_005"], IntegrationSettingName);
+		Result.Message = StrTemplate(R().S_005, IntegrationSettingName);
 		Return Result;
 	EndIf;
 	
@@ -26,7 +26,7 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefi
 EndFunction
 
 Function InfoRegSettingsStructure() Export
-	Return IntegrationServerReuse.InfoRegSettingsStructure()
+	Return IntegrationServerReuse.InfoRegSettingsStructure();
 EndFunction
 
 Procedure SaveFileToFileStorage(PathForSave, FileName, BinaryData) Export

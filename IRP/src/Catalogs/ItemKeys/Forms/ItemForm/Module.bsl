@@ -1,6 +1,5 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-
 	If Parameters.Property("Item") And Not ValueIsFilled(Object.Ref) Then
 		Object.Item = Parameters.Item;
 		Items.Item.ReadOnly = True;
@@ -19,7 +18,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.UnitMode = ?(ValueIsFilled(Object.Unit), "Own", "Inherit");
 	ThisObject.SpecificationMode = ValueIsFilled(Object.Specification);
 	SetVisible();
-	
 EndProcedure
 
 &AtClient
@@ -44,37 +42,26 @@ EndProcedure
 
 &AtClient
 Procedure PictureViewHTMLDocumentComplete(Item)
-	PictureViewerClient.UpdateHTMLPicture(Item, ThisForm);
+	PictureViewerClient.UpdateHTMLPicture(Item, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure PictureViewHTMLOnClick(Item, EventData, StandardProcessing)
-	StandardProcessing = True;
-	If EventData.event = Undefined Then
-		Return;
-	EndIf;
-	
-	If EventData.Event.propertyName = "call1C" Then
-		If Object.Ref.isEmpty() Then
-			ShowMessageBox(Undefined, R()["InfoMessage_004"]);
-		Else
-			PictureViewerClient.HTMLEvent(ThisForm, Object, EventData.Event.Data);
-		EndIf;
-	EndIf;
+	PictureViewerClient.PictureViewHTMLOnClick(ThisObject, Item, EventData, StandardProcessing);
 EndProcedure
 
 #EndRegion
 
 &AtClient
 Procedure ItemOnChange(Item)
-	AddAttributesCreateFormControll();
+	AddAttributesCreateFormControl();
 	SetVisible();
 EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" And Not ValueIsFilled(Object.Specification) Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 	If EventName = "UpdateTypeOfItemType" Then
 		OnChangeTypeOfItemType();
@@ -83,13 +70,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		ThisObject.Read();
 	EndIf;
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 	
-	PictureViewerClient.HTMLEventAction(EventName, Parameter, Source, ThisForm);
+	PictureViewerClient.HTMLEventAction(EventName, Parameter, Source, ThisObject);
 EndProcedure
-
-
 
 &AtClient
 Procedure OnChangeTypeOfItemType()
@@ -113,13 +98,13 @@ EndFunction
 Procedure SpecificationModeOnChange(Item)
 	If Not ThisObject.SpecificationMode Then
 		Object.Specification = Undefined;
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 	SetVisible();
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupAttributes");
 EndProcedure
 
@@ -159,6 +144,3 @@ Procedure SetVisible()
 	ThisObject.InheritUnit = ?(ValueIsFilled(Object.Item), Object.Item.Unit, Undefined);
 	ThisObject.ItemType = ?(ValueIsFilled(Object.Item), Object.Item.ItemType, Undefined);
 EndProcedure
-
-
-

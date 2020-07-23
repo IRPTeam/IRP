@@ -10,7 +10,7 @@ Procedure OpenHistoryByStatus(DocumentRef, FormOwner, AddInfo = Undefined) Expor
 		+ ".Form.ListForm", OpenParameters, FormOwner, , , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
-Procedure StatusStartChoise(Object, Form, ArrayOfFilters, Item, ChoiceData, StandardProcessing) Export
+Procedure StatusStartChoice(Object, Form, ArrayOfFilters, Item, ChoiceData, StandardProcessing) Export
 	StandardProcessing = False;
 	ChoiceForm = GetForm("Catalog.ObjectStatuses.ChoiceForm", , Item, Form.UUID, , Form.URL);
 	For Each Filter In ArrayOfFilters Do

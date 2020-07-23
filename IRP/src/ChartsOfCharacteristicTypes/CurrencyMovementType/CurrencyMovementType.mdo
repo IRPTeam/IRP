@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:ChartOfCharacteristicTypes xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e576a633-fe90-4b81-9537-fd9ff1c87df4">
+<mdclass:ChartOfCharacteristicTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e576a633-fe90-4b81-9537-fd9ff1c87df4">
   <producedTypes>
     <objectType typeId="2c5cc4ec-683e-4036-af5f-df02a2d4fcd4" valueTypeId="a5f1808f-c853-4826-b0fb-e99f3ae856ef"/>
     <refType typeId="17cc0e35-6c36-4df6-8c96-0640b069fa5a" valueTypeId="c1e5cd9e-1b90-476f-bcff-ca635c1ba210"/>
@@ -11,13 +11,17 @@
   <name>CurrencyMovementType</name>
   <synonym>
     <key>en</key>
-    <value>Currency movement type</value>
+    <value>Multi currency movement types</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Multi currency movement type</value>
+  </objectPresentation>
   <type>
     <types>EnumRef.CurrencyType</types>
   </type>
@@ -28,7 +32,6 @@
     <items id="f71f3bfa-242f-4c9c-9e10-2d66fe1c1801">
       <name>SettlementCurrency</name>
       <description>Settlement currency</description>
-      <code></code>
       <type>
         <types>EnumRef.CurrencyType</types>
       </type>
@@ -49,6 +52,9 @@
     <type>
       <types>CatalogRef.Currencies</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -61,6 +67,9 @@
     <type>
       <types>CatalogRef.IntegrationSettings</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -73,6 +82,9 @@
     <type>
       <types>EnumRef.CurrencyType</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -85,6 +97,9 @@
     <type>
       <types>Boolean</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

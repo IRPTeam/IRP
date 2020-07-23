@@ -35,7 +35,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.FilterVendor.TitleTextColor = ?(FilterVendor, New Color(), WebColors.LightGray);
 	Items.FilterEmployee.TitleTextColor = ?(FilterEmployee, New Color(), WebColors.LightGray);
 	Items.FilterOpponent.TitleTextColor = ?(FilterOpponent, New Color(), WebColors.LightGray);
-	Items.FilterOpponent.Visible = GetFunctionalOption("ShowAlfaTestingSaas");
+	Items.FilterOpponent.Visible = GetFunctionalOption("ShowAlphaTestingSaas");
 EndProcedure
 
 &AtClient
@@ -62,7 +62,6 @@ Procedure FilterOpponentOnChange(Item)
 	Item.TitleTextColor = ?(FilterOpponent, New Color(), WebColors.LightGray);
 EndProcedure
 
-
 &AtClientAtServerNoContext
 Procedure SetBooleanListFilter(FilterItems, FieldName, RightValue)
 	CommonFunctionsClientServer.SetFilterItem(FilterItems,
@@ -71,4 +70,3 @@ Procedure SetBooleanListFilter(FilterItems, FieldName, RightValue)
 		DataCompositionComparisonType.Equal,
 		RightValue = True);
 EndProcedure
-

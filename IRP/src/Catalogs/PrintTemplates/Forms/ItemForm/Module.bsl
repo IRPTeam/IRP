@@ -22,7 +22,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	DataSourceScheme = GenerateDataSourceScheme();
 	
-	
+	GetDefaultAtServer();
 EndProcedure
 
 &AtClient
@@ -42,7 +42,6 @@ Procedure ExternalDataProcOnChange(Item)
 	DataSourceScheme = GenerateDataSourceScheme();
 	SetAvailableFields(DataSourceScheme);
 EndProcedure
-
 
 &AtServer
 Function GenerateDataSourceScheme()
@@ -74,7 +73,7 @@ Function GenerateDataSourceScheme()
 	If ValueIsFilled(Object.ExternalDataProc) Then
 		Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 		Info.Create = True;
-		AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+		AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 		If Not AddDataProc = Undefined Then
 			AdditionalFields = AddDataProc.GetAvailableFields();
 			
@@ -96,20 +95,18 @@ EndFunction
 
 &AtServer
 Procedure SetAvailableFields(DataSourceScheme)
-	
 	SettingsComposer = New DataCompositionSettingsComposer();
 	SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(DataSourceScheme));
 	SettingsComposer.LoadSettings(DataSourceScheme.DefaultSettings);
 	
-	DataCompositionAdress = PutToTempStorage(DataSourceScheme, New UUID);
+	DataCompositionAddress = PutToTempStorage(DataSourceScheme, New UUID);
 	AvailableFields = SettingsComposer;
-	AvailableFields.Initialize(New DataCompositionAvailableSettingsSource(DataCompositionAdress));
+	AvailableFields.Initialize(New DataCompositionAvailableSettingsSource(DataCompositionAddress));
 	
 EndProcedure
 
 &AtServer
 Function GetMainFieldsArray()
-	
 	ReturnValue = New Array;
 	
 	FieldStructure = New Structure;
@@ -293,7 +290,6 @@ Procedure PlaceTextToCellsArea(SpreadsheetDocument, AreaRange, TextName)
 		
 EndProcedure
 
-
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 		
@@ -310,7 +306,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	If ValueIsFilled(Object.ExternalDataProc) Then
 		Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 		Info.Create = True;
-		AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+		AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 		If Not AddDataProc = Undefined Then
 			AdditionalFields = AddDataProc.GetAvailableFields();
 			
@@ -338,7 +334,6 @@ EndProcedure
 
 &AtServer
 Function GetTemplateParameters()
-	
 	ReturnValue = New Map;
 	ReturnValueIterator = 0;
 	
@@ -469,7 +464,7 @@ Procedure GetDefaultAtServer()
 	If ValueIsFilled(Object.ExternalDataProc) Then
 		Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 		Info.Create = True;
-		AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+		AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 		If Not AddDataProc = Undefined Then
 			For Each AddDataProcTemplate In AddDataProc.Metadata().Templates Do
 				If AddDataProcTemplate.TemplateType = Metadata.ObjectProperties.TemplateType.SpreadsheetDocument Then
@@ -493,11 +488,3 @@ Procedure GetDefaultAtServer()
 	SetAvailableFields(DataCompositionSchemaValue);
 	
 EndProcedure
-
-
-
-
-
-
-
-

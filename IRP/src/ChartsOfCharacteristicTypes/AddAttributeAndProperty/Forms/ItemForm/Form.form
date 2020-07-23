@@ -43,8 +43,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Icon</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Icon</segments>
+        </paths>
       </dataPath>
       <titleLocation>None</titleLocation>
       <toolTip>

@@ -14,7 +14,7 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -28,7 +28,7 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocInvoiceMatchServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	SetVisibility();
-	SetConditionalAppearence();
+	SetConditionalAppearance();
 EndProcedure
 
 &AtClient
@@ -39,19 +39,19 @@ Procedure OnOpen(Cancel)
 EndProcedure
 
 &AtServer
-Procedure SetConditionalAppearence() Export
+Procedure SetConditionalAppearance() Export
 	ConditionalAppearance.Items.Clear();
 	
-	AppearenceElement = ConditionalAppearance.Items.Add();
+	AppearanceElement = ConditionalAppearance.Items.Add();
 	
-	FieldElement = AppearenceElement.Fields.Items.Add();
+	FieldElement = AppearanceElement.Fields.Items.Add();
 	FieldElement.Field = New DataCompositionField(Items.TransactionsLegalName.Name);
 	
-	FilterElement = AppearenceElement.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	FilterElement = AppearanceElement.Filter.Items.Add(Type("DataCompositionFilterItem"));
 	FilterElement.LeftValue = New DataCompositionField("Object.Transactions.Partner");
 	FilterElement.ComparisonType = DataCompositionComparisonType.NotFilled;
 	
-	AppearenceElement.Appearance.SetParameterValue("Enabled", False);
+	AppearanceElement.Appearance.SetParameterValue("Enabled", False);
 	
 EndProcedure
 
@@ -63,7 +63,6 @@ Procedure OperationTypeOnChange(Item)
 	FillByBasisDocument();
 	SetVisibility();
 EndProcedure
-
 
 &AtServer
 Procedure SetVisibility()
@@ -94,7 +93,6 @@ Procedure PartnerApTransactionsBasisDocumentStartChoice(Item, ChoiceData, Standa
 	DocInvoiceMatchClient.PartnerApTransactionsBasisDocumentStartChoice(
 				Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
-
 
 &AtClient
 Procedure PartnerArTransactionsBasisDocumentOnChange(Item)
@@ -244,6 +242,7 @@ Procedure FillAdvancesAtServer()
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetQueryTextByAdvanceToSuppliers()
 	Return
 	"SELECT
@@ -263,6 +262,7 @@ Function GetQueryTextByAdvanceToSuppliers()
 	|	AdvanceToSuppliersBalance.PaymentDocument.Date";
 EndFunction
 
+&AtServer
 Function GetQueryTextByAdvanceFromCustomers()
 	Return
 	"SELECT
@@ -329,7 +329,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemDescription
 
 &AtClient
@@ -339,7 +338,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region GroupTitleDecorations
 
 &AtClient
@@ -348,8 +346,8 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLalelClick(Item)
-	DocInvoiceMatchClient.DecorationGroupTitleCollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocInvoiceMatchClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -358,8 +356,8 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
-	DocInvoiceMatchClient.DecorationGroupTitleUncollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocInvoiceMatchClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -412,10 +410,11 @@ EndProcedure
 
 #Region Currencies
 
+&AtServer
 Procedure CurrencyOnChangeAtServer()
 	Object.Currencies.Clear();
 	For Each Row In Object.Transactions Do
-		CurrenciesServer.FiilCurrencyTable(Object, 
+		CurrenciesServer.FillCurrencyTable(Object, 
 	                                       Object.Date, 
 	                                       Object.Company, 
 	                                       Row.Currency, 
@@ -423,7 +422,7 @@ Procedure CurrencyOnChangeAtServer()
 	                                       Row.Agreement);
 	EndDo;
 	For Each Row In Object.Advances Do
-		CurrenciesServer.FiilCurrencyTable(Object, 
+		CurrenciesServer.FillCurrencyTable(Object, 
 	                                       Object.Date, 
 	                                       Object.Company, 
 	                                       Row.Currency, 
@@ -434,7 +433,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient
@@ -443,8 +441,23 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region ExternalCommands
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);	
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
 #EndRegion

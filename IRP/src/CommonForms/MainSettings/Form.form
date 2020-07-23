@@ -11,8 +11,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ConstantsSet.ConnectionStatus</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>ConstantsSet.ConnectionStatus</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ConnectionStatusExtendedTooltip</name>
@@ -61,8 +63,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ConstantsSet.DefaultPictureStorageVolume</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>ConstantsSet.DefaultPictureStorageVolume</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>DefaultPictureStorageVolumeExtendedTooltip</name>
@@ -111,8 +115,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ConstantsSet.ShowBetaTesting</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>ConstantsSet.ShowBetaTesting</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ShowBetaTestingExtendedTooltip</name>
@@ -154,8 +160,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ConstantsSet.UseCompanies</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>ConstantsSet.UseCompanies</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>UseCompaniesExtendedTooltip</name>
@@ -197,8 +205,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ConstantsSet.NotFirstStart</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>ConstantsSet.NotFirstStart</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>NotFirstStartExtendedTooltip</name>
@@ -240,8 +250,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ConstantsSet.SaasMode</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>ConstantsSet.SaasMode</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>SaasModeExtendedTooltip</name>
@@ -276,18 +288,20 @@
       <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
     </items>
     <items xsi:type="form:FormField">
-      <name>ShowAlfaTestingSaas</name>
+      <name>ShowAlphaTestingSaas</name>
       <id>27</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ConstantsSet.ShowAlfaTestingSaas</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>ConstantsSet.ShowAlphaTestingSaas</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
-        <name>ShowAlfaTestingSaasExtendedTooltip</name>
+        <name>ShowAlphaTestingSaasExtendedTooltip</name>
         <id>29</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -302,7 +316,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ShowAlfaTestingSaasContextMenu</name>
+        <name>ShowAlphaTestingSaasContextMenu</name>
         <id>28</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -326,8 +340,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ConstantsSet.UseItemKey</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>ConstantsSet.UseItemKey</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>UseItemKeyExtendedTooltip</name>

@@ -2,7 +2,6 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	If Parameters.Property("Item") And Not ValueIsFilled(Object.Ref) Then
 		Object.Item = Parameters.Item;
@@ -31,25 +30,24 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 		UpdateAddAttributesHTMLDocument();
 	EndIf;
-	PictureViewerClient.HTMLEventAction(EventName, Parameter, Source, ThisForm);
+	PictureViewerClient.HTMLEventAction(EventName, Parameter, Source, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	UpdateAddAttributesHTMLDocument();
-	AddAttributesCreateFormControll();
+	AddAttributesCreateFormControl();
 EndProcedure
 
 &AtClient
 Procedure ItemTypeOnChange(Item)
-	AddAttributesCreateFormControll();
+	AddAttributesCreateFormControl();
 EndProcedure
 
 #EndRegion
-
 #Region AddAttributeViewer
 
 &AtClient
@@ -72,24 +70,12 @@ EndProcedure
 
 &AtClient
 Procedure PictureViewHTMLOnClick(Item, EventData, StandardProcessing)
-	StandardProcessing = EventData.Href = Undefined;
-	If EventData.event = Undefined Then
-		Return;
-	EndIf;
-	
-	If EventData.Event.propertyName = "call1C" Then
-		If Object.Ref.isEmpty() Then
-			ShowMessageBox(Undefined, R()["InfoMessage_004"]);
-		Else
-			PictureViewerClient.HTMLEvent(ThisForm, Object, EventData.Event.Data);
-		EndIf;
-	EndIf;
-	
+	PictureViewerClient.PictureViewHTMLOnClick(ThisObject, Item, EventData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure PictureViewerHTMLDocumentComplete(Item)
-	PictureViewerClient.UpdateHTMLPicture(Item, ThisForm);
+	PictureViewerClient.UpdateHTMLPicture(Item, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -105,12 +91,6 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
-
-
-
-
-
-

@@ -125,7 +125,7 @@ Function CheckItemList(Object) Export
 	Stores = "";
 	While SelectionDetailRecords.Next() Do
 		If Not Stores = "" Then
-			Stores = Stores + ", "
+			Stores = Stores + ", ";
 		EndIf;
 		
 		Stores = Stores + String(SelectionDetailRecords.Store);
@@ -158,8 +158,8 @@ Function GetActualStore(Object) Export
 		ReturnValue = Object.AgreementInfo.Store;
 	Else
 		RowCount = Object.ItemList.Count();
-		PrevRow = Object.ItemList.Get(RowCount - 2);
-		ReturnValue = PrevRow.Store;
+		PreviousRow = Object.ItemList.Get(RowCount - 2);
+		ReturnValue = PreviousRow.Store;
 	EndIf;
 	Return ReturnValue;
 EndFunction

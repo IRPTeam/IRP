@@ -29,7 +29,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 EndProcedure
 
-
 &AtClient
 Procedure TestConnection(Command)
 	If Object.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
@@ -50,7 +49,7 @@ Procedure TestConnection(Command)
 		ResourceParameters = New Structure();
 		ResourceParameters.Insert("MetadataName", "TestConnection");
 		ServerResponse = IntegrationClientServer.SendRequest(ConnectionSetting, ResourceParameters);
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R()["S_016"],
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_016,
 				ServerResponse.Message,
 				ServerResponse.StatusCode,
 				ServerResponse.ResponseBody));
@@ -60,7 +59,7 @@ EndProcedure
 &AtClient
 Procedure Login(Command)
 	If Object.IntegrationType = PredefinedValue("Enum.IntegrationType.GoogleDrive") Then
-		GoogleDriveClient.Auth(ThisForm);
+		GoogleDriveClient.Auth(ThisObject);
 	EndIf;
 EndProcedure
 
@@ -116,7 +115,7 @@ EndProcedure
 Procedure ExternalDataProcOnChangeAtServer()
 	Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 	Info.Create = True;
-	AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);
+	AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 	If Not AddDataProc = Undefined Then
 		ConnectionSettings = AddDataProc.ConnectionSettings();
 		Object.ConnectionSetting.Clear();
@@ -132,7 +131,7 @@ EndProcedure
 Procedure ExternalDataProcSettings(Command)
 	Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 	Info.Insert("Settings", ThisObject.AddressResult);
-	CallMetodAddDataProc(Info);
+	CallMethodAddDataProc(Info);
 	
 	NotifyDescription = New NotifyDescription("OpenFormProcSettingsEnd", ThisObject);
 	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "Settings");
@@ -145,8 +144,8 @@ Procedure PutSettingsToTempStorage()
 EndProcedure
 
 &AtServerNoContext
-Procedure CallMetodAddDataProc(Info)
-	AddDataProcServer.CallMetodAddDataProc(Info);
+Procedure CallMethodAddDataProc(Info)
+	AddDataProcServer.CallMethodAddDataProc(Info);
 EndProcedure
 
 &AtClient
@@ -167,7 +166,4 @@ Procedure OpenFormProcSettingsEndServer(Result)
 	ValueToFormAttribute(Obj, "Object");
 EndProcedure
 
-
-
 #EndRegion
-

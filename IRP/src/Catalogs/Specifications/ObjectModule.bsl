@@ -1,7 +1,7 @@
 Procedure OnWrite(Cancel)
-	If Not (ThisObject.AdditionalProperties.Property("SynhronizeAffectPricingMD5")
-		And Not ThisObject.AdditionalProperties.SynhronizeAffectPricingMD5) Then
-		Catalogs.ItemKeys.SynhronizeAffectPricingMD5BySpecification(ThisObject.Ref);
+	If Not (ThisObject.AdditionalProperties.Property("SynchronizeAffectPricingMD5")
+		And Not ThisObject.AdditionalProperties.SynchronizeAffectPricingMD5) Then
+		Catalogs.ItemKeys.SynchronizeAffectPricingMD5BySpecification(ThisObject.Ref);
 	EndIf;
 EndProcedure
 
@@ -44,5 +44,3 @@ Procedure BeforeWrite(Cancel)
 		CommonFunctionsClientServer.ShowUsersMessage(R().Error_066);
 	EndIf;
 EndProcedure
-
-

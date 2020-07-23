@@ -8,7 +8,6 @@
     <key>en</key>
     <value>Type barcode</value>
   </synonym>
-  <comment></comment>
   <type>
     <types>String</types>
     <stringQualifiers>

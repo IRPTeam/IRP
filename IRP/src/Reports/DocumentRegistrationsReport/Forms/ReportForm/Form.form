@@ -43,8 +43,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Document</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Document</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>DocumentExtendedTooltip</name>
@@ -97,8 +99,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>PutInTable</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>PutInTable</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>PutInTableExtendedTooltip</name>
@@ -175,8 +179,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>ResultTable</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>ResultTable</segments>
+      </paths>
     </dataPath>
     <titleLocation>None</titleLocation>
     <extendedTooltip>
@@ -336,9 +342,5 @@
     <navigationPanel/>
     <commandBar/>
   </commandInterface>
-  <extInfo xsi:type="form:ReportFormExtInfo">
-    <reportResult>Result</reportResult>
-    <detailsInformation>DetailsData</detailsInformation>
-    <userSettingsGroup>SettingsComposerUserSettings</userSettingsGroup>
-  </extInfo>
+  <extInfo xsi:type="form:ReportFormExtInfo"/>
 </form:Form>

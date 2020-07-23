@@ -11,8 +11,8 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		FillingData.Insert("Partner", CommandParameter);
 	EndIf;
 	If TypeOf(CommandParameter) = Type("CatalogRef.PartnerSegments") Then
-		ArrayOfFilters.Add(
-			DocumentsClientServer.CreateFilterItem("PartnerSegment", CommandParameter, DataCompositionComparisonType.Equal));
+		Filter = DocumentsClientServer.CreateFilterItem("PartnerSegment", CommandParameter, DataCompositionComparisonType.Equal);
+		ArrayOfFilters.Add(Filter);
 		FillingData.Insert("PartnerSegment", CommandParameter);
 	EndIf;
 	FormParameters.Insert("FillingData", FillingData);
@@ -23,4 +23,3 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		CommandExecuteParameters.Window,
 		CommandExecuteParameters.URL);
 EndProcedure
-

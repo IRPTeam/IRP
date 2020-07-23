@@ -1,6 +1,6 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	If NeedCreateFormFilelds(Parameters) Then
+	If NeedCreateFormFields(Parameters) Then
 		ThisObject.Item = Parameters.Filter.Item;
 		
 		ArrayOfAttributes = New Array();
@@ -33,7 +33,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtServer
-Function NeedCreateFormFilelds(Parameters)
+Function NeedCreateFormFields(Parameters)
 	Return Parameters.ChoiceMode
 		And Parameters.Filter.Property("Item")
 		And ValueIsFilled(Parameters.Filter.Item)
@@ -44,7 +44,6 @@ EndFunction
 Procedure OnLoadDataFromSettingsAtServer(Settings)
 	UpdateListWithFilter();
 EndProcedure
-
 
 &AtClient
 Procedure IsSpecificationFilterOnChange(Item)
@@ -184,4 +183,3 @@ Procedure SearchStringClearing(Item, StandardProcessing)
 	ThisObject.SearchString = "";
 	UpdateListWithFilter();
 EndProcedure
-

@@ -3,8 +3,7 @@
   <name>IDInfoClient</name>
   <synonym>
     <key>en</key>
-    <value>IDInfo client</value>
+    <value>Contact info client</value>
   </synonym>
-  <comment></comment>
   <clientManagedApplication>true</clientManagedApplication>
 </mdclass:CommonModule>

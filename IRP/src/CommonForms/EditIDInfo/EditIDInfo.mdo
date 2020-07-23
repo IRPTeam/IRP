@@ -3,9 +3,8 @@
   <name>EditIDInfo</name>
   <synonym>
     <key>en</key>
-    <value>Edit ID Info</value>
+    <value>Edit contact info</value>
   </synonym>
-  <comment></comment>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

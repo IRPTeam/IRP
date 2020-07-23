@@ -54,6 +54,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_SalesOrder = New Array();
 	ArrayOf_ShipmentConfirmation = New Array();
@@ -85,6 +86,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables)
 	
 	ItemList = New ValueTable();
@@ -135,7 +137,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	
 	KeyFields = "BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, ManagerSegment";
 	
-	TransferedFields = New Structure(KeyFields);
+	TransferredFields = New Structure(KeyFields);
 		
 	UniqueShipmentConfirmations = ItemList.Copy();
 	UniqueShipmentConfirmations.GroupBy("ShipmentConfirmation");
@@ -147,7 +149,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		ItemListCopy = ItemList.Copy(New Structure("BasedOn, ShipmentConfirmation", 
 			"SalesOrder", RowUniqueShipmentConfirmations.ShipmentConfirmation));
 		If ItemListCopy.Count() Then
-			FillPropertyValues(TransferedFields, ItemListCopy[0]);
+			FillPropertyValues(TransferredFields, ItemListCopy[0]);
 		Else
 			Continue;
 		EndIf;
@@ -155,7 +157,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		For Each RowItemList In ItemList Do
 			If RowItemList.BasedOn = "ShipmentConfirmation" 
 			And RowItemList.ShipmentConfirmation = RowUniqueShipmentConfirmations.ShipmentConfirmation Then
-				FillPropertyValues(RowItemList, TransferedFields);
+				FillPropertyValues(RowItemList, TransferredFields);
 			EndIf;
 		EndDo;
 	EndDo;
@@ -252,6 +254,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function ExtractInfoFromOrderRows(QueryTable)
 	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
 	For Each Row In QueryTable Do
@@ -394,6 +397,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 	Return New Structure("ItemList, TaxList", QueryTable_ItemList, QueryTable_TaxList);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_Service(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -419,6 +423,7 @@ Function GetDocumentTable_Service(ArrayOfBasisDocuments)
 	Return ExtractInfoFromOrderRows(QueryTable);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -446,6 +451,7 @@ Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
 	Return ExtractInfoFromOrderRows(QueryTable);
 EndFunction
 
+&AtServer
 Function GetDocumentTable_ShipmentConfirmation(ArrayOfBasisDocuments)
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.SalesOrder"));
@@ -648,30 +654,31 @@ EndFunction
 
 #Region Errors
 
+&AtServer
 Function GetErrorMessage(BasisDocument)
 	ErrorMessage = Undefined;
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.SalesOrder") Then
 		If Not BasisDocument.Status.Posting Or Not BasisDocument.Posted Then
-			Return StrTemplate(R()["Error_067"], String(BasisDocument));		
+			Return StrTemplate(R().Error_067, String(BasisDocument));		
 		EndIf;
 		
 		If BasisDocument.ShipmentConfirmationsBeforeSalesInvoice Then
 			If ShipmentConfirmationExist(BasisDocument) Then
-				ErrorMessage = R()["Error_019"];
+				ErrorMessage = R().Error_019;
 				ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.SalesInvoice.Synonym, BasisDocument.Metadata().Synonym);
 			Else
-				ErrorMessage = R()["Error_018"];
+				ErrorMessage = R().Error_018;
 			EndIf;
 		Else
 			If SalesInvoiceExist(BasisDocument) Then
-				ErrorMessage = R()["Error_019"];
+				ErrorMessage = R().Error_019;
 				ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.SalesInvoice.Synonym, BasisDocument.Metadata().Synonym);
 			EndIf;
 		EndIf;
 	EndIf;
 	If TypeOf(BasisDocument) = Type("DocumentRef.ShipmentConfirmation") Then
-		ErrorMessage = R()["Error_019"];
+		ErrorMessage = R().Error_019;
 		ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.SalesInvoice.Synonym, BasisDocument.Metadata().Synonym);
 	EndIf;
 	
@@ -679,6 +686,7 @@ Function GetErrorMessage(BasisDocument)
 	
 EndFunction
 
+&AtServer
 Function GetInfoMessage(FillingData)
 	InfoMessage = "";
 	BasisDocument = New Array();
@@ -686,13 +694,14 @@ Function GetInfoMessage(FillingData)
 		BasisDocument.Add(Row.SalesOrder);
 	EndDo;
 	If SalesInvoiceExist(BasisDocument) Then
-		InfoMessage = StrTemplate(R()["InfoMessage_001"], 
+		InfoMessage = StrTemplate(R().InfoMessage_001, 
 						Metadata.Documents.SalesInvoice.Synonym, 
 						Metadata.Documents.SalesOrder.Synonym);
 	EndIf;
 	Return InfoMessage;	
 EndFunction
 
+&AtServer
 Function ShipmentConfirmationExist(BasisDocument)
 	Query = New Query(
 	"SELECT ALLOWED
@@ -707,6 +716,7 @@ Function ShipmentConfirmationExist(BasisDocument)
 	Return Query.Execute().IsEmpty();
 EndFunction
 
+&AtServer
 Function SalesInvoiceExist(BasisDocument)
 	Query = New Query(
 	"SELECT TOP 1

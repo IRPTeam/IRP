@@ -1,32 +1,16 @@
-&AtClient
-Var DontCloseForm Export;
-
 #Region FormEvents
-
-&AtClient
-Procedure BeforeClose(Cancel, Exit, MessageText, StandardProcessing)
-	If DontCloseForm Then
-		Cancel = True;
-	EndIf;
-	If DontCloseForm AND NOT Exit Then
-		ShowQueryBox(New NotifyDescription("BeforeCloseEnd", ThisObject), R().QuestionToUser_012, QuestionDialogMode.YesNo);
-	ElsIf Modified AND Exit Then
-		MessageText = R().QuestionToUser_012;
-		Cancel = True;
-	EndIf;
-EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	BarcodeTypeChoiceList = New ValueList;
-	BarcodeTypeChoiceList.Add("Auto",	"Auto");
-	BarcodeTypeChoiceList.Add("EAN8",	"EAN-8");
-	BarcodeTypeChoiceList.Add("EAN13",	"EAN-13");
-	BarcodeTypeChoiceList.Add("EAN128",	"EAN-128");
-	BarcodeTypeChoiceList.Add("CODE39",	"Code 39");
-	BarcodeTypeChoiceList.Add("CODE128",	"Code 128");
-	BarcodeTypeChoiceList.Add("ITF14",	"ITF-14");
+	BarcodeTypeChoiceList.Add("Auto",	 "Auto");
+	BarcodeTypeChoiceList.Add("EAN8",	 "EAN-8");
+	BarcodeTypeChoiceList.Add("EAN13",	 "EAN-13");
+	BarcodeTypeChoiceList.Add("EAN128",	 "EAN-128");
+	BarcodeTypeChoiceList.Add("CODE39",	 "Code 39");
+	BarcodeTypeChoiceList.Add("CODE128", "Code 128");
+	BarcodeTypeChoiceList.Add("ITF14",	 "ITF-14");
 	
 	Items.BarcodeType.ChoiceList.Clear();
 	Items.ItemListBarcodeType.ChoiceList.Clear();
@@ -35,11 +19,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Items.ItemListBarcodeType.ChoiceList.Add(ChoiceListItem.Value, ChoiceListItem.Presentation);
 	EndDo;
 
-EndProcedure
-
-&AtClient
-Procedure OnOpen(Cancel)
-	DontCloseForm = True;
 EndProcedure
 
 #EndRegion
@@ -113,27 +92,16 @@ EndProcedure
 
 &AtServer
 Function GetIgnoredAttributeNames()	
-	IgnoredAttibutesNames = New Array;
-	IgnoredAttibutesNames.Add("Object");
-	Return IgnoredAttibutesNames;
+	IgnoredAttributesNames = New Array;
+	IgnoredAttributesNames.Add("Object");
+	Return IgnoredAttributesNames;
 EndFunction
-
-#EndRegion
-
-#Region ConfirmExit
-
-&AtClient
-Procedure BeforeCloseEnd(QuestionResult, AdditionalParameters) Export
-    If QuestionResult = DialogReturnCode.Yes Then
-        DontCloseForm = False;
-        Close();
-    EndIf;
-EndProcedure
 
 #EndRegion
 
 &AtClient
 Procedure Fill(Command)
+	ItemList.Clear();
 	FillAtServer();
 EndProcedure
 
@@ -271,8 +239,6 @@ Procedure ItemListPriceTypeOnChange(Item)
 		CalculationSettings);
 EndProcedure
 
-
-
 &AtClient
 Procedure ItemListItemOnChange(Item)
 	CurrentRow = ThisObject.Items.ItemList.CurrentData;
@@ -315,7 +281,5 @@ Procedure ItemListItemOnChange(Item)
 	
 EndProcedure
 
-
 #EndRegion
-
 

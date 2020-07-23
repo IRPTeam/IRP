@@ -1,0 +1,31 @@
+{
+  "$schema": "https://1c-syntax.github.io/bsl-language-server/configuration/schema.json",
+  "language": "en",
+  "diagnostics": {
+    "computeTrigger": "onType",
+    "parameters": {
+      "NestedStatements": false,
+      "CognitiveComplexity": false,
+      "MethodSize": false,
+      "CodeOutOfRegion": false,
+      "CyclomaticComplexity":false,
+      "NonStandardRegion": false,
+      "DeletingCollectionItem": false,
+      "CommitTransactionOutsideTryCatch": false,
+      "BeginTransactionBeforeTryCatch": false,
+      "NestedFunctionInParameters": false,
+      "MultilingualStringHasAllDeclaredLanguages": {
+        "declaredLanguages": "en"
+      },
+      "LineLength": {
+        "maxLineLength": 160
+      },
+      "Typo": {
+        "userWordsToIgnore": "sizepx,javascript,css,unpost,UNPOST,Undopost,Localizations,charset,Splitted,HHM,Unposting,Unselect,Reposting,tmp,Grupped,Acc,Attr,basises,uncheck,Unchecking,cheque,auth,uri,oauth,urlencoded,json,googleapis,Auth,Cheques,Barcodes,Mss,Mdd,jpeg,jpg,png,ico,cfe,Integrations,Expence,Cheque,Args,Unpost,Uncollapsed,Deserialize,Basises,localhost,Webclient,barcode,pcs,Exc,Unbundling,Param,Undoposting",
+        "minWordLength": 3
+      }
+    }
+  }
+}
+
+

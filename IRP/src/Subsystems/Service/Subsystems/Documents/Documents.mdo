@@ -5,14 +5,11 @@
     <key>en</key>
     <value>Documents</value>
   </synonym>
-  <comment></comment>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.CashInPOS</content>
   <content>Document.CashPayment</content>
   <content>Document.CashReceipt</content>
   <content>Document.PriceList</content>
-  <content>Document.SetupOfSpecialOffers</content>
-  <content>Document.ZReport</content>
+  <content>5a2a8a1f-b29b-4352-9833-04e70902c2cb</content>
   <parentSubsystem>Subsystem.Service</parentSubsystem>
 </mdclass:Subsystem>

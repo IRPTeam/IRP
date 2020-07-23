@@ -1,3 +1,4 @@
+&AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
 EndProcedure
@@ -9,4 +10,3 @@ Procedure Settings(Command)
 		OpenForm("CommonForm.EditUserSettings", New Structure("UserOrGroup", CurrentRow), ThisObject);
 	EndIf;
 EndProcedure
-

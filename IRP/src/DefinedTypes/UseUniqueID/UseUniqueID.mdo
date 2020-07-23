@@ -8,10 +8,9 @@
     <key>en</key>
     <value>Use unique ID</value>
   </synonym>
-  <comment></comment>
   <type>
+    <types>ChartOfCharacteristicTypesObject.CustomUserSettings</types>
     <types>CatalogObject.IntegrationSettings</types>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-    <types>ChartOfCharacteristicTypesObject.CustomUserSettings</types>
   </type>
 </mdclass:DefinedType>

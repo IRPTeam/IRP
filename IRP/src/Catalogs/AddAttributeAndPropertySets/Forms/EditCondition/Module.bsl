@@ -3,8 +3,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Ref = Parameters.Ref;
 	
 	DCSTemplate = AddAttributesAndPropertiesServer.GetDCSTemplate(ThisObject.Ref.PredefinedDataName);
-	Adres = PutToTempStorage(DCSTemplate);
-	ThisObject.SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(Adres));
+	Address = PutToTempStorage(DCSTemplate);
+	ThisObject.SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(Address));
 	
 	If Parameters.SavedSettings = Undefined Then
 		ThisObject.SettingsComposer.LoadSettings(DCSTemplate.DefaultSettings);

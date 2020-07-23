@@ -67,7 +67,6 @@ Function GetArrayOfUnusedFiles(PathForSave)
 		|	tmp AS tmp
 		|		LEFT JOIN Catalog.Files AS Files
 		|		ON tmp.FileURI = Files.URI
-		|		OR tmp.FileURI = Files.Preview1URI
 		|WHERE
 		|	Files.Ref IS NULL";
 	Query.SetParameter("TablesOfFilesURI", TableOfFilesURI);
@@ -79,8 +78,6 @@ Procedure DeleteUnusedFiles(PathForSave, ArrayOfFilesID)
 		DeleteFiles(PathForSave + "\" + FileName);
 	EndDo;
 EndProcedure
-
-
 
 Function CreateErrorResponse(HttpResponse, Message)
 	ErrorResponse = ErrorResponse();
@@ -114,12 +111,12 @@ Function FileTransferPOST(Request)
 		Storage = URLParameters.Get("storage");
 	EndIf;
 	If Not ValueIsFilled(FileName) Or Not ValueIsFilled(Storage) Then
-		Return CreateErrorResponse(HttpResponse, R()["S_014"]);
+		Return CreateErrorResponse(HttpResponse, R().S_014);
 	EndIf;
 	
 	FileStorageInfo = GetFileStorageInfo(Storage);
 	If Not ValueIsFilled(FileStorageInfo.PathForSave) Then
-		Return CreateErrorResponse(HttpResponse, R()["S_015"]);
+		Return CreateErrorResponse(HttpResponse, R().S_015);
 	EndIf;
 	
 	GetUnusedFiles = Request.QueryOptions.Get("get_unused_files");
@@ -178,12 +175,12 @@ Function FileTransferGET(Request)
 		Storage = URLParameters.Get("storage");
 	EndIf;
 	If Not ValueIsFilled(Storage) Then
-		Return CreateErrorResponse(HttpResponse, R()["S_014"]);
+		Return CreateErrorResponse(HttpResponse, R().S_014);
 	EndIf;
 	
 	FileStorageInfo = GetFileStorageInfo(Storage);
 	If Not ValueIsFilled(FileStorageInfo.PathForSave) Then
-		Return CreateErrorResponse(HttpResponse, R()["S_015"]);
+		Return CreateErrorResponse(HttpResponse, R().S_015);
 	EndIf;
 	
 	If StrEndsWith(Upper(TrimAll(Request.RelativeURL)), "JPEG") 

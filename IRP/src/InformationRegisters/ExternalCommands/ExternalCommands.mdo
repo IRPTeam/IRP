@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="61c78855-b01f-4ef4-bf23-1f0648a351ea">
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="61c78855-b01f-4ef4-bf23-1f0648a351ea">
   <producedTypes>
     <selectionType typeId="f122d9eb-39ea-4d4c-a89d-d482b1ae8d27" valueTypeId="3f99aa35-e983-4f30-9667-2d568f319620"/>
     <listType typeId="cbdd400c-96a1-4ad6-b776-645955a54602" valueTypeId="88b5999b-429c-4755-ae4d-f30e1461f581"/>
@@ -12,7 +12,7 @@
   <name>ExternalCommands</name>
   <synonym>
     <key>en</key>
-    <value>External commands</value>
+    <value>Definable UI commands</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -20,13 +20,16 @@
     <name>InterfaceGroup</name>
     <synonym>
       <key>en</key>
-      <value>Interface group</value>
+      <value>UI group</value>
     </synonym>
     <type>
       <types>CatalogRef.InterfaceGroups</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <dimensions uuid="2b90e7ef-49a5-406a-b7fc-4138a96c0073">
     <name>ConfigurationMetadata</name>
@@ -37,21 +40,27 @@
     <type>
       <types>CatalogRef.ConfigurationMetadata</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="d6b1f3be-56cb-4814-b415-2cb76b669e63">
     <name>ExternalDataProc</name>
     <synonym>
       <key>en</key>
-      <value>External data proc</value>
+      <value>Plugins</value>
     </synonym>
     <type>
       <types>CatalogRef.ExternalDataProc</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="f335d9fa-da17-426d-a51c-1b468ba3a8f7">
@@ -63,8 +72,11 @@
     <type>
       <types>EnumRef.FormTypes</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
 </mdclass:InformationRegister>

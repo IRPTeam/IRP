@@ -8,31 +8,26 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	
 	StandardProcessing = False;
 	
-	QueryTable = GetChoiseDataTable(Parameters);
+	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = New ValueList();
 	For Each Row In QueryTable Do
 		ChoiceData.Add(Row.Ref, Row.Presentation);
 	EndDo;
 EndProcedure
 
-Function GetChoiseDataTable(Parameters) Export
-	
-	QueryBuilderText =
-		"SELECT ALLOWED TOP 50
-		|	Table.Ref AS Ref,
-		|	Table.Presentation
-		|FROM
-		|	Catalog.Companies AS Table
-		|WHERE
-		|	Table.Description_en LIKE ""%%"" + &SearchString + ""%%""
+Function GetChoiceDataTable(Parameters) Export
+	Filter = "
 		|	AND CASE
-		|			WHEN &FilterByPartnerHierarchy
-		|				THEN Table.Ref IN (&CompaniesByPartnerHierarchy)
-		|			ELSE TRUE
-		|		END
-		|";
-	QueryBuilderText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryBuilderText);
+		|		WHEN &FilterByPartnerHierarchy
+		|			THEN Table.Ref IN (&CompaniesByPartnerHierarchy)
+		|		ELSE TRUE
+		|	END";
+	Settings = New Structure;
+	Settings.Insert("Name", "Catalog.Companies");
+	Settings.Insert("Filter", Filter);
 	
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
+		
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
 	If TypeOf(Parameters) = Type("Structure") And Parameters.Filter.Property("CustomSearchFilter") Then
@@ -63,8 +58,8 @@ Function GetChoiseDataTable(Parameters) Export
 	Return Query.Execute().Unload();
 EndFunction
 
-Function GetDefaultChoiseRef(Parameters) Export
-	QueryTable = GetChoiseDataTable(New Structure("SearchString, Filter", "", Parameters));
+Function GetDefaultChoiceRef(Parameters) Export
+	QueryTable = GetChoiceDataTable(New Structure("SearchString, Filter", "", Parameters));
 	
 	If QueryTable.Count() = 1 Then
 		Return QueryTable[0].Ref;
@@ -116,4 +111,3 @@ Function GetCurrenciesByType(CompanyRef, Type)
 	EndDo;
 	Return ArrayOfResults;
 EndFunction
-

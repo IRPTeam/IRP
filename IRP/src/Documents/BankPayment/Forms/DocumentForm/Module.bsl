@@ -9,7 +9,7 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -202,15 +202,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPayee
-
-&AtClient
-Procedure PayeeOnChange(Item, AddInfo = Undefined) Export
-	DocBankPaymentClient.PayeeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
 #Region ItemCompany
 
 &AtClient
@@ -249,7 +240,6 @@ Procedure CurrencyOnChangeContinue(Answer, AdditionalParameters) Export
 		ClearCashTransferOrders(Object.Currency);
 		CurrentCurrency = Object.Currency;
 		DocBankPaymentClient.CurrencyOnChange(Object, ThisObject, Items.Currency);
-		DocBankPaymentClient.FillPayees(Object, ThisObject);
 	Else
 		Object.Currency = CurrentCurrency;
 	EndIf;
@@ -275,7 +265,6 @@ Procedure AccountOnChangeContinue(Answer, AdditionalParameters) Export
 	If Answer = DialogReturnCode.Yes Then
 		CurrentAccount = Object.Account;
 		DocBankPaymentClient.AccountOnChange(Object, ThisObject, Items.Currency);
-		DocBankPaymentClient.FillPayees(Object, ThisObject);
 		ClearCashTransferOrders(Object.Currency);
 	Else
 		Object.Account = CurrentAccount;
@@ -347,8 +336,8 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLalelClick(Item)
-	DocBankPaymentClient.DecorationGroupTitleCollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocBankPaymentClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -357,8 +346,8 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
-	DocBankPaymentClient.DecorationGroupTitleUncollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocBankPaymentClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -398,7 +387,6 @@ Function Currencies_GetDeclaration(Object, Form)
 	ArrayOfItems_Header.Add(Form.Items.Account);
 	ArrayOfItems_Header.Add(Form.Items.TransactionType);
 	ArrayOfItems_Header.Add(Form.Items.Currency);
-	ArrayOfItems_Header.Add(Form.Items.Payee);
 	ArrayOfItems_Header.Add(Form.Items.Date);
 	
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_HeaderOnChange", "OnChange", ArrayOfItems_Header);
@@ -511,7 +499,7 @@ EndProcedure
 
 &AtServer
 Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	CurrenciesServer.FiilCurrencyTable(Object, 
+	CurrenciesServer.FillCurrencyTable(Object, 
 	                                   Object.Date, 
 	                                   Object.Company, 
 	                                   Currency, 
@@ -567,7 +555,6 @@ EndFunction
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient
@@ -576,8 +563,23 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region ExternalCommands
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);	
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
 #EndRegion

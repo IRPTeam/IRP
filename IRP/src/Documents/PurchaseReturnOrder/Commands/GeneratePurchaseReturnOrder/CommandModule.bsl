@@ -27,6 +27,7 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	
 	ArrayOf_PurchaseInvoice = New Array();
@@ -46,6 +47,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	
 	ItemList = New ValueTable();
@@ -167,10 +169,12 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_PurchaseInvoice(ArrayOfBasisDocuments)
 	Return GetDocumentTable(ArrayOfBasisDocuments, "PurchaseInvoice");
 EndFunction
 
+&AtServer
 Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 	Query = New Query();
 	Query.Text =
@@ -198,6 +202,7 @@ Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 	Return ExtractInfoFromOrderRows(QueryTable);
 EndFunction
 
+&AtServer
 Function ExtractInfoFromOrderRows(QueryTable)
 	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
 	For Each Row In QueryTable Do
@@ -295,7 +300,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 EndFunction
 
 #Region Errors
-
+&AtServer
 Function GetErrorMessageKey(BasisDocument)
 	ErrorMessageKey = Undefined;
 	
@@ -306,6 +311,7 @@ Function GetErrorMessageKey(BasisDocument)
 	Return ErrorMessageKey;
 EndFunction
 
+&AtServer
 Function GetInfoMessage(FillingData)
 	InfoMessage = "";
 	If FillingData.BasedOn = "PurchaseInvoice" Then
@@ -314,7 +320,7 @@ Function GetInfoMessage(FillingData)
 			BasisDocument.Add(Row.PurchaseInvoice);
 		EndDo;
 		If PurchaseReturnOrderExist(BasisDocument) Then
-			InfoMessage = StrTemplate(R()["InfoMessage_001"], 
+			InfoMessage = StrTemplate(R().InfoMessage_001, 
 										Metadata.Documents.PurchaseReturnOrder.Synonym,
 										Metadata.Documents.PurchaseInvoice.Synonym);
 		EndIf;
@@ -322,6 +328,7 @@ Function GetInfoMessage(FillingData)
 	Return InfoMessage;	
 EndFunction
 
+&AtServer
 Function PurchaseReturnOrderExist(BasisDocument)
 	Query = New Query(
 	"SELECT TOP 1

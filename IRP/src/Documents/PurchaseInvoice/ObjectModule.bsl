@@ -52,7 +52,7 @@ Procedure OnCopy(CopiedObject)
 	LinkedTables.Add(SpecialOffers);
 	LinkedTables.Add(TaxList);
 	LinkedTables.Add(Currencies);
-	DocumentsServer.SetNewTabelUUID(ItemList, LinkedTables);
+	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
 	
 EndProcedure
 

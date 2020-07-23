@@ -12,9 +12,8 @@
   <name>PartnerSegments</name>
   <synonym>
     <key>en</key>
-    <value>Partner segments</value>
+    <value>Partner segments content</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <dimensions uuid="53831403-55b9-489e-840c-53c917b9803d">
@@ -23,11 +22,9 @@
       <key>en</key>
       <value>Segment</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.PartnerSegments</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
@@ -42,11 +39,9 @@
       <key>en</key>
       <value>Partner</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.Partners</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>

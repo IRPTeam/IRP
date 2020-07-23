@@ -46,7 +46,7 @@ $text = "
     'updatetreewhenscenariostarts': true,
     'stoponerror': false,
     'showrownumberonerror': false,
-    'pendingequalfailed': false,
+    'pendingequAlphailed': false,
     'timeoutforasynchronoussteps': 0,
     'timetofindwindow': 5,
     'numberofattemptstoperformanaction': 3,

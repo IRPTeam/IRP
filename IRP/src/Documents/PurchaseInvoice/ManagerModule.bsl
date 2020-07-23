@@ -169,8 +169,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		Row.RowKey = String(Row.RowKeyUUID);
 	EndDo;
 	
-	QueryTaxlist = New Query();
-	QueryTaxlist.Text =
+	QueryTaxList = New Query();
+	QueryTaxList.Text =
 		"SELECT
 		|	PurchaseInvoiceTaxList.Ref AS Document,
 		|	PurchaseInvoiceTaxList.Ref.Date AS Period,
@@ -193,8 +193,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|	PurchaseInvoiceTaxList.Ref = &Ref";
 	
-	QueryTaxlist.SetParameter("Ref", Ref);
-	QueryResultTaxList = QueryTaxlist.Execute();
+	QueryTaxList.SetParameter("Ref", Ref);
+	QueryResultTaxList = QueryTaxList.Execute();
 	QueryTableTaxList = QueryResultTaxList.Unload();
 	// UUID to String
 	QueryTableTaxList.Columns.Add("RowKey", Metadata.AccumulationRegisters.TaxesTurnovers.Dimensions.RowKey.Type);
@@ -2542,6 +2542,129 @@ EndProcedure
 Procedure GetTables_UsePurchaseOrder_UseSalesOrder_NotGoodsReceiptBeforeInvoice_ShipmentBeforeInvoice_UseGoodsReceipt_IsProduct(Tables, 
                                                                                                                                 TempManager, 
                                                                                                                                 TableName)
+	// tmp_2_2
+	
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	
+	#Region QueryText
+	Query.Text =
+		// [0] InventoryBalance
+		"SELECT
+		|	tmp.Company,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.ItemKey,
+		|	tmp.Period
+		|;
+		|
+		|//[1] GoodsInTransitIncoming
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.ReceiptBasis,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period,
+		|	tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.ReceiptBasis,
+		|	tmp.Period,
+		|	tmp.RowKey
+		|;
+		|//[2] GoodsReceiptSchedule_Expense
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.Order AS Order,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.RowKey AS RowKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period,
+		|	GoodsReceiptSchedule.DeliveryDate AS DeliveryDate
+		|FROM
+		|	tmp AS tmp
+		|		INNER JOIN AccumulationRegister.GoodsReceiptSchedule AS GoodsReceiptSchedule
+		|		ON GoodsReceiptSchedule.Recorder = tmp.Order
+		|		AND GoodsReceiptSchedule.RowKey = tmp.RowKey
+		|		AND GoodsReceiptSchedule.Company = tmp.Company
+		|		AND GoodsReceiptSchedule.Store = tmp.Store
+		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
+		|		AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.Order,
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.RowKey,
+		|	tmp.Period,
+		|	GoodsReceiptSchedule.DeliveryDate
+		|;
+		|//[3] GoodsReceiptSchedule_Receipt 
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.Order AS Order,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.RowKey AS RowKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period,
+		|	tmp.DeliveryDate AS DeliveryDate
+		|FROM
+		|	tmp AS tmp
+		|		INNER JOIN AccumulationRegister.GoodsReceiptSchedule AS GoodsReceiptSchedule
+		|		ON GoodsReceiptSchedule.Recorder = tmp.Order
+		|		AND GoodsReceiptSchedule.RowKey = tmp.RowKey
+		|		AND GoodsReceiptSchedule.Company = tmp.Company
+		|		AND GoodsReceiptSchedule.Store = tmp.Store
+		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
+		|		AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.Order,
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.RowKey,
+		|	tmp.Period,
+		|	tmp.DeliveryDate
+		|;
+		|//[4] OrderBalance
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Order AS Order,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period,
+		|	tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Order,
+		|	tmp.Period,
+		|	tmp.RowKey";
+	
+	
+	Query.Text = StrReplace(Query.Text, "tmp", TableName);
+	#EndRegion
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	PostingServer.MergeTables(Tables.InventoryBalance, QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitIncoming, QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Expense, QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Receipt, QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.OrderBalance, QueryResults[4].Unload());
+	
 	Return;
 EndProcedure
 
@@ -3097,7 +3220,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	ArrayOfTables.Add(Table2);
 	
 	Table3 = Parameters.DocumentDataTables.AdvanceToSuppliers_Registrations.Copy();
-	Table3.Columns.Amount.Name = "AdvanceToSupliers";
+	Table3.Columns.Amount.Name = "AdvanceToSuppliers";
 	PostingServer.AddColumnsToAccountsStatementTable(Table3);
 	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");
 	ArrayOfTables.Add(Table3);
@@ -3113,7 +3236,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordSet, WriteInTransaction",
 			PostingServer.JoinTables(ArrayOfTables,
 				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency,
-				| TransactionAP, AdvanceToSupliers,
+				| TransactionAP, AdvanceToSuppliers,
 				| TransactionAR, AdvanceFromCustomers"),
 			Parameters.IsReposting));	
 	
@@ -3201,7 +3324,6 @@ EndProcedure
 #EndRegion
 
 #Region Undoposting
-
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Return Undefined;

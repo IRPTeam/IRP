@@ -18,6 +18,7 @@ Procedure GenerateReport(Command)
 	GenerateReportAtServer(ThisObject.ResultTable);
 EndProcedure
 
+&AtServer
 Function GetRegisterType(ObjectMetadata)
 	If Metadata.AccumulationRegisters.IndexOf(ObjectMetadata) >= 0 Then
 		Return "AccumulationRegister";
@@ -28,15 +29,17 @@ Function GetRegisterType(ObjectMetadata)
 	EndIf;
 EndFunction
 
+&AtServer
 Function CanBuildReport()
 	If Not ValueIsFilled(ThisObject.Document) Then
-		Message(R().Error_045);
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_045);
 		Return False;
 	Else
 		Return True;
 	EndIf;
 EndFunction
 
+&AtServer
 Procedure GenerateReportAtServer(Result)
 	
 	If Not CanBuildReport() Then
@@ -60,6 +63,7 @@ Procedure GenerateReportAtServer(Result)
 	EndIf;
 EndProcedure
 
+&AtServer
 Function GetChequeBondTransactionItems(DocumentRef)
 	Query = New Query();
 	Query.Text =
@@ -75,6 +79,7 @@ Function GetChequeBondTransactionItems(DocumentRef)
 	Return QueryResult.Unload().UnloadColumn("Ref");
 EndFunction
 
+&AtServer
 Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleArea)
 	
 	MainTitleArea.Parameters.Document = String(DocumentRef);
@@ -197,12 +202,14 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 	
 EndProcedure
 
+&AtServer
 Procedure AddDataToArrayOfFields(ArrayOfFields, Data)
 	If ValueIsFilled(Data.ListOfFields) Then
 		ArrayOfFields.Add(Data);
 	EndIf;
 EndProcedure
 
+&AtServer
 Function GetListOfFields(ObjectMetadata, FildsPresentations)
 	ListOfFields = "";
 	For Each Row In ObjectMetadata Do
@@ -212,6 +219,7 @@ Function GetListOfFields(ObjectMetadata, FildsPresentations)
 	Return ListOfFields;
 EndFunction
 
+&AtServer
 Function GetListOfFieldsByData(Data)
 	ListOfFields = "";
 	For Each Row In Data Do
@@ -224,6 +232,7 @@ Function GetListOfFieldsByData(Data)
 	Return ListOfFields;
 EndFunction
 
+&AtServer
 Procedure PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, ReportBuilder, Val RegisterName, Val PutInTable = False)
 	
 	If Not ArrayOfFields.Count() Then
@@ -277,13 +286,13 @@ Procedure PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, Repo
 	
 	If Not PutInTable Then
 		
-		NumberOfCurrenColumn = 2;
+		NumberOfCurrentColumn = 2;
 		
 		For Each Row In ArrayOfFields Do
 			If Row.ColumnNumber > 0 Then
-				OutlineOutputArea(TemplateDetails, TemplateHeader, TemplateHeight, Row.Width, NumberOfCurrenColumn);
+				OutlineOutputArea(TemplateDetails, TemplateHeader, TemplateHeight, Row.Width, NumberOfCurrentColumn);
 				
-				NumberOfCurrenColumn = NumberOfCurrenColumn + 1;
+				NumberOfCurrentColumn = NumberOfCurrentColumn + 1;
 			EndIf;
 		EndDo;
 	Else
@@ -291,12 +300,12 @@ Procedure PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, Repo
 		CurrentWidth = - 1;
 		CurrentIndexOfArray = - 1;
 		
-		For NumberOfCurrenColumn = 0 To TotalFieldsForOutput - 1 Do
+		For NumberOfCurrentColumn = 0 To TotalFieldsForOutput - 1 Do
 			If CurrentIndexOfArray <= ArrayOfFields.Count() - 2 Then
 				
 				NumberNextColumn = ArrayOfFields[CurrentIndexOfArray + 1].ColumnNumber - 2;
 				
-				If NumberNextColumn <= NumberOfCurrenColumn Then
+				If NumberNextColumn <= NumberOfCurrentColumn Then
 					CurrentIndexOfArray = CurrentIndexOfArray + 1;
 					CurrentWidth = ArrayOfFields[CurrentIndexOfArray].Width;
 					
@@ -309,27 +318,28 @@ Procedure PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, Repo
 							NumberLastColumn = TotalFieldsForOutput;
 						EndIf;
 						
-						For NumberTempColumn = NumberOfCurrenColumn To NumberLastColumn - 1 Do
+						For NumberTempColumn = NumberOfCurrentColumn To NumberLastColumn - 1 Do
 							AddTitleToColumn(TemplateHeader, NumberTempColumn + 2, ColumnName);
 						EndDo;
 						
-						Area = TemplateHeader.Area(1, NumberOfCurrenColumn + 2, 1, NumberLastColumn + 1);
+						Area = TemplateHeader.Area(1, NumberOfCurrentColumn + 2, 1, NumberLastColumn + 1);
 						Area.Merge();
 						
 					EndIf;
 				EndIf;
 			EndIf;
-			OutlineOutputArea(TemplateDetails, TemplateHeader, TemplateHeight, CurrentWidth, NumberOfCurrenColumn + 2);
+			OutlineOutputArea(TemplateDetails, TemplateHeader, TemplateHeight, CurrentWidth, NumberOfCurrentColumn + 2);
 		EndDo;
 	EndIf;
 	
 	AreaDetails = TemplateDetails.GetArea("Details");
-	AreaHeder = TemplateHeader.GetArea("TableHeader");
+	AreaHeader = TemplateHeader.GetArea("TableHeader");
 	
 	ReportBuilder.DetailRecordsTemplate = AreaDetails;
-	ReportBuilder.TableHeaderTemplate = AreaHeder;
+	ReportBuilder.TableHeaderTemplate = AreaHeader;
 EndProcedure
 
+&AtServer
 Procedure PrepareTemplateForOutput(TemplateDetails, TemplateHeader, TemplateHeight, Val AddCounter = 0)
 	
 	TemplateDetails.Area("Details").Name = "";
@@ -344,6 +354,7 @@ Procedure PrepareTemplateForOutput(TemplateDetails, TemplateHeader, TemplateHeig
 	
 EndProcedure
 
+&AtServer
 Procedure OutlineOutputArea(TemplateDetails, TemplateHeader, Val TemplateHeight, Val ColumnWidth, Val ColumnNumber)
 	
 	Line1 = New Line(SpreadsheetDocumentCellLineType.Solid, 1);
@@ -360,6 +371,7 @@ Procedure OutlineOutputArea(TemplateDetails, TemplateHeader, Val TemplateHeight,
 	
 EndProcedure
 
+&AtServer
 Procedure AddTitleToColumn(TemplateHeader, Val ColumnNumber, Val TitleString)
 	TemplateHeader.InsertArea(TemplateHeader.Area(TemplateHeader.Area("TableHeader").Top, ColumnNumber),
 		TemplateHeader.Area(TemplateHeader.Area("TableHeader").Top, ColumnNumber),
@@ -374,6 +386,7 @@ Procedure AddTitleToColumn(TemplateHeader, Val ColumnNumber, Val TitleString)
 	TemplateHeaderTitle.HorizontalAlign = HorizontalAlign.Center;
 EndProcedure
 
+&AtServer
 Procedure PrepareTemplateDetails(ListOfFields
 		, TemplateDetails
 		, TemplateHeader
@@ -392,7 +405,7 @@ Procedure PrepareTemplateDetails(ListOfFields
 		
 		While ValueIsFilled(ParameterName) Do
 			
-			If Find(ListOfFields + ",", " " + ParameterName + ",") > 0 Then
+			If StrFind(ListOfFields + ",", " " + ParameterName + ",") > 0 Then
 				
 				If ColumnNumber = 0 Then
 					
@@ -441,7 +454,7 @@ Procedure PrepareTemplateDetails(ListOfFields
 		
 		While ValueIsFilled(ParameterName) Do
 			
-			If Find(ListOfFields + ",", " " + ParameterName + ",") > 0 Then
+			If StrFind(ListOfFields + ",", " " + ParameterName + ",") > 0 Then
 				
 				If ColumnNumber = 0 Then
 					ColumnNumber = ColumnIndex;
@@ -458,6 +471,7 @@ Procedure PrepareTemplateDetails(ListOfFields
 	
 EndProcedure
 
+&AtServer
 Function GetTableRegistrations(DocumentRef)
 	QueryText = "";
 	
@@ -479,6 +493,7 @@ Function GetTableRegistrations(DocumentRef)
 	Return Query.Execute().Unload();
 EndFunction
 
+&AtServer
 Procedure FillFieldPresentations(FieldPresentations, ReportBuilder)
 	CollectionOfReportBuilder = New Structure("AvailableFields, SelectedFields, ColumnDimensions, RowDimensions, Filter");
 	For Each Row In CollectionOfReportBuilder Do

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fb329c00-d1f7-4e1a-99e8-0daf49c27cf9">
+  <producedTypes>
+    <managerType typeId="6a3b3484-ca38-4960-9df8-61fa6d621011" valueTypeId="ded24c8f-fabd-498f-ab86-82988d28fd6a"/>
+    <valueManagerType typeId="80dc8780-ff6d-467c-95a0-15ec95d6d326" valueTypeId="aef5d691-0ced-4292-b39a-b98cf15c3aac"/>
+    <valueKeyType typeId="d0472f74-7ced-43b7-96f1-7bc83b199420" valueTypeId="88ae4084-1828-4b7c-ac0c-a9217ecbb936"/>
+  </producedTypes>
+  <name>ShowAlphaTestingSaas</name>
+  <synonym>
+    <key>en</key>
+    <value>Show Alpha testing saas</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

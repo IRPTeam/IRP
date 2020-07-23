@@ -34,13 +34,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 		
-	List.Parameters.SetParameterValue("ArraytOfPlaningTransactionBasis", QueryTable.UnloadColumn("PlaningTransactionBasis"));
-	If Parameters.Property("ArrayOfChoisedDocuments") 
-		And Parameters.ArrayOfChoisedDocuments.Count() Then
-		List.Parameters.SetParameterValue("UseArrayOfChoisedDocuments", True);
-		List.Parameters.SetParameterValue("ArrayOfChoisedDocuments", Parameters.ArrayOfChoisedDocuments);
+	List.Parameters.SetParameterValue("ArrayOfPlaningTransactionBasis", QueryTable.UnloadColumn("PlaningTransactionBasis"));
+	If Parameters.Property("ArrayOfSelectedDocuments") 
+		And Parameters.ArrayOfSelectedDocuments.Count() Then
+		List.Parameters.SetParameterValue("UseArrayOfSelectedDocuments", True);
+		List.Parameters.SetParameterValue("ArrayOfSelectedDocuments", Parameters.ArrayOfSelectedDocuments);
 	Else
-		List.Parameters.SetParameterValue("UseArrayOfChoisedDocuments", False);
-		List.Parameters.SetParameterValue("ArrayOfChoisedDocuments", Undefined);
+		List.Parameters.SetParameterValue("UseArrayOfSelectedDocuments", False);
+		List.Parameters.SetParameterValue("ArrayOfSelectedDocuments", Undefined);
 	EndIf;
 EndProcedure

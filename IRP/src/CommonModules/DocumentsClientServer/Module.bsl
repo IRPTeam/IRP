@@ -80,7 +80,7 @@ Procedure ChangeTitleGroupTitle(Object, Form) Export
 	
 	TitleRow = New FormattedString(TitleArray);
 	If IsBlankString(TitleRow) Then
-		Form.Items.DecorationGroupTitleCollapsedLabel.Title = New FormattedString(R()["I_3"],
+		Form.Items.DecorationGroupTitleCollapsedLabel.Title = New FormattedString(R().I_3,
 				ValueFont, ValueTextColor, ValueBackColor);
 	Else
 		Form.Items.DecorationGroupTitleCollapsedLabel.Title = TitleRow;
@@ -126,7 +126,7 @@ Procedure ChangeTitleGroupTitle(Object, Form) Export
 	
 	TitleRow = New FormattedString(TitleArray);
 	If IsBlankString(TitleRow) Then
-		Form.Items.DecorationGroupTitleUncollapsedLabel.Title = New FormattedString(R()["I_3"],
+		Form.Items.DecorationGroupTitleUncollapsedLabel.Title = New FormattedString(R().I_3,
 				ValueFont, ValueTextColor, ValueBackColor);
 	Else
 		Form.Items.DecorationGroupTitleUncollapsedLabel.Title = TitleRow;
@@ -134,7 +134,7 @@ Procedure ChangeTitleGroupTitle(Object, Form) Export
 	
 EndProcedure
 
-//TODO: Delete parameter Object
+// TODO: Delete parameter Object
 Procedure ChangeTitleCollapse(Object = Undefined, Form, TitleVisible = True) Export
 	
 	#If Server Then
@@ -176,8 +176,8 @@ Procedure CleanDataByArray(Object, Val ArrayAll, Val ArrayVisible) Export
 			Continue;
 		EndIf;
 		
-		If StrFind(ArrayElement,".") Then
-			TableName = Left(ArrayElement, StrFind(ArrayElement,".") - 1);
+		If StrFind(ArrayElement, ".") Then
+			TableName = Left(ArrayElement, StrFind(ArrayElement, ".") - 1);
 			ItemName = StrReplace(ArrayElement, TableName + ".", "");
 			For Each Row In Object[TableName] Do
 				Row[ItemName] = Undefined;
@@ -236,7 +236,6 @@ Function GetStructureFillStores() Export
 EndFunction
 
 #EndRegion
-
 
 #Region Common
 

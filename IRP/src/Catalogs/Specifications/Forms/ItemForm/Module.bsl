@@ -16,7 +16,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	
 	If Object.Type = Enums.SpecificationType.Bundle
 		And Not ValueIsFilled(Object.ItemBundle) Then
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R()["Error_010"], "Item Bundle")
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, "Item Bundle")
 			, "Object.ItemBundle"
 			, ThisObject);
 		HaveError = True;
@@ -24,13 +24,13 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	
 	For Each Field In SavedDataStructure.Fields Do
 		If Items[Field.Key].AutoMarkIncomplete And Not ValueIsFilled(ThisObject[Field.Value.Item]) Then
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R()["Error_010"], "Item")
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, "Item")
 				, Field.Value.Item
 				, ThisObject);
 			HaveError = True;
 		EndIf;
 		If Not ThisObject[Field.Value.Table.Name].Count() Then
-			CommonFunctionsClientServer.ShowUsersMessage(R()["Error_011"]
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_011
 				, Field.Value.Table.Name
 				, ThisObject);
 			HaveError = True;
@@ -42,9 +42,9 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 				If Items[Column.FormName].AutoMarkIncomplete And Not ValueIsFilled(Row[Column.Name]) Then
 					MessageText = "";
 					If Column.Name = "Quantity" Then
-						MessageText = StrTemplate(R()["Error_010"], "Quantity");
+						MessageText = StrTemplate(R().Error_010, "Quantity");
 					Else
-						MessageText = StrTemplate(R()["Error_010"], String(ThisObject[Column.OwnerName]));
+						MessageText = StrTemplate(R().Error_010, String(ThisObject[Column.OwnerName]));
 					EndIf;
 					CommonFunctionsClientServer.ShowUsersMessage(MessageText
 						, Field.Value.Table.Name + "[" + RowIndex + "]." + Column.Name
@@ -58,7 +58,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 			// checking for duplicate lines
 			If ThisObject[Field.Value.Table.Name].FindRows(DimensionStr).Count() > 1
 				AND Field.Value.Table.Columns.Count() Then
-				MessageText = R()["Error_013"];
+				MessageText = R().Error_013;
 				CommonFunctionsClientServer.ShowUsersMessage(MessageText
 					, Field.Value.Table.Name + "[" + RowIndex + "]." + Field.Value.Table.Columns[0].Name
 					, ThisObject[Field.Value.Table.Name]);
@@ -291,7 +291,6 @@ Function CreatePage()
 	ArrayOfAttributes.Add(NewColumn);
 	ThisObject.ChangeAttributes(ArrayOfAttributes);
 	
-	
 	// FormTable
 	NewFormTable = Items.Add(GetUniqueName("FormTable")
 			, Type("FormTable")
@@ -505,7 +504,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient
@@ -514,9 +512,15 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
-#EndRegion
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControl();
+	EndIf;
+EndProcedure
 
+#EndRegion

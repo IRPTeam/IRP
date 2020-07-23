@@ -17,7 +17,7 @@ Function GetClassifierData(MetadataName) Export
 		Return ClassifierData;
 	EndIf;
 	For Each Template In CurrentMetadata.Templates Do
-		If Find(Upper(Template.Name), Upper("Classifier_JSON")) <> 0 Then
+		If StrFind(Upper(Template.Name), Upper("Classifier_JSON")) <> 0 Then
 			TemplateData = ServiceSystemServer.GetManagerByMetadata(CurrentMetadata).GetTemplate(Template.Name);
 			CurrentClassifierData = CommonFunctionsServer.DeserializeJSON(TemplateData.GetText());
 			If TypeOf(CurrentClassifierData) = Type("Array") Then
@@ -88,17 +88,17 @@ Procedure DisassembleClassifierElement_KeyAndValue(NewObject, KeyAndValue)
 		Else
 			MetadataType = Undefined;
 			If KeyAndValue.Value.Property("MetadataType", MetadataType) Then
-				If Find(MetadataType, "Catalog") <> 0 Then
+				If StrFind(MetadataType, "Catalog") <> 0 Then
 					NewObject[KeyAndValue.Key] = CheckExistingAndCreateCatalogItemFromClassifierElement(
 									MetadataType, KeyAndValue.Value, False);
 				EndIf;
-				If Find(MetadataType, "Enum") <> 0 Then
+				If StrFind(MetadataType, "Enum") <> 0 Then
 					EnumManager = ServiceSystemServer.GetManagerByMetadataFullName(MetadataType);
 					If EnumManager <> Undefined Then
 						NewObject[KeyAndValue.Key] = EnumManager[KeyAndValue.Value.Value];
 					EndIf;
 				EndIf;
-				If Find(MetadataType, "ValueStorage_Structure") <> 0 Then
+				If StrFind(MetadataType, "ValueStorage_Structure") <> 0 Then
 					ValueStorage_Structure = New Structure(); 
 					For Each ValueStorage_KeyAndValue In KeyAndValue.Value Do
 						If ValueStorage_KeyAndValue.Key <> "MetadataType" Then
@@ -107,8 +107,8 @@ Procedure DisassembleClassifierElement_KeyAndValue(NewObject, KeyAndValue)
 					EndDo;
 					DisassembleClassifierElement_Structure(ValueStorage_Structure, KeyAndValue.Value);
 					NewObject[KeyAndValue.Key] = New ValueStorage(ValueStorage_Structure, New Deflation(9));	
-				Endif;
-				If Find(MetadataType, "ValueStorage_ExtData") <> 0 Then
+				EndIf;
+				If StrFind(MetadataType, "ValueStorage_ExtData") <> 0 Then
 					NewObject[KeyAndValue.Key] = GetBinaryDataFromTemplate(KeyAndValue.Value);		
 				EndIf;
 			EndIf;
@@ -127,7 +127,7 @@ Procedure DisassembleClassifierElement_TabularSection(NewObject, TabularSection)
 	EndDo;
 EndProcedure
 
-Function CheckExistingAndCreateCatalogItemFromClassifierElement(MetadataName, ClassifierElement, OwnClassifier=True) Export
+Function CheckExistingAndCreateCatalogItemFromClassifierElement(MetadataName, ClassifierElement, OwnClassifier = True) Export
 	If TypeOf(ClassifierElement) <> Type("Structure") OR Not ClassifierElement.Count() Then
 		CurrentManager = ServiceSystemServer.GetManagerByMetadataFullName(MetadataName);
 		If CurrentManager = Undefined Then
@@ -149,7 +149,7 @@ Function CheckExistingAndCreateCatalogItemFromClassifierElement(MetadataName, Cl
 	|	Catalog.%1 AS Table
 	|WHERE
 	|	Table.%2 = &%2");
-	Query.Text = StrTemplate(Query.Text, Mid(MetadataName,9), SearchingKeyAndValue.Key);
+	Query.Text = StrTemplate(Query.Text, Mid(MetadataName, 9), SearchingKeyAndValue.Key);
 	Query.SetParameter(SearchingKeyAndValue.Key, SearchingKeyAndValue.Value);
 	
 	Selection = Query.Execute().Select();
@@ -203,7 +203,7 @@ EndFunction
 
 Procedure FillDescriptionOfPredefinedCatalogs() Export
     
-    LocalCodes = LocalicationCodesList();
+    LocalCodes = LocalizationCodesList();
 
 	ValueTable = New ValueTable;
 	ValueTable.Columns.Add("Ref");
@@ -309,7 +309,7 @@ Procedure FillDescriptionOfPredefinedCatalogs() Export
 
 EndProcedure
 
-Function LocalicationCodesList()
+Function LocalizationCodesList()
     
     LocalizationCodes = New Array;
     LocalizationCodes.Add("en");

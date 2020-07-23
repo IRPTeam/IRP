@@ -29,8 +29,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.CompareItemList.LineNumber</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.CompareItemList.LineNumber</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ItemListLineNumberExtendedTooltip</name>
@@ -75,8 +77,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.CompareItemList.Item</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.CompareItemList.Item</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ExtendedTooltip</name>
@@ -125,8 +129,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.CompareItemList.ItemKey</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.CompareItemList.ItemKey</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ItemListItemKeyExtendedTooltip</name>
@@ -175,8 +181,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.CompareItemList.Unit</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.CompareItemList.Unit</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ItemListUnitExtendedTooltip</name>
@@ -225,8 +233,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.CompareItemList.Quantity</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.CompareItemList.Quantity</segments>
+              </paths>
             </dataPath>
             <handlers>
               <event>OnChange</event>
@@ -280,8 +290,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.CompareItemList.Count</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.CompareItemList.Count</segments>
+              </paths>
             </dataPath>
             <handlers>
               <event>OnChange</event>
@@ -334,8 +346,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.CompareItemList.Difference</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.CompareItemList.Difference</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ItemListDifferenceExtendedTooltip</name>
@@ -519,7 +533,6 @@
               </userVisible>
               <autoFill>true</autoFill>
             </contextMenu>
-            <source>ItemListSearchString</source>
             <extInfo xsi:type="form:SearchStringAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -558,7 +571,6 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>ViewStatusAddition</type>
-            <source>ItemListViewStatus</source>
             <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
               <horizontalLocation>Left</horizontalLocation>
@@ -598,7 +610,6 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>SearchControlAddition</type>
-            <source>CompareItemList</source>
             <extInfo xsi:type="form:SearchControlAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -649,6 +660,7 @@
           <enableStartDrag>true</enableStartDrag>
           <enableDrag>true</enableDrag>
           <fileDragMode>AsFileRef</fileDragMode>
+          <rowFilter xsi:type="core:UndefinedValue"/>
         </items>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -758,9 +770,6 @@
               <paths xsi:type="form:DataPath">
                 <segments>Object.PhysItemList.Item</segments>
               </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.PhysItemList.Item</segments>
-              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ExtendedTooltip</name>
@@ -810,9 +819,6 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.PhysItemList.ItemKey</segments>
-              </paths>
               <paths xsi:type="form:DataPath">
                 <segments>Object.PhysItemList.ItemKey</segments>
               </paths>
@@ -868,9 +874,6 @@
               <paths xsi:type="form:DataPath">
                 <segments>Object.PhysItemList.Unit</segments>
               </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.PhysItemList.Unit</segments>
-              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ExtendedTooltip</name>
@@ -920,9 +923,6 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.PhysItemList.Count</segments>
-              </paths>
               <paths xsi:type="form:DataPath">
                 <segments>Object.PhysItemList.Count</segments>
               </paths>
@@ -1236,6 +1236,7 @@
           <horizontalStretch>true</horizontalStretch>
           <verticalStretch>true</verticalStretch>
           <fileDragMode>AsFileRef</fileDragMode>
+          <rowFilter xsi:type="core:UndefinedValue"/>
         </items>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1341,8 +1342,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.ExpItemList.Item</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.ExpItemList.Item</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ExtendedTooltip</name>
@@ -1395,9 +1398,6 @@
               <paths xsi:type="form:DataPath">
                 <segments>Object.ExpItemList.ItemKey</segments>
               </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.ExpItemList.ItemKey</segments>
-              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ExpItemListItemKeyExtendedTooltip</name>
@@ -1446,8 +1446,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.ExpItemList.Unit</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.ExpItemList.Unit</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ExtendedTooltip</name>
@@ -1500,9 +1502,6 @@
               <paths xsi:type="form:DataPath">
                 <segments>Object.ExpItemList.Quantity</segments>
               </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.ExpItemList.Quantity</segments>
-              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ExpItemListQuantityExtendedTooltip</name>
@@ -1552,9 +1551,6 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.ExpItemList.BaseOn</segments>
-              </paths>
               <paths xsi:type="form:DataPath">
                 <segments>Object.ExpItemList.BaseOn</segments>
               </paths>
@@ -1766,6 +1762,7 @@
           <horizontalStretch>true</horizontalStretch>
           <verticalStretch>true</verticalStretch>
           <fileDragMode>AsFileRef</fileDragMode>
+          <rowFilter xsi:type="core:UndefinedValue"/>
         </items>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1992,7 +1989,7 @@
         <name>SearchByBarcode</name>
       </handler>
     </action>
-    <functionalOptions>FunctionalOption.ShowAlfaTestingSaas</functionalOptions>
+    <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
     <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>

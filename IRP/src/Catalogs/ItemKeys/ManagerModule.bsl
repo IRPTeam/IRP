@@ -13,65 +13,73 @@ Function GetRefsBySearchString(Item, SearchString) Export
 	Query = New Query();
 	Query.Text =
 		
-		"SELECT
-		|	Table.Attribute AS Property,
-		|	Items.Ref AS Item
-		|INTO tmp
-		|FROM
-		|	Catalog.ItemTypes.AvailableAttributes AS Table
-		|		INNER JOIN Catalog.Items AS Items
-		|		ON Items.ItemType = Table.Ref
-		|		AND Items.Ref = &Item
-		|;
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	ItemKeys.Ref AS ItemKey,
-		|	ItemKeys.Specification AS Specification
-		|INTO tmp2
+		"SELECT ALLOWED
+		|	ItemKeys.Ref AS Ref,
+		|	REFPRESENTATION(ItemKeys.Ref) AS Presentation
 		|FROM
 		|	Catalog.ItemKeys AS ItemKeys
 		|WHERE
-		|	ItemKeys.Specification <> VALUE(Catalog.Specifications.EmptyRef)
-		|	AND ItemKeys.Item = &Item
-		|;
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT ALLOWED TOP 50
-		|	ItemKeys.ItemKey AS ItemKey
+		|	ItemKeys.Item = &Item";
+		
+	Query.SetParameter("Item", Item);
+	TmpTable = Query.Execute().Unload();
+	
+	Query = New Query();
+	Query.Text =
+		
+		"SELECT TOP 10
+		|	ItemKeys.Ref AS Ref,
+		|	CAST(ItemKeys.Presentation AS String(200)) AS Presentation,
+		|	0 AS Sort
+		|INTO VT
 		|FROM
-		|	tmp2 AS ItemKeys
-		|		INNER JOIN Catalog.Specifications.DataSet AS DataSet
-		|		ON ItemKeys.Specification = DataSet.Ref
-		|		AND CASE
-		|			WHEN VALUETYPE(DataSet.Value) = TYPE(Catalog.AddAttributeAndPropertyValues)
-		|				THEN DataSet.Value.Description_en
-		|			ELSE CAST(DataSet.Value AS STRING(200))
-		|		END LIKE ""%"" + &SearchString + ""%""
+		|	&TmpTable AS ItemKeys
+		|WHERE
+		|	ItemKeys.Presentation LIKE &SearchString + ""%""
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT TOP 10
+		|	ItemKeys.Ref AS Ref,
+		|	CAST(ItemKeys.Presentation AS String(200)) AS Presentation,
+		|	1 AS Sort
+		|INTO VTFull
+		|FROM
+		|	&TmpTable AS ItemKeys
+		|WHERE
+		|	ItemKeys.Presentation LIKE ""%"" + &SearchString + ""%""
+		|	AND NOT ItemKeys.Ref IN
+		|				(SELECT
+		|					T.Ref
+		|				FROM
+		|					VT AS T)
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	VT.Ref AS Ref,
+		|	VT.Presentation AS Presentation,
+		|	VT.Sort AS Sort
+		|FROM
+		|	VT AS VT
 		|
 		|UNION
 		|
 		|SELECT
-		|	Table.Ref
+		|	VTFull.Ref,
+		|	VTFull.Presentation,
+		|	VTFull.Sort
 		|FROM
-		|	Catalog.ItemKeys.AddAttributes AS Table
-		|		INNER JOIN tmp AS tmp
-		|		ON Table.Property = tmp.Property
-		|		AND Table.Ref.Item = tmp.Item
-		|		AND CASE
-		|			WHEN VALUETYPE(Table.Value) = TYPE(Catalog.AddAttributeAndPropertyValues)
-		|				THEN Table.Value.Description_en
-		|			WHEN VALUETYPE(Table.Value) = TYPE(NUMBER)
-		|				THEN Table.SearchLiteral
-		|			ELSE CAST(Table.Value AS STRING(200))
-		|		END LIKE ""%"" + &SearchString + ""%""
-		|GROUP BY
-		|	Table.Ref";
-	
-	Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "Table.Value");
-	Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "DataSet.Value");
-	
-	Query.SetParameter("Item", Item);
+		|	VTFull AS VTFull
+		|
+		|ORDER BY
+		|	Sort,
+		|	Presentation";
+		
+	Query.SetParameter("TmpTable", TmpTable);
 	Query.SetParameter("SearchString", SearchString);
-	Return Query.Execute().Unload().UnloadColumn("ItemKey");
+	Return Query.Execute().Unload().UnloadColumn("Ref");
+
 EndFunction
 
 Function GetRefsByProperties(TableOfProperties, Item, AddInfo = Undefined) Export
@@ -209,7 +217,7 @@ Function GetRefsByOnePropertyWithSpecifications(ArrayOfFoundedItemKeys, Item, At
 	Return Query.Execute().Unload().UnloadColumn("Ref");
 EndFunction
 
-Function GetUniqItemKeyByItem(Item) Export
+Function GetUniqueItemKeyByItem(Item) Export
 	Query = New Query(
 			"SELECT TOP 2
 			|	Table.Ref
@@ -409,7 +417,7 @@ EndFunction
 
 #Region AffectPricingMD5
 
-Procedure SynhronizeAffectPricingMD5ByItemType(ItemType) Export
+Procedure SynchronizeAffectPricingMD5ByItemType(ItemType) Export
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -425,10 +433,10 @@ Procedure SynhronizeAffectPricingMD5ByItemType(ItemType) Export
 		|	ItemKeys.Item.ItemType = &ItemType";
 	Query.SetParameter("ItemType", ItemType);
 	QueryResult = Query.Execute();
-	SynhronizeAffectPricingMD5(QueryResult.Select());
+	SynchronizeAffectPricingMD5(QueryResult.Select());
 EndProcedure
 
-Procedure SynhronizeAffectPricingMD5BySpecification(Specification) Export
+Procedure SynchronizeAffectPricingMD5BySpecification(Specification) Export
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -444,10 +452,10 @@ Procedure SynhronizeAffectPricingMD5BySpecification(Specification) Export
 		|	ItemKeys.Specification = &Specification";
 	Query.SetParameter("Specification", Specification);
 	QueryResult = Query.Execute();
-	SynhronizeAffectPricingMD5(QueryResult.Select());
+	SynchronizeAffectPricingMD5(QueryResult.Select());
 EndProcedure
 
-Procedure SynhronizeAffectPricingMD5(QuerySelection)
+Procedure SynchronizeAffectPricingMD5(QuerySelection)
 	
 	While QuerySelection.Next() Do
 		NeedWrite = False;
@@ -491,7 +499,7 @@ Procedure SynhronizeAffectPricingMD5(QuerySelection)
 		
 		If NeedWrite Then
 			ItemKeyObject = QuerySelection.ItemKey.GetObject();
-			ItemKeyObject.AdditionalProperties.Insert("SynhronizeAffectPricingMD5", True);
+			ItemKeyObject.AdditionalProperties.Insert("SynchronizeAffectPricingMD5", True);
 			If AffectPricingMD5 <> Undefined Then
 				ItemKeyObject.AdditionalProperties.Insert("AffectPricingMD5", AffectPricingMD5);
 			EndIf;
@@ -549,4 +557,3 @@ Function GetResultTableMD5ForSpecification()
 EndFunction
 
 #EndRegion
-

@@ -26,10 +26,10 @@ Function SearchByBarcodes(Barcodes, AddInfo) Export
 	If AddInfo.Property("PriceType", PriceType) Then
 		AddInfo.Property("PricePeriod", PricePeriod);
 		QueryUnload.Columns.Add("Price", Metadata.DefinedTypes.typePrice.Type);		
-		PrePriceTable = QueryUnload.Copy( , "ItemKey, Unit");
-		PrePriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
-		PrePriceTable.FillValues(PriceType, "PriceType");
-		ItemsInfo = GetItemInfo.ItemPriceInfoByTable(PrePriceTable, PricePeriod);
+		PreviousPriceTable = QueryUnload.Copy( , "ItemKey, Unit");
+		PreviousPriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
+		PreviousPriceTable.FillValues(PriceType, "PriceType");
+		ItemsInfo = GetItemInfo.ItemPriceInfoByTable(PreviousPriceTable, PricePeriod);
 		For Each Row In ItemsInfo Do
 			Filter = New Structure;
 			Filter.Insert("ItemKey", Row.ItemKey);
@@ -85,4 +85,3 @@ Function GetQRPicture(BarcodeParameters) Export
 	Return New Picture;
 	
 EndFunction
-

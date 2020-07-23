@@ -5,6 +5,5 @@
     <key>en</key>
     <value>Common form actions</value>
   </synonym>
-  <comment></comment>
   <clientManagedApplication>true</clientManagedApplication>
 </mdclass:CommonModule>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ee46c0c7-1ec5-4b25-ad63-889eaf9522ea">
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ee46c0c7-1ec5-4b25-ad63-889eaf9522ea">
   <producedTypes>
     <selectionType typeId="cfb00920-a771-4da9-bc74-a12bbb316e89" valueTypeId="dbc9d060-c1e5-4f1f-aa24-6d759e57dad0"/>
     <listType typeId="e101ed1d-8a59-4747-9fb5-74bca7f71eda" valueTypeId="ae9c5eb6-8c64-4e4e-b166-dc39f5a96cc9"/>
@@ -12,7 +12,7 @@
   <name>UserSettings</name>
   <synonym>
     <key>en</key>
-    <value>User settings</value>
+    <value>User defaults settings</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -25,8 +25,11 @@
     <type>
       <types>EnumRef.KindsOfAttributes</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <resources uuid="b5c5bfb2-6b37-4783-9ef4-b0487f3aa19a">
     <name>Value</name>
@@ -35,10 +38,10 @@
       <value>Value</value>
     </synonym>
     <type>
-      <types>Number</types>
+      <types>Boolean</types>
       <types>String</types>
       <types>Date</types>
-      <types>Boolean</types>
+      <types>Number</types>
       <types>AnyRef</types>
       <numberQualifiers>
         <precision>12</precision>
@@ -49,8 +52,13 @@
       </stringQualifiers>
       <dateQualifiers/>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
   </resources>
   <dimensions uuid="294152d5-e325-4588-8b43-c7a9e643bcb0">
     <name>UserOrGroup</name>
@@ -59,11 +67,14 @@
       <value>User or group</value>
     </synonym>
     <type>
-      <types>CatalogRef.Users</types>
       <types>CatalogRef.UserGroups</types>
+      <types>CatalogRef.Users</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
@@ -79,8 +90,13 @@
         <length>100</length>
       </stringQualifiers>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="fa6d600a-4784-4609-a589-55d3b69b8c8e">
@@ -95,8 +111,13 @@
         <length>100</length>
       </stringQualifiers>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
     <mainFilter>true</mainFilter>
   </dimensions>
 </mdclass:InformationRegister>

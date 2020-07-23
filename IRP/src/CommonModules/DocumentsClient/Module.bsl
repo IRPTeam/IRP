@@ -52,7 +52,7 @@ Procedure CurrencyOnChange(Object, Form, Module, Item = Undefined, Settings = Un
 		QuestionStructure.Insert("CurrentCurrency", Form.Currency);
 		QuestionStructure.Insert("AccountInfo", Settings.AccountInfo);
 		QuestionStructure.Insert("ProcedureName", "CurrencyOnChangeContinue");
-		QuestionStructure.Insert("QuestionText", StrTemplate(R()["R().QuestionToUser_006"]));
+		QuestionStructure.Insert("QuestionText", StrTemplate(R()/R().QuestionToUser_006));
 		QuestionStructure.Insert("Action", "Currency");
 		
 		Settings.Questions.Add(QuestionStructure);
@@ -295,7 +295,7 @@ Procedure AgreementOnChange(Object, Form, Module, Item = Undefined, Settings  = 
 	
 EndProcedure
 
-//TODO: Start choice functions are similar.
+// TODO: Start choice functions are similar.
 Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
 	If  OpenSettings = Undefined Then
 		OpenSettings = GetOpenSettingsStructure();
@@ -329,7 +329,7 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
-//TODO: Edit text change functions are similar.
+// TODO: Edit text change functions are similar.
 Procedure AgreementEditTextChange(Object, Form, Item, Text,
 		StandardProcessing, ArrayOfFilters = Undefined,
 		AdditionalParameters = Undefined) Export
@@ -666,7 +666,7 @@ Procedure PriceTypeOnChange(Object, Form, Module, Item = Undefined, Settings = U
 		QuestionStructure.Insert("CurrentPriceType", Form.CurrentPriceType);
 		QuestionStructure.Insert("AgreementInfo", Settings.AgreementInfo);
 		QuestionStructure.Insert("ProcedureName", "PriceTypeOnChangeContinue");
-		QuestionStructure.Insert("QuestionText", StrTemplate(R()["QuestionToUser_011"], String(Settings.AgreementInfo.PriceType)));
+		QuestionStructure.Insert("QuestionText", StrTemplate(R().QuestionToUser_011, String(Settings.AgreementInfo.PriceType)));
 		QuestionStructure.Insert("Action", "PriceTypes");
 		
 		Settings.Questions.Add(QuestionStructure);
@@ -742,23 +742,23 @@ EndProcedure
 
 #Region GroupTitleDecorationsEvents
 
-//TODO: Delete parameter Object
+// TODO: Delete parameter Object
 Procedure DecorationGroupTitleCollapsedPictureClick(Object = Undefined, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(, Form, True);
 EndProcedure
 
-//TODO: Delete parameter Object
-Procedure DecorationGroupTitleCollapsedLalelClick(Object = Undefined, Form, Item) Export
+// TODO: Delete parameter Object
+Procedure DecorationGroupTitleCollapsedLabelClick(Object = Undefined, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(, Form, True);
 EndProcedure
 
-//TODO: Delete parameter Object
+// TODO: Delete parameter Object
 Procedure DecorationGroupTitleUncollapsedPictureClick(Object = Undefined, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(, Form, False);
 EndProcedure
 
-//TODO: Delete parameter Object
-Procedure DecorationGroupTitleUncollapsedLalelClick(Object = Undefined, Form, Item) Export
+// TODO: Delete parameter Object
+Procedure DecorationGroupTitleUncollapsedLabelClick(Object = Undefined, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(, Form, False);
 EndProcedure
 
@@ -803,7 +803,7 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 	EndIf;
 	#EndRegion
 	
-	//TODO: Refact	
+	// TODO: Refact	
 	For Each AfterActionsCalculateSettingsItem In DateSettings.AfterActionsCalculateSettings Do
 		Settings.CalculateSettings.Insert(AfterActionsCalculateSettingsItem.Key, AfterActionsCalculateSettingsItem.Value);
 	EndDo;
@@ -842,11 +842,11 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 	EndIf;
 	
 	If Settings.CalculateSettings.Property("UpdatePrice")
-		//TODO: Refact
-		And CalculationStringsClientServer.PricesChenged(Object, Form, Settings) Then
+		// TODO: Refact
+		And CalculationStringsClientServer.PricesChanged(Object, Form, Settings) Then
 		QuestionStructure = New Structure;
-		QuestionStructure.Insert("ProcedureName", "PricesChengedContinue");
-		QuestionStructure.Insert("QuestionText"	, R()["QuestionToUser_013"]);
+		QuestionStructure.Insert("ProcedureName", "PricesChangedContinue");
+		QuestionStructure.Insert("QuestionText"	, R().QuestionToUser_013);
 		QuestionStructure.Insert("Action"		, "Prices");
 		Settings.Questions.Add(QuestionStructure);
 	EndIf;
@@ -910,9 +910,9 @@ Procedure ShowUserQueryBoxContinue(Result, AdditionalParameters) Export
 		Return;
 	EndIf;
 	
-	QuestionSettngs = New Structure();
+	QuestionSettings = New Structure();
 	For Each Question In Settings.Questions Do
-		QuestionSettngs.Insert(Question.Action, Question);
+		QuestionSettings.Insert(Question.Action, Question);
 	EndDo;
 	
 	If Settings.Property("Rows") Then
@@ -925,7 +925,7 @@ Procedure ShowUserQueryBoxContinue(Result, AdditionalParameters) Export
 		Parameters = New Structure("Object, Form, Settings, Rows");
 		Parameters.Object = Object;
 		Parameters.Form = Form;
-		Parameters.Settings = QuestionSettngs.Stores;
+		Parameters.Settings = QuestionSettings.Stores;
 		Parameters.Rows = Rows;
 		StoreOnChangeContinue(DialogReturnCode.Yes, Parameters);
 	EndIf;
@@ -934,7 +934,7 @@ Procedure ShowUserQueryBoxContinue(Result, AdditionalParameters) Export
 		Parameters = New Structure("Object, Form, Settings, Rows");
 		Parameters.Object = Object;
 		Parameters.Form = Form;
-		Parameters.Settings = QuestionSettngs.PriceTypes;
+		Parameters.Settings = QuestionSettings.PriceTypes;
 		Parameters.Rows = Rows;
 		PriceTypeOnChangeContinue(DialogReturnCode.Yes, Parameters);
 	EndIf;
@@ -1017,7 +1017,7 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 		
 		If Row.Property("Quantity") Then
 			Row.Quantity = Row.Quantity + ResultElement.Quantity;
-		ElsIF Row.Property("PhysCount") And Row.Property("Difference") Then
+		ElsIf Row.Property("PhysCount") And Row.Property("Difference") Then
 			Row.PhysCount = Row.PhysCount + ResultElement.Quantity;
 			Row.Difference = Row.PhysCount - Row.ExpCount;
 		EndIf;
@@ -1038,14 +1038,14 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 	NotifyDescription = New NotifyDescription("PickupItemsEnd", ThisObject, NotifyParameters);
 	OpenFormParameters = PickupItemsParameters(Object, Form);	
 	#If MobileClient Then
-	FormName = "CommonForm.PickUpItemsMobile";
+	
 	#Else
 	FormName = "CommonForm.PickUpItems";
 	#EndIf
 	OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
 EndProcedure
 
-//TODO: Some parameters do not exist. Fix
+// TODO: Some parameters do not exist. Fix
 Function PickupItemsParameters(Object, Form)
 	ReturnValue = New Structure();
 	
@@ -1117,12 +1117,12 @@ Procedure FillDeliveryDates(Object, Form) Export
 		Form.Items.DeliveryDate.Tooltip = "";
 		Form.DeliveryDate = DeliveryDatesArray[0];
 	Else
-		DeliveryDatesFormatedArray = New Array();
+		DeliveryDatesFormattedArray = New Array();
 		For Each Row In DeliveryDatesArray Do
-			DeliveryDatesFormatedArray.Add(Format(Row, "DF=dd.MM.yy;"));
+			DeliveryDatesFormattedArray.Add(Format(Row, "DF=dd.MM.yy;"));
 		EndDo;
 		Form.DeliveryDate = Date(1, 1, 1);
-		Form.Items.DeliveryDate.Tooltip = StrConcat(DeliveryDatesFormatedArray, "; ");
+		Form.Items.DeliveryDate.Tooltip = StrConcat(DeliveryDatesFormattedArray, "; ");
 	EndIf;
 EndProcedure
 
@@ -1232,23 +1232,23 @@ EndProcedure
 
 #Region Commands
 
-&AtClient
 Procedure SearchByBarcode(Command, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined) Export
-	TransferParameters = New Structure;
-	If DocumentClientModule = Undefined Then
-		TransferParameters.Insert("ClientModule", ThisObject);
-	Else
-		TransferParameters.Insert("ClientModule", DocumentClientModule);
-	EndIf;
-	If PriceType <> Undefined Then
-		TransferParameters.Insert("PriceType", PriceType);
-		If Object.Ref = Undefined Then
-			TransferParameters.Insert("PricePeriod", CurrentDate());
-		Else
-			TransferParameters.Insert("PricePeriod", Object.Date);
-		EndIf;
-	EndIf;
-	BarcodeClient.SearchByBarcode(Command, Object, Form, ThisObject, TransferParameters);
+  TransferParameters = New Structure;
+  If DocumentClientModule = Undefined Then
+    ClientModule = ThisObject;
+  Else
+    ClientModule = DocumentClientModule;
+  EndIf;
+  
+  If PriceType <> Undefined Then
+    TransferParameters.Insert("PriceType", PriceType);
+    If Object.Ref = Undefined Then
+      TransferParameters.Insert("PricePeriod", CurrentDate());
+    Else
+      TransferParameters.Insert("PricePeriod", Object.Date);
+    EndIf;
+  EndIf;
+  BarcodeClient.SearchByBarcode(Command, Object, Form, ClientModule, TransferParameters);
 EndProcedure
 
 Procedure SearchByBarcodeEnd(BarcodeItems, Parameters) Export
@@ -1284,7 +1284,7 @@ EndProcedure
 
 #EndRegion
 
-#Region DocUmentsStartChoise
+#Region DocUmentsStartChoice
 
 Procedure PurchaseInvoiceStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
 	If  OpenSettings = Undefined Then
@@ -1429,7 +1429,7 @@ EndProcedure
 Procedure CalculateTable(Object, Form, Settings) Export
 	Actions = New Structure();
 
-	CalculationStringsClientServer.DoTabelActions(Object, Form, Settings, Actions);
+	CalculationStringsClientServer.DoTableActions(Object, Form, Settings, Actions);
 	
 	ItemListCalculateRowsAmounts(Object, Form, Settings);
 EndProcedure 
@@ -1466,7 +1466,7 @@ Procedure SetTextOfDescriptionAtForm(Object, Form) Export
 	If ValueIsFilled(Object.Description) Then
 		Form.Description = Object.Description;
 	Else
-		Form.Description = R()["I_2"];
+		Form.Description = R().I_2;
 	EndIf;
 EndProcedure
 
@@ -1574,7 +1574,7 @@ Procedure UpdateStore(Object, Form, Settings) Export
 		QuestionStructure.Insert("StoreBeforeChange", Form.StoreBeforeChange);
 		QuestionStructure.Insert("NewStore"			, Settings.NewStore);
 		QuestionStructure.Insert("ProcedureName"	, "StoreOnChangeContinue");
-		QuestionStructure.Insert("QuestionText"		, StrTemplate(R()["QuestionToUser_009"], String(Settings.NewStore)));
+		QuestionStructure.Insert("QuestionText"		, StrTemplate(R().QuestionToUser_009, String(Settings.NewStore)));
 		QuestionStructure.Insert("Action"			, "Stores");
 		Settings.Questions.Add(QuestionStructure);
 		Return;
@@ -1713,7 +1713,7 @@ Procedure ItemListItemOnChange(Object, Form, Module, Item = Undefined, Settings 
 	
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
 	
-	CalculationStringsClientServer.DoTabelActions(Object, Form, Settings, ItemListItemSettings.Actions);
+	CalculationStringsClientServer.DoTableActions(Object, Form, Settings, ItemListItemSettings.Actions);
 	
 	If Item = Undefined Then
 		Return;
@@ -1748,7 +1748,7 @@ Procedure ItemListItemKeyOnChange(Object, Form, Module, Item = Undefined, Settin
 	Settings.Rows.Add(CurrentRow);
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
 	
-	CalculationStringsClientServer.DoTabelActions(Object, Form, Settings, ItemListItemKeySettings.Actions);
+	CalculationStringsClientServer.DoTableActions(Object, Form, Settings, ItemListItemKeySettings.Actions);
 	
 	If Item = Undefined Then
 		Return;
@@ -1780,7 +1780,7 @@ Procedure ItemListUnitOnChange(Object, Form, Module, Item = Undefined, Settings 
 	Settings.Rows.Add(CurrentRow);
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
 	
-	CalculationStringsClientServer.DoTabelActions(Object, Form, Settings, ItemListUnitSettings.Actions);
+	CalculationStringsClientServer.DoTableActions(Object, Form, Settings, ItemListUnitSettings.Actions);
 	
 	If Item = Undefined Then
 		Return;
@@ -1798,12 +1798,12 @@ Procedure ItemListPriceTypeOnChange(Object, Form, Module, Item = Undefined, Sett
 		Return;
 	EndIf;
 	
-	// If Item was chenged we hawe to clear itemkey
+	// If Item was Changed we hawe to clear itemkey
 	If Settings = Undefined Then
 		Settings = GetSettingsStructure(Module);
 	EndIf;
 	
-	//TODO: Unit?
+	// TODO: Unit?
 	ItemListUnitSettings = Module.ItemListUnitSettings();
 	
 	Settings.Insert("ObjectAttributes", ItemListUnitSettings.ObjectAttributes);
@@ -1812,7 +1812,7 @@ Procedure ItemListPriceTypeOnChange(Object, Form, Module, Item = Undefined, Sett
 	Settings.Rows.Add(CurrentRow);
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
 	
-	CalculationStringsClientServer.DoTabelActions(Object, Form, Settings, ItemListUnitSettings.Actions);
+	CalculationStringsClientServer.DoTableActions(Object, Form, Settings, ItemListUnitSettings.Actions);
 	
 	If Item = Undefined Then
 		Return;
@@ -1873,7 +1873,6 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 		EndIf;
 	EndIf;
 EndProcedure
-
 
 Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export 
 	CurrentData = Form.Items.PaymentList.CurrentData;

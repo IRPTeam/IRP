@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://g5.1c.ru/v8/dt/form">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <title>
     <key>en</key>
     <value>Cash transfer orders</value>
@@ -56,18 +56,20 @@
     <defaultItem>true</defaultItem>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormField">
-      <name>Choiced</name>
+      <name>Selected</name>
       <id>67</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Choiced</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Selected</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
-        <name>ChoicedExtendedTooltip</name>
+        <name>SelectedExtendedTooltip</name>
         <id>69</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -82,7 +84,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ChoicedContextMenu</name>
+        <name>SelectedContextMenu</name>
         <id>68</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -106,8 +108,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Number</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Number</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>NumberExtendedTooltip</name>
@@ -156,8 +160,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Date</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Date</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>DateExtendedTooltip</name>
@@ -206,8 +212,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Company</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Company</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>CompanyExtendedTooltip</name>
@@ -256,8 +264,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Sender</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Sender</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>SenderExtendedTooltip</name>
@@ -306,8 +316,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.SendCurrency</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.SendCurrency</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>SendCurrencyExtendedTooltip</name>
@@ -349,18 +361,20 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>IsCurrensyExchange</name>
+      <name>IsCurrencyExchange</name>
       <id>64</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.IsCurrensyExchange</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.IsCurrencyExchange</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
-        <name>IsCurrensyExchangeExtendedTooltip</name>
+        <name>IsCurrencyExchangeExtendedTooltip</name>
         <id>66</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -375,7 +389,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>IsCurrensyExchangeContextMenu</name>
+        <name>IsCurrencyExchangeContextMenu</name>
         <id>65</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -435,7 +449,6 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>ListSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -474,7 +487,6 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>ListViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
         <horizontalLocation>Left</horizontalLocation>
@@ -514,7 +526,6 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>List</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -572,6 +583,11 @@
     </rowPictureDataPath>
     <extInfo xsi:type="form:DynamicListTableExtInfo">
       <autoRefreshPeriod>60</autoRefreshPeriod>
+      <period>
+        <startDate>0001-01-01T00:00:00</startDate>
+        <endDate>0001-01-01T00:00:00</endDate>
+      </period>
+      <topLevelParent xsi:type="core:UndefinedValue"/>
       <showRoot>true</showRoot>
       <userSettingsGroup>ListSettingsComposerUserSettings</userSettingsGroup>
     </extInfo>
@@ -613,22 +629,28 @@
       <common>true</common>
     </edit>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>List.Company</segments>
+    </notDefaultUseAlwaysAttributes>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>List.Date</segments>
+    </notDefaultUseAlwaysAttributes>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>List.IsCurrencyExchange</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>List.Number</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.Amount</segments>
-    </notDefaultUseAlwaysAttributes>
-    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.Ref</segments>
+      <segments>List.ReceiveCurrency</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>List.Receiver</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.Partner</segments>
+      <segments>List.Ref</segments>
+    </notDefaultUseAlwaysAttributes>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>List.Selected</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>List.SendCurrency</segments>
@@ -636,26 +658,26 @@
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>List.Sender</segments>
     </notDefaultUseAlwaysAttributes>
-    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.Company</segments>
+    <notDefaultUseAlwaysAttributes xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>List.Amount</segments>
+      </paths>
     </notDefaultUseAlwaysAttributes>
-    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.TransactionType</segments>
+    <notDefaultUseAlwaysAttributes xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>List.Partner</segments>
+      </paths>
     </notDefaultUseAlwaysAttributes>
-    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.ReceiveCurrency</segments>
-    </notDefaultUseAlwaysAttributes>
-    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.IsCurrensyExchange</segments>
-    </notDefaultUseAlwaysAttributes>
-    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.Choiced</segments>
+    <notDefaultUseAlwaysAttributes xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>List.TransactionType</segments>
+      </paths>
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
-CASE WHEN &amp;UseArrayOfChoisedDocuments THEN
-	CashTransferOrder.Ref in (&amp;ArrayOfChoisedDocuments) ELSE False End AS Choiced,
+CASE WHEN &amp;UseArrayOfSelectedDocuments THEN
+	CashTransferOrder.Ref in (&amp;ArrayOfSelectedDocuments) ELSE False End AS Selected,
 
 
 	CashTransferOrder.Ref,
@@ -667,11 +689,11 @@ CASE WHEN &amp;UseArrayOfChoisedDocuments THEN
 	CashTransferOrder.Receiver AS Receiver,
 	CashTransferOrder.ReceiveCurrency AS ReceiveCurrency,
 	CashTransferOrder.Posted,
-	CashTransferOrder.SendCurrency &lt;> CashTransferOrder.ReceiveCurrency AS IsCurrensyExchange
+	CashTransferOrder.SendCurrency &lt;> CashTransferOrder.ReceiveCurrency AS IsCurrencyExchange
 FROM
 	Document.CashTransferOrder AS CashTransferOrder
 where
-	CashTransferOrder.Ref in (&amp;ArraytOfPlaningTransactionBasis)</queryText>
+	CashTransferOrder.Ref in (&amp;ArrayOfPlaningTransactionBasis)</queryText>
       <mainTable>Document.CashTransferOrder</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

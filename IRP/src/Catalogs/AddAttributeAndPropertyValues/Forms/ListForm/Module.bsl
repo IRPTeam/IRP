@@ -10,11 +10,13 @@ Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	FormParameters.Insert("AllowOwnerEdit", True);
 	OwnerValue = PredefinedValue("ChartOfCharacteristicTypes.AddAttributeAndProperty.EmptyRef");
 	For Each Filter In List.Filter.Items Do
-		If TypeOf(Filter) = Type("DataCompositionFilterItem")
+		isSetConditionByOwner = TypeOf(Filter) = Type("DataCompositionFilterItem")
 			And Filter.LeftValue = New DataCompositionField("Owner")
 			And Filter.Use
 			And Filter.ComparisonType = DataCompositionComparisonType.Equal
-			And ValueIsFilled(Filter.RightValue) Then
+			And ValueIsFilled(Filter.RightValue);
+			
+		If isSetConditionByOwner Then
 			OwnerValue = Filter.RightValue;
 			FormParameters.Insert("AllowOwnerEdit", False);
 		EndIf;
@@ -34,6 +36,3 @@ Procedure ListBeforeRowChange(Item, Cancel)
 	FormParameters.Insert("Key", Items.List.CurrentRow);
 	OpenForm("Catalog.AddAttributeAndPropertyValues.ObjectForm", FormParameters, Item, UUID);
 EndProcedure
-
-
-

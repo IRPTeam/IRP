@@ -3,9 +3,8 @@
   <name>IDInfo</name>
   <synonym>
     <key>en</key>
-    <value>ID Info</value>
+    <value>Contact info</value>
   </synonym>
-  <comment></comment>
   <group>FormCommandBarImportant</group>
   <commandParameterType>
     <types>DefinedType.typeIDInfoOwners</types>

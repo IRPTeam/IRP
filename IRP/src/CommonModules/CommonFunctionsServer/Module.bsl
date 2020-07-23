@@ -159,7 +159,7 @@ EndFunction
 Function XSLTransformation(XML, XSLT) Export
 	XSLTransform = New XSLTransform;
     XSLTransform.LoadFromString(XSLT);
-    Return XSLTransform.TransformFromString(XML)
+    Return XSLTransform.TransformFromString(XML);
 EndFunction
 
 #Region QueryBuilder

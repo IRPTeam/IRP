@@ -77,7 +77,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>BarcodeType</v8:content>
+					<v8:content>Barcode type</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -118,6 +118,7 @@
 				<v8:DateFractions>DateTime</v8:DateFractions>
 			</v8:DateQualifiers>
 		</valueType>
+		<value xsi:nil="true"/>
 		<useRestriction>false</useRestriction>
 	</parameter>
 	<settingsVariant>

@@ -1,4 +1,4 @@
-Procedure OnCreateAtServer(Cancel, StandartProcessing, Form, Parameters) Export
+Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 	FillingData = Undefined;
 	If Parameters.Property("FillingData", FillingData) Then
 		Form.FillingData = CommonFunctionsServer.SerializeXMLUseXDTO(FillingData);
@@ -25,10 +25,10 @@ Function GetCashAccountByCompany(Company, CustomParameters) Export
 	If Company.IsEmpty() Then
 		Return Catalogs.CashAccounts.EmptyRef();
 	EndIf;
-	Return GetDefaultChoiseRef(CustomParameters);
+	Return GetDefaultChoiceRef(CustomParameters);
 EndFunction
 
-Function GetDefaultChoiseRef(Parameters) Export
+Function GetDefaultChoiceRef(Parameters) Export
 	QueryTable = CommonFunctionsServer.QueryTable("Catalog.CashAccounts", CatCashAccountsServer, Parameters);
 	If QueryTable.Count() = 1 Then
 		Return QueryTable[0].Ref;

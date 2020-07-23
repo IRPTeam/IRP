@@ -65,7 +65,7 @@ Procedure AfterWrite(Object, Form, WriteParameters) Export
 	MessageText = DocSalesOrderServer.CheckItemList(Object.Ref);
 	If Not MessageText = "" Then
 		#If Not MobileClient AND Not MobileAppClient Then
-		Status(Object.Ref,,MessageText);
+		Status(Object.Ref, , MessageText);
 		#EndIf
 	EndIf;
 	
@@ -187,7 +187,6 @@ Function ItemListPriceTypeSettings() Export
 	Return Settings;
 EndFunction
 
-
 Procedure ItemListUnitOnChange(Object, Form, Item = Undefined) Export
 	DocumentsClient.ItemListUnitOnChange(Object, Form, ThisObject, Item);
 EndProcedure
@@ -226,8 +225,8 @@ EndProcedure
 
 #Region ItemPartner
 
-Procedure PartnerOnChange(Object, Form, Item) Export
-	DocumentsClient.PartnerOnChange(Object, Form, ThisObject, Item);
+Procedure PartnerOnChange(Object, Form, Item, Settings = Undefined) Export
+	DocumentsClient.PartnerOnChange(Object, Form, ThisObject, Item, Settings);
 EndProcedure
 
 Function PartnerSettings() Export
@@ -487,7 +486,7 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
-Procedure DecorationGroupTitleCollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
@@ -495,7 +494,7 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
-Procedure DecorationGroupTitleUncollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
@@ -539,7 +538,7 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 EndProcedure
 
 Procedure SearchByBarcode(Command, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Command, Object, Form, ThisObject, Form.CurrentPriceType);
+	DocumentsClient.SearchByBarcode(Command, Object, Form, , Form.CurrentPriceType);
 EndProcedure
 
 #EndRegion
@@ -554,9 +553,4 @@ Procedure StatusOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
-
-
-
-
-
 

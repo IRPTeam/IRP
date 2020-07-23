@@ -481,7 +481,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
     	|	AccountsStatementBalance.Currency,
     	|	&Period AS Period,
     	|	AccountsStatementBalance.AdvanceFromCustomersBalance AS AdvanceFromCustomersBalance,
-    	|	tmp.Amount AS AdvanceToSupliers
+    	|	tmp.Amount AS AdvanceToSuppliers
     	|FROM
     	|	AccumulationRegister.AccountsStatement.Balance(&PointInTime, (Company, Partner, LegalName, Currency) IN
     	|		(SELECT
@@ -560,7 +560,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table1.Columns.Amount.Name = "TransactionAR";
 	PostingServer.AddColumnsToAccountsStatementTable(Table1);
 	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	For Each row in Table1 Do
+	For Each row In Table1 Do
 		row.TransactionAR = - row.TransactionAR;
 	EndDo;
 	ArrayOfTables.Add(Table1);
@@ -569,7 +569,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table2.Columns.Amount.Name = "TransactionAR";
 	PostingServer.AddColumnsToAccountsStatementTable(Table2);
 	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	For Each row in Table2 Do
+	For Each row In Table2 Do
 		row.TransactionAR = - row.TransactionAR;
 	EndDo;
 	ArrayOfTables.Add(Table2);
@@ -578,8 +578,8 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table3.Columns.Amount.Name = "AdvanceFromCustomers";
 	PostingServer.AddColumnsToAccountsStatementTable(Table3);
 	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");
-	For Each row in Table3 Do
-		row.AdvanceToSupliers = - row.AdvanceToSupliers;
+	For Each row In Table3 Do
+		row.AdvanceToSuppliers = - row.AdvanceToSuppliers;
 	EndDo;
 	ArrayOfTables.Add(Table3);
 	
@@ -595,7 +595,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			PostingServer.JoinTables(ArrayOfTables,
 				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency, 
 				|TransactionAR, AdvanceFromCustomers, 
-				|TransactionAP, AdvanceToSupliers"),
+				|TransactionAP, AdvanceToSuppliers"),
 			Parameters.IsReposting));
 	
 	// PartnerApTransactions

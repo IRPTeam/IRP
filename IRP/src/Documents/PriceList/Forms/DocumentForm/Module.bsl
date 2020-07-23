@@ -55,7 +55,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		DrawFormTablePriceKeyList();
 	EndIf;
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -112,12 +112,12 @@ EndProcedure
 
 &AtServer
 Procedure SetVisible()
-	ShowAlfaTestingSaas = GetFunctionalOption("ShowAlfaTestingSaas");
-	Items.GroupPriceKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByProperties And ShowAlfaTestingSaas;
-	Items.GroupItemKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByItemKeys And ShowAlfaTestingSaas;
+	ShowAlphaTestingSaas = GetFunctionalOption("ShowAlphaTestingSaas");
+	Items.GroupPriceKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByProperties And ShowAlphaTestingSaas;
+	Items.GroupItemKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByItemKeys And ShowAlphaTestingSaas;
 	Items.GroupItemList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByItems;
 	Items.FillByRules.Visible = ValueIsFilled(Object.PriceType.ExternalDataProc);
-	Items.PriceListType.Visible = ShowAlfaTestingSaas;
+	Items.PriceListType.Visible = ShowAlphaTestingSaas;
 EndProcedure
 
 &AtServer
@@ -213,6 +213,7 @@ Procedure SaveTablePriceKeyList(Cancel, CurrentObject, WriteParameters)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function PriceKeyListHaveError()
 	SavedDataStructure = GetSavedData();
 	// Fill cheking
@@ -226,7 +227,7 @@ Function PriceKeyListHaveError()
 		// Fixed columns	
 		For Each Column In ArrayOfFixedColumns Do
 			If Items[Column.FormName].AutoMarkIncomplete = True And Not ValueIsFilled(Row[Column.Name]) Then
-				MessageText = StrTemplate(R()["Error_010"], Column.Name);
+				MessageText = StrTemplate(R().Error_010, Column.Name);
 				CommonFunctionsClientServer.ShowUsersMessage(MessageText
 					, "PriceKeyList[" + RowIndex + "]." + Column.Name
 					, ThisObject.PriceKeyList);
@@ -241,7 +242,7 @@ Function PriceKeyListHaveError()
 				If Column.Name = "Price" Then
 					Continue;
 				Else
-					MessageText = StrTemplate(R()["Error_010"], String(ThisObject[Column.OwnerName]));
+					MessageText = StrTemplate(R().Error_010, String(ThisObject[Column.OwnerName]));
 				EndIf;
 				CommonFunctionsClientServer.ShowUsersMessage(MessageText
 					, "PriceKeyList[" + RowIndex + "]." + Column.Name
@@ -286,11 +287,12 @@ Procedure DrawFormTablePriceKeyList()
 			ColumnName = Table.Name + i.Name;
 			ColumnOwnerName = Table.Name + i.Name_owner;
 			
-			Table.Columns.Add(New Structure("Name, DataPath, OwnerName, FormName"
+			ColumnStr = New Structure("Name, DataPath, OwnerName, FormName"
 					, ColumnName
 					, Table.Name + "." + ColumnName
 					, ColumnOwnerName
-					, ""));
+					, "");
+			Table.Columns.Add(ColumnStr);
 			
 			NewColumn = New FormAttribute(ColumnName, i.Type, Table.Name, i.Title);
 			ArrayOfAttributes.Add(NewColumn);
@@ -373,7 +375,6 @@ Procedure ItemKeyListOnStartEdit(Item, NewRow, Clone)
 		
 		
 EndProcedure
-
 
 &AtServer
 Function GetSavedData()
@@ -459,7 +460,7 @@ Procedure FillByRules(Command)
 	ExternalDataProc = ServiceSystemServer.GetObjectAttribute(Object.PriceType, "ExternalDataProc");
 	Info = AddDataProcServer.AddDataProcInfo(ExternalDataProc);
 	Info.Insert("Settings", PutSettingsToTempStorage(Object.PriceType));
-	CallMetodAddDataProc(Info);
+	CallMethodAddDataProc(Info);
 	NotifyDescription = New NotifyDescription("OpenFormProcEnd", ThisObject);
 	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription);
 EndProcedure
@@ -474,6 +475,7 @@ Procedure OpenFormProcEnd(Result, AdditionalParameters) Export
 	LoadDataAtServer(Result);
 EndProcedure
 
+&AtServer
 Procedure LoadDataAtServer(DataForLoad)
 	If Not DataForLoad.Property("PriceListType") Then
 		Return;
@@ -515,15 +517,14 @@ Function PutSettingsToTempStorage(PriceTypeRef)
 EndFunction
 
 &AtServerNoContext
-Procedure CallMetodAddDataProc(Info)
-	AddDataProcServer.CallMetodAddDataProc(Info);
+Procedure CallMethodAddDataProc(Info)
+	AddDataProcServer.CallMethodAddDataProc(Info);
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	BuildForm();
 EndProcedure
-
 
 #Region AddAttributes
 
@@ -533,11 +534,13 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 
 #EndRegion
+
+#Region ExternalCommands
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
@@ -550,3 +553,4 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
+#EndRegion

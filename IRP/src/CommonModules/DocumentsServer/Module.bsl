@@ -1,18 +1,16 @@
 #Region FormEvents
 
-&AtServer
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export	
 	If Not Object.Ref.Metadata().TabularSections.Find("AddAttributes") = Undefined Then
 		AddAttributesAndPropertiesServer.OnCreateAtServer(Form, "GroupOther");
 	EndIf;
-	//TODO: Cut If after fix all documents
+	// TODO: Cut If after fix all documents
 	If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then
 		DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
 	EndIf;	
 	ExternalCommandsServer.CreateCommands(Form, Object.Ref.Metadata().Name, Catalogs.ConfigurationMetadata.Documents, Enums.FormTypes.ObjectForm);	
 EndProcedure
 
-&AtServer
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	Return;
 EndProcedure
@@ -127,7 +125,7 @@ EndFunction
 
 #Region ItemList
 
-Procedure SetNewTabelUUID(Table, LinkedTables) Export
+Procedure SetNewTableUUID(Table, LinkedTables) Export
 	For Each TableRow In Table Do
 	
 		CurrentKey = TableRow.Key;
@@ -245,7 +243,7 @@ Function CheckItemListStores(Object) Export
 	
 	While SelectionDetailRecords.Next() Do
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_072, SelectionDetailRecords.LineNumber), 
-							"ItemList["+ Format((SelectionDetailRecords.LineNumber - 1),"NZ=0; NG=0;") + "].Store", 
+							"ItemList[" + Format((SelectionDetailRecords.LineNumber - 1), "NZ=0; NG=0;") + "].Store", 
 							Object);
 	EndDo;	
 	
@@ -292,7 +290,7 @@ Procedure CheckPaymentList(Object, Cancel, CheckedAttributes) Export
 	Cancel = True;
 	While SelectionDetailRecords.Next() Do
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_020, SelectionDetailRecords.LineNumber), 
-							"PaymentList["+ Format((SelectionDetailRecords.LineNumber - 1),"NZ=0; NG=0;") + "].BasisDocument", 
+							"PaymentList[" + Format((SelectionDetailRecords.LineNumber - 1), "NZ=0; NG=0;") + "].BasisDocument", 
 							Object);
 	EndDo;
 EndProcedure
@@ -364,7 +362,7 @@ Function GetAgreementByPartner(AgreementParameters) Export
 			DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
 			DocumentsServer.SerializeArrayOfFilters(AdditionalParameters),
 			AgreementParameters.Agreement);
-	Return Catalogs.Agreements.GetDefaultChoiseRef(Parameters);
+	Return Catalogs.Agreements.GetDefaultChoiceRef(Parameters);
 	
 EndFunction
 
@@ -381,7 +379,7 @@ Function GetLegalNameByPartner(Partner, LegalName) Export
 				DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
 				DocumentsServer.SerializeArrayOfFilters(AdditionalParameters),
 				LegalName);
-		Return Catalogs.Companies.GetDefaultChoiseRef(Parameters);
+		Return Catalogs.Companies.GetDefaultChoiceRef(Parameters);
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -396,7 +394,6 @@ EndProcedure
 
 #Region ListFormEvents
 
-&AtServer
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export	
 	FormNamesArray = StrSplit(Form.FormName, ".");
 	DocumentName = FormNamesArray[1];
@@ -407,7 +404,6 @@ EndProcedure
 
 #Region ChoiceFormEvents
 
-&AtServer
 Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export	
 	FormNamesArray = StrSplit(Form.FormName, ".");
 	DocumentName = FormNamesArray[1];
@@ -416,16 +412,15 @@ EndProcedure
 
 #EndRegion
 
-
 #Region TitleItems
 
 Procedure DeleteUnavailableTitleItemNames(ItemNames) Export
 	UnavailableNames = New Array;
-	ShowAlfaTestingSaas = GetFunctionalOption("ShowAlfaTestingSaas");
+	ShowAlphaTestingSaas = GetFunctionalOption("ShowAlphaTestingSaas");
 	If Not CatCompaniesServer.isUseCompanies() Then
 		UnavailableNames.Add("Company");
 	EndIf;
-	If Not ShowAlfaTestingSaas Then		
+	If Not ShowAlphaTestingSaas Then		
 		UnavailableNames.Add("Store");
 		UnavailableNames.Add("LegalName");
 		UnavailableNames.Add("Agreement");

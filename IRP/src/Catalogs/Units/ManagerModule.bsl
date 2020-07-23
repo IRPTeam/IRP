@@ -13,18 +13,18 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		EndIf;
 	EndIf;
 	
-	Query = New Query();
-	Query.Text =
-		"SELECT TOP 50
-		|	Table.Ref
-		|FROM
-		|	Catalog.Units AS Table
-		|WHERE
-		|	(Table.Item = &Item
+	Filter = "
+		|	AND (Table.Item = &Item
 		|	OR Table.Item = VALUE(Catalog.Items.EmptyRef))
-		|	AND Table.Description_en LIKE &SearchString";
+		|";
+
+	Settings = New Structure;
+	Settings.Insert("Name", "Catalog.Units");
+	Settings.Insert("Filter", Filter);
 	
-	Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text);
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
+
+	Query = New Query(QueryBuilderText);
 	Query.SetParameter("Item", FilterItem);
 	Query.SetParameter("SearchString", "%" + Parameters.SearchString + "%");
 	
@@ -39,7 +39,7 @@ Function GetUnitFactor(FromUnit, ToUnit = Undefined) Export
 	
 	If ToUnit <> Undefined Then
 		Result = New Array();
-		GetUnitFactorRecursy(FromUnit, ToUnit, Result);
+		GetUnitFactorRecursion(FromUnit, ToUnit, Result);
 		Factor = 1;
 		For Each Value In Result Do
 			Factor = Factor * Value;
@@ -50,10 +50,9 @@ Function GetUnitFactor(FromUnit, ToUnit = Undefined) Export
 	EndIf;
 EndFunction
 
-Procedure GetUnitFactorRecursy(FromUnit, ToUnit, Result)
+Procedure GetUnitFactorRecursion(FromUnit, ToUnit, Result)
 	If ValueIsFilled(FromUnit.BasisUnit) And FromUnit <> ToUnit Then
 		Result.Add(FromUnit.Quantity);
-		GetUnitFactorRecursy(FromUnit.BasisUnit, ToUnit, Result);
+		GetUnitFactorRecursion(FromUnit.BasisUnit, ToUnit, Result);
 	EndIf;
 EndProcedure
-

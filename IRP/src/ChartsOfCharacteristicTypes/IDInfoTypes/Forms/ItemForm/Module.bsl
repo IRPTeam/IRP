@@ -10,7 +10,7 @@ EndProcedure
 
 &AtClient
 Procedure SetSettings(Command)
-	CurrentRow = Items.ExternalDataProces.CurrentData;
+	CurrentRow = Items.ExternalDataProcess.CurrentData;
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
@@ -19,15 +19,15 @@ Procedure SetSettings(Command)
 	Info.Insert("Settings", ThisObject.AddressResult);
 	Info.Insert("ExternalDataProcRef", CurrentRow.ExternalDataProc);
 	Info.Insert("Country", CurrentRow.Country);
-	CallMetodAddDataProc(Info);
+	CallMethodAddDataProc(Info);
 	
 	NotifyDescription = New NotifyDescription("OpenFormAddDataProcEnd", ThisObject);
 	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "Settings");
 EndProcedure
 
 &AtServerNoContext
-Procedure CallMetodAddDataProc(Info)
-	AddDataProcServer.CallMetodAddDataProc(Info);
+Procedure CallMethodAddDataProc(Info)
+	AddDataProcServer.CallMethodAddDataProc(Info);
 EndProcedure
 
 &AtClient
@@ -42,7 +42,7 @@ EndProcedure
 &AtServer
 Procedure OpenFormAddDataProcEndServer(Result)
 	Obj = FormAttributeToValue("Object");
-	Obj.ExternalDataProces[ThisObject.RowNumber - 1].Settings =
+	Obj.ExternalDataProcess[ThisObject.RowNumber - 1].Settings =
 		New ValueStorage(Result, New Deflation(9));
 	Obj.Write();
 	PutToTempStorage(Result, ThisObject.AddressResult);
@@ -50,8 +50,8 @@ Procedure OpenFormAddDataProcEndServer(Result)
 EndProcedure
 
 &AtClient
-Procedure ExternalDataProcesOnActivateRow(Item)
-	CurrentRow = Items.ExternalDataProces.CurrentData;
+Procedure ExternalDataProcessorOnActivateRow(Item)
+	CurrentRow = Items.ExternalDataProcess.CurrentData;
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
@@ -61,8 +61,7 @@ EndProcedure
 &AtServer
 Procedure PutSettingsToTempStorage(LineNumber)
 	Obj = FormAttributeToValue("Object");
-	Settings = Obj.ExternalDataProces[LineNumber - 1].Settings;
+	Settings = Obj.ExternalDataProcess[LineNumber - 1].Settings;
 	ThisObject.AddressResult = PutToTempStorage(Settings.Get(), ThisObject.UUID);
 	ThisObject.RowNumber = LineNumber;
 EndProcedure
-

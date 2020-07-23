@@ -294,21 +294,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.CompanyTypes</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeletePredefinedData</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeleteMarkedPredefinedData</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.ReconciliationStatement</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -331,21 +316,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.ZReport</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.CashExpense</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SetupOfSpecialOffers</name>
 		<right>
 			<name>InteractiveDelete</name>
 			<value>false</value>
@@ -677,13 +648,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.CashInPOS</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.BusinessUnits</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -1007,13 +971,6 @@
 	</object>
 	<object>
 		<name>Document.CashTransferOrder</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ItemsFlow</name>
 		<right>
 			<name>InteractiveDelete</name>
 			<value>false</value>

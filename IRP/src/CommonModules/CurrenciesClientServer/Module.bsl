@@ -3,7 +3,6 @@
 
 #Region OnOpen
 
-&AtClient
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_OnOpen", AddInfo), 
 	Cancel);
@@ -25,18 +24,15 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	EndIf;
 EndProcedure
 
-&AtClient
 Procedure OnOpen_1_0(Object, Form, Cancel, LibraryData, AddInfo)
 	Form.Currencies_UpdateRatePresentation();
 EndProcedure
 
-&AtClient
 Procedure OnOpen_2_0(Object, Form, Cancel, LibraryData, AddInfo)
 	Form.Currencies_UpdateRatePresentation();
 	Form.Currencies_SetVisibleCurrenciesRow(Undefined, True);
 EndProcedure
 
-&AtClient
 Procedure OnOpen_3_0(Object, Form, Cancel, LibraryData, AddInfo)
 	Form.Currencies_UpdateRatePresentation();
 	Form.Currencies_SetVisibleCurrenciesRow(Undefined, True);
@@ -46,7 +42,6 @@ EndProcedure
 
 #Region AfterWriteAtServer
 
-&AtServer
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_AfterWriteAtServer", AddInfo),
 	CurrentObject, WriteParameters);
@@ -62,18 +57,15 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters, AddIn
 	EndIf;
 EndProcedure
 
-&AtServer
 Procedure AfterWriteAtServer_1_0(Object, Form, CurrentObject, WriteParameters, LibraryData, AddInfo)
 	Form.Currencies_UpdateRatePresentation();
 EndProcedure
 
-&AtServer
 Procedure AfterWriteAtServer_2_0(Object, Form, CurrentObject, WriteParameters, LibraryData, AddInfo)
 	Form.Currencies_UpdateRatePresentation();
 	Form.Currencies_SetVisibleCurrenciesRow(Undefined, True);
 EndProcedure
 
-&AtServer
 Procedure AfterWriteAtServer_3_0(Object, Form, CurrentObject, WriteParameters, LibraryData, AddInfo)
 	Form.Currencies_UpdateRatePresentation();
 	Form.Currencies_SetVisibleCurrenciesRow(Undefined, True);
@@ -83,7 +75,6 @@ EndProcedure
 
 #Region AfterWrite
 
-&AtClient
 Procedure AfterWrite(Object, Form, WriteParameters, AddInfo = Undefined) Export
 	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_AfterWrite", AddInfo), 
 	AddInfo, WriteParameters);
@@ -99,7 +90,6 @@ Procedure AfterWrite(Object, Form, WriteParameters, AddInfo = Undefined) Export
 	EndIf;
 EndProcedure
 
-&AtClient
 Procedure AfterWrite_1_0(Object, Form, WriteParameters, LibraryData, AddInfo)
 	CurrentTableName = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Currencies_CurrentTableName");
 	KeyForSetVisible = Undefined;
@@ -112,12 +102,10 @@ Procedure AfterWrite_1_0(Object, Form, WriteParameters, LibraryData, AddInfo)
 	Form.Currencies_SetVisibleCurrenciesRow(KeyForSetVisible);
 EndProcedure
 
-&AtClient
 Procedure AfterWrite_2_0(Object, Form, WriteParameters, LibraryData, AddInfo)
 	Form.Currencies_SetVisibleCurrenciesRow(Undefined, True);
 EndProcedure
 
-&AtClient
 Procedure AfterWrite_3_0(Object, Form, WriteParameters, LibraryData, AddInfo)
 	Form.Currencies_SetVisibleCurrenciesRow(Undefined, True);
 EndProcedure
@@ -126,7 +114,6 @@ EndProcedure
 
 #Region NotificationProcessing
 
-&AtClient
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
 	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_NotificationProcessing", AddInfo),
 	EventName, Parameter, Source);
@@ -149,7 +136,6 @@ Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, Add
 	EndIf;
 EndProcedure
 
-&AtClient
 Procedure NotificationProcessing_1_0(Object, Form, EventName, Parameter, Source, LibraryData, AddInfo)
 	// Full rebuild currency table
 	Form.Currencies_ClearCurrenciesTable(Undefined);
@@ -176,7 +162,6 @@ Procedure NotificationProcessing_1_0(Object, Form, EventName, Parameter, Source,
 	Form.Currencies_SetVisibleCurrenciesRow(CurrentData.Key);
 EndProcedure
 
-&AtClient
 Procedure NotificationProcessing_2_0(Object, Form, EventName, Parameter, Source, LibraryData, AddInfo)
 	// Recalculate amount
 	TableName = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Currencies_CurrentTableName");
@@ -186,7 +171,6 @@ Procedure NotificationProcessing_2_0(Object, Form, EventName, Parameter, Source,
 	Form.Currencies_SetVisibleCurrenciesRow(Undefined, True);
 EndProcedure
 
-&AtClient
 Procedure NotificationProcessing_3_0(Object, Form, EventName, Parameter, Source, LibraryData, AddInfo)
 	Form.Currencies_CalculateAmount(Undefined, Undefined);
 	Form.Currencies_UpdateRatePresentation();
@@ -195,8 +179,6 @@ EndProcedure
 
 #EndRegion
 
-
-&AtClient
 Procedure MainTableOnActivateRow(Object, Form, Item, Addinfo = Undefined) Export
 	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_MainTableOnActivateRow", AddInfo),
 	Item);
@@ -209,7 +191,6 @@ Procedure MainTableOnActivateRow(Object, Form, Item, Addinfo = Undefined) Export
 	Form.Currencies_SetVisibleCurrenciesRow(CurrentData.Key);
 EndProcedure
 
-&AtClient
 Procedure MainTableBeforeDeleteRow(Object, Form, Item, AddInfo = Undefined) Export
 	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_MainTableBeforeDeleteRow", AddInfo),
 	Item);
@@ -221,7 +202,6 @@ Procedure MainTableBeforeDeleteRow(Object, Form, Item, AddInfo = Undefined) Expo
 	Form.Currencies_ClearCurrenciesTable(CurrentData.Key);
 EndProcedure
 
-&AtClient
 Procedure MainTableColumnOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_MainTableColumnOnChange", AddInfo), 
 	Item);
@@ -254,7 +234,6 @@ EndProcedure
 
 #Region HeaderOnChange
 
-&AtClient
 Procedure HeaderOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_HeaderOnChange", AddInfo),
 	Item);
@@ -273,7 +252,6 @@ Procedure HeaderOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	EndIf;
 EndProcedure
 
-&AtClient
 Procedure HeaderOnChange_1_0(Object, Form, Item, ArrayOfTableNames, LibraryData, AddInfo)
 	For Each TableName In ArrayOfTableNames Do
 		Names = ReplacePropertyNames(TableName, LibraryData);
@@ -296,7 +274,6 @@ Procedure HeaderOnChange_1_0(Object, Form, Item, ArrayOfTableNames, LibraryData,
 	Form.Currencies_SetVisibleCurrenciesRow(CurrentData.Key);
 EndProcedure
 
-&AtClient
 Procedure HeaderOnChange_2_0(Object, Form, Item, ArrayOfTableNames, LibraryData, AddInfo)
 	For Each TableName In ArrayOfTableNames Do
 		Names = ReplacePropertyNames(TableName, LibraryData);
@@ -307,7 +284,6 @@ Procedure HeaderOnChange_2_0(Object, Form, Item, ArrayOfTableNames, LibraryData,
 	Form.Currencies_SetVisibleCurrenciesRow(Undefined, True);
 EndProcedure
 
-&AtClient
 Procedure HeaderOnChange_3_0(Object, Form, Item, LibraryData, AddInfo)
 	Form.Currencies_FillCurrencyTable(Undefined, Undefined, Undefined);
 	Form.Currencies_CalculateAmount(Undefined, Undefined);
@@ -319,7 +295,6 @@ EndProcedure
 
 #Region MainTableAmountOnChange
 
-&AtClient
 Procedure MainTableAmountOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	LibraryLoader.CallHandler(
 	GetCallHandlerParameters(Object, Form, "Currencies_MainTableAmountOnChange", AddInfo),
@@ -337,7 +312,6 @@ Procedure MainTableAmountOnChange(Object, Form, Item, AddInfo = Undefined) Expor
 	EndIf;
 EndProcedure
 
-&AtClient
 Procedure MainTableAmountOnChange_1_0(Object, Form, Item, LibraryData, AddInfo)
 	TableName = Item.Parent.Name;
 	Names = ReplacePropertyNames(TableName, LibraryData);
@@ -350,7 +324,6 @@ Procedure MainTableAmountOnChange_1_0(Object, Form, Item, LibraryData, AddInfo)
 	Form.Currencies_SetVisibleCurrenciesRow(CurrentData.Key);
 EndProcedure
 
-&AtClient
 Procedure MainTableAmountOnChange_2_0(Object, Form, Item, LibraryData, AddInfo)
 	TableName = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Currencies_CurrentTableName");
 	Names = ReplacePropertyNames(TableName, LibraryData);
@@ -359,7 +332,6 @@ Procedure MainTableAmountOnChange_2_0(Object, Form, Item, LibraryData, AddInfo)
 	Form.Currencies_SetVisibleCurrenciesRow(Undefined, True);
 EndProcedure
 
-&AtClient
 Procedure MainTableAmountOnChange_3_0(Object, Form, Item, LibraryData, AddInfo)
 	Form.Currencies_CalculateAmount(Undefined, Undefined);
 	Form.Currencies_UpdateRatePresentation();
@@ -437,4 +409,3 @@ Function GetCallHandlerParameters(Object, Form, HandlerID, AddInfo)
 	Parameters.AddInfo = AddInfo;
 	Return Parameters;
 EndFunction
-

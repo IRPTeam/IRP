@@ -56,9 +56,6 @@
         <paths xsi:type="form:DataPath">
           <segments>Users.Description</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>Users.Description</segments>
-        </paths>
       </dataPath>
       <extendedTooltip>
         <name>UsersDescriptionExtendedTooltip</name>
@@ -111,9 +108,6 @@
         <paths xsi:type="form:DataPath">
           <segments>Users.Login</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>Users.Login</segments>
-        </paths>
       </dataPath>
       <extendedTooltip>
         <name>UsersLoginExtendedTooltip</name>
@@ -163,9 +157,6 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Users.Partner</segments>
-        </paths>
         <paths xsi:type="form:DataPath">
           <segments>Users.Partner</segments>
         </paths>
@@ -383,6 +374,11 @@
     </rowPictureDataPath>
     <extInfo xsi:type="form:DynamicListTableExtInfo">
       <autoRefreshPeriod>60</autoRefreshPeriod>
+      <period>
+        <startDate>0001-01-01T00:00:00</startDate>
+        <endDate>0001-01-01T00:00:00</endDate>
+      </period>
+      <topLevelParent xsi:type="core:UndefinedValue"/>
       <showRoot>true</showRoot>
     </extInfo>
   </items>

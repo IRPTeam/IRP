@@ -1,4 +1,4 @@
-Procedure OnCreateAtServer(Cancel, StandartProcessing, Form, Parameters) Export
+Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 	FillingData = Undefined;
 	If Parameters.Property("FillingData", FillingData) Then
 		Form.FillingData = CommonFunctionsServer.SerializeXMLUseXDTO(FillingData);
@@ -35,7 +35,6 @@ Procedure SetChoiceFormParameters(Form, Parameters) Export
 		EndIf;
 	EndIf;
 EndProcedure
-
 
 Procedure ReadTaxesIntoFormTable(Form) Export
 	Set = InformationRegisters.Taxes.CreateRecordSet();

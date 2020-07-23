@@ -8,7 +8,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	
 	StandardProcessing = False;
 	
-	QueryTable = GetChoiseDataTable(Parameters);
+	QueryTable = GetChoiceDataTable(Parameters);
 	
 	ChoiceData = New ValueList();
 	For Each Row In QueryTable Do
@@ -82,24 +82,21 @@ Function GetCompaniesForPartner(Partner) Export
 	Return Query.Execute().Unload().UnloadColumn("Ref");
 EndFunction
 
-Function GetChoiseDataTable(Parameters) Export
+Function GetChoiceDataTable(Parameters) Export
 	
-	QueryBuilderText =
-		"SELECT ALLOWED TOP 50
-		|	Table.Ref AS Ref,
-		|	Table.Presentation
-		|FROM
-		|	Catalog.Partners AS Table
-		|WHERE
-		|	Table.Description_en LIKE ""%%"" + &SearchString + ""%%""
+	Filter = "
 		|	AND CASE
 		|		WHEN &FilterPartnersByCompanies
 		|			THEN Table.Ref IN (&PartnersByCompanies)
 		|		ELSE TRUE
 		|	END
 		|";
-	QueryBuilderText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryBuilderText);
+
+	Settings = New Structure;
+	Settings.Insert("Name", "Catalog.Partners");
+	Settings.Insert("Filter", Filter);
 	
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
 	If TypeOf(Parameters) = Type("Structure")
@@ -133,8 +130,8 @@ Function GetChoiseDataTable(Parameters) Export
 	Return Query.Execute().Unload();
 EndFunction
 
-Function GetDefaultChoiseRef(Parameters) Export
-	QueryTable = GetChoiseDataTable(New Structure("SearchString, Filter", "", Parameters));
+Function GetDefaultChoiceRef(Parameters) Export
+	QueryTable = GetChoiceDataTable(New Structure("SearchString, Filter", "", Parameters));
 	If QueryTable.Count() = 1 Then
 		Return QueryTable[0].Ref;
 	EndIf;

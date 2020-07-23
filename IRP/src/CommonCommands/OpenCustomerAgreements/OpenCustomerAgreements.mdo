@@ -3,8 +3,10 @@
   <name>OpenCustomerAgreements</name>
   <synonym>
     <key>en</key>
-    <value>Customer agreements</value>
+    <value>Customers partner terms</value>
   </synonym>
   <group>NavigationPanelImportant</group>
+  <commandParameterType/>
   <representation>Auto</representation>
+  <shortcut></shortcut>
 </mdclass:CommonCommand>

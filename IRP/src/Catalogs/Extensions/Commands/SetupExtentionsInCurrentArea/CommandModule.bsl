@@ -10,4 +10,3 @@ EndProcedure
 Procedure CommandProcessingAtServer(Val Ref)
 	Catalogs.Extensions.SetupExtentionInCurrentArea(Ref, True);
 EndProcedure
-

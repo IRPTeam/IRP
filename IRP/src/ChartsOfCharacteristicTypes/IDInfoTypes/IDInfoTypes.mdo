@@ -11,14 +11,17 @@
   <name>IDInfoTypes</name>
   <synonym>
     <key>en</key>
-    <value>ID Info types</value>
+    <value>Contact info types</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Contact info type</value>
+  </objectPresentation>
   <characteristicExtValues>Catalog.IDInfoAddresses</characteristicExtValues>
   <type>
     <types>CatalogRef.IDInfoAddresses</types>
@@ -41,14 +44,12 @@
       <key>en</key>
       <value>Comment</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>String</types>
       <stringQualifiers>
         <length>512</length>
       </stringQualifiers>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:StringValue">
@@ -63,11 +64,9 @@
       <key>en</key>
       <value>Show on form</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>Boolean</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -80,11 +79,9 @@
       <key>en</key>
       <value>Read only</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>Boolean</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -96,23 +93,20 @@
       <objectType typeId="6b8bd8eb-1a94-4c91-8b0b-da553a34904b" valueTypeId="a2c05f04-1a4d-4822-a62b-344b19b92dc0"/>
       <rowType typeId="ae0aca17-9fee-4963-a9b0-1d4e8c3e580d" valueTypeId="849a8035-9eb6-4e6c-811f-4a6ae2ca8766"/>
     </producedTypes>
-    <name>ExternalDataProces</name>
+    <name>ExternalDataProcess</name>
     <synonym>
       <key>en</key>
-      <value>External data proces</value>
+      <value>Plugins</value>
     </synonym>
-    <comment></comment>
     <attributes uuid="97042539-5fd3-4d0d-9edb-2f2308bb2bbc">
       <name>Country</name>
       <synonym>
         <key>en</key>
         <value>Country</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>CatalogRef.Countries</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
     </attributes>
@@ -120,13 +114,11 @@
       <name>ExternalDataProc</name>
       <synonym>
         <key>en</key>
-        <value>External data proc</value>
+        <value>Plugins</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>CatalogRef.ExternalDataProc</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
     </attributes>
@@ -136,11 +128,9 @@
         <key>en</key>
         <value>Settings</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>ValueStorage</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -157,18 +147,15 @@
       <key>en</key>
       <value>Related values</value>
     </synonym>
-    <comment></comment>
     <attributes uuid="ffcf1a90-f99a-47b7-816f-34f62e89b44d">
       <name>IDInfoType</name>
       <synonym>
         <key>en</key>
-        <value>ID Info type</value>
+        <value>Contact info type</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
     </attributes>
@@ -179,7 +166,6 @@
       <key>en</key>
       <value>Item form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -189,7 +175,6 @@
       <key>en</key>
       <value>List form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -199,7 +184,6 @@
       <key>en</key>
       <value>Choice form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -209,7 +193,6 @@
       <key>en</key>
       <value>Select country form</value>
     </synonym>
-    <comment></comment>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>

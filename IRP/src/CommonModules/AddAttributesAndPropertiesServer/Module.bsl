@@ -69,7 +69,7 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "", AddInfo = Undefin
 	EndIf;
 	ClearForm(Form);
 	
-	SavedData = New Structure("FormGroups, FormArributes, FormItemFields, ArrayOfAttributesInfo");
+	SavedData = New Structure("FormGroups, FormAttributes, FormItemFields, ArrayOfAttributesInfo");
 	
 	AddAttributeAndPropertySetName = AddAttributeAndPropertySetName(FormInfo, AddInfo);
 	ObjectAttributes = ObjectAttributes(FormInfo, AddAttributeAndPropertySetName, AddInfo);
@@ -79,7 +79,7 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "", AddInfo = Undefin
 	SavedData.FormGroups = ExtractProperty(CreatedFormGroups, "Name");
 	
 	FormAttributes = FormAttributes(ObjectAttributes, AddInfo);
-	SavedData.FormArributes = ExtractProperty(FormAttributes.Attributes, "Name");
+	SavedData.FormAttributes = ExtractProperty(FormAttributes.Attributes, "Name");
 	
 	ArrayOfAttributesInfo = New Array();
 	For Each Row In FormAttributes.FormAttributesInfo Do
@@ -178,7 +178,7 @@ Procedure ClearForm(Form)
 	
 	// Attributes
 	
-	Form.ChangeAttributes( , SavedData.FormArributes);
+	Form.ChangeAttributes( , SavedData.FormAttributes);
 EndProcedure
 
 Function ExtractProperty(ArrayOfValues, Name)
@@ -475,18 +475,18 @@ Function GetDCSTemplate(PredefinedDataName, AddInfo = Undefined) Export
 		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Document");
 		Template.DataSets[0].Query = StrTemplate(Template.DataSets[0].Query, TableName);
 	Else
-		Raise R()["Error_004"];
+		Raise R().Error_004;
 	EndIf;
 	Return Template;
 EndFunction
 
 Function GetRefsByCondition(DCSTemplate, Settings, ExternalDataSet, AddInfo = Undefined) Export
 	Composer = New DataCompositionTemplateComposer();
-	Tempalte = Composer.Execute(DCSTemplate, Settings, , ,
+	Template = Composer.Execute(DCSTemplate, Settings, , ,
 			Type("DataCompositionValueCollectionTemplateGenerator"));
 	
 	Processor = New DataCompositionProcessor();
-	Processor.Initialize(Tempalte, New Structure("ExternalDataSet", ExternalDataSet));	
+	Processor.Initialize(Template, New Structure("ExternalDataSet", ExternalDataSet));	
 	
 	Output = New DataCompositionResultValueCollectionOutputProcessor();
 	Result = New ValueTable();
@@ -691,8 +691,8 @@ Procedure SetRequiredAtAllSets(AddAttribute, Required) Export
 	QuerySelection = QueryExecuteBatch[0].Select();
 	While QuerySelection.Next() Do
 		CatObj = QuerySelection.Ref.GetObject();
-		AttibuteFilter = New Structure("Attribute", AddAttribute);
-		AttributeFoundedRows = CatObj.Attributes.FindRows(AttibuteFilter);
+		AttributeFilter = New Structure("Attribute", AddAttribute);
+		AttributeFoundedRows = CatObj.Attributes.FindRows(AttributeFilter);
 		For Each AttributeFoundedRow In AttributeFoundedRows Do
 			AttributeFoundedRow.Required = Required;
 		EndDo;
@@ -702,8 +702,8 @@ Procedure SetRequiredAtAllSets(AddAttribute, Required) Export
 	QuerySelection = QueryExecuteBatch[1].Select();
 	While QuerySelection.Next() Do
 		CatObj = QuerySelection.Ref.GetObject();
-		AttibuteFilter = New Structure("Attribute", AddAttribute);
-		AttributeFoundedRows = CatObj.AvailableAttributes.FindRows(AttibuteFilter);
+		AttributeFilter = New Structure("Attribute", AddAttribute);
+		AttributeFoundedRows = CatObj.AvailableAttributes.FindRows(AttributeFilter);
 		For Each AttributeFoundedRow In AttributeFoundedRows Do
 			AttributeFoundedRow.Required = Required;
 		EndDo;
@@ -824,7 +824,6 @@ Function AdditionPropertyValueByRef(Ref, ArrayProperties) Export
 	
 	Return PropertyArray;
 EndFunction
-
 
 #Region HTML
 

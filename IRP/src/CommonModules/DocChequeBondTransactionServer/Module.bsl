@@ -24,7 +24,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region Common
 Function CheckRowChequeBond(Status, CashAccount) Export
 	If ValueIsFilled(Status) Then
@@ -36,7 +35,6 @@ Function CheckRowChequeBond(Status, CashAccount) Export
 		Return True;
 	EndIf;
 EndFunction
-
 
 Function GetChequeInfo(ChequeBondTransactionRef, ChequeRef) Export
 	InfoStructure = New Structure("Status, Amount, NewStatus, Currency");
@@ -111,7 +109,7 @@ Procedure GetPaymentListFillingData(ChequeBondTransactionRef, Parameters) Export
 
 EndProcedure
 
-Function  InvalidDocuments(СontrolStructure) Export
+Function  InvalidDocuments(ControlStructure) Export
 
 	Query = New Query();
 	Query.Text = "SELECT
@@ -152,14 +150,14 @@ Function  InvalidDocuments(СontrolStructure) Export
 		|	OR CASE  WHEN &UseCurrencyFilter THEN Not PartnerArTransactionsBalance.Currency = &Currency ELSE TRUE END
 		|	OR Not PartnerArTransactionsBalance.Company = &Company)"; 
 
-	Query.SetParameter("BasisDocuments", СontrolStructure.СontrolDocument);
-	Query.SetParameter("Company", СontrolStructure.Company);
-	Query.SetParameter("Partner", СontrolStructure.Partner);
-	Query.SetParameter("LegalName", СontrolStructure.LegalName);
-	Query.SetParameter("Agreement", СontrolStructure.Agreement);
-	Query.SetParameter("Currency", СontrolStructure.Currency);
-	Query.SetParameter("UseCurrencyFilter", СontrolStructure.UseCurrencyFilter);
-	Query.SetParameter("EndDate", СontrolStructure.EndDate);
+	Query.SetParameter("BasisDocuments", ControlStructure.ControlDocument);
+	Query.SetParameter("Company", ControlStructure.Company);
+	Query.SetParameter("Partner", ControlStructure.Partner);
+	Query.SetParameter("LegalName", ControlStructure.LegalName);
+	Query.SetParameter("Agreement", ControlStructure.Agreement);
+	Query.SetParameter("Currency", ControlStructure.Currency);
+	Query.SetParameter("UseCurrencyFilter", ControlStructure.UseCurrencyFilter);
+	Query.SetParameter("EndDate", ControlStructure.EndDate);
 	
 	Return Query.Execute().Unload().UnloadColumn("BasisDocument");
 

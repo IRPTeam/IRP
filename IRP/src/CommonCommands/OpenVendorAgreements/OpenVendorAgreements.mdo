@@ -3,8 +3,10 @@
   <name>OpenVendorAgreements</name>
   <synonym>
     <key>en</key>
-    <value>Vendor agreements</value>
+    <value>Vendors partner terms</value>
   </synonym>
   <group>NavigationPanelImportant</group>
+  <commandParameterType/>
   <representation>Auto</representation>
+  <shortcut></shortcut>
 </mdclass:CommonCommand>

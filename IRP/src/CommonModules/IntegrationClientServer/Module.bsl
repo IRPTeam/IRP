@@ -51,7 +51,7 @@ Function SendRequestClientServer(ConnectionSetting,
 	
 	If Not ValueIsFilled(ConnectionSetting.ResourceAddress) Then
 		ServerResponse.Success = False;
-		ServerResponse.Message = R()["S_004"];
+		ServerResponse.Message = R().S_004;
 		Return ServerResponse;
 	EndIf;
 	
@@ -59,7 +59,7 @@ Function SendRequestClientServer(ConnectionSetting,
 		ResourceAddress = ConnectionSetting.ResourceAddress;
 	Else
 		ResourceAddress = ConnectionSetting.ResourceAddress + 
-		?(StrStartsWith(EndPoint, "/"),EndPoint,"/"+EndPoint);
+		?(StrStartsWith(EndPoint, "/"), EndPoint, "/" + EndPoint);
 	EndIf;
 	
 	SetResourceParameters(ResourceAddress, ResourceParameters, AddInfo);
@@ -77,7 +77,7 @@ Function SendRequestClientServer(ConnectionSetting,
 		HTTPResponse = HTTPConnection.CallHTTPMethod(ConnectionSetting.QueryType, HTTPRequest);
 	Except
 		ServerResponse.Success = False;
-		ServerResponse.Message = StrTemplate(R()["S_002"],
+		ServerResponse.Message = StrTemplate(R().S_002,
 				ConnectionSetting.Ip,
 				ConnectionSetting.Port,
 				ErrorDescription());
@@ -85,7 +85,7 @@ Function SendRequestClientServer(ConnectionSetting,
 	EndTry;
 	
 	ServerResponse.Success = True;
-	ServerResponse.Message = StrTemplate(R()["S_003"],
+	ServerResponse.Message = StrTemplate(R().S_003,
 			ConnectionSetting.Ip,
 			ConnectionSetting.Port);
 	ServerResponse.StatusCode = HTTPResponse.StatusCode;
@@ -119,7 +119,7 @@ Function SendRequest(Val ConnectionSetting,
 	
 	ServerResponse = ServerResponse(AddInfo);
 	ServerResponse.Success = False;
-	ServerResponse.Message = R()["S_006"];
+	ServerResponse.Message = R().S_006;
 	Return ServerResponse;
 	
 	#Else

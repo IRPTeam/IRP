@@ -21,8 +21,8 @@ Procedure CompanyOnChange(Object, Form, Item) Export
 																			Object.Sender,
 																			ComparisonType.Equal,
 																			DataCompositionComparisonType.Equal));
-		GetDefaultChoiseRef = CatCashAccountsServer.GetDefaultChoiseRef(CustomParameters);
-		If Object.Sender <> GetDefaultChoiseRef Then
+		GetDefaultChoiceRef = CatCashAccountsServer.GetDefaultChoiceRef(CustomParameters);
+		If Object.Sender <> GetDefaultChoiceRef Then
 			RefillData.Insert("Sender", PredefinedValue("Catalog.CashAccounts.EmptyRef"));
 		EndIf;
 	EndIf;
@@ -33,8 +33,8 @@ Procedure CompanyOnChange(Object, Form, Item) Export
 																			Object.Receiver,
 																			ComparisonType.Equal,
 																			DataCompositionComparisonType.Equal));
-		GetDefaultChoiseRef = CatCashAccountsServer.GetDefaultChoiseRef(CustomParameters);
-		If Object.Receiver <> GetDefaultChoiseRef Then
+		GetDefaultChoiceRef = CatCashAccountsServer.GetDefaultChoiceRef(CustomParameters);
+		If Object.Receiver <> GetDefaultChoiceRef Then
 			RefillData.Insert("Receiver", PredefinedValue("Catalog.CashAccounts.EmptyRef"));
 		EndIf;
 	EndIf;		
@@ -89,7 +89,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemDate
 
 Procedure DateOnChange(Object, Form, Item) Export
@@ -100,7 +99,6 @@ Procedure DateOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemDescription
 
@@ -117,7 +115,7 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
-Procedure DecorationGroupTitleCollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
@@ -125,12 +123,11 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
-Procedure DecorationGroupTitleUncollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemSendDate
 
@@ -146,7 +143,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemReceiveDate
 
 Procedure ReceiveDateOnChange(Object, Form, Item) Export
@@ -161,7 +157,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemReceiveAmount
 
 Procedure ReceiveAmountOnChange(Object, Form, Item) Export
@@ -169,7 +164,6 @@ Procedure ReceiveAmountOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemSendAmount
 
@@ -183,7 +177,6 @@ Procedure SendAmountOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemSender
 
@@ -279,7 +272,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemSenderCurrency
 
 Procedure SetSenderCurrency(Object, Form)
@@ -292,7 +284,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemReceiverCurrency
 
 Procedure SetReceiverCurrency(Object, Form)
@@ -304,7 +295,6 @@ Procedure SetReceiverCurrency(Object, Form)
 EndProcedure
 
 #EndRegion
-
 
 #Region CheckFillData
 

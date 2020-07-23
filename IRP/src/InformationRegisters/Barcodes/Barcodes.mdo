@@ -12,9 +12,8 @@
   <name>Barcodes</name>
   <synonym>
     <key>en</key>
-    <value>Barcodes</value>
+    <value>Item barcodes</value>
   </synonym>
-  <comment></comment>
   <useStandardCommands>true</useStandardCommands>
   <defaultRecordForm>InformationRegister.Barcodes.Form.RecordForm</defaultRecordForm>
   <defaultListForm>InformationRegister.Barcodes.Form.ListForm</defaultListForm>
@@ -25,11 +24,9 @@
       <key>en</key>
       <value>Item key</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>CatalogRef.ItemKeys</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
@@ -41,13 +38,16 @@
     <name>SerialLotNumber</name>
     <synonym>
       <key>en</key>
-      <value>Serial lot number</value>
+      <value>Item serial/lot number</value>
     </synonym>
     <type>
       <types>CatalogRef.SerialLotNumbers</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <resources uuid="a28bcd7c-a08a-4e9b-9f1e-28e86ce01af7">
     <name>Unit</name>
@@ -58,12 +58,15 @@
     <type>
       <types>CatalogRef.Units</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <choiceParameterLinks>
       <name>Filter.ItemKey</name>
       <field>InformationRegister.Barcodes.Resource.ItemKey</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <attributes uuid="5325c9a5-fbb3-4e4d-92a5-1c64e4c8f10f">
     <name>Presentation</name>
@@ -74,8 +77,13 @@
     <type>
       <types>DefinedType.typeQR</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
   </attributes>
   <dimensions uuid="72cf742b-9480-4cc3-9639-a8a877cf8539">
     <name>Barcode</name>
@@ -83,11 +91,9 @@
       <key>en</key>
       <value>Barcode</value>
     </synonym>
-    <comment></comment>
     <type>
       <types>DefinedType.typeBarcode</types>
     </type>
-    <mask></mask>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
@@ -125,9 +131,10 @@
     </synonym>
     <group>FormNavigationPanelGoTo</group>
     <commandParameterType>
-      <types>CatalogRef.ItemKeys</types>
       <types>CatalogRef.Items</types>
+      <types>CatalogRef.ItemKeys</types>
     </commandParameterType>
     <representation>Auto</representation>
+    <shortcut></shortcut>
   </commands>
 </mdclass:InformationRegister>

@@ -102,4 +102,3 @@ EndProcedure
 Procedure PropertiesBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
-

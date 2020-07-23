@@ -40,7 +40,6 @@ Procedure FindUnusedFilesAtClient()
 	
 	IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(Volume);
 	ArrayOfUnusedFilesID = PictureViewerClient.GetArrayOfUnusedFiles(IntegrationSettings.POSTIntegrationSettings);
-	ArrayOfUnusedPrewiewFilesID = PictureViewerClient.GetArrayOfUnusedFiles(IntegrationSettings.Preview1POSTIntegrationSettings);
 	
 	ThisObject.Files.Clear();
 	For Each ItemOfArray In ArrayOfUnusedFilesID Do
@@ -49,15 +48,7 @@ Procedure FindUnusedFilesAtClient()
 		NewRow.POSTSettingName = "POSTIntegrationSettings";
 		NewRow.GETSettingName = "GETIntegrationSettings";
 	EndDo;
-	
-	For Each ItemOfArray In ArrayOfUnusedPrewiewFilesID Do
-		NewRow = ThisObject.Files.Add();
-		NewRow.FileURI = ItemOfArray;
-		NewRow.POSTSettingName = "Preview1POSTIntegrationSettings";
-		NewRow.GETSettingName = "Preview1GETIntegrationSettings";
-	EndDo;
 EndProcedure
-
 
 &AtClient
 Procedure FilesIDSelection(Item, RowSelected, Field, StandardProcessing)
@@ -103,4 +94,3 @@ Function PrepareDeletionFilesID()
 	EndDo;
 	Return ArrayOfResults;
 EndFunction
-

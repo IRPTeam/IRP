@@ -192,7 +192,7 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	Return QueryTable;
 EndFunction
 
-Procedure FiilCurrencyTable(Object, Date, Company, Currency, RowKey, AgreementInfo) Export
+Procedure FillCurrencyTable(Object, Date, Company, Currency, RowKey, AgreementInfo) Export
 	
 	// Agreement currency
 	If AgreementInfo <> Undefined And ValueIsFilled(AgreementInfo.Ref) Then
@@ -229,8 +229,6 @@ Procedure FiilCurrencyTable(Object, Date, Company, Currency, RowKey, AgreementIn
 		                      Currency, 
 		                      ItemOfArray.CurrencyMovementType);
 	EndDo;
-	
-	
 EndProcedure
 
 Procedure AddRowToCurrencyTable(Date, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType) Export

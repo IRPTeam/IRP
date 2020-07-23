@@ -51,7 +51,7 @@ Function GetPartnerByLegalName(LegalName, Partner) Export
 		Parameters = New Structure("CustomSearchFilter, AdditionalParameters",
 				DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
 				DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
-		Return Catalogs.Partners.GetDefaultChoiseRef(Parameters);
+		Return Catalogs.Partners.GetDefaultChoiceRef(Parameters);
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -143,7 +143,7 @@ EndFunction
 Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, ObjectRef = Undefined) Export
 	EndOfDate = Undefined;
 	If ValueIsFilled(ObjectRef) Then
-		EndOfDate = New Boundary(ObjectRef.PointInTime(), BoundaryType.Excluding)
+		EndOfDate = New Boundary(ObjectRef.PointInTime(), BoundaryType.Excluding);
 	EndIf;
 	ArrayOfResults = New Array();
 	ValueTable = GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate);

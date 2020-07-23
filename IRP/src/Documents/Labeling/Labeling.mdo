@@ -89,10 +89,12 @@
         <value>Item key</value>
       </synonym>
       <type>
+        <types>CatalogRef.Items</types>
         <types>CatalogRef.ItemKeys</types>
         <types>CatalogRef.ItemTypes</types>
-        <types>CatalogRef.Items</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
@@ -101,11 +103,13 @@
       <name>SerialLotNumber</name>
       <synonym>
         <key>en</key>
-        <value>Serial lot number</value>
+        <value>Item serial/lot number</value>
       </synonym>
       <type>
         <types>CatalogRef.SerialLotNumbers</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -115,11 +119,9 @@
         <key>en</key>
         <value>Barcode</value>
       </synonym>
-      <comment></comment>
       <type>
         <types>DefinedType.typeBarcode</types>
       </type>
-      <mask></mask>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
@@ -136,6 +138,8 @@
       <type>
         <types>DocumentRef.PurchaseOrder</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -161,7 +165,7 @@
     <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Add attributes</value>
+      <value>Additional attributes</value>
     </synonym>
     <attributes uuid="506af94a-702b-44e8-8676-b48b10bee70c">
       <name>Property</name>
@@ -202,5 +206,6 @@
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
+    <shortcut></shortcut>
   </commands>
 </mdclass:Document>

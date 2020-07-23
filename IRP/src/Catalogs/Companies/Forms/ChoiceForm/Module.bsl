@@ -16,7 +16,6 @@ EndProcedure
 
 #EndRegion
 
-
 &AtClient
 Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	CatCompaniesClient.ListBeforeAddRow(ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
@@ -35,4 +34,3 @@ EndProcedure
 Procedure SetFormParametersAtServer()
 	CatCompaniesServer.SetChoiceFormParameters(ThisObject, Parameters);
 EndProcedure
-

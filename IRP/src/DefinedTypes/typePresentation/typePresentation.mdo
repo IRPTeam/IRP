@@ -8,7 +8,6 @@
     <key>en</key>
     <value>Type presentation</value>
   </synonym>
-  <comment></comment>
   <type>
     <types>CatalogManager.ItemTypes</types>
     <types>CatalogManager.PriceTypes</types>

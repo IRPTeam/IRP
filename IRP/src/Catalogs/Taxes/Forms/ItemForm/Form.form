@@ -40,8 +40,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Type</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Type</segments>
+      </paths>
     </dataPath>
     <titleLocation>None</titleLocation>
     <handlers>
@@ -111,8 +113,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Object.ExternalDataProc</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Object.ExternalDataProc</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ExternalDataProcExtendedTooltip</name>
@@ -292,9 +296,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.TaxRates.TaxRate</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.TaxRates.TaxRate</segments>
             </paths>
@@ -506,6 +507,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -616,9 +618,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.UseDocuments.DocumentName</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.UseDocuments.DocumentName</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>UseDocumentsDocumentNameExtendedTooltip</name>
@@ -687,7 +686,7 @@
             <choiceList>
               <presentation>
                 <key>en</key>
-                <value>Saler return</value>
+                <value>Sales return</value>
               </presentation>
               <value xsi:type="core:StringValue">
                 <value>SalesReturn</value>
@@ -917,6 +916,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -990,12 +990,12 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>

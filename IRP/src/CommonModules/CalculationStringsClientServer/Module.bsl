@@ -11,11 +11,10 @@ Function GetCalculationSettings(Actions = Undefined, AddInfo = Undefined) Export
 	Return Actions;
 EndFunction
 
-
 // TODO: Test
 Procedure ClearDependentData(Object, AddInfo = Undefined) Export
-	If AddInfo = Undefined Or not AddInfo.Property("TableParent") Then
-		TableName = "ItemList"
+	If AddInfo = Undefined OR Not AddInfo.Property("TableParent") Then
+		TableName = "ItemList";
 	Else
 		TableName = AddInfo.TableParent;
 	EndIf;
@@ -74,7 +73,6 @@ Procedure CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = U
 	Notify("CallbackHandler", Undefined, Form);
 	#EndIf
 EndProcedure
-
 
 Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
 	
@@ -384,7 +382,6 @@ Procedure CalculateTax(Object, ItemRow, PriceIncludeTax, ArrayOfTaxInfo, Reverse
 	ItemRow.TaxAmount = GetTotalAmountByDependedTable(Object, "TaxList", ItemRow.Key);
 EndProcedure
 
-
 Procedure CalculateTaxManualPriority(Object, ItemRow, PriceIncludeTax, ArrayOfTaxInfo, Reverse, AddInfo = Undefined)
 	
 	// ArrayOfTaxInfo
@@ -590,7 +587,7 @@ Function DeleteRowsInDependedTable(Object, DependedTableName, MainTableKey, Cach
 	Return Cache;
 EndFunction
 
-Function Priceschenged(Object, Form, Settings) Export
+Function PricesChanged(Object, Form, Settings) Export
 
 	CachedColumns = "Key, Price, PriceType, ItemKey, Unit";
 	ListCache = GetCacheTable(Object, "ItemList", CachedColumns);
@@ -603,9 +600,9 @@ Function Priceschenged(Object, Form, Settings) Export
 	CalculateItemsRows(Object, Form, ListCache, CalculationSettings);
 
 	For Each RowCache In ListCache Do
-		FindedRows = Object.ItemList.FindRows(New Structure("Key", RowCache.Key));
-		For Each FindedRow In FindedRows Do
-			If Not FindedRow.Price = RowCache.Price Then
+		FoundRows = Object.ItemList.FindRows(New Structure("Key", RowCache.Key));
+		For Each FoundRow In FoundRows Do
+			If Not FoundRow.Price = RowCache.Price Then
 				Return True;	
 			EndIf;
 		EndDo;
@@ -641,15 +638,13 @@ EndFunction
 
 #Region NeewForms
 
-
 Procedure CalculateRow(Object, Form, Settings, Actions) Export
 	
-	DoTabelActions(Object, Form, Settings, Actions);
+	DoTableActions(Object, Form, Settings, Actions);
 	
 EndProcedure
 
-
-Procedure DoTabelActions(Object, Form, Settings, Actions) Export
+Procedure DoTableActions(Object, Form, Settings, Actions) Export
 	
 	For Each Action In Actions Do
 		
@@ -695,7 +690,7 @@ EndProcedure
 
 #EndRegion
 
-#Region TabelItensChanges
+#Region TableItemsChanges
 
 Procedure UpdateItemKey(Object, Form, Settings) Export
 
@@ -735,7 +730,6 @@ Procedure UpdateRowUnit(Object, Form, Settings)
 	
 EndProcedure
 
-
 Procedure UpdateRowPriceType(Object, Form, Settings)
 	If Settings.Rows.Count() = 0 Then
 		Return;
@@ -755,7 +749,7 @@ Procedure UpdateItemType(Object, Form, Settings) Export
 	
 	CurrentRow = Settings.Rows[0];
 	
-	//TODO: SalesOrder???
+	// TODO: SalesOrder???
 	CurrentRow.ItemType = DocSalesOrderServer.GetItemRowType(CurrentRow.Item);
 	If CurrentRow.ItemType = PredefinedValue("Enum.ItemTypes.Service") Then
 		CurrentRow.ProcurementMethod = Undefined;

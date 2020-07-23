@@ -1,6 +1,5 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
-	
 	If CommandParameter = Undefined Then
 		Return;
 	EndIf;
@@ -15,4 +14,3 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		CommandExecuteParameters.Window);
 	
 EndProcedure
-

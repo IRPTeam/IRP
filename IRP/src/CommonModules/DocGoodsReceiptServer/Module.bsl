@@ -75,8 +75,6 @@ EndProcedure
 
 #EndRegion
 
-
-
 Function InfoReceiptBasisesFilling(FilterValues, ExistingRows, Ref) Export
 	
 	TableItemList = New ValueTable();
@@ -356,7 +354,6 @@ EndProcedure
 
 #Region QuantityCompare
 
-&AtServer
 Procedure LoadDataFromQuantityCompare(Object, Form, ItemListAddress) Export
 	Lists = GetFromTempStorage(ItemListAddress);
 	QuantityCompareExpItemList = Lists.ExpItemList;

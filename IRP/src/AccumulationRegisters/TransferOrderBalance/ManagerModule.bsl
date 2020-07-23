@@ -9,7 +9,3 @@ Function GetLockFields(Data) Export
 	Result.Insert("LockInfo", New Structure("Data, Fields", Data, Fields));
 	Return Result;
 EndFunction
-
-
-
-	

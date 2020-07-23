@@ -8,8 +8,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>HTMLGallery</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>HTMLGallery</segments>
+      </paths>
     </dataPath>
     <titleLocation>None</titleLocation>
     <extendedTooltip>
@@ -85,7 +87,7 @@
     <name>HTMLGallery</name>
     <title>
       <key>en</key>
-      <value>HTMLGallery</value>
+      <value>HTML gallery</value>
     </title>
     <id>20</id>
     <valueType>

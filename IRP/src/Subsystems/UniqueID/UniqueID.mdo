@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Unique ID</value>
   </synonym>
-  <comment></comment>
   <content>CommonModule.UniqueID</content>
   <content>CommonAttribute.UniqueID</content>
   <content>EventSubscription.CheckUniqueID</content>

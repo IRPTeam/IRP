@@ -19,8 +19,8 @@
       <value>Price owner</value>
     </synonym>
     <type>
-      <types>CatalogRef.ItemKeys</types>
       <types>CatalogRef.Items</types>
+      <types>CatalogRef.ItemKeys</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -65,8 +65,8 @@
     </synonym>
     <group>FormNavigationPanelImportant</group>
     <commandParameterType>
-      <types>CatalogRef.ItemKeys</types>
       <types>CatalogRef.Items</types>
+      <types>CatalogRef.ItemKeys</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

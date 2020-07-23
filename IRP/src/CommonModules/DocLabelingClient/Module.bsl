@@ -16,7 +16,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ItemDescription
 
 Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
@@ -25,7 +24,6 @@ Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
-
 
 #Region GroupTitle
 
@@ -53,7 +51,7 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
 	DocLabelingClient.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
-Procedure DecorationGroupTitleCollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
 	DocLabelingClient.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
@@ -61,14 +59,13 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
 	DocLabelingClient.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
-Procedure DecorationGroupTitleUncollapsedLalelClick(Object, Form, Item) Export
+Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 	DocLabelingClient.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
 #EndRegion
 
 #EndRegion
-
 
 #Region ItemItemList
 

@@ -56,7 +56,6 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.PaymentList.BasisDocument</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>
@@ -81,7 +80,6 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.PaymentList.PlaningTransactionBasis</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>
@@ -101,12 +99,10 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.PaymentList.PlaningTransactionBasis</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.TransactionType</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>

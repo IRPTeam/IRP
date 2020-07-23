@@ -76,9 +76,6 @@
           <paths xsi:type="form:DataPath">
             <segments>DocumentsTree.SalesOrder</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>DocumentsTree.SalesOrder</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DocumentsTreeSalesOrderExtendedTooltip</name>
@@ -128,9 +125,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>DocumentsTree.Item</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>DocumentsTree.Item</segments>
           </paths>
@@ -186,9 +180,6 @@
           <paths xsi:type="form:DataPath">
             <segments>DocumentsTree.ItemKey</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>DocumentsTree.ItemKey</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DocumentsTreeItemKeyExtendedTooltip</name>
@@ -241,9 +232,6 @@
           <paths xsi:type="form:DataPath">
             <segments>DocumentsTree.Unit</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>DocumentsTree.Unit</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DocumentsTreeUnitExtendedTooltip</name>
@@ -293,9 +281,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>DocumentsTree.Quantity</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>DocumentsTree.Quantity</segments>
           </paths>
@@ -789,8 +774,8 @@
       </title>
       <id>3</id>
       <valueType>
-        <types>DocumentRef.SalesOrder</types>
         <types>DocumentRef.ShipmentConfirmation</types>
+        <types>DocumentRef.SalesOrder</types>
       </valueType>
       <view>
         <common>true</common>

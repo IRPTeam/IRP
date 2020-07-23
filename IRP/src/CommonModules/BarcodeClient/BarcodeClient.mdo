@@ -5,6 +5,5 @@
     <key>en</key>
     <value>Barcode client</value>
   </synonym>
-  <comment></comment>
   <clientManagedApplication>true</clientManagedApplication>
 </mdclass:CommonModule>

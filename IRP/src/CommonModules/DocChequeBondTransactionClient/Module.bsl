@@ -138,7 +138,7 @@ Procedure CompanyOnChange(Object, Form, Item) Export
 		Parameters.Insert("Object", Object);
 		
 		QuestionToUserNotify = New NotifyDescription("CompanyOnChangeEnd", ThisObject, Parameters);
-		ShowQueryBox(QuestionToUserNotify,StrTemplate(R().QuestionToUser_003, Item.Title), QuestionDialogMode.YesNo);
+		ShowQueryBox(QuestionToUserNotify, StrTemplate(R().QuestionToUser_003, Item.Title), QuestionDialogMode.YesNo);
 		Return;
 	EndIf;
 	Form.CurrentCompany = Object.Company;
@@ -163,7 +163,7 @@ Procedure CompanyOnChangeEnd(Result, Parameters) Export
 	
 	For Each InvalidAgreement In InvalidAgreements Do
 		
-		InvalidRows = Object.ChequeBonds.FindRows(New Structure("Agreement",InvalidAgreement));
+		InvalidRows = Object.ChequeBonds.FindRows(New Structure("Agreement", InvalidAgreement));
 
 		For Each InvalidRow In InvalidRows Do
 			Object.ChequeBonds.Delete(InvalidRow);
@@ -396,9 +396,9 @@ Procedure FillPaymentListRows(Form, RowData, Object) Export
 
 	DocChequeBondTransactionServer.GetPaymentListFillingData(Object.Ref, Parameters);
 
-	FindedRows = Object.PaymentList.FindRows(New Structure("Key", Parameters.Key));
-	For Each FindedRow In FindedRows Do
-		Object.PaymentList.Delete(FindedRow);
+	FoundRows = Object.PaymentList.FindRows(New Structure("Key", Parameters.Key));
+	For Each FoundRow In FoundRows Do
+		Object.PaymentList.Delete(FoundRow);
 	EndDo;
 
 	For Each Row In Parameters.PaymentList Do
@@ -428,9 +428,9 @@ Procedure CleanPaymentList(Object, Form) Export
 	
 	ChequeType = ServiceSystemServer.GetObjectAttribute(CurrentData.Cheque, "Type");
 	If ChequeType = PredefinedValue("Enum.ChequeBondTypes.PartnerCheque") Then
-		ColomnName = "PartnerArBasisDocument";
+		ColumnName = "PartnerArBasisDocument";
 	ElsIf ChequeType = PredefinedValue("Enum.ChequeBondTypes.OwnCheque") Then
-		ColomnName = "PartnerApBasisDocument"; 
+		ColumnName = "PartnerApBasisDocument"; 
 	Else
 		For Each DependentLine In DependentLines Do
 			Object.PaymentList.Delete(DependentLine);
@@ -438,33 +438,33 @@ Procedure CleanPaymentList(Object, Form) Export
 		EndDo;
 	EndIf;
 	
-	СontrolDocuments = New Array();
+	ControlDocuments = New Array();
 	For Each DependentLine In DependentLines Do
-		If ValueIsFilled(DependentLine[ColomnName]) Then
-			СontrolDocuments.Add(DependentLine[ColomnName]);
+		If ValueIsFilled(DependentLine[ColumnName]) Then
+			ControlDocuments.Add(DependentLine[ColumnName]);
 		Else
 			Object.PaymentList.Delete(DependentLine);
 		EndIf;
 	EndDo;
 	
-	If СontrolDocuments.Count() = 0 Then
+	If ControlDocuments.Count() = 0 Then
 		Return;
 	EndIf;
 	
-	СontrolStructure = New Structure(, );
-	СontrolStructure.Insert("Company", Object.Company);
-	СontrolStructure.Insert("Partner", Form.CurrentPartner);
-	СontrolStructure.Insert("LegalName", Form.CurrentLegalName);
-	СontrolStructure.Insert("Agreement", Form.CurrentAgreement);
-	СontrolStructure.Insert("СontrolDocument", СontrolDocuments);
-	СontrolStructure.Insert("EndDate", Object.Date - 1);
-	СontrolStructure.Insert("UseCurrencyFilter", ValueIsFilled(Object.Currency));
-	СontrolStructure.Insert("Currency", Object.Currency);
+	ControlStructure = New Structure(, );
+	ControlStructure.Insert("Company", Object.Company);
+	ControlStructure.Insert("Partner", Form.CurrentPartner);
+	ControlStructure.Insert("LegalName", Form.CurrentLegalName);
+	ControlStructure.Insert("Agreement", Form.CurrentAgreement);
+	ControlStructure.Insert("ControlDocument", ControlDocuments);
+	ControlStructure.Insert("EndDate", Object.Date - 1);
+	ControlStructure.Insert("UseCurrencyFilter", ValueIsFilled(Object.Currency));
+	ControlStructure.Insert("Currency", Object.Currency);
 	
-	InvalidDocuments = DocChequeBondTransactionServer.InvalidDocuments(СontrolStructure);
+	InvalidDocuments = DocChequeBondTransactionServer.InvalidDocuments(ControlStructure);
 	
 	For Each DependentLine In DependentLines Do
-		If InvalidDocuments.Find(DependentLine[ColomnName]) = Undefined Then
+		If InvalidDocuments.Find(DependentLine[ColumnName]) = Undefined Then
 			Continue;
 		Else
 			Object.PaymentList.Delete(DependentLine);
@@ -596,11 +596,11 @@ Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing)
 																		,
 																		DataCompositionComparisonType.NotEqual));
 	If ValueIsFilled(Object.Currency) Then
-		Currenseies = New Array();
-		Currenseies.Add(PredefinedValue("Catalog.Currencies.EmptyRef"));
-		Currenseies.Add(Object.Currency);
+		Currencies = New Array();
+		Currencies.Add(PredefinedValue("Catalog.Currencies.EmptyRef"));
+		Currencies.Add(Object.Currency);
 		StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Currency",
-																		Currenseies,
+																		Currencies,
 																		,
 																		DataCompositionComparisonType.InList));
 	EndIf;																		
@@ -614,11 +614,11 @@ Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 																		PredefinedValue("Enum.CashAccountTypes.Transit"),
 																		ComparisonType.NotEqual));
 																		If ValueIsFilled(Object.Currency) Then
-	Currenseies = New Array();
-	Currenseies.Add(PredefinedValue("Catalog.Currencies.EmptyRef"));
-	Currenseies.Add(Object.Currency);
+	Currencies = New Array();
+	Currencies.Add(PredefinedValue("Catalog.Currencies.EmptyRef"));
+	Currencies.Add(Object.Currency);
 	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Currency",
-																		Currenseies,
+																		Currencies,
 																		,
 																		DataCompositionComparisonType.InList));
 	EndIf;

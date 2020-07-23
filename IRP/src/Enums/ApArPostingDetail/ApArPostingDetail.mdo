@@ -8,7 +8,7 @@
   <name>ApArPostingDetail</name>
   <synonym>
     <key>en</key>
-    <value>AP-AR posting detail</value>
+    <value>AP/AR posting detail</value>
   </synonym>
   <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>

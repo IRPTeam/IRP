@@ -35,7 +35,6 @@ Procedure OnStart()
 
 EndProcedure
 
-
 Procedure BeforeStart(Cancel)
 	AreaStatus = SaasClient.CurrentAreaStatus();
 	If AreaStatus.isError Then

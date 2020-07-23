@@ -47,8 +47,7 @@ Function CreateAddDataProc(Info, AddInfo)
 	Return DataProc;
 EndFunction
 
-
-Function CallMetodAddDataProc(Info, AddInfo = Undefined) Export
+Function CallMethodAddDataProc(Info, AddInfo = Undefined) Export
 	Result = Undefined;
 	
 	If UseInternalDataProcessor(Info.ExternalDataProcName) Then
@@ -107,4 +106,3 @@ EndFunction
 Function UseInternalDataProcessor(DataProcName) Export
 	Return Metadata.DataProcessors.Find(DataProcName) <> Undefined;
 EndFunction
-

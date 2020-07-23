@@ -1,4 +1,3 @@
-
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	Filter = New Structure();

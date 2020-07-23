@@ -10,10 +10,10 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	IDInfoClient.NotificationProcessing(ThisObject, Object.Ref, EventName, Parameter, Source);
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 	If EventName = "UpdateIDInfo" Then
-		IDInfoCreateFormControll();
+		IDInfoCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -34,7 +34,7 @@ EndProcedure
 &AtClient
 Procedure UseGoodsReceiptOnChange(Item)
 	If Not Object.UseGoodsReceipt  And ValueIsFilled(Object.Ref) Then
-		If СheckGoodsInTransitIncoming() Then
+		If CheckGoodsInTransitIncoming() Then
 			Object.UseGoodsReceipt = True;
 		 	ThisObject.Modified = False;
 		 	ShowMessageBox(, StrTemplate(R().Error_053, String(Object.Ref)));
@@ -45,7 +45,7 @@ EndProcedure
 &AtClient
 Procedure UseShipmentConfirmationOnChange(Item)
 	If Not Object.UseShipmentConfirmation And ValueIsFilled(Object.Ref) Then
-		 If СheckGoodsInTransitOutgoing() Then
+		 If CheckGoodsInTransitOutgoing() Then
 		 	Object.UseShipmentConfirmation = True;
 		 	ThisObject.Modified = False;
 		 	ShowMessageBox(, StrTemplate(R().Error_052, String(Object.Ref)));
@@ -54,7 +54,7 @@ Procedure UseShipmentConfirmationOnChange(Item)
 EndProcedure
 
 &AtServer
-Function СheckGoodsInTransitIncoming()
+Function CheckGoodsInTransitIncoming()
 	
 	Query = New Query;
 	Query.Text =
@@ -72,7 +72,7 @@ Function СheckGoodsInTransitIncoming()
 EndFunction
 
 &AtServer
-Function СheckGoodsInTransitOutgoing()
+Function CheckGoodsInTransitOutgoing()
 	Query = New Query;
 	Query.Text =
 		"SELECT TOP 1
@@ -86,7 +86,6 @@ Function СheckGoodsInTransitOutgoing()
 	
 	Return Not Query.Execute().IsEmpty();
 EndFunction
-
 
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
@@ -112,7 +111,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient
@@ -121,12 +119,12 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
 &AtServer
-Procedure IDInfoCreateFormControll()
+Procedure IDInfoCreateFormControl()
 	IDInfoServer.CreateFormControls(ThisObject);
 EndProcedure
 

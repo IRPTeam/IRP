@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Localization client server</value>
   </synonym>
-  <comment></comment>
   <global>true</global>
   <clientManagedApplication>true</clientManagedApplication>
   <server>true</server>

@@ -1,5 +1,5 @@
 Function UniqueIDByName(ObjectMetadata, UniqueID) Export
-	Return UniqueIDReuse.UniqueIDByName(ObjectMetadata.FullName(), UniqueID)
+	Return UniqueIDReuse.UniqueIDByName(ObjectMetadata.FullName(), UniqueID);
 EndFunction
 
 Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
@@ -14,14 +14,14 @@ Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
 		Execute Source.UniqueID + " = 0;";
 	Except
 		Cancel = True;
-		CommonFunctionsClientServer.ShowUsersMessage(R()["Error_012"], "UniqueID", Source);
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_012, "UniqueID", Source);
 		Return;
 	EndTry;
 	
 	Ref = UniqueIDByName(Source.Metadata(), Source.UniqueID);
 	If Ref <> Source.Ref And Ref <> Undefined Then
 		Cancel = True;
-		CommonFunctionsClientServer.ShowUsersMessage(R()["Error_013"], "UniqueID", Source);
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_013, "UniqueID", Source);
 	EndIf;
 EndProcedure
 

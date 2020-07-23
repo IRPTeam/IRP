@@ -57,7 +57,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region ListFormEvents
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export

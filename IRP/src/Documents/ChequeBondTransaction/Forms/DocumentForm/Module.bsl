@@ -8,7 +8,7 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -28,7 +28,6 @@ EndProcedure
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	DocChequeBondTransactionServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
-
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
@@ -128,7 +127,7 @@ Procedure ChequeBondsStatusEditTextChange(Item, Text, StandardProcessing)
 		ObjectStatusesClient.GetAvailableStatusesByCheque(Object.Ref, CurrentData.Cheque));
 	
 	ArrayOfFilteredStatusRefs
-	= ObjectStatusesServer.GetObjectStatusesChoiseDataTable(Text, ArrayOfFilters, AdditionalParameters);
+	= ObjectStatusesServer.GetObjectStatusesChoiceDataTable(Text, ArrayOfFilters, AdditionalParameters);
 	If Not ArrayOfFilteredStatusRefs.Count() Then
 		StandardProcessing = False;
 		Return;
@@ -255,8 +254,6 @@ EndProcedure
 Procedure ChequeBondsCashAccountEditTextChange(Item, Text, StandardProcessing)
 	DocChequeBondTransactionClient.AccountEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
-
-
 
 &AtClient
 Procedure ChequeBondsAgreementEditTextChange(Item, Text, StandardProcessing)
@@ -425,7 +422,7 @@ EndProcedure
 
 &AtServer
 Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	CurrenciesServer.FiilCurrencyTable(Object, 
+	CurrenciesServer.FillCurrencyTable(Object, 
 	                                   Object.Date, 
 	                                   Object.Company, 
 	                                   Currency, 
@@ -452,7 +449,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient
@@ -461,8 +457,23 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region ExternalCommands
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);	
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
 #EndRegion

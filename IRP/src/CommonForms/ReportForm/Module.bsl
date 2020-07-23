@@ -2,9 +2,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocumentsClientServer.ChangeTitleCollapse(, ThisObject);
-	SplitedFormName = StrSplit(ThisObject.FormName, ".");
-	SplitedFormName.Delete(SplitedFormName.UBound());
-	ReportName = SplitedFormName.Get(SplitedFormName.UBound());
+	ReportName = ReportName();
 	ExternalCommandsServer.CreateCommands(ThisObject, ReportName, Catalogs.ConfigurationMetadata.Reports, Enums.FormTypes.ObjectForm);	
 EndProcedure
 
@@ -16,8 +14,8 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLalelClick(Item)
-	DocumentsClient.DecorationGroupTitleCollapsedLalelClick(, ThisObject, Item);
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocumentsClient.DecorationGroupTitleCollapsedLabelClick(, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -26,12 +24,11 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
-	DocumentsClient.DecorationGroupTitleUncollapsedLalelClick(, ThisObject, Item);
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocumentsClient.DecorationGroupTitleUncollapsedLabelClick(, ThisObject, Item);
 EndProcedure
 
 #EndRegion
-
 
 #Region Commands
 
@@ -47,12 +44,13 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
-
-#Region Variants
+#Region Private
 
 &AtServer
-Procedure CreateVariantsMenu()
-	
-EndProcedure
+Function ReportName()
+	SplittedFormName = StrSplit(ThisObject.FormName, ".");
+	SplittedFormName.Delete(SplittedFormName.UBound());
+	Return SplittedFormName.Get(SplittedFormName.UBound());
+EndFunction
 
 #EndRegion

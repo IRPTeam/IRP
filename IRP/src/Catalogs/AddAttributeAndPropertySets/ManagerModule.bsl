@@ -1,4 +1,4 @@
-Procedure SinhronizeItemKeysAttributes() Export
+Procedure SynchronizeItemKeysAttributes() Export
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -11,10 +11,10 @@ Procedure SinhronizeItemKeysAttributes() Export
 		|	ItemTypesAvailableAttributes.Attribute";
 	QueryResult = Query.Execute();
 	ArrayOfAttributes = QueryResult.Unload().UnloadColumn("Attribute");
-	SinhronizeAttributes(Catalogs.AddAttributeAndPropertySets.Catalog_ItemKeys, ArrayOfAttributes);
+	SynchronizeAttributes(Catalogs.AddAttributeAndPropertySets.Catalog_ItemKeys, ArrayOfAttributes);
 EndProcedure
 
-Procedure SinhronizePriceKeysAttributes() Export
+Procedure SynchronizePriceKeysAttributes() Export
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -28,10 +28,10 @@ Procedure SinhronizePriceKeysAttributes() Export
 		|	ItemTypesAvailableAttributes.Attribute";
 	QueryResult = Query.Execute();
 	ArrayOfAttributes = QueryResult.Unload().UnloadColumn("Attribute");
-	SinhronizeAttributes(Catalogs.AddAttributeAndPropertySets.Catalog_PriceKeys, ArrayOfAttributes);
+	SynchronizeAttributes(Catalogs.AddAttributeAndPropertySets.Catalog_PriceKeys, ArrayOfAttributes);
 EndProcedure
 
-Procedure SinhronizeAttributes(Set, ArrayOfAttributes)
+Procedure SynchronizeAttributes(Set, ArrayOfAttributes)
 	If Not TransactionActive() Then
 		BeginTransaction(DataLockControlMode.Managed);
 		Try

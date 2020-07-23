@@ -40,8 +40,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Type</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Type</segments>
+      </paths>
     </dataPath>
     <handlers>
       <event>OnChange</event>
@@ -116,8 +118,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Company</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Company</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>CompanyExtendedTooltip</name>
@@ -166,8 +170,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Number</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Number</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>NumberExtendedTooltip</name>
@@ -216,8 +222,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.BankName</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.BankName</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>BankNameExtendedTooltip</name>
@@ -266,8 +274,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.TransitAccount</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.TransitAccount</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>TransitAccountExtendedTooltip</name>
@@ -301,12 +311,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-        <event>StartChoice</event>
-        <name>TransitAccountStartChoice</name>
-      </handlers>
-      <handlers>
         <event>EditTextChange</event>
         <name>TransitAccountEditTextChange</name>
+      </handlers>
+      <handlers>
+        <event>StartChoice</event>
+        <name>TransitAccountStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -331,8 +341,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>CurrencyType</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>CurrencyType</segments>
+        </paths>
       </dataPath>
       <titleLocation>Left</titleLocation>
       <handlers>
@@ -485,20 +497,20 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
   </handlers>
   <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
   <handlers>
-    <event>FillCheckProcessingAtServer</event>
-    <name>FillCheckProcessingAtServer</name>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <handlers>
-    <event>NotificationProcessing</event>
-    <name>NotificationProcessing</name>
+    <event>FillCheckProcessingAtServer</event>
+    <name>FillCheckProcessingAtServer</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>

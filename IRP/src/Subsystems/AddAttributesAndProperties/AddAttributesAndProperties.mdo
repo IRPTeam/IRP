@@ -3,9 +3,8 @@
   <name>AddAttributesAndProperties</name>
   <synonym>
     <key>en</key>
-    <value>Add attributes and properties</value>
+    <value>Additional attributes and properties</value>
   </synonym>
-  <comment></comment>
   <includeHelpInContents>true</includeHelpInContents>
   <content>InformationRegister.AddProperties</content>
   <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>

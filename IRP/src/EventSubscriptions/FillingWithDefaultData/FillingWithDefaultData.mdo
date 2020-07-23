@@ -5,7 +5,6 @@
     <key>en</key>
     <value>Filling with default data</value>
   </synonym>
-  <comment></comment>
   <source>
     <types>DocumentObject</types>
   </source>

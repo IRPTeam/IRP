@@ -1,4 +1,4 @@
-Procedure OnCreateAtServer(Cancel, StandartProcessing, Form, Parameters) Export
+Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 	FillingData = Undefined;
 	If Parameters.Property("FillingData", FillingData) Then
 		Form.FillingData = CommonFunctionsServer.SerializeXMLUseXDTO(FillingData);
@@ -14,12 +14,6 @@ Procedure OnCreateAtServer(Cancel, StandartProcessing, Form, Parameters) Export
 		Form.List.Parameters.SetParameterValue("IncludeFilterByEndOfUseDate", Parameters.IncludeFilterByEndOfUseDate);
 		Form.List.Parameters.SetParameterValue("IncludeFilterByPartner", Parameters.IncludeFilterByPartner);
 		Form.List.Parameters.SetParameterValue("IncludePartnerSegments", Parameters.IncludePartnerSegments);
-		If Parameters.IncludePartnerSegments Then
-			PartnersSegmentsArray = InformationRegisters.PartnerSegments.GetSegmentsRefArrayByPartner(Parameters.Partner);
-			Form.List.Parameters.SetParameterValue("PartnerSegments", PartnersSegmentsArray);
-		Else
-			Form.List.Parameters.SetParameterValue("PartnerSegments", New Array());
-		EndIf;
 		Form.List.Parameters.SetParameterValue("EndOfUseDate", Parameters.EndOfUseDate);
 		Form.List.Parameters.SetParameterValue("Partner", Parameters.Partner);
 	EndIf;

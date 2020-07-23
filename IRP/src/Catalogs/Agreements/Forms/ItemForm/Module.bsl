@@ -8,7 +8,7 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
 
@@ -25,15 +25,11 @@ EndProcedure
 
 #EndRegion
 
-
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
-
-
 #Region ItemCompany
-
 &AtClient
 Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
 	CatAgreementsClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
@@ -68,7 +64,6 @@ Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemPartnerSegment
 
@@ -111,7 +106,7 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 

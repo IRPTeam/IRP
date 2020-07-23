@@ -12,18 +12,19 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+&AtServer
 Function ErrorMessageStructure(BasisDocuments)
 	ErrorMessageStructure = New Structure();
 	
 	For Each BasisDocument In BasisDocuments Do
-		ErrorMessagekey = ErrorMessagekey(BasisDocument);
-		If ValueIsFilled(ErrorMessagekey) Then
-			ErrorMessageStructure.Insert(ErrorMessagekey, StrTemplate(R()[ErrorMessagekey], Metadata.Documents.BankPayment.Synonym));
+		ErrorMessageKey = ErrorMessageKey(BasisDocument);
+		If ValueIsFilled(ErrorMessageKey) Then
+			ErrorMessageStructure.Insert(ErrorMessageKey, StrTemplate(R()[ErrorMessageKey], Metadata.Documents.BankPayment.Synonym));
 		EndIf;
 	EndDo;
 	
 	If ErrorMessageStructure.Count() = 1 Then
-		ErrorMessageText = ErrorMessageStructure[ErrorMessagekey];	
+		ErrorMessageText = ErrorMessageStructure[ErrorMessageKey];	
 	ElsIf ErrorMessageStructure.Count() = 0 Then
 		ErrorMessageText = StrTemplate(R().Error_051, Metadata.Documents.BankPayment.Synonym);
 	Else
@@ -34,20 +35,22 @@ Function ErrorMessageStructure(BasisDocuments)
 	Return ErrorMessageText;
 EndFunction
 
-Function ErrorMessagekey(BasisDocument)
-	ErrorMessagekey = Undefined;
+&AtServer
+Function ErrorMessageKey(BasisDocument)
+	ErrorMessageKey = Undefined;
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.CashTransferOrder") Then
 		If Not BasisDocument.Sender.Type = PredefinedValue("Enum.CashAccountTypes.Bank") Then
-			ErrorMessagekey = "Error_057";
+			ErrorMessageKey = "Error_057";
 		Else
-			ErrorMessagekey = "Error_058";
+			ErrorMessageKey = "Error_058";
 		EndIf;
 	EndIf;
 	
-	Return ErrorMessagekey;
+	Return ErrorMessageKey;
 EndFunction
 
+&AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_CashTransferOrder = New Array();
 	ArrayOf_OutgoingPaymentOrder = New Array();
@@ -75,6 +78,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
 
+&AtServer
 Function JoinDocumentsStructure(ArrayOfTables)
 	
 	ValueTable = New ValueTable();
@@ -137,6 +141,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	Return ArrayOfResults;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments)
 
 	Result = DocBankPaymentServer.GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments);
@@ -156,6 +161,7 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments)
 	Return Result;
 EndFunction
 
+&AtServer
 Function GetDocumentTable_OutgoingPaymentOrder(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
@@ -182,6 +188,7 @@ Function GetDocumentTable_OutgoingPaymentOrder(ArrayOfBasisDocuments)
 	Return QueryResult.Unload();
 EndFunction
 
+&AtServer
 Function GetDocumentTable_PurchaseInvoice(ArrayOfBasisDocuments)
 	
 	Return DocumentsGenerationServer.GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments);

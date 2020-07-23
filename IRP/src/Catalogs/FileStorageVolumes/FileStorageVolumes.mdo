@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0bf3a5a6-df7d-440c-92d0-6491b76179d2">
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0bf3a5a6-df7d-440c-92d0-6491b76179d2">
   <producedTypes>
     <objectType typeId="c24a5b0d-3297-484d-bc4c-6f763d8629f0" valueTypeId="c4a8ad25-ba92-4351-a844-a7c324bdec2f"/>
     <refType typeId="a4632c31-45bd-4797-9021-1c8d707ef812" valueTypeId="09a5bb33-1cc0-4b60-9d85-ece77b52a1c8"/>
@@ -42,6 +42,9 @@
     <type>
       <types>EnumRef.FileTypes</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -54,6 +57,9 @@
     <type>
       <types>CatalogRef.IntegrationSettings</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -66,57 +72,9 @@
     <type>
       <types>CatalogRef.IntegrationSettings</types>
     </type>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="fd4d287b-d613-4a25-8d2c-217a141de49e">
-    <name>UsePreview1</name>
-    <synonym>
-      <key>en</key>
-      <value>Use preview1</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="87e67d45-b3fa-4540-9bc9-368056abadd7">
-    <name>Preview1POSTIntegrationSettings</name>
-    <synonym>
-      <key>en</key>
-      <value>Preview1 POST Integration settings</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.IntegrationSettings</types>
-    </type>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="6018094a-0192-44db-992b-3518e2640dc4">
-    <name>Preview1GETIntegrationSettings</name>
-    <synonym>
-      <key>en</key>
-      <value>Preview1 GET Integration settings</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.IntegrationSettings</types>
-    </type>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="7cf075d7-baba-4982-8eac-ebfb60de5c45">
-    <name>Preview1Sizepx</name>
-    <synonym>
-      <key>en</key>
-      <value>Preview1 size px</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>10</length>
-      </stringQualifiers>
-    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

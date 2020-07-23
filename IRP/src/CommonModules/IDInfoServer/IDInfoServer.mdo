@@ -3,9 +3,8 @@
   <name>IDInfoServer</name>
   <synonym>
     <key>en</key>
-    <value>IDInfo server</value>
+    <value>Contact info server</value>
   </synonym>
-  <comment></comment>
   <server>true</server>
   <serverCall>true</serverCall>
 </mdclass:CommonModule>

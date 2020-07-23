@@ -108,7 +108,6 @@ Function GetQueryTextQueryTable()
 		|
 		|// 1 - OrderBalance//////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		//|	tmp.Company,
 		|	tmp.StoreSender,
 		|	tmp.StoreReceiver,
 		|	tmp.Order,
@@ -121,7 +120,6 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.Order <> VALUE(Document.InventoryTransferOrder.EmptyRef)
 		|GROUP BY
-		//|	tmp.Company,
 		|	tmp.StoreSender,
 		|	tmp.StoreReceiver,
 		|	tmp.Order,
@@ -132,7 +130,6 @@ Function GetQueryTextQueryTable()
 		|
 		|// 2 - StockReservation_Expense //////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		//|	tmp.Company,
 		|	tmp.StoreSender AS Store,
 		|	tmp.ItemKey,
 		|	SUM(Quantity) AS Quantity,
@@ -142,7 +139,6 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.Order = VALUE(Document.InventoryTransferOrder.EmptyRef)
 		|GROUP BY
-		//|	tmp.Company,
 		|	tmp.StoreSender,
 		|	tmp.ItemKey,
 		|	tmp.Period
@@ -150,29 +146,20 @@ Function GetQueryTextQueryTable()
 		|
 		|// 3 - StockBalance_Receipt//////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		//|	tmp.Company,
 		|	tmp.StoreReceiver AS Store,
 		|	tmp.ItemKey,
 		|	SUM(Quantity) AS Quantity,
 		|	tmp.Period
-		//|	tmp.ReceiptBasis,
-		//|	tmp.ShipmentBasis,
-		//|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
 		|GROUP BY
-		//|	tmp.Company,
 		|	tmp.StoreReceiver,
 		|	tmp.ItemKey,
 		|	tmp.Period
-		//|	tmp.ReceiptBasis,
-		//|	tmp.ShipmentBasis,
-		//|   tmp.RowKey
 		|;
 		|
 		|// 4 - StockReservation_Receipt //////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		//|	tmp.Company,
 		|	tmp.StoreReceiver AS Store,
 		|	tmp.ItemKey,
 		|	SUM(Quantity) AS Quantity,
@@ -180,7 +167,6 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	tmp AS tmp
 		|GROUP BY
-		//|	tmp.Company,
 		|	tmp.StoreReceiver,
 		|	tmp.ItemKey,
 		|	tmp.Period
@@ -188,89 +174,65 @@ Function GetQueryTextQueryTable()
 		|
 		|// 5 - StockBalance_Expense //////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		//|	tmp.Company,
 		|	tmp.StoreSender AS Store,
 		|	tmp.ItemKey,
 		|	SUM(Quantity) AS Quantity,
 		|	tmp.Period
-		//|	tmp.ReceiptBasis,
-		//|	tmp.ShipmentBasis,
-		//|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
 		|GROUP BY
-		//|	tmp.Company,
 		|	tmp.StoreSender,
 		|	tmp.ItemKey,
 		|	tmp.Period
-		//|	tmp.ReceiptBasis,
-		//|	tmp.ShipmentBasis,
-		//|   tmp.RowKey
 		|;
 		|// 6 - GoodsInTransitIncoming//////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		//|	tmp.Company,
 		|	tmp.StoreReceiver AS Store,
 		|	tmp.ItemKey,
 		|	SUM(Quantity) AS Quantity,
 		|	tmp.Period,
 		|	tmp.ReceiptBasis,
-		//|	tmp.ShipmentBasis,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
 		|GROUP BY
-		//|	tmp.Company,
 		|	tmp.StoreReceiver,
 		|	tmp.ItemKey,
 		|	tmp.Period,
 		|	tmp.ReceiptBasis,
-		//|	tmp.ShipmentBasis,
 		|   tmp.RowKey
 		|;
 		|// 7 - GoodsInTransitOutgoing //////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		//|	tmp.Company,
 		|	tmp.StoreSender AS Store,
 		|	tmp.ItemKey,
 		|	SUM(Quantity) AS Quantity,
 		|	tmp.Period,
-		//|	tmp.ReceiptBasis,
 		|	tmp.ShipmentBasis,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
 		|GROUP BY
-		//|	tmp.Company,
 		|	tmp.StoreSender,
 		|	tmp.ItemKey,
 		|	tmp.Period,
-		//|	tmp.ReceiptBasis,
 		|	tmp.ShipmentBasis,
 		|   tmp.RowKey
 		|;
 		|// 8 - StockBalance_Transit //////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		//|	tmp.Company,
 		|	tmp.StoreTransit AS Store,
 		|	tmp.ItemKey,
 		|	SUM(Quantity) AS Quantity,
 		|	tmp.Period
-		//|	tmp.ReceiptBasis,
-		//|	tmp.ShipmentBasis,
-		//|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
 		|Where
 		|	tmp.StoreTransit <> VALUE(Catalog.Stores.EmptyRef)
 		|GROUP BY
-		//|	tmp.Company,
 		|	tmp.StoreTransit,
 		|	tmp.ItemKey,
 		|	tmp.Period
-		//|	tmp.ReceiptBasis,
-		//|	tmp.ShipmentBasis,
-		//|   tmp.RowKey
 		|";
 EndFunction
 
@@ -375,7 +337,6 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Return;
 EndProcedure
 
-
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
 	
@@ -446,12 +407,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			New Structure("RecordSet, WriteInTransaction",
 				PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Store, ItemKey, Quantity"),
 				Parameters.IsReposting));
-		
-		//PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
-		//	New Structure("RecordType, RecordSet, WriteInTransaction",
-		//		AccumulationRecordType.Expense,
-		//		Parameters.DocumentDataTables.StockBalance_Expense,
-		//		Parameters.IsReposting));
 		
 	ElsIf Not Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
 		And Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then

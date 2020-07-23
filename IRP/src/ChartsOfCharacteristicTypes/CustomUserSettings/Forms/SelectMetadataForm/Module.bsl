@@ -42,4 +42,3 @@ EndProcedure
 Procedure Cancel(Command)
 	Close();
 EndProcedure
-

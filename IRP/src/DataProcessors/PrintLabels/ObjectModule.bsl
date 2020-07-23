@@ -1,8 +1,5 @@
 
 Procedure FillAtServer(Object, Form) Export
-	
-	Form.ItemList.Clear();
-	
 	ItemTable = Form.FormAttributeToValue("ItemList");
 	
 	Query = New Query;
@@ -13,7 +10,7 @@ Procedure FillAtServer(Object, Form) Export
 	|FROM
 	|	InformationRegister.Barcodes AS Barcodes
 	|WHERE
-	|	Barcodes.ItemKey.Specification <> VALUE(Catalog.Specifications.EmptyRef)
+	|	NOT Barcodes.ItemKey.Specification <> VALUE(Catalog.Specifications.EmptyRef)
 	|GROUP BY
 	|	Barcodes.ItemKey
 	|;
@@ -88,7 +85,6 @@ Procedure FillAtServer(Object, Form) Export
 	
 EndProcedure
 
-
 Function PrintLabels(Object, Form) Export
 	
 	SpreadDocsArray = New Array;
@@ -121,7 +117,7 @@ Function PrintLabels(Object, Form) Export
 		If ValueIsFilled(ExternalDataProc) Then
 			Info = AddDataProcServer.AddDataProcInfo(ExternalDataProc);
 			Info.Create = True;
-			AddDataProc = AddDataProcServer.CallMetodAddDataProc(Info);	
+			AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);	
 			If Not AddDataProc = Undefined Then		
 				SetDataSetFields(DataSourceScheme.DataSets.Get(0), AddDataProc);
 				FillDataTable(ItemListValue, AddDataProc);	
@@ -165,7 +161,8 @@ Function PrintLabels(Object, Form) Export
 		SettingsComposerSettings = SettingsComposer.GetSettings();		
 			
 		TemplateComposer = New DataCompositionTemplateComposer;		
-		ComposerOfTemplate = TemplateComposer.Execute(DataSourceScheme, SettingsComposerSettings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
+		ComposerOfTemplate = TemplateComposer.Execute(DataSourceScheme, SettingsComposerSettings, , , 
+										Type("DataCompositionValueCollectionTemplateGenerator"));
 		
 		QueryTextArray = New Array;
 		QueryTextArray.Add("SELECT");
@@ -187,7 +184,7 @@ Function PrintLabels(Object, Form) Export
 					|	Item_TT AS Item_TT");
 		
 		Query = New Query;
-		QUery.Text = StrConcat(QueryTextArray, Chars.LF);
+		Query.Text = StrConcat(QueryTextArray, Chars.LF);
 		Query.SetParameter("ItemSource", ItemListValue);
 		QueryExecution = Query.Execute();
 		If QueryExecution.IsEmpty() Then
@@ -239,31 +236,19 @@ Function PrintLabels(Object, Form) Export
 						Drawing.Picture = New Picture();
 						ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(QuerySelection.Item);
 						If ArrayOfFiles.Count() Then
-							FileInfo = PictureViewerServer.GetFileInfo(ArrayOfFiles[0]);	
-							IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(ServiceSystemServer.GetObjectAttribute(ArrayOfFiles[0], "Volume"));
-							TmpAddress = GetPictureAndPutToTempStorage(ArrayOfFiles[0]
-	                                     , New UUID
-	                                     , FileInfo.Preview1URI
-	                                     , IntegrationSettings.Preview1GETIntegrationSettings);
-							If IsTempStorageURL(TmpAddress) Then
-								Drawing.Picture = GetFromTempStorage(TmpAddress);
+							If ArrayOfFiles[0].isPreviewSet Then
+								Drawing.Picture = New Picture(ArrayOfFiles[0].Preview.Get());
 							EndIf;
 						EndIf;
 					ElsIf Drawing.Name = "ItemKeyPicture" Then
 						Drawing.Picture = New Picture();
 						ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(QuerySelection.ItemKey);
 						If ArrayOfFiles.Count() Then
-							FileInfo = PictureViewerServer.GetFileInfo(ArrayOfFiles[0]);	
-							IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(ServiceSystemServer.GetObjectAttribute(ArrayOfFiles[0], "Volume"));
-							TmpAddress = GetPictureAndPutToTempStorage(ArrayOfFiles[0]
-	                                     , New UUID
-	                                     , FileInfo.Preview1URI
-	                                     , IntegrationSettings.Preview1GETIntegrationSettings);
-							If IsTempStorageURL(TmpAddress) Then
-								Drawing.Picture = GetFromTempStorage(TmpAddress);
+							If ArrayOfFiles[0].isPreviewSet Then
+								Drawing.Picture =  New Picture(ArrayOfFiles[0].Preview.Get());
 							EndIf;
 						EndIf;
-					Endif;
+					EndIf;
 				EndDo;
 			EndIf;
 			
@@ -297,7 +282,7 @@ Function PrintLabels(Object, Form) Export
 			SpreadDoc  = New SpreadsheetDocument();
 			SpreadDoc.PrintParametersKey = TemplateStructure.PrintParametersKey;
 			
-		Endif;
+		EndIf;
 		
 		SpreadDoc.PutHorizontalPageBreak();
 	
@@ -307,43 +292,15 @@ Function PrintLabels(Object, Form) Export
 		SpreadDoc.PutHorizontalPageBreak();
 		SpreadDoc.FitToPage = True;
 		SpreadDocsArray.Add(SpreadDoc);
-	Endif;
+	EndIf;
 	
 	Return SpreadDocsArray;	
 	
 EndFunction
 
-Function GetPictureAndPutToTempStorage(FileRef, UUID, URI, GETIntegrationSettings)
-	
-	If Not ValueIsFilled(FileRef) Then
-		Return "";
-	EndIf;
-	
-	ConnectionSettings = IntegrationClientServer.ConnectionSetting(	
-	ServiceSystemServer.GetObjectAttribute(GETIntegrationSettings, "UniqueID"));
-	
-	If Not ConnectionSettings.Success Then
-		Raise ConnectionSettings.Message;
-	EndIf;
-	ConnectionSettings.Value.QueryType = "GET";
-	ResourceParameters = New Structure();
-	ResourceParameters.Insert("filename", URI);
-	RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters);
-	
-	If RequestResult.Success Then
-		Try
-			Return PutToTempStorage(New Picture(RequestResult.ResponseBody), UUID);
-		Except
-			Return "";
-		EndTry;
-	Else
-		Return "";
-	EndIf;	
-EndFunction
-
 Procedure SetDataSetFields(DataSet, AddDataProc)	
-	AvailableFieds = AddDataProc.GetAvailableFields();	
-	For Each Row In AvailableFieds Do		
+	AvailableFields = AddDataProc.GetAvailableFields();	
+	For Each Row In AvailableFields Do		
 		NewField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
 		NewField.Title = Row.Title;
 		NewField.DataPath = Row.Name;
@@ -359,7 +316,7 @@ Procedure FillDataTable(DataTable, AddDataProc)
 		DataTable.Columns.Add(Field.Name, Field.TypeDescription, Field.Title);
 	EndDo;
 	 	
-	For Each Row In DataTable Do;
+	For Each Row In DataTable Do
 		For Each Field In AvailableFields Do
 			If Not Field.SetByUser Then 
 				AddDataProc.FillFieldValue(Row, Field.Name);
@@ -368,6 +325,4 @@ Procedure FillDataTable(DataTable, AddDataProc)
 	EndDo;
 	
 EndProcedure
-
-
 

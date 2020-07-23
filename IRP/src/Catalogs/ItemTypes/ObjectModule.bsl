@@ -1,8 +1,8 @@
 Procedure OnWrite(Cancel)
-	Catalogs.AddAttributeAndPropertySets.SinhronizeItemKeysAttributes();
-	Catalogs.AddAttributeAndPropertySets.SinhronizePriceKeysAttributes();
+	Catalogs.AddAttributeAndPropertySets.SynchronizeItemKeysAttributes();
+	Catalogs.AddAttributeAndPropertySets.SynchronizePriceKeysAttributes();
 	
-	Catalogs.ItemKeys.SynhronizeAffectPricingMD5ByItemType(ThisObject.Ref);
+	Catalogs.ItemKeys.SynchronizeAffectPricingMD5ByItemType(ThisObject.Ref);
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
@@ -33,5 +33,3 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 EndProcedure
-
-

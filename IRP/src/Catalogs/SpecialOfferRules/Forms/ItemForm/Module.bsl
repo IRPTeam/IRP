@@ -14,15 +14,15 @@ EndProcedure
 Procedure SetSettings(Command)
 	Info = AddDataProcServer.AddDataProcInfo(Object.Ref);
 	Info.Insert("Settings", AddressResult);
-	CallMetodAddDataProc(Info);
+	CallMethodAddDataProc(Info);
 	NotifyDescription = New NotifyDescription("OpenFormAddDataProcEnd", ThisObject);
 	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "RuleForm");
 	
 EndProcedure
 
 &AtServerNoContext
-Procedure CallMetodAddDataProc(Info)
-	AddDataProcServer.CallMetodAddDataProc(Info);
+Procedure CallMethodAddDataProc(Info)
+	AddDataProcServer.CallMethodAddDataProc(Info);
 EndProcedure
 
 &AtClient
@@ -43,4 +43,3 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	CurrentObject.Settings = New ValueStorage(GetFromTempStorage(AddressResult), New Deflation(9));
 EndProcedure
-	

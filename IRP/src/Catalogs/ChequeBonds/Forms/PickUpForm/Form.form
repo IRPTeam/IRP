@@ -49,13 +49,15 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>StatusCheck</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>StatusCheck</segments>
+        </paths>
       </dataPath>
       <titleLocation>None</titleLocation>
       <handlers>
         <event>OnChange</event>
-        <name>StstusCheakOnChange</name>
+        <name>StatusCheckOnChange</name>
       </handlers>
       <extendedTooltip>
         <name>StatusCheckExtendedTooltip</name>
@@ -97,8 +99,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>StatusSelection</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>StatusSelection</segments>
+        </paths>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -136,12 +140,12 @@
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
         <handlers>
-          <event>StartChoice</event>
-          <name>StatusSelectionStartChoice</name>
-        </handlers>
-        <handlers>
           <event>EditTextChange</event>
           <name>StatusSelectionEditTextChange</name>
+        </handlers>
+        <handlers>
+          <event>StartChoice</event>
+          <name>StatusSelectionStartChoice</name>
         </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -159,8 +163,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ChequeBondType</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>ChequeBondType</segments>
+        </paths>
       </dataPath>
       <titleLocation>None</titleLocation>
       <handlers>
@@ -268,8 +274,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Description</segments>
+        </paths>
       </dataPath>
       <defaultItem>true</defaultItem>
       <extendedTooltip>
@@ -315,8 +323,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.ChequeSerialNo</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.ChequeSerialNo</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ChequeSerialNoExtendedTooltip</name>
@@ -361,8 +371,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Type</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Type</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>TypeExtendedTooltip</name>
@@ -407,8 +419,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.DueDate</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.DueDate</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>DueDateExtendedTooltip</name>
@@ -453,8 +467,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Currency</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Currency</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>CurrencyExtendedTooltip</name>
@@ -499,8 +515,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Amount</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Amount</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>AmountExtendedTooltip</name>
@@ -545,8 +563,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Status</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Status</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>StatusExtendedTooltip</name>
@@ -635,7 +655,6 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>ListSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -674,7 +693,6 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>ListViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
         <horizontalLocation>Left</horizontalLocation>
@@ -714,7 +732,6 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>List</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -771,6 +788,11 @@
     </rowPictureDataPath>
     <extInfo xsi:type="form:DynamicListTableExtInfo">
       <autoRefreshPeriod>60</autoRefreshPeriod>
+      <period>
+        <startDate>0001-01-01T00:00:00</startDate>
+        <endDate>0001-01-01T00:00:00</endDate>
+      </period>
+      <topLevelParent xsi:type="core:UndefinedValue"/>
       <showRoot>true</showRoot>
       <userSettingsGroup>ListSettingsComposerUserSettings</userSettingsGroup>
     </extInfo>
@@ -788,20 +810,20 @@
     </dataPath>
     <titleLocation>None</titleLocation>
     <excludedCommands>Add</excludedCommands>
-    <excludedCommands>Copy</excludedCommands>
+    <excludedCommands>CancelSearch</excludedCommands>
     <excludedCommands>Change</excludedCommands>
+    <excludedCommands>Copy</excludedCommands>
+    <excludedCommands>CopyToClipboard</excludedCommands>
     <excludedCommands>EndEdit</excludedCommands>
     <excludedCommands>Find</excludedCommands>
-    <excludedCommands>CancelSearch</excludedCommands>
-    <excludedCommands>ShowRowRearrangement</excludedCommands>
-    <excludedCommands>MoveUp</excludedCommands>
     <excludedCommands>MoveDown</excludedCommands>
-    <excludedCommands>SortListAsc</excludedCommands>
-    <excludedCommands>SortListDesc</excludedCommands>
+    <excludedCommands>MoveUp</excludedCommands>
     <excludedCommands>OutputList</excludedCommands>
-    <excludedCommands>CopyToClipboard</excludedCommands>
     <excludedCommands>SelectAll</excludedCommands>
     <excludedCommands>ShowMultipleSelection</excludedCommands>
+    <excludedCommands>ShowRowRearrangement</excludedCommands>
+    <excludedCommands>SortListAsc</excludedCommands>
+    <excludedCommands>SortListDesc</excludedCommands>
     <items xsi:type="form:FormField">
       <name>PickedCheckBondsChequeBondDescription</name>
       <id>50</id>
@@ -810,8 +832,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>PickedCheckBonds.ChequeBond.Description</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>PickedCheckBonds.ChequeBond.Description</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>PickedCheckBondsChequeBondDescriptionExtendedTooltip</name>
@@ -860,8 +884,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>PickedCheckBonds.ChequeBond.ChequeSerialNo</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>PickedCheckBonds.ChequeBond.ChequeSerialNo</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>PickedCheckBondsChequeBondChequeSerialNoExtendedTooltip</name>
@@ -910,8 +936,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>PickedCheckBonds.ChequeBond.Type</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>PickedCheckBonds.ChequeBond.Type</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>PickedCheckBondsChequeBondTypeExtendedTooltip</name>
@@ -960,8 +988,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>PickedCheckBonds.ChequeBond.DueDate</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>PickedCheckBonds.ChequeBond.DueDate</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>PickedCheckBondsChequeBondDueDateExtendedTooltip</name>
@@ -1010,8 +1040,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>PickedCheckBonds.ChequeBond.Currency</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>PickedCheckBonds.ChequeBond.Currency</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>PickedCheckBondsChequeBondCurrencyExtendedTooltip</name>
@@ -1060,8 +1092,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>PickedCheckBonds.ChequeBond.Amount</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>PickedCheckBonds.ChequeBond.Amount</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>PickedCheckBondsChequeBondAmountExtendedTooltip</name>
@@ -1269,6 +1303,7 @@
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
   </items>
   <autoCommandBar>
     <name>FormCommandBar</name>
@@ -1313,18 +1348,18 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
-  <excludedCommands>Create</excludedCommands>
-  <excludedCommands>Copy</excludedCommands>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
+  </handlers>
   <excludedCommands>Change</excludedCommands>
-  <excludedCommands>SetDeletionMark</excludedCommands>
+  <excludedCommands>Copy</excludedCommands>
+  <excludedCommands>Create</excludedCommands>
   <excludedCommands>Delete</excludedCommands>
+  <excludedCommands>SetDeletionMark</excludedCommands>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -1445,7 +1480,7 @@ FROM
     <name>Sourse</name>
     <title>
       <key>en</key>
-      <value>Sourse</value>
+      <value>Source</value>
     </title>
     <id>7</id>
     <valueType>

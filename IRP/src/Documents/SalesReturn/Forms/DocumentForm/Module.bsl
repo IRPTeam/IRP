@@ -22,7 +22,7 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControll();
+		AddAttributesCreateFormControl();
 	EndIf;
 	
 	If Not Source = ThisObject Then
@@ -83,7 +83,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region FormItemsEvents
 
 &AtClient
@@ -115,16 +114,6 @@ EndProcedure
 &AtClient
 Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
 	DocSalesReturnClient.CompanyOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PriceIncludeTaxOnChange(Item)
-	DocSalesReturnClient.PriceIncludeTaxOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure InputTypeOnChange(Item)
-	DocSalesReturnClient.InputTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -275,7 +264,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region GroupTitleDecorations
 
 &AtClient
@@ -284,8 +272,8 @@ Procedure DecorationGroupTitleCollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLalelClick(Item)
-	DocumentsClient.DecorationGroupTitleCollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocumentsClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -294,8 +282,8 @@ Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedLalelClick(Item)
-	DocumentsClient.DecorationGroupTitleUncollapsedLalelClick(Object, ThisObject, Item);
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocumentsClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -393,90 +381,6 @@ Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 	EndIf;
 	
 	TaxesClient.CalculateReverseTaxOnChangeTotalAmount(Object, ThisObject, CurrentData);
-EndProcedure
-
-&AtClient
-Procedure SelectSalesReturnOrders(Command)
-	FilterValues = New Structure("Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
-	FillPropertyValues(FilterValues, Object);
-	
-	ExistingRows = New Array;
-	For Each Row In Object.ItemList Do
-		RowStructure = New Structure("Key, Unit, Quantity");
-		FillPropertyValues(RowStructure, Row);
-		ExistingRows.Add(RowStructure);
-	EndDo;
-	
-	FormParameters = New Structure("FilterValues, ExistingRows, Ref", FilterValues, ExistingRows, Object.Ref);
-	OpenForm("Document.SalesReturn.Form.SelectSalesReturnOrdersForm"
-		, FormParameters, , , ,
-		, New NotifyDescription("SelectSalesReturnOrdersContinue", ThisObject));
-EndProcedure
-
-&AtClient
-Procedure SelectSalesReturnOrdersContinue(Result, AdditionalParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	
-	SelectSalesReturnOrdersContinueAtServer(Result, AdditionalParameters);
-	
-	DocSalesReturnClient.ItemListOnChange(Object, ThisObject, Items.ItemList);
-EndProcedure
-
-&AtServer
-Procedure SelectSalesReturnOrdersContinueAtServer(Result, AdditionalParameters)
-	
-	Settings = New Structure();
-	Settings.Insert("Rows", New Array());
-	Settings.Insert("CalculateSettings", New Structure());
-	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
-	
-	
-	For Each ResultRow In Result Do
-		RowsByKey = Object.ItemList.FindRows(New Structure("Key", ResultRow.Key));
-		If RowsByKey.Count() Then
-			RowByKey = RowsByKey[0];
-			ItemKeyUnit = CatItemsServer.GetItemKeyUnit(ResultRow.ItemKey);
-			UnitFactorFrom = Catalogs.Units.GetUnitFactor(RowByKey.Unit, ItemKeyUnit);
-			UnitFactorTo = Catalogs.Units.GetUnitFactor(ResultRow.Unit, ItemKeyUnit);
-			FillPropertyValues(RowByKey, ResultRow, , "Quantity");
-			RowByKey.Quantity = ?(UnitFactorTo = 0,
-					0,
-					RowByKey.Quantity * UnitFactorFrom / UnitFactorTo) + ResultRow.Quantity;
-			RowByKey.PriceType = ResultRow.PriceType;
-			RowByKey.Price = ResultRow.Price;
-			Settings.Rows.Add(RowByKey);
-		Else
-			NewRow = Object.ItemList.Add();
-			FillPropertyValues(NewRow, ResultRow);
-			NewRow.PriceType = ResultRow.PriceType;
-			NewRow.Price = ResultRow.Price;
-			Settings.Rows.Add(NewRow);
-		EndIf;
-	EndDo;
-	
-	TaxInfo = Undefined;
-	SavedData = TaxesClientServer.GetSavedData(ThisObject, TaxesServer.GetAttributeNames().CacheName);
-	If SavedData.Property("ArrayOfColumnsInfo") Then
-		TaxInfo = SavedData.ArrayOfColumnsInfo;
-	EndIf;
-	CalculationStringsClientServer.CalculateItemsRows(Object,
-		ThisObject,
-		Settings.Rows,
-		Settings.CalculateSettings,
-		TaxInfo);
-EndProcedure
-
-&AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
 #EndRegion
@@ -610,7 +514,7 @@ EndProcedure
 
 &AtServer
 Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	CurrenciesServer.FiilCurrencyTable(Object, 
+	CurrenciesServer.FillCurrencyTable(Object, 
 	                                   Object.Date, 
 	                                   Object.Company, 
 	                                   Currency, 
@@ -637,7 +541,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region AddAttributes
 
 &AtClient
@@ -646,8 +549,23 @@ Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 EndProcedure
 
 &AtServer
-Procedure AddAttributesCreateFormControll()
+Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region ExternalCommands
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);	
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
 #EndRegion

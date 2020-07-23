@@ -3,9 +3,8 @@
   <name>AddDataProc</name>
   <synonym>
     <key>en</key>
-    <value>Add data proc</value>
+    <value>Additional dataproc</value>
   </synonym>
-  <comment></comment>
   <includeHelpInContents>true</includeHelpInContents>
   <picture xsi:type="core:PictureRef">
     <picture>CommonPicture.AddDataProc</picture>

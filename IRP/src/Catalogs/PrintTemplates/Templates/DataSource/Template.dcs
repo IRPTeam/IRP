@@ -37,7 +37,6 @@
 					<v8:content>Barcode picture</v8:content>
 				</v8:item>
 			</title>
-			<valueType/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>QRPicture</dataPath>
@@ -112,6 +111,7 @@ FROM
 	<dataSet xsi:type="DataSetObject">
 		<name>DataSet2</name>
 		<dataSource>DataSource1</dataSource>
+		<objectName/>
 	</dataSet>
 	<dataSet xsi:type="DataSetObject">
 		<name>DataSet2</name>
@@ -135,16 +135,13 @@ FROM
 				<v8:DateFractions>DateTime</v8:DateFractions>
 			</v8:DateQualifiers>
 		</valueType>
+		<value xsi:nil="true"/>
 		<useRestriction>false</useRestriction>
 	</parameter>
 	<settingsVariant>
 		<dcsset:name>Default</dcsset:name>
 		<dcsset:presentation xsi:type="xs:string">Default</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
-			<dcsset:selection>
-			</dcsset:selection>
-			<dcsset:order>
-			</dcsset:order>
 			<dcsset:item xsi:type="dcsset:StructureItemGroup">
 				<dcsset:order>
 					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>

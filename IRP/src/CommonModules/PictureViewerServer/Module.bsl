@@ -428,3 +428,17 @@ EndFunction
 
 #EndRegion
 
+Function CreatePictureParameters(FileRef) Export
+	PictureParameters = New Structure();
+	PictureParameters.Insert("Ref", FileRef);
+	PictureParameters.Insert("Description", FileRef.Description);
+	PictureParameters.Insert("FileID", FileRef.FileID);
+	PictureParameters.Insert("isFilledVolume", FileRef.Volume <> Catalogs.IntegrationSettings.EmptyRef());
+	PictureParameters.Insert("GETIntegrationSettings", FileRef.Volume.GETIntegrationSettings);
+	PictureParameters.Insert("isLocalPictureURL", 
+	FileRef.Volume.GETIntegrationSettings.IntegrationType = Enums.IntegrationType.LocalFileStorage);
+	PictureParameters.Insert("URI", FileRef.URI);
+	
+	Return PictureParameters;		
+EndFunction	
+

@@ -55,16 +55,16 @@ Function SendRequestClientServer(ConnectionSetting,
 		Return ServerResponse;
 	EndIf;
 	
-	SetResourceParameters(ConnectionSetting.ResourceAddress, ResourceParameters, AddInfo);
-	
-	SetRequestParameters(ConnectionSetting.ResourceAddress, RequestParameters, AddInfo);
-	
 	If Not ValueIsFilled(EndPoint) Then
 		ResourceAddress = ConnectionSetting.ResourceAddress;
 	Else
 		ResourceAddress = ConnectionSetting.ResourceAddress + 
 		?(StrStartsWith(EndPoint, "/"), EndPoint, "/" + EndPoint);
 	EndIf;
+	
+	SetResourceParameters(ResourceAddress, ResourceParameters, AddInfo);
+	
+	SetRequestParameters(ResourceAddress, RequestParameters, AddInfo);
 	
 	HTTPRequest = New HTTPRequest(ResourceAddress);
 	

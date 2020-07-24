@@ -267,7 +267,7 @@ Scenario: _2050003 check the autocomplete document Invoice match with the custom
 		And "Advances" table contains lines
 			| 'Receipt document'  | 'Closing amount' | 'Partner' | 'Amount'    | 'Legal name'   | 'Currency' |
 			| 'Bank receipt 700*' | '20 000,00'      | 'Crystal' | '20 000,00' | 'Company Adel' | 'TRY'      |
-		Then the number of "Advances" table lines is "<=" 2
+		Then the number of "Advances" table lines is "меньше или равно" 2
 	And I close all client application windows
 
 Scenario: _2050004 check the autocomplete document Invoice match with the vendor in advance
@@ -299,7 +299,7 @@ Scenario: _2050004 check the autocomplete document Invoice match with the vendor
 			| 'Closing amount' | 'Payment document'  | 'Partner' | 'Amount'   | 'Legal name'   | 'Currency' |
 			| '5 000,00'       | 'Cash payment 700*' | 'Crystal' | '5 000,00' | 'Company Adel' | 'TRY'      |
 			| '1 000,00'       | 'Bank payment 700*' | 'Crystal' | '1 000,00' | 'Company Adel' | 'TRY'      |
-		Then the number of "Advances" table lines is "<=" 2
+		Then the number of "Advances" table lines is "меньше или равно" 2
 	And I close all client application windows
 
 Scenario: _2050005 check the movements of the Invoice match document with the vendor in advance (manual filling)

@@ -883,7 +883,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key' | 'Q'     |
 			| 'Service' | 'Rent'     | '1,000' |
-		Then the number of "ItemList" table lines is "<=" 1
+		Then the number of "ItemList" table lines is "меньше или равно" 1
 		And I close current window
 * Create Shipment confirmation based on SO №800 and SO №801 (should get 2 lines for items from two orders)
 	And I go to line in "List" table
@@ -897,7 +897,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Store" became equal to "Store 02"
 	* Check filling in tabular part
-		Then the number of "ItemList" table lines is "<=" 2
+		Then the number of "ItemList" table lines is "меньше или равно" 2
 		And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Shipment basis'   |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 02' | 'Sales order 800*' |
@@ -909,7 +909,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			| 800    |
 	And I move one line down in "List" table and select line
 	And I click the button named "FormDocumentPurchaseOrderGeneratePurchaseOrder"
-	Then the number of "ItemList" table lines is "<=" 1
+	Then the number of "ItemList" table lines is "меньше или равно" 1
 	And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Purchase basis'   |
 			| 'Shirt' | '38/Black' | '1,000' | 'Sales order 800*' |
@@ -920,7 +920,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			| 800    |
 	And I move one line down in "List" table and select line
 	And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
-	Then the number of "ItemList" table lines is "<=" 1
+	Then the number of "ItemList" table lines is "меньше или равно" 1
 	And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Sales order'      |
 			| 'Shirt' | '38/Black' | '1,000' | 'Sales order 800*' |

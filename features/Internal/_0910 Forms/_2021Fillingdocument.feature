@@ -902,7 +902,7 @@ Scenario: _0154103 check Sales order when changing date
 		And I select current line in "List" table
 	* Filling in an Partner term
 		And I click Select button of "Partner term" field
-		Then the number of "List" table lines is "<=" 4
+		Then the number of "List" table lines is "меньше или равно" 4
 		And I go to line in "List" table
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY' |
@@ -969,7 +969,7 @@ Scenario: _0154104 check Sales invoice when changing date
 		And I select current line in "List" table
 	* Filling in an Partner term
 		And I click Select button of "Partner term" field
-		Then the number of "List" table lines is "<=" 4
+		Then the number of "List" table lines is "меньше или равно" 4
 		And I go to line in "List" table
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY' |
@@ -3425,7 +3425,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 		And I select current line in "List" table
 		And in the table "Transactions" I click "Fill" button
 	* Check that the transaction table is filled out
-		And While the number of "Transactions" table lines ">" 0 Then
+		And While the number of "Transactions" table lines "больше" 0 Then
 		And I click "Post" button
 		And "Transactions" table does not contain lines
 			| 'Document'            | 'Credit'     | 'Debit'     |
@@ -3469,7 +3469,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 			| 'Second Company' |
 		And I select current line in "List" table
 		And in the table "Transactions" I click "Fill" button
-		Then the number of "Transactions" table lines is "=" 0
+		Then the number of "Transactions" table lines is "равно" 0
 	* Check re-filling when re-selecting a legal name (partner previous)
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
@@ -3486,7 +3486,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And While the number of "Transactions" table lines ">" 0 Then
+		And While the number of "Transactions" table lines "больше" 0 Then
 		And I click "Post" button
 		And I close all client application windows
 
@@ -4106,7 +4106,7 @@ Scenario: check filling in and re-filling Credit debit note
 		And I select current line in "List" table
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
-		Then the number of "Transactions" table lines is "=" 0
+		Then the number of "Transactions" table lines is "равно" 0
 	* Filter check basis documents (depend of company)
 		And I select "Payable" exact value from "Operation type" drop-down list
 	* Re-select company
@@ -4121,7 +4121,7 @@ Scenario: check filling in and re-filling Credit debit note
 			| ''                 |
 			| 'Purchase invoice' |
 		And I select current line in "" table
-		Then the number of "List" table lines is "=" 0
+		Then the number of "List" table lines is "равно" 0
 		And I close "Purchase invoices" window
 		And I finish line editing in "Transactions" table
 		And I click Select button of "Company" field

@@ -1165,7 +1165,7 @@ Scenario: _400009 check the entry of the Ap/Ar balance by documents
 			| ''                 |
 			| 'Purchase invoice' |
 		And I select current line in "" table
-		Then the number of "List" table lines is "<=" 1
+		Then the number of "List" table lines is "меньше или равно" 1
 		And I go to line in "List" table
 			| 'Legal name' | 'Number' |
 			| 'DFC'        | '5 900'  |

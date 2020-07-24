@@ -10,6 +10,7 @@ Given I launch TestClient opening script or connect the existing one
 
 
 Scenario: _351001 check user password setting from enterprise mode
+		And I close all client application windows
         * Select user
                 Given I open hyperlink "e1cib/list/Catalog.Users"
                 And I go to line in "List" table

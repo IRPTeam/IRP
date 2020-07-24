@@ -1223,7 +1223,7 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 		| 'Boots' | '37/18SD'  | '1,000' | 'Basic Price Types' | 'pcs'            | 'Store 02' | 'Sales order 9 000*' |
 		| 'Dress' | 'M/White'  | '4,000' | 'Basic Price Types' | 'pcs'            | 'Store 02' | 'Sales order 9 002*' |
 		| 'Boots' | '36/18SD'  | '1,000' | 'Basic Price Types' | 'Boots (12 pcs)' | 'Store 02' | 'Sales order 9 002*' |
-		Then the number of "ItemList" table lines is "<=" 6
+		Then the number of "ItemList" table lines is "меньше или равно" 6
 	* Check that the quantity already added by rows is not available to select products from Sales order
 		And I go to the last line in "ItemList" table
 		# | 'Item'  | 'Item key' | 'Sales order'        |
@@ -1345,7 +1345,7 @@ Scenario: _2040003 selection button Shipment confirmation in Sales invoice docum
 			| 'Shipment confirmation 9 000*' | 'Yes'                          |
 			| 'Dress, M/White, pcs, 10,000'  | 'Dress, M/White, pcs, 10,000'  |
 		And I click "Ok" button
-		Then the number of "ItemList" table lines is "<=" 2
+		Then the number of "ItemList" table lines is "меньше или равно" 2
 		* Change of agreement and check of selection
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
@@ -1365,7 +1365,7 @@ Scenario: _2040003 selection button Shipment confirmation in Sales invoice docum
 		| 'Boots, 36/18SD, pcs, 12,000'  | 'Boots, 36/18SD, pcs, 12,000' |
 		| 'Boots, 37/18SD, pcs, 1,000'   | 'Boots, 37/18SD, pcs, 1,000'  |
 		And I click "Ok" button
-		Then the number of "ItemList" table lines is "<=" 5
+		Then the number of "ItemList" table lines is "меньше или равно" 5
 		And I close all client application windows
 
 
@@ -1494,7 +1494,7 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 		| 'Trousers' | '36/Yellow' | '10,000' | 'pcs'            |
 		| 'Trousers' | '36/Yellow' | '5,000'  | 'pcs'            |
 		| 'Boots'    | '36/18SD'   | '5,000'  | 'Boots (12 pcs)' |
-		Then the number of "ItemList" table lines is "<=" 6
+		Then the number of "ItemList" table lines is "меньше или равно" 6
 	* Check that the quantity already added by rows is not available for selecting products from Purchase order
 		And I go to line in "ItemList" table
 		| 'Item'  | 'Item key' | 'Q'        |
@@ -1582,7 +1582,7 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 			| 'Boots, 36/18SD, Boots (12 pcs), 5,000' |
 			And I click the button named "FormSelectAll"
 			And I click "Ok" button
-			Then the number of "ItemList" table lines is "<=" 8
+			Then the number of "ItemList" table lines is "меньше или равно" 8
 			And I go to the last line in "ItemList" table
 			And I delete a line in "ItemList" table
 		* Change the document number
@@ -1634,7 +1634,7 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 		| 'Boots, 36/18SD, Boots (12 pcs), 60,000, Store 02' |
 		And I click the button named "FormSelectAll"
 		And I click "Ok" button
-		Then the number of "ItemList" table lines is "<=" 11
+		Then the number of "ItemList" table lines is "меньше или равно" 11
 	* Change the document number
 		And I move to "Other" tab
 		And I input "0" text in "Number" field
@@ -1680,7 +1680,7 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 		| 'Boots, 36/18SD, Boots (12 pcs), 22,000, Store 02' | 'No'  |
 		| 'Purchase invoice 9 001*'                          | 'No'  |
 		| 'Boots, 36/18SD, Boots (12 pcs), 36,000, Store 02' | 'No'  |
-		Then the number of "DocumentsTree" table lines is "<=" 11
+		Then the number of "DocumentsTree" table lines is "меньше или равно" 11
 		And I click "Cancel" button
 		And I click "Post and close" button
 	* Create one more Goods receipt for the remainder
@@ -1817,7 +1817,7 @@ Scenario: _2040008 button to fill in items from Goods receipt in Purchase invoic
 		| 'Goods receipt 9 000*'             |
 		| 'Dress, M/White, pcs, 8,000'       |
 		| 'Trousers, 36/Yellow, pcs, 12,000' |
-		Then the number of "GoodsReceiptTree" table lines is "<=" 4
+		Then the number of "GoodsReceiptTree" table lines is "меньше или равно" 4
 		And I click the button named "FormSelectAll"
 		And I click "Ok" button
 		And I close all client application windows

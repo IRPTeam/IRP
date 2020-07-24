@@ -287,9 +287,9 @@ Scenario: _2020007 check filter by cheque in the form of 'Cheque bonds' selectio
 			And in the table "ChequeBonds" I click "Fill cheques" button
 		* Check that there are no checks in the selection form
 			And I change "ChequeBondType" radio button value to "Partner"
-			Then the number of "List" table lines is "=" 0
+			Then the number of "List" table lines is "равно" 0
 			And I change "ChequeBondType" radio button value to "Own"
-			Then the number of "List" table lines is "=" 0
+			Then the number of "List" table lines is "равно" 0
 			And I close "Cheque bonds" window
 	* Check that cheques with TRY currency are displayed in the selection form after re-selection and divide the cheques into Partners/Own
 		* Select currency
@@ -469,7 +469,7 @@ Scenario: _2020011 check filter under valid agreements depending on the date of 
 			And I activate "Partner term" field in "ChequeBonds" table
 			And I select current line in "ChequeBonds" table
 			And I click choice button of "Partner term" attribute in "ChequeBonds" table
-			Then the number of "List" table lines is "=" 0
+			Then the number of "List" table lines is "равно" 0
 		And I close all client application windows
 
 Scenario: _2020012 check input of cheque statuses by line
@@ -698,7 +698,7 @@ Scenario: _2020014 check clearing of cheques from a Cheque bond transaction when
 		And I select current line in "List" table
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
-		Then the number of "ChequeBonds" table lines is "=" 0
+		Then the number of "ChequeBonds" table lines is "равно" 0
 		And I close all client application windows
 
 Scenario: _2020015 cancel a Cheque bond transaction and check that cancelled Cheque bond items movements
@@ -826,7 +826,7 @@ Scenario: _2020016 check cleaning of cheques from a Cheque bond transaction docu
 		And I select current line in "List" table
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
-		Then the number of "ChequeBonds" table lines is "=" 0
+		Then the number of "ChequeBonds" table lines is "равно" 0
 		And I close all client application windows
 			
 

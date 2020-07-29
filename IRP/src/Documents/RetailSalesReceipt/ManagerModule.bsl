@@ -82,7 +82,7 @@ Function GetQueryTextRetailSalesReceiptItemList()
 		|		WHEN RetailSalesReceiptItemList.ShipmentConfirmation.Date IS NULL
 		|			THEN FALSE
 		|		ELSE TRUE
-		|	END AS ShipmentConfirmationBeforeRetailSalesReceitp,
+		|	END AS ShipmentConfirmationBeforeRetailSalesReceipt,
 		|	RetailSalesReceiptItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
 		|	RetailSalesReceiptItemList.ItemKey AS ItemKey,
 		|	SUM(RetailSalesReceiptItemList.Quantity) AS Quantity,
@@ -716,6 +716,7 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	
 	// SalesTurnovers
 	SalesTurnovers = AccumulationRegisters.SalesTurnovers.GetLockFields(DocumentDataTables.SalesTurnovers);
+	SalesTurnovers.LockInfo.Fields["SalesInvoice"] = "RetailSalesReceipt";
 	DataMapWithLockFields.Insert(SalesTurnovers.RegisterName, SalesTurnovers.LockInfo);
 	
 	// GoodsInTransitOutgoing 

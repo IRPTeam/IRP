@@ -407,6 +407,13 @@
         <value></value>
       </code>
     </items>
+    <items id="36ae80a0-5960-4a6d-9f2b-ae2ade0e6cb1">
+      <name>Document_RetailSalesReceipt</name>
+      <description>Document retail sales receipt</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

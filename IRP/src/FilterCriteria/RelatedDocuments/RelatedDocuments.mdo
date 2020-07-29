@@ -56,6 +56,9 @@
   <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.ShipmentBasis</content>
   <content>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.BasisDocument</content>
   <content>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.BasisDocument</content>
+  <content>Document.RetailSalesReceipt.Attribute.BasisDocument</content>
+  <content>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.SalesOrder</content>
+  <content>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.ShipmentConfirmation</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>
@@ -94,6 +97,7 @@
       <types>DocumentRef.PhysicalInventory</types>
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.CreditDebitNote</types>
+      <types>DocumentRef.RetailSalesReceipt</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

@@ -195,11 +195,22 @@ Scenario: Create catalog ChequeBonds objects
 		| 'e1cib/data/Catalog.ChequeBonds?ref=aa6b120ed92fbced11eacda583f5c26f' | 'Yes'          | 'Partner cheque 101' | 'Enum.ChequeBondTypes.PartnerCheque' | '31.07.2020 00:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa6b120ed92fbced11eacd8baf320da1' | '10 000' | 'AN'             |
 		| 'e1cib/data/Catalog.ChequeBonds?ref=aa6b120ed92fbced11eacda583f5c270' | 'No'           | 'Partner cheque 102' | 'Enum.ChequeBondTypes.PartnerCheque' | '31.07.2020 00:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa6b120ed92fbced11eacd8baf320da1' | '15 000' | 'AN'             |
 
-Scenario: Create catalog Companies objects
+Scenario: Create catalog Companies objects (Main company)
+
+	And I check or create catalog "Companies" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'Our' | 'Description_en'           | 'Description_hash' | 'Description_ru'       | 'Description_tr'              |
+		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd8baf320da8' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9e' | ''            | ''                                                                 | 'Enum.CompanyLegalType.Company' | 'Yes' | 'Main Company'             | ''                 | 'Главная компания'     | 'Main Company TR'             |
+
+Scenario: Create catalog Companies objects (own Second company)
+	And I check or create catalog "Companies" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'Our' | 'Description_en'           | 'Description_hash' | 'Description_ru'       | 'Description_tr'              |
+		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd9eb9771eb7' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9f' | ''            | ''                                                                 | 'Enum.CompanyLegalType.Company' | 'Yes' | 'Second Company'           | ''                 | ''               | 'Second Company TR'           |
+
+
+Scenario: Create catalog Companies objects (partners company)
 
 	And I check or create catalog "Companies" objects:
 		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'Our' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
-		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd8baf320da8' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9e' | ''            | ''                                                                 | 'Enum.CompanyLegalType.Company' | 'Yes' | 'Main Company'             | ''                 | ''               | 'Main Company TR'             |
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd8f1ea75923' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9e' | ''            | 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8baf320dbc' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Ferron BP'        | ''                 | ''               | 'Company Ferron BP TR'        |
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd8f1ea75924' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9f' | ''            | 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8baf320dbd' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Kalipso'          | ''                 | ''               | 'Company Kalipso TR'          |
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd8f1ea75925' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9f' | ''            | 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8baf320dbf' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Lomaniti'         | ''                 | ''               | 'Company Lomaniti TR'         |
@@ -211,7 +222,7 @@ Scenario: Create catalog Companies objects
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd9eb9771ea0' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9e' | ''            | 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd9eb9771e9f' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Nicoletta'        | ''                 | ''               | ''                            |
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd9eb9771ea2' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9e' | ''            | 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd9eb9771ea1' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Veritas '         | ''                 | ''               | ''                            |
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd9eb9771eb4' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9e' | ''            | 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8baf320dbc' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Second Company Ferron BP' | ''                 | ''               | 'Second Company Ferron BP TR' |
-		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd9eb9771eb7' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9f' | ''            | ''                                                                 | 'Enum.CompanyLegalType.Company' | 'Yes' | 'Second Company'           | ''                 | ''               | 'Second Company TR'           |
+
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacda828b2d1b2' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9e' | ''            | 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacda828b2d1b1' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Adel'             | ''                 | ''               | ''                            |
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacda828b2d1b4' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9e' | ''            | 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacda828b2d1b3' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Astar'            | ''                 | ''               | ''                            |
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacdba623b983e' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa6b120ed92fbced11eacd8baf320d9e' | ''            | 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacdba623b983d' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Foxred'           | ''                 | ''               | ''                            |
@@ -377,25 +388,37 @@ Scenario: Create catalog IDInfoSets objects
 		| 'e1cib/data/Catalog.IDInfoSets?ref=aa6b120ed92fbced11eacd8baf320d87' | 'No'           | 'Company'        | ''                 | ''               | 'Company TR'     |
 		| 'e1cib/data/Catalog.IDInfoSets?ref=aa6b120ed92fbced11eacd8baf320d88' | 'No'           | 'Partners'       | ''                 | ''               | 'Partners TR'    |
 
-Scenario: Create catalog IntegrationSettings objects
+Scenario: Create catalog IntegrationSettings objects (currency source)
 
 	And I check or create catalog "IntegrationSettings" objects:
 		| 'Ref'                                                                         | 'DeletionMark' | 'Description'     | 'ExternalDataProc'                                                         | 'IntegrationType'                       | 'ExternalDataProcSettings' | 'UniqueID'      |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa6b120ed92fbced11eacd8baf320da7' | 'No'           | 'Bank UA'         | 'e1cib/data/Catalog.ExternalDataProc?ref=86f6d69b4676df1211ea172d24e6cd78' | 'Enum.IntegrationType.CurrencyRates'    | 'ValueStorage'             | 'BankUA'        |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa6b120ed92fbced11eacd8baf320da6' | 'No'           | 'Forex Buying'    | 'e1cib/data/Catalog.ExternalDataProc?ref=86f6d69b4676df1211ea172d0ccf48fb' | 'Enum.IntegrationType.CurrencyRates'    | 'ValueStorage'             | 'ForexBuying'   |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa6b120ed92fbced11eacd8baf320da5' | 'No'           | 'Forex Seling'    | 'e1cib/data/Catalog.ExternalDataProc?ref=86f6d69b4676df1211ea172d0ccf48fb' | 'Enum.IntegrationType.CurrencyRates'    | 'ValueStorage'             | 'ForexSeling'   |
+		
+Scenario: Create catalog IntegrationSettings objects (picture)
+
+	And I check or create catalog "IntegrationSettings" objects:	
+		| 'Ref'                                                                         | 'DeletionMark' | 'Description'     | 'ExternalDataProc'                                                         | 'IntegrationType'                       | 'ExternalDataProcSettings' | 'UniqueID'      |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa6b120ed92fbced11eacdc3fd4021b2' | 'No'           | 'PICTURE STORAGE' | ''                                                                         | 'Enum.IntegrationType.LocalFileStorage' | 'ValueStorage'             | '_b0fc8fae405f' |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa6b120ed92fbced11eacdc3fd4021b3' | 'No'           | 'PREWIEV STORAGE' | ''                                                                         | 'Enum.IntegrationType.LocalFileStorage' | 'ValueStorage'             | '_d0916f2be552' |
 
-Scenario: Create catalog InterfaceGroups objects
+Scenario: Create catalog InterfaceGroups objects (Purchase and production,  Main information)
 
 	And I check or create catalog "InterfaceGroups" objects:
 		| 'Ref'                                                                     | 'DeletionMark' | 'Code'      | 'Description' | 'FormPosition' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             |
-		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa6b120ed92fbced11eacd8d38d0864a' | 'No'           | '000000001' | ''            | ''             | 'Product information'     | ''                 | ''               | 'Product information TR'     |
-		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa6b120ed92fbced11eacd8d38d0864b' | 'No'           | '000000002' | ''            | 'Right'        | 'Accounting information'  | ''                 | ''               | 'Accounting information TR'  |
 		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa6b120ed92fbced11eacd8d38d0864c' | 'No'           | '000000003' | ''            | ''             | 'Purchase and production' | ''                 | ''               | 'Purchase and production TR' |
 		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa6b120ed92fbced11eacd8f1ea7592a' | 'No'           | '000000004' | ''            | 'Left'         | 'Main information'        | ''                 | ''               | 'Main information TR'        |
+
+Scenario: Create catalog InterfaceGroups objects
+
+	And I check or create catalog "InterfaceGroups" objects:		
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code'      | 'Description' | 'FormPosition' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             |
+		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa6b120ed92fbced11eacd8d38d0864a' | 'No'           | '000000001' | ''            | ''             | 'Product information'     | ''                 | ''               | 'Product information TR'     |
+		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa6b120ed92fbced11eacd8d38d0864b' | 'No'           | '000000002' | ''            | 'Right'        | 'Accounting information'  | ''                 | ''               | 'Accounting information TR'  |
 		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa6b120ed92fbced11eacdacd2de2a97' | 'No'           | '000000005' | ''            | ''             | 'Print'                   | ''                 | 'Печать'         | 'Print'                      |
+
+
 
 Scenario: Create catalog ItemKeys objects
 
@@ -461,14 +484,18 @@ Scenario: Create catalog ItemSegments objects
 		| 'Ref'                                                                  | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
 		| 'e1cib/data/Catalog.ItemSegments?ref=aa6b120ed92fbced11eacd8baf320dc3' | 'No'           | 'Sale autum'     | ''                 | ''               | 'Sale autum TR'  |
 
-Scenario: Create catalog ItemTypes objects
+Scenario: Create catalog ItemTypes objects (Clothes, Shoes)
 
 	And I check or create catalog "ItemTypes" objects:
-		| 'Ref'                                                               | 'DeletionMark' | 'Parent'                                                            | 'IsFolder' | 'Type'                   | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa6b120ed92fbced11eacdc3fd4021bb' | 'No'           | ''                                                                  | 'Yes'      | ''                       | 'Accessories'    | ''                 | ''               | 'Accessories TR' |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa6b120ed92fbced11eacd8e2a104dc4' | 'No'           | ''                                                                  | 'No'       | 'Enum.ItemTypes.Product' | 'Clothes'        | ''                 | ''               | 'Clothes TR'     |
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type'                   | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa6b120ed92fbced11eacd8e2a104dc4' | 'No'           | ''       | 'No'       | 'Enum.ItemTypes.Product' | 'Clothes'        | ''                 | 'Одежда'         | 'Clothes TR'     |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa6b120ed92fbced11eacd8e2a104dc6' | 'No'           | ''       | 'No'       | 'Enum.ItemTypes.Product' | 'Shoes'          | ''                 | 'Обувь'          | 'Shoes TR'       |
+
+Scenario: Create catalog ItemTypes objects
+
+	And I check or create catalog "ItemTypes" objects:	
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa6b120ed92fbced11eacd8e2a104dc5' | 'No'           | ''                                                                  | 'No'       | 'Enum.ItemTypes.Product' | 'Box'            | ''                 | ''               | 'Box TR'         |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa6b120ed92fbced11eacd8e2a104dc6' | 'No'           | ''                                                                  | 'No'       | 'Enum.ItemTypes.Product' | 'Shoes'          | ''                 | ''               | 'Shoes TR'       |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa6b120ed92fbced11eacdc3fd4021bb' | 'No'           | ''                                                                  | 'Yes'      | ''                       | 'Accessories'    | ''                 | ''               | 'Accessories TR' |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa6b120ed92fbced11eacd9135e493c8' | 'No'           | ''                                                                  | 'No'       | 'Enum.ItemTypes.Service' | 'Service'        | ''                 | ''               | 'Service TR'     |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa6b120ed92fbced11eacd93fa566fa9' | 'No'           | ''                                                                  | 'No'       | 'Enum.ItemTypes.Product' | 'Equipment'      | ''                 | ''               | ''               |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa6b120ed92fbced11eacd9eb9771eae' | 'No'           | ''                                                                  | 'No'       | 'Enum.ItemTypes.Product' | 'Bags'           | ''                 | ''               | 'Bags TR'        |
@@ -524,11 +551,17 @@ Scenario: Create catalog ObjectStatuses objects
 		| 'e1cib/data/Catalog.ObjectStatuses?ref=aa6b120ed92fbced11eacdc01668da72' | 'No'           | 'e1cib/data/Catalog.ObjectStatuses?ref=86fed69b4676df1211ea692255767e2c' | 'No'       | 'No'           | 'No'      | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing' | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing'  | 'In processing'              | ''                 | ''               | 'In processing TR'              | '_4cb83f9af996' |
 		| 'e1cib/data/Catalog.ObjectStatuses?ref=aa6b120ed92fbced11eacdc01668da73' | 'No'           | 'e1cib/data/Catalog.ObjectStatuses?ref=86fed69b4676df1211ea692255767e2c' | 'No'       | 'No'           | 'Yes'     | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing' | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing'  | 'Done'                       | ''                 | ''               | 'Done TR'                       | '_ee7b5120587c' |
 
-Scenario: Create catalog Partners objects
+Scenario: Create catalog Partners objects (Ferron BP)
 
 	And I check or create catalog "Partners" objects:
 		| 'Ref'                                                              | 'DeletionMark' | 'Parent'                                                           | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 		| 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8baf320dbc' | 'No'           | ''                                                                 | 'Yes'      | 'Yes'    | 'No'       | 'No'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa6b120ed92fbced11eacd8f1ea7591c' | 'No'                                      | 'No'                                | 'Ferron BP'        | ''                 | ''               | 'Ferron BP TR'       |
+		
+		
+Scenario: Create catalog Partners objects
+
+	And I check or create catalog "Partners" objects:		
+		| 'Ref'                                                              | 'DeletionMark' | 'Parent'                                                           | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 		| 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8baf320dbd' | 'No'           | ''                                                                 | 'Yes'      | 'No'     | 'No'       | 'No'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa6b120ed92fbced11eacd8f1ea7591d' | 'Yes'                                     | 'No'                                | 'Kalipso'          | ''                 | ''               | 'Kalipso TR'         |
 		| 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8baf320dbe' | 'No'           | ''                                                                 | 'Yes'      | 'No'     | 'No'       | 'No'       | ''                                                                        | 'No'                                      | 'No'                                | 'Manager B'        | ''                 | ''               | 'Manager B TR'       |
 		| 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8baf320dbf' | 'No'           | ''                                                                 | 'Yes'      | 'No'     | 'No'       | 'No'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa6b120ed92fbced11eacd8f1ea7591d' | 'No'                                      | 'No'                                | 'Lomaniti'         | ''                 | ''               | 'Lomaniti TR'        |
@@ -867,6 +900,14 @@ Scenario: Create catalog Units objects
 		| 'e1cib/data/Catalog.Units?ref=aa6b120ed92fbced11eacd8baf320db1' | 'No'           | ''                                                              | '16'       | 'e1cib/data/Catalog.Units?ref=aa6b120ed92fbced11eacd8baf320dae' | 'box (16 pcs)'           | ''                 | ''               | 'box (16 adet)'              |
 		| 'e1cib/data/Catalog.Units?ref=aa6b120ed92fbced11eacd8e2a104dde' | 'No'           | 'e1cib/data/Catalog.Items?ref=aa6b120ed92fbced11eacd8e2a104dcb' | '8'        | 'e1cib/data/Catalog.Units?ref=aa6b120ed92fbced11eacd8baf320dae' | 'High shoes box (8 pcs)' | ''                 | ''               | 'High shoes box (8 adet) TR' |
 		| 'e1cib/data/Catalog.Units?ref=aa6b120ed92fbced11eacd8e2a104ddf' | 'No'           | 'e1cib/data/Catalog.Items?ref=aa6b120ed92fbced11eacd8e2a104dca' | '12'       | 'e1cib/data/Catalog.Units?ref=aa6b120ed92fbced11eacd8baf320dae' | 'Boots (12 pcs)'         | ''                 | ''               | 'Boots (12 adet) TR'         |
+
+Scenario: Create catalog Units objects (box (8 pcs))
+
+	And I check or create catalog "Units" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'Item'                                                          | 'Quantity' | 'BasisUnit'                                                     | 'Description_en'         | 'Description_hash' | 'Description_ru' | 'Description_tr'             |
+		| 'e1cib/data/Catalog.Units?ref=aa6b120ed92fbced11eacd8baf320db0' | 'No'           | ''                                                              | '8'        | 'e1cib/data/Catalog.Units?ref=aa6b120ed92fbced11eacd8baf320dae' | 'box (8 pcs)'            | ''                 | ''               | 'box (8 adet)'               |
+
+
 
 Scenario: Create catalog UserGroups objects
 

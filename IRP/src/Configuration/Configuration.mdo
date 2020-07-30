@@ -454,6 +454,7 @@
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.ReportOptions</catalogs>
   <catalogs>Catalog.UnitsOfMeasurement</catalogs>
+  <catalogs>Catalog.PaymentTerminals</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>

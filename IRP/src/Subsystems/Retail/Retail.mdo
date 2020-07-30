@@ -8,4 +8,5 @@
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Document.RetailSalesReceipt</content>
+  <content>Catalog.PaymentTerminals</content>
 </mdclass:Subsystem>

@@ -94,6 +94,7 @@
   <subsystems>Subsystem.Temp</subsystems>
   <subsystems>Subsystem.Treasury</subsystems>
   <subsystems>Subsystem.UniqueID</subsystems>
+  <subsystems>Subsystem.Retail</subsystems>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
   <commonPictures>CommonPicture.AddProperties</commonPictures>
   <commonPictures>CommonPicture.AutoTest</commonPictures>

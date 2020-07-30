@@ -304,6 +304,8 @@
   <commonModules>CommonModule.UserSettingsServer</commonModules>
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.CatUserGroupsServer</commonModules>
+  <commonModules>CommonModule.DocRetailSalesReceiptServer</commonModules>
+  <commonModules>CommonModule.DocRetailSalesReceiptClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -487,6 +489,7 @@
   <documents>Document.StockAdjustmentAsSurplus</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
+  <documents>Document.RetailSalesReceipt</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AgreementKinds</enums>

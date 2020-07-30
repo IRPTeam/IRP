@@ -54,22 +54,11 @@
   <defaultListForm>Document.RetailSalesReceipt.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.RetailSalesReceipt.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.PartnerArTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
-  <registerRecords>AccumulationRegister.ItemsInStores</registerRecords>
-  <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.OrderReservation</registerRecords>
   <registerRecords>AccumulationRegister.TaxesTurnovers</registerRecords>
-  <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.SalesTurnovers</registerRecords>
-  <registerRecords>AccumulationRegister.ShipmentOrders</registerRecords>
-  <registerRecords>AccumulationRegister.ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.RevenuesTurnovers</registerRecords>
-  <registerRecords>AccumulationRegister.AdvanceFromCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
-  <registerRecords>AccumulationRegister.ShipmentConfirmationSchedule</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -437,51 +426,6 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <createOnInput>DontUse</createOnInput>
-    </attributes>
-    <attributes uuid="2ac88435-bc07-42ea-9a31-6ab499844753">
-      <name>SalesOrder</name>
-      <synonym>
-        <key>en</key>
-        <value>Sales order</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.SalesOrder</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="06fa5d1b-1a92-4e31-876f-2a4212ca3beb">
-      <name>ShipmentConfirmation</name>
-      <synonym>
-        <key>en</key>
-        <value>Shipment confirmation</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.ShipmentConfirmation</types>
-        <types>DocumentRef.SalesOrder</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d7660b7d-5f4f-41a7-83a0-d25da43c5048">
-      <name>DeliveryDate</name>
-      <synonym>
-        <key>en</key>
-        <value>Delivery date</value>
-      </synonym>
-      <type>
-        <types>Date</types>
-        <dateQualifiers>
-          <dateFractions>Date</dateFractions>
-        </dateQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="f7668f60-0f03-4f02-8f2a-0fd8910aba2c">
       <name>Detail</name>
@@ -872,19 +816,4 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <commands uuid="ac5e2a42-8184-4e1b-b213-f6083b0cb4b1">
-    <name>GenerateSalesInvoice</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales invoice</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.ShipmentConfirmation</types>
-      <types>DocumentRef.SalesOrder</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-    <shortcut></shortcut>
-  </commands>
 </mdclass:Document>

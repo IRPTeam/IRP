@@ -1519,11 +1519,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.DeliveryDate</segments>
-            </paths>
-          </dataPath>
           <extendedTooltip>
             <name>ItemListDeliveryDateExtendedTooltip</name>
             <id>425</id>
@@ -1549,19 +1544,10 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <type>InputField</type>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListSalesOrder</name>
@@ -1571,11 +1557,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.SalesOrder</segments>
-            </paths>
-          </dataPath>
           <extendedTooltip>
             <name>ItemListSalesOrderExtendedTooltip</name>
             <id>242</id>
@@ -1601,20 +1582,10 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <type>InputField</type>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <choiceButton>false</choiceButton>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListShipmentConfirmation</name>
@@ -1624,11 +1595,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.ShipmentConfirmation</segments>
-            </paths>
-          </dataPath>
           <extendedTooltip>
             <name>ItemListShipmentConfirmationExtendedTooltip</name>
             <id>274</id>
@@ -1654,19 +1620,10 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <type>InputField</type>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListBusinessUnit</name>
@@ -1966,66 +1923,6 @@
             <representation>Auto</representation>
             <autoMaxWidth>true</autoMaxWidth>
             <maxHeight>1</maxHeight>
-            <placementArea>UserCmds</placementArea>
-            <representationInContextMenu>Auto</representationInContextMenu>
-          </items>
-          <items xsi:type="form:Button">
-            <name>ItemListSelectShipmentConfirmation</name>
-            <id>436</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <extendedTooltip>
-              <name>ItemListSelectShipmentConfirmationExtendedTooltip</name>
-              <id>437</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <type>Label</type>
-              <autoMaxWidth>true</autoMaxWidth>
-              <autoMaxHeight>true</autoMaxHeight>
-              <extInfo xsi:type="form:LabelDecorationExtInfo">
-                <horizontalAlign>Left</horizontalAlign>
-              </extInfo>
-            </extendedTooltip>
-            <commandName>Form.Command.SelectShipmentConfirmation</commandName>
-            <representation>Auto</representation>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <placementArea>UserCmds</placementArea>
-            <representationInContextMenu>Auto</representationInContextMenu>
-          </items>
-          <items xsi:type="form:Button">
-            <name>ItemListSelectSalesOrders</name>
-            <id>438</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <extendedTooltip>
-              <name>ItemListSelectSalesOrdersExtendedTooltip</name>
-              <id>439</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <type>Label</type>
-              <autoMaxWidth>true</autoMaxWidth>
-              <autoMaxHeight>true</autoMaxHeight>
-              <extInfo xsi:type="form:LabelDecorationExtInfo">
-                <horizontalAlign>Left</horizontalAlign>
-              </extInfo>
-            </extendedTooltip>
-            <commandName>Form.Command.SelectSalesOrders</commandName>
-            <representation>Auto</representation>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
@@ -5815,40 +5712,6 @@
     </action>
     <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
     <representation>Picture</representation>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>SelectShipmentConfirmation</name>
-    <title>
-      <key>en</key>
-      <value>Select shipment confirmations</value>
-    </title>
-    <id>7</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>SelectShipmentConfirmation</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>SelectSalesOrders</name>
-    <title>
-      <key>en</key>
-      <value>Select sales orders</value>
-    </title>
-    <id>8</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>SelectSalesOrders</name>
-      </handler>
-    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

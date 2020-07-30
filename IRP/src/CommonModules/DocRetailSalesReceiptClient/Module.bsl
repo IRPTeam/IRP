@@ -39,12 +39,7 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	If Not ValueIsFilled(Form.CurrentStore) Then
 		DocumentsClient.SetCurrentStore(Object, Form, AgreementInfo.Store);
 	EndIf;
-	
-	DocumentsClient.FillDeliveryDates(Object, Form);
-	If Not ValueIsFilled(Form.CurrentDeliveryDate) Then
-		DocumentsClient.SetCurrentDeliveryDate(Form, AgreementInfo.DeliveryDate);
-	EndIf;
-	
+		
 	If Not ValueIsFilled(Form.CurrentPriceType) Then
 		DocumentsClient.SetCurrentPriceType(Form, AgreementInfo.PriceType);
 	EndIf;
@@ -64,7 +59,7 @@ Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source) Exp
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	DocumentsClient.FillDeliveryDates(Object, Form);
+	Return;
 EndProcedure
 
 #EndRegion
@@ -76,15 +71,11 @@ Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
-	
 	For Each Row In Object.ItemList Do
 		If Not ValueIsFilled(Row.Key) Then
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	
-	DocumentsClient.FillDeliveryDates(Object, Form);
-	
 EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item) Export
@@ -97,11 +88,6 @@ Procedure ItemListOnActivateRow(Object, Form, Item) Export
 	If ValueIsFilled(CurrentRow.Store)
 		And CurrentRow.Store <> Form.CurrentStore Then
 		DocumentsClient.SetCurrentStore(Object, Form, CurrentRow.Store);
-	EndIf;
-	
-	If ValueIsFilled(CurrentRow.DeliveryDate)
-		And CurrentRow.DeliveryDate <> Form.CurrentDeliveryDate Then
-		DocumentsClient.SetCurrentDeliveryDate(Form, CurrentRow.DeliveryDate);
 	EndIf;
 	
 	If ValueIsFilled(CurrentRow.PriceType)
@@ -258,11 +244,10 @@ Function AgreementSettings() Export
 	Actions.Insert("ChangeCurrency"			, "ChangeCurrency");
 	Actions.Insert("ChangePriceIncludeTax"	, "ChangePriceIncludeTax");
 	Actions.Insert("ChangeStore"			, "ChangeStore");
-	Actions.Insert("ChangeDeliveryDate"		, "ChangeDeliveryDate");
 	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, ManagerSegment";
-	Settings.FormAttributes = "Store, DeliveryDate, CurrentPriceType";
+	Settings.FormAttributes = "Store, CurrentPriceType";
 	Return Settings;
 EndFunction
 
@@ -367,7 +352,7 @@ Function CompanySettings() Export
 	Settings.Insert("TableName"		, "ItemList");
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, Agreement";
-	Settings.FormAttributes = "Store, DeliveryDate, CurrentPriceType";
+	Settings.FormAttributes = "Store, CurrentPriceType";
 	Return Settings;
 EndFunction
 
@@ -455,7 +440,6 @@ Function DateSettings(Form) Export
 	
 	Actions = New Structure();
 	Actions.Insert("ChangeAgreement"	, "ChangeAgreement");
-	Actions.Insert("ChangeDeliveryDate"	, "ChangeDeliveryDate");
 	
 	AfterActionsCalculateSettings = New Structure;
 	PriceDate = ?(Form.Object.Ref.IsEmpty(), CurrentDate(), Form.Object.Date);

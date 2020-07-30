@@ -67,6 +67,7 @@
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.CreditDebitNote</types>
       <types>DocumentRef.CashExpense</types>
+      <types>DocumentRef.RetailSalesReceipt</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

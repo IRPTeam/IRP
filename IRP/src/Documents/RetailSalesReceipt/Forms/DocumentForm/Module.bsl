@@ -94,11 +94,6 @@ Procedure StoreOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure DeliveryDateOnChange(Item)
-	DocumentsClient.DeliveryDateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure ItemListStoreOnChange(Item)
 	DocRetailSalesReceiptClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure

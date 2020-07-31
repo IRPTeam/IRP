@@ -746,6 +746,15 @@
                 <value>CashRevenue</value>
               </value>
             </choiceList>
+            <choiceList>
+              <presentation>
+                <key>en</key>
+                <value>Retail sales receipt</value>
+              </presentation>
+              <value xsi:type="core:StringValue">
+                <value>RetailSalesReceipt</value>
+              </value>
+            </choiceList>
           </extInfo>
         </items>
         <autoCommandBar>

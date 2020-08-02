@@ -239,6 +239,11 @@ Function Strings(Lang) Export
 	// %1 - Physical count by location
 	Strings.Insert("Error_075", NStr("en = 'Not yet all %1 is closed'", Lang));
 	Strings.Error_075 = StrTemplate(Strings.Error_075, Metadata.Documents.PhysicalCountByLocation.Synonym);
+	
+	// %1 - Retail sales receipt
+	Strings.Insert("Error_076", NStr("en = 'Lines on which you may create return are missed in the %1. All products are already returned.'", Lang));
+	Strings.Error_076 = StrTemplate(Strings.Error_076, Metadata.Documents.RetailSalesReceipt.Synonym);
+	
 	#EndRegion
 	
 	#Region InfoMessages

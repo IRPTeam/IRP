@@ -307,6 +307,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	
 	
 	// SalesTurnovers
+	Parameters.DocumentDataTables.SalesTurnovers.Columns.RetailSalesReceipt.Name = "SalesInvoice";
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SalesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.SalesTurnovers));
 	

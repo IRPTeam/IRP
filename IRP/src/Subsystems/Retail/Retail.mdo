@@ -9,4 +9,5 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Document.RetailSalesReceipt</content>
   <content>Catalog.PaymentTerminals</content>
+  <content>Document.RetailReturnReceipt</content>
 </mdclass:Subsystem>

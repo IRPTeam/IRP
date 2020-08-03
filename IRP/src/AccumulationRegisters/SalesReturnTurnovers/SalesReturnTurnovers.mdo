@@ -78,6 +78,7 @@
     </synonym>
     <type>
       <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.RetailSalesReceipt</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

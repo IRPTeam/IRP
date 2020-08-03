@@ -12,77 +12,31 @@ To specify: address, phone, e-mail, gps coordinate on the map
 
 Background:
 	Given I open new TestClient session or connect the existing one
+	And I set "True" value to the constant "ShowBetaTesting"
+	And I set "True" value to the constant "ShowAlphaTestingSaas"
+	And I set "True" value to the constant "UseItemKey"
+	And I set "True" value to the constant "UseCompanies"
+
    
 
-
-Scenario: _010001 add Plugin sessing for entering addresses
-	* Opening a form to add Plugin sessing
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		And I click the button named "FormCreate"
-	* Adding Plugin sessing 
-		And I select external file "#workingDir#\DataProcessor\InputAddress.epf"
-		And I click the button named "FormAddExtDataProc"
-		And I input "" text in "Path to plugin for test" field
-		And I input "ExternaInputAddress" text in "Name" field
-		And I click Open button of the field named "Description_en"
-		And I input "ExternalInputAddress" text in "ENG" field
-		And I input "ExternalInputAddress" text in "TR" field
-		And I click "Ok" button
-		And I click "Save and close" button
-		And Delay 5
-	* Check adding Plugin sessing
-		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalInputAddress"
-
-Scenario: _010002 add Plugin sessing for GPS
-	* Opening a form to add Plugin sessing
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		And I click the button named "FormCreate"
-	* Adding Plugin sessing 
-		And I select external file "#workingDir#\DataProcessor\Coordinates.epf"
-		And I click the button named "FormAddExtDataProc"
-		And I input "" text in "Path to plugin for test" field
-		And I input "ExternalCoordinates" text in "Name" field
-		And I click Open button of the field named "Description_en"
-		And I input "ExternalCoordinates" text in "ENG" field
-		And I input "ExternalCoordinates" text in "TR" field
-		And I click "Ok" button
-		And I click "Save and close" button
-		And Delay 5
-	* Check adding Plugin sessing
-		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalCoordinates"
-
-Scenario: _010003 add Plugin sessing for phone
-	* Opening a form to add Plugin sessing
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		And I click the button named "FormCreate"
-	* Filling in the 'External Input Phone Ukraine' and adding it to the database
-		And I select external file "#workingDir#\DataProcessor\InputPhoneUkraine.epf"
-		And I click the button named "FormAddExtDataProc"
-		And I input "" text in "Path to plugin for test" field
-		And I input "ExternalInputPhoneUkraine" text in "Name" field
-		And I click Open button of the field named "Description_en"
-		And I input "ExternalInputPhoneUkraine" text in "ENG" field
-		And I input "ExternalInputPhoneUkraine" text in "TR" field
-		And I click "Ok" button
-		And I click "Save and close" button
-		And Delay 5
-		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalInputPhoneUkraine"
-	* Add processing Phone TR
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		And I click the button named "FormCreate"
-		And I select external file "#workingDir#\DataProcessor\InputPhoneUkraine.epf"
-		And I click the button named "FormAddExtDataProc"
-		And I input "" text in "Path to plugin for test" field
-		And I input "PhoneTR" text in "Name" field
-		And I click Open button of the field named "Description_en"
-		And I input "Phone TR" text in "ENG" field
-		And I input "Phone TR" text in "TR" field
-		And I click "Ok" button
-		And I click "Save and close" button
-		And Delay 5
-		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "Phone TR"
-
 Scenario: _010004 create Contact info Type - Addresses
+	* Add Plugin sessing for entering addresses
+		* Opening a form to add Plugin sessing
+			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+			And I click the button named "FormCreate"
+		* Adding Plugin sessing 
+			And I select external file "#workingDir#\DataProcessor\InputAddress.epf"
+			And I click the button named "FormAddExtDataProc"
+			And I input "" text in "Path to plugin for test" field
+			And I input "ExternaInputAddress" text in "Name" field
+			And I click Open button of the field named "Description_en"
+			And I input "ExternalInputAddress" text in "ENG" field
+			And I input "ExternalInputAddress" text in "TR" field
+			And I click "Ok" button
+			And I click "Save and close" button
+			And Delay 5
+		* Check adding Plugin sessing
+			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalInputAddress"
 	* Opening a form to add Plugin sessing
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 		And I click the button named "FormCreate"
@@ -113,7 +67,7 @@ Scenario: _010004 create Contact info Type - Addresses
 		| 'Description' |
 		| 'Google Addreses'  |
 
-Scenario: _010004 verification of UNIQ ID uniqueness control in IDInfoTypes
+Scenario: _010005 verification of UNIQ ID uniqueness control in IDInfoTypes
 	* Create one more item with ID Adr_10
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 		And I click the button named "FormCreate"
@@ -131,276 +85,38 @@ Scenario: _010004 verification of UNIQ ID uniqueness control in IDInfoTypes
 		Then I wait that in user messages the "Value is not unique" substring will appear in 30 seconds
 		And I close all client application windows
 
-Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
-	* Opening the form for filling in Company
-		Given I open hyperlink "e1cib/list/Catalog.Companies"
-		And I click the button named "FormCreate"
-		And Delay 2
-	* Filling in company data 'Company Ferron BP'
-		And I click Open button of the field named "Description_en"
-		And I input "Company Ferron BP" text in "ENG" field
-		And I input "Company Ferron BP TR" text in "TR" field
-		And I click "Ok" button
-		And I input "Turkey" text in "Country" field
-		And I input "Ferron BP" text in "Partner" field
-		And I select "Company" exact value from the drop-down list named "Type"
-		And I click "Save and close" button
-		And Delay 5
-	* Check the availability of the created company  "Company Ferron BP"
-		Then I check for the "Companies" catalog element with the "Description_en" "Company Ferron BP" 
-		Then I check for the "Companies" catalog element with the "Description_tr" "Company Ferron BP TR"
-	* Creating "Company Kalipso"
-		And I click the button named "FormCreate"
-		And Delay 2
-		And I click Open button of the field named "Description_en"
-		And I input "Company Kalipso" text in "ENG" field
-		And I input "Company Kalipso TR" text in "TR" field
-		And I click "Ok" button
-		And I input "Ukraine" text in "Country" field
-		And I input "Kalipso" text in "Partner" field
-		And I select "Company" exact value from the drop-down list named "Type"
-		And I click "Save and close" button
-		And Delay 5
-		Then I check for the "Companies" catalog element with the "Description_en" "Company Kalipso" 
-		Then I check for the "Companies" catalog element with the "Description_tr" "Company Kalipso TR" 
-	* Creating "Company Lomaniti"
-		And I click the button named "FormCreate"
-		And Delay 2
-		And I click Open button of the field named "Description_en"
-		And I input "Company Lomaniti" text in "ENG" field
-		And I input "Company Lomaniti TR" text in "TR" field
-		And I click "Ok" button
-		And I input "Ukraine" text in "Country" field
-		And I input "Lomaniti" text in "Partner" field
-		And I select "Company" exact value from the drop-down list named "Type"
-		And I click "Save and close" button
-		And Delay 5
-		Then I check for the "Companies" catalog element with the "Description_en" "Company Lomaniti" 
-		Then I check for the "Companies" catalog element with the "Description_tr" "Company Lomaniti TR"
-
-Scenario: _010006 create a structure of partners (partners), 1 main partner and several subordinates
-	* Opening the form for filling in partners
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-		And I click the button named "FormCreate"
-		And Delay 2
-	* Creating partners: 'Alians', 'MIO', 'Seven Brand'
-		And I click Open button of the field named "Description_en"
-		And I input "Alians" text in "ENG" field
-		And I input "Alians TR" text in "TR" field
-		And I click "Ok" button
-		And I change checkbox "Customer"
-		And I click "Save and close" button
-		And Delay 5
-		And I click the button named "FormCreate"
-		And Delay 2
-		And I click Open button of the field named "Description_en"
-		And I input "MIO" text in "ENG" field
-		And I input "MIO TR" text in "TR" field
-		And I click "Ok" button
-		And I change checkbox "Customer"
-		And I click "Save and close" button
-		And Delay 5
-		And I click the button named "FormCreate"
-		And Delay 2
-		And I click Open button of the field named "Description_en"
-		And I input "Seven Brand" text in "ENG" field
-		And I input "Seven Brand TR" text in "TR" field
-		And I click "Ok" button
-		And I change checkbox "Customer"
-		And I click "Save and close" button
-		And Delay 5
-	* Check for created partners: 'Alians', 'MIO', 'Seven Brand'
-		Then I check for the "Partners" catalog element with the "Description_en" "Alians" 
-		Then I check for the "Partners" catalog element with the "Description_en" "MIO"
-		Then I check for the "Partners" catalog element with the "Description_en" "Seven Brand" 
-	* Subordination of partners 'Alians', 'MIO' to the main partner 'Seven Brand'
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Alians'  |
-		And I select current line in "List" table
-		And I click Select button of "Main partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Seven Brand'  |
-		And I select current line in "List" table
-		Then the form attribute named "Parent" became equal to "Seven Brand"
-		And I click "Save and close" button
-		And Delay 5
-		Then "Partners" window is opened
-		And I go to line in "List" table
-			| 'Description' |
-			| 'MIO'  |
-		And I select current line in "List" table
-		And I click Select button of "Main partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Seven Brand'  |
-		And I select current line in "List" table
-		Then the form attribute named "Parent" became equal to "Seven Brand"
-		And I click "Save and close" button
-		And Delay 5
-	* Structure check
-		And "List" table does not contain lines
-			| 'Description' |
-			| 'MIO' |
-			| 'Alians'  |
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Seven Brand'  |
-		And I move one level down in "List" table
-		And "List" table became equal
-			| 'Description' |
-			| 'Seven Brand' |
-			| 'Alians' |
-			| 'MIO' |
-
-Scenario: _010007 adding additional details for partners "Business region"
-	* Opening a form for adding additional attributes for partners
-		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
-		And I go to line in "List" table
-			| Predefined data item name |
-			| Catalog_Partners          |
-		And I select current line in "List" table
-	* Filling in the name of the settings for adding additional details for partners
-		And I click Open button of the field named "Description_en"
-		And I input "Partners" text in "ENG" field
-		And I input "Partners TR" text in "TR" field
-		And I click "Ok" button
-		And in the table "Attributes" I click the button named "AttributesAdd"
-		And I click choice button of "Attribute" attribute in "Attributes" table
-	* Adding additional attribute Business region
-		And I click the button named "FormCreate"
-		And I click Open button of the field named "Description_en"
-		And I input "Business region" text in "ENG" field
-		And I input "Business region TR" text in "TR" field
-		And I click "Ok" button
-		And I input "BusinessRegion" text in "Unique ID" field
-		And I click "Save and close" button
-		And Delay 5
-		And I click the button named "FormChoose"
-	* Create an UI group for additional attribute
-		And I activate "UI group" field in "Attributes" table
-		And I click choice button of "UI group" attribute in "Attributes" table
-		And I click the button named "FormCreate"
-		And I click Open button of the field named "Description_en"
-		And I input "Main information" text in "ENG" field
-		And I input "Main information TR" text in "TR" field
-		And I click "Ok" button
-		And I change "Form position" radio button value to "Left"
-		And I click "Save and close" button
-		And Delay 5
-		And I click the button named "FormChoose"
-		And I finish line editing in "Attributes" table
-		And I click "Save and close" button
-		And Delay 5
-		And I close all client application windows
-	* Filling in the created additional attribute for partners
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
-		And I select current line in "List" table
-		And I click Select button of "Business region" field
-		And I click the button named "FormCreate"
-		And I click Open button of the field named "Description_en"
-		And I input "Region Turkey" text in "ENG" field
-		And I input "Turkey TR" text in "TR" field
-		And I click "Ok" button
-		And I click "Save and close" button
-		And Delay 5
-		And I click the button named "FormCreate"
-		And I click Open button of the field named "Description_en"
-		And I input "Region Ukraine" text in "ENG" field
-		And I input "Ukraine TR" text in "TR" field
-		And I click "Ok" button
-		And I click "Save and close" button
-		And Delay 5
-		And I go to line in "List" table
-			| Description |
-			| Region Ukraine     |
-		And I click the button named "FormChoose"
-		And I click "Save and close" button
-		And Delay 2
-		And I go to line in "List" table
-			| Description |
-			| Lomaniti   |
-		And I select current line in "List" table
-		And I click Select button of "Business region" field
-		And I go to line in "List" table
-			| Description |
-			| Region Ukraine     |
-		And I click the button named "FormChoose"
-		And I click "Save and close" button
-		And Delay 2
-		And I go to line in "List" table
-			| Description |
-			| Kalipso   |
-		And I select current line in "List" table
-		And I click Select button of "Business region" field
-		And I go to line in "List" table
-			| Description |
-			| Region Ukraine     |
-		And I click the button named "FormChoose"
-		And I click "Save and close" button
-		And Delay 2
-		And I click "List" button
-		And I go to line in "List" table
-			| Description |
-			| Alians   |
-		And I select current line in "List" table
-		And I click Select button of "Business region" field
-		And I go to line in "List" table
-			| Description |
-			| Region Turkey     |
-		And I click the button named "FormChoose"
-		And I click "Save and close" button
-		And Delay 2
-		And I go to line in "List" table
-			| Description |
-			| MIO   |
-		And I select current line in "List" table
-		And I click Select button of "Business region" field
-		And I go to line in "List" table
-			| Description |
-			| Region Turkey     |
-		And I click the button named "FormChoose"
-		And I click "Save and close" button
-		And Delay 2
-
-
-Scenario: _010008 create of a partner structure (Partners), 1 main partner, under which a 2nd level partner and under which 2 3rd level partners
-	* Opening the catalog Partners
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-	* Filling in the "Seven Brand" partner Kalipso as the main partner
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Seven Brand'  |
-		And I select current line in "List" table
-		And I click Select button of "Main partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'  |
-		And I select current line in "List" table
-		Then the form attribute named "Parent" became equal to "Kalipso"
-		And I click "Save and close" button
-		And Delay 5
-	* Check the subordination of "Seven Brand" (together with the "Alians" and "MIO" subordinates) to Kalipso partner
-		And I click "Hierarchical list" button
-		And "List" table contains lines
-			| 'Description' |
-			| 'Kalipso' |
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'  |
-		And I move one level down in "List" table
-		And I move one level down in "List" table
-		And "List" table became equal
-			| 'Description' |
-			| 'Kalipso' |
-			| 'Alians' |
-			| 'MIO' |
 
 Scenario: _010009 adding phones to Contact info type
+	* Add Plugin sessing for phone
+		* Opening a form to add Plugin sessing
+			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+			And I click the button named "FormCreate"
+		* Filling in the 'External Input Phone Ukraine' and adding it to the database
+			And I select external file "#workingDir#\DataProcessor\InputPhoneUkraine.epf"
+			And I click the button named "FormAddExtDataProc"
+			And I input "" text in "Path to plugin for test" field
+			And I input "ExternalInputPhoneUkraine" text in "Name" field
+			And I click Open button of the field named "Description_en"
+			And I input "ExternalInputPhoneUkraine" text in "ENG" field
+			And I input "ExternalInputPhoneUkraine" text in "TR" field
+			And I click "Ok" button
+			And I click "Save and close" button
+			And Delay 5
+			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalInputPhoneUkraine"
+		* Add processing Phone TR
+			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+			And I click the button named "FormCreate"
+			And I select external file "#workingDir#\DataProcessor\InputPhoneUkraine.epf"
+			And I click the button named "FormAddExtDataProc"
+			And I input "" text in "Path to plugin for test" field
+			And I input "PhoneTR" text in "Name" field
+			And I click Open button of the field named "Description_en"
+			And I input "Phone TR" text in "ENG" field
+			And I input "Phone TR" text in "TR" field
+			And I click "Ok" button
+			And I click "Save and close" button
+			And Delay 5
+			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "Phone TR"
 	* Opening the form for filling in Contact info type
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 	* Creation Company phone
@@ -477,7 +193,7 @@ Scenario: _010009 adding phones to Contact info type
 			| 'Description'     |
 			| 'Partner phone' |
 
-Scenario: _010010 adding addresses to an Contact info type
+Scenario: _010010 adding addresses to a Contact info type
 	* Opening the form for filling in Contact info type
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 	* Adding an actual address for partners
@@ -607,6 +323,22 @@ Scenario: _010010 adding addresses to an Contact info type
 
 
 Scenario: _010011 adding gps to a Contact info type
+	* Add Plugin sessing for GPS
+		* Opening a form to add Plugin sessing
+			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+			And I click the button named "FormCreate"
+		* Adding Plugin sessing 
+			And I select external file "#workingDir#\DataProcessor\Coordinates.epf"
+			And I click the button named "FormAddExtDataProc"
+			And I input "" text in "Path to plugin for test" field
+			And I input "ExternalCoordinates" text in "Name" field
+			And I click Open button of the field named "Description_en"
+			And I input "ExternalCoordinates" text in "ENG" field
+			And I input "ExternalCoordinates" text in "TR" field
+			And I click "Ok" button
+			And I click "Save and close" button
+			And Delay 5
+	* Check adding Plugin sessing
 	* Opening the form for filling in Contact info type
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 	* Adding Contact info gps coordinates for partners in Ukraine

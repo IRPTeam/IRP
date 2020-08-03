@@ -426,13 +426,11 @@ Scenario: _005016 filling in the "AccessProfiles" catalog
 		And Delay 2
 		And I click the button named "FormCreate"
 		And Delay 2
-	* Data Filling - Admin
-		And I click the button named "FormCreate"
-		And Delay 2
+	* Data Filling - management
 		And I click Open button of the field named "Description_en"
-		And I input "Administrators" text in the field named "Description_en"
-		And I input "Administrators TR" text in the field named "Description_tr"
-		And I input "Админ" text in the field named "Description_ru"
+		And I input "Management" text in the field named "Description_en"
+		And I input "Management TR" text in the field named "Description_tr"
+		And I input "Руководство" text in the field named "Description_ru"
 		And I click "Ok" button
 		And in the table "Roles" I click "Update roles" button
 		* Set up access for admin
@@ -469,15 +467,15 @@ Scenario: _005016 filling in the "AccessProfiles" catalog
 			And I finish line editing in "Roles" table
 			And I click the button named "FormWriteAndClose"
 			And I wait "User access profiles (create)" window closing in 20 seconds
-	* Data Filling - Financier
+	* Data Filling - Logistic team
 		And I click the button named "FormCreate"
 		And Delay 2
 		And I click Open button of the field named "Description_en"
-		And I input "Financier" text in the field named "Description_en"
-		And I input "Financier TR" text in the field named "Description_tr"
+		And I input "Logistic team" text in the field named "Description_en"
+		And I input "Logistic team TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And in the table "Roles" I click "Update roles" button
-		* Set up access for the Financier
+		* Set up access for the Logistic team
 			And I go to line in "Roles" table
 				| 'Configuration' | 'Presentation'    | 'Use' |
 				| 'IRP'           | 'Run thin client' | 'No'  |
@@ -489,9 +487,9 @@ Scenario: _005016 filling in the "AccessProfiles" catalog
 			And I change "Use" checkbox in "Roles" table
 		And I click the button named "FormWriteAndClose"
 	* Check for created User access profiles
-		Then I check for the "AccessProfiles" catalog element with the "Description_en" "Admin"  
-		Then I check for the "AccessProfiles" catalog element with the "Description_tr" "Admin TR"
-		Then I check for the "AccessProfiles" catalog element with the "Description_ru" "Админ"
+		Then I check for the "AccessProfiles" catalog element with the "Description_en" "Management"  
+		Then I check for the "AccessProfiles" catalog element with the "Description_tr" "Management TR"
+		Then I check for the "AccessProfiles" catalog element with the "Description_ru" "Руководство"
 
 
 Scenario: _005018 filling in the "Cash/Bank accounts" catalog
@@ -701,6 +699,11 @@ Scenario: _005022 filling in the "Partners" catalog
 		Then I check for the "Partners" catalog element with the "Description_en" "Manager B"
 		And Delay 2
 		Then I check for the "Partners" catalog element with the "Description_en" "Lomaniti"
+	* Clear catalog Partners
+		And I delete "Partners" catalog element with the Description_en "Ferron BP"
+		And I delete "Partners" catalog element with the Description_en "Kalipso"
+		And I delete "Partners" catalog element with the Description_en "Manager B"
+
 
 Scenario: _005023 filling in the "Partner segments content" catalog
 	* Opening the form for filling in Partner segments content
@@ -708,15 +711,15 @@ Scenario: _005023 filling in the "Partner segments content" catalog
 	* Create segments: Retail
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Retail" text in the field named "Description_en"
-		And I input "Retail TR" text in the field named "Description_tr"
-		And I input "Розница" text in the field named "Description_ru"
+		And I input "Distribution" text in the field named "Description_en"
+		And I input "Distribution TR" text in the field named "Description_tr"
+		And I input "Дистрибьюция" text in the field named "Description_ru"
 		And I click "Ok" button
 		And I click the button named "FormWriteAndClose"
 	* Check for created Partner segments content
-		Then I check for the "PartnerSegments" catalog element with the "Description_tr" "Retail TR"
-		Then I check for the "PartnerSegments" catalog element with the "Description_en" "Retail" 
-		Then I check for the "PartnerSegments" catalog element with the "Description_ru" "Розница"
+		Then I check for the "PartnerSegments" catalog element with the "Description_tr" "Distribution TR"
+		Then I check for the "PartnerSegments" catalog element with the "Description_en" "Distribution" 
+		Then I check for the "PartnerSegments" catalog element with the "Description_ru" "Дистрибьюция"
 
 Scenario: _005024 filling in the "Payment terms" catalog 
 	* Opening a form and creating Payment terms
@@ -951,7 +954,10 @@ Scenario: _005033 filling in the "Tax rates" catalog
 		Then I check for the "TaxRates" catalog element with the "Description_ru" "8% RU"
 		Then I check for the "TaxRates" catalog element with the "Description_en" "Without VAT"  
 		Then I check for the "TaxRates" catalog element with the "Description_en" "0%"
-
+	* Clean catalog
+		And I delete "TaxRates" catalog element with the Description_en "8%"
+		And I delete "TaxRates" catalog element with the Description_en "Without VAT"
+		And I delete "TaxRates" catalog element with the Description_en "0%"
 
 
 Scenario: _005039 filling in the status catalog for Inventory transfer order

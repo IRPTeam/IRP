@@ -33,6 +33,8 @@ Scenario: _017901 connection of tax calculation Plugin sessing TaxCalculateVAT_T
 
 
 Scenario: _017902 filling in catalog 'Tax types'
+	* Preparation
+		When Create catalog TaxRates objects
 	* Opening a tax creation form
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"
 		And I click the button named "FormCreate"

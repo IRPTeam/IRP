@@ -12,6 +12,11 @@ To further use it when reflecting in the program of business processes
 
 Background:
 	Given I open new TestClient session or connect the existing one
+	And I set "True" value to the constant "ShowBetaTesting"
+	And I set "True" value to the constant "ShowAlphaTestingSaas"
+	And I set "True" value to the constant "UseItemKey"
+	And I set "True" value to the constant "UseCompanies"
+
 
 
 # All indivisible packages of the same product are wound up using Specification with type Set. Then a separate Item key is created for the product, in which the necessary set is specified.
@@ -161,6 +166,7 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		And I input "Gir" text in "ENG" field
 		And I input "Gir" text in "TR" field
 		And I click "Ok" button
+		And I click "Save" button
 		* Check data save
 			And I wait the field named "UniqueID" will be filled in "3" seconds
 			Then the form attribute named "Owner" became equal to "'Brand"
@@ -196,7 +202,7 @@ Scenario: _005113 filling in the "Item types" catalog
 		And I click the button named "FormWrite"
 		* Check data save
 			Then the form attribute named "Type" became equal to "Product"
-			Then the form attribute named "Description_en" became equal to "Clothes"
+			Then the form attribute named "Description_en" became equal to "Smartphones"
 		And I click the button named "FormWriteAndClose"
 		And I click the button named "FormCreate"
 		And Delay 2
@@ -206,7 +212,7 @@ Scenario: _005113 filling in the "Item types" catalog
 		And I click "Ok" button
 		And I click the button named "FormWrite"
 		* Check data save
-			Then the form attribute named "Description_en" became equal to "Shoes"
+			Then the form attribute named "Description_en" became equal to "TV set"
 			Then the form attribute named "Type" became equal to "Product"
 		And I click the button named "FormWriteAndClose"
 		And I click the button named "FormCreate"
@@ -246,7 +252,7 @@ Scenario: _005113 filling in the "Item types" catalog
 				| 'Description' |
 				| 'Accessories'            |
 			And I move one level down in "List" table
-			And "List" table became equal
+			And "List" table contains lines
 				| 'Description'    |
 				| 'Accessories' |
 				| 'Earrings'    |
@@ -542,7 +548,7 @@ Scenario: _005115 filling in the "Items" catalog
 
 // доделать после того как будет загрузка планов видов характеристик
 
-Scenario: _005117 fill in Item keys
+Scenario: _005117 filling in Item keys
 # Dress, Trousers
 	Given I open hyperlink "e1cib/list/Catalog.Items"
 	* Filling in Item keys for Dress
@@ -1091,4 +1097,3 @@ Scenario: _005121 filling item key according to specification for set
 			| 'Item key'   |
 			| 'Boots/S-8'  |
 		And I close current window
-

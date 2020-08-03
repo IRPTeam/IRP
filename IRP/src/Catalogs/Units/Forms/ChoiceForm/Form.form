@@ -339,7 +339,7 @@ WHERE
 		WHEN &amp;Filter
 			THEN Table.Item = &amp;Item
 			OR Table.Ref = &amp;Unit
-		ELSE Table.Item = VALUE(Catalog.Items.EmptyRef)
+		ELSE Table.Item.Ref IS NULL
 	END</queryText>
       <mainTable>Catalog.Units</mainTable>
       <dynamicDataRead>true</dynamicDataRead>

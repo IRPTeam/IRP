@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bb9cd1cd-1ae0-446b-8047-ae0adf6ba51f">
+  <name>DocRetailReturnReceiptClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc retail return receipt client</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+</mdclass:CommonModule>

@@ -2,7 +2,8 @@
 
 Function GetAllActiveOffers_ForDocument(Val Object, AddInfo = Undefined) Export
 	If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") Then
+		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
+		Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
 		OffersDocumentTypesArray = New Array;
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.Sales);
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.PurchasesAndSales);
@@ -50,7 +51,8 @@ EndFunction
 
 Function GetAllActiveOffers_ForRow(Val Object, AddInfo = Undefined) Export
 	If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") Then
+		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") 
+		Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
 		OffersDocumentTypesArray = New Array;
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.Sales);
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.PurchasesAndSales);
@@ -100,7 +102,8 @@ Function GetAllAppliedOffers(Val Object, AddInfo = Undefined) Export
 	CanGetAllAppliedOffers = TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
 		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") 
 		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice"); 
+		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice")
+		Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt"); 
 	If CanGetAllAppliedOffers Then
 		Return GetAllAppliedOffers_Documents(Object, AddInfo);
 	Else
@@ -260,7 +263,8 @@ Function CalculateOffersTree_ForDocument(Val Object, OffersInfo, AddInfo = Undef
 	isTaxDocRef = TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
 		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
 		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice");
+		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice")
+		Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt");
 	If isTaxDocRef Then
 			OffersTree = CalculateOffersTree_Documents(Object, OffersInfo, AddInfo);
 	Else
@@ -277,7 +281,8 @@ Function CalculateOffersTree_ForRow(Val Object, OffersInfo, AddInfo = Undefined)
 	isTaxDocRef = TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
 		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
 		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice");
+		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice")
+		Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt");
 	If isTaxDocRef Then
 			OffersTree = CalculateOffersTree_Documents(Object, OffersInfo, AddInfo);
 	Else

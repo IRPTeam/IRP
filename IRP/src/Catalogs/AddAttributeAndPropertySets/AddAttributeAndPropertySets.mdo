@@ -414,6 +414,20 @@
         <value></value>
       </code>
     </items>
+    <items id="0acebd7b-ff65-452a-b032-85a1295e1d94">
+      <name>Catalog_PaymentTerminals</name>
+      <description>Catalog payment terminals</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="5fb73bc8-57cf-4f02-87f4-fc35e6c5657c">
+      <name>Document_RetailReturnReceipt</name>
+      <description>Document retail return receipt</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

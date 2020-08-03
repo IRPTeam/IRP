@@ -33,4 +33,11 @@
       <value>Transit</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="5656b9fa-ea7c-47ef-a836-ce78cdbc12df">
+    <name>POS</name>
+    <synonym>
+      <key>en</key>
+      <value>POS</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

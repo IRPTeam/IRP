@@ -44,7 +44,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <listPresentation>
     <key>en</key>
-    <value>Retail sales receipt</value>
+    <value>Retail sales receipts</value>
   </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>

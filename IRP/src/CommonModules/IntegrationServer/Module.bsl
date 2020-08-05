@@ -56,12 +56,10 @@ Function GetArrayOfUnusedFiles(PathForSave) Export
 	TableOfFilesURI = New ValueTable();
 	TableOfFilesURI.Columns.Add("FileURI", Metadata.Catalogs.Files.Attributes.URI.Type);
 	
-	ArrayOfExtensions = New Array();
-	ArrayOfExtensions.Add(".JPEG");
-	ArrayOfExtensions.Add(".JPG");
+	ArrayOfExtensions = PictureViewerClientServer.AllPictureExtensions();
 	ArrayOfFiles = FindFiles(PathForSave, "*", True);
 	For Each File In ArrayOfFiles Do
-		If ArrayOfExtensions.Find(Upper(File.Extension)) = Undefined Then
+		If ArrayOfExtensions.Find(Lower(File.Extension)) = Undefined Then
 			Continue;
 		EndIf;
 		TableOfFilesURI.Add().FileURI = File.Name;

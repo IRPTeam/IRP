@@ -79,7 +79,7 @@ Procedure Upload(Form, Object, Volume) Export
 	Notify = New NotifyDescription("SelectFileEnd", ThisObject, StrParam);
 	OpenFileDialog = New FileDialog(FileDialogMode.Open);
 	OpenFileDialog.Multiselect = False;
-	OpenFileDialog.Filter = "(*.jpeg;*.jpg;*.png)|*.jpeg;*.jpg;*.png";
+	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
 	BeginPuttingFiles(Notify, , OpenFileDialog, True, Form.UUID);
 EndProcedure
 

@@ -13,5 +13,6 @@
     <types>DocumentRef.CashRevenue</types>
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.CashExpense</types>
+    <types>DocumentRef.RetailSalesReceipt</types>
   </type>
 </mdclass:DefinedType>

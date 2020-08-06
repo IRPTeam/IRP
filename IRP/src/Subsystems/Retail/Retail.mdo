@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d29cb9d4-ed41-4c36-8e40-376c053ff3ae">
+<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d29cb9d4-ed41-4c36-8e40-376c053ff3ae">
   <name>Retail</name>
   <synonym>
     <key>en</key>
@@ -7,6 +7,9 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
+  <picture xsi:type="core:PictureRef">
+    <picture>CommonPicture.Retail</picture>
+  </picture>
   <content>Document.RetailSalesReceipt</content>
   <content>Catalog.PaymentTerminals</content>
   <content>Document.RetailReturnReceipt</content>

@@ -9,20 +9,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ChangeEnabledDigitButtons();
 	
 	Object.Amount = Parameters.Parameters.Amount;
-	Object.CustomerCash = Parameters.Parameters.Amount;
-	
-	CustomerAmountString = Format(Object.CustomerCash, "NG=0");
 	
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	RecalculateCashback();
-EndProcedure
-
-&AtClient
-Procedure CustomerCashOnChange(Item)
-	CustomerAmountString = Format(Object.CustomerCash, "NG=0");
 	RecalculateCashback();
 EndProcedure
 
@@ -50,6 +41,9 @@ EndProcedure
 
 &AtClient
 Procedure Enter(Command)
+	If PaymentsAmountTotal <> (Object.Amount + Object.Cashback) Then
+		Return;
+	EndIf;
 	ReturnValue = New Structure;
 	ReturnValue.Insert("Payments", Payments);
 	Close(ReturnValue);
@@ -110,7 +104,7 @@ Procedure Card(Command)
 EndProcedure
 
 &AtClient
-Procedure Loyality(Command)
+Procedure LoyalityPoints(Command)
 	If (Object.Amount - Payments.Total("Amount")) <= 0 Then
 		RemainingAmount = 0;
 	Else
@@ -134,11 +128,11 @@ EndProcedure
 
 &AtClient
 Procedure Certificate(Command)
-	//TODO: Insert the handler content
+	Return;
 EndProcedure
 
 &AtClient
-Procedure NumPress(Команда)
+Procedure NumPress(Command)
 	ButtonValue = ThisObject.CurrentItem.Title;
 	NumButtonPress(ButtonValue);
 	RecalculateCashback();
@@ -147,6 +141,48 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+#Region Internal
+
+&AtServer
+Procedure ChangeEnabledDigitButtons()
+	If Payments.Count() Then
+		Enabled = True;
+	Else
+		Enabled = False;
+	EndIf;
+	Items.__0.Enabled = Enabled;
+	Items.__1.Enabled = Enabled;
+	Items.__2.Enabled = Enabled;
+	Items.__3.Enabled = Enabled;
+	Items.__4.Enabled = Enabled;
+	Items.__5.Enabled = Enabled;
+	Items.__6.Enabled = Enabled;
+	Items.__7.Enabled = Enabled;
+	Items.__8.Enabled = Enabled;
+	Items.__9.Enabled = Enabled;
+	Items.__Dot.Enabled = Enabled;
+	Items.__C.Enabled = Enabled;
+EndProcedure
+
+&AtClient
+Procedure CalculatePaymentsAmountTotal()
+	PaymentsAmountTotal = Payments.Total("Amount");
+	CashFilter = New Structure;
+	CashFilter.Insert("PaymentType", PredefinedValue("Enum.PaymentTypes.Cash"));
+	CashRows = Payments.FindRows(CashFilter);
+	PaymentCashAmount = 0;
+	For Each CashRow In CashRows Do
+		PaymentCashAmount = PaymentCashAmount + CashRow.Amount;
+	EndDo;
+	If PaymentsAmountTotal > Object.Amount
+		And PaymentsAmountTotal - Object.Amount <= PaymentCashAmount Then
+			CashbackValue = PaymentCashAmount - (PaymentsAmountTotal - Object.Amount);
+	Else
+		CashbackValue = 0;
+	EndIf;
+	Object.Cashback = CashbackValue;
+EndProcedure
 
 &AtClient
 Procedure RecalculateCashback()
@@ -190,33 +226,6 @@ Procedure NumButtonPress(ButtonValue)
 	EndIf;
 	CurrentData.Amount = Number(CurrentData.AmountString);
 	CalculatePaymentsAmountTotal();	
-EndProcedure
-
-#Region Internal
-
-Procedure ChangeEnabledDigitButtons()
-	If Payments.Count() Then
-		Enabled = True;
-	Else
-		Enabled = False;
-	EndIf;
-	Items.__0.Enabled = Enabled;
-	Items.__1.Enabled = Enabled;
-	Items.__2.Enabled = Enabled;
-	Items.__3.Enabled = Enabled;
-	Items.__4.Enabled = Enabled;
-	Items.__5.Enabled = Enabled;
-	Items.__6.Enabled = Enabled;
-	Items.__7.Enabled = Enabled;
-	Items.__8.Enabled = Enabled;
-	Items.__9.Enabled = Enabled;
-	Items.__Dot.Enabled = Enabled;
-	Items.__C.Enabled = Enabled;
-EndProcedure
-
-&AtClient
-Procedure CalculatePaymentsAmountTotal()
-	PaymentsAmountTotal = Payments.Total("Amount");
 EndProcedure
 
 #EndRegion

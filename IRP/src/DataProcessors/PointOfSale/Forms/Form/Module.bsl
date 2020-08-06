@@ -5,11 +5,6 @@ Var HTMLWindowPictures Export;
 
 #Region Events
 
-&AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	//NewTransaction();
-EndProcedure
-
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	For Each Row In Object.ItemList Do

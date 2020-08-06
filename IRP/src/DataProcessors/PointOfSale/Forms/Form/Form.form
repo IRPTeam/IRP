@@ -62,6 +62,10 @@
             <items xsi:type="form:Button">
               <name>ItemListShowPictures</name>
               <id>642</id>
+              <title>
+                <key>en</key>
+                <value>Show pictures</value>
+              </title>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -94,6 +98,10 @@
             <items xsi:type="form:Button">
               <name>ItemListShowItems</name>
               <id>661</id>
+              <title>
+                <key>en</key>
+                <value>Show items</value>
+              </title>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -126,6 +134,10 @@
             <items xsi:type="form:Button">
               <name>ItemListOpenPickupItems</name>
               <id>705</id>
+              <title>
+                <key>en</key>
+                <value>Pickup items</value>
+              </title>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -159,6 +171,10 @@
             <items xsi:type="form:Button">
               <name>ItemListSearchByBarcode</name>
               <id>707</id>
+              <title>
+                <key>en</key>
+                <value>Search by barcode</value>
+              </title>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -2418,6 +2434,10 @@
       <items xsi:type="form:Button">
         <name>qPayment</name>
         <id>604</id>
+        <title>
+          <key>en</key>
+          <value>Payment</value>
+        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -2570,10 +2590,6 @@
   <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
-  </handlers>
-  <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
   </handlers>
   <handlers>
     <event>ExternalEvent</event>
@@ -3041,114 +3057,6 @@ WHERE
       <common>true</common>
     </edit>
   </attributes>
-  <formCommands>
-    <name>_Command</name>
-    <title>
-      <key>ru</key>
-      <value>Команда</value>
-    </title>
-    <title>
-      <key>en</key>
-      <value>Command</value>
-    </title>
-    <id>1</id>
-    <toolTip>
-      <key>ru</key>
-      <value>Команда</value>
-    </toolTip>
-    <toolTip>
-      <key>en</key>
-      <value>Comand</value>
-    </toolTip>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>КомандаКлавиатуры</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>_Layout</name>
-    <title>
-      <key>ru</key>
-      <value>Раскладка</value>
-    </title>
-    <title>
-      <key>en</key>
-      <value>Layout</value>
-    </title>
-    <id>2</id>
-    <toolTip>
-      <key>ru</key>
-      <value>Раскладка</value>
-    </toolTip>
-    <toolTip>
-      <key>en</key>
-      <value>Layout</value>
-    </toolTip>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>_Раскладка</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>_Symbol</name>
-    <title>
-      <key>ru</key>
-      <value>Символ</value>
-    </title>
-    <title>
-      <key>en</key>
-      <value>Symbol</value>
-    </title>
-    <id>3</id>
-    <toolTip>
-      <key>ru</key>
-      <value>Символ</value>
-    </toolTip>
-    <toolTip>
-      <key>en</key>
-      <value>Symbol</value>
-    </toolTip>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>_Символ</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>qMenu</name>
-    <title>
-      <key>en</key>
-      <value>Menu</value>
-    </title>
-    <id>4</id>
-    <toolTip>
-      <key>en</key>
-      <value>Q menu</value>
-    </toolTip>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>qMenu</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
   <formCommands>
     <name>qPayment</name>
     <title>

@@ -353,7 +353,7 @@ Function GetErrorMessage(BasisDocument)
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.PurchaseOrder") Then
 		If Not BasisDocument.Status.Posting Or Not BasisDocument.Posted Then
-			Return StrTemplate(R().Error_067, String(BasisDocument));		
+			Return StrTemplate(R().Error_054, String(BasisDocument));		
 		EndIf;
 		
 		If BasisDocument.GoodsReceiptBeforePurchaseInvoice Then

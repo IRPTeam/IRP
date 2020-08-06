@@ -211,9 +211,6 @@ Function Strings(Lang) Export
 
 	Strings.Insert("Error_065", NStr("en = 'Item key is not unique'", Lang));
 	Strings.Insert("Error_066", NStr("en = 'Specification is not unique'", Lang));
-	
-	// %3 - Sales order
-	Strings.Insert("Error_067", NStr("en = 'Not properly status of %1 to proceed.'", Lang));
 
 	// %1 - 12
 	// %2 - Boots

@@ -332,6 +332,7 @@
   <eventSubscriptions>EventSubscription.RefreshReusableValues</eventSubscriptions>
   <eventSubscriptions>EventSubscription.UpdateUsersRole</eventSubscriptions>
   <eventSubscriptions>EventSubscription.EventSubscription</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopyRemoveUniqueID</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>

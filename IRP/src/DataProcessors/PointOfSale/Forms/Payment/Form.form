@@ -2116,6 +2116,23 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>Edited</name>
+      <title>
+        <key>en</key>
+        <value>Edited</value>
+      </title>
+      <id>8</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>PaymentsAmountTotal</name>

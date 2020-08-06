@@ -26,8 +26,8 @@ EndProcedure
 
 &AtClient
 Procedure ItemsPickupOnActivateRow(Item)
-//	CurrentData = Items.ItemsPickup.CurrentData;
-//	AfterItemChoice(CurrentData.Item);
+	CurrentData = Items.ItemsPickup.CurrentData;
+	AfterItemChoice(CurrentData.Item);
 	If NOT HTMLWindowPictures = Undefined Then
 		HTMLWindowPictures.clearAll();
 		AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
@@ -96,7 +96,7 @@ EndProcedure
 &AtServer
 Procedure NewTransaction()
 	ObjectValue = Documents.RetailSalesReceipt.CreateDocument();
-	//FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True);
+	FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True);
 	ValueToFormAttribute(ObjectValue, "Object");
 EndProcedure
 
@@ -108,7 +108,7 @@ Procedure WriteTransaction(Result)
 	EndIf;
 	ObjectValue = FormAttributeToValue("Object");
 	ObjectValue.Date = CurrentDate();
-	ObjectValue.Payments.Load(Payments);
+	//ObjectValue.Payments.Load(Payments);
 	ObjectValue.Write();	
 	NewTransaction();
 	Return;
@@ -196,7 +196,7 @@ EndProcedure
 #Region RegionArea
 
 &AtServer
-Procedure AfterItemChoice(ChoicedItem, AddToItemList = False)	
+Procedure AfterItemChoice(Val ChoicedItem, AddToItemList = False)	
 	Query = New Query;
 	Query.Text = "SELECT
 			|CatalogItemKeys.Ref AS Ref
@@ -245,20 +245,20 @@ Procedure ItemKeysSelection(Item, SelectedRow, Field, StandardProcessing)
 EndProcedure
 
 &AtServer
-Procedure ItemKeysSelectionAtServer(ChoicedItemKey)
+Procedure ItemKeysSelectionAtServer(Val ChoicedItemKey)
 	ItemListFilter = New Structure;
 	ItemListFilter.Insert("ItemKey", ChoicedItemKey);
 	FoundRows = Object.ItemList.FindRows(ItemListFilter);
 	If FoundRows.Count() Then
 		NewRow = FoundRows.Get(0);
-		Items.ItemList.CurrentRow = NewRow;
 	Else
 		NewRow = Object.ItemList.Add();
 		NewRow.ItemKey = ChoicedItemKey;
-		NewRow.Item = NewRow.ItemKey.Item;
+		NewRow.Item = ChoicedItemKey.Item;
 	EndIf;
 	NewRow.Quantity = NewRow.Quantity + 1;	
 	NewRow.TotalAmount = NewRow.Quantity * NewRow.Price;
+	Items.ItemList.CurrentRow = NewRow.GetID();
 EndProcedure
 
 #EndRegion

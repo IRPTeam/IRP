@@ -40,8 +40,7 @@ EndProcedure
 Procedure PaymentsOnActivateRow(Item)
 	CurrentData = Items.Payments.CurrentData;
 	If CurrentData <> Undefined Then
-		CurrentData.AmountString = "0";
-		CurrentData.Amount = 0;
+		CurrentData.Edited = False;
 	EndIf;
 EndProcedure
 	
@@ -79,9 +78,9 @@ Procedure Cash(Command)
 	Else
 		Row = Payments.Add();
 		Row.PaymentType = PredefinedValue("Enum.PaymentTypes.Cash");
-		Row.Amount = RemainingAmount;
 	EndIf;
-	Row.AmountString = "0";
+	Row.AmountString = Format(RemainingAmount, "NG=0;");
+	Row.Amount = RemainingAmount;
 	Items.Payments.CurrentRow = Row.GetID();
 	ChangeEnabledDigitButtons();
 	CalculatePaymentsAmountTotal();
@@ -102,9 +101,9 @@ Procedure Card(Command)
 	Else
 		Row = Payments.Add();
 		Row.PaymentType = PredefinedValue("Enum.PaymentTypes.Card");
-		Row.Amount = RemainingAmount;
 	EndIf;
-	Row.AmountString = "0";
+	Row.AmountString = Format(RemainingAmount, "NG=0;");
+	Row.Amount = RemainingAmount;
 	Items.Payments.CurrentRow = Row.GetID();
 	ChangeEnabledDigitButtons();
 	CalculatePaymentsAmountTotal();	
@@ -125,9 +124,9 @@ Procedure Loyality(Command)
 	Else
 		Row = Payments.Add();
 		Row.PaymentType = PredefinedValue("Enum.PaymentTypes.LoyalityPoint");
-		Row.Amount = RemainingAmount;
 	EndIf;
-	Row.AmountString = "0";
+	Row.AmountString = Format(RemainingAmount, "NG=0;");
+	Row.Amount = RemainingAmount;
 	Items.Payments.CurrentRow = Row.GetID();
 	ChangeEnabledDigitButtons();
 	CalculatePaymentsAmountTotal();
@@ -165,11 +164,17 @@ Procedure NumButtonPress(ButtonValue)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
+	If Not CurrentData.Edited Then
+		CurrentData.Amount = 0;
+		CurrentData.AmountString = "";
+		CurrentData.Edited = True;
+	EndIf;
 	If ButtonValue = "."
 		And StrOccurrenceCount(CurrentData.AmountString, LocalDotPresentation) Then
 		Return;
 	EndIf;
 	If ButtonValue = "0"
+		And Left(CurrentData.AmountString, 1) = "0"
 		And Not StrOccurrenceCount(CurrentData.AmountString, LocalDotPresentation) Then
 		Return;
 	EndIf;

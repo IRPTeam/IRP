@@ -4,7 +4,7 @@ EndFunction
 
 Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
 	If Not ValueIsFilled(Source.UniqueID) Then
-		Source.UniqueID = "_" + Right(String(New UUID()), 12);
+		Source.UniqueID = "_" + StrReplace(String(New UUID()), "-", "");
 	EndIf;
 	DataLock = New DataLock();
 	DataLockItem = DataLock.Add(Source.Metadata().FullName());

@@ -15,6 +15,9 @@ Background:
 
 
 Scenario: _006101 filling in exchange rates in registers
+	* Preparation
+		When Create catalog Currencies objects
+		When Create catalog IntegrationSettings objects (currency source)
 	* Opening of register CurrencyRates
 		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
 	* Filling the lira to euro rate

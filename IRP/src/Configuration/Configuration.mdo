@@ -309,7 +309,7 @@
   <commonModules>CommonModule.DocRetailSalesReceiptClient</commonModules>
   <commonModules>CommonModule.DocRetailReturnReceiptClient</commonModules>
   <commonModules>CommonModule.DocRetailReturnReceiptServer</commonModules>
-  <commonModules>CommonModule.DPPointOfSailClient</commonModules>
+  <commonModules>CommonModule.DPPointOfSaleClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -535,7 +535,7 @@
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
   <dataProcessors>DataProcessor.QuantityCompare</dataProcessors>
   <dataProcessors>DataProcessor.FirstStartSettings</dataProcessors>
-  <dataProcessors>DataProcessor.PointOfSail</dataProcessors>
+  <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

@@ -7,7 +7,7 @@ Var HTMLWindowPictures Export;
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	NewTransaction();
+	//NewTransaction();
 EndProcedure
 
 &AtClient
@@ -26,8 +26,8 @@ EndProcedure
 
 &AtClient
 Procedure ItemsPickupOnActivateRow(Item)
-	CurrentData = Items.ItemsPickup.CurrentData;
-	AfterItemChoice(CurrentData.Item);
+//	CurrentData = Items.ItemsPickup.CurrentData;
+//	AfterItemChoice(CurrentData.Item);
 	If NOT HTMLWindowPictures = Undefined Then
 		HTMLWindowPictures.clearAll();
 		AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
@@ -74,7 +74,7 @@ Procedure qPayment(Command)
 	ObjectParameters.Insert("CustomerCash", Object.ItemList.Total("TotalAmount"));
 	OpenFormParameters = New Structure;
 	OpenFormParameters.Insert("Parameters", ObjectParameters);
-	OpenForm("DataProcessor.PointOfSail.Form.Payment"
+	OpenForm("DataProcessor.PointOfSale.Form.Payment"
 				, OpenFormParameters
 				, ThisObject
 				, New UUID()
@@ -96,18 +96,19 @@ EndProcedure
 &AtServer
 Procedure NewTransaction()
 	ObjectValue = Documents.RetailSalesReceipt.CreateDocument();
-	FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True);
+	//FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True);
 	ValueToFormAttribute(ObjectValue, "Object");
 EndProcedure
 
 &AtServer
 Procedure WriteTransaction(Result)
 	Payments = Result.Payments;
-	If Not Payments.Total("Amount") Then
+	If Not Payments.Count() Then
 		Return;
 	EndIf;
 	ObjectValue = FormAttributeToValue("Object");
 	ObjectValue.Date = CurrentDate();
+	ObjectValue.Payments.Load(Payments);
 	ObjectValue.Write();	
 	NewTransaction();
 	Return;
@@ -245,7 +246,7 @@ EndProcedure
 
 &AtServer
 Procedure ItemKeysSelectionAtServer(ChoicedItemKey)
-	ItemListFilter = New Structure
+	ItemListFilter = New Structure;
 	ItemListFilter.Insert("ItemKey", ChoicedItemKey);
 	FoundRows = Object.ItemList.FindRows(ItemListFilter);
 	If FoundRows.Count() Then

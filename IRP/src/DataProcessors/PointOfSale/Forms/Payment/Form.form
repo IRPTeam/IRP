@@ -22,7 +22,6 @@
             <segments>Object.Amount</segments>
           </paths>
         </dataPath>
-        <titleLocation>None</titleLocation>
         <extendedTooltip>
           <name>AmountExtendedTooltip</name>
           <id>21</id>
@@ -96,7 +95,6 @@
         <representation>NormalSeparation</representation>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
-        <showTitle>true</showTitle>
         <throughAlign>Auto</throughAlign>
         <currentRowUse>DontUse</currentRowUse>
       </extInfo>
@@ -302,6 +300,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>InputField</type>
+            <readOnly>true</readOnly>
             <editMode>Enter</editMode>
             <showInHeader>true</showInHeader>
             <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -313,12 +312,14 @@
               <chooseType>true</chooseType>
               <typeDomainEnabled>true</typeDomainEnabled>
               <textEdit>true</textEdit>
+              <font xsi:type="core:FontDef">
+                <height>16.0</height>
+              </font>
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
             <name>PaymentsAmount</name>
             <id>109</id>
-            <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
@@ -361,6 +362,9 @@
             <showInHeader>true</showInHeader>
             <headerHorizontalAlign>Left</headerHorizontalAlign>
             <showInFooter>true</showInFooter>
+            <footerFont xsi:type="core:FontDef">
+              <height>16.0</height>
+            </footerFont>
             <extInfo xsi:type="form:InputFieldExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
               <autoMaxHeight>true</autoMaxHeight>
@@ -368,26 +372,25 @@
               <chooseType>true</chooseType>
               <typeDomainEnabled>true</typeDomainEnabled>
               <textEdit>true</textEdit>
+              <font xsi:type="core:FontDef">
+                <height>16.0</height>
+              </font>
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
-            <name>PaymentsTerminal</name>
-            <id>112</id>
+            <name>PaymentsAmountString</name>
+            <id>149</id>
+            <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Payments.Terminal</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Payments.Terminal</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Payments.AmountString</segments>
             </dataPath>
             <extendedTooltip>
-              <name>PaymentsTerminalExtendedTooltip</name>
-              <id>114</id>
+              <name>PaymentsAmountStringExtendedTooltip</name>
+              <id>151</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -401,8 +404,8 @@
               </extInfo>
             </extendedTooltip>
             <contextMenu>
-              <name>PaymentsTerminalContextMenu</name>
-              <id>113</id>
+              <name>PaymentsAmountStringContextMenu</name>
+              <id>150</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -411,17 +414,28 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>InputField</type>
+            <readOnly>true</readOnly>
+            <horizontalAlign>Right</horizontalAlign>
             <editMode>Enter</editMode>
             <showInHeader>true</showInHeader>
             <headerHorizontalAlign>Left</headerHorizontalAlign>
             <showInFooter>true</showInFooter>
+            <footerDataPath xsi:type="form:DataPath">
+              <segments>PaymentsAmountTotal</segments>
+            </footerDataPath>
+            <footerFont xsi:type="core:FontDef">
+              <height>16.0</height>
+            </footerFont>
             <extInfo xsi:type="form:InputFieldExtInfo">
-              <autoMaxWidth>true</autoMaxWidth>
+              <maxWidth>15</maxWidth>
               <autoMaxHeight>true</autoMaxHeight>
               <wrap>true</wrap>
               <chooseType>true</chooseType>
               <typeDomainEnabled>true</typeDomainEnabled>
               <textEdit>true</textEdit>
+              <font xsi:type="core:FontDef">
+                <height>16.0</height>
+              </font>
             </extInfo>
           </items>
           <autoCommandBar>
@@ -434,6 +448,18 @@
             </userVisible>
             <horizontalAlign>Left</horizontalAlign>
           </autoCommandBar>
+          <handlers>
+            <event>AfterDeleteRow</event>
+            <name>PaymentsAfterDeleteRow</name>
+          </handlers>
+          <handlers>
+            <event>OnChange</event>
+            <name>PaymentsOnChange</name>
+          </handlers>
+          <handlers>
+            <event>OnActivateRow</event>
+            <name>PaymentsOnActivateRow</name>
+          </handlers>
           <searchStringAddition>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1197,7 +1223,7 @@
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
-              <name>_Точка</name>
+              <name>__Dot</name>
               <id>91</id>
               <title>
                 <key>ru</key>
@@ -1213,7 +1239,7 @@
                 <common>true</common>
               </userVisible>
               <extendedTooltip>
-                <name>_ТочкаРасширеннаяПодсказка</name>
+                <name>__DotExtendedTooltip</name>
                 <id>92</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1695,7 +1721,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:Button">
-              <name>__Enter</name>
+              <name>Enter</name>
               <id>147</id>
               <title>
                 <key>en</key>
@@ -1711,7 +1737,7 @@
                 <common>true</common>
               </userVisible>
               <extendedTooltip>
-                <name>__EnterExtendedTooltip</name>
+                <name>EnterExtendedTooltip</name>
                 <id>148</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1726,7 +1752,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.Enter</commandName>
               <representation>Auto</representation>
               <defaultButton>true</defaultButton>
               <width>4</width>
@@ -1956,7 +1982,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>DataProcessorObject.PointOfSail</types>
+      <types>DataProcessorObject.PointOfSale</types>
     </valueType>
     <view>
       <common>true</common>
@@ -1965,24 +1991,6 @@
       <common>true</common>
     </edit>
     <main>true</main>
-  </attributes>
-  <attributes>
-    <name>CustomerCashString</name>
-    <title>
-      <key>en</key>
-      <value>Customer cash string</value>
-    </title>
-    <id>2</id>
-    <valueType>
-      <types>String</types>
-      <stringQualifiers/>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
   </attributes>
   <attributes>
     <name>POSTerminals</name>
@@ -2089,12 +2097,12 @@
       </edit>
     </columns>
     <columns>
-      <name>Terminal</name>
+      <name>AmountString</name>
       <title>
         <key>en</key>
-        <value>Terminal</value>
+        <value>Amount</value>
       </title>
-      <id>3</id>
+      <id>7</id>
       <valueType>
         <types>String</types>
         <stringQualifiers>
@@ -2108,6 +2116,23 @@
         <common>true</common>
       </edit>
     </columns>
+  </attributes>
+  <attributes>
+    <name>PaymentsAmountTotal</name>
+    <title>
+      <key>en</key>
+      <value>Payments amount total</value>
+    </title>
+    <id>6</id>
+    <valueType>
+      <types>DefinedType.typeAmount</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
   </attributes>
   <formCommands>
     <name>Cash</name>
@@ -2170,7 +2195,7 @@
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>Mixed</name>
+        <name>Loyality</name>
       </handler>
     </action>
     <representation>TextPicture</representation>
@@ -2236,6 +2261,28 @@
     <use>
       <common>true</common>
     </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Certificate</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Enter</name>
+    <title>
+      <key>en</key>
+      <value>Enter</value>
+    </title>
+    <id>7</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Enter</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

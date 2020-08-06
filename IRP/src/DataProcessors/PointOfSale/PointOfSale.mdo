@@ -4,13 +4,13 @@
     <objectType typeId="e5fcad66-7768-4d3a-b385-a8ce6b4a3cdf" valueTypeId="62f03e06-dc7f-4016-b845-5f6b80514249"/>
     <managerType typeId="5faa6790-23fb-4cfc-81ab-8c8d144a6281" valueTypeId="71dd6469-cde5-477c-a415-303a6b104b1b"/>
   </producedTypes>
-  <name>PointOfSail</name>
+  <name>PointOfSale</name>
   <synonym>
     <key>en</key>
-    <value>Point of sail</value>
+    <value>Point of sale</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.PointOfSail.Form.Form</defaultForm>
+  <defaultForm>DataProcessor.PointOfSale.Form.Form</defaultForm>
   <attributes uuid="a569aba7-c821-4877-8f3a-6b44d7cae57f">
     <name>Amount</name>
     <synonym>

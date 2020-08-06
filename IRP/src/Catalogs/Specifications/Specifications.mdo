@@ -127,6 +127,7 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+      <indexing>IndexWithAdditionalOrder</indexing>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="6161d092-06e2-4f8f-9937-12e385b3ff93">
@@ -195,6 +196,7 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+      <indexing>IndexWithAdditionalOrder</indexing>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="4fd4218b-614f-4c70-94e0-590d4bd8a855">

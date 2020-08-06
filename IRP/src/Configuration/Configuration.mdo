@@ -123,6 +123,7 @@
   <commonPictures>CommonPicture.Share</commonPictures>
   <commonPictures>CommonPicture.SpecialOffer</commonPictures>
   <commonPictures>CommonPicture.Store</commonPictures>
+  <commonPictures>CommonPicture.Retail</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUser</sessionParameters>
@@ -332,6 +333,8 @@
   <eventSubscriptions>EventSubscription.OpenMobileForm</eventSubscriptions>
   <eventSubscriptions>EventSubscription.RefreshReusableValues</eventSubscriptions>
   <eventSubscriptions>EventSubscription.UpdateUsersRole</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.EventSubscription</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopyRemoveUniqueID</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>

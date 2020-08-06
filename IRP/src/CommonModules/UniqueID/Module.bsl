@@ -2,6 +2,11 @@ Function UniqueIDByName(ObjectMetadata, UniqueID) Export
 	Return UniqueIDReuse.UniqueIDByName(ObjectMetadata.FullName(), UniqueID);
 EndFunction
 
+Procedure OnCopyRemoveUniqueIDOnCopy(Source, CopiedObject) Export
+	Source.UniqueID = Undefined;
+EndProcedure
+
+
 Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
 	If Not ValueIsFilled(Source.UniqueID) Then
 		Source.UniqueID = "_" + StrReplace(String(New UUID()), "-", "");
@@ -11,7 +16,7 @@ Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
 	DataLockItem.Mode = DataLockMode.Shared;
 	DataLock.Lock();
 	Try
-		Execute Source.UniqueID + " = 0;";
+		Str = New Structure(Source.UniqueID);
 	Except
 		Cancel = True;
 		CommonFunctionsClientServer.ShowUsersMessage(R().Error_012, "UniqueID", Source);

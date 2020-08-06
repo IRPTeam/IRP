@@ -2,7 +2,7 @@
 Procedure OnCreateAtServer(Form, Cancel, StandardProcessing) Export
 	NewCommand = Form.Commands.Add("CreateFromClassifier");
 	NewCommand.Action = "CreateFromClassifier";
-	NewCommand.Title = "Create from classifier";
+	NewCommand.Title = R().Form_025;
 	
 	NewItem = Form.Items.Add("CreateFromClassifier",
 	                                 Type("FormButton"),

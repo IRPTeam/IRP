@@ -170,7 +170,6 @@ Function Strings(Lang) Export
 			 												 Metadata.Documents.GoodsReceipt.Synonym);
 	// %1 - sales order
 	Strings.Insert("Error_054", NStr("en = 'Not properly status of %1 to proceed.'", Lang));
-	Strings.Error_053 = StrTemplate(Strings.Error_053, Metadata.Documents.SalesOrder.Synonym);
 															  
 	Strings.Insert("Error_055", NStr("en = 'No lines with properly procurement method.'", Lang));
 

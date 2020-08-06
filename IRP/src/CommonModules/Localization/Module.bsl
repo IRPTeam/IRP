@@ -74,6 +74,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_024", NStr("en = '3. By items'", Lang));
 	
 	Strings.Insert("Form_025", NStr("en = 'Create from classifier'", Lang));
+	
+	Strings.Insert("Form_026", NStr("en = 'Item Bundle'", Lang));
+	Strings.Insert("Form_027", NStr("en = 'Item'", Lang));
+	Strings.Insert("Form_027", NStr("en = 'Item type'", Lang));
 	#EndRegion
 	
 	#Region ErrorMessages

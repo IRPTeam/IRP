@@ -78,4 +78,5 @@
   <content>Document.Labeling</content>
   <content>FunctionalOption.ShowAlphaTestingSaas</content>
   <content>DataProcessor.QuantityCompare</content>
+  <content>DataProcessor.PointOfSail</content>
 </mdclass:Subsystem>

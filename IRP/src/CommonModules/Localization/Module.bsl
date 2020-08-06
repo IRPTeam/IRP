@@ -72,6 +72,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_022", NStr("en = '1. By item keys'", Lang));
 	Strings.Insert("Form_023", NStr("en = '2. By properties'", Lang));
 	Strings.Insert("Form_024", NStr("en = '3. By items'", Lang));
+	
+	Strings.Insert("Form_025", NStr("en = 'Create from classifier'", Lang));
 	#EndRegion
 	
 	#Region ErrorMessages

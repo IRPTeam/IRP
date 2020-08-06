@@ -77,7 +77,7 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("Form_026", NStr("en = 'Item Bundle'", Lang));
 	Strings.Insert("Form_027", NStr("en = 'Item'", Lang));
-	Strings.Insert("Form_027", NStr("en = 'Item type'", Lang));
+	Strings.Insert("Form_028", NStr("en = 'Item type'", Lang));
 	#EndRegion
 	
 	#Region ErrorMessages

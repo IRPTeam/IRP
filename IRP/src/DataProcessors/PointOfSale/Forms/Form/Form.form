@@ -3066,7 +3066,7 @@ WHERE
     <id>5</id>
     <toolTip>
       <key>en</key>
-      <value>Q payment</value>
+      <value>Payment</value>
     </toolTip>
     <use>
       <common>true</common>
@@ -3111,7 +3111,7 @@ WHERE
     <id>8</id>
     <toolTip>
       <key>en</key>
-      <value>L show items</value>
+      <value>Show items</value>
     </toolTip>
     <use>
       <common>true</common>

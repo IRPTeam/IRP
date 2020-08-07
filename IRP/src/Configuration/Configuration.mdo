@@ -458,6 +458,7 @@
   <catalogs>Catalog.ReportOptions</catalogs>
   <catalogs>Catalog.UnitsOfMeasurement</catalogs>
   <catalogs>Catalog.PaymentTerminals</catalogs>
+  <catalogs>Catalog.BankTerms</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -557,6 +558,7 @@
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
+  <informationRegisters>InformationRegister.StoreBankTerms</informationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>

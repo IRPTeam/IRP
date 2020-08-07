@@ -176,41 +176,6 @@
     <items xsi:type="form:FormGroup">
       <name>GroupPaymentsCommandBar</name>
       <id>132</id>
-      <items xsi:type="form:Button">
-        <name>PaymentsDelete</name>
-        <id>128</id>
-        <title>
-          <key>en</key>
-          <value>Delete row</value>
-        </title>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <extendedTooltip>
-          <name>PaymentsDeleteExtendedTooltip</name>
-          <id>129</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <commandName>Form.Item.Payments.StandardCommand.Delete</commandName>
-        <representation>PictureAndText</representation>
-        <onlyInAllActions>false</onlyInAllActions>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <placementArea>UserCmds</placementArea>
-        <representationInContextMenu>Auto</representationInContextMenu>
-      </items>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -436,6 +401,55 @@
               <font xsi:type="core:FontDef">
                 <height>16.0</height>
               </font>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
+            <name>PaymentsPaymentTypeEnum</name>
+            <id>157</id>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Payments.PaymentTypeEnum</segments>
+            </dataPath>
+            <extendedTooltip>
+              <name>PaymentsPaymentTypeEnumExtendedTooltip</name>
+              <id>159</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>PaymentsPaymentTypeEnumContextMenu</name>
+              <id>158</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <chooseType>true</chooseType>
+              <typeDomainEnabled>true</typeDomainEnabled>
+              <textEdit>true</textEdit>
             </extInfo>
           </items>
           <autoCommandBar>
@@ -669,7 +683,6 @@
               <name>Certificate</name>
               <id>136</id>
               <visible>true</visible>
-              <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
@@ -997,7 +1010,6 @@
                 <value>Loyality points</value>
               </title>
               <visible>true</visible>
-              <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
@@ -2169,7 +2181,7 @@
       </title>
       <id>1</id>
       <valueType>
-        <types>EnumRef.PaymentTypes</types>
+        <types>CatalogRef.PaymentTypes</types>
       </valueType>
       <view>
         <common>true</common>
@@ -2232,6 +2244,57 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>BankTerm</name>
+      <title>
+        <key>en</key>
+        <value>Bank term</value>
+      </title>
+      <id>15</id>
+      <valueType>
+        <types>CatalogRef.BankTerms</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Description</name>
+      <title>
+        <key>en</key>
+        <value>Description</value>
+      </title>
+      <id>18</id>
+      <valueType>
+        <types>DefinedType.typeDescription</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PaymentTypeEnum</name>
+      <title>
+        <key>en</key>
+        <value>Payment type enum</value>
+      </title>
+      <id>19</id>
+      <valueType>
+        <types>EnumRef.PaymentTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>PaymentsAmountTotal</name>
@@ -2249,6 +2312,142 @@
     <edit>
       <common>true</common>
     </edit>
+  </attributes>
+  <attributes>
+    <name>CashPaymentTypes</name>
+    <title>
+      <key>en</key>
+      <value>Cash payment types</value>
+    </title>
+    <id>9</id>
+    <valueType>
+      <types>ValueTable</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <columns>
+      <name>PaymentType</name>
+      <title>
+        <key>en</key>
+        <value>Payment type</value>
+      </title>
+      <id>10</id>
+      <valueType>
+        <types>CatalogRef.PaymentTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+  </attributes>
+  <attributes>
+    <name>BankPaymentTypes</name>
+    <title>
+      <key>en</key>
+      <value>Bank payment types</value>
+    </title>
+    <id>11</id>
+    <valueType>
+      <types>ValueTable</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <columns>
+      <name>PaymentType</name>
+      <title>
+        <key>en</key>
+        <value>Payment type</value>
+      </title>
+      <id>10</id>
+      <valueType>
+        <types>CatalogRef.PaymentTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Account</name>
+      <title>
+        <key>en</key>
+        <value>Account</value>
+      </title>
+      <id>12</id>
+      <valueType>
+        <types>CatalogRef.CashAccounts</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>BankTerm</name>
+      <title>
+        <key>en</key>
+        <value>Bank term</value>
+      </title>
+      <id>13</id>
+      <valueType>
+        <types>CatalogRef.BankTerms</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Percent</name>
+      <title>
+        <key>en</key>
+        <value>Percent</value>
+      </title>
+      <id>14</id>
+      <valueType>
+        <types>DefinedType.typePercent</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Description</name>
+      <title>
+        <key>en</key>
+        <value>Description</value>
+      </title>
+      <id>16</id>
+      <valueType>
+        <types>DefinedType.typeDescription</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <formCommands>
     <name>Cash</name>

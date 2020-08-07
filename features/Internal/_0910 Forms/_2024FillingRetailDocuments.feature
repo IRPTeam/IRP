@@ -15,12 +15,12 @@ Scenario: _0154134 preparation
 	* Create Retail customer
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Retail customer" text in "ENG" field
+		And I input "Retail customer" text in the field named "Description_en"
 		And I change checkbox "Customer"
 		And I click "Save" button
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "Company Retail customer" text in "ENG" field
+		And I input "Company Retail customer" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -31,7 +31,7 @@ Scenario: _0154134 preparation
 	* Create Retail Agreement for Retail customer
 		And In this window I click command interface button "Partner terms"
 		And I click the button named "FormCreate"
-		And I input "Retail partner term" text in "ENG" field
+		And I input "Retail partner term" text in the field named "Description_en"
 		And I click Select button of "Date" field
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
@@ -87,7 +87,7 @@ Scenario: _0154134 preparation
 	* Create payment terminal
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTerminals"
 		And I click the button named "FormCreate"
-		And I input "Payment terminal 01" text in "ENG" field
+		And I input "Payment terminal 01" text in the field named "Description_en"
 		And I click Select button of "Account" field
 		Then "Cash/Bank accounts" window is opened
 		And I go to line in "List" table
@@ -99,13 +99,13 @@ Scenario: _0154134 preparation
 	* Create 
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTypes"
 		And I click the button named "FormCreate"
-		And I input "Cash" text in "ENG" field
+		And I input "Cash" text in the field named "Description_en"
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
-		And I input "Card" text in "ENG" field
+		And I input "Card" text in the field named "Description_en"
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
-		And I input "Mixed" text in "ENG" field
+		And I input "Mixed" text in the field named "Description_en"
 		And I click "Save and close" button
 
 

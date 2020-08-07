@@ -762,7 +762,7 @@ Scenario: _400004 opening entry AP balance by partner terms (vendors)
 			And I click the button named "FormCreate"
 			And I change "AP/AR posting detail" radio button value to "By partner terms"
 			And I change "Type" radio button value to "Vendor"
-			And I input "DFC Vendor by Partner terms" text in "ENG" field
+			And I input "DFC Vendor by Partner terms" text in the field named "Description_en"
 			And I input "01.12.2019" text in "Date" field
 			And I click Select button of "Multi currency movement type" field
 			And I go to line in "List" table
@@ -865,7 +865,7 @@ Scenario: _400005 opening entry AR balance by partner terms (customers)
 			And I click the button named "FormCreate"
 			And I change "AP/AR posting detail" radio button value to "By partner terms"
 			And I change "Type" radio button value to "Customer"
-			And I input "DFC Customer by Partner terms" text in "ENG" field
+			And I input "DFC Customer by Partner terms" text in the field named "Description_en"
 			And I input "01.12.2019" text in "Date" field
 			And I click Select button of "Multi currency movement type" field
 			And I go to line in "List" table

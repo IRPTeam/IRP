@@ -27,10 +27,10 @@ Scenario: _207001 copy additional attribute values when create catalog element
 			And I click the button named "FormWrite"
 			And In this window I click command interface button "Additional attribute values"
 			And I click the button named "FormCreate"
-			And I input "Value02" text in "ENG" field
+			And I input "Value02" text in the field named "Description_en"
 			And I click "Save and close" button
 			And I click the button named "FormCreate"
-			And I input "Value01" text in "ENG" field
+			And I input "Value01" text in the field named "Description_en"
 			And I click "Save and close" button
 			And I close current window
 		* Additional attribute 02
@@ -48,10 +48,10 @@ Scenario: _207001 copy additional attribute values when create catalog element
 			And I click the button named "FormWrite"
 			And In this window I click command interface button "Additional attribute values"
 			And I click the button named "FormCreate"
-			And I input "Value02" text in "ENG" field
+			And I input "Value02" text in the field named "Description_en"
 			And I click "Save and close" button
 			And I click the button named "FormCreate"
-			And I input "Value01" text in "ENG" field
+			And I input "Value01" text in the field named "Description_en"
 			And I click "Save and close" button
 			And I close current window
 	* Additional attributes settings
@@ -75,7 +75,7 @@ Scenario: _207001 copy additional attribute values when create catalog element
 				| 'Additional attribute 01' |
 			And I select current line in "List" table
 			And I finish line editing in "Attributes" table
-			And I input "Partners" text in "ENG" field
+			And I input "Partners" text in the field named "Description_en"
 			And I click "Save and close" button
 		* Opening the form for adding additional attributes for Partners
 			Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
@@ -97,7 +97,7 @@ Scenario: _207001 copy additional attribute values when create catalog element
 				| 'Additional attribute 01' |
 			And I select current line in "List" table
 			And I finish line editing in "Attributes" table
-			And I input "Partners" text in "ENG" field
+			And I input "Partners" text in the field named "Description_en"
 			And I click "Save and close" button
 	* Load test partner
 		When Create catalog Partners objects (Partner 01)
@@ -122,7 +122,7 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		Then "Additional attribute 02" form attribute became equal to "Value01"
 		Then "Additional attribute 01" form attribute became equal to ""
 		Then the form attribute named "Description_en" became equal to "Partner 01"
-		And I input "Partner 01 (clone)" text in "ENG" field
+		And I input "Partner 01 (clone)" text in the field named "Description_en"
 		And I click "Save" button
 		Then "Additional attribute 02" form attribute became equal to "Value01"
 		Then the form attribute named "Description_en" became equal to "Partner 01 (clone)"
@@ -167,7 +167,7 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		Then "Additional attribute 02" form attribute became equal to "Value01"
 		Then "Additional attribute 01" form attribute became equal to "Value01"
 		Then the form attribute named "Description_en" became equal to "Partner 01"
-		And I input "Partner 01 (clone2)" text in "ENG" field
+		And I input "Partner 01 (clone2)" text in the field named "Description_en"
 		And I click "Save" button
 		Then "Additional attribute 02" form attribute became equal to "Value01"
 		Then "Additional attribute 01" form attribute became equal to "Value01"
@@ -201,7 +201,7 @@ Scenario: _207002 copy additional attribute values when create document
 				| 'Additional attribute 01' |
 			And I select current line in "List" table
 			And I finish line editing in "Attributes" table
-			And I input "Bank receipt" text in "ENG" field
+			And I input "Bank receipt" text in the field named "Description_en"
 			And I click "Save and close" button
 	* Create test Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"

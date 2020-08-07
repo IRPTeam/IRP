@@ -30,8 +30,8 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And Delay 2
 	* Filling in company data 'Company Ferron BP'
 		And I click Open button of the field named "Description_en"
-		And I input "Company Ferron BP" text in "ENG" field
-		And I input "Company Ferron BP TR" text in "TR" field
+		And I input "Company Ferron BP" text in the field named "Description_en"
+		And I input "Company Ferron BP TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I input "Turkey" text in "Country" field
 		And I input "Ferron BP" text in "Partner" field
@@ -46,8 +46,8 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And I click the button named "FormCreate"
 		And Delay 2
 		And I click Open button of the field named "Description_en"
-		And I input "Company Kalipso" text in "ENG" field
-		And I input "Company Kalipso TR" text in "TR" field
+		And I input "Company Kalipso" text in the field named "Description_en"
+		And I input "Company Kalipso TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I input "Ukraine" text in "Country" field
 		And I input "Kalipso" text in "Partner" field
@@ -67,8 +67,8 @@ Scenario: _010006 create a structure of partners (partners), 1 main partner and 
 		And Delay 2
 	* Creating partners: 'Alians', 'MIO', 'Seven Brand'
 		And I click Open button of the field named "Description_en"
-		And I input "Alians" text in "ENG" field
-		And I input "Alians TR" text in "TR" field
+		And I input "Alians" text in the field named "Description_en"
+		And I input "Alians TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I change checkbox "Customer"
 		And I click "Save and close" button
@@ -76,8 +76,8 @@ Scenario: _010006 create a structure of partners (partners), 1 main partner and 
 		And I click the button named "FormCreate"
 		And Delay 2
 		And I click Open button of the field named "Description_en"
-		And I input "MIO" text in "ENG" field
-		And I input "MIO TR" text in "TR" field
+		And I input "MIO" text in the field named "Description_en"
+		And I input "MIO TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I change checkbox "Customer"
 		And I click "Save and close" button
@@ -85,8 +85,8 @@ Scenario: _010006 create a structure of partners (partners), 1 main partner and 
 		And I click the button named "FormCreate"
 		And Delay 2
 		And I click Open button of the field named "Description_en"
-		And I input "Seven Brand" text in "ENG" field
-		And I input "Seven Brand TR" text in "TR" field
+		And I input "Seven Brand" text in the field named "Description_en"
+		And I input "Seven Brand TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I change checkbox "Customer"
 		And I click "Save and close" button
@@ -145,16 +145,16 @@ Scenario: _010007 adding additional details for partners "Business region"
 		And I select current line in "List" table
 	* Filling in the name of the settings for adding additional details for partners
 		And I click Open button of the field named "Description_en"
-		And I input "Partners" text in "ENG" field
-		And I input "Partners TR" text in "TR" field
+		And I input "Partners" text in the field named "Description_en"
+		And I input "Partners TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And in the table "Attributes" I click the button named "AttributesAdd"
 		And I click choice button of "Attribute" attribute in "Attributes" table
 	* Adding additional attribute Business region
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Business region" text in "ENG" field
-		And I input "Business region TR" text in "TR" field
+		And I input "Business region" text in the field named "Description_en"
+		And I input "Business region TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I input "BusinessRegion" text in "Unique ID" field
 		And I click "Save and close" button
@@ -165,8 +165,8 @@ Scenario: _010007 adding additional details for partners "Business region"
 		And I click choice button of "UI group" attribute in "Attributes" table
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Main information" text in "ENG" field
-		And I input "Main information TR" text in "TR" field
+		And I input "Main information" text in the field named "Description_en"
+		And I input "Main information TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I change "Form position" radio button value to "Left"
 		And I click "Save and close" button
@@ -185,15 +185,15 @@ Scenario: _010007 adding additional details for partners "Business region"
 		And I click Select button of "Business region" field
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Region Turkey" text in "ENG" field
-		And I input "Turkey TR" text in "TR" field
+		And I input "Region Turkey" text in the field named "Description_en"
+		And I input "Turkey TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Region Ukraine" text in "ENG" field
-		And I input "Ukraine TR" text in "TR" field
+		And I input "Region Ukraine" text in the field named "Description_en"
+		And I input "Ukraine TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5

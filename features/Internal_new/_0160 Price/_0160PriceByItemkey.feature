@@ -554,8 +554,8 @@ Scenario: _016010 check dependent prices calculation
 		And I input "" text in "Path to plugin for test" field
 		And I input "SalesPriceCalculation" text in "Name" field
 		And I click Open button of the field named "Description_en"
-		And I input "SalesPriceCalculation" text in "ENG" field
-		And I input "SalesPriceCalculation" text in "TR" field
+		And I input "SalesPriceCalculation" text in the field named "Description_en"
+		And I input "SalesPriceCalculation" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And I wait "Plugins (create)" window closing in 10 seconds

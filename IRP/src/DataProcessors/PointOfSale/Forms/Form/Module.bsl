@@ -5,18 +5,9 @@ Var HTMLWindowPictures Export;
 
 #Region Events
 
-&AtClient
-Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	For Each Row In Object.ItemList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;	
-EndProcedure
-
-&AtClient
-Procedure ItemListItemOnChange(Item)
-	DocRetailSalesReceiptClient.ItemListItemOnChange(Object, ThisObject, Item);
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	NewTransaction();
 EndProcedure
 
 &AtClient
@@ -30,9 +21,22 @@ Procedure ItemsPickupOnActivateRow(Item)
 EndProcedure
 
 &AtClient
-Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
-	CurrentData = Items.ItemsPickup.CurrentData;
-	AfterItemChoice(CurrentData.Item, True);
+Procedure OnOpen(Cancel, AddInfo = Undefined) Export
+	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
+	
+	PictureViewerClient.UpdateObjectPictures(ThisObject, PredefinedValue("Catalog.ItemKeys.EmptyRef"));
+	Items.DecorationTop.Title = CurrentDate();
+	Items.ItemListPicture.PictureSize = PictureSize.Proportionally;
+	ShowPictures();
+	ShowItems();
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+	If Not Source = ThisObject Then
+		Return;
+	EndIf;	
+	DocRetailSalesReceiptClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 EndProcedure
 
 &AtClient
@@ -46,8 +50,115 @@ Procedure ExternalEvent(Source, Event, Data)
 	EndIf;
 EndProcedure
 
+#Region ItemListEvents
+
+&AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocRetailSalesReceiptClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
+	DocRetailSalesReceiptClient.ItemListOnChange(Object, ThisObject, Item);
+	EnabledPaymentButton();
+EndProcedure
+
+&AtClient
+Procedure ItemListOnStartEdit(Item, NewRow, Clone)
+	If Clone Then
+		Item.CurrentData.Key = New UUID();
+	EndIf;
+	DocumentsClient.TableOnStartEdit(Object, ThisObject, "Object.ItemList", Item, NewRow, Clone);
+EndProcedure
+
+&AtClient
+Procedure ItemListOnActivateRow(Item)
+	DocRetailSalesReceiptClient.ItemListOnActivateRow(Object, ThisObject, Item);
+	If NOT HTMLWindowPictures = Undefined Then
+		HTMLWindowPictures.clearAll();
+		AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
+	EndIf;
+EndProcedure
+
 #EndRegion
 
+#Region ItemListItemsEvents
+
+&AtClient
+Procedure ItemListItemOnChange(Item, AddInfo = Undefined) Export
+	DocRetailSalesReceiptClient.ItemListItemOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemKeyOnChange(Item, AddInfo = Undefined) Export
+	DocRetailSalesReceiptClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+	UpdateHTMLPictures();
+EndProcedure
+
+&AtClient
+Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
+	DocRetailSalesReceiptClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
+	DocRetailSalesReceiptClient.ItemListUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
+	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListPriceOnChange(Item, AddInfo = Undefined) Export
+	DocRetailSalesReceiptClient.ItemListPriceOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
+	CurrentData = ThisObject.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;	
+	TaxesClient.CalculateReverseTaxOnChangeTotalAmount(Object, ThisObject, CurrentData);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailSalesReceiptClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
+	DocRetailSalesReceiptClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ItemListPickupEvents
+
+&AtClient
+Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
+	CurrentData = Items.ItemsPickup.CurrentData;
+	AfterItemChoice(CurrentData.Item, True);
+	ItemListOnChange(Items.ItemList);
+	ItemListItemOnChange(Items.ItemList);
+EndProcedure
+
+#EndRegion
+
+#Region ItemkeyPickupList
+
+&AtClient
+Procedure ItemKeysPickupSelection(Item, SelectedRow, Field, StandardProcessing)
+	CurrentData = Items.ItemKeysPickup.CurrentData;
+	ItemKeysSelectionAtServer(CurrentData.Ref);
+	ItemListOnChange(Items.ItemList);	
+	ItemListItemKeyOnChange(Items.ItemList);
+EndProcedure
+
+#EndRegion
 
 #Region Commands
 
@@ -66,7 +177,7 @@ Procedure qPayment(Command)
 	OpenFormNotifyDescription = New NotifyDescription("PaymentFormClose", ThisObject);
 	ObjectParameters = New Structure;
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
-	ObjectParameters.Insert("CustomerCash", Object.ItemList.Total("TotalAmount"));
+	ObjectParameters.Insert("BusinessUnit", Object.BusinessUnit);
 	OpenFormParameters = New Structure;
 	OpenFormParameters.Insert("Parameters", ObjectParameters);
 	OpenForm("DataProcessor.PointOfSale.Form.Payment"
@@ -78,6 +189,8 @@ Procedure qPayment(Command)
 				, OpenFormNotifyDescription
 				, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
+
+#EndRegion
 
 #EndRegion
 
@@ -93,47 +206,33 @@ Procedure NewTransaction()
 	ObjectValue = Documents.RetailSalesReceipt.CreateDocument();
 	FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True);
 	ValueToFormAttribute(ObjectValue, "Object");
+	ThisObject.CurrentPartner = ObjectValue.Partner;
+	ThisObject.CurrentAgreement = ObjectValue.Agreement;
+	ThisObject.CurrentDate = ObjectValue.Date;
+	DocRetailSalesReceiptServer.CalculateTableAtServer(ThisObject, ObjectValue);
+	EnabledPaymentButton();
 EndProcedure
 
 &AtServer
 Procedure WriteTransaction(Result)
-	Payments = Result.Payments;
+	Payments = Result.Payments.Unload();
 	If Not Payments.Count() Then
 		Return;
 	EndIf;
+	For Each PaymentRow In Payments Do
+		If PaymentRow.Percent Then
+			PaymentRow.Commision = PaymentRow.Amount * PaymentRow.Percent / 100;
+		EndIf; 
+	EndDo;
 	ObjectValue = FormAttributeToValue("Object");
 	ObjectValue.Date = CurrentDate();
-	//ObjectValue.Payments.Load(Payments);
+	ObjectValue.Payments.Load(Payments);
 	ObjectValue.Write();	
 	NewTransaction();
 	Return;
 EndProcedure
 
 #EndRegion
-
-&AtClient
-Procedure OnOpen(Cancel)
-	PictureViewerClient.UpdateObjectPictures(ThisObject, PredefinedValue("Catalog.ItemKeys.EmptyRef"));
-	Items.DecorationTop.Title = CurrentDate();
-	Items.ItemListPicture.PictureSize = PictureSize.Proportionally;
-	ShowPictures();
-	ShowItems();
-EndProcedure
-
-&AtClient
-Procedure ItemListOnActivateRow(Item)
-	If NOT HTMLWindowPictures = Undefined Then
-		HTMLWindowPictures.clearAll();
-		AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
-	EndIf;
-EndProcedure
-
-&AtClient
-Procedure ItemListItemKeyOnChange(Item)
-	DocRetailSalesReceiptClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
-	UpdateHTMLPictures();
-EndProcedure
-
 
 &AtClient
 Procedure ShowPictures()
@@ -215,30 +314,6 @@ Procedure AfterItemChoice(Val ChoicedItem, AddToItemList = False)
 	EndIf;
 EndProcedure
 
-&AtClient
-Procedure ItemListQuantityOnChange(Item)
-	RecalculateAmount();
-EndProcedure
-
-&AtClient
-Procedure ItemListPriceOnChange(Item)
-	RecalculateAmount();
-EndProcedure
-
-&AtClient
-Procedure RecalculateAmount()
-	For Each Row In Object.ItemList Do
-		Row.TotalAmount = Row.Quantity * Row.Price;
-	EndDo;
-EndProcedure
-
-&AtClient
-Procedure ItemKeysSelection(Item, SelectedRow, Field, StandardProcessing)
-	CurrentData = Items.ItemKeysPickup.CurrentData;
-	ItemKeysSelectionAtServer(CurrentData.Ref);
-	ItemListItemOnChange(Item);
-EndProcedure
-
 &AtServer
 Procedure ItemKeysSelectionAtServer(Val ChoicedItemKey)
 	ItemListFilter = New Structure;
@@ -254,6 +329,85 @@ Procedure ItemKeysSelectionAtServer(Val ChoicedItemKey)
 	NewRow.Quantity = NewRow.Quantity + 1;	
 	NewRow.TotalAmount = NewRow.Quantity * NewRow.Price;
 	Items.ItemList.CurrentRow = NewRow.GetID();
+	EnabledPaymentButton();
+EndProcedure
+
+&AtServer
+Procedure EnabledPaymentButton()
+	Items.qPayment.Enabled = Object.ItemList.Count();
+EndProcedure
+
+#EndRegion
+
+#Region Taxes
+&AtClient
+Procedure TaxValueOnChange(Item) Export
+//    CurrentData = Items.ItemList.CurrentData;
+//    If CurrentData = Undefined Then
+//        Return;
+//    EndIf;
+//    PutToTaxTable_(Item.Name, CurrentData.Key, CurrentData[Item.Name]);
+//    Settings = New Structure();
+//    Settings.Insert("Rows", New Array());
+//    Settings.Insert("CalculateSettings");
+//    Settings.CalculateSettings = New Structure("CalculateTax");
+//    Settings.Rows.Add(CurrentData);
+//    DocumentsClient.ItemListCalculateRowsAmounts(Object, ThisObject, Settings);
+EndProcedure
+
+&AtServer
+Procedure PutToTaxTable_(ItemName, Key, Value) Export
+    //TaxesServer.PutToTaxTableByColumnName(ThisObject, Key, ItemName, Value);
+EndProcedure
+
+&AtClient
+Procedure TaxTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+    //Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure TaxTreeOnChange(Item)
+//    CurrentData = Items.TaxTree.CurrentData;
+//    If CurrentData = Undefined Then
+//        Return;
+//    EndIf;
+//    Filter = TaxesClient.ChangeTaxAmount(Object, ThisObject, CurrentData, Object.ItemList);
+//    Taxes_CreateTaxTree();
+//    TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
+//    ThisObject.Items.TaxTree.CurrentRow = TaxesClient.FindRowInTree(Filter, ThisObject.TaxTree);
+EndProcedure
+
+&AtClient
+Procedure TaxTreeBeforeDeleteRow(Item, Cancel)
+    //Cancel = True;
+EndProcedure
+
+&AtServer
+Procedure Taxes_CreateFormControls() Export
+    TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
+    TaxesParameters.Date = Object.Date;
+    TaxesParameters.Company = Object.Company;
+    TaxesParameters.PathToTable = "Object.ItemList";
+    TaxesParameters.ItemParent = ThisObject.Items.ItemList;
+    TaxesParameters.ColumnOffset = ThisObject.Items.ItemListOffersAmount;
+    TaxesParameters.ItemListName = "ItemList";
+    TaxesParameters.TaxListName = "TaxList";
+    TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
+    TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
+EndProcedure
+
+&AtServer
+Procedure Taxes_CreateTaxTree() Export
+//    TaxesTreeParameters = TaxesServer.GetCreateTaxTreeParameters();
+//    TaxesTreeParameters.MetadataMainList = Metadata.Documents.SalesInvoice.TabularSections.ItemList;
+//    TaxesTreeParameters.MetadataTaxList = Metadata.Documents.SalesInvoice.TabularSections.TaxList;
+//    TaxesTreeParameters.ObjectMainList = Object.ItemList;
+//    TaxesTreeParameters.ObjectTaxList = Object.TaxList;
+//    TaxesTreeParameters.MainListColumns = "Key, Item, ItemKey";
+//    TaxesTreeParameters.Level1Columns = "Tax";
+//    TaxesTreeParameters.Level2Columns = "Key, Item, ItemKey, TaxRate";
+//    TaxesTreeParameters.Level3Columns = "Key, Analytics";
+//    TaxesServer.CreateTaxTree(Object, ThisObject, TaxesTreeParameters);
 EndProcedure
 
 #EndRegion

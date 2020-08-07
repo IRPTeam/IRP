@@ -1,4 +1,7 @@
 
+#Region Events
+
+#Region FormEvents
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
@@ -11,13 +14,26 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		NewItem.Type = FormButtonType.UsualButton;
 		NewItem.Title = PayButton.Presentation;
 		NewItem.CommandName = NewCommand.Name;
+		NewItem.Font = New Font(NewItem.Font, , 20, True);
 	EndDo;
 
 EndProcedure
 
+#EndRegion
+
+#Region Commands
+
 &AtClient
 Procedure PayButtonPress(Command)
-	ButtonNameIndex = Number(StrReplace(Command, "Button", ""));
+	ButtonNameIndex = Number(StrReplace(Command.Name, "Button", ""));
 	Close(ButtonNameIndex);
 EndProcedure
 
+&AtClient
+Procedure CloseButton(Command)
+	Close();
+EndProcedure
+
+#EndRegion
+
+#EndRegion

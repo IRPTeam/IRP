@@ -37,30 +37,6 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.BankTerms.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="438f7a7b-676d-4fce-a156-5d287f043165">
-    <name>Account</name>
-    <synonym>
-      <key>en</key>
-      <value>Account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="37c70c33-3bd4-4503-b487-7b408c338034">
-    <name>Percent</name>
-    <synonym>
-      <key>en</key>
-      <value>Percent</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typePercent</types>
-    </type>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <tabularSections uuid="a02a7569-9bd2-4203-8a91-cbfb6e902c90">
     <producedTypes>
       <objectType typeId="5b2d60d1-cb4c-4c56-bb66-cc9291835207" valueTypeId="27cf030d-46b7-4b62-b17e-ecc4607aec8f"/>
@@ -79,6 +55,30 @@
       </synonym>
       <type>
         <types>CatalogRef.PaymentTypes</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="78623f56-8170-45ab-a554-fa1264aedc41">
+      <name>Account</name>
+      <synonym>
+        <key>en</key>
+        <value>Account</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CashAccounts</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="605e9138-cc11-49eb-b8ee-714774369177">
+      <name>Percent</name>
+      <synonym>
+        <key>en</key>
+        <value>Percent</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePercent</types>
       </type>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>

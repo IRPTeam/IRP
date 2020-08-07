@@ -9,21 +9,21 @@
     <recordType typeId="d41b8372-1948-4e49-80e0-d9440677cf90" valueTypeId="8a9c981e-8650-4353-8b09-9b6948dc907a"/>
     <recordManagerType typeId="bd4cca65-9eb7-4df2-854c-0e35240496a3" valueTypeId="69b24edb-4c81-4e6b-828b-c1b53b67a609"/>
   </producedTypes>
-  <name>StoreBankTerms</name>
+  <name>BusinessUnitBankTerms</name>
   <synonym>
     <key>en</key>
-    <value>Store bank terms</value>
+    <value>Business unit bank terms</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <dimensions uuid="495bc5fa-d746-44a1-8a3e-abd9d5bc7fb8">
-    <name>Store</name>
+    <name>BusinessUnit</name>
     <synonym>
       <key>en</key>
-      <value>Store</value>
+      <value>Business unit</value>
     </synonym>
     <type>
-      <types>CatalogRef.Stores</types>
+      <types>CatalogRef.BusinessUnits</types>
     </type>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

@@ -2075,10 +2075,6 @@
     <horizontalAlign>Right</horizontalAlign>
   </autoCommandBar>
   <handlers>
-    <event>OnOpen</event>
-    <name>OnOpen</name>
-  </handlers>
-  <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
@@ -2287,6 +2283,40 @@
       <id>19</id>
       <valueType>
         <types>EnumRef.PaymentTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Account</name>
+      <title>
+        <key>en</key>
+        <value>Account</value>
+      </title>
+      <id>20</id>
+      <valueType>
+        <types>CatalogRef.CashAccounts</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Percent</name>
+      <title>
+        <key>en</key>
+        <value>Percent</value>
+      </title>
+      <id>21</id>
+      <valueType>
+        <types>DefinedType.typePercent</types>
       </valueType>
       <view>
         <common>true</common>

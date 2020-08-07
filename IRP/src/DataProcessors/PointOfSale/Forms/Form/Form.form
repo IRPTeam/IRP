@@ -317,6 +317,10 @@
                   <dataPath xsi:type="form:DataPath">
                     <segments>Object.ItemList.Item</segments>
                   </dataPath>
+                  <handlers>
+                    <event>OnChange</event>
+                    <name>ItemListItemOnChange</name>
+                  </handlers>
                   <extendedTooltip>
                     <name>ItemListItemExtendedTooltip</name>
                     <id>823</id>
@@ -348,6 +352,14 @@
                   <headerHorizontalAlign>Left</headerHorizontalAlign>
                   <showInFooter>true</showInFooter>
                   <extInfo xsi:type="form:InputFieldExtInfo">
+                    <handlers>
+                      <event>StartChoice</event>
+                      <name>ItemListItemStartChoice</name>
+                    </handlers>
+                    <handlers>
+                      <event>EditTextChange</event>
+                      <name>ItemListItemEditTextChange</name>
+                    </handlers>
                     <maxWidth>14</maxWidth>
                     <autoMaxHeight>true</autoMaxHeight>
                     <wrap>true</wrap>
@@ -417,6 +429,12 @@
                     <chooseType>true</chooseType>
                     <typeDomainEnabled>true</typeDomainEnabled>
                     <textEdit>true</textEdit>
+                    <choiceParameterLinks>
+                      <name>Filter.Item</name>
+                      <datapath xsi:type="form:DataPath">
+                        <segments>Items.ItemList.CurrentData.Item</segments>
+                      </datapath>
+                    </choiceParameterLinks>
                     <font xsi:type="core:FontDef">
                       <height>18.0</height>
                     </font>
@@ -740,6 +758,9 @@
                   <chooseType>true</chooseType>
                   <typeDomainEnabled>true</typeDomainEnabled>
                   <textEdit>true</textEdit>
+                  <font xsi:type="core:FontDef">
+                    <height>18.0</height>
+                  </font>
                 </extInfo>
               </items>
               <items xsi:type="form:FormField">
@@ -758,6 +779,10 @@
                     <segments>Object.ItemList.TotalAmount</segments>
                   </paths>
                 </dataPath>
+                <handlers>
+                  <event>OnChange</event>
+                  <name>ItemListTotalAmountOnChange</name>
+                </handlers>
                 <extendedTooltip>
                   <name>ItemListTotalAmountExtendedTooltip</name>
                   <id>778</id>
@@ -865,6 +890,10 @@
                     <segments>Object.ItemList.Unit</segments>
                   </paths>
                 </dataPath>
+                <handlers>
+                  <event>OnChange</event>
+                  <name>ItemListUnitOnChange</name>
+                </handlers>
                 <extendedTooltip>
                   <name>ItemListUnitExtendedTooltip</name>
                   <id>805</id>
@@ -919,6 +948,10 @@
                     <segments>Object.ItemList.PriceType</segments>
                   </paths>
                 </dataPath>
+                <handlers>
+                  <event>OnChange</event>
+                  <name>ItemListPriceTypeOnChange</name>
+                </handlers>
                 <extendedTooltip>
                   <name>ItemListPriceTypeExtendedTooltip</name>
                   <id>808</id>
@@ -1191,6 +1224,18 @@
               <handlers>
                 <event>OnChange</event>
                 <name>ItemListOnChange</name>
+              </handlers>
+              <handlers>
+                <event>OnActivateRow</event>
+                <name>ItemListOnActivateRow</name>
+              </handlers>
+              <handlers>
+                <event>OnStartEdit</event>
+                <name>ItemListOnStartEdit</name>
+              </handlers>
+              <handlers>
+                <event>AfterDeleteRow</event>
+                <name>ItemListAfterDeleteRow</name>
               </handlers>
               <searchStringAddition>
                 <visible>true</visible>
@@ -2099,7 +2144,7 @@
             </autoCommandBar>
             <handlers>
               <event>Selection</event>
-              <name>ItemKeysSelection</name>
+              <name>ItemKeysPickupSelection</name>
             </handlers>
             <searchStringAddition>
               <visible>true</visible>
@@ -2547,6 +2592,55 @@
       <currentRowUse>DontUse</currentRowUse>
     </extInfo>
   </items>
+  <items xsi:type="form:FormField">
+    <name>Store</name>
+    <id>859</id>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Store</segments>
+    </dataPath>
+    <extendedTooltip>
+      <name>StoreExtendedTooltip</name>
+      <id>861</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>StoreContextMenu</name>
+      <id>860</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+    </extInfo>
+  </items>
   <autoCommandBar>
     <name>ФормаКоманднаяПанель</name>
     <id>-1</id>
@@ -2594,6 +2688,14 @@
   <handlers>
     <event>ExternalEvent</event>
     <name>ExternalEvent</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
+  </handlers>
+  <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
   </handlers>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -3056,6 +3158,234 @@ WHERE
     <edit>
       <common>true</common>
     </edit>
+  </attributes>
+  <attributes>
+    <name>TaxAndOffersCalculated</name>
+    <title>
+      <key>en</key>
+      <value>Tax and offers calculated</value>
+    </title>
+    <id>29</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>TaxTree</name>
+    <title>
+      <key>en</key>
+      <value>Tax tree</value>
+    </title>
+    <id>30</id>
+    <valueType>
+      <types>ValueTree</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <savedData>true</savedData>
+    <columns>
+      <name>Key</name>
+      <title>
+        <key>en</key>
+        <value>Key</value>
+      </title>
+      <id>15</id>
+      <valueType>
+        <types>UUID</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Tax</name>
+      <title>
+        <key>en</key>
+        <value>Tax</value>
+      </title>
+      <id>16</id>
+      <valueType>
+        <types>CatalogRef.Taxes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Analytics</name>
+      <title>
+        <key>en</key>
+        <value>Analytics</value>
+      </title>
+      <id>17</id>
+      <valueType>
+        <types>CatalogRef.TaxAnalytics</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Item</name>
+      <title>
+        <key>en</key>
+        <value>Item</value>
+      </title>
+      <id>18</id>
+      <valueType>
+        <types>CatalogRef.Items</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>ItemKey</name>
+      <title>
+        <key>en</key>
+        <value>Item key</value>
+      </title>
+      <id>19</id>
+      <valueType>
+        <types>CatalogRef.ItemKeys</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>TaxRate</name>
+      <title>
+        <key>en</key>
+        <value>Tax rate</value>
+      </title>
+      <id>20</id>
+      <valueType>
+        <types>CatalogRef.TaxRates</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Amount</name>
+      <title>
+        <key>en</key>
+        <value>Amount</value>
+      </title>
+      <id>21</id>
+      <valueType>
+        <types>DefinedType.typeAmount</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Level</name>
+      <title>
+        <key>en</key>
+        <value>Level</value>
+      </title>
+      <id>22</id>
+      <valueType>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>ManualAmount</name>
+      <title>
+        <key>en</key>
+        <value>Manual amount</value>
+      </title>
+      <id>23</id>
+      <valueType>
+        <types>DefinedType.typeAmount</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>ReadOnly</name>
+      <title>
+        <key>en</key>
+        <value>Read only</value>
+      </title>
+      <id>24</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PictureEdit</name>
+      <title>
+        <key>en</key>
+        <value>Picture edit</value>
+      </title>
+      <id>25</id>
+      <valueType>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <formCommands>
     <name>qPayment</name>

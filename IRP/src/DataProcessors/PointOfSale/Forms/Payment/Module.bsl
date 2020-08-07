@@ -10,11 +10,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ChangeEnabledDigitButtons();
 	
 	Object.Amount = Parameters.Parameters.Amount;
-	
-EndProcedure
-
-&AtClient
-Procedure OnOpen(Cancel)
+	Object.BusinessUnit = Parameters.Parameters.BusinessUnit;
 	
 EndProcedure
 
@@ -45,6 +41,13 @@ Procedure Enter(Command)
 	If PaymentsAmountTotal <> (Object.Amount + Object.Cashback) Then
 		Return;
 	EndIf;
+	If Object.Cashback Then
+		Row = Payments.Add();
+		//TODO: #168 Решить по поводу наличных видов оплат
+		Row.PaymentType = CashPaymentTypes[0].PaymentType;
+		Row.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card");
+		Row.Amount = - Object.Cashback;
+	EndIf;
 	ReturnValue = New Structure;
 	ReturnValue.Insert("Payments", Payments);
 	Close(ReturnValue);
@@ -62,14 +65,21 @@ EndProcedure
 Procedure Cash(Command)
 	If CashPaymentTypes.Count() > 1 Then
 		NotifyParameters = New Structure;
-		NotifyDescription = New NotifyDescription("CashChoiceEnd", ThisObject, NotifyParameters, , );
+		NotifyDescription = New NotifyDescription("CashChoiceEnd", ThisObject, NotifyParameters);
 		PayButtons = New ValueList();
 		For Each CollectionItem In CashPaymentTypes Do
-			PayButtons.Add("Button" + Format(CashPaymentTypes.IndexOf(CollectionItem), "NG=0;"), CollectionItem.Description);
+			PayButtons.Add("Button" + Format(CashPaymentTypes.IndexOf(CollectionItem), "NZ=0; NLZ=0; NG=0;"), CollectionItem.Description);
 		EndDo;
 		OpeningFormParameters = New Structure;
 		OpeningFormParameters.Insert("PayButtons", PayButtons);
-		OpenForm("DataProcessor.PointOfSale.Form.PaymentTypes", , ThisObject, UUID, , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+		OpenForm("DataProcessor.PointOfSale.Form.PaymentTypes"
+					, OpeningFormParameters
+					, ThisObject
+					, UUID
+					, 
+					, 
+					, NotifyDescription
+					, FormWindowOpeningMode.LockWholeInterface);
 	Else
 		ChoiceEndResult = 0;
 		ChoiceEndAdditionalParameters = New Structure;
@@ -81,14 +91,21 @@ EndProcedure
 Procedure Card(Command)	
 	If BankPaymentTypes.Count() > 1 Then
 		NotifyParameters = New Structure;
-		NotifyDescription = New NotifyDescription("CardChoiceEnd", ThisObject, NotifyParameters, , );
+		NotifyDescription = New NotifyDescription("CardChoiceEnd", ThisObject, NotifyParameters);
 		PayButtons = New ValueList();
 		For Each CollectionItem In BankPaymentTypes Do
-			PayButtons.Add("Button" + Format(BankPaymentTypes.IndexOf(CollectionItem), "NG=0;"), CollectionItem.Description);
+			PayButtons.Add("Button" + Format(BankPaymentTypes.IndexOf(CollectionItem), "NZ=0; NLZ=0; NG=0;"), CollectionItem.Description);
 		EndDo;
 		OpeningFormParameters = New Structure;
 		OpeningFormParameters.Insert("PayButtons", PayButtons);
-		OpenForm("DataProcessor.PointOfSale.Form.PaymentTypes", , ThisObject, UUID, , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+		OpenForm("DataProcessor.PointOfSale.Form.PaymentTypes"
+					, OpeningFormParameters
+					, ThisObject
+					, UUID
+					, 
+					, 
+					, NotifyDescription
+					, FormWindowOpeningMode.LockWholeInterface);
 	Else
 		ChoiceEndResult = 0;
 		ChoiceEndAdditionalParameters = New Structure;
@@ -169,7 +186,7 @@ Procedure CalculatePaymentsAmountTotal()
 	EndDo;
 	If PaymentsAmountTotal > Object.Amount
 		And PaymentsAmountTotal - Object.Amount <= PaymentCashAmount Then
-			CashbackValue = PaymentCashAmount - (PaymentsAmountTotal - Object.Amount);
+			CashbackValue = PaymentsAmountTotal - Object.Amount;
 	Else
 		CashbackValue = 0;
 	EndIf;
@@ -211,7 +228,7 @@ Procedure NumButtonPress(ButtonValue)
 	CalculatePaymentsAmountTotal();	
 EndProcedure
 
-&AtClient
+&AtServer
 Procedure FillPaymentTypes()
 	FillPaymentsAtServer();
 EndProcedure
@@ -232,23 +249,27 @@ Procedure FillPaymentsAtServer()
 	
 	Query = New Query;
 	Query.Text = "SELECT
-	|	StoreBankTerms.BankTerm
-	|INTO StoreBankTerms
+	|	BusinessUnitBankTerms.BankTerm
 	|FROM
-	|	InformationRegister.StoreBankTerms AS StoreBankTerms
+	|	InformationRegister.BusinessUnitBankTerms AS BusinessUnitBankTerms
 	|WHERE
-	|	StoreBankTerms.Store = &Store
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|	BusinessUnitBankTerms.BusinessUnit = &BusinessUnit";
+	Query.SetParameter("BusinessUnit", Object.BusinessUnit);
+	QueryUnload = Query.Execute().Unload();
+	BankTerms = QueryUnload.UnloadColumn("BankTerm");
+	
+	Query = New Query;
+	Query.Text = "SELECT
 	|	PaymentTypes.PaymentType,
-	|	PaymentTypes.Description_en AS Description,
+	|	PaymentTypes.PaymentType.Description_en AS Description,
 	|	PaymentTypes.Ref AS BankTerm,
-	|	PaymentTypes.Ref.Account,
-	|	PaymentTypes.Ref.Percent
+	|	PaymentTypes.Account,
+	|	PaymentTypes.Percent
 	|FROM
-	|	PaymentTypes AS PaymentTypes";
+	|	Catalog.BankTerms.PaymentTypes AS PaymentTypes
+	|WHERE
+	|	PaymentTypes.Ref In (&BankTerms)";
+	Query.SetParameter("BankTerms", BankTerms);
 	BankPaymentTypesValue = Query.Execute().Unload();
 	ValueToFormAttribute(BankPaymentTypesValue, "BankPaymentTypes");
 	
@@ -262,26 +283,30 @@ Procedure CardChoiceEnd(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	If (Object.Amount - Payments.Total("Amount")) <= 0 Then
-		RemainingAmount = 0;
-	Else
-		RemainingAmount = Object.Amount - Payments.Total("Amount");
-	EndIf;
 	PaymentFilter = New Structure;
 	PaymentFilter.Insert("PaymentType", BankPaymentTypes.Get(Result).PaymentType);
 	PaymentFilter.Insert("BankTerm", BankPaymentTypes.Get(Result).BankTerm);
 	FoundPayment = Payments.FindRows(PaymentFilter);
 	If FoundPayment.Count() Then
 		Row = FoundPayment[0];
+		Row.Amount = 0;
 	Else
 		Row = Payments.Add();
 		Row.PaymentType = PaymentFilter.PaymentType;
 		Row.BankTerm = PaymentFilter.BankTerm;		
 		Row.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card");
+		Row.Account = BankPaymentTypes.Get(Result).Account;
+		Row.Percent = BankPaymentTypes.Get(Result).Percent;
+	EndIf;
+	If (Object.Amount - Payments.Total("Amount")) <= 0 Then
+		RemainingAmount = 0;
+	Else
+		RemainingAmount = Object.Amount - Payments.Total("Amount");
 	EndIf;
 	Row.AmountString = Format(RemainingAmount, "NG=0;");
 	Row.Amount = RemainingAmount;
 	Items.Payments.CurrentRow = Row.GetID();
+	Items.Payments.CurrentData.Edited = False;
 	ChangeEnabledDigitButtons();
 	CalculatePaymentsAmountTotal();
 EndProcedure
@@ -291,24 +316,26 @@ Procedure CashChoiceEnd(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	If (Object.Amount - Payments.Total("Amount")) <= 0 Then
-		RemainingAmount = 0;
-	Else
-		RemainingAmount = Object.Amount - Payments.Total("Amount");
-	EndIf;
 	PaymentFilter = New Structure;
 	PaymentFilter.Insert("PaymentType", CashPaymentTypes.Get(Result).PaymentType);
 	FoundPayment = Payments.FindRows(PaymentFilter);
 	If FoundPayment.Count() Then
 		Row = FoundPayment[0];
+		Row.Amount = 0;
 	Else
 		Row = Payments.Add();
 		Row.PaymentType = PaymentFilter.PaymentType;
 		Row.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Cash");
 	EndIf;
+	If (Object.Amount - Payments.Total("Amount")) <= 0 Then
+		RemainingAmount = 0;
+	Else
+		RemainingAmount = Object.Amount - Payments.Total("Amount");
+	EndIf;
 	Row.AmountString = Format(RemainingAmount, "NG=0;");
 	Row.Amount = RemainingAmount;
 	Items.Payments.CurrentRow = Row.GetID();
+	Items.Payments.CurrentData.Edited = False;
 	ChangeEnabledDigitButtons();
 	CalculatePaymentsAmountTotal();
 EndProcedure

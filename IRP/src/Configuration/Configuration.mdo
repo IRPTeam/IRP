@@ -558,7 +558,7 @@
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
-  <informationRegisters>InformationRegister.StoreBankTerms</informationRegisters>
+  <informationRegisters>InformationRegister.BusinessUnitBankTerms</informationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>

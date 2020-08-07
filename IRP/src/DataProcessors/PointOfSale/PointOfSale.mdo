@@ -59,6 +59,16 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
   </attributes>
+  <attributes uuid="a19ebf74-4e81-47cd-a246-627566cbe9c6">
+    <name>BusinessUnit</name>
+    <synonym>
+      <key>en</key>
+      <value>Business unit</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+  </attributes>
   <forms uuid="6e29de76-f7b4-42c8-a2b7-9df2359eb2f3">
     <name>Form</name>
     <synonym>

@@ -23,8 +23,8 @@ Scenario: _017901 connection of tax calculation Plugin sessing TaxCalculateVAT_T
 		And I input "" text in "Path to plugin for test" field
 		And I input "TaxCalculateVAT_TR" text in "Name" field
 		And I click Open button of the field named "Description_en"
-		And I input "TaxCalculateVAT_TR" text in "ENG" field
-		And I input "TaxCalculateVAT_TR" text in "TR" field
+		And I input "TaxCalculateVAT_TR" text in the field named "Description_en"
+		And I input "TaxCalculateVAT_TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And I wait "Plugins (create)" window closing in 10 seconds
@@ -39,7 +39,7 @@ Scenario: _017902 filling in catalog 'Tax types'
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"
 		And I click the button named "FormCreate"
 	* Filling VAT settings
-		And I input "VAT" text in "ENG" field
+		And I input "VAT" text in the field named "Description_en"
 		And I click Select button of "Plugins" field
 		And I go to line in "List" table
 			| 'Description'        |
@@ -125,7 +125,7 @@ Scenario: _017902 filling in catalog 'Tax types'
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"
 		And I click the button named "FormCreate"
 	* Filling in Sales Tax rate settings
-		And I input "SalesTax" text in "ENG" field
+		And I input "SalesTax" text in the field named "Description_en"
 		And I click Select button of "Plugins" field
 		And I go to line in "List" table
 			| 'Description'        |

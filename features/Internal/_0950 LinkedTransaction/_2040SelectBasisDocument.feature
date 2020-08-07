@@ -16,13 +16,13 @@ Scenario: _2040001 preparation
 			* In USD
 				Given I open hyperlink "e1cib/list/Catalog.Agreements"
 				And I click the button named "FormCreate"
-				And I input "Vendor, USD" text in "ENG" field
+				And I input "Vendor, USD" text in the field named "Description_en"
 				And I change "Type" radio button value to "Vendor"
 				And I input "12389" text in "Number" field
 				And I input "22.01.2020" text in "Date" field
 				And I click Select button of "Partner segment" field
 				And I click the button named "FormCreate"
-				And I input "Vendor" text in "ENG" field
+				And I input "Vendor" text in the field named "Description_en"
 				And I click "Save and close" button
 				And I go to line in "List" table
 					| 'Description' |
@@ -50,7 +50,7 @@ Scenario: _2040001 preparation
 			* In TRY
 				Given I open hyperlink "e1cib/list/Catalog.Agreements"
 				And I click the button named "FormCreate"
-				And I input "Vendor, TRY" text in "ENG" field
+				And I input "Vendor, TRY" text in the field named "Description_en"
 				And I change "Type" radio button value to "Vendor"
 				And I input "12389" text in "Number" field
 				And I input "22.01.2020" text in "Date" field
@@ -81,7 +81,7 @@ Scenario: _2040001 preparation
 		* Main partner and Legal name
 			Given I open hyperlink "e1cib/list/Catalog.Partners"
 			And I click the button named "FormCreate"
-			And I input "Adel" text in "ENG" field
+			And I input "Adel" text in the field named "Description_en"
 			And I change checkbox "Vendor"
 			And I change checkbox "Customer"
 			And I change checkbox "Shipment confirmations before sales invoice"
@@ -109,7 +109,7 @@ Scenario: _2040001 preparation
 			And I click "Save and close" button
 			And In this window I click command interface button "Company"
 			And I click the button named "FormCreate"
-			And I input "Company Adel" text in "ENG" field
+			And I input "Company Adel" text in the field named "Description_en"
 			And I click Select button of "Country" field
 			And I go to line in "List" table
 				| 'Description' |
@@ -122,7 +122,7 @@ Scenario: _2040001 preparation
 		* Subordinate partner with own legal name
 			Given I open hyperlink "e1cib/list/Catalog.Partners"
 			And I click the button named "FormCreate"
-			And I input "Astar" text in "ENG" field
+			And I input "Astar" text in the field named "Description_en"
 			And I change checkbox "Vendor"
 			And I change checkbox "Customer"
 			And I change checkbox "Shipment confirmations before sales invoice"
@@ -155,7 +155,7 @@ Scenario: _2040001 preparation
 			And I click "Save and close" button
 			And In this window I click command interface button "Company"
 			And I click the button named "FormCreate"
-			And I input "Company Astar" text in "ENG" field
+			And I input "Company Astar" text in the field named "Description_en"
 			And I click Select button of "Country" field
 			And I go to line in "List" table
 				| 'Description' |
@@ -168,7 +168,7 @@ Scenario: _2040001 preparation
 		* Subordinate partner without own legal name
 			Given I open hyperlink "e1cib/list/Catalog.Partners"
 			And I click the button named "FormCreate"
-			And I input "Crystal" text in "ENG" field
+			And I input "Crystal" text in the field named "Description_en"
 			And I change checkbox "Vendor"
 			And I change checkbox "Customer"
 			And I change checkbox "Shipment confirmations before sales invoice"

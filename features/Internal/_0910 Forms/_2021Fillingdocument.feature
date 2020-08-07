@@ -89,7 +89,7 @@ Scenario: _0154100 preparation
 		* Preparation: creating a vendor partner term for DFC
 			Given I open hyperlink "e1cib/list/Catalog.Agreements"
 			And I click the button named "FormCreate"
-			And I input "Partner term vendor DFC" text in "ENG" field
+			And I input "Partner term vendor DFC" text in the field named "Description_en"
 			And I change "Type" radio button value to "Vendor"
 			And I change "AP/AR posting detail" radio button value to "By documents"
 			And I click Select button of "Partner" field
@@ -125,7 +125,7 @@ Scenario: _0154100 preparation
 		* Preparation: creating a vendor partner term for Partner Kalipso Vendor
 			Given I open hyperlink "e1cib/list/Catalog.Agreements"
 			And I click the button named "FormCreate"
-			And I input "Partner term vendor Partner Kalipso" text in "ENG" field
+			And I input "Partner term vendor Partner Kalipso" text in the field named "Description_en"
 			And I change "Type" radio button value to "Vendor"
 			And I change "AP/AR posting detail" radio button value to "By documents"
 			And I click Select button of "Partner" field

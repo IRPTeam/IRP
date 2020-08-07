@@ -16,7 +16,7 @@ Scenario: _206001 check message output when creating a Bundle with empty item
 		And I click the button named "FormCreate"
 	* Filling in the Bundle name and items (without quantity)
 		And I change "Type" radio button value to "Bundle"
-		And I input "Test" text in "ENG" field
+		And I input "Test" text in the field named "Description_en"
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
 			| 'Description'          |
@@ -217,8 +217,8 @@ Scenario: create a specification double
 		And I input "2,000" text in "Quantity" field of "FormTable*" table
 		And I finish line editing in "FormTable*" table
 		And I click Open button of the field named "Description_en"
-		And I input "Duplicate A-8" text in "ENG" field
-		And I input "Duplicate A-8" text in "TR" field
+		And I input "Duplicate A-8" text in the field named "Description_en"
+		And I input "Duplicate A-8" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save" button
 	* Check the output message that the specification cannot be saved

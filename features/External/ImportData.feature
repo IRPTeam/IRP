@@ -554,7 +554,12 @@ Scenario: Create catalog Partners objects (Ferron BP)
 	And I check or create catalog "Partners" objects:
 		| 'Ref'                                                              | 'DeletionMark' | 'Parent'                                                           | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 		| 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8baf320dbc' | 'No'           | ''                                                                 | 'Yes'      | 'Yes'    | 'No'       | 'No'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa6b120ed92fbced11eacd8f1ea7591c' | 'No'                                      | 'No'                                | 'Ferron BP'        | ''                 | ''               | 'Ferron BP TR'       |
-		
+
+Scenario: Create catalog Partners objects (Partner 01)
+
+	And I check or create catalog "Partners" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Parent'                                                           | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
+		| 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8baf322dba' | 'No'           | ''                                                                 | 'Yes'      | 'Yes'    | 'No'       | 'No'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa6b120ed92fbced11eacd8f1ea7591c' | 'No'                                      | 'No'                                | 'Partner 01'        | ''                 | ''               | ''       |	
 		
 Scenario: Create catalog Partners objects (Kalipso)
 
@@ -934,3 +939,10 @@ Scenario: Create catalog Users objects
 		| 'e1cib/data/Catalog.Users?ref=aa6b120ed92fbced11eacd8f1ea75915' | 'No'           | 'APetrova'    | '1c6ee894-3c89-4772-b4cd-04cf60a5cea0' | 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8e2a104de5' | 'tr'               | 'Yes'        | ''          | 'tr'                        | ''                 | 'Anna Petrova (Commercial Agent 3)'    | ''                 | ''               | 'Anna Petrova (Commercial Agent 3) TR'    |
 		| 'e1cib/data/Catalog.Users?ref=aa6b120ed92fbced11eacd8f1ea75919' | 'No'           | 'DRomanov'    | '3a3cece7-6029-4ef6-95c4-abd5abd42419' | 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8e2a104de6' | 'tr'               | 'Yes'        | ''          | 'tr'                        | ''                 | 'David Romanov (Financier 1)'          | ''                 | ''               | 'David Romanov (Financier 1) TR'          |
 		| 'e1cib/data/Catalog.Users?ref=aa6b120ed92fbced11eacd8f1ea7591a' | 'No'           | 'EZelenova'   | 'a876fc5d-fa90-4abb-9317-b1f6091fac3b' | ''                                                                 | 'tr'               | 'Yes'        | ''          | 'tr'                        | ''                 | 'Ella Zelenova (Financier 2)'          | ''                 | ''               | 'Ella Zelenova (Financier 2) TR'          |
+
+
+Scenario: Create document BankReceipt objects (BankReceipt 1001)
+
+	And I check or create document "BankReceipt" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Number'    | 'Date'                | 'Posted' | 'Account'                                                              | 'Company'                                                           | 'Currency'                                                           | 'TransactionType'                                         | 'CurrencyExchange'                                                   | 'TransitAccount'                                                       | 'Author'                                                        | 'Description' | 'DocumentAmount' |
+		| 'e1cib/data/Document.BankReceipt?ref=86ffd69b4676df1211ea9f8de6c72b2a' | 'No'           | '1001'      | '26.05.2020 23:17:20' | 'Yes'    | 'e1cib/data/Catalog.CashAccounts?ref=86ffd69b4676df1211ea9f64161c37dd' | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588' | 'Enum.IncomingPaymentTransactionType.PaymentFromCustomer' | ''                                                                   | ''                                                                     | 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | ''            | '200'            |

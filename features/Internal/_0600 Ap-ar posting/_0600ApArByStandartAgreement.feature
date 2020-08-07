@@ -14,12 +14,12 @@ Scenario: _060001 preparation
 	* Create a test segment of Standard clients
 		Given I open hyperlink "e1cib/list/Catalog.PartnerSegments"
 		And I click the button named "FormCreate"
-		And I input "Standard" text in "ENG" field
+		And I input "Standard" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Create vendor (Veritas) and client (Nicoletta)
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Nicoletta" text in "ENG" field
+		And I input "Nicoletta" text in the field named "Description_en"
 		And I change checkbox "Vendor"
 		And I change checkbox "Customer"
 		And I change checkbox "Shipment confirmations before sales invoice"
@@ -36,7 +36,7 @@ Scenario: _060001 preparation
 		And I wait "Partner segments content (create) *" window closing in 20 seconds
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "Company Nicoletta" text in "ENG" field
+		And I input "Company Nicoletta" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -47,14 +47,14 @@ Scenario: _060001 preparation
 		And In this window I click command interface button "Main"
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
-		And I input "Veritas" text in "ENG" field
+		And I input "Veritas" text in the field named "Description_en"
 		And I change checkbox "Vendor"
 		And I change checkbox "Shipment confirmations before sales invoice"
 		And I change checkbox "Goods receipt before purchase invoice"
 		And I click "Save" button
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "Company Veritas " text in "ENG" field
+		And I input "Company Veritas " text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -68,7 +68,7 @@ Scenario: _060001 preparation
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 		And I click the button named "FormCreate"
 		And I change "Kind" radio button value to "Standard"
-		And I input "Standard" text in "ENG" field
+		And I input "Standard" text in the field named "Description_en"
 		And I input "01.12.2019" text in "Date" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -85,7 +85,7 @@ Scenario: _060001 preparation
 	* Create an individual Partner term for the vendor with the type of settlements Standard 
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 		And I click the button named "FormCreate"
-		And I input "Posting by Standard Partner term (Veritas)" text in "ENG" field
+		And I input "Posting by Standard Partner term (Veritas)" text in the field named "Description_en"
 		And I change "Type" radio button value to "Vendor"
 		And I input "01.12.2019" text in "Date" field
 		And I change "AP/AR posting detail" radio button value to "By standard partner term"
@@ -125,7 +125,7 @@ Scenario: _060001 preparation
 	* Create an individual Partner term for the customer with the type of settlements Standard
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 		And I click the button named "FormCreate"
-		And I input "Posting by Standard Partner term Customer" text in "ENG" field
+		And I input "Posting by Standard Partner term Customer" text in the field named "Description_en"
 		And I change "Type" radio button value to "Customer"
 		And I input "01.12.2019" text in "Date" field
 		And I change "AP/AR posting detail" radio button value to "By standard partner term"

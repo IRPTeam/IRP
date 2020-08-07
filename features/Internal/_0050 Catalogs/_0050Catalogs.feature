@@ -29,8 +29,8 @@ Scenario: _005010 filling in the "Countries" catalog
 		And Delay 2
 	* Data Filling - Turkey
 		And I click Open button of the field named "Description_en"
-		And I input "Turkey" text in "ENG" field
-		And I input "Turkey TR" text in "TR" field
+		And I input "Turkey" text in the field named "Description_en"
+		And I input "Turkey TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click the button named "FormWriteAndClose"
 		And Delay 5
@@ -179,7 +179,7 @@ Scenario: _005013 filling in the "Companies" catalog
 			And in the table "Currencies" I click the button named "CurrenciesAdd"
 			And I click choice button of "Movement type" attribute in "Currencies" table
 			And I click the button named "FormCreate"
-			And I input "Local currency" text in "ENG" field
+			And I input "Local currency" text in the field named "Description_en"
 			And I click Select button of "Currency" field
 			And I go to line in "List" table
 				| 'Code' | 'Description'  |
@@ -211,7 +211,7 @@ Scenario: _005013 filling in the "Companies" catalog
 				| 'Forex Seling' |
 			And I select current line in "List" table
 			And I select "Reporting" exact value from "Type" drop-down list
-			And I input "Reporting currency" text in "ENG" field
+			And I input "Reporting currency" text in the field named "Description_en"
 			And I click "Save and close" button
 			And Delay 5
 			And I click the button named "FormChoose"
@@ -228,7 +228,7 @@ Scenario: _005017 creation Movement Type for Partner term currencies
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.CurrencyMovementType"
 	* Create currency for Partner terms - TRY
 		And I click the button named "FormCreate"
-		And I input "TRY" text in "ENG" field
+		And I input "TRY" text in the field named "Description_en"
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
 			| 'Code' | 'Description'  |
@@ -243,7 +243,7 @@ Scenario: _005017 creation Movement Type for Partner term currencies
 		And I click "Save and close" button
 	* Create currency for Partner terms - EUR
 		And I click the button named "FormCreate"
-		And I input "EUR" text in "ENG" field
+		And I input "EUR" text in the field named "Description_en"
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
 			| 'Code' | 'Description' |
@@ -259,7 +259,7 @@ Scenario: _005017 creation Movement Type for Partner term currencies
 		And I click "Save and close" button
 	* Create currency for Partner terms - USD
 		And I click the button named "FormCreate"
-		And I input "USD" text in "ENG" field
+		And I input "USD" text in the field named "Description_en"
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
 			| 'Code' | 'Description'     |
@@ -970,8 +970,8 @@ Scenario: _005039 filling in the status catalog for Inventory transfer order
 			| InventoryTransferOrder                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Inventory transfer order" text in "ENG" field
-		And I input "Inventory transfer order TR" text in "TR" field
+		And I input "Inventory transfer order" text in the field named "Description_en"
+		And I input "Inventory transfer order TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Wait"
@@ -981,8 +981,8 @@ Scenario: _005039 filling in the status catalog for Inventory transfer order
 		And I click the button named "FormCreate"
 		And I set checkbox "Set by default"
 		And I click Open button of the field named "Description_en"
-		And I input "Wait" text in "ENG" field
-		And I input "Wait TR" text in "TR" field
+		And I input "Wait" text in the field named "Description_en"
+		And I input "Wait TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Approved"
@@ -992,8 +992,8 @@ Scenario: _005039 filling in the status catalog for Inventory transfer order
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
-		And I input "Approved" text in "ENG" field
-		And I input "Approved TR" text in "TR" field
+		And I input "Approved" text in the field named "Description_en"
+		And I input "Approved TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Send"
@@ -1003,8 +1003,8 @@ Scenario: _005039 filling in the status catalog for Inventory transfer order
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
-		And I input "Send" text in "ENG" field
-		And I input "Send TR" text in "TR" field
+		And I input "Send" text in the field named "Description_en"
+		And I input "Send TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Receive"
@@ -1014,8 +1014,8 @@ Scenario: _005039 filling in the status catalog for Inventory transfer order
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
-		And I input "Receive" text in "ENG" field
-		And I input "Receive TR" text in "TR" field
+		And I input "Receive" text in the field named "Description_en"
+		And I input "Receive TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And I close current window
@@ -1032,8 +1032,8 @@ Scenario: _005040 filling in the status catalog for Outgoing Payment Order
 			| OutgoingPaymentOrder                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Outgoing payment order" text in "ENG" field
-		And I input "Outgoing payment order TR" text in "TR" field
+		And I input "Outgoing payment order" text in the field named "Description_en"
+		And I input "Outgoing payment order TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Wait"
@@ -1043,8 +1043,8 @@ Scenario: _005040 filling in the status catalog for Outgoing Payment Order
 		And I click the button named "FormCreate"
 		And I set checkbox "Set by default"
 		And I click Open button of the field named "Description_en"
-		And I input "Wait" text in "ENG" field
-		And I input "Wait TR" text in "TR" field
+		And I input "Wait" text in the field named "Description_en"
+		And I input "Wait TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Approved"
@@ -1054,8 +1054,8 @@ Scenario: _005040 filling in the status catalog for Outgoing Payment Order
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
-		And I input "Approved" text in "ENG" field
-		And I input "Approved TR" text in "TR" field
+		And I input "Approved" text in the field named "Description_en"
+		And I input "Approved TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 
@@ -1071,8 +1071,8 @@ Scenario: _005041 filling in the status catalog for Purchase return order
 			| PurchaseReturnOrder                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Purchase return order" text in "ENG" field
-		And I input "Purchase return order TR" text in "TR" field
+		And I input "Purchase return order" text in the field named "Description_en"
+		And I input "Purchase return order TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Wait"
@@ -1082,8 +1082,8 @@ Scenario: _005041 filling in the status catalog for Purchase return order
 		And I click the button named "FormCreate"
 		And I set checkbox "Set by default"
 		And I click Open button of the field named "Description_en"
-		And I input "Wait" text in "ENG" field
-		And I input "Wait TR" text in "TR" field
+		And I input "Wait" text in the field named "Description_en"
+		And I input "Wait TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Approved"
@@ -1093,8 +1093,8 @@ Scenario: _005041 filling in the status catalog for Purchase return order
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
-		And I input "Approved" text in "ENG" field
-		And I input "Approved TR" text in "TR" field
+		And I input "Approved" text in the field named "Description_en"
+		And I input "Approved TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 
@@ -1111,8 +1111,8 @@ Scenario: _005042 filling in the status catalog for Purchase order
 			| PurchaseOrder                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Purchase order" text in "ENG" field
-		And I input "Purchase order TR" text in "TR" field
+		And I input "Purchase order" text in the field named "Description_en"
+		And I input "Purchase order TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Wait"
@@ -1122,8 +1122,8 @@ Scenario: _005042 filling in the status catalog for Purchase order
 		And I click the button named "FormCreate"
 		And I set checkbox "Set by default"
 		And I click Open button of the field named "Description_en"
-		And I input "Wait" text in "ENG" field
-		And I input "Wait TR" text in "TR" field
+		And I input "Wait" text in the field named "Description_en"
+		And I input "Wait TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Approved"
@@ -1133,8 +1133,8 @@ Scenario: _005042 filling in the status catalog for Purchase order
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
-		And I input "Approved" text in "ENG" field
-		And I input "Approved TR" text in "TR" field
+		And I input "Approved" text in the field named "Description_en"
+		And I input "Approved TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 
@@ -1150,8 +1150,8 @@ Scenario: _005043 filling in the status catalog for Sales return order
 			| SalesReturnOrder                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Sales return order" text in "ENG" field
-		And I input "Sales return order TR" text in "TR" field
+		And I input "Sales return order" text in the field named "Description_en"
+		And I input "Sales return order TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Wait"
@@ -1161,8 +1161,8 @@ Scenario: _005043 filling in the status catalog for Sales return order
 		And I click the button named "FormCreate"
 		And I set checkbox "Set by default"
 		And I click Open button of the field named "Description_en"
-		And I input "Wait" text in "ENG" field
-		And I input "Wait TR" text in "TR" field
+		And I input "Wait" text in the field named "Description_en"
+		And I input "Wait TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Approved"
@@ -1172,8 +1172,8 @@ Scenario: _005043 filling in the status catalog for Sales return order
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
-		And I input "Approved" text in "ENG" field
-		And I input "Approved TR" text in "TR" field
+		And I input "Approved" text in the field named "Description_en"
+		And I input "Approved TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 
@@ -1189,8 +1189,8 @@ Scenario: _005044 filling in the status catalog for Sales order
 			| SalesOrder                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Sales order" text in "ENG" field
-		And I input "Sales order TR" text in "TR" field
+		And I input "Sales order" text in the field named "Description_en"
+		And I input "Sales order TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Wait"
@@ -1199,8 +1199,8 @@ Scenario: _005044 filling in the status catalog for Sales order
 		| 'Sales order' |
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Wait" text in "ENG" field
-		And I input "Wait TR" text in "TR" field
+		And I input "Wait" text in the field named "Description_en"
+		And I input "Wait TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Approved"
@@ -1211,8 +1211,8 @@ Scenario: _005044 filling in the status catalog for Sales order
 		And I set checkbox "Posting"
 		And I set checkbox "Set by default"
 		And I click Open button of the field named "Description_en"
-		And I input "Approved" text in "ENG" field
-		And I input "Approved TR" text in "TR" field
+		And I input "Approved" text in the field named "Description_en"
+		And I input "Approved TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Adding status "Done"
@@ -1222,8 +1222,8 @@ Scenario: _005044 filling in the status catalog for Sales order
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
-		And I input "Done" text in "ENG" field
-		And I input "Done TR" text in "TR" field
+		And I input "Done" text in the field named "Description_en"
+		And I input "Done TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	And I close all client application windows
@@ -1255,29 +1255,29 @@ Scenario: _005046 filling in Business units
 	* Create business unit 'Front office'
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Front office" text in "ENG" field
-		And I input "Front office TR" text in "TR" field
+		And I input "Front office" text in the field named "Description_en"
+		And I input "Front office TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Create business unit 'Accountants office'
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Accountants office" text in "ENG" field
-		And I input "Accountants office TR" text in "TR" field
+		And I input "Accountants office" text in the field named "Description_en"
+		And I input "Accountants office TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Create business unit 'Distribution department'
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Distribution department" text in "ENG" field
-		And I input "Distribution department TR" text in "TR" field
+		And I input "Distribution department" text in the field named "Description_en"
+		And I input "Distribution department TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Create business unit 'Logistics department'
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Logistics department" text in "ENG" field
-		And I input "Logistics department TR" text in "TR" field
+		And I input "Logistics department" text in the field named "Description_en"
+		And I input "Logistics department TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Check creation Business units
@@ -1294,36 +1294,36 @@ Scenario: _005047 filling in Expense type
 	* Create expense type 'Rent'
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Rent" text in "ENG" field
-		And I input "Rent TR" text in "TR" field
+		And I input "Rent" text in the field named "Description_en"
+		And I input "Rent TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Create expense type  'Telephone communications'
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Telephone communications" text in "ENG" field
-		And I input "Telephone communications TR" text in "TR" field
+		And I input "Telephone communications" text in the field named "Description_en"
+		And I input "Telephone communications TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Create expense type 'Fuel'
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Fuel" text in "ENG" field
-		And I input "Fuel TR" text in "TR" field
+		And I input "Fuel" text in the field named "Description_en"
+		And I input "Fuel TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Create expense type  'Software'
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Software" text in "ENG" field
-		And I input "Software TR" text in "TR" field
+		And I input "Software" text in the field named "Description_en"
+		And I input "Software TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Create expense type  'Delivery'
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Delivery" text in "ENG" field
-		And I input "Delivery TR" text in "TR" field
+		And I input "Delivery" text in the field named "Description_en"
+		And I input "Delivery TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 	* Check creation Expense type
@@ -1340,8 +1340,8 @@ Scenario: _005048 filling in the "Item segments content" catalog  "Tax additiona
 		Given I open hyperlink "e1cib/list/Catalog.TaxAnalytics"
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Analytics 01" text in "ENG" field
-		And I input "Analytics 01 TR" text in "TR" field
+		And I input "Analytics 01" text in the field named "Description_en"
+		And I input "Analytics 01 TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And I close all client application windows

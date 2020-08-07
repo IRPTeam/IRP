@@ -19,7 +19,7 @@ Scenario: _200001 customize the CI user settings
 		| 'Login' |
 		| 'CI'          |
 	And I select current line in "List" table
-	And I input "CI" text in "ENG" field
+	And I input "CI" text in the field named "Description_en"
 	And I input "en" text in "Interface localization code" field
 	And I click "Save" button
 	And I click "Settings" button
@@ -1028,7 +1028,7 @@ Scenario:  _200028 create a custom display setting for entering in a row objects
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.CustomUserSettings"
 	* Create custom user settings
 		And I click the button named "FormCreate"
-		And I input "Use object with deletion mark" text in "ENG" field
+		And I input "Use object with deletion mark" text in the field named "Description_en"
 		And I input "Use_object_with_deletion_mark" text in "Unique ID" field
 		And I click Select button of "Value type" field
 		And I go to line in "" table
@@ -1065,7 +1065,7 @@ Scenario: _200029 filling in user settings for a user group
 		Given I open hyperlink "e1cib/list/Catalog.UserGroups"
 	* create a new group and filling out a user preference for displaying objects marked for deletion
 		And I click the button named "FormCreate"
-		And I input "Admin" text in "ENG" field
+		And I input "Admin" text in the field named "Description_en"
 		And I click "Save" button
 		And I click "Settings" button
 	* Filling in the settings for the display of Additional attribute values ​​marked for deletion when entering by line
@@ -1147,7 +1147,7 @@ Scenario: _200031 line entry check of objects marked for deletion (AddAttributeA
 	* create an AddAttributeAndPropertyValues and marking it for deletion
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 		And I click the button named "FormCreate"
-		And I input "100" text in "ENG" field
+		And I input "100" text in the field named "Description_en"
 		And I click Select button of "Additional attribute" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -1163,7 +1163,7 @@ Scenario: _200031 line entry check of objects marked for deletion (AddAttributeA
 	* create a Partner and marking it for deletion
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Delete" text in "ENG" field
+		And I input "Delete" text in the field named "Description_en"
 		And I set checkbox "Customer"
 		And I click "Save and close" button
 		And I go to line in "List" table

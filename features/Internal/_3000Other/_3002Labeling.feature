@@ -33,8 +33,8 @@ Scenario: _300201 add-on plugin to generate unique barcodes
 	And I input "" text in "Path to plugin for test" field
 	And I input "GenerateBarcode" text in "Name" field
 	And I click Open button of the field named "Description_tr"
-	And I input "GenerateBarcode" text in "ENG" field
-	And I input "GenerateBarcodeTR" text in "TR" field
+	And I input "GenerateBarcode" text in the field named "Description_en"
+	And I input "GenerateBarcodeTR" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save and close" button
 	And I wait "Plugins (create)" window closing in 10 seconds

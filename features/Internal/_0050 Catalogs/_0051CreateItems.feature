@@ -27,23 +27,23 @@ Scenario: _005110 filling in the "UI groups" catalog
 		And I click the button named "FormCreate"
 	* Creating UI groups: Product information, Accounting information, Purchase and production 
 		And I click Open button of the field named "Description_en"
-		And I input "Product information" text in "ENG" field
-		And I input "Product information TR" text in "TR" field
+		And I input "Product information" text in the field named "Description_en"
+		And I input "Product information TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And I wait "UI groups (create)" window closing in 5 seconds
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Accounting information" text in "ENG" field
-		And I input "Accounting information TR" text in "TR" field
+		And I input "Accounting information" text in the field named "Description_en"
+		And I input "Accounting information TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I change the radio button named "FormPosition" value to "Right"
 		And I click "Save and close" button
 		And I wait "UI groups (create)" window closing in 5 seconds
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Purchase and production" text in "ENG" field
-		And I input "Purchase and production TR" text in "TR" field
+		And I input "Purchase and production" text in the field named "Description_en"
+		And I input "Purchase and production TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And I wait "UI groups (create)" window closing in 5 seconds
@@ -202,71 +202,71 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		And In this window I click command interface button "Additional attribute values"
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "S" text in "ENG" field
-		And I input "S" text in "TR" field
+		And I input "S" text in the field named "Description_en"
+		And I input "S" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "XS" text in "ENG" field
-		And I input "XS" text in "TR" field
+		And I input "XS" text in the field named "Description_en"
+		And I input "XS" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "M" text in "ENG" field
-		And I input "M" text in "TR" field
+		And I input "M" text in the field named "Description_en"
+		And I input "M" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "L" text in "ENG" field
-		And I input "L" text in "TR" field
+		And I input "L" text in the field named "Description_en"
+		And I input "L" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "XL" text in "ENG" field
-		And I input "XL" text in "TR" field
+		And I input "XL" text in the field named "Description_en"
+		And I input "XL" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "XXL" text in "ENG" field
-		And I input "XXL" text in "TR" field
+		And I input "XXL" text in the field named "Description_en"
+		And I input "XXL" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "36" text in "ENG" field
-		And I input "36" text in "TR" field
+		And I input "36" text in the field named "Description_en"
+		And I input "36" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "37" text in "ENG" field
-		And I input "37" text in "TR" field
+		And I input "37" text in the field named "Description_en"
+		And I input "37" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "38" text in "ENG" field
-		And I input "38" text in "TR" field
+		And I input "38" text in the field named "Description_en"
+		And I input "38" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "39" text in "ENG" field
-		And I input "39" text in "TR" field
+		And I input "39" text in the field named "Description_en"
+		And I input "39" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
@@ -280,50 +280,50 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		And In this window I click command interface button "Additional attribute values"
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Yellow" text in "ENG" field
-		And I input "Yellow TR" text in "TR" field
+		And I input "Yellow" text in the field named "Description_en"
+		And I input "Yellow TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Blue" text in "ENG" field
-		And I input "Blue TR" text in "TR" field
+		And I input "Blue" text in the field named "Description_en"
+		And I input "Blue TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Brown" text in "ENG" field
-		And I input "Brown TR" text in "TR" field
+		And I input "Brown" text in the field named "Description_en"
+		And I input "Brown TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "White" text in "ENG" field
-		And I input "White TR" text in "TR" field
+		And I input "White" text in the field named "Description_en"
+		And I input "White TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Red" text in "ENG" field
-		And I input "Red TR" text in "TR" field
+		And I input "Red" text in the field named "Description_en"
+		And I input "Red TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Green" text in "ENG" field
-		And I input "Green TR" text in "TR" field
+		And I input "Green" text in the field named "Description_en"
+		And I input "Green TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Black" text in "ENG" field
-		And I input "Black TR" text in "TR" field
+		And I input "Black" text in the field named "Description_en"
+		And I input "Black TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
@@ -337,22 +337,22 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		And In this window I click command interface button "Additional attribute values"
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "18SD" text in "ENG" field
-		And I input "18SD" text in "TR" field
+		And I input "18SD" text in the field named "Description_en"
+		And I input "18SD" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "19SD" text in "ENG" field
-		And I input "19SD" text in "TR" field
+		And I input "19SD" text in the field named "Description_en"
+		And I input "19SD" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "20SD" text in "ENG" field
-		And I input "20SD" text in "TR" field
+		And I input "20SD" text in the field named "Description_en"
+		And I input "20SD" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
@@ -366,29 +366,29 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		And In this window I click command interface button "Additional attribute values"
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Turkey" text in "ENG" field
-		And I input "Turkey TR" text in "TR" field
+		And I input "Turkey" text in the field named "Description_en"
+		And I input "Turkey TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Romania" text in "ENG" field
-		And I input "Romania TR" text in "TR" field
+		And I input "Romania" text in the field named "Description_en"
+		And I input "Romania TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Ukraine" text in "ENG" field
-		And I input "Ukraine TR" text in "TR" field
+		And I input "Ukraine" text in the field named "Description_en"
+		And I input "Ukraine TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Poland" text in "ENG" field
-		And I input "Poland TR" text in "TR" field
+		And I input "Poland" text in the field named "Description_en"
+		And I input "Poland TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
@@ -402,22 +402,22 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		And In this window I click command interface button "Additional attribute values"
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "UNIQ" text in "ENG" field
-		And I input "UNIQ" text in "TR" field
+		And I input "UNIQ" text in the field named "Description_en"
+		And I input "UNIQ" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "PZU" text in "ENG" field
-		And I input "PZU" text in "TR" field
+		And I input "PZU" text in the field named "Description_en"
+		And I input "PZU" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "ODS" text in "ENG" field
-		And I input "ODS" text in "TR" field
+		And I input "ODS" text in the field named "Description_en"
+		And I input "ODS" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
@@ -431,29 +431,29 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		And In this window I click command interface button "Additional attribute values"
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "York" text in "ENG" field
-		And I input "York" text in "TR" field
+		And I input "York" text in the field named "Description_en"
+		And I input "York" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Gir" text in "ENG" field
-		And I input "Gir" text in "TR" field
+		And I input "Gir" text in the field named "Description_en"
+		And I input "Gir" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Rose" text in "ENG" field
-		And I input "Rose" text in "TR" field
+		And I input "Rose" text in the field named "Description_en"
+		And I input "Rose" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Montel" text in "ENG" field
-		And I input "Montel" text in "TR" field
+		And I input "Montel" text in the field named "Description_en"
+		And I input "Montel" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
@@ -579,8 +579,8 @@ Scenario: _005114 adding general additional attributes for Item
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
 		And I click Open button of the field named "Description_en"
-		And I input "Items" text in "ENG" field
-		And I input "Items" text in "TR" field
+		And I input "Items" text in the field named "Description_en"
+		And I input "Items" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 
@@ -1103,8 +1103,8 @@ Scenario: _005119 packaging for High shoes
 	* Create packaging High shoes box (8 pcs)
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "High shoes box (8 pcs)" text in "ENG" field
-		And I input "High shoes box (8 adet) TR" text in "TR" field
+		And I input "High shoes box (8 pcs)" text in the field named "Description_en"
+		And I input "High shoes box (8 adet) TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click Select button of "Item" field
 		And I go to line in "List" table
@@ -1121,8 +1121,8 @@ Scenario: _005119 packaging for High shoes
 	* Create packaging Boots (12 pcs)
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Boots (12 pcs)" text in "ENG" field
-		And I input "Boots (12 adet) TR" text in "TR" field
+		And I input "Boots (12 pcs)" text in the field named "Description_en"
+		And I input "Boots (12 adet) TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click Select button of "Item" field
 		And I go to line in "List" table
@@ -1209,8 +1209,8 @@ Scenario: _005120 set Closets/Shoes specification creation
 		And I input "2,000" text in "Quantity" field of "FormTable*" table
 		And I finish line editing in "FormTable*" table
 		And I click Open button of the field named "Description_en"
-		And I input "A-8" text in "ENG" field
-		And I input "A-8" text in "TR" field
+		And I input "A-8" text in the field named "Description_en"
+		And I input "A-8" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
@@ -1287,8 +1287,8 @@ Scenario: _005120 set Closets/Shoes specification creation
 		And I input "1,000" text in "Quantity" field of "FormTable*" table
 		And I finish line editing in "FormTable*" table
 		And I click Open button of the field named "Description_en"
-		And I input "S-8" text in "ENG" field
-		And I input "S-8" text in "TR" field
+		And I input "S-8" text in the field named "Description_en"
+		And I input "S-8" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10

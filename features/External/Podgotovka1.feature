@@ -566,7 +566,7 @@ Scenario: change purchase order number to 103
 		And I click Select button of "Partner term" field
 		And I click the button named "FormCreate"
 		* Create partner term in USD
-			And I input "Ferron, USD" text in "ENG" field
+			And I input "Ferron, USD" text in the field named "Description_en"
 			And I change "Type" radio button value to "Customer"
 			And I change "AP/AR posting detail" radio button value to "By documents"
 			And I input "234" text in "Number" field

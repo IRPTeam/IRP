@@ -21,8 +21,8 @@ Scenario: _25001 adding print plugin for sales order
 		And I input "" text in "Path to plugin for test" field
 		And I input "PrintFormSalesOrder" text in "Name" field
 		And I click Open button of the field named "Description_en"
-		And I input "Sales order" text in "ENG" field
-		And I input "Sales order tr" text in "TR" field
+		And I input "Sales order" text in the field named "Description_en"
+		And I input "Sales order tr" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -53,9 +53,9 @@ Scenario: _25002 create a print command for Sales order
 			And I click Select button of "UI group" field
 			* Create UI group Print
 				And I click the button named "FormCreate"
-				And I input "Print" text in "ENG" field
+				And I input "Print" text in the field named "Description_en"
 				And I click Open button of "ENG" field
-				And I input "Print" text in "TR" field
+				And I input "Print" text in the field named "Description_tr"
 				And I input "Печать" text in "RU" field
 				And I click "Ok" button
 				And I click "Save and close" button

@@ -267,8 +267,8 @@ Scenario: _012004 create common Partner term
 				| 'Store 01'  |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Basic Partner terms, TRY" text in "ENG" field
-		And I input "Basic Partner terms, TRY" text in "TR" field
+		And I input "Basic Partner terms, TRY" text in the field named "Description_en"
+		And I input "Basic Partner terms, TRY" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -308,8 +308,8 @@ Scenario: _012004 create common Partner term
 				| 'Store 02'  |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Basic Partner terms, $" text in "ENG" field
-		And I input "Basic Partner terms, $" text in "TR" field
+		And I input "Basic Partner terms, $" text in the field named "Description_en"
+		And I input "Basic Partner terms, $" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -351,8 +351,8 @@ Scenario: _012004 create common Partner term
 				| 'Store 02'  |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Basic Partner terms, without VAT" text in "ENG" field
-		And I input "Basic Partner terms, without VAT" text in "TR" field
+		And I input "Basic Partner terms, without VAT" text in the field named "Description_en"
+		And I input "Basic Partner terms, without VAT" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -398,8 +398,8 @@ Scenario: _012005 creation of an individual Partner term in USD
 				| 'Store 02'  |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Personal Partner terms, $" text in "ENG" field
-		And I input "Personal Partner terms, $" text in "TR" field
+		And I input "Personal Partner terms, $" text in the field named "Description_en"
+		And I input "Personal Partner terms, $" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -434,8 +434,8 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I input "01.11.2018" text in "Start using" field
 		And I change checkbox "Price include tax"
 		And I click Open button of the field named "Description_en"
-		And I input "Vendor Ferron, TRY" text in "ENG" field
-		And I input "Vendor Ferron, TRY TR" text in "TR" field
+		And I input "Vendor Ferron, TRY" text in the field named "Description_en"
+		And I input "Vendor Ferron, TRY TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -469,8 +469,8 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I input "01.11.2018" text in "Start using" field
 		And I change checkbox "Price include tax"
 		And I click Open button of the field named "Description_en"
-		And I input "Vendor Ferron, USD" text in "ENG" field
-		And I input "Vendor Ferron, USD TR" text in "TR" field
+		And I input "Vendor Ferron, USD" text in the field named "Description_en"
+		And I input "Vendor Ferron, USD TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -504,8 +504,8 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I input "01.11.2018" text in "Start using" field
 		And I change checkbox "Price include tax"
 		And I click Open button of the field named "Description_en"
-		And I input "Vendor Ferron, EUR" text in "ENG" field
-		And I input "Vendor Ferron, EUR TR" text in "TR" field
+		And I input "Vendor Ferron, EUR" text in the field named "Description_en"
+		And I input "Vendor Ferron, EUR TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -550,8 +550,8 @@ Scenario: _012007 create common Partner term with Item Segment
 		And I input "01.11.2018" text in "Start using" field
 		And I input "01.11.2018" text in "End of Use" field
 		And I click Open button of the field named "Description_en"
-		And I input "Sale autum, TRY" text in "ENG" field
-		And I input "Sale autum, TRY" text in "TR" field
+		And I input "Sale autum, TRY" text in the field named "Description_en"
+		And I input "Sale autum, TRY" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -591,8 +591,8 @@ Scenario: _012010 create Partner term without currency (negative test)
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And I click Open button of the field named "Description_en"
-		And I input "Currency, TRY" text in "ENG" field
-		And I input "Currency, TRY" text in "TR" field
+		And I input "Currency, TRY" text in the field named "Description_en"
+		And I input "Currency, TRY" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
@@ -632,8 +632,8 @@ Scenario: _012011 create Partner term without price type (negative test)
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And I click Open button of the field named "Description_en"
-		And I input "Price Type, TRY" text in "ENG" field
-		And I input "Price Type, TRY" text in "TR" field
+		And I input "Price Type, TRY" text in the field named "Description_en"
+		And I input "Price Type, TRY" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10

@@ -15,7 +15,7 @@ Scenario: _095001 preparation
 	* Create customer and vendor
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Lunch" text in "ENG" field
+		And I input "Lunch" text in the field named "Description_en"
 		And I change checkbox "Vendor"
 		And I change checkbox "Customer"
 		And I click "Save" button
@@ -30,7 +30,7 @@ Scenario: _095001 preparation
 		And I wait "Partner segments content (create) *" window closing in 20 seconds
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "Company Lunch" text in "ENG" field
+		And I input "Company Lunch" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -41,7 +41,7 @@ Scenario: _095001 preparation
 		And In this window I click command interface button "Main"
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
-		And I input "Maxim" text in "ENG" field
+		And I input "Maxim" text in the field named "Description_en"
 		And I change checkbox "Customer"
 		And I change checkbox "Vendor"
 		And I click "Save" button
@@ -56,7 +56,7 @@ Scenario: _095001 preparation
 		And I click "Save and close" button
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "Company Maxim" text in "ENG" field
+		And I input "Company Maxim" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -65,7 +65,7 @@ Scenario: _095001 preparation
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
-		And I input "Company Aldis" text in "ENG" field
+		And I input "Company Aldis" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -78,7 +78,7 @@ Scenario: _095001 preparation
 	* Create vendor Partner term for Maxim, Ap-Ar - posting details (by Partner terms)
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 		And I click the button named "FormCreate"
-		And I input "Partner term Maxim" text in "ENG" field
+		And I input "Partner term Maxim" text in the field named "Description_en"
 		And I change "Type" radio button value to "Vendor"
 		And I input "01.12.2019" text in "Date" field
 		And I click Select button of "Multi currency movement type" field

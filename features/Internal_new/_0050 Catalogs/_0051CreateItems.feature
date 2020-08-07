@@ -33,8 +33,8 @@ Scenario: _005110 filling in the "UI groups" catalog
 		And I click the button named "FormCreate"
 	* Creating UI groups: Product information, Accounting information
 		And I click Open button of the field named "Description_en"
-		And I input "Product information" text in "ENG" field
-		And I input "Product information TR" text in "TR" field
+		And I input "Product information" text in the field named "Description_en"
+		And I input "Product information TR" text in the field named "Description_tr"
 		And I input "Информация о продукте" text in "RU" field
 		And I click "Ok" button
 		And I change the radio button named "FormPosition" value to "Left"
@@ -46,8 +46,8 @@ Scenario: _005110 filling in the "UI groups" catalog
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Accounting information" text in "ENG" field
-		And I input "Accounting information TR" text in "TR" field
+		And I input "Accounting information" text in the field named "Description_en"
+		And I input "Accounting information TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I change the radio button named "FormPosition" value to "Right"
 		And I click "Save" button
@@ -127,8 +127,8 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		And In this window I click command interface button "Additional attribute values"
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "UNIQ" text in "ENG" field
-		And I input "UNIQ" text in "TR" field
+		And I input "UNIQ" text in the field named "Description_en"
+		And I input "UNIQ" text in the field named "Description_tr"
 		And I input "UNIQ" text in "RU" field
 		And I click "Ok" button
 		And I click "Save" button
@@ -140,8 +140,8 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "PZU" text in "ENG" field
-		And I input "PZU" text in "TR" field
+		And I input "PZU" text in the field named "Description_en"
+		And I input "PZU" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
@@ -155,16 +155,16 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		And In this window I click command interface button "Additional attribute values"
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "York" text in "ENG" field
-		And I input "York" text in "TR" field
+		And I input "York" text in the field named "Description_en"
+		And I input "York" text in the field named "Description_tr"
 		And I input "York" text in "RU" field
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Gir" text in "ENG" field
-		And I input "Gir" text in "TR" field
+		And I input "Gir" text in the field named "Description_en"
+		And I input "Gir" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save" button
 		* Check data save
@@ -437,8 +437,8 @@ Scenario: _005114 adding general additional attributes and properties for catalo
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
 		And I click Open button of the field named "Description_en"
-		And I input "Items" text in "ENG" field
-		And I input "Items" text in "TR" field
+		And I input "Items" text in the field named "Description_en"
+		And I input "Items" text in the field named "Description_tr"
 		And I input "Номенклатура" text in "RU" field
 		And I click "Ok" button
 	* Adding additional property
@@ -858,8 +858,8 @@ Scenario: _005119 packaging for High shoes
 	* Create packaging High shoes box (8 pcs)
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "High shoes box (8 pcs)" text in "ENG" field
-		And I input "High shoes box (8 adet) TR" text in "TR" field
+		And I input "High shoes box (8 pcs)" text in the field named "Description_en"
+		And I input "High shoes box (8 adet) TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click Select button of "Item" field
 		And I go to line in "List" table
@@ -876,8 +876,8 @@ Scenario: _005119 packaging for High shoes
 	* Create packaging Boots (12 pcs)
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Boots (12 pcs)" text in "ENG" field
-		And I input "Boots (12 adet) TR" text in "TR" field
+		And I input "Boots (12 pcs)" text in the field named "Description_en"
+		And I input "Boots (12 adet) TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click Select button of "Item" field
 		And I go to line in "List" table
@@ -964,8 +964,8 @@ Scenario: _005120 set Closets/Shoes specification creation
 		And I input "2,000" text in "Quantity" field of "FormTable*" table
 		And I finish line editing in "FormTable*" table
 		And I click Open button of the field named "Description_en"
-		And I input "A-8" text in "ENG" field
-		And I input "A-8" text in "TR" field
+		And I input "A-8" text in the field named "Description_en"
+		And I input "A-8" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
@@ -1042,8 +1042,8 @@ Scenario: _005120 set Closets/Shoes specification creation
 		And I input "1,000" text in "Quantity" field of "FormTable*" table
 		And I finish line editing in "FormTable*" table
 		And I click Open button of the field named "Description_en"
-		And I input "S-8" text in "ENG" field
-		And I input "S-8" text in "TR" field
+		And I input "S-8" text in the field named "Description_en"
+		And I input "S-8" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10

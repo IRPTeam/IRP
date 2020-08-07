@@ -15,7 +15,7 @@ Scenario: check the clearing of values ​​when changing the type of account i
         And I click the button named "FormCreate"
 * Filling in the details of the document for Bank account
         And I change "Type" radio button value to "Bank"
-        And I input "Test Bank" text in "TR" field
+        And I input "Test Bank" text in the field named "Description_tr"
         And I click Select button of "Company" field
         And I go to line in "List" table
         | 'Description'  |
@@ -84,7 +84,7 @@ Scenario: check clearing values ​​when changing the Ap-ar posting / Standard
         And I click Select button of "Standard Partner term" field
         * Create standart agreement in EUR
         And I click the button named "FormCreate"
-        And I input "Standard, EUR" text in "TR" field
+        And I input "Standard, EUR" text in the field named "Description_tr"
         And I click "Save and close" button
         And I click the button named "FormChoose"
         And I click Select button of "Price type" field
@@ -111,7 +111,7 @@ Scenario: check clearing the values ​​of Tax types and Multi currency moveme
         Given I open hyperlink "e1cib/list/Catalog.Companies"
         And I click the button named "FormCreate"
 * Tick the box Our and fill in Tax types and Multi currency movement types
-        And I input "Test" text in "TR" field
+        And I input "Test" text in the field named "Description_tr"
         And I set checkbox "Our"
         * Filling in Multi currency movement type
         And in the table "Currencies" I click the button named "CurrenciesAdd"

@@ -180,7 +180,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 	* Add new partner Partner Ferron 1 for Company Ferron BP
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Partner Ferron 1" text in "ENG" field
+		And I input "Partner Ferron 1" text in the field named "Description_en"
 		And I set checkbox "Customer"
 		And I set checkbox "Vendor"
 		And I click Select button of "Main partner" field
@@ -196,7 +196,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		And I click "Save" button
 		And In this window I click command interface button "Partner terms"
 		And I click the button named "FormCreate"
-		And I input "Vendor Ferron 1" text in "ENG" field
+		And I input "Vendor Ferron 1" text in the field named "Description_en"
 		And I change "Type" radio button value to "Vendor"
 		And I input "125" text in "Number" field
 		And I input current date in the field named "StartUsing"
@@ -219,7 +219,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
-		And I input "Vendor Ferron Discount" text in "ENG" field
+		And I input "Vendor Ferron Discount" text in the field named "Description_en"
 		And I change "Type" radio button value to "Vendor"
 		And I input "126" text in "Number" field
 		And I input current date in the field named "StartUsing"
@@ -245,7 +245,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 	* Add new partner Partner Ferron 2 for Company Ferron BP
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Partner Ferron 2" text in "ENG" field
+		And I input "Partner Ferron 2" text in the field named "Description_en"
 		And I set checkbox "Customer"
 		And I set checkbox "Vendor"
 		And I click Select button of "Main partner" field
@@ -261,7 +261,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		And I click "Save" button
 		And In this window I click command interface button "Partner terms"
 		And I click the button named "FormCreate"
-		And I input "Vendor Ferron Partner 2" text in "ENG" field
+		And I input "Vendor Ferron Partner 2" text in the field named "Description_en"
 		And I change "Type" radio button value to "Vendor"
 		And I input "126" text in "Number" field
 		And I input current date in the field named "StartUsing"

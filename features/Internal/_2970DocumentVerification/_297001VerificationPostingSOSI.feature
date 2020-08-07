@@ -16,7 +16,7 @@ Scenario: _29700101 preparation
 	* Create customer
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Foxred" text in "ENG" field
+		And I input "Foxred" text in the field named "Description_en"
 		And I change checkbox "Vendor"
 		And I change checkbox "Customer"
 		And I click Select button of "Manager segment" field
@@ -35,7 +35,7 @@ Scenario: _29700101 preparation
 		And I click "Save and close" button
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "Company Foxred" text in "ENG" field
+		And I input "Company Foxred" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |

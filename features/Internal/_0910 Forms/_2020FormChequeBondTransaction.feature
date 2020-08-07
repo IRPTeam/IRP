@@ -184,7 +184,7 @@ Scenario: _2020004 check the automatic filling in of Partner term (partner has o
 			And I click "Yes" button
 			And In this window I click command interface button "Partner terms"
 			And I click the button named "FormCreate"
-			And I input "Partner term DFC" text in "ENG" field
+			And I input "Partner term DFC" text in the field named "Description_en"
 			And I change "Type" radio button value to "Customer"
 			And I change "AP/AR posting detail" radio button value to "By documents"
 			And I input "121" text in "Number" field

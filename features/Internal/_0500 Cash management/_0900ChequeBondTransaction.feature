@@ -28,14 +28,14 @@ Scenario: _090002 create statuses for Cheque bond
 			| 'ChequeBondIncoming'     |
 		And I activate "Predefined data item name" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuChange"
-		And I input "ChequeBondIncoming" text in "ENG" field
+		And I input "ChequeBondIncoming" text in the field named "Description_en"
 		And I click "Save and close" button
 		And I go to line in "List" table
 			| 'Predefined data item name' |
 			| 'ChequeBondOutgoing'     |
 		And I activate "Predefined data item name" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuChange"
-		And I input "ChequeBondOutgoing" text in "ENG" field
+		And I input "ChequeBondOutgoing" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Create statuses for Cheque bond incoming
 		* Create status Taken from partner
@@ -43,7 +43,7 @@ Scenario: _090002 create statuses for Cheque bond
 			| 'Description'        |
 			| 'ChequeBondIncoming' |
 			And I click the button named "FormCreate"
-			And I input "01. TakenFromPartner" text in "ENG" field
+			And I input "01. TakenFromPartner" text in the field named "Description_en"
 			And I set checkbox "Set by default"
 			And I move to the tab named "GroupPosting"
 			And I change "Cheque bond balance" radio button value to "Posting"
@@ -57,7 +57,7 @@ Scenario: _090002 create statuses for Cheque bond
 			| 'Description'        |
 			| 'ChequeBondIncoming' |
 			And I click the button named "FormCreate"
-			And I input "03. PaymentReceived" text in "ENG" field
+			And I input "03. PaymentReceived" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
 			And I change "Account balance" radio button value to "Posting"
 			And I change "Planning cash transactions" radio button value to "Reversal"
@@ -67,7 +67,7 @@ Scenario: _090002 create statuses for Cheque bond
 			| 'Description'        |
 			| 'ChequeBondIncoming' |
 			And I click the button named "FormCreate"
-			And I input "04. Protested" text in "ENG" field
+			And I input "04. Protested" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
 			And I change "Cheque bond balance" radio button value to "Reversal"
 			And I change "Advanced" radio button value to "Reversal"
@@ -80,7 +80,7 @@ Scenario: _090002 create statuses for Cheque bond
 			| 'Description'        |
 			| 'ChequeBondIncoming' |
 			And I click the button named "FormCreate"
-			And I input "02. GiveToBankAsAssurance" text in "ENG" field
+			And I input "02. GiveToBankAsAssurance" text in the field named "Description_en"
 			And I click "Save and close" button
 	* Create statuses for Cheque bond outgoing
 		* Create status Given to partner
@@ -88,7 +88,7 @@ Scenario: _090002 create statuses for Cheque bond
 				| 'Description'        |
 				| 'ChequeBondOutgoing' |
 			And I click the button named "FormCreate"
-			And I input "01. GivenToPartner" text in "ENG" field
+			And I input "01. GivenToPartner" text in the field named "Description_en"
 			And I set checkbox "Set by default"
 			And I move to the tab named "GroupPosting"
 			And I change "Cheque bond balance" radio button value to "Posting"
@@ -102,7 +102,7 @@ Scenario: _090002 create statuses for Cheque bond
 				| 'Description'        |
 				| 'ChequeBondOutgoing' |
 			And I click the button named "FormCreate"
-			And I input "02. Payed" text in "ENG" field
+			And I input "02. Payed" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
 			And I change "Account balance" radio button value to "Posting"
 			And I change "Planning cash transactions" radio button value to "Reversal"
@@ -112,7 +112,7 @@ Scenario: _090002 create statuses for Cheque bond
 				| 'Description'        |
 				| 'ChequeBondOutgoing' |
 			And I click the button named "FormCreate"
-			And I input "03. Protested" text in "ENG" field
+			And I input "03. Protested" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
 			And I change "Cheque bond balance" radio button value to "Reversal"
 			And I change "Advanced" radio button value to "Reversal"
@@ -233,7 +233,7 @@ Scenario: _090004 preparation
 	* Create a partner and legal name from whom the cheque bond was received and to whom the heque bond was issued
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "DFC" text in "ENG" field
+		And I input "DFC" text in the field named "Description_en"
 		And I change checkbox "Vendor"
 		And I change checkbox "Customer"
 		And I change checkbox "Shipment confirmations before sales invoice"
@@ -251,7 +251,7 @@ Scenario: _090004 preparation
 		And I wait "Partner segments content (create) *" window closing in 20 seconds
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "DFC" text in "ENG" field
+		And I input "DFC" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -265,7 +265,7 @@ Scenario: _090004 preparation
 		And I click "Save and close" button
 		And I wait "DFC (Partner)" window closing in 20 seconds
 		And I click the button named "FormCreate"
-		And I input "Big foot" text in "ENG" field
+		And I input "Big foot" text in the field named "Description_en"
 		And I change checkbox "Customer"
 		And I change checkbox "Vendor"
 		And I change checkbox "Shipment confirmations before sales invoice"
@@ -283,7 +283,7 @@ Scenario: _090004 preparation
 		And I wait "Partner segments content (create) *" window closing in 20 seconds
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "Big foot" text in "ENG" field
+		And I input "Big foot" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |

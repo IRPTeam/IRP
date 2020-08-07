@@ -11,16 +11,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
-Procedure ItemsPickupOnActivateRow(Item)
-	CurrentData = Items.ItemsPickup.CurrentData;
-	AfterItemChoice(CurrentData.Item);
-	If NOT HTMLWindowPictures = Undefined Then
-		HTMLWindowPictures.clearAll();
-		AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
-	EndIf;
-EndProcedure
-
-&AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
 	
@@ -146,6 +136,19 @@ Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	ItemListItemOnChange(Items.ItemList);
 EndProcedure
 
+&AtClient
+Procedure ItemsPickupOnActivateRow(Item)
+	CurrentData = Items.ItemsPickup.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	AfterItemChoice(CurrentData.Item);
+	If NOT HTMLWindowPictures = Undefined Then
+		HTMLWindowPictures.clearAll();
+		AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region ItemkeyPickupList
@@ -209,7 +212,7 @@ Procedure NewTransaction()
 	ThisObject.CurrentPartner = ObjectValue.Partner;
 	ThisObject.CurrentAgreement = ObjectValue.Agreement;
 	ThisObject.CurrentDate = ObjectValue.Date;
-	DocRetailSalesReceiptServer.CalculateTableAtServer(ThisObject, ObjectValue);
+	//DocRetailSalesReceiptServer.CalculateTableAtServer(ThisObject, ObjectValue);
 	EnabledPaymentButton();
 EndProcedure
 
@@ -264,6 +267,10 @@ EndProcedure
 
 &AtClient
 Procedure UpdateHTMLPictures() Export
+	If Not Items.PictureViewHTML.Visible Then
+		Return;
+	EndIf;
+	
 	If CurrentItem = Items.ItemList Then
 		CurrentRow = Items.ItemList.CurrentData;
 	ElsIf CurrentItem = Items.ItemsPickup Then
@@ -342,44 +349,27 @@ EndProcedure
 #Region Taxes
 &AtClient
 Procedure TaxValueOnChange(Item) Export
-//    CurrentData = Items.ItemList.CurrentData;
-//    If CurrentData = Undefined Then
-//        Return;
-//    EndIf;
-//    PutToTaxTable_(Item.Name, CurrentData.Key, CurrentData[Item.Name]);
-//    Settings = New Structure();
-//    Settings.Insert("Rows", New Array());
-//    Settings.Insert("CalculateSettings");
-//    Settings.CalculateSettings = New Structure("CalculateTax");
-//    Settings.Rows.Add(CurrentData);
-//    DocumentsClient.ItemListCalculateRowsAmounts(Object, ThisObject, Settings);
+	
 EndProcedure
 
 &AtServer
 Procedure PutToTaxTable_(ItemName, Key, Value) Export
-    //TaxesServer.PutToTaxTableByColumnName(ThisObject, Key, ItemName, Value);
+	
 EndProcedure
 
 &AtClient
 Procedure TaxTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-    //Cancel = True;
+	
 EndProcedure
 
 &AtClient
 Procedure TaxTreeOnChange(Item)
-//    CurrentData = Items.TaxTree.CurrentData;
-//    If CurrentData = Undefined Then
-//        Return;
-//    EndIf;
-//    Filter = TaxesClient.ChangeTaxAmount(Object, ThisObject, CurrentData, Object.ItemList);
-//    Taxes_CreateTaxTree();
-//    TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
-//    ThisObject.Items.TaxTree.CurrentRow = TaxesClient.FindRowInTree(Filter, ThisObject.TaxTree);
+	
 EndProcedure
 
 &AtClient
 Procedure TaxTreeBeforeDeleteRow(Item, Cancel)
-    //Cancel = True;
+	
 EndProcedure
 
 &AtServer
@@ -398,16 +388,7 @@ EndProcedure
 
 &AtServer
 Procedure Taxes_CreateTaxTree() Export
-//    TaxesTreeParameters = TaxesServer.GetCreateTaxTreeParameters();
-//    TaxesTreeParameters.MetadataMainList = Metadata.Documents.SalesInvoice.TabularSections.ItemList;
-//    TaxesTreeParameters.MetadataTaxList = Metadata.Documents.SalesInvoice.TabularSections.TaxList;
-//    TaxesTreeParameters.ObjectMainList = Object.ItemList;
-//    TaxesTreeParameters.ObjectTaxList = Object.TaxList;
-//    TaxesTreeParameters.MainListColumns = "Key, Item, ItemKey";
-//    TaxesTreeParameters.Level1Columns = "Tax";
-//    TaxesTreeParameters.Level2Columns = "Key, Item, ItemKey, TaxRate";
-//    TaxesTreeParameters.Level3Columns = "Key, Analytics";
-//    TaxesServer.CreateTaxTree(Object, ThisObject, TaxesTreeParameters);
+	
 EndProcedure
 
 #EndRegion

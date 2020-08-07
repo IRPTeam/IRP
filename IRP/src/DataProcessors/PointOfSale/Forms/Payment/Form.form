@@ -74,6 +74,7 @@
         <key>en</key>
         <value>Group amount</value>
       </toolTip>
+      <horizontalStretch>true</horizontalStretch>
       <extendedTooltip>
         <name>GroupAmountExtendedTooltip</name>
         <id>44</id>

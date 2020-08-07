@@ -7,7 +7,6 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	FillPaymentTypes();
-	ChangeEnabledDigitButtons();
 	
 	Object.Amount = Parameters.Parameters.Amount;
 	Object.BusinessUnit = Parameters.Parameters.BusinessUnit;
@@ -143,6 +142,12 @@ EndProcedure
 
 &AtClient
 Procedure NumPress(Command)
+	If Not Payments.Count()
+		And CashPaymentTypes.Count() Then
+		Result = 0;
+		AdditionalParameters = New Structure;
+		CashChoiceEnd(Result, AdditionalParameters);
+	EndIf;
 	ButtonValue = ThisObject.CurrentItem.Title;
 	NumButtonPress(ButtonValue);
 EndProcedure

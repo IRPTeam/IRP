@@ -122,10 +122,10 @@
       <value>Additional ID</value>
     </synonym>
     <type>
-      <types>String</types>
-      <types>Number</types>
-      <types>Date</types>
       <types>Boolean</types>
+      <types>String</types>
+      <types>Date</types>
+      <types>Number</types>
       <types>AnyRef</types>
       <numberQualifiers>
         <precision>15</precision>
@@ -136,6 +136,11 @@
       </stringQualifiers>
       <dateQualifiers/>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

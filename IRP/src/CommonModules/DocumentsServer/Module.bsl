@@ -3,6 +3,7 @@
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export	
 	If Not Object.Ref.Metadata().TabularSections.Find("AddAttributes") = Undefined Then
 		AddAttributesAndPropertiesServer.OnCreateAtServer(Form, "GroupOther");
+		ExtentionServer.AddAtributesFromExtensions(Form, Object.Ref, Form.Items.GroupOther);
 	EndIf;
 	// TODO: Cut If after fix all documents
 	If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then

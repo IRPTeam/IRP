@@ -3,6 +3,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	ThisObject.Users.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.Users.QueryText);
 	ThisObject.Users.Parameters.SetParameterValue("UserGroup", ?(ValueIsFilled(Object.Ref), Object.Ref, Undefined));
+	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 &AtClient

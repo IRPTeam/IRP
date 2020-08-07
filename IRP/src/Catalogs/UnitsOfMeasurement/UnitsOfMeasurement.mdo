@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="74710749-117b-493f-87a5-b39f29ee5e85">
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="74710749-117b-493f-87a5-b39f29ee5e85">
   <producedTypes>
     <objectType typeId="eaea175c-f7ef-4193-b18d-16a899e631fe" valueTypeId="4cc14344-00c6-4893-a9b9-1cdfc6db02a8"/>
     <refType typeId="6432272c-e889-4349-a209-b195099999cc" valueTypeId="17087db0-bc41-48d0-9166-ba5e801f8fc5"/>
@@ -28,6 +28,7 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.UnitsOfMeasurement.Form.ItemForm</defaultObjectForm>
   <attributes uuid="bb100a4b-60c6-448a-b812-8c62687c76fc">
     <name>Symbol</name>
     <synonym>
@@ -40,7 +41,21 @@
         <length>10</length>
       </stringQualifiers>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <forms uuid="930fbc38-1aa0-4b85-b743-2f7770dfab1a">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:Catalog>

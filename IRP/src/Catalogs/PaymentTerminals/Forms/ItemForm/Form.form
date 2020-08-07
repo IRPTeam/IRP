@@ -40,8 +40,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Account</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Account</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>AccountExtendedTooltip</name>
@@ -90,8 +92,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Percent</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Percent</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>PercentExtendedTooltip</name>

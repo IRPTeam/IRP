@@ -30,6 +30,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CommonFunctionsServer.SetConditionalAppearanceDataField(ThisObject, "SalesOrdersList.Date");
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
 	Items.Parent.Visible = GetFunctionalOption("ShowAlphaTestingSaas");
+	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
 EndProcedure
 
 #EndRegion

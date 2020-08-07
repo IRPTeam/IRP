@@ -115,6 +115,30 @@
   <defaultListForm>Catalog.AddAttributeAndPropertyValues.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.AddAttributeAndPropertyValues.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="41f52a81-828d-4ecb-9a3c-961d248c0804">
+    <name>AdditionalID</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional ID</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <types>Number</types>
+      <types>Date</types>
+      <types>Boolean</types>
+      <types>AnyRef</types>
+      <numberQualifiers>
+        <precision>15</precision>
+        <scale>5</scale>
+      </numberQualifiers>
+      <stringQualifiers>
+        <length>100</length>
+      </stringQualifiers>
+      <dateQualifiers/>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="2f86661f-b92e-46ec-a5ad-2414105cdc3a">
     <name>ItemForm</name>
     <synonym>

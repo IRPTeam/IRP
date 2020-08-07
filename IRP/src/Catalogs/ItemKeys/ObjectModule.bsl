@@ -1,4 +1,5 @@
 Procedure BeforeWrite(Cancel)
+
 	If ValueIsFilled(ThisObject.Specification) Then
 		ThisObject.AddAttributes.Clear();
 	EndIf;

@@ -6,12 +6,7 @@
     <value>Check unique ID</value>
   </synonym>
   <source>
-    <types>ChartOfCharacteristicTypesObject.AddAttributeAndProperty</types>
-    <types>ChartOfCharacteristicTypesObject.IDInfoTypes</types>
-    <types>ChartOfCharacteristicTypesObject.CustomUserSettings</types>
-    <types>CatalogObject.ObjectStatuses</types>
-    <types>CatalogObject.IntegrationSettings</types>
-    <types>CatalogObject.AddAttributeAndPropertyValues</types>
+    <types>DefinedType.UseUniqueID</types>
   </source>
   <event>BeforeWrite</event>
   <handler>CommonModule.UniqueID.CheckUniqueIDBeforeWrite</handler>

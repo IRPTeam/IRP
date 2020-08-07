@@ -128,17 +128,17 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "", AddInfo = Undefin
 	EndIf;
 	
 	For Each Row In ObjectAttributes Do
-		If IsNewObject And DefaultAttributeValues <> Undefined Then
+		
+		ArrayOfExistAttributes = FormInfo.AddAttributes.FindRows(New Structure("Property", Row.Attribute));
+		If ArrayOfExistAttributes.Count() Then
+			AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
+			Form[AttributeInfo.Name] = ArrayOfExistAttributes[0].Value;
+			
+		ElsIf IsNewObject And DefaultAttributeValues <> Undefined Then
 			ArrayOfDefaultAttributes = DefaultAttributeValues.FindRows(New Structure("AttributeRef", Row.Attribute));
 			If ArrayOfDefaultAttributes.Count() Then
 				AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
 				Form[AttributeInfo.Name] = ArrayOfDefaultAttributes[0].Value;
-			EndIf;
-		Else
-			ArrayOfExistAttributes = FormInfo.AddAttributes.FindRows(New Structure("Property", Row.Attribute));
-			If ArrayOfExistAttributes.Count() Then
-				AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
-				Form[AttributeInfo.Name] = ArrayOfExistAttributes[0].Value;
 			EndIf;
 		EndIf;
 	EndDo;
@@ -866,5 +866,12 @@ Function PrepareDataForHTM(ItemRef, Filter = Undefined) Export
 	
 	Return Str;
 EndFunction
+
+Procedure EventSubscriptionOnCopy(Source, CopiedObject) Export
+	If Not Metadata.FindByType(TypeOf(Source)).TabularSections.Find("AddAttributes") = Undefined Then
+		Source.AddAttributes.Load(CopiedObject.AddAttributes.Unload());
+	EndIf;
+EndProcedure
+
 
 #EndRegion

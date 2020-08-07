@@ -10,7 +10,12 @@
   </synonym>
   <type>
     <types>ChartOfCharacteristicTypesObject.CustomUserSettings</types>
+    <types>CatalogObject.AddAttributeAndPropertyValues</types>
+    <types>CatalogObject.Extensions</types>
     <types>CatalogObject.IntegrationSettings</types>
-    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+    <types>CatalogObject.ItemTypes</types>
+    <types>CatalogObject.ObjectStatuses</types>
+    <types>ChartOfCharacteristicTypesObject.IDInfoTypes</types>
+    <types>ChartOfCharacteristicTypesObject.AddAttributeAndProperty</types>
   </type>
 </mdclass:DefinedType>

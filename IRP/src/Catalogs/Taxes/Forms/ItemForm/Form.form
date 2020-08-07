@@ -755,6 +755,15 @@
                 <value>RetailSalesReceipt</value>
               </value>
             </choiceList>
+            <choiceList>
+              <presentation>
+                <key>en</key>
+                <value>Retail return receipt</value>
+              </presentation>
+              <value xsi:type="core:StringValue">
+                <value>RetailReturnReceipt</value>
+              </value>
+            </choiceList>
           </extInfo>
         </items>
         <autoCommandBar>

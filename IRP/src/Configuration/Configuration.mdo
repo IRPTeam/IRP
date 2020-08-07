@@ -123,6 +123,7 @@
   <commonPictures>CommonPicture.Share</commonPictures>
   <commonPictures>CommonPicture.SpecialOffer</commonPictures>
   <commonPictures>CommonPicture.Store</commonPictures>
+  <commonPictures>CommonPicture.Retail</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUser</sessionParameters>
@@ -309,6 +310,7 @@
   <commonModules>CommonModule.DocRetailSalesReceiptClient</commonModules>
   <commonModules>CommonModule.DocRetailReturnReceiptClient</commonModules>
   <commonModules>CommonModule.DocRetailReturnReceiptServer</commonModules>
+  <commonModules>CommonModule.DPPointOfSaleClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -331,6 +333,8 @@
   <eventSubscriptions>EventSubscription.OpenMobileForm</eventSubscriptions>
   <eventSubscriptions>EventSubscription.RefreshReusableValues</eventSubscriptions>
   <eventSubscriptions>EventSubscription.UpdateUsersRole</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.EventSubscription</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopyRemoveUniqueID</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>
@@ -528,11 +532,13 @@
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.CompanyLegalType</enums>
+  <enums>Enum.PaymentTypes</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
   <dataProcessors>DataProcessor.QuantityCompare</dataProcessors>
   <dataProcessors>DataProcessor.FirstStartSettings</dataProcessors>
+  <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

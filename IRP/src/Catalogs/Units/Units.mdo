@@ -51,7 +51,6 @@
     </synonym>
     <type>
       <types>CatalogRef.Items</types>
-      <types>CatalogRef.ItemTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

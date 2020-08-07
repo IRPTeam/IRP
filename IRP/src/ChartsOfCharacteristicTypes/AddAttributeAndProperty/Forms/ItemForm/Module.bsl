@@ -37,7 +37,7 @@ Procedure AskForChangeIcon()
 	OpenFileDialog = New FileDialog(FileDialogMode.Open);
 	OpenFileDialog.Multiselect = False;
 	OpenFileDialog.Title = R().S_026;
-	OpenFileDialog.Filter = "(*.jpeg;*.jpg;*.png;*.ico)|*.jpeg;*.jpg;*.png;*.ico";
+	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
 	BeginPuttingFiles(Notify, , OpenFileDialog, True, UUID);
 EndProcedure
 

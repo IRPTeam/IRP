@@ -134,6 +134,7 @@ Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	AfterItemChoice(CurrentData.Item, True);
 	ItemListOnChange(Items.ItemList);
 	ItemListItemOnChange(Items.ItemList);
+	ItemListItemKeyOnChange(Items.ItemList);
 EndProcedure
 
 &AtClient

@@ -22,8 +22,8 @@ Scenario: _030001 add Pluginsessor SpecialMessage
 	And I input "" text in "Path to plugin for test" field
 	And I input "ExternalSpecialMessage" text in "Name" field
 	And I click Open button of the field named "Description_en"
-	And I input "ExternalSpecialMessage" text in "ENG" field
-	And I input "ExternalSpecialMessage" text in "TR" field
+	And I input "ExternalSpecialMessage" text in the field named "Description_en"
+	And I input "ExternalSpecialMessage" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save and close" button
 	And I wait "Plugins (create)" window closing in 10 seconds
@@ -37,8 +37,8 @@ Scenario: _030002 add Pluginsessor DocumentDiscount
 	And I input "" text in "Path to plugin for test" field
 	And I input "DocumentDiscount" text in "Name" field
 	And I click Open button of the field named "Description_en"
-	And I input "DocumentDiscount" text in "ENG" field
-	And I input "DocumentDiscount" text in "TR" field
+	And I input "DocumentDiscount" text in the field named "Description_en"
+	And I input "DocumentDiscount" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save and close" button
 	And I wait "Plugins (create)" window closing in 10 seconds
@@ -52,8 +52,8 @@ Scenario: _030003 add Pluginsessor SpecialRules
 	And I input "" text in "Path to plugin for test" field
 	And I input "ExternalSpecialOfferRules" text in "Name" field
 	And I click Open button of the field named "Description_en"
-	And I input "ExternalSpecialOfferRules" text in "ENG" field
-	And I input "ExternalSpecialOfferRules" text in "TR" field
+	And I input "ExternalSpecialOfferRules" text in the field named "Description_en"
+	And I input "ExternalSpecialOfferRules" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save and close" button
 	And I wait "Plugins (create)" window closing in 10 seconds
@@ -67,8 +67,8 @@ Scenario: _030004 add Pluginsessor RangeDiscount
 	And I input "" text in "Path to plugin for test" field
 	And I input "ExternalRangeDiscount" text in "Name" field
 	And I click Open button of the field named "Description_en"
-	And I input "ExternalRangeDiscount" text in "ENG" field
-	And I input "ExternalRangeDiscount" text in "TR" field
+	And I input "ExternalRangeDiscount" text in the field named "Description_en"
+	And I input "ExternalRangeDiscount" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save and close" button
 	And I wait "Plugins (create)" window closing in 10 seconds
@@ -85,8 +85,8 @@ Scenario: _030005 add Pluginsessor FivePlusOne
 		And I input "" text in "Path to plugin for test" field
 		And I input "ExternalFivePlusOne" text in "Name" field
 		And I click Open button of the field named "Description_en"
-		And I input "ExternalFivePlusOne" text in "ENG" field
-		And I input "ExternalFivePlusOne" text in "TR" field
+		And I input "ExternalFivePlusOne" text in the field named "Description_en"
+		And I input "ExternalFivePlusOne" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
@@ -95,8 +95,8 @@ Scenario: _030005 add Pluginsessor FivePlusOne
 
 Scenario: _030006 create Special Offer Types (price type)
 	When select the plugin to create the type of special offer
-	And I input "Discount Price 1" text in "ENG" field
-	And I input "Discount Price 1" text in "TR" field
+	And I input "Discount Price 1" text in the field named "Description_en"
+	And I input "Discount Price 1" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save" button
 	When move on to the Price Type settings
@@ -107,8 +107,8 @@ Scenario: _030006 create Special Offer Types (price type)
 	When save the special offer setting
 	Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Discount Price 1"
 	When select the plugin to create the type of special offer
-	And I input "Discount Price 2" text in "ENG" field
-	And I input "Discount Price 2" text in "TR" field
+	And I input "Discount Price 2" text in the field named "Description_en"
+	And I input "Discount Price 2" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save" button
 	When move on to the Price Type settings
@@ -119,8 +119,8 @@ Scenario: _030006 create Special Offer Types (price type)
 	When save the special offer setting
 	Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Discount Price 2"
 	When select the plugin to create the type of special offer
-	And I input "Discount 1 without Vat" text in "ENG" field
-	And I input "Discount 1 without Vat" text in "TR" field
+	And I input "Discount 1 without Vat" text in the field named "Description_en"
+	And I input "Discount 1 without Vat" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save" button
 	When move on to the Price Type settings
@@ -131,8 +131,8 @@ Scenario: _030006 create Special Offer Types (price type)
 	When save the special offer setting
 	Then I check for the "SpecialOfferTypes" catalog element with the "Description_en" "Discount 1 without Vat"
 	When select the plugin to create the type of special offer
-	And I input "Discount 2 TRY without VAT" text in "ENG" field
-	And I input "Discount 2 TRY without VAT" text in "TR" field
+	And I input "Discount 2 TRY without VAT" text in the field named "Description_en"
+	And I input "Discount 2 TRY without VAT" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save" button
 	When move on to the Price Type settings
@@ -145,8 +145,8 @@ Scenario: _030006 create Special Offer Types (price type)
 
 Scenario: _030007 create Special Offer Types special message (Notification)
 	When choose the plugin to create a special offer type (message)
-	And I input "Special Message Notification" text in "ENG" field
-	And I input "Special Message Notification" text in "TR" field
+	And I input "Special Message Notification" text in the field named "Description_en"
+	And I input "Special Message Notification" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save" button
 	And I click "Set settings" button
@@ -168,8 +168,8 @@ Scenario: _030008 create Special Offer Rule RangeDiscount
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		* Filling the rule name
-			And I input "Range Discount Basic (Dress)" text in "ENG" field
-			And I input "Range Discount Basic (Dress)" text in "TR" field
+			And I input "Range Discount Basic (Dress)" text in the field named "Description_en"
+			And I input "Range Discount Basic (Dress)" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save" button
 	* Filling special offer rule: Basic Partner terms TRY, Dress,3
@@ -215,8 +215,8 @@ Scenario: _030008 create Special Offer Rule RangeDiscount
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 		* Filling the rule name
-			And I input "Range Discount Basic (Trousers)" text in "ENG" field
-			And I input "Range Discount Basic (Trousers)" text in "TR" field
+			And I input "Range Discount Basic (Trousers)" text in the field named "Description_en"
+			And I input "Range Discount Basic (Trousers)" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save" button
 	* Filling special offer rule: Basic Partner terms TRY, Trousers
@@ -257,8 +257,8 @@ Scenario: _030009 create Special Offer Rule Present Discount
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 	* Filling the rule name
-		And I input "All items 5+1, Discount on Basic Partner terms" text in "ENG" field
-		And I input "All items 5+1 TR, Discount on Basic Partner terms" text in "TR" field
+		And I input "All items 5+1, Discount on Basic Partner terms" text in the field named "Description_en"
+		And I input "All items 5+1 TR, Discount on Basic Partner terms" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save" button
 	* Filling special offer rule: Basic Partner terms TRY, all items, 5+1, multiple 
@@ -302,8 +302,8 @@ Scenario: _030009 create Special Offer Rule Present Discount
 			And I select current line in "List" table
 			And I click Open button of the field named "Description_en"
 		* Filling the rule name
-			And I input "Dress and Trousers 4+1, Discount on Basic Partner terms" text in "ENG" field
-			And I input "Dress and Trousers 4+1 TR, Discount on Basic Partner terms" text in "TR" field
+			And I input "Dress and Trousers 4+1, Discount on Basic Partner terms" text in the field named "Description_en"
+			And I input "Dress and Trousers 4+1 TR, Discount on Basic Partner terms" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save" button
 		* Filling special offer rule: Basic Partner terms TRY, 4+1, multiple 
@@ -352,8 +352,8 @@ Scenario: _030009 create Special Offer Rule Present Discount
 			And I select current line in "List" table
 			And I click Open button of the field named "Description_en"
 		* Filling the rule name
-			And I input "Dress and Trousers 3+1, Discount on Basic Partner terms" text in "ENG" field
-			And I input "Dress and Trousers 3+1 TR, Discount on Basic Partner terms" text in "TR" field
+			And I input "Dress and Trousers 3+1, Discount on Basic Partner terms" text in the field named "Description_en"
+			And I input "Dress and Trousers 3+1 TR, Discount on Basic Partner terms" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save" button
 		* Filling special offer rule: Basic Partner terms TRY
@@ -394,8 +394,8 @@ Scenario: _030009 create Special Offer Rule Present Discount
 
 Scenario: _030010 create Special Offer Types special message (DialogBox)
 	When choose the plugin to create a special offer type (message)
-	And I input "Special Message DialogBox" text in "ENG" field
-	And I input "Special Message DialogBox" text in "TR" field
+	And I input "Special Message DialogBox" text in the field named "Description_en"
+	And I input "Special Message DialogBox" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save" button
 	And I click "Set settings" button
@@ -417,8 +417,8 @@ Scenario: _030011 create Special Offer Types Present Discount
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 	* Filling in type name
-		And I input "All items 5+1, Discount on Basic Partner terms" text in "ENG" field
-		And I input "All items 5+1 TR, Discount on Basic Partner terms" text in "TR" field
+		And I input "All items 5+1, Discount on Basic Partner terms" text in the field named "Description_en"
+		And I input "All items 5+1 TR, Discount on Basic Partner terms" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save" button
 	* Filling in type: Basic Partner terms TRY, all items, 5+1, multiple
@@ -463,8 +463,8 @@ Scenario: _030011 create Special Offer Types Present Discount
 			And I select current line in "List" table
 			And I click Open button of the field named "Description_en"
 		* Filling in type name
-			And I input "Dress,2 4+1, Discount on Basic Partner terms" text in "ENG" field
-			And I input "Dress,2 4+1 TR, Discount on Basic Partner terms" text in "TR" field
+			And I input "Dress,2 4+1, Discount on Basic Partner terms" text in the field named "Description_en"
+			And I input "Dress,2 4+1 TR, Discount on Basic Partner terms" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save" button
 		* Filling in type: Basic Partner terms TRY, all items, 4+1, multiple 
@@ -516,8 +516,8 @@ Scenario: _030011 create Special Offer Types Present Discount
 			And I select current line in "List" table
 			And I click Open button of the field named "Description_en"
 		* Filling in type name
-			And I input "Dress,2 3+1, Discount on Basic Partner terms" text in "ENG" field
-			And I input "Dress,2 3+1 TR, Discount on Basic Partner terms" text in "TR" field
+			And I input "Dress,2 3+1, Discount on Basic Partner terms" text in the field named "Description_en"
+			And I input "Dress,2 3+1 TR, Discount on Basic Partner terms" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save" button
 		* Filling in type: Basic Partner terms TRY, all items, 4+1, multiple
@@ -569,8 +569,8 @@ Scenario: _030012 create Special Offer Types Range Discount
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
 	* Filling in type name
-		And I input "Range Discount Basic (Dress)" text in "ENG" field
-		And I input "Range Discount Basic (Dress)" text in "TR" field
+		And I input "Range Discount Basic (Dress)" text in the field named "Description_en"
+		And I input "Range Discount Basic (Dress)" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save" button
 	* Filling in type: Basic Partner terms TRY, Dress,3
@@ -613,8 +613,8 @@ Scenario: _030012 create Special Offer Types Range Discount
 			And I select current line in "List" table
 			And I click Open button of the field named "Description_en"
 		* Filling in type name
-			And I input "Range Discount Basic (Trousers)" text in "ENG" field
-			And I input "Range Discount Basic (Trousers)" text in "TR" field
+			And I input "Range Discount Basic (Trousers)" text in the field named "Description_en"
+			And I input "Range Discount Basic (Trousers)" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save" button
 		* Filling in type: Basic Partner terms TRY, Dress
@@ -639,8 +639,8 @@ Scenario: _030012 create Special Offer Types Range Discount
 
 Scenario: _030013 create Special Offer Rules (Partner term)
 	When select the plugin to create the rule of special offer
-	And I input "Discount on Basic Partner terms" text in "ENG" field
-	And I input "Discount on Basic Partner terms" text in "TR" field
+	And I input "Discount on Basic Partner terms" text in the field named "Description_en"
+	And I input "Discount on Basic Partner terms" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save" button
 	And I click "Set settings" button
@@ -660,8 +660,8 @@ Scenario: _030013 create Special Offer Rules (Partner term)
 	When save the special offer setting
 	Then I check for the "SpecialOfferRules" catalog element with the "Description_en" "Discount on Basic Partner terms"
 	When select the plugin to create the rule of special offer
-	And I input "Discount on Basic Partner terms without Vat" text in "ENG" field
-	And I input "Discount on Basic Partner terms without Vat" text in "TR" field
+	And I input "Discount on Basic Partner terms without Vat" text in the field named "Description_en"
+	And I input "Discount on Basic Partner terms without Vat" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save" button
 	And I click "Set settings" button
@@ -684,8 +684,8 @@ Scenario: _030013 create Special Offer Rules (Partner term)
 
 Scenario: _030014 create Special Offer (group Maximum by row/Special Offers Maximum by row)
 	When choose the plugin to create a special offer
-	And I input "Special Offers" text in "ENG" field
-	And I input "Special Offers" text in "TR" field
+	And I input "Special Offers" text in the field named "Description_en"
+	And I input "Special Offers" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I change checkbox "Group types"
 	And I click "Save" button
@@ -695,16 +695,16 @@ Scenario: _030014 create Special Offer (group Maximum by row/Special Offers Maxi
 	When save the special offer setting
 	And I click the button named "FormChoose"
 	And I click Open button of the field named "Description_en"
-	And I input "Special Offers" text in "ENG" field
-	And I input "Special Offers" text in "TR" field
+	And I input "Special Offers" text in the field named "Description_en"
+	And I input "Special Offers" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I input "1" text in "Priority" field
 	And I click "Save and close" button
 	And Delay 10
 	Then I check for the "SpecialOffers" catalog element with the "Description_en" "Special Offers"
 	When choose the plugin to create a special offer
-	And I input "Maximum" text in "ENG" field
-	And I input "Maximum" text in "TR" field
+	And I input "Maximum" text in the field named "Description_en"
+	And I input "Maximum" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I change checkbox "Group types"
 	And I click "Save" button
@@ -714,8 +714,8 @@ Scenario: _030014 create Special Offer (group Maximum by row/Special Offers Maxi
 	When save the special offer setting
 	And I click the button named "FormChoose"
 	And I click Open button of the field named "Description_en"
-	And I input "Maximum" text in "ENG" field
-	And I input "Maximum" text in "TR" field
+	And I input "Maximum" text in the field named "Description_en"
+	And I input "Maximum" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I input "3" text in "Priority" field
 	And I click "Save and close" button
@@ -733,8 +733,8 @@ Scenario: _030015 create Special Offer (group Sum)
 		| 'ExternalSpecialOfferRules' |
 	And I select current line in "List" table
 	And I click Open button of the field named "Description_en"
-	And I input "Sum" text in "ENG" field
-	And I input "Sum" text in "TR" field
+	And I input "Sum" text in the field named "Description_en"
+	And I input "Sum" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I change checkbox "Group types"
 	And I click "Save" button
@@ -744,8 +744,8 @@ Scenario: _030015 create Special Offer (group Sum)
 	When save the special offer setting
 	And I click the button named "FormChoose"
 	And I click Open button of the field named "Description_en"
-	And I input "Sum" text in "ENG" field
-	And I input "Sum" text in "TR" field
+	And I input "Sum" text in the field named "Description_en"
+	And I input "Sum" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I input "1" text in "Priority" field
 	And I click "Save and close" button
@@ -763,8 +763,8 @@ Scenario: _030016 create Special Offer (group Minimum )
 		| 'ExternalSpecialOfferRules' |
 	And I select current line in "List" table
 	And I click Open button of the field named "Description_en"
-	And I input "Minimum" text in "ENG" field
-	And I input "Minimum" text in "TR" field
+	And I input "Minimum" text in the field named "Description_en"
+	And I input "Minimum" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I change checkbox "Group types"
 	And I click "Save" button
@@ -774,8 +774,8 @@ Scenario: _030016 create Special Offer (group Minimum )
 	When save the special offer setting
 	And I click the button named "FormChoose"
 	And I click Open button of the field named "Description_en"
-	And I input "Minimum" text in "ENG" field
-	And I input "Minimum" text in "TR" field
+	And I input "Minimum" text in the field named "Description_en"
+	And I input "Minimum" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I input "2" text in "Priority" field
 	And I click "Save and close" button
@@ -792,8 +792,8 @@ Scenario: _030017 create Special Offer (manual) Discount Price 1-2 (discount pri
 	And I change checkbox "Manually"
 	And I change checkbox "Launch"
 	And I click Open button of the field named "Description_en"
-	And I input "Discount Price 1" text in "ENG" field
-	And I input "Discount Price 1" text in "TR" field
+	And I input "Discount Price 1" text in the field named "Description_en"
+	And I input "Discount Price 1" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I select "Sales" exact value from "Document type" drop-down list
 	When enter the discount period this month
@@ -819,8 +819,8 @@ Scenario: _030017 create Special Offer (manual) Discount Price 1-2 (discount pri
 	And I change checkbox "Manually"
 	And I change checkbox "Launch"
 	And I click Open button of the field named "Description_en"
-	And I input "Discount Price 2" text in "ENG" field
-	And I input "Discount Price 2" text in "TR" field
+	And I input "Discount Price 2" text in the field named "Description_en"
+	And I input "Discount Price 2" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I select "Sales" exact value from "Document type" drop-down list
 	When enter the discount period this month
@@ -848,8 +848,8 @@ Scenario: _030018 create Special Offer - Special Message (Notification)
 	And I input "1" text in "Priority" field
 	When enter the discount period this month
 	And I click Open button of the field named "Description_en"
-	And I input "Special Message Notification" text in "ENG" field
-	And I input "Special Message Notification" text in "TR" field
+	And I input "Special Message Notification" text in the field named "Description_en"
+	And I input "Special Message Notification" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I select "Sales" exact value from "Document type" drop-down list
 	And I change checkbox "Launch"
@@ -879,8 +879,8 @@ Scenario: _030019 create Special Offer - Special Message (DialogBox)
 	And I input "2" text in "Priority" field
 	When enter the discount period this month
 	And I click Open button of the field named "Description_en"
-	And I input "Special Message DialogBox" text in "ENG" field
-	And I input "Special Message DialogBox" text in "TR" field
+	And I input "Special Message DialogBox" text in the field named "Description_en"
+	And I input "Special Message DialogBox" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I select "Sales" exact value from "Document type" drop-down list
 	And I change checkbox "Launch"
@@ -914,8 +914,8 @@ Scenario: _030020 create Special Offer, automatic use Discount Price 1-2 without
 	And I input "3" text in "Priority" field
 	And I change checkbox "Launch"
 	And I click Open button of the field named "Description_en"
-	And I input "Discount 1 without Vat" text in "ENG" field
-	And I input "Discount 1 without Vat" text in "TR" field
+	And I input "Discount 1 without Vat" text in the field named "Description_en"
+	And I input "Discount 1 without Vat" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I select "Sales" exact value from "Document type" drop-down list
 	When enter the discount period this month
@@ -937,8 +937,8 @@ Scenario: _030020 create Special Offer, automatic use Discount Price 1-2 without
 	And I select "Sales" exact value from "Document type" drop-down list
 	And I change checkbox "Launch"
 	And I click Open button of the field named "Description_en"
-	And I input "Discount 2 without Vat" text in "ENG" field
-	And I input "Discount 2 without Vat" text in "TR" field
+	And I input "Discount 2 without Vat" text in the field named "Description_en"
+	And I input "Discount 2 without Vat" text in the field named "Description_tr"
 	And I click "Ok" button
 	When enter the discount period this month
 	When add a special offer rule
@@ -997,8 +997,8 @@ Scenario: _030022 create special offer group within another special offer group
 	And I select current line in "List" table
 	And I input "10" text in "Priority" field
 	And I click Open button of the field named "Description_en"
-	And I input "Sum in Minimum" text in "ENG" field
-	And I input "Sum in Minimum" text in "TR" field
+	And I input "Sum in Minimum" text in the field named "Description_en"
+	And I input "Sum in Minimum" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save" button
 	And Delay 2
@@ -1072,8 +1072,8 @@ Scenario: _030024 create special offer Present Discount
 		And I select current line in "List" table
 		And I finish line editing in "Rules" table
 		And I click Open button of the field named "Description_en"
-		And I input "All items 5+1, Discount on Basic Partner terms" text in "ENG" field
-		And I input "All items 5+1, Discount on Basic Partner terms" text in "TR" field
+		And I input "All items 5+1, Discount on Basic Partner terms" text in the field named "Description_en"
+		And I input "All items 5+1, Discount on Basic Partner terms" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
@@ -1097,8 +1097,8 @@ Scenario: _030024 create special offer Present Discount
 			And I select current line in "List" table
 			And I finish line editing in "Rules" table
 			And I click Open button of the field named "Description_en"
-			And I input "4+1 Dress and Trousers, Discount on Basic Partner terms" text in "ENG" field
-			And I input "4+1 Dress and Trousers TR, Discount on Basic Partner terms" text in "TR" field
+			And I input "4+1 Dress and Trousers, Discount on Basic Partner terms" text in the field named "Description_en"
+			And I input "4+1 Dress and Trousers TR, Discount on Basic Partner terms" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save and close" button
 			And Delay 10
@@ -1122,8 +1122,8 @@ Scenario: _030024 create special offer Present Discount
 			And I select current line in "List" table
 			And I finish line editing in "Rules" table
 			And I click Open button of the field named "Description_en"
-			And I input "3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms" text in "ENG" field
-			And I input "3+1 Dress and Trousers (not multiplicity) TR, Discount on Basic Partner terms" text in "TR" field
+			And I input "3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms" text in the field named "Description_en"
+			And I input "3+1 Dress and Trousers (not multiplicity) TR, Discount on Basic Partner terms" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save and close" button
 			And Delay 10
@@ -1160,8 +1160,8 @@ Scenario: _030025 create Range Discount
 		And I select current line in "List" table
 		And I finish line editing in "Rules" table
 		And I click Open button of the field named "Description_en"
-		And I input "Range Discount Basic (Trousers)" text in "ENG" field
-		And I input "Range Discount Basic (Trousers)" text in "TR" field
+		And I input "Range Discount Basic (Trousers)" text in the field named "Description_en"
+		And I input "Range Discount Basic (Trousers)" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
@@ -1186,8 +1186,8 @@ Scenario: _030025 create Range Discount
 		And I select current line in "List" table
 		And I finish line editing in "Rules" table
 		And I click Open button of the field named "Description_en"
-		And I input "Range Discount Basic (Dress)" text in "ENG" field
-		And I input "Range Discount Basic (Dress)" text in "TR" field
+		And I input "Range Discount Basic (Dress)" text in the field named "Description_en"
+		And I input "Range Discount Basic (Dress)" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
@@ -1199,17 +1199,17 @@ Scenario: _030025 create Range Discount
 Scenario: _030026 create Document discount
 	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 	And I click the button named "FormCreate"
-	And I input "Document discount" text in "ENG" field
+	And I input "Document discount" text in the field named "Description_en"
 	And I click Open button of "ENG" field
-	And I input "Document discount TR" text in "TR" field
+	And I input "Document discount TR" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I select "Purchases and sales" exact value from "Document type" drop-down list
 	And I change checkbox "Launch"
 	And I click Select button of "Special offer type" field
 	And I click the button named "FormCreate"
-	And I input "Document discount" text in "ENG" field
+	And I input "Document discount" text in the field named "Description_en"
 	And I click Open button of "ENG" field
-	And I input "Document discount TR" text in "TR" field
+	And I input "Document discount TR" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click Select button of "Plugins" field
 	Then "Plugins" window is opened

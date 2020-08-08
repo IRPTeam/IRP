@@ -51,11 +51,11 @@
     </synonym>
     <type>
       <types>CatalogRef.Items</types>
-      <types>CatalogRef.ItemTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <createOnInput>Use</createOnInput>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <attributes uuid="840178c5-4b1d-441a-a05b-cec5fc49ad11">
     <name>Quantity</name>
@@ -104,6 +104,9 @@
     <type>
       <types>CatalogRef.UnitsOfMeasurement</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

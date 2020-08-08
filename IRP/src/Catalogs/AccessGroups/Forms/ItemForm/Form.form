@@ -33,7 +33,7 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormGroup">
-    <name>Pages</name>
+    <name>GroupMainPages</name>
     <id>1</id>
     <items xsi:type="form:FormGroup">
       <name>GroupProfiles</name>
@@ -676,10 +676,14 @@
     </userVisible>
     <title>
       <key>en</key>
-      <value>Pages</value>
+      <value>Group main pages</value>
     </title>
+    <toolTip>
+      <key>en</key>
+      <value>Group main pages</value>
+    </toolTip>
     <extendedTooltip>
-      <name>PagesExtendedTooltip</name>
+      <name>GroupMainPagesExtendedTooltip</name>
       <id>2</id>
       <visible>true</visible>
       <enabled>true</enabled>

@@ -20,6 +20,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		CurrentObject = FormAttributeToValue("Object");
 		Preview = PutToTempStorage(CurrentObject.Preview.Get());
 	EndIf;
+	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 &AtClient

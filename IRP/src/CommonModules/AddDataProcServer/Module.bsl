@@ -34,11 +34,7 @@ Function CreateAddDataProc(Info, AddInfo)
 	DataProc = Undefined;
 	
 	If ValueIsFilled(Info.ExternalDataProc.PathToExtDataProcForTest) Then
-		
-		File = New File(Info.ExternalDataProc.PathToExtDataProcForTest);
-		If File.Exist() Then
-			DataProc = ExternalDataProcessors.Create(Info.ExternalDataProc.PathToExtDataProcForTest, Info.ExternalDataProcName);
-		EndIf;
+		DataProc = ExternalDataProcessors.Create(Info.ExternalDataProc.PathToExtDataProcForTest, Info.ExternalDataProcName);
 	Else
 		ConnectedDataProc(Info, AddInfo);
 		DataProc = ExternalDataProcessors.Create(Info.ExternalDataProcName);

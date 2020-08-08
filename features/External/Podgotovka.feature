@@ -22,8 +22,8 @@ Scenario: create discount Message Dialog Box 2 (Message 3)
 			| 'ExternalSpecialMessage' |
 	And I select current line in "List" table
 	And I click Open button of the field named "Description_en"
-	And I input "DialogBox2" text in "ENG" field
-	And I input "DialogBox2" text in "TR" field
+	And I input "DialogBox2" text in the field named "Description_en"
+	And I input "DialogBox2" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save" button
 	And I click "Set settings" button
@@ -39,8 +39,8 @@ Scenario: create discount Message Dialog Box 2 (Message 3)
 	And I select "Sales" exact value from "Document type" drop-down list
 	And I change checkbox "Launch"
 	And I click Open button of the field named "Description_en"
-	And I input "DialogBox2" text in "ENG" field
-	And I input "DialogBox2" text in "TR" field
+	And I input "DialogBox2" text in the field named "Description_en"
+	And I input "DialogBox2" text in the field named "Description_tr"
 	And I click "Ok" button
 	And in the table "Rules" I click the button named "RulesAdd"
 	And I click choice button of "Rule" attribute in "Rules" table

@@ -45,6 +45,7 @@
   <defaultFolderForm>Catalog.ItemTypes.Form.GroupForm</defaultFolderForm>
   <defaultListForm>Catalog.ItemTypes.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.ItemTypes.Form.ChoiceForm</defaultChoiceForm>
+  <defaultFolderChoiceForm>Catalog.ItemTypes.Form.GroupChoiceForm</defaultFolderChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="1467a8a8-043f-422a-b930-608f5e45d117">
     <name>Type</name>
@@ -198,6 +199,15 @@
     <synonym>
       <key>en</key>
       <value>Group form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="2794538e-dff8-4e70-8001-40c8bf87cbfc">
+    <name>GroupChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

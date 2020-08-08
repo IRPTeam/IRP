@@ -2139,6 +2139,10 @@
   </attributes>
   <formCommands>
     <name>SearchByBarcode</name>
+    <title>
+      <key>en</key>
+      <value>Search by barcode</value>
+    </title>
     <id>1</id>
     <use>
       <common>true</common>

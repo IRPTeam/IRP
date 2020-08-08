@@ -34,5 +34,15 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.Workstations.Form.ItemForm</defaultObjectForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <forms uuid="be6907cb-f1a0-4a12-bd73-1d703dca564f">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:Catalog>

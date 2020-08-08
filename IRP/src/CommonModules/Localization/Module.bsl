@@ -72,6 +72,13 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_022", NStr("en = '1. By item keys'", Lang));
 	Strings.Insert("Form_023", NStr("en = '2. By properties'", Lang));
 	Strings.Insert("Form_024", NStr("en = '3. By items'", Lang));
+	
+	Strings.Insert("Form_025", NStr("en = 'Create from classifier'", Lang));
+	
+	Strings.Insert("Form_026", NStr("en = 'Item Bundle'", Lang));
+	Strings.Insert("Form_027", NStr("en = 'Item'", Lang));
+	Strings.Insert("Form_028", NStr("en = 'Item type'", Lang));
+	Strings.Insert("Form_029", NStr("en = 'External attributes'", Lang));
 	#EndRegion
 	
 	#Region ErrorMessages
@@ -170,7 +177,6 @@ Function Strings(Lang) Export
 			 												 Metadata.Documents.GoodsReceipt.Synonym);
 	// %1 - sales order
 	Strings.Insert("Error_054", NStr("en = 'Not properly status of %1 to proceed.'", Lang));
-	Strings.Error_053 = StrTemplate(Strings.Error_053, Metadata.Documents.SalesOrder.Synonym);
 															  
 	Strings.Insert("Error_055", NStr("en = 'No lines with properly procurement method.'", Lang));
 
@@ -211,9 +217,6 @@ Function Strings(Lang) Export
 
 	Strings.Insert("Error_065", NStr("en = 'Item key is not unique'", Lang));
 	Strings.Insert("Error_066", NStr("en = 'Specification is not unique'", Lang));
-	
-	// %3 - Sales order
-	Strings.Insert("Error_067", NStr("en = 'Not properly status of %1 to proceed.'", Lang));
 
 	// %1 - 12
 	// %2 - Boots

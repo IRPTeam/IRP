@@ -23,8 +23,8 @@ Scenario: _060004 check that the Reconcilation statement document is connected t
 			| ReconciliationStatement                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Reconciliation statement" text in "ENG" field
-		And I input "Reconciliation statement TR" text in "TR" field
+		And I input "Reconciliation statement" text in the field named "Description_en"
+		And I input "Reconciliation statement TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
@@ -35,8 +35,8 @@ Scenario: _060004 check that the Reconcilation statement document is connected t
 			And I click the button named "FormCreate"
 			And I set checkbox "Set by default"
 			And I click Open button of the field named "Description_en"
-			And I input "Send" text in "ENG" field
-			And I input "Send TR" text in "TR" field
+			And I input "Send" text in the field named "Description_en"
+			And I input "Send TR" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save and close" button
 			And Delay 2
@@ -46,8 +46,8 @@ Scenario: _060004 check that the Reconcilation statement document is connected t
 			| 'Reconciliation statement' |
 			And I click the button named "FormCreate"
 			And I click Open button of the field named "Description_en"
-			And I input "Approved" text in "ENG" field
-			And I input "Approved TR" text in "TR" field
+			And I input "Approved" text in the field named "Description_en"
+			And I input "Approved TR" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save and close" button
 			And Delay 2

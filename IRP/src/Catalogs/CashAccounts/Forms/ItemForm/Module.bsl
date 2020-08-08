@@ -24,6 +24,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Property("CurrencyType") Then
 		CurrencyType = Parameters.CurrencyType;	
 	EndIf;
+	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 #EndRegion

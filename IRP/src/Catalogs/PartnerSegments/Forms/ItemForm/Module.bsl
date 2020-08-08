@@ -7,6 +7,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			Items.Managers.Visible = False;
 		EndIf;
 	EndIf;
+	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 &AtClient

@@ -11,5 +11,6 @@
   <content>Catalog.AccessGroups</content>
   <content>Catalog.Workstations</content>
   <content>Catalog.Users</content>
+  <content>Catalog.UserGroups</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

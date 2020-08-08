@@ -21,14 +21,14 @@ Scenario: _300301 preparation
 			* Create item type for candy
 				And I click Select button of "Item type" field
 				And I click the button named "FormCreate"
-				And I input "Chewing gum" text in "TR" field
+				And I input "Chewing gum" text in the field named "Description_tr"
 				And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
 				And I click choice button of "Attribute" attribute in "AvailableAttributes" table
 				And I click the button named "FormCreate"
-				And I input "Chewing gum taste" text in "TR" field
+				And I input "Chewing gum taste" text in the field named "Description_tr"
 				And I click "Save and close" button
 				And I click the button named "FormCreate"
-				And I input "Chewing gum brand" text in "TR" field
+				And I input "Chewing gum brand" text in the field named "Description_tr"
 				And I click "Save and close" button
 				And Delay 5
 				And I click the button named "FormChoose"
@@ -54,7 +54,7 @@ Scenario: _300301 preparation
 	* Filling in add attribute and property values for Chewing gum brand and Chewing gum taste
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 		And I click the button named "FormCreate"
-		And I input "Cherry" text in "TR" field
+		And I input "Cherry" text in the field named "Description_tr"
 		And I click Select button of "Additional attribute" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -63,7 +63,7 @@ Scenario: _300301 preparation
 		And I click the button named "FormWriteAndClose"
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 		And I click the button named "FormCreate"
-		And I input "Mango" text in "TR" field
+		And I input "Mango" text in the field named "Description_tr"
 		And I click Select button of "Additional attribute" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -72,7 +72,7 @@ Scenario: _300301 preparation
 		And I click the button named "FormWriteAndClose"
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 		And I click the button named "FormCreate"
-		And I input "Mint" text in "TR" field
+		And I input "Mint" text in the field named "Description_tr"
 		And I click Select button of "Additional attribute" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -114,8 +114,8 @@ Scenario: _300301 preparation
 			And I input "10,000" text in "Quantity" field of "FormTable*" table
 			And I finish line editing in "FormTable*" table
 			And I click Open button of the field named "Description_tr"
-			And I input "Chewing gum" text in "ENG" field
-			And I input "Chewing gum" text in "TR" field
+			And I input "Chewing gum" text in the field named "Description_en"
+			And I input "Chewing gum" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save" button
 			And I close all client application windows

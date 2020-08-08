@@ -16,7 +16,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	
 	If Object.Type = Enums.SpecificationType.Bundle
 		And Not ValueIsFilled(Object.ItemBundle) Then
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, "Item Bundle")
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, R().Form_026)
 			, "Object.ItemBundle"
 			, ThisObject);
 		HaveError = True;
@@ -24,7 +24,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	
 	For Each Field In SavedDataStructure.Fields Do
 		If Items[Field.Key].AutoMarkIncomplete And Not ValueIsFilled(ThisObject[Field.Value.Item]) Then
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, "Item")
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, R().Form_027)
 				, Field.Value.Item
 				, ThisObject);
 			HaveError = True;
@@ -42,7 +42,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 				If Items[Column.FormName].AutoMarkIncomplete And Not ValueIsFilled(Row[Column.Name]) Then
 					MessageText = "";
 					If Column.Name = "Quantity" Then
-						MessageText = StrTemplate(R().Error_010, "Quantity");
+						MessageText = StrTemplate(R().Error_010, R().Form_003);
 					Else
 						MessageText = StrTemplate(R().Error_010, String(ThisObject[Column.OwnerName]));
 					EndIf;
@@ -258,8 +258,8 @@ Function CreatePage()
 	MapOfTypeDescriptions.Insert(Enums.SpecificationType.Set, New TypeDescription("CatalogRef.ItemTypes"));
 	
 	MapOfFieldTitle = New Map();
-	MapOfFieldTitle.Insert(Enums.SpecificationType.Bundle, "Item");
-	MapOfFieldTitle.Insert(Enums.SpecificationType.Set, "Item type");
+	MapOfFieldTitle.Insert(Enums.SpecificationType.Bundle, R().Form_027);
+	MapOfFieldTitle.Insert(Enums.SpecificationType.Set, R().Form_028);
 	
 	NewAttribute = New FormAttribute(GetUniqueName("Item")
 			, MapOfTypeDescriptions.Get(Object.Type)
@@ -287,7 +287,7 @@ Function CreatePage()
 			, True);
 	ArrayOfAttributes.Add(NewTable);
 	
-	NewColumn = New FormAttribute("Quantity", Metadata.DefinedTypes.typeQuantity.Type, NewTable.Name, "Quantity");
+	NewColumn = New FormAttribute("Quantity", Metadata.DefinedTypes.typeQuantity.Type, NewTable.Name, R().Form_003);
 	ArrayOfAttributes.Add(NewColumn);
 	ThisObject.ChangeAttributes(ArrayOfAttributes);
 	

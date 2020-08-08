@@ -20,20 +20,20 @@ Scenario: _0154000 preparation
 		And I select current line in "List" table
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "Second Company Ferron BP" text in "ENG" field
+		And I input "Second Company Ferron BP" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I select current line in "List" table
 		And I click Open button of "ENG" field
-		And I input "Second Company Ferron BP TR" text in "TR" field
+		And I input "Second Company Ferron BP TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save and close" button
 	* Create one more own company Second Company
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I click the button named "FormCreate"
-		And I input "Second Company" text in "ENG" field
+		And I input "Second Company" text in the field named "Description_en"
 		And I click Open button of "ENG" field
-		And I input "Second Company TR" text in "TR" field
+		And I input "Second Company TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click Select button of "Country" field
 		And I go to line in "List" table
@@ -48,7 +48,7 @@ Scenario: _0154000 preparation
 				And in the table "Currencies" I click the button named "CurrenciesAdd"
 				And I click choice button of "Movement type" attribute in "Currencies" table
 				And I click the button named "FormCreate"
-				And I input "Local currency UA" text in "ENG" field
+				And I input "Local currency UA" text in the field named "Description_en"
 				And I click Select button of "Currency" field
 				And I go to line in "List" table
 					| 'Code' |
@@ -80,7 +80,7 @@ Scenario: _0154000 preparation
 					| 'Bank UA' |
 				And I select current line in "List" table
 				And I select "Reporting" exact value from "Type" drop-down list
-				And I input "Reporting currency UA" text in "ENG" field
+				And I input "Reporting currency UA" text in the field named "Description_en"
 				And I click "Save and close" button
 				And Delay 5
 				And I click the button named "FormChoose"
@@ -93,18 +93,18 @@ Scenario: _0154001 check that additional attributes are displayed on the form wi
 	* Create item type
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I click the button named "FormCreate"
-		And I input "Test" text in "ENG" field
+		And I input "Test" text in the field named "Description_en"
 		And I click Open button of "ENG" field
-		And I input "Test TR" text in "TR" field
+		And I input "Test TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
 	* Create item
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I click the button named "FormCreate"
-		And I input "Test" text in "ENG" field
+		And I input "Test" text in the field named "Description_en"
 		And I click Open button of "ENG" field
-		And I input "Test TR" text in "TR" field
+		And I input "Test TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
@@ -134,9 +134,9 @@ Scenario: _0154001 check that additional attributes are displayed on the form wi
 		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
 		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
 		And I click the button named "FormCreate"
-		And I input "Test" text in "ENG" field
+		And I input "Test" text in the field named "Description_en"
 		And I click Open button of "ENG" field
-		And I input "Test TR" text in "TR" field
+		And I input "Test TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I input "_a154" text in "Unique ID" field
 		And I click "Save and close" button
@@ -210,7 +210,7 @@ Scenario:  _0154003 check that additional attributes are displayed on the form w
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Item types" text in "ENG" field
+		And I input "Item types" text in the field named "Description_en"
 		And I click "Save and close" button
 		When I click command interface button "Item types"
 	* Check that the additional Test attribute has been displayed on the form
@@ -223,7 +223,7 @@ Scenario:  _0154004 check that additional attributes are displayed on the form w
 	* Create Partners
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Test" text in "ENG" field
+		And I input "Test" text in the field named "Description_en"
 		And I set checkbox "Customer"
 		And I click "Save and close" button
 	* Open Partners form
@@ -279,7 +279,7 @@ Scenario:  _0154006 check that additional attributes are displayed on the form w
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Sales invoice" text in "ENG" field
+		And I input "Sales invoice" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Sales invoice (create)"
@@ -306,7 +306,7 @@ Scenario:  _01540060 check that additional attributes are displayed on the form 
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Purchase Invoice" text in "ENG" field
+		And I input "Purchase Invoice" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Purchase invoice (create)"
@@ -333,7 +333,7 @@ Scenario:  _01540061 check that additional attributes are displayed on the form 
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Sales Order" text in "ENG" field
+		And I input "Sales Order" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Sales order (create)"
@@ -360,7 +360,7 @@ Scenario:  _01540062 check that additional attributes are displayed on the form 
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Purchase Order" text in "ENG" field
+		And I input "Purchase Order" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Purchase order (create)"
@@ -387,7 +387,7 @@ Scenario:  _01540063 check that additional attributes are displayed on the form 
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Expense and revenue types" text in "ENG" field
+		And I input "Expense and revenue types" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Expense and revenue types"
@@ -413,7 +413,7 @@ Scenario:  _01540063 check that additional attributes are displayed on the form 
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Business units" text in "ENG" field
+		And I input "Business units" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Business units"
@@ -436,7 +436,7 @@ Scenario:  _01540064 check adding additional properties for Specifications (Cata
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
-		And I input "Specifications" text in "ENG" field
+		And I input "Specifications" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		Given I open hyperlink "e1cib/list/Catalog.Specifications"
@@ -466,7 +466,7 @@ Scenario:  _01540064 check that additional attributes are displayed on the form 
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Cheque Bonds" text in "ENG" field
+		And I input "Cheque Bonds" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Cheque bonds"
@@ -492,7 +492,7 @@ Scenario:  _015400640 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Partner terms" text in "ENG" field
+		And I input "Partner terms" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Partner terms"
@@ -520,7 +520,7 @@ Then I check for the "AddAttributeAndPropertyValues" charts of characteristic ty
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Cash/Bank accounts" text in "ENG" field
+		And I input "Cash/Bank accounts" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Cash/Bank accounts"
@@ -546,7 +546,7 @@ Scenario:  _015400642 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Companies" text in "ENG" field
+		And I input "Companies" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Companies"
@@ -573,7 +573,7 @@ Scenario:  _015400644 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Countries" text in "ENG" field
+		And I input "Countries" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Countries"
@@ -602,7 +602,7 @@ Scenario:  _015400645 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Currencies" text in "ENG" field
+		And I input "Currencies" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Currencies"
@@ -628,7 +628,7 @@ Scenario:  _015400646 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Price types" text in "ENG" field
+		And I input "Price types" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Price types"
@@ -655,7 +655,7 @@ Scenario:  _015400647 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Item serial/lot number" text in "ENG" field
+		And I input "Item serial/lot number" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Item serial/lot numbers"
@@ -684,7 +684,7 @@ Scenario:  _015400648 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Stores" text in "ENG" field
+		And I input "Stores" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Stores"
@@ -711,7 +711,7 @@ Scenario:  _015400649 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Tax types" text in "ENG" field
+		And I input "Tax types" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Tax types"
@@ -737,7 +737,7 @@ Scenario:  _015400650 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Units" text in "ENG" field
+		And I input "Units" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Item units"
@@ -765,7 +765,7 @@ Scenario:  _015400651 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Users" text in "ENG" field
+		And I input "Users" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Users"
@@ -792,7 +792,7 @@ Scenario:  _015400652 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Bank payment" text in "ENG" field
+		And I input "Bank payment" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Bank payment (create)"
@@ -820,7 +820,7 @@ Scenario:  _015400653 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Bank receipt" text in "ENG" field
+		And I input "Bank receipt" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Bank receipt (create)"
@@ -849,7 +849,7 @@ Scenario:  _015400655 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Bundling" text in "ENG" field
+		And I input "Bundling" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Bundling (create)"
@@ -877,7 +877,7 @@ Scenario:  _015400656 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Cash expense" text in "ENG" field
+		And I input "Cash expense" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Cash expense (create)"
@@ -905,7 +905,7 @@ Scenario:  _015400657 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Cash payment" text in "ENG" field
+		And I input "Cash payment" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Cash payment (create)"
@@ -934,7 +934,7 @@ Scenario:  _015400658 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Cash receipt" text in "ENG" field
+		And I input "Cash receipt" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Cash receipt (create)"
@@ -964,7 +964,7 @@ Scenario:  _015400659 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Cash revenue" text in "ENG" field
+		And I input "Cash revenue" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Cash revenue (create)"
@@ -992,7 +992,7 @@ Scenario:  _015400660 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Cash transfer order" text in "ENG" field
+		And I input "Cash transfer order" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Cash transfer order (create)"
@@ -1019,7 +1019,7 @@ Scenario:  _015400661 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Cheque bond transaction" text in "ENG" field
+		And I input "Cheque bond transaction" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Cheque bond transaction (create)"
@@ -1047,7 +1047,7 @@ Scenario:  _015400662 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Goods receipt" text in "ENG" field
+		And I input "Goods receipt" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Goods receipt (create)"
@@ -1076,7 +1076,7 @@ Scenario:  _015400663 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Incoming payment order" text in "ENG" field
+		And I input "Incoming payment order" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Incoming payment order (create)"
@@ -1104,7 +1104,7 @@ Scenario:  _015400664 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Inventory transfer" text in "ENG" field
+		And I input "Inventory transfer" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Inventory transfer (create)"
@@ -1132,7 +1132,7 @@ Scenario:  _015400665 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Inventory transfer order" text in "ENG" field
+		And I input "Inventory transfer order" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Inventory transfer order (create)"
@@ -1162,7 +1162,7 @@ Scenario:  _015400667 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Invoice match" text in "ENG" field
+		And I input "Invoice match" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Invoice match (create)"
@@ -1190,7 +1190,7 @@ Scenario:  _015400668 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Labeling" text in "ENG" field
+		And I input "Labeling" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Labeling (create)"
@@ -1218,7 +1218,7 @@ Scenario:  _015400669 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Opening entry" text in "ENG" field
+		And I input "Opening entry" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Opening entry (create)"
@@ -1249,7 +1249,7 @@ Scenario:  _015400670 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Outgoing payment order" text in "ENG" field
+		And I input "Outgoing payment order" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Outgoing payment order (create)"
@@ -1279,7 +1279,7 @@ Scenario:  _015400671 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Physical count by location" text in "ENG" field
+		And I input "Physical count by location" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Physical count by location (create)"
@@ -1307,7 +1307,7 @@ Scenario:  _015400672 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Physical inventory" text in "ENG" field
+		And I input "Physical inventory" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Physical inventory (create)"
@@ -1334,7 +1334,7 @@ Scenario:  _015400673 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Price list" text in "ENG" field
+		And I input "Price list" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Price list (create)"
@@ -1363,7 +1363,7 @@ Scenario:  _015400674 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Purchase return" text in "ENG" field
+		And I input "Purchase return" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Purchase return (create)"
@@ -1392,7 +1392,7 @@ Scenario:  _015400675 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Purchase return order" text in "ENG" field
+		And I input "Purchase return order" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Purchase return order (create)"
@@ -1422,7 +1422,7 @@ Scenario:  _015400676 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Reconciliation statement" text in "ENG" field
+		And I input "Reconciliation statement" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Reconciliation statement (create)"
@@ -1451,7 +1451,7 @@ Scenario:  _015400677 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Sales return" text in "ENG" field
+		And I input "Sales return" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Sales return (create)"
@@ -1479,7 +1479,7 @@ Scenario:  _015400678 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Sales return order" text in "ENG" field
+		And I input "Sales return order" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Sales return order (create)"
@@ -1508,7 +1508,7 @@ Scenario:  _015400679 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Shipment confirmation" text in "ENG" field
+		And I input "Shipment confirmation" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Shipment confirmation (create)"
@@ -1536,7 +1536,7 @@ Scenario:  _015400680 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Stock adjustment as surplus" text in "ENG" field
+		And I input "Stock adjustment as surplus" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Stock adjustment as surplus (create)"
@@ -1563,7 +1563,7 @@ Scenario:  _015400681 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Stock adjustment as write off" text in "ENG" field
+		And I input "Stock adjustment as write off" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Stock adjustment as write-off (create)"
@@ -1591,7 +1591,7 @@ Scenario:  _015400683 check that additional attributes are displayed on the form
 			| Test        |
 		And I select current line in "List" table
 		And I finish line editing in "Attributes" table
-		And I input "Unbundling" text in "ENG" field
+		And I input "Unbundling" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Unbundling (create)"
@@ -3563,11 +3563,11 @@ Scenario: _010018 check the display on the Partners Description ENG form after c
 			| 'Anna Petrova'         |
 		And I select current line in "List" table
 	* Changing Description_en to Anna Petrova1 and display checking
-		And I input "Anna Petrova1" text in "ENG" field
+		And I input "Anna Petrova1" text in the field named "Description_en"
 		And I click "Save" button
 		Then the form attribute named "Description_en" became equal to "Anna Petrova1"
 	* Changing Description_en back and display checking
-		And I input "Anna Petrova" text in "ENG" field
+		And I input "Anna Petrova" text in the field named "Description_en"
 		And I click "Save" button
 		Then the form attribute named "Description_en" became equal to "Anna Petrova"
 		And I click "Save and close" button
@@ -3581,10 +3581,10 @@ Scenario: _010019 check the display on the Company Description ENG form after ch
 			| 'Company Lomaniti'         |
 		And I select current line in "List" table
 	* Changing Description_en to Company Lomaniti1 and display checking
-		And I input "Company Lomaniti1" text in "ENG" field
+		And I input "Company Lomaniti1" text in the field named "Description_en"
 		And I click "Save" button
 		Then the form attribute named "Description_en" became equal to "Company Lomaniti1"
-		And I input "Company Lomaniti" text in "ENG" field
+		And I input "Company Lomaniti" text in the field named "Description_en"
 		And I click "Save" button
 	* Changing Description_en back and display checking
 		Then the form attribute named "Description_en" became equal to "Company Lomaniti"
@@ -3649,10 +3649,10 @@ Scenario: _005118 check the display on the Items Description ENG form after chan
 			| 'Box'         |
 		And I select current line in "List" table
 	* Changing Description_en to Box1 and display checking
-		And I input "Box1" text in "ENG" field
+		And I input "Box1" text in the field named "Description_en"
 		And I click "Save" button
 		Then the form attribute named "Description_en" became equal to "Box1"
-		And I input "Box" text in "ENG" field
+		And I input "Box" text in the field named "Description_en"
 		And I click "Save" button
 	* Changing Description_en back
 		Then the form attribute named "Description_en" became equal to "Box"
@@ -3666,11 +3666,11 @@ Scenario: _012008 check the display on the Partner term Description ENG form aft
 			| 'Personal Partner terms, $'         |
 		And I select current line in "List" table
 	* Changing Description_en to Personal Partner terms, $ 1 and display checking
-		And I input "Personal Partner terms, $ 1" text in "ENG" field
+		And I input "Personal Partner terms, $ 1" text in the field named "Description_en"
 		And I click "Save" button
 		Then the form attribute named "Description_en" became equal to "Personal Partner terms, $ 1"
 	* Changing Description_en back
-		And I input "Personal Partner terms, $" text in "ENG" field
+		And I input "Personal Partner terms, $" text in the field named "Description_en"
 		And I click "Save" button
 		Then the form attribute named "Description_en" became equal to "Personal Partner terms, $"
 		And I click "Save and close" button

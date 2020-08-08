@@ -25,6 +25,7 @@
   <checkUnique>true</checkUnique>
   <defaultPresentation>AsDescription</defaultPresentation>
   <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.ReportOptions.Form.ItemForm</defaultObjectForm>
   <attributes uuid="6ccd4096-7481-44ed-aff0-4dbf174d94c8">
     <name>ObjectKey</name>
     <synonym>
@@ -60,4 +61,13 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <forms uuid="e6c58e50-1134-4822-83f4-420a88051843">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:Catalog>

@@ -14,17 +14,17 @@ Background:
 Scenario: _029101 create item type for services
 	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 	And I click the button named "FormCreate"
-	And I input "Service" text in "ENG" field
+	And I input "Service" text in the field named "Description_en"
 	And I click Open button of "ENG" field
-	And I input "Service TR" text in "TR" field
+	And I input "Service TR" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I change "Type" radio button value to "Service"
 	And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
 	And I click choice button of "Attribute" attribute in "AvailableAttributes" table
 	And I click the button named "FormCreate"
-	And I input "Service type" text in "ENG" field
+	And I input "Service type" text in the field named "Description_en"
 	And I click Open button of "ENG" field
-	And I input "Service type TR" text in "TR" field
+	And I input "Service type TR" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save and close" button
 	And I go to line in "List" table
@@ -39,9 +39,9 @@ Scenario: _029101 create item type for services
 Scenario: _029102 create Item - Service
 	Given I open hyperlink "e1cib/list/Catalog.Items"
 	And I click the button named "FormCreate"
-	And I input "Service" text in "ENG" field
+	And I input "Service" text in the field named "Description_en"
 	And I click Open button of "ENG" field
-	And I input "Service TR" text in "TR" field
+	And I input "Service TR" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click Select button of "Item type" field
 	And I go to line in "List" table
@@ -59,9 +59,9 @@ Scenario: _029102 create Item - Service
 		And I click the button named "FormCreate"
 		And I click Select button of "Service type" field
 		And I click the button named "FormCreate"
-		And I input "Interner" text in "ENG" field
+		And I input "Interner" text in the field named "Description_en"
 		And I click Open button of "ENG" field
-		And I input "Interner TR" text in "TR" field
+		And I input "Interner TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And I click the button named "FormChoose"
@@ -70,9 +70,9 @@ Scenario: _029102 create Item - Service
 		And I click the button named "FormCreate"
 		And I click Select button of "Service type" field
 		And I click the button named "FormCreate"
-		And I input "Rent" text in "ENG" field
+		And I input "Rent" text in the field named "Description_en"
 		And I click Open button of "ENG" field
-		And I input "Rent TR" text in "TR" field
+		And I input "Rent TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And I click the button named "FormChoose"
@@ -190,10 +190,10 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 		* Create Item Router
 			Given I open hyperlink "e1cib/list/Catalog.Items"
 			And I click the button named "FormCreate"
-			And I input "Router" text in "ENG" field
+			And I input "Router" text in the field named "Description_en"
 			And I click Select button of "Item type" field
 			And I click the button named "FormCreate"
-			And I input "Equipment" text in "ENG" field
+			And I input "Equipment" text in the field named "Description_en"
 			And I click "Save and close" button
 			And I click the button named "FormChoose"
 			And I click Select button of "Unit" field

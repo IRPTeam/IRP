@@ -46,15 +46,15 @@ Scenario: _300602 check that the English name of the catalog element is saved an
 	* Create item only with Description en
 		And I click the button named "FormCreate"
 		And I click Open button of "TR" field
-		And I input "Skittles" text in "ENG" field
+		And I input "Skittles" text in the field named "Description_en"
 		And I click "Ok" button
 		And I click Select button of "Item type" field
 		And I click the button named "FormCreate"
-		And I input "Candy TR" text in "TR" field
+		And I input "Candy TR" text in the field named "Description_tr"
 		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
 		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
 		And I click the button named "FormCreate"
-		And I input "Taste TR" text in "TR" field
+		And I input "Taste TR" text in the field named "Description_tr"
 		And I click "Save and close" button
 		And I click the button named "FormChoose"
 		And I finish line editing in "AvailableAttributes" table
@@ -160,7 +160,7 @@ Scenario: _300605 check the display of the Turkish name in the list by the eleme
 		| Description    |
 		| Skittles       |
 	And I select current line in "List" table
-	And I input "Skittles TR" text in "TR" field
+	And I input "Skittles TR" text in the field named "Description_tr"
 	And I click "Save and close" button
 	And "List" table contains lines
 		| Description             | Item type     |

@@ -798,7 +798,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.Numpad7</commandName>
               <representation>Auto</representation>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -849,7 +849,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.Numpad4</commandName>
               <representation>Auto</representation>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -900,7 +900,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.Numpad1</commandName>
               <representation>Auto</representation>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -951,7 +951,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.Numpad0</commandName>
               <representation>Auto</representation>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -1118,7 +1118,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.Numpad8</commandName>
               <representation>Auto</representation>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -1169,7 +1169,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.Numpad5</commandName>
               <representation>Auto</representation>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -1220,7 +1220,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.Numpad2</commandName>
               <representation>Auto</representation>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -1271,7 +1271,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.NumpadDot</commandName>
               <representation>Auto</representation>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -1445,7 +1445,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.Numpad9</commandName>
               <representation>Auto</representation>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -1496,7 +1496,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.Numpad6</commandName>
               <representation>Auto</representation>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -1547,7 +1547,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.Numpad3</commandName>
               <representation>Auto</representation>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -1598,7 +1598,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command._Layout</commandName>
+              <commandName>Form.Command.NumpadClear</commandName>
               <representation>Auto</representation>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -1607,6 +1607,9 @@
               <horizontalStretch>true</horizontalStretch>
               <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
+              <backColor xsi:type="core:ColorRef">
+                <color>Style.ToolTipBackColor</color>
+              </backColor>
               <font xsi:type="core:FontRef">
                 <font>Style.NormalTextFont</font>
                 <height>16.0</height>
@@ -1753,6 +1756,7 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
+              <defaultItem>true</defaultItem>
               <extendedTooltip>
                 <name>EnterExtendedTooltip</name>
                 <id>148</id>
@@ -2494,6 +2498,7 @@
     <use>
       <common>true</common>
     </use>
+    <shortcut>Num +</shortcut>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>Cash</name>
@@ -2515,6 +2520,7 @@
     <use>
       <common>true</common>
     </use>
+    <shortcut>Num -</shortcut>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>Card</name>
@@ -2627,6 +2633,222 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>Enter</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Numpad1</name>
+    <title>
+      <key>en</key>
+      <value>1</value>
+    </title>
+    <id>8</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num 1</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Numpad2</name>
+    <title>
+      <key>en</key>
+      <value>2</value>
+    </title>
+    <id>9</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num 2</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Numpad3</name>
+    <title>
+      <key>en</key>
+      <value>3</value>
+    </title>
+    <id>10</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num 3</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Numpad4</name>
+    <title>
+      <key>en</key>
+      <value>4</value>
+    </title>
+    <id>11</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num 4</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Numpad5</name>
+    <title>
+      <key>en</key>
+      <value>5</value>
+    </title>
+    <id>12</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num 5</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Numpad6</name>
+    <title>
+      <key>en</key>
+      <value>6</value>
+    </title>
+    <id>13</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num 6</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Numpad7</name>
+    <title>
+      <key>en</key>
+      <value>7</value>
+    </title>
+    <id>14</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num 7</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Numpad8</name>
+    <title>
+      <key>en</key>
+      <value>8</value>
+    </title>
+    <id>15</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num 8</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Numpad9</name>
+    <title>
+      <key>en</key>
+      <value>9</value>
+    </title>
+    <id>16</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num 9</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Numpad0</name>
+    <title>
+      <key>en</key>
+      <value>0</value>
+    </title>
+    <id>17</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num 0</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>NumpadDot</name>
+    <title>
+      <key>en</key>
+      <value>.</value>
+    </title>
+    <id>18</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num .</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>NumpadClear</name>
+    <title>
+      <key>en</key>
+      <value>C</value>
+    </title>
+    <id>19</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num *</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

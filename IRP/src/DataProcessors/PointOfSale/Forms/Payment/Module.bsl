@@ -154,8 +154,8 @@ Procedure NumPress(Command)
 		AdditionalParameters = New Structure;
 		CashChoiceEnd(Result, AdditionalParameters);
 	EndIf;
-	ButtonValue = ThisObject.CurrentItem.Title;
-	NumButtonPress(ButtonValue);
+	NumButtonPress(Command.Name);
+	CurrentItem = Items.Enter;
 EndProcedure
 
 #EndRegion
@@ -205,7 +205,8 @@ Procedure CalculatePaymentsAmountTotal()
 EndProcedure
 	
 &AtClient
-Procedure NumButtonPress(ButtonValue)
+Procedure NumButtonPress(CommandName)
+	ButtonValue = StrReplace(CommandName, "Numpad", "");
 	LocalDotPresentation = ".";
 	CurrentData = Items.Payments.CurrentData;
 	If CurrentData = Undefined Then
@@ -216,16 +217,18 @@ Procedure NumButtonPress(ButtonValue)
 		CurrentData.AmountString = "";
 		CurrentData.Edited = True;
 	EndIf;
-	If ButtonValue = "."
-		And StrOccurrenceCount(CurrentData.AmountString, LocalDotPresentation) Then
-		Return;
+	If ButtonValue = "Dot" Then
+		ButtonValue = LocalDotPresentation;
+		If StrOccurrenceCount(CurrentData.AmountString, LocalDotPresentation) Then
+			Return;
+		EndIf;
 	EndIf;
 	If ButtonValue = "0"
 		And Left(CurrentData.AmountString, 1) = "0"
 		And Not StrOccurrenceCount(CurrentData.AmountString, LocalDotPresentation) Then
 		Return;
 	EndIf;
-	If ButtonValue = "C" Then
+	If ButtonValue = "Clear" Then
 		CurrentData.AmountString = "0";		
 	Else
 		If Left(CurrentData.AmountString, 1) = "0"
@@ -318,6 +321,7 @@ Procedure CardChoiceEnd(Result, AdditionalParameters) Export
 	Row.Amount = RemainingAmount;
 	Items.Payments.CurrentRow = Row.GetID();
 	Items.Payments.CurrentData.Edited = False;
+	CurrentItem = Items.Enter;
 	ChangeEnabledDigitButtons();
 	CalculatePaymentsAmountTotal();
 EndProcedure
@@ -347,6 +351,7 @@ Procedure CashChoiceEnd(Result, AdditionalParameters) Export
 	Row.Amount = RemainingAmount;
 	Items.Payments.CurrentRow = Row.GetID();
 	Items.Payments.CurrentData.Edited = False;
+	CurrentItem = Items.Enter;
 	ChangeEnabledDigitButtons();
 	CalculatePaymentsAmountTotal();
 EndProcedure

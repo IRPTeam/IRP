@@ -37,6 +37,12 @@ EndProcedure
 
 &AtClient
 Procedure Enter(Command)
+	If Not Payments.Count()
+		And CashPaymentTypes.Count() Then
+		Result = 0;
+		AdditionalParameters = New Structure;
+		CashChoiceEnd(Result, AdditionalParameters);
+	EndIf;
 	If PaymentsAmountTotal <> (Object.Amount + Object.Cashback) Then
 		Return;
 	EndIf;

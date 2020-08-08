@@ -223,9 +223,19 @@ Procedure WriteTransaction(Result)
 	If Not Payments.Count() Then
 		Return;
 	EndIf;
-	For Each PaymentRow In Payments Do
-		If PaymentRow.Percent Then
-			PaymentRow.Commision = PaymentRow.Amount * PaymentRow.Percent / 100;
+	ZeroAmountFilter = New Structure;
+	ZeroAmountFilter.Insert("Amount", 0);
+	ZeroAmountFoundRows = Payments.FindRows(ZeroAmountFilter);
+	ZeroAmountRows = New Array();
+	For Each Row In ZeroAmountFoundRows Do
+		ZeroAmountRows.Add(Row);
+	EndDo;
+	For Each Row In ZeroAmountRows Do
+		Payments.Delete(Row);
+	EndDo; 
+	For Each Row In Payments Do
+		If Row.Percent Then
+			Row.Commision = Row.Amount * Row.Percent / 100;
 		EndIf; 
 	EndDo;
 	ObjectValue = FormAttributeToValue("Object");

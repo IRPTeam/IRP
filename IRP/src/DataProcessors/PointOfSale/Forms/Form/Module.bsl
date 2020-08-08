@@ -219,10 +219,11 @@ EndProcedure
 
 &AtServer
 Procedure WriteTransaction(Result)
-	Payments = Result.Payments.Unload();
-	If Not Payments.Count() Then
+	If Result = Undefined 
+		Or Not Result.Payments.Count() Then
 		Return;
 	EndIf;
+	Payments = Result.Payments.Unload();
 	ZeroAmountFilter = New Structure;
 	ZeroAmountFilter.Insert("Amount", 0);
 	ZeroAmountFoundRows = Payments.FindRows(ZeroAmountFilter);

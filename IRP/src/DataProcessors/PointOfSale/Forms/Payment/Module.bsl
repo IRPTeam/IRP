@@ -1,26 +1,26 @@
 
+#Region Vars
+
+&AtClient
+Var AmountFractionDigitsCount, AmountDotIsActive, AmountFractionDigitsMaxCount, AmountWholeDigitsMaxCount;
+
+#EndRegion
+
 #Region Events
 
 #Region FormEvents
 
 &AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	
-	FillPaymentTypes();
-	
+Procedure OnCreateAtServer(Cancel, StandardProcessing)	
+	FillPaymentTypes();	
 	Object.Amount = Parameters.Parameters.Amount;
-	Object.BusinessUnit = Parameters.Parameters.BusinessUnit;
-	
-EndProcedure
-
-&AtClient
-Procedure PaymentsAfterDeleteRow(Item)
-	ChangeEnabledDigitButtons();
+	Object.BusinessUnit = Parameters.Parameters.BusinessUnit;	
 EndProcedure
 
 &AtClient
 Procedure PaymentsOnChange(Item)
 	CalculatePaymentsAmountTotal();
+	FormatPaymentsAmountStringRows();
 EndProcedure
 
 &AtClient
@@ -28,7 +28,47 @@ Procedure PaymentsOnActivateRow(Item)
 	CurrentData = Items.Payments.CurrentData;
 	If CurrentData <> Undefined Then
 		CurrentData.Edited = False;
+		CurrentData.AmountString = GetAmountString(CurrentData.Amount);
 	EndIf;
+EndProcedure
+
+&AtServer
+Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
+	ErrorMessages = New Array;
+	
+	If PaymentsAmountTotal < Object.Amount Then
+		ErrorMessages.Add(RL().s1);
+	EndIf;
+	
+	PaymentsValue = FormAttributeToValue("Payments");
+	CashPaymentFilter = New Structure();
+	CashPaymentFilter.Insert("PaymentTypeEnum", Enums.PaymentTypes.Cash);
+	CashAmounts = PaymentsValue.Copy(CashPaymentFilter, "Amount");
+	CashAmount = CashAmounts.Total("Amount");
+	CardPaymentFilter = New Structure();
+	CardPaymentFilter.Insert("PaymentTypeEnum", Enums.PaymentTypes.Card);
+	CardAmounts = PaymentsValue.Copy(CardPaymentFilter, "Amount");
+	CardAmount = CardAmounts.Total("Amount");
+	If CardAmount > Object.Amount Then
+		ErrorMessages.Add(RL().s2);
+	EndIf;
+	If CardAmount = Object.Amount
+		And CashAmount Then
+		ErrorMessages.Add(RL().s3);
+	EndIf;
+		
+	If Not ErrorMessages.Count()
+		And PaymentsAmountTotal <> (Object.Amount + Object.Cashback) Then
+		ErrorMessages.Add(RL().s4);		
+	EndIf;
+	
+	If ErrorMessages.Count() Then
+		Cancel = True;
+		For Each ErrorMessage In ErrorMessages Do
+			Message(ErrorMessage);
+		EndDo;
+	EndIf;
+	
 EndProcedure
 	
 #EndRegion
@@ -43,9 +83,9 @@ Procedure Enter(Command)
 		AdditionalParameters = New Structure;
 		CashChoiceEnd(Result, AdditionalParameters);
 	EndIf;
-	If PaymentsAmountTotal <> (Object.Amount + Object.Cashback) Then
+	If Not CheckFilling() Then
 		Return;
-	EndIf;
+	EndIf;		
 	If Object.Cashback Then
 		Row = Payments.Add();
 		//TODO: #168 Решить по поводу наличных видов оплат
@@ -57,6 +97,8 @@ Procedure Enter(Command)
 	ReturnValue.Insert("Payments", Payments);
 	Close(ReturnValue);
 EndProcedure
+
+
 
 &AtClient
 Procedure CloseButton(Command)
@@ -119,34 +161,6 @@ Procedure Card(Command)
 EndProcedure
 
 &AtClient
-Procedure LoyalityPoints(Command)
-	If (Object.Amount - Payments.Total("Amount")) <= 0 Then
-		RemainingAmount = 0;
-	Else
-		RemainingAmount = Object.Amount - Payments.Total("Amount");
-	EndIf;
-	PaymentFilter = New Structure;
-	PaymentFilter.Insert("PaymentType", PredefinedValue("Enum.PaymentTypes.LoyalityPoint"));
-	FoundPayment = Payments.FindRows(PaymentFilter);
-	If FoundPayment.Count() Then
-		Row = FoundPayment[0];
-	Else
-		Row = Payments.Add();
-		Row.PaymentType = PredefinedValue("Enum.PaymentTypes.LoyalityPoint");
-	EndIf;
-	Row.AmountString = Format(RemainingAmount, "NG=0;");
-	Row.Amount = RemainingAmount;
-	Items.Payments.CurrentRow = Row.GetID();
-	ChangeEnabledDigitButtons();
-	CalculatePaymentsAmountTotal();
-EndProcedure
-
-&AtClient
-Procedure Certificate(Command)
-	Return;
-EndProcedure
-
-&AtClient
 Procedure NumPress(Command)
 	If Not Payments.Count()
 		And CashPaymentTypes.Count() Then
@@ -163,27 +177,6 @@ EndProcedure
 #EndRegion
 
 #Region Internal
-
-&AtServer
-Procedure ChangeEnabledDigitButtons()
-	If Payments.Count() Then
-		Enabled = True;
-	Else
-		Enabled = False;
-	EndIf;
-	Items.__0.Enabled = Enabled;
-	Items.__1.Enabled = Enabled;
-	Items.__2.Enabled = Enabled;
-	Items.__3.Enabled = Enabled;
-	Items.__4.Enabled = Enabled;
-	Items.__5.Enabled = Enabled;
-	Items.__6.Enabled = Enabled;
-	Items.__7.Enabled = Enabled;
-	Items.__8.Enabled = Enabled;
-	Items.__9.Enabled = Enabled;
-	Items.__Dot.Enabled = Enabled;
-	Items.__C.Enabled = Enabled;
-EndProcedure
 
 &AtClient
 Procedure CalculatePaymentsAmountTotal()
@@ -203,42 +196,105 @@ Procedure CalculatePaymentsAmountTotal()
 	EndIf;
 	Object.Cashback = CashbackValue;
 EndProcedure
+
+&AtClient
+Procedure FormatPaymentsAmountStringRows()
+	For Each Row In Payments Do
+		Row.AmountString = GetAmountString(Row.Amount);
+	EndDo;
+EndProcedure
 	
 &AtClient
 Procedure NumButtonPress(CommandName)
-	ButtonValue = StrReplace(CommandName, "Numpad", "");
-	LocalDotPresentation = ".";
 	CurrentData = Items.Payments.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
+	
+	Ten = 10;
+	
 	If Not CurrentData.Edited Then
 		CurrentData.Amount = 0;
-		CurrentData.AmountString = "";
 		CurrentData.Edited = True;
+		AmountDotIsActive = False;
+		AmountFractionDigitsCount = 0;
 	EndIf;
+	
+	ButtonValue = StrReplace(CommandName, "Numpad", "");
+	
 	If ButtonValue = "Dot" Then
-		ButtonValue = LocalDotPresentation;
-		If StrOccurrenceCount(CurrentData.AmountString, LocalDotPresentation) Then
-			Return;
+		If Not AmountDotIsActive Then
+			AmountDotIsActive = True;
+			AmountFractionDigitsCount = 0;
+		EndIf;
+		Goto ~BuildAmountString;
+	EndIf;
+	
+	
+	If ButtonValue = "0" Then
+		If AmountDotIsActive Then
+			If (AmountFractionDigitsCount + 1) < AmountFractionDigitsMaxCount Then
+				AmountFractionDigitsCount = AmountFractionDigitsCount + 1;
+			EndIf;
+		Else
+			CurrentData.Amount = CurrentData.Amount * Ten;
+		EndIf;
+		Goto ~BuildAmountString;
+	EndIf;
+	
+	If ButtonValue = "Backspace" Then
+		If AmountDotIsActive Then
+			If AmountFractionDigitsCount Then
+				AmountFractionDigitsCount = AmountFractionDigitsCount - 1;
+				AmountFractionDigits = CurrentData.Amount - Int(CurrentData.Amount);
+				AmountValue = Int(AmountFractionDigits * Pow(Ten, AmountFractionDigitsCount)) / Pow(Ten, AmountFractionDigitsCount);
+				CurrentData.Amount = Int(CurrentData.Amount) + AmountValue;
+			Else
+				AmountDotIsActive = False;
+			EndIf;
+		Else
+			If Int(CurrentData.Amount / Ten) Then
+				CurrentData.Amount = Int(CurrentData.Amount / Ten);
+			Else
+				CurrentData.Amount = 0;
+			EndIf;
+		EndIf;
+		Goto ~BuildAmountString;
+	EndIf;
+		
+	If ButtonValue = "Clear" Then
+		CurrentData.Amount = 0;
+		CurrentData.Edited = False;
+		AmountDotIsActive = False;
+		AmountFractionDigitsCount = 0;
+		Goto ~BuildAmountString;
+	EndIf;
+	
+	CurrentAmountValue = CurrentData.Amount;
+	If AmountDotIsActive Then
+		If AmountFractionDigitsCount < AmountFractionDigitsMaxCount Then
+			CurrentData.Amount = CurrentData.Amount + Number(ButtonValue) / Pow(Ten, AmountFractionDigitsCount + 1);
+			AmountFractionDigitsCount = AmountFractionDigitsCount + 1;
+		EndIf;
+	Else
+		CurrentData.Amount = CurrentData.Amount * Ten + Number(ButtonValue);
+		If (CurrentAmountValue * Ten  + Number(ButtonValue)) <> CurrentData.Amount Then
+			CurrentData.Amount = CurrentAmountValue;
 		EndIf;
 	EndIf;
-	If ButtonValue = "0"
-		And Left(CurrentData.AmountString, 1) = "0"
-		And Not StrOccurrenceCount(CurrentData.AmountString, LocalDotPresentation) Then
-		Return;
-	EndIf;
-	If ButtonValue = "Clear" Then
-		CurrentData.AmountString = "0";		
+	
+	~BuildAmountString:
+	If AmountDotIsActive Then
+		If AmountFractionDigitsCount Then
+			NFDValue = "NFD=" + String(AmountFractionDigitsCount) + ";";
+			AmountString = Format(CurrentData.Amount, NFDValue);
+		Else
+			AmountString = String(CurrentData.Amount) + Mid(String(0.1), 2, 1);
+		EndIf;
 	Else
-		If Left(CurrentData.AmountString, 1) = "0"
-			And Not StrOccurrenceCount(CurrentData.AmountString, LocalDotPresentation)
-			And Not ButtonValue = "." Then
-			CurrentData.AmountString = "";
-		EndIf;		
-		CurrentData.AmountString = CurrentData.AmountString + ButtonValue;
+		AmountString = String(CurrentData.Amount);
 	EndIf;
-	CurrentData.Amount = Number(CurrentData.AmountString);
+	CurrentData.AmountString = AmountString;
 	CalculatePaymentsAmountTotal();	
 EndProcedure
 
@@ -317,13 +373,12 @@ Procedure CardChoiceEnd(Result, AdditionalParameters) Export
 	Else
 		RemainingAmount = Object.Amount - Payments.Total("Amount");
 	EndIf;
-	Row.AmountString = Format(RemainingAmount, "NG=0;");
 	Row.Amount = RemainingAmount;
 	Items.Payments.CurrentRow = Row.GetID();
 	Items.Payments.CurrentData.Edited = False;
 	CurrentItem = Items.Enter;
-	ChangeEnabledDigitButtons();
 	CalculatePaymentsAmountTotal();
+	FormatPaymentsAmountStringRows();
 EndProcedure
 
 &AtClient
@@ -347,14 +402,54 @@ Procedure CashChoiceEnd(Result, AdditionalParameters) Export
 	Else
 		RemainingAmount = Object.Amount - Payments.Total("Amount");
 	EndIf;
-	Row.AmountString = Format(RemainingAmount, "NG=0;");
 	Row.Amount = RemainingAmount;
+	Row.AmountString = GetAmountString(Row.Amount);
 	Items.Payments.CurrentRow = Row.GetID();
 	Items.Payments.CurrentData.Edited = False;
 	CurrentItem = Items.Enter;
-	ChangeEnabledDigitButtons();
 	CalculatePaymentsAmountTotal();
+	FormatPaymentsAmountStringRows();
 EndProcedure
+
+//TODO: #186 Transfer to localization module
+&AtServer
+Function RL()
+	S = New Structure;
+	S.Insert("s1", "Сумма оплат меньше суммы документа");
+	S.Insert("s2", "Сумма оплат по картам больше суммы документа");
+	S.Insert("s3", "Нет надобности использовать наличные, так как суммы оплат по картам достаточно для оплаты");
+	S.Insert("s4", "Суммы оплат некорректны");
+	Return S;
+EndFunction
+
+&AtClient
+Function GetAmountString(Val AmountValue)
+	Return Format(AmountValue, "NFD=" + Format(AmountFractionDigitsMaxCount, "NG=0;"));
+EndFunction
+
+&AtClient
+Procedure OnOpen(Cancel)
+	FillVars();
+EndProcedure
+
+&AtClient
+Procedure FillVars()
+	AmountFractionDigitsCount = 0;
+	AmountDotIsActive = False;
+	AmountFractionDigitsMaxCount = GetFractionDigitsMaxCount();
+	AmountWholeDigitsMaxCount = GetWholeDigitsMaxCount();
+EndProcedure
+
+&AtServerNoContext
+Function GetFractionDigitsMaxCount()
+	Return Metadata.DefinedTypes.typeAmount.Type.NumberQualifiers.FractionDigits;
+EndFunction
+
+&AtServerNoContext
+Function GetWholeDigitsMaxCount()
+	Return Metadata.DefinedTypes.typeAmount.Type.NumberQualifiers.Digits - Metadata.DefinedTypes.typeAmount.Type.NumberQualifiers.FractionDigits;
+EndFunction
+
 
 #EndRegion
 

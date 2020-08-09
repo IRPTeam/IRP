@@ -55,10 +55,55 @@
         <extInfo xsi:type="form:LabelFieldExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
+          <horizontalStretch>false</horizontalStretch>
           <font xsi:type="core:FontRef">
             <font>Style.NormalTextFont</font>
             <height>20.0</height>
           </font>
+        </extInfo>
+      </items>
+      <items xsi:type="form:Decoration">
+        <name>DecorationAmountAfter</name>
+        <id>166</id>
+        <title>
+          <key>en</key>
+          <value>Decoration amount after</value>
+        </title>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+          <name>DecorationAmountAfterExtendedTooltip</name>
+          <id>168</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+          <name>DecorationAmountAfterContextMenu</name>
+          <id>167</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+        </contextMenu>
+        <autoMaxWidth>true</autoMaxWidth>
+        <height>1</height>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:PictureDecorationExtInfo">
+          <fileDragMode>AsFileRef</fileDragMode>
         </extInfo>
       </items>
       <visible>true</visible>
@@ -93,6 +138,7 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>HorizontalIfPossible</group>
+        <horizontalAlign>Left</horizontalAlign>
         <representation>NormalSeparation</representation>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
@@ -464,10 +510,6 @@
             <horizontalAlign>Left</horizontalAlign>
           </autoCommandBar>
           <handlers>
-            <event>AfterDeleteRow</event>
-            <name>PaymentsAfterDeleteRow</name>
-          </handlers>
-          <handlers>
             <event>OnChange</event>
             <name>PaymentsOnChange</name>
           </handlers>
@@ -683,6 +725,10 @@
             <items xsi:type="form:Button">
               <name>Certificate</name>
               <id>136</id>
+              <title>
+                <key>en</key>
+                <value>Certificate</value>
+              </title>
               <visible>true</visible>
               <userVisible>
                 <common>true</common>
@@ -703,7 +749,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command.Certificate</commandName>
+              <commandName>Form.Command.Cash</commandName>
               <representation>PictureAndText</representation>
               <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -805,7 +851,6 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.NormalTextFont</font>
@@ -856,7 +901,6 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.NormalTextFont</font>
@@ -907,7 +951,6 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.NormalTextFont</font>
@@ -958,7 +1001,6 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.NormalTextFont</font>
@@ -1030,7 +1072,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command.LoyalityPoints</commandName>
+              <commandName>Form.Command.Cash</commandName>
               <representation>Auto</representation>
               <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -1040,6 +1082,9 @@
               <font xsi:type="core:FontDef">
                 <height>14.0</height>
               </font>
+              <picture xsi:type="core:PictureRef">
+                <picture>CommonPicture.SpecialOffer</picture>
+              </picture>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">
@@ -1125,7 +1170,6 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.NormalTextFont</font>
@@ -1176,7 +1220,6 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.NormalTextFont</font>
@@ -1227,7 +1270,6 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.NormalTextFont</font>
@@ -1278,7 +1320,6 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <backColor xsi:type="core:ColorRef">
                 <color>Style.ReportHeaderBackColor</color>
@@ -1452,7 +1493,6 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.NormalTextFont</font>
@@ -1503,7 +1543,6 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.NormalTextFont</font>
@@ -1554,7 +1593,6 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.NormalTextFont</font>
@@ -1605,7 +1643,6 @@
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <backColor xsi:type="core:ColorRef">
                 <color>Style.ToolTipBackColor</color>
@@ -1678,7 +1715,7 @@
               </extendedTooltip>
               <type>UsualButton</type>
               <commandName>Form.Command.Cash</commandName>
-              <representation>PictureAndText</representation>
+              <representation>Auto</representation>
               <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>3</height>
@@ -1691,9 +1728,6 @@
                 <faceName>Arial</faceName>
                 <height>14.0</height>
               </font>
-              <picture xsi:type="core:PictureRef">
-                <picture>CommonPicture.Purchase</picture>
-              </picture>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">
@@ -1741,6 +1775,48 @@
               </extInfo>
             </items>
             <items xsi:type="form:Button">
+              <name>NumpadBackspace</name>
+              <id>175</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>NumpadBackspaceExtendedTooltip</name>
+                <id>176</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>UsualButton</type>
+              <commandName>Form.Command.NumpadBackspace</commandName>
+              <representation>Auto</representation>
+              <width>4</width>
+              <autoMaxWidth>true</autoMaxWidth>
+              <height>2</height>
+              <autoMaxHeight>true</autoMaxHeight>
+              <horizontalStretch>true</horizontalStretch>
+              <placementArea>UserCmds</placementArea>
+              <font xsi:type="core:FontRef">
+                <font>Style.NormalTextFont</font>
+                <height>16.0</height>
+                <bold>true</bold>
+                <italic>false</italic>
+                <underline>false</underline>
+                <strikeout>false</strikeout>
+              </font>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
+            <items xsi:type="form:Button">
               <name>Enter</name>
               <id>147</id>
               <title>
@@ -1778,14 +1854,14 @@
               <defaultButton>true</defaultButton>
               <width>4</width>
               <autoMaxWidth>true</autoMaxWidth>
-              <height>3</height>
+              <height>6</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
               <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.NormalTextFont</font>
-                <height>9.0</height>
+                <height>16.0</height>
                 <bold>true</bold>
                 <italic>false</italic>
                 <underline>false</underline>
@@ -2030,6 +2106,50 @@
         </font>
       </extInfo>
     </items>
+    <items xsi:type="form:Decoration">
+      <name>DecorationCashbackAfter</name>
+      <id>163</id>
+      <title>
+        <key>en</key>
+        <value>Decoration cashback after</value>
+      </title>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>DecorationCashbackAfterExtendedTooltip</name>
+        <id>165</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>DecorationCashbackAfterContextMenu</name>
+        <id>164</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <autoMaxWidth>true</autoMaxWidth>
+      <height>1</height>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:PictureDecorationExtInfo">
+        <fileDragMode>AsFileRef</fileDragMode>
+      </extInfo>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -2082,6 +2202,14 @@
   <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
+  </handlers>
+  <handlers>
+    <event>FillCheckProcessingAtServer</event>
+    <name>FillCheckProcessingAtServer</name>
+  </handlers>
+  <handlers>
+    <event>OnOpen</event>
+    <name>OnOpen</name>
   </handlers>
   <windowOpeningMode>LockWholeInterface</windowOpeningMode>
   <autoTitle>true</autoTitle>
@@ -2498,12 +2626,16 @@
     <use>
       <common>true</common>
     </use>
-    <shortcut>Num +</shortcut>
+    <shortcut>Num /</shortcut>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.Purchase</picture>
+    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>Cash</name>
       </handler>
     </action>
+    <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -2520,37 +2652,12 @@
     <use>
       <common>true</common>
     </use>
-    <shortcut>Num -</shortcut>
+    <shortcut>Num *</shortcut>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>Card</name>
       </handler>
     </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>LoyalityPoints</name>
-    <title>
-      <key>en</key>
-      <value>Loyality points</value>
-    </title>
-    <id>3</id>
-    <toolTip>
-      <key>en</key>
-      <value>Mixed</value>
-    </toolTip>
-    <use>
-      <common>true</common>
-    </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.IDInfo</picture>
-    </picture>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>LoyalityPoints</name>
-      </handler>
-    </action>
-    <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -2845,7 +2952,25 @@
     <use>
       <common>true</common>
     </use>
-    <shortcut>Num *</shortcut>
+    <shortcut>Delete</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>NumpadBackspace</name>
+    <title>
+      <key>en</key>
+      <value>⌫</value>
+    </title>
+    <id>20</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>BackSpace</shortcut>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>NumPress</name>

@@ -16,7 +16,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>0.6.4.#BuildNumber#</version>
+  <version>0.7.0.#BuildNumber#</version>
   <updateCatalogAddress>https://github.com/DitriXNew/irp</updateCatalogAddress>
   <reportsVariantsStorage>SettingsStorage.ReportOptions</reportsVariantsStorage>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>

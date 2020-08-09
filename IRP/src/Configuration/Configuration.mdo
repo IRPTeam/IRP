@@ -39,7 +39,7 @@
   <modalityUseMode>DontUse</modalityUseMode>
   <synchronousExtensionAndAddInCallUseMode>DontUse</synchronousExtensionAndAddInCallUseMode>
   <synchronousPlatformExtensionAndAddInCallUseMode>DontUse</synchronousPlatformExtensionAndAddInCallUseMode>
-  <compatibilityMode>8.3.15</compatibilityMode>
+  <compatibilityMode>8.3.16</compatibilityMode>
   <languages uuid="f1c59d1c-aafe-420b-96cd-c5f1608cf9c1">
     <name>English</name>
     <synonym>

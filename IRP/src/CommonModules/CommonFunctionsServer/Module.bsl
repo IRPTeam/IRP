@@ -67,6 +67,14 @@ Function IsDocumentRef(Value) Export
 	Return Documents.AllRefsType().ContainsType(TypeOf(Value));
 EndFunction
 
+Function GetCommonTemplateByName(Name, GetFromStorage = False) Export
+	If GetFromStorage Then
+		Return GetCommonTemplate(Name).Get();
+	Else
+		Return GetCommonTemplate(Name);
+	EndIf;
+EndFunction
+
 Function SerializeJSON(Value, AddInfo = Undefined) Export
 	Writer = New JSONWriter();
 	Writer.SetString();

@@ -422,6 +422,7 @@ Scenario: _095004 check movements of the document Credit_DebitNote by operation 
 			| 'Sales invoice' |
 		And I select current line in "" table
 		* Check the selection of basis documents for the specified partner
+			And delay 2
 			Then the number of "List" table lines is "less or equal" 1
 			And "List" table contains lines
 			| 'Number' |

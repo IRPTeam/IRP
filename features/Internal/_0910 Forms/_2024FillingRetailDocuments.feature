@@ -329,9 +329,9 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Retail sales receipt'          |
-			| '400,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | '312,00'        | '74,44'      | 'pcs'  | '413,56'     | '488,00'       | 'Store 01' | '$$RetailSalesReceipt0154135$$' |
-			| '350,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '-63,00'        | '63,00'      | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' | '$$RetailSalesReceipt0154135$$' |
-			| '700,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '311,00'        | '59,34'      | 'pcs'  | '329,66'     | '389,00'       | 'Store 01' | '$$RetailSalesReceipt0154135$$' |
+			| '400,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | '312,00'        | '74,44'      | 'pcs'  | '413,56'     | '488,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
+			| '350,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '-63,00'        | '63,00'      | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
+			| '700,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '311,00'        | '59,34'      | 'pcs'  | '329,66'     | '389,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 		And "TaxTree" table contains lines
 			| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT' | ''         | ''      | ''         | ''          | '196,78' | '196,78'        |
@@ -360,8 +360,8 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		And I delete a line in "ItemList" table
 		And "ItemList" table contains lines
 		| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Retail sales receipt'          |
-		| '400,00' | 'Shirt' | '18%' | '38/Black' | '1,000' | '166,00'        | '35,69'      | 'pcs'  | '198,31'     | '234,00'       | 'Store 01' | '$$RetailSalesReceipt0154135$$' |
-		| '350,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '-63,00'        | '63,00'      | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' | '$$RetailSalesReceipt0154135$$' |
+		| '400,00' | 'Shirt' | '18%' | '38/Black' | '1,000' | '166,00'        | '35,69'      | 'pcs'  | '198,31'     | '234,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
+		| '350,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '-63,00'        | '63,00'      | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 	* Filling in payment tab
 			And I move to "Payments" tab
 			And in the table "Payments" I click "Add" button

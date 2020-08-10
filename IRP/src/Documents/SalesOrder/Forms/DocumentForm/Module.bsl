@@ -393,7 +393,7 @@ Procedure TaxValueOnChange(Item) Export
 	Settings = New Structure();
 	Settings.Insert("Rows", New Array());
 	Settings.Insert("CalculateSettings");
-	Settings.CalculateSettings = New Structure("CalculateTax");
+	Settings.CalculateSettings = New Structure("CalculateTax, CalculateTotalAmount");
 	Settings.Rows.Add(CurrentData);
 	DocumentsClient.ItemListCalculateRowsAmounts(Object, ThisObject, Settings);
 EndProcedure

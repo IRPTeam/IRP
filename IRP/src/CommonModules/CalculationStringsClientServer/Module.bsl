@@ -593,7 +593,7 @@ Function PricesChanged(Object, Form, Settings) Export
 	ListCache = GetCacheTable(Object, "ItemList", CachedColumns);
 	
 	CalculationSettings = New Structure();
-	PriceDate = ?(Object.Ref.IsEmpty(), CurrentDate(), Object.Date);
+	PriceDate = ?(ValueIsFilled(Form.Object.Date), Form.Object.Date, CurrentDate());
 	CalculationSettings.Insert("UpdatePrice",
 					New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	

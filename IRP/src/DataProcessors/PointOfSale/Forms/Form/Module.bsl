@@ -135,6 +135,10 @@ Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	ItemListOnChange(Items.ItemList);
 	ItemListItemOnChange(Items.ItemList);
 	ItemListItemKeyOnChange(Items.ItemList);
+	CurrentDataItemList = Items.ItemList.CurrentData;
+	If CurrentDataItemList <> Undefined Then
+		BuildDetailedInformation(CurrentDataItemList.ItemKey);
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -160,6 +164,7 @@ Procedure ItemKeysPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	ItemKeysSelectionAtServer(CurrentData.Ref);
 	ItemListOnChange(Items.ItemList);	
 	ItemListItemKeyOnChange(Items.ItemList);
+	BuildDetailedInformation(CurrentData.Ref);
 EndProcedure
 
 #EndRegion
@@ -236,13 +241,26 @@ Procedure WriteTransaction(Result)
 	EndDo; 
 	For Each Row In Payments Do
 		If Row.Percent Then
-			Row.Commision = Row.Amount * Row.Percent / 100;
+			Row.Commission = Row.Amount * Row.Percent / 100;
 		EndIf; 
 	EndDo;
 	ObjectValue = FormAttributeToValue("Object");
 	ObjectValue.Date = CurrentDate();
 	ObjectValue.Payments.Load(Payments);
-	ObjectValue.Write();	
+	ObjectValue.Write();
+	CashAmountFilter = New Structure;
+	CashAmountFilter.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.Cash"));
+	CashAmountFoundRows = Payments.FindRows(CashAmountFilter);
+	CashbackAmount = 0;
+	For Each Row In CashAmountFoundRows Do
+		If Row.Amount < 0 Then
+			CashbackAmount = CashbackAmount + Row.Amount * (-1);
+		EndIf;
+	EndDo;
+	If CashbackAmount Then
+		Items.DetailedInformationTitles.Title = "Cashback: ";
+		Items.DetailedInformationValues.Title = Format(CashbackAmount, "NFD=2;");
+	EndIf;
 	NewTransaction();
 	Return;
 EndProcedure
@@ -354,6 +372,37 @@ EndProcedure
 &AtServer
 Procedure EnabledPaymentButton()
 	Items.qPayment.Enabled = Object.ItemList.Count();
+EndProcedure
+
+&AtClient
+Procedure BuildDetailedInformation(ItemKey)
+	ItemListFilter = New Structure();
+	ItemListFilter.Insert("ItemKey", ItemKey);
+	FoundItemKeyRows = Object.ItemList.FindRows(ItemListFilter);
+	InfoItem = PredefinedValue("Catalog.Items.EmptyRef");
+	InfoPrice = 0;
+	InfoQuantity = 0;
+	InfoOffersAmount = 0;
+	InfoTotalAmount = 0;
+	For Each FoundItemKeyRow In FoundItemKeyRows Do
+		InfoItem = FoundItemKeyRow.Item;
+		InfoPrice = FoundItemKeyRow.Price;
+		InfoOffersAmount = InfoOffersAmount + FoundItemKeyRow.OffersAmount;
+		InfoQuantity = InfoQuantity + FoundItemKeyRow.Quantity;		
+		InfoTotalAmount = InfoTotalAmount + FoundItemKeyRow.TotalAmount;
+	EndDo;
+	Items.DetailedInformationTitles.Title = "Item: "
+						+ Chars.LF + "Item key: "
+						+ Chars.LF + "Quantity: "
+						+ Chars.LF + "Price: "
+						+ Chars.LF + "Offers: "
+						+ Chars.LF + "Total: ";
+	Items.DetailedInformationValues.Title = String(InfoItem)
+						+ Chars.LF + String(ItemKey)
+						+ Chars.LF + Format(InfoQuantity, "NFD=2;")
+						+ Chars.LF + Format(InfoPrice, "NFD=2;")
+						+ Chars.LF + Format(InfoOffersAmount, "NFD=2;")
+						+ Chars.LF + Format(InfoTotalAmount, "NFD=2;");
 EndProcedure
 
 #EndRegion

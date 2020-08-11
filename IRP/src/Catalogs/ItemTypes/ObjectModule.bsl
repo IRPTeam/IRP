@@ -1,4 +1,8 @@
 Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+	
 	Catalogs.AddAttributeAndPropertySets.SynchronizeItemKeysAttributes();
 	Catalogs.AddAttributeAndPropertySets.SynchronizePriceKeysAttributes();
 	
@@ -32,4 +36,16 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			Cancel = True;
 		EndIf;
 	EndDo;
+EndProcedure
+
+Procedure BeforeWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
 EndProcedure

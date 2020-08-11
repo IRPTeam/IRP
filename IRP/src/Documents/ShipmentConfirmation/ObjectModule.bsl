@@ -1,7 +1,8 @@
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
-	If DataExchange.Load = True Then
+	If DataExchange.Load Then
 		Return;
-	EndIf;
+	EndIf;	
+
 	If TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Bundling")
 			OR TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer") Then
 		Partner = Undefined;
@@ -77,3 +78,14 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	EndIf;
 EndProcedure
 
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure

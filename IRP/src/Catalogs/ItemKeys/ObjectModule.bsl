@@ -1,4 +1,7 @@
 Procedure BeforeWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
 
 	If ValueIsFilled(ThisObject.Specification) Then
 		ThisObject.AddAttributes.Clear();
@@ -111,5 +114,15 @@ Procedure SetSpecificationAffectPricingMD5(TableOfAffectPricingMD5)
 EndProcedure
 
 Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+	
 	RefreshReusableValues();
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
 EndProcedure

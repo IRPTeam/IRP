@@ -30,6 +30,10 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		Return;
 	EndIf;
 	
+	If Upper(EventName) = Upper("CallbackHandler") Then
+		UpdateTotalAmounts();
+	EndIf;
+	
 	DocSalesOrderClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 	
 	// {TAXES}
@@ -39,6 +43,37 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 	// {TAXES}
 	
+EndProcedure
+
+&AtClient
+Procedure ItemListProcurementMethodOnChange(Item)
+	UpdateTotalAmounts();
+EndProcedure
+
+&AtClient
+Procedure UpdateTotalAmounts()
+	ThisObject.TotalNetAmount = 0;
+	ThisObject.TotalTotalAmount = 0;
+	ThisObject.TotalTaxAmount = 0;
+	ThisObject.TotalOffersAmount = 0;
+	For Each Row In Object.ItemList Do
+		If Row.ProcurementMethod = PredefinedValue("Enum.ProcurementMethods.Repeal") 
+		Or Row.ProcurementMethod = PredefinedValue("Enum.ProcurementMethods.EmptyRef") Then
+			Continue;
+		Endif;
+		ThisObject.TotalNetAmount = ThisObject.TotalNetAmount + Row.NetAmount;
+		ThisObject.TotalTotalAmount = ThisObject.TotalTotalAmount + Row.TotalAmount;
+		
+		ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
+		For Each RowTax In ArrayOfTaxesRows Do
+			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + RowTax.Amount;
+		EndDo;
+			
+		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));
+		For Each RowOffer In ArrayOfOffersRows Do
+			ThisObject.TotalOffersAmount = ThisObject.TotalOffersAmount + RowOffer.Amount;
+		EndDo;
+	EndDo;
 EndProcedure
 
 &AtClient

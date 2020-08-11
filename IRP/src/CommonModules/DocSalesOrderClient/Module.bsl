@@ -141,7 +141,7 @@ Function ItemListItemSettings(Form) Export
 	Actions.Insert("UpdateItemType"				, "UpdateItemType");
 	
 	AfterActionsCalculateSettings = New Structure;
-	PriceDate = ?(Form.Object.Ref.IsEmpty(), CurrentDate(), Form.Object.Date);
+	PriceDate = ?(ValueIsFilled(Form.Object.Date), Form.Object.Date, CurrentDate());
 	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	
 	Settings.Actions = Actions;
@@ -164,7 +164,7 @@ Function ItemListItemKeySettings(Form) Export
 	Actions.Insert("UpdateProcurementMethod", "UpdateProcurementMethod");
 	
 	AfterActionsCalculateSettings = New Structure;
-	PriceDate = ?(Form.Object.Ref.IsEmpty(), CurrentDate(), Form.Object.Date);
+	PriceDate = ?(ValueIsFilled(Form.Object.Date), Form.Object.Date, CurrentDate());
 	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	
 	Settings.Actions = Actions;

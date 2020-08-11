@@ -90,7 +90,7 @@ Procedure Enter(Command)
 		Row = Payments.Add();
 		//TODO: #168 Решить по поводу наличных видов оплат
 		Row.PaymentType = CashPaymentTypes[0].PaymentType;
-		Row.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card");
+		Row.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Cash");
 		Row.Amount = - Object.Cashback;
 	EndIf;
 	ReturnValue = New Structure;
@@ -158,6 +158,11 @@ Procedure Card(Command)
 		ChoiceEndAdditionalParameters = New Structure;
 		CardChoiceEnd(ChoiceEndResult, ChoiceEndAdditionalParameters);
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure Certificate(Command)
+	Return;
 EndProcedure
 
 &AtClient
@@ -411,6 +416,7 @@ Procedure CashChoiceEnd(Result, AdditionalParameters) Export
 	FormatPaymentsAmountStringRows();
 EndProcedure
 
+
 //TODO: #186 Transfer to localization module
 &AtServer
 Function RL()
@@ -449,7 +455,6 @@ EndFunction
 Function GetWholeDigitsMaxCount()
 	Return Metadata.DefinedTypes.typeAmount.Type.NumberQualifiers.Digits - Metadata.DefinedTypes.typeAmount.Type.NumberQualifiers.FractionDigits;
 EndFunction
-
 
 #EndRegion
 

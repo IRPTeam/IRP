@@ -749,7 +749,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command.Cash</commandName>
+              <commandName>Form.Command.Certificate</commandName>
               <representation>PictureAndText</representation>
               <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -760,7 +760,6 @@
                 <color>Web.HoneyDew</color>
               </backColor>
               <font xsi:type="core:FontDef">
-                <faceName>Arial</faceName>
                 <height>14.0</height>
               </font>
               <picture xsi:type="core:PictureRef">
@@ -846,7 +845,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.Numpad7</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -896,7 +895,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.Numpad4</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -946,7 +945,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.Numpad1</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -996,7 +995,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.Numpad0</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1072,7 +1071,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command.Cash</commandName>
+              <commandName>Form.Command.Certificate</commandName>
               <representation>Auto</representation>
               <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
@@ -1165,7 +1164,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.Numpad8</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1215,7 +1214,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.Numpad5</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1265,7 +1264,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.Numpad2</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1315,7 +1314,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.NumpadDot</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1402,7 +1401,6 @@
                 <color>Web.Cream</color>
               </backColor>
               <font xsi:type="core:FontDef">
-                <faceName>Arial</faceName>
                 <height>14.0</height>
               </font>
               <picture xsi:type="core:PictureRef">
@@ -1488,7 +1486,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.Numpad9</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1538,7 +1536,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.Numpad6</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1588,7 +1586,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.Numpad3</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1638,7 +1636,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.NumpadClear</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1692,7 +1690,7 @@
             <id>134</id>
             <items xsi:type="form:Button">
               <name>Cash</name>
-              <id>3</id>
+              <id>177</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -1700,7 +1698,7 @@
               </userVisible>
               <extendedTooltip>
                 <name>CashExtendedTooltip</name>
-                <id>4</id>
+                <id>178</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1715,19 +1713,21 @@
               </extendedTooltip>
               <type>UsualButton</type>
               <commandName>Form.Command.Cash</commandName>
-              <representation>Auto</representation>
+              <representation>PictureAndText</representation>
               <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>3</height>
               <autoMaxHeight>true</autoMaxHeight>
               <placementArea>UserCmds</placementArea>
               <backColor xsi:type="core:ColorRef">
-                <color>Web.HoneyDew</color>
+                <color>Web.AliceBlue</color>
               </backColor>
               <font xsi:type="core:FontDef">
-                <faceName>Arial</faceName>
                 <height>14.0</height>
               </font>
+              <picture xsi:type="core:PictureRef">
+                <picture>CommonPicture.Purchase</picture>
+              </picture>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">
@@ -1800,7 +1800,7 @@
               <type>UsualButton</type>
               <commandName>Form.Command.NumpadBackspace</commandName>
               <representation>Auto</representation>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1852,7 +1852,7 @@
               <commandName>Form.Command.Enter</commandName>
               <representation>Auto</representation>
               <defaultButton>true</defaultButton>
-              <width>4</width>
+              <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
               <height>6</height>
               <autoMaxHeight>true</autoMaxHeight>
@@ -2458,6 +2458,23 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>Commission</name>
+      <title>
+        <key>en</key>
+        <value>Commission</value>
+      </title>
+      <id>25</id>
+      <valueType>
+        <types>DefinedType.typePercent</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>PaymentsAmountTotal</name>
@@ -2613,42 +2630,12 @@
     </columns>
   </attributes>
   <formCommands>
-    <name>Cash</name>
-    <title>
-      <key>en</key>
-      <value>Cash</value>
-    </title>
-    <id>1</id>
-    <toolTip>
-      <key>en</key>
-      <value>Cash</value>
-    </toolTip>
-    <use>
-      <common>true</common>
-    </use>
-    <shortcut>Num /</shortcut>
-    <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.Purchase</picture>
-    </picture>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>Cash</name>
-      </handler>
-    </action>
-    <representation>TextPicture</representation>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
     <name>Card</name>
     <title>
       <key>en</key>
       <value>Card</value>
     </title>
     <id>2</id>
-    <toolTip>
-      <key>en</key>
-      <value>Card</value>
-    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -2974,6 +2961,24 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>NumPress</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Cash</name>
+    <title>
+      <key>en</key>
+      <value>Cash</value>
+    </title>
+    <id>21</id>
+    <use>
+      <common>true</common>
+    </use>
+    <shortcut>Num /</shortcut>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Cash</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

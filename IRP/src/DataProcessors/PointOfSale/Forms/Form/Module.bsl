@@ -15,7 +15,7 @@ Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
 	
 	PictureViewerClient.UpdateObjectPictures(ThisObject, PredefinedValue("Catalog.ItemKeys.EmptyRef"));
-	Items.DecorationTop.Title = CurrentDate();
+	//Items.DecorationTop.Title = CurrentDate();
 	Items.ItemListPicture.PictureSize = PictureSize.Proportionally;
 	ShowPictures();
 	ShowItems();
@@ -67,6 +67,10 @@ Procedure ItemListOnActivateRow(Item)
 	If NOT HTMLWindowPictures = Undefined Then
 		HTMLWindowPictures.clearAll();
 		AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
+	EndIf;
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData <> Undefined Then
+		BuildDetailedInformation(CurrentData.ItemKey);
 	EndIf;
 EndProcedure
 
@@ -161,6 +165,9 @@ EndProcedure
 &AtClient
 Procedure ItemKeysPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	CurrentData = Items.ItemKeysPickup.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
 	ItemKeysSelectionAtServer(CurrentData.Ref);
 	ItemListOnChange(Items.ItemList);	
 	ItemListItemKeyOnChange(Items.ItemList);
@@ -258,8 +265,7 @@ Procedure WriteTransaction(Result)
 		EndIf;
 	EndDo;
 	If CashbackAmount Then
-		Items.DetailedInformationTitles.Title = "Cashback: ";
-		Items.DetailedInformationValues.Title = Format(CashbackAmount, "NFD=2;");
+		DetailedInformation = "Cashback: " + Format(CashbackAmount, "NFD=2;");
 	EndIf;
 	NewTransaction();
 	Return;
@@ -312,6 +318,9 @@ Procedure UpdateHTMLPictures() Export
 		Return;
 	EndIf;
 	
+	DisplayItemPicture(Items.ItemList.CurrentData.Item);
+	Return;
+	
 	PictureInfo = PictureViewerClient.PicturesInfoForSlider(CurrentRow.Item, UUID);
 	JSON = CommonFunctionsServer.SerializeJSON(PictureInfo);
 	HTMLWindowPictures.fillSlider(JSON);
@@ -330,24 +339,25 @@ EndProcedure
 Procedure AfterItemChoice(Val ChoicedItem, AddToItemList = False)	
 	Query = New Query;
 	Query.Text = "SELECT
-			|CatalogItemKeys.Ref AS Ref
-			|FROM
-			|	Catalog.ItemKeys AS CatalogItemKeys
-			|WHERE
-			|	CatalogItemKeys.Item = &Item
-			|	AND NOT CatalogItemKeys.DeletionMark";
+	|	CatalogItemKeys.Ref AS Ref,
+	|	CatalogItemKeys.Ref AS Presentation
+	|FROM
+	|	Catalog.ItemKeys AS CatalogItemKeys
+	|WHERE
+	|	CatalogItemKeys.Item = &Item
+	|	AND NOT CatalogItemKeys.DeletionMark
+	|ORDER BY
+	|	Ref";
 	Query.SetParameter("Item", ChoicedItem);
 	QueryExecute = Query.Execute();
 	If QueryExecute.IsEmpty() Then
-		ItemKeysPickup.Parameters.SetParameterValue("Item", ChoicedItem);
-		Return;
+		
 	EndIf;
 	QueryUnload = QueryExecute.Unload();
+	ItemKeysPickup.Load(QueryUnload);
 	If QueryUnload.Count() = 1
 		And AddToItemList Then
 		ItemKeysSelectionAtServer(QueryUnload[0].Ref);
-	Else
-		ItemKeysPickup.Parameters.SetParameterValue("Item", ChoicedItem);
 	EndIf;
 EndProcedure
 
@@ -391,18 +401,12 @@ Procedure BuildDetailedInformation(ItemKey)
 		InfoQuantity = InfoQuantity + FoundItemKeyRow.Quantity;		
 		InfoTotalAmount = InfoTotalAmount + FoundItemKeyRow.TotalAmount;
 	EndDo;
-	Items.DetailedInformationTitles.Title = "Item: "
-						+ Chars.LF + "Item key: "
-						+ Chars.LF + "Quantity: "
-						+ Chars.LF + "Price: "
-						+ Chars.LF + "Offers: "
-						+ Chars.LF + "Total: ";
-	Items.DetailedInformationValues.Title = String(InfoItem)
-						+ Chars.LF + String(ItemKey)
-						+ Chars.LF + Format(InfoQuantity, "NFD=2;")
-						+ Chars.LF + Format(InfoPrice, "NFD=2;")
-						+ Chars.LF + Format(InfoOffersAmount, "NFD=2;")
-						+ Chars.LF + Format(InfoTotalAmount, "NFD=2;");
+	DetailedInformation = String(InfoItem)
+						+ ?(ValueIsFilled(ItemKey), " " + String(ItemKey), "")
+						+ " " + Format(InfoQuantity, "NFD=2;")
+						+ " x " + Format(InfoPrice, "NFD=2;")
+						+ ?(ValueIsFilled(InfoOffersAmount), "-" + Format(InfoOffersAmount, "NFD=2;"), "")
+						+ " = " + Format(InfoTotalAmount, "NFD=2;");
 EndProcedure
 
 #EndRegion
@@ -415,21 +419,6 @@ EndProcedure
 
 &AtServer
 Procedure PutToTaxTable_(ItemName, Key, Value) Export
-	
-EndProcedure
-
-&AtClient
-Procedure TaxTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	
-EndProcedure
-
-&AtClient
-Procedure TaxTreeOnChange(Item)
-	
-EndProcedure
-
-&AtClient
-Procedure TaxTreeBeforeDeleteRow(Item, Cancel)
 	
 EndProcedure
 
@@ -450,6 +439,11 @@ EndProcedure
 &AtServer
 Procedure Taxes_CreateTaxTree() Export
 	
+EndProcedure
+
+&AtServer
+Procedure DisplayItemPicture(Val ItemValue)
+	Items.ItemPicture.Picture = New Picture(ItemValue.MainPricture.Get());
 EndProcedure
 
 #EndRegion

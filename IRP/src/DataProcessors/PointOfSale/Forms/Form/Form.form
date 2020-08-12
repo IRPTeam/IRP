@@ -2275,13 +2275,42 @@
             <autoCommandBar>
               <name>ItemKeysPickupCommandBar</name>
               <id>880</id>
+              <items xsi:type="form:Button">
+                <name>ItemKeysPickupFind</name>
+                <id>901</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>ItemKeysPickupFindExtendedTooltip</name>
+                  <id>902</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <commandName>Form.Item.ItemKeysPickup.StandardCommand.Find</commandName>
+                <representation>Auto</representation>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <placementArea>UserCmds</placementArea>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
               <horizontalAlign>Left</horizontalAlign>
-              <autoFill>true</autoFill>
             </autoCommandBar>
             <handlers>
               <event>Selection</event>

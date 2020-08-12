@@ -1643,6 +1643,28 @@ Scenario:  _0154007 delete Test attribute
 	And I activate "Attribute" field in "Attributes" table
 	And I delete a line in "Attributes" table
 	And I click "Save and close" button
+	And I go to line in "List" table
+		| Predefined data item name |
+		| Catalog_Companies         |
+	And I select current line in "List" table
+	And I activate "Attribute" field in "Attributes" table
+	And I go to line in "Attributes" table
+		| Attribute |
+		| Test      |
+	And I activate "Attribute" field in "Attributes" table
+	And I delete a line in "Attributes" table
+	And I click "Save and close" button
+	And I go to line in "List" table
+		| Predefined data item name |
+		| Catalog_Taxes         |
+	And I select current line in "List" table
+	And I activate "Attribute" field in "Attributes" table
+	And I go to line in "Attributes" table
+		| Attribute |
+		| Test      |
+	And I activate "Attribute" field in "Attributes" table
+	And I delete a line in "Attributes" table
+	And I click "Save and close" button
 	And I delete "Items" catalog element with the Description_en "Test"
 	And I delete "ItemTypes" catalog element with the Description_en "Test"
 	And I delete "Partners" catalog element with the Description_en "Test"

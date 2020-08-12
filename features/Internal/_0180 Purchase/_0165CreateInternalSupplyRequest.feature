@@ -205,10 +205,10 @@ Scenario: _016503 check the Company filter in the Internal Supply Request docume
 		And I select current line in "List" table
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Check filter by Company when inpute by string
-		And Delay 2
 		And I input "Company Kalipso" text in "Company" field
 		And Delay 2
 		And I click Select button of "Store" field
+		And Delay 2
 		Then "Companies" window is opened
 		And "List" table does not contain lines
 			| Description  |

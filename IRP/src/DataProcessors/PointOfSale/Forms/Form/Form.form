@@ -6,49 +6,6 @@
     <items xsi:type="form:FormGroup">
       <name>GroupLeft</name>
       <id>599</id>
-      <items xsi:type="form:Decoration">
-        <name>DecorationTop</name>
-        <id>601</id>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <extendedTooltip>
-          <name>DecorationTopExtendedTooltip</name>
-          <id>603</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>DecorationTopContextMenu</name>
-          <id>602</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>Label</type>
-        <height>1</height>
-        <autoMaxHeight>true</autoMaxHeight>
-        <horizontalStretch>true</horizontalStretch>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-          <backColor xsi:type="core:ColorRef">
-            <color>Style.ToolTipBackColor</color>
-          </backColor>
-        </extInfo>
-      </items>
       <items xsi:type="form:FormGroup">
         <name>Group1</name>
         <id>634</id>

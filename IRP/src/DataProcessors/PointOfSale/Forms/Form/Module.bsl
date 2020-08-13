@@ -12,10 +12,8 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
-	
+	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);	
 	PictureViewerClient.UpdateObjectPictures(ThisObject, PredefinedValue("Catalog.ItemKeys.EmptyRef"));
-	//Items.DecorationTop.Title = CurrentDate();
 	Items.ItemListPicture.PictureSize = PictureSize.Proportionally;
 	ShowPictures();
 	ShowItems();
@@ -226,7 +224,6 @@ Procedure NewTransaction()
 	ThisObject.CurrentPartner = ObjectValue.Partner;
 	ThisObject.CurrentAgreement = ObjectValue.Agreement;
 	ThisObject.CurrentDate = ObjectValue.Date;
-	//DocRetailSalesReceiptServer.CalculateTableAtServer(ThisObject, ObjectValue);
 	EnabledPaymentButton();
 EndProcedure
 
@@ -351,9 +348,6 @@ Procedure AfterItemChoice(Val ChoicedItem, AddToItemList = False)
 	|	Ref";
 	Query.SetParameter("Item", ChoicedItem);
 	QueryExecute = Query.Execute();
-	If QueryExecute.IsEmpty() Then
-		
-	EndIf;
 	QueryUnload = QueryExecute.Unload();
 	ItemKeysPickup.Load(QueryUnload);
 	If QueryUnload.Count() = 1
@@ -410,6 +404,11 @@ Procedure BuildDetailedInformation(ItemKey)
 						+ " = " + Format(InfoTotalAmount, "NFD=2;");
 EndProcedure
 
+&AtServer
+Procedure DisplayItemPicture(Val ItemValue)
+	Items.ItemPicture.Picture = New Picture(ItemValue.MainPricture.Get());
+EndProcedure
+
 #EndRegion
 
 #Region Taxes
@@ -440,11 +439,6 @@ EndProcedure
 &AtServer
 Procedure Taxes_CreateTaxTree() Export
 	
-EndProcedure
-
-&AtServer
-Procedure DisplayItemPicture(Val ItemValue)
-	Items.ItemPicture.Picture = New Picture(ItemValue.MainPricture.Get());
 EndProcedure
 
 #EndRegion

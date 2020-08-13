@@ -1956,7 +1956,7 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
 		And I click "Post" button
-		If user messages contain "Basis document is required on line 1" string Then
+		If user messages contain "Specify a base document for line 1." string Then
 
 Scenario: _0154108 total amount calculation in Cash reciept
 	* Open form Cash reciept
@@ -2167,7 +2167,7 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
 		And I click "Post" button
-		If user messages contain "Basis document is required on line 1" string Then
+		If user messages contain "Specify a base document for line 1." string Then
 
 Scenario: _0154110 total amount calculation in Bank reciept
 	* Open form Bank reciept
@@ -2400,7 +2400,7 @@ Scenario: _0154111 check filling in and re-filling Cash payment (transaction typ
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 		And I click "Post" button
-		If user messages contain "Basis document is required on line 1" string Then
+		If user messages contain "Specify a base document for line 1." string Then
 
 Scenario: _0154112 total amount calculation in Cash payment
 	* Open form Cash payment
@@ -2620,7 +2620,7 @@ Scenario: _0154113 check filling in and re-filling Bank payment (transaction typ
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
 		And I click "Post" button
-		If user messages contain "Basis document is required on line 1" string Then
+		If user messages contain "Specify a base document for line 1." string Then
 
 Scenario: _0154114 total amount calculation in Bank payment
 	* Open form Bank payment

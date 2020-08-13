@@ -1273,7 +1273,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 			And I select "Done" exact value from "Status" drop-down list
 			And I click "Post" button
-			Then I wait that in user messages the "Not yet all Physical count by location is closed" substring will appear in 30 seconds
+			Then I wait that in user messages the "There are Physical count by location documents that are not closed." substring will appear in 30 seconds
 		* Change the status to "In processing" and post the document
 			And I select "In processing" exact value from "Status" drop-down list
 			And I click "Post and close" button
@@ -1354,7 +1354,7 @@ Scenario: _2990011 re-filling Physical inventory based on Physical count by loca
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I select "Done" exact value from "Status" drop-down list
 		And I click "Post" button
-		Then I wait that in user messages the "Not yet all Physical count by location is closed" substring will appear in 30 seconds
+		Then I wait that in user messages the "NThere are Physical count by location documents that are not closed." substring will appear in 30 seconds
 	* Check that Physical count by location are not created and their statuses do not change
 		And I select "In processing" exact value from "Status" drop-down list
 		And I click "Physical count by location" button

@@ -1643,7 +1643,7 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 		And I input "9 000" text in "Number" field
 	* Check the display of an error that GR documents with different currencies are selected in GR
 		And I click "Post" button
-		Then I wait that in user messages the "Multi currency receipt basises" substring will appear in 30 seconds
+		Then I wait that in user messages the "Currencies in the base documents must match." substring will appear in 30 seconds
 	* Post with the same currency
 		And I move to "Items" tab
 		And I go to line in "ItemList" table

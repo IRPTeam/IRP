@@ -421,7 +421,7 @@ Scenario: _350006 check error when doubling additional attribute on item
         And I select current line in "List" table
     * Check save error message
         And I click "Save" button
-        Then I wait that in user messages the "Duplicated attribute: Brand TR" substring will appear in 10 seconds
+        Then I wait that in user messages the "Duplicate attribute. Brand TR." substring will appear in 10 seconds
     And I close all client application windows
 
 Scenario: _350007 check error when duplicating an additional attribute of an item key
@@ -446,5 +446,5 @@ Scenario: _350007 check error when duplicating an additional attribute of an ite
         And I finish line editing in "AvailableAttributes" table
     * Check save error message
         And I click "Save" button
-        Then I wait that in user messages the "Duplicated attribute: Brand Socks TR" substring will appear in 10 seconds
+        Then I wait that in user messages the "Duplicate attribute. Brand Socks TR." substring will appear in 10 seconds
     And I close all client application windows

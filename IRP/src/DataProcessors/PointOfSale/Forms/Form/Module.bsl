@@ -134,6 +134,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
+	StandardProcessing = False;
 	CurrentData = Items.ItemsPickup.CurrentData;
 	AfterItemChoice(CurrentData.Item, True);
 	ItemListOnChange(Items.ItemList);

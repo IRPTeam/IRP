@@ -1932,6 +1932,7 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>InputField</type>
+              <readOnly>true</readOnly>
               <editMode>Enter</editMode>
               <showInHeader>true</showInHeader>
               <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -2107,7 +2108,7 @@
             <changeRowSet>true</changeRowSet>
             <changeRowOrder>true</changeRowOrder>
             <autoMaxWidth>true</autoMaxWidth>
-            <maxHeight>10</maxHeight>
+            <autoMaxHeight>true</autoMaxHeight>
             <autoMaxRowsCount>true</autoMaxRowsCount>
             <selectionMode>MultiRow</selectionMode>
             <headerHeight>1</headerHeight>
@@ -2162,8 +2163,9 @@
             <excludedCommands>ShowMultipleSelection</excludedCommands>
             <excludedCommands>SortListAsc</excludedCommands>
             <excludedCommands>SortListDesc</excludedCommands>
+            <excludedCommands>CancelSearch</excludedCommands>
             <items xsi:type="form:FormField">
-              <name>ItemKeysPickup1Ref</name>
+              <name>ItemKeysPickupRef</name>
               <id>892</id>
               <enabled>true</enabled>
               <userVisible>
@@ -2178,7 +2180,7 @@
                 </paths>
               </dataPath>
               <extendedTooltip>
-                <name>ItemKeysPickup1RefExtendedTooltip</name>
+                <name>ItemKeysPickupRefExtendedTooltip</name>
                 <id>894</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2193,7 +2195,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>ItemKeysPickup1RefContextMenu</name>
+                <name>ItemKeysPickupRefContextMenu</name>
                 <id>893</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2217,7 +2219,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>ItemKeysPickup1Presentation</name>
+              <name>ItemKeysPickupPresentation</name>
               <id>895</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2233,7 +2235,7 @@
                 </paths>
               </dataPath>
               <extendedTooltip>
-                <name>ItemKeysPickup1PresentationExtendedTooltip</name>
+                <name>ItemKeysPickupPresentationExtendedTooltip</name>
                 <id>897</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2248,7 +2250,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>ItemKeysPickup1PresentationContextMenu</name>
+                <name>ItemKeysPickupPresentationContextMenu</name>
                 <id>896</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2275,36 +2277,6 @@
             <autoCommandBar>
               <name>ItemKeysPickupCommandBar</name>
               <id>880</id>
-              <items xsi:type="form:Button">
-                <name>ItemKeysPickupFind</name>
-                <id>901</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <extendedTooltip>
-                  <name>ItemKeysPickupFindExtendedTooltip</name>
-                  <id>902</id>
-                  <visible>true</visible>
-                  <enabled>true</enabled>
-                  <userVisible>
-                    <common>true</common>
-                  </userVisible>
-                  <type>Label</type>
-                  <autoMaxWidth>true</autoMaxWidth>
-                  <autoMaxHeight>true</autoMaxHeight>
-                  <extInfo xsi:type="form:LabelDecorationExtInfo">
-                    <horizontalAlign>Left</horizontalAlign>
-                  </extInfo>
-                </extendedTooltip>
-                <commandName>Form.Item.ItemKeysPickup.StandardCommand.Find</commandName>
-                <representation>Auto</representation>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <placementArea>UserCmds</placementArea>
-                <representationInContextMenu>Auto</representationInContextMenu>
-              </items>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -2472,6 +2444,9 @@
             <horizontalStretch>true</horizontalStretch>
             <verticalStretch>true</verticalStretch>
             <fileDragMode>AsFileRef</fileDragMode>
+            <searchStringLocation>Top</searchStringLocation>
+            <viewStatusLocation>Top</viewStatusLocation>
+            <searchControlLocation>CommandBar</searchControlLocation>
           </items>
           <visible>true</visible>
           <enabled>true</enabled>

@@ -4189,7 +4189,7 @@ Scenario: check filling in procurement method using the button Fill in SO
 			| 'Item'       | 'Item key' | 'Procurement method' |
 			| 'High shoes' | '37/19SD'  | 'Repeal'             |
 		And I click "Post" button
-		Then I wait that in user messages the "Field: [Procurement method] is empty" substring will appear in 30 seconds
+		Then I wait that in user messages the "Field: [Procurement method] is empty." substring will appear in 30 seconds
 		And I close all client application windows
 
 

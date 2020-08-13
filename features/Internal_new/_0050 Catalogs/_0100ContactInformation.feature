@@ -82,7 +82,7 @@ Scenario: _010005 verification of UNIQ ID uniqueness control in IDInfoTypes
 		And I click "Save and close" button
 		And I close warning window
 	* Check message by non-unique ID
-		Then I wait that in user messages the "Value is not unique" substring will appear in 30 seconds
+		Then I wait that in user messages the "Value is not unique." substring will appear in 30 seconds
 		And I close all client application windows
 
 
@@ -683,7 +683,7 @@ Scenario: _010012 settings for displaying contact information in Stores, Partner
 		And I select current line in "List" table
 		And I finish line editing in "IDInfoTypes" table
 		And I click "Save and close" button
-		And I wait "en descriptions is empty (Contact info sets) *" window closing in 20 seconds
+		And I wait "en description is empty. (Contact info sets) *" window closing in 20 seconds
 		
 
 Scenario: _010013 filling phones for partners

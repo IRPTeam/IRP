@@ -155,7 +155,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 		* Check filling in prices
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
-				| 'Trousers' | '500,00' | '38/Yellow' | '1,000' | 'pcs'  |
+				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -175,8 +175,8 @@ Scenario: _0154135 create document Retail Sales Receipt
 		* Check filling in prices
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
-				| 'Trousers' | '500,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
-				| 'Shirt'    | '400,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 01' |
+				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
+				| 'Shirt'    | '350,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 01' |
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
 			And in the table "ItemList" I click "SearchByBarcode" button
@@ -187,9 +187,9 @@ Scenario: _0154135 create document Retail Sales Receipt
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '500,00' | 'Trousers' | '18%' | '38/Yellow' | '90,00'      | '1,000' | 'pcs'  | '500,00'     | '590,00'       | 'Store 01' |
-				| '400,00' | 'Shirt'    | '18%' | '38/Black'  | '144,00'     | '2,000' | 'pcs'  | '800,00'     | '944,00'       | 'Store 01' |
-				| '350,00' | 'Dress'    | '18%' | 'L/Green'   | '63,00'      | '1,000' | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '72,00'      | '1,000' | 'pcs'  | '400,00'     | '472,00'       | 'Store 01' |
+				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '126,00'     | '2,000' | 'pcs'  | '700,00'     | '826,00'       | 'Store 01' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '99,00'      | '1,000' | 'pcs'  | '550,00'     | '649,00'       | 'Store 01' |
 			And Delay 4
 	* Check filling in prices and calculation of taxes when adding items through the goods selection form
 		* Add items via Pickup form
@@ -200,16 +200,16 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And I select current line in "ItemList" table
 			And I go to line in "ItemKeyList" table
 				| 'Price'  | 'Title'   | 'Unit' |
-				| '700,00' | 'XS/Blue' | 'pcs'  |
+				| '520,00' | 'XS/Blue' | 'pcs'  |
 			And I select current line in "ItemKeyList" table
 			And I click "Transfer to document" button
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '500,00' | 'Trousers' | '18%' | '38/Yellow' | '90,00'      | '1,000' | 'pcs'  | '500,00'     | '590,00'       | 'Store 01' |
-				| '400,00' | 'Shirt'    | '18%' | '38/Black'  | '144,00'     | '2,000' | 'pcs'  | '800,00'     | '944,00'       | 'Store 01' |
-				| '350,00' | 'Dress'    | '18%' | 'L/Green'   | '63,00'      | '1,000' | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' |
-				| '700,00' | 'Dress'    | '18%' | 'XS/Blue'   | '126,00'      | '1,000' | 'pcs'  | '700,00'     | '826,00'       | 'Store 01' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '72,00'      | '1,000' | 'pcs'  | '400,00'     | '472,00'       | 'Store 01' |
+				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '126,00'     | '2,000' | 'pcs'  | '700,00'     | '826,00'       | 'Store 01' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '99,00'      | '1,000' | 'pcs'  | '550,00'     | '649,00'       | 'Store 01' |
+				| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '93,60'      | '1,000' | 'pcs'  | '520,00'     | '613,60'       | 'Store 01' |
 	* Check the line clearing in the tax tree when deleting a line from an order
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
@@ -228,9 +228,9 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '400,00' | 'Shirt'    | '18%' | '38/Black'  | '144,00'     | '2,000' | 'pcs'  | '800,00'     | '944,00'       | 'Store 01' |
-				| '350,00' | 'Dress'    | '18%' | 'L/Green'   | '63,00'      | '1,000' | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' |
-				| '700,00' | 'Dress'    | '18%' | 'XS/Blue'   | '126,00'     | '1,000' | 'pcs'  | '700,00'     | '826,00'       | 'Store 01' |
+				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '126,00'     | '2,000' | 'pcs'  | '700,00'     | '826,00'       | 'Store 01' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '99,00'      | '1,000' | 'pcs'  | '550,00'     | '649,00'       | 'Store 01' |
+				| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '93,60'      | '1,000' | 'pcs'  | '520,00'     | '613,60'       | 'Store 01' |
 		* Tick Price include Tax and check the calculation
 			And I move to "Other" tab
 			And I expand "More" group
@@ -238,17 +238,17 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '400,00' | 'Shirt'    | '18%' | '38/Black'  | '122,03'     | '2,000' | 'pcs'  | '677,97'     | '800,00'       | 'Store 01' |
-				| '350,00' | 'Dress'    | '18%' | 'L/Green'   | '53,39'      | '1,000' | 'pcs'  | '296,61'     | '350,00'       | 'Store 01' |
-				| '700,00' | 'Dress'    | '18%' | 'XS/Blue'   | '106,78'     | '1,000' | 'pcs'  | '593,22'     | '700,00'       | 'Store 01' |
+				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '106,78'     | '2,000' | 'pcs'  | '593,22'     | '700,00'       | 'Store 01' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '83,90'      | '1,000' | 'pcs'  | '466,10'     | '550,00'       | 'Store 01' |
+				| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '79,32'      | '1,000' | 'pcs'  | '440,68'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
 			And I click "Save" button
 			And I move to the tab named "GroupCurrency"
 			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 850'  | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 850'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '316,78' | '1'            |
+			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
+			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '303,08' | '1'            |
 		* Check discount calculation
 			And I move to "Item list" tab
 			And in the table "ItemList" I click "% Offers" button
@@ -261,9 +261,9 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And in the table "Offers" I click "OK" button
 			And "ItemList" table contains lines
 				| 'Item'  | 'Price'  | 'Item key' | 'Q'     | 'Offers amount' | 'Unit' |
-				| 'Shirt' | '400,00' | '38/Black' | '2,000' | '312,00'        | 'pcs'  |
-				| 'Dress' | '350,00' | 'L/Green'  | '1,000' | '-63,00'        | 'pcs'  |
-				| 'Dress' | '700,00' | 'XS/Blue'  | '1,000' | '311,00'        | 'pcs'  |
+				| 'Shirt' | '350,00' | '38/Black' | '2,000' | '212,00'        | 'pcs'  |
+				| 'Dress' | '550,00' | 'L/Green'  | '1,000' | '137,00'        | 'pcs'  |
+				| 'Dress' | '520,00' | 'XS/Blue'  | '1,000' | '131,00'        | 'pcs'  |
 		* Filling in payment tab
 			And I move to "Payments" tab
 			And in the table "Payments" I click "Add" button
@@ -329,9 +329,9 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Retail sales receipt'          |
-			| '400,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | '312,00'        | '74,44'      | 'pcs'  | '413,56'     | '488,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
-			| '350,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '-63,00'        | '63,00'      | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
-			| '700,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '311,00'        | '59,34'      | 'pcs'  | '329,66'     | '389,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
+			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | '212,00'        | '74,44'      | 'pcs'  | '413,56'     | '488,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
+			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '137,00'        | '63,00'      | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
+			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '131,00'        | '59,34'      | 'pcs'  | '329,66'     | '389,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 		And "TaxTree" table contains lines
 			| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
 			| 'VAT' | ''         | ''      | ''         | ''          | '196,78' | '196,78'        |
@@ -350,18 +350,18 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 	* Change quantity and post document
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
-			| 'Shirt' | '38/Black' | '400,00' | '2,000' |
+			| 'Shirt' | '38/Black' | '350,00' | '2,000' |
 		And I select current line in "ItemList" table
 		And I input "1,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
-			| 'Dress' | 'XS/Blue'  | '700,00' | '1,000' |
+			| 'Dress' | 'XS/Blue'  | '520,00' | '1,000' |
 		And I delete a line in "ItemList" table
 		And "ItemList" table contains lines
 		| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Retail sales receipt'          |
-		| '400,00' | 'Shirt' | '18%' | '38/Black' | '1,000' | '166,00'        | '35,69'      | 'pcs'  | '198,31'     | '234,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
-		| '350,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '-63,00'        | '63,00'      | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
+		| '350,00' | 'Shirt' | '18%' | '38/Black' | '1,000' | '106,00'        | '35,69'      | 'pcs'  | '198,31'     | '234,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
+		| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '137,00'        | '63,00'      | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 	* Filling in payment tab
 			And I move to "Payments" tab
 			And in the table "Payments" I click "Add" button

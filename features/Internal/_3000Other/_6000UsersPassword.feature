@@ -26,7 +26,7 @@ Scenario: _351001 check user password setting from enterprise mode
                 * Check message output if password confirmation does not match
                         And I input "F12346" text in "Confirm password" field
                         And I click "Ok" button
-                        Then I wait that in user messages the "Password and password confirmation do not match" substring will appear in "30" seconds
+                        Then I wait that in user messages the "Password and password confirmation do not match." substring will appear in "30" seconds
                 * Password entry is correct
                         And I input "" text in "Confirm password" field
                         And I input "F12345" text in "Confirm password" field

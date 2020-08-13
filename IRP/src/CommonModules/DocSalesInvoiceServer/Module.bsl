@@ -46,7 +46,7 @@ Procedure CalculateTableAtServer(Form, Object) Export
 		If ValueIsFilled(Object.Agreement) Then
 			
 			CalculationSettings = CalculationStringsClientServer.GetCalculationSettings();
-			PriceDate = ?(Object.Ref.IsEmpty(), CurrentDate(), Object.Date);
+			PriceDate = ?(ValueIsFilled(Object.Date), Object.Date, CurrentDate());
 			CalculationSettings.Insert("UpdatePrice", 
 							New Structure("Period, PriceType", PriceDate, Object.Agreement.PriceType));
 			
@@ -477,7 +477,7 @@ Procedure FillDocumentWithShipmentConfirmationArray(Object, Form, ArrayOfBasisDo
 	Settings.Insert("Rows", New Array());
 	Settings.Insert("CalculateSettings", New Structure());
 	Settings.CalculateSettings.Insert("UpdatePrice");
-	PriceDate = ?(Object.Ref.IsEmpty(), CurrentDate(), Object.Date);
+	PriceDate = ?(ValueIsFilled(Object.Date), Object.Date, CurrentDate());
 	Settings.CalculateSettings.UpdatePrice = New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType);
 	
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);

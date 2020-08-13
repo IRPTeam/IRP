@@ -7,23 +7,23 @@ Function Strings(Lang) Export
 	// %1 - localhost
 	// %2 - 8080 
 	// %3 - There is no internet connection
-	Strings.Insert("S_002", NStr("en='Can`t connect to: %1:%2 Detail: %3'", Lang));
+	Strings.Insert("S_002", NStr("en='Cannot connect to %1:%2. Details: %3'", Lang));
 	
 	// %1 - localhost
 	// %2 - 8080
-	Strings.Insert("S_003", NStr("en = 'Received response from: %1:%2'", Lang));
-	Strings.Insert("S_004", NStr("en = 'Resource address is empty'", Lang));
+	Strings.Insert("S_003", NStr("en = 'Received response from %1:%2'", Lang));
+	Strings.Insert("S_004", NStr("en = 'Resource address is empty.'", Lang));
 	
 	// %1 - connection_to_other_system
-	Strings.Insert("S_005", NStr("en = 'Integration setting not found by name: %1'", Lang));
-	Strings.Insert("S_006", NStr("en = 'Method unsupported on web client'", Lang));
+	Strings.Insert("S_005", NStr("en = 'Integration setting with name %1 is not found.'", Lang));
+	Strings.Insert("S_006", NStr("en = 'Method is not supported in Web Client.'", Lang));
 	
 	// Special offers
-	Strings.Insert("S_013", NStr("en = 'Not supported type of object: %1'", Lang));
+	Strings.Insert("S_013", NStr("en = 'Unsupported object type: %1.'", Lang));
 	
 	// FileTransfer
-	Strings.Insert("S_014", NStr("en = 'File name is empty'", Lang));
-	Strings.Insert("S_015", NStr("en = 'Path for save not set'", Lang));
+	Strings.Insert("S_014", NStr("en = 'File name is empty.'", Lang));
+	Strings.Insert("S_015", NStr("en = 'Path for saving is not set.'", Lang));
 	
 	// Test connection
 	// %1 - Method unsupported on web client
@@ -32,14 +32,14 @@ Function Strings(Lang) Export
 	Strings.Insert("S_016", NStr("en = '%1 Status code: %2 %3'", Lang));
 	
 	//	scan barcode
-	Strings.Insert("S_018", NStr("en = 'Item added'", Lang)); 
+	Strings.Insert("S_018", NStr("en = 'Item added.'", Lang)); 
 	
 	// %1 - 123123123123
-	Strings.Insert("S_019", NStr("en = 'Barcode %1 not found'", Lang));
-	Strings.Insert("S_022", NStr("en = 'Multi currency receipt basises'", Lang));
+	Strings.Insert("S_019", NStr("en = 'Barcode %1 not found.'", Lang));
+	Strings.Insert("S_022", NStr("en = 'Currencies in the base documents must match.'", Lang));
 	Strings.Insert("S_023", NStr("en = 'Procurement method'", Lang));
 	
-	Strings.Insert("S_026", NStr("en = 'Selected icon will be resized to 16x16 px'", Lang));
+	Strings.Insert("S_026", NStr("en = 'Selected icon will be resized to 16x16 px.'", Lang));
 
 	// presentation of empty value for query result
 	Strings.Insert("S_027", NStr("en = '[Not filled]'", Lang));
@@ -84,139 +84,139 @@ Function Strings(Lang) Export
 	#Region ErrorMessages
 
 	// %1 - en
-	Strings.Insert("Error_002", NStr("en = '%1 descriptions is empty'", Lang));
-	Strings.Insert("Error_003", NStr("en = 'Fill any description'", Lang));
-	Strings.Insert("Error_004", NStr("en = 'Not supported metadata'", Lang));
+	Strings.Insert("Error_002", NStr("en = '%1 description is empty.'", Lang));
+	Strings.Insert("Error_003", NStr("en = 'Fill any description.'", Lang));
+	Strings.Insert("Error_004", NStr("en = 'Metadata is not supported.'", Lang));
 	
 	// %1 - en
-	Strings.Insert("Error_005", NStr("en = 'Fill any additional attribute description %1'", Lang));
-	Strings.Insert("Error_008", NStr("en = 'Groups are created by administrator'", Lang));
+	Strings.Insert("Error_005", NStr("en = 'Fill the description of an additional attribute %1.'", Lang));
+	Strings.Insert("Error_008", NStr("en = 'Groups are created by an administrator.'", Lang));
 	
 	// %1 - Number 111 is not unique
-	Strings.Insert("Error_009", NStr("en = 'Can`t write object: [%1]'", Lang));
+	Strings.Insert("Error_009", NStr("en = 'Cannot write the object: [%1].'", Lang));
 	
 	// %1 - Number
-	Strings.Insert("Error_010", NStr("en = 'Field: [%1] is empty'", Lang));
-	Strings.Insert("Error_011", NStr("en = 'Need add any row'", Lang));
-	Strings.Insert("Error_012", NStr("en = 'Not according rules for naming variable'", Lang));
-	Strings.Insert("Error_013", NStr("en = 'Value is not unique'", Lang));
-	Strings.Insert("Error_014", NStr("en = 'Password and password confirmation do not match'", Lang));
+	Strings.Insert("Error_010", NStr("en = 'Field [%1] is empty.'", Lang));
+	Strings.Insert("Error_011", NStr("en = 'Add at least one row.'", Lang));
+	Strings.Insert("Error_012", NStr("en = 'Variable is not named according to the rules.'", Lang));
+	Strings.Insert("Error_013", NStr("en = 'Value is not unique.'", Lang));
+	Strings.Insert("Error_014", NStr("en = 'Password and password confirmation do not match.'", Lang));
 
 	// %1 - Sales order
-	Strings.Insert("Error_016", NStr("en = 'Lines on which you need to order items from suppliers are missed in the %1'", Lang));
+	Strings.Insert("Error_016", NStr("en = 'There are no more items that you need to order from suppliers in the ""%1"" document.'", Lang));
 	Strings.Error_016 = StrTemplate(Strings.Error_016, Metadata.Documents.SalesOrder.Synonym);
 	
 	// %1 - Goods receipt
 	// %2 - Purchase invoice
-	Strings.Insert("Error_017", NStr("en = 'Please, at first create %1 or uncheck the box %1 before %2 on the tab Other'", Lang));
+	Strings.Insert("Error_017", NStr("en = 'First, create a ""%1"" document or clear the ""%1 before %2"" check box on the ""Other"" tab.'", Lang));
 	Strings.Error_017 = StrTemplate(Strings.Error_017, Metadata.Documents.GoodsReceipt.Synonym, Metadata.Documents.PurchaseInvoice.Synonym);
 
 	// %1 - Shipment confirmation
 	// %1 - Sales invoice
-	Strings.Insert("Error_018", NStr("en = 'Please, at first create %1 or uncheck the box %1 before %2 on the tab Other'", Lang));
+	Strings.Insert("Error_018", NStr("en = 'First, create a ""%1"" document or clear the ""%1 before %2"" check box on the ""Other"" tab.'", Lang));
 	Strings.Error_018 = StrTemplate(Strings.Error_018, Metadata.Documents.ShipmentConfirmation.Synonym, Metadata.Documents.SalesInvoice.Synonym);
 	
 	// %1 - Goods receipt
 	// %2 - Purchase invoice
-	Strings.Insert("Error_019", NStr("en = 'Lines on which you need to create %1 are missed in the %2.'", Lang));
+	Strings.Insert("Error_019", NStr("en = 'There are no lines for which you need to create a ""%1"" document in the ""%2"" document.'", Lang));
 
 	// %1 - 12
-	Strings.Insert("Error_020", NStr("en = 'Basis document is required on line %1'", Lang));
+	Strings.Insert("Error_020", NStr("en = 'Specify a base document for line %1.'", Lang));
 
 	// %1 - Purchase invoice
-	Strings.Insert("Error_021", NStr("en = 'Lines on which you may create return are missed in the %1. All products are already returned.'", Lang));
+	Strings.Insert("Error_021", NStr("en = 'There are no products to return in the ""%1"" document. All products are already returned.'", Lang));
 	Strings.Error_021 = StrTemplate(Strings.Error_021, Metadata.Documents.PurchaseInvoice.Synonym);
 
 	// %1 - Internal supply request
-	Strings.Insert("Error_023", NStr("en = 'Lines on which you need to order items from suppliers are missed in the %1'", Lang));
+	Strings.Insert("Error_023", NStr("en = 'There are no more items that you need to order from suppliers in the ""%1"" document.'", Lang));
 	Strings.Error_023 = StrTemplate(Strings.Error_023, Metadata.Documents.InternalSupplyRequest.Synonym);
 	
 	// %1 - Goods receipt
 	// %2 - Purchase invoice
-	Strings.Insert("Error_028", NStr("en = 'Please, check the box %1 before %2 on the tab Other'", Lang));
+	Strings.Insert("Error_028", NStr("en = 'Select the ""%1 before %2"" check box on the ""Other"" tab.'", Lang));
 	Strings.Error_028 = StrTemplate(Strings.Error_028, Metadata.Documents.GoodsReceipt.Synonym, Metadata.Documents.PurchaseInvoice.Synonym);
 	
 	// %1 - Cash account
 	// %2 - 12
 	// %3 - Cheque bonds
-	Strings.Insert("Error_030", NStr("en = 'The %1 is required on line %2 of the %3'", Lang));
+	Strings.Insert("Error_030", NStr("en = 'Specify %1 in line %2 of the %3.'", Lang));
 
-	Strings.Insert("Error_031", NStr("en = 'Items were not received from supplier according to procurement method.'", Lang));
-	Strings.Insert("Error_032", NStr("en = 'Action not completed'", Lang));
-	Strings.Insert("Error_033", NStr("en = 'Duplicated attribute'", Lang));
+	Strings.Insert("Error_031", NStr("en = 'Items were not received from the supplier according to the procurement method.'", Lang));
+	Strings.Insert("Error_032", NStr("en = 'Action not completed.'", Lang));
+	Strings.Insert("Error_033", NStr("en = 'Duplicate attribute.'", Lang));
 	// %1 - Google drive
-	Strings.Insert("Error_034", NStr("en = '%1 is not picture storage volume'", Lang));
-	Strings.Insert("Error_035", NStr("en = 'Cannot upload more than 1 file'", Lang));
-	Strings.Insert("Error_037", NStr("en = 'Unsupported data composition comparison type'", Lang));	
-	Strings.Insert("Error_040", NStr("en = 'Support picture files only'", Lang));
-	Strings.Insert("Error_041", NStr("en = 'Tax table content more 1 row [key: %1] [tax: %2]'", Lang));
+	Strings.Insert("Error_034", NStr("en = '%1 is not a picture storage volume.'", Lang));
+	Strings.Insert("Error_035", NStr("en = 'Cannot upload more than 1 file.'", Lang));
+	Strings.Insert("Error_037", NStr("en = 'Unsupported type of data composition comparison.'", Lang));	
+	Strings.Insert("Error_040", NStr("en = 'Only picture files are supported.'", Lang));
+	Strings.Insert("Error_041", NStr("en = 'Tax table contains more than 1 row [key: %1] [tax: %2].'", Lang));
 	// %1 - Name
-	Strings.Insert("Error_042", NStr("en = 'Cannot find tax by column name: %1'", Lang));
-	Strings.Insert("Error_043", NStr("en = 'Unsupported document type'", Lang));
-	Strings.Insert("Error_044", NStr("en = 'Not supported operation'", Lang));
-	Strings.Insert("Error_045", NStr("en = 'Document is empty'", Lang));
+	Strings.Insert("Error_042", NStr("en = 'Cannot find a tax by column name: %1.'", Lang));
+	Strings.Insert("Error_043", NStr("en = 'Unsupported document type.'", Lang));
+	Strings.Insert("Error_044", NStr("en = 'Operation is not supported.'", Lang));
+	Strings.Insert("Error_045", NStr("en = 'Document is empty.'", Lang));
 	// %1 - Currency
-	Strings.Insert("Error_047", NStr("en = '%1 is a required field'", Lang));
-	Strings.Insert("Error_049", NStr("en = 'Default picture storage volume not set'", Lang));
-	Strings.Insert("Error_050", NStr("en = 'Currency exchange is possible only through accounts with the same type (cash account or bank account).'", Lang));
+	Strings.Insert("Error_047", NStr("en = '""%1"" is a required field.'", Lang));
+	Strings.Insert("Error_049", NStr("en = 'Default picture storage volume is not set.'", Lang));
+	Strings.Insert("Error_050", NStr("en = 'Currency exchange is available only for the same-type accounts (cash accounts or bank accounts).'", Lang));
 	// %1 - Bank payment
-	Strings.Insert("Error_051", NStr("en = 'Lines on which you may create %1 are missed. Or all %1 are already created.'", Lang));
+	Strings.Insert("Error_051", NStr("en = 'There are no lines for which you can create a ""%1"" document, or all ""%1"" documents are already created.'", Lang));
 	// %1 - Main store
 	// %2 - Use shipment confirmation
 	// %3 - Shipment confirmations
-	Strings.Insert("Error_052", NStr("en = 'Unchecking ""%2"" isn`t possible. 
-											|%3 from store %1 have already been created previously.'", Lang));
+	Strings.Insert("Error_052", NStr("en = 'Cannot clear the ""%2"" check box. 
+											|Documents ""%3"" from store %1 were already created.'", Lang));
 	Strings.Error_052 = StrTemplate(Strings.Error_052, "%1", Metadata.Catalogs.Stores.Attributes.UseShipmentConfirmation.Synonym,
 															 Metadata.Documents.ShipmentConfirmation.Synonym);										
 
 	// %1 - Main store
 	// %2 - Use goods receipt
 	// %3 - Goods receipts
-	Strings.Insert("Error_053", NStr("en = 'Unchecking ""2"" isn`t possible. %3 from store %1 have already been created previously.'", Lang));
+	Strings.Insert("Error_053", NStr("en = 'Cannot clear the ""2"" check box. Documents ""%3"" from store %1 were already created.'", Lang));
 	Strings.Error_053 = StrTemplate(Strings.Error_053, "%1", Metadata.Catalogs.Stores.Attributes.UseGoodsReceipt.Synonym,
 			 												 Metadata.Documents.GoodsReceipt.Synonym);
 	// %1 - sales order
-	Strings.Insert("Error_054", NStr("en = 'Not properly status of %1 to proceed.'", Lang));
+	Strings.Insert("Error_054", NStr("en = 'Cannot continue. The ""%1""document has an incorrect status.'", Lang));
 															  
-	Strings.Insert("Error_055", NStr("en = 'No lines with properly procurement method.'", Lang));
+	Strings.Insert("Error_055", NStr("en = 'There are no lines with a correct procurement method.'", Lang));
 
-	Strings.Insert("Error_056", NStr("en = 'All items in sales order are already ordered by purchase order(s).'", Lang));
+	Strings.Insert("Error_056", NStr("en = 'All items in the sales order are already ordered using purchase order(s).'", Lang));
 
 	// %1 - sales order
 	// %2 - purchase order
-	Strings.Insert("Error_056", NStr("en = 'All items in %1 are already ordered by %2(s).'", Lang));
+	Strings.Insert("Error_056", NStr("en = 'All items in the ""%1"" document are already ordered using the ""%2"" document(s).'", Lang));
 	Strings.Error_056 = StrTemplate(Strings.Error_056, Metadata.Documents.SalesOrder.Synonym, Metadata.Documents.PurchaseOrder.Synonym);
 
 	// %1 - Bank receipt
 	// %2 - Cash transfer order
-	Strings.Insert("Error_057", NStr("en = 'Don`t need to create a %1 for selected %2(s).'", Lang));
+	Strings.Insert("Error_057", NStr("en = 'You do not need to create a ""%1"" document for the selected ""%2"" document(s).'", Lang));
 	Strings.Error_057 = StrTemplate(Strings.Error_057, "%1", Metadata.Documents.CashTransferOrder.Synonym);
 
 	// %1 - Bank receipt
 	// %2 - Cash transfer order
-	Strings.Insert("Error_058", NStr("en = 'Whole amount in %2(s) are already payed by document %1(s).'", Lang));
+	Strings.Insert("Error_058", NStr("en = 'The total amount of the ""%2"" document(s) is already paid on the basis of the ""%1"" document(s).'", Lang));
 	Strings.Error_058 = StrTemplate(Strings.Error_058, "%1", Metadata.Documents.CashTransferOrder.Synonym);
 
 	// %1 - Bank receipt
 	// %2 - Cash transfer order
-	Strings.Insert("Error_059", NStr("en = 'In the selected documents there are %2(s) by which %1(s) has already been created
-											| and those for which %1 doesn`t need to be created.'", Lang));
+	Strings.Insert("Error_059", NStr("en = 'In the selected documents, there are ""%2"" document(s) with existing ""%1"" document(s)
+											| and those that do not require a ""%1"" document.'", Lang));
 	Strings.Error_059 = StrTemplate(Strings.Error_059, "%1", Metadata.Documents.CashTransferOrder.Synonym);
 	
 	// %1 - Bank receipt
 	// %2 - Cash transfer order
-	Strings.Insert("Error_060", NStr("en = 'Whole amount in %2(s) are already received by document %1(s).'", Lang));
+	Strings.Insert("Error_060", NStr("en = 'The total amount of the ""%2"" document(s) is already received on the basis of the ""%1"" document(s).'", Lang));
 	Strings.Error_060 = StrTemplate(Strings.Error_060, "%1", Metadata.Documents.CashTransferOrder.Synonym);
 
 	// %1 - Main store
 	// %2 - Shipment confirmation
 	// %3 - Sales order
-	Strings.Insert("Error_064", NStr("en = 'There is no need to create %2 for store(s) %1. Item will be shipped by %3'", Lang));
+	Strings.Insert("Error_064", NStr("en = 'You do not need to create a ""%2"" document for store(s) %1. The item will be shipped using the ""%3"" document.'", Lang));
 	Strings.Error_064 = StrTemplate(Strings.Error_064, "%1", Metadata.Documents.ShipmentConfirmation.Synonym,
 															 Metadata.Documents.SalesOrder.Synonym);
 
-	Strings.Insert("Error_065", NStr("en = 'Item key is not unique'", Lang));
-	Strings.Insert("Error_066", NStr("en = 'Specification is not unique'", Lang));
+	Strings.Insert("Error_065", NStr("en = 'Item key is not unique.'", Lang));
+	Strings.Insert("Error_066", NStr("en = 'Specification is not unique.'", Lang));
 
 	// %1 - 12
 	// %2 - Boots
@@ -226,25 +226,25 @@ Function Strings(Lang) Export
 	// %6 - 15
 	// %7 - 4
 	// %8 - pcs
-	Strings.Insert("Error_068", NStr("en = 'Line No. [%1] [%2 %3] %4 remains: %5 %8 Required: %6 %8 Lacks: %7 %8'", Lang));
+	Strings.Insert("Error_068", NStr("en = 'Line No. [%1] [%2 %3] %4 remaining: %5 %8. Required: %6 %8. Lacking: %7 %8.'", Lang));
 
 	// %1 - some extention name
-	Strings.Insert("Error_071", NStr("en = 'Plugin ""%1"" was not connected'", Lang));
+	Strings.Insert("Error_071", NStr("en = 'Plugin ""%1"" is not connected.'", Lang));
 	
 	// %1 - 12
-	Strings.Insert("Error_072", NStr("en = 'Store is required on line %1'", Lang));
+	Strings.Insert("Error_072", NStr("en = 'Specify a store in line %1.'", Lang));
 
 	// %1 - Sales order
 	// %2 - Goods receipt
-	Strings.Insert("Error_073", NStr("en = 'All items in %1(s) are already received by %2(s).'", Lang));
-	Strings.Insert("Error_074", NStr("en = 'Currency transfer is possible only when amounts is equal.'", Lang));
+	Strings.Insert("Error_073", NStr("en = 'All items in the ""%1"" document(s) are already received using the ""%2"" document(s).'", Lang));
+	Strings.Insert("Error_074", NStr("en = 'Currency transfer is available only when amounts are equal.'", Lang));
 
 	// %1 - Physical count by location
-	Strings.Insert("Error_075", NStr("en = 'Not yet all %1 is closed'", Lang));
+	Strings.Insert("Error_075", NStr("en = 'There are ""%1"" documents that are not closed.'", Lang));
 	Strings.Error_075 = StrTemplate(Strings.Error_075, Metadata.Documents.PhysicalCountByLocation.Synonym);
 	
 	// %1 - Retail sales receipt
-	Strings.Insert("Error_076", NStr("en = 'Lines on which you may create return are missed in the %1. All products are already returned.'", Lang));
+	Strings.Insert("Error_076", NStr("en = 'There are no products to return in the ""%1"" document. All products are already returned.'", Lang));
 	Strings.Error_076 = StrTemplate(Strings.Error_076, Metadata.Documents.RetailSalesReceipt.Synonym);
 	
 	#EndRegion
@@ -252,16 +252,16 @@ Function Strings(Lang) Export
 	#Region InfoMessages
 	// %1 - Purchase invoice
 	// %2 - Purchase order
-	Strings.Insert("InfoMessage_001", NStr("en = '%1 is not the same as the %2 will be due to the fact 
-												 |that there is already another %1 that partially closed this %2'", Lang));
+	Strings.Insert("InfoMessage_001", NStr("en = 'The ""%1"" document does not fully match the ""%2"" document because 
+												 |there is already another ""%1"" document that partially covered this ""%2"" document.'", Lang));
 	// %1 - Boots
-	Strings.Insert("InfoMessage_002", NStr("en = 'Object %1 created'", Lang));
-	Strings.Insert("InfoMessage_003", NStr("en = 'This is the service form.'", Lang));
-	Strings.Insert("InfoMessage_004", NStr("en = 'Save object before continue'", Lang));
+	Strings.Insert("InfoMessage_002", NStr("en = 'Object %1 created.'", Lang));
+	Strings.Insert("InfoMessage_003", NStr("en = 'This is a service form.'", Lang));
+	Strings.Insert("InfoMessage_004", NStr("en = 'Save the object to continue.'", Lang));
 	Strings.Insert("InfoMessage_005", NStr("en = 'Done'", Lang));
 	
 	// %1 - Physical count by location
-	Strings.Insert("InfoMessage_006", NStr("en = 'Document %1 already created, use update'", Lang));
+	Strings.Insert("InfoMessage_006", NStr("en = 'The ""%1"" document is already created. You can update the quantity.'", Lang));
 	Strings.InfoMessage_006 = StrTemplate(Strings.InfoMessage_006, Metadata.Documents.PhysicalCountByLocation.Synonym);
 
 	// %1 - 12
@@ -270,33 +270,33 @@ Function Strings(Lang) Export
 	#EndRegion
 	
 	#Region QuestionToUser
-	Strings.Insert("QuestionToUser_001", NStr("en = 'The object is not saved, you must write to continue. Continue?'", Lang));
-	Strings.Insert("QuestionToUser_002", NStr("en = 'Would you like to switch to scan mode?'", Lang));
+	Strings.Insert("QuestionToUser_001", NStr("en = 'Write the object to continue. Continue?'", Lang));
+	Strings.Insert("QuestionToUser_002", NStr("en = 'Do you want to switch to scan mode?'", Lang));
 	Strings.Insert("QuestionToUser_003", NStr("en = 'Filled data on cheque bonds transactions will be deleted. Do you want to update %1?'", Lang));
-	Strings.Insert("QuestionToUser_004", NStr("en = 'Change tax rates according agreement?'", Lang));
+	Strings.Insert("QuestionToUser_004", NStr("en = 'Do you want to change tax rates according to the partner term?'", Lang));
 	Strings.Insert("QuestionToUser_005", NStr("en = 'Do you want to update filled stores?'", Lang));
 	Strings.Insert("QuestionToUser_006", NStr("en = 'Do you want to update filled currency?'", Lang));
 	Strings.Insert("QuestionToUser_007", NStr("en = 'Transaction table will be cleared. Continue?'", Lang));
-	Strings.Insert("QuestionToUser_008", NStr("en = 'When the currency is changed, rows with cash transfer documents will be cleared. Continue?'", Lang));
-	Strings.Insert("QuestionToUser_009", NStr("en = 'Update filled stores on %1'", Lang));
-	Strings.Insert("QuestionToUser_011", NStr("en = 'Update filled price types on %1'", Lang));
+	Strings.Insert("QuestionToUser_008", NStr("en = 'Changing the currency will clear the rows with cash transfer documents. Continue?'", Lang));
+	Strings.Insert("QuestionToUser_009", NStr("en = 'Do you want to update filled stores on %1?'", Lang));
+	Strings.Insert("QuestionToUser_011", NStr("en = 'Do you want to update filled price types on %1?'", Lang));
 	Strings.Insert("QuestionToUser_012", NStr("en = 'Do you want to exit?'", Lang));
-	Strings.Insert("QuestionToUser_013", NStr("en = 'Update filled prices.'", Lang));
-	Strings.Insert("QuestionToUser_014", NStr("en = 'Transaction type changed. Do you want to update filled data?'", Lang));
-	Strings.Insert("QuestionToUser_015", NStr("en = 'Filled data will be cleared. Proceed?'", Lang));
-	Strings.Insert("QuestionToUser_016", NStr("en = 'Change or clear icon?'", Lang));
+	Strings.Insert("QuestionToUser_013", NStr("en = 'Do you want to update filled prices?'", Lang));
+	Strings.Insert("QuestionToUser_014", NStr("en = 'Transaction type is changed. Do you want to update filled data?'", Lang));
+	Strings.Insert("QuestionToUser_015", NStr("en = 'Filled data will be cleared. Continue?'", Lang));
+	Strings.Insert("QuestionToUser_016", NStr("en = 'Do you want to change or clear the icon?'", Lang));
 	#EndRegion
 	
 	#Region SuggestionToUser
-	Strings.Insert("SuggestionToUser_1", NStr("en = 'Choice value'", Lang));
-	Strings.Insert("SuggestionToUser_2", NStr("en = 'Enter barcode'", Lang));
-	Strings.Insert("SuggestionToUser_3", NStr("en = 'Input option name'", Lang));
-	Strings.Insert("SuggestionToUser_4", NStr("en = 'Input new option name'", Lang));
+	Strings.Insert("SuggestionToUser_1", NStr("en = 'Select a value'", Lang));
+	Strings.Insert("SuggestionToUser_2", NStr("en = 'Enter a barcode'", Lang));
+	Strings.Insert("SuggestionToUser_3", NStr("en = 'Enter an option name'", Lang));
+	Strings.Insert("SuggestionToUser_4", NStr("en = 'Enter a new option name'", Lang));
 	#EndRegion
 	
 	#Region UsersEvent
-	Strings.Insert("UsersEvent_001", NStr("en = 'User not found by UUID: %1 Name: %2'", Lang));
-	Strings.Insert("UsersEvent_002", NStr("en = 'User found by UUID: %1 Name: %2'", Lang));
+	Strings.Insert("UsersEvent_001", NStr("en = 'User not found by UUID %1 and name %2.'", Lang));
+	Strings.Insert("UsersEvent_002", NStr("en = 'User found by UUID %1 and name %2.'", Lang));
 	#EndRegion
 	
 	#Region Items
@@ -304,33 +304,33 @@ Function Strings(Lang) Export
 	// Interface
 	Strings.Insert("I_1", NStr("en = 'Enter description'", Lang));
 	
-	Strings.Insert("I_2", NStr("en = 'Click for input description'", Lang));
+	Strings.Insert("I_2", NStr("en = 'Click to enter description'", Lang));
 	
-	Strings.Insert("I_3", NStr("en = 'Please, fill the document'", Lang));
+	Strings.Insert("I_3", NStr("en = 'Fill out the document'", Lang));
 	
 	#EndRegion
 	
 	#Region Exceptions
-	Strings.Insert("Exc_001", NStr("en = 'Not supported object type'", Lang));
-	Strings.Insert("Exc_002", NStr("en = 'Not condition'", Lang));
-	Strings.Insert("Exc_003", NStr("en = 'Not implemented method: %1'", Lang));
-	Strings.Insert("Exc_004", NStr("en = 'Can not extract Currency from object'", Lang));
-	Strings.Insert("Exc_005", NStr("en = 'Library name is empty'", Lang));
-	Strings.Insert("Exc_006", NStr("en = 'Library data not contain version'", Lang));
-	Strings.Insert("Exc_007", NStr("en = 'Not implemented for library version: %1'", Lang));
-	Strings.Insert("Exc_008", NStr("en = 'Unknown row key'", Lang));
+	Strings.Insert("Exc_001", NStr("en = 'Unsupported object type.'", Lang));
+	Strings.Insert("Exc_002", NStr("en = 'No conditions'", Lang));
+	Strings.Insert("Exc_003", NStr("en = 'Method is not implemented: %1.'", Lang));
+	Strings.Insert("Exc_004", NStr("en = 'Cannot extract currency from the object.'", Lang));
+	Strings.Insert("Exc_005", NStr("en = 'Library name is empty.'", Lang));
+	Strings.Insert("Exc_006", NStr("en = 'Library data does not contain a version.'", Lang));
+	Strings.Insert("Exc_007", NStr("en = 'Not applicable for library version %1.'", Lang));
+	Strings.Insert("Exc_008", NStr("en = 'Unknown row key.'", Lang));
 	Strings.Insert("Exc_009", NStr("en = 'Error: %1'", Lang));
 	#EndRegion
 	
 	#Region Saas
 	// %1 - 12
-	Strings.Insert("Saas_001", NStr("en = 'Area %1 not found!'", Lang));
+	Strings.Insert("Saas_001", NStr("en = 'Area %1 not found.'", Lang));
 	
 	// %1 - closed
-	Strings.Insert("Saas_002", NStr("en = 'Area status: %1'", Lang));
+	Strings.Insert("Saas_002", NStr("en = 'Area status: %1.'", Lang));
 	
 	// %1 - en
-	Strings.Insert("Saas_003", NStr("en = 'Company localization %1 is not available'", Lang));
+	Strings.Insert("Saas_003", NStr("en = 'Localization %1 of the company is not available.'", Lang));
 	#EndRegion
 	
 	#Region FillingFromClassifiers
@@ -351,7 +351,7 @@ Function Strings(Lang) Export
     
 	#Region Titles
 	// %1 - Cheque bond transaction
-	Strings.Insert("Title_00100", NStr("en = 'Select basis documents in %1'", Lang));	// Form PickUpDocuments
+	Strings.Insert("Title_00100", NStr("en = 'Select base documents in the ""%1"" document.'", Lang));	// Form PickUpDocuments
 	Strings.Title_00100 = StrTemplate(Strings.Title_00100, Metadata.Documents.ChequeBondTransaction.Synonym);
 	#EndRegion
 	
@@ -364,7 +364,7 @@ EndFunction
 
 Procedure PredefinedDescriptions(Strings, CodeLanguage)
 
-	Strings.Insert("Description_A001", NStr("en = 'Catalog Agreements'", CodeLanguage));
+	Strings.Insert("Description_A001", NStr("en = 'Catalog Partner terms'", CodeLanguage));
 	Strings.Insert("Description_A003", NStr("en = 'Catalog Business units'", CodeLanguage));
 	Strings.Insert("Description_A004", NStr("en = 'Catalog Cash accounts'", CodeLanguage));
 	Strings.Insert("Description_A005", NStr("en = 'Catalog Cheque bonds'", CodeLanguage));

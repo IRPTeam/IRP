@@ -11,9 +11,24 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+	
 	If Not (ThisObject.AdditionalProperties.Property("WriteOnTransaction")
 			And ThisObject.AdditionalProperties.WriteOnTransaction) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
 
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure

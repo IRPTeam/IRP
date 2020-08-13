@@ -60,6 +60,10 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 EndProcedure
 
 Procedure BeforeWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+	
 	If ThisObject.Kind <> Enums.AgreementKinds.Regular Then
 		ThisObject.Type = Enums.AgreementTypes.EmptyRef();
 		ThisObject.PriceType = Catalogs.PriceTypes.EmptyRef();
@@ -70,5 +74,17 @@ Procedure BeforeWrite(Cancel)
 	
 	If ThisObject.ApArPostingDetail <> Enums.ApArPostingDetail.ByStandardAgreement Then
 		ThisObject.StandardAgreement = Catalogs.Agreements.EmptyRef();
+	EndIf;
+EndProcedure
+
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
 	EndIf;
 EndProcedure

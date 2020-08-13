@@ -1,5 +1,7 @@
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
-	Return;
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)
@@ -33,3 +35,14 @@ Procedure Filling_BasedOnInventoryTransferOrder(FillingData)
 	EndDo;
 EndProcedure
 
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure

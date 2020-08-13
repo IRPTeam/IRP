@@ -1079,6 +1079,10 @@
               <segments>Object.ItemList.ProcurementMethod</segments>
             </paths>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListProcurementMethodOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListProcurementMethodExtendedTooltip</name>
             <id>444</id>
@@ -4684,10 +4688,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.TotalOffersAmount</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>TotalOffersAmount</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListTotalOffersAmountExtendedTooltip</name>
@@ -4778,10 +4780,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.TotalNetAmount</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>TotalNetAmount</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListTotalNetAmountExtendedTooltip</name>
@@ -4868,10 +4868,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.TotalTaxAmount</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>TotalTaxAmount</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListTotalTaxAmountExtendedTooltip</name>
@@ -4962,10 +4960,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.TotalTotalAmount</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>TotalTotalAmount</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListTotalTotalAmountExtendedTooltip</name>
@@ -5735,6 +5731,90 @@
     <valueType>
       <types>Date</types>
       <dateQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>TotalOffersAmount</name>
+    <title>
+      <key>en</key>
+      <value>Total offers amount</value>
+    </title>
+    <id>175</id>
+    <valueType>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+        <scale>2</scale>
+      </numberQualifiers>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>TotalNetAmount</name>
+    <title>
+      <key>en</key>
+      <value>Total net amount</value>
+    </title>
+    <id>176</id>
+    <valueType>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+        <scale>2</scale>
+      </numberQualifiers>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>TotalTaxAmount</name>
+    <title>
+      <key>en</key>
+      <value>Total tax amount</value>
+    </title>
+    <id>177</id>
+    <valueType>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+        <scale>2</scale>
+      </numberQualifiers>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>TotalTotalAmount</name>
+    <title>
+      <key>en</key>
+      <value>Total total amount</value>
+    </title>
+    <id>178</id>
+    <valueType>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+        <scale>2</scale>
+      </numberQualifiers>
     </valueType>
     <view>
       <common>true</common>

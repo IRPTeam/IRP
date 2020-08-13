@@ -8,6 +8,10 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 EndProcedure
 
 Procedure BeforeWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+	
 	If ThisObject.IsFolder
 		Or (ThisObject.AdditionalProperties.Property("WriteMode")
 			And ThisObject.AdditionalProperties.WriteMode = "Service") Then
@@ -73,4 +77,16 @@ EndProcedure
 
 Procedure OnCopy(CopiedObject)
 	UniqueID = "";
+EndProcedure
+
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
 EndProcedure

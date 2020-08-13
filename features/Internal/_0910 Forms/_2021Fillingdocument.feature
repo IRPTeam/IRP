@@ -9,7 +9,6 @@ Feature: check filling in and re-filling in documents forms + currency form conn
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
-
 Scenario: _0154100 preparation
 	* For a test of price and rate changes depending on the date
 	# check the Sales order reset when the date changes, check the Sales invoice reset when the date changes
@@ -89,7 +88,7 @@ Scenario: _0154100 preparation
 		* Preparation: creating a vendor partner term for DFC
 			Given I open hyperlink "e1cib/list/Catalog.Agreements"
 			And I click the button named "FormCreate"
-			And I input "Partner term vendor DFC" text in the field named "Description_en"
+			And I input "Partner term vendor DFC" text in "ENG" field
 			And I change "Type" radio button value to "Vendor"
 			And I change "AP/AR posting detail" radio button value to "By documents"
 			And I click Select button of "Partner" field
@@ -125,7 +124,7 @@ Scenario: _0154100 preparation
 		* Preparation: creating a vendor partner term for Partner Kalipso Vendor
 			Given I open hyperlink "e1cib/list/Catalog.Agreements"
 			And I click the button named "FormCreate"
-			And I input "Partner term vendor Partner Kalipso" text in the field named "Description_en"
+			And I input "Partner term vendor Partner Kalipso" text in "ENG" field
 			And I change "Type" radio button value to "Vendor"
 			And I change "AP/AR posting detail" radio button value to "By documents"
 			And I click Select button of "Partner" field
@@ -358,7 +357,7 @@ Scenario: _0154100 preparation
 Scenario: _0154101 check filling in and re-filling Sales order
 	And I close all client application windows
 	* Open the Sales order creation form
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		Given I open hyper link "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field
@@ -614,8 +613,62 @@ Scenario: _0154101 check filling in and re-filling Sales order
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '303,08' | '1'            |
+		* Check recalculate Total amount and Net amount when change Tax rate
+			* Price include tax
+				And I move to "Item list" tab
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' | 'Price'  |
+					| 'Dress' | 'L/Green'  | '550,00' |
+				And I select current line in "ItemList" table
+				And I activate "VAT" field in "ItemList" table
+				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+				And I finish line editing in "ItemList" table
+				And "ItemList" table contains lines
+					| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+					| '350,00' | 'Shirt' | '38/Black' | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
+					| '550,00' | 'Dress' | 'L/Green'  | '5,45'       | '1%'       | '1,000' | 'pcs'  | '544,55'     | '550,00'       | 'Store 01' |
+					| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
+				And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 566,37"
+				Then the form attribute named "ItemListTotalTaxAmount" became equal to "203,63"
+				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
+			* Price doesn't include tax
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' | 'Price'  |
+					| 'Dress' | 'L/Green'  | '550,00' |
+				And I select current line in "ItemList" table
+				And I activate "VAT" field in "ItemList" table
+				And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
+				And I move to "Other" tab
+				And I remove checkbox "Price include tax"
+				And I move to "Item list" tab
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
+					| 'Shirt' | '38/Black' | '350,00' | '2,000' |
+				And I select current line in "ItemList" table
+				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+				And I finish line editing in "ItemList" table
+				And "ItemList" table contains lines
+					| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+					| '350,00' | 'Shirt' | '38/Black' | '7,00'       | '1%'       | '2,000' | 'pcs'  | '700,00'     | '707,00'       | 'Store 01' |
+					| '550,00' | 'Dress' | 'L/Green'  | '104,50'     | '1%'       | '1,000' | 'pcs'  | '550,00'     | '654,50'       | 'Store 01' |
+					| '520,00' | 'Dress' | 'XS/Blue'  | '98,80'      | '1%'       | '1,000' | 'pcs'  | '520,00'     | '618,80'       | 'Store 01' |
+				And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
+				Then the form attribute named "ItemListTotalTaxAmount" became equal to "210,30"
+				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 980,30"
+				
+
+
+
+
+
+
+
+
 
 Scenario: _0154102 check filling in and re-filling Sales invoice
+	And I close all client application windows
 	* Open the Sales invoice creation form
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -884,11 +937,55 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 				| 'SalesTax' | '1%'       | 'Dress' | 'L/Green'  | ''          | '5,45'   | '5,45'          |
 				| 'SalesTax' | '1%'       | 'Dress' | 'XS/Blue'  | ''          | '5,15'   | '5,15'          |
 				| 'SalesTax' | '1%'       | 'Shirt' | '38/Black' | ''          | '6,93'   | '6,93'          |
-			And I close all client application windows
+		* Check recalculate Total amount and Net amount when change Tax rate
+			* Price include tax
+				And I move to "Item list" tab
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' | 'Price'  |
+					| 'Dress' | 'L/Green'  | '550,00' |
+				And I select current line in "ItemList" table
+				And I activate "VAT" field in "ItemList" table
+				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+				And I finish line editing in "ItemList" table
+				And "ItemList" table contains lines
+					| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+					| '350,00' | 'Shirt' | '38/Black' | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
+					| '550,00' | 'Dress' | 'L/Green'  | '5,45'       | '1%'       | '1,000' | 'pcs'  | '544,55'     | '550,00'       | 'Store 01' |
+					| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
+				And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 566,37"
+				Then the form attribute named "ItemListTotalTaxAmount" became equal to "203,63"
+				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
+			* Price doesn't include tax
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' | 'Price'  |
+					| 'Dress' | 'L/Green'  | '550,00' |
+				And I select current line in "ItemList" table
+				And I activate "VAT" field in "ItemList" table
+				And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
+				And I move to "Other" tab
+				And I remove checkbox "Price include tax"
+				And I move to "Item list" tab
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
+					| 'Shirt' | '38/Black' | '350,00' | '2,000' |
+				And I select current line in "ItemList" table
+				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+				And I finish line editing in "ItemList" table
+				And "ItemList" table contains lines
+					| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+					| '350,00' | 'Shirt' | '38/Black' | '7,00'       | '1%'       | '2,000' | 'pcs'  | '700,00'     | '707,00'       | 'Store 01' |
+					| '550,00' | 'Dress' | 'L/Green'  | '104,50'     | '1%'       | '1,000' | 'pcs'  | '550,00'     | '654,50'       | 'Store 01' |
+					| '520,00' | 'Dress' | 'XS/Blue'  | '98,80'      | '1%'       | '1,000' | 'pcs'  | '520,00'     | '618,80'       | 'Store 01' |
+				And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
+				Then the form attribute named "ItemListTotalTaxAmount" became equal to "210,30"
+				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 980,30"
 
 
 
 Scenario: _0154103 check Sales order when changing date
+	And I close all client application windows
 	* Open the Sales order creation form
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -1297,11 +1394,61 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 				| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '99,00'  | '99,00'         |
 				| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '93,60'  | '93,60'         |
 				| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
-			And I close all client application windows
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Shirt' | '38/Black' |
+			And I activate "VAT" field in "ItemList" table
+			And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
+		* Check recalculate Total amount and Net amount when change Tax rate
+			* Price include tax
+				And I move to "Item list" tab
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' | 'Price'  |
+					| 'Dress' | 'L/Green'  | '550,00' |
+				And I select current line in "ItemList" table
+				And I activate "VAT" field in "ItemList" table
+				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+				And I finish line editing in "ItemList" table
+				And "ItemList" table contains lines
+					| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' |
+					| '350,00' | 'Shirt' | '38/Black' | '106,78'     | '2,000' | 'pcs'  | '593,22'     | '700,00'       |
+					| '550,00' | 'Dress' | 'L/Green'  | ''           | '1,000' | 'pcs'  | '550,00'     | '550,00'       |
+					| '520,00' | 'Dress' | 'XS/Blue'  | '79,32'      | '1,000' | 'pcs'  | '440,68'     | '520,00'       |
+				And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 583,90"
+				Then the form attribute named "ItemListTotalTaxAmount" became equal to "186,10"
+				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
+			* Price doesn't include tax
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' | 'Price'  |
+					| 'Dress' | 'L/Green'  | '550,00' |
+				And I select current line in "ItemList" table
+				And I activate "VAT" field in "ItemList" table
+				And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
+				And I move to "Other" tab
+				And I remove checkbox "Price include tax"
+				And I move to "Item list" tab
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
+					| 'Shirt' | '38/Black' | '350,00' | '2,000' |
+				And I select current line in "ItemList" table
+				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+				And I finish line editing in "ItemList" table
+				And "ItemList" table contains lines
+					| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' |
+					| '350,00' | 'Shirt' | '38/Black' | ''           | '2,000' | 'pcs'  | '700,00'     | '700,00'       |
+					| '550,00' | 'Dress' | 'L/Green'  | '99,00'      | '1,000' | 'pcs'  | '550,00'     | '649,00'       |
+					| '520,00' | 'Dress' | 'XS/Blue'  | '93,60'      | '1,000' | 'pcs'  | '520,00'     | '613,60'       |
+				And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
+				Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
+				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
+
 
 
 
 Scenario: _0154106 check filling in and re-filling Purchase invoice
+	And I close all client application windows
 	* Open the Purchase invoice creation form
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
@@ -1573,9 +1720,54 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 				| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '99,00'  | '99,00'         |
 				| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '93,60'  | '93,60'         |
 				| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
-			And I close all client application windows
+			And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
+		* Check recalculate Total amount and Net amount when change Tax rate
+			* Price include tax
+				And I move to "Item list" tab
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' | 'Price'  |
+					| 'Dress' | 'L/Green'  | '550,00' |
+				And I select current line in "ItemList" table
+				And I activate "VAT" field in "ItemList" table
+				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+				And I finish line editing in "ItemList" table
+				And "ItemList" table contains lines
+					| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' |
+					| '350,00' | 'Shirt' | '38/Black' | '106,78'     | '2,000' | 'pcs'  | '593,22'     | '700,00'       |
+					| '550,00' | 'Dress' | 'L/Green'  | ''           | '1,000' | 'pcs'  | '550,00'     | '550,00'       |
+					| '520,00' | 'Dress' | 'XS/Blue'  | '79,32'      | '1,000' | 'pcs'  | '440,68'     | '520,00'       |
+				And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 583,90"
+				Then the form attribute named "ItemListTotalTaxAmount" became equal to "186,10"
+				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
+			* Price doesn't include tax
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' | 'Price'  |
+					| 'Dress' | 'L/Green'  | '550,00' |
+				And I select current line in "ItemList" table
+				And I activate "VAT" field in "ItemList" table
+				And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
+				And I move to "Other" tab
+				And I remove checkbox "Price include tax"
+				And I move to "Item list" tab
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
+					| 'Shirt' | '38/Black' | '350,00' | '2,000' |
+				And I select current line in "ItemList" table
+				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+				And I finish line editing in "ItemList" table
+				And "ItemList" table contains lines
+					| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' |
+					| '350,00' | 'Shirt' | '38/Black' | ''           | '2,000' | 'pcs'  | '700,00'     | '700,00'       |
+					| '550,00' | 'Dress' | 'L/Green'  | '99,00'      | '1,000' | 'pcs'  | '550,00'     | '649,00'       |
+					| '520,00' | 'Dress' | 'XS/Blue'  | '93,60'      | '1,000' | 'pcs'  | '520,00'     | '613,60'       |
+				And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
+				Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
+				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
 
 Scenario: _0154107 check filling in and re-filling Cash reciept (transaction type Payment from customer)
+	And I close all client application windows
 	* Open the Cash reciept creation form
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
@@ -4427,278 +4619,3 @@ Scenario: _0154133  check currency form in Outgoing payment order
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
 		And I close all client application windows
-
-
-Scenario: _0154134 create document Retail Sales Receipt
-	And I close all client application windows
-	* Open the Retail Sales Receipt creation form
-		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-		And I click the button named "FormCreate"
-	* Check filling in legal name if the partner has only one
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'DFC'         |
-		And I select current line in "List" table
-		Then the form attribute named "LegalName" became equal to "DFC"
-	* Check filling in Partner term if the partner has only one
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'DFC'         |
-		And I select current line in "List" table
-		Then the form attribute named "Agreement" became equal to "Partner term DFC"
-	* Check filling in Company from Partner term
-		* Change company in Sales order
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'    |
-				| 'Second Company' |
-			And I select current line in "List" table
-			Then the form attribute named "Company" became equal to "Second Company"
-			And I click Select button of "Partner term" field
-			And I select current line in "List" table
-		* Check the refill when selecting a partner term
-			Then the form attribute named "Company" became equal to "Main Company"
-	* Check filling in Store from Partner term
-		* Change of store in the selected partner term
-			And I click Open button of "Partner term" field
-			And I click Select button of "Store" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 03'    |
-			And I select current line in "List" table
-			And I click "Save and close" button
-		* Re-selection of the agreement and check of the store refill (items not added)
-			And I click Select button of "Partner term" field
-			And I select current line in "List" table
-	* Check clearing legal name, Partner term when re-selecting a partner
-		* Re-select partner
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'     |
-			And I select current line in "List" table
-		* Check clearing fields
-			Then the form attribute named "Agreement" became equal to ""
-		* Check filling in legal name after re-selection partner
-			Then the form attribute named "LegalName" became equal to "Company Kalipso"
-		* Select partner term
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| 'Description'                   |
-				| 'Basic Partner terms, without VAT' |
-			And I select current line in "List" table
-	* Check filling in Store and Compane from Partner term when re-selection partner
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Store" became equal to "Store 02"
-	* Check the item key autofill when adding Item (Item has one item key)
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Router'      |
-		And I select current line in "List" table
-		And "ItemList" table contains lines
-			| 'Item'   | 'Item key' | 'Unit' | 'Store'    |
-			| 'Router' | 'Router'   | 'pcs'  | 'Store 02' |
-	* Check filling in prices when adding an Item and selecting an item key
-		* Filling in item and item key
-			And I delete a line in "ItemList" table
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
-			And I select current line in "List" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
-			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-		* Check filling in prices
-			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
-				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
-	* Check re-filling  price when reselection partner term
-		* Re-select partner term
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
-			And I select current line in "List" table
-			Then "Update item list info" window is opened
-			And I click "OK" button
-		* Check store and price re-filling in the added line
-			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
-				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
-	* Check filling in prices on new lines at agreement reselection
-		* Add line
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Shirt'       |
-			And I select current line in "List" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-		* Check filling in prices
-			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
-				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
-				| 'Shirt'    | '350,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 01' |
-	* Check the re-drawing of the form for taxes at company re-selection.
-			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'SalesTax'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '*'         | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
-				| '350,00' | 'Shirt'    | '*'    | '38/Black'  | '*'           | '*'         | '2,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'    |
-				| 'Second Company' |
-			And I select current line in "List" table
-			If "ItemList" table does not contain "VAT" column Then
-	* Tax calculation check when filling in the company at reselection of the partner term
-		* Re-select partner term
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
-			And I select current line in "List" table
-		* Tax calculation check
-			And "ItemList" table contains lines
-				| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '400,00' | ''       | 'Trousers' | '18%' | '38/Yellow' | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
-				| '350,00' | ''       | 'Shirt'    | '18%' | '38/Black'  | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
-	* Check filling in prices and calculate taxes when adding items via barcode search
-		* Add item via barcodes
-			And in the table "ItemList" I click "SearchByBarcode" button
-			And I input "2202283739" text in "InputFld" field
-			And Delay 4
-			And I click "OK" button
-			And Delay 4
-		* Check filling in prices and tax calculation
-			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
-				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
-				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
-			And Delay 4
-	* Check filling in prices and calculation of taxes when adding items through the goods selection form
-		* Add items via Pickup form
-			And in the table "ItemList" I click "Pickup" button
-			And I go to line in "ItemList" table
-				| 'Title' |
-				| 'Dress' |
-			And I select current line in "ItemList" table
-			And I go to line in "ItemKeyList" table
-				| 'Price'  | 'Title'   | 'Unit' |
-				| '520,00' | 'XS/Blue' | 'pcs'  |
-			And I select current line in "ItemKeyList" table
-			And I click "Transfer to document" button
-		* Check filling in prices and tax calculation
-			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '400,00' | 'Trousers' | '38/Yellow' | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
-				| '350,00' | 'Shirt'    | '38/Black'  | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
-				| '550,00' | 'Dress'    | 'L/Green'   | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
-				| '520,00' | 'Dress'    | 'XS/Blue'   | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
-	* Check the line clearing in the tax tree when deleting a line from an order
-		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
-		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
-		And "ItemList" table does not contain lines
-			| 'Item'  | 'Item key' |
-			| 'Trousers' | '38/Yellow' |
-	* Check tax recalculation when uncheck/re-check Price include Tax
-		* Unchecking box Price include Tax
-			And I move to "Other" tab
-			And I expand "More" group
-			And I remove checkbox "Price include tax"
-		* Tax recalculation check
-			And I move to "Item list" tab
-			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '350,00' | 'Shirt' | '38/Black' | '133,00'     | '2,000' | 'pcs'  | '700,00'     | '833,00'       | 'Store 01' |
-				| '550,00' | 'Dress' | 'L/Green'  | '104,50'     | '1,000' | 'pcs'  | '550,00'     | '654,50'       | 'Store 01' |
-				| '520,00' | 'Dress' | 'XS/Blue'  | '98,80'      | '1,000' | 'pcs'  | '520,00'     | '618,80'       | 'Store 01' |
-		* Tick Price include Tax and check the calculation
-			And I move to "Other" tab
-			And I expand "More" group
-			And I set checkbox "Price include tax"
-			And I move to "Item list" tab
-			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '350,00' | 'Shirt' | '38/Black' | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
-				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
-				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
-	* Check filling in the Price include Tax check boxes when re-selecting an agreement and check tax recalculation
-		* Re-select partner term for which Price include Tax is not ticked 
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| 'Description'                   |
-				| 'Basic Partner terms, without VAT' |
-			And I select current line in "List" table
-			Then "Update item list info" window is opened
-			And I click "OK" button
-		* Check that the Price include Tax checkbox value has been filled out from the partner term
-			Then the form attribute named "PriceIncludeTax" became equal to "No"
-		* Check tax recalculation 
-			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '296,61' | 'Shirt' | '18%' | '38/Black' | '112,71'     | '1%'       | '2,000' | 'pcs'  | '593,22'     | '705,93'       | 'Store 02' |
-			| '466,10' | 'Dress' | '18%' | 'L/Green'  | '88,56'      | '1%'       | '1,000' | 'pcs'  | '466,10'     | '554,66'       | 'Store 02' |
-			| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '83,73'      | '1%'       | '1,000' | 'pcs'  | '440,68'     | '524,41'       | 'Store 02' |
-		* Change of partner term to what was earlier
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
-			And I select current line in "List" table
-			Then "Update item list info" window is opened
-			And I click "OK" button
-			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
-		* Tax recalculation check
-			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '350,00' | 'Shirt' | '38/Black' | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
-				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
-				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
-		* Check filling in currency tab
-			And I click "Save" button
-			And I move to the tab named "GroupCurrency"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '303,08' | '1'            |
-		* Check discount calculation
-			And I move to "Item list" tab
-			And in the table "ItemList" I click "% Offers" button
-			Then "Pickup special offers" window is opened
-			And I go to line in "Offers" table
-				| 'Presentation'     |
-				| 'Discount Price 2' |
-			And I activate "Is select" field in "Offers" table
-			And I select current line in "Offers" table
-			And in the table "Offers" I click "OK" button
-			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Q'     | 'Offers amount' | 'Unit' |
-				| 'Shirt' | '350,00' | '38/Black' | '2,000' | '212,00'        | 'pcs'  |
-				| 'Dress' | '550,00' | 'L/Green'  | '1,000' | '137,00'        | 'pcs'  |
-				| 'Dress' | '520,00' | 'XS/Blue'  | '1,000' | '131,00'        | 'pcs'  |
-			And I close all client application windows
-			
-

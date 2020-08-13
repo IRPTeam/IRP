@@ -272,7 +272,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_001", NStr("en = 'Write the object to continue. Continue?'", Lang));
 	Strings.Insert("QuestionToUser_002", NStr("en = 'Do you want to switch to scan mode?'", Lang));
 	Strings.Insert("QuestionToUser_003", NStr("en = 'Filled data on cheque bonds transactions will be deleted. Do you want to update %1?'", Lang));
-	Strings.Insert("QuestionToUser_004", NStr("en = 'Do you want to change tax rates according to the agreement?'", Lang));
+	Strings.Insert("QuestionToUser_004", NStr("en = 'Do you want to change tax rates according to the partner term?'", Lang));
 	Strings.Insert("QuestionToUser_005", NStr("en = 'Do you want to update filled stores?'", Lang));
 	Strings.Insert("QuestionToUser_006", NStr("en = 'Do you want to update filled currency?'", Lang));
 	Strings.Insert("QuestionToUser_007", NStr("en = 'Transaction table will be cleared. Continue?'", Lang));
@@ -363,7 +363,7 @@ EndFunction
 
 Procedure PredefinedDescriptions(Strings, CodeLanguage)
 
-	Strings.Insert("Description_A001", NStr("en = 'Catalog Agreements'", CodeLanguage));
+	Strings.Insert("Description_A001", NStr("en = 'Catalog Partner terms'", CodeLanguage));
 	Strings.Insert("Description_A003", NStr("en = 'Catalog Business units'", CodeLanguage));
 	Strings.Insert("Description_A004", NStr("en = 'Catalog Cash accounts'", CodeLanguage));
 	Strings.Insert("Description_A005", NStr("en = 'Catalog Cheque bonds'", CodeLanguage));

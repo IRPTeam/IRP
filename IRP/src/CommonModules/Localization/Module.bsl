@@ -172,7 +172,7 @@ Function Strings(Lang) Export
 	// %1 - Main store
 	// %2 - Use goods receipt
 	// %3 - Goods receipts
-	Strings.Insert("Error_053", NStr("en = 'Cannot clear the ""2"" check box. Documents ""%3"" from store %1 were already created.'", Lang));
+	Strings.Insert("Error_053", NStr("en = 'Cannot clear the ""%2"" check box. Documents ""%3"" from store %1 were already created.'", Lang));
 	Strings.Error_053 = StrTemplate(Strings.Error_053, "%1", Metadata.Catalogs.Stores.Attributes.UseGoodsReceipt.Synonym,
 			 												 Metadata.Documents.GoodsReceipt.Synonym);
 	// %1 - sales order

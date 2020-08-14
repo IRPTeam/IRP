@@ -46,7 +46,7 @@ Scenario: check of the sign of required filling at the additional attribute and 
 		And I select current line in "List" table
 		And I input "" text in "Article" field
 		And I click "Save" button
-		Then I wait that in user messages the "Field: [Article] is empty." substring will appear in 30 seconds
+		Then I wait that in user messages the "Field [Article] is empty." substring will appear in 30 seconds
 		And I close all client application windows
 	* Check that the Season account in the Item key is required by Shoes
 		Given I open hyperlink "e1cib/list/Catalog.ItemKeys"
@@ -56,7 +56,7 @@ Scenario: check of the sign of required filling at the additional attribute and 
 		And I select current line in "List" table
 		And I input "" text in "Season" field
 		And I click "Save" button
-		Then I wait that in user messages the "Field: [Season] is empty." substring will appear in 30 seconds
+		Then I wait that in user messages the "Field [Season] is empty." substring will appear in 30 seconds
 		And I close all client application windows
 	* Putt in an optional filling in the details
 		* Open add attribute settings

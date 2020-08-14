@@ -1352,9 +1352,9 @@ Scenario: _2040003 selection button Shipment confirmation in Sales invoice docum
 				| 'Description'           | 'Kind'    |
 				| 'Basic Partner terms, TRY' | 'Regular' |
 			And I select current line in "List" table
-			And I change checkbox "Update filled stores on Store 01"
-			And I change checkbox "Update filled price types on Basic Price Types"
-			And I change checkbox "Update filled prices."
+			And I change checkbox "Do you want to update filled stores on Store 01?"
+			And I change checkbox "Do you want to update filled price types on Basic Price Types?"
+			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 		And in the table "ItemList" I click "Select shipment confirmations" button
 		And "ShipmentConfirmationsTree" table contains lines

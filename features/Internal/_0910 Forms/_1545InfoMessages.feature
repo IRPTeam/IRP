@@ -39,7 +39,7 @@ Scenario: message when trying to create a Sales invoice by Sales order with Ship
 		And I move to "Item list" tab
 		And I click "Post" button
 		And I click "Sales invoice" button
-		Then warning message containing text "First, create a Shipment confirmation document or clear the Shipment confirmation before Sales invoice check box on the ""Other"" tab." appears
+		Then warning message containing text 'First, create a "Shipment confirmation" document or clear the "Shipment confirmation before Sales invoice" check box on the "Other" tab.' appears
 		And I close all client application windows
 
 Scenario: message when trying to create a Purchase invoice by Purchase order with Goods receipt before Purchase invoice (Goods receipt has not been created yet)
@@ -103,7 +103,7 @@ Scenario: message when trying to create a Purchase invoice by Purchase order wit
 	* Check the information message display when trying to create Sales invoice
 		And I click "Post" button
 		And I click "Purchase invoice" button
-		Then warning message containing text "First, create a Goods receipt document or clear the Goods receipt before Purchase invoice check box on the ""Other"" tab." appears
+		Then warning message containing text 'First, create a "Goods receipt" document or clear the "Goods receipt before Purchase invoice" check box on the "Other" tab.' appears
 		And I close all client application windows
 
 Scenario: message when trying to create Sales returm order based on Sales invoice when all products have already been returned
@@ -153,11 +153,11 @@ Scenario: message when trying to create Sales returm order based on Sales invoic
 			And I click "Post and close" button
 	* Check the message output when creating Sales return order or Sales return again
 			And I click "Sales return order" button
-			Then warning message containing text "There are no products to return in the Sales invoice document. All products are already returned." appears
+			Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
 			And I click "OK" button
 			Then "Sales invoice * dated *" window is opened
 			And I click "Sales return" button
-			Then warning message containing text "There are no products to return in the Sales invoice document. All products are already returned." appears
+			Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
 			And I click "OK" button
 			And I close all client application windows
 
@@ -225,11 +225,11 @@ Scenario: message when trying to create Purchase return order and Purchase retur
 			And I click "Post and close" button
 	* Check the message output when Purchase return or Purchase return order is created again
 			And I click "Purchase return order" button
-			Then warning message containing text "There are no products to return in the Purchase invoice document. All products are already returned." appears
+			Then warning message containing text 'There are no products to return in the "Purchase invoice" document. All products are already returned.' appears
 			And I click "OK" button
 			Then "Purchase invoice * dated *" window is opened
 			And I click "Purchase return" button
-			Then warning message containing text "There are no products to return in the Purchase invoice document. All products are already returned." appears
+			Then warning message containing text 'There are no products to return in the "Purchase invoice" document. All products are already returned.' appears
 			And I click "OK" button
 			And I close all client application windows
 
@@ -286,7 +286,7 @@ Scenario: message when trying to re-create Sales invoice based on Shipment confi
 		And I wait "Sales invoice (create)" window closing in 20 seconds
 	* Check message display when trying to re-create Sales invoice
 		And I click "Sales invoice" button
-		Then warning message containing text "There are no lines for which you need to create Sales invoice document in the Shipment confirmation document." appears
+		Then warning message containing text 'There are no lines for which you need to create a "Sales invoice" document in the "Shipment confirmation" document.' appears
 		And I close all client application windows
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -464,25 +464,13 @@ Scenario: message when trying to re-create Purchase invoice based on Purchase or
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I input "40,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		* Change the document number
-			And I move to "Other" tab
-			And I expand "More" group
-			And I input "2006" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "2006" text in "Number" field
 		And I click "Post" button
 	* Create Purchase invoice based on Purchase order
 		And I click "Purchase invoice" button
-		* Change number
-			And I input "2006" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "2006" text in "Number" field
 		And I click "Post and close" button
 	* Check message display when you try to re-create Purchase invoice
 		And I click "Purchase invoice" button
-		Then warning message containing text "There are no lines for which you need to create Purchase invoice document in the Purchase order document." appears
+		Then warning message containing text 'There are no lines for which you need to create a "Purchase invoice" document in the "Purchase order" document.' appears
 		And I close all client application windows
 
 Scenario: message when trying to re-create Goods reciept based on Purchase order
@@ -557,7 +545,7 @@ Scenario: message when trying to re-create Goods reciept based on Purchase order
 		And I click "Post and close" button
 	* Check message display when you try to re-create Goods receipt
 		And I click "Goods receipt" button
-		Then warning message containing text "All items in the Purchase order document(s) are already received using the Goods receipt document(s)." appears
+		Then warning message containing text 'All items in the "Purchase order" document(s) are already received using the "Goods receipt" document(s).' appears
 		And I close all client application windows
 
 Scenario: message when trying to re-create Sales invoice based on Sales order (Sales invoice before Shipment confirmation)
@@ -602,7 +590,7 @@ Scenario: message when trying to re-create Sales invoice based on Sales order (S
 			And I click "Post and close" button
 	* Check message display when you try to re-create Sales invoice
 		And I click "Sales invoice" button
-		Then warning message containing text "There are no lines for which you need to create Sales invoice document in the Sales order document." appears
+		Then warning message containing text 'There are no lines for which you need to create a "Sales invoice" document in the "Sales order" document.' appears
 		And I close all client application windows
 		
 Scenario: message when trying to re-create Shipment confirmation based on Sales order (Shipment confirmation before Sales invoic)
@@ -647,7 +635,7 @@ Scenario: message when trying to re-create Shipment confirmation based on Sales 
 			And I click "Post and close" button
 	* Check message display when you try to re-create Shipment confirmation
 		And I click "Shipment confirmation" button
-		Then warning message containing text "There are no lines for which you need to create Shipment confirmation document in the Sales order document." appears
+		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales order" document.' appears
 		And I close all client application windows
 
 Scenario: message when trying to re-create Shipment confirmation based on Sales invoice
@@ -701,7 +689,7 @@ Scenario: message when trying to re-create Shipment confirmation based on Sales 
 		And I click "Post and close" button
 	* Check message display when you try to re-create Shipment confirmation
 		And I click "Shipment confirmation" button
-		Then warning message containing text "There are no lines for which you need to create Shipment confirmation document in the Sales invoice document." appears
+		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
 		And I close all client application windows
 
 Scenario: message when trying to create Shipment confirmation based on Sales invoice (Stor doesn't use Shipment confirmation)
@@ -747,7 +735,7 @@ Scenario: message when trying to create Shipment confirmation based on Sales inv
 			And I click "Post" button
 	* Check message display when you try to create Shipment confirmation based on Sales invoice (Stor doesn't use Shipment confirmation)
 		And I click "Shipment confirmation" button
-		Then warning message containing text "There are no lines for which you need to create Shipment confirmation document in the Sales invoice document." appears
+		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
 		And I close all client application windows
 
 Scenario: message when trying to create Shipment confirmation based on Sales invoice with Service
@@ -797,7 +785,7 @@ Scenario: message when trying to create Shipment confirmation based on Sales inv
 			And I click "Post" button
 	* Check message display when you try to create Shipment confirmation based on Sales invoice with Service
 		And I click "Shipment confirmation" button
-		Then warning message containing text "There are no lines for which you need to create Shipment confirmation document in the Sales invoice document." appears
+		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
 		And I close all client application windows
 
 Scenario: message when trying to create Goods reciept based on Purchase invoice with Service
@@ -846,7 +834,7 @@ Scenario: message when trying to create Goods reciept based on Purchase invoice 
 			And I click "Post" button
 	* Check message display when you try to create Goods receipt based on Purchase invoice with Service
 		And I click "Goods receipt" button
-		Then warning message containing text "There are no lines for which you need to create Goods receipt document in the Purchase invoice document." appears
+		Then warning message containing text 'There are no lines for which you need to create a "Goods receipt" document in the "Purchase invoice" document.' appears
 		And I close all client application windows
 
 Scenario: message when trying to create Purchase order based on Sales order with procurement nethod stock and repeal, with Service
@@ -1050,7 +1038,9 @@ Scenario: user notification when create a second partial sales invoice based on 
 		And I click "Post and close" button
 	* Create second Sales invoice
 		And I click "Sales invoice" button
-		Then I wait that in user messages the "Sales invoice document does not fully match the Sales order document because | there is already another Sales invoice document that partially covered this Sales order document." substring will appear in 30 seconds
+		When TestClient messages log contains messages from the list only
+		| 'The "Sales invoice" document does not fully match the "Sales order" document because' |
+		| 'there is already another "Sales invoice" document that partially covered this "Sales order" document.'|
 		And I close all client application windows
 
 Scenario: user notification when create a second partial purchase invoice based on purchase order
@@ -1108,7 +1098,10 @@ Scenario: user notification when create a second partial purchase invoice based 
 		And I click "Post and close" button
 	* Create second Purchase invoice based on Purchase order
 		And I click "Purchase invoice" button
-		Then I wait that in user messages the "Purchase invoice document does not fully match the Purchase order document because | there is already another Purchase invoice document that partially covered this Purchase order document." substring will appear in 5 seconds
+		When TestClient messages log contains messages from the list only
+		| 'The "Purchase invoice" document does not fully match the "Purchase order" document because'|
+		|  'there is already another "Purchase invoice" document that partially covered this "Purchase order" document.'|
+		And I close all client application windows
 
 Scenario: _0154513 check message output for SO when trying to create a purchase order/SC
 	* Open the Sales order creation form
@@ -1199,12 +1192,12 @@ Scenario: _0154513 check message output for SO when trying to create a purchase 
 			And I click "Post" button
 		* Check message output when trying to generate a PO
 			And I click "Purchase order" button
-			Then the form attribute named "Message" became equal to "Cannot continue. The Sales order* document has an incorrect status." template
+			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 		* Check message output when trying to generate a PI
 			And I click "Purchase invoice" button
-			Then the form attribute named "Message" became equal to "Cannot continue. The Sales order* document has an incorrect status." template
+			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 	* Check the message output when it is impossible to create SC because the goods have not yet come from the vendor provided that the type of supply "through orders" is selected
@@ -1417,19 +1410,19 @@ Scenario: _0154514 check message output when trying to create a subsequent order
 		And I click "Post" button
 		* Check message output when trying to create SalesInvoice
 			And I click "Sales invoice" button
-			Then the form attribute named "Message" became equal to "Cannot continue. The Sales order* document has an incorrect status." template
+			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			And I click "Purchase invoice" button
-			Then the form attribute named "Message" became equal to "Cannot continue. The Sales order* document has an incorrect status." template
+			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			And I click "Purchase order" button
-			Then the form attribute named "Message" became equal to "Cannot continue. The Sales order* document has an incorrect status." template
+			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			And I click "Shipment confirmation" button
-			Then the form attribute named "Message" became equal to "Cannot continue. The of Sales order* document has an incorrect status." template
+			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			And I select "Approved" exact value from "Status" drop-down list
@@ -1471,11 +1464,11 @@ Scenario: _0154514 check message output when trying to create a subsequent order
 			And I click "Post" button
 		* Check the message output when trying to create PurchaseInvoice
 			And I click "Purchase invoice" button
-			Then the form attribute named "Message" became equal to "Cannot continue. The Purchase order* document has an incorrect status." template
+			Then the field named "Message" value contains 'Cannot continue. The "Purchase order' text
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			And I click "Goods receipt" button
-			Then the form attribute named "Message" became equal to "Cannot continue. The Purchase order* document has an incorrect status." template
+			Then the field named "Message" value contains 'Cannot continue. The "Purchase order' text
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			And I close all client application windows
@@ -1489,7 +1482,7 @@ Scenario: _0154515 check the message output when trying to uncheck a tick for St
 		And I select current line in "List" table
 	* Check the message output when trying to uncheck a tick for Store "Use Goods receipt"
 		And I remove checkbox "Use goods receipt"
-		Then the form attribute named "Message" became equal to "Cannot clear the \"Use goods receipt\" check box. Documents Goods receipts from store Store 02 have already been created previously."
+		Then the form attribute named "Message" became equal to 'Cannot clear the \"Use goods receipt\" check box. Documents "Goods receipts" from store Store 02 have already been created previously.'
 	And I close all client application windows
 	* Open Store 02
 		Given I open hyperlink "e1cib/list/Catalog.Stores"
@@ -1499,7 +1492,7 @@ Scenario: _0154515 check the message output when trying to uncheck a tick for St
 		And I select current line in "List" table
 	* Check the message output when trying to uncheck a tick for Store "Use shipment confirmation"
 		And I remove checkbox "Use shipment confirmation"
-		Then the form attribute named "Message" became equal to "Cannot clear the \"Use shipment confirmation\" check box. Documents Shipment confirmations from store Store 02 have already been created previously."
+		Then the form attribute named "Message" became equal to 'Cannot clear the \"Use shipment confirmation\" check box. Documents "Shipment confirmations" from store Store 02 have already been created previously.'
 		And I close all client application windows
 
 
@@ -1553,5 +1546,5 @@ Scenario: _0154516 notification when trying to post a Sales order without fillin
 			And I finish line editing in "ItemList" table
 	* Check message output
 		And I click "Post" button
-		Then I wait that in user messages the "Field: [Procurement method] is empty." substring will appear in 10 seconds
+		Then I wait that in user messages the "Field [Procurement method] is empty." substring will appear in 10 seconds
 		And I close all client application windows

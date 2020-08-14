@@ -112,7 +112,7 @@ Scenario: _028004 create document Sales return order, store doesn't use Goods re
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-		Then the form attribute named "Description" became equal to "Click for input description"
+		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I click Select button of "Store" field
 	Then "Stores" window is opened

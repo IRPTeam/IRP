@@ -3120,7 +3120,7 @@ Scenario: _0154083 check company, Cash accounts, transaction type, currency, par
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
-		Then the form attribute named "Description" became equal to "Click for input description"
+		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
@@ -3153,7 +3153,7 @@ Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Bank account, USD"
-		Then the form attribute named "Description" became equal to "Click for input description"
+		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
@@ -3185,7 +3185,7 @@ Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Bank account, USD"
-		Then the form attribute named "Description" became equal to "Click for input description"
+		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
@@ -3217,7 +3217,7 @@ Scenario: _0154086 check company, Cash accounts, transaction type, currency, par
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
-		Then the form attribute named "Description" became equal to "Click for input description"
+		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
@@ -4189,7 +4189,7 @@ Scenario: check filling in procurement method using the button Fill in SO
 			| 'Item'       | 'Item key' | 'Procurement method' |
 			| 'High shoes' | '37/19SD'  | 'Repeal'             |
 		And I click "Post" button
-		Then I wait that in user messages the "Field: [Procurement method] is empty." substring will appear in 30 seconds
+		Then I wait that in user messages the "Field [Procurement method] is empty." substring will appear in 30 seconds
 		And I close all client application windows
 
 

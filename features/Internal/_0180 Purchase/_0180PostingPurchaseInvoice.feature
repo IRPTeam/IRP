@@ -38,9 +38,9 @@ Scenario: _018001 create document Purchase Invoice based on order - Goods receip
 	* Check filling prices
 		And "ItemList" table contains lines
 		| 'Price'  | 'Item'     | 'Item key'  | 'Q'       | 'Price type'                         | 'Store'    |
-		| '200,00' | 'Dress'    | 'M/White'   | '100,000' | 'en description is empty.'           | 'Store 01' |
-		| '210,00' | 'Dress'    | 'L/Green'   | '200,000' | 'en description is empty.'           | 'Store 01' |
-		| '250,00' | 'Trousers' | '36/Yellow' | '300,000' | 'en description is empty.'           | 'Store 01' |
+		| '200,00' | 'Dress'    | 'M/White'   | '100,000' | 'en description is empty'           | 'Store 01' |
+		| '210,00' | 'Dress'    | 'L/Green'   | '200,000' | 'en description is empty'           | 'Store 01' |
+		| '250,00' | 'Trousers' | '36/Yellow' | '300,000' | 'en description is empty'           | 'Store 01' |
 	* Filling in the document number 1
 		And I input "1" text in "Number" field
 		Then "1C:Enterprise" window is opened
@@ -110,7 +110,7 @@ Scenario: _018006 create document Purchase Invoice based on order - Goods receip
 	* Filling prices
 		And "ItemList" table contains lines
 		| 'Price' | 'Item'  | 'Item key' | 'Q'       | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' |
-		| '40,00' | 'Dress' | 'L/Green'  | '500,000' | 'en description is empty.' | 'pcs'  | '3 050,85'   | '16 949,15'  | '20 000,00'    |
+		| '40,00' | 'Dress' | 'L/Green'  | '500,000' | 'en description is empty' | 'pcs'  | '3 050,85'   | '16 949,15'  | '20 000,00'    |
 	* Filling in the document number 2
 		And I input "2" text in "Number" field
 		Then "1C:Enterprise" window is opened

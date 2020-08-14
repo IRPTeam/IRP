@@ -206,7 +206,7 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'TRY'                      |
 		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'Local currency'           |
 		| 'USD'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Nicoletta' | 'Reporting currency'       |
-		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty.' |
+		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty' |
 	And I close all client application windows
 
 Scenario: _060003 create Cash reciept with the type of settlements under standard Partner terms and check its movements
@@ -256,7 +256,7 @@ Scenario: _060003 create Cash reciept with the type of settlements under standar
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
 		And "List" table contains lines
 		| 'Currency' | 'Recorder'          | 'Legal name'        | 'Company'      | 'Amount'    | 'Partner term' | 'Partner'   | 'Multi currency movement type'   |
-		| 'TRY'      | 'Cash receipt 601*' | 'Company Nicoletta' | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty.' |
+		| 'TRY'      | 'Cash receipt 601*' | 'Company Nicoletta' | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty' |
 		And I close all client application windows
 
 Scenario: _060004 check the offset of the advance for Sales invoice with the type of settlement under standard Partner terms and check its movements
@@ -298,7 +298,7 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 		Given I open hyperlink "e1cib/list/AccumulationRegister.AdvanceFromCustomers"
 		And "List" table contains lines
 		| 'Currency' | 'Recorder'          | 'Legal name'        | 'Company'      | 'Receipt document'  | 'Partner'   | 'Multi currency movement type'   | 'Amount'    |
-		| 'TRY'      | 'Bank receipt 602*' | 'Company Nicoletta' | 'Main Company' | 'Bank receipt 602*' | 'Nicoletta' | 'en description is empty.' | '12 000,00' |
+		| 'TRY'      | 'Bank receipt 602*' | 'Company Nicoletta' | 'Main Company' | 'Bank receipt 602*' | 'Nicoletta' | 'en description is empty' | '12 000,00' |
 		And I close all client application windows
 	* Create Sales invoice with the type of settlements under standard Partner terms
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -340,15 +340,15 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'TRY'                      |
 		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'Local currency'           |
 		| 'USD'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Nicoletta' | 'Reporting currency'       |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty.' |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty.' |
+		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty' |
+		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty' |
 	* Check movements SalesInvoice by register AdvanceFromCustomers
 		Given I open hyperlink "e1cib/list/AccumulationRegister.AdvanceFromCustomers"
 		And "List" table contains lines
 		| 'Currency' | 'Recorder'           | 'Legal name'        | 'Company'      | 'Receipt document'  | 'Partner'   | 'Multi currency movement type'   | 'Amount'    | 'Deferred calculation' |
 		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | 'Main Company' | 'Bank receipt 602*' | 'Nicoletta' | 'Local currency'           | '11 000,00' | 'No'                   |
 		| 'USD'      | 'Sales invoice 602*' | 'Company Nicoletta' | 'Main Company' | 'Bank receipt 602*' | 'Nicoletta' | 'Reporting currency'       | '1 883,56'  | 'No'                   |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | 'Main Company' | 'Bank receipt 602*' | 'Nicoletta' | 'en description is empty.' | '11 000,00' | 'No'                   |
+		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | 'Main Company' | 'Bank receipt 602*' | 'Nicoletta' | 'en description is empty' | '11 000,00' | 'No'                   |
 
 Scenario: _060005 create Purchase invoice with the type of settlements under standard contracts and check its movements
 	* Create Purchase invoice №601
@@ -384,7 +384,7 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 		* Check filling in purchase invoice
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'en description is empty.' | 'pcs'  | '1 677,97'   | '9 322,03'   | '11 000,00'    | 'Store 01' |
+			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'en description is empty' | 'pcs'  | '1 677,97'   | '9 322,03'   | '11 000,00'    | 'Store 01' |
 			And I click "Post" button
 	* Check movements Purchase Invoice by register PartnerApTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerApTransactions"
@@ -393,7 +393,7 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'TRY'                      |
 		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'Local currency'           |
 		| 'USD'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Veritas' | 'Reporting currency'       |
-		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'en description is empty.' |
+		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'en description is empty' |
 		And I close all client application windows
 	
 Scenario: _060006 create Cash payment with the type of settlements under standard contracts and check its movements
@@ -443,7 +443,7 @@ Scenario: _060006 create Cash payment with the type of settlements under standar
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerApTransactions"
 		And "List" table contains lines
 		| 'Currency' | 'Recorder'          | 'Legal name'        | 'Company'      | 'Amount'    | 'Partner term' | 'Partner'   | 'Multi currency movement type'   |
-		| 'TRY'      | 'Cash payment 601*' | 'Company Veritas'   | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas'   | 'en description is empty.' |
+		| 'TRY'      | 'Cash payment 601*' | 'Company Veritas'   | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas'   | 'en description is empty' |
 		And I close all client application windows
 
 Scenario: _060007 check the offset of Purchase invoice advance with the type of settlement under standard contracts and check its movements
@@ -485,7 +485,7 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 			| 'Currency' | 'Recorder'          | 'Legal name'       | 'Company'      | 'Partner' | 'Payment document'  | 'Multi currency movement type'   | 'Amount'    | 'Deferred calculation' |
 			| 'TRY'      | 'Bank payment 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'Local currency'           | '12 000,00' | 'No'                   |
 			| 'USD'      | 'Bank payment 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'Reporting currency'       | '2 054,79'  | 'No'                   |
-			| 'TRY'      | 'Bank payment 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'en description is empty.' | '12 000,00' | 'No'                   |
+			| 'TRY'      | 'Bank payment 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'en description is empty' | '12 000,00' | 'No'                   |
 		And I close all client application windows
 	* Create Purchase Invoice №602
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -525,7 +525,7 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'TRY'                      |
 		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'Local currency'           |
 		| 'USD'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Veritas' | 'Reporting currency'       |
-		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'en description is empty.' |
+		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'en description is empty' |
 		And I close all client application windows
 	* Check movements Purchase Invoice by register AdvanceFromCustomers
 		Given I open hyperlink "e1cib/list/AccumulationRegister.AdvanceToSuppliers"
@@ -533,6 +533,6 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 		| 'Currency' | 'Recorder'              | 'Legal name'       | 'Company'      | 'Partner' | 'Payment document'  | 'Multi currency movement type'   | 'Amount'    | 'Deferred calculation' |
 		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'Local currency'           | '11 000,00' | 'No'                   |
 		| 'USD'      | 'Purchase invoice 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'Reporting currency'       | '1 883,56'  | 'No'                   |
-		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'en description is empty.' | '11 000,00' | 'No'                   |
+		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'en description is empty' | '11 000,00' | 'No'                   |
 
 

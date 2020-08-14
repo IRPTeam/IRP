@@ -1273,7 +1273,7 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 				| 'Partner Kalipso Vendor' |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
-			And I change checkbox "Update filled stores on Store 02"
+			And I change checkbox "Do you want to update filled stores on Store 02?"
 			And I click "OK" button
 		* Tax calculation check
 			And "ItemList" table contains lines
@@ -1601,7 +1601,7 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 				| 'Partner Kalipso Vendor' |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
-			And I change checkbox "Update filled stores on Store 02"
+			And I change checkbox "Do you want to update filled stores on Store 02?"
 			And I click "OK" button
 		* Tax calculation check
 			And "ItemList" table contains lines
@@ -2850,7 +2850,7 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
 			And I click "Post" button
-			Then I wait that in user messages the "Currency transfer is possible only when amounts is equal." substring will appear in 10 seconds
+			Then I wait that in user messages the "Currency transfer is available only when amounts are equal." substring will appear in 10 seconds
 			And I close all client application windows
 	* Check cash transfer from cash account to bank account
 		* Open form Cash transfer order
@@ -2881,7 +2881,7 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
 			And I click "Post" button
-			Then I wait that in user messages the "Currency transfer is possible only when amounts is equal." substring will appear in 10 seconds
+			Then I wait that in user messages the "Currency transfer is available only when amounts are equal." substring will appear in 10 seconds
 			And I close all client application windows
 	* Check cash transfer from bank account to cash account
 		* Open form Cash transfer order
@@ -2912,7 +2912,7 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
 			And I click "Post" button
-			Then I wait that in user messages the "Currency transfer is possible only when amounts is equal." substring will appear in 10 seconds
+			Then I wait that in user messages the "Currency transfer is available only when amounts are equal." substring will appear in 10 seconds
 			And I close all client application windows
 	* Check cash transfer between two bank account
 		* Open form Cash transfer order
@@ -2938,7 +2938,7 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
 			And I click "Post" button
-			Then I wait that in user messages the "Currency transfer is possible only when amounts is equal." substring will appear in 10 seconds
+			Then I wait that in user messages the "Currency transfer is available only when amounts are equal." substring will appear in 10 seconds
 			And I close all client application windows
 
 

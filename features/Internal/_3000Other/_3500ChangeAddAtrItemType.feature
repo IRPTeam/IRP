@@ -42,7 +42,6 @@ Scenario: _350000 preparation for check a bunch of additional details in item ty
             And I click "Ok" button
         * Setting the required filling additional attribute Color Socks TR
             And I click "Set \"Required\" at all sets" button
-            Then "Choice value" window is opened
             And I select "Yes" exact value from "InputFld" drop-down list
             And I click "OK" button
             And I click "Save and close" button

@@ -683,7 +683,7 @@ Scenario: _010012 settings for displaying contact information in Stores, Partner
 		And I select current line in "List" table
 		And I finish line editing in "IDInfoTypes" table
 		And I click "Save and close" button
-		And I wait "en description is empty. (Contact info sets) *" window closing in 20 seconds
+		And I wait "en description is empty (Contact info sets) *" window closing in 20 seconds
 		
 
 Scenario: _010013 filling phones for partners

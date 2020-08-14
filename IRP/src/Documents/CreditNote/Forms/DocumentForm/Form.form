@@ -310,11 +310,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.OperationType</segments>
-            </paths>
-          </dataPath>
           <handlers>
             <event>OnChange</event>
             <name>OperationTypeOnChange</name>
@@ -344,20 +339,11 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <type>InputField</type>
           <readOnly>true</readOnly>
           <editMode>EnterOnInput</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
         </items>
         <items xsi:type="form:FormField">
           <name>Company</name>
@@ -1401,36 +1387,6 @@
         <autoCommandBar>
           <name>TransactionsCommandBar</name>
           <id>27</id>
-          <items xsi:type="form:Button">
-            <name>TransactionsTransactionsFillTransactions</name>
-            <id>86</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <extendedTooltip>
-              <name>TransactionsTransactionsFillTransactionsExtendedTooltip</name>
-              <id>87</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <type>Label</type>
-              <autoMaxWidth>true</autoMaxWidth>
-              <autoMaxHeight>true</autoMaxHeight>
-              <extInfo xsi:type="form:LabelDecorationExtInfo">
-                <horizontalAlign>Left</horizontalAlign>
-              </extInfo>
-            </extendedTooltip>
-            <commandName>Form.Command.FillTransactions</commandName>
-            <representation>Auto</representation>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <placementArea>UserCmds</placementArea>
-            <representationInContextMenu>Auto</representationInContextMenu>
-          </items>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -2533,10 +2489,6 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>NotificationProcessing</event>
-    <name>NotificationProcessing</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
@@ -2715,23 +2667,6 @@
       <common>true</common>
     </edit>
   </attributes>
-  <formCommands>
-    <name>FillTransactions</name>
-    <title>
-      <key>en</key>
-      <value>Fill transactions</value>
-    </title>
-    <id>1</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>FillTransactions</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

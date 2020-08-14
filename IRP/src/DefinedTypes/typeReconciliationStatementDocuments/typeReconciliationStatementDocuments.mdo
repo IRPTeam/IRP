@@ -20,5 +20,6 @@
     <types>DocumentRef.ChequeBondTransactionItem</types>
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.CreditDebitNote</types>
+    <types>DocumentRef.CreditNote</types>
   </type>
 </mdclass:DefinedType>

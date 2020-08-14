@@ -3,26 +3,26 @@
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	DocCreditNoteServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetVisibility(Object, ThisObject);
+//	SetVisibility(Object, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocCreditNoteServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	SetVisibility(Object, ThisObject);
+//	SetVisibility(Object, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	If Not ValueIsFilled(Object.Ref) Then
-		Object.OperationType = PredefinedValue("Enum.CreditDebitNoteOperationsTypes.Payable");
-	EndIf;
+//	If Not ValueIsFilled(Object.Ref) Then
+//		Object.OperationType = PredefinedValue("Enum.CreditDebitNoteOperationsTypes.Payable");
+//	EndIf;
 	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));
 	
 	DocCreditNoteServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-	If Parameters.Key.IsEmpty() Then
-		SetVisibility(Object, ThisObject);
-	EndIf;
+//	If Parameters.Key.IsEmpty() Then
+//		SetVisibility(Object, ThisObject);
+//	EndIf;
 	SetConditionalAppearance();
 EndProcedure
 
@@ -31,12 +31,12 @@ Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocCreditNoteClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
-&AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	If EventName = "SetVisibility" Then
-		SetVisibility(Object, ThisObject);
-	EndIf;
-EndProcedure
+//&AtClient
+//Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+//	If EventName = "SetVisibility" Then
+//		SetVisibility(Object, ThisObject);
+//	EndIf;
+//EndProcedure
 
 &AtServer
 Procedure SetConditionalAppearance() Export
@@ -45,106 +45,106 @@ EndProcedure
 
 #EndRegion
 
-&AtClient
-Procedure OperationTypeOnChange(Item, AddInfo = Undefined) Export
-	DocCreditNoteClient.OperationTypeOnChange(Object, ThisObject, Item);
-	SetVisibility(Object, ThisObject);
-EndProcedure
+//&AtClient
+//Procedure OperationTypeOnChange(Item, AddInfo = Undefined) Export
+//	DocCreditNoteClient.OperationTypeOnChange(Object, ThisObject, Item);
+//	SetVisibility(Object, ThisObject);
+//EndProcedure
 
 &AtClient
 Procedure DateOnChange(Item, AddInfo = Undefined) Export
 	DocCreditNoteClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClientAtServerNoContext
-Procedure SetVisibility(Object, Form)
-	IsAp = Object.OperationType = PredefinedValue("Enum.CreditDebitNoteOperationsTypes.Payable");
-	IsAr = Object.OperationType = PredefinedValue("Enum.CreditDebitNoteOperationsTypes.Receivable");
-	
-	Form.Items.TransactionsPartnerApTransactionsBasisDocument.Visible = IsAp;
-	Form.Items.TransactionsPartnerArTransactionsBasisDocument.Visible = IsAr;
-EndProcedure
+//&AtClientAtServerNoContext
+//Procedure SetVisibility(Object, Form)
+//	IsAp = Object.OperationType = PredefinedValue("Enum.CreditDebitNoteOperationsTypes.Payable");
+//	IsAr = Object.OperationType = PredefinedValue("Enum.CreditDebitNoteOperationsTypes.Receivable");
+//	
+//	Form.Items.TransactionsPartnerApTransactionsBasisDocument.Visible = IsAp;
+//	Form.Items.TransactionsPartnerArTransactionsBasisDocument.Visible = IsAr;
+//EndProcedure
 
-&AtClient
-Procedure FillTransactions(Command)
-	If Not CheckFilling() Then
-		Return;
-	EndIf;
-	If Not ValueIsFilled(Object.OperationType) Then
-		MessageText = StrTemplate(R().Error_010, "OperationType");
-		CommonFunctionsClientServer.ShowUsersMessage(MessageText
-			, "Object.OperationType"
-			, Object.OperationType);
-		Return;
-	EndIf;
-	
-	If Object.Transactions.Count() Then
-		ShowQueryBox(New NotifyDescription("FillTransactionsContinue", ThisObject),
-			R().QuestionToUser_007,	QuestionDialogMode.YesNoCancel);
-		Return;
-	EndIf;
-	FillTransactionsAtServer();
-EndProcedure
-
-&AtClient
-Procedure FillTransactionsContinue(Answer, AdditionalParameters) Export
-	If Answer = DialogReturnCode.Yes Then
-		Object.Transactions.Clear();
-		FillTransactionsAtServer();
-	EndIf;
-EndProcedure
-
-&AtServer
-Procedure FillTransactionsAtServer()
-	Object.Transactions.Clear();
-	
-	TableName = "";
-	BasisAttributeName = "";
-	If Object.OperationType = Enums.CreditDebitNoteOperationsTypes.Payable Then
-		TableName = "PartnerApTransactions";
-		BasisAttributeName = "PartnerApTransactionsBasisDocument";
-	ElsIf Object.OperationType = Enums.CreditDebitNoteOperationsTypes.Receivable Then
-		TableName = "PartnerArTransactions";
-		BasisAttributeName = "PartnerArTransactionsBasisDocument";
-	Else
-		Return;
-	EndIf;
-	
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	Table.Company,
-		|	Table.BasisDocument AS %2,
-		|	Table.Partner,
-		|	Table.LegalName,
-		|	Table.Agreement,
-		|	Table.Currency,
-		|	Table.AmountBalance AS Amount
-		|FROM
-		|	AccumulationRegister.%1.Balance(&Period, 
-		|	Company = &Company
-		|	AND LegalName = &LegalName 
-		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS Table
-		|WHERE
-		|	Table.AmountBalance > 0";
-	Query.SetParameter("Period", ?(ValueIsFilled(Object.Ref),
-			New Boundary(Object.Date, BoundaryType.Excluding),
-			Undefined));
-	Query.SetParameter("Company", Object.Company);
-	Query.SetParameter("LegalName", Object.LegalName);
-	
-	Query.Text = StrTemplate(Query.Text, TableName, BasisAttributeName);
-	
-	TransferParameters = New Structure;
-	TransferParameters.Insert("Period", Object.Date);
-	TransferParameters.Insert("Company", Object.Company);
-	Selection = Query.Execute().Select();
-	While Selection.Next() Do
-		NewRow = Object.Transactions.Add();
-		FillPropertyValues(NewRow, Selection);
-	EndDo;
-	
-EndProcedure
+//&AtClient
+//Procedure FillTransactions(Command)
+//	If Not CheckFilling() Then
+//		Return;
+//	EndIf;
+//	If Not ValueIsFilled(Object.OperationType) Then
+//		MessageText = StrTemplate(R().Error_010, "OperationType");
+//		CommonFunctionsClientServer.ShowUsersMessage(MessageText
+//			, "Object.OperationType"
+//			, Object.OperationType);
+//		Return;
+//	EndIf;
+//	
+//	If Object.Transactions.Count() Then
+//		ShowQueryBox(New NotifyDescription("FillTransactionsContinue", ThisObject),
+//			R().QuestionToUser_007,	QuestionDialogMode.YesNoCancel);
+//		Return;
+//	EndIf;
+//	FillTransactionsAtServer();
+//EndProcedure
+//
+//&AtClient
+//Procedure FillTransactionsContinue(Answer, AdditionalParameters) Export
+//	If Answer = DialogReturnCode.Yes Then
+//		Object.Transactions.Clear();
+//		FillTransactionsAtServer();
+//	EndIf;
+//EndProcedure
+//
+//&AtServer
+//Procedure FillTransactionsAtServer()
+//	Object.Transactions.Clear();
+//	
+//	TableName = "";
+//	BasisAttributeName = "";
+//	If Object.OperationType = Enums.CreditDebitNoteOperationsTypes.Payable Then
+//		TableName = "PartnerApTransactions";
+//		BasisAttributeName = "PartnerApTransactionsBasisDocument";
+//	ElsIf Object.OperationType = Enums.CreditDebitNoteOperationsTypes.Receivable Then
+//		TableName = "PartnerArTransactions";
+//		BasisAttributeName = "PartnerArTransactionsBasisDocument";
+//	Else
+//		Return;
+//	EndIf;
+//	
+//	Query = New Query();
+//	Query.Text =
+//		"SELECT
+//		|	Table.Company,
+//		|	Table.BasisDocument AS %2,
+//		|	Table.Partner,
+//		|	Table.LegalName,
+//		|	Table.Agreement,
+//		|	Table.Currency,
+//		|	Table.AmountBalance AS Amount
+//		|FROM
+//		|	AccumulationRegister.%1.Balance(&Period, 
+//		|	Company = &Company
+//		|	AND LegalName = &LegalName 
+//		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS Table
+//		|WHERE
+//		|	Table.AmountBalance > 0";
+//	Query.SetParameter("Period", ?(ValueIsFilled(Object.Ref),
+//			New Boundary(Object.Date, BoundaryType.Excluding),
+//			Undefined));
+//	Query.SetParameter("Company", Object.Company);
+//	Query.SetParameter("LegalName", Object.LegalName);
+//	
+//	Query.Text = StrTemplate(Query.Text, TableName, BasisAttributeName);
+//	
+//	TransferParameters = New Structure;
+//	TransferParameters.Insert("Period", Object.Date);
+//	TransferParameters.Insert("Company", Object.Company);
+//	Selection = Query.Execute().Select();
+//	While Selection.Next() Do
+//		NewRow = Object.Transactions.Add();
+//		FillPropertyValues(NewRow, Selection);
+//	EndDo;
+//	
+//EndProcedure
 
 #Region ItemCompany
 
@@ -295,7 +295,7 @@ Function Currencies_GetDeclaration(Object, Form)
 	
 	ArrayOfItems_Header = New Array();
 	ArrayOfItems_Header.Add(Form.Items.Company);
-	ArrayOfItems_Header.Add(Form.Items.OperationType);
+//	ArrayOfItems_Header.Add(Form.Items.OperationType);
 	ArrayOfItems_Header.Add(Form.Items.LegalName);
 	ArrayOfItems_Header.Add(Form.Items.Date);
 	

@@ -67,24 +67,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="a30d2d6b-fb9c-47be-bc8b-2bb6f4f4d584">
-    <name>OperationType</name>
-    <synonym>
-      <key>en</key>
-      <value>Operation type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.CreditDebitNoteOperationsTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:ReferenceValue">
-      <value>Enum.CreditDebitNoteOperationsTypes.EnumValue.Payable</value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="0aa38d53-c8c0-4868-95df-3aadac92318d">
     <name>LegalName</name>
     <synonym>

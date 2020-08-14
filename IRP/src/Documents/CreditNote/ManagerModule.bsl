@@ -14,15 +14,19 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		"SELECT
 		|	Doc.Company AS Company,
 		|	Doc.Date AS Period,
-		|	Doc.OperationType AS OperationType,
+//		|	Doc.OperationType AS OperationType,
+		|	QueryTable.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+		|	QueryTable.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
 		|	QueryTable.AdditionalAnalytic AS AdditionalAnalytic,
 		|	QueryTable.Currency AS Currency,
 		|	CASE
 		|		WHEN QueryTable.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
 		|			THEN CASE
-		|				WHEN Doc.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Payable)
+//		|				WHEN Doc.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Payable)
+		|				WHEN QueryTable.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor)
 		|					THEN QueryTable.PartnerApTransactionsBasisDocument
-		|				ELSE QueryTable.PartnerArTransactionsBasisDocument
+		|				WHEN QueryTable.Agreement.Type = VALUE(Enum.AgreementTypes.Customer)
+		|					THEN QueryTable.PartnerArTransactionsBasisDocument
 		|			END
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
@@ -60,8 +64,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Key AS Key
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Payable)
+		|WHERE tmp.IsVendor
+//		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Payable)
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Partner,
@@ -86,8 +90,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Key AS Key
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Receivable)
+//		|WHERE false
+//		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Receivable)
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.BusinessUnit,
@@ -107,13 +111,13 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.LegalName AS LegalName,
 		|	tmp.Agreement AS Agreement,
 		|	tmp.Currency AS Currency,
-		|	SUM(tmp.Amount) AS Amount,
+		|	- SUM(tmp.Amount) AS Amount,
 		|	tmp.Period AS Period,
 		|	tmp.Key AS Key
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Receivable)
+		|WHERE tmp.IsCustomer
+//		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Receivable)
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Partner,
@@ -138,8 +142,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Key AS Key
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Payable)
+		|WHERE false
+//		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Payable)
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.BusinessUnit,
@@ -160,8 +164,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period AS Period
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Payable)
+		|WHERE False
+//		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Payable)
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.LegalName,
@@ -178,8 +182,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period AS Period
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Receivable)
+//		|WHERE tmp.IsVendor
+//		|	tmp.OperationType = VALUE(Enum.CreditDebitNoteOperationsTypes.Receivable)
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.LegalName,
@@ -277,34 +281,35 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			NewRow.TransactionAP = Row.Amount;
 		EndIf;
 	EndDo;
-	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+//	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");	
 	ArrayOfTables.Add(Table1);
 	
-	Table2 = Parameters.DocumentDataTables.PartnerApTransactions.CopyColumns();
-	Table2.Columns.Amount.Name = "TransactionAR";
-	PostingServer.AddColumnsToAccountsStatementTable(Table2);
-	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
-			NewRow = Table2.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.TransactionAR = - Row.Amount;
-		EndIf;
-	EndDo;
-	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table2);
+//	Table2 = Parameters.DocumentDataTables.PartnerApTransactions.CopyColumns();
+//	Table2.Columns.Amount.Name = "TransactionAR";
+//	PostingServer.AddColumnsToAccountsStatementTable(Table2);
+//	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions Do
+//		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
+//			NewRow = Table2.Add();
+//			FillPropertyValues(NewRow, Row);
+//			NewRow.TransactionAR = - Row.Amount;
+//		EndIf;
+//	EndDo;
+//	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
+//	ArrayOfTables.Add(Table2);
 	
-	Table3 = Parameters.DocumentDataTables.PartnerArTransactions.CopyColumns();
-	Table3.Columns.Amount.Name = "TransactionAP";
-	PostingServer.AddColumnsToAccountsStatementTable(Table3);
-	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
-			NewRow = Table3.Add(); 
-			FillPropertyValues(NewRow, Row);
-			NewRow.TransactionAP = - Row.Amount;
-		EndIf;
-	EndDo;
-	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");	
-	ArrayOfTables.Add(Table3);
+//	Table3 = Parameters.DocumentDataTables.PartnerArTransactions.CopyColumns();
+//	Table3.Columns.Amount.Name = "TransactionAP";
+//	PostingServer.AddColumnsToAccountsStatementTable(Table3);
+//	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
+//		If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
+//			NewRow = Table3.Add(); 
+//			FillPropertyValues(NewRow, Row);
+//			NewRow.TransactionAP = - Row.Amount;
+//		EndIf;
+//	EndDo;
+//	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");	
+//	ArrayOfTables.Add(Table3);
 	
 	Table4 = Parameters.DocumentDataTables.PartnerArTransactions.CopyColumns();
 	Table4.Columns.Amount.Name = "TransactionAR";
@@ -316,7 +321,8 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			NewRow.TransactionAR = Row.Amount;
 		EndIf;
 	EndDo;
-	Table4.FillValues(AccumulationRecordType.Expense, "RecordType");
+//	Table4.FillValues(AccumulationRecordType.Expense, "RecordType");
+	Table4.FillValues(AccumulationRecordType.Receipt, "RecordType");
 	ArrayOfTables.Add(Table4);
 	
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
@@ -330,7 +336,8 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	// PartnerApTransactions
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerApTransactions,
 		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
+//			AccumulationRecordType.Expense,
+			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.PartnerApTransactions));
 	
 	// ExpensesTurnovers
@@ -340,7 +347,8 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	// PartnerArTransactions
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerArTransactions,
 		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
+//			AccumulationRecordType.Expense,
+			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.PartnerArTransactions));
 	
 	// RevenuesTurnovers

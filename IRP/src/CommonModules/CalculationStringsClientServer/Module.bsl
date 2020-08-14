@@ -593,7 +593,7 @@ Function PricesChanged(Object, Form, Settings) Export
 	ListCache = GetCacheTable(Object, "ItemList", CachedColumns);
 	
 	CalculationSettings = New Structure();
-	PriceDate = ?(ValueIsFilled(Form.Object.Date), Form.Object.Date, CurrentDate());
+	PriceDate = GetPriceDate(Form.Object);
 	CalculationSettings.Insert("UpdatePrice",
 					New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	
@@ -610,6 +610,21 @@ Function PricesChanged(Object, Form, Settings) Export
 	
 	Return False;
 EndFunction
+
+Function GetPriceDate(Object) Export
+	If Object.Ref.IsEmpty() Then
+		If Not ValueIsFilled(Object.Date) Then
+			Return CurrentDate();
+		EndIf;
+		If BegOfDay(Object.Date) = BegOfDay(CurrentDate()) Then
+			Return EndOfDay(Object.Date);
+		Else
+			Return Object.Date;
+		EndIf;
+	Else
+		Return Object.Date;
+	EndIf;
+Endfunction
 
 Function GetCacheTable(Object, TableName, CachedColumns = Undefined)
 	Cache = New Array();

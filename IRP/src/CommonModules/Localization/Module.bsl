@@ -84,7 +84,7 @@ Function Strings(Lang) Export
 	#Region ErrorMessages
 
 	// %1 - en
-	Strings.Insert("Error_002", NStr("en = '%1 description is empty.'", Lang));
+	Strings.Insert("Error_002", NStr("en = '%1 description is empty'", Lang));
 	Strings.Insert("Error_003", NStr("en = 'Fill any description.'", Lang));
 	Strings.Insert("Error_004", NStr("en = 'Metadata is not supported.'", Lang));
 	

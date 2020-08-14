@@ -912,5 +912,17 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="9d897597-c66d-4ce0-af7c-3103bca4fc78">
+      <name>BankTerm</name>
+      <synonym>
+        <key>en</key>
+        <value>Bank term</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BankTerms</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
 </mdclass:Document>

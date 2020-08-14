@@ -428,6 +428,13 @@
         <value></value>
       </code>
     </items>
+    <items id="6a361b94-41b0-4947-9777-628809f62438">
+      <name>Catalog_BankTerms</name>
+      <description>Catalog bank terms</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -1,22 +1,16 @@
 
-
-&AtClient
-Var HTMLWindowPictures Export;
-
-#Region Events
+#Region FormEventHandlers
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	DetailedInformation = Format(CurrentSessionDate(), "DLF=DDT");
 	NewTransaction();
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);	
-	PictureViewerClient.UpdateObjectPictures(ThisObject, PredefinedValue("Catalog.ItemKeys.EmptyRef"));
+	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
 	Items.ItemListPicture.PictureSize = PictureSize.Proportionally;
-	ShowPictures();
-	ShowItems();
 EndProcedure
 
 &AtClient
@@ -37,6 +31,8 @@ Procedure ExternalEvent(Source, Event, Data)
 		BarcodeClient.InputBarcodeEnd(Data, NotifyParameters);
 	EndIf;
 EndProcedure
+
+#Region FormTableItemsEventHandlers
 
 #Region ItemListEvents
 
@@ -62,10 +58,7 @@ EndProcedure
 &AtClient
 Procedure ItemListOnActivateRow(Item)
 	DocRetailSalesReceiptClient.ItemListOnActivateRow(Object, ThisObject, Item);
-	If NOT HTMLWindowPictures = Undefined Then
-		HTMLWindowPictures.clearAll();
-		AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
-	EndIf;
+	UpdateHTMLPictures();
 	CurrentData = Items.ItemList.CurrentData;
 	If CurrentData <> Undefined Then
 		BuildDetailedInformation(CurrentData.ItemKey);
@@ -151,10 +144,7 @@ Procedure ItemsPickupOnActivateRow(Item)
 		Return;
 	EndIf;
 	AfterItemChoice(CurrentData.Item);
-	If NOT HTMLWindowPictures = Undefined Then
-		HTMLWindowPictures.clearAll();
-		AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
-	EndIf;
+	UpdateHTMLPictures();
 EndProcedure
 
 #EndRegion
@@ -175,7 +165,9 @@ EndProcedure
 
 #EndRegion
 
-#Region Commands
+#EndRegion
+
+#Region FormCommandsEventHandlers
 
 &AtClient
 Procedure OpenPickupItems(Command)
@@ -198,18 +190,81 @@ Procedure qPayment(Command)
 	OpenForm("DataProcessor.PointOfSale.Form.Payment"
 				, OpenFormParameters
 				, ThisObject
-				, New UUID()
+				, UUID
 				, 
 				, 
 				, OpenFormNotifyDescription
 				, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
-#EndRegion
+&AtClient
+Procedure Refund(Command)
+	OpenForm("Document.RetailReturnReceipt.ObjectForm");
+EndProcedure
+
+&AtClient
+Procedure CancelReceipt(Command)
+	Return;
+EndProcedure
+
+&AtClient
+Procedure ChangeCashier(Command)
+	Return;
+EndProcedure
+
+&AtClient
+Procedure CloseButton(Command)
+	Close();
+EndProcedure
+
+&AtClient
+Procedure CalculateOffers(Command)
+	Return;
+EndProcedure
+
+&AtClient
+Procedure PrintReceipt(Command)
+	Return;
+EndProcedure
 
 #EndRegion
 
-#Region Common
+#EndRegion
+
+#Region Private
+
+#Region PictureViewer
+
+&AtClient
+Procedure UpdateHTMLPictures() Export
+	If Not Items.ItemPicture.Visible Then
+		Return;
+	EndIf;
+	
+	If CurrentItem = Items.ItemList Then
+		CurrentRow = Items.ItemList.CurrentData;
+	ElsIf CurrentItem = Items.ItemsPickup Then
+		CurrentRow = Items.ItemsPickup.CurrentData;
+	Else
+		CurrentRow = Undefined;
+	EndIf;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+		
+	PictureInfo = PictureViewerClient.PicturesInfoForSlider(CurrentRow.Item, UUID);
+	
+	If PictureInfo.Pictures.Count() Then
+		ItemPicture = PictureInfo.Pictures[0].Preview;
+		If CurrentItem = Items.ItemList Then
+			CurrentRow.Picture = PictureInfo.Pictures[0].Preview;
+		EndIf;
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region RegionArea
 
 &AtClient
 Procedure PaymentFormClose(Result, AdditionalData) Export
@@ -229,6 +284,7 @@ EndProcedure
 
 &AtServer
 Procedure WriteTransaction(Result)
+	OneHundred = 100;
 	If Result = Undefined 
 		Or Not Result.Payments.Count() Then
 		Return;
@@ -246,11 +302,11 @@ Procedure WriteTransaction(Result)
 	EndDo; 
 	For Each Row In Payments Do
 		If Row.Percent Then
-			Row.Commission = Row.Amount * Row.Percent / 100;
+			Row.Commission = Row.Amount * Row.Percent / OneHundred;
 		EndIf; 
 	EndDo;
 	ObjectValue = FormAttributeToValue("Object");
-	ObjectValue.Date = CurrentDate();
+	ObjectValue.Date = CurrentSessionDate();
 	ObjectValue.Payments.Load(Payments);
 	ObjectValue.Write();
 	CashAmountFilter = New Structure;
@@ -269,12 +325,10 @@ Procedure WriteTransaction(Result)
 	Return;
 EndProcedure
 
-#EndRegion
-
 &AtClient
 Procedure ShowPictures()
-	Items.ItemListShowPictures.Check = Not Items.PictureViewHTML.Visible;
-	Items.PictureViewHTML.Visible = Items.ItemListShowPictures.Check;
+	Items.ItemListShowPictures.Check = Not Items.ItemPicture.Visible;
+	Items.ItemPicture.Visible = Items.ItemListShowPictures.Check;
 EndProcedure
 
 &AtClient
@@ -289,49 +343,6 @@ Procedure ShowItems()
 	EndIf;
 	Items.ItemKeysPickup.Visible = Items.ItemListShowItems.Check;
 EndProcedure
-
-#Region PictureViewer
-&AtClient
-Procedure PictureViewerHTMLDocumentComplete(Item)
-	HTMLWindowPictures = PictureViewerClient.InfoDocumentComplete(Item);
-	HTMLWindowPictures.displayTarget("toolbar", False);
-	AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
-EndProcedure
-
-
-&AtClient
-Procedure UpdateHTMLPictures() Export
-	If Not Items.PictureViewHTML.Visible Then
-		Return;
-	EndIf;
-	
-	If CurrentItem = Items.ItemList Then
-		CurrentRow = Items.ItemList.CurrentData;
-	ElsIf CurrentItem = Items.ItemsPickup Then
-		CurrentRow = Items.ItemsPickup.CurrentData;
-	Else
-		CurrentRow = Undefined;
-	EndIf;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-	
-	DisplayItemPicture(Items.ItemList.CurrentData.Item);
-	Return;
-	
-	PictureInfo = PictureViewerClient.PicturesInfoForSlider(CurrentRow.Item, UUID);
-	JSON = CommonFunctionsServer.SerializeJSON(PictureInfo);
-	HTMLWindowPictures.fillSlider(JSON);
-	
-	If PictureInfo.Pictures.Count()
-		And CurrentItem = Items.ItemList Then
-		CurrentRow.Picture = PictureInfo.Pictures[0].Preview;
-	EndIf;
-EndProcedure
-
-#EndRegion
-
-#Region RegionArea
 
 &AtServer
 Procedure AfterItemChoice(Val ChoicedItem, AddToItemList = False)	
@@ -404,22 +415,17 @@ Procedure BuildDetailedInformation(ItemKey)
 						+ " = " + Format(InfoTotalAmount, "NFD=2;");
 EndProcedure
 
-&AtServer
-Procedure DisplayItemPicture(Val ItemValue)
-	Items.ItemPicture.Picture = New Picture(ItemValue.MainPricture.Get());
-EndProcedure
-
 #EndRegion
 
 #Region Taxes
 &AtClient
 Procedure TaxValueOnChange(Item) Export
-	
+	Return;
 EndProcedure
 
 &AtServer
 Procedure PutToTaxTable_(ItemName, Key, Value) Export
-	
+	Return;
 EndProcedure
 
 &AtServer
@@ -438,8 +444,9 @@ EndProcedure
 
 &AtServer
 Procedure Taxes_CreateTaxTree() Export
-	
+	Return;
 EndProcedure
 
 #EndRegion
 
+#EndRegion

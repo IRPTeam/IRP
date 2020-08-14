@@ -132,7 +132,7 @@
               <commandName>Form.Command.ShowPictures</commandName>
               <representation>Picture</representation>
               <autoMaxWidth>true</autoMaxWidth>
-              <height>2</height>
+              <height>3</height>
               <autoMaxHeight>true</autoMaxHeight>
               <placementArea>UserCmds</placementArea>
               <representationInContextMenu>Auto</representationInContextMenu>
@@ -168,7 +168,7 @@
               <commandName>Form.Command.ShowItems</commandName>
               <representation>Picture</representation>
               <autoMaxWidth>true</autoMaxWidth>
-              <height>2</height>
+              <height>3</height>
               <autoMaxHeight>true</autoMaxHeight>
               <placementArea>UserCmds</placementArea>
               <representationInContextMenu>Auto</representationInContextMenu>
@@ -180,7 +180,6 @@
                 <key>en</key>
                 <value>Pickup items</value>
               </title>
-              <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
@@ -241,7 +240,7 @@
               <commandName>Form.Command.SearchByBarcode</commandName>
               <representation>Auto</representation>
               <autoMaxWidth>true</autoMaxWidth>
-              <height>2</height>
+              <height>3</height>
               <autoMaxHeight>true</autoMaxHeight>
               <placementArea>UserCmds</placementArea>
               <representationInContextMenu>Auto</representationInContextMenu>
@@ -410,7 +409,7 @@
                     <typeDomainEnabled>true</typeDomainEnabled>
                     <textEdit>true</textEdit>
                     <font xsi:type="core:FontDef">
-                      <height>18.0</height>
+                      <height>14.0</height>
                     </font>
                   </extInfo>
                 </items>
@@ -478,7 +477,7 @@
                       </datapath>
                     </choiceParameterLinks>
                     <font xsi:type="core:FontDef">
-                      <height>18.0</height>
+                      <height>14.0</height>
                     </font>
                   </extInfo>
                 </items>
@@ -2065,6 +2064,7 @@
             <changeRowSet>true</changeRowSet>
             <changeRowOrder>true</changeRowOrder>
             <autoMaxWidth>true</autoMaxWidth>
+            <height>10</height>
             <autoMaxHeight>true</autoMaxHeight>
             <autoMaxRowsCount>true</autoMaxRowsCount>
             <selectionMode>MultiRow</selectionMode>
@@ -2503,21 +2503,89 @@
     <items xsi:type="form:FormGroup">
       <name>GroupButtons</name>
       <id>595</id>
-      <items xsi:type="form:Decoration">
-        <name>ItemPicture</name>
-        <id>876</id>
-        <title>
-          <key>en</key>
-          <value>Item picture</value>
-        </title>
+      <items xsi:type="form:FormGroup">
+        <name>GroupButtonsExit</name>
+        <id>911</id>
+        <items xsi:type="form:Button">
+          <name>CloseButton</name>
+          <id>909</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+            <name>CloseButtonExtendedTooltip</name>
+            <id>910</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <type>UsualButton</type>
+          <commandName>Form.Command.CloseButton</commandName>
+          <representation>Auto</representation>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <placementArea>UserCmds</placementArea>
+          <font xsi:type="core:FontDef">
+            <height>20.0</height>
+          </font>
+          <representationInContextMenu>Auto</representationInContextMenu>
+        </items>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
+        <horizontalStretch>true</horizontalStretch>
+        <extendedTooltip>
+          <name>GroupButtonsExitExtendedTooltip</name>
+          <id>912</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <type>UsualGroup</type>
+        <extInfo xsi:type="form:UsualGroupExtInfo">
+          <group>HorizontalIfPossible</group>
+          <horizontalAlign>Right</horizontalAlign>
+          <showLeftMargin>true</showLeftMargin>
+          <united>true</united>
+          <throughAlign>Auto</throughAlign>
+          <currentRowUse>Auto</currentRowUse>
+        </extInfo>
+      </items>
+      <items xsi:type="form:FormField">
+        <name>ItemPicture</name>
+        <id>898</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>ItemPicture</segments>
+        </dataPath>
+        <titleLocation>None</titleLocation>
         <extendedTooltip>
           <name>ItemPictureExtendedTooltip</name>
-          <id>878</id>
+          <id>900</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -2532,7 +2600,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>ItemPictureContextMenu</name>
-          <id>877</id>
+          <id>899</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -2540,31 +2608,274 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <width>20</width>
-        <autoMaxWidth>true</autoMaxWidth>
-        <height>8</height>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:PictureDecorationExtInfo">
+        <type>PictureField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:ImageFieldExtInfo">
+          <width>21</width>
+          <autoMaxWidth>true</autoMaxWidth>
+          <height>9</height>
+          <autoMaxHeight>true</autoMaxHeight>
           <fileDragMode>AsFileRef</fileDragMode>
         </extInfo>
       </items>
-      <items xsi:type="form:FormField">
-        <name>PictureViewHTML</name>
-        <id>636</id>
+      <items xsi:type="form:FormGroup">
+        <name>GroupCommonButtons</name>
+        <id>901</id>
+        <items xsi:type="form:FormGroup">
+          <name>GroupCommonButtons1</name>
+          <id>903</id>
+          <items xsi:type="form:Button">
+            <name>ChangeCashier</name>
+            <id>913</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ChangeCashierExtendedTooltip</name>
+              <id>914</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.ChangeCashier</commandName>
+            <representation>Auto</representation>
+            <width>10</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>4</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <backColor xsi:type="core:ColorRef">
+              <color>Web.Ivory</color>
+            </backColor>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>CalculateOffers</name>
+            <id>917</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>CalculateOffersExtendedTooltip</name>
+              <id>918</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.CalculateOffers</commandName>
+            <representation>Auto</representation>
+            <width>10</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>4</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <backColor xsi:type="core:ColorRef">
+              <color>Web.Azure</color>
+            </backColor>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+            <name>GroupCommonButtons1ExtendedTooltip</name>
+            <id>904</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <type>UsualGroup</type>
+          <extInfo xsi:type="form:UsualGroupExtInfo">
+            <group>Vertical</group>
+            <showLeftMargin>true</showLeftMargin>
+            <united>true</united>
+            <throughAlign>Auto</throughAlign>
+            <currentRowUse>Auto</currentRowUse>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormGroup">
+          <name>GroupCommonButtons2</name>
+          <id>905</id>
+          <items xsi:type="form:Button">
+            <name>CancelReceipt</name>
+            <id>915</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>CancelReceiptExtendedTooltip</name>
+              <id>916</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.CancelReceipt</commandName>
+            <representation>Auto</representation>
+            <width>10</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>4</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <backColor xsi:type="core:ColorRef">
+              <color>Web.Azure</color>
+            </backColor>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>PrintReceipt</name>
+            <id>921</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>PrintReceiptExtendedTooltip</name>
+              <id>922</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.PrintReceipt</commandName>
+            <representation>Auto</representation>
+            <width>10</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>4</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <backColor xsi:type="core:ColorRef">
+              <color>Web.Cream</color>
+            </backColor>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>Refund</name>
+            <id>919</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>RefundExtendedTooltip</name>
+              <id>920</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.Refund</commandName>
+            <representation>Auto</representation>
+            <width>10</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>4</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <backColor xsi:type="core:ColorRef">
+              <color>Web.Beige</color>
+            </backColor>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+            <name>GroupCommonButtons2ExtendedTooltip</name>
+            <id>906</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <type>UsualGroup</type>
+          <extInfo xsi:type="form:UsualGroupExtInfo">
+            <group>Vertical</group>
+            <showLeftMargin>true</showLeftMargin>
+            <united>true</united>
+            <throughAlign>Auto</throughAlign>
+            <currentRowUse>Auto</currentRowUse>
+          </extInfo>
+        </items>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>PictureViewHTML</segments>
-          </paths>
-        </dataPath>
-        <titleLocation>None</titleLocation>
         <extendedTooltip>
-          <name>PictureViewHTMLExtendedTooltip</name>
-          <id>638</id>
+          <name>GroupCommonButtonsExtendedTooltip</name>
+          <id>902</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -2577,35 +2888,13 @@
             <horizontalAlign>Left</horizontalAlign>
           </extInfo>
         </extendedTooltip>
-        <contextMenu>
-          <name>PictureViewHTMLContextMenu</name>
-          <id>637</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>HTMLDocumentField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:HtmlFieldExtInfo">
-          <handlers>
-            <event>DocumentComplete</event>
-            <name>PictureViewerHTMLDocumentComplete</name>
-          </handlers>
-          <width>20</width>
-          <maxWidth>20</maxWidth>
-          <height>8</height>
-          <maxHeight>8</maxHeight>
-          <horizontalStretch>true</horizontalStretch>
-          <verticalStretch>true</verticalStretch>
-          <borderColor xsi:type="core:ColorRef">
-            <color>Style.FormBackColor</color>
-          </borderColor>
+        <type>UsualGroup</type>
+        <extInfo xsi:type="form:UsualGroupExtInfo">
+          <group>AlwaysHorizontal</group>
+          <showLeftMargin>true</showLeftMargin>
+          <united>true</united>
+          <throughAlign>Auto</throughAlign>
+          <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
       <items xsi:type="form:Button">
@@ -2638,9 +2927,9 @@
         <type>UsualButton</type>
         <commandName>Form.Command.qPayment</commandName>
         <representation>Auto</representation>
-        <width>20</width>
+        <width>21</width>
         <autoMaxWidth>true</autoMaxWidth>
-        <height>5</height>
+        <height>6</height>
         <autoMaxHeight>true</autoMaxHeight>
         <groupVerticalAlign>Bottom</groupVerticalAlign>
         <placementArea>UserCmds</placementArea>
@@ -2804,6 +3093,7 @@
   <autoFillCheck>true</autoFillCheck>
   <allowFormCustomize>true</allowFormCustomize>
   <enabled>true</enabled>
+  <scalingMode>Compact</scalingMode>
   <attributes>
     <name>FlagShift</name>
     <title>
@@ -2899,24 +3189,6 @@
       <value>Text line</value>
     </title>
     <id>5</id>
-    <valueType>
-      <types>String</types>
-      <stringQualifiers/>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
-  <attributes>
-    <name>PictureViewHTML</name>
-    <title>
-      <key>en</key>
-      <value>Picture view HTML</value>
-    </title>
-    <id>8</id>
     <valueType>
       <types>String</types>
       <stringQualifiers/>
@@ -3529,6 +3801,24 @@ WHERE
       </edit>
     </columns>
   </attributes>
+  <attributes>
+    <name>ItemPicture</name>
+    <title>
+      <key>en</key>
+      <value>Item picture</value>
+    </title>
+    <id>36</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>qPayment</name>
     <title>
@@ -3635,6 +3925,112 @@ WHERE
     </action>
     <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
     <representation>Picture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Refund</name>
+    <title>
+      <key>en</key>
+      <value>Refund</value>
+    </title>
+    <id>11</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Refund</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>ChangeCashier</name>
+    <title>
+      <key>en</key>
+      <value>Change
+cashier</value>
+    </title>
+    <id>12</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>ChangeCashier</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>CancelReceipt</name>
+    <title>
+      <key>en</key>
+      <value>Cancel
+receipt</value>
+    </title>
+    <id>13</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>CancelReceipt</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>CalculateOffers</name>
+    <title>
+      <key>en</key>
+      <value>Calculate
+offers</value>
+    </title>
+    <id>14</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>CalculateOffers</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>PrintReceipt</name>
+    <title>
+      <key>en</key>
+      <value>Print
+receipt</value>
+    </title>
+    <id>15</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>PrintReceipt</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>CloseButton</name>
+    <title>
+      <key>en</key>
+      <value>X</value>
+    </title>
+    <id>16</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>CloseButton</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

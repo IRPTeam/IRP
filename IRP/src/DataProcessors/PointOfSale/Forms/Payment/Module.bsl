@@ -1,35 +1,18 @@
 
-#Region Vars
+#Region Variables
 
-&AtClient
+&AtClient 
 Var AmountFractionDigitsCount, AmountDotIsActive, AmountFractionDigitsMaxCount, AmountWholeDigitsMaxCount;
 
 #EndRegion
 
-#Region Events
-
-#Region FormEvents
+#Region FormEventHandlers
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)	
 	FillPaymentTypes();	
 	Object.Amount = Parameters.Parameters.Amount;
 	Object.BusinessUnit = Parameters.Parameters.BusinessUnit;	
-EndProcedure
-
-&AtClient
-Procedure PaymentsOnChange(Item)
-	CalculatePaymentsAmountTotal();
-	FormatPaymentsAmountStringRows();
-EndProcedure
-
-&AtClient
-Procedure PaymentsOnActivateRow(Item)
-	CurrentData = Items.Payments.CurrentData;
-	If CurrentData <> Undefined Then
-		CurrentData.Edited = False;
-		CurrentData.AmountString = GetAmountString(CurrentData.Amount);
-	EndIf;
 EndProcedure
 
 &AtServer
@@ -65,15 +48,34 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	If ErrorMessages.Count() Then
 		Cancel = True;
 		For Each ErrorMessage In ErrorMessages Do
-			Message(ErrorMessage);
+			CommonFunctionsClientServer.ShowUsersMessage(ErrorMessage);
 		EndDo;
 	EndIf;
 	
 EndProcedure
+
+#EndRegion
+
+#Region FormTableItemsEventHandlers
+
+&AtClient
+Procedure PaymentsOnChange(Item)
+	CalculatePaymentsAmountTotal();
+	FormatPaymentsAmountStringRows();
+EndProcedure
+
+&AtClient
+Procedure PaymentsOnActivateRow(Item)
+	CurrentData = Items.Payments.CurrentData;
+	If CurrentData <> Undefined Then
+		CurrentData.Edited = False;
+		CurrentData.AmountString = GetAmountString(CurrentData.Amount);
+	EndIf;
+EndProcedure
 	
 #EndRegion
 
-#Region Commands
+#Region FormCommandsEventHandlers
 
 &AtClient
 Procedure Enter(Command)
@@ -97,8 +99,6 @@ Procedure Enter(Command)
 	ReturnValue.Insert("Payments", Payments);
 	Close(ReturnValue);
 EndProcedure
-
-
 
 &AtClient
 Procedure CloseButton(Command)
@@ -179,9 +179,7 @@ EndProcedure
 
 #EndRegion
 
-#EndRegion
-
-#Region Internal
+#Region Private
 
 &AtClient
 Procedure CalculatePaymentsAmountTotal()
@@ -216,8 +214,6 @@ Procedure NumButtonPress(CommandName)
 		Return;
 	EndIf;
 	
-	Ten = 10;
-	
 	If Not CurrentData.Edited Then
 		CurrentData.Amount = 0;
 		CurrentData.Edited = True;
@@ -228,67 +224,17 @@ Procedure NumButtonPress(CommandName)
 	ButtonValue = StrReplace(CommandName, "Numpad", "");
 	
 	If ButtonValue = "Dot" Then
-		If Not AmountDotIsActive Then
-			AmountDotIsActive = True;
-			AmountFractionDigitsCount = 0;
-		EndIf;
-		Goto ~BuildAmountString;
-	EndIf;
-	
-	
-	If ButtonValue = "0" Then
-		If AmountDotIsActive Then
-			If (AmountFractionDigitsCount + 1) < AmountFractionDigitsMaxCount Then
-				AmountFractionDigitsCount = AmountFractionDigitsCount + 1;
-			EndIf;
-		Else
-			CurrentData.Amount = CurrentData.Amount * Ten;
-		EndIf;
-		Goto ~BuildAmountString;
-	EndIf;
-	
-	If ButtonValue = "Backspace" Then
-		If AmountDotIsActive Then
-			If AmountFractionDigitsCount Then
-				AmountFractionDigitsCount = AmountFractionDigitsCount - 1;
-				AmountFractionDigits = CurrentData.Amount - Int(CurrentData.Amount);
-				AmountValue = Int(AmountFractionDigits * Pow(Ten, AmountFractionDigitsCount)) / Pow(Ten, AmountFractionDigitsCount);
-				CurrentData.Amount = Int(CurrentData.Amount) + AmountValue;
-			Else
-				AmountDotIsActive = False;
-			EndIf;
-		Else
-			If Int(CurrentData.Amount / Ten) Then
-				CurrentData.Amount = Int(CurrentData.Amount / Ten);
-			Else
-				CurrentData.Amount = 0;
-			EndIf;
-		EndIf;
-		Goto ~BuildAmountString;
-	EndIf;
-		
-	If ButtonValue = "Clear" Then
-		CurrentData.Amount = 0;
-		CurrentData.Edited = False;
-		AmountDotIsActive = False;
-		AmountFractionDigitsCount = 0;
-		Goto ~BuildAmountString;
-	EndIf;
-	
-	CurrentAmountValue = CurrentData.Amount;
-	If AmountDotIsActive Then
-		If AmountFractionDigitsCount < AmountFractionDigitsMaxCount Then
-			CurrentData.Amount = CurrentData.Amount + Number(ButtonValue) / Pow(Ten, AmountFractionDigitsCount + 1);
-			AmountFractionDigitsCount = AmountFractionDigitsCount + 1;
-		EndIf;
+		ProcessDotButtonPress(CurrentData);
+	ElsIf ButtonValue = "0" Then
+		ProcessZeroButtonPress(CurrentData);
+	ElsIf ButtonValue = "Backspace" Then
+		ProcessBackspaceButtonPress(CurrentData);
+	ElsIf ButtonValue = "Clear" Then
+		ProcessClearButtonPress(CurrentData);
 	Else
-		CurrentData.Amount = CurrentData.Amount * Ten + Number(ButtonValue);
-		If (CurrentAmountValue * Ten  + Number(ButtonValue)) <> CurrentData.Amount Then
-			CurrentData.Amount = CurrentAmountValue;
-		EndIf;
+		ProcessDigitButtonPress(CurrentData, ButtonValue);
 	EndIf;
 	
-	~BuildAmountString:
 	If AmountDotIsActive Then
 		If AmountFractionDigitsCount Then
 			NFDValue = "NFD=" + String(AmountFractionDigitsCount) + ";";
@@ -301,6 +247,73 @@ Procedure NumButtonPress(CommandName)
 	EndIf;
 	CurrentData.AmountString = AmountString;
 	CalculatePaymentsAmountTotal();	
+EndProcedure
+
+&AtClient
+Procedure ProcessDotButtonPress(CurrentData)
+	If Not AmountDotIsActive Then
+		AmountDotIsActive = True;
+		AmountFractionDigitsCount = 0;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure ProcessZeroButtonPress(CurrentData)
+	Ten = 10;
+	If AmountDotIsActive Then
+		If (AmountFractionDigitsCount + 1) < AmountFractionDigitsMaxCount Then
+			AmountFractionDigitsCount = AmountFractionDigitsCount + 1;
+		EndIf;
+	Else
+		CurrentData.Amount = CurrentData.Amount * Ten;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure ProcessBackspaceButtonPress(CurrentData)
+	Ten = 10;
+	If AmountDotIsActive Then
+		If AmountFractionDigitsCount Then
+			AmountFractionDigitsCount = AmountFractionDigitsCount - 1;
+			AmountFractionDigits = CurrentData.Amount - Int(CurrentData.Amount);
+			AmountValue = Int(AmountFractionDigits * Pow(Ten, AmountFractionDigitsCount)) / Pow(Ten,
+				AmountFractionDigitsCount);
+			CurrentData.Amount = Int(CurrentData.Amount) + AmountValue;
+		Else
+			AmountDotIsActive = False;
+		EndIf;
+	Else
+		If Int(CurrentData.Amount / Ten) Then
+			CurrentData.Amount = Int(CurrentData.Amount / Ten);
+		Else
+			CurrentData.Amount = 0;
+		EndIf;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure ProcessClearButtonPress(CurrentData)
+	CurrentData.Amount = 0;
+	CurrentData.Edited = False;
+	AmountDotIsActive = False;
+	AmountFractionDigitsCount = 0;
+EndProcedure
+
+&AtClient
+Procedure ProcessDigitButtonPress(CurrentData, Val ButtonValue)
+	Ten = 10;
+	CurrentAmountValue = CurrentData.Amount;
+	If AmountDotIsActive Then
+		If AmountFractionDigitsCount < AmountFractionDigitsMaxCount Then
+			CurrentData.Amount = CurrentData.Amount + Number(ButtonValue) / Pow(Ten, AmountFractionDigitsCount + 1);
+			AmountFractionDigitsCount = AmountFractionDigitsCount + 1;
+		EndIf;
+	Else
+		CurrentData.Amount = CurrentData.Amount * Ten + Number(ButtonValue);
+		If (CurrentAmountValue * Ten + Number(ButtonValue)) <> CurrentData.Amount Then
+			CurrentData.Amount = CurrentAmountValue;
+		EndIf;
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -415,7 +428,6 @@ Procedure CashChoiceEnd(Result, AdditionalParameters) Export
 	CalculatePaymentsAmountTotal();
 	FormatPaymentsAmountStringRows();
 EndProcedure
-
 
 //TODO: #186 Transfer to localization module
 &AtServer

@@ -1,4 +1,8 @@
 Procedure BeforeWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+	
 	User = InfoBaseUsers.FindByName(Description);
 	If User = Undefined Then
 		User = InfoBaseUsers.CreateUser();
@@ -41,4 +45,16 @@ Procedure BeforeWrite(Cancel)
 	User.Write();
 	
 	InfobaseUserID = User.UUID;
+EndProcedure
+
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
 EndProcedure

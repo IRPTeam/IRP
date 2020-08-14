@@ -716,14 +716,14 @@ Scenario: _400003 opening entry advance balance
 		| ''                                     | 'Record type' | 'Period' | 'Resources'           | 'Dimensions'     | ''                       | ''                  | ''             | ''                 | ''                         | 'Attributes'           | ''         |
 		| ''                                     | ''            | ''       | 'Amount'              | 'Company'        | 'Partner'                | 'Legal name'        | 'Currency'     | 'Receipt document' | 'Multi currency movement type'   | 'Deferred calculation' | ''         |
 		| ''                                     | 'Receipt'     | '*'      | '17,12'               | 'Main Company'   | 'Kalipso'                | 'Company Kalipso'   | 'USD'          | 'Opening entry 3*' | 'Reporting currency'       | 'No'                   | ''         |
-		| ''                                     | 'Receipt'     | '*'      | '100'                 | 'Main Company'   | 'Kalipso'                | 'Company Kalipso'   | 'TRY'          | 'Opening entry 3*' | 'en descriptions is empty' | 'No'                   | ''         |
+		| ''                                     | 'Receipt'     | '*'      | '100'                 | 'Main Company'   | 'Kalipso'                | 'Company Kalipso'   | 'TRY'          | 'Opening entry 3*' | 'en description is empty.' | 'No'                   | ''         |
 		| ''                                     | 'Receipt'     | '*'      | '100'                 | 'Main Company'   | 'Kalipso'                | 'Company Kalipso'   | 'TRY'          | 'Opening entry 3*' | 'Local currency'           | 'No'                   | ''         |
 		| ''                                     | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
 		| 'Register  "Advance to suppliers"'     | ''            | ''       | ''                    | ''               | ''                       | ''                  | ''             | ''                 | ''                         | ''                     | ''         |
 		| ''                                     | 'Record type' | 'Period' | 'Resources'           | 'Dimensions'     | ''                       | ''                  | ''             | ''                 | ''                         | 'Attributes'           | ''         |
 		| ''                                     | ''            | ''       | 'Amount'              | 'Company'        | 'Partner'                | 'Legal name'        | 'Currency'     | 'Payment document' | 'Multi currency movement type'   | 'Deferred calculation' | ''         |
 		| ''                                     | 'Receipt'     | '*'      | '17,12'               | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'USD'          | 'Opening entry 3*' | 'Reporting currency'       | 'No'                   | ''         |
-		| ''                                     | 'Receipt'     | '*'      | '100'                 | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'TRY'          | 'Opening entry 3*' | 'en descriptions is empty' | 'No'                   | ''         |
+		| ''                                     | 'Receipt'     | '*'      | '100'                 | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'TRY'          | 'Opening entry 3*' | 'en description is empty.' | 'No'                   | ''         |
 		| ''                                     | 'Receipt'     | '*'      | '100'                 | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'TRY'          | 'Opening entry 3*' | 'Local currency'           | 'No'                   | ''         |
 		And I close all client application windows
 
@@ -762,7 +762,7 @@ Scenario: _400004 opening entry AP balance by partner terms (vendors)
 			And I click the button named "FormCreate"
 			And I change "AP/AR posting detail" radio button value to "By partner terms"
 			And I change "Type" radio button value to "Vendor"
-			And I input "DFC Vendor by Partner terms" text in "ENG" field
+			And I input "DFC Vendor by Partner terms" text in the field named "Description_en"
 			And I input "01.12.2019" text in "Date" field
 			And I click Select button of "Multi currency movement type" field
 			And I go to line in "List" table
@@ -825,7 +825,7 @@ Scenario: _400004 opening entry AP balance by partner terms (vendors)
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''         | ''           | ''                         | ''         | ''                         | 'Attributes'           |
 			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner'  | 'Legal name' | 'Partner term'                | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                     | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by Partner terms' | 'USD'      | 'Reporting currency'       | 'No'                   |
-			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by Partner terms' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
+			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by Partner terms' | 'TRY'      | 'en description is empty.' | 'No'                   |
 			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by Partner terms' | 'TRY'      | 'Local currency'           | 'No'                   |
 			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Vendor by Partner terms' | 'TRY'      | 'TRY'                      | 'No'                   |
 
@@ -865,7 +865,7 @@ Scenario: _400005 opening entry AR balance by partner terms (customers)
 			And I click the button named "FormCreate"
 			And I change "AP/AR posting detail" radio button value to "By partner terms"
 			And I change "Type" radio button value to "Customer"
-			And I input "DFC Customer by Partner terms" text in "ENG" field
+			And I input "DFC Customer by Partner terms" text in the field named "Description_en"
 			And I input "01.12.2019" text in "Date" field
 			And I click Select button of "Multi currency movement type" field
 			And I go to line in "List" table
@@ -918,7 +918,7 @@ Scenario: _400005 opening entry AR balance by partner terms (customers)
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''         | ''           | ''                           | ''         | ''                         | 'Attributes'           |
 			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner'  | 'Legal name' | 'Partner term'                  | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                     | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by Partner terms' | 'USD'      | 'Reporting currency'       | 'No'                   |
-			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by Partner terms' | 'TRY'      | 'en descriptions is empty' | 'No'                   |
+			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by Partner terms' | 'TRY'      | 'en description is empty.' | 'No'                   |
 			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by Partner terms' | 'TRY'      | 'Local currency'           | 'No'                   |
 			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'      | 'DFC'        | 'DFC Customer by Partner terms' | 'TRY'      | 'TRY'                      | 'No'                   |
 			| ''                                     | ''            | ''       | ''          | ''             | ''               | ''         | ''           | ''                           | ''         | ''                         | ''                     |

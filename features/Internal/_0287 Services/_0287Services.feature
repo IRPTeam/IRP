@@ -14,17 +14,17 @@ Background:
 Scenario: _029101 create item type for services
 	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 	And I click the button named "FormCreate"
-	And I input "Service" text in "ENG" field
+	And I input "Service" text in the field named "Description_en"
 	And I click Open button of "ENG" field
-	And I input "Service TR" text in "TR" field
+	And I input "Service TR" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I change "Type" radio button value to "Service"
 	And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
 	And I click choice button of "Attribute" attribute in "AvailableAttributes" table
 	And I click the button named "FormCreate"
-	And I input "Service type" text in "ENG" field
+	And I input "Service type" text in the field named "Description_en"
 	And I click Open button of "ENG" field
-	And I input "Service type TR" text in "TR" field
+	And I input "Service type TR" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click "Save and close" button
 	And I go to line in "List" table
@@ -39,9 +39,9 @@ Scenario: _029101 create item type for services
 Scenario: _029102 create Item - Service
 	Given I open hyperlink "e1cib/list/Catalog.Items"
 	And I click the button named "FormCreate"
-	And I input "Service" text in "ENG" field
+	And I input "Service" text in the field named "Description_en"
 	And I click Open button of "ENG" field
-	And I input "Service TR" text in "TR" field
+	And I input "Service TR" text in the field named "Description_tr"
 	And I click "Ok" button
 	And I click Select button of "Item type" field
 	And I go to line in "List" table
@@ -59,9 +59,9 @@ Scenario: _029102 create Item - Service
 		And I click the button named "FormCreate"
 		And I click Select button of "Service type" field
 		And I click the button named "FormCreate"
-		And I input "Interner" text in "ENG" field
+		And I input "Interner" text in the field named "Description_en"
 		And I click Open button of "ENG" field
-		And I input "Interner TR" text in "TR" field
+		And I input "Interner TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And I click the button named "FormChoose"
@@ -70,9 +70,9 @@ Scenario: _029102 create Item - Service
 		And I click the button named "FormCreate"
 		And I click Select button of "Service type" field
 		And I click the button named "FormCreate"
-		And I input "Rent" text in "ENG" field
+		And I input "Rent" text in the field named "Description_en"
 		And I click Open button of "ENG" field
-		And I input "Rent TR" text in "TR" field
+		And I input "Rent TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And I click the button named "FormChoose"
@@ -190,10 +190,10 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 		* Create Item Router
 			Given I open hyperlink "e1cib/list/Catalog.Items"
 			And I click the button named "FormCreate"
-			And I input "Router" text in "ENG" field
+			And I input "Router" text in the field named "Description_en"
 			And I click Select button of "Item type" field
 			And I click the button named "FormCreate"
-			And I input "Equipment" text in "ENG" field
+			And I input "Equipment" text in the field named "Description_en"
 			And I click "Save and close" button
 			And I click the button named "FormChoose"
 			And I click Select button of "Unit" field
@@ -308,10 +308,10 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			| ''                                      | ''            | 'Quantity'  | 'Amount'        | 'Net amount'    | 'Company'                  | 'Purchase invoice'      | 'Currency'          | 'Item key'            | 'Row key'                  | 'Multi currency movement type'   | 'Deferred calculation' | ''                         | ''                     |
 			| ''                                      | '*'           | '1'         | '17,12'         | '14,51'         | 'Main Company'             | 'Purchase invoice 124*' | 'USD'               | 'Interner'            | '*'                        | 'Reporting currency'       | 'No'                   | ''                         | ''                     |
 			| ''                                      | '*'           | '1'         | '34,25'         | '29,02'         | 'Main Company'             | 'Purchase invoice 124*' | 'USD'               | 'Router'              | '*'                        | 'Reporting currency'       | 'No'                   | ''                         | ''                     |
-			| ''                                      | '*'           | '1'         | '100'           | '84,75'         | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Interner'            | '*'                        | 'en descriptions is empty' | 'No'                   | ''                         | ''                     |
+			| ''                                      | '*'           | '1'         | '100'           | '84,75'         | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Interner'            | '*'                        | 'en description is empty.' | 'No'                   | ''                         | ''                     |
 			| ''                                      | '*'           | '1'         | '100'           | '84,75'         | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Interner'            | '*'                        | 'Local currency'           | 'No'                   | ''                         | ''                     |
 			| ''                                      | '*'           | '1'         | '100'           | '84,75'         | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Interner'            | '*'                        | 'TRY'                      | 'No'                   | ''                         | ''                     |
-			| ''                                      | '*'           | '1'         | '200'           | '169,49'        | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Router'              | '*'                        | 'en descriptions is empty' | 'No'                   | ''                         | ''                     |
+			| ''                                      | '*'           | '1'         | '200'           | '169,49'        | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Router'              | '*'                        | 'en description is empty.' | 'No'                   | ''                         | ''                     |
 			| ''                                      | '*'           | '1'         | '200'           | '169,49'        | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Router'              | '*'                        | 'Local currency'           | 'No'                   | ''                         | ''                     |
 			| ''                                      | '*'           | '1'         | '200'           | '169,49'        | 'Main Company'             | 'Purchase invoice 124*' | 'TRY'               | 'Router'              | '*'                        | 'TRY'                      | 'No'                   | ''                         | ''                     |
 			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
@@ -319,7 +319,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			| ''                                      | 'Period'      | 'Resources' | 'Dimensions'    | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | 'Attributes'               | ''                     | ''                         | ''                     |
 			| ''                                      | ''            | 'Amount'    | 'Company'       | 'Business unit' | 'Expense type'             | 'Item key'              | 'Currency'          | 'Additional analytic' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     | ''                         | ''                     |
 			| ''                                      | '*'           | '17,12'     | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'USD'               | ''                    | 'Reporting currency'       | 'No'                       | ''                     | ''                         | ''                     |
-			| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'en descriptions is empty' | 'No'                       | ''                     | ''                         | ''                     |
+			| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'en description is empty.' | 'No'                       | ''                     | ''                         | ''                     |
 			| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'Local currency'           | 'No'                       | ''                     | ''                         | ''                     |
 			| ''                                      | '*'           | '100'       | 'Main Company'  | 'Front office'  | 'Telephone communications' | 'Interner'              | 'TRY'               | ''                    | 'TRY'                      | 'No'                       | ''                     | ''                         | ''                     |
 			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
@@ -328,10 +328,10 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			| ''                                      | ''            | 'Amount'    | 'Manual amount' | 'Net amount'    | 'Document'                 | 'Tax'                   | 'Analytics'         | 'Tax rate'            | 'Include to total amount'  | 'Row key'                  | 'Currency'             | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                      | '*'           | '2,61'      | '2,61'          | '14,51'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'USD'                  | 'Reporting currency'       | 'No'                   |
 			| ''                                      | '*'           | '5,22'      | '5,22'          | '29,02'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'USD'                  | 'Reporting currency'       | 'No'                   |
-			| ''                                      | '*'           | '15,25'     | '15,25'         | '84,75'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'en descriptions is empty' | 'No'                   |
+			| ''                                      | '*'           | '15,25'     | '15,25'         | '84,75'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'en description is empty.' | 'No'                   |
 			| ''                                      | '*'           | '15,25'     | '15,25'         | '84,75'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'Local currency'           | 'No'                   |
 			| ''                                      | '*'           | '15,25'     | '15,25'         | '84,75'         | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'TRY'                      | 'No'                   |
-			| ''                                      | '*'           | '30,51'     | '30,51'         | '169,49'        | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'en descriptions is empty' | 'No'                   |
+			| ''                                      | '*'           | '30,51'     | '30,51'         | '169,49'        | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'en description is empty.' | 'No'                   |
 			| ''                                      | '*'           | '30,51'     | '30,51'         | '169,49'        | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'Local currency'           | 'No'                   |
 			| ''                                      | '*'           | '30,51'     | '30,51'         | '169,49'        | 'Purchase invoice 124*'    | 'VAT'                   | ''                  | '18%'                 | 'Yes'                      | '*'                        | 'TRY'                  | 'TRY'                      | 'No'                   |
 			| ''                                      | ''            | ''          | ''              | ''              | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | ''                     | ''                         | ''                     |
@@ -361,7 +361,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			| ''                                      | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                         | ''                      | ''                  | ''                    | ''                         | ''                         | 'Attributes'           | ''                         | ''                     |
 			| ''                                      | ''            | ''          | 'Amount'        | 'Company'       | 'Basis document'           | 'Partner'               | 'Legal name'        | 'Partner term'           | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' | ''                         | ''                     |
 			| ''                                      | 'Receipt'     | '*'         | '51,37'         | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'USD'                      | 'Reporting currency'       | 'No'                   | ''                         | ''                     |
-			| ''                                      | 'Receipt'     | '*'         | '300'           | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                      | 'en descriptions is empty' | 'No'                   | ''                         | ''                     |
+			| ''                                      | 'Receipt'     | '*'         | '300'           | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                      | 'en description is empty.' | 'No'                   | ''                         | ''                     |
 			| ''                                      | 'Receipt'     | '*'         | '300'           | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                      | 'Local currency'           | 'No'                   | ''                         | ''                     |
 			| ''                                      | 'Receipt'     | '*'         | '300'           | 'Main Company'  | 'Purchase invoice 124*'    | 'Ferron BP'             | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                      | 'TRY'                      | 'No'                   | ''                         | ''                     |
 		And I close all client application windows
@@ -455,11 +455,11 @@ Scenario: _029107 create a Sales order for service and product (Store doesn't us
 		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''                 | ''         | ''         | ''        | ''                         | 'Attributes'           |
 		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'      | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                           | '*'           | '1'         | '17,12'     | 'Main Company' | 'Sales order 700*' | 'USD'      | 'Rent'     | '*'       | 'Reporting currency'       | 'No'                   |
-		| ''                                           | '*'           | '1'         | '100'       | 'Main Company' | 'Sales order 700*' | 'TRY'      | 'Rent'     | '*'       | 'en descriptions is empty' | 'No'                   |
+		| ''                                           | '*'           | '1'         | '100'       | 'Main Company' | 'Sales order 700*' | 'TRY'      | 'Rent'     | '*'       | 'en description is empty.' | 'No'                   |
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company' | 'Sales order 700*' | 'TRY'      | 'Rent'     | '*'       | 'Local currency'           | 'No'                   |
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company' | 'Sales order 700*' | 'TRY'      | 'Rent'     | '*'       | 'TRY'                      | 'No'                   |
 		| ''                                           | '*'           | '10'        | '1 198,63'  | 'Main Company' | 'Sales order 700*' | 'USD'      | '37/18SD'  | '*'       | 'Reporting currency'       | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company' | 'Sales order 700*' | 'TRY'      | '37/18SD'  | '*'       | 'en descriptions is empty' | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company' | 'Sales order 700*' | 'TRY'      | '37/18SD'  | '*'       | 'en description is empty.' | 'No'                   |
 		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company' | 'Sales order 700*' | 'TRY'      | '37/18SD'  | '*'       | 'Local currency'           | 'No'                   |
 		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company' | 'Sales order 700*' | 'TRY'      | '37/18SD'  | '*'       | 'TRY'                      | 'No'                   |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
@@ -568,11 +568,11 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''                 | ''         | ''         | ''        | ''                         | 'Attributes'           |
 		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'      | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                           | '*'           | '1'         | '20,21'     | 'Main Company' | 'Sales order 701*' | 'USD'      | 'Rent'     | '*'       | 'Reporting currency'       | 'No'                   |
-		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | 'Sales order 701*' | 'TRY'      | 'Rent'     | '*'       | 'en descriptions is empty' | 'No'                   |
+		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | 'Sales order 701*' | 'TRY'      | 'Rent'     | '*'       | 'en description is empty.' | 'No'                   |
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | 'Sales order 701*' | 'TRY'      | 'Rent'     | '*'       | 'Local currency'           | 'No'                   |
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | 'Sales order 701*' | 'TRY'      | 'Rent'     | '*'       | 'TRY'                      | 'No'                   |
 		| ''                                           | '*'           | '10'        | '1 309,62'  | 'Main Company' | 'Sales order 701*' | 'USD'      | '37/18SD'  | '*'       | 'Reporting currency'       | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | 'Sales order 701*' | 'TRY'      | '37/18SD'  | '*'       | 'en descriptions is empty' | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | 'Sales order 701*' | 'TRY'      | '37/18SD'  | '*'       | 'en description is empty.' | 'No'                   |
 		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | 'Sales order 701*' | 'TRY'      | '37/18SD'  | '*'       | 'Local currency'           | 'No'                   |
 		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | 'Sales order 701*' | 'TRY'      | '37/18SD'  | '*'       | 'TRY'                      | 'No'                   |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
@@ -693,11 +693,11 @@ Scenario: _029109 create a Sales order for service and product (Store doesn't us
 		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'       | ''                      | ''         | ''         | ''        | ''                         | 'Attributes'           |
 		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'          | 'Sales order'           | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                           | '*'           | '1'         | '17,12'     | 'Main Company'     | 'Sales order 702*'      | 'USD'      | 'Rent'     | '*'       | 'Reporting currency'       | 'No'                   |
-		| ''                                           | '*'           | '1'         | '100'       | 'Main Company'     | 'Sales order 702*'      | 'TRY'      | 'Rent'     | '*'       | 'en descriptions is empty' | 'No'                   |
+		| ''                                           | '*'           | '1'         | '100'       | 'Main Company'     | 'Sales order 702*'      | 'TRY'      | 'Rent'     | '*'       | 'en description is empty.' | 'No'                   |
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company'     | 'Sales order 702*'      | 'TRY'      | 'Rent'     | '*'       | 'Local currency'           | 'No'                   |
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company'     | 'Sales order 702*'      | 'TRY'      | 'Rent'     | '*'       | 'TRY'                      | 'No'                   |
 		| ''                                           | '*'           | '10'        | '1 198,63'  | 'Main Company'     | 'Sales order 702*'      | 'USD'      | '37/18SD'  | '*'       | 'Reporting currency'       | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company'     | 'Sales order 702*'      | 'TRY'      | '37/18SD'  | '*'       | 'en descriptions is empty' | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company'     | 'Sales order 702*'      | 'TRY'      | '37/18SD'  | '*'       | 'en description is empty.' | 'No'                   |
 		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company'     | 'Sales order 702*'      | 'TRY'      | '37/18SD'  | '*'       | 'Local currency'           | 'No'                   |
 		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company'     | 'Sales order 702*'      | 'TRY'      | '37/18SD'  | '*'       | 'TRY'                      | 'No'                   |
 		| ''                                           | ''            | ''          | ''          | ''                 | ''                      | ''         | ''         | ''        | ''                         | ''                     |
@@ -816,11 +816,11 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''                 | ''         | ''         | ''        | ''                         | 'Attributes'           |
 		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'      | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                           | '*'           | '1'         | '20,21'     | 'Main Company' | 'Sales order 703*' | 'USD'      | 'Rent'     | '*'       | 'Reporting currency'       | 'No'                   |
-		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | 'Sales order 703*' | 'TRY'      | 'Rent'     | '*'       | 'en descriptions is empty' | 'No'                   |
+		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | 'Sales order 703*' | 'TRY'      | 'Rent'     | '*'       | 'en description is empty.' | 'No'                   |
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | 'Sales order 703*' | 'TRY'      | 'Rent'     | '*'       | 'Local currency'           | 'No'                   |
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | 'Sales order 703*' | 'TRY'      | 'Rent'     | '*'       | 'TRY'                      | 'No'                   |
 		| ''                                           | '*'           | '10'        | '1 309,62'  | 'Main Company' | 'Sales order 703*' | 'USD'      | '37/18SD'  | '*'       | 'Reporting currency'       | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | 'Sales order 703*' | 'TRY'      | '37/18SD'  | '*'       | 'en descriptions is empty' | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | 'Sales order 703*' | 'TRY'      | '37/18SD'  | '*'       | 'en description is empty.' | 'No'                   |
 		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | 'Sales order 703*' | 'TRY'      | '37/18SD'  | '*'       | 'Local currency'           | 'No'                   |
 		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | 'Sales order 703*' | 'TRY'      | '37/18SD'  | '*'       | 'TRY'                      | 'No'                   |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |

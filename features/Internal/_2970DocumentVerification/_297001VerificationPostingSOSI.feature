@@ -16,7 +16,7 @@ Scenario: _29700101 preparation
 	* Create customer
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Foxred" text in "ENG" field
+		And I input "Foxred" text in the field named "Description_en"
 		And I change checkbox "Vendor"
 		And I change checkbox "Customer"
 		And I click Select button of "Manager segment" field
@@ -35,7 +35,7 @@ Scenario: _29700101 preparation
 		And I click "Save and close" button
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "Company Foxred" text in "ENG" field
+		And I input "Company Foxred" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -82,7 +82,7 @@ Scenario: _29700102 test filling-in SO - SI - SC by quantity
 				And I click "Post" button
 				Then "1C:Enterprise" window is opened
 				And I click "OK" button
-				Then I wait that in user messages the "Line No. [1] [Dress M/White] Ordered remains: 8 pcs Required: 12 pcs Lacks: 4 pcs" substring will appear in 20 seconds
+				Then I wait that in user messages the "Line No. [1] [Dress M/White] Ordered remaining: 8 pcs Required: 12 pcs Lacking: 4 pcs." substring will appear in 20 seconds
 			* Change in quantity to original value
 				And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
@@ -100,7 +100,7 @@ Scenario: _29700102 test filling-in SO - SI - SC by quantity
 				And I click "Post" button
 				Then "1C:Enterprise" window is opened
 				And I click "OK" button
-				Then I wait that in user messages the "Line No. [1,3] [Dress M/White] Ordered remains: 8 pcs Required: 16 pcs Lacks: 8 pcs" substring will appear in 20 seconds
+				Then I wait that in user messages the "Line No. [1,3] [Dress M/White] Ordered remaining: 8 pcs Required: 16 pcs Lacking: 8 pcs." substring will appear in 20 seconds
 			* Delete added line
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Q'     |
@@ -151,8 +151,8 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 		And I click "Clear posting" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [1] [Dress M/White] Invoiced remains: 8 pcs Required: 0 pcs Lacks: 8 pcs" substring will appear in 20 seconds
-		Then I wait that in user messages the "Line No. [2] [Dress L/Green] Invoiced remains: 20 pcs Required: 0 pcs Lacks: 20 pcs" substring will appear in 20 seconds
+		Then I wait that in user messages the "Line No. [1] [Dress M/White] Invoiced remaining: 8 pcs Required: 0 pcs Lacking: 8 pcs." substring will appear in 20 seconds
+		Then I wait that in user messages the "Line No. [2] [Dress L/Green] Invoiced remaining: 20 pcs Required: 0 pcs Lacking: 20 pcs." substring will appear in 20 seconds
 	* Check for changes in the quantity in SO when SI is created (SI is more than in SO)
 		* Change the number in the second line to 19
 			And I go to line in "ItemList" table
@@ -165,7 +165,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I click "Post" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress L/Green] Invoiced remains: 20 pcs Required: 19 pcs Lacks: 1 pcs" substring will appear in 20 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress L/Green] Invoiced remaining: 20 pcs Required: 19 pcs Lacking: 1 pcs." substring will appear in 20 seconds
 	* Check for changes in the quantity in SO when SI is created (SI is less than in SO)
 		* Change the number in the second line to 21
 			And I go to line in "ItemList" table
@@ -185,7 +185,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I click "Post" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [] [Dress L/Green] Invoiced remains: 20 pcs Required: 0 pcs Lacks: 20 pcs" substring will appear in 20 seconds
+			Then I wait that in user messages the "Line No. [] [Dress L/Green] Invoiced remaining: 20 pcs Required: 0 pcs Lacking: 20 pcs." substring will appear in 20 seconds
 	* Check the addition in SO of a string that has been deleted and that is in the Sales invoice carried out 
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -259,7 +259,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [2] [Dress L/Green] Ordered remains: 0 pcs Required: 20 pcs Lacks: 20 pcs" substring will appear in 20 seconds
+		Then I wait that in user messages the "Line No. [2] [Dress L/Green] Ordered remaining: 0 pcs Required: 20 pcs Lacking: 20 pcs." substring will appear in 20 seconds
 	* Check post SI if a line is not added to it by order
 		And I go to line in "ItemList" table
 		| '#' | 'Item'  | 'Item key' |
@@ -310,7 +310,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I click "Post" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Given Recent TestClient message contains "* [Dress L/Green] Invoiced remains: 20 pcs Required: 22 pcs Lacks: 2 pcs" string by template
+			Given Recent TestClient message contains "* [Dress L/Green] Invoiced remaining: 20 pcs Required: 22 pcs Lacking: 2 pcs." string by template
 		* Change the quantity by less than specified in SI and post
 			And I move to "Items" tab
 			And I go to line in "ItemList" table
@@ -348,7 +348,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I click "Post" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Given Recent TestClient message contains "* [Dress L/Green] Invoiced remains: 20 pcs Required: 38 pcs Lacks: 18 pcs" string by template
+			Given Recent TestClient message contains "* [Dress L/Green] Invoiced remaining: 20 pcs Required: 38 pcs Lacking: 18 pcs." string by template
 		* Clearing the basis document from the copied line and try to post
 			And I go to the last line in "ItemList" table
 			And I select current line in "ItemList" table
@@ -385,7 +385,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I click "Post" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Given Recent TestClient message contains "* [Dress M/White] Invoiced remains: 8 pcs Required: 9 pcs Lacks: 1 pcs" string by template
+			Given Recent TestClient message contains "* [Dress M/White] Invoiced remaining: 8 pcs Required: 9 pcs Lacking: 1 pcs." string by template
 		* Change by less than the SI balance (already created by SC) and try to post
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' | 'Quantity' |
@@ -404,7 +404,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Given Recent TestClient message contains "* [Dress L/Green] Shipped remains: 20 pcs Required: 0 pcs Lacks: 20 pcs" string by template
+			Given Recent TestClient message contains "* [Dress L/Green] Shipped remaining: 20 pcs Required: 0 pcs Lacking: 20 pcs." string by template
 			And I close all client application windows
 
 
@@ -460,7 +460,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [2,3] [Boots Boots/S-8] Ordered remains: 74 pcs Required: 87 pcs Lacks: 13 pcs" substring will appear in 20 seconds
+		Then I wait that in user messages the "Line No. [2,3] [Boots Boots/S-8] Ordered remaining: 74 pcs Required: 87 pcs Lacking: 13 pcs." substring will appear in 20 seconds
 	* Change the SI quantity of shoes to a lesser side in packages and try to post
 		And I go to line in "ItemList" table
 		| 'Item'  | 'Item key'  | 'Q'      |
@@ -486,7 +486,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [2,3] [Boots Boots/S-8] Ordered remains: 74 pcs Required: 94 pcs Lacks: 20 pcs" substring will appear in 20 seconds
+		Then I wait that in user messages the "Line No. [2,3] [Boots Boots/S-8] Ordered remaining: 74 pcs Required: 94 pcs Lacking: 20 pcs." substring will appear in 20 seconds
 	* Change in SI shoe quantity by which in SO
 		And I go to line in "ItemList" table
 		| 'Item'  | 'Item key'  | 'Q'      |
@@ -551,7 +551,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Given Recent TestClient message contains "*[Boots Boots/S-8] Invoiced remains: 74 pcs Required: 86 pcs Lacks: 12 pcs" string by template
+		Given Recent TestClient message contains "*[Boots Boots/S-8] Invoiced remaining: 74 pcs Required: 86 pcs Lacking: 12 pcs." string by template
 		And I close all client application windows
 
 

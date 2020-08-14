@@ -1,5 +1,9 @@
 
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");	
 EndProcedure
 
@@ -58,5 +62,17 @@ EndProcedure
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
 		Cancel = True;	
+	EndIf;
+EndProcedure
+
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
 	EndIf;
 EndProcedure

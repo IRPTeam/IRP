@@ -25,8 +25,8 @@ Scenario: _010001 add Plugin sessing for entering addresses
 		And I input "" text in "Path to plugin for test" field
 		And I input "ExternaInputAddress" text in "Name" field
 		And I click Open button of the field named "Description_en"
-		And I input "ExternalInputAddress" text in "ENG" field
-		And I input "ExternalInputAddress" text in "TR" field
+		And I input "ExternalInputAddress" text in the field named "Description_en"
+		And I input "ExternalInputAddress" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -43,8 +43,8 @@ Scenario: _010002 add Plugin sessing for GPS
 		And I input "" text in "Path to plugin for test" field
 		And I input "ExternalCoordinates" text in "Name" field
 		And I click Open button of the field named "Description_en"
-		And I input "ExternalCoordinates" text in "ENG" field
-		And I input "ExternalCoordinates" text in "TR" field
+		And I input "ExternalCoordinates" text in the field named "Description_en"
+		And I input "ExternalCoordinates" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -61,8 +61,8 @@ Scenario: _010003 add Plugin sessing for phone
 		And I input "" text in "Path to plugin for test" field
 		And I input "ExternalInputPhoneUkraine" text in "Name" field
 		And I click Open button of the field named "Description_en"
-		And I input "ExternalInputPhoneUkraine" text in "ENG" field
-		And I input "ExternalInputPhoneUkraine" text in "TR" field
+		And I input "ExternalInputPhoneUkraine" text in the field named "Description_en"
+		And I input "ExternalInputPhoneUkraine" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -75,8 +75,8 @@ Scenario: _010003 add Plugin sessing for phone
 		And I input "" text in "Path to plugin for test" field
 		And I input "PhoneTR" text in "Name" field
 		And I click Open button of the field named "Description_en"
-		And I input "Phone TR" text in "ENG" field
-		And I input "Phone TR" text in "TR" field
+		And I input "Phone TR" text in the field named "Description_en"
+		And I input "Phone TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -87,8 +87,8 @@ Scenario: _010004 create Contact info Type - Addresses
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Google Addreses" text in "ENG" field
-		And I input "Google Addreses TR" text in "TR" field
+		And I input "Google Addreses" text in the field named "Description_en"
+		And I input "Google Addreses TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
 		And I input "Adr_10" text in "Unique ID" field
@@ -118,8 +118,8 @@ Scenario: _010004 verification of UNIQ ID uniqueness control in IDInfoTypes
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Test" text in "ENG" field
-		And I input "Test" text in "TR" field
+		And I input "Test" text in the field named "Description_en"
+		And I input "Test" text in the field named "Description_tr"
 		And I click "Ok" button
 		And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
 		And I input "Adr_10" text in "Unique ID" field
@@ -138,8 +138,8 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And Delay 2
 	* Filling in company data 'Company Ferron BP'
 		And I click Open button of the field named "Description_en"
-		And I input "Company Ferron BP" text in "ENG" field
-		And I input "Company Ferron BP TR" text in "TR" field
+		And I input "Company Ferron BP" text in the field named "Description_en"
+		And I input "Company Ferron BP TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I input "Turkey" text in "Country" field
 		And I input "Ferron BP" text in "Partner" field
@@ -153,8 +153,8 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And I click the button named "FormCreate"
 		And Delay 2
 		And I click Open button of the field named "Description_en"
-		And I input "Company Kalipso" text in "ENG" field
-		And I input "Company Kalipso TR" text in "TR" field
+		And I input "Company Kalipso" text in the field named "Description_en"
+		And I input "Company Kalipso TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I input "Ukraine" text in "Country" field
 		And I input "Kalipso" text in "Partner" field
@@ -167,8 +167,8 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And I click the button named "FormCreate"
 		And Delay 2
 		And I click Open button of the field named "Description_en"
-		And I input "Company Lomaniti" text in "ENG" field
-		And I input "Company Lomaniti TR" text in "TR" field
+		And I input "Company Lomaniti" text in the field named "Description_en"
+		And I input "Company Lomaniti TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I input "Ukraine" text in "Country" field
 		And I input "Lomaniti" text in "Partner" field
@@ -185,8 +185,8 @@ Scenario: _010006 create a structure of partners (partners), 1 main partner and 
 		And Delay 2
 	* Creating partners: 'Alians', 'MIO', 'Seven Brand'
 		And I click Open button of the field named "Description_en"
-		And I input "Alians" text in "ENG" field
-		And I input "Alians TR" text in "TR" field
+		And I input "Alians" text in the field named "Description_en"
+		And I input "Alians TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I change checkbox "Customer"
 		And I click "Save and close" button
@@ -194,8 +194,8 @@ Scenario: _010006 create a structure of partners (partners), 1 main partner and 
 		And I click the button named "FormCreate"
 		And Delay 2
 		And I click Open button of the field named "Description_en"
-		And I input "MIO" text in "ENG" field
-		And I input "MIO TR" text in "TR" field
+		And I input "MIO" text in the field named "Description_en"
+		And I input "MIO TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I change checkbox "Customer"
 		And I click "Save and close" button
@@ -203,8 +203,8 @@ Scenario: _010006 create a structure of partners (partners), 1 main partner and 
 		And I click the button named "FormCreate"
 		And Delay 2
 		And I click Open button of the field named "Description_en"
-		And I input "Seven Brand" text in "ENG" field
-		And I input "Seven Brand TR" text in "TR" field
+		And I input "Seven Brand" text in the field named "Description_en"
+		And I input "Seven Brand TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I change checkbox "Customer"
 		And I click "Save and close" button
@@ -263,16 +263,16 @@ Scenario: _010007 adding additional details for partners "Business region"
 		And I select current line in "List" table
 	* Filling in the name of the settings for adding additional details for partners
 		And I click Open button of the field named "Description_en"
-		And I input "Partners" text in "ENG" field
-		And I input "Partners TR" text in "TR" field
+		And I input "Partners" text in the field named "Description_en"
+		And I input "Partners TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And in the table "Attributes" I click the button named "AttributesAdd"
 		And I click choice button of "Attribute" attribute in "Attributes" table
 	* Adding additional attribute Business region
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Business region" text in "ENG" field
-		And I input "Business region TR" text in "TR" field
+		And I input "Business region" text in the field named "Description_en"
+		And I input "Business region TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I input "BusinessRegion" text in "Unique ID" field
 		And I click "Save and close" button
@@ -283,8 +283,8 @@ Scenario: _010007 adding additional details for partners "Business region"
 		And I click choice button of "UI group" attribute in "Attributes" table
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Main information" text in "ENG" field
-		And I input "Main information TR" text in "TR" field
+		And I input "Main information" text in the field named "Description_en"
+		And I input "Main information TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I change "Form position" radio button value to "Left"
 		And I click "Save and close" button
@@ -303,15 +303,15 @@ Scenario: _010007 adding additional details for partners "Business region"
 		And I click Select button of "Business region" field
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Region Turkey" text in "ENG" field
-		And I input "Turkey TR" text in "TR" field
+		And I input "Region Turkey" text in the field named "Description_en"
+		And I input "Turkey TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Region Ukraine" text in "ENG" field
-		And I input "Ukraine TR" text in "TR" field
+		And I input "Region Ukraine" text in the field named "Description_en"
+		And I input "Ukraine TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 5
@@ -413,8 +413,8 @@ Scenario: _010009 adding phones to Contact info type
 			And I click "OK" button
 			And I input "Phone_1" text in "Unique ID" field
 			And I click Open button of the field named "Description_en"
-			And I input "Company phone" text in "ENG" field
-			And I input "Company phone TR" text in "TR" field
+			And I input "Company phone" text in the field named "Description_en"
+			And I input "Company phone TR" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I change checkbox "Show on form"
 			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
@@ -451,8 +451,8 @@ Scenario: _010009 adding phones to Contact info type
 			And I click "OK" button
 			And I input "Phone_2" text in "Unique ID" field
 			And I click Open button of the field named "Description_en"
-			And I input "Partner phone" text in "ENG" field
-			And I input "Partner phone" text in "TR" field
+			And I input "Partner phone" text in the field named "Description_en"
+			And I input "Partner phone" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I change checkbox "Show on form"
 			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
@@ -493,8 +493,8 @@ Scenario: _010010 adding addresses to an Contact info type
 			And I change checkbox "Show on form"
 		* Filling in the name of the address
 			And I click Open button of the field named "Description_en"
-			And I input "Location address (Partner)" text in "ENG" field
-			And I input "Location address (Partner) TR" text in "TR" field
+			And I input "Location address (Partner)" text in the field named "Description_en"
+			And I input "Location address (Partner) TR" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save and close" button
 			And Delay 5
@@ -512,8 +512,8 @@ Scenario: _010010 adding addresses to an Contact info type
 			And I set checkbox named "ReadOnly"
 		* Filling in the name of the address
 			And I click Open button of the field named "Description_en"
-			And I input "Billing address (Company)" text in "ENG" field
-			And I input "Billing address (Company) TR" text in "TR" field
+			And I input "Billing address (Company)" text in the field named "Description_en"
+			And I input "Billing address (Company) TR" text in the field named "Description_tr"
 			And I click "Ok" button
 			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
 		* Adding Plugin sessing to specify the address for Ukraine
@@ -561,8 +561,8 @@ Scenario: _010010 adding addresses to an Contact info type
 			And I set checkbox named "ReadOnly"
 		* Filling in the name of the address detail
 			And I click Open button of the field named "Description_en"
-			And I input "Registered address  (Company)" text in "ENG" field
-			And I input "Registered address (Company) TR" text in "TR" field
+			And I input "Registered address  (Company)" text in the field named "Description_en"
+			And I input "Registered address (Company) TR" text in the field named "Description_tr"
 			And I click "Ok" button
 			And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
 		* Adding Plugin sessing to specify the address for Ukraine
@@ -623,8 +623,8 @@ Scenario: _010011 adding gps to a Contact info type
 		And I change checkbox "Show on form"
 		And I set checkbox named "ReadOnly"
 		And I click Open button of the field named "Description_en"
-		And I input "GPS Ukraine" text in "ENG" field
-		And I input "GPS Ukraine TR" text in "TR" field
+		And I input "GPS Ukraine" text in the field named "Description_en"
+		And I input "GPS Ukraine TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
 		And I activate "Plugins" field in "ExternalDataProcess" table
@@ -721,8 +721,8 @@ Scenario: _010011 adding gps to a Contact info type
 		And I change checkbox "Show on form"
 		And I set checkbox named "ReadOnly"
 		And I click Open button of the field named "Description_en"
-		And I input "GPS Turkey" text in "ENG" field
-		And I input "GPS Turkey TR" text in "TR" field
+		And I input "GPS Turkey" text in the field named "Description_en"
+		And I input "GPS Turkey TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
 		And I activate "Plugins" field in "ExternalDataProcess" table
@@ -816,8 +816,8 @@ Scenario: _010012 settings for displaying contact information in Stores, Partner
 		And I select current line in "List" table
 		Then the form attribute named "PredefinedDataName" became equal to "Catalog_Partners"
 		And I click Open button of the field named "Description_en"
-		And I input "Partners" text in "ENG" field
-		And I input "Partners TR" text in "TR" field
+		And I input "Partners" text in the field named "Description_en"
+		And I input "Partners TR" text in the field named "Description_tr"
 		And I click "OK" button
 		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
 		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
@@ -906,8 +906,8 @@ Scenario: _010012 settings for displaying contact information in Stores, Partner
 		And I select current line in "List" table
 		Then the form attribute named "PredefinedDataName" became equal to "Catalog_Companies"
 		And I click Open button of the field named "Description_en"
-		And I input "Company" text in "ENG" field
-		And I input "Company TR" text in "TR" field
+		And I input "Company" text in the field named "Description_en"
+		And I input "Company TR" text in the field named "Description_tr"
 		And I click "OK" button
 		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
 		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
@@ -939,8 +939,8 @@ Scenario: _010012 settings for displaying contact information in Stores, Partner
 		And I select current line in "List" table
 		Then the form attribute named "PredefinedDataName" became equal to "Catalog_Stores"
 		And I click Open button of the field named "Description_en"
-		And I input "Stores" text in "ENG" field
-		And I input "Stores TR" text in "TR" field
+		And I input "Stores" text in the field named "Description_en"
+		And I input "Stores TR" text in the field named "Description_tr"
 		And I click "OK" button
 		And in the table "IDInfoTypes" I click the button named "IDInfoTypesAdd"
 		And I click choice button of "Contact info type" attribute in "IDInfoTypes" table
@@ -951,7 +951,7 @@ Scenario: _010012 settings for displaying contact information in Stores, Partner
 		And I select current line in "List" table
 		And I finish line editing in "IDInfoTypes" table
 		And I click "Save and close" button
-		And I wait "en descriptions is empty (Contact info sets) *" window closing in 20 seconds
+		And I wait "en description is empty. (Contact info sets) *" window closing in 20 seconds
 		
 
 Scenario: _010013 filling phones for partners

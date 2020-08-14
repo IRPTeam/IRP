@@ -3,6 +3,10 @@ Procedure Posting(Cancel, PostingMode)
 EndProcedure
 
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+
 	If ThisObject.PriceListType <> Enums.PriceListTypes.PriceByItemKeys Then
 		ThisObject.ItemKeyList.Clear();
 	EndIf;
@@ -44,3 +48,14 @@ Procedure RemoveCheckedAttribute(Name, CheckedAttributes)
 	EndIf;
 EndProcedure
 
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure

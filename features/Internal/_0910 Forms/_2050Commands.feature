@@ -22,8 +22,8 @@ Scenario: _0205001 preparation
 			And I input "" text in "Path to plugin for test" field
 			And I input "PrintFormSalesOrder" text in "Name" field
 			And I click Open button of the field named "Description_en"
-			And I input "Test command" text in "ENG" field
-			And I input "Test command tr" text in "TR" field
+			And I input "Test command" text in the field named "Description_en"
+			And I input "Test command tr" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save and close" button
 			And Delay 5

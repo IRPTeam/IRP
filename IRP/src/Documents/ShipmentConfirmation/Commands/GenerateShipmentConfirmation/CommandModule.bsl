@@ -275,7 +275,7 @@ Function GetErrorMessage(BasisDocument)
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.SalesOrder") Then
 		If Not BasisDocument.Status.Posting Or Not BasisDocument.Posted Then
-			Return StrTemplate(R().Error_067, String(BasisDocument));		
+			Return StrTemplate(R().Error_054, String(BasisDocument));		
 		EndIf;
 		If BasisDocument.ShipmentConfirmationsBeforeSalesInvoice Then
 			If WithoutBalance(BasisDocument) And HasShipmentConfirmation(BasisDocument) Then

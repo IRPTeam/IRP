@@ -1,4 +1,8 @@
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+
 	ThisObject.DocumentAmount = ItemList.Total("TotalAmount");
 EndProcedure
 
@@ -41,3 +45,14 @@ Procedure OnCopy(CopiedObject)
 	
 EndProcedure
 
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure

@@ -15,8 +15,8 @@ Scenario: _351501 create a group of item types
     * Create Item Type group
         And I click the button named "FormCreateFolder"
         And I click Open button of "TR" field
-        And I input "Accessories" text in "ENG" field
-        And I input "Accessories TR" text in "TR" field
+        And I input "Accessories" text in the field named "Description_en"
+        And I input "Accessories TR" text in the field named "Description_tr"
         And I click "Ok" button
         And I click "Save and close" button
     * Create item type in group Accessories

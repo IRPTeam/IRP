@@ -1414,7 +1414,7 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 	* Create Partner Kalipso
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Partner Kalipso" text in "ENG" field
+		And I input "Partner Kalipso" text in the field named "Description_en"
 		And I click Select button of "Main partner" field
 		And I go to line in "List" table
 			| Description |
@@ -1426,7 +1426,7 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 	* Add customer partner term
 		And In this window I click command interface button "Partner terms"
 		And I click the button named "FormCreate"
-		And I input "Partner Kalipso Customer" text in "ENG" field
+		And I input "Partner Kalipso Customer" text in the field named "Description_en"
 		And I change "Type" radio button value to "Customer"
 		And I input "#1001" text in "Number" field
 		And I input "28.08.2019" text in "Date" field
@@ -1457,7 +1457,7 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 	* Add vendor partner term
 		And In this window I click command interface button "Partner terms"
 		And I click the button named "FormCreate"
-		And I input "Partner Kalipso Vendor" text in "ENG" field
+		And I input "Partner Kalipso Vendor" text in the field named "Description_en"
 		And I change "Type" radio button value to "Vendor"
 		And I input "#1001" text in "Number" field
 		And I input "28.08.2019" text in "Date" field
@@ -1515,7 +1515,7 @@ Scenario: check the autocompletion of the partner term (by customer) in the docu
 Scenario: create test item with one item key
 	Given I open hyperlink "e1cib/list/Catalog.Items"
 	And I click the button named "FormCreate"
-	And I input "Scarf" text in "ENG" field
+	And I input "Scarf" text in the field named "Description_en"
 	And I click Select button of "Item type" field
 	And I go to line in "List" table
 		| Description |

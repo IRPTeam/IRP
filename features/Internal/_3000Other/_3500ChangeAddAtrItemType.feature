@@ -19,7 +19,7 @@ Scenario: _350000 preparation for check a bunch of additional details in item ty
             | 'Catalog_ItemKeys'          |
         And I select current line in "List" table
         And I click Open button of "TR" field
-        And I input "Item key" text in "ENG" field
+        And I input "Item key" text in the field named "Description_en"
         And I click "Ok" button
         And I click "Save" button
     * Create item type
@@ -37,8 +37,8 @@ Scenario: _350000 preparation for check a bunch of additional details in item ty
             Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
             And I click the button named "FormCreate"
             And I click Open button of "TR" field
-            And I input "Color Socks TR" text in "TR" field
-            And I input "Color Socks" text in "ENG" field
+            And I input "Color Socks TR" text in the field named "Description_tr"
+            And I input "Color Socks" text in the field named "Description_en"
             And I click "Ok" button
         * Setting the required filling additional attribute Color Socks TR
             And I click "Set \"Required\" at all sets" button
@@ -51,8 +51,8 @@ Scenario: _350000 preparation for check a bunch of additional details in item ty
             Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
             And I click the button named "FormCreate"
             And I click Open button of "TR" field
-            And I input "Brand Socks TR" text in "TR" field
-            And I input "Brand Socks" text in "ENG" field
+            And I input "Brand Socks TR" text in the field named "Description_tr"
+            And I input "Brand Socks" text in the field named "Description_en"
             And I click "Ok" button
             And I click "Save and close" button
             And I close all client application windows
@@ -60,8 +60,8 @@ Scenario: _350000 preparation for check a bunch of additional details in item ty
             Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
             And I click the button named "FormCreate"
             And I click Open button of "TR" field
-            And I input "Article Socks TR" text in "TR" field
-            And I input "Article Socks" text in "ENG" field
+            And I input "Article Socks TR" text in the field named "Description_tr"
+            And I input "Article Socks" text in the field named "Description_en"
             And I click "Ok" button
             And I click "Save and close" button
             And I close all client application windows
@@ -72,7 +72,7 @@ Scenario: _350000 preparation for check a bunch of additional details in item ty
         | 'Catalog_PriceKeys'          |
         And I select current line in "List" table
         And I click Open button of "TR" field
-        And I input "Price Keys" text in "ENG" field
+        And I input "Price Keys" text in the field named "Description_en"
         And I click "Ok" button
         And I click "Save" button
     And I close all client application windows
@@ -316,7 +316,7 @@ Scenario: _350004 edit Item type and check changes in Add atribute and property 
             | 'Description' |
             | 'Socks TR'    |
         And I select current line in "List" table
-        And I input "Warm Socks TR" text in "TR" field
+        And I input "Warm Socks TR" text in the field named "Description_tr"
         And I click "Save and close" button
     * Check item type replacement in Add atribute and property sets by item key
         When in opened panel I select "Additional attribute sets"
@@ -369,7 +369,7 @@ Scenario: _350005 check the selection conditions when adding additional details 
         * Create Item with item type Warm Socks TR
             Given I open hyperlink "e1cib/list/Catalog.Items"
             And I click the button named "FormCreate"
-            And I input "Socks" text in "TR" field
+            And I input "Socks" text in the field named "Description_tr"
             And I click Select button of "Item type" field
             And I go to line in "List" table
                 | 'Description'   |
@@ -421,7 +421,7 @@ Scenario: _350006 check error when doubling additional attribute on item
         And I select current line in "List" table
     * Check save error message
         And I click "Save" button
-        Then I wait that in user messages the "Duplicated attribute: Brand TR" substring will appear in 10 seconds
+        Then I wait that in user messages the "Duplicate attribute. Brand TR." substring will appear in 10 seconds
     And I close all client application windows
 
 Scenario: _350007 check error when duplicating an additional attribute of an item key
@@ -446,5 +446,5 @@ Scenario: _350007 check error when duplicating an additional attribute of an ite
         And I finish line editing in "AvailableAttributes" table
     * Check save error message
         And I click "Save" button
-        Then I wait that in user messages the "Duplicated attribute: Brand Socks TR" substring will appear in 10 seconds
+        Then I wait that in user messages the "Duplicate attribute. Brand Socks TR." substring will appear in 10 seconds
     And I close all client application windows

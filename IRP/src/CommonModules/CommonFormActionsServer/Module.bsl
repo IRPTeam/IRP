@@ -60,5 +60,6 @@ Function QuerySearchInputByString(Settings) Export
 		|	Presentation";
 	
 	Text = StrTemplate(QueryText, Settings.Name, Settings.Filter);
-	Return Text;	
+	
+	Return LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text);;	
 EndFunction

@@ -19,9 +19,11 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	ThisObject.AddressResult
-	= PutToTempStorage(FormAttributeToValue("Object").ExternalDataProcSettings.Get(), ThisObject.UUID);
+	ProcSettings = FormAttributeToValue("Object").ExternalDataProcSettings.Get();
+	ThisObject.AddressResult = PutToTempStorage(ProcSettings, ThisObject.UUID);
 	SetVisible();
+	
+	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
 EndProcedure
 
 #EndRegion

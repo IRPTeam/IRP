@@ -24,3 +24,13 @@ Procedure SetFileInfo(FileInfo, Object) Export
 	Object.MD5 = FileInfo.MD5;
 EndProcedure
 
+Function AllPictureExtensions(AddInfo = Undefined) Export
+	Return StrSplit("jpeg,jpg,png,ico", ",");
+EndFunction
+
+Function FilterForPicturesDialog() Export
+	
+	Data = "*." + StrConcat(AllPictureExtensions(), ";*.");
+	Return "(" + Data + ")|" + Data;
+	
+EndFunction

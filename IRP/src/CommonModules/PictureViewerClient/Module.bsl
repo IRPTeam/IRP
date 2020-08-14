@@ -18,21 +18,25 @@ Function GetArrayOfUnusedFiles(POSTIntegrationSettings) Export
 		Raise ConnectionSettings.Message;
 	EndIf;
 	
-	ConnectionSettings.Value.QueryType = "POST";
-	ResourceParameters = New Structure();
-	ResourceParameters.Insert("filename", "cleaner_service");
-	
-	RequestParameters = New Structure();
-	RequestParameters.Insert("get_unused_files", "True");
-	
-	RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value
-			, ResourceParameters
-			, RequestParameters);
-	
-	If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
-		Return CommonFunctionsServer.DeserializeJSON(RequestResult.ResponseBody).Data.ArrayOfUnusedFiles;
-	Else
-		Return New Array();
+	If ConnectionSettings.Value.IntegrationType	= PredefinedValue("Enum.IntegrationType.FileStorage") Then
+		ConnectionSettings.Value.QueryType = "POST";
+		ResourceParameters = New Structure();
+		ResourceParameters.Insert("filename", "cleaner_service");
+		
+		RequestParameters = New Structure();
+		RequestParameters.Insert("get_unused_files", "True");
+		
+		RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value
+				, ResourceParameters
+				, RequestParameters);
+		
+		If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
+			Return CommonFunctionsServer.DeserializeJSON(RequestResult.ResponseBody).Data.ArrayOfUnusedFiles;
+		Else
+			Return New Array();
+		EndIf;
+	ElsIf ConnectionSettings.Value.IntegrationType	= PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
+		Return IntegrationServer.GetArrayOfUnusedFiles(ConnectionSettings.Value.AddressPath);
 	EndIf;
 EndFunction
 
@@ -44,21 +48,25 @@ Procedure DeleteUnusedFiles(ArrayOfFilesID, PostIntegrationSettings) Export
 		Raise ConnectionSettings.Message;
 	EndIf;
 	
-	ConnectionSettings.Value.QueryType = "POST";
-	ResourceParameters = New Structure();
-	ResourceParameters.Insert("filename", "cleaner_service");
-	
-	RequestParameters = New Structure();
-	RequestParameters.Insert("delete_unused_files", "True");
-	
-	RequestBody = CommonFunctionsServer.SerializeJSON(New Structure("ArrayOfFilesID", ArrayOfFilesID));
-	
-	RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value
-			, ResourceParameters
-			, RequestParameters
-			, RequestBody);
-	If Not IntegrationClientServer.RequestResultIsOk(RequestResult) Then
-		Raise RequestResult.Message;
+	If ConnectionSettings.Value.IntegrationType	= PredefinedValue("Enum.IntegrationType.FileStorage") Then
+		ConnectionSettings.Value.QueryType = "POST";
+		ResourceParameters = New Structure();
+		ResourceParameters.Insert("filename", "cleaner_service");
+		
+		RequestParameters = New Structure();
+		RequestParameters.Insert("delete_unused_files", "True");
+		
+		RequestBody = CommonFunctionsServer.SerializeJSON(New Structure("ArrayOfFilesID", ArrayOfFilesID));
+		
+		RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value
+				, ResourceParameters
+				, RequestParameters
+				, RequestBody);
+		If Not IntegrationClientServer.RequestResultIsOk(RequestResult) Then
+			Raise RequestResult.Message;
+		EndIf;
+	ElsIf ConnectionSettings.Value.IntegrationType	= PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
+		IntegrationServer.DeleteUnusedFiles(ConnectionSettings.Value.AddressPath, ArrayOfFilesID);
 	EndIf;
 EndProcedure
 
@@ -71,7 +79,7 @@ Procedure Upload(Form, Object, Volume) Export
 	Notify = New NotifyDescription("SelectFileEnd", ThisObject, StrParam);
 	OpenFileDialog = New FileDialog(FileDialogMode.Open);
 	OpenFileDialog.Multiselect = False;
-	OpenFileDialog.Filter = "(*.jpeg;*.jpg;*.png)|*.jpeg;*.jpg;*.png";
+	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
 	BeginPuttingFiles(Notify, , OpenFileDialog, True, Form.UUID);
 EndProcedure
 

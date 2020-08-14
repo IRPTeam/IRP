@@ -2,7 +2,7 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocPurchaseReturnServer.OnCreateAtServerChoiceForm(ThisObject, Cancel, StandardProcessing);
+	DocPurchaseReturnServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
 #EndRegion

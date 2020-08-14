@@ -16,7 +16,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>0.6.4.#BuildNumber#</version>
+  <version>0.7.0.#BuildNumber#</version>
   <updateCatalogAddress>https://github.com/DitriXNew/irp</updateCatalogAddress>
   <reportsVariantsStorage>SettingsStorage.ReportOptions</reportsVariantsStorage>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>
@@ -39,7 +39,7 @@
   <modalityUseMode>DontUse</modalityUseMode>
   <synchronousExtensionAndAddInCallUseMode>DontUse</synchronousExtensionAndAddInCallUseMode>
   <synchronousPlatformExtensionAndAddInCallUseMode>DontUse</synchronousPlatformExtensionAndAddInCallUseMode>
-  <compatibilityMode>8.3.15</compatibilityMode>
+  <compatibilityMode>8.3.16</compatibilityMode>
   <languages uuid="f1c59d1c-aafe-420b-96cd-c5f1608cf9c1">
     <name>English</name>
     <synonym>
@@ -123,6 +123,7 @@
   <commonPictures>CommonPicture.Share</commonPictures>
   <commonPictures>CommonPicture.SpecialOffer</commonPictures>
   <commonPictures>CommonPicture.Store</commonPictures>
+  <commonPictures>CommonPicture.Retail</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUser</sessionParameters>
@@ -152,6 +153,7 @@
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
+  <commonTemplates>CommonTemplate.MonacoEditor</commonTemplates>
   <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
   <commonModules>CommonModule.AddAttributesAndPropertiesClient</commonModules>
   <commonModules>CommonModule.AddAttributesAndPropertiesServer</commonModules>
@@ -174,8 +176,8 @@
   <commonModules>CommonModule.CatPartnersServer</commonModules>
   <commonModules>CommonModule.CommonFormActions</commonModules>
   <commonModules>CommonModule.CommonFormActionsServer</commonModules>
-  <commonModules>CommonModule.CommonFunctionsClientServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsServer</commonModules>
+  <commonModules>CommonModule.CommonFunctionsClientServer</commonModules>
   <commonModules>CommonModule.CurrenciesClient</commonModules>
   <commonModules>CommonModule.CurrenciesClientServer</commonModules>
   <commonModules>CommonModule.CurrenciesServer</commonModules>
@@ -332,6 +334,8 @@
   <eventSubscriptions>EventSubscription.OpenMobileForm</eventSubscriptions>
   <eventSubscriptions>EventSubscription.RefreshReusableValues</eventSubscriptions>
   <eventSubscriptions>EventSubscription.UpdateUsersRole</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.EventSubscription</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopyRemoveUniqueID</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>

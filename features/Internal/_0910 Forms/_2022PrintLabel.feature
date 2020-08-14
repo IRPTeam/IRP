@@ -15,7 +15,7 @@ Scenario: create print layout
 	* Create Label 1
 		And I click the button named "FormCreate"
 		And I click "Get default" button
-		And I input "Label 1" text in "ENG" field
+		And I input "Label 1" text in the field named "Description_en"
 		And I input "2" text in "Labels in row" field
 		And I input "4" text in "Labels in column" field
 		And I go to line in "OrderOrderAvailableFields" table
@@ -45,7 +45,7 @@ Scenario: create print layout
 	* Create Label 2
 		And I click the button named "FormCreate"
 		And I click "Get default" button
-		And I input "Label 2" text in "ENG" field
+		And I input "Label 2" text in the field named "Description_en"
 		And I input "2" text in "Labels in row" field
 		And I input "4" text in "Labels in column" field
 		And I go to line in "OrderOrderAvailableFields" table

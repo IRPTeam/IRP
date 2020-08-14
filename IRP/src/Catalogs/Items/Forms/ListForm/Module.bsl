@@ -43,7 +43,7 @@ EndProcedure
 &AtClient
 Procedure UpdateHTMLPictures() Export
 	CurrentRow = Items.List.CurrentData;
-	If CurrentRow = Undefined Then
+	If CurrentRow = Undefined OR Not CurrentRow.Property("Ref") Then
 		Return;
 	EndIf;
 	
@@ -55,7 +55,7 @@ EndProcedure
 &AtClient
 Procedure UpdateHTMLAddAttributes() Export
 	CurrentRow = Items.List.CurrentData;
-	If CurrentRow = Undefined Then
+	If CurrentRow = Undefined OR Not CurrentRow.Property("Ref") Then
 		Return;
 	EndIf;
 	

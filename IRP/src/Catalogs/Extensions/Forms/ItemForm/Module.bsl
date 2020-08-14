@@ -7,6 +7,11 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	EndIf;
 EndProcedure
 
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
+EndProcedure
+
 #EndRegion
 
 #Region CommandInterface
@@ -65,3 +70,4 @@ EndProcedure
 Procedure SaveFileContinue()
 	BeginGetFileFromServer(GetURL(Object.Ref, "FileData"), Object.Description);
 EndProcedure
+

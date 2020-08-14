@@ -13,12 +13,19 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
 	
 	Synchronize("Delete", Cancel);
 	
 EndProcedure
 
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+	
 	If Not ThisObject.AdditionalProperties.Property("DelayedSynchronization") Then
 		ThisObject.AdditionalProperties.Insert("DelayedSynchronization", New Array());
 	EndIf;
@@ -32,6 +39,10 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 EndProcedure
 
 Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+	
 	If ThisObject.AdditionalProperties.Property("DelayedSynchronization") Then
 		For Each ItemOfDelayedSynchronization In ThisObject.AdditionalProperties.DelayedSynchronization Do
 			Synchronize(ItemOfDelayedSynchronization, Cancel);

@@ -157,8 +157,8 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 			| PhysicalInventory         |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Physical inventory" text in "ENG" field
-		And I input "Physical inventory TR" text in "TR" field
+		And I input "Physical inventory" text in the field named "Description_en"
+		And I input "Physical inventory TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
@@ -168,8 +168,8 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		| 'Physical inventory' |
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Prepared" text in "ENG" field
-		And I input "Prepared TR" text in "TR" field
+		And I input "Prepared" text in the field named "Description_en"
+		And I input "Prepared TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I set checkbox "Set by default"
 		And I click "Save and close" button
@@ -180,8 +180,8 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		| 'Physical inventory' |
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "In processing" text in "ENG" field
-		And I input "In processing TR" text in "TR" field
+		And I input "In processing" text in the field named "Description_en"
+		And I input "In processing TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
@@ -192,8 +192,8 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
-		And I input "Done" text in "ENG" field
-		And I input "Done TR" text in "TR" field
+		And I input "Done" text in the field named "Description_en"
+		And I input "Done TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
@@ -206,8 +206,8 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 			| PhysicalCountByLocation         |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
-		And I input "Physical count by location" text in "ENG" field
-		And I input "Physical count by location TR" text in "TR" field
+		And I input "Physical count by location" text in the field named "Description_en"
+		And I input "Physical count by location TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
@@ -217,8 +217,8 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		| 'Physical count by location' |
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Prepared" text in "ENG" field
-		And I input "Prepared TR" text in "TR" field
+		And I input "Prepared" text in the field named "Description_en"
+		And I input "Prepared TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I set checkbox "Set by default"
 		And I click "Save and close" button
@@ -229,8 +229,8 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		| 'Physical count by location' |
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "In processing" text in "ENG" field
-		And I input "In processing TR" text in "TR" field
+		And I input "In processing" text in the field named "Description_en"
+		And I input "In processing TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
@@ -241,8 +241,8 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		And I click the button named "FormCreate"
 		And I set checkbox "Posting"
 		And I click Open button of the field named "Description_en"
-		And I input "Done" text in "ENG" field
-		And I input "Done TR" text in "TR" field
+		And I input "Done" text in the field named "Description_en"
+		And I input "Done TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
@@ -1273,7 +1273,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 			And I select "Done" exact value from "Status" drop-down list
 			And I click "Post" button
-			Then I wait that in user messages the "Not yet all Physical count by location is closed" substring will appear in 30 seconds
+			Then I wait that in user messages the "There are Physical count by location documents that are not closed." substring will appear in 30 seconds
 		* Change the status to "In processing" and post the document
 			And I select "In processing" exact value from "Status" drop-down list
 			And I click "Post and close" button
@@ -1354,7 +1354,7 @@ Scenario: _2990011 re-filling Physical inventory based on Physical count by loca
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I select "Done" exact value from "Status" drop-down list
 		And I click "Post" button
-		Then I wait that in user messages the "Not yet all Physical count by location is closed" substring will appear in 30 seconds
+		Then I wait that in user messages the "NThere are Physical count by location documents that are not closed." substring will appear in 30 seconds
 	* Check that Physical count by location are not created and their statuses do not change
 		And I select "In processing" exact value from "Status" drop-down list
 		And I click "Physical count by location" button

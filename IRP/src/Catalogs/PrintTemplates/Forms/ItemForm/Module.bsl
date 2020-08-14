@@ -23,6 +23,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DataSourceScheme = GenerateDataSourceScheme();
 	
 	GetDefaultAtServer();
+	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 &AtClient

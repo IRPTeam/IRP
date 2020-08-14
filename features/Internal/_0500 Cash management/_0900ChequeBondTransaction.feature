@@ -28,14 +28,14 @@ Scenario: _090002 create statuses for Cheque bond
 			| 'ChequeBondIncoming'     |
 		And I activate "Predefined data item name" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuChange"
-		And I input "ChequeBondIncoming" text in "ENG" field
+		And I input "ChequeBondIncoming" text in the field named "Description_en"
 		And I click "Save and close" button
 		And I go to line in "List" table
 			| 'Predefined data item name' |
 			| 'ChequeBondOutgoing'     |
 		And I activate "Predefined data item name" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuChange"
-		And I input "ChequeBondOutgoing" text in "ENG" field
+		And I input "ChequeBondOutgoing" text in the field named "Description_en"
 		And I click "Save and close" button
 	* Create statuses for Cheque bond incoming
 		* Create status Taken from partner
@@ -43,7 +43,7 @@ Scenario: _090002 create statuses for Cheque bond
 			| 'Description'        |
 			| 'ChequeBondIncoming' |
 			And I click the button named "FormCreate"
-			And I input "01. TakenFromPartner" text in "ENG" field
+			And I input "01. TakenFromPartner" text in the field named "Description_en"
 			And I set checkbox "Set by default"
 			And I move to the tab named "GroupPosting"
 			And I change "Cheque bond balance" radio button value to "Posting"
@@ -57,7 +57,7 @@ Scenario: _090002 create statuses for Cheque bond
 			| 'Description'        |
 			| 'ChequeBondIncoming' |
 			And I click the button named "FormCreate"
-			And I input "03. PaymentReceived" text in "ENG" field
+			And I input "03. PaymentReceived" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
 			And I change "Account balance" radio button value to "Posting"
 			And I change "Planning cash transactions" radio button value to "Reversal"
@@ -67,7 +67,7 @@ Scenario: _090002 create statuses for Cheque bond
 			| 'Description'        |
 			| 'ChequeBondIncoming' |
 			And I click the button named "FormCreate"
-			And I input "04. Protested" text in "ENG" field
+			And I input "04. Protested" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
 			And I change "Cheque bond balance" radio button value to "Reversal"
 			And I change "Advanced" radio button value to "Reversal"
@@ -80,7 +80,7 @@ Scenario: _090002 create statuses for Cheque bond
 			| 'Description'        |
 			| 'ChequeBondIncoming' |
 			And I click the button named "FormCreate"
-			And I input "02. GiveToBankAsAssurance" text in "ENG" field
+			And I input "02. GiveToBankAsAssurance" text in the field named "Description_en"
 			And I click "Save and close" button
 	* Create statuses for Cheque bond outgoing
 		* Create status Given to partner
@@ -88,7 +88,7 @@ Scenario: _090002 create statuses for Cheque bond
 				| 'Description'        |
 				| 'ChequeBondOutgoing' |
 			And I click the button named "FormCreate"
-			And I input "01. GivenToPartner" text in "ENG" field
+			And I input "01. GivenToPartner" text in the field named "Description_en"
 			And I set checkbox "Set by default"
 			And I move to the tab named "GroupPosting"
 			And I change "Cheque bond balance" radio button value to "Posting"
@@ -102,7 +102,7 @@ Scenario: _090002 create statuses for Cheque bond
 				| 'Description'        |
 				| 'ChequeBondOutgoing' |
 			And I click the button named "FormCreate"
-			And I input "02. Payed" text in "ENG" field
+			And I input "02. Payed" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
 			And I change "Account balance" radio button value to "Posting"
 			And I change "Planning cash transactions" radio button value to "Reversal"
@@ -112,7 +112,7 @@ Scenario: _090002 create statuses for Cheque bond
 				| 'Description'        |
 				| 'ChequeBondOutgoing' |
 			And I click the button named "FormCreate"
-			And I input "03. Protested" text in "ENG" field
+			And I input "03. Protested" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
 			And I change "Cheque bond balance" radio button value to "Reversal"
 			And I change "Advanced" radio button value to "Reversal"
@@ -221,11 +221,11 @@ Scenario: _090003 create an incoming and outgoing check in the Cheque bonds cata
 		Given I open hyperlink "e1cib/list/Catalog.ChequeBonds"
 		And I click the button named "FormCreate"
 		And I click "Save" button
-		Then I wait that in user messages the "\"Cheque No\" is a required field" substring will appear in 5 seconds
-		Then I wait that in user messages the "\"Type\" is a required field" substring will appear in 5 seconds
-		Then I wait that in user messages the "\"Due date\" is a required field" substring will appear in 5 seconds
-		Then I wait that in user messages the "\"Currency\" is a required field" substring will appear in 5 seconds
-		Then I wait that in user messages the "\"Amount\" is a required field" substring will appear in 5 seconds
+		Then I wait that in user messages the "\"Cheque No\" is a required field." substring will appear in 5 seconds
+		Then I wait that in user messages the "\"Type\" is a required field." substring will appear in 5 seconds
+		Then I wait that in user messages the "\"Due date\" is a required field." substring will appear in 5 seconds
+		Then I wait that in user messages the "\"Currency\" is a required field." substring will appear in 5 seconds
+		Then I wait that in user messages the "\"Amount\" is a required field." substring will appear in 5 seconds
 		And I close all client application windows
 
 
@@ -233,7 +233,7 @@ Scenario: _090004 preparation
 	* Create a partner and legal name from whom the cheque bond was received and to whom the heque bond was issued
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "DFC" text in "ENG" field
+		And I input "DFC" text in the field named "Description_en"
 		And I change checkbox "Vendor"
 		And I change checkbox "Customer"
 		And I change checkbox "Shipment confirmations before sales invoice"
@@ -251,7 +251,7 @@ Scenario: _090004 preparation
 		And I wait "Partner segments content (create) *" window closing in 20 seconds
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "DFC" text in "ENG" field
+		And I input "DFC" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -265,7 +265,7 @@ Scenario: _090004 preparation
 		And I click "Save and close" button
 		And I wait "DFC (Partner)" window closing in 20 seconds
 		And I click the button named "FormCreate"
-		And I input "Big foot" text in "ENG" field
+		And I input "Big foot" text in the field named "Description_en"
 		And I change checkbox "Customer"
 		And I change checkbox "Vendor"
 		And I change checkbox "Shipment confirmations before sales invoice"
@@ -283,7 +283,7 @@ Scenario: _090004 preparation
 		And I wait "Partner segments content (create) *" window closing in 20 seconds
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "Big foot" text in "ENG" field
+		And I input "Big foot" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -444,7 +444,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		| ''                                      | 'Record type' | 'Period'               | 'Resources'        | 'Dimensions'       | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | 'Attributes'           |
 		| ''                                      | ''            | ''                     | 'Amount'           | 'Company'          | 'Basis document'       | 'Partner'    | 'Legal name'          | 'Partner term'             | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                      | 'Expense'     | '*'                    | '308,22'           | 'Main Company'     | 'Sales invoice 3 000*' | 'DFC'        | 'DFC'                 | 'Basic Partner terms, TRY' | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                      | 'Expense'     | '*'                    | '1 800'            | 'Main Company'     | 'Sales invoice 3 000*' | 'DFC'        | 'DFC'                 | 'Basic Partner terms, TRY' | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
+		| ''                                      | 'Expense'     | '*'                    | '1 800'            | 'Main Company'     | 'Sales invoice 3 000*' | 'DFC'        | 'DFC'                 | 'Basic Partner terms, TRY' | 'TRY'                      | 'en description is empty.' | 'No'                   |
 		| ''                                      | 'Expense'     | '*'                    | '1 800'            | 'Main Company'     | 'Sales invoice 3 000*' | 'DFC'        | 'DFC'                 | 'Basic Partner terms, TRY' | 'TRY'                      | 'Local currency'           | 'No'                   |
 		| ''                                      | 'Expense'     | '*'                    | '1 800'            | 'Main Company'     | 'Sales invoice 3 000*' | 'DFC'        | 'DFC'                 | 'Basic Partner terms, TRY' | 'TRY'                      | 'TRY'                      | 'No'                   |
 		| ''                                      | ''            | ''                     | ''                 | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | ''                     |
@@ -452,7 +452,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		| ''                                      | 'Period'      | 'Resources'            | 'Dimensions'       | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | 'Attributes'           |
 		| ''                                      | ''            | 'Amount'               | 'Company'          | 'Basis document'   | 'Account'              | 'Currency'   | 'Cash flow direction' | 'Partner'               | 'Legal name'               | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                      | '*'           | '342,47'               | 'Main Company'     | 'Partner cheque 1' | 'Bank account, TRY'    | 'USD'        | 'Incoming'            | 'DFC'                   | 'DFC'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                      | '*'           | '2 000'                | 'Main Company'     | 'Partner cheque 1' | 'Bank account, TRY'    | 'TRY'        | 'Incoming'            | 'DFC'                   | 'DFC'                      | 'en descriptions is empty' | 'No'                   |
+		| ''                                      | '*'           | '2 000'                | 'Main Company'     | 'Partner cheque 1' | 'Bank account, TRY'    | 'TRY'        | 'Incoming'            | 'DFC'                   | 'DFC'                      | 'en description is empty.' | 'No'                   |
 		| ''                                      | '*'           | '2 000'                | 'Main Company'     | 'Partner cheque 1' | 'Bank account, TRY'    | 'TRY'        | 'Incoming'            | 'DFC'                   | 'DFC'                      | 'Local currency'           | 'No'                   |
 		| ''                                      | '*'           | '2 000'                | 'Main Company'     | 'Partner cheque 1' | 'Bank account, TRY'    | 'TRY'        | 'Incoming'            | 'DFC'                   | 'DFC'                      | 'TRY'                      | 'No'                   |
 		| ''                                      | ''            | ''                     | ''                 | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | ''                     |
@@ -467,7 +467,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		| ''                                      | 'Record type' | 'Period'               | 'Resources'        | 'Dimensions'       | ''                     | ''           | ''                    | ''                      | ''                         | 'Attributes'               | ''                     |
 		| ''                                      | ''            | ''                     | 'Amount'           | 'Company'          | 'Cheque'               | 'Partner'    | 'Legal name'          | 'Currency'              | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '342,47'           | 'Main Company'     | 'Partner cheque 1'     | 'DFC'        | 'DFC'                 | 'USD'                   | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                      | 'Receipt'     | '*'                    | '2 000'            | 'Main Company'     | 'Partner cheque 1'     | 'DFC'        | 'DFC'                 | 'TRY'                   | 'en descriptions is empty' | 'No'                       | ''                     |
+		| ''                                      | 'Receipt'     | '*'                    | '2 000'            | 'Main Company'     | 'Partner cheque 1'     | 'DFC'        | 'DFC'                 | 'TRY'                   | 'en description is empty.' | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '2 000'            | 'Main Company'     | 'Partner cheque 1'     | 'DFC'        | 'DFC'                 | 'TRY'                   | 'Local currency'           | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '2 000'            | 'Main Company'     | 'Partner cheque 1'     | 'DFC'        | 'DFC'                 | 'TRY'                   | 'TRY'                      | 'No'                       | ''                     |
 		| ''                                      | ''            | ''                     | ''                 | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | ''                     |
@@ -480,7 +480,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		| ''                                      | 'Record type' | 'Period'               | 'Resources'        | 'Dimensions'       | ''                     | ''           | ''                    | ''                      | ''                         | 'Attributes'               | ''                     |
 		| ''                                      | ''            | ''                     | 'Amount'           | 'Company'          | 'Partner'              | 'Legal name' | 'Currency'            | 'Receipt document'      | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '34,25'            | 'Main Company'     | 'DFC'                  | 'DFC'        | 'USD'                 | 'Partner cheque 1'      | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                      | 'Receipt'     | '*'                    | '200'              | 'Main Company'     | 'DFC'                  | 'DFC'        | 'TRY'                 | 'Partner cheque 1'      | 'en descriptions is empty' | 'No'                       | ''                     |
+		| ''                                      | 'Receipt'     | '*'                    | '200'              | 'Main Company'     | 'DFC'                  | 'DFC'        | 'TRY'                 | 'Partner cheque 1'      | 'en description is empty.' | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '200'              | 'Main Company'     | 'DFC'                  | 'DFC'        | 'TRY'                 | 'Partner cheque 1'      | 'Local currency'           | 'No'                       | ''                     |
 		| ''                                      | ''            | ''                     | ''                 | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | ''                     |
 		| 'Own cheque 1'                          | ''            | ''                     | ''                 | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | ''                     |
@@ -488,7 +488,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		| ''                                      | 'Period'      | 'Resources'            | 'Dimensions'       | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | 'Attributes'           |
 		| ''                                      | ''            | 'Amount'               | 'Company'          | 'Basis document'   | 'Account'              | 'Currency'   | 'Cash flow direction' | 'Partner'               | 'Legal name'               | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                      | '*'           | '856,16'               | 'Main Company'     | 'Own cheque 1'     | 'Bank account, TRY'    | 'USD'        | 'Outgoing'            | 'Big foot'              | 'Big foot'                 | 'Reporting currency'       | 'No'                   |
-		| ''                                      | '*'           | '5 000'                | 'Main Company'     | 'Own cheque 1'     | 'Bank account, TRY'    | 'TRY'        | 'Outgoing'            | 'Big foot'              | 'Big foot'                 | 'en descriptions is empty' | 'No'                   |
+		| ''                                      | '*'           | '5 000'                | 'Main Company'     | 'Own cheque 1'     | 'Bank account, TRY'    | 'TRY'        | 'Outgoing'            | 'Big foot'              | 'Big foot'                 | 'en description is empty.' | 'No'                   |
 		| ''                                      | '*'           | '5 000'                | 'Main Company'     | 'Own cheque 1'     | 'Bank account, TRY'    | 'TRY'        | 'Outgoing'            | 'Big foot'              | 'Big foot'                 | 'Local currency'           | 'No'                   |
 		| ''                                      | ''            | ''                     | ''                 | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | ''                     |
 		| 'Register  "Accounts statement"'                     | ''                   | ''                     | ''                    | ''                 | ''                                              | ''               | ''                    | ''                      | ''                         | ''                                              | ''                     |
@@ -501,7 +501,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		| ''                                      | 'Record type' | 'Period'               | 'Resources'        | 'Dimensions'       | ''                     | ''           | ''                    | ''                      | ''                         | 'Attributes'               | ''                     |
 		| ''                                      | ''            | ''                     | 'Amount'           | 'Company'          | 'Cheque'               | 'Partner'    | 'Legal name'          | 'Currency'              | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '856,16'           | 'Main Company'     | 'Own cheque 1'         | 'Big foot'   | 'Big foot'            | 'USD'                   | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                      | 'Receipt'     | '*'                    | '5 000'            | 'Main Company'     | 'Own cheque 1'         | 'Big foot'   | 'Big foot'            | 'TRY'                   | 'en descriptions is empty' | 'No'                       | ''                     |
+		| ''                                      | 'Receipt'     | '*'                    | '5 000'            | 'Main Company'     | 'Own cheque 1'         | 'Big foot'   | 'Big foot'            | 'TRY'                   | 'en description is empty.' | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '5 000'            | 'Main Company'     | 'Own cheque 1'         | 'Big foot'   | 'Big foot'            | 'TRY'                   | 'Local currency'           | 'No'                       | ''                     |
 		| ''                                      | ''            | ''                     | ''                 | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | ''                     |
 		| 'Register  "Reconciliation statement"'  | ''            | ''                     | ''                 | ''                 | ''                     | ''           | ''                    | ''                      | ''                         | ''                         | ''                     |
@@ -513,7 +513,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		| ''                                      | 'Record type' | 'Period'               | 'Resources'        | 'Dimensions'       | ''                     | ''           | ''                    | ''                      | ''                         | 'Attributes'               | ''                     |
 		| ''                                      | ''            | ''                     | 'Amount'           | 'Company'          | 'Partner'              | 'Legal name' | 'Currency'            | 'Payment document'      | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '856,16'           | 'Main Company'     | 'Big foot'             | 'Big foot'   | 'USD'                 | 'Own cheque 1'          | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                      | 'Receipt'     | '*'                    | '5 000'            | 'Main Company'     | 'Big foot'             | 'Big foot'   | 'TRY'                 | 'Own cheque 1'          | 'en descriptions is empty' | 'No'                       | ''                     |
+		| ''                                      | 'Receipt'     | '*'                    | '5 000'            | 'Main Company'     | 'Big foot'             | 'Big foot'   | 'TRY'                 | 'Own cheque 1'          | 'en description is empty.' | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '5 000'            | 'Main Company'     | 'Big foot'             | 'Big foot'   | 'TRY'                 | 'Own cheque 1'          | 'Local currency'           | 'No'                       | ''                     |
 		And I close all client application windows
 	* Check the deleting of the added bases document
@@ -543,7 +543,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| ''                                      | 'Period'      | 'Resources'            | 'Dimensions'          | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | 'Attributes'           |
 			| ''                                      | ''            | 'Amount'               | 'Company'             | 'Basis document'   | 'Account'                | 'Currency'       | 'Cash flow direction' | 'Partner'          | 'Legal name'               | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                      | '*'           | '342,47'               | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'USD'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'Reporting currency'       | 'No'                   |
-			| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'en descriptions is empty' | 'No'                   |
+			| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'en description is empty.' | 'No'                   |
 			| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'Local currency'           | 'No'                   |
 			| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'TRY'                      | 'No'                   |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -557,7 +557,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 			| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Cheque'                 | 'Partner'        | 'Legal name'          | 'Currency'         | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '342,47'              | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'USD'              | 'Reporting currency'       | 'No'                       | ''                     |
-			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'en descriptions is empty' | 'No'                       | ''                     |
+			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'en description is empty.' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'Local currency'           | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'TRY'                      | 'No'                       | ''                     |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -570,7 +570,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 			| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Partner'                | 'Legal name'     | 'Currency'            | 'Receipt document' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '342,47'              | 'Main Company'     | 'DFC'                    | 'DFC'            | 'USD'                 | 'Partner cheque 1' | 'Reporting currency'       | 'No'                       | ''                     |
-			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'en descriptions is empty' | 'No'                       | ''                     |
+			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'en description is empty.' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'Local currency'           | 'No'                       | ''                     |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Own cheque 1'                          | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -578,7 +578,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| ''                                      | 'Period'      | 'Resources'            | 'Dimensions'          | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | 'Attributes'           |
 			| ''                                      | ''            | 'Amount'               | 'Company'             | 'Basis document'   | 'Account'                | 'Currency'       | 'Cash flow direction' | 'Partner'          | 'Legal name'               | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                      | '*'           | '856,16'               | 'Main Company'        | 'Own cheque 1'     | 'Bank account, TRY'      | 'USD'            | 'Outgoing'            | 'Big foot'         | 'Big foot'                 | 'Reporting currency'       | 'No'                   |
-			| ''                                      | '*'           | '5 000'                | 'Main Company'        | 'Own cheque 1'     | 'Bank account, TRY'      | 'TRY'            | 'Outgoing'            | 'Big foot'         | 'Big foot'                 | 'en descriptions is empty' | 'No'                   |
+			| ''                                      | '*'           | '5 000'                | 'Main Company'        | 'Own cheque 1'     | 'Bank account, TRY'      | 'TRY'            | 'Outgoing'            | 'Big foot'         | 'Big foot'                 | 'en description is empty.' | 'No'                   |
 			| ''                                      | '*'           | '5 000'                | 'Main Company'        | 'Own cheque 1'     | 'Bank account, TRY'      | 'TRY'            | 'Outgoing'            | 'Big foot'         | 'Big foot'                 | 'Local currency'           | 'No'                   |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Register  "Accounts statement"'        | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -591,7 +591,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 			| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Cheque'                 | 'Partner'        | 'Legal name'          | 'Currency'         | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '856,16'              | 'Main Company'     | 'Own cheque 1'           | 'Big foot'       | 'Big foot'            | 'USD'              | 'Reporting currency'       | 'No'                       | ''                     |
-			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Own cheque 1'           | 'Big foot'       | 'Big foot'            | 'TRY'              | 'en descriptions is empty' | 'No'                       | ''                     |
+			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Own cheque 1'           | 'Big foot'       | 'Big foot'            | 'TRY'              | 'en description is empty.' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Own cheque 1'           | 'Big foot'       | 'Big foot'            | 'TRY'              | 'Local currency'           | 'No'                       | ''                     |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Register  "Reconciliation statement"'  | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -603,7 +603,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 			| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Partner'                | 'Legal name'     | 'Currency'            | 'Payment document' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '856,16'              | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'USD'                 | 'Own cheque 1'     | 'Reporting currency'       | 'No'                       | ''                     |
-			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'en descriptions is empty' | 'No'                       | ''                     |
+			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'en description is empty.' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'Local currency'           | 'No'                       | ''                     |
 			And I close all client application windows
 	* Clear movements Cheque bond transactions and check that there is no movements on the registers
@@ -653,7 +653,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| ''                                      | 'Period'      | 'Resources'            | 'Dimensions'          | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | 'Attributes'           |
 			| ''                                      | ''            | 'Amount'               | 'Company'             | 'Basis document'   | 'Account'                | 'Currency'       | 'Cash flow direction' | 'Partner'          | 'Legal name'               | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                      | '*'           | '342,47'               | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'USD'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'Reporting currency'       | 'No'                   |
-			| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'en descriptions is empty' | 'No'                   |
+			| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'en description is empty.' | 'No'                   |
 			| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'Local currency'           | 'No'                   |
 			| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'TRY'                      | 'No'                   |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -667,7 +667,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 			| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Cheque'                 | 'Partner'        | 'Legal name'          | 'Currency'         | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '342,47'              | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'USD'              | 'Reporting currency'       | 'No'                       | ''                     |
-			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'en descriptions is empty' | 'No'                       | ''                     |
+			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'en description is empty.' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'Local currency'           | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'TRY'                      | 'No'                       | ''                     |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -680,7 +680,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 			| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Partner'                | 'Legal name'     | 'Currency'            | 'Receipt document' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '342,47'              | 'Main Company'     | 'DFC'                    | 'DFC'            | 'USD'                 | 'Partner cheque 1' | 'Reporting currency'       | 'No'                       | ''                     |
-			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'en descriptions is empty' | 'No'                       | ''                     |
+			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'en description is empty.' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'Local currency'           | 'No'                       | ''                     |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Own cheque 1'                          | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -688,7 +688,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| ''                                      | 'Period'      | 'Resources'            | 'Dimensions'          | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | 'Attributes'           |
 			| ''                                      | ''            | 'Amount'               | 'Company'             | 'Basis document'   | 'Account'                | 'Currency'       | 'Cash flow direction' | 'Partner'          | 'Legal name'               | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                      | '*'           | '856,16'               | 'Main Company'        | 'Own cheque 1'     | 'Bank account, TRY'      | 'USD'            | 'Outgoing'            | 'Big foot'         | 'Big foot'                 | 'Reporting currency'       | 'No'                   |
-			| ''                                      | '*'           | '5 000'                | 'Main Company'        | 'Own cheque 1'     | 'Bank account, TRY'      | 'TRY'            | 'Outgoing'            | 'Big foot'         | 'Big foot'                 | 'en descriptions is empty' | 'No'                   |
+			| ''                                      | '*'           | '5 000'                | 'Main Company'        | 'Own cheque 1'     | 'Bank account, TRY'      | 'TRY'            | 'Outgoing'            | 'Big foot'         | 'Big foot'                 | 'en description is empty.' | 'No'                   |
 			| ''                                      | '*'           | '5 000'                | 'Main Company'        | 'Own cheque 1'     | 'Bank account, TRY'      | 'TRY'            | 'Outgoing'            | 'Big foot'         | 'Big foot'                 | 'Local currency'           | 'No'                   |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Register  "Accounts statement"'        | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -701,7 +701,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 			| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Cheque'                 | 'Partner'        | 'Legal name'          | 'Currency'         | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '856,16'              | 'Main Company'     | 'Own cheque 1'           | 'Big foot'       | 'Big foot'            | 'USD'              | 'Reporting currency'       | 'No'                       | ''                     |
-			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Own cheque 1'           | 'Big foot'       | 'Big foot'            | 'TRY'              | 'en descriptions is empty' | 'No'                       | ''                     |
+			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Own cheque 1'           | 'Big foot'       | 'Big foot'            | 'TRY'              | 'en description is empty.' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Own cheque 1'           | 'Big foot'       | 'Big foot'            | 'TRY'              | 'Local currency'           | 'No'                       | ''                     |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Register  "Reconciliation statement"'  | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -713,7 +713,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 			| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Partner'                | 'Legal name'     | 'Currency'            | 'Payment document' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '856,16'              | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'USD'                 | 'Own cheque 1'     | 'Reporting currency'       | 'No'                       | ''                     |
-			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'en descriptions is empty' | 'No'                       | ''                     |
+			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'en description is empty.' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'Local currency'           | 'No'                       | ''                     |
 			And I close all client application windows
 
@@ -747,7 +747,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 		| ''                                      | 'Period'      | 'Resources'            | 'Dimensions'          | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | 'Attributes'           |
 		| ''                                      | ''            | 'Amount'               | 'Company'             | 'Basis document'   | 'Account'                | 'Currency'       | 'Cash flow direction' | 'Partner'          | 'Legal name'               | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                      | '*'           | '342,47'               | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'USD'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'en descriptions is empty' | 'No'                   |
+		| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'en description is empty.' | 'No'                   |
 		| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'Local currency'           | 'No'                   |
 		| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'TRY'                      | 'No'                   |
 		| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -761,7 +761,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 		| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 		| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Cheque'                 | 'Partner'        | 'Legal name'          | 'Currency'         | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '342,47'              | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'USD'              | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'en descriptions is empty' | 'No'                       | ''                     |
+		| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'en description is empty.' | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'Local currency'           | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'TRY'                      | 'No'                       | ''                     |
 		| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -774,7 +774,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 		| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 		| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Partner'                | 'Legal name'     | 'Currency'            | 'Receipt document' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '342,47'              | 'Main Company'     | 'DFC'                    | 'DFC'            | 'USD'                 | 'Partner cheque 1' | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'en descriptions is empty' | 'No'                       | ''                     |
+		| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'en description is empty.' | 'No'                       | ''                     |
 		| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'Local currency'           | 'No'                       | ''                     |
 	* Returning the second check bond recording and motion check
 		And I close "Document registrations report" window
@@ -820,7 +820,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 			| ''                                      | 'Period'      | 'Resources'            | 'Dimensions'          | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | 'Attributes'           |
 			| ''                                      | ''            | 'Amount'               | 'Company'             | 'Basis document'   | 'Account'                | 'Currency'       | 'Cash flow direction' | 'Partner'          | 'Legal name'               | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                      | '*'           | '342,47'               | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'USD'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'Reporting currency'       | 'No'                   |
-			| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'en descriptions is empty' | 'No'                   |
+			| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'en description is empty.' | 'No'                   |
 			| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'Local currency'           | 'No'                   |
 			| ''                                      | '*'           | '2 000'                | 'Main Company'        | 'Partner cheque 1' | 'Bank account, TRY'      | 'TRY'            | 'Incoming'            | 'DFC'              | 'DFC'                      | 'TRY'                      | 'No'                   |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -834,7 +834,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 			| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 			| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Cheque'                 | 'Partner'        | 'Legal name'          | 'Currency'         | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '342,47'              | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'USD'              | 'Reporting currency'       | 'No'                       | ''                     |
-			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'en descriptions is empty' | 'No'                       | ''                     |
+			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'en description is empty.' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'Local currency'           | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'Partner cheque 1'       | 'DFC'            | 'DFC'                 | 'TRY'              | 'TRY'                      | 'No'                       | ''                     |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -847,7 +847,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 			| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 			| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Partner'                | 'Legal name'     | 'Currency'            | 'Receipt document' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '342,47'              | 'Main Company'     | 'DFC'                    | 'DFC'            | 'USD'                 | 'Partner cheque 1' | 'Reporting currency'       | 'No'                       | ''                     |
-			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'en descriptions is empty' | 'No'                       | ''                     |
+			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'en description is empty.' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '2 000'               | 'Main Company'     | 'DFC'                    | 'DFC'            | 'TRY'                 | 'Partner cheque 1' | 'Local currency'           | 'No'                       | ''                     |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Own cheque 1'                          | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -855,7 +855,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 			| ''                                      | 'Period'      | 'Resources'            | 'Dimensions'          | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | 'Attributes'           |
 			| ''                                      | ''            | 'Amount'               | 'Company'             | 'Basis document'   | 'Account'                | 'Currency'       | 'Cash flow direction' | 'Partner'          | 'Legal name'               | 'Multi currency movement type'   | 'Deferred calculation' |
 			| ''                                      | '*'           | '856,16'               | 'Main Company'        | 'Own cheque 1'     | 'Bank account, TRY'      | 'USD'            | 'Outgoing'            | 'Big foot'         | 'Big foot'                 | 'Reporting currency'       | 'No'                   |
-			| ''                                      | '*'           | '5 000'                | 'Main Company'        | 'Own cheque 1'     | 'Bank account, TRY'      | 'TRY'            | 'Outgoing'            | 'Big foot'         | 'Big foot'                 | 'en descriptions is empty' | 'No'                   |
+			| ''                                      | '*'           | '5 000'                | 'Main Company'        | 'Own cheque 1'     | 'Bank account, TRY'      | 'TRY'            | 'Outgoing'            | 'Big foot'         | 'Big foot'                 | 'en description is empty.' | 'No'                   |
 			| ''                                      | '*'           | '5 000'                | 'Main Company'        | 'Own cheque 1'     | 'Bank account, TRY'      | 'TRY'            | 'Outgoing'            | 'Big foot'         | 'Big foot'                 | 'Local currency'           | 'No'                   |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Register  "Accounts statement"'        | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -868,7 +868,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 			| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 			| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Cheque'                 | 'Partner'        | 'Legal name'          | 'Currency'         | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '856,16'              | 'Main Company'     | 'Own cheque 1'           | 'Big foot'       | 'Big foot'            | 'USD'              | 'Reporting currency'       | 'No'                       | ''                     |
-			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Own cheque 1'           | 'Big foot'       | 'Big foot'            | 'TRY'              | 'en descriptions is empty' | 'No'                       | ''                     |
+			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Own cheque 1'           | 'Big foot'       | 'Big foot'            | 'TRY'              | 'en description is empty.' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Own cheque 1'           | 'Big foot'       | 'Big foot'            | 'TRY'              | 'Local currency'           | 'No'                       | ''                     |
 			| ''                                      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Register  "Reconciliation statement"'  | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -880,7 +880,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 			| ''                                      | 'Record type' | 'Period'               | 'Resources'           | 'Dimensions'       | ''                       | ''               | ''                    | ''                 | ''                         | 'Attributes'               | ''                     |
 			| ''                                      | ''            | ''                     | 'Amount'              | 'Company'          | 'Partner'                | 'Legal name'     | 'Currency'            | 'Payment document' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '856,16'              | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'USD'                 | 'Own cheque 1'     | 'Reporting currency'       | 'No'                       | ''                     |
-			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'en descriptions is empty' | 'No'                       | ''                     |
+			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'en description is empty.' | 'No'                       | ''                     |
 			| ''                                      | 'Receipt'     | '*'                    | '5 000'               | 'Main Company'     | 'Big foot'               | 'Big foot'       | 'TRY'                 | 'Own cheque 1'     | 'Local currency'           | 'No'                       | ''                     |
 		And I close all client application windows
 

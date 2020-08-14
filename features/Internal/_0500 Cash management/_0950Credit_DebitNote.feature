@@ -15,7 +15,7 @@ Scenario: _095001 preparation
 	* Create customer and vendor
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Lunch" text in "ENG" field
+		And I input "Lunch" text in the field named "Description_en"
 		And I change checkbox "Vendor"
 		And I change checkbox "Customer"
 		And I click "Save" button
@@ -30,7 +30,7 @@ Scenario: _095001 preparation
 		And I wait "Partner segments content (create) *" window closing in 20 seconds
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "Company Lunch" text in "ENG" field
+		And I input "Company Lunch" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -41,7 +41,7 @@ Scenario: _095001 preparation
 		And In this window I click command interface button "Main"
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
-		And I input "Maxim" text in "ENG" field
+		And I input "Maxim" text in the field named "Description_en"
 		And I change checkbox "Customer"
 		And I change checkbox "Vendor"
 		And I click "Save" button
@@ -56,7 +56,7 @@ Scenario: _095001 preparation
 		And I click "Save and close" button
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-		And I input "Company Maxim" text in "ENG" field
+		And I input "Company Maxim" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -65,7 +65,7 @@ Scenario: _095001 preparation
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
-		And I input "Company Aldis" text in "ENG" field
+		And I input "Company Aldis" text in the field named "Description_en"
 		And I click Select button of "Country" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -78,7 +78,7 @@ Scenario: _095001 preparation
 	* Create vendor Partner term for Maxim, Ap-Ar - posting details (by Partner terms)
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 		And I click the button named "FormCreate"
-		And I input "Partner term Maxim" text in "ENG" field
+		And I input "Partner term Maxim" text in the field named "Description_en"
 		And I change "Type" radio button value to "Vendor"
 		And I input "01.12.2019" text in "Date" field
 		And I click Select button of "Multi currency movement type" field
@@ -324,7 +324,7 @@ Scenario: _095002 check movements of the document Credit_DebitNote by operation 
 		| ''                                     | 'Period'      | 'Resources' | 'Dimensions'   | ''                        | ''               | ''         | ''              | ''                    | ''                         | 'Attributes'               | ''                     |
 		| ''                                     | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type'   | 'Item key' | 'Currency'      | 'Additional analytic' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                     | '*'           | '171,23'    | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'USD'           | ''                    | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'en descriptions is empty' | 'No'                       | ''                     |
+		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'en description is empty.' | 'No'                       | ''                     |
 		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'Local currency'           | 'No'                       | ''                     |
 		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'TRY'                      | 'No'                       | ''                     |
 		| ''                                     | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
@@ -332,7 +332,7 @@ Scenario: _095002 check movements of the document Credit_DebitNote by operation 
 		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''               | ''         | ''              | ''                    | ''                         | ''                         | 'Attributes'           |
 		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Basis document' | 'Partner'  | 'Legal name'    | 'Partner term'           | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                     | 'Expense'     | '*'         | '171,23'       | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
+		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'en description is empty.' | 'No'                   |
 		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'Local currency'           | 'No'                   |
 		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'TRY'                      | 'No'                   |
 		And I close all client application windows
@@ -379,7 +379,7 @@ Scenario: _095003 change of the basis document and the amount in the already per
 		| ''                                     | 'Period'      | 'Resources' | 'Dimensions'   | ''                        | ''               | ''         | ''              | ''                    | ''                         | 'Attributes'               | ''                     |
 		| ''                                     | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type'   | 'Item key' | 'Currency'      | 'Additional analytic' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                     | '*'           | '342,47'    | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'USD'           | ''                    | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                     | '*'           | '2 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'en descriptions is empty' | 'No'                       | ''                     |
+		| ''                                     | '*'           | '2 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'en description is empty.' | 'No'                       | ''                     |
 		| ''                                     | '*'           | '2 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'Local currency'           | 'No'                       | ''                     |
 		| ''                                     | '*'           | '2 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'TRY'                      | 'No'                       | ''                     |
 		| ''                                     | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
@@ -387,7 +387,7 @@ Scenario: _095003 change of the basis document and the amount in the already per
 		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''               | ''         | ''              | ''                    | ''                         | ''                         | 'Attributes'           |
 		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Basis document' | 'Partner'  | 'Legal name'    | 'Partner term'           | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                     | 'Expense'     | '*'         | '342,47'       | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
+		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'en description is empty.' | 'No'                   |
 		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'Local currency'           | 'No'                   |
 		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'TRY'                      | 'No'                   |
 		And I close all client application windows
@@ -422,6 +422,7 @@ Scenario: _095004 check movements of the document Credit_DebitNote by operation 
 			| 'Sales invoice' |
 		And I select current line in "" table
 		* Check the selection of basis documents for the specified partner
+			And delay 2
 			Then the number of "List" table lines is "less or equal" 1
 			And "List" table contains lines
 			| 'Number' |
@@ -463,7 +464,7 @@ Scenario: _095004 check movements of the document Credit_DebitNote by operation 
 		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | 'Attributes'           |
 		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Basis document'                                | 'Partner'  | 'Legal name'    | 'Partner term'             | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
 		| ''                                     | 'Expense'     | '*'         | '171,23'       | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                      | 'en descriptions is empty' | 'No'                   |
+		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                      | 'en description is empty.' | 'No'                   |
 		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                      | 'Local currency'           | 'No'                   |
 		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                      | 'TRY'                      | 'No'                   |
 		| ''                                     | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
@@ -471,7 +472,7 @@ Scenario: _095004 check movements of the document Credit_DebitNote by operation 
 		| ''                                     | 'Period'      | 'Resources' | 'Dimensions'   | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | 'Attributes'               | ''                     |
 		| ''                                     | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Expense type'                                  | 'Item key' | 'Currency'      | 'Additional analytic'   | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
 		| ''                                     | '*'           | '171,23'    | 'Main Company' | 'Distribution department' | 'Software'                                      | ''         | 'USD'           | ''                      | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'                                      | ''         | 'TRY'           | ''                      | 'en descriptions is empty' | 'No'                       | ''                     |
+		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'                                      | ''         | 'TRY'           | ''                      | 'en description is empty.' | 'No'                       | ''                     |
 		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'                                      | ''         | 'TRY'           | ''                      | 'Local currency'           | 'No'                       | ''                     |
 		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'                                      | ''         | 'TRY'           | ''                      | 'TRY'                      | 'No'                       | ''                     |
 		| ''                                     | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |

@@ -11,7 +11,11 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 		For Each BasisDocument In ArrayOfBasisDocuments Do
 			ErrorMessageKey = GetErrorMessageKey(BasisDocument);
 			If ValueIsFilled(ErrorMessageKey) Then
-				ShowMessageBox( , R()[ErrorMessageKey]);
+				ErrorText = R()[ErrorMessageKey];
+				If ErrorMessageKey = "Error_054" Then
+					ErrorText = StrTemplate(ErrorText, BasisDocument);
+				EndIf;
+				ShowMessageBox( , ErrorText);
 				Return;
 			EndIf;
 		EndDo;

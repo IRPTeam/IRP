@@ -1,4 +1,8 @@
 Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+	
 	If Not (ThisObject.AdditionalProperties.Property("SynchronizeAffectPricingMD5")
 		And Not ThisObject.AdditionalProperties.SynchronizeAffectPricingMD5) Then
 		Catalogs.ItemKeys.SynchronizeAffectPricingMD5BySpecification(ThisObject.Ref);
@@ -6,6 +10,10 @@ Procedure OnWrite(Cancel)
 EndProcedure
 
 Procedure BeforeWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+	
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -42,5 +50,11 @@ Procedure BeforeWrite(Cancel)
 	If ValueIsFilled(UniqueID.FindRefByUniqueMD5(ThisObject, ThisObject.UniqueMD5)) Then
 		Cancel = True;
 		CommonFunctionsClientServer.ShowUsersMessage(R().Error_066);
+	EndIf;
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
 	EndIf;
 EndProcedure

@@ -13,5 +13,6 @@
   <content>Document.ReconciliationStatement</content>
   <content>Document.CashExpense</content>
   <content>Document.CashRevenue</content>
+  <content>Document.CreditNote</content>
   <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

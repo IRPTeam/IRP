@@ -127,4 +127,5 @@
   <content>Document.PurchaseReturn.Attribute.IsOpeningEntry</content>
   <content>InformationRegister.TaxSettings.Dimension.Agreement</content>
   <content>InformationRegister.TaxSettings.Dimension.ItemKey</content>
+  <content>Document.CreditNote</content>
 </mdclass:FunctionalOption>

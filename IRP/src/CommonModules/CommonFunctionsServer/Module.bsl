@@ -1,64 +1,3 @@
-Procedure SetConditionalAppearanceDataField(ThisObject,
-		AttributeFullName = "List.Date", ItemName = "Date") Export
-	
-	PartsOfFullName = StrSplit(AttributeFullName, ".");
-	NeedPartsOfFullName = 2;
-	If PartsOfFullName.Count() <> NeedPartsOfFullName Then
-		// Invalid value for the FullRequireName parameter.
-		// The name of the attribute must be In the format "" <ListName>. <FieldName> "" '));
-		Return;
-	EndIf;
-	
-	ListAttribute = ThisObject[PartsOfFullName[0]];
-	
-	If TypeOf(ListAttribute) = Type("DynamicList") Then
-		// DynamicList allows you to set conditional formatting using your own linker.
-		// In this case, the ElementName parameter is ignored because the dynamic list composer
-		// does Not know how the details of the list will be displayed, 
-		// therefore the path to the details And values of selection And design
-		// is the name of the attribute of the dynamic list.
-		ConditionalAppearance = ListAttribute.ConditionalAppearance;
-		PathToAttribute = PartsOfFullName[1];
-		AppearanceFieldName = PathToAttribute;
-	Else
-		// Other lists, for example, Form DataTree:
-		// do Not have their own linker, so they use the linker of the form itself.
-		ConditionalAppearance = ThisObject.ConditionalAppearance;
-		PathToAttribute = AttributeFullName;
-		AppearanceFieldName = ItemName;
-	EndIf;
-	
-	If Not ValueIsFilled(ConditionalAppearance.UserSettingID) Then
-		ConditionalAppearance.UserSettingID = "BasicAppearance";
-	EndIf;
-	
-	// By default, the view "06/10/2012" is used.
-	ItemOfAppearance = ConditionalAppearance.Items.Add();
-	ItemOfAppearance.Use = True;
-	ItemOfAppearance.Appearance.SetParameterValue("Format", "DLF=D;");
-	
-	AppearanceField = ItemOfAppearance.Fields.Items.Add();
-	AppearanceField.Field = New DataCompositionField(AppearanceFieldName);
-	
-	// For today, the views "09:46" are used.
-	ItemOfAppearance = ConditionalAppearance.Items.Add();
-	ItemOfAppearance.Use = True;
-	ItemOfAppearance.Appearance.SetParameterValue("Format", "DF=HH:mm;");
-	
-	AppearanceField = ItemOfAppearance.Fields.Items.Add();
-	AppearanceField.Field = New DataCompositionField(AppearanceFieldName);
-	
-	ItemOfFilter = ItemOfAppearance.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	ItemOfFilter.LeftValue = New DataCompositionField(PathToAttribute);
-	ItemOfFilter.ComparisonType = DataCompositionComparisonType.GreaterOrEqual;
-	ItemOfFilter.RightValue = New StandardBeginningDate(StandardBeginningDateVariant.BeginningOfThisDay);
-	
-	ItemOfFilter = ItemOfAppearance.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	ItemOfFilter.LeftValue = New DataCompositionField(PathToAttribute);
-	ItemOfFilter.ComparisonType = DataCompositionComparisonType.Less;
-	ItemOfFilter.RightValue = New StandardBeginningDate(StandardBeginningDateVariant.BeginningOfNextDay);
-EndProcedure
-
 Function IsPrimitiveValue(Value) Export
 	Return Metadata.FindByType(TypeOf(Value)) = Undefined;
 EndFunction
@@ -83,11 +22,27 @@ Function SerializeJSON(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
+Function SerializeJSONUseXDTO(Value, AddInfo = Undefined) Export
+	Writer = New JSONWriter();
+	Writer.SetString();
+	XDTOSerializer.WriteJSON(Writer, Value, XMLTypeAssignment.Explicit);
+	Result = Writer.Close();
+	Return Result;
+EndFunction
+
 Function SerializeXMLUseXDTO(Value, AddInfo = Undefined) Export
 	Writer = New XMLWriter();
 	Writer.SetString();
 	XDTOSerializer.WriteXML(Writer, Value);
 	Result = Writer.Close();
+	Return Result;
+EndFunction
+
+Function DeserializeJSONUseXDTO(Value, AddInfo = Undefined) Export
+	Reader = New JSONReader();
+	Reader.SetString(Value);
+	Result = XDTOSerializer.ReadJSON(Reader);
+	Reader.Close();
 	Return Result;
 EndFunction
 

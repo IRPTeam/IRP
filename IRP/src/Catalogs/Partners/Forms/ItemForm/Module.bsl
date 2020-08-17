@@ -27,7 +27,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	SalesOrdersList.Parameters.SetParameterValue("Partner", Object.Ref);
-	CommonFunctionsServer.SetConditionalAppearanceDataField(ThisObject, "SalesOrdersList.Date");
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
 	Items.Parent.Visible = GetFunctionalOption("ShowAlphaTestingSaas");
 	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);

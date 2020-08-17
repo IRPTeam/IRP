@@ -13,13 +13,6 @@ EndProcedure
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export
-//	If Form.CurrentCompany <> Object.Company
-//		And Object.Transactions.Count() Then
-//		ShowQueryBox(New NotifyDescription("TransactionsBeforeClearing", ThisObject, New Structure("Form", Form)),
-//			R().QuestionToUser_007,	QuestionDialogMode.YesNoCancel);
-//		Return;
-//	EndIf;
-//	Form.CurrentCompany = Object.Company;
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
@@ -69,14 +62,6 @@ EndProcedure
 #Region ItemLegalName
 
 Procedure LegalNameOnChange(Object, Form, Item) Export
-//	If Form.CurrentLegalName <> Object.LegalName
-//		And Object.Transactions.Count() Then
-//		ShowQueryBox(New NotifyDescription("TransactionsBeforeClearing", ThisObject, New Structure("Form", Form)),
-//			R().QuestionToUser_007,	QuestionDialogMode.YesNoCancel);
-//		Return;
-//	EndIf;
-//	Form.CurrentPartner = Object.Partner; 
-//	Form.CurrentLegalName = Object.LegalName;
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
@@ -111,22 +96,7 @@ EndProcedure
 #EndRegion
 
 Procedure TransactionsBasisDocumentOnChange(Object, Form, Item) Export
-//	CurrentRow = Form.Items.Transactions.CurrentData;
-//	If CurrentRow <> Undefined Then
-//		BasisAttributeName = "";
-//		If Object.OperationType = PredefinedValue("Enum.CreditDebitNoteOperationsTypes.Payable") Then
-//			BasisAttributeName = "PartnerApTransactionsBasisDocument";
-//			CurrentRow.PartnerArTransactionsBasisDocument = Undefined;
-//		ElsIf Object.OperationType = PredefinedValue("Enum.CreditDebitNoteOperationsTypes.Receivable") Then
-//			BasisAttributeName = "PartnerArTransactionsBasisDocument";
-//			CurrentRow.PartnerApTransactionsBasisDocument = Undefined;
-//		Else
-//			Return;
-//		EndIf;
-//		CurrentRow.Partner = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow[BasisAttributeName], "Partner");
-//		CurrentRow.Agreement = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow[BasisAttributeName], "Agreement");
-//		CurrentRow.Currency = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow[BasisAttributeName], "Currency");
-//	EndIf;
+	Return;
 EndProcedure
 
 #Region ItemTransactionsPartner
@@ -159,49 +129,6 @@ Procedure TransactionsPartnerEditTextChange(Object, Form, Item, Text, StandardPr
 EndProcedure
 
 #EndRegion
-
-//Procedure OperationTypeOnChange(Object, Form, Item) Export
-//	If Form.CurrentOperationType <> Object.OperationType
-//		And Object.Transactions.Count() Then
-//		ShowQueryBox(New NotifyDescription("TransactionsBeforeClearing", ThisObject, New Structure("Form", Form)),
-//			R().QuestionToUser_007,	QuestionDialogMode.YesNoCancel);
-//		Return;
-//	EndIf;
-//	Form.CurrentOperationType = Object.OperationType;
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-//EndProcedure
-
-//Procedure TransactionsBeforeClearing(Answer, AdditionalParameters) Export
-//	If Answer = DialogReturnCode.Yes
-//		And AdditionalParameters.Property("Form") Then
-//		Form = AdditionalParameters.Form;
-//		Form.Object.Transactions.Clear();
-//		
-//		If Form.CurrentCompany <> Form.Object.Company Then
-//			Form.CurrentCompany = Form.Object.Company;
-//		EndIf;
-//		If Form.CurrentOperationType <> Form.Object.OperationType Then
-//			Form.CurrentOperationType = Form.Object.OperationType;
-//		EndIf;
-//		If Form.CurrentLegalName <> Form.Object.LegalName Then
-//			Form.CurrentLegalName = Form.Object.LegalName;
-//		EndIf;
-//		If Form.CurrentPartner <> Form.Object.Partner Then
-//			Form.CurrentPartner = Form.Object.Partner;
-//		EndIf;
-//	Else
-//		If AdditionalParameters.Property("Form") Then
-//			Form = AdditionalParameters.Form;
-//			Form.Object.Company = Form.CurrentCompany;
-//			Form.Object.OperationType = Form.CurrentOperationType;
-//			Form.Object.LegalName = Form.CurrentLegalName;
-//			Form.Object.Partner = Form.CurrentPartner;
-//			Notify("SetVisibility", Undefined, Form);
-//		EndIf;
-//	EndIf;
-//	DocumentsClientServer.ChangeTitleGroupTitle(Form.Object, Form);
-//	Notify("CallbackHandler", Undefined, Form);
-//EndProcedure
 
 #Region ItemDescription
 

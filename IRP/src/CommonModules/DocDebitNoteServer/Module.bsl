@@ -3,7 +3,6 @@
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
-//		Form.CurrentOperationType = Object.OperationType;
 		Form.CurrentLegalName = Object.LegalName;
 		Form.CurrentCompany = Object.Company;
 		Form.CurrentPartner = Object.Partner;
@@ -13,7 +12,6 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
-//	Form.CurrentOperationType = Object.OperationType;
 	Form.CurrentLegalName = Object.LegalName;
 	Form.CurrentCompany = Object.Company;
 	Form.CurrentPartner = Object.Partner;
@@ -21,7 +19,6 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
-//	Form.CurrentOperationType = Object.OperationType;
 	Form.CurrentLegalName = Object.LegalName;
 	Form.CurrentCompany = Object.Company;
 	Form.CurrentPartner = Object.Partner;
@@ -37,7 +34,6 @@ EndProcedure
 
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array;
-//	AttributesArray.Add("OperationType");
 	AttributesArray.Add("Company");
 	AttributesArray.Add("LegalName");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);

@@ -2,7 +2,7 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocCreditDebitNoteServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
+	DocDebitNoteServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
 #EndRegion

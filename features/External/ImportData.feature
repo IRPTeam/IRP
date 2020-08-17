@@ -632,7 +632,6 @@ Scenario: Create catalog PriceTypes objects
 
 	And I check or create catalog "PriceTypes" objects:
 		| 'Ref'                                                                | 'DeletionMark' | 'Currency'                                                           | 'ExternalDataProc'                                                         | 'ExternalDataProcSettings' | 'Description_en'             | 'Description_hash' | 'Description_ru' | 'Description_tr'             |
-		| 'e1cib/data/Catalog.PriceTypes?ref=aa6b120ed92fbced11eacd8baf320d89' | 'No'           | ''                                                                   | ''                                                                         | 'ValueStorage'             | ''                           | ''                 | ''               | ''                           |
 		| 'e1cib/data/Catalog.PriceTypes?ref=aa6b120ed92fbced11eacd8baf320dc5' | 'No'           | 'e1cib/data/Catalog.Currencies?ref=aa6b120ed92fbced11eacd8baf320da1' | ''                                                                         | 'ValueStorage'             | 'Basic Price Types'          | ''                 | ''               | 'Basic Price Types TR'       |
 		| 'e1cib/data/Catalog.PriceTypes?ref=aa6b120ed92fbced11eacd8d38d0861c' | 'No'           | 'e1cib/data/Catalog.Currencies?ref=aa6b120ed92fbced11eacd8baf320da2' | ''                                                                         | 'ValueStorage'             | 'Price USD'                  | ''                 | ''               | 'Price USD TR'               |
 		| 'e1cib/data/Catalog.PriceTypes?ref=aa6b120ed92fbced11eacd8d38d0861d' | 'No'           | 'e1cib/data/Catalog.Currencies?ref=aa6b120ed92fbced11eacd8baf320da1' | ''                                                                         | 'ValueStorage'             | 'Discount Price TRY 1'       | ''                 | ''               | 'Discount Price TRY 1 TR'    |
@@ -643,6 +642,12 @@ Scenario: Create catalog PriceTypes objects
 		| 'e1cib/data/Catalog.PriceTypes?ref=aa6b120ed92fbced11eacd8d38d08622' | 'No'           | 'e1cib/data/Catalog.Currencies?ref=aa6b120ed92fbced11eacd8baf320da1' | ''                                                                         | 'ValueStorage'             | 'Vendor price, TRY'          | ''                 | ''               | 'Vendor price, TRY TR'       |
 		| 'e1cib/data/Catalog.PriceTypes?ref=aa6b120ed92fbced11eacd8d38d08623' | 'No'           | 'e1cib/data/Catalog.Currencies?ref=aa6b120ed92fbced11eacd8baf320da2' | ''                                                                         | 'ValueStorage'             | 'Vendor price, USD'          | ''                 | ''               | 'Vendor price, USD TR'       |
 		| 'e1cib/data/Catalog.PriceTypes?ref=aa6b120ed92fbced11eacd8d38d08624' | 'No'           | 'e1cib/data/Catalog.Currencies?ref=aa6b120ed92fbced11eacd8baf320da3' | ''                                                                         | 'ValueStorage'             | 'Vendor price, EUR'          | ''                 | ''               | 'Vendor price, EUR TR'       |
+
+Scenario: Create catalog PriceTypes objects (Current price)
+		And I check or create catalog "PriceTypes" objects:
+		| 'Ref'                                                                | 'DeletionMark' | 'Currency'                                                           | 'ExternalDataProc'                                                         | 'ExternalDataProcSettings' | 'Description_en'             | 'Description_hash' | 'Description_ru' | 'Description_tr'         |
+		| 'e1cib/data/Catalog.PriceTypes?ref=aa6b120ed92fbced11eacd8baf320dc8' | 'No'           | 'e1cib/data/Catalog.Currencies?ref=aa6b120ed92fbced11eacd8baf320da1' | ''                                                                         | 'ValueStorage'             | 'Current Price'              | ''                 | ''               | 'Current Price TR'       |
+
 
 Scenario: Create catalog PrintTemplates objects
 

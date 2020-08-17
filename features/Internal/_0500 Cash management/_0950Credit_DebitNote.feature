@@ -1,8 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-Feature: write-off of accounts receivable and payable
-
+Feature: Credit note and Debit note
 As an accountant
 I want to create a Credit_DebitNote document.
 For write-off of accounts receivable and payable
@@ -242,12 +241,11 @@ Scenario: _095001 preparation
 			And I click "Post and close" button
 	
 
-Scenario: _095002 check movements of the document Credit_DebitNote by operation type payable
+Scenario: _095002 check movements of the document Dedit Note (write off debts to the vendor)
 	* Create document
-		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I select "Payable" exact value from "Operation type" drop-down list
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -297,107 +295,171 @@ Scenario: _095002 check movements of the document Credit_DebitNote by operation 
 			| 'Description' |
 			| 'Software'    |
 		And I select current line in "List" table
+		And I click choice button of "Partner term" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term Maxim'    |
+		And I select current line in "List" table
+		And I click choice button of "Currency" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Turkish lira'    |
+		And I select current line in "List" table
+		And I click choice button of "Partner" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Maxim'    |
+		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
-	* Change the document number
-		And I move to "Other" tab
-		And I input "1" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "1" text in "Number" field
 	* Check movements
 		And I click "Post" button
+		And I save the window as "$$DeditNote095002$$"
+		And I save the value of "Date" field as "$$DeditNoteDate095002$$"
 		And I click "Registrations report" button
 		Then "ResultTable" spreadsheet document is equal by template
-		| 'Credit debit note 1*'                 | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| 'Document registrations records'       | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| 'Register  "Accounts statement"'       | ''            | ''                    | ''                    | ''                        | ''                       | ''               | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | 'Record type' | 'Period'              | 'Resources'           | ''                        | ''                       | ''               | 'Dimensions'    | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | ''            | ''                    | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers' | 'Transaction AR' | 'Company'       | 'Partner'             | 'Legal name'               | 'Basis document'           | 'Currency'             |
-		| ''                                     | 'Expense'     | '*'                   | ''                    | '1 000'                   | ''                       | ''               | 'Main Company'  | 'Maxim'               | 'Company Maxim'            | ''                         | 'TRY'                  |
-		| ''                                     | ''            | ''                    | ''                    | ''                        | ''                       | ''               | ''              | ''                    | ''                         | ''                         | ''                     |
-		| 'Register  "Reconciliation statement"' | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Legal name'     | 'Currency' | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '1 000'        | 'Main Company'            | 'Company Maxim'  | 'TRY'      | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| 'Register  "Revenues turnovers"'       | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | 'Period'      | 'Resources' | 'Dimensions'   | ''                        | ''               | ''         | ''              | ''                    | ''                         | 'Attributes'               | ''                     |
-		| ''                                     | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type'   | 'Item key' | 'Currency'      | 'Additional analytic' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
-		| ''                                     | '*'           | '171,23'    | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'USD'           | ''                    | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'en description is empty' | 'No'                       | ''                     |
-		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'Local currency'           | 'No'                       | ''                     |
-		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'TRY'                      | 'No'                       | ''                     |
-		| ''                                     | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| 'Register  "Partner AP transactions"'  | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''               | ''         | ''              | ''                    | ''                         | ''                         | 'Attributes'           |
-		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Basis document' | 'Partner'  | 'Legal name'    | 'Partner term'           | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
-		| ''                                     | 'Expense'     | '*'         | '171,23'       | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'en description is empty' | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'Local currency'           | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'TRY'                      | 'No'                   |
+			| '$$DeditNote095002$$'                  | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| 'Document registrations records'       | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| 'Register  "Accounts statement"'       | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | ''                        | ''                       | ''               | 'Dimensions'    | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | ''                        | ''                        | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers' | 'Transaction AR' | 'Company'       | 'Partner'             | 'Legal name'                   | 'Basis document'               | 'Currency'             |
+			| ''                                     | 'Receipt'                 | '$$DeditNoteDate095002$$' | ''                     | '-1 000'                  | ''                       | ''               | 'Main Company'  | ''                    | 'Company Maxim'                | ''                             | 'TRY'                  |
+			| ''                                     | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| 'Register  "Reconciliation statement"' | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | 'Dimensions'              | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | ''                        | ''                        | 'Amount'               | 'Company'                 | 'Legal name'             | 'Currency'       | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | 'Receipt'                 | '$$DeditNoteDate095002$$' | '1 000'                | 'Main Company'            | 'Company Maxim'          | 'TRY'            | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| 'Register  "Revenues turnovers"'       | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | 'Period'                  | 'Resources'               | 'Dimensions'           | ''                        | ''                       | ''               | ''              | ''                    | ''                             | 'Attributes'                   | ''                     |
+			| ''                                     | ''                        | 'Amount'                  | 'Company'              | 'Business unit'           | 'Revenue type'           | 'Item key'       | 'Currency'      | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation'         | ''                     |
+			| ''                                     | '$$DeditNoteDate095002$$' | '171,23'                  | 'Main Company'         | 'Distribution department' | 'Software'               | ''               | 'USD'           | ''                    | 'Reporting currency'           | 'No'                           | ''                     |
+			| ''                                     | '$$DeditNoteDate095002$$' | '1 000'                   | 'Main Company'         | 'Distribution department' | 'Software'               | ''               | 'TRY'           | ''                    | 'en description is empty'      | 'No'                           | ''                     |
+			| ''                                     | '$$DeditNoteDate095002$$' | '1 000'                   | 'Main Company'         | 'Distribution department' | 'Software'               | ''               | 'TRY'           | ''                    | 'Local currency'               | 'No'                           | ''                     |
+			| ''                                     | '$$DeditNoteDate095002$$' | '1 000'                   | 'Main Company'         | 'Distribution department' | 'Software'               | ''               | 'TRY'           | ''                    | 'TRY'                          | 'No'                           | ''                     |
+			| ''                                     | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| 'Register  "Partner AP transactions"'  | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | 'Dimensions'              | ''                       | ''               | ''              | ''                    | ''                             | ''                             | 'Attributes'           |
+			| ''                                     | ''                        | ''                        | 'Amount'               | 'Company'                 | 'Basis document'         | 'Partner'        | 'Legal name'    | 'Partner term'        | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                     | 'Receipt'                 | '$$DeditNoteDate095002$$' | '-1 000'               | 'Main Company'            | ''                       | 'Maxim'          | 'Company Maxim' | 'Partner term Maxim'  | 'TRY'                          | 'en description is empty'      | 'No'                   |
+			| ''                                     | 'Receipt'                 | '$$DeditNoteDate095002$$' | '-1 000'               | 'Main Company'            | ''                       | 'Maxim'          | 'Company Maxim' | 'Partner term Maxim'  | 'TRY'                          | 'Local currency'               | 'No'                   |
+			| ''                                     | 'Receipt'                 | '$$DeditNoteDate095002$$' | '-1 000'               | 'Main Company'            | ''                       | 'Maxim'          | 'Company Maxim' | 'Partner term Maxim'  | 'TRY'                          | 'TRY'                          | 'No'                   |
+			| ''                                     | 'Receipt'                 | '$$DeditNoteDate095002$$' | '-171,23'              | 'Main Company'            | ''                       | 'Maxim'          | 'Company Maxim' | 'Partner term Maxim'  | 'USD'                          | 'Reporting currency'           | 'No'                   |
 		And I close all client application windows
 
-Scenario: _095003 change of the basis document and the amount in the already performed Credit debit note and movement check
-	* Choose a document already created
-		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+
+Scenario: _095003 check movements of the document Credit Note (increase in debt to the vendor)
+	* Create document
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I click the button named "FormCreate"
+	* Filling in the details of the document
+		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+			| 'Description'  |
+			| 'Main Company' |
 		And I select current line in "List" table
-	* Change of the basis document and the amount
-		And I select current line in "Transactions" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Maxim'       |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Company Maxim' |
+		And I select current line in "List" table
+	* Filling in the basis document for debt write-offs
+		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner ap transactions basis document" attribute in "Transactions" table
 		Then "Select data type" window is opened
 		And I go to line in "" table
 			| ''                 |
 			| 'Purchase invoice' |
 		And I select current line in "" table
+		* Check the selection of basis documents for the specified partner
+			Then the number of "List" table lines is "меньше или равно" 2
+			And "List" table contains lines
+			| 'Number' | 'Legal name'    | 'Partner' | 'Document amount'   | 'Currency' |
+			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00'         | 'TRY'      |
+			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00'         | 'TRY'      |
 		And I go to line in "List" table
-			| 'Document amount'     | 'Currency' | 'Legal name'    | 'Number' | 'Partner' |
-			| '10 000,00' | 'TRY'      | 'Company Maxim' | '2 901'  | 'Maxim'   |
+			| 'Number' |
+			| '2 900'  |
 		And I select current line in "List" table
 		And I activate field named "TransactionsAmount" in "Transactions" table
-		And I input "2 000,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I activate "Business unit" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Business unit" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+		And I activate "Expense type" field in "Transactions" table
+		And I click choice button of "Expense type" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Software'    |
+		And I select current line in "List" table
+		And I click choice button of "Partner term" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term Maxim'    |
+		And I select current line in "List" table
+		And I click choice button of "Currency" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Turkish lira'    |
+		And I select current line in "List" table
+		And I click choice button of "Partner" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Maxim'    |
+		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
 	* Check movements
 		And I click "Post" button
+		And I save the window as "$$CreditNote095003$$"
+		And I save the value of "Date" field as "$$CreditNoteDate095003$$"
 		And I click "Registrations report" button
 		Then "ResultTable" spreadsheet document is equal by template
-		| 'Credit debit note 1*'                 | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| 'Document registrations records'       | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| 'Register  "Accounts statement"'       | ''            | ''                    | ''                    | ''                        | ''                       | ''               | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | 'Record type' | 'Period'              | 'Resources'           | ''                        | ''                       | ''               | 'Dimensions'    | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | ''            | ''                    | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers' | 'Transaction AR' | 'Company'       | 'Partner'             | 'Legal name'               | 'Basis document'           | 'Currency'             |
-		| ''                                     | 'Expense'     | '*'                   | ''                    | '2 000'                   | ''                       | ''               | 'Main Company'  | 'Maxim'               | 'Company Maxim'            | ''                         | 'TRY'                  |
-		| ''                                     | ''            | ''                    | ''                    | ''                        | ''                       | ''               | ''              | ''                    | ''                         | ''                         | ''                     |
-		| 'Register  "Reconciliation statement"' | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Legal name'     | 'Currency' | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '2 000'        | 'Main Company'            | 'Company Maxim'  | 'TRY'      | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| 'Register  "Revenues turnovers"'       | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | 'Period'      | 'Resources' | 'Dimensions'   | ''                        | ''               | ''         | ''              | ''                    | ''                         | 'Attributes'               | ''                     |
-		| ''                                     | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type'   | 'Item key' | 'Currency'      | 'Additional analytic' | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
-		| ''                                     | '*'           | '342,47'    | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'USD'           | ''                    | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                     | '*'           | '2 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'en description is empty' | 'No'                       | ''                     |
-		| ''                                     | '*'           | '2 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'Local currency'           | 'No'                       | ''                     |
-		| ''                                     | '*'           | '2 000'     | 'Main Company' | 'Distribution department' | 'Software'       | ''         | 'TRY'           | ''                    | 'TRY'                      | 'No'                       | ''                     |
-		| ''                                     | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| 'Register  "Partner AP transactions"'  | ''            | ''          | ''             | ''                        | ''               | ''         | ''              | ''                    | ''                         | ''                         | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''               | ''         | ''              | ''                    | ''                         | ''                         | 'Attributes'           |
-		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Basis document' | 'Partner'  | 'Legal name'    | 'Partner term'           | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
-		| ''                                     | 'Expense'     | '*'         | '342,47'       | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'en description is empty' | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'Local currency'           | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '2 000'        | 'Main Company'            | ''               | 'Maxim'    | 'Company Maxim' | 'Partner term Maxim'     | 'TRY'                      | 'TRY'                      | 'No'                   |
+			| '$$CreditNote095003$$'                 | ''                         | ''                         | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| 'Document registrations records'       | ''                         | ''                         | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| 'Register  "Expenses turnovers"'       | ''                         | ''                         | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | 'Period'                   | 'Resources'                | 'Dimensions'           | ''                        | ''                       | ''               | ''              | ''                    | ''                             | 'Attributes'                   | ''                     |
+			| ''                                     | ''                         | 'Amount'                   | 'Company'              | 'Business unit'           | 'Expense type'           | 'Item key'       | 'Currency'      | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation'         | ''                     |
+			| ''                                     | '$$CreditNoteDate095003$$' | '17,12'                    | 'Main Company'         | 'Distribution department' | 'Software'               | ''               | 'USD'           | ''                    | 'Reporting currency'           | 'No'                           | ''                     |
+			| ''                                     | '$$CreditNoteDate095003$$' | '100'                      | 'Main Company'         | 'Distribution department' | 'Software'               | ''               | 'TRY'           | ''                    | 'en description is empty'      | 'No'                           | ''                     |
+			| ''                                     | '$$CreditNoteDate095003$$' | '100'                      | 'Main Company'         | 'Distribution department' | 'Software'               | ''               | 'TRY'           | ''                    | 'Local currency'               | 'No'                           | ''                     |
+			| ''                                     | '$$CreditNoteDate095003$$' | '100'                      | 'Main Company'         | 'Distribution department' | 'Software'               | ''               | 'TRY'           | ''                    | 'TRY'                          | 'No'                           | ''                     |
+			| ''                                     | ''                         | ''                         | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| 'Register  "Accounts statement"'       | ''                         | ''                         | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | 'Record type'              | 'Period'                   | 'Resources'            | ''                        | ''                       | ''               | 'Dimensions'    | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | ''                         | ''                         | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers' | 'Transaction AR' | 'Company'       | 'Partner'             | 'Legal name'                   | 'Basis document'               | 'Currency'             |
+			| ''                                     | 'Receipt'                  | '$$CreditNoteDate095003$$' | ''                     | '100'                     | ''                       | ''               | 'Main Company'  | 'Maxim'               | 'Company Maxim'                | ''                             | 'TRY'                  |
+			| ''                                     | ''                         | ''                         | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| 'Register  "Reconciliation statement"' | ''                         | ''                         | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | 'Record type'              | 'Period'                   | 'Resources'            | 'Dimensions'              | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | ''                         | ''                         | 'Amount'               | 'Company'                 | 'Legal name'             | 'Currency'       | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | 'Expense'                  | '$$CreditNoteDate095003$$' | '100'                  | 'Main Company'            | 'Company Maxim'          | 'TRY'            | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | ''                         | ''                         | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| 'Register  "Partner AP transactions"'  | ''                         | ''                         | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
+			| ''                                     | 'Record type'              | 'Period'                   | 'Resources'            | 'Dimensions'              | ''                       | ''               | ''              | ''                    | ''                             | ''                             | 'Attributes'           |
+			| ''                                     | ''                         | ''                         | 'Amount'               | 'Company'                 | 'Basis document'         | 'Partner'        | 'Legal name'    | 'Partner term'        | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                     | 'Receipt'                  | '$$CreditNoteDate095003$$' | '17,12'                | 'Main Company'            | ''                       | 'Maxim'          | 'Company Maxim' | 'Partner term Maxim'  | 'USD'                          | 'Reporting currency'           | 'No'                   |
+			| ''                                     | 'Receipt'                  | '$$CreditNoteDate095003$$' | '100'                  | 'Main Company'            | ''                       | 'Maxim'          | 'Company Maxim' | 'Partner term Maxim'  | 'TRY'                          | 'en description is empty'      | 'No'                   |
+			| ''                                     | 'Receipt'                  | '$$CreditNoteDate095003$$' | '100'                  | 'Main Company'            | ''                       | 'Maxim'          | 'Company Maxim' | 'Partner term Maxim'  | 'TRY'                          | 'Local currency'               | 'No'                   |
+			| ''                                     | 'Receipt'                  | '$$CreditNoteDate095003$$' | '100'                  | 'Main Company'            | ''                       | 'Maxim'          | 'Company Maxim' | 'Partner term Maxim'  | 'TRY'                          | 'TRY'                          | 'No'                   |
 		And I close all client application windows
 
-Scenario: _095004 check movements of the document Credit_DebitNote by operation type Receivable
-	* Create a document
-		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+
+
+
+Scenario: _095004 check movements of the document Credit Note (write off customers debts)
+	* Create document
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I select "Receivable" exact value from "Operation type" drop-down list
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -415,16 +477,16 @@ Scenario: _095004 check movements of the document Credit_DebitNote by operation 
 		And I select current line in "List" table
 	* Filling in the basis document for debt write-offs
 		And in the table "Transactions" I click the button named "TransactionsAdd"
-		And I click choice button of "Partner AR transactions basis document" attribute in "Transactions" table
+		And I click choice button of "Partner ar transactions basis document" attribute in "Transactions" table
 		Then "Select data type" window is opened
 		And I go to line in "" table
 			| ''                 |
 			| 'Sales invoice' |
 		And I select current line in "" table
 		* Check the selection of basis documents for the specified partner
-			And delay 2
-			Then the number of "List" table lines is "less or equal" 1
-			And "List" table contains lines
+		And delay 2
+		Then the number of "List" table lines is "less or equal" 1
+		And "List" table contains lines
 			| 'Number' |
 			| '2 900'  |
 		And I go to line in "List" table
@@ -447,49 +509,217 @@ Scenario: _095004 check movements of the document Credit_DebitNote by operation 
 			| 'Description' |
 			| 'Software'    |
 		And I select current line in "List" table
+		And I click choice button of "Partner term" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'    |
+		And I select current line in "List" table
+		And I click choice button of "Currency" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Turkish lira'    |
+		And I select current line in "List" table
+		And I click choice button of "Partner" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lunch'    |
+		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
-	* Change the document number
-		And I move to "Other" tab
-		And I input "2" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "2" text in "Number" field
 	* Check movements
 		And I click "Post" button
+		And I save the window as "$$CreditNote095004$$"
+		And I save the value of "Date" field as "$$CreditNoteDate095004$$"
 		And I click "Registrations report" button
 		Then "ResultTable" spreadsheet document is equal by template
-		| 'Credit debit note 2*'                 | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
-		| 'Document registrations records'       | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
-		| 'Register  "Partner AR transactions"'  | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | 'Attributes'           |
-		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Basis document'                                | 'Partner'  | 'Legal name'    | 'Partner term'             | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
-		| ''                                     | 'Expense'     | '*'         | '171,23'       | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                      | 'en description is empty' | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                      | 'Local currency'           | 'No'                   |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'    | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                      | 'TRY'                      | 'No'                   |
-		| ''                                     | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
-		| 'Register  "Expenses turnovers"'       | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
-		| ''                                     | 'Period'      | 'Resources' | 'Dimensions'   | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | 'Attributes'               | ''                     |
-		| ''                                     | ''            | 'Amount'    | 'Company'      | 'Business unit'           | 'Expense type'                                  | 'Item key' | 'Currency'      | 'Additional analytic'   | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
-		| ''                                     | '*'           | '171,23'    | 'Main Company' | 'Distribution department' | 'Software'                                      | ''         | 'USD'           | ''                      | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'                                      | ''         | 'TRY'           | ''                      | 'en description is empty' | 'No'                       | ''                     |
-		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'                                      | ''         | 'TRY'           | ''                      | 'Local currency'           | 'No'                       | ''                     |
-		| ''                                     | '*'           | '1 000'     | 'Main Company' | 'Distribution department' | 'Software'                                      | ''         | 'TRY'           | ''                      | 'TRY'                      | 'No'                       | ''                     |
-		| ''                                     | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
-		| 'Register  "Accounts statement"'                | ''                    | ''                    | ''                    | ''                        | ''                                              | ''               | ''              | ''                      | ''                         | ''                         | ''                     |
-		| ''                                              | 'Record type'         | 'Period'              | 'Resources'           | ''                        | ''                                              | ''               | 'Dimensions'    | ''                      | ''                         | ''                         | ''                     |
-		| ''                                              | ''                    | ''                    | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers'                        | 'Transaction AR' | 'Company'       | 'Partner'               | 'Legal name'               | 'Basis document'           | 'Currency'             |
-		| ''                                              | 'Expense'             | '*'                   | ''                    | ''                        | ''                                              | '1 000'          | 'Main Company'  | 'Lunch'                 | 'Company Lunch'            | 'Sales invoice 2 900*'     | 'TRY'                  |
-		| ''                                              | ''                    | ''                    | ''                    | ''                        | ''                                              | ''               | ''              | ''                      | ''                         | ''                         | ''                     |
-		| 'Register  "Reconciliation statement"' | ''            | ''          | ''             | ''                        | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''                                              | ''         | ''              | ''                      | ''                         | ''                         | ''                     |
-		| ''                                     | ''            | ''          | 'Amount'       | 'Company'                 | 'Legal name'                                    | 'Currency' | ''              | ''                      | ''                         | ''                         | ''                     |
-		| ''                                     | 'Expense'     | '*'         | '1 000'        | 'Main Company'            | 'Company Lunch'                                 | 'TRY'      | ''              | ''                      | ''                         | ''                         | ''                     |
+		| '$$CreditNote095004$$'                 | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| 'Document registrations records'       | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| 'Register  "Partner AR transactions"'  | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | 'Record type'              | 'Period'                   | 'Resources'            | 'Dimensions'              | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | 'Attributes'           |
+		| ''                                     | ''                         | ''                         | 'Amount'               | 'Company'                 | 'Basis document'                                | 'Partner'        | 'Legal name'    | 'Partner term'             | 'Currency'                     | 'Multi currency movement type'                  | 'Deferred calculation' |
+		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | '-1 000'               | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'en description is empty'                       | 'No'                   |
+		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | '-1 000'               | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'Local currency'                                | 'No'                   |
+		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | '-1 000'               | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'TRY'                                           | 'No'                   |
+		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | '-171,23'              | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'USD'                          | 'Reporting currency'                            | 'No'                   |
+		| ''                                     | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| 'Register  "Expenses turnovers"'       | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | 'Period'                   | 'Resources'                | 'Dimensions'           | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | 'Attributes'                                    | ''                     |
+		| ''                                     | ''                         | 'Amount'                   | 'Company'              | 'Business unit'           | 'Expense type'                                  | 'Item key'       | 'Currency'      | 'Additional analytic'      | 'Multi currency movement type' | 'Deferred calculation'                          | ''                     |
+		| ''                                     | '$$CreditNoteDate095004$$' | '171,23'                   | 'Main Company'         | 'Distribution department' | 'Software'                                      | ''               | 'USD'           | ''                         | 'Reporting currency'           | 'No'                                            | ''                     |
+		| ''                                     | '$$CreditNoteDate095004$$' | '1 000'                    | 'Main Company'         | 'Distribution department' | 'Software'                                      | ''               | 'TRY'           | ''                         | 'en description is empty'      | 'No'                                            | ''                     |
+		| ''                                     | '$$CreditNoteDate095004$$' | '1 000'                    | 'Main Company'         | 'Distribution department' | 'Software'                                      | ''               | 'TRY'           | ''                         | 'Local currency'               | 'No'                                            | ''                     |
+		| ''                                     | '$$CreditNoteDate095004$$' | '1 000'                    | 'Main Company'         | 'Distribution department' | 'Software'                                      | ''               | 'TRY'           | ''                         | 'TRY'                          | 'No'                                            | ''                     |
+		| ''                                     | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| 'Register  "Accounts statement"'       | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | 'Record type'              | 'Period'                   | 'Resources'            | ''                        | ''                                              | ''               | 'Dimensions'    | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | ''                         | ''                         | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers'                        | 'Transaction AR' | 'Company'       | 'Partner'                  | 'Legal name'                   | 'Basis document'                                | 'Currency'             |
+		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | ''                     | ''                        | ''                                              | '-1 000'         | 'Main Company'  | 'Lunch'                    | 'Company Lunch'                | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'TRY'                  |
+		| ''                                     | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| 'Register  "Reconciliation statement"' | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | 'Record type'              | 'Period'                   | 'Resources'            | 'Dimensions'              | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | ''                         | ''                         | 'Amount'               | 'Company'                 | 'Legal name'                                    | 'Currency'       | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | 'Expense'                  | '$$CreditNoteDate095004$$' | '1 000'                | 'Main Company'            | 'Company Lunch'                                 | 'TRY'            | ''              | ''                         | ''                             | ''                                              | ''                     |
+	And I close all client application windows
+
+
+Scenario: _095005 check movements of the document Debit Note (increase in customers debt)
+	* Create document
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I click the button named "FormCreate"
+	* Filling in the details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lunch'       |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Company Lunch' |
+		And I select current line in "List" table
+	* Filling in the basis document for debt write-offs
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner ar transactions basis document" attribute in "Transactions" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
+			| ''                 |
+			| 'Sales invoice' |
+		And I select current line in "" table
+		* Check the selection of basis documents for the specified partner
+		And delay 2
+		Then the number of "List" table lines is "less or equal" 1
+		And "List" table contains lines
+			| 'Number' |
+			| '2 900'  |
+		And I go to line in "List" table
+			| 'Number' |
+			| '2 900'  |
+		And I select current line in "List" table
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I activate "Business unit" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Business unit" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+		And I activate "Expense type" field in "Transactions" table
+		And I click choice button of "Expense type" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Software'    |
+		And I select current line in "List" table
+		And I click choice button of "Partner term" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'    |
+		And I select current line in "List" table
+		And I click choice button of "Currency" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Turkish lira'    |
+		And I select current line in "List" table
+		And I click choice button of "Partner" attribute in "Transactions" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lunch'    |
+		And I select current line in "List" table
+		And I finish line editing in "Transactions" table
+	* Check movements
+		And I click "Post" button
+		And I save the window as "$$DeditNote095005$$"
+		And I save the value of "Date" field as "$$DeditNoteDate095005$$"
+		And I click "Registrations report" button
+		Then "ResultTable" spreadsheet document is equal by template
+		| '$$DeditNote095005$$'                  | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| 'Document registrations records'       | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| 'Register  "Partner AR transactions"'  | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | 'Dimensions'              | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | 'Attributes'           |
+		| ''                                     | ''                        | ''                        | 'Amount'               | 'Company'                 | 'Basis document'                                | 'Partner'        | 'Legal name'    | 'Partner term'             | 'Currency'                     | 'Multi currency movement type'                  | 'Deferred calculation' |
+		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '17,12'                | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'USD'                          | 'Reporting currency'                            | 'No'                   |
+		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '100'                  | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'en description is empty'                       | 'No'                   |
+		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '100'                  | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'Local currency'                                | 'No'                   |
+		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '100'                  | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'TRY'                                           | 'No'                   |
+		| ''                                     | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| 'Register  "Accounts statement"'       | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | ''                        | ''                                              | ''               | 'Dimensions'    | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | ''                        | ''                        | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers'                        | 'Transaction AR' | 'Company'       | 'Partner'                  | 'Legal name'                   | 'Basis document'                                | 'Currency'             |
+		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | ''                     | ''                        | ''                                              | '100'            | 'Main Company'  | 'Lunch'                    | 'Company Lunch'                | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'TRY'                  |
+		| ''                                     | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| 'Register  "Reconciliation statement"' | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | 'Dimensions'              | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | ''                        | ''                        | 'Amount'               | 'Company'                 | 'Legal name'                                    | 'Currency'       | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '100'                  | 'Main Company'            | 'Company Lunch'                                 | 'TRY'            | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| 'Register  "Revenues turnovers"'       | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
+		| ''                                     | 'Period'                  | 'Resources'               | 'Dimensions'           | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | 'Attributes'                                    | ''                     |
+		| ''                                     | ''                        | 'Amount'                  | 'Company'              | 'Business unit'           | 'Revenue type'                                  | 'Item key'       | 'Currency'      | 'Additional analytic'      | 'Multi currency movement type' | 'Deferred calculation'                          | ''                     |
+		| ''                                     | '$$DeditNoteDate095005$$' | '17,12'                   | 'Main Company'         | 'Distribution department' | 'Software'                                      | ''               | 'USD'           | ''                         | 'Reporting currency'           | 'No'                                            | ''                     |
+		| ''                                     | '$$DeditNoteDate095005$$' | '100'                     | 'Main Company'         | 'Distribution department' | 'Software'                                      | ''               | 'TRY'           | ''                         | 'en description is empty'      | 'No'                                            | ''                     |
+		| ''                                     | '$$DeditNoteDate095005$$' | '100'                     | 'Main Company'         | 'Distribution department' | 'Software'                                      | ''               | 'TRY'           | ''                         | 'Local currency'               | 'No'                                            | ''                     |
+		| ''                                     | '$$DeditNoteDate095005$$' | '100'                     | 'Main Company'         | 'Distribution department' | 'Software'                                      | ''               | 'TRY'           | ''                         | 'TRY'                          | 'No'                                            | ''                     |
 		And I close all client application windows
 
-Scenario: _095005 check the legal name filling if the partner has only one
-	* Create a document
-		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+
+Scenario: _095006 check Reconcilation statement
+	* Create document
+		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
+		And I click the button named "FormCreate"
+	* Check for Maxim
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Maxim'       |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Company Maxim' |
+		And I select current line in "List" table
+		And I click Select button of "Currency" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Turkish lira' |
+		And I select current line in "List" table
+		Then "Reconciliation statement (create) *" window is opened
+		And I input "01.01.2020" text in "Begin period" field
+		And I input end of the current month date in "End period" field
+		And in the table "Transactions" I click "Fill" button
+		And "Transactions" table contains lines
+		| 'Date'                     | 'Document'                                         | 'Credit'    | 'Debit'    |
+		| '01.01.2020 10:00:00'      | 'Purchase invoice 2 900 dated 01.01.2020 10:00:00' | '11 000,00' | ''         |
+		| '01.01.2020 10:00:00'      | 'Purchase invoice 2 901 dated 01.01.2020 10:00:00' | '10 000,00' | ''         |
+		| '$$DeditNoteDate095002$$'  | '$$DeditNote095002$$'                              | ''          | '1 000,00' |
+		| '$$CreditNoteDate095003$$' | '$$CreditNote095003$$'                             | '100,00'    | ''         |
+	* Check for Lunch
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lunch'       |
+		And I select current line in "List" table
+		And in the table "Transactions" I click "Fill" button
+		And "Transactions" table contains lines
+		| 'Date'                     | 'Document'                                      | 'Credit'   | 'Debit'     |
+		| '01.01.2020 10:00:00'      | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | ''         | '10 500,00' |
+		| '$$CreditNoteDate095004$$' | '$$CreditNote095004$$'                          | '1 000,00' | ''          |
+		| '$$DeditNoteDate095005$$'  | '$$DeditNote095005$$'                           | ''         | '100,00'    |
+		And I close all client application windows
+		
+
+Scenario: _095007 check the legal name filling if the partner has only one
+	* Create Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
 	* Filling in legal name
 		And I click Choice button of the field named "Partner"
@@ -505,145 +735,21 @@ Scenario: _095005 check the legal name filling if the partner has only one
 			| 'DFC'         |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "DFC"
-
-Scenario: _095006 check re-selection of the transaction type in the Credit Debit Note document
-	* Create a document
-		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+	* Create Dedit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
-	* Filling in the details of the document
-		And I select "Receivable" exact value from "Operation type" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+	* Filling in legal name
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Lunch'       |
 		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-			| 'Description'   |
-			| 'Company Lunch' |
-		And I select current line in "List" table
-	* Filling in the basis document for debt write-offs
-		And in the table "Transactions" I click the button named "TransactionsAdd"
-		And I click choice button of "Partner AR transactions basis document" attribute in "Transactions" table
-		Then "Select data type" window is opened
-		And I go to line in "" table
-			| ''                 |
-			| 'Sales invoice' |
-		And I select current line in "" table
-		* Check the selection of basis documents for the specified partner
-			Then the number of "List" table lines is "меньше или равно" 1
-			And "List" table contains lines
-			| 'Number' |
-			| '2 900'  |
-		And I go to line in "List" table
-			| 'Number' |
-			| '2 900'  |
-		And I select current line in "List" table
-		And I activate field named "TransactionsAmount" in "Transactions" table
-		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
-		And I finish line editing in "Transactions" table
-		And I activate "Business unit" field in "Transactions" table
-		And I select current line in "Transactions" table
-		And I click choice button of "Business unit" attribute in "Transactions" table
-		And I go to line in "List" table
-			| 'Description'             |
-			| 'Distribution department' |
-		And I select current line in "List" table
-		And I activate "Expense type" field in "Transactions" table
-		And I click choice button of "Expense type" attribute in "Transactions" table
+		Then the form attribute named "LegalName" became equal to "Company Lunch"
+	* Check legal name re-filling at partner re-selection.
+		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Software'    |
+			| 'DFC'         |
 		And I select current line in "List" table
-		And I finish line editing in "Transactions" table
-	* Change the document number
-		And I move to "Other" tab
-		And I input "12" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "12" text in "Number" field
-		And I click "Post" button
-	* Re-select operatiom type
-		And I select "Payable" exact value from "Operation type" drop-down list
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		Then the number of "Transactions" table lines is "равно" 0
+		Then the form attribute named "LegalName" became equal to "DFC"
 		And I close all client application windows
-	* Click cancel when re-selecting the operation type
-		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
-		And I go to line in "List" table
-		| 'Number' |
-		| '12'     |
-		And I select current line in "List" table
-		And I click "Decoration group title collapsed picture" hyperlink
-		And I select "Payable" exact value from "Operation type" drop-down list
-		Then "1C:Enterprise" window is opened
-		And I click "No" button
-		And "Transactions" table contains lines
-		| 'Partner AR transactions basis document'        | 'Partner' | 'Partner term'             | 'Amount'   | 'Business unit'           | 'Currency' | 'Expense type' |
-		| 'Sales invoice 2 900*'                          | 'Lunch'   | 'Basic Partner terms, TRY' | '1 000,00' | 'Distribution department' | 'TRY'      | 'Software'     |
-		And I select "Payable" exact value from "Operation type" drop-down list
-		Then "1C:Enterprise" window is opened
-		And I click "Cancel" button
-		And "Transactions" table contains lines
-		| 'Partner AR transactions basis document'        | 'Partner' | 'Partner term'             | 'Amount'   | 'Business unit'           | 'Currency' | 'Expense type' |
-		| 'Sales invoice 2 900*'                          | 'Lunch'   | 'Basic Partner terms, TRY' | '1 000,00' | 'Distribution department' | 'TRY'      | 'Software'     |
-	
-
-Scenario: _095007 check filling and refilling of the tabular part using the Fill button
-	* Create a document
-		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
-		And I click the button named "FormCreate"
-	* Filling in the details of the document
-		And I select "Receivable" exact value from "Operation type" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Partner"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'       |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-			| 'Description'   |
-			| 'Company Kalipso' |
-		And I select current line in "List" table
-	* Filling in the tabular part
-		And in the table "Transactions" I click "Fill transactions" button
-		And "Transactions" table contains lines
-			| 'Partner AR transactions basis document'      |
-			| 'Sales invoice 180*'                          |
-			| 'Sales invoice 181*'                          |
-			| 'Sales invoice 3*'                            |
-	* Re-select partner and check re-filling tabular part
-		And I click Choice button of the field named "Partner"
-		Then "Partners" window is opened
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'     |
-		And I select current line in "List" table
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-			| 'Description'   |
-			| 'Company Ferron BP' |
-		And I select current line in "List" table
-		Then the number of "Transactions" table lines is "равно" 0
-		And in the table "Transactions" I click "Fill transactions" button
-		And "Transactions" table does not contain lines
-			| 'Partner AR transactions basis document'      |
-			| 'Sales invoice 180*'                          |
-			| 'Sales invoice 181*'                          |
-			| 'Sales invoice 3*'                            |
-	And I close all client application windows
-
-

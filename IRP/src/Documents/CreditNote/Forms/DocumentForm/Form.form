@@ -303,49 +303,6 @@
         <name>GroupTitleLeft</name>
         <id>136</id>
         <items xsi:type="form:FormField">
-          <name>OperationType</name>
-          <id>10</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <handlers>
-            <event>OnChange</event>
-            <name>OperationTypeOnChange</name>
-          </handlers>
-          <extendedTooltip>
-            <name>OperationTypeExtendedTooltip</name>
-            <id>12</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>OperationTypeContextMenu</name>
-            <id>11</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <readOnly>true</readOnly>
-          <editMode>EnterOnInput</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-        </items>
-        <items xsi:type="form:FormField">
           <name>Company</name>
           <id>7</id>
           <visible>true</visible>

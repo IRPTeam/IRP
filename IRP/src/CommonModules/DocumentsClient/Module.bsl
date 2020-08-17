@@ -942,7 +942,7 @@ Procedure ShowUserQueryBoxContinue(Result, AdditionalParameters) Export
 	If Result.Property("UpdatePrices") Then
 		
 		Settings.CalculateSettings = New Structure();
-		PriceDate = ?(ValueIsFilled(Object.Date), Object.Date, CurrentDate());
+		PriceDate = CalculationStringsClientServer.GetPriceDate(Object);
 		Settings.CalculateSettings.Insert("UpdatePrice",
 					New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 					
@@ -978,7 +978,7 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	CalculationSettings = New Structure;
 	If Object.Property("Agreement") Then
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
-		PriceDate = ?(ValueIsFilled(Object.Date), Object.Date, CurrentDate());
+		PriceDate = CalculationStringsClientServer.GetPriceDate(Object);
 		CalculationSettings.Insert("UpdatePrice",
 					New Structure("Period, PriceType", PriceDate, AgreementInfo.PriceType));
 		FilterString = "Item, ItemKey, Unit, Price";

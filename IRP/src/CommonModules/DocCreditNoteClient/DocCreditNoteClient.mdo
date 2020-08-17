@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4443defb-9b77-4fde-bf59-082519ff1335">
+  <name>DocCreditNoteClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc credit note client</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+</mdclass:CommonModule>

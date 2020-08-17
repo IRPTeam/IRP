@@ -165,6 +165,14 @@
     <metadata>Document.RetailReturnReceipt</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Document.CreditNote</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.DebitNote</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

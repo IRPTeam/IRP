@@ -314,6 +314,8 @@
   <commonModules>CommonModule.DPPointOfSaleClient</commonModules>
   <commonModules>CommonModule.DocCreditNoteClient</commonModules>
   <commonModules>CommonModule.DocCreditNoteServer</commonModules>
+  <commonModules>CommonModule.DocDebitNoteClient</commonModules>
+  <commonModules>CommonModule.DocDebitNoteServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -504,6 +506,7 @@
   <documents>Document.RetailSalesReceipt</documents>
   <documents>Document.RetailReturnReceipt</documents>
   <documents>Document.CreditNote</documents>
+  <documents>Document.DebitNote</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AgreementKinds</enums>

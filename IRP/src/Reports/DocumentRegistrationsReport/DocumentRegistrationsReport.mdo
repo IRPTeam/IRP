@@ -70,6 +70,7 @@
       <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.RetailReturnReceipt</types>
       <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.DebitNote</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

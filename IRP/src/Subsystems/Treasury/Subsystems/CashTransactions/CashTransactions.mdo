@@ -14,5 +14,6 @@
   <content>Document.CashExpense</content>
   <content>Document.CashRevenue</content>
   <content>Document.CreditNote</content>
+  <content>Document.DebitNote</content>
   <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

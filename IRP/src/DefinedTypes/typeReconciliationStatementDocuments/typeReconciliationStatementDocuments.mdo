@@ -21,5 +21,6 @@
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.CreditDebitNote</types>
     <types>DocumentRef.CreditNote</types>
+    <types>DocumentRef.DebitNote</types>
   </type>
 </mdclass:DefinedType>

@@ -913,7 +913,7 @@ Scenario: message when trying to create Purchase order based on Sales order with
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I click "Purchase invoice" button
-		Then warning message containing text "There are no lines with a correct procurement method." appears
+		Then warning message containing text 'There are no more items that you need to order from suppliers in the "Sales order" document.' appears
 		And I close all client application windows
 
 Scenario: message when trying to re-create Purchase order/Inventory transfer order based on Internal supply request

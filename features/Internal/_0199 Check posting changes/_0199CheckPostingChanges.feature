@@ -130,10 +130,11 @@ Scenario: _019903 add line in Purchase order and chek movements changes
 		And I click "Post and close" button
 	* Check registry entries (Order Balance)
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		And Delay 2
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
-			| '100,000'  | 'Purchase order 103*' | '12'          | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
-			| '50,000'   | 'Purchase order 103*' | '13'          | 'Store 03' | 'Purchase order 103*' | '39/19SD'   |
+			| 'Quantity' | 'Recorder'          | 'Store'    | 'Order'             | 'Item key'  |
+			| '100,000'  | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '39/18SD'   |
+			| '50,000'   | 'Purchase order 103*' | 'Store 03' | 'Purchase order 103*' | '39/19SD'   |
 	
 Scenario: _019904 add package in Purchase order and chek movements (conversion to storage unit)
 	* Add package in the order

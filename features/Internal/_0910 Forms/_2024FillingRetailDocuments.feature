@@ -390,7 +390,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 			Then "Payment types" window is opened
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Card'        |
+				| 'Card 01'        |
 			And I select current line in "List" table
 			And I activate "Payment terminal" field in "Payments" table
 			And I click choice button of "Payment terminal" attribute in "Payments" table
@@ -535,7 +535,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		And I click "OK" button
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'L/Green'  | '1,000' | '350,00' | '18%' | ''              | '413,00'       |
+			| 'Dress' | 'L/Green'  | '1,000' | '550,00' | '18%' | ''              | '649,00'       |
 	* Add product (pick up)
 		And I go to line in "ItemsPickup" table
 			| 'Item'     |
@@ -547,36 +547,36 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		And I select current line in "ItemKeysPickup" table
 		And "ItemList" table became equal
 			| 'Item'     | 'Item key'  | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' |
-			| 'Dress'    | 'L/Green'   | '1,000' | '350,00' | '18%' | ''              | '413,00'       |
-			| 'Trousers' | '38/Yellow' | '1,000' | '500,00' | '18%' | ''              | '590,00'       |
+			| 'Dress'    | 'L/Green'   | '1,000' | '550,00' | '18%' | ''              | '649,00'       |
+			| 'Trousers' | '38/Yellow' | '1,000' | '400,00' | '18%' | ''              | '472,00'       |
 		Then the form attribute named "ItemListTotalQuantity" became equal to "2"
-		Then the form attribute named "ItemListTotalTotalAmount" became equal to "1 003"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "1 121"
 	* Change quantity and check amount recalculate
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Price'  | 'Q'     | 'Total amount' | 'VAT' |
-			| 'Dress' | 'L/Green'  | '350,00' | '1,000' | '413,00'       | '18%' |
+			| 'Dress' | 'L/Green'  | '550,00' | '1,000' | '649,00'       | '18%' |
 		And I select current line in "ItemList" table
 		And I input "3,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		Then the form attribute named "ItemListTotalQuantity" became equal to "4"
-		Then the form attribute named "ItemListTotalTotalAmount" became equal to "1 829"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "2 419"
 	* Payment (Cash)
 		And I click "Payment" button
-		And I click "1" button
-		And I click "8" button
-		And I click "3" button
+		And I click "2" button
+		And I click "4" button
+		And I click "2" button
 		And I click "0" button
-		Then the form attribute named "Amount" became equal to "1 829"
+		Then the form attribute named "Amount" became equal to "2 419"
 		Then the form attribute named "DecorationAmountAfter" became equal to "Decoration amount after"
 		And "Payments" table became equal
 			| 'Payment type' | 'Amount'   |
-			| 'Cash'         | '1 830,00' |
+			| 'Cash'         | '2 420,00' |
 		Then the form attribute named "Cashback" became equal to "1"
 		And I click "Enter" button
 		And "ItemList" table does not contain lines
 			| 'Item'     | 'Item key'  | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' |
-			| 'Dress'    | 'L/Green'   | '1,000' | '350,00' | '18%' | ''              | '413,00'       |
-			| 'Trousers' | '38/Yellow' | '1,000' | '500,00' | '18%' | ''              | '590,00'       |
+			| 'Dress'    | 'L/Green'   | '1,000' | '550,00' | '18%' | ''              | '649,00'       |
+			| 'Trousers' | '38/Yellow' | '1,000' | '400,00' | '18%' | ''              | '472,00'       |
 		And I close current window
 	* Check Retail Sales Receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -589,20 +589,20 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
 			| 'Business unit' | 'Revenue type' | 'Item'     | 'Price type'        | 'Item key'  | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
-			| 'Shop 01'       | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000' | 'pcs'  | '189,00'     | '350,00' | '18%' | ''              | '1 050,00'   | '1 239,00'     | ''                    | 'Store 01' | ''       |
-			| 'Shop 01'       | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000' | 'pcs'  | '90,00'      | '500,00' | '18%' | ''              | '500,00'     | '590,00'       | ''                    | 'Store 01' | ''       |
+			| 'Shop 01'       | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000' | 'pcs'  | '297,00'     | '550,00' | '18%' | ''              | '1 650,00'   | '1 947,00'     | ''                    | 'Store 01' | ''       |
+			| 'Shop 01'       | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000' | 'pcs'  | '72,00'      | '400,00' | '18%' | ''              | '400,00'     | '472,00'       | ''                    | 'Store 01' | ''       |
 		And "Payments" table contains lines
 			| 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Account' | 'Percent' |
-			| '1 830,00' | ''           | 'Cash'         | ''                 | ''          | ''        | ''        |
+			| '2 420,00' | ''           | 'Cash'         | ''                 | ''          | ''        | ''        |
 			| '-1,00'    | ''           | 'Cash'         | ''                 | ''          | ''        | ''        |
 		And "TaxTree" table contains lines
 			| 'Tax' | 'Item'     | 'Item key'  | 'Manual amount' | 'Tax rate' | 'Analytics' | 'Amount' |
-			| 'VAT' | ''         | ''          | '279,00'        | ''         | ''          | '279,00' |
-			| ''    | 'Trousers' | '38/Yellow' | '90,00'         | '18%'      | ''          | '90,00'  |
-			| ''    | 'Dress'    | 'L/Green'   | '189,00'        | '18%'      | ''          | '189,00' |
-		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "1 550,00"
-		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "279,00"
-		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 829,00"
+			| 'VAT' | ''         | ''          | '369,00'        | ''         | ''          | '369,00' |
+			| 'VAT' | 'Trousers' | '38/Yellow' | '72,00'         | '18%'      | ''          | '72,00'  |
+			| 'VAT' | 'Dress'    | 'L/Green'   | '297,00'        | '18%'      | ''          | '297,00' |
+		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 050,00"
+		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "369,00"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 419,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I close all client application windows
 		
@@ -617,7 +617,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		And I click "OK" button
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'L/Green'  | '1,000' | '350,00' | '18%' | ''              | '413,00'       |
+			| 'Dress' | 'L/Green'  | '1,000' | '550,00' | '18%' | ''              | '649,00'       |
 	* Add product (pick up)
 		And I go to line in "ItemsPickup" table
 			| 'Item'     |
@@ -629,37 +629,37 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		And I select current line in "ItemKeysPickup" table
 		And "ItemList" table became equal
 			| 'Item'     | 'Item key'  | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' |
-			| 'Dress'    | 'L/Green'   | '1,000' | '350,00' | '18%' | ''              | '413,00'       |
-			| 'Trousers' | '38/Yellow' | '1,000' | '500,00' | '18%' | ''              | '590,00'       |
+			| 'Dress'    | 'L/Green'   | '1,000' | '550,00' | '18%' | ''              | '649,00'       |
+			| 'Trousers' | '38/Yellow' | '1,000' | '400,00' | '18%' | ''              | '472,00'       |
 		Then the form attribute named "ItemListTotalQuantity" became equal to "2"
-		Then the form attribute named "ItemListTotalTotalAmount" became equal to "1 003"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "1 121"
 	* Change quantity and check amount recalculate
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Price'  | 'Q'     | 'Total amount' | 'VAT' |
-			| 'Dress' | 'L/Green'  | '350,00' | '1,000' | '413,00'       | '18%' |
+			| 'Dress' | 'L/Green'  | '550,00' | '1,000' | '649,00'       | '18%' |
 		And I select current line in "ItemList" table
 		And I input "3,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		Then the form attribute named "ItemListTotalQuantity" became equal to "4"
-		Then the form attribute named "ItemListTotalTotalAmount" became equal to "1 829"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "2 419"
 	* Payment (Card)
 		And I click "Payment" button
 		And I click "Card" button
+		And I click "2" button
+		And I click "4" button
 		And I click "1" button
-		And I click "8" button
-		And I click "3" button
-		And I click "0" button
+		And I click "9" button
 		Then the form attribute named "Amount" became equal to "1 829"
 		Then the form attribute named "DecorationAmountAfter" became equal to "Decoration amount after"
 		And "Payments" table became equal
-			| 'Payment type' | 'Amount'   |
-			| 'Cash'         | '1 830,00' |
+			| 'Payment type'    | 'Amount'   |
+			| 'Card 01'         | '2 419,00' |
 		Then the form attribute named "Cashback" became equal to "1"
 		And I click "Enter" button
 		And "ItemList" table does not contain lines
 			| 'Item'     | 'Item key'  | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' |
-			| 'Dress'    | 'L/Green'   | '1,000' | '350,00' | '18%' | ''              | '413,00'       |
-			| 'Trousers' | '38/Yellow' | '1,000' | '500,00' | '18%' | ''              | '590,00'       |
+			| 'Dress'    | 'L/Green'   | '1,000' | '550,00' | '18%' | ''              | '649,00'       |
+			| 'Trousers' | '38/Yellow' | '1,000' | '400,00' | '18%' | ''              | '472,00'       |
 		And I close current window
 	* Check Retail Sales Receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -672,20 +672,19 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
 			| 'Business unit' | 'Revenue type' | 'Item'     | 'Price type'        | 'Item key'  | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
-			| 'Shop 01'       | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000' | 'pcs'  | '189,00'     | '350,00' | '18%' | ''              | '1 050,00'   | '1 239,00'     | ''                    | 'Store 01' | ''       |
-			| 'Shop 01'       | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000' | 'pcs'  | '90,00'      | '500,00' | '18%' | ''              | '500,00'     | '590,00'       | ''                    | 'Store 01' | ''       |
+			| 'Shop 01'       | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000' | 'pcs'  | '297,00'     | '550,00' | '18%' | ''              | '1 650,00'   | '1 947,00'     | ''                    | 'Store 01' | ''       |
+			| 'Shop 01'       | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000' | 'pcs'  | '72,00'      | '400,00' | '18%' | ''              | '400,00'     | '472,00'       | ''                    | 'Store 01' | ''       |
 		And "Payments" table contains lines
 			| 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Account' | 'Percent' |
-			| '1 830,00' | ''           | 'Cash'         | ''                 | ''          | ''        | ''        |
-			| '-1,00'    | ''           | 'Cash'         | ''                 | ''          | ''        | ''        |
+			| '2 419,00' | ''           | 'Card 01'         | ''                 | ''          | ''        | ''        |
 		And "TaxTree" table contains lines
 			| 'Tax' | 'Item'     | 'Item key'  | 'Manual amount' | 'Tax rate' | 'Analytics' | 'Amount' |
-			| 'VAT' | ''         | ''          | '279,00'        | ''         | ''          | '279,00' |
-			| ''    | 'Trousers' | '38/Yellow' | '90,00'         | '18%'      | ''          | '90,00'  |
-			| ''    | 'Dress'    | 'L/Green'   | '189,00'        | '18%'      | ''          | '189,00' |
-		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "1 550,00"
-		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "279,00"
-		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 829,00"
+			| 'VAT' | ''         | ''          | '369,00'        | ''         | ''          | '369,00' |
+			| 'VAT' | 'Trousers' | '38/Yellow' | '72,00'         | '18%'      | ''          | '72,00'  |
+			| 'VAT' | 'Dress'    | 'L/Green'   | '297,00'        | '18%'      | ''          | '297,00' |
+		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 050,00"
+		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "369,00"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 419,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I close all client application windows
 

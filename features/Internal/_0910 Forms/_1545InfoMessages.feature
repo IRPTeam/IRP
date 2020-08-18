@@ -410,7 +410,7 @@ Scenario: message when trying to re-create Purchase invoice based on Goods recie
 		And I wait "Purchase invoice (create)" window closing in 20 seconds
 	* Check message display when you try to re-create Purchase invoice
 		And I click "Purchase invoice" button
-		Then warning message containing text "There are no lines for which you need to create Purchase invoice document in the Goods receipt document." appears
+		Then warning message containing text 'There are no lines for which you need to create a "Purchase invoice" document in the "Goods receipt" document.' appears
 		And I close all client application windows
 
 Scenario: message when trying to re-create Purchase invoice based on Purchase order
@@ -837,7 +837,7 @@ Scenario: message when trying to create Goods reciept based on Purchase invoice 
 		Then warning message containing text 'There are no lines for which you need to create a "Goods receipt" document in the "Purchase invoice" document.' appears
 		And I close all client application windows
 
-Scenario: message when trying to create Purchase order based on Sales order with procurement nethod stock and repeal, with Service
+Scenario: message when trying to create Purchase order based on Sales order with procurement method stock and repeal, with Service
 	* Create Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click "Create" button
@@ -972,6 +972,7 @@ Scenario: message when trying to re-create Purchase order/Inventory transfer ord
 			| 'Vendor Ferron, TRY' |
 		And I click the button named "FormChoose"
 		Then If dialog box is visible I click "OK"
+		And I click "OK" button
 		And I select current line in "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -981,11 +982,11 @@ Scenario: message when trying to re-create Purchase order/Inventory transfer ord
 		And I click "Post and close" button
 	* Check message display when you try to re-create Purchase order/Inventory transfer order
 		And I click "Purchase order" button
-		Then warning message containing text "There are no more items that you need to order from suppliers in the Internal supply request document." appears
+		Then warning message containing text 'There are no more items that you need to order from suppliers in the "Internal supply request" document.' appears
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I click "Inventory transfer order" button
-		Then warning message containing text "There are no more items that you need to order from suppliers in the Internal supply request document." appears
+		Then warning message containing text 'There are no more items that you need to order from suppliers in the "Internal supply request" document.' appears
 		And I close all client application windows
 
 
@@ -1482,7 +1483,7 @@ Scenario: _0154515 check the message output when trying to uncheck a tick for St
 		And I select current line in "List" table
 	* Check the message output when trying to uncheck a tick for Store "Use Goods receipt"
 		And I remove checkbox "Use goods receipt"
-		Then the form attribute named "Message" became equal to 'Cannot clear the \"Use goods receipt\" check box. Documents "Goods receipts" from store Store 02 have already been created previously.'
+		Then the form attribute named "Message" became equal to 'Cannot clear the "Use goods receipt" check box. Documents "Goods receipt" from store Store 02 were already created.'
 	And I close all client application windows
 	* Open Store 02
 		Given I open hyperlink "e1cib/list/Catalog.Stores"
@@ -1492,8 +1493,9 @@ Scenario: _0154515 check the message output when trying to uncheck a tick for St
 		And I select current line in "List" table
 	* Check the message output when trying to uncheck a tick for Store "Use shipment confirmation"
 		And I remove checkbox "Use shipment confirmation"
-		Then the form attribute named "Message" became equal to 'Cannot clear the \"Use shipment confirmation\" check box. Documents "Shipment confirmations" from store Store 02 have already been created previously.'
+		Then the form attribute named "Message" became equal to 'Cannot clear the "Use shipment confirmation" check box.  Documents "Shipment confirmation" from store Store 02 were already created.'
 		And I close all client application windows
+
 
 
 Scenario: _0154516 notification when trying to post a Sales order without filling procurement method

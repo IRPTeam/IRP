@@ -3171,14 +3171,12 @@ Scenario: _0154116 check filling in and re-filling Cash expence
 		And I select "8%" exact value from "VAT" drop-down list in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Business unit' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
-			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '8%'  | '16,00'      | '236,00'       |
+			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '8%'  | '16,00'      | '216,00'       |
 		And "TaxTree" table contains lines
-			| 'Tax' | 'Tax rate' | 'Currency' | 'Amount' | 'Manual amount' |
-			| 'VAT' | ''         | 'USD'      | '16,00'  | '16,00'         |
-			| 'VAT' | '8%'       | 'USD'      | '16,00'  | '16,00'         |
+			| 'Tax' | 'Currency' | 'Business unit' | 'Amount' | 'Expense type' | 'Tax rate' | 'Manual amount' |
+			| 'VAT' | 'USD'      | ''              | '16,00'  | ''             | ''         | '16,00'         |
+			| ''    | ''         | 'Front office'  | '16,00'  | 'Software'     | '8%'       | '16,00'         |
 	And I close all client application windows
-
-
 
 
 
@@ -3347,11 +3345,11 @@ Scenario: _0154117 check filling in and re-filling Cash revenue
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Revenue type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
-			| '200,00'     | 'Software'     | '236,00'       | 'TRY'      | '8%'  | '16,00'      |
+			| '200,00'     | 'Software'     | '216,00'       | 'TRY'      | '8%'  | '16,00'      |
 		And "TaxTree" table contains lines
 			| 'Tax' | 'Tax rate' | 'Currency' | 'Amount' | 'Manual amount' |
 			| 'VAT' | ''         | 'TRY'      | '16,00'  | '16,00'         |
-			| 'VAT' | '8%'       | 'TRY'      | '16,00'  | '16,00'         |
+			| ''    | '8%'       | ''         | '16,00'  | '16,00'         |
 		And I close all client application windows
 
 Scenario: _0154118 check the details cleaning on the form Cash reciept 

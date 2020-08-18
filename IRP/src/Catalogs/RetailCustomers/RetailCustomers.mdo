@@ -43,6 +43,36 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.RetailCustomers.Form.ItemForm</defaultObjectForm>
+  <attributes uuid="0efea20d-efa3-40ab-ab5e-7300844232ca">
+    <name>Name</name>
+    <synonym>
+      <key>en</key>
+      <value>Name</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>150</length>
+      </stringQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9a32a16c-c3af-4605-b9c5-4a823c8f617f">
+    <name>Surname</name>
+    <synonym>
+      <key>en</key>
+      <value>Surname</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>200</length>
+      </stringQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="a40af367-e5b7-472f-9a82-d617ee2d5a48">
     <producedTypes>
       <objectType typeId="763f697b-9925-4828-b6f0-33b7d6cf6963" valueTypeId="4b5feca9-6937-48e1-9661-b393be050f80"/>

@@ -2564,7 +2564,10 @@
     </title>
     <id>7</id>
     <valueType>
-      <types>EnumRef.CreditDebitNoteOperationsTypes</types>
+      <types>String</types>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
     </valueType>
     <view>
       <common>true</common>

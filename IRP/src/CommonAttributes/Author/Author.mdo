@@ -79,10 +79,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.CreditDebitNote</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.Unbundling</metadata>
     <use>Use</use>
   </content>

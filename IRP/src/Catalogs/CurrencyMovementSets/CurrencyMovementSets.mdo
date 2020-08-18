@@ -135,8 +135,15 @@
         <value></value>
       </code>
     </items>
-    <items id="e633c6be-1975-4b52-bbd4-a7f3a27f4eaa">
-      <name>Document_CreditDebitNote</name>
+    <items id="3053745a-4309-44cc-b606-09e7dd62f74b">
+      <name>Document_CreditNote</name>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="de5fda38-0918-458a-9016-e51b46979277">
+      <name>Document_DebitNote</name>
+      <description>Document debit note</description>
       <code xsi:type="core:StringValue">
         <value></value>
       </code>

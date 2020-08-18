@@ -16,8 +16,8 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>0.7.0.#BuildNumber#</version>
-  <updateCatalogAddress>https://github.com/DitriXNew/irp</updateCatalogAddress>
+  <version>0.7.1.#BuildNumber#</version>
+  <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <reportsVariantsStorage>SettingsStorage.ReportOptions</reportsVariantsStorage>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>
   <mainSectionPicture/>
@@ -252,7 +252,7 @@
   <commonModules>CommonModule.DocumentsServer</commonModules>
   <commonModules>CommonModule.DocUnbundlingClient</commonModules>
   <commonModules>CommonModule.DocUnbundlingServer</commonModules>
-  <commonModules>CommonModule.ExtentionServer</commonModules>
+  <commonModules>CommonModule.ExtensionServer</commonModules>
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>
   <commonModules>CommonModule.ExternalCommandsServer</commonModules>
   <commonModules>CommonModule.FillingFromClassifiers</commonModules>
@@ -465,6 +465,7 @@
   <catalogs>Catalog.UnitsOfMeasurement</catalogs>
   <catalogs>Catalog.PaymentTerminals</catalogs>
   <catalogs>Catalog.BankTerms</catalogs>
+  <catalogs>Catalog.RetailCustomers</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>

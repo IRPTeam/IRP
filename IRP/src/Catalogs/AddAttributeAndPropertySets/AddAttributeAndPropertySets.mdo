@@ -435,6 +435,12 @@
         <value></value>
       </code>
     </items>
+    <items id="41535f14-894a-4704-be4d-e8a4534502a4">
+      <name>Catalog_RetailCustomers</name>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

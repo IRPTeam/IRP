@@ -251,6 +251,18 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="029aea7f-8d46-4d53-88bf-4edccd0a16a0">
+    <name>RetailCustomer</name>
+    <synonym>
+      <key>en</key>
+      <value>Retail customer</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.RetailCustomers</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="c15af520-fffe-411a-acb9-d2d0b4b35b84">
     <name>ListForm</name>
     <synonym>

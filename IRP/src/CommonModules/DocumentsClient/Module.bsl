@@ -1819,7 +1819,8 @@ Procedure ItemListPriceTypeOnChange(Object, Form, Module, Item = Undefined, Sett
 	EndIf;
 	
 	Settings.CalculateSettings.Insert("UpdatePrice");
-	Settings.CalculateSettings.UpdatePrice = New Structure("Period, PriceType", Object.Date, Form.CurrentPriceType);
+	Settings.CalculateSettings.UpdatePrice = New Structure("Period, PriceType", 
+	CalculationStringsClientServer.GetPriceDate(Object), Form.CurrentPriceType);
 	
 	ItemListCalculateRowsAmounts(Object, Form, Settings);
 EndProcedure

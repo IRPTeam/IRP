@@ -247,6 +247,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_076", NStr("en = 'There are no products to return in the ""%1"" document. All products are already returned.'", Lang));
 	Strings.Error_076 = StrTemplate(Strings.Error_076, Metadata.Documents.RetailSalesReceipt.Synonym);
 	
+	// %1 - 12
+	Strings.Insert("Error_077", NStr("en = 'Basis document is empty in line %1.'", Lang));
+	
 	#EndRegion
 	
 	#Region InfoMessages

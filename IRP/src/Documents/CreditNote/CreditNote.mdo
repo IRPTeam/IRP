@@ -67,37 +67,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="0aa38d53-c8c0-4868-95df-3aadac92318d">
-    <name>LegalName</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="85a05939-8a73-4216-bc3f-ce2ba3321619">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <forms uuid="423866d9-0079-49e9-9c93-34c2e98b0be9">
     <name>DocumentForm</name>
     <synonym>
@@ -146,54 +115,6 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5c119cec-129a-4f20-a049-2d00cb331cdc">
-      <name>PartnerApTransactionsBasisDocument</name>
-      <synonym>
-        <key>en</key>
-        <value>Partner ap transactions basis document</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeApTransactionBasises</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.LegalName</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.CreditNote.Attribute.LegalName</field>
-      </choiceParameterLinks>
-      <choiceParameterLinks>
-        <name>Filter.Company</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.CreditNote.Attribute.Company</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5c0ffeea-e2af-4972-adce-3169ef038551">
-      <name>PartnerArTransactionsBasisDocument</name>
-      <synonym>
-        <key>en</key>
-        <value>Partner AR transactions basis document</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeArTransactionBasises</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.LegalName</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.CreditNote.Attribute.LegalName</field>
-      </choiceParameterLinks>
-      <choiceParameterLinks>
-        <name>Filter.Company</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.CreditNote.Attribute.Company</field>
-      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -294,6 +215,30 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="cbe6f940-0e6a-4bb1-bfb0-cca3a95a7767">
+      <name>BasisDocument</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis document</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAccountStatementBasises</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5c4d3bf2-61d6-4ec0-8dd5-9096fc3ab346">
+      <name>LegalName</name>
+      <synonym>
+        <key>en</key>
+        <value>Legal name</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

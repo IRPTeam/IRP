@@ -3,25 +3,19 @@
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
-		Form.CurrentLegalName = Object.LegalName;
 		Form.CurrentCompany = Object.Company;
-		Form.CurrentPartner = Object.Partner;
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
-	Form.CurrentLegalName = Object.LegalName;
 	Form.CurrentCompany = Object.Company;
-	Form.CurrentPartner = Object.Partner;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
-	Form.CurrentLegalName = Object.LegalName;
 	Form.CurrentCompany = Object.Company;
-	Form.CurrentPartner = Object.Partner;
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;
@@ -35,7 +29,6 @@ EndProcedure
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array;
 	AttributesArray.Add("Company");
-	AttributesArray.Add("LegalName");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
 		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
@@ -65,3 +58,23 @@ Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
+
+Function GetPartnerByLegalName(LegalName, Partner) Export
+	If Not LegalName.IsEmpty() Then
+		ArrayOfFilters = New Array();
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+		If ValueIsFilled(Partner) Then
+			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", Partner, ComparisonType.Equal));
+		EndIf;
+		AdditionalParameters = New Structure();
+		If ValueIsFilled(LegalName) Then
+			AdditionalParameters.Insert("Company", LegalName);
+			AdditionalParameters.Insert("FilterPartnersByCompanies", True);
+		EndIf;
+		Parameters = New Structure("CustomSearchFilter, AdditionalParameters",
+				DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
+				DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
+		Return Catalogs.Partners.GetDefaultChoiceRef(Parameters);
+	EndIf;
+	Return Undefined;
+EndFunction

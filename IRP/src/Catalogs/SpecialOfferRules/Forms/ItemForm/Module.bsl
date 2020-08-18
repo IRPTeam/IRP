@@ -3,7 +3,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	Obj = FormAttributeToValue("Object");
 	AddressResult = PutToTempStorage(Obj.Settings.Get(), ThisObject.UUID);
-	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
+	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 &AtClient

@@ -14,7 +14,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			Items[Row.Name].ReadOnly = True;
 		EndDo;
 	EndIf;
-	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
+	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 &AtClient

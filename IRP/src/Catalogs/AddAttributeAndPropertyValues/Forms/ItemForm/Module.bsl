@@ -2,7 +2,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	Items.Owner.ReadOnly = Not Parameters.AllowOwnerEdit;
-	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
+	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 &AtClient

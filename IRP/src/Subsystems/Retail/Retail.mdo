@@ -13,4 +13,5 @@
   <content>Document.RetailSalesReceipt</content>
   <content>Catalog.PaymentTerminals</content>
   <content>Document.RetailReturnReceipt</content>
+  <content>Catalog.RetailCustomers</content>
 </mdclass:Subsystem>

@@ -101,7 +101,7 @@ Scenario: check clearing values ​​when changing the Ap-ar posting / Standard
         Then the form attribute named "StandardAgreement" became equal to ""
 * Check clearing fields when changing the switch to Standard
         And I change "Kind" radio button value to "Standard"
-        Then the form attribute named "CurrencyMovementType" became equal to ""
+        Then the form attribute named "CurrencyMovementType" became equal to "EUR"
         Then the form attribute named "PriceType" became equal to ""
         And I close all client application windows
 
@@ -144,6 +144,7 @@ Scenario: check clearing the values ​​of Tax types and Multi currency moveme
         * Check to clear completed data when uncheck Our
         And I move to "Info" tab
         And I remove checkbox "Our"
+		And I select "Company" exact value from the drop-down list named "Type"
         And I click "Save" button
         And I set checkbox "Our"
         And "Currencies" table does not contain lines

@@ -937,6 +937,11 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 				| 'SalesTax' | '1%'       | 'Dress' | 'L/Green'  | ''          | '5,45'   | '5,45'          |
 				| 'SalesTax' | '1%'       | 'Dress' | 'XS/Blue'  | ''          | '5,15'   | '5,15'          |
 				| 'SalesTax' | '1%'       | 'Shirt' | '38/Black' | ''          | '6,93'   | '6,93'          |
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Shirt' | '38/Black' |
+			And I activate "VAT" field in "ItemList" table
+			And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price include tax
 				And I move to "Item list" tab
@@ -981,7 +986,7 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "210,30"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 980,30"
-
+				And I close all client application windows
 
 
 Scenario: _0154103 check Sales order when changing date
@@ -1401,6 +1406,8 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 			And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price include tax
+				And I move to "Other" tab
+				And I set checkbox "Price include tax"
 				And I move to "Item list" tab
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Price'  |
@@ -1723,6 +1730,8 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 			And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price include tax
+				And I move to "Other" tab
+				And I set checkbox "Price include tax"
 				And I move to "Item list" tab
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Price'  |
@@ -3175,7 +3184,7 @@ Scenario: _0154116 check filling in and re-filling Cash expence
 		And "TaxTree" table contains lines
 			| 'Tax' | 'Currency' | 'Business unit' | 'Amount' | 'Expense type' | 'Tax rate' | 'Manual amount' |
 			| 'VAT' | 'USD'      | ''              | '16,00'  | ''             | ''         | '16,00'         |
-			| ''    | ''         | 'Front office'  | '16,00'  | 'Software'     | '8%'       | '16,00'         |
+			| 'VAT' | 'USD'      | 'Front office'  | '16,00'  | 'Software'     | '8%'       | '16,00'         |
 	And I close all client application windows
 
 
@@ -3349,7 +3358,7 @@ Scenario: _0154117 check filling in and re-filling Cash revenue
 		And "TaxTree" table contains lines
 			| 'Tax' | 'Tax rate' | 'Currency' | 'Amount' | 'Manual amount' |
 			| 'VAT' | ''         | 'TRY'      | '16,00'  | '16,00'         |
-			| ''    | '8%'       | ''         | '16,00'  | '16,00'         |
+			| 'VAT'    | '8%'    | 'TRY'         | '16,00'  | '16,00'         |
 		And I close all client application windows
 
 Scenario: _0154118 check the details cleaning on the form Cash reciept 

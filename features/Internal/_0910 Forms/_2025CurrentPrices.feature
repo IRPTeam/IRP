@@ -75,12 +75,14 @@ Scenario: _01202502 check current price in the Sales order
 			| 'Item'       | 'Item key' |
 			| 'High shoes' | '37/19SD'  |
 		And I select current line in "List" table
+		And Delay 4
 		And I activate "Price type" field in "ItemList" table
 		And I click choice button of "Price type" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'   | 'Reference'     |
 			| 'Current Price' | 'Current Price' |
 		And I select current line in "List" table
+		And Delay 4
 	* Check current price
 		And "ItemList" table contains lines
 		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Q'     |

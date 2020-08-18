@@ -426,5 +426,7 @@ Procedure PredefinedDescriptions(Strings, CodeLanguage)
 	Strings.Insert("Description_A059", NStr("en = 'Cheque bond outgoing'", CodeLanguage));
 	Strings.Insert("Description_A060", NStr("en = 'Document Credit debit note'", CodeLanguage));
 	Strings.Insert("Description_A061", NStr("en = 'Settlement currency'", CodeLanguage));
-
+	Strings.Insert("Description_A062", NStr("en = 'Credit note'", CodeLanguage));
+	Strings.Insert("Description_A063", NStr("en = 'Debit note'", CodeLanguage));
+		
 EndProcedure

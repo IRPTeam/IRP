@@ -289,8 +289,7 @@ Procedure FillDescriptionOfPredefinedCatalogs() Export
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashPayment, 			"Description_A027");
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashReceipt, 			"Description_A028");
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashRevenue, 			"Description_A029");
-	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashTransferOrder, 	"Description_A030");
-	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CreditDebitNote, 		"Description_A060"); 
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashTransferOrder, 	"Description_A030"); 
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_IncomingPaymentOrder, "Description_A033");
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_InvoiceMatch, 		"Description_A036");
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_OutgoingPaymentOrder, "Description_A039");
@@ -301,7 +300,8 @@ Procedure FillDescriptionOfPredefinedCatalogs() Export
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_SalesOrder, 			"Description_A049");
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_SalesReturn, 			"Description_A050");
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_SalesReturnOrder, 	"Description_A051");
-	
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CreditNote, 		    "Description_A062");
+	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_DebitNote, 		    "Description_A063");
 	Obj = ChartsOfCharacteristicTypes.CurrencyMovementType;
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.SettlementCurrency, "Description_A061");
 	

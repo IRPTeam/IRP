@@ -65,7 +65,6 @@
       <types>DocumentRef.GoodsReceipt</types>
       <types>DocumentRef.PhysicalInventory</types>
       <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.CreditDebitNote</types>
       <types>DocumentRef.CashExpense</types>
       <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.RetailReturnReceipt</types>

@@ -20,7 +20,7 @@
     <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
     <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.CurrencyMovementSets.Document_CreditDebitNote</value>
+      <value>Catalog.CurrencyMovementSets.Document_CreditNote</value>
     </typesFilterValue>
     <characteristicValues>Document.CreditNote.TabularSection.Currencies</characteristicValues>
     <objectField>Document.CreditNote.TabularSection.Currencies.StandardAttribute.Ref</objectField>

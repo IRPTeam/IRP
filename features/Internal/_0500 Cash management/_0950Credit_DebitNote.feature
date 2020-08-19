@@ -322,7 +322,7 @@ Scenario: _095002 check movements of the document Dedit Note (write off debts to
 			| 'Register  "Accounts statement"'       | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
 			| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | ''                        | ''                       | ''               | 'Dimensions'    | ''                    | ''                             | ''                             | ''                     |
 			| ''                                     | ''                        | ''                        | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers' | 'Transaction AR' | 'Company'       | 'Partner'             | 'Legal name'                   | 'Basis document'               | 'Currency'             |
-			| ''                                     | 'Receipt'                 | '$$DeditNoteDate095002$$' | ''                     | '-1 000'                  | ''                       | ''               | 'Main Company'  | 'Maxim'               | 'Company Maxim'                | ''                             | 'TRY'                  |
+			| ''                                     | 'Receipt'                 | '$$DeditNoteDate095002$$' | ''                     | '-1 000'                  | ''                       | ''               | 'Main Company'  | ''                    | 'Company Maxim'                | ''                             | 'TRY'                  |
 			| ''                                     | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
 			| 'Register  "Reconciliation statement"' | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
 			| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | 'Dimensions'              | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
@@ -357,27 +357,26 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Partner"
+	* Filling in the basis document for debt write-offs
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Maxim'       |
 		And I select current line in "List" table
-		And I click Select button of "Legal name" field
+		And I click choice button of "Legal name" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'   |
 			| 'Company Maxim' |
 		And I select current line in "List" table
-	* Filling in the basis document for debt write-offs
-		And in the table "Transactions" I click the button named "TransactionsAdd"
-		And I click choice button of "Partner ap transactions basis document" attribute in "Transactions" table
+		And I click choice button of "Basis document" attribute in "Transactions" table
 		Then "Select data type" window is opened
 		And I go to line in "" table
 			| ''                 |
 			| 'Purchase invoice' |
 		And I select current line in "" table
-		* Check the selection of basis documents for the specified partner
-			Then the number of "List" table lines is "меньше или равно" 2
-			And "List" table contains lines
+	* Check the selection of basis documents for the specified partner
+		And "List" table contains lines
 			| 'Number' | 'Legal name'    | 'Partner' | 'Document amount'   | 'Currency' |
 			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00'         | 'TRY'      |
 			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00'         | 'TRY'      |
@@ -465,30 +464,25 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Partner"
+	* Filling in the basis document for debt write-offs
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Lunch'       |
 		And I select current line in "List" table
-		And I click Select button of "Legal name" field
+		And I click choice button of "Legal name" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'   |
 			| 'Company Lunch' |
 		And I select current line in "List" table
-	* Filling in the basis document for debt write-offs
-		And in the table "Transactions" I click the button named "TransactionsAdd"
-		And I click choice button of "Partner ar transactions basis document" attribute in "Transactions" table
-		Then "Select data type" window is opened
+		And I click choice button of "Basis document" attribute in "Transactions" table
 		And I go to line in "" table
 			| ''                 |
 			| 'Sales invoice' |
 		And I select current line in "" table
 		* Check the selection of basis documents for the specified partner
 		And delay 2
-		Then the number of "List" table lines is "less or equal" 1
-		And "List" table contains lines
-			| 'Number' |
-			| '2 900'  |
 		And I go to line in "List" table
 			| 'Number' |
 			| '2 900'  |

@@ -227,6 +227,10 @@
       <type>
         <types>DefinedType.typeAccountStatementBasises</types>
       </type>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.CreditNote.Attribute.Company</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

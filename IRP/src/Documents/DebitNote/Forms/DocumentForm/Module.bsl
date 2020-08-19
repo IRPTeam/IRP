@@ -56,35 +56,21 @@ EndProcedure
 #Region ItemPartner
 
 &AtClient
-Procedure PartnerOnChange(Item)
-	DocDebitNoteClient.PartnerOnChange(Object, ThisObject, Item);
+Procedure TransactionsPartnerOnChange(Item, AddInfo = Undefined) Export
+	DocDebitNoteClient.TransactionsPartnerOnChange(Object, ThisObject, Item);	
+EndProcedure
+
+&AtClient
+Procedure TransactionsOnActivateCell(Item)
+	DocDebitNoteClient.TransactionsOnActivateCell(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
-
-#Region ItemLegalName
-
-&AtClient
-Procedure LegalNameOnChange(Item, AddInfo = Undefined) Export
-	DocDebitNoteClient.LegalNameOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocDebitNoteClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
-	DocDebitNoteClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
 
 &AtClient
 Procedure TransactionsOnStartEdit(Item, NewRow, Clone)
 	Return;
 EndProcedure
-
-#EndRegion
 
 #Region ItemTransactionsPartner
 
@@ -170,8 +156,7 @@ Function Currencies_GetDeclaration(Object, Form)
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableOnActivateRow", "OnActivateRow", ArrayOfItems_MainTable);
 	
 	ArrayOfItems_MainTableColumns = New Array();
-	ArrayOfItems_MainTableColumns.Add(Form.Items.TransactionsPartnerApTransactionsBasisDocument);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.TransactionsPartnerArTransactionsBasisDocument);
+	ArrayOfItems_MainTableColumns.Add(Form.Items.TransactionsBasisDocument);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.TransactionsPartner);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.TransactionsAgreement);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.TransactionsCurrency);
@@ -183,7 +168,6 @@ Function Currencies_GetDeclaration(Object, Form)
 	
 	ArrayOfItems_Header = New Array();
 	ArrayOfItems_Header.Add(Form.Items.Company);
-	ArrayOfItems_Header.Add(Form.Items.LegalName);
 	ArrayOfItems_Header.Add(Form.Items.Date);
 	
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_HeaderOnChange", "OnChange", ArrayOfItems_Header);
@@ -334,6 +318,41 @@ EndProcedure
 &AtServer
 Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region Agreement
+&AtClient
+Procedure TransactionsAgreementOnChange(Item, AddInfo = Undefined) Export
+	DocDebitNoteClient.TransactionsAgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TransactionsAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocDebitNoteClient.TransactionsAgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure TransactionsAgreementEditTextChange(Item, Text, StandardProcessing)
+	DocDebitNoteClient.TransactionsAgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+#EndRegion
+
+#Region LegalName
+&AtClient
+Procedure TransactionsLegalNameOnChange(Item, AddInfo = Undefined) Export
+	DocDebitNoteClient.TransactionsLegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TransactionsLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocDebitNoteClient.TransactionsLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure TransactionsLegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocDebitNoteClient.TransactionsLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

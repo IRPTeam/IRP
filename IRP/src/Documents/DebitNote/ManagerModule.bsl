@@ -16,18 +16,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
 		|	QueryTable.AdditionalAnalytic AS AdditionalAnalytic,
 		|	QueryTable.Currency AS Currency,
-		|	CASE
-		|		WHEN QueryTable.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN CASE
-		|				WHEN QueryTable.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor)
-		|					THEN QueryTable.PartnerApTransactionsBasisDocument
-		|				WHEN QueryTable.Agreement.Type = VALUE(Enum.AgreementTypes.Customer)
-		|					THEN QueryTable.PartnerArTransactionsBasisDocument
-		|			END
-		|		ELSE UNDEFINED
-		|	END AS BasisDocument,
+		|	QueryTable.BasisDocument AS BasisDocument,
 		|	QueryTable.BusinessUnit AS BusinessUnit,
-		|	QueryTable.ExpenseType AS ExpenseType,
+		|	QueryTable.RevenueType AS RevenueType,
 		|	CASE
 		|		WHEN QueryTable.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
 		|		AND QueryTable.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
@@ -35,7 +26,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|		ELSE QueryTable.Agreement
 		|	END AS Agreement,
 		|	QueryTable.Partner AS Partner,
-		|	Doc.LegalName AS LegalName,
+		|	QueryTable.LegalName AS LegalName,
 		|	QueryTable.Amount AS Amount,
 		|	QueryTable.Key AS Key
 		|INTO tmp
@@ -103,7 +94,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BusinessUnit AS BusinessUnit,
-		|	tmp.ExpenseType AS RevenueType,
+		|	tmp.RevenueType AS RevenueType,
 		|	VALUE(Catalog.ItemKeys.EmptyRef) AS ItemKey,
 		|	tmp.Currency AS Currency,
 		|	tmp.AdditionalAnalytic AS AdditionalAnalytic,
@@ -115,7 +106,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.BusinessUnit,
-		|	tmp.ExpenseType,
+		|	tmp.RevenueType,
 		|	tmp.Currency,
 		|	tmp.AdditionalAnalytic,
 		|	tmp.Period,

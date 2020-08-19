@@ -428,13 +428,14 @@ Scenario: check Description in the document Reconcilation statement
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	When check Description
 
-Scenario: check the filter for Company in the document CreditDebitNote
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
-	When check the filter by Company
 
-Scenario: check Description in the document CreditDebitNote
-	Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+
+Scenario: check Description in the document CreditNote
+	Given I open hyperlink "e1cib/list/Document.CreditNote"
+	When check Description
+
+Scenario: check Description in the document DebitNote
+	Given I open hyperlink "e1cib/list/Document.DebitNote"
 	When check Description
 
 Scenario: check the filter for Legal name in the document Goods receipt

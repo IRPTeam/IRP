@@ -1023,21 +1023,33 @@ Scenario: Open object form "ChequeBondTransaction"
 
 	
 	
-Scenario: Open list form "CreditDebitNote" 
+Scenario: Open list form "CreditNote" 
 	And I close all client application windows
-	Given I open "CreditDebitNote" document default form
+	Given I open "CreditNote" document default form
 	If the warning is displayed then
-		Then I raise "Failed to open document form CreditDebitNote" exception
+		Then I raise "Failed to open document form CreditNote" exception
 	And I close current window
 
-Scenario: Open object form "CreditDebitNote"
+Scenario: Open object form "CreditNote"
 	And I close all client application windows
-	Given I open "CreditDebitNote" document main form
+	Given I open "CreditNote" document main form
 	If the warning is displayed then
-		Then I raise "Failed to open document form CreditDebitNote" exception
+		Then I raise "Failed to open document form CreditNote" exception
 	And I close current window
 
+Scenario: Open list form "DebitNote" 
+	And I close all client application windows
+	Given I open "DebitNote" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form DebitNote" exception
+	And I close current window
 
+Scenario: Open object form "DebitNote"
+	And I close all client application windows
+	Given I open "DebitNote" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form DebitNote" exception
+	And I close current window
 
 
 	

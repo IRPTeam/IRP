@@ -3252,22 +3252,17 @@ Scenario: _0154087 check company, sender, receiver, send currency, receive curre
 		Then the form attribute named "ReceiveCurrency" became equal to "EUR"
 		And I close all client application windows
 
-Scenario: _0154088 check company, operation type, partner, legal name, Partner term, business unit, expence type input by search in line in a CreditDebitNote (in english)
-	* Open a creation form CreditDebitNote
-		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+Scenario: _0154088 check company, operation type, partner, legal name, Partner term, business unit, expence type input by search in line in a CreditNote (in english)
+	* Open a creation form CreditNote
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
-	* Operation type input by search in line
-		And I select from "Operation type" drop-down list by "Recei" string
-	* Partner input by search in line
-		And I select from "Partner" drop-down list by "fer" string
-	* Legal name input by search in line
-		And I select from "Legal name" drop-down list by "second" string
 	* Filling the tabular part by searching the value by line
 		And in the table "Transactions" I click "Add" button
 		And I activate "Partner" field in "Transactions" table
 		And I select "fer" from "Partner" drop-down list by string in "Transactions" table
+		And I select "Company Ferr" from "Legal name" drop-down list by string in "Transactions" table
 		And I activate "Partner term" field in "Transactions" table
 		And I select "without" from "Partner term" drop-down list by string in "Transactions" table
 		And I select "lir" from "Currency" drop-down list by string in "Transactions" table
@@ -3277,14 +3272,42 @@ Scenario: _0154088 check company, operation type, partner, legal name, Partner t
 		And I activate "Expense type" field in "Transactions" table
 		And I select "fu" from "Expense type" drop-down list by string in "Transactions" table
 	* Filling check
-		Then the form attribute named "OperationType" became equal to "Receivable"
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "LegalName" became equal to "Second Company Ferron BP"
-			And "Transactions" table contains lines
-		| 'Partner'   | 'Partner term'                     | 'Business unit'        | 'Currency' | 'Expense type' |
-		| 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Logistics department' | 'TRY'      | 'Fuel'         |
+		// Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		And "Transactions" table contains lines
+		| 'Legal name'          | 'Partner'   | 'Partner term'                     | 'Business unit'        | 'Currency' | 'Expense type' |
+		| 'Company Ferron BP'   | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Logistics department' | 'TRY'      | 'Fuel'         |
 		And I close all client application windows
+
+
+Scenario: _0154100 check company, operation type, partner, legal name, Partner term, business unit, expence type input by search in line in a DebitNote (in english)
+	* Open a creation form DebitNote
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Filling the tabular part by searching the value by line
+		And in the table "Transactions" I click "Add" button
+		And I activate "Partner" field in "Transactions" table
+		And I select "fer" from "Partner" drop-down list by string in "Transactions" table
+		And I select "Company Ferr" from "Legal name" drop-down list by string in "Transactions" table
+		And I activate "Partner term" field in "Transactions" table
+		And I select "without" from "Partner term" drop-down list by string in "Transactions" table
+		And I select "lir" from "Currency" drop-down list by string in "Transactions" table
+		And I activate "Business unit" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I select "lo" from "Business unit" drop-down list by string in "Transactions" table
+		And I activate "Revenue type" field in "Transactions" table
+		And I select "fu" from "Revenue type" drop-down list by string in "Transactions" table
+	* Filling check
+		Then the form attribute named "Company" became equal to "Main Company"
+		// Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		And "Transactions" table contains lines
+		| 'Legal name'          | 'Partner'   | 'Partner term'                     | 'Business unit'        | 'Currency' | 'Revenue type' |
+		| 'Company Ferron BP'   | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Logistics department' | 'TRY'      | 'Fuel'         |
+		And I close all client application windows
+
+
 
 Scenario: _0154089 check company, account, currency input by search in line in Incoming payment order (in english)
 	* Open a creation form IncomingPaymentOrder

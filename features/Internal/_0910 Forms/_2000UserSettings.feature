@@ -540,20 +540,6 @@ Scenario: _200001 customize the CI user settings
 			| 'Cash desk №3' |
 		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
-	* Fill in custom settings for Credit debit note
-		And I go to line in "MetadataTree" table
-			| 'Group name'        |
-			| 'Credit debit note' |
-		And I go to line in "MetadataTree" table
-			| 'Group name' | 'Use' |
-			| 'Company'    | 'No'  |
-		And I activate "Value" field in "MetadataTree" table
-		And I select current line in "MetadataTree" table
-		And I click choice button of "Value" attribute in "MetadataTree" table
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
 	* Fill in custom settings for Incoming payment order
 		And I go to line in "MetadataTree" table
 			| 'Group name'             |

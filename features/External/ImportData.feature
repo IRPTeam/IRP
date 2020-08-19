@@ -241,7 +241,6 @@ Scenario: Create catalog ConfigurationMetadata objects
 		| 'e1cib/data/Catalog.ConfigurationMetadata?ref=aa6b120ed92fbced11eacda828b2d19b' | 'No'           | 'e1cib/data/Catalog.ConfigurationMetadata?ref=86fed69b4676df1211ea692255767e2e' | 'CashRevenue'               |
 		| 'e1cib/data/Catalog.ConfigurationMetadata?ref=aa6b120ed92fbced11eacda828b2d18f' | 'No'           | 'e1cib/data/Catalog.ConfigurationMetadata?ref=86fed69b4676df1211ea692255767e2e' | 'CashTransferOrder'         |
 		| 'e1cib/data/Catalog.ConfigurationMetadata?ref=aa6b120ed92fbced11eacda828b2d19c' | 'No'           | 'e1cib/data/Catalog.ConfigurationMetadata?ref=86fed69b4676df1211ea692255767e2e' | 'ChequeBondTransaction'     |
-		| 'e1cib/data/Catalog.ConfigurationMetadata?ref=aa6b120ed92fbced11eacda828b2d19d' | 'No'           | 'e1cib/data/Catalog.ConfigurationMetadata?ref=86fed69b4676df1211ea692255767e2e' | 'CreditDebitNote'           |
 		| 'e1cib/data/Catalog.ConfigurationMetadata?ref=aa6b120ed92fbced11eacda828b2d191' | 'No'           | 'e1cib/data/Catalog.ConfigurationMetadata?ref=86fed69b4676df1211ea692255767e2e' | 'GoodsReceipt'              |
 		| 'e1cib/data/Catalog.ConfigurationMetadata?ref=aa6b120ed92fbced11eacda828b2d19e' | 'No'           | 'e1cib/data/Catalog.ConfigurationMetadata?ref=86fed69b4676df1211ea692255767e2e' | 'IncomingPaymentOrder'      |
 		| 'e1cib/data/Catalog.ConfigurationMetadata?ref=aa6b120ed92fbced11eacda828b2d19f' | 'No'           | 'e1cib/data/Catalog.ConfigurationMetadata?ref=86fed69b4676df1211ea692255767e2e' | 'InternalSupplyRequest'     |

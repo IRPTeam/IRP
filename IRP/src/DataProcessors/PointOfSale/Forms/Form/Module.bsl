@@ -308,7 +308,7 @@ Procedure WriteTransaction(Result)
 	ObjectValue = FormAttributeToValue("Object");
 	ObjectValue.Date = CurrentSessionDate();
 	ObjectValue.Payments.Load(Payments);
-	ObjectValue.Write();
+	ObjectValue.Write(DocumentWriteMode.Posting);
 	CashAmountFilter = New Structure;
 	CashAmountFilter.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.Cash"));
 	CashAmountFoundRows = Payments.FindRows(CashAmountFilter);

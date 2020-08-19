@@ -276,8 +276,7 @@ Procedure ProcessBackspaceButtonPress(CurrentData)
 		If AmountFractionDigitsCount Then
 			AmountFractionDigitsCount = AmountFractionDigitsCount - 1;
 			AmountFractionDigits = CurrentData.Amount - Int(CurrentData.Amount);
-			AmountValue = Int(AmountFractionDigits * Pow(Ten, AmountFractionDigitsCount)) / Pow(Ten,
-				AmountFractionDigitsCount);
+			AmountValue = Int(AmountFractionDigits * Pow(Ten, AmountFractionDigitsCount)) / Pow(Ten, AmountFractionDigitsCount);
 			CurrentData.Amount = Int(CurrentData.Amount) + AmountValue;
 		Else
 			AmountDotIsActive = False;

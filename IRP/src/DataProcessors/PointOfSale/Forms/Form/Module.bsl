@@ -305,10 +305,14 @@ Procedure WriteTransaction(Result)
 			Row.Commission = Row.Amount * Row.Percent / OneHundred;
 		EndIf; 
 	EndDo;
+	
 	ObjectValue = FormAttributeToValue("Object");
 	ObjectValue.Date = CurrentSessionDate();
 	ObjectValue.Payments.Load(Payments);
+	DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 	ObjectValue.Write(DocumentWriteMode.Posting);
+	DocRef = ObjectValue.Ref;	
+	DPPointOfSaleServer.AfterPostingDocument(DocRef);
 	CashAmountFilter = New Structure;
 	CashAmountFilter.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.Cash"));
 	CashAmountFoundRows = Payments.FindRows(CashAmountFilter);

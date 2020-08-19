@@ -312,16 +312,30 @@ Scenario: _02016 check the display of the header of the collapsible group in Cas
 	And I close all client application windows
 
 
-Scenario: _02017 check the display of the header of the collapsible group in CreditDebitNote
-	Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
+Scenario: _02017 check the display of the header of the collapsible group in CreditNote
+	Given I open hyperlink "e1cib/list/Document.CreditNote"
 	* Check the display of the header of the collapsible group
-		When check the display of the header of the collapsible group in sales, purchase and return documents
-		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Legal name: Company Ferron BP" text
+		When check the display of the header of the collapsible group in OpeningEntry
+		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
         |'And I click Select button of  "Company" field'|
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
+
+
+Scenario: _02021 check the display of the header of the collapsible group in DebitNote
+	Given I open hyperlink "e1cib/list/Document.DebitNote"
+	* Check the display of the header of the collapsible group
+		When check the display of the header of the collapsible group in OpeningEntry
+		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Company" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
+
+
 
 Scenario: _02018 check the display of the header of the collapsible group in Internal supply request
 	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"

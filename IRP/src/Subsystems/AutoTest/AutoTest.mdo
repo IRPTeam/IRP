@@ -6,7 +6,6 @@
     <value>Auto test</value>
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
   <picture xsi:type="core:PictureRef">
     <picture>CommonPicture.AutoTest</picture>
   </picture>

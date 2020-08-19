@@ -634,13 +634,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.CreditDebitNote</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.Unbundling</name>
 		<right>
 			<name>InteractiveDelete</name>

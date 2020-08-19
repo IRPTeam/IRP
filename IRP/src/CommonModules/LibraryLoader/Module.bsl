@@ -328,6 +328,12 @@ Function FormItems_Unclassified_CallChainHandler(Object, Form, ActionHandler, Ad
 	ElsIf Upper(ActionHandler) = Upper("TransactionsBasisDocumentOnChange") Then
 		Form.TransactionsBasisDocumentOnChange(P1, AddInfo);
 		Return True;
+	ElsIf Upper(ActionHandler) = Upper("TransactionsAgreementOnChange") Then
+		Form.TransactionsAgreementOnChange(P1, AddInfo);
+		Return True;
+	ElsIf Upper(ActionHandler) = Upper("TransactionsPartnerOnChange") Then
+		Form.TransactionsPartnerOnChange(P1, AddInfo);
+		Return True;	
 	Else
 		Return False;
 	EndIf;

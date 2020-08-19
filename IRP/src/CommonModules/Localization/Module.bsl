@@ -247,6 +247,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_076", NStr("en = 'There are no products to return in the ""%1"" document. All products are already returned.'", Lang));
 	Strings.Error_076 = StrTemplate(Strings.Error_076, Metadata.Documents.RetailSalesReceipt.Synonym);
 	
+	// %1 - 12
+	Strings.Insert("Error_077", NStr("en = 'Basis document is empty in line %1.'", Lang));
+	
 	#EndRegion
 	
 	#Region InfoMessages
@@ -423,5 +426,7 @@ Procedure PredefinedDescriptions(Strings, CodeLanguage)
 	Strings.Insert("Description_A059", NStr("en = 'Cheque bond outgoing'", CodeLanguage));
 	Strings.Insert("Description_A060", NStr("en = 'Document Credit debit note'", CodeLanguage));
 	Strings.Insert("Description_A061", NStr("en = 'Settlement currency'", CodeLanguage));
-
+	Strings.Insert("Description_A062", NStr("en = 'Credit note'", CodeLanguage));
+	Strings.Insert("Description_A063", NStr("en = 'Debit note'", CodeLanguage));
+		
 EndProcedure

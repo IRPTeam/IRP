@@ -1,5 +1,10 @@
-
 #Region FormEvents
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
+	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
+EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
@@ -11,12 +16,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
-EndProcedure
-
-&AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
-	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 #EndRegion

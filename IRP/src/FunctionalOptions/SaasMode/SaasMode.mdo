@@ -7,4 +7,5 @@
   </synonym>
   <location>Constant.SaasMode</location>
   <privilegedGetMode>true</privilegedGetMode>
+  <content>Subsystem.Saas</content>
 </mdclass:FunctionalOption>

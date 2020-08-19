@@ -16,16 +16,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
 		|	QueryTable.AdditionalAnalytic AS AdditionalAnalytic,
 		|	QueryTable.Currency AS Currency,
-		|	CASE
-		|		WHEN QueryTable.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN CASE
-		|				WHEN QueryTable.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor)
-		|					THEN QueryTable.PartnerApTransactionsBasisDocument
-		|				WHEN QueryTable.Agreement.Type = VALUE(Enum.AgreementTypes.Customer)
-		|					THEN QueryTable.PartnerArTransactionsBasisDocument
-		|			END
-		|		ELSE UNDEFINED
-		|	END AS BasisDocument,
+		|	QueryTable.BasisDocument AS BasisDocument,
 		|	QueryTable.BusinessUnit AS BusinessUnit,
 		|	QueryTable.ExpenseType AS ExpenseType,
 		|	CASE
@@ -35,7 +26,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|		ELSE QueryTable.Agreement
 		|	END AS Agreement,
 		|	QueryTable.Partner AS Partner,
-		|	Doc.LegalName AS LegalName,
+		|	QueryTable.LegalName AS LegalName,
 		|	QueryTable.Amount AS Amount,
 		|	QueryTable.Key AS Key
 		|INTO tmp

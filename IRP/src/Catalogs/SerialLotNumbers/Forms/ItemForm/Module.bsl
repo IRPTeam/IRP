@@ -15,7 +15,7 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
-	ExtentionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
+	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 #EndRegion

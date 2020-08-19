@@ -16,8 +16,8 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>0.7.0.#BuildNumber#</version>
-  <updateCatalogAddress>https://github.com/DitriXNew/irp</updateCatalogAddress>
+  <version>0.7.1.#BuildNumber#</version>
+  <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <reportsVariantsStorage>SettingsStorage.ReportOptions</reportsVariantsStorage>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>
   <mainSectionPicture/>
@@ -197,8 +197,6 @@
   <commonModules>CommonModule.DocCashTransferOrderServer</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
-  <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
-  <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
   <commonModules>CommonModule.DocExpenseClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptServer</commonModules>
@@ -254,7 +252,7 @@
   <commonModules>CommonModule.DocumentsServer</commonModules>
   <commonModules>CommonModule.DocUnbundlingClient</commonModules>
   <commonModules>CommonModule.DocUnbundlingServer</commonModules>
-  <commonModules>CommonModule.ExtentionServer</commonModules>
+  <commonModules>CommonModule.ExtensionServer</commonModules>
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>
   <commonModules>CommonModule.ExternalCommandsServer</commonModules>
   <commonModules>CommonModule.FillingFromClassifiers</commonModules>
@@ -467,6 +465,7 @@
   <catalogs>Catalog.UnitsOfMeasurement</catalogs>
   <catalogs>Catalog.PaymentTerminals</catalogs>
   <catalogs>Catalog.BankTerms</catalogs>
+  <catalogs>Catalog.RetailCustomers</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -477,7 +476,6 @@
   <documents>Document.CashTransferOrder</documents>
   <documents>Document.ChequeBondTransaction</documents>
   <documents>Document.ChequeBondTransactionItem</documents>
-  <documents>Document.CreditDebitNote</documents>
   <documents>Document.GoodsReceipt</documents>
   <documents>Document.IncomingPaymentOrder</documents>
   <documents>Document.InternalSupplyRequest</documents>
@@ -516,7 +514,6 @@
   <enums>Enum.CashAccountTypes</enums>
   <enums>Enum.CashFlowDirections</enums>
   <enums>Enum.ChequeBondTypes</enums>
-  <enums>Enum.CreditDebitNoteOperationsTypes</enums>
   <enums>Enum.CurrencyType</enums>
   <enums>Enum.DataAreaStatus</enums>
   <enums>Enum.DocumentPostingTypes</enums>

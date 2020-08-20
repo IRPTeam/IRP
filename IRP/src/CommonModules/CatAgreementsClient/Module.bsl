@@ -113,6 +113,7 @@ Procedure KindOnChange(Object, Form, Item) Export
 	If Object.Kind = PredefinedValue("Enum.AgreementKinds.Standard") Then
 		Object.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByAgreements");
 		Object.StandardAgreement = Undefined;
+		Object.PriceType = Undefined;
 	EndIf;
 	SetVisible(Object, Form);
 EndProcedure

@@ -44,6 +44,7 @@ Procedure TransactionsBasisDocumentOnChange(Object, Form, Item) Export
 		CurrentRow.Partner = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow.BasisDocument, "Partner");
 		CurrentRow.Agreement = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow.BasisDocument, "Agreement");
 		CurrentRow.Currency = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow.BasisDocument, "Currency");
+		CurrentRow.LegalName = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow.BasisDocument, "LegalName");
 	EndIf;	
 EndProcedure
 

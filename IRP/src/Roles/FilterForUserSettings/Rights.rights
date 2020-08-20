@@ -898,36 +898,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.CreditNote</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.DebitNote</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CreditNote.Attribute.Company</name>
+		<name>Document.RetailSalesReceipt.TabularSection.ItemList</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.DebitNote.Attribute.Company</name>
+		<name>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.Store</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

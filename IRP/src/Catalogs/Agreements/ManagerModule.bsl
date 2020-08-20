@@ -105,7 +105,7 @@ Function GetChoiceDataTable(Parameters) Export
 		|		ELSE TRUE
 		|	END)";
 	Settings = New Structure;
-	Settings.Insert("Name", "Catalog.Agreements");
+	Settings.Insert("MetadataObject", Metadata.Catalogs.Agreements);
 	Settings.Insert("Filter", Filter);
 	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);

@@ -29,7 +29,7 @@ Function GetGroupItemsArray(Object, Form)
 EndFunction
 
 Procedure ChangeTitleGroupTitle(Object, Form) Export
-	
+		
 	#If Server Then
 	If SessionParameters.isMobile Then
 		Return;
@@ -252,8 +252,8 @@ EndFunction
 
 #Region Common
 Procedure FillDefinedData(Object, Form) Export
-	If NOT ValueIsFilled(Form.Parameters.CopyingValue) 
-		AND NOT Form.Parameters.FillingValues.Property("BasedOn")Then
+	If (Not Form.Parameters.Property("CopyingValue") Or NOT ValueIsFilled(Form.Parameters.CopyingValue)) 
+		AND (Not Form.Parameters.Property("BasedOn") Or NOT Form.Parameters.FillingValues.Property("BasedOn")) Then
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
 		Object.PriceIncludeTax 	= AgreementInfo.PriceIncludeTax;
 		Object.Currency 		= AgreementInfo.Currency;

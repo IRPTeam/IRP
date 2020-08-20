@@ -288,10 +288,6 @@ Procedure NewTransactionAtServer()
 	ValueToFormAttribute(ObjectValue, "Object");
 	Cancel = False;
 	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);
-//	ThisObject.CurrentPartner = ObjectValue.Partner;
-//	ThisObject.CurrentAgreement = ObjectValue.Agreement;
-//	ThisObject.CurrentDate = ObjectValue.Date;
-	
 EndProcedure
 
 &AtServer
@@ -445,6 +441,10 @@ EndProcedure
 
 &AtServer
 Procedure Taxes_CreateFormControls() Export
+	
+	ColumnFieldParameters = New Structure;
+	ColumnFieldParameters.Insert("Visible", False);
+	
     TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
     TaxesParameters.Date = Object.Date;
     TaxesParameters.Company = Object.Company;
@@ -454,6 +454,7 @@ Procedure Taxes_CreateFormControls() Export
     TaxesParameters.ItemListName = "ItemList";
     TaxesParameters.TaxListName = "TaxList";
     TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
+    TaxesParameters.ColumnFieldParameters = ColumnFieldParameters;
     TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
 EndProcedure
 

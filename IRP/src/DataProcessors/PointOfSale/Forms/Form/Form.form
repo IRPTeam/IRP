@@ -630,6 +630,10 @@
               <items xsi:type="form:FormField">
                 <name>ItemListQuantity</name>
                 <id>794</id>
+                <title>
+                  <key>en</key>
+                  <value>Quantity</value>
+                </title>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -851,6 +855,7 @@
                   <autoFill>true</autoFill>
                 </contextMenu>
                 <type>InputField</type>
+                <readOnly>true</readOnly>
                 <editMode>Enter</editMode>
                 <showInHeader>true</showInHeader>
                 <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -970,6 +975,7 @@
                   <autoFill>true</autoFill>
                 </contextMenu>
                 <type>InputField</type>
+                <readOnly>true</readOnly>
                 <editMode>Enter</editMode>
                 <showInHeader>true</showInHeader>
                 <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -1540,30 +1546,80 @@
           <items xsi:type="form:FormGroup">
             <name>GroupTotal</name>
             <id>646</id>
-            <items xsi:type="form:FormField">
-              <name>ItemListTotalQuantity</name>
-              <id>840</id>
-              <title>
-                <key>en</key>
-                <value>Quantity</value>
-              </title>
-              <titleTextColor xsi:type="core:ColorRef">
-                <color>Web.DarkGreen</color>
-              </titleTextColor>
-              <titleFont xsi:type="core:FontDef">
-                <height>20.0</height>
-              </titleFont>
+            <items xsi:type="form:FormGroup">
+              <name>GroupTotalQuantity</name>
+              <id>936</id>
+              <items xsi:type="form:FormField">
+                <name>ItemListTotalQuantity</name>
+                <id>840</id>
+                <title>
+                  <key>en</key>
+                  <value>Quantity</value>
+                </title>
+                <titleTextColor xsi:type="core:ColorRef">
+                  <color>Web.DarkGreen</color>
+                </titleTextColor>
+                <titleFont xsi:type="core:FontDef">
+                  <height>20.0</height>
+                </titleFont>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <dataPath xsi:type="form:DataPath">
+                  <segments>Object.ItemList.TotalQuantity</segments>
+                </dataPath>
+                <extendedTooltip>
+                  <name>ItemListTotalQuantityExtendedTooltip</name>
+                  <id>842</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>ItemListTotalQuantityContextMenu</name>
+                  <id>841</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <type>LabelField</type>
+                <readOnly>true</readOnly>
+                <editMode>Enter</editMode>
+                <showInHeader>true</showInHeader>
+                <headerHorizontalAlign>Left</headerHorizontalAlign>
+                <showInFooter>true</showInFooter>
+                <extInfo xsi:type="form:LabelFieldExtInfo">
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <textColor xsi:type="core:ColorRef">
+                    <color>Web.Green</color>
+                  </textColor>
+                  <font xsi:type="core:FontDef">
+                    <height>20.0</height>
+                  </font>
+                </extInfo>
+              </items>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>Object.ItemList.TotalQuantity</segments>
-              </dataPath>
               <extendedTooltip>
-                <name>ItemListTotalQuantityExtendedTooltip</name>
-                <id>842</id>
+                <name>GroupTotalQuantityExtendedTooltip</name>
+                <id>937</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1576,44 +1632,92 @@
                   <horizontalAlign>Left</horizontalAlign>
                 </extInfo>
               </extendedTooltip>
-              <contextMenu>
-                <name>ItemListTotalQuantityContextMenu</name>
-                <id>841</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>LabelField</type>
-              <readOnly>true</readOnly>
-              <editMode>Enter</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:LabelFieldExtInfo">
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <textColor xsi:type="core:ColorRef">
-                  <color>Web.Green</color>
-                </textColor>
-                <font xsi:type="core:FontDef">
-                  <height>20.0</height>
-                </font>
+              <type>UsualGroup</type>
+              <extInfo xsi:type="form:UsualGroupExtInfo">
+                <group>HorizontalIfPossible</group>
+                <showLeftMargin>true</showLeftMargin>
+                <united>true</united>
+                <backColor xsi:type="core:ColorRef">
+                  <color>Web.SeaShell</color>
+                </backColor>
+                <throughAlign>Auto</throughAlign>
+                <currentRowUse>Auto</currentRowUse>
               </extInfo>
             </items>
-            <items xsi:type="form:Decoration">
-              <name>Decoration1</name>
-              <id>654</id>
+            <items xsi:type="form:FormGroup">
+              <name>GroupTotalOfferAmount</name>
+              <id>938</id>
+              <items xsi:type="form:FormField">
+                <name>ItemListTotalOffersAmount</name>
+                <id>843</id>
+                <title>
+                  <key>en</key>
+                  <value>Offer</value>
+                </title>
+                <titleTextColor xsi:type="core:ColorRef">
+                  <color>Web.DarkGreen</color>
+                </titleTextColor>
+                <titleFont xsi:type="core:FontDef">
+                  <height>20.0</height>
+                </titleFont>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <dataPath xsi:type="form:DataPath">
+                  <segments>Object.ItemList.TotalOffersAmount</segments>
+                </dataPath>
+                <extendedTooltip>
+                  <name>ItemListTotalOffersAmountExtendedTooltip</name>
+                  <id>845</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>ItemListTotalOffersAmountContextMenu</name>
+                  <id>844</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <type>LabelField</type>
+                <readOnly>true</readOnly>
+                <editMode>Enter</editMode>
+                <showInHeader>true</showInHeader>
+                <headerHorizontalAlign>Left</headerHorizontalAlign>
+                <showInFooter>true</showInFooter>
+                <extInfo xsi:type="form:LabelFieldExtInfo">
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <textColor xsi:type="core:ColorRef">
+                    <color>Web.Green</color>
+                  </textColor>
+                  <font xsi:type="core:FontDef">
+                    <height>20.0</height>
+                  </font>
+                </extInfo>
+              </items>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
               <extendedTooltip>
-                <name>Decoration1ExtendedTooltip</name>
-                <id>656</id>
+                <name>GroupTotalOfferAmountExtendedTooltip</name>
+                <id>939</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1626,48 +1730,92 @@
                   <horizontalAlign>Left</horizontalAlign>
                 </extInfo>
               </extendedTooltip>
-              <contextMenu>
-                <name>Decoration1ContextMenu</name>
-                <id>655</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>Label</type>
-              <autoMaxWidth>true</autoMaxWidth>
-              <autoMaxHeight>true</autoMaxHeight>
-              <horizontalStretch>true</horizontalStretch>
-              <extInfo xsi:type="form:LabelDecorationExtInfo">
-                <horizontalAlign>Left</horizontalAlign>
+              <type>UsualGroup</type>
+              <extInfo xsi:type="form:UsualGroupExtInfo">
+                <group>HorizontalIfPossible</group>
+                <showLeftMargin>true</showLeftMargin>
+                <united>true</united>
+                <backColor xsi:type="core:ColorRef">
+                  <color>Web.Cream</color>
+                </backColor>
+                <throughAlign>Auto</throughAlign>
+                <currentRowUse>Auto</currentRowUse>
               </extInfo>
             </items>
-            <items xsi:type="form:FormField">
-              <name>ItemListTotalOffersAmount</name>
-              <id>843</id>
-              <title>
-                <key>en</key>
-                <value>Offer</value>
-              </title>
-              <titleTextColor xsi:type="core:ColorRef">
-                <color>Web.DarkGreen</color>
-              </titleTextColor>
-              <titleFont xsi:type="core:FontDef">
-                <height>20.0</height>
-              </titleFont>
+            <items xsi:type="form:FormGroup">
+              <name>GroupTotalTotalAmmount</name>
+              <id>940</id>
+              <items xsi:type="form:FormField">
+                <name>ItemListTotalTotalAmount</name>
+                <id>846</id>
+                <title>
+                  <key>en</key>
+                  <value>Total</value>
+                </title>
+                <titleTextColor xsi:type="core:ColorRef">
+                  <color>Web.DarkGreen</color>
+                </titleTextColor>
+                <titleFont xsi:type="core:FontDef">
+                  <height>20.0</height>
+                </titleFont>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <dataPath xsi:type="form:DataPath">
+                  <segments>Object.ItemList.TotalTotalAmount</segments>
+                </dataPath>
+                <extendedTooltip>
+                  <name>ItemListTotalTotalAmountExtendedTooltip</name>
+                  <id>848</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>ItemListTotalTotalAmountContextMenu</name>
+                  <id>847</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <type>LabelField</type>
+                <readOnly>true</readOnly>
+                <editMode>Enter</editMode>
+                <showInHeader>true</showInHeader>
+                <headerHorizontalAlign>Left</headerHorizontalAlign>
+                <showInFooter>true</showInFooter>
+                <extInfo xsi:type="form:LabelFieldExtInfo">
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <textColor xsi:type="core:ColorRef">
+                    <color>Web.Green</color>
+                  </textColor>
+                  <font xsi:type="core:FontDef">
+                    <height>20.0</height>
+                  </font>
+                </extInfo>
+              </items>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>Object.ItemList.TotalOffersAmount</segments>
-              </dataPath>
               <extendedTooltip>
-                <name>ItemListTotalOffersAmountExtendedTooltip</name>
-                <id>845</id>
+                <name>GroupTotalTotalAmmountExtendedTooltip</name>
+                <id>941</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1680,37 +1828,21 @@
                   <horizontalAlign>Left</horizontalAlign>
                 </extInfo>
               </extendedTooltip>
-              <contextMenu>
-                <name>ItemListTotalOffersAmountContextMenu</name>
-                <id>844</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>LabelField</type>
-              <readOnly>true</readOnly>
-              <editMode>Enter</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:LabelFieldExtInfo">
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <textColor xsi:type="core:ColorRef">
-                  <color>Web.Green</color>
-                </textColor>
-                <font xsi:type="core:FontDef">
-                  <height>20.0</height>
-                </font>
+              <type>UsualGroup</type>
+              <extInfo xsi:type="form:UsualGroupExtInfo">
+                <group>HorizontalIfPossible</group>
+                <showLeftMargin>true</showLeftMargin>
+                <united>true</united>
+                <backColor xsi:type="core:ColorRef">
+                  <color>Web.OldLace</color>
+                </backColor>
+                <throughAlign>Auto</throughAlign>
+                <currentRowUse>Auto</currentRowUse>
               </extInfo>
             </items>
             <items xsi:type="form:Decoration">
               <name>Decoration2</name>
               <id>849</id>
-              <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
@@ -1748,30 +1880,16 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </items>
-            <items xsi:type="form:FormField">
-              <name>ItemListTotalTotalAmount</name>
-              <id>846</id>
-              <title>
-                <key>en</key>
-                <value>Total</value>
-              </title>
-              <titleTextColor xsi:type="core:ColorRef">
-                <color>Web.DarkGreen</color>
-              </titleTextColor>
-              <titleFont xsi:type="core:FontDef">
-                <height>20.0</height>
-              </titleFont>
-              <visible>true</visible>
+            <items xsi:type="form:Decoration">
+              <name>Decoration1</name>
+              <id>654</id>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>Object.ItemList.TotalTotalAmount</segments>
-              </dataPath>
               <extendedTooltip>
-                <name>ItemListTotalTotalAmountExtendedTooltip</name>
-                <id>848</id>
+                <name>Decoration1ExtendedTooltip</name>
+                <id>656</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1785,8 +1903,8 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>ItemListTotalTotalAmountContextMenu</name>
-                <id>847</id>
+                <name>Decoration1ContextMenu</name>
+                <id>655</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1794,21 +1912,12 @@
                 </userVisible>
                 <autoFill>true</autoFill>
               </contextMenu>
-              <type>LabelField</type>
-              <readOnly>true</readOnly>
-              <editMode>Enter</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:LabelFieldExtInfo">
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <textColor xsi:type="core:ColorRef">
-                  <color>Web.Green</color>
-                </textColor>
-                <font xsi:type="core:FontDef">
-                  <height>20.0</height>
-                </font>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <horizontalStretch>true</horizontalStretch>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </items>
             <visible>true</visible>
@@ -2018,6 +2127,7 @@
               </contextMenu>
               <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
+                <horizontalStretch>true</horizontalStretch>
               </extInfo>
             </searchStringAddition>
             <viewStatusAddition>
@@ -2571,7 +2681,6 @@
         <items xsi:type="form:Button">
           <name>CloseButton</name>
           <id>909</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>

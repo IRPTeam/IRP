@@ -3994,7 +3994,7 @@ receipt</value>
     <name>CloseButton</name>
     <title>
       <key>en</key>
-      <value>X</value>
+      <value>Exit</value>
     </title>
     <id>16</id>
     <use>

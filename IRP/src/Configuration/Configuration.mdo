@@ -314,6 +314,7 @@
   <commonModules>CommonModule.DocCreditNoteServer</commonModules>
   <commonModules>CommonModule.DocDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocDebitNoteServer</commonModules>
+  <commonModules>CommonModule.DPPointOfSaleServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>

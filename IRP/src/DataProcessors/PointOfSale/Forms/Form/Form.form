@@ -2958,10 +2958,6 @@
       <items xsi:type="form:Button">
         <name>qPayment</name>
         <id>604</id>
-        <title>
-          <key>en</key>
-          <value>Payment</value>
-        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -3797,7 +3793,7 @@ WHERE
     <name>qPayment</name>
     <title>
       <key>en</key>
-      <value>Payment</value>
+      <value>Payment (+)</value>
     </title>
     <id>5</id>
     <toolTip>

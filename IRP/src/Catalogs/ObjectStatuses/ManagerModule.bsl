@@ -30,7 +30,7 @@ Function GetChoiceDataTable(Parameters) Export
 		|";
 
 	Settings = New Structure;
-	Settings.Insert("Name", "Catalog.ObjectStatuses");
+	Settings.Insert("MetadataObject", Metadata.Catalogs.ObjectStatuses);
 	Settings.Insert("Filter", Filter);
 	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);

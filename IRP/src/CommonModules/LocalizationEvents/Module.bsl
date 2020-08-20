@@ -25,9 +25,9 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	
 	StandardProcessing = False;
 
-	MetadataObject = Metadata.FindByType(Type(Source)).FullName();
+	MetadataObject = Metadata.FindByType(Type(Source));
 	Settings = New Structure;
-	Settings.Insert("Name", MetadataObject);
+	Settings.Insert("MetadataObject", MetadataObject);
 	Settings.Insert("Filter", "");
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 	

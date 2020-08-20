@@ -7,6 +7,7 @@ Function RestoreFillingData(Val FillingData) Export
 EndFunction
 
 Function QuerySearchInputByString(Settings) Export
+
 	QueryText = 
 		"SELECT ALLOWED TOP 10
 		|	Table.Ref AS Ref,
@@ -16,7 +17,7 @@ Function QuerySearchInputByString(Settings) Export
 		|FROM
 		|	%1 AS Table
 		|WHERE
-		|	Table.Description_en LIKE &SearchString + ""%%""
+		|	Table.Description%3 LIKE &SearchString + ""%%""
 		| %2
 		|;
 		|
@@ -29,7 +30,7 @@ Function QuerySearchInputByString(Settings) Export
 		|FROM
 		|	%1 AS Table
 		|WHERE
-		|	Table.Description_en LIKE ""%%"" + &SearchString + ""%%""
+		|	Table.Description%3 LIKE ""%%"" + &SearchString + ""%%""
 		|	AND NOT Table.Ref IN
 		|				(SELECT
 		|					T.Ref
@@ -58,8 +59,15 @@ Function QuerySearchInputByString(Settings) Export
 		|ORDER BY
 		|	Sort,
 		|	Presentation";
-	
-	Text = StrTemplate(QueryText, Settings.Name, Settings.Filter);
-	
-	Return LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text);;	
+
+
+	If Not Settings.MetadataObject.DescriptionLength Then
+		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), , "_" + "en");
+		QueryField = "CASE WHEN %1.Description%2 = """" THEN %1.Description_en ELSE %1.Description%2 END ";
+		QueryField = StrTemplate(QueryField, "Table", "_" + LocalizationReuse.GetLocalizationCode());
+		QueryText = StrReplace(QueryText, StrTemplate("%1.Description_en", "Table"), QueryField);
+	Else
+		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), , "");
+	EndIf;
+	Return 	QueryText;
 EndFunction

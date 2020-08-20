@@ -58,9 +58,8 @@
   <content>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.BasisDocument</content>
   <content>Document.RetailSalesReceipt.Attribute.BasisDocument</content>
   <content>Document.RetailReturnReceipt.TabularSection.ItemList.Attribute.RetailSalesReceipt</content>
-  <content>Document.DebitNote.TabularSection.Transactions.Attribute.PartnerArTransactionsBasisDocument</content>
-  <content>Document.DebitNote.TabularSection.Transactions.Attribute.PartnerApTransactionsBasisDocument</content>
   <content>Document.CreditNote.TabularSection.Transactions.Attribute.BasisDocument</content>
+  <content>Document.DebitNote.TabularSection.Transactions.Attribute.BasisDocument</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>

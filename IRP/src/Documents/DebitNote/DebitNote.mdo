@@ -67,37 +67,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="32607774-4afc-41e1-9322-a1ce7de67c62">
-    <name>LegalName</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="c58e0649-2ce5-4036-a902-3f46647b35f7">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <forms uuid="617b1c3e-517d-4317-afb3-069eb8b20027">
     <name>DocumentForm</name>
     <synonym>
@@ -146,54 +115,6 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="61cbb830-f379-4401-b1cc-463f266935af">
-      <name>PartnerApTransactionsBasisDocument</name>
-      <synonym>
-        <key>en</key>
-        <value>Partner ap transactions basis document</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeApTransactionBasises</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.LegalName</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.DebitNote.Attribute.LegalName</field>
-      </choiceParameterLinks>
-      <choiceParameterLinks>
-        <name>Filter.Company</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.DebitNote.Attribute.Company</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6d43c692-2ba9-4103-a413-eaccc4384a8b">
-      <name>PartnerArTransactionsBasisDocument</name>
-      <synonym>
-        <key>en</key>
-        <value>Partner AR transactions basis document</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeArTransactionBasises</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.LegalName</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.DebitNote.Attribute.LegalName</field>
-      </choiceParameterLinks>
-      <choiceParameterLinks>
-        <name>Filter.Company</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.DebitNote.Attribute.Company</field>
-      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -270,10 +191,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="3816265c-f9c5-4bb4-bf60-4bdfe4861515">
-      <name>ExpenseType</name>
+      <name>RevenueType</name>
       <synonym>
         <key>en</key>
-        <value>Expense type</value>
+        <value>Revenue type</value>
       </synonym>
       <type>
         <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -294,6 +215,34 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="bb49d066-929f-4961-9671-8bdec1b8b53e">
+      <name>BasisDocument</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis document</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAccountStatementBasises</types>
+      </type>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.DebitNote.Attribute.Company</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1094ae5d-d84d-4dd5-932a-ad2e8ab60a74">
+      <name>LegalName</name>
+      <synonym>
+        <key>en</key>
+        <value>Legal name</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

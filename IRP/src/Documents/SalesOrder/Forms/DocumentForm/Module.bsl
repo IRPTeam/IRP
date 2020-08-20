@@ -212,6 +212,7 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocSalesOrderClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	UpdateTotalAmounts();
 EndProcedure
 
 &AtClient

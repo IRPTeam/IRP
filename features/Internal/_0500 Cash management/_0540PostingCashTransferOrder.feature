@@ -916,7 +916,7 @@ Scenario: _054015 check message output in case the user tries to create a Bank p
 		| 'Main Company' | '3'      | 'Bank account, USD' | 'Cash desk №1' |
 	* Trying to create Bank payment and check message output
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
-		Then I wait that in user messages the 'You do not need to create a "Bank payment" document for the the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
+		Then I wait that in user messages the 'You do not need to create a "Bank payment" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
 		And I close all client application windows
 
 Scenario: _054016 check message output in case the user tries to create a Cash receipt by Cash transfer order for which he does not need to create it
@@ -976,7 +976,7 @@ Scenario: _054020 check message output in case the user tries to create a Cash p
 		| 'Main Company' | '4'      | 'Bank account, USD' | 'Cash desk №1' |
 	* Trying to create Cash payment and check message output
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
-		Then I wait that in user messages the 'You do not need to create a "Cash payment" for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
+		Then I wait that in user messages the 'You do not need to create a "Cash payment" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
 		And I close all client application windows
 
 Scenario: _054021 check message output in case the user tries to create Bank payment again by Cash transfer order

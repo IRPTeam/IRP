@@ -528,7 +528,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 
 Scenario: _0154137 create document Retail Sales Receipt from Point of sale (payment by cash)
 	* Open Point of sale
-		And In the command interface I select "Auto test" "Point of sale"
+		And In the command interface I select "Retail" "Point of sale"
 	* Add product (scan)
 		And I click "Search by barcode" button
 		And I input "2202283739" text in "InputFld" field
@@ -561,7 +561,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		Then the form attribute named "ItemListTotalQuantity" became equal to "4"
 		Then the form attribute named "ItemListTotalTotalAmount" became equal to "2 419"
 	* Payment (Cash)
-		And I click "Payment" button
+		And I click "Payment (+)" button
 		And I click "2" button
 		And I click "4" button
 		And I click "2" button
@@ -610,7 +610,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 
 Scenario: _0154137 create document Retail Sales Receipt from Point of sale (payment by card)
 	* Open Point of sale
-		And In the command interface I select "Auto test" "Point of sale"
+		And In the command interface I select "Retail" "Point of sale"
 	* Add product (scan)
 		And I click "Search by barcode" button
 		And I input "2202283739" text in "InputFld" field
@@ -643,18 +643,18 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		Then the form attribute named "ItemListTotalQuantity" became equal to "4"
 		Then the form attribute named "ItemListTotalTotalAmount" became equal to "2 419"
 	* Payment (Card)
-		And I click "Payment" button
+		And I click "Payment (+)" button
 		And I click "Card" button
+		And I click "Card 01" button
 		And I click "2" button
 		And I click "4" button
 		And I click "1" button
 		And I click "9" button
-		Then the form attribute named "Amount" became equal to "1 829"
+		Then the form attribute named "Amount" became equal to "2 419"
 		Then the form attribute named "DecorationAmountAfter" became equal to "Decoration amount after"
 		And "Payments" table became equal
 			| 'Payment type'    | 'Amount'   |
 			| 'Card 01'         | '2 419,00' |
-		Then the form attribute named "Cashback" became equal to "1"
 		And I click "Enter" button
 		And "ItemList" table does not contain lines
 			| 'Item'     | 'Item key'  | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' |

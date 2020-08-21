@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
+  <title>
+    <key>en</key>
+    <value>Payment</value>
+  </title>
   <items xsi:type="form:FormGroup">
     <name>GroupTitle</name>
     <id>33</id>
@@ -2663,35 +2667,6 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>CloseButton</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>_Layout</name>
-    <title>
-      <key>ru</key>
-      <value>Раскладка</value>
-    </title>
-    <title>
-      <key>en</key>
-      <value>Layout</value>
-    </title>
-    <id>5</id>
-    <toolTip>
-      <key>ru</key>
-      <value>Раскладка</value>
-    </toolTip>
-    <toolTip>
-      <key>en</key>
-      <value>Layout</value>
-    </toolTip>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>NumPress</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

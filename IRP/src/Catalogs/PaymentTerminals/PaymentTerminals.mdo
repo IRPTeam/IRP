@@ -19,7 +19,7 @@
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_BusinessUnits</value>
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentTerminals</value>
     </typesFilterValue>
     <characteristicValues>Catalog.PaymentTerminals.TabularSection.AddAttributes</characteristicValues>
     <objectField>Catalog.PaymentTerminals.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>

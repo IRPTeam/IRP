@@ -4,12 +4,12 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DetailedInformation = Format(CurrentSessionDate(), "DLF=DDT");
-	NewTransaction();
+	
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
+	NewTransaction();
 	Items.ItemListPicture.PictureSize = PictureSize.Proportionally;
 EndProcedure
 
@@ -128,6 +128,7 @@ Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	StandardProcessing = False;
 	CurrentData = Items.ItemsPickup.CurrentData;
 	AfterItemChoice(CurrentData.Item, True);
+	ItemListOnStartEdit(Items.ItemList, True, False);
 	ItemListOnChange(Items.ItemList);
 	ItemListItemOnChange(Items.ItemList);
 	ItemListItemKeyOnChange(Items.ItemList);
@@ -269,17 +270,24 @@ EndProcedure
 &AtClient
 Procedure PaymentFormClose(Result, AdditionalData) Export
 	WriteTransaction(Result);
+	NewTransaction();
+EndProcedure
+
+&AtClient
+Procedure NewTransaction()
+	NewTransactionAtServer();
+	Cancel = False;
+	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
+	EnabledPaymentButton();
 EndProcedure
 
 &AtServer
-Procedure NewTransaction()
+Procedure NewTransactionAtServer()
 	ObjectValue = Documents.RetailSalesReceipt.CreateDocument();
 	FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True);
 	ValueToFormAttribute(ObjectValue, "Object");
-	ThisObject.CurrentPartner = ObjectValue.Partner;
-	ThisObject.CurrentAgreement = ObjectValue.Agreement;
-	ThisObject.CurrentDate = ObjectValue.Date;
-	EnabledPaymentButton();
+	Cancel = False;
+	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);
 EndProcedure
 
 &AtServer
@@ -305,10 +313,14 @@ Procedure WriteTransaction(Result)
 			Row.Commission = Row.Amount * Row.Percent / OneHundred;
 		EndIf; 
 	EndDo;
+	
 	ObjectValue = FormAttributeToValue("Object");
 	ObjectValue.Date = CurrentSessionDate();
 	ObjectValue.Payments.Load(Payments);
-	ObjectValue.Write();
+	DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
+	ObjectValue.Write(DocumentWriteMode.Posting);
+	DocRef = ObjectValue.Ref;	
+	DPPointOfSaleServer.AfterPostingDocument(DocRef);
 	CashAmountFilter = New Structure;
 	CashAmountFilter.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.Cash"));
 	CashAmountFoundRows = Payments.FindRows(CashAmountFilter);
@@ -321,7 +333,6 @@ Procedure WriteTransaction(Result)
 	If CashbackAmount Then
 		DetailedInformation = "Cashback: " + Format(CashbackAmount, "NFD=2;");
 	EndIf;
-	NewTransaction();
 	Return;
 EndProcedure
 
@@ -430,6 +441,10 @@ EndProcedure
 
 &AtServer
 Procedure Taxes_CreateFormControls() Export
+	
+	ColumnFieldParameters = New Structure;
+	ColumnFieldParameters.Insert("Visible", False);
+	
     TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
     TaxesParameters.Date = Object.Date;
     TaxesParameters.Company = Object.Company;
@@ -439,6 +454,7 @@ Procedure Taxes_CreateFormControls() Export
     TaxesParameters.ItemListName = "ItemList";
     TaxesParameters.TaxListName = "TaxList";
     TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
+    TaxesParameters.ColumnFieldParameters = ColumnFieldParameters;
     TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
 EndProcedure
 

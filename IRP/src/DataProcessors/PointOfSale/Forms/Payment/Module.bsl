@@ -9,10 +9,10 @@ Var AmountFractionDigitsCount, AmountDotIsActive, AmountFractionDigitsMaxCount, 
 #Region FormEventHandlers
 
 &AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)	
-	FillPaymentTypes();	
+Procedure OnCreateAtServer(Cancel, StandardProcessing)		
 	Object.Amount = Parameters.Parameters.Amount;
-	Object.BusinessUnit = Parameters.Parameters.BusinessUnit;	
+	Object.BusinessUnit = Parameters.Parameters.BusinessUnit;
+	FillPaymentTypes();	
 EndProcedure
 
 &AtServer
@@ -276,8 +276,7 @@ Procedure ProcessBackspaceButtonPress(CurrentData)
 		If AmountFractionDigitsCount Then
 			AmountFractionDigitsCount = AmountFractionDigitsCount - 1;
 			AmountFractionDigits = CurrentData.Amount - Int(CurrentData.Amount);
-			AmountValue = Int(AmountFractionDigits * Pow(Ten, AmountFractionDigitsCount)) / Pow(Ten,
-				AmountFractionDigitsCount);
+			AmountValue = Int(AmountFractionDigits * Pow(Ten, AmountFractionDigitsCount)) / Pow(Ten, AmountFractionDigitsCount);
 			CurrentData.Amount = Int(CurrentData.Amount) + AmountValue;
 		Else
 			AmountDotIsActive = False;

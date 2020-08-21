@@ -479,6 +479,11 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 			NewColumn.ChoiceList.LoadValues(GetTaxRatesByTax(ItemOfColumnsInfo.Tax));
 		EndIf;
 		NewColumn.SetAction("OnChange", "TaxValueOnChange");
+		If ValueIsFilled(Parameters.ColumnFieldParameters) Then
+			For Each FieldParameter In Parameters.ColumnFieldParameters Do
+				NewColumn[FieldParameter.Key] = FieldParameter.Value;
+			EndDo;
+		EndIf;
 	EndDo;
 	
 	// Update columns
@@ -498,7 +503,8 @@ Function GetCreateFormControlsParameters() Export
 		|, ColumnOffset
 		|, ItemListName
 		|, TaxListName
-		|, TotalAmountColumnName");
+		|, TotalAmountColumnName
+		|, ColumnFieldParameters");
 EndFunction
 
 Function GetAttributeNames() Export

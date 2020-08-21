@@ -33,8 +33,10 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		DocumentsClientServer.FillStores(ObjectData, Form);
 		
 		DocumentsServer.FillItemList(Object);
-		SetGroupItemsList(Object, Form);
-		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+		If Form.Items.Find("GroupTitleDecorations") <> Undefined Then
+			SetGroupItemsList(Object, Form);
+			DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+		EndIf;
 	EndIf;
 	
 	DocumentsServer.ShowUserMessageOnCreateAtServer(Form);

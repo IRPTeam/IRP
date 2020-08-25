@@ -1041,8 +1041,9 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 	
 	#Else
 	FormName = "CommonForm.PickUpItems";
-	#EndIf
 	OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
+	#EndIf
+	
 EndProcedure
 
 // TODO: Some parameters do not exist. Fix

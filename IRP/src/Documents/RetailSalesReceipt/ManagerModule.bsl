@@ -9,7 +9,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("StockBalance", PostingServer.CreateTable(AccReg.StockBalance));
 	Tables.Insert("TaxesTurnovers", PostingServer.CreateTable(AccReg.TaxesTurnovers));
 	Tables.Insert("RevenuesTurnovers", PostingServer.CreateTable(AccReg.RevenuesTurnovers));
-
+	Tables.Insert("AccountBalance", PostingServer.CreateTable(AccReg.AccountBalance));
+	
 	QueryItemList = New Query();
 	QueryItemList.Text = GetQueryTextRetailSalesReceiptItemList();
 	QueryItemList.SetParameter("Ref", Ref);
@@ -34,6 +35,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		Row.RowKey = String(Row.RowKeyUUID);
 	EndDo;
 	
+	QueryPaymentList = New Query();
+	QueryPaymentList.Text = GetQueryTextRetailSalesReceiptPaymentList();
+	QueryPaymentList.SetParameter("Ref", Ref);
+	QueryResultPaymentList = QueryPaymentList.Execute();
+	QueryTablePaymentList = QueryResultPaymentList.Unload();
+	
 	Query = New Query();
 	Query.Text = GetQueryTextQueryTable();
 	Query.SetParameter("QueryTable", QueryTableItemList);
@@ -44,6 +51,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.StockBalance = QueryResult[3].Unload();
 	Tables.RevenuesTurnovers = QueryResult[4].Unload();
 	Tables.TaxesTurnovers = QueryTableTaxList;
+	Tables.AccountBalance = QueryTablePaymentList;
 	
 	Return Tables;
 EndFunction
@@ -154,6 +162,24 @@ Function GetQueryTextRetailSalesReceiptTaxList()
 			|WHERE
 			|	RetailSalesReceiptTaxList.Ref = &Ref";
 EndFunction
+
+Function GetQueryTextRetailSalesReceiptPaymentList()
+	Return "SELECT
+		   |	RetailSalesReceiptPayments.Ref.Company,
+		   |	RetailSalesReceiptPayments.Ref.Currency,
+		   |	RetailSalesReceiptPayments.Account,
+		   |	SUM(RetailSalesReceiptPayments.Amount) AS Amount,
+		   |	RetailSalesReceiptPayments.Ref.Date AS Period
+		   |FROM
+		   |	Document.RetailSalesReceipt.Payments AS RetailSalesReceiptPayments
+		   |WHERE
+		   |	RetailSalesReceiptPayments.Ref = &Ref
+		   |GROUP BY
+		   |	RetailSalesReceiptPayments.Ref.Company,
+		   |	RetailSalesReceiptPayments.Ref.Currency,
+		   |	RetailSalesReceiptPayments.Account,
+		   |	RetailSalesReceiptPayments.Ref.Date";
+EndFunction	
 
 Function GetQueryTextQueryTable()
 	Return
@@ -289,6 +315,10 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	RevenuesTurnovers = AccumulationRegisters.RevenuesTurnovers.GetLockFields(DocumentDataTables.RevenuesTurnovers);
 	DataMapWithLockFields.Insert(RevenuesTurnovers.RegisterName, RevenuesTurnovers.LockInfo);
 	
+	// AccountBalance
+	AccountBalance = AccumulationRegisters.AccountBalance.GetLockFields(DocumentDataTables.AccountBalance);
+	DataMapWithLockFields.Insert(AccountBalance.RegisterName, AccountBalance.LockInfo);
+	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -326,6 +356,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	// TaxesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TaxesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.TaxesTurnovers));
+	
+	// AccountBalance
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountBalance,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.AccountBalance));
 	
 	Return PostingDataTables;
 EndFunction

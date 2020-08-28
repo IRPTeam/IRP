@@ -10,7 +10,6 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	NewTransaction();
-	Items.ItemListPicture.PictureSize = PictureSize.Proportionally;
 EndProcedure
 
 &AtClient
@@ -130,7 +129,7 @@ Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	AfterItemChoice(CurrentData.Item, True);
 	ItemListOnStartEdit(Items.ItemList, True, False);
 	ItemListOnChange(Items.ItemList);
-	ItemListItemOnChange(Items.ItemList);
+	//ItemListItemOnChange(Items.ItemList);
 	ItemListItemKeyOnChange(Items.ItemList);
 	CurrentDataItemList = Items.ItemList.CurrentData;
 	If CurrentDataItemList <> Undefined Then
@@ -228,6 +227,22 @@ Procedure PrintReceipt(Command)
 	Return;
 EndProcedure
 
+&AtClient
+Procedure SearchCustomer(Command)
+
+	Notify = New NotifyDescription("SetRetailCustomer", ThisObject);
+	OpenForm("Catalog.RetailCustomers.Form.QuickSearch",  
+				New Structure("RetailCustomer", Object.RetailCustomer), , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+
+EndProcedure
+
+&AtClient
+Procedure SetRetailCustomer(Value, AddInfo = Undefined) Export
+	If ValueIsFilled(Value) Then
+		Object.RetailCustomer = Value;
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #EndRegion
@@ -262,6 +277,18 @@ Procedure UpdateHTMLPictures() Export
 		EndIf;
 	EndIf;
 EndProcedure
+
+&AtServerNoContext
+Function GetPictureFile(Item)
+	ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(Item);
+	If ArrayOfFiles.Count() Then
+		If ArrayOfFiles[0].isPreviewSet Then
+			Return ArrayOfFiles[0];
+		EndIf;
+	Else
+		Return Catalogs.Files.EmptyRef();
+	EndIf;
+EndFunction
 
 #EndRegion
 

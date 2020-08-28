@@ -124,6 +124,10 @@
   <commonPictures>CommonPicture.SpecialOffer</commonPictures>
   <commonPictures>CommonPicture.Store</commonPictures>
   <commonPictures>CommonPicture.Retail</commonPictures>
+  <commonPictures>CommonPicture.Price</commonPictures>
+  <commonPictures>CommonPicture.Quantity</commonPictures>
+  <commonPictures>CommonPicture.Total</commonPictures>
+  <commonPictures>CommonPicture.SerialNumber</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUser</sessionParameters>

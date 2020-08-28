@@ -353,62 +353,6 @@
                 <segments>Object.ItemList</segments>
               </dataPath>
               <titleLocation>None</titleLocation>
-              <items xsi:type="form:FormField">
-                <name>ItemListPIcture</name>
-                <id>824</id>
-                <title>
-                  <key>en</key>
-                  <value> </value>
-                </title>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <dataPath xsi:type="form:MultiLanguageDataPath">
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.PIcture</segments>
-                  </paths>
-                </dataPath>
-                <extendedTooltip>
-                  <name>ItemListPIctureExtendedTooltip</name>
-                  <id>826</id>
-                  <visible>true</visible>
-                  <enabled>true</enabled>
-                  <userVisible>
-                    <common>true</common>
-                  </userVisible>
-                  <type>Label</type>
-                  <autoMaxWidth>true</autoMaxWidth>
-                  <autoMaxHeight>true</autoMaxHeight>
-                  <extInfo xsi:type="form:LabelDecorationExtInfo">
-                    <horizontalAlign>Left</horizontalAlign>
-                  </extInfo>
-                </extendedTooltip>
-                <contextMenu>
-                  <name>ItemListPIctureContextMenu</name>
-                  <id>825</id>
-                  <visible>true</visible>
-                  <enabled>true</enabled>
-                  <userVisible>
-                    <common>true</common>
-                  </userVisible>
-                  <autoFill>true</autoFill>
-                </contextMenu>
-                <type>PictureField</type>
-                <editMode>Enter</editMode>
-                <showInHeader>true</showInHeader>
-                <headerHorizontalAlign>Left</headerHorizontalAlign>
-                <showInFooter>true</showInFooter>
-                <extInfo xsi:type="form:ImageFieldExtInfo">
-                  <width>2</width>
-                  <autoMaxWidth>true</autoMaxWidth>
-                  <autoMaxHeight>true</autoMaxHeight>
-                  <horizontalStretch>true</horizontalStretch>
-                  <verticalStretch>true</verticalStretch>
-                  <fileDragMode>AsFileRef</fileDragMode>
-                </extInfo>
-              </items>
               <items xsi:type="form:FormGroup">
                 <name>ItemListGroupItem</name>
                 <id>857</id>
@@ -456,7 +400,6 @@
                   </contextMenu>
                   <type>InputField</type>
                   <editMode>Enter</editMode>
-                  <showInHeader>true</showInHeader>
                   <headerHorizontalAlign>Left</headerHorizontalAlign>
                   <showInFooter>true</showInFooter>
                   <extInfo xsi:type="form:InputFieldExtInfo">
@@ -524,7 +467,6 @@
                   </contextMenu>
                   <type>InputField</type>
                   <editMode>Enter</editMode>
-                  <showInHeader>true</showInHeader>
                   <headerHorizontalAlign>Left</headerHorizontalAlign>
                   <showInFooter>true</showInFooter>
                   <extInfo xsi:type="form:InputFieldExtInfo">
@@ -552,7 +494,7 @@
                 </userVisible>
                 <title>
                   <key>en</key>
-                  <value>Item list group item</value>
+                  <value>Item</value>
                 </title>
                 <extendedTooltip>
                   <name>ItemListGroupItemExtendedTooltip</name>
@@ -573,6 +515,10 @@
                 <extInfo xsi:type="form:ColumnGroupExtInfo">
                   <group>Vertical</group>
                   <showTitle>true</showTitle>
+                  <showInHeader>true</showInHeader>
+                  <headerPicture xsi:type="core:PictureRef">
+                    <picture>CommonPicture.ItemKeyPicture</picture>
+                  </headerPicture>
                 </extInfo>
               </items>
               <items xsi:type="form:FormField">
@@ -675,6 +621,9 @@
                 <type>InputField</type>
                 <editMode>Enter</editMode>
                 <showInHeader>true</showInHeader>
+                <headerPicture xsi:type="core:PictureRef">
+                  <picture>CommonPicture.Quantity</picture>
+                </headerPicture>
                 <headerHorizontalAlign>Left</headerHorizontalAlign>
                 <showInFooter>true</showInFooter>
                 <extInfo xsi:type="form:InputFieldExtInfo">
@@ -789,6 +738,9 @@
                 <type>InputField</type>
                 <editMode>Enter</editMode>
                 <showInHeader>true</showInHeader>
+                <headerPicture xsi:type="core:PictureRef">
+                  <picture>CommonPicture.Price</picture>
+                </headerPicture>
                 <headerHorizontalAlign>Left</headerHorizontalAlign>
                 <showInFooter>true</showInFooter>
                 <extInfo xsi:type="form:InputFieldExtInfo">
@@ -845,6 +797,9 @@
                 <readOnly>true</readOnly>
                 <editMode>Enter</editMode>
                 <showInHeader>true</showInHeader>
+                <headerPicture xsi:type="core:PictureRef">
+                  <picture>CommonPicture.SpecialOffer</picture>
+                </headerPicture>
                 <headerHorizontalAlign>Left</headerHorizontalAlign>
                 <showInFooter>true</showInFooter>
                 <extInfo xsi:type="form:InputFieldExtInfo">
@@ -959,6 +914,9 @@
                 <readOnly>true</readOnly>
                 <editMode>Enter</editMode>
                 <showInHeader>true</showInHeader>
+                <headerPicture xsi:type="core:PictureRef">
+                  <picture>CommonPicture.Total</picture>
+                </headerPicture>
                 <headerHorizontalAlign>Left</headerHorizontalAlign>
                 <showInFooter>true</showInFooter>
                 <extInfo xsi:type="form:InputFieldExtInfo">

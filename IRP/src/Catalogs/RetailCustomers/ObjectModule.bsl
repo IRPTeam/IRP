@@ -3,6 +3,7 @@ Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	Description = Name + " " + Surname;
 EndProcedure
 
 Procedure OnWrite(Cancel)

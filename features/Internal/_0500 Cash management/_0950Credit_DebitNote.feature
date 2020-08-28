@@ -251,27 +251,27 @@ Scenario: _095002 check movements of the document Dedit Note (write off debts to
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Partner"
+	* Filling in the basis document for debt write-offs
+		* Filling in the basis document for debt write-offs
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Maxim'       |
 		And I select current line in "List" table
-		And I click Select button of "Legal name" field
+		And I click choice button of "Legal name" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'   |
 			| 'Company Maxim' |
 		And I select current line in "List" table
-	* Filling in the basis document for debt write-offs
-		And in the table "Transactions" I click the button named "TransactionsAdd"
-		And I click choice button of "Partner ap transactions basis document" attribute in "Transactions" table
+		And I click choice button of "Basis document" attribute in "Transactions" table
 		Then "Select data type" window is opened
 		And I go to line in "" table
 			| ''                 |
 			| 'Purchase invoice' |
 		And I select current line in "" table
 		* Check the selection of basis documents for the specified partner
-			Then the number of "List" table lines is "меньше или равно" 2
-			And "List" table contains lines
+		And "List" table contains lines
 			| 'Number' | 'Legal name'    | 'Partner' | 'Document amount'   | 'Currency' |
 			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00'         | 'TRY'      |
 			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00'         | 'TRY'      |
@@ -289,8 +289,8 @@ Scenario: _095002 check movements of the document Dedit Note (write off debts to
 			| 'Description'             |
 			| 'Distribution department' |
 		And I select current line in "List" table
-		And I activate "Expense type" field in "Transactions" table
-		And I click choice button of "Expense type" attribute in "Transactions" table
+		And I activate "Revenue type" field in "Transactions" table
+		And I click choice button of "Revenue type" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Software'    |
@@ -322,7 +322,7 @@ Scenario: _095002 check movements of the document Dedit Note (write off debts to
 			| 'Register  "Accounts statement"'       | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
 			| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | ''                        | ''                       | ''               | 'Dimensions'    | ''                    | ''                             | ''                             | ''                     |
 			| ''                                     | ''                        | ''                        | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers' | 'Transaction AR' | 'Company'       | 'Partner'             | 'Legal name'                   | 'Basis document'               | 'Currency'             |
-			| ''                                     | 'Receipt'                 | '$$DeditNoteDate095002$$' | ''                     | '-1 000'                  | ''                       | ''               | 'Main Company'  | ''                    | 'Company Maxim'                | ''                             | 'TRY'                  |
+			| ''                                     | 'Receipt'                 | '$$DeditNoteDate095002$$' | ''                     | '-1 000'                  | ''                       | ''               | 'Main Company'  | 'Maxim'               | 'Company Maxim'                | ''                             | 'TRY'                  |
 			| ''                                     | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
 			| 'Register  "Reconciliation statement"' | ''                        | ''                        | ''                     | ''                        | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
 			| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | 'Dimensions'              | ''                       | ''               | ''              | ''                    | ''                             | ''                             | ''                     |
@@ -565,27 +565,25 @@ Scenario: _095005 check movements of the document Debit Note (increase in custom
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Partner"
+	* Filling in the basis document for debt write-offs
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Lunch'       |
 		And I select current line in "List" table
-		And I click Select button of "Legal name" field
+		And I click choice button of "Legal name" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'   |
 			| 'Company Lunch' |
 		And I select current line in "List" table
-	* Filling in the basis document for debt write-offs
-		And in the table "Transactions" I click the button named "TransactionsAdd"
-		And I click choice button of "Partner ar transactions basis document" attribute in "Transactions" table
-		Then "Select data type" window is opened
+		And I click choice button of "Basis document" attribute in "Transactions" table
 		And I go to line in "" table
 			| ''                 |
 			| 'Sales invoice' |
 		And I select current line in "" table
 		* Check the selection of basis documents for the specified partner
 		And delay 2
-		Then the number of "List" table lines is "less or equal" 1
 		And "List" table contains lines
 			| 'Number' |
 			| '2 900'  |
@@ -603,8 +601,8 @@ Scenario: _095005 check movements of the document Debit Note (increase in custom
 			| 'Description'             |
 			| 'Distribution department' |
 		And I select current line in "List" table
-		And I activate "Expense type" field in "Transactions" table
-		And I click choice button of "Expense type" attribute in "Transactions" table
+		And I activate "Revenue type" field in "Transactions" table
+		And I click choice button of "Revenue type" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Software'    |
@@ -671,6 +669,7 @@ Scenario: _095006 check Reconcilation statement
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
+		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -715,35 +714,45 @@ Scenario: _095007 check the legal name filling if the partner has only one
 	* Create Credit note
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
+		And in the table "Transactions" I click the button named "TransactionsAdd"
 	* Filling in legal name
-		And I click Choice button of the field named "Partner"
+		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Lunch'       |
+			| 'Lunch'    |
 		And I select current line in "List" table
-		Then the form attribute named "LegalName" became equal to "Company Lunch"
+		And "Transactions" table contains lines
+			| 'Partner' | 'Legal name'    |
+			| 'Lunch'   | 'Company Lunch' |
 	* Check legal name re-filling at partner re-selection.
-		And I click Choice button of the field named "Partner"
+		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'DFC'    |
 		And I select current line in "List" table
-		Then the form attribute named "LegalName" became equal to "DFC"
+		And "Transactions" table contains lines
+			| 'Partner' | 'Legal name'    |
+			| 'DFC'     | 'DFC' |
 	* Create Dedit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
+		And in the table "Transactions" I click the button named "TransactionsAdd"
 	* Filling in legal name
-		And I click Choice button of the field named "Partner"
+		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Lunch'       |
 		And I select current line in "List" table
-		Then the form attribute named "LegalName" became equal to "Company Lunch"
+		And "Transactions" table contains lines
+			| 'Partner' | 'Legal name'    |
+			| 'Lunch'   | 'Company Lunch' |
 	* Check legal name re-filling at partner re-selection.
-		And I click Choice button of the field named "Partner"
+		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'DFC'         |
 		And I select current line in "List" table
-		Then the form attribute named "LegalName" became equal to "DFC"
+		And "Transactions" table contains lines
+			| 'Partner' | 'Legal name'    |
+			| 'DFC'     | 'DFC' |
 		And I close all client application windows

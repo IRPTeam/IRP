@@ -93,7 +93,7 @@ Function GetChoiceDataTable(Parameters) Export
 		|";
 
 	Settings = New Structure;
-	Settings.Insert("Name", "Catalog.Partners");
+	Settings.Insert("MetadataObject", Metadata.Catalogs.Partners);
 	Settings.Insert("Filter", Filter);
 	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);

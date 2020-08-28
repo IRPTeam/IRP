@@ -19,7 +19,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		|";
 
 	Settings = New Structure;
-	Settings.Insert("Name", "Catalog.Units");
+	Settings.Insert("MetadataObject", Metadata.Catalogs.Units);
 	Settings.Insert("Filter", Filter);
 	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);

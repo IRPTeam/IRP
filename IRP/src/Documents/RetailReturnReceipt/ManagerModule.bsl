@@ -178,10 +178,36 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("StockBalance", QueryResults[2].Unload());
 	Tables.Insert("StockReservation", QueryResults[3].Unload());
 	Tables.Insert("SalesReturnTurnovers", QueryResults[4].Unload());
+	
+	QueryPaymentList = New Query();
+	QueryPaymentList.Text = GetQueryTextRetailReturnReceiptPaymentList();
+	QueryPaymentList.SetParameter("Ref", Ref);
+	QueryResultPaymentList = QueryPaymentList.Execute();
+	QueryTablePaymentList = QueryResultPaymentList.Unload();
+	Tables.Insert("AccountBalance", QueryTablePaymentList);
+	
 	Parameters.IsReposting = False;
 	
 	Return Tables;
 EndFunction
+
+Function GetQueryTextRetailReturnReceiptPaymentList()
+	Return "SELECT
+	|	RetailReturnReceiptPayments.Ref.Company,
+	|	RetailReturnReceiptPayments.Ref.Currency,
+	|	RetailReturnReceiptPayments.Account,
+	|	SUM(RetailReturnReceiptPayments.Amount) AS Amount,
+	|	RetailReturnReceiptPayments.Ref.Date AS Period
+	|FROM
+	|	Document.RetailReturnReceipt.Payments AS RetailReturnReceiptPayments
+	|WHERE
+	|	RetailReturnReceiptPayments.Ref = &Ref
+	|GROUP BY
+	|	RetailReturnReceiptPayments.Ref.Company,
+	|	RetailReturnReceiptPayments.Ref.Currency,
+	|	RetailReturnReceiptPayments.Account,
+	|	RetailReturnReceiptPayments.Ref.Date";
+EndFunction	
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	DocumentDataTables = Parameters.DocumentDataTables;
@@ -223,6 +249,9 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	DataMapWithLockFields.Insert("AccumulationRegister.StockReservation",
 		New Structure("Fields, Data", Fields, DocumentDataTables.StockReservation));
 	
+	// AccountBalance
+	AccountBalance = AccumulationRegisters.AccountBalance.GetLockFields(DocumentDataTables.AccountBalance);
+	DataMapWithLockFields.Insert(AccountBalance.RegisterName, AccountBalance.LockInfo);
 	
 	Return DataMapWithLockFields;
 EndFunction
@@ -261,6 +290,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.StockReservation,
 			Parameters.IsReposting));
+		
+	// AccountBalance
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountBalance,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Expense,
+			Parameters.DocumentDataTables.AccountBalance));
 	
 	Return PostingDataTables;
 EndFunction

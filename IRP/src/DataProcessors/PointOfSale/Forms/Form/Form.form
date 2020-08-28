@@ -27,8 +27,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>DetailedInformation</segments>
+              <dataPath xsi:type="form:MultiLanguageDataPath">
+                <paths xsi:type="form:DataPath">
+                  <segments>DetailedInformation</segments>
+                </paths>
               </dataPath>
               <titleLocation>None</titleLocation>
               <extendedTooltip>
@@ -99,7 +101,7 @@
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
               <throughAlign>Auto</throughAlign>
-              <currentRowUse>DontUse</currentRowUse>
+              <currentRowUse>Auto</currentRowUse>
             </extInfo>
           </items>
           <items xsi:type="form:FormGroup">
@@ -258,8 +260,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>Object.RetailCustomer</segments>
+              <dataPath xsi:type="form:MultiLanguageDataPath">
+                <paths xsi:type="form:DataPath">
+                  <segments>Object.RetailCustomer</segments>
+                </paths>
               </dataPath>
               <titleLocation>None</titleLocation>
               <extendedTooltip>
@@ -296,13 +300,10 @@
                 <autoMaxWidth>true</autoMaxWidth>
                 <autoMaxHeight>true</autoMaxHeight>
                 <wrap>true</wrap>
-                <dropListButton>true</dropListButton>
-                <choiceButton>true</choiceButton>
-                <clearButton>true</clearButton>
-                <openButton>false</openButton>
                 <chooseType>true</chooseType>
                 <typeDomainEnabled>true</typeDomainEnabled>
                 <textEdit>true</textEdit>
+                <choiceForm>Catalog.RetailCustomers.Form.QuickSearch</choiceForm>
                 <font xsi:type="core:FontDef">
                   <height>20.0</height>
                 </font>
@@ -334,7 +335,7 @@
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
               <throughAlign>Auto</throughAlign>
-              <currentRowUse>DontUse</currentRowUse>
+              <currentRowUse>Auto</currentRowUse>
             </extInfo>
           </items>
           <items xsi:type="form:FormGroup">
@@ -364,8 +365,10 @@
                 <userVisible>
                   <common>true</common>
                 </userVisible>
-                <dataPath xsi:type="form:DataPath">
-                  <segments>Object.ItemList.PIcture</segments>
+                <dataPath xsi:type="form:MultiLanguageDataPath">
+                  <paths xsi:type="form:DataPath">
+                    <segments>Object.ItemList.PIcture</segments>
+                  </paths>
                 </dataPath>
                 <extendedTooltip>
                   <name>ItemListPIctureExtendedTooltip</name>
@@ -417,8 +420,10 @@
                   <userVisible>
                     <common>true</common>
                   </userVisible>
-                  <dataPath xsi:type="form:DataPath">
-                    <segments>Object.ItemList.Item</segments>
+                  <dataPath xsi:type="form:MultiLanguageDataPath">
+                    <paths xsi:type="form:DataPath">
+                      <segments>Object.ItemList.Item</segments>
+                    </paths>
                   </dataPath>
                   <handlers>
                     <event>OnChange</event>
@@ -457,12 +462,12 @@
                   <showInFooter>true</showInFooter>
                   <extInfo xsi:type="form:InputFieldExtInfo">
                     <handlers>
-                      <event>StartChoice</event>
-                      <name>ItemListItemStartChoice</name>
-                    </handlers>
-                    <handlers>
                       <event>EditTextChange</event>
                       <name>ItemListItemEditTextChange</name>
+                    </handlers>
+                    <handlers>
+                      <event>StartChoice</event>
+                      <name>ItemListItemStartChoice</name>
                     </handlers>
                     <maxWidth>14</maxWidth>
                     <autoMaxHeight>true</autoMaxHeight>
@@ -485,9 +490,6 @@
                     <common>true</common>
                   </userVisible>
                   <dataPath xsi:type="form:MultiLanguageDataPath">
-                    <paths xsi:type="form:DataPath">
-                      <segments>Object.ItemList.ItemKey</segments>
-                    </paths>
                     <paths xsi:type="form:DataPath">
                       <segments>Object.ItemList.ItemKey</segments>
                     </paths>
@@ -586,9 +588,6 @@
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.Store</segments>
                   </paths>
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.Store</segments>
-                  </paths>
                 </dataPath>
                 <extendedTooltip>
                   <name>ItemListStoreExtendedTooltip</name>
@@ -642,9 +641,6 @@
                   <common>true</common>
                 </userVisible>
                 <dataPath xsi:type="form:MultiLanguageDataPath">
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.Quantity</segments>
-                  </paths>
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.Quantity</segments>
                   </paths>
@@ -706,9 +702,6 @@
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.Unit</segments>
                   </paths>
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.Unit</segments>
-                  </paths>
                 </dataPath>
                 <handlers>
                   <event>OnChange</event>
@@ -762,9 +755,6 @@
                   <common>true</common>
                 </userVisible>
                 <dataPath xsi:type="form:MultiLanguageDataPath">
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.Price</segments>
-                  </paths>
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.Price</segments>
                   </paths>
@@ -827,9 +817,6 @@
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.OffersAmount</segments>
                   </paths>
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.OffersAmount</segments>
-                  </paths>
                 </dataPath>
                 <extendedTooltip>
                   <name>ItemListOffersAmountExtendedTooltip</name>
@@ -885,9 +872,6 @@
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.TaxAmount</segments>
                   </paths>
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.TaxAmount</segments>
-                  </paths>
                 </dataPath>
                 <extendedTooltip>
                   <name>ItemListTaxAmountExtendedTooltip</name>
@@ -940,9 +924,6 @@
                   <common>true</common>
                 </userVisible>
                 <dataPath xsi:type="form:MultiLanguageDataPath">
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.TotalAmount</segments>
-                  </paths>
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.TotalAmount</segments>
                   </paths>
@@ -1005,9 +986,6 @@
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.Key</segments>
                   </paths>
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.Key</segments>
-                  </paths>
                 </dataPath>
                 <extendedTooltip>
                   <name>ItemListKeyExtendedTooltip</name>
@@ -1052,9 +1030,6 @@
                   <common>true</common>
                 </userVisible>
                 <dataPath xsi:type="form:MultiLanguageDataPath">
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.PriceType</segments>
-                  </paths>
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.PriceType</segments>
                   </paths>
@@ -1113,9 +1088,6 @@
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.Detail</segments>
                   </paths>
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.Detail</segments>
-                  </paths>
                 </dataPath>
                 <extendedTooltip>
                   <name>ItemListDetailExtendedTooltip</name>
@@ -1164,9 +1136,6 @@
                   <common>true</common>
                 </userVisible>
                 <dataPath xsi:type="form:MultiLanguageDataPath">
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.BusinessUnit</segments>
-                  </paths>
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.BusinessUnit</segments>
                   </paths>
@@ -1221,9 +1190,6 @@
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.RevenueType</segments>
                   </paths>
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.RevenueType</segments>
-                  </paths>
                 </dataPath>
                 <extendedTooltip>
                   <name>ItemListRevenueTypeExtendedTooltip</name>
@@ -1272,9 +1238,6 @@
                   <common>true</common>
                 </userVisible>
                 <dataPath xsi:type="form:MultiLanguageDataPath">
-                  <paths xsi:type="form:DataPath">
-                    <segments>Object.ItemList.AdditionalAnalytic</segments>
-                  </paths>
                   <paths xsi:type="form:DataPath">
                     <segments>Object.ItemList.AdditionalAnalytic</segments>
                   </paths>
@@ -1329,14 +1292,6 @@
                 <horizontalAlign>Left</horizontalAlign>
               </autoCommandBar>
               <handlers>
-                <event>60edb81d-887b-478e-94ee-7fef2b13393d</event>
-                <name>ItemListOnActivateRow</name>
-              </handlers>
-              <handlers>
-                <event>OnChange</event>
-                <name>ItemListOnChange</name>
-              </handlers>
-              <handlers>
                 <event>OnActivateRow</event>
                 <name>ItemListOnActivateRow</name>
               </handlers>
@@ -1347,6 +1302,10 @@
               <handlers>
                 <event>AfterDeleteRow</event>
                 <name>ItemListAfterDeleteRow</name>
+              </handlers>
+              <handlers>
+                <event>OnChange</event>
+                <name>ItemListOnChange</name>
               </handlers>
               <searchStringAddition>
                 <visible>true</visible>
@@ -1542,7 +1501,7 @@
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
               <throughAlign>Auto</throughAlign>
-              <currentRowUse>DontUse</currentRowUse>
+              <currentRowUse>Auto</currentRowUse>
             </extInfo>
           </items>
           <items xsi:type="form:FormGroup">
@@ -1569,8 +1528,10 @@
                 <userVisible>
                   <common>true</common>
                 </userVisible>
-                <dataPath xsi:type="form:DataPath">
-                  <segments>Object.ItemList.TotalQuantity</segments>
+                <dataPath xsi:type="form:MultiLanguageDataPath">
+                  <paths xsi:type="form:DataPath">
+                    <segments>Object.ItemList.TotalQuantity</segments>
+                  </paths>
                 </dataPath>
                 <extendedTooltip>
                   <name>ItemListTotalQuantityExtendedTooltip</name>
@@ -1667,8 +1628,10 @@
                 <userVisible>
                   <common>true</common>
                 </userVisible>
-                <dataPath xsi:type="form:DataPath">
-                  <segments>Object.ItemList.TotalOffersAmount</segments>
+                <dataPath xsi:type="form:MultiLanguageDataPath">
+                  <paths xsi:type="form:DataPath">
+                    <segments>Object.ItemList.TotalOffersAmount</segments>
+                  </paths>
                 </dataPath>
                 <extendedTooltip>
                   <name>ItemListTotalOffersAmountExtendedTooltip</name>
@@ -1765,8 +1728,10 @@
                 <userVisible>
                   <common>true</common>
                 </userVisible>
-                <dataPath xsi:type="form:DataPath">
-                  <segments>Object.ItemList.TotalTotalAmount</segments>
+                <dataPath xsi:type="form:MultiLanguageDataPath">
+                  <paths xsi:type="form:DataPath">
+                    <segments>Object.ItemList.TotalTotalAmount</segments>
+                  </paths>
                 </dataPath>
                 <extendedTooltip>
                   <name>ItemListTotalTotalAmountExtendedTooltip</name>
@@ -1958,7 +1923,7 @@
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
               <throughAlign>Auto</throughAlign>
-              <currentRowUse>DontUse</currentRowUse>
+              <currentRowUse>Auto</currentRowUse>
             </extInfo>
           </items>
           <visible>true</visible>
@@ -1987,7 +1952,7 @@
             <showLeftMargin>true</showLeftMargin>
             <united>true</united>
             <throughAlign>Auto</throughAlign>
-            <currentRowUse>DontUse</currentRowUse>
+            <currentRowUse>Auto</currentRowUse>
           </extInfo>
         </items>
         <items xsi:type="form:FormGroup">
@@ -2032,8 +1997,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>ItemsPickup.Item</segments>
+              <dataPath xsi:type="form:MultiLanguageDataPath">
+                <paths xsi:type="form:DataPath">
+                  <segments>ItemsPickup.Item</segments>
+                </paths>
               </dataPath>
               <extendedTooltip>
                 <name>ItemsPickupItemExtendedTooltip</name>
@@ -2281,20 +2248,20 @@
             </dataPath>
             <titleLocation>None</titleLocation>
             <excludedCommands>Add</excludedCommands>
-            <excludedCommands>Copy</excludedCommands>
+            <excludedCommands>CancelSearch</excludedCommands>
             <excludedCommands>Change</excludedCommands>
+            <excludedCommands>Copy</excludedCommands>
+            <excludedCommands>CopyToClipboard</excludedCommands>
             <excludedCommands>Delete</excludedCommands>
             <excludedCommands>EndEdit</excludedCommands>
-            <excludedCommands>ShowRowRearrangement</excludedCommands>
-            <excludedCommands>MoveUp</excludedCommands>
             <excludedCommands>MoveDown</excludedCommands>
+            <excludedCommands>MoveUp</excludedCommands>
             <excludedCommands>OutputList</excludedCommands>
-            <excludedCommands>CopyToClipboard</excludedCommands>
             <excludedCommands>SelectAll</excludedCommands>
             <excludedCommands>ShowMultipleSelection</excludedCommands>
+            <excludedCommands>ShowRowRearrangement</excludedCommands>
             <excludedCommands>SortListAsc</excludedCommands>
             <excludedCommands>SortListDesc</excludedCommands>
-            <excludedCommands>CancelSearch</excludedCommands>
             <items xsi:type="form:FormField">
               <name>ItemKeysPickupRef</name>
               <id>892</id>
@@ -2303,9 +2270,6 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>ItemKeysPickup.Ref</segments>
-                </paths>
                 <paths xsi:type="form:DataPath">
                   <segments>ItemKeysPickup.Ref</segments>
                 </paths>
@@ -2358,9 +2322,6 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>ItemKeysPickup.Presentation</segments>
-                </paths>
                 <paths xsi:type="form:DataPath">
                   <segments>ItemKeysPickup.Presentation</segments>
                 </paths>
@@ -2578,6 +2539,7 @@
             <searchStringLocation>Top</searchStringLocation>
             <viewStatusLocation>Top</viewStatusLocation>
             <searchControlLocation>CommandBar</searchControlLocation>
+            <rowFilter xsi:type="core:UndefinedValue"/>
           </items>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -2605,7 +2567,7 @@
             <showLeftMargin>true</showLeftMargin>
             <united>true</united>
             <throughAlign>Auto</throughAlign>
-            <currentRowUse>DontUse</currentRowUse>
+            <currentRowUse>Auto</currentRowUse>
           </extInfo>
         </items>
         <visible>true</visible>
@@ -2634,7 +2596,7 @@
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
-          <currentRowUse>DontUse</currentRowUse>
+          <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
       <visible>true</visible>
@@ -2671,7 +2633,7 @@
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
-        <currentRowUse>DontUse</currentRowUse>
+        <currentRowUse>Auto</currentRowUse>
       </extInfo>
     </items>
     <items xsi:type="form:FormGroup">
@@ -2752,8 +2714,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>ItemPicture</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>ItemPicture</segments>
+          </paths>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
@@ -2873,7 +2837,7 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>ConnectScanner</name>
+            <name>SearchCustomer</name>
             <id>942</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2881,8 +2845,44 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>ConnectScannerExtendedTooltip</name>
+              <name>SearchCustomerExtendedTooltip</name>
               <id>943</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.SearchCustomer</commandName>
+            <representation>Auto</representation>
+            <width>10</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>4</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <backColor xsi:type="core:ColorRef">
+              <color>Web.SeaShell</color>
+            </backColor>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+		  <items xsi:type="form:Button">
+            <name>ConnectScanner</name>
+            <id>944</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ConnectScannerExtendedTooltip</name>
+              <id>945</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -3178,7 +3178,7 @@
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
-        <currentRowUse>DontUse</currentRowUse>
+        <currentRowUse>Auto</currentRowUse>
       </extInfo>
     </items>
     <visible>true</visible>
@@ -3215,7 +3215,7 @@
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
-      <currentRowUse>DontUse</currentRowUse>
+      <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
@@ -3225,8 +3225,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Store</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Store</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>StoreExtendedTooltip</name>
@@ -3278,6 +3280,10 @@
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
@@ -3288,10 +3294,6 @@
   <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
-    <event>NotificationProcessing</event>
-    <name>NotificationProcessing</name>
   </handlers>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -3386,7 +3388,7 @@ WHERE
       <common>true</common>
     </edit>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>10/-8</segments>
+      <segments>Object.RegisterRecords</segments>
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <additionalColumns>
@@ -4156,10 +4158,29 @@ receipt</value>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
+    <name>SearchCustomer</name>
+    <title>
+      <key>en</key>
+      <value>Search
+customer</value>
+    </title>
+    <id>17</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SearchCustomer</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
     <name>ConnectScanner</name>
     <title>
       <key>en</key>
-      <value>Connect scanner</value>
+      <value>Connect
+scanner</value>
     </title>
     <id>17</id>
     <use>

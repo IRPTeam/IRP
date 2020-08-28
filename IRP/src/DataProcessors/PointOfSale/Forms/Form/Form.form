@@ -450,6 +450,7 @@
                     <autoFill>true</autoFill>
                   </contextMenu>
                   <type>InputField</type>
+                  <readOnly>true</readOnly>
                   <editMode>Enter</editMode>
                   <showInHeader>true</showInHeader>
                   <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -521,6 +522,7 @@
                     <autoFill>true</autoFill>
                   </contextMenu>
                   <type>InputField</type>
+                  <readOnly>true</readOnly>
                   <editMode>Enter</editMode>
                   <showInHeader>true</showInHeader>
                   <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -2870,6 +2872,42 @@
             </backColor>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
+          <items xsi:type="form:Button">
+            <name>ConnectScanner</name>
+            <id>942</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ConnectScannerExtendedTooltip</name>
+              <id>943</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.ConnectScanner</commandName>
+            <representation>Auto</representation>
+            <width>10</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>4</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <backColor xsi:type="core:ColorRef">
+              <color>Web.SeaShell</color>
+            </backColor>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -3998,6 +4036,7 @@ WHERE
     <use>
       <common>true</common>
     </use>
+    <shortcut>F7</shortcut>
     <picture xsi:type="core:PictureRef">
       <picture>CommonPicture.Barcode</picture>
     </picture>
@@ -4112,6 +4151,23 @@ receipt</value>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>CloseButton</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>ConnectScanner</name>
+    <title>
+      <key>en</key>
+      <value>Connect scanner</value>
+    </title>
+    <id>17</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>ConnectScanner</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

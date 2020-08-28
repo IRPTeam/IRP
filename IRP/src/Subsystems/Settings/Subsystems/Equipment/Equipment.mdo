@@ -7,5 +7,6 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
+  <content>Catalog.Hardware</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

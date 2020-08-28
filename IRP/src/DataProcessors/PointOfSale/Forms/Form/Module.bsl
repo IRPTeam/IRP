@@ -1,4 +1,7 @@
 
+&AtClient
+Var Component Export;
+
 #Region FormEventHandlers
 
 &AtServer
@@ -23,11 +26,17 @@ EndProcedure
 &AtClient
 Procedure ExternalEvent(Source, Event, Data)
 	If Data <> Undefined Then
-		NotifyParameters = New Structure;
-		NotifyParameters.Insert("Form", ThisObject);
-		NotifyParameters.Insert("Object", Object);
-		NotifyParameters.Insert("ClientModule", ThisObject);
-		BarcodeClient.InputBarcodeEnd(Data, NotifyParameters);
+		If Event = "Штрихкод" Then
+			AddInfo = New Structure;
+			AddInfo.Insert("PriceType", ThisObject.CurrentPriceType);
+			AddInfo.Insert("PricePeriod", CurrentDate());
+			NotifyParameters = New Structure;
+			NotifyParameters.Insert("Form", ThisObject);
+			NotifyParameters.Insert("Object", Object);
+			NotifyParameters.Insert("ClientModule", DocumentsClient);
+			NotifyParameters.Insert("AddInfo", AddInfo);
+			BarcodeClient.InputBarcodeEnd(Data, NotifyParameters);
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -215,6 +224,13 @@ EndProcedure
 &AtClient
 Procedure CloseButton(Command)
 	Close();
+EndProcedure
+
+&AtClient
+Procedure ConnectScanner(Command)
+	Component = ScanerComponentClient.ConnectComponent();
+	ComponentParameters = GetScannerConnectParameters("BarcodeScanner");
+	ScanerComponentClient.ConnectDevice(Component, ComponentParameters);
 EndProcedure
 
 &AtClient
@@ -452,6 +468,18 @@ Procedure BuildDetailedInformation(ItemKey)
 						+ ?(ValueIsFilled(InfoOffersAmount), "-" + Format(InfoOffersAmount, "NFD=2;"), "")
 						+ " = " + Format(InfoTotalAmount, "NFD=2;");
 EndProcedure
+
+&AtServerNoContext
+Function GetScannerConnectParameters(HardwareDescription)
+	ReturnValue = New Structure;
+	Hardware = Catalogs.Hardware.FindByDescription(HardwareDescription);
+	If Not Hardware.IsEmpty() Then
+		For Each Row In Hardware.ConnectParameters Do
+			ReturnValue.Insert(Row.Name, Row.Value);
+		EndDo;		
+	EndIf;
+	Return ReturnValue;
+EndFunction
 
 #EndRegion
 

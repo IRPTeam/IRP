@@ -319,6 +319,7 @@
   <commonModules>CommonModule.DocDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocDebitNoteServer</commonModules>
   <commonModules>CommonModule.DPPointOfSaleServer</commonModules>
+  <commonModules>CommonModule.ScanerComponentClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -471,6 +472,7 @@
   <catalogs>Catalog.PaymentTerminals</catalogs>
   <catalogs>Catalog.BankTerms</catalogs>
   <catalogs>Catalog.RetailCustomers</catalogs>
+  <catalogs>Catalog.Hardware</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>

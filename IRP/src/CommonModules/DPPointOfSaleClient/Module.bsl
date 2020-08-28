@@ -9,3 +9,8 @@ Procedure ExternalEvent(Object, Form, Source, Event, Data) Export
 		BarcodeClient.InputBarcodeEnd(Data, NotifyParameters);
 	EndIf;
 EndProcedure
+
+&AtClient
+Procedure BeforePayment(Object, Cancel, AddInfo = Undefined) Export
+	Return;
+EndProcedure

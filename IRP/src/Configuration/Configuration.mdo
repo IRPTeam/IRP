@@ -5,6 +5,7 @@
     <key>en</key>
     <value>IRP</value>
   </synonym>
+  <comment> </comment>
   <containedObjects classId="9cd510cd-abfc-11d4-9434-004095e12fc7" objectId="e3520cbe-9782-4189-a67d-a0c8964a51a5"/>
   <containedObjects classId="9fcd25a0-4822-11d4-9414-008048da11f9" objectId="a697ecc7-e3f7-4c7b-a293-303c19a1ddf6"/>
   <containedObjects classId="e3687481-0a87-462c-a166-9f34594f9bba" objectId="1e1b2c21-6d3c-4cff-95e5-1775402940eb"/>
@@ -158,6 +159,8 @@
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
   <commonTemplates>CommonTemplate.MonacoEditor</commonTemplates>
+  <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
+  <commonTemplates>CommonTemplate.HTMLTextField</commonTemplates>
   <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
   <commonModules>CommonModule.AddAttributesAndPropertiesClient</commonModules>
   <commonModules>CommonModule.AddAttributesAndPropertiesServer</commonModules>
@@ -545,6 +548,8 @@
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.CompanyLegalType</enums>
   <enums>Enum.PaymentTypes</enums>
+  <enums>Enum.SerialNumberTypes</enums>
+  <enums>Enum.SerialNumbersOwner</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>

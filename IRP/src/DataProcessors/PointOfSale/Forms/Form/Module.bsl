@@ -6,13 +6,14 @@ Var Component Export;
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DetailedInformation = Format(CurrentSessionDate(), "DLF=DDT");
-	
+	HTMLDate = GetCommonTemplate("HTMLClock").GetText();
+	HTMLTextTemplate = GetCommonTemplate("HTMLTextField").GetText();
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	NewTransaction();
+	SetShowItems();
 EndProcedure
 
 &AtClient
@@ -53,7 +54,7 @@ EndProcedure
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListOnChange(Object, ThisObject, Item);
 	EnabledPaymentButton();
-	 ItemListOnActivateRow(Item);
+	ItemListOnActivateRow(Item);
 EndProcedure
 
 &AtClient
@@ -69,9 +70,7 @@ Procedure ItemListOnActivateRow(Item)
 	DocRetailSalesReceiptClient.ItemListOnActivateRow(Object, ThisObject, Item);
 	UpdateHTMLPictures();
 	CurrentData = Items.ItemList.CurrentData;
-	If CurrentData <> Undefined Then
-		BuildDetailedInformation(CurrentData.ItemKey);
-	EndIf;
+	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
 EndProcedure
 
 #EndRegion
@@ -142,9 +141,9 @@ Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	//ItemListItemOnChange(Items.ItemList);
 	ItemListItemKeyOnChange(Items.ItemList);
 	CurrentDataItemList = Items.ItemList.CurrentData;
-	If CurrentDataItemList <> Undefined Then
-		BuildDetailedInformation(CurrentDataItemList.ItemKey);
-	EndIf;
+
+	BuildDetailedInformation(?(CurrentDataItemList = Undefined, Undefined, CurrentDataItemList.ItemKey));
+
 EndProcedure
 
 &AtClient
@@ -170,7 +169,8 @@ Procedure ItemKeysPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	ItemKeysSelectionAtServer(CurrentData.Ref);
 	ItemListOnChange(Items.ItemList);	
 	ItemListItemKeyOnChange(Items.ItemList);
-	BuildDetailedInformation(CurrentData.Ref);
+	
+	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.Ref));
 EndProcedure
 
 #EndRegion
@@ -191,6 +191,13 @@ EndProcedure
 
 &AtClient
 Procedure qPayment(Command)
+	Cancel = False;
+	DPPointOfSaleClient.BeforePayment(ThisObject, Cancel);
+	
+	If Cancel Then
+		Return;
+	EndIf;
+	
 	OpenFormNotifyDescription = New NotifyDescription("PaymentFormClose", ThisObject);
 	ObjectParameters = New Structure;
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
@@ -281,6 +288,7 @@ Procedure UpdateHTMLPictures() Export
 	Else
 		CurrentRow = Undefined;
 	EndIf;
+	
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
@@ -306,7 +314,16 @@ EndFunction
 
 &AtClient
 Procedure PaymentFormClose(Result, AdditionalData) Export
-	WriteTransaction(Result);
+	
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	
+	CashbackAmount = WriteTransaction(Result);
+	DetailedInformation = "Cashback: " + Format(CashbackAmount, "NFD=2; NZ=0;");
+	Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
+
 	NewTransaction();
 EndProcedure
 
@@ -328,11 +345,11 @@ Procedure NewTransactionAtServer()
 EndProcedure
 
 &AtServer
-Procedure WriteTransaction(Result)
+Function WriteTransaction(Result)
 	OneHundred = 100;
 	If Result = Undefined 
 		Or Not Result.Payments.Count() Then
-		Return;
+		Return 0;
 	EndIf;
 	Payments = Result.Payments.Unload();
 	ZeroAmountFilter = New Structure;
@@ -367,11 +384,9 @@ Procedure WriteTransaction(Result)
 			CashbackAmount = CashbackAmount + Row.Amount * (-1);
 		EndIf;
 	EndDo;
-	If CashbackAmount Then
-		DetailedInformation = "Cashback: " + Format(CashbackAmount, "NFD=2;");
-	EndIf;
-	Return;
-EndProcedure
+
+	Return CashbackAmount;
+EndFunction
 
 &AtClient
 Procedure ShowPictures()
@@ -381,16 +396,22 @@ EndProcedure
 
 &AtClient
 Procedure ShowItems()
-	Items.ItemListShowItems.Check = Not Items.ItemsPickup.Visible;
-	Items.ItemsPickup.Visible = Items.ItemListShowItems.Check;
+	Items.ItemListShowItems.Check = Not Items.ItemListShowItems.Check;
+	SetShowItems();
+EndProcedure
+
+
+&AtClient
+Procedure SetShowItems()
+	Items.GroupPickupItems.Visible = Items.ItemListShowItems.Check;
 	CurrentData = Items.ItemsPickup.CurrentData;
 	If CurrentData <> Undefined Then
 		AfterItemChoice(CurrentData.Item);
 	Else
 		AfterItemChoice(PredefinedValue("Catalog.Items.EmptyRef"));
 	EndIf;
-	Items.ItemKeysPickup.Visible = Items.ItemListShowItems.Check;
 EndProcedure
+
 
 &AtServer
 Procedure AfterItemChoice(Val ChoicedItem, AddToItemList = False)	
@@ -440,6 +461,10 @@ EndProcedure
 
 &AtClient
 Procedure BuildDetailedInformation(ItemKey)
+	If Not ValueIsFilled(ItemKey) Then
+		DetailedInformation = "";
+		Return;
+	EndIf;
 	ItemListFilter = New Structure();
 	ItemListFilter.Insert("ItemKey", ItemKey);
 	FoundItemKeyRows = Object.ItemList.FindRows(ItemListFilter);
@@ -457,11 +482,18 @@ Procedure BuildDetailedInformation(ItemKey)
 	EndDo;
 	DetailedInformation = String(InfoItem)
 						+ ?(ValueIsFilled(ItemKey), " " + String(ItemKey), "")
-						+ " " + Format(InfoQuantity, "NFD=2;")
-						+ " x " + Format(InfoPrice, "NFD=2;")
-						+ ?(ValueIsFilled(InfoOffersAmount), "-" + Format(InfoOffersAmount, "NFD=2;"), "")
-						+ " = " + Format(InfoTotalAmount, "NFD=2;");
+						+ " " + Format(InfoQuantity, "NFD=2; NZ=0;")
+						+ " x " + Format(InfoPrice, "NFD=2; NZ=0;")
+						+ ?(ValueIsFilled(InfoOffersAmount), "-" + Format(InfoOffersAmount, "NFD=2; NZ=0;"), "")
+						+ " = " + Format(InfoTotalAmount, "NFD=2; NZ=0;");
+	Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;						
 EndProcedure
+
+&AtClient
+Procedure ClearRetailCustomer(Command)
+	Object.RetailCustomer = Undefined;
+EndProcedure
+
 
 &AtServerNoContext
 Function GetScannerConnectParameters(HardwareDescription)

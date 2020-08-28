@@ -1,0 +1,36 @@
+<html>
+	<head>
+	 <style>
+	div.containerDate {
+	  height: 10em;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center
+	  }
+	div.containerDate p {
+	  margin: 0
+	  }
+	html { overflow:  hidden; }
+  </style>
+  </head>
+	<body>
+	<div style="text-align: center;">
+		<h3><span class="containerDate" id="datetime"/></h3>
+	</div>
+		<script>
+			timer();
+			function timer() {
+			var dt = new Date();
+			document.getElementById("datetime").innerHTML = 
+			(("0"+dt.getDate()).slice(-2)) +"."+ 
+			(("0"+(dt.getMonth()+1)).slice(-2))
+			//+"."+ (dt.getFullYear())
+			+" "+ (("0"+dt.getHours()).slice(-2)) +":"+ 
+			(("0"+dt.getMinutes()).slice(-2))
+			//+":"+ (("0"+dt.getSeconds()).slice(-2))
+			;
+			setTimeout(timer, 1000);
+			}
+		</script>
+	</body>
+</html>

@@ -13,15 +13,11 @@ EndProcedure
 
 &AtClient
 Procedure CodeOnChange(Item)
-	If Not isEmptyRetailCustomerByCode(RetailCustomer.Code) Then
-		List.SettingsComposer.Settings.Filter.Items.Clear();
-		FilterItem = List.SettingsComposer.Settings.Filter.Items.Add(Type("DataCompositionFilterItem"));
-		FilterItem.LeftValue = New DataCompositionField(Item.Name);
-		FilterItem.Use = True;
-		FilterItem.ComparisonType = DataCompositionComparisonType.Contains;
-		FilterItem.RightValue = RetailCustomer[Item.Name];
-		FillByRow();
+	RetailCustomerByCode = RetailCustomerByCode(RetailCustomer.Code);
+	If Not RetailCustomerByCode.isEmpty() Then
+		FillDataOnServer(RetailCustomerByCode);
 		Modified = False;
+		CurrentItem = Items.FormWriteAndClose;
 	Else
 		Modified = True;
 	EndIf;
@@ -73,7 +69,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtServerNoContext
-Function isEmptyRetailCustomerByCode(Code)
+Function RetailCustomerByCode(Code)
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -84,8 +80,12 @@ Function isEmptyRetailCustomerByCode(Code)
 		|	RetailCustomers.Code = &Code";
 	
 	Query.SetParameter("Code", Code);
-	
-	Return Query.Execute().IsEmpty();
+	Result = Query.Execute();
+	If Result.IsEmpty() Then
+		Return Catalogs.RetailCustomers.EmptyRef();
+	Else
+		Return Result.Unload()[0].Ref;
+	EndIf;		
 EndFunction
 
 &AtClient

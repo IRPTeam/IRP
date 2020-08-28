@@ -1027,8 +1027,11 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 		EndIf;	
 		Settings.Rows.Add(Row);
 	EndDo;
-	
+	If Not Row = Undefined Then
+		Form.Items.ItemList.CurrentRow = Row.GetID();
+	EndIf;
 	Form.ItemListOnChange(Form.Items.ItemList);
+
 EndProcedure
 
 Procedure OpenPickupItems(Object, Form, Command) Export
@@ -1234,6 +1237,7 @@ EndProcedure
 #Region Commands
 
 Procedure SearchByBarcode(Command, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined) Export
+  Form.CurrentItem = Form.Items.ItemList;
   TransferParameters = New Structure;
   If DocumentClientModule = Undefined Then
     ClientModule = ThisObject;

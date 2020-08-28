@@ -2830,7 +2830,7 @@
             </backColor>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
-		  <items xsi:type="form:Button">
+          <items xsi:type="form:Button">
             <name>ConnectScanner</name>
             <id>944</id>
             <visible>true</visible>

@@ -283,15 +283,8 @@ Procedure UpdateHTMLPictures() Export
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-		
-	PictureInfo = PictureViewerClient.PicturesInfoForSlider(CurrentRow.Item, UUID);
 	
-	If PictureInfo.Pictures.Count() Then
-		ItemPicture = PictureInfo.Pictures[0].Preview;
-		If CurrentItem = Items.ItemList Then
-			CurrentRow.Picture = PictureInfo.Pictures[0].Preview;
-		EndIf;
-	EndIf;
+	ItemPicture = GetURL(GetPictureFile(CurrentRow.Item), "Preview");
 EndProcedure
 
 &AtServerNoContext

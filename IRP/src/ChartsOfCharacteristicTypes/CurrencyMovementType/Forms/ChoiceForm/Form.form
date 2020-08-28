@@ -569,16 +569,15 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
-      <queryText>SELECT 
-       CurrencyMovementType.Currency, 
-       CurrencyMovementType.Source, 
-       CurrencyMovementType.Type, 
-       CurrencyMovementType.DeferredCalculation, 
-       CurrencyMovementType.Description_en AS Description 
-   FROM 
-       ChartOfCharacteristicTypes.CurrencyMovementType
- AS 
-       CurrencyMovementType</queryText>
+      <queryText>SELECT
+	CurrencyMovementType.Currency,
+	CurrencyMovementType.Source,
+	CurrencyMovementType.Type,
+	CurrencyMovementType.DeferredCalculation,
+	CurrencyMovementType.Description_en AS Description,
+	CurrencyMovementType.Ref
+FROM
+	ChartOfCharacteristicTypes.CurrencyMovementType AS CurrencyMovementType</queryText>
       <mainTable>ChartOfCharacteristicTypes.CurrencyMovementType</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

@@ -41,6 +41,8 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.SerialLotNumbers.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.SerialLotNumbers.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.SerialLotNumbers.Form.ChoiceForm</defaultChoiceForm>
   <attributes uuid="b1910d24-9155-47dd-82b1-92d92ca46f00">
     <name>Item</name>
     <synonym>
@@ -119,6 +121,24 @@
     <synonym>
       <key>en</key>
       <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="bcb8994b-8dee-42a8-b8ef-f38fa0792e85">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="03ce25e5-802f-41a9-877a-7870d5434f48">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

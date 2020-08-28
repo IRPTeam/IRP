@@ -53,6 +53,7 @@ EndProcedure
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListOnChange(Object, ThisObject, Item);
 	EnabledPaymentButton();
+	 ItemListOnActivateRow(Item);
 EndProcedure
 
 &AtClient

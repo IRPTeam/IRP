@@ -9,13 +9,13 @@
     <value>Use unique ID</value>
   </synonym>
   <type>
+    <types>ChartOfCharacteristicTypesObject.AddAttributeAndProperty</types>
+    <types>ChartOfCharacteristicTypesObject.IDInfoTypes</types>
     <types>ChartOfCharacteristicTypesObject.CustomUserSettings</types>
-    <types>CatalogObject.AddAttributeAndPropertyValues</types>
-    <types>CatalogObject.Extensions</types>
+    <types>CatalogObject.ObjectStatuses</types>
     <types>CatalogObject.IntegrationSettings</types>
     <types>CatalogObject.ItemTypes</types>
-    <types>CatalogObject.ObjectStatuses</types>
-    <types>ChartOfCharacteristicTypesObject.IDInfoTypes</types>
-    <types>ChartOfCharacteristicTypesObject.AddAttributeAndProperty</types>
+    <types>CatalogObject.AddAttributeAndPropertyValues</types>
+    <types>CatalogObject.Extensions</types>
   </type>
 </mdclass:DefinedType>

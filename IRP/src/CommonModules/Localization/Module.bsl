@@ -7,7 +7,7 @@ Function Strings(Lang) Export
 	// %1 - localhost
 	// %2 - 8080 
 	// %3 - There is no internet connection
-	Strings.Insert("S_002", NStr("en='Cannot connect to %1:%2. Details: %3'", Lang));
+	Strings.Insert("S_002", NStr("en = 'Cannot connect to %1:%2. Details: %3'", Lang));
 	
 	// %1 - localhost
 	// %2 - 8080
@@ -43,7 +43,8 @@ Function Strings(Lang) Export
 
 	// presentation of empty value for query result
 	Strings.Insert("S_027", NStr("en = '[Not filled]'", Lang));
-	
+	// operation is Success
+	Strings.Insert("S_028", NStr("en = 'Success'", Lang));
 	#EndRegion
 	
 	#Region Service
@@ -104,17 +105,14 @@ Function Strings(Lang) Export
 
 	// %1 - Sales order
 	Strings.Insert("Error_016", NStr("en = 'There are no more items that you need to order from suppliers in the ""%1"" document.'", Lang));
-	Strings.Error_016 = StrTemplate(Strings.Error_016, Metadata.Documents.SalesOrder.Synonym);
 	
 	// %1 - Goods receipt
 	// %2 - Purchase invoice
 	Strings.Insert("Error_017", NStr("en = 'First, create a ""%1"" document or clear the ""%1 before %2"" check box on the ""Other"" tab.'", Lang));
-	Strings.Error_017 = StrTemplate(Strings.Error_017, Metadata.Documents.GoodsReceipt.Synonym, Metadata.Documents.PurchaseInvoice.Synonym);
 
 	// %1 - Shipment confirmation
 	// %1 - Sales invoice
 	Strings.Insert("Error_018", NStr("en = 'First, create a ""%1"" document or clear the ""%1 before %2"" check box on the ""Other"" tab.'", Lang));
-	Strings.Error_018 = StrTemplate(Strings.Error_018, Metadata.Documents.ShipmentConfirmation.Synonym, Metadata.Documents.SalesInvoice.Synonym);
 	
 	// %1 - Goods receipt
 	// %2 - Purchase invoice
@@ -125,16 +123,13 @@ Function Strings(Lang) Export
 
 	// %1 - Purchase invoice
 	Strings.Insert("Error_021", NStr("en = 'There are no products to return in the ""%1"" document. All products are already returned.'", Lang));
-	Strings.Error_021 = StrTemplate(Strings.Error_021, Metadata.Documents.PurchaseInvoice.Synonym);
-
+	
 	// %1 - Internal supply request
 	Strings.Insert("Error_023", NStr("en = 'There are no more items that you need to order from suppliers in the ""%1"" document.'", Lang));
-	Strings.Error_023 = StrTemplate(Strings.Error_023, Metadata.Documents.InternalSupplyRequest.Synonym);
 	
 	// %1 - Goods receipt
 	// %2 - Purchase invoice
 	Strings.Insert("Error_028", NStr("en = 'Select the ""%1 before %2"" check box on the ""Other"" tab.'", Lang));
-	Strings.Error_028 = StrTemplate(Strings.Error_028, Metadata.Documents.GoodsReceipt.Synonym, Metadata.Documents.PurchaseInvoice.Synonym);
 	
 	// %1 - Cash account
 	// %2 - 12
@@ -166,15 +161,12 @@ Function Strings(Lang) Export
 	// %3 - Shipment confirmations
 	Strings.Insert("Error_052", NStr("en = 'Cannot clear the ""%2"" check box. 
 											|Documents ""%3"" from store %1 were already created.'", Lang));
-	Strings.Error_052 = StrTemplate(Strings.Error_052, "%1", Metadata.Catalogs.Stores.Attributes.UseShipmentConfirmation.Synonym,
-															 Metadata.Documents.ShipmentConfirmation.Synonym);										
-
+	
 	// %1 - Main store
 	// %2 - Use goods receipt
 	// %3 - Goods receipts
 	Strings.Insert("Error_053", NStr("en = 'Cannot clear the ""%2"" check box. Documents ""%3"" from store %1 were already created.'", Lang));
-	Strings.Error_053 = StrTemplate(Strings.Error_053, "%1", Metadata.Catalogs.Stores.Attributes.UseGoodsReceipt.Synonym,
-			 												 Metadata.Documents.GoodsReceipt.Synonym);
+	
 	// %1 - sales order
 	Strings.Insert("Error_054", NStr("en = 'Cannot continue. The ""%1""document has an incorrect status.'", Lang));
 															  
@@ -185,36 +177,29 @@ Function Strings(Lang) Export
 	// %1 - sales order
 	// %2 - purchase order
 	Strings.Insert("Error_056", NStr("en = 'All items in the ""%1"" document are already ordered using the ""%2"" document(s).'", Lang));
-	Strings.Error_056 = StrTemplate(Strings.Error_056, Metadata.Documents.SalesOrder.Synonym, Metadata.Documents.PurchaseOrder.Synonym);
-
+	
 	// %1 - Bank receipt
 	// %2 - Cash transfer order
 	Strings.Insert("Error_057", NStr("en = 'You do not need to create a ""%1"" document for the selected ""%2"" document(s).'", Lang));
-	Strings.Error_057 = StrTemplate(Strings.Error_057, "%1", Metadata.Documents.CashTransferOrder.Synonym);
-
+	
 	// %1 - Bank receipt
 	// %2 - Cash transfer order
 	Strings.Insert("Error_058", NStr("en = 'The total amount of the ""%2"" document(s) is already paid on the basis of the ""%1"" document(s).'", Lang));
-	Strings.Error_058 = StrTemplate(Strings.Error_058, "%1", Metadata.Documents.CashTransferOrder.Synonym);
-
+	
 	// %1 - Bank receipt
 	// %2 - Cash transfer order
 	Strings.Insert("Error_059", NStr("en = 'In the selected documents, there are ""%2"" document(s) with existing ""%1"" document(s)
 											| and those that do not require a ""%1"" document.'", Lang));
-	Strings.Error_059 = StrTemplate(Strings.Error_059, "%1", Metadata.Documents.CashTransferOrder.Synonym);
 	
 	// %1 - Bank receipt
 	// %2 - Cash transfer order
 	Strings.Insert("Error_060", NStr("en = 'The total amount of the ""%2"" document(s) is already received on the basis of the ""%1"" document(s).'", Lang));
-	Strings.Error_060 = StrTemplate(Strings.Error_060, "%1", Metadata.Documents.CashTransferOrder.Synonym);
-
+	
 	// %1 - Main store
 	// %2 - Shipment confirmation
 	// %3 - Sales order
 	Strings.Insert("Error_064", NStr("en = 'You do not need to create a ""%2"" document for store(s) %1. The item will be shipped using the ""%3"" document.'", Lang));
-	Strings.Error_064 = StrTemplate(Strings.Error_064, "%1", Metadata.Documents.ShipmentConfirmation.Synonym,
-															 Metadata.Documents.SalesOrder.Synonym);
-
+	
 	Strings.Insert("Error_065", NStr("en = 'Item key is not unique.'", Lang));
 	Strings.Insert("Error_066", NStr("en = 'Specification is not unique.'", Lang));
 
@@ -241,11 +226,9 @@ Function Strings(Lang) Export
 
 	// %1 - Physical count by location
 	Strings.Insert("Error_075", NStr("en = 'There are ""%1"" documents that are not closed.'", Lang));
-	Strings.Error_075 = StrTemplate(Strings.Error_075, Metadata.Documents.PhysicalCountByLocation.Synonym);
 	
 	// %1 - Retail sales receipt
 	Strings.Insert("Error_076", NStr("en = 'There are no products to return in the ""%1"" document. All products are already returned.'", Lang));
-	Strings.Error_076 = StrTemplate(Strings.Error_076, Metadata.Documents.RetailSalesReceipt.Synonym);
 	
 	// %1 - 12
 	Strings.Insert("Error_077", NStr("en = 'Basis document is empty in line %1.'", Lang));
@@ -265,8 +248,7 @@ Function Strings(Lang) Export
 	
 	// %1 - Physical count by location
 	Strings.Insert("InfoMessage_006", NStr("en = 'The ""%1"" document is already created. You can update the quantity.'", Lang));
-	Strings.InfoMessage_006 = StrTemplate(Strings.InfoMessage_006, Metadata.Documents.PhysicalCountByLocation.Synonym);
-
+	
 	// %1 - 12
 	// %2 - 20.02.2020
 	Strings.Insert("InfoMessage_007", NStr("en = '#%1 date: %2'", Lang));
@@ -355,7 +337,6 @@ Function Strings(Lang) Export
 	#Region Titles
 	// %1 - Cheque bond transaction
 	Strings.Insert("Title_00100", NStr("en = 'Select base documents in the ""%1"" document.'", Lang));	// Form PickUpDocuments
-	Strings.Title_00100 = StrTemplate(Strings.Title_00100, Metadata.Documents.ChequeBondTransaction.Synonym);
 	#EndRegion
 	
 	#Region ChoiceListValues

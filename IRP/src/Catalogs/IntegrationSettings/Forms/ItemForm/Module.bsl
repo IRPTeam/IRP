@@ -41,6 +41,23 @@ Procedure TestConnection(Command)
 		If ValueIsFilled(CurrentActiveToken) Then
 			CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
 		EndIf;	
+	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.Email") Then 
+		ConnectionSetting = IntegrationServer.ConnectionSettingTemplate(Object.IntegrationType);
+		For Each Str In Object.ConnectionSetting Do
+			FillPropertyValues(ConnectionSetting, New Structure(Str.Key, Str.Value));
+		EndDo;
+		
+		eMail = New InternetMailMessage;
+		eMail.Texts.Add("<h1> Test </h1>", InternetMailTextType.HTML);
+		eMail.Subject = "Test";
+		eMail.SenderName = ConnectionSetting.SenderName;
+		eMail.To.Add(ConnectionSetting.eMailForTest);
+		Answer = IntegrationClientServer.SendEmail(ConnectionSetting, eMail);
+		If Not Answer.Count() Then
+			CommonFunctionsClientServer.ShowUsersMessage(CommonFunctionsServer.SerializeJSON(Answer));
+		Else
+			CommonFunctionsClientServer.ShowUsersMessage(R().S_028);
+		EndIf;
 	Else
 		ConnectionSetting = IntegrationServer.ConnectionSettingTemplate();
 		For Each Str In Object.ConnectionSetting Do

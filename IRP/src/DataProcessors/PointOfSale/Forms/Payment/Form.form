@@ -2639,7 +2639,7 @@
     <name>Card</name>
     <title>
       <key>en</key>
-      <value>Card</value>
+      <value>Card (*)</value>
     </title>
     <id>2</id>
     <use>
@@ -2945,7 +2945,7 @@
     <name>Cash</name>
     <title>
       <key>en</key>
-      <value>Cash</value>
+      <value>Cash (/)</value>
     </title>
     <id>21</id>
     <use>

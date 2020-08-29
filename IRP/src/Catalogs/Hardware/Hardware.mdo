@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="86ff70e8-2860-4578-a016-3de85f17ab25">
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="86ff70e8-2860-4578-a016-3de85f17ab25">
   <producedTypes>
     <objectType typeId="de4bb776-ba5c-4cb9-9e5c-43f9718f1ae6" valueTypeId="4b37fe90-902c-4b74-8d7f-186fc2f275bd"/>
     <refType typeId="63716219-7d63-4ac0-b819-b8d79670e070" valueTypeId="e8cda96c-ef95-481b-83ce-80375dffb116"/>
@@ -39,6 +39,9 @@
     <type>
       <types>CatalogRef.Workstations</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -64,6 +67,8 @@
           <length>64</length>
         </stringQualifiers>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -74,10 +79,10 @@
         <value>Value</value>
       </synonym>
       <type>
-        <types>String</types>
-        <types>Number</types>
-        <types>Date</types>
         <types>Boolean</types>
+        <types>String</types>
+        <types>Date</types>
+        <types>Number</types>
         <numberQualifiers>
           <precision>23</precision>
           <scale>6</scale>
@@ -89,6 +94,8 @@
           <dateFractions>Date</dateFractions>
         </dateQualifiers>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

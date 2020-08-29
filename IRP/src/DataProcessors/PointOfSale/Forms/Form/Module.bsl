@@ -248,7 +248,8 @@ EndProcedure
 
 &AtClient
 Procedure PrintReceipt(Command)
-	Return;
+	Cancel = False;
+	DPPointOfSaleClient.PrintLastReciept(ThisObject, Cancel);
 EndProcedure
 
 &AtClient

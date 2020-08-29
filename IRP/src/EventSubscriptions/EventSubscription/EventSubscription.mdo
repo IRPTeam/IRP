@@ -6,9 +6,9 @@
     <value>CopyAddAttributes</value>
   </synonym>
   <source>
-    <types>DocumentObject</types>
-    <types>CatalogObject</types>
     <types>ChartOfCharacteristicTypesObject</types>
+    <types>CatalogObject</types>
+    <types>DocumentObject</types>
   </source>
   <event>OnCopy</event>
   <handler>CommonModule.AddAttributesAndPropertiesServer.EventSubscriptionOnCopy</handler>

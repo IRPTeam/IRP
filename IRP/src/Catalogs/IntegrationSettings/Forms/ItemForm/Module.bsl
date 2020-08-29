@@ -46,7 +46,7 @@ Procedure TestConnection(Command)
 		For Each Str In Object.ConnectionSetting Do
 			FillPropertyValues(ConnectionSetting, New Structure(Str.Key, Str.Value));
 		EndDo;
-		
+		#If Not WebClient Then
 		eMail = New InternetMailMessage;
 		eMail.Texts.Add("<h1> Test </h1>", InternetMailTextType.HTML);
 		eMail.Subject = "Test";
@@ -58,6 +58,9 @@ Procedure TestConnection(Command)
 		Else
 			CommonFunctionsClientServer.ShowUsersMessage(R().S_028);
 		EndIf;
+		#Else
+		CommonFunctionsClientServer.ShowUsersMessage(R().S_029);
+		#EndIf
 	Else
 		ConnectionSetting = IntegrationServer.ConnectionSettingTemplate();
 		For Each Str In Object.ConnectionSetting Do

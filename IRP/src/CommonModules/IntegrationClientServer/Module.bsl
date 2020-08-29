@@ -179,10 +179,10 @@ Procedure SetRequestBody(HTTPRequest, RequestBody, AddInfo = Undefined)
 EndProcedure
 
 Function SendEmail(ConnectionSetting, InternetMailMessage, AddInfo = Undefined) Export
+	#If Not WebClient Then 
 	InternetMailProfile = New InternetMailProfile;
 	InternetMailProfile.SMTPServerAddress = ConnectionSetting.SMTPServerAddress;
 	InternetMailProfile.SMTPPort = ConnectionSetting.SMTPPort;
-	InternetMailProfile.SMTPAuthentication = SMTPAuthenticationMode.Login;
 	InternetMailProfile.SMTPUser = ConnectionSetting.SMTPUser;
 	InternetMailProfile.SMTPPassword = ConnectionSetting.SMTPPassword;
 	InternetMailProfile.Timeout = ConnectionSetting.Timeout;
@@ -198,5 +198,9 @@ Function SendEmail(ConnectionSetting, InternetMailMessage, AddInfo = Undefined) 
 	InternetMailMessage.ProcessTexts();
 	Answer = Mail.Send(InternetMailMessage);
 	Mail.Logoff();
+	#Else
+		Answer = New Map;
+		Answer.Insert(R().S_029);
+	#EndIf
 	Return Answer;
 EndFunction

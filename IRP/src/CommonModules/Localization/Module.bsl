@@ -45,6 +45,7 @@ Function Strings(Lang) Export
 	Strings.Insert("S_027", NStr("en = '[Not filled]'", Lang));
 	// operation is Success
 	Strings.Insert("S_028", NStr("en = 'Success'", Lang));
+	Strings.Insert("S_029", NStr("en = 'Not supoorting web client'", Lang));
 	#EndRegion
 	
 	#Region Service

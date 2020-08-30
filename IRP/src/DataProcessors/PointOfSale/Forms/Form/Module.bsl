@@ -138,7 +138,7 @@ Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	AfterItemChoice(CurrentData.Item, True);
 	ItemListOnStartEdit(Items.ItemList, True, False);
 	ItemListOnChange(Items.ItemList);
-	//ItemListItemOnChange(Items.ItemList);
+	ItemListItemOnChange(Items.ItemList);
 	ItemListItemKeyOnChange(Items.ItemList);
 	CurrentDataItemList = Items.ItemList.CurrentData;
 
@@ -167,6 +167,7 @@ Procedure ItemKeysPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 		Return;
 	EndIf;
 	ItemKeysSelectionAtServer(CurrentData.Ref);
+	ItemListOnStartEdit(Items.ItemList, True, False);
 	ItemListOnChange(Items.ItemList);	
 	ItemListItemKeyOnChange(Items.ItemList);
 	

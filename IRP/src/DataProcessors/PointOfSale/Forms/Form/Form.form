@@ -111,169 +111,6 @@
           <items xsi:type="form:FormGroup">
             <name>GroupItemListButtons</name>
             <id>838</id>
-            <items xsi:type="form:Button">
-              <name>ItemListShowPictures</name>
-              <id>642</id>
-              <title>
-                <key>en</key>
-                <value>Show pictures</value>
-              </title>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <extendedTooltip>
-                <name>ItemListShowPicturesExtendedTooltip</name>
-                <id>643</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <type>UsualButton</type>
-              <commandName>Form.Command.ShowPictures</commandName>
-              <representation>Picture</representation>
-              <autoMaxWidth>true</autoMaxWidth>
-              <height>3</height>
-              <autoMaxHeight>true</autoMaxHeight>
-              <placementArea>UserCmds</placementArea>
-              <backColor xsi:type="core:ColorRef">
-                <color>Style.ReportGroup2BackColor</color>
-              </backColor>
-              <borderColor xsi:type="core:ColorRef">
-                <color>Style.ReportGroup2BackColor</color>
-              </borderColor>
-              <representationInContextMenu>Auto</representationInContextMenu>
-            </items>
-            <items xsi:type="form:Button">
-              <name>ItemListShowItems</name>
-              <id>661</id>
-              <title>
-                <key>en</key>
-                <value>Show items</value>
-              </title>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <extendedTooltip>
-                <name>ItemListShowItemsExtendedTooltip</name>
-                <id>662</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <type>UsualButton</type>
-              <commandName>Form.Command.ShowItems</commandName>
-              <representation>Picture</representation>
-              <autoMaxWidth>true</autoMaxWidth>
-              <height>3</height>
-              <autoMaxHeight>true</autoMaxHeight>
-              <placementArea>UserCmds</placementArea>
-              <backColor xsi:type="core:ColorRef">
-                <color>Style.ReportGroup2BackColor</color>
-              </backColor>
-              <borderColor xsi:type="core:ColorRef">
-                <color>Style.ReportGroup2BackColor</color>
-              </borderColor>
-              <representationInContextMenu>Auto</representationInContextMenu>
-            </items>
-            <items xsi:type="form:Button">
-              <name>ItemListOpenPickupItems</name>
-              <id>705</id>
-              <title>
-                <key>en</key>
-                <value>Pickup items</value>
-              </title>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <extendedTooltip>
-                <name>ItemListOpenPickupItemsExtendedTooltip</name>
-                <id>706</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <type>UsualButton</type>
-              <commandName>Form.Command.OpenPickupItems</commandName>
-              <representation>Picture</representation>
-              <autoMaxWidth>true</autoMaxWidth>
-              <height>2</height>
-              <autoMaxHeight>true</autoMaxHeight>
-              <placementArea>UserCmds</placementArea>
-              <representationInContextMenu>Auto</representationInContextMenu>
-              <locationInCommandBar>InCommandBar</locationInCommandBar>
-            </items>
-            <items xsi:type="form:Button">
-              <name>ItemListSearchByBarcode</name>
-              <id>707</id>
-              <title>
-                <key>en</key>
-                <value>Search by barcode</value>
-              </title>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <extendedTooltip>
-                <name>ItemListSearchByBarcodeExtendedTooltip</name>
-                <id>708</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <type>UsualButton</type>
-              <commandName>Form.Command.SearchByBarcode</commandName>
-              <representation>Auto</representation>
-              <autoMaxWidth>true</autoMaxWidth>
-              <height>3</height>
-              <autoMaxHeight>true</autoMaxHeight>
-              <placementArea>UserCmds</placementArea>
-              <backColor xsi:type="core:ColorRef">
-                <color>Style.ReportGroup2BackColor</color>
-              </backColor>
-              <borderColor xsi:type="core:ColorRef">
-                <color>Style.ReportGroup2BackColor</color>
-              </borderColor>
-              <representationInContextMenu>Auto</representationInContextMenu>
-              <locationInCommandBar>InCommandBar</locationInCommandBar>
-            </items>
             <items xsi:type="form:FormField">
               <name>RetailCustomer</name>
               <id>923</id>
@@ -322,15 +159,9 @@
               <extInfo xsi:type="form:LabelFieldExtInfo">
                 <autoMaxHeight>true</autoMaxHeight>
                 <horizontalStretch>true</horizontalStretch>
-                <borderColor xsi:type="core:ColorRef">
-                  <color>Style.ReportGroup2BackColor</color>
-                </borderColor>
                 <textColor xsi:type="core:ColorRef">
                   <color>Style.FieldSelectionBackColor</color>
                 </textColor>
-                <backColor xsi:type="core:ColorRef">
-                  <color>Style.ReportGroup2BackColor</color>
-                </backColor>
                 <font xsi:type="core:FontDef">
                   <height>20.0</height>
                 </font>
@@ -368,12 +199,6 @@
               <autoMaxHeight>true</autoMaxHeight>
               <groupVerticalAlign>Center</groupVerticalAlign>
               <placementArea>UserCmds</placementArea>
-              <backColor xsi:type="core:ColorRef">
-                <color>Style.ReportGroup2BackColor</color>
-              </backColor>
-              <borderColor xsi:type="core:ColorRef">
-                <color>Style.ReportGroup2BackColor</color>
-              </borderColor>
               <representationInContextMenu>Auto</representationInContextMenu>
               <shapeRepresentation>None</shapeRepresentation>
             </items>
@@ -402,9 +227,6 @@
               <group>AlwaysHorizontal</group>
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
-              <backColor xsi:type="core:ColorRef">
-                <color>Style.ReportGroup2BackColor</color>
-              </backColor>
               <throughAlign>Auto</throughAlign>
               <currentRowUse>Auto</currentRowUse>
             </extInfo>
@@ -1395,6 +1217,10 @@
                 <event>OnChange</event>
                 <name>ItemListOnChange</name>
               </handlers>
+              <handlers>
+                <event>Drag</event>
+                <name>ItemListDrag</name>
+              </handlers>
               <searchStringAddition>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1527,6 +1353,36 @@
               <contextMenu>
                 <name>ItemListContextMenu</name>
                 <id>607</id>
+                <items xsi:type="form:Button">
+                  <name>ItemListContextMenuSetSpecialOffersAtRow</name>
+                  <id>966</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <extendedTooltip>
+                    <name>ItemListContextMenuSetSpecialOffersAtRowExtendedTooltip</name>
+                    <id>967</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <type>Label</type>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <extInfo xsi:type="form:LabelDecorationExtInfo">
+                      <horizontalAlign>Left</horizontalAlign>
+                    </extInfo>
+                  </extendedTooltip>
+                  <commandName>Form.Command.SetSpecialOffersAtRow</commandName>
+                  <representation>Auto</representation>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <placementArea>UserCmds</placementArea>
+                  <representationInContextMenu>Auto</representationInContextMenu>
+                </items>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -2624,6 +2480,7 @@
             <initialListView>Auto</initialListView>
             <horizontalStretch>true</horizontalStretch>
             <verticalStretch>true</verticalStretch>
+            <enableStartDrag>true</enableStartDrag>
             <fileDragMode>AsFileRef</fileDragMode>
             <searchStringLocation>Top</searchStringLocation>
             <viewStatusLocation>Top</viewStatusLocation>
@@ -2913,9 +2770,78 @@
           <name>GroupCommonButtons1</name>
           <id>903</id>
           <items xsi:type="form:Button">
+            <name>ItemListSearchByBarcode</name>
+            <id>707</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ItemListSearchByBarcodeExtendedTooltip</name>
+              <id>708</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.SearchByBarcode</commandName>
+            <representation>Auto</representation>
+            <width>10</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>4</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+            <locationInCommandBar>InCommandBar</locationInCommandBar>
+          </items>
+          <items xsi:type="form:Button">
+            <name>SetSpecialOffersAtRow</name>
+            <id>968</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>SetSpecialOffersAtRowExtendedTooltip</name>
+              <id>969</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.SetSpecialOffersAtRow</commandName>
+            <representation>Auto</representation>
+            <width>10</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>4</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <picture xsi:type="core:PictureRef">
+              <picture>CommonPicture.Share</picture>
+            </picture>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
             <name>ChangeCashier</name>
             <id>913</id>
-            <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
@@ -2951,7 +2877,6 @@
           <items xsi:type="form:Button">
             <name>CalculateOffers</name>
             <id>917</id>
-            <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
@@ -3083,9 +3008,74 @@
           <name>GroupCommonButtons2</name>
           <id>905</id>
           <items xsi:type="form:Button">
+            <name>ItemListShowItems</name>
+            <id>661</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ItemListShowItemsExtendedTooltip</name>
+              <id>662</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.ShowItems</commandName>
+            <representation>Auto</representation>
+            <width>10</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>4</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>SetSpecialOffers</name>
+            <id>964</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>SetSpecialOffersExtendedTooltip</name>
+              <id>965</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.SetSpecialOffers</commandName>
+            <representation>Auto</representation>
+            <width>10</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>4</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
             <name>CancelReceipt</name>
             <id>915</id>
-            <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
@@ -3155,15 +3145,14 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>Refund</name>
+            <name>Return</name>
             <id>919</id>
             <visible>true</visible>
-            <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>RefundExtendedTooltip</name>
+              <name>ReturnExtendedTooltip</name>
               <id>920</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -3178,7 +3167,7 @@
               </extInfo>
             </extendedTooltip>
             <type>UsualButton</type>
-            <commandName>Form.Command.Refund</commandName>
+            <commandName>Form.Command.DocReturn</commandName>
             <representation>Auto</representation>
             <width>10</width>
             <autoMaxWidth>true</autoMaxWidth>
@@ -4215,7 +4204,8 @@ WHERE
     <name>ShowItems</name>
     <title>
       <key>en</key>
-      <value>Show items</value>
+      <value>Show
+items</value>
     </title>
     <id>8</id>
     <toolTip>
@@ -4225,14 +4215,12 @@ WHERE
     <use>
       <common>true</common>
     </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.ItemPicture</picture>
-    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>ShowItems</name>
       </handler>
     </action>
+    <representation>Text</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -4257,6 +4245,11 @@ WHERE
   </formCommands>
   <formCommands>
     <name>SearchByBarcode</name>
+    <title>
+      <key>en</key>
+      <value>Search by
+barcode (F7)</value>
+    </title>
     <id>10</id>
     <use>
       <common>true</common>
@@ -4271,14 +4264,14 @@ WHERE
       </handler>
     </action>
     <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
-    <representation>Picture</representation>
+    <representation>Text</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>Refund</name>
+    <name>DocReturn</name>
     <title>
       <key>en</key>
-      <value>Refund</value>
+      <value>Return</value>
     </title>
     <id>11</id>
     <use>
@@ -4286,7 +4279,7 @@ WHERE
     </use>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>Refund</name>
+        <name>DocReturn</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>
@@ -4435,6 +4428,52 @@ customer</value>
       </handler>
     </action>
     <representation>Picture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SetSpecialOffersAtRow</name>
+    <title>
+      <key>en</key>
+      <value>Discount
+current row</value>
+    </title>
+    <id>20</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.SpecialOffer</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SetSpecialOffersAtRow</name>
+      </handler>
+    </action>
+    <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
+    <representation>Text</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SetSpecialOffers</name>
+    <title>
+      <key>en</key>
+      <value>Discount
+document</value>
+    </title>
+    <id>21</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.SpecialOffer</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SetSpecialOffers</name>
+      </handler>
+    </action>
+    <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
+    <representation>Text</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

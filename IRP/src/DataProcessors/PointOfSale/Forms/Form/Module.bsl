@@ -134,6 +134,12 @@ EndProcedure
 &AtClient
 Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	StandardProcessing = False;
+	AddItemToItemList();
+EndProcedure
+
+
+&AtClient
+Procedure AddItemToItemList()
 	CurrentData = Items.ItemsPickup.CurrentData;
 	AfterItemChoice(CurrentData.Item, True);
 	ItemListOnStartEdit(Items.ItemList, True, False);
@@ -143,8 +149,8 @@ Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	CurrentDataItemList = Items.ItemList.CurrentData;
 
 	BuildDetailedInformation(?(CurrentDataItemList = Undefined, Undefined, CurrentDataItemList.ItemKey));
-
 EndProcedure
+
 
 &AtClient
 Procedure ItemsPickupOnActivateRow(Item)
@@ -162,6 +168,13 @@ EndProcedure
 
 &AtClient
 Procedure ItemKeysPickupSelection(Item, SelectedRow, Field, StandardProcessing)
+	AddItemKeyToItemList();
+EndProcedure
+
+
+&AtClient
+Procedure AddItemKeyToItemList()
+	Var CurrentData;
 	CurrentData = Items.ItemKeysPickup.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
@@ -173,6 +186,7 @@ Procedure ItemKeysPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	
 	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.Ref));
 EndProcedure
+
 
 #EndRegion
 
@@ -216,7 +230,7 @@ Procedure qPayment(Command)
 EndProcedure
 
 &AtClient
-Procedure Refund(Command)
+Procedure DocReturn(Command)
 	OpenForm("Document.RetailReturnReceipt.ObjectForm");
 EndProcedure
 
@@ -269,6 +283,51 @@ Procedure SetRetailCustomer(Value, AddInfo = Undefined) Export
 	EndIf;
 EndProcedure
 
+
+&AtClient
+Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
+	
+	AddItemKeyToItemList();
+	
+EndProcedure
+
+#Region SpecialOffers
+
+#Region Offers_for_document
+
+&AtClient
+Procedure SetSpecialOffers(Command)
+	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object,
+		ThisObject,
+		"SpecialOffersEditFinish_ForDocument");
+EndProcedure
+
+&AtClient
+Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Export
+	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
+	
+EndProcedure
+
+#EndRegion
+
+#Region Offers_for_row
+
+&AtClient
+Procedure SetSpecialOffersAtRow(Command)
+	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object,
+		Items.ItemList.CurrentData,
+		ThisObject,
+		"SpecialOffersEditFinish_ForRow");
+EndProcedure
+
+&AtClient
+Procedure SpecialOffersEditFinish_ForRow(Result, AdditionalParameters) Export
+	OffersClient.SpecialOffersEditFinish_ForRow(Result, Object, ThisObject, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
 #EndRegion
 
 #EndRegion

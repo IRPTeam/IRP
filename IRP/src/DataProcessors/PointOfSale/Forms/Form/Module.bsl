@@ -542,11 +542,11 @@ Procedure BuildDetailedInformation(ItemKey)
 		InfoTotalAmount = InfoTotalAmount + FoundItemKeyRow.TotalAmount;
 	EndDo;
 	DetailedInformation = String(InfoItem)
-						+ ?(ValueIsFilled(ItemKey), " " + String(ItemKey), "")
-						+ " " + Format(InfoQuantity, "NFD=2; NZ=0;")
-						+ " x " + Format(InfoPrice, "NFD=2; NZ=0;")
-						+ ?(ValueIsFilled(InfoOffersAmount), "-" + Format(InfoOffersAmount, "NFD=2; NZ=0;"), "")
-						+ " = " + Format(InfoTotalAmount, "NFD=2; NZ=0;");
+						+ ?(ValueIsFilled(ItemKey), " [" + String(ItemKey), "]")
+						+ " " + InfoQuantity
+						+ " x " + Format(InfoPrice, "NFD=2; NZ=0.00;")
+						+ ?(ValueIsFilled(InfoOffersAmount), "-" + Format(InfoOffersAmount, "NFD=2; NZ=0.00;"), "")
+						+ " = " + Format(InfoTotalAmount, "NFD=2; NZ=0.00;");
 	Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;						
 EndProcedure
 

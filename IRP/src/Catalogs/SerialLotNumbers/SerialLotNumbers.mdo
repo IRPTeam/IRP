@@ -143,4 +143,13 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="fb6b5fc5-414b-4b13-a997-01f56fb6ab9d">
+    <name>EditListOfSerialLotNumbers</name>
+    <synonym>
+      <key>en</key>
+      <value>Edit list of serial lot numbers</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:Catalog>

@@ -970,4 +970,51 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="fac862fc-34a5-4249-954f-05cc4fcff6fb">
+    <producedTypes>
+      <objectType typeId="716a2cd5-f4d8-4b6a-a0c8-ae8d53af0129" valueTypeId="c897bf09-2b4c-4272-bf1f-ea8aadf022b8"/>
+      <rowType typeId="31dff153-7ac7-4638-b0a8-ddb28ce4f8ae" valueTypeId="b597b380-31c6-4421-842d-896ad8f9861e"/>
+    </producedTypes>
+    <name>SerialLotNumbers</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot numbers</value>
+    </synonym>
+    <attributes uuid="86311af7-bcb4-419b-b03a-85d50c6320ac">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="681e8ac4-ef56-42b8-aae8-3101f07278e6">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6425693e-a337-4bfa-b57b-842157cf49eb">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
 </mdclass:Document>

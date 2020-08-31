@@ -49,18 +49,24 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResultPaymentList = QueryPaymentList.Execute();
 	QueryTablePaymentList = QueryResultPaymentList.Unload();
 	
+	QuerySalesTurnovers = New Query();
+	QuerySalesTurnovers.Text = GetQueryTextRetailSalesReceiptSalesTurnovers();
+	QuerySalesTurnovers.SetParameter("Ref", Ref);
+	QueryResultSalesTurnovers = QuerySalesTurnovers.Execute();
+	QueryTableSalesTurnovers = QueryResultSalesTurnovers.Unload();
+	
 	Query = New Query();
 	Query.Text = GetQueryTextQueryTable();
 	Query.SetParameter("QueryTable", QueryTableItemList);
 	QueryResult = Query.ExecuteBatch();
 	
 	Tables.StockReservation = QueryResult[1].Unload();
-	Tables.SalesTurnovers = QueryResult[2].Unload();
-	Tables.StockBalance = QueryResult[3].Unload();
-	Tables.RevenuesTurnovers = QueryResult[4].Unload();
+	Tables.StockBalance = QueryResult[2].Unload();
+	Tables.RevenuesTurnovers = QueryResult[3].Unload();
+	
 	Tables.TaxesTurnovers = QueryTableTaxList;
 	Tables.AccountBalance = QueryTablePaymentList;
-	
+	Tables.SalesTurnovers = QueryTableSalesTurnovers;
 	Return Tables;
 EndFunction
 
@@ -189,6 +195,39 @@ Function GetQueryTextRetailSalesReceiptPaymentList()
 		   |	RetailSalesReceiptPayments.Ref.Date";
 EndFunction	
 
+Function GetQueryTextRetailSalesReceiptSalesTurnovers()
+	Return "SELECT
+		   |	RetailSalesReceiptItemList.Ref.Company,
+		   |	RetailSalesReceiptItemList.Ref.Currency,
+		   |	RetailSalesReceiptItemList.ItemKey,
+		   |	SUM(RetailSalesReceiptItemList.Quantity) AS Quantity,
+		   |	RetailSalesReceiptItemList.Ref.Date AS Period,
+		   |	RetailSalesReceiptItemList.Ref AS RetailSalesReceipt,
+		   |	SUM(RetailSalesReceiptItemList.TotalAmount) AS Amount,
+		   |	SUM(RetailSalesReceiptItemList.NetAmount) AS NetAmount,
+		   |	SUM(RetailSalesReceiptItemList.OffersAmount) AS OffersAmount,
+		   |	RetailSalesReceiptItemList.Key AS RowKey,
+		   |	RetailSalesReceiptSerialLotNumbers.SerialLotNumber
+		   |FROM
+		   |	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
+		   |		LEFT JOIN Document.RetailSalesReceipt.SerialLotNumbers AS RetailSalesReceiptSerialLotNumbers
+		   |		ON RetailSalesReceiptItemList.Key = RetailSalesReceiptSerialLotNumbers.Key
+		   |		AND RetailSalesReceiptItemList.Ref = RetailSalesReceiptSerialLotNumbers.Ref
+		   |		AND RetailSalesReceiptItemList.Ref = &Ref
+		   |		AND RetailSalesReceiptSerialLotNumbers.Ref = &Ref
+		   |WHERE
+		   |	RetailSalesReceiptItemList.Ref = &Ref
+		   |	AND RetailSalesReceiptSerialLotNumbers.Ref = &Ref
+		   |GROUP BY
+		   |	RetailSalesReceiptItemList.Ref.Company,
+		   |	RetailSalesReceiptItemList.Ref.Currency,
+		   |	RetailSalesReceiptItemList.ItemKey,
+		   |	RetailSalesReceiptItemList.Ref.Date,
+		   |	RetailSalesReceiptItemList.Ref,
+		   |	RetailSalesReceiptItemList.Key,
+		   |	RetailSalesReceiptSerialLotNumbers.SerialLotNumber";
+EndFunction
+
 Function GetQueryTextQueryTable()
 	Return
 		"SELECT
@@ -237,29 +276,6 @@ Function GetQueryTextQueryTable()
 		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
-		|	tmp.Currency AS Currency,
-		|	tmp.ItemKey AS ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period AS Period,
-		|	tmp.RetailSalesReceipt AS RetailSalesReceipt,
-		|	SUM(tmp.Amount) AS Amount,
-		|	SUM(tmp.NetAmount) AS NetAmount,
-		|	SUM(tmp.OffersAmount) AS OffersAmount,
-		|	tmp.RowKey AS RowKey
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Period,
-		|	tmp.Company,
-		|	tmp.Currency,
-		|	tmp.ItemKey,
-		|	tmp.RetailSalesReceipt,
-		|	tmp.RowKey
-		|;
-		|
-		|//[3]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	SUM(tmp.Quantity) AS Quantity,
@@ -276,7 +292,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Store,
 		|	tmp.ItemKey
 		|;
-		|//[4]//////////////////////////////////////////////////////////////////////////////
+		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Period AS Period,
 		|	tmp.Company AS Company,

@@ -30,6 +30,7 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.Hardware.Form.ItemForm</defaultObjectForm>
   <attributes uuid="2215cdc3-fcfc-40e0-83a2-153654cd1ac6">
     <name>Workstation</name>
     <synonym>
@@ -42,6 +43,28 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9753667e-e27e-4c25-afad-8cd1ef0e0961">
+    <name>EquipmentType</name>
+    <synonym>
+      <key>en</key>
+      <value>Types of Equipment</value>
+    </synonym>
+    <type>
+      <types>EnumRef.EquipmentTypes</types>
+    </type>
+  </attributes>
+  <attributes uuid="a325d8a3-741f-44c5-b7a0-bd9bdd6f3b40">
+    <name>Driver</name>
+    <synonym>
+      <key>en</key>
+      <value>Driver</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.EquipmentDrivers</types>
+    </type>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -100,4 +123,13 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <forms uuid="161f3551-9be0-4efa-bc08-af1e45560d8a">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:Catalog>

@@ -542,7 +542,7 @@ Procedure BuildDetailedInformation(ItemKey)
 		InfoTotalAmount = InfoTotalAmount + FoundItemKeyRow.TotalAmount;
 	EndDo;
 	DetailedInformation = String(InfoItem)
-						+ ?(ValueIsFilled(ItemKey), " [" + String(ItemKey), "]")
+						+ ?(ValueIsFilled(ItemKey), " [" + String(ItemKey) + "]", "]")
 						+ " " + InfoQuantity
 						+ " x " + Format(InfoPrice, "NFD=2; NZ=0.00;")
 						+ ?(ValueIsFilled(InfoOffersAmount), "-" + Format(InfoOffersAmount, "NFD=2; NZ=0.00;"), "")

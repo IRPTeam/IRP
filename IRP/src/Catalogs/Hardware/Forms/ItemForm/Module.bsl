@@ -31,7 +31,7 @@ Procedure Test(Command)
 	EndDo;
 	
 	Оповещение = Новый ОписаниеОповещения("ТестУстройстваЗавершение", ЭтотОбъект);
-	HardwareClient.НачатьВыполнениеДополнительнойКоманды(Оповещение, "CheckHealth", ВходныеПараметры, Object.Ref, ПараметрыУстройства);
+	HardwareClient.BeginStartAdditionalComand(Оповещение, "CheckHealth", ВходныеПараметры, Object.Ref, ПараметрыУстройства);
 
 EndProcedure
 

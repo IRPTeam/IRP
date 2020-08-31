@@ -326,7 +326,6 @@
   <commonModules>CommonModule.HardwareClient</commonModules>
   <commonModules>CommonModule.HardwareServer</commonModules>
   <commonModules>CommonModule.HardwareInputDevice</commonModules>
-  <commonModules>CommonModule.HardwareBarcodeScanner</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>

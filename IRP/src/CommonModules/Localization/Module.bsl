@@ -2,6 +2,22 @@ Function Strings(Lang) Export
 	
 	Strings = New Structure();
 	
+	#Region Equipment
+	Strings.Insert("Eq_001", NStr("en = 'Installed'", Lang));
+	Strings.Insert("Eq_002", NStr("en = 'Not installed'", Lang));
+	Strings.Insert("Eq_003", NStr("en = 'There are no errors.'", Lang));
+	
+	Strings.Insert("EqError_001", NStr("en = 'The device is connected. The device must be disabled before the operation.'", Lang));
+
+	Strings.Insert("EqError_002", NStr("en = 'The device driver could not be downloaded.
+											  |Check that the driver is correctly installed and registered in the system.'", Lang));
+	Strings.Insert("EqError_003", NStr("en = ''", Lang));
+	Strings.Insert("EqError_004", NStr("en = ''", Lang));
+	Strings.Insert("EqError_005", NStr("en = ''", Lang));
+	Strings.Insert("EqError_006", NStr("en = ''", Lang));
+
+	#EndRegion
+	
 	#Region Service
 	
 	// %1 - localhost

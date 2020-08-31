@@ -322,10 +322,8 @@
   <commonModules>CommonModule.DocDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocDebitNoteServer</commonModules>
   <commonModules>CommonModule.DPPointOfSaleServer</commonModules>
-  <commonModules>CommonModule.ScanerComponentClient</commonModules>
   <commonModules>CommonModule.HardwareClient</commonModules>
   <commonModules>CommonModule.HardwareServer</commonModules>
-  <commonModules>CommonModule.HardwareInputDevice</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>

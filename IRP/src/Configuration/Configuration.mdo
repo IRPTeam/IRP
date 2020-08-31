@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>0.7.1.#BuildNumber#</version>
+  <version>0.7.2.#BuildNumber#</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <reportsVariantsStorage>SettingsStorage.ReportOptions</reportsVariantsStorage>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>
@@ -326,6 +326,7 @@
   <commonModules>CommonModule.HardwareClient</commonModules>
   <commonModules>CommonModule.HardwareServer</commonModules>
   <commonModules>CommonModule.HardwareInputDevice</commonModules>
+  <commonModules>CommonModule.HardwareBarcodeScanner</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>

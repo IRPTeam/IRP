@@ -21,7 +21,7 @@ EndProcedure
 
 Function ProcessBarcode(Barcode, Parameters)
 	BarcodeArray = New Array;
-	BarcodeArray.Add(Barcode);
+	BarcodeArray.Add(TrimAll(Barcode));
 	Return ProcessBarcodes(BarcodeArray, Parameters);
 EndFunction
 

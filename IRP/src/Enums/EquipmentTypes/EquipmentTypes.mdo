@@ -19,4 +19,11 @@
       <value>Input device</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="6e28e4d8-2707-43dd-93f3-30d0b69063a8">
+    <name>BarcodeScanner</name>
+    <synonym>
+      <key>en</key>
+      <value>Barcode scanner</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

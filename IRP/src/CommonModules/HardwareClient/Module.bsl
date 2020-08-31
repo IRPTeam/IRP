@@ -135,7 +135,7 @@ EndFunction
 	ПодключенноеУстройство = Неопределено;
 	
 	Для Каждого Подключение Из СписокПодключений Цикл
-		Если Подключение.Ссылка = Идентификатор Тогда
+		Если Подключение.Ref = Идентификатор Тогда
 			ПодключенноеУстройство = Подключение;
 			Прервать;
 		КонецЕсли;
@@ -198,7 +198,9 @@ EndFunction
 КонецПроцедуры
 
 Function ПолучитьОбработчикДрайвера(EquipmentType)
-	If EquipmentType = PredefinedValue("Enum.EquipmentTypes.InputDevice") Then
+	If EquipmentType = PredefinedValue("Enum.EquipmentTypes.BarcodeScanner") Then
+		Return HardwareBarcodeScanner;
+	Else
 		Return HardwareInputDevice;
 	EndIf;
 EndFunction

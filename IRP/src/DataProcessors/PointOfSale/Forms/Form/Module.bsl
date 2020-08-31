@@ -24,9 +24,10 @@ EndProcedure
 Procedure ConnectEquipments_End(Result, Param) Export
 	
 	If Result.Result Then
-		Message("Scanner is connected");
+		Message("Scanner is connected!");
 	Else
-		Message("Scanner not connected");
+		Message("Error. Scanner not connected!");
+		Message(Result.ОписаниеОшибки);
 	EndIf;
 EndProcedure
 
@@ -42,7 +43,7 @@ EndProcedure
 &AtClient
 Procedure ExternalEvent(Source, Event, Data)
 	If Data <> Undefined Then
-		If Event = "NewBarcode" Then
+		If Event = "NewBarcode" Or Event = "Штрихкод" Then
 			AddInfo = New Structure;
 			AddInfo.Insert("PriceType", ThisObject.CurrentPriceType);
 			AddInfo.Insert("PricePeriod", CurrentDate());
@@ -51,7 +52,13 @@ Procedure ExternalEvent(Source, Event, Data)
 			NotifyParameters.Insert("Object", Object);
 			NotifyParameters.Insert("ClientModule", DocumentsClient);
 			NotifyParameters.Insert("AddInfo", AddInfo);
-			BarcodeClient.InputBarcodeEnd(Data, NotifyParameters);
+			Result = True;
+			Message = "";
+			Items.DetailedInformation.document.getElementById("text").innerHTML = "";
+			BarcodeClient.ScanBarcodeEnd(Data, Result, Message, NotifyParameters);
+			If Not Result Then
+				Items.DetailedInformation.document.getElementById("text").innerHTML = "<p style='color:red'>" + Message + "</p>";
+			EndIf;
 		EndIf;
 	EndIf;
 EndProcedure

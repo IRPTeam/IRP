@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="68d2ac49-3e71-42ff-ae94-e087e943035f">
+  <name>HardwareBarcodeScanner</name>
+  <synonym>
+    <key>en</key>
+    <value>Hardware barcode scanner</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+</mdclass:CommonModule>

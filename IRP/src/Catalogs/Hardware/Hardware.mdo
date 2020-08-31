@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="86ff70e8-2860-4578-a016-3de85f17ab25">
+  <producedTypes>
+    <objectType typeId="de4bb776-ba5c-4cb9-9e5c-43f9718f1ae6" valueTypeId="4b37fe90-902c-4b74-8d7f-186fc2f275bd"/>
+    <refType typeId="63716219-7d63-4ac0-b819-b8d79670e070" valueTypeId="e8cda96c-ef95-481b-83ce-80375dffb116"/>
+    <selectionType typeId="02d0abaa-ae1f-4a1f-8922-90b3562ca2c9" valueTypeId="67ce4ac6-c07a-46e7-8778-f6f1ccf53ccf"/>
+    <listType typeId="6a4a2208-f2ca-4ad9-a6b4-23a5dbe7cfd9" valueTypeId="662c220f-af74-408f-983c-f95bb7b4ba5e"/>
+    <managerType typeId="02e4a082-2a57-4c0b-979e-104e92ff49fc" valueTypeId="bf2d7979-7e5f-41df-a63e-98bb5e71d157"/>
+  </producedTypes>
+  <name>Hardware</name>
+  <synonym>
+    <key>en</key>
+    <value>Hardware</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.Hardware.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.Hardware.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>9</codeLength>
+  <descriptionLength>25</descriptionLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <attributes uuid="2215cdc3-fcfc-40e0-83a2-153654cd1ac6">
+    <name>Workstation</name>
+    <synonym>
+      <key>en</key>
+      <value>Workstation</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Workstations</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="fd9a6894-9c06-4625-91a4-5db398bbb9ac">
+    <producedTypes>
+      <objectType typeId="b8fed1f0-7596-48b4-9c7e-bbe156d72e69" valueTypeId="1acf60ec-ede0-41cf-8e2a-c53aee5f71c5"/>
+      <rowType typeId="7628feff-a346-4554-b6af-9803dec73f37" valueTypeId="444355a6-c98a-4545-bd0a-62409091103e"/>
+    </producedTypes>
+    <name>ConnectParameters</name>
+    <synonym>
+      <key>en</key>
+      <value>Connect parameters</value>
+    </synonym>
+    <attributes uuid="805ffe86-574a-4a56-a17d-3fb9178e03c2">
+      <name>Name</name>
+      <synonym>
+        <key>en</key>
+        <value>Name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>64</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f966ae63-5e31-4a00-b122-94ec7d3b5b3d">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+        <types>String</types>
+        <types>Date</types>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>23</precision>
+          <scale>6</scale>
+        </numberQualifiers>
+        <stringQualifiers>
+          <length>1024</length>
+        </stringQualifiers>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+</mdclass:Catalog>

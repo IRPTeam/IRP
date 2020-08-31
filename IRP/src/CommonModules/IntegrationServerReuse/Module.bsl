@@ -18,6 +18,19 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefi
 	ConnectionSetting = New Structure();
 	If IntegrationType = Enums.IntegrationType.LocalFileStorage Then
 		ConnectionSetting.Insert("AddressPath", "");
+	ElsIf IntegrationType = Enums.IntegrationType.Email Then
+		ConnectionSetting.Insert("SMTPServerAddress", "smtp.gmail.com");
+		ConnectionSetting.Insert("SMTPPort", 465);
+		ConnectionSetting.Insert("SMTPUser", "username");
+		ConnectionSetting.Insert("SMTPPassword", "");
+		ConnectionSetting.Insert("SMTPUseSSL", True);
+		ConnectionSetting.Insert("POP3BeforeSMTP", False);
+		ConnectionSetting.Insert("TimeOut", 60);
+		ConnectionSetting.Insert("eMailForTest", "email@test.com");
+		ConnectionSetting.Insert("SenderName", "IRP Team");
+		ConnectionSetting.Insert("FromAddress", "noreply@irpteam.com");
+		ConnectionSetting.Insert("DisplayName", "IRP NO REPLY");
+
 	Else
 		ConnectionSetting.Insert("QueryType", "POST");
 		ConnectionSetting.Insert("ResourceAddress", "");

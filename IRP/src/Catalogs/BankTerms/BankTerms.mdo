@@ -37,6 +37,8 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.BankTerms.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.BankTerms.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.BankTerms.Form.ChoiceForm</defaultChoiceForm>
   <tabularSections uuid="a02a7569-9bd2-4203-8a91-cbfb6e902c90">
     <producedTypes>
       <objectType typeId="5b2d60d1-cb4c-4c56-bb66-cc9291835207" valueTypeId="27cf030d-46b7-4b62-b17e-ecc4607aec8f"/>
@@ -56,6 +58,8 @@
       <type>
         <types>CatalogRef.PaymentTypes</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -68,6 +72,8 @@
       <type>
         <types>CatalogRef.CashAccounts</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -80,6 +86,8 @@
       <type>
         <types>DefinedType.typePercent</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -128,6 +136,24 @@
     <synonym>
       <key>en</key>
       <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="6418a24e-626b-427c-90dd-8b10d847e3ad">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="79a3f6cd-26c6-429f-856f-493f55a4f7b9">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

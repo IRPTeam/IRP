@@ -25,6 +25,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.RetailReturnReceipt</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.PurchaseReturn</metadata>
     <use>Use</use>
   </content>
@@ -34,6 +38,10 @@
   </content>
   <content>
     <metadata>Document.OutgoingPaymentOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.RetailSalesReceipt</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -66,14 +74,6 @@
   </content>
   <content>
     <metadata>Document.BankReceipt</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.RetailSalesReceipt</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.RetailReturnReceipt</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

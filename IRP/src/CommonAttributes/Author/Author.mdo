@@ -35,6 +35,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.RetailReturnReceipt</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.CashExpense</metadata>
     <use>Use</use>
   </content>
@@ -95,6 +99,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.RetailSalesReceipt</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.StockAdjustmentAsWriteOff</metadata>
     <use>Use</use>
   </content>
@@ -112,6 +120,10 @@
   </content>
   <content>
     <metadata>Document.CashReceipt</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.DebitNote</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -135,6 +147,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.CreditNote</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.BankPayment</metadata>
     <use>Use</use>
   </content>
@@ -152,22 +168,6 @@
   </content>
   <content>
     <metadata>Document.BankReceipt</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.RetailSalesReceipt</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.RetailReturnReceipt</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.CreditNote</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.DebitNote</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

@@ -60,6 +60,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.DebitNote.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PurchaseOrder.TabularSection.ItemList</name>
 		<right>
 			<name>View</name>
@@ -79,6 +86,13 @@
 	</object>
 	<object>
 		<name>Document.SalesInvoice.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesOrder.Attribute.Partner</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -167,6 +181,13 @@
 	</object>
 	<object>
 		<name>Document.PurchaseInvoice.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailSalesReceipt.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -394,6 +415,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.RetailSalesReceipt.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.BankPayment.Attribute.Account</name>
 		<right>
 			<name>View</name>
@@ -558,6 +586,24 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.RetailSalesReceipt</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailSalesReceipt.Attribute.Partner</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Partners</name>
 		<right>
 			<name>Read</name>
@@ -601,6 +647,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.CreditNote.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.IncomingPaymentOrder</name>
 		<right>
 			<name>Read</name>
@@ -626,6 +679,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.Store</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.SalesInvoice.TabularSection.ItemList</name>
 		<right>
 			<name>View</name>
@@ -645,6 +705,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailSalesReceipt.Attribute.BusinessUnit</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -755,6 +822,20 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.BusinessUnit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailSalesReceipt.Attribute.LegalName</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashExpense.Attribute.Account</name>
 		<right>
 			<name>View</name>
@@ -763,6 +844,13 @@
 	</object>
 	<object>
 		<name>Document.CashExpense.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailSalesReceipt.Attribute.Agreement</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -839,94 +927,6 @@
 	</object>
 	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesOrder.Attribute.Partner</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailSalesReceipt</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailSalesReceipt.Attribute.Agreement</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailSalesReceipt.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailSalesReceipt.Attribute.Partner</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailSalesReceipt.Attribute.BusinessUnit</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailSalesReceipt.Attribute.LegalName</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailSalesReceipt.TabularSection.ItemList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.Store</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.BusinessUnit</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CreditNote.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.DebitNote.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

@@ -1,5 +1,13 @@
 #Region Posting
 
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region Posting
+
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	
 	AccReg = Metadata.AccumulationRegisters;

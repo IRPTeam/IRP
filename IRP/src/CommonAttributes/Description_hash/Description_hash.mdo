@@ -13,6 +13,10 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
   <content>
+    <metadata>Catalog.PaymentTerminals</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.Agreements</metadata>
     <use>Use</use>
   </content>
@@ -65,6 +69,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.BankTerms</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.SpecialOffers</metadata>
     <use>Use</use>
   </content>
@@ -98,6 +106,10 @@
   </content>
   <content>
     <metadata>Catalog.SpecialOfferRules</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.UnitsOfMeasurement</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -182,18 +194,6 @@
   </content>
   <content>
     <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.UnitsOfMeasurement</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.PaymentTerminals</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.BankTerms</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

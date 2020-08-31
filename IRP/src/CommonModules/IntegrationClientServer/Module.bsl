@@ -133,6 +133,7 @@ Function SendRequest(Val ConnectionSetting,
 	#EndIf
 	
 EndFunction
+
 Procedure SetResourceParameters(ResourceAddress, ResourceParameters, AddInfo = Undefined)
 	If ResourceParameters = Undefined Then
 		Return;
@@ -177,3 +178,29 @@ Procedure SetRequestBody(HTTPRequest, RequestBody, AddInfo = Undefined)
 	EndIf;
 EndProcedure
 
+Function SendEmail(ConnectionSetting, InternetMailMessage, AddInfo = Undefined) Export
+	#If Not WebClient Then 
+	InternetMailProfile = New InternetMailProfile;
+	InternetMailProfile.SMTPServerAddress = ConnectionSetting.SMTPServerAddress;
+	InternetMailProfile.SMTPPort = ConnectionSetting.SMTPPort;
+	InternetMailProfile.SMTPUser = ConnectionSetting.SMTPUser;
+	InternetMailProfile.SMTPPassword = ConnectionSetting.SMTPPassword;
+	InternetMailProfile.Timeout = ConnectionSetting.Timeout;
+	InternetMailProfile.POP3BeforeSMTP = ConnectionSetting.POP3BeforeSMTP;
+	InternetMailProfile.SMTPUseSSL = ConnectionSetting.SMTPUseSSL;
+
+	Mail = New InternetMail;
+	Mail.Logon(InternetMailProfile);
+	
+	InternetMailMessage.From.Address = ConnectionSetting.FromAddress;
+	InternetMailMessage.From.DisplayName = ConnectionSetting.DisplayName;
+	InternetMailMessage.SenderName = ConnectionSetting.SenderName;
+	InternetMailMessage.ProcessTexts();
+	Answer = Mail.Send(InternetMailMessage);
+	Mail.Logoff();
+	#Else
+		Answer = New Map;
+		Answer.Insert(R().S_029);
+	#EndIf
+	Return Answer;
+EndFunction

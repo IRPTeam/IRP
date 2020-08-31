@@ -68,6 +68,8 @@
     <type>
       <types>CatalogRef.BusinessUnits</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <forms uuid="6e29de76-f7b4-42c8-a2b7-9df2359eb2f3">
     <name>Form</name>

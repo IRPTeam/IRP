@@ -102,10 +102,7 @@ EndProcedure
 
 &AtClient
 Procedure CloseButton(Command)
-	Payments.Clear();
-	ReturnValue = New Structure;
-	ReturnValue.Insert("Payments", Payments);
-	Close(ReturnValue);
+	Close();
 EndProcedure
 
 &AtClient

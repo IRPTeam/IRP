@@ -227,6 +227,8 @@
       <type>
         <types>DefinedType.typeAccountStatementBasises</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
         <name>Filter.Company</name>
         <field>Document.CreditNote.Attribute.Company</field>
@@ -243,6 +245,8 @@
       <type>
         <types>CatalogRef.Companies</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

@@ -47,4 +47,11 @@
       <value>Google drive</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="01d8ba4c-e1e7-4c4b-8f88-49dd92b8029b">
+    <name>Email</name>
+    <synonym>
+      <key>en</key>
+      <value>Email</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

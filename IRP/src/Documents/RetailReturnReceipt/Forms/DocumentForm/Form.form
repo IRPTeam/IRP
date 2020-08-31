@@ -135,7 +135,7 @@
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
-          <currentRowUse>DontUse</currentRowUse>
+          <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
       <items xsi:type="form:FormGroup">
@@ -264,7 +264,7 @@
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
-          <currentRowUse>DontUse</currentRowUse>
+          <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
       <visible>true</visible>
@@ -293,7 +293,7 @@
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
-        <currentRowUse>DontUse</currentRowUse>
+        <currentRowUse>Auto</currentRowUse>
       </extInfo>
     </items>
     <items xsi:type="form:FormGroup">
@@ -573,7 +573,7 @@
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
-          <currentRowUse>DontUse</currentRowUse>
+          <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
       <items xsi:type="form:FormGroup">
@@ -728,7 +728,7 @@
             <showLeftMargin>true</showLeftMargin>
             <united>true</united>
             <throughAlign>Auto</throughAlign>
-            <currentRowUse>DontUse</currentRowUse>
+            <currentRowUse>Auto</currentRowUse>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
@@ -739,8 +739,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.RetailCustomer</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.RetailCustomer</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>RetailCustomerExtendedTooltip</name>
@@ -807,7 +809,7 @@
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
-          <currentRowUse>DontUse</currentRowUse>
+          <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
       <visible>true</visible>
@@ -836,7 +838,7 @@
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
-        <currentRowUse>DontUse</currentRowUse>
+        <currentRowUse>Auto</currentRowUse>
       </extInfo>
     </items>
     <visible>true</visible>
@@ -865,7 +867,7 @@
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
-      <currentRowUse>DontUse</currentRowUse>
+      <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
   <items xsi:type="form:FormGroup">
@@ -1119,7 +1121,7 @@
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
-          <currentRowUse>DontUse</currentRowUse>
+          <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
       <items xsi:type="form:Table">
@@ -1831,10 +1833,19 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <type>InputField</type>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
         </items>
         <autoCommandBar>
           <name>ItemListCommandBar</name>
@@ -2084,9 +2095,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.Payments.LineNumber</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.НомерСтроки</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PaymentsLineNumberExtendedTooltip</name>
@@ -2136,9 +2144,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.PaymentType</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.Payments.PaymentType</segments>
             </paths>
@@ -2194,9 +2199,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.Payments.PaymentTerminal</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.PaymentTerminal</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PaymentsPaymentTerminalExtendedTooltip</name>
@@ -2246,9 +2248,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.Account</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.Payments.Account</segments>
             </paths>
@@ -2304,9 +2303,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.Payments.Amount</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.Amount</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PaymentsAmountExtendedTooltip</name>
@@ -2359,9 +2355,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.Payments.Percent</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.Percent</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PaymentsPercentExtendedTooltip</name>
@@ -2411,9 +2404,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.Commission</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.Payments.Commission</segments>
             </paths>
@@ -2625,6 +2615,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -4404,7 +4395,7 @@
     <type>Pages</type>
     <extInfo xsi:type="form:PagesGroupExtInfo">
       <pagesRepresentation>TabsOnTop</pagesRepresentation>
-      <currentRowUse>DontUse</currentRowUse>
+      <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
   <items xsi:type="form:FormGroup">
@@ -4428,8 +4419,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.TotalNetAmount</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.TotalNetAmount</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListTotalNetAmountExtendedTooltip</name>
@@ -4498,7 +4491,7 @@
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
-          <currentRowUse>DontUse</currentRowUse>
+          <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
       <items xsi:type="form:FormGroup">
@@ -4516,8 +4509,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.TotalTaxAmount</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.TotalTaxAmount</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListTotalTaxAmountExtendedTooltip</name>
@@ -4586,7 +4581,7 @@
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
-          <currentRowUse>DontUse</currentRowUse>
+          <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
       <items xsi:type="form:FormGroup">
@@ -4604,8 +4599,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.TotalTotalAmount</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.TotalTotalAmount</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListTotalTotalAmountExtendedTooltip</name>
@@ -4723,7 +4720,7 @@
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
-          <currentRowUse>DontUse</currentRowUse>
+          <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
       <visible>true</visible>
@@ -4758,7 +4755,7 @@
           <blue>242</blue>
         </backColor>
         <throughAlign>Auto</throughAlign>
-        <currentRowUse>DontUse</currentRowUse>
+        <currentRowUse>Auto</currentRowUse>
       </extInfo>
     </items>
     <visible>true</visible>
@@ -4788,7 +4785,7 @@
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
-      <currentRowUse>DontUse</currentRowUse>
+      <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
   <autoCommandBar>

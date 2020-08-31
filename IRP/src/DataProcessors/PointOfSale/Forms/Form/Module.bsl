@@ -14,7 +14,22 @@ EndProcedure
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	NewTransaction();
 	SetShowItems();
+	
+	NotifyDescription_ConnectEquipments_End = New NotifyDescription("ConnectEquipments_End", ThisObject);                                 
+	HardwareClient.BeginConnectEquipment(NotifyDescription_ConnectEquipments_End);
+	
 EndProcedure
+
+&AtClient
+Procedure ConnectEquipments_End(Result, Param) Export
+	
+	If Result.Result Then
+		Message("Scanner is connected");
+	Else
+		Message("Scanner not connected");
+	EndIf;
+EndProcedure
+
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
@@ -27,7 +42,7 @@ EndProcedure
 &AtClient
 Procedure ExternalEvent(Source, Event, Data)
 	If Data <> Undefined Then
-		If Event = "Штрихкод" Then
+		If Event = "NewBarcode" Then
 			AddInfo = New Structure;
 			AddInfo.Insert("PriceType", ThisObject.CurrentPriceType);
 			AddInfo.Insert("PricePeriod", CurrentDate());
@@ -247,13 +262,6 @@ EndProcedure
 &AtClient
 Procedure CloseButton(Command)
 	Close();
-EndProcedure
-
-&AtClient
-Procedure ConnectScanner(Command)
-	Component = ScanerComponentClient.ConnectComponent();
-	ComponentParameters = GetScannerConnectParameters("BarcodeScanner");
-	ScanerComponentClient.ConnectDevice(Component, ComponentParameters);
 EndProcedure
 
 &AtClient
@@ -554,19 +562,6 @@ EndProcedure
 Procedure ClearRetailCustomer(Command)
 	Object.RetailCustomer = Undefined;
 EndProcedure
-
-
-&AtServerNoContext
-Function GetScannerConnectParameters(HardwareDescription)
-	ReturnValue = New Structure;
-	Hardware = Catalogs.Hardware.FindByDescription(HardwareDescription);
-	If Not Hardware.IsEmpty() Then
-		For Each Row In Hardware.ConnectParameters Do
-			ReturnValue.Insert(Row.Name, Row.Value);
-		EndDo;		
-	EndIf;
-	Return ReturnValue;
-EndFunction
 
 #EndRegion
 

@@ -26,7 +26,12 @@ Function GetDriverSettings(AddInID) Export
 	Return Settings;
 EndFunction
 
-Function GetConnectionSettings(HardwareRef) Export
+Function GetConnectionSettings(HardwareRef = Undefined, Name = "") Export
+	
+	If Not IsBlankString(Name) Then
+		HardwareRef = Catalogs.Hardware.FindByDescription(Name);
+	EndIf;
+	
 	
 	Query = New Query;
 	Query.Text =
@@ -53,6 +58,12 @@ Function GetConnectionSettings(HardwareRef) Export
 		Settings.Insert("EquipmentType", SelectionDetailRecords.EquipmentType);
 		Settings.Insert("AddInID", SelectionDetailRecords.AddInID);
 		Settings.Insert("Driver", SelectionDetailRecords.Driver);
+		
+		ConnectParameters = New Structure;
+		For Each Row In SelectionDetailRecords.Ref.ConnectParameters Do
+			ConnectParameters.Insert(Row.Name, Row.Value);
+		EndDo;
+		Settings.Insert("ConnectParameters", ConnectParameters);
 	EndIf;
 	Return Settings;
 

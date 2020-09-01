@@ -2910,39 +2910,6 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>ConnectScaner</name>
-            <id>952</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <extendedTooltip>
-              <name>ConnectScanerExtendedTooltip</name>
-              <id>953</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <type>Label</type>
-              <autoMaxWidth>true</autoMaxWidth>
-              <autoMaxHeight>true</autoMaxHeight>
-              <extInfo xsi:type="form:LabelDecorationExtInfo">
-                <horizontalAlign>Left</horizontalAlign>
-              </extInfo>
-            </extendedTooltip>
-            <type>UsualButton</type>
-            <commandName>Form.Command.ConnectScaner</commandName>
-            <representation>Auto</representation>
-            <width>10</width>
-            <autoMaxWidth>true</autoMaxWidth>
-            <height>4</height>
-            <autoMaxHeight>true</autoMaxHeight>
-            <placementArea>UserCmds</placementArea>
-            <representationInContextMenu>Auto</representationInContextMenu>
-          </items>
-          <items xsi:type="form:Button">
             <name>SearchCustomer</name>
             <id>954</id>
             <visible>true</visible>
@@ -3462,10 +3429,6 @@
   <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
-  </handlers>
-  <handlers>
-    <event>ExternalEvent</event>
-    <name>ExternalEvent</name>
   </handlers>
   <handlers>
     <event>OnCreateAtServer</event>
@@ -4369,24 +4332,6 @@ receipt</value>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>CloseButton</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>ConnectScaner</name>
-    <title>
-      <key>en</key>
-      <value>Connect
-scaner</value>
-    </title>
-    <id>17</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>ConnectScanner</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

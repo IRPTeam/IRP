@@ -4,6 +4,13 @@ Var DeleteRows;
 
 #Region FormEvents
 
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+EndProcedure
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If ValueIsFilled(Parameters.IncomingExpItemListAddress) Then
@@ -36,8 +43,8 @@ EndProcedure
 #Region Commands
 
 &AtClient
-Procedure SearchByBarcode(Command)
-	BarcodeClient.SearchByBarcode(Command, Object, ThisObject, ThisObject);
+Procedure SearchByBarcode(Command, Barcode = "")
+	BarcodeClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject);
 EndProcedure
 
 &AtClient

@@ -729,10 +729,6 @@
             <items xsi:type="form:Button">
               <name>Certificate</name>
               <id>136</id>
-              <title>
-                <key>en</key>
-                <value>Certificate</value>
-              </title>
               <visible>true</visible>
               <userVisible>
                 <common>true</common>
@@ -760,15 +756,15 @@
               <height>3</height>
               <autoMaxHeight>true</autoMaxHeight>
               <placementArea>UserCmds</placementArea>
+              <textColor xsi:type="core:ColorRef">
+                <color>Windows.ToolTip</color>
+              </textColor>
               <backColor xsi:type="core:ColorRef">
                 <color>Web.HoneyDew</color>
               </backColor>
               <font xsi:type="core:FontDef">
                 <height>14.0</height>
               </font>
-              <picture xsi:type="core:PictureRef">
-                <picture>CommonPicture.Store</picture>
-              </picture>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">
@@ -1082,12 +1078,12 @@
               <height>3</height>
               <autoMaxHeight>true</autoMaxHeight>
               <placementArea>UserCmds</placementArea>
+              <textColor xsi:type="core:ColorRef">
+                <color>Windows.ToolTip</color>
+              </textColor>
               <font xsi:type="core:FontDef">
                 <height>14.0</height>
               </font>
-              <picture xsi:type="core:PictureRef">
-                <picture>CommonPicture.SpecialOffer</picture>
-              </picture>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">

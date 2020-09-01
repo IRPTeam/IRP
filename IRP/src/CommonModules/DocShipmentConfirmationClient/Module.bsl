@@ -321,7 +321,7 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	ItemListOnChange(AdditionalParameters.Object, AdditionalParameters.Form, Undefined, Undefined);
 EndProcedure
 
-Procedure SearchByBarcode(Command, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Command, Object, Form);
+Procedure SearchByBarcode(Barcode, Object, Form) Export
+	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
 EndProcedure
 

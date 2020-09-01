@@ -152,7 +152,7 @@ Procedure StoreReceiverOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
-Procedure SearchByBarcode(Command, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Command, Object, Form);
+Procedure SearchByBarcode(Barcode, Object, Form) Export
+	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
 EndProcedure
 

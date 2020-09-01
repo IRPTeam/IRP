@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>0.7.1.#BuildNumber#</version>
+  <version>0.7.2.#BuildNumber#</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <reportsVariantsStorage>SettingsStorage.ReportOptions</reportsVariantsStorage>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>
@@ -322,7 +322,8 @@
   <commonModules>CommonModule.DocDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocDebitNoteServer</commonModules>
   <commonModules>CommonModule.DPPointOfSaleServer</commonModules>
-  <commonModules>CommonModule.ScanerComponentClient</commonModules>
+  <commonModules>CommonModule.HardwareClient</commonModules>
+  <commonModules>CommonModule.HardwareServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -421,6 +422,7 @@
   <commonForms>CommonForm.ReportForm</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.ShareToUsers</commonForms>
+  <catalogs>Catalog.EquipmentDrivers</catalogs>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
@@ -550,6 +552,7 @@
   <enums>Enum.PaymentTypes</enums>
   <enums>Enum.SerialNumberTypes</enums>
   <enums>Enum.SerialNumbersOwner</enums>
+  <enums>Enum.EquipmentTypes</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c2f7af64-5dfa-4755-a496-2126b7c8a095">
-  <name>ScanerComponentClient</name>
-  <clientManagedApplication>true</clientManagedApplication>
-</mdclass:CommonModule>

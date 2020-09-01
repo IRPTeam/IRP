@@ -1,3 +1,5 @@
+Var globalEquipments Export; 
+
 Procedure OnStart()
 	isMobile = False;
 	#If MobileAppClient OR MobileClient OR MobileAppServer Then
@@ -41,5 +43,10 @@ Procedure BeforeStart(Cancel)
 		Cancel = True;
 		Raise AreaStatus.Status;
 	EndIf;
+	
+	globalEquipments = New Structure;
+	globalEquipments.Insert("Drivers", New Map);
+	globalEquipments.Insert("ConnectionSettings" , New Array);
+	
 EndProcedure
 

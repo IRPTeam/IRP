@@ -1,4 +1,4 @@
-Function SearchByBarcodes(Barcodes, AddInfo) Export
+Function SearchByBarcodes(Val Barcodes, AddInfo) Export
 	
 	ReturnValue = New Array;
 	Query = New Query;

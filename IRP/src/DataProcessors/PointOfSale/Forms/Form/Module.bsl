@@ -14,30 +14,31 @@ EndProcedure
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	NewTransaction();
 	SetShowItems();
+	
+	NotifyDescription_ConnectEquipments_End = New NotifyDescription("ConnectEquipments_End", ThisObject);                                 
+	HardwareClient.BeginConnectEquipment(NotifyDescription_ConnectEquipments_End);
+	
 EndProcedure
+
+&AtClient
+Procedure ConnectEquipments_End(Result, Param) Export
+	
+	If Result.Result Then
+		Status(R().Eq_004);
+	Else
+		Status(R().Eq_005);
+	EndIf;
+EndProcedure
+
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	If Not Source = ThisObject Then
-		Return;
+	If Source = ThisObject Then
+		DocRetailSalesReceiptClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 	EndIf;	
-	DocRetailSalesReceiptClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-EndProcedure
-
-&AtClient
-Procedure ExternalEvent(Source, Event, Data)
-	If Data <> Undefined Then
-		If Event = "Штрихкод" Then
-			AddInfo = New Structure;
-			AddInfo.Insert("PriceType", ThisObject.CurrentPriceType);
-			AddInfo.Insert("PricePeriod", CurrentDate());
-			NotifyParameters = New Structure;
-			NotifyParameters.Insert("Form", ThisObject);
-			NotifyParameters.Insert("Object", Object);
-			NotifyParameters.Insert("ClientModule", DocumentsClient);
-			NotifyParameters.Insert("AddInfo", AddInfo);
-			BarcodeClient.InputBarcodeEnd(Data, NotifyParameters);
-		EndIf;
+	
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
 	EndIf;
 EndProcedure
 
@@ -200,8 +201,8 @@ Procedure OpenPickupItems(Command)
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcode(Command)
-	DocumentsClient.SearchByBarcode(Command, Object, ThisObject, , ThisObject.CurrentPriceType);
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, , ThisObject.CurrentPriceType);
 EndProcedure
 
 &AtClient
@@ -247,13 +248,6 @@ EndProcedure
 &AtClient
 Procedure CloseButton(Command)
 	Close();
-EndProcedure
-
-&AtClient
-Procedure ConnectScanner(Command)
-	Component = ScanerComponentClient.ConnectComponent();
-	ComponentParameters = GetScannerConnectParameters("BarcodeScanner");
-	ScanerComponentClient.ConnectDevice(Component, ComponentParameters);
 EndProcedure
 
 &AtClient
@@ -554,19 +548,6 @@ EndProcedure
 Procedure ClearRetailCustomer(Command)
 	Object.RetailCustomer = Undefined;
 EndProcedure
-
-
-&AtServerNoContext
-Function GetScannerConnectParameters(HardwareDescription)
-	ReturnValue = New Structure;
-	Hardware = Catalogs.Hardware.FindByDescription(HardwareDescription);
-	If Not Hardware.IsEmpty() Then
-		For Each Row In Hardware.ConnectParameters Do
-			ReturnValue.Insert(Row.Name, Row.Value);
-		EndDo;		
-	EndIf;
-	Return ReturnValue;
-EndFunction
 
 #EndRegion
 

@@ -20,7 +20,7 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	ErrorMessages = New Array;
 	
 	If PaymentsAmountTotal < Object.Amount Then
-		ErrorMessages.Add(RL().s1);
+		ErrorMessages.Add(R().POS_s1);
 	EndIf;
 	
 	PaymentsValue = FormAttributeToValue("Payments");
@@ -33,16 +33,16 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	CardAmounts = PaymentsValue.Copy(CardPaymentFilter, "Amount");
 	CardAmount = CardAmounts.Total("Amount");
 	If CardAmount > Object.Amount Then
-		ErrorMessages.Add(RL().s2);
+		ErrorMessages.Add(R().POS_s2);
 	EndIf;
 	If CardAmount = Object.Amount
 		And CashAmount Then
-		ErrorMessages.Add(RL().s3);
+		ErrorMessages.Add(R().POS_s3);
 	EndIf;
 		
 	If Not ErrorMessages.Count()
 		And PaymentsAmountTotal <> (Object.Amount + Object.Cashback) Then
-		ErrorMessages.Add(RL().s4);		
+		ErrorMessages.Add(R().POS_s4);		
 	EndIf;
 	
 	If ErrorMessages.Count() Then
@@ -424,17 +424,6 @@ Procedure CashChoiceEnd(Result, AdditionalParameters) Export
 	CalculatePaymentsAmountTotal();
 	FormatPaymentsAmountStringRows();
 EndProcedure
-
-//TODO: #186 Transfer to localization module
-&AtServer
-Function RL()
-	S = New Structure;
-	S.Insert("s1", "Сумма оплат меньше суммы документа");
-	S.Insert("s2", "Сумма оплат по картам больше суммы документа");
-	S.Insert("s3", "Нет надобности использовать наличные, так как суммы оплат по картам достаточно для оплаты");
-	S.Insert("s4", "Суммы оплат некорректны");
-	Return S;
-EndFunction
 
 &AtClient
 Function GetAmountString(Val AmountValue)

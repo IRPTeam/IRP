@@ -43,6 +43,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 	// {TAXES}
 	
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -504,8 +507,8 @@ Procedure SetProcurementMethods(Command)
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcode(Command)
-	DocSalesOrderClient.SearchByBarcode(Command, Object, ThisObject);
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocSalesOrderClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
 &AtClient

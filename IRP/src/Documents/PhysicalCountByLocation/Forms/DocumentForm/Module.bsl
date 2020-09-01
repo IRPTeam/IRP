@@ -10,6 +10,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -120,8 +123,8 @@ EndProcedure
 #EndRegion
 
 &AtClient
-Procedure SearchByBarcode(Command)
-	DocPhysicalCountByLocationClient.SearchByBarcode(Command, Object, ThisObject);
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocPhysicalCountByLocationClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
 &AtClient

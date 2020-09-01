@@ -17,7 +17,7 @@ Background:
 
 Scenario: _090302 create purchase invoice for several purchase orders with different legal name
 	# should be created 2 Purchase invoice
-	Create rest Purchase order 124
+	* Create Purchase order 124
 		When create the first test PO for a test on the creation mechanism based on
 		* Change the document number to 124
 			And I move to "Other" tab
@@ -113,7 +113,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 
 Scenario: _090303 create Purchase invoice for several Purchase order with the same partner, legal name, partner term, currency and store
 # Should be created 1 Purchase invoice
-	Create rest Purchase order 126
+	* Create Purchase order 126
 		When create the first test PO for a test on the creation mechanism based on
 		* Change the document number to 126
 			And I move to "Other" tab
@@ -128,7 +128,7 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 			| Company Ferron BP |
 		And I select current line in "List" table
 		And I click "Post and close" button
-	Create rest Purchase order 127
+	* Create Purchase order 127
 		When create the second test PO for a test on the creation mechanism based on
 		* Change the document number to 127
 			And I move to "Other" tab
@@ -2174,4 +2174,114 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 			| 'Number'  |
 			| '149'       |
 			| '150'       |
+		And I close all client application windows
+
+Scenario: _090323 create one Purchase order - several Goods receipt - one Purchase invoice
+	* Create Purchase order
+		When create the first test PO for a test on the creation mechanism based on
+		* Save the document number
+			And I save the value of "Number" field as "$$NumberPurchaseOrder090323$$"
+			And I set checkbox "Goods receipt before purchase invoice"
+			And I click "Post and close" button
+	* Create 3 Goods receipt
+		* First GR
+			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+			And I go to line in "List" table
+				| Number |
+				| $$NumberPurchaseOrder090323$$    |
+			And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+			And I activate "Quantity" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' | 'Quantity' |
+				| 'Dress' | 'L/Green'  | '20,000'   |
+			And I select current line in "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Quantity' |
+				| 'Trousers' | '36/Yellow' | '30,000'   |
+			And I select current line in "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post and close" button
+		* Second GR
+			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+			And I go to line in "List" table
+				| Number |
+				| $$NumberPurchaseOrder090323$$    |
+			And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+			And I activate "Quantity" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "8,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'L/Green'  |
+			And I select current line in "ItemList" table
+			And I input "8,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '36/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "12,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post and close" button
+		* Third GR
+			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+			And I go to line in "List" table
+				| Number |
+				| $$NumberPurchaseOrder090323$$    |
+			And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+			And I activate "Quantity" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "7,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'L/Green'  |
+			And I select current line in "ItemList" table
+			And I input "7,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '36/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "8,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post and close" button
+	* Create Purchase invoice for 3 Goods receipt
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| Number |
+			| $$NumberPurchaseOrder090323$$    |
+		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		And I click the button named "FormSelectAll"
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '5,000'  | 'pcs'  | '152,54'     | '847,46'     | '1 000,00'     | 'Store 02' |
+			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000'  | 'pcs'  | '160,17'     | '889,83'     | '1 050,00'     | 'Store 02' |
+			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '10,000' | 'pcs'  | '320,34'     | '1 779,66'   | '2 100,00'     | 'Store 02' |
+			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '8,000'  | 'pcs'  | '244,07'     | '1 355,93'   | '1 600,00'     | 'Store 02' |
+			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '7,000'  | 'pcs'  | '213,56'     | '1 186,44'   | '1 400,00'     | 'Store 02' |
+			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '8,000'  | 'pcs'  | '256,27'     | '1 423,73'   | '1 680,00'     | 'Store 02' |
+			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '7,000'  | 'pcs'  | '224,24'     | '1 245,76'   | '1 470,00'     | 'Store 02' |
+			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '12,000' | 'pcs'  | '384,41'     | '2 135,59'   | '2 520,00'     | 'Store 02' |
+			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '8,000'  | 'pcs'  | '256,27'     | '1 423,73'   | '1 680,00'     | 'Store 02' |
+		And "TaxTree" table contains lines
+			| 'Tax' | 'Tax rate' | 'Item'     | 'Item key'  | 'Amount'   | 'Manual amount' |
+			| 'VAT' | ''         | ''         | ''          | '2 211,87' | '2 211,87'      |
+			| 'VAT' | '18%'      | 'Dress'    | 'M/White'   | '152,54'   | '152,54'        |
+			| 'VAT' | '18%'      | 'Dress'    | 'M/White'   | '244,07'   | '244,07'        |
+			| 'VAT' | '18%'      | 'Dress'    | 'M/White'   | '213,56'   | '213,56'        |
+			| 'VAT' | '18%'      | 'Dress'    | 'L/Green'   | '160,17'   | '160,17'        |
+			| 'VAT' | '18%'      | 'Dress'    | 'L/Green'   | '256,27'   | '256,27'        |
+			| 'VAT' | '18%'      | 'Dress'    | 'L/Green'   | '224,24'   | '224,24'        |
+			| 'VAT' | '18%'      | 'Trousers' | '36/Yellow' | '320,34'   | '320,34'        |
+			| 'VAT' | '18%'      | 'Trousers' | '36/Yellow' | '384,41'   | '384,41'        |
+			| 'VAT' | '18%'      | 'Trousers' | '36/Yellow' | '256,27'   | '256,27'        |
 		And I close all client application windows

@@ -197,35 +197,81 @@ EndFunction
 
 Function GetQueryTextRetailSalesReceiptSalesTurnovers()
 	Return "SELECT
-		   |	RetailSalesReceiptItemList.Ref.Company,
-		   |	RetailSalesReceiptItemList.Ref.Currency,
-		   |	RetailSalesReceiptItemList.ItemKey,
-		   |	SUM(RetailSalesReceiptItemList.Quantity) AS Quantity,
-		   |	RetailSalesReceiptItemList.Ref.Date AS Period,
-		   |	RetailSalesReceiptItemList.Ref AS RetailSalesReceipt,
-		   |	SUM(RetailSalesReceiptItemList.TotalAmount) AS Amount,
-		   |	SUM(RetailSalesReceiptItemList.NetAmount) AS NetAmount,
-		   |	SUM(RetailSalesReceiptItemList.OffersAmount) AS OffersAmount,
-		   |	RetailSalesReceiptItemList.Key AS RowKey,
-		   |	RetailSalesReceiptSerialLotNumbers.SerialLotNumber
-		   |FROM
-		   |	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
-		   |		LEFT JOIN Document.RetailSalesReceipt.SerialLotNumbers AS RetailSalesReceiptSerialLotNumbers
-		   |		ON RetailSalesReceiptItemList.Key = RetailSalesReceiptSerialLotNumbers.Key
-		   |		AND RetailSalesReceiptItemList.Ref = RetailSalesReceiptSerialLotNumbers.Ref
-		   |		AND RetailSalesReceiptItemList.Ref = &Ref
-		   |		AND RetailSalesReceiptSerialLotNumbers.Ref = &Ref
-		   |WHERE
-		   |	RetailSalesReceiptItemList.Ref = &Ref
-		   |	AND RetailSalesReceiptSerialLotNumbers.Ref = &Ref
-		   |GROUP BY
-		   |	RetailSalesReceiptItemList.Ref.Company,
-		   |	RetailSalesReceiptItemList.Ref.Currency,
-		   |	RetailSalesReceiptItemList.ItemKey,
-		   |	RetailSalesReceiptItemList.Ref.Date,
-		   |	RetailSalesReceiptItemList.Ref,
-		   |	RetailSalesReceiptItemList.Key,
-		   |	RetailSalesReceiptSerialLotNumbers.SerialLotNumber";
+	|	RetailSalesReceiptItemList.Ref.Company AS Company,
+	|	RetailSalesReceiptItemList.Ref.Currency AS Currency,
+	|	RetailSalesReceiptItemList.ItemKey AS ItemKey,
+	|	SUM(RetailSalesReceiptItemList.Quantity) AS Quantity,
+	|	SUM(ISNULL(RetailSalesReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
+	|	RetailSalesReceiptItemList.Ref.Date AS Period,
+	|	RetailSalesReceiptItemList.Ref AS RetailSalesReceipt,
+	|	SUM(RetailSalesReceiptItemList.TotalAmount) AS Amount,
+	|	SUM(RetailSalesReceiptItemList.NetAmount) AS NetAmount,
+	|	SUM(RetailSalesReceiptItemList.OffersAmount) AS OffersAmount,
+	|	RetailSalesReceiptItemList.Key AS RowKey,
+	|	RetailSalesReceiptSerialLotNumbers.SerialLotNumber AS SerialLotNumber
+	|INTO tmp
+	|FROM
+	|	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
+	|		LEFT JOIN Document.RetailSalesReceipt.SerialLotNumbers AS RetailSalesReceiptSerialLotNumbers
+	|		ON RetailSalesReceiptItemList.Key = RetailSalesReceiptSerialLotNumbers.Key
+	|		AND RetailSalesReceiptItemList.Ref = RetailSalesReceiptSerialLotNumbers.Ref
+	|		AND RetailSalesReceiptItemList.Ref = &Ref
+	|		AND RetailSalesReceiptSerialLotNumbers.Ref = &Ref
+	|WHERE
+	|	RetailSalesReceiptItemList.Ref = &Ref
+	|GROUP BY
+	|	RetailSalesReceiptItemList.Ref.Company,
+	|	RetailSalesReceiptItemList.Ref.Currency,
+	|	RetailSalesReceiptItemList.ItemKey,
+	|	RetailSalesReceiptItemList.Ref.Date,
+	|	RetailSalesReceiptItemList.Ref,
+	|	RetailSalesReceiptItemList.Key,
+	|	RetailSalesReceiptSerialLotNumbers.SerialLotNumber
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.Company AS Company,
+	|	tmp.Currency AS Currency,
+	|	tmp.ItemKey AS ItemKey,
+	|	CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers = 0
+	|			THEN tmp.Quantity
+	|		ELSE tmp.QuantityBySerialLtNumbers
+	|	END AS Quantity,
+	|	tmp.Period AS Period,
+	|	tmp.RetailSalesReceipt AS RetailSalesReceipt,
+	|	tmp.RowKey AS RowKey,
+	|	tmp.SerialLotNumber AS SerialLotNumber,
+	|	CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.Amount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.Amount
+	|	END AS Amount,
+	|	CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.NetAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.NetAmount
+	|	END AS NetAmount,
+	|	CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.OffersAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.OffersAmount
+	|	END AS OffersAmount
+	|FROM
+	|	tmp AS tmp";
 EndFunction
 
 Function GetQueryTextQueryTable()

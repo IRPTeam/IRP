@@ -2087,6 +2087,10 @@
           <event>OnChange</event>
           <name>ItemListOnChange</name>
         </handlers>
+        <handlers>
+          <event>OnActivateCell</event>
+          <name>ItemListOnActivateCell</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -4964,6 +4968,56 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>SerialLotNumbersTreeItemKeyQuantity</name>
+          <id>875</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>SerialLotNumbersTree.ItemKeyQuantity</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>SerialLotNumbersTreeItemKeyQuantityExtendedTooltip</name>
+            <id>877</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>SerialLotNumbersTreeItemKeyQuantityContextMenu</name>
+            <id>876</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>SerialLotNumbersTreeQuantity</name>
           <id>872</id>
           <visible>true</visible>
@@ -6388,6 +6442,40 @@
           <common>true</common>
         </edit>
       </columns>
+      <columns>
+        <name>UseSerialLotNumber</name>
+        <title>
+          <key>en</key>
+          <value>Use serial lot number</value>
+        </title>
+        <id>163</id>
+        <valueType>
+          <types>Boolean</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
+      <columns>
+        <name>SerialLotNumberIsFilling</name>
+        <title>
+          <key>en</key>
+          <value>Serial lot number is filling</value>
+        </title>
+        <id>164</id>
+        <valueType>
+          <types>Boolean</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
     </additionalColumns>
   </attributes>
   <attributes>
@@ -6909,6 +6997,23 @@
         <numberQualifiers>
           <precision>10</precision>
         </numberQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>ItemKeyQuantity</name>
+      <title>
+        <key>en</key>
+        <value>Item key quantity</value>
+      </title>
+      <id>165</id>
+      <valueType>
+        <types>DefinedType.typeQuantity</types>
       </valueType>
       <view>
         <common>true</common>

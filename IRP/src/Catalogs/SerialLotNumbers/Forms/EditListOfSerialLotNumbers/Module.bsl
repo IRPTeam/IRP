@@ -13,6 +13,9 @@ EndProcedure
 
 &AtClient
 Procedure Ok(Command)
+	If Not CheckFilling() Then
+		Return;
+	EndIf;
 	Result = New Structure();
 	Result.Insert("RowKey", ThisObject.RowKey);
 	Result.Insert("Item", ThisObject.Item);
@@ -30,4 +33,24 @@ Procedure Cancel(Command)
 	Close(Undefined);
 EndProcedure
 
-
+&AtServer
+Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
+	RowIndex = 0;
+	For Each Row In SerialLotNumbers Do
+		If Not ValueIsFilled(Row.SerialLotNumber) Then
+			Cancel = True; 
+			CommonFunctionsClientServer.ShowUsersMessage(
+			StrTemplate(R().Error_010, "Serial lot number"), 
+			"SerialLotNumbers[" + Format(RowIndex, "NZ=0; NG=0;") + "].SerialLotNumber", 
+			ThisObject);
+		EndIf;
+		If Not ValueIsFilled(Row.Quantity) Then
+			Cancel = True; 
+			CommonFunctionsClientServer.ShowUsersMessage(
+			StrTemplate(R().Error_010, "Quantity"), 
+			"SerialLotNumbers[" + Format(RowIndex, "NZ=0; NG=0;") + "].Quantity", 
+			ThisObject);
+		EndIf;		
+		RowIndex = RowIndex + 1;
+	EndDo;	
+EndProcedure

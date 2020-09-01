@@ -257,6 +257,9 @@ Function Strings(Lang) Export
 	// %1 - 12
 	Strings.Insert("Error_077", NStr("en = 'Basis document is empty in line %1.'", Lang));
 	
+	// %1 - 1 %2 - 2
+	Strings.Insert("Error_078", NStr("en = 'Quantity [%1] does not match the quantity [%2] by serial/lot numbers'", Lang));
+	
 	#EndRegion
 	
 	#Region InfoMessages

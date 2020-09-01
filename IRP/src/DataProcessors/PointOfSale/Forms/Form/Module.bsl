@@ -24,42 +24,21 @@ EndProcedure
 Procedure ConnectEquipments_End(Result, Param) Export
 	
 	If Result.Result Then
-		Message("Scanner is connected!");
+		Status(R().Eq_004);
 	Else
-		Message("Error. Scanner not connected!");
-		Message(Result.ОписаниеОшибки);
+		Status(R().Eq_005);
 	EndIf;
 EndProcedure
 
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	If Not Source = ThisObject Then
-		Return;
+	If Source = ThisObject Then
+		DocRetailSalesReceiptClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 	EndIf;	
-	DocRetailSalesReceiptClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-EndProcedure
-
-&AtClient
-Procedure ExternalEvent(Source, Event, Data)
-	If Data <> Undefined Then
-		If Event = "NewBarcode" Or Event = "Штрихкод" Then
-			AddInfo = New Structure;
-			AddInfo.Insert("PriceType", ThisObject.CurrentPriceType);
-			AddInfo.Insert("PricePeriod", CurrentDate());
-			NotifyParameters = New Structure;
-			NotifyParameters.Insert("Form", ThisObject);
-			NotifyParameters.Insert("Object", Object);
-			NotifyParameters.Insert("ClientModule", DocumentsClient);
-			NotifyParameters.Insert("AddInfo", AddInfo);
-			Result = True;
-			Message = "";
-			Items.DetailedInformation.document.getElementById("text").innerHTML = "";
-			BarcodeClient.ScanBarcodeEnd(Data, Result, Message, NotifyParameters);
-			If Not Result Then
-				Items.DetailedInformation.document.getElementById("text").innerHTML = "<p style='color:red'>" + Message + "</p>";
-			EndIf;
-		EndIf;
+	
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
 	EndIf;
 EndProcedure
 
@@ -222,8 +201,8 @@ Procedure OpenPickupItems(Command)
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcode(Command)
-	DocumentsClient.SearchByBarcode(Command, Object, ThisObject, , ThisObject.CurrentPriceType);
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, , ThisObject.CurrentPriceType);
 EndProcedure
 
 &AtClient

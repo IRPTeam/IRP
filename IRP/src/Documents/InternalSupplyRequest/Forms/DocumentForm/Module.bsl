@@ -25,6 +25,13 @@ Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+EndProcedure
 #EndRegion
 
 &AtClient
@@ -126,8 +133,8 @@ EndProcedure
 #EndRegion
 
 &AtClient
-Procedure SearchByBarcode(Command)
-	DocInternalSupplyRequestClient.SearchByBarcode(Command, Object, ThisObject);
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocInternalSupplyRequestClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
 #Region ExternalCommands

@@ -50,12 +50,13 @@ Procedure RegisterLibrary(Object, Form, Declaration) Export
 EndProcedure
 
 Function RestoreFormData(Object, Form, AttributeName, InitValue = Undefined)
+	#If Server Then
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, AttributeName) Then
 		ArrayOfNewAttribute = New Array();
 		ArrayOfNewAttribute.Add(New FormAttribute(AttributeName, New TypeDescription("String")));
 		Form.ChangeAttributes(ArrayOfNewAttribute);
 	EndIf;
-	
+	#EndIf
 	If ValueIsFilled(Form[AttributeName]) Then
 		Return CommonFunctionsServer.DeserializeXMLUseXDTO(Form[AttributeName]);
 	Else

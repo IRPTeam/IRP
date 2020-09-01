@@ -101,7 +101,7 @@ Function GetConnectedDevice(ConnectionsList, ID) Export
 	ПодключенноеУстройство = Undefined;
 	
 	Для Каждого Подключение Из ConnectionsList Цикл
-		If Подключение.Ref = ID Then
+		If Подключение.Hardware = ID Then
 			ПодключенноеУстройство = Подключение;
 			Прервать;
 		EndIf;
@@ -195,10 +195,9 @@ Procedure BeginConnectEquipment(ConnectionNotify) Export
 
 	
 	Else // Устройство было подключено ранее.
-		ПодключенноеУстройство.КоличествоПодключенных = ПодключенноеУстройство.КоличествоПодключенных + 1;
 		If ConnectionNotify <> Undefined Then
 			ОписаниеОшибки = R().Eq_003;
-			РезультатВыполнения = Новый Структура("Результат, ОписаниеОшибки, ПараметрыПодключения", Истина, ОписаниеОшибки, ПодключенноеУстройство.ПараметрыПодключения);
+			РезультатВыполнения = Новый Структура("Result, ОписаниеОшибки, ПараметрыПодключения", Истина, ОписаниеОшибки, ПодключенноеУстройство.ConnectParameters);
 			ExecuteNotifyProcessing(ConnectionNotify, РезультатВыполнения);
 		EndIf;
 	EndIf;

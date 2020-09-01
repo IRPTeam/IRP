@@ -37,6 +37,10 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
 	EndIf;
 	// {TAXES}
+	
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -358,8 +362,8 @@ Procedure OpenPickupItems(Command)
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcode(Command)
-	DocSalesInvoiceClient.SearchByBarcode(Command, Object, ThisObject);
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocSalesInvoiceClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
 &AtClient

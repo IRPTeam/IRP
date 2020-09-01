@@ -59,6 +59,10 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
+	
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -231,8 +235,8 @@ EndProcedure
 #Region Commands
 
 &AtClient
-Procedure SearchByBarcode(Command)
-	DocGoodsReceiptClient.SearchByBarcode(Object, ThisObject, Command);
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocGoodsReceiptClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
 &AtClient

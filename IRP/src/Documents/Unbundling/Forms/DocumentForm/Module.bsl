@@ -16,6 +16,10 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
+	
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -205,8 +209,8 @@ Procedure DateOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcode(Command)
-	DocUnbundlingClient.SearchByBarcode(Command, Object, ThisObject);
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocUnbundlingClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
 #Region GroupTitleDecorations

@@ -3431,10 +3431,6 @@
     <name>OnOpen</name>
   </handlers>
   <handlers>
-    <event>ExternalEvent</event>
-    <name>ExternalEvent</name>
-  </handlers>
-  <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>

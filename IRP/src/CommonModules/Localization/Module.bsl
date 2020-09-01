@@ -6,16 +6,23 @@ Function Strings(Lang) Export
 	Strings.Insert("Eq_001", NStr("en = 'Installed'", Lang));
 	Strings.Insert("Eq_002", NStr("en = 'Not installed'", Lang));
 	Strings.Insert("Eq_003", NStr("en = 'There are no errors.'", Lang));
+	Strings.Insert("Eq_004", NStr("en = 'Scanner is connected.'", Lang));
+	Strings.Insert("Eq_005", NStr("en = 'Error. Scanner not connected.'", Lang));
 	
 	Strings.Insert("EqError_001", NStr("en = 'The device is connected. The device must be disabled before the operation.'", Lang));
 
 	Strings.Insert("EqError_002", NStr("en = 'The device driver could not be downloaded.
 											  |Check that the driver is correctly installed and registered in the system.'", Lang));
-	Strings.Insert("EqError_003", NStr("en = ''", Lang));
-	Strings.Insert("EqError_004", NStr("en = ''", Lang));
-	Strings.Insert("EqError_005", NStr("en = ''", Lang));
-	Strings.Insert("EqError_006", NStr("en = ''", Lang));
 
+	#EndRegion
+	
+	
+	#Region POS
+	
+	Strings.Insert("POS_s1", NStr("en = 'Amount paid is less than amount of the document'", Lang));
+	Strings.Insert("POS_s2", NStr("en = 'Card fees are more than the amount of the document'", Lang));
+	Strings.Insert("POS_s3", NStr("en = 'There is no need to use cash, as card payments are sufficient to pay'", Lang));
+	Strings.Insert("POS_s4", NStr("en = 'Amounts of payments are incorrect'", Lang));
 	#EndRegion
 	
 	#Region Service

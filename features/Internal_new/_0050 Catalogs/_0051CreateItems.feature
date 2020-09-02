@@ -169,7 +169,7 @@ Scenario: _005112 filling in Additional attribute values with type Additional at
 		And I click "Save" button
 		* Check data save
 			And I wait the field named "UniqueID" will be filled in "3" seconds
-			Then the form attribute named "Owner" became equal to "'Brand"
+			Then the form attribute named "Owner" became equal to "Brand"
 			Then the form attribute named "Description_en" became equal to "Gir"
 		And I click "Save and close" button
 		And Delay 2

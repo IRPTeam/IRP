@@ -925,3 +925,125 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			| 'Item'  | 'Item key' | 'Q'     | 'Sales order'      |
 			| 'Shirt' | '38/Black' | '1,000' | 'Sales order 800*' |
 	And I close all client application windows
+
+
+Scenario: _090408 create one Sales order - several Shipment confirmation - one Sales invoice
+	* Create Sales order
+		When create the first test SO for a test on the creation mechanism based on
+		* Save the document number
+			And I save the value of "Number" field as "$$NumberSalesOrder090408$$"
+			And I set checkbox "Shipment confirmations before sales invoice"
+			And I click "Post and close" button
+	* Create 3 Shipment confirmation
+		* First SC
+			Given I open hyperlink "e1cib/list/Document.SalesOrder"
+			And I go to line in "List" table
+				| 'Number' |
+				| '$$NumberSalesOrder090408$$'    |
+			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+			And I activate "Quantity" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' | 'Quantity' |
+				| 'Dress' | 'L/Green'  | '20,000'   |
+			And I select current line in "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Quantity' |
+				| 'Trousers' | '36/Yellow' | '30,000'   |
+			And I select current line in "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post and close" button
+		* Second SC
+			Given I open hyperlink "e1cib/list/Document.SalesOrder"
+			And I go to line in "List" table
+				| 'Number' |
+				| '$$NumberSalesOrder090408$$'    |
+			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+			And I activate "Quantity" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "8,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'L/Green'  |
+			And I select current line in "ItemList" table
+			And I input "8,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '36/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "12,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post and close" button
+		* Third SC
+			Given I open hyperlink "e1cib/list/Document.SalesOrder"
+			And I go to line in "List" table
+				| 'Number' |
+				| '$$NumberSalesOrder090408$$'    |
+			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+			And I activate "Quantity" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "7,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'L/Green'  |
+			And I select current line in "ItemList" table
+			And I input "7,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '36/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "8,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post and close" button
+	* Create Sales invoice for 3 Shipment Confirmation
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberSalesOrder090408$$'    |
+		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+		And I click the button named "FormSelectAll"
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Price'  | 'Item'     | 'Item key'  | 'Price type'        | 'Q'      | 'Unit' | 'SalesTax' | 'Net amount' | 'Total amount' | 'Store'    |
+			| '520,00' | 'Dress'    | 'M/White'   | 'Basic Price Types' | '5,000'  | 'pcs'  | '1%'       | '2 177,65'   | '2 600,00'     | 'Store 02' |
+			| '550,00' | 'Dress'    | 'L/Green'   | 'Basic Price Types' | '5,000'  | 'pcs'  | '1%'       | '2 303,28'   | '2 750,00'     | 'Store 02' |
+			| '400,00' | 'Trousers' | '36/Yellow' | 'Basic Price Types' | '10,000' | 'pcs'  | '1%'       | '3 350,23'   | '4 000,00'     | 'Store 02' |
+			| '520,00' | 'Dress'    | 'M/White'   | 'Basic Price Types' | '8,000'  | 'pcs'  | '1%'       | '3 484,23'   | '4 160,00'     | 'Store 02' |
+			| '520,00' | 'Dress'    | 'M/White'   | 'Basic Price Types' | '7,000'  | 'pcs'  | '1%'       | '3 048,71'   | '3 640,00'     | 'Store 02' |
+			| '550,00' | 'Dress'    | 'L/Green'   | 'Basic Price Types' | '8,000'  | 'pcs'  | '1%'       | '3 685,25'   | '4 400,00'     | 'Store 02' |
+			| '550,00' | 'Dress'    | 'L/Green'   | 'Basic Price Types' | '7,000'  | 'pcs'  | '1%'       | '3 224,59'   | '3 850,00'     | 'Store 02' |
+			| '400,00' | 'Trousers' | '36/Yellow' | 'Basic Price Types' | '12,000' | 'pcs'  | '1%'       | '4 020,28'   | '4 800,00'     | 'Store 02' |
+			| '400,00' | 'Trousers' | '36/Yellow' | 'Basic Price Types' | '8,000'  | 'pcs'  | '1%'       | '2 680,18'   | '3 200,00'     | 'Store 02' |
+		And "TaxTree" table contains lines
+			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount'   | 'Manual amount' |
+			| 'VAT'      | ''         | ''         | ''          | ''          | '5 094,92' | '5 094,92'      |
+			| 'VAT'      | '18%'      | 'Dress'    | 'M/White'   | ''          | '396,61'   | '396,61'        |
+			| 'VAT'      | '18%'      | 'Dress'    | 'L/Green'   | ''          | '419,49'   | '419,49'        |
+			| 'VAT'      | '18%'      | 'Trousers' | '36/Yellow' | ''          | '610,17'   | '610,17'        |
+			| 'VAT'      | '18%'      | 'Dress'    | 'M/White'   | ''          | '634,58'   | '634,58'        |
+			| 'VAT'      | '18%'      | 'Dress'    | 'M/White'   | ''          | '555,25'   | '555,25'        |
+			| 'VAT'      | '18%'      | 'Dress'    | 'L/Green'   | ''          | '671,19'   | '671,19'        |
+			| 'VAT'      | '18%'      | 'Dress'    | 'L/Green'   | ''          | '587,29'   | '587,29'        |
+			| 'VAT'      | '18%'      | 'Trousers' | '36/Yellow' | ''          | '732,20'   | '732,20'        |
+			| 'VAT'      | '18%'      | 'Trousers' | '36/Yellow' | ''          | '488,14'   | '488,14'        |
+			| 'SalesTax' | ''         | ''         | ''          | ''          | '330,68'   | '330,68'        |
+			| 'SalesTax' | '1%'       | 'Dress'    | 'M/White'   | ''          | '25,74'    | '25,74'         |
+			| 'SalesTax' | '1%'       | 'Dress'    | 'L/Green'   | ''          | '27,23'    | '27,23'         |
+			| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '39,60'    | '39,60'         |
+			| 'SalesTax' | '1%'       | 'Dress'    | 'M/White'   | ''          | '41,19'    | '41,19'         |
+			| 'SalesTax' | '1%'       | 'Dress'    | 'M/White'   | ''          | '36,04'    | '36,04'         |
+			| 'SalesTax' | '1%'       | 'Dress'    | 'L/Green'   | ''          | '43,56'    | '43,56'         |
+			| 'SalesTax' | '1%'       | 'Dress'    | 'L/Green'   | ''          | '38,12'    | '38,12'         |
+			| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '47,52'    | '47,52'         |
+			| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '31,68'    | '31,68'         |
+		And I close all client application windows
+

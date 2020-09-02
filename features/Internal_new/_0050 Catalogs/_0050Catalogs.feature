@@ -49,8 +49,9 @@ Scenario: _005010 filling in the "Countries" catalog
 		Then I check for the "Countries" catalog element with the "Description_en" "Ukraine"
 		Then I check for the "Countries" catalog element with the "Description_tr" "Ukraine TR"
 		Then I check for the "Countries" catalog element with the "Description_ru" "Украина"
-
-
+	* Clean catalog Countries
+		And I delete "Countries" catalog element with the Description_en "Turkey"
+		And I delete "Countries" catalog element with the Description_en "Ukraine"
 
 
 Scenario: _005011 filling in the "Currencies" catalog
@@ -91,8 +92,9 @@ Scenario: _005011 filling in the "Currencies" catalog
 		Then I check for the "Currencies" catalog element with the "Description_en" "Euro"
 		Then I check for the "Currencies" catalog element with the "Description_tr" "Euro TR"
 		Then I check for the "Currencies" catalog element with the "Description_ru" "Евро"
-
-
+	* Clean catalog Currencies
+		And I delete "Currencies" catalog element with the Description_en "American dollar"
+		And I delete "Currencies" catalog element with the Description_en "Euro"
 
 Scenario: _005012 filling in the "Integration settings" catalog
 	* Create setting with integration type local file storage
@@ -336,6 +338,8 @@ Scenario: _005013 filling in the "Companies" catalog
 			Then I check for the "Companies" catalog element with the "Description_en" "Main Company" 
 			Then I check for the "Companies" catalog element with the "Description_tr" "Main Company TR"
 			Then I check for the "Companies" catalog element with the "Description_ru" "Главная компания"
+	* Clean catalog Companies
+		And I delete "Companies" catalog element with the Description_en "Main Company"
 
 
 Scenario: _005017 creation Movement Type for Partner term currencies
@@ -393,6 +397,9 @@ Scenario: _005014 filling in the "Units" catalog
 		Then I check for the "Units" catalog element with the "Description_tr" "adet"
 		Then I check for the "Units" catalog element with the "Description_ru" "шт"
 		Then I check for the "Units" catalog element with the "Description_en" "box (4 pcs)"
+	* Clean catalog Units
+		And I delete "Units" catalog element with the Description_en "pcs"
+		And I delete "Units" catalog element with the Description_en "box (4 pcs)"
 
 
 Scenario: _005015 filling in the "AccessGroups" catalog
@@ -419,6 +426,10 @@ Scenario: _005015 filling in the "AccessGroups" catalog
 		Then I check for the "AccessGroups" catalog element with the "Description_tr" "Admin TR"
 		Then I check for the "AccessGroups" catalog element with the "Description_ru" "Админ"
 		Then I check for the "AccessGroups" catalog element with the "Description_en" "Manager"
+	* Clean catalog AccessGroups
+		And I delete "AccessGroups" catalog element with the Description_en "Admin"
+		And I delete "AccessGroups" catalog element with the Description_en "Manager"
+
 
 Scenario: _005016 filling in the "AccessProfiles" catalog
 	* Opening the form for filling in AccessProfiles
@@ -490,7 +501,9 @@ Scenario: _005016 filling in the "AccessProfiles" catalog
 		Then I check for the "AccessProfiles" catalog element with the "Description_en" "Management"  
 		Then I check for the "AccessProfiles" catalog element with the "Description_tr" "Management TR"
 		Then I check for the "AccessProfiles" catalog element with the "Description_ru" "Руководство"
-
+	* Clean catalog AccessProfiles
+		And I delete "AccessProfiles" catalog element with the Description_en "Management"
+		And I delete "AccessProfiles" catalog element with the Description_en "Logistic team"
 
 Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 	* Preparation
@@ -628,6 +641,11 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 		* Check data save
 			Then the form attribute named "TransitAccount" became equal to "Transit Main"
 			And I click the button named "FormWriteAndClose"
+	* Clean catalog CashAccounts
+		And I delete "CashAccounts" catalog element with the Description_en "Cash desk №1"
+		And I delete "CashAccounts" catalog element with the Description_en "Cash desk №2"
+		And I delete "CashAccounts" catalog element with the Description_en "Bank account, TRY"
+		And I delete "CashAccounts" catalog element with the Description_en "Transit Main"
 
 Scenario: _005022 filling in the "Partners" catalog
 	* Opening the form for filling in Partners
@@ -699,16 +717,16 @@ Scenario: _005022 filling in the "Partners" catalog
 		Then I check for the "Partners" catalog element with the "Description_en" "Manager B"
 		And Delay 2
 		Then I check for the "Partners" catalog element with the "Description_en" "Lomaniti"
-	* Clear catalog Partners
+	* Clean catalog Partners
 		And I delete "Partners" catalog element with the Description_en "Ferron BP"
 		And I delete "Partners" catalog element with the Description_en "Kalipso"
 		And I delete "Partners" catalog element with the Description_en "Manager B"
-
+		And I delete "Partners" catalog element with the Description_en "Lomaniti"
 
 Scenario: _005023 filling in the "Partner segments content" catalog
 	* Opening the form for filling in Partner segments content
 		Given I open hyperlink "e1cib/list/Catalog.PartnerSegments"
-	* Create segments: Retail
+	* Create segments: Distribution
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
 		And I input "Distribution" text in the field named "Description_en"
@@ -720,6 +738,10 @@ Scenario: _005023 filling in the "Partner segments content" catalog
 		Then I check for the "PartnerSegments" catalog element with the "Description_tr" "Distribution TR"
 		Then I check for the "PartnerSegments" catalog element with the "Description_en" "Distribution" 
 		Then I check for the "PartnerSegments" catalog element with the "Description_ru" "Дистрибьюция"
+	* Clean catalog PartnerSegments
+		And I delete "PartnerSegments" catalog element with the Description_en "Distribution"
+
+
 
 Scenario: _005024 filling in the "Payment terms" catalog 
 	* Opening a form and creating Payment terms
@@ -728,6 +750,7 @@ Scenario: _005024 filling in the "Payment terms" catalog
 	* Check for created Payment terms
 		Then I check for the "PaymentSchedules" catalog element with the "Description_en" "Test ENG"  
 		Then I check for the "PaymentSchedules" catalog element with the "Description_tr" "Test TR"
+
 
 
 Scenario: _005026 filling in the "Item segments content" catalog 
@@ -745,6 +768,7 @@ Scenario: _005026 filling in the "Item segments content" catalog
 		Then I check for the "ItemSegments" catalog element with the "Description_en" "Sale autum"
 		Then I check for the "ItemSegments" catalog element with the "Description_tr" "Sale autum TR"
 		Then I check for the "ItemSegments" catalog element with the "Description_ru" "Осень"
+
 
 
 
@@ -785,7 +809,8 @@ Scenario: _005028 filling in the "Price types" catalog
 		Then I check for the "PriceTypes" catalog element with the "Description_en" "Basic Price Types"
 		Then I check for the "PriceTypes" catalog element with the "Description_tr" "Basic Price Types TR"
 		Then I check for the "PriceTypes" catalog element with the "Description_ru" "Базовая цена"
-		
+	* Clean catalog
+		And I delete "PriceTypes" catalog element with the Description_en "Basic Price Types"
 
 
 Scenario: _005031 filling in the "Special offers" catalog
@@ -904,6 +929,11 @@ Scenario: _005032 filling in the "Stores" catalog
 		Then I check for the "Stores" catalog element with the "Description_en" "Store 02"  
 		Then I check for the "Stores" catalog element with the "Description_en" "Store 03"
 		Then I check for the "Stores" catalog element with the "Description_en" "Store 04"
+	* Clean catalog
+		And I delete "Stores" catalog element with the Description_en "Store 01"
+		And I delete "Stores" catalog element with the Description_en "Store 02"
+		And I delete "Stores" catalog element with the Description_en "Store 03"
+		And I delete "Stores" catalog element with the Description_en "Store 04"
 
 Scenario: _005033 filling in the "Tax rates" catalog  
 	* Opening a form for creating Tax rates

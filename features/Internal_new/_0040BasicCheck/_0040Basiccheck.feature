@@ -1038,7 +1038,7 @@ Scenario: Open object form "CreditNote"
 
 Scenario: Open list form "DebitNote" 
 	And I close all client application windows
-	Given I open "CDebitNote" document default form
+	Given I open "DebitNote" document default form
 	If the warning is displayed then
 		Then I raise "Failed to open document form DebitNote" exception
 	And I close current window

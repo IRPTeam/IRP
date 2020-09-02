@@ -62,6 +62,18 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="67a45561-4e5a-4e35-a37c-6eb71fd776da">
+    <name>UseSerialLotNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Use serial lot number</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="a261a912-5869-49b5-8ab6-76ad86abeaba">
     <producedTypes>
       <objectType typeId="192f1da3-6058-4b27-b623-41f7c6cafedb" valueTypeId="dff3d6ac-2e62-4190-bda0-9908ffbe49bc"/>

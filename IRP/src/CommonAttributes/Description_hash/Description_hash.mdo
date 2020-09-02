@@ -173,10 +173,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.SerialLotNumbers</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.UserGroups</metadata>
     <use>Use</use>
   </content>

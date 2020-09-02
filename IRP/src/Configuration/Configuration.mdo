@@ -324,6 +324,7 @@
   <commonModules>CommonModule.DPPointOfSaleServer</commonModules>
   <commonModules>CommonModule.HardwareClient</commonModules>
   <commonModules>CommonModule.HardwareServer</commonModules>
+  <commonModules>CommonModule.SerialLotNumbersServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>

@@ -104,7 +104,50 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>Item</name>
+      <name>Inactive</name>
+      <id>27</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Inactive</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>InactiveExtendedTooltip</name>
+        <id>29</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>InactiveContextMenu</name>
+        <id>28</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>CheckBoxField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>Owner</name>
       <id>22</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -112,10 +155,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Item</segments>
+        <segments>List.SerialLotNumberOwner</segments>
       </dataPath>
       <extendedTooltip>
-        <name>ItemExtendedTooltip</name>
+        <name>OwnerExtendedTooltip</name>
         <id>24</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -130,7 +173,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ItemContextMenu</name>
+        <name>OwnerContextMenu</name>
         <id>23</id>
         <visible>true</visible>
         <enabled>true</enabled>

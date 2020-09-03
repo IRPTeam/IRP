@@ -36,7 +36,7 @@
     <typeField>Catalog.SerialLotNumbers.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.SerialLotNumbers.TabularSection.AddAttributes.Attribute.Value</valueField>
   </characteristics>
-  <createOnInput>Use</createOnInput>
+  <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
@@ -56,10 +56,10 @@
   <defaultChoiceForm>Catalog.SerialLotNumbers.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="b1910d24-9155-47dd-82b1-92d92ca46f00">
-    <name>Item</name>
+    <name>SerialLotNumberOwner</name>
     <synonym>
       <key>en</key>
-      <value>Item</value>
+      <value>Owner</value>
     </synonym>
     <type>
       <types>CatalogRef.Items</types>
@@ -68,9 +68,20 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6eff101e-e128-438b-a8ef-b7d1d0a73b9d">
+    <name>Inactive</name>
+    <synonym>
+      <key>en</key>
+      <value>Inactive</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

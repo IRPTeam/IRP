@@ -45,6 +45,9 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	#If AtClient Then
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 	#EndIf
+	
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	SerialLotNumberClient.UpdateSerialLotNubersTree(Object, Form);	
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source) Export
@@ -57,12 +60,18 @@ Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source) Exp
 	EndIf;
 EndProcedure
 
+Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+EndProcedure
+
 #EndRegion
 
 #Region ItemListEvents
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
+	SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Object);
+	SerialLotNumberClient.UpdateSerialLotNubersTree(Object, Form);	
 EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
@@ -101,6 +110,7 @@ EndProcedure
 
 Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 	DocumentsClient.ItemListItemOnChange(Object, Form, ThisObject, Item);
+	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form);
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export																		
@@ -132,6 +142,7 @@ EndFunction
 
 Procedure ItemListItemKeyOnChange(Object, Form, Item = Undefined) Export
 	DocumentsClient.ItemListItemKeyOnChange(Object, Form, ThisObject, Item);
+	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form);
 EndProcedure
 
 Function ItemListItemKeySettings(Form) Export
@@ -165,6 +176,7 @@ Procedure ItemListQuantityOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;	
 	DocumentsClient.ItemListCalculateRowAmounts(Object, Form, CurrentData);
+	SerialLotNumberClient.UpdateSerialLotNubersTree(Object, Form);	
 EndProcedure
 
 Procedure ItemListPriceOnChange(Object, Form, Item) Export

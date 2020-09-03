@@ -17,8 +17,6 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
-	UpdateSerialLotNumbersPresentation();
-	UpdateSerialLotNubersTree();
 EndProcedure
 
 &AtClient
@@ -63,7 +61,6 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
-	UpdateSerialLotNumbersPresentation();
 EndProcedure
 
 &AtServer
@@ -154,8 +151,6 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocRetailSalesReceiptClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	DeleteUnusedSerialLotNumbers();
-	UpdateSerialLotNubersTree();
 EndProcedure
 
 &AtClient
@@ -183,13 +178,11 @@ EndProcedure
 &AtClient
 Procedure ItemListItemOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListItemOnChange(Object, ThisObject, Item);
-	UpdateUseSerialLotNumber();
 EndProcedure
 
 &AtClient
 Procedure ItemListItemKeyOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
-	UpdateUseSerialLotNumber();
 EndProcedure
 
 &AtClient
@@ -205,7 +198,6 @@ EndProcedure
 &AtClient
 Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
-	UpdateSerialLotNubersTree();
 EndProcedure
 
 &AtClient
@@ -639,136 +631,12 @@ EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing)
-	StandardProcessing = False;
-	CurrentData = Items.ItemList.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	Notify = New NotifyDescription("OnFinishEditSerialLotNumbers", ThisObject);
-	OpeningParameters = New Structure;
-	OpeningParameters.Insert("Item", CurrentData.Item);
-	OpeningParameters.Insert("ItemKey", CurrentData.ItemKey);
-	OpeningParameters.Insert("RowKey", CurrentData.Key);
-	OpeningParameters.Insert("SerialLotNumbers", New Array());
-	
-	ArrayOfSelectedSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", CurrentData.Key));
-	For Each Row In ArrayOfSelectedSerialLotNumbers Do
-		OpeningParameters.SerialLotNumbers.Add(
-		New Structure("SerialLotNumber, Quantity", Row.SerialLotNumber, Row.Quantity));
-	EndDo;	
-	
-	OpenForm("Catalog.SerialLotNumbers.Form.EditListOfSerialLotNumbers", OpeningParameters, ThisObject, , , , 
-		Notify, FormWindowOpeningMode.LockOwnerWindow);
-EndProcedure
-
-&AtClient
-Procedure OnFinishEditSerialLotNumbers(Result, AddInfo = Undefined) Export
-	If TypeOf(Result) <> Type("Structure") Then
-		Return;
-	EndIf;
-	ArrayOfSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", Result.RowKey));
-	For Each Row In ArrayOfSerialLotNumbers Do
-		Object.SerialLotNumbers.Delete(Row);
-	EndDo;
-
-	For Each Row In Result.SerialLotNumbers Do
-		NewRow = Object.SerialLotNumbers.Add();
-		NewRow.Key = Result.RowKey;
-		NewRow.SerialLotNumber = Row.SerialLotNumber;
-		NewRow.Quantity = Row.Quantity;
-	EndDo;
-	UpdateSerialLotNumbersPresentation();
-	UpdateSerialLotNubersTree();
+	SerialLotNumberClient.PresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
-	CurrentData = Items.ItemList.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	CurrentData.SerialLotNumberIsFilling = False;
-	DeleteUnusedSerialLotNumbers(CurrentData.Key);
-	UpdateSerialLotNubersTree();
-EndProcedure
-
-&AtClient
-Procedure UpdateSerialLotNumbersPresentation()
-	For Each RowItemList In Object.ItemList Do
-		ArrayOfSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", RowItemList.Key));
-		RowItemList.SerialLotNumbersPresentation.Clear();
-		RowItemList.SerialLotNumberIsFilling = False;
-		For Each RowSerialLotNumber In ArrayOfSerialLotNumbers Do
-			RowItemList.SerialLotNumbersPresentation.Add(RowSerialLotNumber.SerialLotNumber);
-			RowItemList.SerialLotNumberIsFilling = True;
-		EndDo;
-		RowItemList.UseSerialLotNumber = SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(RowItemList.ItemKey);
-	EndDo;
-EndProcedure
-
-&AtClient
-Procedure UpdateSerialLotNubersTree()
-	ThisObject.SerialLotNumbersTree.GetItems().Clear();
-	For Each RowItemList In Object.ItemList Do
-		ArrayOfSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", RowItemList.Key));
-		If ArrayOfSerialLotNumbers.Count() Then
-			NewRow0 = ThisObject.SerialLotNumbersTree.GetItems().Add();
-			NewRow0.Level = 1;
-			NewRow0.Key = RowItemList.Key;
-			NewRow0.Item = RowItemList.Item;
-			NewRow0.ItemKey = RowItemList.ItemKey;
-			NewRow0.ItemKeyQuantity = RowItemList.Quantity;
-			
-			For Each RowSerialLotNumber In ArrayOfSerialLotNumbers Do
-				NewRow1 = NewRow0.GetItems().Add();
-				NewRow1.Level = 2;
-				NewRow1.Key = RowItemList.Key;
-				NewRow1.SerialLotNumber = RowSerialLotNumber.SerialLotNumber;
-				NewRow1.Quantity = RowSerialLotNumber.Quantity;
-				NewRow0.Quantity = NewRow0.Quantity + RowSerialLotNumber.Quantity;
-			EndDo;
-		EndIf;
-	EndDo;
-	
-	For Each ItemTreeRows In ThisObject.SerialLotNumbersTree.GetItems() Do
-		Items.SerialLotNumbersTree.Expand(ItemTreeRows.GetID());
-	EndDo;	
-EndProcedure
-
-&AtClient
-Procedure DeleteUnusedSerialLotNumbers(KeyForDelete = Undefined)
-	If KeyForDelete = Undefined Then
-		ArrayOfUnusedRows = New Array();
-		For Each Row In Object.SerialLotNumbers Do
-			If Not Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
-				ArrayOfUnusedRows.Add(Row);
-			EndIf;
-		EndDo;
-		For Each Row In ArrayOfUnusedRows Do
-			Object.SerialLotNumbers.Delete(Row);
-		EndDo;
-	Else
-		ArrayRowsForDelete = Object.SerialLotNumbers.FindRows(New Structure("Key", KeyForDelete));
-		For Each Row In ArrayRowsForDelete Do
-			Object.SerialLotNumbers.Delete(Row);
-		EndDo;
-	EndIf;
-EndProcedure
-
-&AtClient
-Procedure UpdateUseSerialLotNumber()
-	CurrentData = Items.ItemList.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	
-	CurrentData.UseSerialLotNumber = SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(CurrentData.ItemKey);
-	If Not CurrentData.UseSerialLotNumber Then
-		DeleteUnusedSerialLotNumbers(CurrentData.Key);
-		UpdateSerialLotNumbersPresentation();
-		UpdateSerialLotNubersTree();
-	EndIf;
+	SerialLotNumberClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion

@@ -104,7 +104,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>Item</name>
+      <name>Owner</name>
       <id>22</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -112,10 +112,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Item</segments>
+        <segments>List.SerialLotNumberOwner</segments>
       </dataPath>
       <extendedTooltip>
-        <name>ItemExtendedTooltip</name>
+        <name>OwnerExtendedTooltip</name>
         <id>24</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -130,7 +130,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ItemContextMenu</name>
+        <name>OwnerContextMenu</name>
         <id>23</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -213,6 +213,10 @@
       </userVisible>
       <horizontalAlign>Left</horizontalAlign>
     </autoCommandBar>
+    <handlers>
+      <event>BeforeAddRow</event>
+      <name>ListBeforeAddRow</name>
+    </handlers>
     <searchStringAddition>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -400,6 +404,10 @@
     <horizontalAlign>Left</horizontalAlign>
     <autoFill>true</autoFill>
   </autoCommandBar>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
+  </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -424,19 +432,49 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
-	Table.Ref,
-	Table.DeletionMark,
-	Table.Description_en AS Description,
-	Table.Predefined,
-	Table.PredefinedDataName
+	SerialLotNumbers.Ref,
+	SerialLotNumbers.DeletionMark,
+	SerialLotNumbers.Description,
+	SerialLotNumbers.SerialLotNumberOwner,
+	SerialLotNumbers.Inactive,
+	SerialLotNumbers.Predefined,
+	SerialLotNumbers.PredefinedDataName
 FROM
-	Catalog.SerialLotNumbers AS Table</queryText>
+	Catalog.SerialLotNumbers AS SerialLotNumbers
+WHERE
+	CASE
+			WHEN &amp;UseFilter
+				THEN (CAST(SerialLotNumbers.SerialLotNumberOwner AS Catalog.ItemTypes)) = &amp;ItemType
+						OR (CAST(SerialLotNumbers.SerialLotNumberOwner AS Catalog.Items)) = &amp;Item
+						OR (CAST(SerialLotNumbers.SerialLotNumberOwner AS Catalog.ItemKeys)) = &amp;ItemKey
+						OR SerialLotNumbers.SerialLotNumberOwner.Ref IS NULL
+			ELSE TRUE
+		END</queryText>
       <mainTable>Catalog.SerialLotNumbers</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>
+  </attributes>
+  <attributes>
+    <name>FillingData</name>
+    <title>
+      <key>en</key>
+      <value>Filling data</value>
+    </title>
+    <id>2</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
   </attributes>
   <commandInterface>
     <navigationPanel/>

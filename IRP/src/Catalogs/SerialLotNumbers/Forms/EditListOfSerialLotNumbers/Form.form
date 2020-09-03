@@ -59,6 +59,14 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
+        <handlers>
+          <event>StartChoice</event>
+          <name>SerialLotNumbersSerialLotNumberStartChoice</name>
+        </handlers>
+        <handlers>
+          <event>EditTextChange</event>
+          <name>SerialLotNumbersSerialLotNumberEditTextChange</name>
+        </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>
@@ -66,12 +74,6 @@
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
-        <choiceParameterLinks>
-          <name>Filter.Item</name>
-          <datapath xsi:type="form:DataPath">
-            <segments>Item.Ref</segments>
-          </datapath>
-        </choiceParameterLinks>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -482,6 +484,23 @@
         <common>true</common>
       </edit>
     </columns>
+  </attributes>
+  <attributes>
+    <name>ItemType</name>
+    <title>
+      <key>en</key>
+      <value>Item type</value>
+    </title>
+    <id>7</id>
+    <valueType>
+      <types>CatalogRef.ItemTypes</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
   </attributes>
   <formCommands>
     <name>Ok</name>

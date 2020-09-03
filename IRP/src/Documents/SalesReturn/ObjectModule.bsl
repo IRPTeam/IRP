@@ -40,6 +40,10 @@ Procedure Filling_BasedOnSalesInvoice(FillingData)
 		NewRow = ThisObject.SpecialOffers.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
+	For Each Row In FillingData.SerialLotNumbers Do
+		NewRow = ThisObject.SerialLotNumbers.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;	
 EndProcedure
 
 Procedure Filling_BasedOnSalesReturnOrder(FillingData)
@@ -74,6 +78,10 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
 		Cancel = True;	
 	EndIf;
+	
+	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
+		Cancel = True;
+	EndIf;	
 EndProcedure
 
 Procedure OnWrite(Cancel)

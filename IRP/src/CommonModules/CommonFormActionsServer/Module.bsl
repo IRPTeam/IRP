@@ -62,12 +62,12 @@ Function QuerySearchInputByString(Settings) Export
 
 
 	If Not Settings.MetadataObject.DescriptionLength Then
-		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), , "_" + "en");
+		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter , "_" + "en");
 		QueryField = "CASE WHEN %1.Description%2 = """" THEN %1.Description_en ELSE %1.Description%2 END ";
 		QueryField = StrTemplate(QueryField, "Table", "_" + LocalizationReuse.GetLocalizationCode());
 		QueryText = StrReplace(QueryText, StrTemplate("%1.Description_en", "Table"), QueryField);
 	Else
-		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), , "");
+		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "");
 	EndIf;
 	Return 	QueryText;
 EndFunction

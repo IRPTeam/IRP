@@ -1,6 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
+@Group18
+
 Feature: check form of selection of item in store documents
 
 

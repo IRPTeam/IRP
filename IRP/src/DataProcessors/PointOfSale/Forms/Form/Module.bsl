@@ -14,10 +14,11 @@ EndProcedure
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	NewTransaction();
 	SetShowItems();
-	
+	Try
 	NotifyDescription_ConnectEquipments_End = New NotifyDescription("ConnectEquipments_End", ThisObject);                                 
 	HardwareClient.BeginConnectEquipment(NotifyDescription_ConnectEquipments_End);
-	
+	Except
+	EndTry;
 EndProcedure
 
 &AtClient

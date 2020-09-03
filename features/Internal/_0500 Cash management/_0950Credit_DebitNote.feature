@@ -1,6 +1,9 @@
 ﻿#language: en
 @tree
 @Positive
+@Group9
+
+
 Feature: Credit note and Debit note
 As an accountant
 I want to create a Credit_DebitNote document.

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@TestExtDataProc
+@Group1
 
 Feature: filling in tax rates
 

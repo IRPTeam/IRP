@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-
+@Group2
 
 
 Feature: item key pricing

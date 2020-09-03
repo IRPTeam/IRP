@@ -1,6 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
+@Group4
 Feature: create document Inventory transfer
 
 As a procurement manager

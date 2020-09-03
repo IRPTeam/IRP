@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
+@Test1
+@Group1
 
 
 Feature: basic check documents and catalogs

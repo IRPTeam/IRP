@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Test1
+@Test2
 @Group1
 
 Feature: filling in catalogs

@@ -1,6 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
+@Group7
 Feature: create document Goods receipt
 
 As a storekeeper

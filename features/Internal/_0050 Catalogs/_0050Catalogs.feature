@@ -1,8 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
-
+@Test2
+@Group1
 
 Feature: filling in catalogs
 

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-
+@Group2
 
 Feature: filling in exchange rates in registers
 

@@ -1,6 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
+@Group5
 Feature: create document Sales order
 
 As a sales manager

@@ -2,7 +2,7 @@
 @tree
 @Positive
 @Discount
-
+@Group8
 
 Feature: special offers
 

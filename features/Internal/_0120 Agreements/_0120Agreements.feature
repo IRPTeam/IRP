@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-
+@Group2
 
 
 Feature: terms of cooperation with partners

@@ -3,7 +3,7 @@
 @Positive
 @Discount
 @tree
-
+@Group8
 Feature: check discounts in purchase documents Purchase order/Purchase invoice
 
 As a developer

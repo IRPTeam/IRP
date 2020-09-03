@@ -55,7 +55,7 @@ EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
-	Return;
+	DocSalesReturnClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -570,6 +570,20 @@ EndProcedure
 &AtServer
 Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region SerialLotNumbers
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing)
+	SerialLotNumberClient.PresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
+	SerialLotNumberClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion

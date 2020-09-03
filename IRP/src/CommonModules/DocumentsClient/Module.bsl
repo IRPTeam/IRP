@@ -493,6 +493,28 @@ Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing,
 	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
 	
 EndProcedure
+
+Procedure SerialLotNumbersEditTextChange(Object, Form, Item, Text, StandardProcessing, 
+										ArrayOfFilters = Undefined, AdditionalParameters = Undefined) Export
+	
+	If ArrayOfFilters = Undefined Then
+		ArrayOfFilters = New Array();
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Inactive", True, ComparisonType.Equal));
+	EndIf;
+	
+	If AdditionalParameters = Undefined Then
+		AdditionalParameters = New Structure();
+	EndIf;
+	
+	ArrayOfChoiceParameters = New Array();
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter",
+															DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters", 
+														DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
+	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
+	
+EndProcedure
 	
 #EndRegion
 
@@ -1390,6 +1412,31 @@ Procedure SalesReturnStartChoice(Object, Form, Item, ChoiceData, StandardProcess
 		FormFilters = New Array;
 		FormFilters.Add(CreateFilterItem("Posted", True, DataCompositionComparisonType.Equal));
 		FormFilters.Add(CreateFilterItem("Company", Object.Company, DataCompositionComparisonType.Equal));
+	EndIf;
+	
+	If OpenSettings.FormParameters = Undefined Then
+		FormParameters = New Structure();
+		FormParameters.Insert("FillingData", New Structure());
+	EndIf;
+	
+	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure SerialLotNumberStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
+	If  OpenSettings = Undefined Then
+		OpenSettings = GetOpenSettingsStructure();
+	EndIf;
+	
+	StandardProcessing = False;
+	
+	If OpenSettings.FormName = Undefined Then
+		OpenSettings.FormName = "Catalog.SerialLotNumbers.ChoiceForm";
+	EndIf;
+	
+	If OpenSettings.FormFilters = Undefined Then
+		FormFilters = New Array;
+		FormFilters.Add(CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+		FormFilters.Add(CreateFilterItem("Inactive", True, DataCompositionComparisonType.NotEqual));
 	EndIf;
 	
 	If OpenSettings.FormParameters = Undefined Then

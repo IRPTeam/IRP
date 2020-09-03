@@ -90,22 +90,21 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|// 1//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
-		|	tmp.Currency,
+		|	tmp.Store,
 		|	tmp.ItemKey,
-		|	-SUM(tmp.Quantity) AS Quantity,
-		|	-SUM(tmp.Amount) AS Amount,
-		|	tmp.Period,
-		|	tmp.RetailSalesReceipt,
-		|	tmp.RowKey
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Unit AS Unit,
+		|	tmp.Period
 		|FROM
 		|	tmp AS tmp
+		|WHERE
+		|	NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
-		|	tmp.Currency,
+		|	tmp.Store,
 		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	tmp.RetailSalesReceipt,
-		|	tmp.RowKey
+		|	tmp.Unit,
+		|	tmp.Period
 		|;
 		|
 		|// 2//////////////////////////////////////////////////////////////////////////////
@@ -131,26 +130,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|// 3//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Unit AS Unit,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsOpeningEntry
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Unit,
-		|	tmp.Period
-		|;
-		|
-		|// 4//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
 		|	tmp.Currency,
 		|	tmp.ItemKey,
 		|	-SUM(tmp.Quantity) AS Quantity,
@@ -174,10 +153,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables = New Structure();
 	
-	Tables.Insert("SalesTurnovers", QueryResults[1].Unload());
-	Tables.Insert("StockBalance", QueryResults[2].Unload());
-	Tables.Insert("StockReservation", QueryResults[3].Unload());
-	Tables.Insert("SalesReturnTurnovers", QueryResults[4].Unload());
+	Tables.Insert("StockBalance", QueryResults[1].Unload());
+	Tables.Insert("StockReservation", QueryResults[2].Unload());
+	Tables.Insert("SalesReturnTurnovers", QueryResults[3].Unload());
 	
 	QueryPaymentList = New Query();
 	QueryPaymentList.Text = GetQueryTextRetailReturnReceiptPaymentList();
@@ -186,10 +164,97 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryTablePaymentList = QueryResultPaymentList.Unload();
 	Tables.Insert("AccountBalance", QueryTablePaymentList);
 	
+	QuerySalesTurnovers = New Query();
+	QuerySalesTurnovers.Text = GetQueryTextRetailReturnReceiptSalesTurnovers();
+	QuerySalesTurnovers.SetParameter("Ref", Ref);
+	QueryResultSalesTurnovers = QuerySalesTurnovers.Execute();
+	QueryTableSalesTurnovers = QueryResultSalesTurnovers.Unload();
+	Tables.Insert("SalesTurnovers", QueryTableSalesTurnovers);
+			
 	Parameters.IsReposting = False;
 	
 	Return Tables;
 EndFunction
+
+Function GetQueryTextRetailReturnReceiptSalesTurnovers()
+	Return "SELECT
+	|	RetailReturnReceiptItemList.Ref.Company AS Company,
+	|	RetailReturnReceiptItemList.Ref.Currency AS Currency,
+	|	RetailReturnReceiptItemList.ItemKey AS ItemKey,
+	|	SUM(RetailReturnReceiptItemList.Quantity) AS Quantity,
+	|	SUM(ISNULL(RetailReturnReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
+	|	RetailReturnReceiptItemList.Ref.Date AS Period,
+	|	RetailReturnReceiptItemList.RetailSalesReceipt AS RetailSalesReceipt,
+	|	SUM(RetailReturnReceiptItemList.TotalAmount) AS Amount,
+	|	SUM(RetailReturnReceiptItemList.NetAmount) AS NetAmount,
+	|	SUM(RetailReturnReceiptItemList.OffersAmount) AS OffersAmount,
+	|	RetailReturnReceiptItemList.Key AS RowKey,
+	|	RetailReturnReceiptSerialLotNumbers.SerialLotNumber AS SerialLotNumber
+	|INTO tmp
+	|FROM
+	|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
+	|		LEFT JOIN Document.RetailReturnReceipt.SerialLotNumbers AS RetailReturnReceiptSerialLotNumbers
+	|		ON RetailReturnReceiptItemList.Key = RetailReturnReceiptSerialLotNumbers.Key
+	|		AND RetailReturnReceiptItemList.Ref = RetailReturnReceiptSerialLotNumbers.Ref
+	|		AND RetailReturnReceiptItemList.Ref = &Ref
+	|		AND RetailReturnReceiptSerialLotNumbers.Ref = &Ref
+	|WHERE
+	|	RetailReturnReceiptItemList.Ref = &Ref
+	|GROUP BY
+	|	RetailReturnReceiptItemList.Ref.Company,
+	|	RetailReturnReceiptItemList.Ref.Currency,
+	|	RetailReturnReceiptItemList.ItemKey,
+	|	RetailReturnReceiptItemList.Ref.Date,
+	|	RetailReturnReceiptItemList.Ref,
+	|	RetailReturnReceiptItemList.Key,
+	|	RetailReturnReceiptSerialLotNumbers.SerialLotNumber,
+	|	RetailReturnReceiptItemList.RetailSalesReceipt
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.Company AS Company,
+	|	tmp.Currency AS Currency,
+	|	tmp.ItemKey AS ItemKey,
+	|	-CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers = 0
+	|			THEN tmp.Quantity
+	|		ELSE tmp.QuantityBySerialLtNumbers
+	|	END AS Quantity,
+	|	tmp.Period AS Period,
+	|	tmp.RetailSalesReceipt AS RetailSalesReceipt,
+	|	tmp.RowKey AS RowKey,
+	|	tmp.SerialLotNumber AS SerialLotNumber,
+	|	-CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.Amount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.Amount
+	|	END AS Amount,
+	|	-CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.NetAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.NetAmount
+	|	END AS NetAmount,
+	|	-CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.OffersAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.OffersAmount
+	|	END AS OffersAmount
+	|FROM
+	|	tmp AS tmp";
+EndFunction	
 
 Function GetQueryTextRetailReturnReceiptPaymentList()
 	Return "SELECT

@@ -131,30 +131,30 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.RowKey
 		|;
 		|
-		|// 2//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.Currency,
-		|	tmp.ItemKey,
-		|	-SUM(tmp.Quantity) AS Quantity,
-		|	-SUM(tmp.Amount) AS Amount,
-		|	tmp.Period,
-		|	tmp.SalesInvoice,
-		|	tmp.RowKey
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.Order = VALUE(Document.SalesReturnOrder.EmptyRef)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Currency,
-		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	tmp.SalesInvoice,
-		|	tmp.RowKey
-		|;
+//		|// 2//////////////////////////////////////////////////////////////////////////////
+//		|SELECT
+//		|	tmp.Company,
+//		|	tmp.Currency,
+//		|	tmp.ItemKey,
+//		|	-SUM(tmp.Quantity) AS Quantity,
+//		|	-SUM(tmp.Amount) AS Amount,
+//		|	tmp.Period,
+//		|	tmp.SalesInvoice,
+//		|	tmp.RowKey
+//		|FROM
+//		|	tmp AS tmp
+//		|WHERE
+//		|	tmp.Order = VALUE(Document.SalesReturnOrder.EmptyRef)
+//		|GROUP BY
+//		|	tmp.Company,
+//		|	tmp.Currency,
+//		|	tmp.ItemKey,
+//		|	tmp.Period,
+//		|	tmp.SalesInvoice,
+//		|	tmp.RowKey
+//		|;
 		|
-		|// 3//////////////////////////////////////////////////////////////////////////////
+		|// 2//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -174,7 +174,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period
 		|;
 		|
-		|// 4//////////////////////////////////////////////////////////////////////////////
+		|// 3//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -196,6 +196,28 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Unit,
 		|	tmp.Period,
 		|	tmp.RowKey
+		|;
+		|
+		|// 4//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.Company,
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Unit AS Unit,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	NOT tmp.UseGoodsReceipt
+		|	AND
+		|	NOT tmp.IsOpeningEntry
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Unit,
+		|	tmp.Period
 		|;
 		|
 		|// 5//////////////////////////////////////////////////////////////////////////////
@@ -222,28 +244,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|
 		|// 6//////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Unit AS Unit,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.UseGoodsReceipt
-		|	AND
-		|	NOT tmp.IsOpeningEntry
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Unit,
-		|	tmp.Period
-		|;
-		|
-		|// 7//////////////////////////////////////////////////////////////////////////////
-		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
 		|
@@ -269,7 +269,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	Period
 		|;
 		|
-		|// 8//////////////////////////////////////////////////////////////////////////////
+		|// 7//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -295,7 +295,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period
 		|;
 		|
-		|// 9//////////////////////////////////////////////////////////////////////////////
+		|// 8//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.LegalName AS LegalName,
@@ -311,7 +311,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period,
 		|	Period
 		|;
-		|// 10//////////////////////////////////////////////////////////////////////////////
+		|// 9//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Currency,
@@ -338,22 +338,112 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure();
 	
 	Tables.Insert("OrderBalance", QueryResults[1].Unload());
-	Tables.Insert("SalesTurnovers", QueryResults[2].Unload());
-	Tables.Insert("InventoryBalance", QueryResults[3].Unload());
-	Tables.Insert("GoodsInTransitIncoming", QueryResults[4].Unload());
-	Tables.Insert("StockBalance", QueryResults[5].Unload());
-	Tables.Insert("StockReservation", QueryResults[6].Unload());
-	Tables.Insert("PartnerApTransactions", QueryResults[7].Unload());
+	
+	//Tables.Insert("SalesTurnovers", QueryResults[2].Unload());
+	
+	Tables.Insert("InventoryBalance", QueryResults[2].Unload());
+	Tables.Insert("GoodsInTransitIncoming", QueryResults[3].Unload());
+	Tables.Insert("StockBalance", QueryResults[4].Unload());
+	Tables.Insert("StockReservation", QueryResults[5].Unload());
+	Tables.Insert("PartnerApTransactions", QueryResults[6].Unload());
 	// For lock
-	Tables.Insert("AdvanceToSuppliers_Lock", QueryResults[8].Unload());
+	Tables.Insert("AdvanceToSuppliers_Lock", QueryResults[7].Unload());
 	// For Registrations
 	Tables.Insert("AdvanceToSuppliers_Registrations", New ValueTable());
-	Tables.Insert("ReconciliationStatement", QueryResults[9].Unload());
-	Tables.Insert("SalesReturnTurnovers", QueryResults[10].Unload());
+	Tables.Insert("ReconciliationStatement", QueryResults[8].Unload());
+	Tables.Insert("SalesReturnTurnovers", QueryResults[9].Unload());
+	
+	QuerySalesTurnovers = New Query();
+	QuerySalesTurnovers.Text = GetQueryTextSalesReturnSalesTurnovers();
+	QuerySalesTurnovers.SetParameter("Ref", Ref);
+	QueryResultSalesTurnovers = QuerySalesTurnovers.Execute();
+	QueryTableSalesTurnovers = QueryResultSalesTurnovers.Unload();
+	Tables.Insert("SalesTurnovers", QueryTableSalesTurnovers);
+	
 	Parameters.IsReposting = False;
 	
 	Return Tables;
 EndFunction
+
+Function GetQueryTextSalesReturnSalesTurnovers()
+	Return "SELECT
+	|	SalesReturnItemList.Ref.Company AS Company,
+	|	SalesReturnItemList.Ref.Currency AS Currency,
+	|	SalesReturnItemList.ItemKey AS ItemKey,
+	|	SUM(SalesReturnItemList.Quantity) AS Quantity,
+	|	SUM(ISNULL(SalesReturnSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
+	|	SalesReturnItemList.Ref.Date AS Period,
+	|	SalesReturnItemList.SalesInvoice AS SalesInvoice,
+	|	SUM(SalesReturnItemList.TotalAmount) AS Amount,
+	|	SUM(SalesReturnItemList.NetAmount) AS NetAmount,
+	|	SUM(SalesReturnItemList.OffersAmount) AS OffersAmount,
+	|	SalesReturnItemList.Key AS RowKey,
+	|	SalesReturnSerialLotNumbers.SerialLotNumber AS SerialLotNumber
+	|INTO tmp
+	|FROM
+	|	Document.SalesReturn.ItemList AS SalesReturnItemList
+	|		LEFT JOIN Document.SalesReturn.SerialLotNumbers AS SalesReturnSerialLotNumbers
+	|		ON SalesReturnItemList.Key = SalesReturnSerialLotNumbers.Key
+	|		AND SalesReturnItemList.Ref = SalesReturnSerialLotNumbers.Ref
+	|		AND SalesReturnItemList.Ref = &Ref
+	|		AND SalesReturnSerialLotNumbers.Ref = &Ref
+	|WHERE
+	|	SalesReturnItemList.Ref = &Ref
+	|GROUP BY
+	|	SalesReturnItemList.Ref.Company,
+	|	SalesReturnItemList.Ref.Currency,
+	|	SalesReturnItemList.ItemKey,
+	|	SalesReturnItemList.Ref.Date,
+	|	SalesReturnItemList.Ref,
+	|	SalesReturnItemList.Key,
+	|	SalesReturnSerialLotNumbers.SerialLotNumber,
+	|	SalesReturnItemList.SalesInvoice
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.Company AS Company,
+	|	tmp.Currency AS Currency,
+	|	tmp.ItemKey AS ItemKey,
+	|	-CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers = 0
+	|			THEN tmp.Quantity
+	|		ELSE tmp.QuantityBySerialLtNumbers
+	|	END AS Quantity,
+	|	tmp.Period AS Period,
+	|	tmp.SalesInvoice AS SalesINvoice,
+	|	tmp.RowKey AS RowKey,
+	|	tmp.SerialLotNumber AS SerialLotNumber,
+	|	-CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.Amount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.Amount
+	|	END AS Amount,
+	|	-CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.NetAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.NetAmount
+	|	END AS NetAmount,
+	|	-CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.OffersAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.OffersAmount
+	|	END AS OffersAmount
+	|FROM
+	|	tmp AS tmp";
+EndFunction	
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	DocumentDataTables = Parameters.DocumentDataTables;

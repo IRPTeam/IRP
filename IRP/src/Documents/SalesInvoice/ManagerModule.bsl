@@ -46,6 +46,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		Row.RowKey = String(Row.RowKeyUUID);
 	EndDo;
 	
+	QuerySalesTurnovers = New Query();
+	QuerySalesTurnovers.Text = GetQueryTextSalesInvoiceSalesTurnovers();
+	QuerySalesTurnovers.SetParameter("Ref", Ref);
+	QueryResultSalesTurnovers = QuerySalesTurnovers.Execute();
+	QueryTableSalesTurnovers = QueryResultSalesTurnovers.Unload();
+	
 	Query = New Query();
 	Query.Text = GetQueryTextQueryTable();
 	Query.SetParameter("QueryTable", QueryTableItemList);
@@ -55,21 +61,105 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.OrderReservation = QueryResult[2].Unload();
 	Tables.StockReservation = QueryResult[3].Unload();
 	Tables.InventoryBalance = QueryResult[4].Unload();
-	Tables.SalesTurnovers = QueryResult[5].Unload();
-	Tables.GoodsInTransitOutgoing = QueryResult[6].Unload();
-	Tables.StockBalance = QueryResult[7].Unload();
-	Tables.ShipmentOrders = QueryResult[8].Unload();
-	Tables.PartnerArTransactions = QueryResult[9].Unload();
-	Tables.AdvanceFromCustomers_Lock = QueryResult[10].Unload();
-	Tables.ShipmentConfirmationSchedule_Expense = QueryResult[11].Unload();
-	Tables.ShipmentConfirmationSchedule_Receipt = QueryResult[12].Unload();
-	Tables.ReconciliationStatement = QueryResult[13].Unload();
-	Tables.RevenuesTurnovers = QueryResult[14].Unload();
+	
+	//Tables.SalesTurnovers = QueryResult[5].Unload();
+	
+	Tables.GoodsInTransitOutgoing = QueryResult[5].Unload();
+	Tables.StockBalance = QueryResult[6].Unload();
+	Tables.ShipmentOrders = QueryResult[7].Unload();
+	Tables.PartnerArTransactions = QueryResult[8].Unload();
+	Tables.AdvanceFromCustomers_Lock = QueryResult[9].Unload();
+	Tables.ShipmentConfirmationSchedule_Expense = QueryResult[10].Unload();
+	Tables.ShipmentConfirmationSchedule_Receipt = QueryResult[11].Unload();
+	Tables.ReconciliationStatement = QueryResult[12].Unload();
+	Tables.RevenuesTurnovers = QueryResult[13].Unload();
+	
 	Tables.TaxesTurnovers = QueryTableTaxList;
+	Tables.SalesTurnovers = QueryTableSalesTurnovers;
 	
 	Tables.GoodsInTransitOutgoing_Exists = GetExistsGoodsInTransitOutgoing(Ref, AddInfo);
 	
 	Return Tables;
+EndFunction
+
+Function GetQueryTextSalesInvoiceSalesTurnovers()
+	Return "SELECT
+	|	SalesInvoiceItemList.Ref.Company AS Company,
+	|	SalesInvoiceItemList.Ref.Currency AS Currency,
+	|	SalesInvoiceItemList.ItemKey AS ItemKey,
+	|	SUM(SalesInvoiceItemList.Quantity) AS Quantity,
+	|	SUM(ISNULL(SalesInvoiceSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
+	|	SalesInvoiceItemList.Ref.Date AS Period,
+	|	SalesInvoiceItemList.Ref AS SalesInvoice,
+	|	SUM(SalesInvoiceItemList.TotalAmount) AS Amount,
+	|	SUM(SalesInvoiceItemList.NetAmount) AS NetAmount,
+	|	SUM(SalesInvoiceItemList.OffersAmount) AS OffersAmount,
+	|	SalesInvoiceItemList.Key AS RowKey,
+	|	SalesInvoiceSerialLotNumbers.SerialLotNumber AS SerialLotNumber
+	|INTO tmp
+	|FROM
+	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
+	|		LEFT JOIN Document.SalesInvoice.SerialLotNumbers AS SalesInvoiceSerialLotNumbers
+	|		ON SalesInvoiceItemList.Key = SalesInvoiceSerialLotNumbers.Key
+	|		AND SalesInvoiceItemList.Ref = SalesInvoiceSerialLotNumbers.Ref
+	|		AND SalesInvoiceItemList.Ref = &Ref
+	|		AND SalesInvoiceSerialLotNumbers.Ref = &Ref
+	|WHERE
+	|	SalesInvoiceItemList.Ref = &Ref
+	|GROUP BY
+	|	SalesInvoiceItemList.Ref.Company,
+	|	SalesInvoiceItemList.Ref.Currency,
+	|	SalesInvoiceItemList.ItemKey,
+	|	SalesInvoiceItemList.Ref.Date,
+	|	SalesInvoiceItemList.Ref,
+	|	SalesInvoiceItemList.Key,
+	|	SalesInvoiceSerialLotNumbers.SerialLotNumber
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.Company AS Company,
+	|	tmp.Currency AS Currency,
+	|	tmp.ItemKey AS ItemKey,
+	|	CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers = 0
+	|			THEN tmp.Quantity
+	|		ELSE tmp.QuantityBySerialLtNumbers
+	|	END AS Quantity,
+	|	tmp.Period AS Period,
+	|	tmp.SalesInvoice AS SalesInvoice,
+	|	tmp.RowKey AS RowKey,
+	|	tmp.SerialLotNumber AS SerialLotNumber,
+	|	CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.Amount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.Amount
+	|	END AS Amount,
+	|	CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.NetAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.NetAmount
+	|	END AS NetAmount,
+	|	CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.OffersAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.OffersAmount
+	|	END AS OffersAmount
+	|FROM
+	|	tmp AS tmp";
+	
 EndFunction
 
 Function GetQueryTextSalesInvoiceItemList()
@@ -333,30 +423,30 @@ Function GetQueryTextQueryTable()
 		|	tmp.ItemKey
 		|;
 		|
-		|//[5]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.Currency AS Currency,
-		|	tmp.ItemKey AS ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period AS Period,
-		|	tmp.SalesInvoice AS SalesInvoice,
-		|	SUM(tmp.Amount) AS Amount,
-		|	SUM(tmp.NetAmount) AS NetAmount,
-		|	SUM(tmp.OffersAmount) AS OffersAmount,
-		|	tmp.RowKey AS RowKey
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Period,
-		|	tmp.Company,
-		|	tmp.Currency,
-		|	tmp.ItemKey,
-		|	tmp.SalesInvoice,
-		|	tmp.RowKey
-		|;
+//		|//[5]//////////////////////////////////////////////////////////////////////////////
+//		|SELECT
+//		|	tmp.Company AS Company,
+//		|	tmp.Currency AS Currency,
+//		|	tmp.ItemKey AS ItemKey,
+//		|	SUM(tmp.Quantity) AS Quantity,
+//		|	tmp.Period AS Period,
+//		|	tmp.SalesInvoice AS SalesInvoice,
+//		|	SUM(tmp.Amount) AS Amount,
+//		|	SUM(tmp.NetAmount) AS NetAmount,
+//		|	SUM(tmp.OffersAmount) AS OffersAmount,
+//		|	tmp.RowKey AS RowKey
+//		|FROM
+//		|	tmp AS tmp
+//		|GROUP BY
+//		|	tmp.Period,
+//		|	tmp.Company,
+//		|	tmp.Currency,
+//		|	tmp.ItemKey,
+//		|	tmp.SalesInvoice,
+//		|	tmp.RowKey
+//		|;
 		|
-		|//[6]//////////////////////////////////////////////////////////////////////////////
+		|//[5]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
@@ -395,7 +485,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.RowKey
 		|;
 		|
-		|//[7]//////////////////////////////////////////////////////////////////////////////
+		|//[6]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
@@ -419,7 +509,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.ItemKey
 		|;
 		|
-		|//[8]//////////////////////////////////////////////////////////////////////////////
+		|//[7]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.SalesOrder AS Order,
 		|	tmp.ShipmentConfirmation AS ShipmentConfirmation,
@@ -442,7 +532,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.RowKey
 		|;
 		|
-		|//[9]//////////////////////////////////////////////////////////////////////////////
+		|//[8]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -466,7 +556,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|//[10]//////////////////////////////////////////////////////////////////////////////
+		|//[9]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -490,7 +580,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|//[11]//////////////////////////////////////////////////////////////////////////////
+		|//[10]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.SalesOrder AS Order,
@@ -591,7 +681,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|//[12]//////////////////////////////////////////////////////////////////////////////
+		|//[11]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.SalesInvoice AS Order,
@@ -654,7 +744,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.DeliveryDate
 		|;
 		|
-		|//[13]//////////////////////////////////////////////////////////////////////////////
+		|//[12]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.LegalName AS LegalName,
@@ -672,7 +762,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|//[14]//////////////////////////////////////////////////////////////////////////////
+		|//[13]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Period AS Period,
 		|	tmp.Company AS Company,

@@ -55,9 +55,9 @@ Scenario: _0154134 preparation
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
+		And I set checkbox "Price include tax"
 		And I click "Save and close" button
 		And In this window I click command interface button "Main"
-		And I set checkbox "Price include tax"
 		And I click "Save and close" button
 	* Tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"

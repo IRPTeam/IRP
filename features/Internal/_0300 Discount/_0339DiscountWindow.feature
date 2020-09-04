@@ -4,6 +4,8 @@
 @Discount
 @IgnoreOnCIMainBuild
 @tree
+@Group8
+
 Feature: check that the discount window is displayed in Sales Order
 
 As a developer

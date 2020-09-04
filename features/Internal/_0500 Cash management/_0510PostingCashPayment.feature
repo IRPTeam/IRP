@@ -1,6 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
+@Group9
 Feature: create Cash payment
 
 As a cashier

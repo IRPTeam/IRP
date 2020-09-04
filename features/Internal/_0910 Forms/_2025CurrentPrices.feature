@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-
+@Group12
 Feature: check calculation current prices in the documents
 
 

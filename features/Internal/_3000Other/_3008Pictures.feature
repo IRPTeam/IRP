@@ -1,6 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
+@Group18
+
 Feature: image setting
 
 As a Developer
@@ -27,7 +29,7 @@ Scenario: _300101 image setting
         And I input "#workingDir#\DataProcessor\Picture\Source" text in "Path to catalog at server" field
         And I input "pic" text in "URL alias" field
         And I click "Save and close" button
-   * Filling in settings in Integration Settings for PICTURE STORAGE
+* Filling in settings in Integration Settings for PICTURE STORAGE
         Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
         And I click "Create" button
         And I input "PICTURE STORAGE" text in "Description" field
@@ -214,7 +216,7 @@ Scenario: _300103 item pictures upload
         Given cursor to "plus3" picture
         Then click "plus3" picture
         Given I press ENTER
-     * Check adding picture 
+    * Check adding picture 
         And In this window I click command interface button "Attached files"
         And I click "Refresh" button
         And "List" table contains lines
@@ -319,13 +321,13 @@ Scenario: _300108 open picture gallery from Item and item key
                 | 'Item key'     |
                 | '36/Red TR' |
             And I select current line in "List" table
-         * Open gallery
+        * Open gallery
             Given cursor to "gallery" picture
             Then click "gallery" picture
         * Check the availability of pictures in the gallery
             And I wait "" window opening in 20 seconds
             Given cursor to "verificationpicture" picture
-         * Check click image
+        * Check click image
             Then click "selectverificationpic" picture
             Given cursor to "addselectedpicture" picture
     And I close all client application windows
@@ -357,4 +359,4 @@ Scenario: _300109 check removal of pictures from Item and item key
         Given cursor to "deletepic" picture
         Then click "deletepic" picture
         Then system warning window does not appear
-     And I close all client application windows
+    And I close all client application windows

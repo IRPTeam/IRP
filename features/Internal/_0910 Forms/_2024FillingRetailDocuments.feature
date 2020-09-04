@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-
+@Group12
 Feature: check filling in retail documents + currency form connection
 
 
@@ -1246,7 +1246,7 @@ Scenario: _0154138 check payments form in the Point of sale
 				| 'Cash'         | '0,10' |
 			Then the form attribute named "Cashback" became equal to "0,01"
 			And I close "Payment: Point of sale" window
-		 And I close all client application windows
+		And I close all client application windows
 		
 Scenario: _0154139 check filling in retail customer from the POS
 	And I close all client application windows
@@ -1255,12 +1255,12 @@ Scenario: _0154139 check filling in retail customer from the POS
 	* Add products
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
-			| 'Item'  |
-			| 'Dress' |
-		And I go to line in "ItemKeysPickup" table
-			| 'Presentation' |
-			| 'M/White'      |
-		And I select current line in "ItemKeysPickup" table
+				| 'Item'  |
+				| 'Dress' |
+			And I go to line in "ItemKeysPickup" table
+				| 'Presentation' |
+				| 'M/White'      |
+			And I select current line in "ItemKeysPickup" table
 	* Create Retail customer
 		And I click "Search customer" button
 		And I input "9088090889980" text in "ID" field
@@ -1282,4 +1282,4 @@ Scenario: _0154139 check filling in retail customer from the POS
 		Then the form attribute named "Store" became equal to "Store 01"
 		Then the form attribute named "RetailCustomer" became equal to "Olga Olhovska"
 	And I close all client application windows	
-		
+			

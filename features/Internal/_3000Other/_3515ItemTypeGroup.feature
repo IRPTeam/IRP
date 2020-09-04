@@ -1,6 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
+@Group18
+
 Feature: create a group of item types
 
 

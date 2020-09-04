@@ -1,6 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
+@Group10
 
 Feature: tax calculation check
 

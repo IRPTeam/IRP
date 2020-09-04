@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-
+@Group14
 Feature: check print functionality (Sales order)
 
 

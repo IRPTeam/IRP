@@ -1,6 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
+@Group16
 Feature: create Purchase invoices and Sales invoices based on Goods receipt and Shipment confirmation
 
 

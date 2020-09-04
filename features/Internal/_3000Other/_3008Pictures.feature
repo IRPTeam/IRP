@@ -186,7 +186,7 @@ Scenario: _300111 cleaning up the added picture to the additional details and ad
         | 'Description' |
         | 'Brand TR'     |
         And I select current line in "List" table
-        And I select external file "#workingDir#\features\_3000Other\16466.png"
+        And I select external file "#workingDir#\features\Internal\_3000Other\16466.png"
         And I click "Icon" hyperlink
     * Check adding a picture to an additional attribute
         Then the field named "Icon" value contains "e1cib/tempstorage/" text

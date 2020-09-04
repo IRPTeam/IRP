@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group12
+@Group14
 
 Feature: check setting item prices for Item
 

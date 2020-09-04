@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-
+@Group13
 
 Feature: check that the item marked for deletion is not displayed
 

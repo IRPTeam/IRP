@@ -1,6 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
+@Group16
 Feature: create Inventory transfer order based on several Internal supply request
 
 

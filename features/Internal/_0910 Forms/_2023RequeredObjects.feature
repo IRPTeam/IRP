@@ -2,7 +2,7 @@
 @tree
 @Positive
 @NotCritical
-
+@Group12
 Feature: check required fields
 
 

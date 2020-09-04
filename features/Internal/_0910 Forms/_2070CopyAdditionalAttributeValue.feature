@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group11
+@Group12
 
 Feature: copy additional attribute value
 

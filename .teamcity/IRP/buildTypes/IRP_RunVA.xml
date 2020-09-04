@@ -221,7 +221,7 @@ Write-Output "##teamcity[compilationFinished compiler='VA settings']"]]></param>
   }elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -like "%teamcity.project.id%_develop*")
   {
     Write-Output "Start short test"
- 	$a = @("Test1", "Test2", "Test3")	
+ 	$a = @("CatalogForms", "DocumentForms", "OtherForms")	
   }else{
   	Write-Output "Skip tests"
   }

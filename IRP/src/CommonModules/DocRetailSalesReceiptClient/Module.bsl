@@ -46,6 +46,8 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 	
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	SerialLotNumberClient.UpdateSerialLotNubersTree(Object, Form);		
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source) Export
@@ -59,7 +61,7 @@ Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source) Exp
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	Return;
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
 EndProcedure
 
 #EndRegion
@@ -68,6 +70,8 @@ EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
+	SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Object);
+	SerialLotNumberClient.UpdateSerialLotNubersTree(Object, Form);	
 EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
@@ -101,6 +105,7 @@ EndProcedure
 
 Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 	DocumentsClient.ItemListItemOnChange(Object, Form, ThisObject, Item);
+	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form);
 EndProcedure
 
 Function ItemListItemSettings(Form) Export
@@ -123,6 +128,7 @@ EndFunction
 
 Procedure ItemListItemKeyOnChange(Object, Form, Item = Undefined) Export
 	DocumentsClient.ItemListItemKeyOnChange(Object, Form, ThisObject, Item);
+	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form);
 EndProcedure
 
 Function ItemListItemKeySettings(Form) Export
@@ -157,6 +163,7 @@ Procedure ItemListQuantityOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;	
 	DocumentsClient.ItemListCalculateRowAmounts(Object, Form, CurrentData);
+	SerialLotNumberClient.UpdateSerialLotNubersTree(Object, Form);
 EndProcedure
 
 Procedure ItemListPriceOnChange(Object, Form, Item) Export
@@ -445,7 +452,6 @@ Function DateSettings(Form) Export
 	PriceDate = CalculationStringsClientServer.GetPriceDate(Form.Object);
 	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	
-	Settings.Insert("EmptyBasisDocument", New Structure("SalesOrder", PredefinedValue("Document.SalesOrder.EmptyRef")));
 	Settings.Insert("TableName"			, "ItemList");
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, Agreement, LegalName, ManagerSegment";

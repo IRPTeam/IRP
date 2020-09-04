@@ -325,6 +325,7 @@
   <commonModules>CommonModule.HardwareClient</commonModules>
   <commonModules>CommonModule.HardwareServer</commonModules>
   <commonModules>CommonModule.SerialLotNumbersServer</commonModules>
+  <commonModules>CommonModule.SerialLotNumberClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>

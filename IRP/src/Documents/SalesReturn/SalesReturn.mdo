@@ -858,6 +858,53 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="bbbe5486-c5e5-4bd5-9f41-67bddd4fd060">
+    <producedTypes>
+      <objectType typeId="cf7a1647-279f-4563-99f1-66a238d840d6" valueTypeId="d9e4777c-5d98-4889-85db-9a1e66440778"/>
+      <rowType typeId="873e969f-c775-4d62-8116-82ce50472ab9" valueTypeId="3af5fccc-4c43-4b84-9441-f7cb4015f85d"/>
+    </producedTypes>
+    <name>SerialLotNumbers</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot numbers</value>
+    </synonym>
+    <attributes uuid="9a0cb391-38c3-46e1-9286-1fbc448278c1">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="bf702203-856e-4159-934c-284e28ec0ba2">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6887b8c5-e85d-496c-8bcd-a87f8e84f047">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <commands uuid="cd8f3107-f812-4508-aad4-160931a20bba">
     <name>GenerateSalesReturn</name>
     <synonym>

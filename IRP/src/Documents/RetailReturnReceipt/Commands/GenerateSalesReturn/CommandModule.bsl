@@ -66,7 +66,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	ItemList.Columns.Add("Key"				, New TypeDescription("UUID"));
 	ItemList.Columns.Add("RowKey"			, New TypeDescription("String"));
 	
-	TaxListMetadataColumns = Metadata.Documents.SalesInvoice.TabularSections.TaxList.Attributes;
+	TaxListMetadataColumns = Metadata.Documents.RetailReturnReceipt.TabularSections.TaxList.Attributes;
 	TaxList = New ValueTable();
 	TaxList.Columns.Add("Key"					, TaxListMetadataColumns.Key.Type);
 	TaxList.Columns.Add("Tax"					, TaxListMetadataColumns.Tax.Type);
@@ -77,12 +77,20 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	TaxList.Columns.Add("ManualAmount"			, TaxListMetadataColumns.ManualAmount.Type);
 	TaxList.Columns.Add("Ref"					, New TypeDescription("DocumentRef.SalesReturnOrder"));
 	
-	SpecialOffersMetadataColumns = Metadata.Documents.SalesInvoice.TabularSections.SpecialOffers.Attributes;
+	SpecialOffersMetadataColumns = Metadata.Documents.RetailReturnReceipt.TabularSections.SpecialOffers.Attributes;
 	SpecialOffers = New ValueTable();
 	SpecialOffers.Columns.Add("Key"		, SpecialOffersMetadataColumns.Key.Type);
 	SpecialOffers.Columns.Add("Offer"	, SpecialOffersMetadataColumns.Offer.Type);
 	SpecialOffers.Columns.Add("Amount"	, SpecialOffersMetadataColumns.Amount.Type);
 	SpecialOffers.Columns.Add("Ref"		, New TypeDescription("DocumentRef.SalesReturnOrder"));
+	
+	SerialLotNumbersMetadataColumns = Metadata.Documents.RetailReturnReceipt.TabularSections.SerialLotNumbers.Attributes;
+	SerialLotNumbers = New ValueTable();
+	SerialLotNumbers.Columns.Add("Key"		       , SerialLotNumbersMetadataColumns.Key.Type);
+	SerialLotNumbers.Columns.Add("SerialLotNumber" , SerialLotNumbersMetadataColumns.SerialLotNumber.Type);
+	SerialLotNumbers.Columns.Add("Quantity"	       , SerialLotNumbersMetadataColumns.Quantity.Type);
+	SerialLotNumbers.Columns.Add("Ref"		       , New TypeDescription("DocumentRef.SalesReturnOrder"));
+	
 	
 	For Each TableStructure In ArrayOfTables Do
 		For Each Row In TableStructure.ItemList Do
@@ -94,6 +102,9 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 		For Each Row In TableStructure.SpecialOffers Do
 			FillPropertyValues(SpecialOffers.Add(), Row);
 		EndDo;
+		For Each Row In TableStructure.SerialLotNumbers Do
+			FillPropertyValues(SerialLotNumbers.Add(), Row);
+		EndDo;		
 	EndDo;
 	
 	ItemListCopy = ItemList.Copy();
@@ -105,15 +116,17 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 		Result = New Structure(UnjoinFileds);
 		FillPropertyValues(Result, Row);
 		
-		Result.Insert("ItemList"		, New Array());
-		Result.Insert("TaxList"			, New Array());
-		Result.Insert("SpecialOffers"	, New Array());
+		Result.Insert("ItemList"		 , New Array());
+		Result.Insert("TaxList"			 , New Array());
+		Result.Insert("SpecialOffers"	 , New Array());
+		Result.Insert("SerialLotNumbers" , New Array());
 		
 		Filter = New Structure(UnjoinFileds);
 		FillPropertyValues(Filter, Row);
 		
 		ArrayOfTaxListFilters = New Array();
 		ArrayOfSpecialOffersFilters = New Array();
+		ArrayOfSerialLotNumbersFilters = New Array();
 		
 		ItemListFiltered = ItemList.Copy(Filter);
 		For Each RowItemList In ItemListFiltered Do
@@ -127,6 +140,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 			
 			ArrayOfTaxListFilters.Add(New Structure("Key", NewRow.Key));
 			ArrayOfSpecialOffersFilters.Add(New Structure("Key", NewRow.Key));
+			ArrayOfSerialLotNumbersFilters.Add(New Structure("Key", NewRow.Key));
 			
 			Result.ItemList.Add(NewRow);
 		EndDo;
@@ -155,6 +169,16 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 			EndDo;
 		EndDo;
 		
+		For Each SerialLotNumbersFilter In ArrayOfSerialLotNumbersFilters Do
+			For Each RowSerialLotNumbers In SerialLotNumbers.Copy(SerialLotNumbersFilter) Do
+				NewRow = New Structure();
+				NewRow.Insert("Key",             RowSerialLotNumbers.Key);
+				NewRow.Insert("SerialLotNumber", RowSerialLotNumbers.SerialLotNumber);
+				NewRow.Insert("Quantity"       , RowSerialLotNumbers.Quantity);
+				Result.SerialLotNumbers.Add(NewRow);
+			EndDo;
+		EndDo;
+		
 		ArrayOfResults.Add(Result);
 	EndDo;
 	Return ArrayOfResults;
@@ -180,7 +204,8 @@ Function GetDocumentTable(ArrayOfBasisDocuments, BasedOn)
 		|		ELSE Table.ItemKey.Item.Unit
 		|	END AS Unit,
 		|	Table.QuantityTurnover AS Quantity,
-		|	Table.Company AS Company
+		|	Table.Company AS Company,
+		|	Table.SerialLotNumber
 		|FROM
 		|	AccumulationRegister.SalesTurnovers.Turnovers(,,, SalesInvoice IN (&ArrayOfBasises)
 		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS Table
@@ -209,10 +234,32 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	QueryTable.Key,
 		|	QueryTable.RowKey,
 		|	QueryTable.Unit,
-		|	QueryTable.Quantity
-		|INTO tmpQueryTable
+		|	QueryTable.Quantity,
+		|	QueryTable.SerialLotNumber
+		|INTO tmpQueryTableFull
 		|FROM
 		|	&QueryTable AS QueryTable
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmpQueryTableFull.BasedOn,
+		|	tmpQueryTableFull.RetailSalesReceipt,
+		|	tmpQueryTableFull.ItemKey,
+		|	tmpQueryTableFull.Key,
+		|	tmpQueryTableFull.RowKey,
+		|	tmpQueryTableFull.Unit,
+		|	SUM(tmpQueryTableFull.Quantity) AS Quantity
+		|INTO tmpQueryTable
+		|FROM
+		|	tmpQueryTableFull AS tmpQueryTableFull
+		|GROUP BY
+		|	tmpQueryTableFull.BasedOn,
+		|	tmpQueryTableFull.RetailSalesReceipt,
+		|	tmpQueryTableFull.ItemKey,
+		|	tmpQueryTableFull.Key,
+		|	tmpQueryTableFull.RowKey,
+		|	tmpQueryTableFull.Unit
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -274,18 +321,39 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	Document.RetailSalesReceipt.SpecialOffers AS SpecialOffers
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable
 		|		ON tmpQueryTable.RetailSalesReceipt = SpecialOffers.Ref
-		|		AND tmpQueryTable.Key = SpecialOffers.Key";
+		|		AND tmpQueryTable.Key = SpecialOffers.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SerialLotNumbers.Ref,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	tmpQueryTableFull.Quantity
+		|FROM
+		|	Document.RetailSalesReceipt.SerialLotNumbers AS SerialLotNumbers
+		|		INNER JOIN tmpQueryTableFull AS tmpQueryTableFull
+		|		ON tmpQueryTableFull.RetailSalesReceipt = SerialLotNumbers.Ref
+		|		AND tmpQueryTableFull.Key = SerialLotNumbers.Key
+		|		AND tmpQueryTableFull.SerialLotNumber = SerialLotNumbers.SerialLotNumber
+		|WHERE
+		|	tmpQueryTableFull.Quantity > 0";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	QueryTable_ItemList = QueryResults[1].Unload();
+	QueryTable_ItemList = QueryResults[2].Unload();
 	DocumentsServer.RecalculateQuantityInTable(QueryTable_ItemList);
 	
-	QueryTable_TaxList = QueryResults[2].Unload();
-	QueryTable_SpecialOffers = QueryResults[3].Unload();
+	QueryTable_TaxList = QueryResults[3].Unload();
+	QueryTable_SpecialOffers = QueryResults[4].Unload();
+	QueryTable_SerialLotNumbers = QueryResults[5].Unload();
 	
-	Return New Structure("ItemList, TaxList, SpecialOffers", QueryTable_ItemList, QueryTable_TaxList, QueryTable_SpecialOffers);
+	Return New Structure("ItemList, TaxList, SpecialOffers, SerialLotNumbers", 
+	QueryTable_ItemList, 
+	QueryTable_TaxList, 
+	QueryTable_SpecialOffers,
+	QueryTable_SerialLotNumbers);
 EndFunction
 
 #Region Errors

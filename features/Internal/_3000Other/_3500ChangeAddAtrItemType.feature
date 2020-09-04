@@ -1,6 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
+@Group18
+
 Feature: checking a bunch of additional details in the item type for the item key composition
 
 As a Developer

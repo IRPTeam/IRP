@@ -3,7 +3,7 @@
 @Discount
 @SpecialOffersMaxInRow
 @tree
-
+@Group8
 
 Feature: range discount
 

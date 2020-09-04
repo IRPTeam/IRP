@@ -1,6 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
+@Group9
 Feature: create cash transfer
 
 As an accountant

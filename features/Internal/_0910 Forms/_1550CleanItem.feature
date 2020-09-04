@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-
+@Group11
 Feature: check that the item is not cleared when saving the document
 
 As a QA

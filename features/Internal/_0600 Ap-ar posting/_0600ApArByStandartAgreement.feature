@@ -1,6 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
+@Group10
 Feature: accounting of receivables / payables under Standard type Partner terms
 
 As an accountant

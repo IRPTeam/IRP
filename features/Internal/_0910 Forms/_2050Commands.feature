@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-
+@Group12
 
 Feature: check the addition of commands to documents and document lists
 

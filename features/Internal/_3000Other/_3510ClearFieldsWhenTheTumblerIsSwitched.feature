@@ -1,6 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
+@Group18
+
 Feature: check the cleaning of fields in forms of directories with switches (the drawing of the form depends on the switch)
 
 
@@ -114,46 +116,46 @@ Scenario: check clearing the values ​​of Tax types and Multi currency moveme
         And I input "Test" text in the field named "Description_tr"
         And I set checkbox "Our"
         * Filling in Multi currency movement type
-        And in the table "Currencies" I click the button named "CurrenciesAdd"
-        And I click choice button of "Movement type" attribute in "Currencies" table
-        And I go to line in "List" table
-                | 'Currency' | 'Deferred calculation' | 'Description'        | 'Reference'          | 'Source'       | 'Type'      |
-                | 'USD'      | 'No'                   | 'Reporting currency' | 'Reporting currency' | 'Forex Seling' | 'Reporting' |
-        And I activate "Description" field in "List" table
-        And I select current line in "List" table
-        And I finish line editing in "Currencies" table
-        And "Currencies" table contains lines
-                | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
-                | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
+                And in the table "Currencies" I click the button named "CurrenciesAdd"
+                And I click choice button of "Movement type" attribute in "Currencies" table
+                And I go to line in "List" table
+                        | 'Currency' | 'Deferred calculation' | 'Description'        | 'Reference'          | 'Source'       | 'Type'      |
+                        | 'USD'      | 'No'                   | 'Reporting currency' | 'Reporting currency' | 'Forex Seling' | 'Reporting' |
+                And I activate "Description" field in "List" table
+                And I select current line in "List" table
+                And I finish line editing in "Currencies" table
+                And "Currencies" table contains lines
+                        | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
+                        | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
         * Filling in Tax types
-        And I move to "Tax types" tab
-        And in the table "CompanyTaxes" I click the button named "CompanyTaxesAdd"
-        And I input "01.10.2019" text in "Period" field
-        And I activate "Tax" field in "CompanyTaxes" table
-        And I click choice button of "Tax" attribute in "CompanyTaxes" table
-        And I go to line in "List" table
-                | 'Description' | 'Reference' |
-                | 'VAT'         | 'VAT'       |
-        And I select current line in "List" table
-        And I activate "Priority" field in "CompanyTaxes" table
-        And I input "2" text in "Priority" field of "CompanyTaxes" table
-        And I finish line editing in "CompanyTaxes" table
-        And "CompanyTaxes" table contains lines
-                | 'Use' | 'Tax' | 'Priority' |
-                | 'Yes' | 'VAT' | '2'        |
+                And I move to "Tax types" tab
+                And in the table "CompanyTaxes" I click the button named "CompanyTaxesAdd"
+                And I input "01.10.2019" text in "Period" field
+                And I activate "Tax" field in "CompanyTaxes" table
+                And I click choice button of "Tax" attribute in "CompanyTaxes" table
+                And I go to line in "List" table
+                        | 'Description' | 'Reference' |
+                        | 'VAT'         | 'VAT'       |
+                And I select current line in "List" table
+                And I activate "Priority" field in "CompanyTaxes" table
+                And I input "2" text in "Priority" field of "CompanyTaxes" table
+                And I finish line editing in "CompanyTaxes" table
+                And "CompanyTaxes" table contains lines
+                        | 'Use' | 'Tax' | 'Priority' |
+                        | 'Yes' | 'VAT' | '2'        |
         * Check to clear completed data when uncheck Our
-        And I move to "Info" tab
-        And I remove checkbox "Our"
-		And I select "Company" exact value from the drop-down list named "Type"
-        And I click "Save" button
-        And I set checkbox "Our"
-        And "Currencies" table does not contain lines
-                | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
-                | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
-        And "CompanyTaxes" table does not contain lines
-                | 'Use' | 'Tax' | 'Priority' |
-                | 'Yes' | 'VAT' | '2'        |
-        And I close all client application windows
+                And I move to "Info" tab
+                And I remove checkbox "Our"
+                        And I select "Company" exact value from the drop-down list named "Type"
+                And I click "Save" button
+                And I set checkbox "Our"
+                And "Currencies" table does not contain lines
+                        | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
+                        | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |
+                And "CompanyTaxes" table does not contain lines
+                        | 'Use' | 'Tax' | 'Priority' |
+                        | 'Yes' | 'VAT' | '2'        |
+                And I close all client application windows
 
 
 

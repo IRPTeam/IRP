@@ -2,13 +2,13 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="2c86963a-8b57-4508-a1aa-5148ab426907" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
   <name>IRP</name>
   <parameters>
-    <param name="env.ConnectionTo1C" value="/Slocalhost/%env.Database1CName% /N %env.LoginTo1C% /P %env.PassTo1C%" />
+    <param name="env.ConnectionTo1C" value="/F%system.teamcity.build.workingDir%\TempDB /N %env.LoginTo1C% /P %env.PassTo1C%" />
     <param name="env.GitToken" value="credentialsJSON:dea25710-6762-4b8c-ad3c-c8ea384b82c1" spec="password display='hidden' readOnly='true'" />
     <param name="env.LoginTo1C" value="CI" />
     <param name="env.PassTo1C" value="8HRUYXL2UC" />
+    <param name="env.PathTo1CBin" value="C:\Program Files\1cv8\8.3.16.1502\bin" />
     <param name="env.PathTo1CPlatform" value="&quot;%env.PathTo1CBin%\1cv8.exe&quot;" />
     <param name="env.SkipRunVA" value="False" spec="select data_2='False' data_1='True' display='normal'" />
-    <param name="teamcity.runner.commandline.stdstreams.encoding" value="CP866" />
   </parameters>
   <project-extensions>
     <extension id="PROJECT_EXT_3" type="ReportTab">
@@ -26,17 +26,8 @@
         <param name="buildSettings" value="ALWAYS_USE_CURRENT" />
         <param name="credentialsStorageType" value="credentialsJSON" />
         <param name="enabled" value="true" />
-        <param name="rootId" value="IRP_GitTC" />
+        <param name="rootId" value="IRP_IrpSettingsDeploy" />
         <param name="showChanges" value="false" />
-      </parameters>
-    </extension>
-    <extension id="PROJECT_EXT_7" type="sonar-qube">
-      <parameters>
-        <param name="id" value="4ebba3c9-2abc-4f9a-9c9c-7760b6ad6607" />
-        <param name="name" value="Main SQ" />
-        <param name="token" value="scrambled:NTFhNzBmOThhYmE1Mzg1ZTMxODE5Y2VmMDhiYWNlYzg3NmVkNGI5Ng==" />
-        <param name="url" value="https://ci.irp.one" />
-        <param name="useToken" value="true" />
       </parameters>
     </extension>
   </project-extensions>

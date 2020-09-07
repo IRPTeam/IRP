@@ -95,7 +95,8 @@ Procedure ItemListOnActivateRow(Object, Form, Item) Export
 	EndIf;
 	
 	If ValueIsFilled(CurrentRow.PriceType)
-		And CurrentRow.PriceType <> Form.CurrentPriceType Then
+		And CurrentRow.PriceType <> Form.CurrentPriceType 
+		And CurrentRow.PriceType <> PredefinedValue("Catalog.PriceTypes.ManualPriceType") Then
 		DocumentsClient.SetCurrentPriceType(Form, CurrentRow.PriceType);
 	EndIf;
 EndProcedure

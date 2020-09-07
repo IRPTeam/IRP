@@ -846,9 +846,3 @@ Scenario: Open object form "Extensions"
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form Extensions" exception
 	And I close current window
-
-
-
-
-	
-	

@@ -4,7 +4,7 @@
 @Test
 @Group01
 
-Feature: filling in Partner segments content catalog
+Feature: filling in Partner segments catalog
 
 As an owner
 I want to fill out information on the company

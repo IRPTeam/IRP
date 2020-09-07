@@ -274,46 +274,7 @@ Scenario: _005114 filling in the settings for creating ItemKeys for Item type Cl
 # It is indicated through the type of item with duplication in sets
 	* Preparation
 		When Create catalog ItemTypes objects (Clothes, Shoes)
-		* Create Size AddAttributeAndProperty
-			Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
-			And I click the button named "FormCreate"
-			And I click Choice button of the field named "ValueType"
-			And Delay 2
-			And I go to line in "" table
-					| ''       |
-					| 'Additional attribute value' |
-			And I click the button named "OK"
-			And I click Open button of the field named "Description_en"
-			And I input "Size" text in the field named "Description_en"
-			And I input "Size TR" text in the field named "Description_tr"
-			And I click "Ok" button
-			And I click "Save and close" button
-		* Create Color AddAttributeAndProperty
-			And I click the button named "FormCreate"
-			And I click Choice button of the field named "ValueType"
-			And Delay 2
-			And I go to line in "" table
-					| ''       |
-					| 'Additional attribute value' |
-			And I click the button named "OK"
-			And I click Open button of the field named "Description_en"
-			And I input "Color" text in the field named "Description_en"
-			And I input "Color TR" text in the field named "Description_tr"
-			And I click "Ok" button
-			And I click "Save and close" button
-		* Create Season AddAttributeAndProperty
-			And I click the button named "FormCreate"
-			And I click Choice button of the field named "ValueType"
-			And Delay 2
-			And I go to line in "" table
-					| ''       |
-					| 'Additional attribute value' |
-			And I click the button named "OK"
-			And I click Open button of the field named "Description_en"
-			And I input "Season" text in the field named "Description_en"
-			And I input "Season TR" text in the field named "Description_tr"
-			And I click "Ok" button
-			And I click "Save and close" button
+		When Create chart of characteristic types AddAttributeAndProperty objects (Color, Size, Season)
 	* Opening the form for filling in Item keys settings 
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 	* Item key creation options for Clothes
@@ -472,9 +433,9 @@ Scenario: _005114 adding general additional attributes and properties for catalo
 
 Scenario: _005115 filling in the "Items" catalog 
 	* Preparation
-		When Create catalog ItemTypes objects (Clothes, Shoes)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Units objects (box (8 pcs))
+		When Create catalog Units objects (pcs)
 	* Opening the form for creating Items
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I click the button named "FormCreate"
@@ -531,8 +492,9 @@ Scenario: _005115 filling in the "Items" catalog
 		And I click Choice button of the field named "ItemType"
 		And I go to line in "List" table
 				| 'Description' |
-				| 'Clothes'       |
+				| 'Shoes'       |
 		And I select current line in "List" table
+		And I click Select button of "Unit" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'box (8 pcs)' |
@@ -542,328 +504,104 @@ Scenario: _005115 filling in the "Items" catalog
 		And "List" table became equal
 		| 'Description' | 'Item type' |
 		| 'Bodie'       | 'Clothes'   |
-		| 'Sneakers'    | 'Clothes'   |
+		| 'Sneakers'    | 'Shoes'   |
 
-
-// доделать после того как будет загрузка планов видов характеристик
 
 Scenario: _005117 filling in Item keys
-# Dress, Trousers
+# Bodie, Shoes
 	Given I open hyperlink "e1cib/list/Catalog.Items"
-	* Filling in Item keys for Dress
-		And I go to line in "List" table
-		| 'Description'      |
-		| 'Dress' |
-		And I select current line in "List" table
-		And In this window I click command interface button "Item keys"
-		And I click the button named "FormCreate"
-		And I click Select button of "Size" field
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item keys (create) *" window closing in 20 seconds
-		And I click the button named "FormCreate"
-		And I click Select button of "Size" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'XS'          |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
-		And I click the button named "FormCreate"
-		And I click Select button of "Size" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'M'           |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
-		And I click the button named "FormCreate"
-		And I click Select button of "Size" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'L'           |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
-		And I click the button named "FormCreate"
-		And I click Select button of "Size" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'XL'          |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'S'        |
-		And I select current line in "List" table
-		And I click Select button of "Color" field
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'XS'       |
-		And I select current line in "List" table
-		And I click Select button of "Color" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Blue'        |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "XS (Item key) *" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'M'        |
-		And I select current line in "List" table
-		And I click Select button of "Color" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'White'       |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "M (Item key) *" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'L'        |
-		And I select current line in "List" table
-		And I click Select button of "Color" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Green'       |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "L (Item key) *" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'XL'       |
-		And I select current line in "List" table
-		And I click Select button of "Color" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Green'       |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "XL (Item key) *" window closing in 20 seconds
-		And In this window I click command interface button "Main"
-		And I click "Save and close" button
-		And I wait "Dress (Item)" window closing in 20 seconds
-	* Filling in Item keys for Trousers
+	* Preparation
+		When Create catalog AddAttributeAndPropertyValues objects (Color, Size, Season)
+		When Create chart of characteristic types AddAttributeAndProperty objects (Color, Size, Season)
+	* Filling in Item keys for Bodie
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' | 'Item type' |
-			| 'Trousers'    | 'Clothes'   |
+			| 'Description' |
+			| 'Bodie'       |
 		And I select current line in "List" table
 		And In this window I click command interface button "Item keys"
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
 		And I go to line in "List" table
-			| 'Description' |
-			| '36'          |
+			| 'Additional attribute' | 'Additional attribute values' |
+			| 'Size'                 | 'XS'                          |
+		And I select current line in "List" table
+		And I click Select button of "Color" field
+		And I go to line in "List" table
+			| 'Additional attribute' | 'Additional attribute values' |
+			| 'Color'                | 'Blue'                        |
 		And I select current line in "List" table
 		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
 		And I go to line in "List" table
+			| 'Additional attribute' | 'Additional attribute values' |
+			| 'Size'                 | 'M'                          |
+		And I select current line in "List" table
+		And I click Select button of "Color" field
+		And I go to line in "List" table
+			| 'Additional attribute' | 'Additional attribute values' |
+			| 'Color'                | 'White'                        |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Item key' |
+			| 'XS/Blue'  |
+			| 'M/White'  |
+		And I close current window
+	* Filling in Item keys for Sneakers
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
 			| 'Description' |
-			| '38'          |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Item key' |
-			| '36'       |
-		And I select current line in "List" table
-		And I click Select button of "Color" field
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "* (Item key) *" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Item key' |
-			| '38'       |
-		And I select current line in "List" table
-		And I click Select button of "Color" field
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "* (Item key) *" window closing in 20 seconds
-		And In this window I click command interface button "Main"
-		And I click "Save and close" button
-		And I wait "Trousers (Item)" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Description' | 'Item type' |
-			| 'Shirt'       | 'Clothes'   |
+			| 'Sneakers'       |
 		And I select current line in "List" table
 		And In this window I click command interface button "Item keys"
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
 		And I go to line in "List" table
-			| 'Description' |
-			| '36'          |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
-		And I click the button named "FormCreate"
-		And I click Select button of "Size" field
-		And I go to line in "List" table
-			| 'Description' |
-			| '38'          |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Item key' |
-			| '36'       |
-		And I select current line in "List" table
-		And I click Select button of "Color" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Red'         |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "* (Item key) *" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Item key' |
-			| '38'       |
-		And I select current line in "List" table
-		And I click Select button of "Color" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Black'       |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "* (Item key) *" window closing in 20 seconds
-		Then "Shirt (Item)" window is opened
-		And In this window I click command interface button "Main"
-		And I click "Save and close" button
-		And Delay 5
-		And I go to line in "List" table
-			| 'Description' | 'Item type' |
-			| 'Boots'       | 'Shoes'     |
-		And I select current line in "List" table
-		And In this window I click command interface button "Item keys"
-		And I click the button named "FormCreate"
-		And I click Select button of "Size" field
-		And I go to line in "List" table
-			| 'Description' |
-			| '36'          |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
-		And I click the button named "FormCreate"
-		And I click Select button of "Size" field
-		And I go to line in "List" table
-			| 'Description' |
-			| '37'          |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
-		And I click the button named "FormCreate"
-		And I click Select button of "Size" field
-		And I go to line in "List" table
-			| 'Description' |
-			| '38'          |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
-		And I click the button named "FormCreate"
-		And I click Select button of "Size" field
-		And I go to line in "List" table
-			| 'Description' |
-			| '39'          |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Item key' |
-			| '36'       |
-		And I select current line in "List" table
-		And I click Select button of "Season" field
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "* (Item key) *" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Item key' |
-			| '37'       |
-		And I select current line in "List" table
-		And I click Select button of "Season" field
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "* (Item key) *" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Item key' |
-			| '38'       |
-		And I select current line in "List" table
-		And I click Select button of "Season" field
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "* (Item key) *" window closing in 20 seconds
-		And I go to line in "List" table
-			| 'Item key' |
-			| '39'       |
-		And I select current line in "List" table
-		And I click Select button of "Season" field
-		And I click the button named "FormChoose"
-		And I click "Save and close" button
-		And I wait "* (Item key) *" window closing in 20 seconds
-		And In this window I click command interface button "Main"
-		And I click "Save and close" button
-		And Delay 5
-		And I go to line in "List" table
-			| 'Description' | 'Item type' |
-			| 'High shoes'  | 'Shoes'     |
-		And I select current line in "List" table
-		And In this window I click command interface button "Item keys"
-		And I click the button named "FormCreate"
-		And I click Select button of "Size" field
-		And I go to line in "List" table
-			| 'Description' |
-			| '39'          |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
+			| 'Additional attribute' | 'Additional attribute values' |
+			| 'Size'                 | '36'                          |
 		And I select current line in "List" table
 		And I click Select button of "Season" field
 		And I go to line in "List" table
-			| 'Description' |
-			| '19SD'        |
+			| 'Additional attribute' | 'Additional attribute values' |
+			| 'Season'                | '19SD'                        |
 		And I select current line in "List" table
 		And I click "Save and close" button
-		And I wait "* (Item key) *" window closing in 20 seconds
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
 		And I go to line in "List" table
-			| 'Description' |
-			| '37'          |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Item key (create) *" window closing in 20 seconds
+			| 'Additional attribute' | 'Additional attribute values' |
+			| 'Size'                 | '38'                          |
 		And I select current line in "List" table
 		And I click Select button of "Season" field
 		And I go to line in "List" table
-			| 'Description' |
-			| '19SD'        |
+			| 'Additional attribute' | 'Additional attribute values' |
+			| 'Season'                | '18SD'                        |
 		And I select current line in "List" table
 		And I click "Save and close" button
-		And I wait "* (Item key) *" window closing in 20 seconds
-		And In this window I click command interface button "Main"
-		And I click "Save and close" button
-		And Delay 5
+		And "List" table contains lines
+			| 'Item key' |
+			| '36/19SD'  |
+			| '38/18SD'  |
+	And I close all client application windows
+	
 
-		
 
-Scenario: _005119 packaging for High shoes
+
+Scenario: _005119 packaging for Sneakers
 	* Opening the form for creating Item units
 		Given I open hyperlink "e1cib/list/Catalog.Units"
-	* Create packaging High shoes box (8 pcs)
+	* Create packaging Sneakers box (8 pcs)
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "High shoes box (8 pcs)" text in the field named "Description_en"
-		And I input "High shoes box (8 adet) TR" text in the field named "Description_tr"
+		And I input "Sneakers box (8 pcs)" text in the field named "Description_en"
+		And I input "Sneakers box (8 adet) TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click Select button of "Item" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'High shoes'  |
+			| 'Sneakers'  |
 		And I select current line in "List" table
 		And I click Select button of "Basis unit" field
 		And I go to line in "List" table
@@ -881,7 +619,7 @@ Scenario: _005119 packaging for High shoes
 		And I click Select button of "Item" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Boots'  |
+			| 'Sneakers'  |
 		And I select current line in "List" table
 		And I click Select button of "Basis unit" field
 		And I go to line in "List" table
@@ -1048,13 +786,13 @@ Scenario: _005120 set Closets/Shoes specification creation
 		And Delay 10
 
 Scenario: _005121 filling item key according to specification for set
-	* Opening the Dress element in the Items catalog
+	* Opening the Bodie element in the Items catalog
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
 			| 'Description' | 'Item type' |
-			| 'Dress'       | 'Clothes'   |
+			| 'Bodie'       | 'Clothes'   |
 		And I select current line in "List" table
-	* Creating for Dress a new item key for the specification
+	* Creating for Bodie a new item key for the specification
 		And In this window I click command interface button "Item keys"
 		And I click the button named "FormCreate"
 		And I change checkbox "Specification"
@@ -1070,13 +808,13 @@ Scenario: _005121 filling item key according to specification for set
 		And Delay 5
 		And "List" table contains lines
 			| 'Item key'   |
-			| 'Dress/A-8'  |
+			| 'Bodie/A-8'  |
 		And I close current window
 	* Opening the Boots element in the Items catalog
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| 'Description' | 'Item type' |
-			| 'Boots'       | 'Shoes'   |
+			| 'Description'    | 'Item type' |
+			| 'Sneakers'       | 'Shoes'   |
 		And I select current line in "List" table
 	* Creating for Boots a new item key for the specification
 		And In this window I click command interface button "Item keys"
@@ -1094,5 +832,5 @@ Scenario: _005121 filling item key according to specification for set
 		And Delay 5
 		And "List" table contains lines
 			| 'Item key'   |
-			| 'Boots/S-8'  |
+			| 'Sneakers/S-8'  |
 		And I close current window

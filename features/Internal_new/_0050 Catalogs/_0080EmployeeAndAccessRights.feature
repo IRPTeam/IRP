@@ -20,6 +20,7 @@ Background:
 
 Scenario: _008004 filling in the "Users" catalog 
 	* Preparation
+		And I close all client application windows
 		When Create catalog Partners objects (Employee)
 		When Create catalog UserGroups objects
 	* Opening the form for filling in users

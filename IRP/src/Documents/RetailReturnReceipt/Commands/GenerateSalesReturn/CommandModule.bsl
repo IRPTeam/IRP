@@ -1,6 +1,12 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
-	GenerateDocument(CommandParameter);
+	If TypeOf(CommandParameter) <> Type("Array") Then
+		ArrayOfBasisDocuments = New Array();
+		ArrayOfBasisDocuments.Add(CommandParameter);
+		GenerateDocument(ArrayOfBasisDocuments);
+	Else
+		GenerateDocument(CommandParameter);
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -38,7 +44,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_RetailSalesReceipt(ArrayOf_RetailSalesReceipt));
 	
 	Return JoinDocumentsStructure(ArrayOfTables, 
-	"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
+	"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer");
 EndFunction
 
 &AtServer
@@ -65,6 +71,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	ItemList.Columns.Add("Price"			, New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
 	ItemList.Columns.Add("Key"				, New TypeDescription("UUID"));
 	ItemList.Columns.Add("RowKey"			, New TypeDescription("String"));
+	ItemList.Columns.Add("RetailCustomer"   , New TypeDescription("CatalogRef.RetailCustomers"));
 	
 	TaxListMetadataColumns = Metadata.Documents.RetailReturnReceipt.TabularSections.TaxList.Attributes;
 	TaxList = New ValueTable();
@@ -91,6 +98,15 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	SerialLotNumbers.Columns.Add("Quantity"	       , SerialLotNumbersMetadataColumns.Quantity.Type);
 	SerialLotNumbers.Columns.Add("Ref"		       , New TypeDescription("DocumentRef.SalesReturnOrder"));
 	
+	PaymentsMetadataColumns = Metadata.Documents.RetailReturnReceipt.TabularSections.Payments.Attributes;
+	Payments = New ValueTable();
+	Payments.Columns.Add("PaymentType"	    , PaymentsMetadataColumns.PaymentType.Type);
+	Payments.Columns.Add("PaymentTerminal"  , PaymentsMetadataColumns.PaymentTerminal.Type);
+	Payments.Columns.Add("Account"	        , PaymentsMetadataColumns.Account.Type);
+	Payments.Columns.Add("Amount"		    , PaymentsMetadataColumns.Amount.Type);
+	Payments.Columns.Add("Percent"		    , PaymentsMetadataColumns.Percent.Type);
+	Payments.Columns.Add("Commission"		, PaymentsMetadataColumns.Commission.Type);
+	Payments.Columns.Add("BankTerm");
 	
 	For Each TableStructure In ArrayOfTables Do
 		For Each Row In TableStructure.ItemList Do
@@ -104,6 +120,9 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 		EndDo;
 		For Each Row In TableStructure.SerialLotNumbers Do
 			FillPropertyValues(SerialLotNumbers.Add(), Row);
+		EndDo;
+		For Each Row In TableStructure.Payments Do
+			FillPropertyValues(Payments.Add(), Row);
 		EndDo;		
 	EndDo;
 	
@@ -120,6 +139,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 		Result.Insert("TaxList"			 , New Array());
 		Result.Insert("SpecialOffers"	 , New Array());
 		Result.Insert("SerialLotNumbers" , New Array());
+		Result.Insert("Payments"         , New Array());
 		
 		Filter = New Structure(UnjoinFileds);
 		FillPropertyValues(Filter, Row);
@@ -179,6 +199,18 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 			EndDo;
 		EndDo;
 		
+		For Each RowPayments In Payments Do
+			NewRow = New Structure();
+			NewRow.Insert("PaymentType"     , RowPayments.PaymentType);
+			NewRow.Insert("PaymentTerminal" , RowPayments.PaymentTerminal);
+			NewRow.Insert("Account"         , RowPayments.Account);
+			NewRow.Insert("Amount"          , RowPayments.Amount);
+			NewRow.Insert("Percent"         , RowPayments.Percent);
+			NewRow.Insert("Commission"      , RowPayments.Commission);
+			NewRow.Insert("BankTerm"        , RowPayments.BankTerm);
+			Result.Payments.Add(NewRow);
+		EndDo;
+	
 		ArrayOfResults.Add(Result);
 	EndDo;
 	Return ArrayOfResults;
@@ -273,6 +305,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).PriceIncludeTax AS PriceIncludeTax,
 		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).Currency AS Currency,
 		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).Company AS Company,
+		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).RetailCustomer AS RetailCustomer,		
 		|	tmpQueryTable.Key,
 		|	tmpQueryTable.RowKey,
 		|	tmpQueryTable.Unit AS QuantityUnit,
@@ -337,7 +370,23 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|		AND tmpQueryTableFull.Key = SerialLotNumbers.Key
 		|		AND tmpQueryTableFull.SerialLotNumber = SerialLotNumbers.SerialLotNumber
 		|WHERE
-		|	tmpQueryTableFull.Quantity > 0";
+		|	tmpQueryTableFull.Quantity > 0
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Payments.Ref,
+		|	Payments.PaymentType,
+		|	Payments.PaymentTerminal,
+		|	Payments.Account,
+		|	Payments.Amount,
+		|	Payments.Percent,
+		|	Payments.Commission,
+		|	Payments.BankTerm
+		|FROM
+		|	Document.RetailSalesReceipt.Payments AS Payments
+		|		INNER JOIN tmpQueryTable AS tmpQueryTable
+		|		ON tmpQueryTable.RetailSalesReceipt = Payments.Ref";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
@@ -348,12 +397,14 @@ Function ExtractInfoFromOrderRows(QueryTable)
 	QueryTable_TaxList = QueryResults[3].Unload();
 	QueryTable_SpecialOffers = QueryResults[4].Unload();
 	QueryTable_SerialLotNumbers = QueryResults[5].Unload();
+	QueryTable_Payments = QueryResults[6].Unload();
 	
-	Return New Structure("ItemList, TaxList, SpecialOffers, SerialLotNumbers", 
+	Return New Structure("ItemList, TaxList, SpecialOffers, SerialLotNumbers, Payments", 
 	QueryTable_ItemList, 
 	QueryTable_TaxList, 
 	QueryTable_SpecialOffers,
-	QueryTable_SerialLotNumbers);
+	QueryTable_SerialLotNumbers,
+	QueryTable_Payments);
 EndFunction
 
 #Region Errors

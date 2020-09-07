@@ -24,7 +24,7 @@ EndProcedure
 
 Procedure Filling_BasedOnRetailSalesReceipt(FillingData)
 	FillPropertyValues(ThisObject, FillingData,
-		"Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
+		"Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer");
 	
 	For Each Row In FillingData.ItemList Do
 		NewRow = ThisObject.ItemList.Add();
@@ -40,6 +40,10 @@ Procedure Filling_BasedOnRetailSalesReceipt(FillingData)
 	EndDo;
 	For Each Row In FillingData.SerialLotNumbers Do
 		NewRow = ThisObject.SerialLotNumbers.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;	
+	For Each Row In FillingData.Payments Do
+		NewRow = ThisObject.Payments.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;	
 EndProcedure

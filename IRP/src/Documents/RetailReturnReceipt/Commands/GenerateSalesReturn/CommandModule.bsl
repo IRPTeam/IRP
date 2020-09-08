@@ -272,7 +272,6 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|FROM
 		|	&QueryTable AS QueryTable
 		|;
-		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmpQueryTableFull.BasedOn,
@@ -293,7 +292,6 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	tmpQueryTableFull.RowKey,
 		|	tmpQueryTableFull.Unit
 		|;
-		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT ALLOWED
 		|	tmpQueryTable.BasedOn AS BasedOn,
@@ -305,7 +303,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).PriceIncludeTax AS PriceIncludeTax,
 		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).Currency AS Currency,
 		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).Company AS Company,
-		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).RetailCustomer AS RetailCustomer,		
+		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).RetailCustomer AS RetailCustomer,
 		|	tmpQueryTable.Key,
 		|	tmpQueryTable.RowKey,
 		|	tmpQueryTable.Unit AS QuantityUnit,
@@ -326,7 +324,6 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|ORDER BY
 		|	ItemList.LineNumber
 		|;
-		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	TaxList.Ref,
@@ -343,7 +340,6 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|		ON tmpQueryTable.RetailSalesReceipt = TaxList.Ref
 		|		AND tmpQueryTable.Key = TaxList.Key
 		|;
-		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	SpecialOffers.Ref,
@@ -356,7 +352,6 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|		ON tmpQueryTable.RetailSalesReceipt = SpecialOffers.Ref
 		|		AND tmpQueryTable.Key = SpecialOffers.Key
 		|;
-		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	SerialLotNumbers.Ref,
@@ -372,7 +367,6 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|WHERE
 		|	tmpQueryTableFull.Quantity > 0
 		|;
-		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	Payments.Ref,
@@ -385,8 +379,12 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	Payments.BankTerm
 		|FROM
 		|	Document.RetailSalesReceipt.Payments AS Payments
-		|		INNER JOIN tmpQueryTable AS tmpQueryTable
-		|		ON tmpQueryTable.RetailSalesReceipt = Payments.Ref";
+		|WHERE
+		|	Payments.Ref IN
+		|		(SELECT
+		|			tmpQueryTable.RetailSalesReceipt
+		|		FROM
+		|			tmpQueryTable AS tmpQueryTable)";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();

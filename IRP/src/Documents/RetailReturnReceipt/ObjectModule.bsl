@@ -24,7 +24,7 @@ EndProcedure
 
 Procedure Filling_BasedOnRetailSalesReceipt(FillingData)
 	FillPropertyValues(ThisObject, FillingData,
-		"Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
+		"Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer");
 	
 	For Each Row In FillingData.ItemList Do
 		NewRow = ThisObject.ItemList.Add();
@@ -42,6 +42,10 @@ Procedure Filling_BasedOnRetailSalesReceipt(FillingData)
 		NewRow = ThisObject.SerialLotNumbers.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;	
+	For Each Row In FillingData.Payments Do
+		NewRow = ThisObject.Payments.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;	
 EndProcedure
 
 Procedure OnCopy(CopiedObject)
@@ -49,6 +53,7 @@ Procedure OnCopy(CopiedObject)
 	LinkedTables.Add(SpecialOffers);
 	LinkedTables.Add(TaxList);
 	LinkedTables.Add(Currencies);
+	LinkedTables.Add(SerialLotNumbers);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);	
 EndProcedure
 

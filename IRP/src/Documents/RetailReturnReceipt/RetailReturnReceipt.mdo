@@ -974,7 +974,6 @@
     <commandParameterType>
       <types>DocumentRef.RetailSalesReceipt</types>
     </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
     <shortcut></shortcut>
   </commands>

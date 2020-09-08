@@ -260,6 +260,9 @@ Function Strings(Lang) Export
 	// %1 - 1 %2 - 2
 	Strings.Insert("Error_078", NStr("en = 'Quantity [%1] does not match the quantity [%2] by serial/lot numbers'", Lang));
 	
+	//%1 - 100.00 %2 - 120.00
+	Strings.Insert("Error_079", NStr("en = 'Payment amount [%1] and return amount [%2] not match'", Lang));
+	
 	#EndRegion
 	
 	#Region InfoMessages

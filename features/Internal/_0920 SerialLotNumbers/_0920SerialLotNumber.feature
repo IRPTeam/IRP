@@ -689,20 +689,21 @@ Scenario: _092005 check serial lot number in the Sales return
 	* Post Retail sales receipt and check movements in the register Sales turnovers
 		And I click "Post" button
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
+		And Delay 3
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'              | 'Company'      | 'Multi currency movement type' | 'Sales invoice'          | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount'  | 'Net amount' |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-1,000'   | '-400,00' | '-338,98'    |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-1,000'   | '-400,00' | '-338,98'    |
-		| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-1,000'   | '-68,49'  | '-58,04'     |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' | '-550,85'    |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' | '-550,85'    |
-		| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-111,30' | '-94,32'     |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' | '-593,22'    |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' | '-593,22'    |
-		| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '37/18SD'   | ''                  | '-1,000'   | '-119,86' | '-101,58'    |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-1,000'   | '-400,00' | '-338,98'    |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' | '-550,85'    |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' | '-593,22'    |
+		| 'Currency' | 'Recorder'              | 'Company'      | 'Multi currency movement type' | 'Sales invoice'          | 'Item key'  | 'Serial lot number' | 'Quantity' |
+		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-1,000'   |
+		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-1,000'   |
+		| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-1,000'   |
+		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   |
+		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   |
+		| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   |
+		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '37/18SD'   | ''                  | '-1,000'   |
+		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '37/18SD'   | ''                  | '-1,000'   |
+		| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '37/18SD'   | ''                  | '-1,000'   |
+		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-1,000'   |
+		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   |
+		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '37/18SD'   | ''                  | '-1,000'   |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$SalesReturn092005$$" window
 		And I click the button named "Add"
@@ -1063,6 +1064,7 @@ Scenario: _092010 uncheck checkbox Use serial lot number in the Item type
 		And I select current line in "List" table
 		Then the form attribute named "Parent" became equal to ""
 		Then the form attribute named "UseSerialLotNumber" became equal to "No"
+		And I close current window
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Shoes'     |

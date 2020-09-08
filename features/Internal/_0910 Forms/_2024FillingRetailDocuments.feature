@@ -307,9 +307,9 @@ Scenario: _0154135 create document Retail Sales Receipt
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '72,00'      | '1,000' | 'pcs'  | '400,00'     | '472,00'       | 'Store 01' |
-				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '126,00'     | '2,000' | 'pcs'  | '700,00'     | '826,00'       | 'Store 01' |
-				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '99,00'      | '1,000' | 'pcs'  | '550,00'     | '649,00'       | 'Store 01' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '61,02'      | '1,000' | 'pcs'  | '338,98'     | '400,00'       | 'Store 01' |
+				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '106,78'     | '2,000' | 'pcs'  | '593,22'     | '700,00'       | 'Store 01' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '83,90'      | '1,000' | 'pcs'  | '466,10'     | '550,00'       | 'Store 01' |
 			And Delay 4
 	* Check filling in prices and calculation of taxes when adding items through the goods selection form
 		* Add items via Pickup form
@@ -326,10 +326,10 @@ Scenario: _0154135 create document Retail Sales Receipt
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '72,00'      | '1,000' | 'pcs'  | '400,00'     | '472,00'       | 'Store 01' |
-				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '126,00'     | '2,000' | 'pcs'  | '700,00'     | '826,00'       | 'Store 01' |
-				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '99,00'      | '1,000' | 'pcs'  | '550,00'     | '649,00'       | 'Store 01' |
-				| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '93,60'      | '1,000' | 'pcs'  | '520,00'     | '613,60'       | 'Store 01' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '61,02'      | '1,000' | 'pcs'  | '338,98'     | '400,00'       | 'Store 01' |
+				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '106,78'     | '2,000' | 'pcs'  | '593,22'     | '700,00'       | 'Store 01' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '83,90'      | '1,000' | 'pcs'  | '466,10'     | '550,00'       | 'Store 01' |
+				| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '79,32'      | '1,000' | 'pcs'  | '440,68'     | '520,00'       | 'Store 01' |
 	* Check the line clearing in the tax tree when deleting a line from an order
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
@@ -467,6 +467,10 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 
 		Then the form attribute named "IsOpeningEntry" became equal to "No"
 		Then the form attribute named "Currency" became equal to "TRY"
+	* Check filling in Payments type from Retail sales receipt
+		And "Payments" table became equal
+			| 'Payment type' | 'Payment terminal'    | 'Account'      | 'Commission' | 'Amount'   | 'Percent' |
+			| 'Card 01'      | 'Payment terminal 01' | 'Transit Main' | '12,90'      | '1 290,00' | '1,00'    |
 	* Change quantity and post document
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
@@ -482,40 +486,6 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Retail sales receipt'          |
 		| '350,00' | 'Shirt' | '18%' | '38/Black' | '1,000' | '106,00'        | '35,69'      | 'pcs'  | '198,31'     | '234,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 		| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '137,00'        | '63,00'      | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
-	* Filling in payment tab
-			And I move to "Payments" tab
-			And in the table "Payments" I click "Add" button
-			And I click choice button of "Payment type" attribute in "Payments" table
-			Then "Payment types" window is opened
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Card'        |
-			And I select current line in "List" table
-			And I activate "Payment terminal" field in "Payments" table
-			And I click choice button of "Payment terminal" attribute in "Payments" table
-			Then "Payment terminals" window is opened
-			And I go to line in "List" table
-				| 'Description'         |
-				| 'Payment terminal 01' |
-			And I select current line in "List" table
-			And I activate "Account" field in "Payments" table
-			And I click choice button of "Account" attribute in "Payments" table
-			Then "Cash/Bank accounts" window is opened
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Transit Main' |
-			And I select current line in "List" table
-			And I activate "Amount" field in "Payments" table
-			And I input "647,00" text in "Amount" field of "Payments" table
-			And I finish line editing in "Payments" table
-			And I activate "Percent" field in "Payments" table
-			And I select current line in "Payments" table
-			And I input "1,00" text in "Percent" field of "Payments" table
-			And I finish line editing in "Payments" table
-			And I activate "Commission" field in "Payments" table
-			And I select current line in "Payments" table
-			And I input "6,47" text in "Commission" field of "Payments" table
-			And I finish line editing in "Payments" table
 	* Post Retail return receipt
 		And I click "Post" button
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt0154136$$"
@@ -611,7 +581,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		
 
 
-Scenario: _0154137 create document Retail Sales Receipt from Point of sale (payment by card)
+Scenario: _0154138 create document Retail Sales Receipt from Point of sale (payment by card)
 	And I close all client application windows
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
@@ -696,7 +666,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I close all client application windows
 
-Scenario: _0154138 check payments form in the Point of sale
+Scenario: _0154139 check payments form in the Point of sale
 		And I close all client application windows
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
@@ -1248,7 +1218,7 @@ Scenario: _0154138 check payments form in the Point of sale
 			And I close "Payment: Point of sale" window
 		And I close all client application windows
 		
-Scenario: _0154139 check filling in retail customer from the POS
+Scenario: _0154140 check filling in retail customer from the POS
 	And I close all client application windows
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
@@ -1282,4 +1252,58 @@ Scenario: _0154139 check filling in retail customer from the POS
 		Then the form attribute named "Store" became equal to "Store 01"
 		Then the form attribute named "RetailCustomer" became equal to "Olga Olhovska"
 	And I close all client application windows	
-			
+
+Scenario:  _0154141 manual price adjustment in the POS
+	And I close all client application windows
+	* Open Point of sale
+		And In the command interface I select "Retail" "Point of sale"
+	* Add product
+		And I click "Search by barcode (F7)" button
+		And I input "2202283739" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Quantity'  | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'L/Green'  | '1,000'     | '550,00' | ''              | '550,00'       |
+		And I click "Show items" button
+		And I go to line in "ItemsPickup" table
+			| 'Item'     |
+			| 'Trousers' |
+		And I activate field named "ItemsPickupItem" in "ItemsPickup" table
+		And I go to line in "ItemKeysPickup" table
+			| 'Presentation' |
+			| '38/Yellow' |
+		And I select current line in "ItemKeysPickup" table
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''              | '550,00'       |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''              | '400,00'       |
+	* Price adjustment
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''              | '400,00'       |
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Add one more items and check price filling
+		And I click "Search by barcode (F7)" button
+		And I input "2202283713" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''              | '550,00'       |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '200,00' | ''              | '200,00'       |
+			| 'Dress'    | 'S/Yellow'  | '1,000'    | '550,00' | ''              | '550,00'       |
+		And I go to line in "ItemsPickup" table
+			| 'Item'     |
+			| 'Trousers' |
+		And I activate field named "ItemsPickupItem" in "ItemsPickup" table
+		And I go to line in "ItemKeysPickup" table
+			| 'Presentation' |
+			| '36/Yellow' |
+		And I select current line in "ItemKeysPickup" table
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''              | '550,00'       |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '200,00' | ''              | '200,00'       |
+			| 'Dress'    | 'S/Yellow'  | '1,000'    | '550,00' | ''              | '550,00'       |
+			| 'Trousers' | '36/Yellow' | '1,000'    | '400,00' | ''              | '400,00'       |
+		And I close all client application windows

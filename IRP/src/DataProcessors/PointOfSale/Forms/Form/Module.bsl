@@ -143,6 +143,7 @@ EndProcedure
 &AtClient
 Procedure AddItemToItemList()
 	CurrentData = Items.ItemsPickup.CurrentData;
+	ItemListOnActivateRow(Items.ItemList);
 	AfterItemChoice(CurrentData.Item, True);
 	ItemListOnStartEdit(Items.ItemList, True, False);
 	ItemListOnChange(Items.ItemList);
@@ -203,11 +204,34 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, , ThisObject.CurrentPriceType);
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, CurrentPriceType);
+EndProcedure
+
+&AtClient
+Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
+	If AdditionalParameters.FoundedItems.Count() Then
+		NotifyParameters = New Structure();
+		NotifyParameters.Insert("Form", ThisObject);
+		NotifyParameters.Insert("Object", Object);
+		Items.DetailedInformation.document.getElementById("text").innerHTML = "";
+		DocumentsClient.PickupItemsEnd(AdditionalParameters.FoundedItems, NotifyParameters)
+	Else
+		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(AdditionalParameters.Barcodes, ",")) + "</span>";
+		Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
+	EndIf;
 EndProcedure
 
 &AtClient
 Procedure qPayment(Command)
+	
+	Object.Date = CurrentDate();
+	
+	If Not CheckFilling() Then
+		Cancel = True;
+		Return;
+	EndIf;
+	
+	
 	Cancel = False;
 	DPPointOfSaleClient.BeforePayment(ThisObject, Cancel);
 	
@@ -377,7 +401,7 @@ Procedure PaymentFormClose(Result, AdditionalData) Export
 	
 	
 	CashbackAmount = WriteTransaction(Result);
-	DetailedInformation = "Cashback: " + Format(CashbackAmount, "NFD=2; NZ=0;");
+	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
 	Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
 
 	NewTransaction();

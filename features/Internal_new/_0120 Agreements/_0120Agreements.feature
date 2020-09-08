@@ -150,6 +150,7 @@ Scenario: _012004 create common Partner term
 		When Create catalog Stores objects
 		When Create catalog PartnerSegments objects
 		When Create catalog PriceTypes objects
+		When Create chart of characteristic types CurrencyMovementType objects
 	* Opening an Partner term catalog
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Creating and checking customer Partner term Basic Partner terms, TRY
@@ -165,7 +166,7 @@ Scenario: _012004 create common Partner term
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Type'      |
+			| 'Description' | 'Type'      |
 			| 'TRY'      | 'Partner term' |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
@@ -207,7 +208,7 @@ Scenario: _012004 create common Partner term
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Type'      |
+			| 'Description' | 'Type'      |
 			| 'USD'      | 'Partner term' |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
@@ -249,7 +250,7 @@ Scenario: _012004 create common Partner term
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Type'      |
+			| 'Description' | 'Type'      |
 			| 'TRY'      | 'Partner term' |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
@@ -295,7 +296,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Type'      |
+			| 'Description' | 'Type'      |
 			| 'USD'      | 'Partner term' |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
@@ -339,7 +340,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Type'      |
+			| 'Description' | 'Type'      |
 			| 'TRY'      | 'Partner term' |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
@@ -374,7 +375,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Type'      |
+			| 'Description' | 'Type'      |
 			| 'USD'      | 'Partner term' |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
@@ -401,6 +402,8 @@ Scenario: _012005 creation of an individual Partner term in USD
 	
 
 Scenario: _012007 create common Partner term with Item Segment
+	* Preparation
+		When Create catalog ItemSegments objects
 	* Opening an Partner term catalog
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Creating common Partner term with Item Segment
@@ -416,7 +419,7 @@ Scenario: _012007 create common Partner term with Item Segment
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Type'      |
+			| 'Description' | 'Type'      |
 			| 'EUR'      | 'Partner term' |
 		And I select current line in "List" table
 		And I click Select button of "Price type" field
@@ -504,7 +507,7 @@ Scenario: _012011 create Partner term without price type (negative test)
 		And I select current line in "List" table
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
-			| 'Currency' | 'Type'      |
+			| 'Description' | 'Type'      |
 			| 'TRY'      | 'Partner term' |
 		And I select current line in "List" table
 		And I click Select button of "Partner segment" field

@@ -20,6 +20,7 @@ Scenario: _016001 base price fill (incl. VAT)
 		Then Create catalog ItemTypes objects
 		Then Create catalog Items objects
 		Then Create catalog ItemKeys objects
+			When Create catalog ItemKeys objects
 	* Opening  price list
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I click the button named "FormCreate"

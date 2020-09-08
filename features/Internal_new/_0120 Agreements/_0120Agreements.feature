@@ -148,7 +148,6 @@ Scenario: _012004 create common Partner term
 	* Preparation
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
-		When Create catalog PartnerSegments objects
 		When Create catalog PriceTypes objects
 		When Create chart of characteristic types CurrencyMovementType objects
 	* Opening an Partner term catalog

@@ -17,7 +17,7 @@ Background:
 
 Scenario: _016001 base price fill (incl. VAT)
 	* Preparation
-		Then Create catalog ItemTypes objects
+		When Create catalog ItemTypes objects
 		Then Create catalog Items objects
 		Then Create catalog ItemKeys objects
 			When Create catalog ItemKeys objects

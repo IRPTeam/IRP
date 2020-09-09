@@ -3,6 +3,7 @@
 @Positive
 @Test
 @OtherForms
+@Group1
 
 Feature: basic check registers, reports, constants
 As an QA

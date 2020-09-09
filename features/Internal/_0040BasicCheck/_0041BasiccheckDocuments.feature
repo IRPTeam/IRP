@@ -3,6 +3,7 @@
 @Positive
 @Test
 @DocumentForms
+@Group1
 
 Feature: basic check documents
 As an QA

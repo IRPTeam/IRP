@@ -1974,13 +1974,13 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And I click the button named "FormCreate"
 	* Filling test command data for Dedit Note
-		* Create metadata for CreditNote and select it for the command
+		* Create metadata for DeditNote and select it for the command
 			And I click Select button of "Configuration metadata" field
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Documents'   |
 			And I click the button named "FormCreate"
-			And I input "DeditNote" text in "Description" field
+			And I input "DebitNote" text in "Description" field
 			And I click Select button of "Parent" field
 			And I go to line in "List" table
 				| 'Description' |
@@ -1989,7 +1989,7 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 			And I click "Save and close" button
 			And I go to line in "List" table
 				| 'Description' |
-				| 'DeditNote'  |
+				| 'DebitNote'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -2004,7 +2004,7 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'DeditNote'                | 'Test command'       |
+		| 'DebitNote'                | 'Test command'       |
 	* Check the command from the document list DebitNote
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I go to the last line in "List" table
@@ -2025,7 +2025,7 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'DeditNote' |
+				| 'DebitNote' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2050,7 +2050,7 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'DeditNote' |
+				| 'DebitNote' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table

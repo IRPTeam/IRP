@@ -3,6 +3,7 @@
 @Positive
 @Test
 @CatalogForms
+@Group1
 
 Feature: basic check catalogs
 

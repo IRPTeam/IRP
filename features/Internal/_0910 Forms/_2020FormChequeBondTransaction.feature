@@ -521,7 +521,7 @@ Scenario: _2020012 check input of cheque statuses by line
 		And I close all client application windows
 
 Scenario: _2020013 check the selection of documents for distribution of the amount of the cheque issued to the vendor
-	* Check for sales invoice 3000
+	* Check for Purchase invoice 1
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And "List" table contains lines
 		| 'Number'          |
@@ -572,7 +572,7 @@ Scenario: _2020013 check the selection of documents for distribution of the amou
 		And I select current line in "List" table
 	* Filling in the distribution document
 		And in the table "PaymentList" I click "Fill" button
-		Then 'Select base documents in "Cheque bond transaction" document' window is opened
+		Then 'Select base documents in the "Cheque bond transaction" document.' window is opened
 		And I go to line in "DocumentsList" table
 			| 'Currency' | 'Document amount' |
 			| 'TRY'      | '137 000'         |

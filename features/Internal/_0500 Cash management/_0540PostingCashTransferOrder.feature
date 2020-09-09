@@ -540,8 +540,10 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 			And I input "7" text in "Number" field
 		And I click "Post and close" button
 		And I close all client application windows
+		And Delay 5
 	* Create Cash reciept based on Cash transfer order in partial amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+		And Delay 2
 		And I go to line in "List" table
 			| Number | Receive amount |
 			| '5'      | '175,00'         |

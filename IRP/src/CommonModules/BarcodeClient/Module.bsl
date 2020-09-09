@@ -32,9 +32,13 @@ Function ProcessBarcodes(Barcodes, Parameters)
 		AddInfo.Delete("ClientModule");
 	EndIf;	
 	FoundedItems = BarcodeServer.SearchByBarcodes(Barcodes, AddInfo);
+	
+	Parameters.Insert("FoundedItems", FoundedItems);
+	Parameters.Insert("Barcodes", Barcodes);
+
+	NotifyDescription = New NotifyDescription("SearchByBarcodeEnd", Parameters.ClientModule, Parameters);
+	ExecuteNotifyProcessing(NotifyDescription);
 	If FoundedItems.Count() Then
-		ClientModule = Parameters.ClientModule;
-		ClientModule.SearchByBarcodeEnd(FoundedItems, Parameters);		
 		ReturnResult = True;
 	EndIf;	
 	Return ReturnResult;

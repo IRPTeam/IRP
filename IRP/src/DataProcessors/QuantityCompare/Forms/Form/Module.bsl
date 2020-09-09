@@ -48,9 +48,9 @@ Procedure SearchByBarcode(Command, Barcode = "")
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcodeEnd(BarcodeItems, Parameters) Export
-	AddItemToPhysItemList(BarcodeItems);
-	AddItemToCompareItemList(BarcodeItems);
+Procedure SearchByBarcodeEnd(Result, Parameters) Export
+	AddItemToPhysItemList(Parameters.FoundedItems);
+	AddItemToCompareItemList(Parameters.FoundedItems);
 EndProcedure
 
 &AtClient

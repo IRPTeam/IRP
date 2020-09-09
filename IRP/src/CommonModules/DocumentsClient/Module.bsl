@@ -1278,9 +1278,13 @@ Procedure SearchByBarcode(Barcode, Object, Form, DocumentClientModule = Undefine
   BarcodeClient.SearchByBarcode(Barcode, Object, Form, ClientModule, TransferParameters);
 EndProcedure
 
-Procedure SearchByBarcodeEnd(BarcodeItems, Parameters) Export
-	DocumentModule = Parameters.ClientModule;
-	DocumentModule.PickupItemsEnd(BarcodeItems, Parameters);
+Procedure SearchByBarcodeEnd(Result, Parameters) Export
+	If Parameters.FoundedItems.Count() Then
+		DocumentModule = Parameters.ClientModule;
+		DocumentModule.PickupItemsEnd(Parameters.FoundedItems, Parameters);
+	Else
+	    CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, StrConcat(Parameters.Barcodes, ",")));
+	EndIf;
 EndProcedure
 
 #EndRegion

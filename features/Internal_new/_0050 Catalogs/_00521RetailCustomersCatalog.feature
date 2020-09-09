@@ -28,11 +28,11 @@ Scenario: _005048 filling in the "Retail customers" catalog
 		And I input "Description Retail customer" text in the field named "Description"
 		And I input "Name Retail customer" text in the field named "Name"
 		And I input "Surname Retail customer" text in the field named "Surname"
-		And I input "001" text in the field named "Code"
+		And I input "002" text in the field named "Code"
 		And I click "Save and close" button
 		And Delay 2
 	* Check for created  Tax additional analytics
 		And "List" table contains lines
 		| 'Description'                                  | 'Code' | 'Name'                 | 'Surname'                 |
-		| 'Name Retail customer Surname Retail customer' | '001'  | 'Name Retail customer' | 'Surname Retail customer' |
+		| 'Name Retail customer Surname Retail customer' | '002'  | 'Name Retail customer' | 'Surname Retail customer' |
 		And I close all client application windows

@@ -20,6 +20,8 @@ Background:
    
 
 Scenario: _010004 create Contact info Type - Addresses
+	* Preparation
+		When Create catalog Countries objects
 	* Add Plugin sessing for entering addresses
 		* Opening a form to add Plugin sessing
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -538,7 +540,91 @@ Scenario: _010011 adding gps to a Contact info type
 		| 'GPS Turkey'    |
 
 
-Scenario: _010012 settings for displaying contact information in Stores, Partners, Company
+
+Scenario: _010012 adding additional details for partners "Business region"
+	* Preparation
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Partners objects (Ferron BP)
+	* Opening a form for adding additional attributes for partners
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data item name |
+			| Catalog_Partners          |
+		And I select current line in "List" table
+	* Filling in the name of the settings for adding additional details for partners
+		And I click Open button of the field named "Description_en"
+		And I input "Partners" text in the field named "Description_en"
+		And I input "Partners TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+	* Adding additional attribute Business region
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Business region" text in the field named "Description_en"
+		And I input "Business region TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I input "BusinessRegion" text in "Unique ID" field
+		And I click "Save and close" button
+		And Delay 5
+		And I click the button named "FormChoose"
+	* Create an UI group for additional attribute
+		And I activate "UI group" field in "Attributes" table
+		And I click choice button of "UI group" attribute in "Attributes" table
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Main information" text in the field named "Description_en"
+		And I input "Main information TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I change "Form position" radio button value to "Left"
+		And I click "Save and close" button
+		And Delay 5
+		And I click the button named "FormChoose"
+		And I finish line editing in "Attributes" table
+		And I click "Save and close" button
+		And Delay 5
+		And I close all client application windows
+	* Filling in the created additional attribute for partners
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
+			| Description |
+			| Ferron BP   |
+		And I select current line in "List" table
+		And I click Select button of "Business region" field
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Region Turkey" text in the field named "Description_en"
+		And I input "Turkey TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Region Ukraine" text in the field named "Description_en"
+		And I input "Ukraine TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 5
+		And I go to line in "List" table
+			| Description |
+			| Region Ukraine     |
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+		And Delay 2
+		And I go to line in "List" table
+			| Description |
+			| Kalipso   |
+		And I select current line in "List" table
+		And I click Select button of "Business region" field
+		And I go to line in "List" table
+			| Description |
+			| Region Turkey     |
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+
+
+
+Scenario: _010013 settings for displaying contact information in Stores, Partners, Company
 	And I close all client application windows
 	* Complete settings to display contact information for Partners
 		Given I open hyperlink "e1cib/list/Catalog.IDInfoSets"
@@ -686,7 +772,9 @@ Scenario: _010012 settings for displaying contact information in Stores, Partner
 		And I wait "en description is empty (Contact info sets) *" window closing in 20 seconds
 		
 
-Scenario: _010013 filling phones for partners
+Scenario: _010014 filling phones for partners
+	* Preparation
+		When Create catalog Partners objects (Ferron BP)
 	* Opening a partner catalog form
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Filling a phone for partner Ferron BP
@@ -700,60 +788,13 @@ Scenario: _010013 filling phones for partners
 		And I input "+305500077043" text in "Phone" field
 		And I click "Ok" button
 		And I click "Save and close" button
-	* Filling a phone for partner Kalipso
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
-		And I select current line in "List" table
-		And I move to "Contact information" tab
-		And I click Open button of "Partner phone" field
-		And I input "+305300040042" text in "Phone" field
-		And I click "Ok" button
-		And I click "Save and close" button
-	* Filling a phone for partner Lomaniti
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Lomaniti' |
-		And I select current line in "List" table
-		And I move to "Contact information" tab
-		And I click Open button of "Partner phone" field
-		And I input "+30560105055" text in "Phone" field
-		And I click "Ok" button
-		And I click "Save and close" button
-	* Filling a phone for partner Alians
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Alians' |
-		And I select current line in "List" table
-		And I move to "Contact information" tab
-		And I click Open button of "Partner phone" field
-		And I input "+30920107011" text in "Phone" field
-		And I click "Ok" button
-		And I click "Save and close" button
-	* Filling a phone for partner Seven Brand
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Seven Brand' |
-		And I select current line in "List" table
-		And I move to "Contact information" tab
-		And I click Open button of "Partner phone" field
-		And I input "+30420209012" text in "Phone" field
-		And I click "Ok" button
-		And I click "Save and close" button
-	* Filling a phone for partner MIO
-		And I go to line in "List" table
-			| 'Description' |
-			| 'MIO' |
-		And I select current line in "List" table
-		And I move to "Contact information" tab
-		And I click Open button of "Partner phone" field
-		And I input "+30330309077" text in "Phone" field
-		And I click "Ok" button
-		And I click "Save and close" button
+	
+	
 
 
-
-Scenario: _010014 partner address filling
+Scenario: _010015 partner address filling
+	* Preparation
+		When Create catalog Partners objects (Kalipso)
 	* Opening a partner catalog form
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Filling address partner Kalipso
@@ -765,22 +806,26 @@ Scenario: _010014 partner address filling
 	* Check the display of contact information
 		And the field named "_Adr_1" exists on the form
 		And the field named "_Adr_10" exists on the form
-		And the field named "_GPS" exists on the form
+		And the field named "_GPSTurkey" exists on the form
 		And the field named "_Phone_2" exists on the form
 	* Address Filling
-		And I input "Odessa, Bunina, 2, №32" text in "Location address (Partner)" field
+		And I input "Park sok, 15, Yenikapi, Antalya, Turkey" text in "Location address (Partner)" field
 	* Check address display
-		Then the form attribute named "_Adr_1" became equal to "Odessa, Bunina, 2, №32"
+		Then the form attribute named "_Adr_1" became equal to "Park sok, 15, Yenikapi, Antalya, Turkey"
 		And I click "Save and close" button
 		And Delay 5
 	
-Scenario: _010015 address structure input
+
+
+Scenario: _010016 address structure input
+	* Preparation
+		When Create catalog Companies objects (partners company Almo, Sovelie)
 	* Opening a company catalog form
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 	* Filling in address structure for companies
 		And I go to line in "List" table
 			| Description       |
-			| Company Ferron BP |
+			| Company Almo |
 		And I select current line in "List" table
 		And I move to "Contact information" tab
 		And I click Open button of "Billing address (Company)" field
@@ -805,7 +850,7 @@ Scenario: _010015 address structure input
 	* Check to save the address structure for Billing address (Company)
 		And I go to line in "List" table
 		| Description     |
-		| Company Kalipso |
+		| Company Sovelie |
 		And I select current line in "List" table
 		And I move to "Contact information" tab
 		And I click Open button of "Billing address (Company)" field
@@ -830,15 +875,17 @@ Scenario: _010015 address structure input
 		And I click "Save and close" button
 
 
-Scenario: _010016 gps coordinates on the map for clients from different countries and filling in the address from Google map
+Scenario: _010017 gps coordinates on the map for clients from different countries and filling in the address from Google map
 	* Opening the catalog Partners
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
-	* Filling in gps coordinates for Kalipso client by searching for the address on the map (Ukraine)
+	* Filling in gps coordinates for Ferron BP client by searching for the address on the map (Ukraine)
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Kalipso' |
+			| 'Ferron BP' |
 		And I select current line in "List" table
 		And I move to "Contact information" tab
+		And I input "Odessa, Bunina, 2, №32" text in "Location address (Partner)" field
+		And I click "Save" button
 		And I click Open button of "GPS Ukraine" field
 		And Delay 5
 		And I click "Update address by GPS" button
@@ -850,15 +897,13 @@ Scenario: _010016 gps coordinates on the map for clients from different countrie
 		And the field named "_Adr_10" is filled
 		And I click "Save and close" button
 		And I close all client application windows
-	* Filling in gps coordinates for Alians client by searching for the address on the map (Ukraine)
+	* Filling in gps coordinates for Kalipso client by searching for the address on the map (Turkey)
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Alians' |
+			| 'Kalipso' |
 		And I select current line in "List" table
 		And I move to "Contact information" tab
-		And I input "Park sok, 15, Yenikapi, Antalya, Turkey" text in "Location address (Partner)" field
-		And I click "Save" button
 		And I click Open button of "GPS Turkey" field
 		And I click "Update address by GPS" button
 		And Delay 10

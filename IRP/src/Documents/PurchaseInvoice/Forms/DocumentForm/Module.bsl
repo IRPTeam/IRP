@@ -17,6 +17,8 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocPurchaseInvoiceClient.OnOpen(Object, ThisObject, Cancel);
+	SetLockedRowsByGoodsReceipts();
+	UpdateGoodsReceiptsTree();
 EndProcedure
 
 &AtClient
@@ -55,7 +57,8 @@ EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
-	Return;
+	SetLockedRowsByGoodsReceipts();
+	UpdateGoodsReceiptsTree();	
 EndProcedure
 
 &AtServer
@@ -135,8 +138,10 @@ EndProcedure
 #Region ItemListEvents
 
 &AtClient
-Procedure ItemListBeforeDeleteRow(Item, Cancel)
+Procedure ItemListAfterDeleteRow(Item)
 	DocPurchaseInvoiceClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	ClearGoodsReceiptsTable();
+	UpdateGoodsReceiptsTree();
 EndProcedure
 
 &AtClient
@@ -174,6 +179,7 @@ EndProcedure
 &AtClient
 Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
 	DocPurchaseInvoiceClient.ItemListUnitOnChange(Object, ThisObject, Item);
+	UpdateGoodsReceiptsTree();
 EndProcedure
 
 &AtClient
@@ -189,6 +195,7 @@ EndProcedure
 &AtClient
 Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
 	DocPurchaseInvoiceClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+	UpdateGoodsReceiptsTree();
 EndProcedure
 
 &AtClient
@@ -434,13 +441,13 @@ EndProcedure
 Procedure SelectGoodsReceipt(Command)
 	CommandParameters = New Structure("Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
 	FillPropertyValues(CommandParameters, Object);
-	ExistingShipArray = New Array();
-	For Each Row In Object.ItemList Do
-		If ExistingShipArray.Find(Row.GoodsReceipt) = Undefined Then
-			ExistingShipArray.Add(Row.GoodsReceipt);
+	AlreadySelectedGoodsReceipts = New Array();
+	For Each Row In Object.GoodsReceipts Do
+		If AlreadySelectedGoodsReceipts.Find(Row.GoodsReceipt) = Undefined Then
+			AlreadySelectedGoodsReceipts.Add(Row.GoodsReceipt);
 		EndIf;
 	EndDo;
-	CommandParameters.Insert("ExistingShipArray", ExistingShipArray);
+	CommandParameters.Insert("AlreadySelectedGoodsReceipts", AlreadySelectedGoodsReceipts);
 	InfoGoodsReceipt = DocPurchaseInvoiceServer.GetInfoGoodsReceiptBeforePurchaseInvoice(CommandParameters);
 	
 	FormParameters = New Structure("InfoGoodsReceipt", InfoGoodsReceipt.Tree);
@@ -462,14 +469,21 @@ Procedure SelectGoodsReceiptContinue(Result, AdditionalParameters) Export
 		If Result.Find(Row.GoodsReceipt) <> Undefined Then
 			ArrayOfBasisDocuments.Add(Row);
 		EndIf;
-	EndDo;
+	EndDo;	
 	SelectGoodsReceiptFinish(ArrayOfBasisDocuments);
-	DocSalesInvoiceClient.ItemListOnChange(Object, ThisObject, Items.ItemList);
+	Taxes_CreateTaxTree();
+	TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
+	Taxes_CreateFormControls();
+	SetLockedRowsByGoodsReceipts();
+	UpdateGoodsReceiptsTree();	
 EndProcedure
 
 &AtServer
 Procedure SelectGoodsReceiptFinish(ArrayOfBasisDocuments)
 	DocPurchaseInvoiceServer.FillDocumentWithGoodsReceiptArray(Object, ThisObject, ArrayOfBasisDocuments);
+	For Each Row In Object.ItemList Do
+		Row.Item = Row.ItemKey.Item;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -729,4 +743,129 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
+#EndRegion
+
+#Region GoodsReceiptsTree
+
+&AtClient
+Procedure SetLockedRowsByGoodsReceipts()
+	If Not Object.GoodsReceipts.Count() Then
+		Return;
+	EndIf;
+	
+	For Each Row In Object.ItemList Do
+		Row.LockedRow = Object.GoodsReceipts.FindRows(New Structure("Key", Row.Key)).Count() > 0;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure ClearGoodsReceiptsTable()
+	If Not Object.GoodsReceipts.Count() Then
+		Return;
+	EndIf;
+	
+	ArrayOfRows = New Array();
+	For Each Row In Object.GoodsReceipts Do
+		If Not Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
+			ArrayOfRows.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each Row In ArrayOfRows Do
+		Object.GoodsReceipts.Delete(Row);
+	EndDo;
+EndProcedure	
+
+&AtClient
+Procedure UpdateGoodsReceiptsTree()
+	ThisObject.GoodsReceiptsTree.GetItems().Clear();
+	
+	If Not Object.GoodsReceipts.Count() Then
+		Return;
+	EndIf;
+	
+	ArrayOfRows = New Array();
+	For Each Row In Object.ItemList Do
+		NewRow = New Structure();
+		NewRow.Insert("Key"         , Row.Key);
+		NewRow.Insert("Item"        , Row.Item);
+		NewRow.Insert("ItemKey"     , Row.ItemKey);
+		NewRow.Insert("QuantityUnit", Row.Unit);
+		NewRow.Insert("Unit"        );
+		NewRow.Insert("Quantity"    , Row.Quantity);
+		ArrayOfRows.Add(NewRow);
+	EndDo;
+	RecalculateInvoiceQuantity(ArrayOfRows);
+
+	For Each Row In ArrayOfRows Do
+		ArrayOfGoodsReceipts = Object.GoodsReceipts.FindRows(New Structure("Key", Row.Key));
+		
+		If Not ArrayOfGoodsReceipts.Count() Then
+			Continue;
+		EndIf;
+		
+		NewRow0 = ThisObject.GoodsReceiptsTree.GetItems().Add();
+		NewRow0.Level             = 1;
+		NewRow0.Key               = Row.Key;
+		NewRow0.Item              = Row.Item;
+		NewRow0.ItemKey           = Row.ItemKey;
+		NewRow0.QuantityInInvoice = Row.Quantity;
+		
+		For Each ItemOfArray In ArrayOfGoodsReceipts Do
+			NewRow1 = NewRow0.GetItems().Add();
+			NewRow1.Level                  = 2;
+			NewRow1.Key                    = ItemOfArray.Key;
+			NewRow1.GoodsReceipt           = ItemOfArray.GoodsReceipt;
+			NewRow1.Quantity               = ItemOfArray.Quantity;
+			NewRow1.QuantityInGoodsReceipt = ItemOfArray.QuantityInGoodsReceipt;
+			NewRow1.PictureEdit            = True;
+			NewRow0.Quantity               = NewRow0.Quantity + ItemOfArray.Quantity;
+			NewRow0.QuantityInGoodsReceipt = NewRow0.QuantityInGoodsReceipt + ItemOfArray.QuantityInGoodsReceipt;
+		EndDo;
+	EndDo;
+	
+	For Each ItemTreeRows In ThisObject.GoodsReceiptsTree.GetItems() Do
+		ThisObject.Items.GoodsReceiptsTree.Expand(ItemTreeRows.GetID());
+	EndDo;	
+EndProcedure
+
+&AtServerNoContext
+Procedure RecalculateInvoiceQuantity(ArrayOfRows)
+	For Each Row In ArrayOfRows Do
+		Row.Unit = ?(ValueIsFilled(Row.ItemKey.Unit), 
+		Row.ItemKey.Unit, Row.ItemKey.Item.Unit);
+		DocumentsServer.RecalculateQuantityInRow(Row);
+	EndDo;
+EndProcedure	
+
+&AtClient
+Procedure GoodsReceiptsTreeQuantityOnChange(Item)
+	CurrentRow = Items.GoodsReceiptsTree.CurrentData;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	RowParent = CurrentRow.GetParent();
+	TotalQuantity = 0;
+	For Each Row In RowParent.GetItems() Do
+		TotalQuantity = TotalQuantity + Row.Quantity;
+	EndDo;
+	RowParent.Quantity = TotalQuantity;
+	ArrayOfRows = Object.GoodsReceipts.FindRows(
+	New Structure("Key, GoodsReceipt", CurrentRow.Key, CurrentRow.GoodsReceipt));
+	For Each Row In ArrayOfRows Do
+		Row.Quantity = CurrentRow.Quantity;
+	EndDo;
+EndProcedure
+	
+&AtClient
+Procedure GoodsReceiptsTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure GoodsReceiptsTreeBeforeDeleteRow(Item, Cancel)
+	Cancel = True;
+EndProcedure
+
+	
 #EndRegion

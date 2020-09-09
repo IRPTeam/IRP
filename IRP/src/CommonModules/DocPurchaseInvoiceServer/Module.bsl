@@ -108,7 +108,7 @@ Function GetInfoGoodsReceiptBeforePurchaseInvoice(Parameters) Export
 		|			order
 		|		from
 		|			tmp)
-		|		AND NOT GoodsReceipt IN (&ExistingShipArray)) AS ReceiptOrdersBalance
+		|		AND NOT GoodsReceipt IN (&AlreadySelectedGoodsReceipts)) AS ReceiptOrdersBalance
 		|WHERE
 		|	ReceiptOrdersBalance.QuantityBalance > 0
 		|TOTALS
@@ -122,7 +122,7 @@ Function GetInfoGoodsReceiptBeforePurchaseInvoice(Parameters) Export
 	Query.SetParameter("Currency", Parameters.Currency);
 	Query.SetParameter("PriceIncludeTax", Parameters.PriceIncludeTax);
 	
-	Query.SetParameter("ExistingShipArray", Parameters.ExistingShipArray);
+	Query.SetParameter("AlreadySelectedGoodsReceipts", Parameters.AlreadySelectedGoodsReceipts);
 	
 	QueryResult = Query.Execute();
 	Return DocPurchaseInvoiceServer.GetInfoGoodsReceiptBeforeSalesInvoiceFromQueryResult(QueryResult);
@@ -186,31 +186,47 @@ Function GetInfoGoodsReceiptBeforeSalesInvoiceFromQueryResult(QueryResult) Expor
 		, InfoGoodsReceiptOrders);
 EndFunction
 
+Function CreateTable_GoodsReceipts()
+	ColumnsMetadata = Metadata.Documents.PurchaseInvoice.TabularSections.GoodsReceipts.Attributes;
+	GoodsReceiptsTable = New ValueTable();
+	GoodsReceiptsTable.Columns.Add("Key", ColumnsMetadata.Key.Type);
+	GoodsReceiptsTable.Columns.Add("GoodsReceipt", ColumnsMetadata.GoodsReceipt.Type);
+	GoodsReceiptsTable.Columns.Add("Quantity", ColumnsMetadata.Quantity.Type);
+	GoodsReceiptsTable.Columns.Add("Ref" , New TypeDescription("DocumentRef.PurchaseOrder"));
+	Return GoodsReceiptsTable;
+EndFunction
+
 Procedure FillDocumentWithGoodsReceiptArray(Object, Form, ArrayOfBasisDocuments) Export
 	ValueTable = New ValueTable();
-	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.PurchaseOrder"));
-	
-	ValueTable.Columns.Add("GoodsReceipt"
-		, New TypeDescription(Metadata.AccumulationRegisters.ReceiptOrders.Dimensions.GoodsReceipt.Type));
-	
+	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.PurchaseOrder"));	
 	ValueTable.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
 	ValueTable.Columns.Add("Quantity", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
 	ValueTable.Columns.Add("RowKey", Metadata.AccumulationRegisters.ReceiptOrders.Dimensions.RowKey.Type);
 	
-	For Each Row In ArrayOfBasisDocuments Do
+	GoodsReceiptsTable = CreateTable_GoodsReceipts();
+	
+	For Each Row In ArrayOfBasisDocuments Do		
 		NewRow = ValueTable.Add();
 		NewRow.Order = Row.Order;
-		NewRow.GoodsReceipt = Row.GoodsReceipt;
 		NewRow.ItemKey = Row.ItemKey;
 		NewRow.RowKey = Row.RowKey;
 		NewRow.Quantity = Row.Quantity;
+		
+		NewRow = GoodsReceiptsTable.Add();
+		NewRow.Ref = Row.Order;
+		NewRow.GoodsReceipt = Row.GoodsReceipt;
+		NewRow.Key = New UUID(Row.RowKey);
+		NewRow.Quantity = Row.Quantity;
 	EndDo;
+	
+	ValueTable.GroupBy("Order, ItemKey, RowKey", "Quantity");
+	GoodsReceiptsTable.GroupBy("GoodsReceipt, Key, Ref", "Quantity");
+	
 	
 	Query = New Query();
 	Query.Text =
 		"SELECT
 		|	ValueTable.Order AS Order,
-		|	ValueTable.GoodsReceipt AS GoodsReceipt,
 		|	ValueTable.ItemKey AS ItemKey,
 		|	ValueTable.RowKey AS RowKey,
 		|	ValueTable.Quantity AS Quantity
@@ -230,7 +246,6 @@ Procedure FillDocumentWithGoodsReceiptArray(Object, Form, ArrayOfBasisDocuments)
 		|	END AS Unit,
 		|	OrderBalanceBalance.Store,
 		|	tmp.Quantity,
-		|	tmp.GoodsReceipt,
 		|	OrderBalanceBalance.RowKey
 		|FROM
 		|	AccumulationRegister.OrderBalance.Balance(, (Order, ItemKey, RowKey) IN
@@ -260,9 +275,9 @@ Procedure FillDocumentWithGoodsReceiptArray(Object, Form, ArrayOfBasisDocuments)
 		"SELECT
 		|	QueryTable.Store,
 		|	QueryTable.PurchaseOrder,
-		|	QueryTable.GoodsReceipt,
 		|	QueryTable.ItemKey,
 		|	QueryTable.Key,
+		|	QueryTable.RowKey,
 		|	QueryTable.Unit,
 		|	QueryTable.Quantity
 		|INTO tmpQueryTable
@@ -270,70 +285,192 @@ Procedure FillDocumentWithGoodsReceiptArray(Object, Form, ArrayOfBasisDocuments)
 		|	&QueryTable AS QueryTable
 		|;
 		|
+		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT ALLOWED
 		|	tmpQueryTable.ItemKey AS ItemKey,
-		|	tmpQueryTable.ItemKey.Item AS Item,
 		|	tmpQueryTable.Store AS Store,
 		|	tmpQueryTable.PurchaseOrder AS PurchaseOrder,
+		|	CAST(tmpQueryTable.PurchaseOrder AS Document.PurchaseOrder).Partner AS Partner,
+		|	CAST(tmpQueryTable.PurchaseOrder AS Document.PurchaseOrder).LegalName AS LegalName,
+		|	CAST(tmpQueryTable.PurchaseOrder AS Document.PurchaseOrder).Agreement AS Agreement,
+		|	CAST(tmpQueryTable.PurchaseOrder AS Document.PurchaseOrder).PriceIncludeTax AS PriceIncludeTax,
+		|	CAST(tmpQueryTable.PurchaseOrder AS Document.PurchaseOrder).Currency AS Currency,
+		|	CAST(tmpQueryTable.PurchaseOrder AS Document.PurchaseOrder).Company AS Company,
 		|	tmpQueryTable.Key,
+		|	tmpQueryTable.RowKey,
 		|	tmpQueryTable.Unit AS QuantityUnit,
 		|	tmpQueryTable.Quantity AS Quantity,
-		|	CAST(Doc.PurchaseBasis AS Document.SalesOrder) AS SalesOrder,
-		|	ISNULL(Doc.Price, 0) AS Price,
-		|	ISNULL(Doc.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
-		|	ISNULL(Doc.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
-		|	ISNULL(Doc.DeliveryDate, DATETIME(1, 1, 1)) AS DeliveryDate,
-		|	tmpQueryTable.GoodsReceipt AS GoodsReceipt
+		|	ISNULL(ItemList.Quantity, 0) AS OriginalQuantity,
+		|	ISNULL(ItemList.Price, 0) AS Price,
+		|	ISNULL(ItemList.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
+		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,
+		|	ISNULL(ItemList.TotalAmount, 0) AS TotalAmount,
+		|	ISNULL(ItemList.NetAmount, 0) AS NetAmount,
+		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
+		|	ISNULL(ItemList.DeliveryDate, DATETIME(1, 1, 1)) AS DeliveryDate,
+		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
+		|	ItemList.BusinessUnit,
+		|	ItemList.ExpenseType,
+		|	CASE
+		|		WHEN ItemList.PurchaseBasis REFS Document.SalesOrder
+		|			THEN ItemList.PurchaseBasis
+		|		ELSE UNDEFINED
+		|	END AS SalesOrder
 		|FROM
-		|	Document.PurchaseOrder.ItemList AS Doc
+		|	Document.PurchaseOrder.ItemList AS ItemList
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable
-		|		ON tmpQueryTable.Key = Doc.Key
-		|		AND tmpQueryTable.PurchaseOrder = Doc.Ref";
+		|		ON tmpQueryTable.Key = ItemList.Key
+		|		AND tmpQueryTable.PurchaseOrder = ItemList.Ref
+		|ORDER BY 
+		|	ItemList.LineNumber
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	TaxList.Ref,
+		|	TaxList.Key,
+		|	TaxList.Tax,
+		|	TaxList.Analytics,
+		|	TaxList.TaxRate,
+		|	TaxList.Amount,
+		|	TaxList.IncludeToTotalAmount,
+		|	TaxList.ManualAmount
+		|FROM
+		|	Document.PurchaseOrder.TaxList AS TaxList
+		|		INNER JOIN tmpQueryTable AS tmpQueryTable
+		|		ON tmpQueryTable.PurchaseOrder = TaxList.Ref
+		|		AND tmpQueryTable.Key = TaxList.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SpecialOffers.Ref,
+		|	SpecialOffers.Key,
+		|	SpecialOffers.Offer,
+		|	SpecialOffers.Amount,
+		|	SpecialOffers.Percent
+		|FROM
+		|	Document.PurchaseOrder.SpecialOffers AS SpecialOffers
+		|		INNER JOIN tmpQueryTable AS tmpQueryTable
+		|		ON tmpQueryTable.PurchaseOrder = SpecialOffers.Ref
+		|		AND tmpQueryTable.Key = SpecialOffers.Key";
 	
 	Query.SetParameter("QueryTable", QueryTableOrderBalance);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	DocumentsServer.RecalculateQuantityInTable(QueryTable);
+	QueryResults = Query.ExecuteBatch();
 	
-	Settings = New Structure();
-	Settings.Insert("Rows", New Array());
-	Settings.Insert("CalculateSettings", New Structure());
-	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
+	QueryTable_ItemList = QueryResults[1].Unload();
+	DocumentsServer.RecalculateQuantityInTable(QueryTable_ItemList);
 	
-	For Each Row In QueryTable Do
-		RowsByKey = Object.ItemList.FindRows(New Structure("Key", Row.Key));
-		If RowsByKey.Count() Then
-			RowByKey = RowsByKey[0];
-			ItemKeyUnit = CatItemsServer.GetItemKeyUnit(Row.ItemKey);
-			UnitFactorFrom = Catalogs.Units.GetUnitFactor(RowByKey.Unit, ItemKeyUnit);
-			UnitFactorTo = Catalogs.Units.GetUnitFactor(Row.Unit, ItemKeyUnit);
-			FillPropertyValues(RowByKey, Row);
-			RowByKey.Quantity = ?(UnitFactorTo = 0,
-					0,
-					RowByKey.Quantity * UnitFactorFrom / UnitFactorTo);
-			RowByKey.PriceType = Row.PriceType;
-			RowByKey.Price = Row.Price;
-			Settings.Rows.Add(RowByKey);
+	QueryTable_TaxList = QueryResults[2].Unload();
+	QueryTable_SpecialOffers = QueryResults[3].Unload();
+	
+	For Each Row_ItemList In QueryTable_ItemList Do
+		If Row_ItemList.OriginalQuantity = 0 Then
+			Row_ItemList.TaxAmount = 0;
+			Row_ItemList.NetAmount = 0;
+			Row_ItemList.TotalAmount = 0;
+			Row_ItemList.OffersAmount = 0;
 		Else
-			NewRow = Object.ItemList.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.PriceType = Row.PriceType;
-			NewRow.Price = Row.Price;
-			Settings.Rows.Add(NewRow);
+			Row_ItemList.TaxAmount = Row_ItemList.TaxAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+			Row_ItemList.NetAmount = Row_ItemList.NetAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;;
+			Row_ItemList.TotalAmount = Row_ItemList.TotalAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+			Row_ItemList.OffersAmount = Row_ItemList.OffersAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+		EndIf;	
+		
+		For Each Row_TaxList In QueryTable_TaxList.FindRows(New Structure("Key", Row_ItemList.Key)) Do
+			If Row_ItemList.OriginalQuantity = 0 Then
+				Row_TaxList.Amount = 0;
+				Row_TaxList.ManualAmount = 0;
+			Else
+				Row_TaxList.Amount = Row_TaxList.Amount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+				Row_TaxList.ManualAmount = Row_TaxList.ManualAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;;								
+			EndIf;
+		EndDo;
+		
+		For Each Row_SpecialOffers In QueryTable_SpecialOffers.FindRows(New Structure("Key", Row_ItemList.Key)) Do
+			If Row_ItemList.OriginalQuantity = 0 Then
+				Row_SpecialOffers.Amount = 0;
+			Else
+				Row_SpecialOffers.Amount = Row_SpecialOffers.Amount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+			EndIf;
+		EndDo;		
+	EndDo;
+
+	For Each Row In QueryTable_ItemList Do
+		FilterByKey = New Structure("Key", Row.Key);
+		Rows_ItemList = Object.ItemList.FindRows(FilterByKey);
+		
+		If Rows_ItemList.Count() Then
+			Row_ItemList = Rows_ItemList[0];			
+		Else
+			Row_ItemList = Object.ItemList.Add();
 		EndIf;
+		
+		Row_ItemList.Key           = Row.Key;
+		Row_ItemList.ItemKey       = Row.ItemKey;
+		Row_ItemList.Store         = Row.Store;
+		Row_ItemList.PurchaseOrder = Row.PurchaseOrder;
+		Row_ItemList.Quantity      = Row_ItemList.Quantity + Row.Quantity;
+		Row_ItemList.Price         = Row.Price;
+		Row_ItemList.Unit          = Row.Unit;
+		Row_ItemList.TaxAmount     = Row_ItemList.TaxAmount + Row.TaxAmount;
+		Row_ItemList.TotalAmount   = Row_ItemList.TotalAmount + Row.TotalAmount;
+		Row_ItemList.NetAmount     = Row_ItemList.NetAmount + Row.NetAmount;
+		Row_ItemList.OffersAmount  = Row_ItemList.OffersAmount + Row.OffersAmount;
+		Row_ItemList.DeliveryDate  = Row.DeliveryDate;
+		Row_ItemList.PriceType     = Row.PriceType;
+		Row_ItemList.BusinessUnit  = Row.BusinessUnit;
+		Row_ItemList.ExpenseType   = Row.ExpenseType;
+		Row_ItemList.SalesOrder    = Row.SalesOrder;
+	EndDo;
+		
+	For Each Row In QueryTable_TaxList Do
+		FilterByKey = New Structure("Key", Row.Key);
+		Rows_TaxList = Object.TaxList.FindRows(FilterByKey);
+		If Rows_TaxList.Count() Then
+			Row_TaxList = Rows_TaxList[0];
+		Else
+			Row_TaxList = Object.TaxList.Add();
+		EndIf;
+		
+		Row_TaxList.Key                  = Row.Key;
+		Row_TaxList.Tax                  = Row.Tax;
+		Row_TaxList.Analytics            = Row.Analytics;
+		Row_TaxList.TaxRate              = Row.TaxRate; 
+		Row_TaxList.Amount               = Row_TaxList.Amount + Row.Amount;
+		Row_TaxList.IncludeToTotalAmount = Row.IncludeToTotalAmount;
+		Row_TaxList.ManualAmount         = Row_TaxList.ManualAmount + Row.ManualAmount;		
 	EndDo;
 	
-	TaxInfo = Undefined;
-	SavedData = TaxesClientServer.GetSavedData(Form, TaxesServer.GetAttributeNames().CacheName);
-	If SavedData.Property("ArrayOfColumnsInfo") Then
-		TaxInfo = SavedData.ArrayOfColumnsInfo;
-	EndIf;
-	CalculationStringsClientServer.CalculateItemsRows(Object,
-		Form,
-		Settings.Rows,
-		Settings.CalculateSettings,
-		TaxInfo);
+	For Each Row In QueryTable_SpecialOffers Do
+		FilterByKey = New Structure("Key", Row.Key);
+		Rows_SpecialOffers = Object.SpecialOffers.FindRows(FilterByKey);
+		If Rows_SpecialOffers.Count() Then
+			Row_SpecialOffers = Rows_SpecialOffers[0];
+		Else
+			Row_SpecialOffers = Object.SpecialOffers.Add();
+		EndIf;
+		
+		Row_SpecialOffers.Key     = Row.Key; 
+		Row_SpecialOffers.Offer   = Row.Offer; 
+		Row_SpecialOffers.Amount  = Row_SpecialOffers.Amount + Row.Amount;
+		Row_SpecialOffers.Percent = Row.Percent;		
+	EndDo;
+	
+	For Each Row In GoodsReceiptsTable Do
+		FilterByKey = New Structure("Key, GoodsReceipt", Row.Key, Row.GoodsReceipt);
+		Rows_GoodsReceipts = Object.GoodsReceipts.FindRows(FilterByKey);
+		If Rows_GoodsReceipts.Count() Then
+			Row_GoodsReceipts = Rows_GoodsReceipts[0];
+		Else
+			Row_GoodsReceipts = Object.GoodsReceipts.Add();
+		EndIf;
+		
+		Row_GoodsReceipts.Key          = Row.Key;
+		Row_GoodsReceipts.GoodsReceipt = Row.GoodsReceipt;
+		Row_GoodsReceipts.Quantity     = Row.Quantity;
+	EndDo;
 EndProcedure
 
 #Region ListFormEvents

@@ -241,7 +241,7 @@
     <name>SelectGoodsReceiptForm</name>
     <synonym>
       <key>en</key>
-      <value>Select goods receipt form</value>
+      <value>Select goods receipt</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
@@ -886,6 +886,68 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="06524232-deb6-45e9-baa1-1a1b69c126ff">
+    <producedTypes>
+      <objectType typeId="6104b954-7d0d-4c7f-82d7-3a067c616282" valueTypeId="0ee58200-56ac-446f-9c88-166f9eba76bf"/>
+      <rowType typeId="78d16da6-c9b7-4c54-8cc3-a94339d126aa" valueTypeId="57486bb3-39ed-4bcd-9a9c-36e843de2286"/>
+    </producedTypes>
+    <name>GoodsReceipts</name>
+    <synonym>
+      <key>en</key>
+      <value>Goods receipts</value>
+    </synonym>
+    <attributes uuid="798038ba-7ef3-4604-9545-46c9737777ec">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="fc627e3b-841b-4b0b-98b2-2be585f7b259">
+      <name>GoodsReceipt</name>
+      <synonym>
+        <key>en</key>
+        <value>Goods receipt</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.GoodsReceipt</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b10e9e4b-ff38-48c0-9d11-544d6e012629">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="28c5ca24-bf91-45cb-b92a-a92ea35e6c6d">
+      <name>QuantityInGoodsReceipt</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in goods receipt</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <commands uuid="67571b12-57b7-4fed-998a-8d6f75b9e9d9">

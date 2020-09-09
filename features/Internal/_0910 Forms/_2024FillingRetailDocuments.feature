@@ -225,6 +225,25 @@ Scenario: _0154134 preparation
 		And I go to line in "MetadataTree" table
 			| 'Group name' |
 			| 'Catalogs'   |
+		And I go to line in "MetadataTree" table
+			| 'Group name'    | 'Use' |
+			| 'Business unit' | 'No'  |
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+		And I go to line in "MetadataTree" table
+			| 'Group name' | 'Use' |
+			| 'Store'      | 'No'  |
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
 		And I click "Ok" button
 	
 	

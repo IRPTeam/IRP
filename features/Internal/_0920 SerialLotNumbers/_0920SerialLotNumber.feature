@@ -34,6 +34,9 @@ Scenario: _092001 checkbox Use serial lot number in the Item type
 	And I close all client application windows
 	
 Scenario: _092002 check serial lot number in the Retail sales receipt
+	* Preparation
+		// And I delete '$$RetailSalesReceipt092002$$' variable
+		// And I delete '$$NumberRetailSalesReceipt092002$$' variable
 	* Create Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I click the button named "FormCreate"
@@ -223,6 +226,17 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			| 'Boots' | '37/18SD'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
+	* Filling in payments tab
+		And I move to "Payments" tab
+		And in the table "Payments" I click the button named "PaymentsAdd"
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Cash'        |
+		And I select current line in "List" table
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I input "2 550,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
 		And I click "Post" button
 		Then user message window does not contain messages
 	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
@@ -247,6 +261,9 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 	
 	
 Scenario: _092003 check serial lot number in the Retail return receipt
+	* Preparation
+		// And I delete '$$RetailReturnReceipt092003$$' variable
+		// And I delete '$$NumberRetailSalesReceipt092002$$' variable
 	* Create Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table

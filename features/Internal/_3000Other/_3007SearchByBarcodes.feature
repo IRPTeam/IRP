@@ -101,3 +101,24 @@ Scenario: _300720 barcode check in PhysicalInventory
 Scenario: _300721 barcode check in PhysicalCountByLocation
 	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 	When check the barcode search in storage operations documents
+
+
+Scenario: _300722 barcode check in Retail sales receipt + price and tax filling
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	When check the barcode search in the sales documents + price and tax filling in
+
+Scenario: _300722 barcode check in Retail return receipt + price and tax filling
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	When check the barcode search on the return documents
+
+Scenario: _300740 information message check when barcode is not found
+	* Open Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+		And I click "SearchByBarcode" button
+		And I input "0" text in "InputFld" field
+		And I click "OK" button
+	* Check info message
+		Then I wait that in user messages the "Barcode 0 not found." substring will appear in 10 seconds
+		And I close all client application windows
+		

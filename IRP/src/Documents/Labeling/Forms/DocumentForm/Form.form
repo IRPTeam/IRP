@@ -62,7 +62,7 @@
         </items>
         <items xsi:type="form:Decoration">
           <name>DecorationGroupTitleCollapsedLabel</name>
-          <id>44</id>
+          <id>117</id>
           <title>
             <key>en</key>
             <value>Please, fill the document</value>
@@ -74,7 +74,7 @@
           </userVisible>
           <extendedTooltip>
             <name>DecorationGroupTitleCollapsedLabelExtendedTooltip</name>
-            <id>46</id>
+            <id>119</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -89,7 +89,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>DecorationGroupTitleCollapsedLabelContextMenu</name>
-            <id>45</id>
+            <id>118</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -190,7 +190,7 @@
         </items>
         <items xsi:type="form:Decoration">
           <name>DecorationGroupTitleUncollapsedLabel</name>
-          <id>52</id>
+          <id>120</id>
           <title>
             <key>en</key>
             <value>Please, fill the document</value>
@@ -202,7 +202,7 @@
           </userVisible>
           <extendedTooltip>
             <name>DecorationGroupTitleUncollapsedLabelExtendedTooltip</name>
-            <id>54</id>
+            <id>122</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -217,7 +217,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>DecorationGroupTitleUncollapsedLabelContextMenu</name>
-            <id>53</id>
+            <id>121</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1259,6 +1259,26 @@
     <edit>
       <common>true</common>
     </edit>
+  </attributes>
+  <attributes>
+    <name>GroupItems</name>
+    <title>
+      <key>en</key>
+      <value>Group items</value>
+    </title>
+    <id>5</id>
+    <valueType>
+      <types>ValueList</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <extInfo xsi:type="form:ValueListExtInfo">
+      <itemValueType/>
+    </extInfo>
   </attributes>
   <commandInterface>
     <navigationPanel/>

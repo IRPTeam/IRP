@@ -15,4 +15,6 @@
   <content>Document.RetailReturnReceipt</content>
   <content>Catalog.RetailCustomers</content>
   <content>DataProcessor.PointOfSale</content>
+  <content>Document.CashStatement</content>
+  <content>Catalog.CashStatementStatuses</content>
 </mdclass:Subsystem>

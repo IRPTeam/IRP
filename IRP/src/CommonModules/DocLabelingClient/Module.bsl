@@ -4,13 +4,7 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 	
-	// GroupTitle
-	If ValueIsFilled(Object.Ref) Then
-		DocLabelingClient.ChangeGroupTitleTitle(Object, Form);
-		DocLabelingClient.ChangeTitleCollapse(Object, Form, False);
-	Else
-		DocLabelingClient.ChangeTitleCollapse(Object, Form, True);
-	EndIf;
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	
 EndProcedure
 
@@ -25,45 +19,23 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitle
-
-Procedure ChangeGroupTitleTitle(Object, Form) Export
-	TitleArray = New Array;
-	If ValueIsFilled(Object.Date) Then
-		TitleArray.Add(Object.Date);
-	EndIf;
-	If ValueIsFilled(Object.Number) Then
-		TitleArray.Add(Object.Number);
-	EndIf;
-	Form.Items.DecorationGroupTitleCollapsedLabel.Title = StrConcat(TitleArray, " | ");
-	Form.Items.DecorationGroupTitleUncollapsedLabel.Title = StrConcat(TitleArray, " | ");
-EndProcedure
-
-Procedure ChangeTitleCollapse(Object, Form, TitleVisible = True) Export
-	Form.Items.GroupTitleCollapsed.Visible = Not TitleVisible;
-	Form.Items.GroupTitleUncollapsed.Visible = TitleVisible;
-	Form.Items.GroupTitleItems.Visible = TitleVisible;
-EndProcedure
-
 #Region GroupTitleDecorationsEvents
 
 Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
-	DocLabelingClient.ChangeTitleCollapse(Object, Form, True);
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
 Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
-	DocLabelingClient.ChangeTitleCollapse(Object, Form, True);
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
 Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
-	DocLabelingClient.ChangeTitleCollapse(Object, Form, False);
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
 Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
-	DocLabelingClient.ChangeTitleCollapse(Object, Form, False);
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
-
-#EndRegion
 
 #EndRegion
 

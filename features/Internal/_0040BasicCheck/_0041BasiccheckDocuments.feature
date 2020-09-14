@@ -660,9 +660,6 @@ Scenario: Open object form "StockAdjustmentAsSurplus"
 
 
 
-
-	
-	
 Scenario: Open list form "PhysicalInventory" 
 	And I close all client application windows
 	Given I open "PhysicalInventory" document default form
@@ -675,4 +672,46 @@ Scenario: Open object form "PhysicalInventory"
 	Given I open "PhysicalInventory" document main form
 	If the warning is displayed then
 		Then I raise "Failed to open document form PhysicalInventory" exception
+	And I close current window
+
+Scenario: Open list form "RetailSalesReceipt" 
+	And I close all client application windows
+	Given I open "RetailSalesReceipt" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form RetailSalesReceipt" exception
+	And I close current window
+
+Scenario: Open object form "RetailSalesReceipt"
+	And I close all client application windows
+	Given I open "RetailSalesReceipt" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form RetailSalesReceipt" exception
+	And I close current window
+
+Scenario: Open list form "RetailReturnReceipt" 
+	And I close all client application windows
+	Given I open "RetailReturnReceipt" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form RetailReturnReceipt" exception
+	And I close current window
+
+Scenario: Open object form "RetailReturnReceipt"
+	And I close all client application windows
+	Given I open "RetailReturnReceipt" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form RetailReturnReceipt" exception
+	And I close current window
+	
+Scenario: Open list form "CashStatement" 
+	And I close all client application windows
+	Given I open "CashStatement" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CashStatement" exception
+	And I close current window
+
+Scenario: Open object form "CashStatement"
+	And I close all client application windows
+	Given I open "CashStatement" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form CashStatement" exception
 	And I close current window

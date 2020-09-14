@@ -847,3 +847,47 @@ Scenario: Open object form "Extensions"
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form Extensions" exception
 	And I close current window
+
+
+Scenario: Open list form "CashStatementStatuses" 
+	And I close all client application windows
+	Given I open "CashStatementStatuses" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Cash Statement Statuses" exception
+	And I close current window
+
+Scenario: Open object form "CashStatementStatuses"
+	And I close all client application windows
+	Given I open "CashStatementStatuses" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Cash Statement Statuses" exception
+	And I close current window
+
+Scenario: Open list form "EquipmentDrivers" 
+	And I close all client application windows
+	Given I open "EquipmentDrivers" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form EquipmentDrivers" exception
+	And I close current window
+
+Scenario: Open object form "EquipmentDrivers"
+	And I close all client application windows
+	Given I open "EquipmentDrivers" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form EquipmentDrivers" exception
+	And I close current window
+
+
+Scenario: Open list form "Hardware" 
+	And I close all client application windows
+	Given I open "Hardware" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Hardware" exception
+	And I close current window
+
+Scenario: Open object form "Hardware"
+	And I close all client application windows
+	Given I open "Hardware" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Hardware" exception
+	And I close current window

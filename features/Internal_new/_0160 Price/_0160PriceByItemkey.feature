@@ -18,9 +18,11 @@ Background:
 Scenario: _016001 base price fill (incl. VAT)
 	* Preparation
 		When Create catalog ItemTypes objects
-		Then Create catalog Items objects
-		Then Create catalog ItemKeys objects
-			When Create catalog ItemKeys objects
+		When Create catalog Items objects
+		When Create catalog AddAttributeAndPropertyValues objects (Color, Size, Season)
+		When Create catalog ItemKeys objects
+		When Create chart of characteristic types AddAttributeAndProperty objects (Color, Size, Season)
+		When Create catalog AddAttributeAndPropertySets objects
 	* Opening  price list
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I click the button named "FormCreate"
